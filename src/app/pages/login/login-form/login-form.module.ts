@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
 import { LoginFormRoutingModule } from './login-form-routing.module';
+import { LoginFormComponent } from './login-form.component';
+import {ShareModule} from '../../../share/share.module';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [LoginFormComponent],
   imports: [
-    CommonModule,
+    ShareModule,
     LoginFormRoutingModule
   ]
 })
