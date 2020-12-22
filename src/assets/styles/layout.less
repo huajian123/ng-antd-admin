@@ -1,0 +1,267 @@
+* {
+  box-sizing: border-box;
+}
+
+
+body {
+  // min-width: 570px;
+}
+
+img {
+  display: inline-block;
+  width: 100%;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+audio, video {
+  outline: none;
+}
+
+input:focus {
+  outline: none;
+}
+
+a {
+  color: inherit;
+
+  &:hover {
+    color: inherit;
+    // text-decoration: underline;
+  }
+}
+
+.pagination a:hover {
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 0;
+}
+
+.none {
+  display: none;
+}
+
+
+.full-height {
+  height: 100%;
+}
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+}
+
+.clearfix:after {
+  clear: both;
+  content: '.';
+  display: block;
+  height: 0;
+  visibility: hidden;
+}
+
+.wrap {
+  width: 980px;
+  margin: 0 auto;
+}
+
+
+.text-left {
+  text-align: left !important;;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.text-right {
+  text-align: right !important;;
+}
+
+.pull-left {
+  float: left;
+}
+
+.pull-right {
+  float: right;
+}
+
+.m-0 {
+  margin: 0!important;
+}
+
+.m-l-5 {
+  margin-left: 5px!important;
+}
+
+.m-t-5 {
+  margin-top: 5px!important;
+}
+
+.m-t-30 {
+  margin-top: 30px!important;
+}
+
+.m-b-20 {
+  margin-bottom: 20px!important;
+}
+
+.m-b-30 {
+  margin-bottom: 30px!important;
+}
+
+.m-l-10 {
+  margin-left: 10px!important;
+}
+
+.m-l-20 {
+  margin-left: 20px!important;
+}
+
+.m-l-50 {
+  margin-left: 50px!important;
+}
+
+.m-t-10 {
+  margin-top: 10px!important;
+}
+
+.m-t-15 {
+  margin-top: 15px!important;
+}
+
+.m-t-20 {
+  margin-top: 20px!important;
+}
+
+.p-0{
+  padding: 0!important;
+}
+
+.p-l-10 {
+  padding-left: 10px!important;
+}
+
+.p-l-35 {
+  padding-left: 35px!important;
+}
+
+.p-r-10 {
+  padding-right: 10px!important;
+}
+
+.p-b-0 {
+  padding-bottom: 0 !important;
+}
+
+.p-b-50 {
+  padding-bottom: 50px !important;
+}
+
+.clear-fix:after {
+  content: '';
+  clear: both;
+  display: block;
+}
+
+.with-full {
+  width: 100%;
+}
+
+.collapse {
+  margin-left: 8px;
+  font-size: 12px;
+}
+
+.default-theme{
+  background: #ffffff;
+}
+
+.night-theme{
+  background: #141414;
+}
+
+.operate-text {
+  cursor: pointer;
+  color: #409eff;
+  margin-right: 5px;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bg-color-no {
+  background: none !important;
+}
+
+.preloader {
+  @keyframes fade {
+    from {
+      opacity: 1.0;
+    }
+    50% {
+      opacity: 0.4;
+    }
+    to {
+      opacity: 1.0;
+    }
+  }
+  width: 100vw;
+  height: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  animation: fade 30000ms infinite;
+
+
+}
+
+// 通用页面统一布局
+.normal-wrap {
+  margin: 27px 27px 0;
+  /*列表顶部样式*/
+
+  .ant-pro-table-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .ant-pro-table-toolbar-title {
+      flex: 1 1;
+      color: rgba(0, 0, 0, .85);
+      font-size: 16px;
+      line-height: 24px;
+      opacity: .85;
+    }
+
+    .ant-pro-table-toolbar-option {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .ant-pro-table-toolbar-default-option {
+      .ant-space-item:last-child {
+        margin-right: 5px !important;
+      }
+    }
+  }
+
+  // 表单样式
+  .form-wrap {
+    padding: 24px;
+    max-width: 1190px;
+    margin: 0 auto;
+  }
+}
+
