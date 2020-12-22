@@ -3,12 +3,14 @@ import {SHARED_ZORRO_MODULES} from './shared-zorro.module';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import {RouterModule} from '@angular/router';
 
 const MODULES = [
   CommonModule,
   FormsModule,
   HttpClientModule,
   ReactiveFormsModule,
+  RouterModule,
   ...SHARED_ZORRO_MODULES
 ];
 

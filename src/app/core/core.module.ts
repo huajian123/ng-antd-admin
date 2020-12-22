@@ -3,6 +3,8 @@ import {registerLocaleData} from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import {NZ_I18N, zh_CN} from 'ng-zorro-antd/i18n';
 import {throwIfAlreadyLoaded} from './module-import-guard';
+import {SimpleReuseStrategy} from './services/reuse-strategy';
+import {RouteReuseStrategy} from '@angular/router';
 
 
 registerLocaleData(zh);
@@ -10,9 +12,8 @@ registerLocaleData(zh);
 
 @NgModule({
   declarations: [],
-  imports: [
-  ],
-  providers: [{provide: NZ_I18N, useValue: zh_CN}],
+  imports: [],
+  providers: [{provide: RouteReuseStrategy, useClass: SimpleReuseStrategy}, {provide: NZ_I18N, useValue: zh_CN}],
   exports: [],
 })
 export class CoreModule {

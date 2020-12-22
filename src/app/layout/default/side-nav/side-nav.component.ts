@@ -1,4 +1,17 @@
-import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef, OnDestroy} from '@angular/core';
+import {Subscription} from 'rxjs';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {ThemeService} from '../../../core/services/theme.service';
+import {filter, map, mergeMap, tap} from 'rxjs/operators';
+
+interface Menu {
+  path?: string;
+  title: string;
+  icon?: string;
+  open?: boolean;
+  selected?: boolean;
+  children?: Menu[];
+}
 
 @Component({
   selector: 'app-side-nav',
@@ -6,10 +19,10 @@ import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
   styleUrls: ['./side-nav.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SideNavComponent implements OnInit {
+export class SideNavComponent implements OnInit, OnDestroy {
 
   themesOptions$ = this.themesService.getThemesMode();
-  @Input() isCollapsed: boolean;
+  @Input() isCollapsed = false;
   routerPath = '';
   menus: Menu[] = [
     {
@@ -232,12 +245,14 @@ export class SideNavComponent implements OnInit {
   subs: Array<Subscription> = [];
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private tabService: TabService,
-              private cdr: ChangeDetectorRef, private themesService: ThemesService) {
+              private cdr: ChangeDetectorRef, private themesService: ThemeService) {
     this.routerPath = this.router.url;
     this.subs[0] = this.router.events
       .pipe(
         filter(event => event instanceof NavigationEnd),
         tap(() => {
+          // todo
+          // @ts-ignore
           this.routerPath = this.activatedRoute.snapshot['_routerState'].url;
           this.clickMenuItem();
         }),
@@ -309,7 +324,7 @@ export class SideNavComponent implements OnInit {
   }
 
   // 改变当前菜单展示状态
-  changeOpen(currentMenu, allMenu): void {
+  changeOpen(currentMenu: Menu, allMenu: Menu[]): void {
     /* allMenu.forEach((item) => {
        item.open = false;
      });
