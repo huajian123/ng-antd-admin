@@ -1,0 +1,68 @@
+<div class="sidebar-logo" [class.light]="(themesOptions$|async).theme==='light'">
+  <a href="#" target="_blank">
+    <img src="../../../../assets/logo.svg" alt="logo">
+    <h1 [class.light]="(themesOptions$|async).theme==='light'">Ant Design Pro</h1>
+  </a>
+</div>
+<ul nz-menu [nzInlineCollapsed]="isCollapsed" [nzTheme]="(themesOptions$|async).theme==='night'?'dark':(themesOptions$|async).theme" nzMode="inline">
+  <ng-container *ngTemplateOutlet="menuTpl;context:{$implicit: menus}"></ng-container>
+  <ng-template #menuTpl let-menus>
+    <ng-container *ngFor="let menu of menus;">
+      <!--一级菜单-->
+      <li nz-menu-item *ngIf="!menu.children||menu.children.length===0"  [nzSelected]="menu.selected">
+        <a [routerLink]="[menu.path]">
+          <i nz-icon [nzType]="menu.icon"></i>
+          <span>{{menu.title}}</span>
+        </a>
+      </li>
+      <!--二级菜单-->
+      <li nz-submenu *ngIf="menu.children&&menu.children.length>0" (nzOpenChange)="changeOpen(menu,menus)" [(nzOpen)]="menu.open" [nzTitle]="menu.title" [nzIcon]="menu.icon">
+        <ul>
+          <ng-container *ngFor="let menuSecond of menu.children">
+            <li nz-menu-item [nzSelected]="menuSecond.selected" *ngIf="!menuSecond.children||menuSecond.children.length===0;">
+              <a [routerLink]="[menuSecond.path]">
+                <span>{{menuSecond.title}}</span>
+              </a>
+            </li>
+            <!--三级菜单-->
+            <li *ngIf="menuSecond.children&&menuSecond.children.length>0" nz-submenu  (nzOpenChange)="changeOpen(menuSecond,menu.children)" [(nzOpen)]="menuSecond.open" [nzTitle]="menuSecond.title" [nzIcon]="menuSecond.icon">
+              <ul>
+                <li nz-menu-item [nzSelected]="menuThird.selected" *ngFor="let menuThird of menuSecond.children">
+                  <a [routerLink]="[menuThird.path]">
+                    <span>{{menuThird.title}}</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ng-container>
+        </ul>
+      </li>
+    </ng-container>
+  </ng-template>
+</ul>
+
+
+<!--
+<ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+  <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
+    <ul>
+      <li nz-menu-item nzMatchRouter>
+        <a routerLink="/welcome">Welcome</a>
+      </li>
+      <li nz-menu-item nzMatchRouter>
+        <a>Monitor</a>
+      </li>
+      <li nz-menu-item nzMatchRouter>
+        <a>Workplace</a>
+      </li>
+    </ul>
+  </li>
+  <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
+    <ul>
+      <li nz-menu-item nzMatchRouter>
+        <a>Basic Form</a>
+      </li>
+    </ul>
+  </li>
+</ul>
+-->

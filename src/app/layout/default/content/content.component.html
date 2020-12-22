@@ -1,1 +1,62 @@
-<p>content works!</p>
+<app-default [(collapsed)]="layout.collasped">
+  <ng-container sider>
+    <app-side-nav [isCollapsed]="layout.collasped"></app-side-nav>
+  </ng-container>
+
+  <ng-container header>
+    <div class="app-header">
+      <i class="trigger" nz-icon [nzType]="layout.collasped ? 'menu-unfold' : 'menu-fold'"
+         (click)="layout.collasped=!layout.collasped"></i>
+      <div class="bst-header-wrap">
+          <span class="bst-header-icon">
+              <i nz-icon nzType="search" nzTheme="outline"></i>
+          </span>
+        <span class="bst-header-icon">
+            <i nz-icon nzType="question-circle" nzTheme="outline"></i>
+          </span>
+        <span class="bst-header-icon">
+            <nz-badge [nzCount]="11" class="bst-badge">
+                <i nz-icon nzType="bell" nzTheme="outline"></i>
+            </nz-badge>
+          </span>
+        <span class="bst-header-icon" nz-dropdown [nzDropdownMenu]="userSettingMenu">
+            <img class="avatar" src="assets/img/default_face.png">
+            <span class="base-font-size">管理员</span>
+          </span>
+        <nz-dropdown-menu #userSettingMenu>
+          <ul nz-menu class="bst-header_usr_menu">
+            <li nz-menu-item>
+              <a><i nz-icon nzType="user" nzTheme="outline" class="bst-header_usr_menu_icon"></i><span>个人中心</span></a>
+            </li>
+            <li nz-menu-item>
+              <a><i nz-icon nzType="setting" nzTheme="outline"
+                    class="bst-header_usr_menu_icon"></i><span>个人设置</span></a>
+            </li>
+            <li nz-menu-divider></li>
+            <li nz-menu-item>
+              <a><i nz-icon nzType="logout" nzTheme="outline"
+                    class="bst-header_usr_menu_icon"></i><span>退出登录</span></a>
+            </li>
+          </ul>
+        </nz-dropdown-menu>
+
+        <span class="bst-header-icon">
+            <!--<app-setting-drawer [(settings)]="layout.setting">
+              <i nz-icon nzType="setting" nzTheme="outline"></i>
+            </app-setting-drawer> -->
+          <app-setting-drawer>
+              <i nz-icon nzType="setting" nzTheme="outline"></i>
+            </app-setting-drawer>
+          </span>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container content>
+    <div>
+      <app-tab></app-tab>
+      <router-outlet></router-outlet>
+    </div>
+
+  </ng-container>
+</app-default>
