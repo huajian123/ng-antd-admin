@@ -5,7 +5,7 @@ import {RouteReuseStrategy, ActivatedRouteSnapshot, DetachedRouteHandle} from '@
 export class SimpleReuseStrategy implements RouteReuseStrategy {
 
   static handlers: { [key: string]: any } = {};
-  public static waitDelete: string;
+  public static waitDelete: string | null;
 
   public static deleteRouteSnapshot(path: string): void {
     if (SimpleReuseStrategy.handlers[path]) {
@@ -16,11 +16,7 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
 
   // 是否允许复用路由
   shouldDetach(route: ActivatedRouteSnapshot): boolean {
-    if (route.data.shouldDetach === 'no') {
-      return false;
-    }
-
-    return true;
+    return route.data.shouldDetach !== 'no';
   }
 
   // 当路由离开时会触发，存储路由
@@ -41,10 +37,7 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
 
   // 获取存储路由
   retrieve(route: ActivatedRouteSnapshot): DetachedRouteHandle {
-    if (!route.data.key) {
-      return null;
-    }
-    return SimpleReuseStrategy.handlers[route.data.key];
+    return !route.data.key ? null : SimpleReuseStrategy.handlers[route.data.key];
   }
 
   // 进入路由触发，是否同一路由时复用路由
