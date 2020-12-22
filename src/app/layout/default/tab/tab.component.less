@@ -1,0 +1,14 @@
+a {
+  text-decoration: none;
+  transition: color 0s;
+  font-weight: normal;
+
+  .ant-tabs-close-x{
+    margin-right: 0;
+  }
+}
+
+// 控制关闭图标和文字之间的作用范围
+a[nz-tab-link]::before {
+  right: 33px;
+}

@@ -1,0 +1,19 @@
+<nz-tabset nzLinkRouter [nzSelectedIndex]="currentIndex"
+           [nzTabBarStyle]="{'margin':'10px 0 0 0','background':'#fff'}"
+           [nzTabPosition]="'top'" [nzType]="'card'">
+  <nz-tab *ngFor="let tab of tabs;let i =index;trackBy:trackByTab;">
+
+    <a *nzTabLink nz-tab-link [routerLink]="tab.path" (contextmenu)="contextMenu($event, menu)">
+      {{ tab.title}}
+      <i nz-icon nzType="close" (click)="closeTab(tab,$event,i)" class="ant-tabs-close-x"></i>
+    </a>
+
+    <nz-dropdown-menu #menu="nzDropdownMenu">
+      <ul nz-menu>
+        <li nz-menu-item [nzDisabled]="tabs.length-1===0" (click)="closeTab(tab,$event,i)">关闭标签</li>
+        <li nz-menu-item [nzDisabled]="tabs.length-1===0" (click)="closeOtherTab(tab,$event,i)">关闭其他标签</li>
+        <li nz-menu-item [nzDisabled]="tabs.length-1===i" (click)="closeRithTab(tab,$event,i)">关闭右侧标签</li>
+      </ul>
+    </nz-dropdown-menu>
+  </nz-tab>
+</nz-tabset>
