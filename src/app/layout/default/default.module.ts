@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { DefaultRoutingModule } from './default-routing.module';
 import { DefaultComponent } from './default.component';
-import {ShareModule} from '../../share/share.module';
+import {SharedModule} from '../../share/shared.module';
 
 
 @NgModule({
@@ -11,7 +11,7 @@ import {ShareModule} from '../../share/share.module';
     DefaultComponent
   ],
   imports: [
-    ShareModule,
+    SharedModule,
     DefaultRoutingModule
   ]
 })

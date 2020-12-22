@@ -12,7 +12,7 @@ export interface SettingInterface {
 
 
 @Injectable({
-  providedIn: ServicesModule
+  providedIn: 'root'
 })
 export class ThemeService {
 

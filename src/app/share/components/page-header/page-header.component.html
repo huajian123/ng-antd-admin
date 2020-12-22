@@ -1,0 +1,12 @@
+<nz-page-header class="site-page-header" [nzTitle]="pageHeaderInfo.title">
+  <nz-breadcrumb nz-page-header-breadcrumb>
+    <nz-breadcrumb-item *ngFor="let breadcrumb of pageHeaderInfo.breadcrumb">
+      <a>{{breadcrumb}}</a>
+    </nz-breadcrumb-item>
+  </nz-breadcrumb>
+  <nz-page-header-content *ngIf="pageHeaderInfo.desc">
+    {{pageHeaderInfo.desc}}
+  </nz-page-header-content>
+</nz-page-header>
+
+

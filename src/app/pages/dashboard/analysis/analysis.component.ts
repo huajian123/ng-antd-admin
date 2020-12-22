@@ -105,6 +105,8 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
     chart.interaction('element-active');
 
     chart.legend(false);
+    // todo
+    // @ts-ignore
     chart
       .interval()
       .position('type*value')
@@ -115,12 +117,13 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
         return '#2194ff';
       })
       .label('value', {
-        content: (originData) => {
+       /* content: (originData) => {
           const val = parseFloat(originData.value);
           if (val < 0.05) {
             return (val * 100).toFixed(1) + '%';
           }
-        },
+          return 0;
+        },*/
         offset: 10,
       });
     chart.render();

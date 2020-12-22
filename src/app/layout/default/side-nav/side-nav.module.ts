@@ -1,13 +1,13 @@
 import {NgModule} from '@angular/core';
 import {SideNavComponent} from './side-nav.component';
-import {ShareModule} from '../../../share/share.module';
+import {SharedModule} from '../../../share/shared.module';
 
 
 
 @NgModule({
   declarations: [SideNavComponent],
   imports: [
-    ShareModule
+    SharedModule
   ],
   exports: [
     SideNavComponent

@@ -60,7 +60,17 @@
             "styles": [
               "src/assets/styles/index.less"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "@antv/g2",
+              "@antv/component",
+              "@antv/path-util",
+              "@antv/attr",
+              "@antv/adjust",
+              "@antv/util",
+              "size-sensor",
+              "@antv/g-canvas"
+            ]
           },
           "configurations": {
             "production": {

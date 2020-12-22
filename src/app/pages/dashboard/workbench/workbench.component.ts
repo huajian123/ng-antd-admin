@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {PageHeaderType} from '../../../share/component/page-header/page-header-type';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {NzFormTooltipIcon} from 'ng-zorro-antd/form';
+import {PageHeaderType} from '../../../share/components/page-header/page-header.component';
 
 @Component({
   selector: 'app-workbench',

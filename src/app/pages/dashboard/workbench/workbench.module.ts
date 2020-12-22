@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { WorkbenchRoutingModule } from './workbench-routing.module';
 import { WorkbenchComponent } from './workbench.component';
-import {ShareModule} from '../../../share/share.module';
+import {SharedModule} from '../../../share/shared.module';
 
 
 @NgModule({
   declarations: [WorkbenchComponent],
   imports: [
-    ShareModule,
+    SharedModule,
     WorkbenchRoutingModule
   ]
 })

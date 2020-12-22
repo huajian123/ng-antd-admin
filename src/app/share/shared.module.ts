@@ -25,5 +25,5 @@ const MODULES = [
     ...MODULES
   ]
 })
-export class ShareModule {
+export class SharedModule {
 }
