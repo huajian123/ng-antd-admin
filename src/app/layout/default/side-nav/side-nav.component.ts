@@ -1,8 +1,9 @@
-import {Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef, OnDestroy} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Input, OnDestroy} from '@angular/core';
+import {filter, map, mergeMap, tap} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {ThemeService} from '../../../core/services/theme.service';
-import {filter, map, mergeMap, tap} from 'rxjs/operators';
+import {TabService} from '../../../core/services/tab.service';
 
 interface Menu {
   path?: string;
@@ -12,6 +13,7 @@ interface Menu {
   selected?: boolean;
   children?: Menu[];
 }
+
 
 @Component({
   selector: 'app-side-nav',

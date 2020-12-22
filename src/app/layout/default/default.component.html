@@ -1,4 +1,5 @@
-<app-default [(collapsed)]="layout.collasped">
+<app-def-layout-content [(collapsed)]="layout.collasped">
+
   <ng-container sider>
     <app-side-nav [isCollapsed]="layout.collasped"></app-side-nav>
   </ng-container>
@@ -20,7 +21,7 @@
             </nz-badge>
           </span>
         <span class="bst-header-icon" nz-dropdown [nzDropdownMenu]="userSettingMenu">
-            <img title="头像" class="avatar" src="assets/imgs/default_face.png" alt="头像">
+            <img class="avatar" src="assets/imgs/default_face.png">
             <span class="base-font-size">管理员</span>
           </span>
         <nz-dropdown-menu #userSettingMenu>
@@ -59,4 +60,5 @@
     </div>
 
   </ng-container>
-</app-default>
+
+</app-def-layout-content>

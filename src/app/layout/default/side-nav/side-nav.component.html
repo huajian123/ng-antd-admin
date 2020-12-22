@@ -1,10 +1,10 @@
-<div class="sidebar-logo" [class.light]="(themesOptions$|async).theme==='light'">
+<div class="sidebar-logo">
   <a href="#" target="_blank">
     <img src="../../../../assets/imgs/logo.svg" alt="logo">
-    <h1 [class.light]="(themesOptions$|async).theme==='light'">Ant Design Pro</h1>
+    <h1>Ant Design Pro</h1>
   </a>
 </div>
-<ul nz-menu [nzInlineCollapsed]="isCollapsed" [nzTheme]="(themesOptions$|async).theme==='night'?'dark':(themesOptions$|async).theme" nzMode="inline">
+<ul nz-menu [nzInlineCollapsed]="isCollapsed" [nzTheme]="'dark'" nzMode="inline">
   <ng-container *ngTemplateOutlet="menuTpl;context:{$implicit: menus}"></ng-container>
   <ng-template #menuTpl let-menus>
     <ng-container *ngFor="let menu of menus;">
@@ -66,3 +66,4 @@
   </li>
 </ul>
 -->
+
