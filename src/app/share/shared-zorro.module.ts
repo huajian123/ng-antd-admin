@@ -1,6 +1,6 @@
-import {NzIconModule} from 'ng-zorro-antd/icon';
+import {IconsProviderModule} from './icons-provider.module';
 
 
 export const SHARED_ZORRO_MODULES = [
-  NzIconModule
+  IconsProviderModule
 ];
