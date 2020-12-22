@@ -5,6 +5,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
 import {PipesModule} from './pipes/pipes.module';
+import {ComponentsModule} from './components/components.module';
 
 const MODULES = [
   CommonModule,
@@ -13,6 +14,7 @@ const MODULES = [
   ReactiveFormsModule,
   RouterModule,
   PipesModule,
+  ComponentsModule,
   ...SHARED_ZORRO_MODULES
 ];
 
