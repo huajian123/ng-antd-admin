@@ -1,4 +1,5 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, EventEmitter, OnInit, Output} from '@angular/core';
+import {ThemeService} from '../../core/services/theme.service';
 
 @Component({
   selector: 'app-default',
@@ -8,7 +9,23 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 })
 export class DefaultComponent implements OnInit {
 
-  constructor() { }
+  themesOptions$ = this.themesService.getThemesMode();
+  isCollapsed = true;
+  @Output() collapsedChange = new EventEmitter<boolean>();
+
+  @Input()
+  get collapsed(): boolean {
+    return this.isCollapsed;
+  }
+
+  set collapsed(value: boolean) {
+    this.isCollapsed = value;
+    this.collapsedChange.emit(value);
+  }
+
+
+  constructor(private themesService: ThemeService) {
+  }
 
   ngOnInit(): void {
   }

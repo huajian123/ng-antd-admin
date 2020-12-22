@@ -5,6 +5,7 @@ import {NzInputModule} from 'ng-zorro-antd/input';
 import {NzSelectModule} from 'ng-zorro-antd/select';
 import {NzTabsModule} from 'ng-zorro-antd/tabs';
 import {NzCheckboxModule} from 'ng-zorro-antd/checkbox';
+import {NzLayoutModule} from 'ng-zorro-antd/layout';
 
 
 export const SHARED_ZORRO_MODULES = [
@@ -15,4 +16,5 @@ export const SHARED_ZORRO_MODULES = [
   NzSelectModule,
   NzTabsModule,
   NzCheckboxModule,
+  NzLayoutModule,
 ];
