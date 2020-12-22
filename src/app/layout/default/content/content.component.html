@@ -20,7 +20,7 @@
             </nz-badge>
           </span>
         <span class="bst-header-icon" nz-dropdown [nzDropdownMenu]="userSettingMenu">
-            <img class="avatar" src="assets/img/default_face.png">
+            <img title="头像" class="avatar" src="assets/imgs/default_face.png" alt="头像">
             <span class="base-font-size">管理员</span>
           </span>
         <nz-dropdown-menu #userSettingMenu>
@@ -44,9 +44,9 @@
             <!--<app-setting-drawer [(settings)]="layout.setting">
               <i nz-icon nzType="setting" nzTheme="outline"></i>
             </app-setting-drawer> -->
-          <app-setting-drawer>
+         <!-- <app-setting-drawer>
               <i nz-icon nzType="setting" nzTheme="outline"></i>
-            </app-setting-drawer>
+            </app-setting-drawer>-->
           </span>
       </div>
     </div>
@@ -54,7 +54,7 @@
 
   <ng-container content>
     <div>
-      <app-tab></app-tab>
+      <!--<app-tab></app-tab>-->
       <router-outlet></router-outlet>
     </div>
 
