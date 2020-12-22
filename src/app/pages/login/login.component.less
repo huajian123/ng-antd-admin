@@ -1,0 +1,46 @@
+@import "../../../assets/styles/zorro";
+.container{
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  background:@background-color-base url('../../../assets/imgs/login-bg.svg') no-repeat center 110px;
+  background-size: 100%;
+  .lang{
+    width: 100%;
+    height: 40px;
+    text-align: right;
+    i{
+      margin-right: 24px;
+      padding: 12px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+  }
+
+  .content-layout{
+    padding: 32px 0 0;
+    text-align: center;
+    .head{
+      .logo {
+        height: 44px;
+        width: 44px;
+        margin-right: 16px;
+      }
+      .title {
+        position: relative;
+        // color: rgba(0,0,0,.85);
+        font-weight: 600;
+        font-size: 33px;
+        font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        vertical-align: middle;
+      }
+    }
+
+    .desc {
+      margin-top: 12px;
+      margin-bottom: 40px;
+      color: @text-color-secondary;
+      font-size: @font-size-base;
+    }
+  }
+}
