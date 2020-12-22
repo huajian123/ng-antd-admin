@@ -19,6 +19,8 @@ import {NzSwitchModule} from 'ng-zorro-antd/switch';
 import {NzTimePickerModule} from 'ng-zorro-antd/time-picker';
 import {NzPageHeaderModule} from 'ng-zorro-antd/page-header';
 import {NzBreadCrumbModule} from 'ng-zorro-antd/breadcrumb';
+import {NzDrawerModule} from 'ng-zorro-antd/drawer';
+import {NzListModule} from "ng-zorro-antd/list";
 
 
 export const SHARED_ZORRO_MODULES = [
@@ -42,5 +44,7 @@ export const SHARED_ZORRO_MODULES = [
   NzSwitchModule,
   NzTimePickerModule,
   NzPageHeaderModule,
-  NzBreadCrumbModule
+  NzBreadCrumbModule,
+  NzDrawerModule,
+  NzListModule
 ];

@@ -1,0 +1,58 @@
+<ng-content></ng-content>
+
+
+<nz-drawer [nzWidth]="300" [(nzVisible)]="isCollapsed" (nzOnClose)="isCollapsed = !isCollapsed">
+  <div class="m-b">
+    <h3 class="title">整体风格设置</h3>
+    <div class="block-checkbox">
+      <div *ngFor="let theme of themes" class="item" nz-tooltip [nzTooltipTitle]="theme.title"
+           (click)="changeTheme(theme)">
+        <img [src]="theme.image" [alt]="theme.title">
+        <div class="select-icon">
+          <i nz-icon nzType="check" nzTheme="outline"></i>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="m-b theme-color">
+    <h3 class="title">主题色</h3>
+    <div class="content">
+      <div *ngFor="let color of colors" class="color-block" nz-tooltip [nzTooltipTitle]="color.title"
+           [style.background]="color.color">
+        <i nz-icon nzType="check" nzTheme="outline"></i>
+      </div>
+    </div>
+  </div>
+  <nz-divider></nz-divider>
+  <div class="m-b">
+    <h3 class="title">导航模式</h3>
+    <div class="block-checkbox">
+      <div *ngFor="let mode of modes" class="item" nz-tooltip [nzTooltipTitle]="mode.title">
+        <img [src]="mode.image" [alt]="mode.title">
+        <div class="select-icon">
+          <i nz-icon nzType="check" nzTheme="outline"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nz-list [nzSplit]="false">
+    <nz-list-item [nzActions]="[layoutAction]">固定宽度</nz-list-item>
+    <ng-template #layoutAction>
+      <nz-switch nzSize="small"></nz-switch>
+    </ng-template>
+  </nz-list>
+
+  <nz-divider></nz-divider>
+  <div class="m-b">
+    <h3 class="title">其他设置</h3>
+    <nz-list [nzSplit]="false">
+      <nz-list-item [nzActions]="[otherAction]">色弱模式</nz-list-item>
+      <ng-template #otherAction>
+        <nz-switch nzSize="small"></nz-switch>
+      </ng-template>
+    </nz-list>
+  </div>
+</nz-drawer>

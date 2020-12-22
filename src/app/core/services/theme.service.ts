@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {ServicesModule} from './services.module';
 import {BehaviorSubject, Observable} from 'rxjs';
 export interface SettingInterface {
-  theme: 'dark'|'light';
+  theme: 'dark'|'light'|'night';
   color: string;
   mode: string;
   fixedWidth: boolean;
