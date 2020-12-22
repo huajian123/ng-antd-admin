@@ -9,7 +9,7 @@ export interface TabModel {
 }
 
 @Injectable({
-  providedIn: ServicesModule
+  providedIn: 'root'
 })
 export class TabService {
   private tabArray: TabModel[];
