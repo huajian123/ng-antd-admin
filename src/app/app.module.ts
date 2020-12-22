@@ -4,6 +4,7 @@ import {CoreModule} from './core/core.module';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {ShareModule} from './share/share.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import {ShareModule} from './share/share.module';
   imports: [
     CoreModule,
     ShareModule,
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
   ],
