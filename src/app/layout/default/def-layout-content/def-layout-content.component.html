@@ -1,5 +1,5 @@
 <nz-layout>
-  <nz-sider class="menu-sidebar" [nzTheme]="(themesOptions$|async)!.theme==='night'?'dark':($any(themesOptions$|async)!.theme)"  nzBreakpoint="lg" [nzCollapsible]="true" [(nzCollapsed)]="collapsed">
+  <nz-sider class="menu-sidebar" [nzTheme]="(themesOptions$|async)!.theme"  nzBreakpoint="lg" [nzCollapsible]="true" [(nzCollapsed)]="collapsed">
     <ng-content select="ng-container[sider]"></ng-content>
   </nz-sider>
 

@@ -14,6 +14,8 @@ import {takeUntil} from 'rxjs/operators';
 import {DOCUMENT} from '@angular/common';
 import {SettingInterface, ThemeService} from '../../../core/services/store/theme.service';
 
+type theme = { key: 'dark' | 'light' | 'night', image: string, title: string, isChecked: boolean };
+
 @Component({
   selector: 'app-setting-drawer',
   templateUrl: './setting-drawer.component.html',
@@ -33,21 +35,24 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
   isCollapsed = false;
 
 
-  themes: { key: 'dark' | 'light' | 'night', image: string, title: string }[] = [
+  themes: theme[] = [
     {
       key: 'dark',
       image: '/assets/imgs/theme-dark.svg',
-      title: '暗色菜单风格'
+      title: '暗色菜单风格',
+      isChecked: true,
     },
     {
       key: 'light',
       image: '/assets/imgs/theme-light.svg',
-      title: '亮色菜单风格'
+      title: '亮色菜单风格',
+      isChecked: false,
     },
     {
       key: 'night',
       image: '/assets/imgs/theme-dark.svg',
-      title: '黑夜模式风格'
+      title: '黑夜模式风格',
+      isChecked: false,
     },
   ];
   colors = [
@@ -142,9 +147,18 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
   }
 
 
-  changeTheme(theme: { key: 'dark' | 'light' | 'night'; }): void {
-    theme.key === 'night' ? this.changeThemeToNight() : this.removeNightTheme();
-    this.themesService.setThemesMode({...this._themesOptions, ...{theme: theme.key}});
+  changeTheme(themeItem: theme): void {
+    this.themes.forEach((item) => {
+      item.isChecked = false;
+    });
+    themeItem.isChecked = true;
+    if (themeItem.key === 'night') {
+      this.changeThemeToNight();
+      this.themesService.setThemesMode({...this._themesOptions, ...{theme: 'dark'}});
+    } else {
+      this.removeNightTheme();
+      this.themesService.setThemesMode({...this._themesOptions, ...{theme: themeItem.key}});
+    }
   }
 
   ngOnInit(): void {

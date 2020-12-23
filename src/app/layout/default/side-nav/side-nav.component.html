@@ -1,10 +1,10 @@
 <div class="sidebar-logo">
   <a href="#" target="_blank">
     <img src="../../../../assets/imgs/logo.svg" alt="logo">
-    <h1>Ant Design Pro</h1>
+    <h1 [class.light]="(themesOptions$|async)!.theme==='light'">Ant Design Pro</h1>
   </a>
 </div>
-<ul nz-menu [nzInlineCollapsed]="isCollapsed" [nzTheme]="'dark'" nzMode="inline">
+<ul nz-menu [nzInlineCollapsed]="isCollapsed"  [nzTheme]="(themesOptions$|async)!.theme" nzMode="inline">
   <ng-container *ngTemplateOutlet="menuTpl;context:{$implicit: menus}"></ng-container>
   <ng-template #menuTpl let-menus>
     <ng-container *ngFor="let menu of menus;">
@@ -40,30 +40,3 @@
     </ng-container>
   </ng-template>
 </ul>
-
-
-<!--
-<ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-  <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
-    <ul>
-      <li nz-menu-item nzMatchRouter>
-        <a routerLink="/welcome">Welcome</a>
-      </li>
-      <li nz-menu-item nzMatchRouter>
-        <a>Monitor</a>
-      </li>
-      <li nz-menu-item nzMatchRouter>
-        <a>Workplace</a>
-      </li>
-    </ul>
-  </li>
-  <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
-    <ul>
-      <li nz-menu-item nzMatchRouter>
-        <a>Basic Form</a>
-      </li>
-    </ul>
-  </li>
-</ul>
--->
-

@@ -8,7 +8,7 @@
         <div *ngFor="let theme of themes" class="item" nz-tooltip [nzTooltipTitle]="theme.title"
              (click)="changeTheme(theme)">
           <img [src]="theme.image" [alt]="theme.title">
-          <div class="select-icon">
+          <div class="select-icon" *ngIf="theme.isChecked">
             <i nz-icon nzType="check" nzTheme="outline"></i>
           </div>
         </div>
