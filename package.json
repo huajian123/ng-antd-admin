@@ -20,7 +20,6 @@
     "@angular/platform-browser-dynamic": "~11.0.5",
     "@angular/router": "~11.0.5",
     "@antv/g2plot": "^2.3.3",
-    "minireset.css": "0.0.6",
     "ng-zorro-antd": "^11.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
