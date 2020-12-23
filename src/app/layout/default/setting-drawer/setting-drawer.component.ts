@@ -143,9 +143,9 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
   }
 
   removeNightTheme(): void {
-    const dom = this.doc.getElementById('dark-theme');
-    if (dom) {
-      dom.remove();
+    const doms = this.doc.querySelectorAll('#dark-theme');
+    if (doms && doms.length > 0) {
+      doms.forEach((dom) => dom.remove());
     }
   }
 
