@@ -15,6 +15,12 @@ import {DOCUMENT} from '@angular/common';
 import {SettingInterface, ThemeService} from '../../../core/services/store/theme.service';
 
 type theme = { key: 'dark' | 'light' | 'night', image: string, title: string, isChecked: boolean };
+type color = {
+  key: string,
+  color: string,
+  title: string,
+  isChecked: boolean
+};
 
 @Component({
   selector: 'app-setting-drawer',
@@ -57,46 +63,54 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
       isChecked: false,
     },
   ];
-  colors = [
+  colors: color[] = [
     {
       key: 'dust',
       color: '#F5222D',
-      title: '薄暮'
+      title: '薄暮',
+      isChecked: false
     },
     {
       key: 'volcano',
       color: '#FA541C',
-      title: '火山'
+      title: '火山',
+      isChecked: false
     },
     {
       key: 'sunset',
       color: '#FAAD14',
-      title: '日暮'
+      title: '日暮',
+      isChecked: false
     },
     {
       key: 'cyan',
       color: '#13C2C2',
-      title: '明青'
+      title: '明青',
+      isChecked: false
     },
     {
       key: 'green',
       color: '#52C41A',
-      title: '极光绿'
+      title: '极光绿',
+      isChecked: false
     },
     {
       key: 'daybreak',
       color: '#1890FF',
-      title: '拂晓蓝（默认）'
+      title: '拂晓蓝（默认）',
+      isChecked: true
     },
     {
       key: 'geekblue',
       color: '#2F54EB',
-      title: '极客蓝'
+      title: '极客蓝',
+      isChecked: false
     },
     {
       key: 'purple',
       color: '#722ED1',
-      title: '酱紫'
+      title: '酱紫',
+      isChecked: false
     },
   ];
   modes = [
@@ -149,7 +163,14 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
     }
   }
 
+  // 切换主题色
+  changePrimaryColor(colorItem: color): void {
+    this.colors.forEach(item => item.isChecked = false);
+    colorItem.isChecked = true;
+  }
 
+
+  // 切换主题
   changeTheme(themeItem: theme): void {
     this.themes.forEach((item) => {
       item.isChecked = false;
