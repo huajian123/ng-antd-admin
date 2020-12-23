@@ -18,6 +18,7 @@ export class PageHeaderComponent implements OnInit {
 
   @Input() pageHeaderInfo: Partial<PageHeaderType> = {};
   themesOptions$ = this.themesService.getThemesMode();
+  isNight$ = this.themesService.getIsNightTheme();
 
   constructor(private themesService: ThemeService) {
   }

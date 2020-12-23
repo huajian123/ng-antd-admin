@@ -1,4 +1,5 @@
-<nz-page-header class="site-page-header" [nzTitle]="pageHeaderInfo.title">
+<nz-page-header [ngClass]="{'normal-theme':!(isNight$|async),
+ 'night-theme':isNight$|async}" class="site-page-header" [nzTitle]="pageHeaderInfo.title">
   <nz-breadcrumb nz-page-header-breadcrumb>
     <nz-breadcrumb-item *ngFor="let breadcrumb of pageHeaderInfo.breadcrumb">
       <a>{{breadcrumb}}</a>
