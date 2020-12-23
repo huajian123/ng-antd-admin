@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, ChangeDetectionStrategy, Output, Input} from '@angular/core';
-import {ThemeService} from '../../../core/services/theme.service';
+import {ThemeService} from '../../../core/services/store/theme.service';
 
 
 @Component({

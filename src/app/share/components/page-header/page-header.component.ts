@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
-import {ThemeService} from '../../../core/services/theme.service';
+import {ThemeService} from '../../../core/services/store/theme.service';
 
 export interface PageHeaderType {
   title: string;

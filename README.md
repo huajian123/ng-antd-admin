@@ -1,6 +1,7 @@
-# NgAntAdmin
+# 禁用严格模式
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.5.
+可以通过在应用程序的 TypeScript 配置文件 tsconfig.json 中设置 strictTemplates: false 来完全禁用严格检查。
+https://angular.cn/guide/template-typecheck
 
 ## Development server
 

@@ -2,7 +2,7 @@ import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Input, On
 import {filter, map, mergeMap, tap} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
-import {ThemeService} from '../../../core/services/theme.service';
+import {ThemeService} from '../../../core/services/store/theme.service';
 import {TabService} from '../../../core/services/tab.service';
 
 interface Menu {

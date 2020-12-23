@@ -12,15 +12,7 @@ import {
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {DOCUMENT} from '@angular/common';
-import {ThemeService} from '../../../core/services/theme.service';
-
-interface SettingInterface {
-  theme: 'dark' | 'light' | 'night';
-  color: string;
-  mode: string;
-  fixedWidth: boolean;
-  colorWeak: boolean;
-}
+import {SettingInterface, ThemeService} from '../../../core/services/store/theme.service';
 
 @Component({
   selector: 'app-setting-drawer',
@@ -150,7 +142,7 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
   }
 
 
-  changeTheme(theme: { key: 'night' | 'light' | 'dark'; }): void {
+  changeTheme(theme: { key: 'dark' | 'light' | 'night'; }): void {
     theme.key === 'night' ? this.changeThemeToNight() : this.removeNightTheme();
     this.themesService.setThemesMode({...this._themesOptions, ...{theme: theme.key}});
   }

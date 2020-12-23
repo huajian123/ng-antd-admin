@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SimpleReuseStrategy} from './reuse-strategy';
-import {ServicesModule} from './services.module';
+
 
 export interface TabModel {
   title: string;
