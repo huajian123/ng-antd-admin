@@ -1,14 +1,14 @@
 import {NgModule} from '@angular/core';
 
 import {PageHeaderComponent} from './page-header.component';
-import {NzPageHeaderModule} from 'ng-zorro-antd/page-header';
-import {NzBreadCrumbModule} from 'ng-zorro-antd/breadcrumb';
+import {SHARED_ZORRO_MODULES} from '../../shared-zorro.module';
+import {CommonModule} from '@angular/common';
 
 @NgModule({
   declarations: [PageHeaderComponent],
   imports: [
-    NzPageHeaderModule,
-    NzBreadCrumbModule
+    CommonModule,
+    SHARED_ZORRO_MODULES,
   ],
   exports: [PageHeaderComponent]
 })
