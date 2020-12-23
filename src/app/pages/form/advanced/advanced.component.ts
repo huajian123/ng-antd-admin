@@ -16,6 +16,9 @@ interface ItemData {
 })
 export class AdvancedComponent implements OnInit {
 
+  constructor(private fb: FormBuilder) {
+  }
+
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '高级表单',
     desc: '高级表单常见于一次性输入和提交大批量数据的场景。',
@@ -26,6 +29,10 @@ export class AdvancedComponent implements OnInit {
     type: 'info-circle',
     theme: 'twotone'
   };
+
+  // 表格
+  editCache: { [key: string]: { edit: boolean; data: ItemData } } = {};
+  listOfData: ItemData[] = [];
 
 
 
@@ -55,13 +62,6 @@ export class AdvancedComponent implements OnInit {
   getCaptcha(e: MouseEvent): void {
     e.preventDefault();
   }
-
-  constructor(private fb: FormBuilder) {
-  }
-
-  // 表格
-  editCache: { [key: string]: { edit: boolean; data: ItemData } } = {};
-  listOfData: ItemData[] = [];
 
   startEdit(id: string): void {
     this.editCache[id].edit = true;

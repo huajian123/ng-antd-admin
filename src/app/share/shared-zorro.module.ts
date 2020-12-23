@@ -20,7 +20,13 @@ import {NzTimePickerModule} from 'ng-zorro-antd/time-picker';
 import {NzPageHeaderModule} from 'ng-zorro-antd/page-header';
 import {NzBreadCrumbModule} from 'ng-zorro-antd/breadcrumb';
 import {NzDrawerModule} from 'ng-zorro-antd/drawer';
-import {NzListModule} from "ng-zorro-antd/list";
+import {NzListModule} from 'ng-zorro-antd/list';
+import {NzTableModule} from 'ng-zorro-antd/table';
+import {NzDescriptionsModule} from 'ng-zorro-antd/descriptions';
+import {NzStepsModule} from 'ng-zorro-antd/steps';
+import {NzAlertModule} from 'ng-zorro-antd/alert';
+import {NzResultModule} from 'ng-zorro-antd/result';
+import {NzPopconfirmModule} from 'ng-zorro-antd/popconfirm';
 
 
 export const SHARED_ZORRO_MODULES = [
@@ -46,5 +52,11 @@ export const SHARED_ZORRO_MODULES = [
   NzPageHeaderModule,
   NzBreadCrumbModule,
   NzDrawerModule,
-  NzListModule
+  NzListModule,
+  NzTableModule,
+  NzDescriptionsModule,
+  NzStepsModule,
+  NzAlertModule,
+  NzResultModule,
+  NzPopconfirmModule,
 ];
