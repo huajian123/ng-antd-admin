@@ -13,6 +13,7 @@ export class TabComponent implements OnInit {
 
   tabs = this.tabService.getTabArray();
   themesOptions$ = this.themesService.getThemesMode();
+  isNightTheme$ = this.themesService.getIsNightTheme();
 
   constructor(public tabService: TabService, private nzContextMenuService: NzContextMenuService,
               private themesService: ThemeService) {

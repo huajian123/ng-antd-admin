@@ -1,5 +1,5 @@
 <nz-tabset nzLinkRouter [nzSelectedIndex]="currentIndex"
-           [nzTabBarStyle]="{'margin':'10px 0 0 0','background':'#fff'}"
+           [nzTabBarStyle]="{'margin':'10px 0 0 0','background':(isNightTheme$|async)?'':'#fff'}"
            [nzTabPosition]="'top'" [nzType]="'card'">
   <nz-tab *ngFor="let tab of tabs;let i =index;trackBy:trackByTab;">
 

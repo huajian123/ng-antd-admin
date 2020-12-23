@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --port 4802",
+    "start": "node ./less-compiler.js && ng serve  --port 4802",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -40,6 +40,8 @@
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
+    "less": "^3.13.0",
+    "less-plugin-clean-css": "^1.5.1",
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",

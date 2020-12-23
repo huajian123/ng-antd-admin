@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
+
 export interface SettingInterface {
   theme: 'dark' | 'light';
   color: string;
@@ -9,12 +10,12 @@ export interface SettingInterface {
 }
 
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class ThemeService {
 
+  private isNightTheme$ = new BehaviorSubject<boolean>(false);
   private themesMode$ = new BehaviorSubject<SettingInterface>({
     theme: 'dark',
     color: 'daybreak',
@@ -32,6 +33,14 @@ export class ThemeService {
 
   getThemesMode(): Observable<SettingInterface> {
     return this.themesMode$.asObservable();
+  }
+
+  setIsNightTheme(isNight: boolean): void {
+    this.isNightTheme$.next(isNight);
+  }
+
+  getIsNightTheme(): Observable<boolean> {
+    return this.isNightTheme$.asObservable();
   }
 
 }

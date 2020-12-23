@@ -25,6 +25,8 @@ type theme = { key: 'dark' | 'light' | 'night', image: string, title: string, is
 export class SettingDrawerComponent implements OnInit, OnDestroy {
   private destory$ = new Subject<void>();
   themesOptions$ = this.themesService.getThemesMode();
+  isNightTheme$ = this.themesService.getIsNightTheme();
+  _isNightTheme = false;
   _themesOptions: SettingInterface = {
     theme: 'dark',
     color: 'daybreak',
@@ -137,6 +139,7 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
     style.id = 'dark-theme';
     style.href = themeUrl;
     this.doc.body.appendChild(style);
+
   }
 
   removeNightTheme(): void {
@@ -155,14 +158,17 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
     if (themeItem.key === 'night') {
       this.changeThemeToNight();
       this.themesService.setThemesMode({...this._themesOptions, ...{theme: 'dark'}});
+      this.themesService.setIsNightTheme(true);
     } else {
       this.removeNightTheme();
       this.themesService.setThemesMode({...this._themesOptions, ...{theme: themeItem.key}});
+      this.themesService.setIsNightTheme(false);
     }
   }
 
   ngOnInit(): void {
     this.themesOptions$.pipe(takeUntil(this.destory$)).subscribe((res: SettingInterface) => this._themesOptions = res);
+    // this.isNightTheme$.pipe(takeUntil(this.destory$)).subscribe((res: boolean) => this._isNightTheme = res);
   }
 
   ngOnDestroy(): void {
