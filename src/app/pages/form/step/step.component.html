@@ -1,0 +1,135 @@
+<!--头部版块-->
+<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+
+<div class="normal-wrap">
+  <nz-card>
+    <section class="page-wrap">
+      <section class="step-wrap">
+        <nz-steps [nzCurrent]="1">
+          <nz-step nzTitle="填写转账信息"></nz-step>
+          <nz-step nzTitle="确认转账信息"></nz-step>
+          <nz-step nzTitle="完成"></nz-step>
+        </nz-steps>
+      </section>
+
+      <section>
+        <ng-container *ngIf="false">
+          <form class="form-wrap p-b-0" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="title">付款账户</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入标题">
+                <nz-select>
+                  <nz-option nzValue="ant-design@alipay.com" nzLabel="ant-design@alipay.com"></nz-option>
+                </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="a">收款账户</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入标题">
+                <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
+                  <ng-template #addOnBeforeTemplate>
+                    <nz-select formControlName="payWay" class="phone-select">
+                      <nz-option nzLabel="支付宝" nzValue="zhifubao"></nz-option>
+                      <nz-option nzLabel="银行卡" nzValue="bankcard"></nz-option>
+                    </nz-select>
+                  </ng-template>
+                  <input formControlName="phoneNumber" id="'phoneNumber'" nz-input/>
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="a">收款人姓名</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入标题">
+                <input nz-input formControlName="title" id="b" placeholder="给目标起个名字"/>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="a">收款金额</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入标题">
+                <nz-input-group nzPrefix="￥">
+                  <input type="text" nz-input/>
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item nz-row class="register-area">
+              <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                <button nz-button nzType="primary">下一步</button>
+              </nz-form-control>
+            </nz-form-item>
+          </form>
+
+          <nz-divider></nz-divider>
+          <section class="desc-wrap">
+            <h3 nz-typography nzType="secondary">说明</h3>
+            <h4 nz-typography nzType="secondary">转账到支付宝账户</h4>
+            <p nz-typography nzType="secondary">
+              如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。</p>
+            <h4 nz-typography nzType="secondary">转账到银行卡</h4>
+            <p nz-typography nzType="secondary">
+              如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。</p>
+          </section>
+        </ng-container>
+
+
+        <ng-container *ngIf="false">
+          <div class="determine-wrap p-b-0">
+            <nz-alert
+              nzType="info"
+              nzCloseable
+              nzMessage="确认转账后，资金将直接打入对方账户，无法退回。"
+            >
+            </nz-alert>
+            <nz-descriptions class="m-t-20">
+              <nz-descriptions-item nzTitle="付款账户">ant-design@alipay.com</nz-descriptions-item>
+              <nz-descriptions-item nzTitle="收款账户">test@example.com</nz-descriptions-item>
+              <nz-descriptions-item nzTitle="收款人姓名">Alex</nz-descriptions-item>
+              <nz-descriptions-item nzTitle="转账金额">500元</nz-descriptions-item>
+            </nz-descriptions>
+            <nz-divider></nz-divider>
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="a">支付密码</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="支付密码">
+                <nz-input-group>
+                  <input type="password" nz-input/>
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item nz-row class="register-area">
+              <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                <button nz-button nzType="primary">提交</button>
+                <button class="m-l-10" nz-button nzType="default">上一步</button>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="true">
+          <nz-result
+            nzStatus="success"
+            nzTitle="操作成功"
+            nzSubTitle="预计两小时内到账"
+          >
+            <div nz-result-extra>
+              <button nz-button nzType="primary">在转一笔</button>
+              <button nz-button>查看账单</button>
+            </div>
+          </nz-result>
+          <div class="desc-bg center">
+            <div class="determine-wrap p-b-0">
+
+              <nz-descriptions class="m-t-20">
+                <nz-descriptions-item nzTitle="付款账户">ant-design@alipay.com</nz-descriptions-item>
+                <nz-descriptions-item nzTitle="收款账户">test@example.com</nz-descriptions-item>
+                <nz-descriptions-item nzTitle="收款人姓名">Alex</nz-descriptions-item>
+                <nz-descriptions-item nzTitle="转账金额">500元</nz-descriptions-item>
+              </nz-descriptions>
+            </div>
+
+          </div>
+        </ng-container>
+      </section>
+
+
+    </section>
+  </nz-card>
+</div>
