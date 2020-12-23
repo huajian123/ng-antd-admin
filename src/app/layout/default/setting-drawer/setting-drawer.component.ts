@@ -144,7 +144,7 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
   }
 
   changeThemeToNight(): void {
-    const themeUrl = './assets/themes/style.dark.css';
+    const themeUrl = './assets/themes/style.red.css';
     // create new link element
     const style = this.doc.createElement('link') as HTMLLinkElement;
     // put the link into the document head
