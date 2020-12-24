@@ -143,30 +143,43 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
     this.isCollapsed = !this.isCollapsed;
   }
 
+  // 切换到黑暗主题
   changeThemeToNight(): void {
-    const themeUrl = './assets/themes/style.red.css';
+    this.addCss('./assets/themes/style.dark.css', 'dark-theme');
+  }
+
+  addCss(path: string, id: string): void {
+    const doms = this.doc.getElementById(id);
+    if (doms) {
+      return;
+    }
+    const themeUrl = path;
     // create new link element
     const style = this.doc.createElement('link') as HTMLLinkElement;
     // put the link into the document head
     style.type = 'text/css';
     style.rel = 'stylesheet';
-    style.id = 'dark-theme';
+    style.id = id;
     style.href = themeUrl;
     this.doc.body.appendChild(style);
-
   }
 
-  removeNightTheme(): void {
-    const doms = this.doc.querySelectorAll('#dark-theme');
+  removeCss(select: string): void {
+    const doms = this.doc.querySelectorAll(select);
     if (doms && doms.length > 0) {
       doms.forEach((dom) => dom.remove());
     }
+  }
+
+  removeNightTheme(): void {
+    this.removeCss('#dark-theme');
   }
 
   // 切换主题色
   changePrimaryColor(colorItem: color): void {
     this.colors.forEach(item => item.isChecked = false);
     colorItem.isChecked = true;
+    this.addCss('./assets/themes/style.red.css', 'primary-red');
   }
 
 
