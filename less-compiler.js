@@ -3,8 +3,12 @@ const LessPluginCleanCSS = require('less-plugin-clean-css');
 const fs = require('fs');
 const darkThemeVars = require('ng-zorro-antd/dark-theme');
 
-const appStyles = './node_modules/ng-zorro-antd/ng-zorro-antd.dark.less'; // 应用的样式入口文件
-const themeContent = `@import '${appStyles}';`;
+const darkStyles = './node_modules/ng-zorro-antd/ng-zorro-antd.dark.less'; // 应用的样式入口文件
+const appStyles = './src/assets/styles/index.less'; // 应用的样式入口文件
+const themeContent = `
+@import '${darkStyles}';
+@import '${appStyles}';
+`;
 
 less.render(themeContent, {
   javascriptEnabled: true,
