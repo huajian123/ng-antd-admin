@@ -12,3 +12,15 @@ a {
 a[nz-tab-link]::before {
   right: 33px;
 }
+
+:host ::ng-deep {
+  .ant-tabs-tab {
+    padding: 0!important;
+    a{
+      display: inline-block;
+      line-height: 35px;
+      height: 35px;
+      padding: 0 10px!important;
+    }
+  }
+}
