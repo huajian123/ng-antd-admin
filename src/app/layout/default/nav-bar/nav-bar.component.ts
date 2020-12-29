@@ -241,6 +241,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
   ];
   routerPath = '';
   themesOptions$ = this.themesService.getThemesMode();
+  isCollapsed$ = this.themesService.getIsCollapsed();
   @Input() isCollapsed = false;
   subs: Array<Subscription> = [];
 

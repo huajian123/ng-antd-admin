@@ -11,6 +11,7 @@ import {ThemeService} from '../../../core/services/store/theme.service';
 export class DefLayoutContentComponent implements OnInit {
 
   themesOptions$ = this.themesService.getThemesMode();
+  isCollapsed$ = this.themesService.getIsCollapsed();
   isCollapsed = true;
   @Output() collapsedChange = new EventEmitter<boolean>();
 
@@ -26,6 +27,10 @@ export class DefLayoutContentComponent implements OnInit {
 
 
   constructor(private themesService: ThemeService) {
+  }
+
+  changeCollapsed(isCollapsed: boolean): void {
+    this.themesService.setIsCollapsed(isCollapsed);
   }
 
   ngOnInit(): void {

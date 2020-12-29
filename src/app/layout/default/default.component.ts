@@ -11,6 +11,7 @@ export class DefaultComponent implements OnInit {
   themeOptions = {
     mode: 'side'
   };
+  isCollapsed = false;
 
   layout = {
     collasped: false,
@@ -30,9 +31,17 @@ export class DefaultComponent implements OnInit {
   constructor(private themesService: ThemeService) {
   }
 
+  changeIsCollapsed(): void {
+    this.isCollapsed = !this.isCollapsed;
+    this.themesService.setIsCollapsed(this.isCollapsed);
+  }
+
   ngOnInit(): void {
     this.themesService.getThemesMode().subscribe(res => {
       this.themeOptions.mode = res.mode;
+    });
+    this.themesService.getIsCollapsed().subscribe(res => {
+      this.isCollapsed = res;
     });
   }
 

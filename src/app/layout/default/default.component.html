@@ -1,13 +1,14 @@
 <app-def-layout-content [(collapsed)]="layout.collasped">
 
-  <ng-container sider>
+  <!--mode 为side-->
+  <ng-container sider *ngIf="themeOptions.mode==='side'">
     <app-side-nav [isCollapsed]="layout.collasped"></app-side-nav>
   </ng-container>
 
-  <ng-container header>
+  <ng-container header *ngIf="themeOptions.mode==='side'">
     <div class="app-header">
-      <i class="trigger" nz-icon [nzType]="layout.collasped ? 'menu-unfold' : 'menu-fold'"
-         (click)="layout.collasped=!layout.collasped"></i>
+      <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+         (click)="changeIsCollapsed()"></i>
       <div class="bst-header-wrap">
           <span class="bst-header-icon">
               <i nz-icon nzType="search" nzTheme="outline"></i>
@@ -48,6 +49,11 @@
           </span>
       </div>
     </div>
+  </ng-container>
+
+  <!--mode 为top-->
+  <ng-container header  *ngIf="themeOptions.mode==='top'">
+    <app-nav-bar></app-nav-bar>
   </ng-container>
 
   <ng-container content>
