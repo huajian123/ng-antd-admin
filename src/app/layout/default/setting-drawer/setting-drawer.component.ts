@@ -30,7 +30,7 @@ interface Color extends NormalModel {
 }
 
 interface Mode extends NormalModel {
-  key: string;
+  key: 'side' | 'top';
 }
 
 
@@ -125,7 +125,7 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
       isChecked: false
     },
   ];
-  modes = [
+  modes: Mode[] = [
     {
       key: 'side',
       image: '/assets/imgs/menu-side.svg',
@@ -204,6 +204,8 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
 
   changeMode(mode: Mode): void {
     this.selOne(mode, this.modes);
+    this._themesOptions.mode = mode.key;
+    this.themesService.setThemesMode(this._themesOptions);
   }
 
   // 切换主题
@@ -211,13 +213,14 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
     this.selOne(themeItem, this.themes);
     if (themeItem.key === 'night') {
       this.changeThemeToNight();
-      this.themesService.setThemesMode({...this._themesOptions, ...{theme: 'dark'}});
+      this._themesOptions.theme = 'dark';
       this.themesService.setIsNightTheme(true);
     } else {
       this.removeNightTheme();
-      this.themesService.setThemesMode({...this._themesOptions, ...{theme: themeItem.key}});
+      this._themesOptions.theme = themeItem.key;
       this.themesService.setIsNightTheme(false);
     }
+    this.themesService.setThemesMode(this._themesOptions);
   }
 
   ngOnInit(): void {
