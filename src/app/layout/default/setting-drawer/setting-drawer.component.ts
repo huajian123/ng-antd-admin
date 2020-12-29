@@ -14,13 +14,25 @@ import {takeUntil} from 'rxjs/operators';
 import {DOCUMENT} from '@angular/common';
 import {SettingInterface, ThemeService} from '../../../core/services/store/theme.service';
 
-type theme = { key: 'dark' | 'light' | 'night', image: string, title: string, isChecked: boolean };
-type color = {
-  key: string,
-  color: string,
-  title: string,
-  isChecked: boolean
-};
+interface NormalModel {
+  image?: string;
+  title: string;
+  isChecked: boolean;
+}
+
+interface Theme extends NormalModel {
+  key: 'dark' | 'light' | 'night';
+}
+
+interface Color extends NormalModel {
+  key: string;
+  color: string;
+}
+
+interface Mode extends NormalModel {
+  key: string;
+}
+
 
 @Component({
   selector: 'app-setting-drawer',
@@ -43,7 +55,7 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
   isCollapsed = false;
 
 
-  themes: theme[] = [
+  themes: Theme[] = [
     {
       key: 'dark',
       image: '/assets/imgs/theme-dark.svg',
@@ -63,7 +75,7 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
       isChecked: false,
     },
   ];
-  colors: color[] = [
+  colors: Color[] = [
     {
       key: 'dust',
       color: '#F5222D',
@@ -117,12 +129,14 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
     {
       key: 'side',
       image: '/assets/imgs/menu-side.svg',
-      title: '侧边菜单布局'
+      title: '侧边菜单布局',
+      isChecked: true
     },
     {
       key: 'top',
       image: '/assets/imgs/menu-top.svg',
-      title: '顶部菜单布局'
+      title: '顶部菜单布局',
+      isChecked: false,
     }
   ];
   layouts = [
@@ -176,19 +190,25 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
   }
 
   // 切换主题色
-  changePrimaryColor(colorItem: color): void {
-    this.colors.forEach(item => item.isChecked = false);
-    colorItem.isChecked = true;
+  changePrimaryColor(colorItem: Color): void {
+    this.selOne(colorItem, this.colors);
     this.addCss('./assets/themes/style.red.css', 'primary-red');
   }
 
+  // 选择一个isChecked为true,其他为false
+  selOne(item: NormalModel, itemArray: NormalModel[]): void {
+    itemArray.forEach((_item) => _item.isChecked = false);
+    item.isChecked = true;
+  }
+
+
+  changeMode(mode: Mode): void {
+    this.selOne(mode, this.modes);
+  }
 
   // 切换主题
-  changeTheme(themeItem: theme): void {
-    this.themes.forEach((item) => {
-      item.isChecked = false;
-    });
-    themeItem.isChecked = true;
+  changeTheme(themeItem: Theme): void {
+    this.selOne(themeItem, this.themes);
     if (themeItem.key === 'night') {
       this.changeThemeToNight();
       this.themesService.setThemesMode({...this._themesOptions, ...{theme: 'dark'}});

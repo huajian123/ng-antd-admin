@@ -16,22 +16,22 @@
 
     </div>
 
-    <div class="m-b theme-color">
-      <h3 class="title">主题色</h3>
-      <div class="content">
-        <div *ngFor="let color of colors" class="color-block" nz-tooltip [nzTooltipTitle]="color.title"
-             [style.background]="color.color" (click)="changePrimaryColor(color)">
-          <i *ngIf="color.isChecked" nz-icon nzType="check" nzTheme="outline"></i>
-        </div>
-      </div>
-    </div>
+    <!-- <div class="m-b theme-color">
+       <h3 class="title">主题色</h3>
+       <div class="content">
+         <div *ngFor="let color of colors" class="color-block" nz-tooltip [nzTooltipTitle]="color.title"
+              [style.background]="color.color" (click)="changePrimaryColor(color)">
+           <i *ngIf="color.isChecked" nz-icon nzType="check" nzTheme="outline"></i>
+         </div>
+       </div>
+     </div>-->
     <nz-divider></nz-divider>
     <div class="m-b">
       <h3 class="title">导航模式</h3>
       <div class="block-checkbox">
-        <div *ngFor="let mode of modes" class="item" nz-tooltip [nzTooltipTitle]="mode.title">
+        <div (click)="changeMode(mode)" *ngFor="let mode of modes" class="item" nz-tooltip [nzTooltipTitle]="mode.title">
           <img [src]="mode.image" [alt]="mode.title">
-          <div class="select-icon">
+          <div class="select-icon" *ngIf="mode.isChecked">
             <i nz-icon nzType="check" nzTheme="outline"></i>
           </div>
         </div>
