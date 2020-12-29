@@ -1,4 +1,5 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ThemeService} from '../../core/services/store/theme.service';
 
 @Component({
   selector: 'app-default',
@@ -7,6 +8,10 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DefaultComponent implements OnInit {
+  themeOptions = {
+    mode: 'side'
+  };
+
   layout = {
     collasped: false,
     siderMode: 'side',
@@ -21,9 +26,14 @@ export class DefaultComponent implements OnInit {
       colorweak: false
     }
   };
-  constructor() { }
+
+  constructor(private themesService: ThemeService) {
+  }
 
   ngOnInit(): void {
+    this.themesService.getThemesMode().subscribe(res => {
+      this.themeOptions.mode = res.mode;
+    });
   }
 
 }
