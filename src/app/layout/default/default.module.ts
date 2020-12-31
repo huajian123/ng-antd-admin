@@ -8,10 +8,11 @@ import { TabComponent } from './tab/tab.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import {SettingDrawerModule} from './setting-drawer/setting-drawer.module';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { ToolBarComponent } from './tool-bar/tool-bar.component';
 
 
 @NgModule({
-  declarations: [DefaultComponent, TabComponent, SideNavComponent, NavBarComponent],
+  declarations: [DefaultComponent, TabComponent, SideNavComponent, NavBarComponent, ToolBarComponent],
   imports: [
     SharedModule,
     SettingDrawerModule,

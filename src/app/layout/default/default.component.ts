@@ -11,8 +11,9 @@ export class DefaultComponent implements OnInit {
   themeOptions = {
     mode: 'side'
   };
-  isCollapsed = false;
 
+  themeOptions$ = this.themesService.getThemesMode();
+  isCollapsed = false;
   layout = {
     collasped: false,
     siderMode: 'side',
@@ -31,7 +32,8 @@ export class DefaultComponent implements OnInit {
   constructor(private themesService: ThemeService) {
   }
 
-  changeIsCollapsed(): void {
+
+  changeCollapsed(): void {
     this.isCollapsed = !this.isCollapsed;
     this.themesService.setIsCollapsed(this.isCollapsed);
   }
@@ -40,9 +42,7 @@ export class DefaultComponent implements OnInit {
     this.themesService.getThemesMode().subscribe(res => {
       this.themeOptions.mode = res.mode;
     });
-    this.themesService.getIsCollapsed().subscribe(res => {
-      this.isCollapsed = res;
-    });
+    this.themesService.getIsCollapsed().subscribe(res => this.isCollapsed = res);
   }
 
 }

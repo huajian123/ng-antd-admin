@@ -1,50 +1,41 @@
-.app-header {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+  z-index: 10;
+}
+
+.trigger:hover {
+  color: #1890ff;
+}
+
+
+.bst-header-wrap {
+  margin-right: 8px;
   height: 100%;
-  padding: 0;
-  box-shadow: 0 1px 4px rgba(0,21,41,.08);
-
-  .bst-header-wrap {
-    margin-right: 8px;
-    height: 100%;
-    .bst-header-icon {
-      cursor: pointer;
-      padding: 0 12px;
-      display: inline-block;
-      transition: all .3s;
-      height: 100%;
-      font-size: 16px;
-
-      .avatar {
-        width: 24px;
-        height: 24px;
-        line-height: 24px;
-        margin-right: 10px;
-      }
-
-      .bst-badge {
-        padding: 8px 2px;
-      }
-    }
-
-    .bst-header-icon:hover {
-      background-color: rgba(0, 0, 0, .025);
-    }
-  }
-
-  .trigger {
-    font-size: 18px;
-    line-height: 64px;
-    padding: 0 24px;
+  .bst-header-icon {
     cursor: pointer;
-    transition: color 0.3s;
-    z-index: 10;
+    padding: 0 12px;
+    display: inline-block;
+    transition: all .3s;
+    height: 100%;
+    font-size: 16px;
+
+    .avatar {
+      width: 24px;
+      height: 24px;
+      line-height: 24px;
+      margin-right: 10px;
+    }
+
+    .bst-badge {
+      padding: 8px 2px;
+    }
   }
 
-  .trigger:hover {
-    color: #1890ff;
+  .bst-header-icon:hover {
+    background-color: rgba(0, 0, 0, .025);
   }
 }

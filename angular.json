@@ -69,7 +69,8 @@
               "@antv/adjust",
               "@antv/util",
               "size-sensor",
-              "@antv/g-canvas"
+              "@antv/g-canvas",
+              "lodash"
             ]
           },
           "configurations": {
