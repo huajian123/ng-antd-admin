@@ -242,6 +242,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
   ];
   routerPath = '';
   themesOptions$ = this.themesService.getThemesMode();
+  themesMode = 'side';
   isCollapsed$ = this.themesService.getIsCollapsed();
   isCollapsed = false;
   subs: Array<Subscription> = [];
@@ -263,7 +264,11 @@ export class NavBarComponent implements OnInit, OnDestroy {
           if (this.isCollapsed) {
             this.closeMenuOpen(this.menus);
           } else {
-           // this.menus = this.copyMenus;
+            // this.menus = this.copyMenus;
+          }
+
+          if(this.themesMode==='top'){
+           this.closeMenu();
           }
         }),
         map(() => this.activatedRoute),
@@ -368,9 +373,24 @@ export class NavBarComponent implements OnInit, OnDestroy {
     });
   }
 
+  closeMenu():void{
+    this.clickMenuItem(this.menus);
+    this.clickMenuItem(this.copyMenus);
+    this.closeMenuOpen(this.menus);
+  }
+
+  subThemesSettings(): void {
+    this.themesOptions$.subscribe(options => {
+      this.themesMode = options.mode;
+      if(this.themesMode==='top'){
+        this.closeMenu();
+      }
+    })
+  }
 
   ngOnInit(): void {
     this.subIsCollapsed();
+    this.subThemesSettings();
   }
 
   ngOnDestroy(): void {
