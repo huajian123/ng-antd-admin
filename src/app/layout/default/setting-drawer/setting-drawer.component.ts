@@ -204,6 +204,7 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
 
   changeMode(mode: Mode): void {
     this.selOne(mode, this.modes);
+    this.themesService.setIsCollapsed(false);
     this._themesOptions.mode = mode.key;
     this.themesService.setThemesMode(this._themesOptions);
   }

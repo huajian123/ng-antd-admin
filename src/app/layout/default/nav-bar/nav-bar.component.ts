@@ -4,6 +4,7 @@ import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {TabService} from '../../../core/services/tab.service';
 import {ThemeService} from '../../../core/services/store/theme.service';
 import {Subscription} from 'rxjs';
+import * as _ from 'lodash';
 
 interface Menu {
   path?: string;
@@ -242,8 +243,9 @@ export class NavBarComponent implements OnInit, OnDestroy {
   routerPath = '';
   themesOptions$ = this.themesService.getThemesMode();
   isCollapsed$ = this.themesService.getIsCollapsed();
-  @Input() isCollapsed = false;
+  isCollapsed = false;
   subs: Array<Subscription> = [];
+  copyMenus: Menu[] = _.cloneDeep(this.menus);
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private tabService: TabService,
               private cdr: ChangeDetectorRef, private themesService: ThemeService) {
@@ -255,7 +257,14 @@ export class NavBarComponent implements OnInit, OnDestroy {
           // todo
           // @ts-ignore
           this.routerPath = this.activatedRoute.snapshot['_routerState'].url;
-          this.clickMenuItem();
+          this.clickMenuItem(this.menus);
+          this.clickMenuItem(this.copyMenus);
+          // 是折叠的菜单
+          if (this.isCollapsed) {
+            this.closeMenuOpen(this.menus);
+          } else {
+           // this.menus = this.copyMenus;
+          }
         }),
         map(() => this.activatedRoute),
         map((route) => {
@@ -277,13 +286,13 @@ export class NavBarComponent implements OnInit, OnDestroy {
       });
   }
 
-  clickMenuItem(): void {
-    if (!this.menus) {
+  clickMenuItem(menus: Menu[]): void {
+    if (!menus) {
       return;
     }
     const index = this.routerPath.indexOf('?') === -1 ? this.routerPath.length : this.routerPath.indexOf('?');
     const routePath = this.routerPath.substring(0, index);
-    for (const item of this.menus) {
+    for (const item of menus) {
       item.open = false;
       item.selected = false;
       // 一级菜单
@@ -326,14 +335,42 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   // 改变当前菜单展示状态
   changeOpen(currentMenu: Menu, allMenu: Menu[]): void {
-    /* allMenu.forEach((item) => {
-       item.open = false;
-     });
-     currentMenu.open = true;*/
+    allMenu.forEach((item) => {
+      item.open = false;
+    });
+    currentMenu.open = true;
+  }
+
+  closeMenuOpen(menus: Menu[]): void {
+    menus.forEach(menu => {
+      menu.open = false;
+      if (menu.children && menu.children.length > 0) {
+        this.closeMenuOpen(menu.children);
+      } else {
+        return;
+      }
+    });
+  }
+
+  // 监听折叠菜单事件
+  subIsCollapsed(): void {
+    this.isCollapsed$.subscribe(isCollapsed => {
+      this.isCollapsed = isCollapsed;
+      // 菜单展开
+      if (!this.isCollapsed) {
+        this.menus = _.cloneDeep(this.copyMenus);
+        this.clickMenuItem(this.menus);
+      } else { // 菜单收起
+        this.copyMenus = _.cloneDeep(this.menus);
+        this.closeMenuOpen(this.menus);
+      }
+      this.cdr.markForCheck();
+    });
   }
 
 
   ngOnInit(): void {
+    this.subIsCollapsed();
   }
 
   ngOnDestroy(): void {
