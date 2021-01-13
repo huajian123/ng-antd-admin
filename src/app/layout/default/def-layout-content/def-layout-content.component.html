@@ -5,9 +5,8 @@
             (nzCollapsedChange)="changeCollapsed($event)">
     <ng-content select="ng-container[sider]"></ng-content>
   </nz-sider>
-
   <nz-layout style="overflow-x:hidden">
-    <nz-header>
+    <nz-header [ngClass]="{'dark-top-nav-bg':themesOptions.mode==='top'&&themesOptions.theme==='dark'&&!(isNightTheme$|async)}">
       <ng-content select="ng-container[header]"></ng-content>
     </nz-header>
 
