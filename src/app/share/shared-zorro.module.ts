@@ -27,6 +27,7 @@ import {NzStepsModule} from 'ng-zorro-antd/steps';
 import {NzAlertModule} from 'ng-zorro-antd/alert';
 import {NzResultModule} from 'ng-zorro-antd/result';
 import {NzPopconfirmModule} from 'ng-zorro-antd/popconfirm';
+import {NzSpaceModule} from 'ng-zorro-antd/space';
 
 
 export const SHARED_ZORRO_MODULES = [
@@ -59,4 +60,5 @@ export const SHARED_ZORRO_MODULES = [
   NzAlertModule,
   NzResultModule,
   NzPopconfirmModule,
+  NzSpaceModule,
 ];

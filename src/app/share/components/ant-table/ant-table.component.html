@@ -1,0 +1,35 @@
+<nz-table nzShowPagination
+          [nzFrontPagination]="false"
+          nzSize="small"
+          nzShowSizeChanger nzBordered="true" #basicTable [nzData]="_dataList"
+          [nzTotal]="tableConfig.total"
+          [nzPageIndex]="tableConfig.pageIndex"
+          [nzScroll]="{ x: '1100px' }"
+          [nzPageSize]="tableConfig.pageSize"
+          (nzQueryParams)="onQueryParamsChange($event)"
+          (nzPageSizeChange)="onPageSizeChange($event)"
+          [nzLoading]="tableConfig.loading"
+          nzShowQuickJumper
+          [nzShowTotal]="rangeTemplate"
+>
+  <ng-template #rangeTemplate let-range="range" let-total> {{ range[0] }}-{{ range[1] }} 共 {{ total }} 条 </ng-template>
+  <thead>
+  <tr>
+    <th [nzLeft]="true" [nzIndeterminate]="indeterminate" *ngIf="tableConfig.showCheckbox" (nzCheckedChange)="onAllChecked($event)" [nzWidth]="'10px'" [nzChecked]="allChecked"></th>
+    <th [nzWidth]="head.width + 'px'" *ngFor="let head of tableConfig.headers;trackBy:trackByTableHead;let headIndex=index" [nzRight]="!!head.fixed">{{head.title}}</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let row of _dataList;let rowIndex=index;trackBy:trackByTableBody">
+    <td *ngIf="tableConfig.showCheckbox" [nzLeft]="true"  (nzCheckedChange)="checkRowSingle($event,rowIndex)" [nzChecked]="row['_checked']"></td>
+    <td *ngFor="let head of tableConfig.headers" [nzRight]="!!head.fixed" >
+      <ng-container *ngIf="head.tdTemplate;else roleTpl">
+        <ng-container *ngTemplateOutlet="head.tdTemplate;context:row"></ng-container>
+      </ng-container>
+      <ng-template #roleTpl>
+        <ng-container>{{row[head.field]}}</ng-container>
+      </ng-template>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>

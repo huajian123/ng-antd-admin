@@ -1,11 +1,12 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 import {NumberLoopPipe} from './number-loop.pipe';
-
+import {HtmlPipe} from './html.pipe';
 
 
 @NgModule({
-  declarations: [NumberLoopPipe],
+  declarations: [NumberLoopPipe, HtmlPipe],
   imports: [],
-  exports: [NumberLoopPipe]
+  exports: [NumberLoopPipe, HtmlPipe]
 })
-export class PipesModule { }
+export class PipesModule {
+}
