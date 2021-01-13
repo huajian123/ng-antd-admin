@@ -3,7 +3,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {BaseComponent} from './base.component';
 
 const routes: Routes = [
-  {path: '', component: BaseComponent, data: {title: '基础表单', key: 'base'}}
+  {path: '', component: BaseComponent, data: {title: '基础表单', key: 'base-form'}}
 ];
 
 @NgModule({
