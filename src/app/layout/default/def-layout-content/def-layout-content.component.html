@@ -1,12 +1,12 @@
-<!--class="colorWeak"-->
-<nz-layout>
+<nz-layout [ngClass]="{'color-weak':themesOptions.colorWeak}">
   <nz-sider *ngIf="(themesOptions$|async)!.mode==='side'" class="menu-sidebar" [nzTheme]="(themesOptions$|async)!.theme"
             nzBreakpoint="lg" [nzCollapsible]="true" [nzCollapsed]="isCollapsed$|async"
             (nzCollapsedChange)="changeCollapsed($event)">
     <ng-content select="ng-container[sider]"></ng-content>
   </nz-sider>
   <nz-layout style="overflow-x:hidden">
-    <nz-header [ngClass]="{'dark-top-nav-bg':themesOptions.mode==='top'&&themesOptions.theme==='dark'&&!(isNightTheme$|async)}">
+    <nz-header
+      [ngClass]="{'dark-top-nav-bg':themesOptions.mode==='top'&&themesOptions.theme==='dark'&&!(isNightTheme$|async)}">
       <ng-content select="ng-container[header]"></ng-content>
     </nz-header>
 
