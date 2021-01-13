@@ -10,7 +10,6 @@ import {ComponentsModule} from './components/components.module';
 const MODULES = [
   CommonModule,
   FormsModule,
-  HttpClientModule,
   ReactiveFormsModule,
   RouterModule,
   PipesModule,
