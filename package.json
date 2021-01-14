@@ -22,6 +22,7 @@
     "@antv/g2plot": "^2.3.3",
     "lodash": "^4.17.20",
     "ng-zorro-antd": "^11.0.0",
+    "ngx-quicklink": "^0.2.6",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
