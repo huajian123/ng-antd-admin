@@ -1,6 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import {LoginService} from '../../../core/services/http/login/login.service';
 
 @Component({
   selector: 'app-login-form',
@@ -11,11 +12,13 @@ import {Router} from '@angular/router';
 export class LoginFormComponent implements OnInit {
 
   validateForm!: FormGroup;
-  constructor(private fb: FormBuilder, private router: Router) { }
+
+  constructor(private fb: FormBuilder, private router: Router, private dataService: LoginService) {
+  }
 
 
   submitForm(): void {
-    this.router.navigateByUrl('default');
+    // this.router.navigateByUrl('default');
     Object.keys(this.validateForm.controls).forEach(key => {
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
@@ -24,13 +27,15 @@ export class LoginFormComponent implements OnInit {
       return;
     }
     const param = this.validateForm.getRawValue();
-    /* this.dataService.login(param).subscribe((res) => {
-       this.router.navigateByUrl('hazard');
-     });*/
+    this.dataService.login(param).subscribe((res) => {
+      console.log(res);
+      // this.router.navigateByUrl('hazard');
+    });
   }
+
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      name: [null, [Validators.required]],
+      userName: [null, [Validators.required]],
       password: [null, [Validators.required]],
       remember: [null],
     });

@@ -70,7 +70,8 @@
               "@antv/util",
               "size-sensor",
               "@antv/g-canvas",
-              "lodash"
+              "lodash",
+              "qs"
             ]
           },
           "configurations": {
@@ -106,7 +107,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ng-ant-admin:build"
+            "browserTarget": "ng-ant-admin:build",
+            "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {

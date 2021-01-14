@@ -3,6 +3,20 @@
 可以通过在应用程序的 TypeScript 配置文件 tsconfig.json 中设置 strictTemplates: false 来完全禁用严格检查。
 https://angular.cn/guide/template-typecheck
 
+# 模块不需要预加载
+
+```typescript
+export const routes: Routes = [
+  {
+    path: 'contact',
+    loadChildren: import(() => './contact/contact.module').then(m => m.ContactModule),
+    data: {
+      preload: false
+    }
+  }
+];
+```
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
