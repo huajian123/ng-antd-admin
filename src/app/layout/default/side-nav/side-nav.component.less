@@ -1,5 +1,15 @@
  @import "../../../../assets/styles/zorro.less";
 // todo 侧边栏收缩起来的样式问题
+ .left-nav-wrap{
+   display: flex;
+   flex-direction: column;
+   height: 100%;
+   .nav-ul-wrap{
+     flex: 1 1 0;
+     overflow: hidden auto;
+   }
+ }
+
 .sidebar-logo {
   position: relative;
   height: 64px;
@@ -34,3 +44,24 @@
     color: @primary-6;
   }
 }
+ ::-webkit-scrollbar{
+   width: 7px;
+   height: 7px;
+   background-color: #F5F5F5;
+ }
+
+ /*定义滚动条轨道 内阴影+圆角*/
+ ::-webkit-scrollbar-track {
+   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+   border-radius: 10px;
+   background-color: #F5F5F5;
+ }
+
+ /*定义滑块 内阴影+圆角*/
+ ::-webkit-scrollbar-thumb{
+   border-radius: 10px;
+   box-shadow: inset 0 0 6px rgba(0, 0, 0, .1);
+   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .1);
+   background-color: #c8c8c8;
+ }
