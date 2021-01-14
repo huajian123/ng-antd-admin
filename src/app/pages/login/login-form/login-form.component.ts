@@ -2,6 +2,8 @@ import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {LoginService} from '../../../core/services/http/login/login.service';
+import {WindowService} from '../../../core/services/window.service';
+import {AuthKey} from '../../../configs/constant';
 
 @Component({
   selector: 'app-login-form',
@@ -13,12 +15,12 @@ export class LoginFormComponent implements OnInit {
 
   validateForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router, private dataService: LoginService) {
+  constructor(private fb: FormBuilder, private router: Router, private dataService: LoginService,
+              private windowServe: WindowService) {
   }
 
 
   submitForm(): void {
-    // this.router.navigateByUrl('default');
     Object.keys(this.validateForm.controls).forEach(key => {
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
@@ -27,9 +29,9 @@ export class LoginFormComponent implements OnInit {
       return;
     }
     const param = this.validateForm.getRawValue();
-    this.dataService.login(param).subscribe((res) => {
-      console.log(res);
-      // this.router.navigateByUrl('hazard');
+    this.dataService.login(param).subscribe(({token}) => {
+      this.windowServe.setStorage(AuthKey, token);
+      this.router.navigateByUrl('default');
     });
   }
 
