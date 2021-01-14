@@ -1,108 +1,63 @@
 <!--头部版块-->
+<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
 
-<div class="normal-wrap">
-  <form class="form-wrap" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
-    <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">标题1</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入标题">
-        <input  nz-input formControlName="email" id="email" placeholder="给目标起个名字" />
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>Password</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your password!">
-        <input nz-input type="password" id="password" formControlName="password" (ngModelChange)="updateConfirmValidator()" />
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkPassword" nzRequired>Confirm Password</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorTpl">
-        <input nz-input type="password" formControlName="checkPassword" id="checkPassword" />
-        <ng-template #errorTpl let-control>
-          <ng-container *ngIf="control.hasError('required')">
-            Please confirm your password!
-          </ng-container>
-          <ng-container *ngIf="control.hasError('confirm')">
-            Two passwords that you enter is inconsistent!
-          </ng-container>
-        </ng-template>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="nickname" nzRequired nzTooltipTitle="What do you want other to call you">
-        <span>Nickname</span>
-      </nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname!">
-        <input nz-input id="nickname" formControlName="nickname" />
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phoneNumber" nzRequired>Phone Number</nz-form-label>
-      <nz-form-control
-        [nzSm]="14"
-        [nzXs]="24"
-        [nzValidateStatus]="validateForm.controls['phoneNumber']"
-        nzErrorTip="Please input your phone number!"
-      >
-        <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
-          <ng-template #addOnBeforeTemplate>
-            <nz-select formControlName="phoneNumberPrefix" class="phone-select">
-              <nz-option nzLabel="+86" nzValue="+86"></nz-option>
-              <nz-option nzLabel="+87" nzValue="+87"></nz-option>
-            </nz-select>
-          </ng-template>
-          <input formControlName="phoneNumber" id="'phoneNumber'" nz-input />
-        </nz-input-group>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="website" nzRequired>Website</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input website!">
-        <input nz-input id="website" formControlName="website" placeholder="website" />
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label
-        [nzSm]="6"
-        [nzXs]="24"
-        nzFor="captcha"
-        nzRequired
-        nzTooltipTitle="Please click 'Get captcha'"
-        [nzTooltipIcon]="captchaTooltipIcon"
-      >
-        Captcha
-      </nz-form-label>
-      <nz-form-control
-        [nzSm]="14"
-        [nzXs]="24"
-        nzErrorTip="Please input the captcha you got!"
-        nzExtra="We must make sure that your are a human."
-      >
-        <div nz-row [nzGutter]="8">
-          <div nz-col [nzSpan]="12">
-            <input nz-input formControlName="captcha" id="captcha" />
-          </div>
-          <div nz-col [nzSpan]="12">
-            <button nz-button (click)="getCaptcha($event)">Get captcha</button>
-          </div>
+
+<div class="normal-table-wrap">
+  <nz-card>
+    <form nz-form [formGroup]="validateForm">
+      <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24}">
+        <div nz-col [nzSpan]="8">
+          <nz-form-item>
+            <nz-form-label [nzFor]="">规则名称</nz-form-label>
+            <nz-form-control>
+              <input nz-input placeholder="请输入" formControlName="ruleName"/>
+            </nz-form-control>
+          </nz-form-item>
         </div>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item nz-row class="register-area">
-      <nz-form-control [nzSpan]="14" [nzOffset]="6">
-        <label nz-checkbox formControlName="agree">
-            <span>
-              I have read the
-              <a>agreement</a>
-            </span>
-        </label>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item nz-row class="register-area">
-      <nz-form-control [nzSpan]="14" [nzOffset]="6">
-        <button nz-button nzType="primary">Register</button>
-      </nz-form-control>
-    </nz-form-item>
-  </form>
+        <div nz-col [nzSpan]="8">
+          <nz-form-item>
+            <nz-form-label [nzFor]="">描述</nz-form-label>
+            <nz-form-control>
+              <input nz-input placeholder="请输入" formControlName="desc"/>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <ng-container *ngIf="!isCollapse">
+          <div nz-col [nzSpan]="8">
+            <nz-form-item>
+              <nz-form-label [nzFor]="">服务调用次数</nz-form-label>
+              <nz-form-control>
+                <input nz-input placeholder="请输入" formControlName="desc"/>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col [nzSpan]="8">
+            <nz-form-item>
+              <nz-form-label [nzFor]="">状态</nz-form-label>
+              <nz-form-control>
+                <input nz-input placeholder="请输入" formControlName="desc"/>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col [nzSpan]="8">
+            <nz-form-item>
+              <nz-form-label [nzFor]="">上次调度时间</nz-form-label>
+              <nz-form-control>
+                <input nz-input placeholder="请输入" formControlName="ruleName"/>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </ng-container>
 
+        <div nz-col [nzSpan]="8" class="text-right">
+          <button nz-button [nzType]="'primary'"><i nz-icon nzType="search"></i>搜索</button>
+          <button nz-button class="m-l-5" (click)="resetForm()"><i nz-icon nzType="close-circle" nzTheme="outline"></i>重置</button>
+          <a class="collapse operate-text" (click)="toggleCollapse()">
+            展开
+            <i nz-icon [nzType]="isCollapse ? 'down' : 'up'"></i>
+          </a>
+        </div>
+      </div>
+    </form>
+  </nz-card>
 </div>

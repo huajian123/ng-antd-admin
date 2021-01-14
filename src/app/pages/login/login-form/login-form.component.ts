@@ -21,6 +21,7 @@ export class LoginFormComponent implements OnInit {
 
 
   submitForm(): void {
+    this.router.navigateByUrl('default');
     Object.keys(this.validateForm.controls).forEach(key => {
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
