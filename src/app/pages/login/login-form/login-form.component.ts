@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {LoginService} from '../../../core/services/http/login/login.service';
 import {WindowService} from '../../../core/services/window.service';
-import {AuthKey} from '../../../configs/constant';
+import {AuthKey, TokenPre} from '../../../configs/constant';
 
 @Component({
   selector: 'app-login-form',
@@ -30,7 +30,7 @@ export class LoginFormComponent implements OnInit {
     }
     const param = this.validateForm.getRawValue();
     this.dataService.login(param).subscribe(({token}) => {
-      this.windowServe.setStorage(AuthKey, token);
+      this.windowServe.setStorage(AuthKey, TokenPre + token);
       this.router.navigateByUrl('default');
     });
   }

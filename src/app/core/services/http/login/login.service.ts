@@ -14,4 +14,8 @@ export class LoginService {
   public login(params: UserLogin): Observable<any> {
     return this.http.post('/login', params, {needSuccessInfo: false});
   }
+
+  public ceshi(): Observable<any> {
+    return this.http.get('/preAuthorize');
+  }
 }

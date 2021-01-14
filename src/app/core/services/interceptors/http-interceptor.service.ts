@@ -18,7 +18,7 @@ export class HttpInterceptorService implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const auth = this.windowServe.getStorage(AuthKey);
     let httpConfig: CustomHttpConfig = {};
-    if (auth) {
+    if (!!auth) {
       httpConfig = {headers: req.headers.set(AuthKey, auth)};
     }
     const copyReq = req.clone(httpConfig);
@@ -29,7 +29,7 @@ export class HttpInterceptorService implements HttpInterceptor {
     if (typeof error.error?.code === 'number') { // 后台拒绝请求
       this.windowServe.alert(error.error.message);
     } else {
-      this.windowServe.alert('请求失败');
+      console.log('请求失败');
     }
     return throwError(error);
   }

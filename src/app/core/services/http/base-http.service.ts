@@ -28,7 +28,7 @@ export class BaseHttpService {
     this.uri = environment.production ? '/' : '/site';
   }
 
-  protected get<T>(path: string, param?: any, config?: MyHttpConfig): Observable<any> {
+  get<T>(path: string, param?: any, config?: MyHttpConfig): Observable<any> {
     config = config || {};
     const params = new HttpParams({fromString: qs.stringify(param)});
     return this.http.get<ActionResult<T>>(this.uri + path, {params}).pipe(
