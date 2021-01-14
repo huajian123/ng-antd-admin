@@ -4,6 +4,7 @@ import {Observable, throwError} from 'rxjs';
 import {WindowService} from '../window.service';
 import {AuthKey} from '../../../configs/constant';
 import {catchError} from 'rxjs/operators';
+import {NzMessageService} from 'ng-zorro-antd/message';
 
 interface CustomHttpConfig {
   headers?: HttpHeaders;
@@ -12,7 +13,7 @@ interface CustomHttpConfig {
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor {
 
-  constructor(private windowServe: WindowService) {
+  constructor(private windowServe: WindowService, public message: NzMessageService) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -29,7 +30,7 @@ export class HttpInterceptorService implements HttpInterceptor {
     if (typeof error.error?.code === 'number') { // 后台拒绝请求
       this.windowServe.alert(error.error.message);
     } else {
-      console.log('请求失败');
+      this.message.error('请求失败');
     }
     return throwError(error);
   }
