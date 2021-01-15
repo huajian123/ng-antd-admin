@@ -128,6 +128,682 @@ export class NavBarComponent implements OnInit, OnDestroy {
       ]
     },
     {
+      title: '列表页',
+      icon: 'table',
+      open: false,
+      selected: false,
+      children: [
+        {
+          title: '搜索列表',
+          open: false,
+          selected: false,
+          path: '',
+          children: [
+            {
+              title: '搜索列表(文章）',
+              open: false,
+              selected: false,
+              path: '',
+            },
+            {
+              title: '搜索列表(项目)',
+              open: false,
+              selected: false,
+              path: '',
+            },
+            {
+              title: '搜索列表(应用)',
+              open: false,
+              selected: false,
+              path: '',
+            },
+          ]
+        },
+        {
+          title: '查询表格',
+          open: false,
+          selected: false,
+          path: '',
+        },
+        {
+          title: '标准表格',
+          open: false,
+          selected: false,
+          path: '',
+        },
+        {
+          title: '卡片列表',
+          open: false,
+          selected: false,
+          path: '',
+        },
+      ]
+    },
+    {
+      title: '列表页',
+      icon: 'table',
+      open: false,
+      selected: false,
+      children: [
+        {
+          title: '搜索列表',
+          open: false,
+          selected: false,
+          path: '',
+          children: [
+            {
+              title: '搜索列表(文章）',
+              open: false,
+              selected: false,
+              path: '',
+            },
+            {
+              title: '搜索列表(项目)',
+              open: false,
+              selected: false,
+              path: '',
+            },
+            {
+              title: '搜索列表(应用)',
+              open: false,
+              selected: false,
+              path: '',
+            },
+          ]
+        },
+        {
+          title: '查询表格',
+          open: false,
+          selected: false,
+          path: '',
+        },
+        {
+          title: '标准表格',
+          open: false,
+          selected: false,
+          path: '',
+        },
+        {
+          title: '卡片列表',
+          open: false,
+          selected: false,
+          path: '',
+        },
+      ]
+    },
+    {
+      title: '列表页',
+      icon: 'table',
+      open: false,
+      selected: false,
+      children: [
+        {
+          title: '搜索列表',
+          open: false,
+          selected: false,
+          path: '',
+          children: [
+            {
+              title: '搜索列表(文章）',
+              open: false,
+              selected: false,
+              path: '',
+            },
+            {
+              title: '搜索列表(项目)',
+              open: false,
+              selected: false,
+              path: '',
+            },
+            {
+              title: '搜索列表(应用)',
+              open: false,
+              selected: false,
+              path: '',
+            },
+          ]
+        },
+        {
+          title: '查询表格',
+          open: false,
+          selected: false,
+          path: '',
+        },
+        {
+          title: '标准表格',
+          open: false,
+          selected: false,
+          path: '',
+        },
+        {
+          title: '卡片列表',
+          open: false,
+          selected: false,
+          path: '',
+        },
+      ]
+    },
+    {
+      title: '列表页',
+      icon: 'table',
+      open: false,
+      selected: false,
+      children: [
+        {
+          title: '搜索列表',
+          open: false,
+          selected: false,
+          path: '',
+          children: [
+            {
+              title: '搜索列表(文章）',
+              open: false,
+              selected: false,
+              path: '',
+            },
+            {
+              title: '搜索列表(项目)',
+              open: false,
+              selected: false,
+              path: '',
+            },
+            {
+              title: '搜索列表(应用)',
+              open: false,
+              selected: false,
+              path: '',
+            },
+          ]
+        },
+        {
+          title: '查询表格',
+          open: false,
+          selected: false,
+          path: '',
+        },
+        {
+          title: '标准表格',
+          open: false,
+          selected: false,
+          path: '',
+        },
+        {
+          title: '卡片列表',
+          open: false,
+          selected: false,
+          path: '',
+        },
+      ]
+    },
+    {
+      title: '列表页',
+      icon: 'table',
+      open: false,
+      selected: false,
+      children: [
+        {
+          title: '搜索列表',
+          open: false,
+          selected: false,
+          path: '',
+          children: [
+            {
+              title: '搜索列表(文章）',
+              open: false,
+              selected: false,
+              path: '',
+            },
+            {
+              title: '搜索列表(项目)',
+              open: false,
+              selected: false,
+              path: '',
+            },
+            {
+              title: '搜索列表(应用)',
+              open: false,
+              selected: false,
+              path: '',
+            },
+          ]
+        },
+        {
+          title: '查询表格',
+          open: false,
+          selected: false,
+          path: '',
+        },
+        {
+          title: '标准表格',
+          open: false,
+          selected: false,
+          path: '',
+        },
+        {
+          title: '卡片列表',
+          open: false,
+          selected: false,
+          path: '',
+        },
+      ]
+    },
+    {
+      title: '列表页',
+      icon: 'table',
+      open: false,
+      selected: false,
+      children: [
+        {
+          title: '搜索列表',
+          open: false,
+          selected: false,
+          path: '',
+          children: [
+            {
+              title: '搜索列表(文章）',
+              open: false,
+              selected: false,
+              path: '',
+            },
+            {
+              title: '搜索列表(项目)',
+              open: false,
+              selected: false,
+              path: '',
+            },
+            {
+              title: '搜索列表(应用)',
+              open: false,
+              selected: false,
+              path: '',
+            },
+          ]
+        },
+        {
+          title: '查询表格',
+          open: false,
+          selected: false,
+          path: '',
+        },
+        {
+          title: '标准表格',
+          open: false,
+          selected: false,
+          path: '',
+        },
+        {
+          title: '卡片列表',
+          open: false,
+          selected: false,
+          path: '',
+        },
+      ]
+    },
+    {
+      title: '列表页',
+      icon: 'table',
+      open: false,
+      selected: false,
+      children: [
+        {
+          title: '搜索列表',
+          open: false,
+          selected: false,
+          path: '',
+          children: [
+            {
+              title: '搜索列表(文章）',
+              open: false,
+              selected: false,
+              path: '',
+            },
+            {
+              title: '搜索列表(项目)',
+              open: false,
+              selected: false,
+              path: '',
+            },
+            {
+              title: '搜索列表(应用)',
+              open: false,
+              selected: false,
+              path: '',
+            },
+          ]
+        },
+        {
+          title: '查询表格',
+          open: false,
+          selected: false,
+          path: '',
+        },
+        {
+          title: '标准表格',
+          open: false,
+          selected: false,
+          path: '',
+        },
+        {
+          title: '卡片列表',
+          open: false,
+          selected: false,
+          path: '',
+        },
+      ]
+    },
+    {
+      title: '列表页',
+      icon: 'table',
+      open: false,
+      selected: false,
+      children: [
+        {
+          title: '搜索列表',
+          open: false,
+          selected: false,
+          path: '',
+          children: [
+            {
+              title: '搜索列表(文章）',
+              open: false,
+              selected: false,
+              path: '',
+            },
+            {
+              title: '搜索列表(项目)',
+              open: false,
+              selected: false,
+              path: '',
+            },
+            {
+              title: '搜索列表(应用)',
+              open: false,
+              selected: false,
+              path: '',
+            },
+          ]
+        },
+        {
+          title: '查询表格',
+          open: false,
+          selected: false,
+          path: '',
+        },
+        {
+          title: '标准表格',
+          open: false,
+          selected: false,
+          path: '',
+        },
+        {
+          title: '卡片列表',
+          open: false,
+          selected: false,
+          path: '',
+        },
+      ]
+    },
+    {
+      title: '列表页',
+      icon: 'table',
+      open: false,
+      selected: false,
+      children: [
+        {
+          title: '搜索列表',
+          open: false,
+          selected: false,
+          path: '',
+          children: [
+            {
+              title: '搜索列表(文章）',
+              open: false,
+              selected: false,
+              path: '',
+            },
+            {
+              title: '搜索列表(项目)',
+              open: false,
+              selected: false,
+              path: '',
+            },
+            {
+              title: '搜索列表(应用)',
+              open: false,
+              selected: false,
+              path: '',
+            },
+          ]
+        },
+        {
+          title: '查询表格',
+          open: false,
+          selected: false,
+          path: '',
+        },
+        {
+          title: '标准表格',
+          open: false,
+          selected: false,
+          path: '',
+        },
+        {
+          title: '卡片列表',
+          open: false,
+          selected: false,
+          path: '',
+        },
+      ]
+    },
+    {
+      title: '列表页',
+      icon: 'table',
+      open: false,
+      selected: false,
+      children: [
+        {
+          title: '搜索列表',
+          open: false,
+          selected: false,
+          path: '',
+          children: [
+            {
+              title: '搜索列表(文章）',
+              open: false,
+              selected: false,
+              path: '',
+            },
+            {
+              title: '搜索列表(项目)',
+              open: false,
+              selected: false,
+              path: '',
+            },
+            {
+              title: '搜索列表(应用)',
+              open: false,
+              selected: false,
+              path: '',
+            },
+          ]
+        },
+        {
+          title: '查询表格',
+          open: false,
+          selected: false,
+          path: '',
+        },
+        {
+          title: '标准表格',
+          open: false,
+          selected: false,
+          path: '',
+        },
+        {
+          title: '卡片列表',
+          open: false,
+          selected: false,
+          path: '',
+        },
+      ]
+    },
+    {
+      title: '列表页',
+      icon: 'table',
+      open: false,
+      selected: false,
+      children: [
+        {
+          title: '搜索列表',
+          open: false,
+          selected: false,
+          path: '',
+          children: [
+            {
+              title: '搜索列表(文章）',
+              open: false,
+              selected: false,
+              path: '',
+            },
+            {
+              title: '搜索列表(项目)',
+              open: false,
+              selected: false,
+              path: '',
+            },
+            {
+              title: '搜索列表(应用)',
+              open: false,
+              selected: false,
+              path: '',
+            },
+          ]
+        },
+        {
+          title: '查询表格',
+          open: false,
+          selected: false,
+          path: '',
+        },
+        {
+          title: '标准表格',
+          open: false,
+          selected: false,
+          path: '',
+        },
+        {
+          title: '卡片列表',
+          open: false,
+          selected: false,
+          path: '',
+        },
+      ]
+    },
+    {
+      title: '列表页',
+      icon: 'table',
+      open: false,
+      selected: false,
+      children: [
+        {
+          title: '搜索列表',
+          open: false,
+          selected: false,
+          path: '',
+          children: [
+            {
+              title: '搜索列表(文章）',
+              open: false,
+              selected: false,
+              path: '',
+            },
+            {
+              title: '搜索列表(项目)',
+              open: false,
+              selected: false,
+              path: '',
+            },
+            {
+              title: '搜索列表(应用)',
+              open: false,
+              selected: false,
+              path: '',
+            },
+          ]
+        },
+        {
+          title: '查询表格',
+          open: false,
+          selected: false,
+          path: '',
+        },
+        {
+          title: '标准表格',
+          open: false,
+          selected: false,
+          path: '',
+        },
+        {
+          title: '卡片列表',
+          open: false,
+          selected: false,
+          path: '',
+        },
+      ]
+    },
+    {
+      title: '列表页',
+      icon: 'table',
+      open: false,
+      selected: false,
+      children: [
+        {
+          title: '搜索列表',
+          open: false,
+          selected: false,
+          path: '',
+          children: [
+            {
+              title: '搜索列表(文章）',
+              open: false,
+              selected: false,
+              path: '',
+            },
+            {
+              title: '搜索列表(项目)',
+              open: false,
+              selected: false,
+              path: '',
+            },
+            {
+              title: '搜索列表(应用)',
+              open: false,
+              selected: false,
+              path: '',
+            },
+          ]
+        },
+        {
+          title: '查询表格',
+          open: false,
+          selected: false,
+          path: '',
+        },
+        {
+          title: '标准表格',
+          open: false,
+          selected: false,
+          path: '',
+        },
+        {
+          title: '卡片列表',
+          open: false,
+          selected: false,
+          path: '',
+        },
+      ]
+    },
+    {
       title: '详情页',
       icon: 'profile',
       open: false,
@@ -267,8 +943,8 @@ export class NavBarComponent implements OnInit, OnDestroy {
             // this.menus = this.copyMenus;
           }
 
-          if(this.themesMode==='top'){
-           this.closeMenu();
+          if (this.themesMode === 'top') {
+            this.closeMenu();
           }
         }),
         map(() => this.activatedRoute),
@@ -373,7 +1049,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
     });
   }
 
-  closeMenu():void{
+  closeMenu(): void {
     this.clickMenuItem(this.menus);
     this.clickMenuItem(this.copyMenus);
     this.closeMenuOpen(this.menus);
@@ -382,10 +1058,10 @@ export class NavBarComponent implements OnInit, OnDestroy {
   subThemesSettings(): void {
     this.themesOptions$.subscribe(options => {
       this.themesMode = options.mode;
-      if(this.themesMode==='top'){
+      if (this.themesMode === 'top') {
         this.closeMenu();
       }
-    })
+    });
   }
 
   ngOnInit(): void {

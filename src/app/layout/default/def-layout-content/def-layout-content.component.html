@@ -1,7 +1,7 @@
 <nz-layout [ngClass]="{'color-weak':themesOptions.colorWeak}">
   <nz-sider *ngIf="(themesOptions$|async)!.mode==='side'" class="menu-sidebar" [nzTheme]="(themesOptions$|async)!.theme"
             nzBreakpoint="lg" [nzCollapsible]="true" [nzCollapsed]="isCollapsed$|async"
-            (nzCollapsedChange)="changeCollapsed($event)">
+            (nzCollapsedChange)="changeCollapsed($event)" [nzTrigger]="null">
     <ng-content select="ng-container[sider]"></ng-content>
   </nz-sider>
   <nz-layout style="overflow-x:hidden">
