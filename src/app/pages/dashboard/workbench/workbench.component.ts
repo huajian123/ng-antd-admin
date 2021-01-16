@@ -182,35 +182,6 @@ export class WorkbenchComponent implements OnInit {
         {
           title: '名称',
           width: 100,
-          field: 'productName'
-        }, {
-          title: '年龄',
-          width: 100,
-          field: 'productName',
-        },
-        {
-          title: '名称',
-          width: 100,
-          field: 'productName',
-        },
-        {
-          title: '名称',
-          width: 100,
-          field: 'productName',
-        },
-        {
-          title: '名称',
-          width: 100,
-          field: 'productName',
-        },
-        {
-          title: '名称',
-          width: 100,
-          field: 'productName',
-        },
-        {
-          title: '名称',
-          width: 100,
           field: 'productName',
         },
         {
