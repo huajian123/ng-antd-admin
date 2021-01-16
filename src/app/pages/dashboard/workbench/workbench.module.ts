@@ -6,9 +6,9 @@ import {SharedModule} from '../../../share/shared.module';
 
 @NgModule({
   declarations: [WorkbenchComponent],
-  imports: [
-    SharedModule,
-    WorkbenchRoutingModule
-  ]
+    imports: [
+        SharedModule,
+        WorkbenchRoutingModule,
+    ]
 })
 export class WorkbenchModule { }

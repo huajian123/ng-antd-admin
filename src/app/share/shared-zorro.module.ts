@@ -30,6 +30,7 @@ import {NzPopconfirmModule} from 'ng-zorro-antd/popconfirm';
 import {NzSpaceModule} from 'ng-zorro-antd/space';
 import {NzMessageModule} from 'ng-zorro-antd/message';
 import {NzSpinModule} from 'ng-zorro-antd/spin';
+import {NzTypographyModule} from "ng-zorro-antd/typography";
 
 
 export const SHARED_ZORRO_MODULES = [
@@ -64,5 +65,6 @@ export const SHARED_ZORRO_MODULES = [
   NzPopconfirmModule,
   NzSpaceModule,
   NzMessageModule,
-  NzSpinModule
+  NzSpinModule,
+  NzTypographyModule
 ];

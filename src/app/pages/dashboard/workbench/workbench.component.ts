@@ -40,6 +40,9 @@ export class WorkbenchComponent implements OnInit {
     this.validateForm.reset();
   }
 
+  add(): void {
+    console.log(123);
+  }
 
   initForm() {
 

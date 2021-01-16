@@ -120,6 +120,10 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 30px !important;
 }
 
+.m-b-10 {
+  margin-bottom: 10px !important;
+}
+
 .m-b-20 {
   margin-bottom: 20px !important;
 }
@@ -245,9 +249,35 @@ h1, h2, h3, h4, h5, h6 {
 
 // 通用页面统一布局
 .normal-table-wrap {
-
   margin: 27px 27px 0;
-  height: 630px;
-  background: red;
+
+  /*列表顶部样式*/
+  .ant-pro-table-toolbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .ant-pro-table-toolbar-title{
+      flex: 1 1;
+      font-size: 16px;
+      line-height: 24px;
+      opacity: .85;
+    }
+    .ant-pro-table-toolbar-option{
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .ant-pro-table-toolbar-default-option{
+      .ant-space-item:last-child{
+        margin-right: 5px!important;
+      }
+    }
+  }
+
+  // 表单样式
+  .form-wrap{
+    padding: 24px;
+  }
 }
 

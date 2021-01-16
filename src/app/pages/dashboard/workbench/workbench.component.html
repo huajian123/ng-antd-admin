@@ -3,7 +3,7 @@
 
 
 <div class="normal-table-wrap">
-  <nz-card>
+  <nz-card class="m-b-10">
     <form nz-form [formGroup]="validateForm">
       <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24}">
         <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" nzSm="24" nzXs="24">
@@ -60,4 +60,8 @@
       </div>
     </form>
   </nz-card>
+
+  <app-card-table-wrap  [needAddBtn]="true" (add)="add()">
+
+  </app-card-table-wrap>
 </div>
