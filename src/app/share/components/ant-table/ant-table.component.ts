@@ -17,9 +17,9 @@ export interface TableHeader {
 
 export interface MyTableConfig {
   showCheckbox?: boolean;
-  pageIndex?: number;                 // 当前页码，（与页面中页码双向绑定）
-  pageSize?: number;                // 每一页显示的数据条数（与页面中pageSize双向绑定）
-  total?: number;                   // 数据总量，用于计算分页（应该从后端接口中获得）
+  pageIndex: number;                 // 当前页码，（与页面中页码双向绑定）
+  pageSize: number;                // 每一页显示的数据条数（与页面中pageSize双向绑定）
+  total: number;                   // 数据总量，用于计算分页（应该从后端接口中获得）
   loading: boolean;                 // 是否显示表格加载中
   headers: TableHeader[];            // 列设置
 }
@@ -30,31 +30,24 @@ export interface MyTableConfig {
   styleUrls: ['./ant-table.component.less']
 })
 export class AntTableComponent implements OnInit, OnChanges {
-  _dataList: any[] | undefined;
+  _dataList!: any[];
   // 从业务组件中传入的缓存的已经选中的checkbox数据数组
   @Input() checkedCashArrayFromComment: any[];
 
-  // @ts-ignore
-
   @Input()
-  // @ts-ignore
   set tableData(value: any[]) {
     this._dataList = value;
-    // @ts-ignore
-    // todo
     if (this.tableConfig.showCheckbox) {
       this._dataList.forEach((item) => {
         item['_checked'] = false;
       });
     }
   }
-
-  // @ts-ignore
-  get tableData(): any[] | undefined {
+  get tableData(): any[]{
     return this._dataList;
   }
 
-  @Input() tableConfig: MyTableConfig | undefined;
+  @Input() tableConfig!: MyTableConfig;
   @Output() changePageNum = new EventEmitter<NzTableQueryParams>();
   @Output() changePageSize = new EventEmitter<number>();
   @Output() selectedChange: EventEmitter<any[]>;
@@ -104,7 +97,6 @@ export class AntTableComponent implements OnInit, OnChanges {
 
   // 单选
   public checkRowSingle(isChecked: boolean, selectIndex: number): void {
-    // @ts-ignore
     this.checkFn(this._dataList[selectIndex], isChecked);
     this.selectedChange.emit(this.checkedCashArrayFromComment);
     this.refreshStatus();
@@ -112,7 +104,6 @@ export class AntTableComponent implements OnInit, OnChanges {
 
   // 全选
   onAllChecked(isChecked: boolean): void {
-    // @ts-ignore
     this._dataList.forEach((item) => {
       this.checkFn(item, isChecked);
     });
@@ -121,7 +112,6 @@ export class AntTableComponent implements OnInit, OnChanges {
 
   // 刷新复选框状态
   refreshStatus(): void {
-    // @ts-ignore
     this._dataList.forEach((item) => {
       const index = this.checkedCashArrayFromComment.findIndex((cashItem) => {
         return item.id === cashItem.id;
@@ -130,17 +120,16 @@ export class AntTableComponent implements OnInit, OnChanges {
         item['_checked'] = true;
       }
     });
-    // @ts-ignore
     const allChecked = this._dataList.length > 0 && this._dataList.every((item) => {
       return item['_checked'] === true;
     });
-    // @ts-ignore
     const allUnChecked = this._dataList.every(item => item['_checked'] !== true);
     this.allChecked = allChecked;
     this.indeterminate = !allChecked && !allUnChecked;
   }
 
   ngOnInit(): void {
+    console.log(this.tableConfig)
   }
 
   ngOnChanges(changes: SimpleChanges): void {

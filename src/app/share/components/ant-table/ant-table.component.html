@@ -1,8 +1,9 @@
 <nz-table nzShowPagination
           [nzFrontPagination]="false"
           nzSize="small"
-          nzShowSizeChanger nzBordered="true" #basicTable [nzData]="_dataList"
-          [nzTotal]="tableConfig.total"
+          [nzOuterBordered]="true"
+          nzShowSizeChanger [nzBordered]="true" [nzData]="_dataList"
+          [nzTotal]="tableConfig!.total"
           [nzPageIndex]="tableConfig.pageIndex"
           [nzScroll]="{ x: '1100px' }"
           [nzPageSize]="tableConfig.pageSize"
@@ -27,7 +28,7 @@
         <ng-container *ngTemplateOutlet="head.tdTemplate;context:row"></ng-container>
       </ng-container>
       <ng-template #roleTpl>
-        <ng-container>{{row[head.field]}}</ng-container>
+        <ng-container>{{row[head.field!]}}</ng-container>
       </ng-template>
     </td>
   </tr>

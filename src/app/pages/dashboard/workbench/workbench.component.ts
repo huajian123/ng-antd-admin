@@ -1,7 +1,10 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {NzFormTooltipIcon} from 'ng-zorro-antd/form';
 import {PageHeaderType} from '../../../share/components/page-header/page-header.component';
+import {MyTableConfig} from "../../../share/components/ant-table/ant-table.component";
+import {NzTableQueryParams} from "ng-zorro-antd/table";
+import {SearchCommonVO} from "../../../core/services/types";
 
 @Component({
   selector: 'app-workbench',
@@ -10,21 +13,100 @@ import {PageHeaderType} from '../../../share/components/page-header/page-header.
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WorkbenchComponent implements OnInit {
-  validateForm: FormGroup;
+  @ViewChild('operationTpl', {static: true}) operationTpl!: TemplateRef<any>;
+  validateForm!: FormGroup;
   isCollapse = true;
+  tableConfig!: MyTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '查询表格',
     // desc: '表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。',
     breadcrumb: ['首页', '表单页', '基础表单']
   };
-
+  dataList!: any[]
 
   constructor(private fb: FormBuilder) {
-    this.validateForm = this.fb.group({
-      ruleName: [null],
-      desc: [null],
-    });
   }
+
+  getDataList(e?: NzTableQueryParams) {
+    this.tableConfig.loading = true;
+    const params: SearchCommonVO<any> = {
+      pageSize: this.tableConfig.pageSize!,
+      pageNum: e?.pageIndex! || this.tableConfig.pageIndex!
+    };
+    this.dataList = [];
+    this.tableConfig.loading = false;
+    this.dataList = [
+      {
+        productName: "string",
+        casNo: "string",
+      },
+      {
+        productName: "string",
+        casNo: "string",
+      },
+      {
+        productName: "string",
+        casNo: "string",
+      },
+      {
+        productName: "string",
+        casNo: "string",
+      },
+      {
+        productName: "string",
+        casNo: "string",
+      },
+      {
+        productName: "string",
+        casNo: "string",
+      },
+      {
+        productName: "string",
+        casNo: "string",
+      },
+      {
+        productName: "string",
+        casNo: "string",
+      },
+      {
+        productName: "string",
+        casNo: "string",
+      },
+      {
+        productName: "string",
+        casNo: "string",
+      },
+      {
+        productName: "string",
+        casNo: "string",
+      },
+      {
+        productName: "string",
+        casNo: "string",
+      },
+      {
+        productName: "string",
+        casNo: "string",
+      },
+      {
+        productName: "string",
+        casNo: "string",
+      },
+    ]
+    this.tableConfig.total = 13;
+    this.tableConfig.pageIndex = 1;
+    /*   this.dataService.getProjectlist(params).subscribe((data) => {
+         const {list, total, pageNum} = data;
+         this.dataList = list;
+         console.log(this.dataList);
+         this.tableConfig.total = total;
+         this.tableConfig.pageIndex = pageNum;
+         this.tableConfig.loading = false;
+       },()=>{
+         this.tableConfig.loading = false;
+       });*/
+  }
+
 
   /*展开*/
   toggleCollapse(): void {
@@ -33,6 +115,11 @@ export class WorkbenchComponent implements OnInit {
 
   /*新增*/
   addRow(): void {
+  }
+
+  /*新增*/
+  check(name: string): void {
+    console.log(name);
   }
 
   /*重置*/
@@ -44,11 +131,130 @@ export class WorkbenchComponent implements OnInit {
     console.log(123);
   }
 
-  initForm() {
+  // 修改一页几条
+  changePageSize(e: number) {
+    this.tableConfig.pageSize = e;
+  }
 
+  initForm() {
+    this.validateForm = this.fb.group({
+      ruleName: [null],
+      desc: [null],
+    });
+  }
+
+  private initTable(): void {
+    this.tableConfig = {
+      headers: [
+        {
+          title: '年龄',
+          width: 100,
+          field: 'productName',
+        },
+        {
+          title: '名称',
+          width: 100,
+          field: 'productName',
+        }, {
+          title: '年龄',
+          width: 100,
+          field: 'productName',
+        },
+        {
+          title: '名称',
+          width: 100,
+          field: 'productName',
+        },
+        {
+          title: '年龄',
+          width: 100,
+          field: 'productName',
+        },
+        {
+          title: '名称',
+          width: 100,
+          field: 'productName',
+        }, {
+          title: '年龄',
+          width: 100,
+          field: 'productName',
+        },
+        {
+          title: '名称',
+          width: 100,
+          field: 'productName'
+        }, {
+          title: '年龄',
+          width: 100,
+          field: 'productName',
+        },
+        {
+          title: '名称',
+          width: 100,
+          field: 'productName',
+        },
+        {
+          title: '名称',
+          width: 100,
+          field: 'productName',
+        },
+        {
+          title: '名称',
+          width: 100,
+          field: 'productName',
+        },
+        {
+          title: '名称',
+          width: 100,
+          field: 'productName',
+        },
+        {
+          title: '名称',
+          width: 100,
+          field: 'productName',
+        },
+        {
+          title: '名称',
+          width: 100,
+          field: 'productName',
+        },
+        {
+          title: '名称',
+          width: 100,
+          field: 'productName',
+        },
+        {
+          title: '名称',
+          width: 100,
+          field: 'productName',
+        },
+        {
+          title: '名称',
+          width: 100,
+          field: 'productName',
+        },
+        {
+          title: '名称',
+          width: 100,
+          field: 'productName',
+          fixed: true
+        },
+        {
+          title: '操作',
+          tdTemplate: this.operationTpl,
+          width: 150,
+          fixed: true
+        }
+      ],
+      total: 0,
+      loading: false,
+      pageSize: 10,
+      pageIndex: 1,
+    };
   }
 
   ngOnInit(): void {
-
+    this.initForm();
+    this.initTable();
   }
 }
