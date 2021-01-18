@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {
   NavigationCancel,
   NavigationEnd,
@@ -11,7 +11,8 @@ import {
 @Component({
   selector: 'app-top-progress-bar',
   templateUrl: './top-progress-bar.component.html',
-  styleUrls: ['./top-progress-bar.component.less']
+  styleUrls: ['./top-progress-bar.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TopProgressBarComponent {
   isFetching = false;

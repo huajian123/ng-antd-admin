@@ -1,4 +1,14 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  TemplateRef
+} from '@angular/core';
 import {NzTableQueryParams} from 'ng-zorro-antd/table';
 
 
@@ -27,7 +37,8 @@ export interface MyTableConfig {
 @Component({
   selector: 'app-ant-table',
   templateUrl: './ant-table.component.html',
-  styleUrls: ['./ant-table.component.less']
+  styleUrls: ['./ant-table.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AntTableComponent implements OnInit, OnChanges {
   _dataList!: any[];
