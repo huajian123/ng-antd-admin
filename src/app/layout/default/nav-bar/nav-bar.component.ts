@@ -239,6 +239,32 @@ export class NavBarComponent implements OnInit, OnDestroy {
         },
       ]
     },
+    {
+      title: '内部管理',
+      icon: 'highlight',
+      open: false,
+      selected: false,
+      children: [
+        {
+          title: '用户管理',
+          open: false,
+          selected: false,
+          path: '',
+        },
+        {
+          title: '角色管理',
+          open: false,
+          selected: false,
+          path: '/default/internal-manage/role',
+        },
+        {
+          title: '部门管理',
+          open: false,
+          selected: false,
+          path: '',
+        },
+      ]
+    },
   ];
   routerPath = '';
   themesOptions$ = this.themesService.getThemesMode();

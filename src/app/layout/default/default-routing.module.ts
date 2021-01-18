@@ -14,6 +14,10 @@ const routes: Routes = [
         path: 'form',
         loadChildren: () => import('../../pages/form/form.module').then(m => m.FormModule)
       },
+      {
+        path: 'internal-manage',
+        loadChildren: () => import('../../pages/internal-manage/internal-manage.module').then(m => m.InternalManageModule)
+      },
       {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
     ]
   },
