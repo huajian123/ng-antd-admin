@@ -249,7 +249,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
           title: '用户管理',
           open: false,
           selected: false,
-          path: '',
+          path: '/default/internal-manage/user',
         },
         {
           title: '角色管理',
