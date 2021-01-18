@@ -2,9 +2,9 @@ import {ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild} from
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {NzFormTooltipIcon} from 'ng-zorro-antd/form';
 import {PageHeaderType} from '../../../share/components/page-header/page-header.component';
-import {MyTableConfig} from "../../../share/components/ant-table/ant-table.component";
-import {NzTableQueryParams} from "ng-zorro-antd/table";
-import {SearchCommonVO} from "../../../core/services/types";
+import {MyTableConfig} from '../../../share/components/ant-table/ant-table.component';
+import {NzTableQueryParams} from 'ng-zorro-antd/table';
+import {SearchCommonVO} from '../../../core/services/types';
 
 @Component({
   selector: 'app-workbench',
@@ -22,12 +22,12 @@ export class WorkbenchComponent implements OnInit {
     // desc: '表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。',
     breadcrumb: ['首页', '表单页', '基础表单']
   };
-  dataList!: any[]
+  dataList!: any[];
 
   constructor(private fb: FormBuilder) {
   }
 
-  getDataList(e?: NzTableQueryParams) {
+  getDataList(e?: NzTableQueryParams): void {
     this.tableConfig.loading = true;
     const params: SearchCommonVO<any> = {
       pageSize: this.tableConfig.pageSize!,
@@ -37,62 +37,62 @@ export class WorkbenchComponent implements OnInit {
     this.tableConfig.loading = false;
     this.dataList = [
       {
-        productName: "string",
-        casNo: "string",
+        productName: 'string',
+        casNo: 'string',
       },
       {
-        productName: "string",
-        casNo: "string",
+        productName: 'string',
+        casNo: 'string',
       },
       {
-        productName: "string",
-        casNo: "string",
+        productName: 'string',
+        casNo: 'string',
       },
       {
-        productName: "string",
-        casNo: "string",
+        productName: 'string',
+        casNo: 'string',
       },
       {
-        productName: "string",
-        casNo: "string",
+        productName: 'string',
+        casNo: 'string',
       },
       {
-        productName: "string",
-        casNo: "string",
+        productName: 'string',
+        casNo: 'string',
       },
       {
-        productName: "string",
-        casNo: "string",
+        productName: 'string',
+        casNo: 'string',
       },
       {
-        productName: "string",
-        casNo: "string",
+        productName: 'string',
+        casNo: 'string',
       },
       {
-        productName: "string",
-        casNo: "string",
+        productName: 'string',
+        casNo: 'string',
       },
       {
-        productName: "string",
-        casNo: "string",
+        productName: 'string',
+        casNo: 'string',
       },
       {
-        productName: "string",
-        casNo: "string",
+        productName: 'string',
+        casNo: 'string',
       },
       {
-        productName: "string",
-        casNo: "string",
+        productName: 'string',
+        casNo: 'string',
       },
       {
-        productName: "string",
-        casNo: "string",
+        productName: 'string',
+        casNo: 'string',
       },
       {
-        productName: "string",
-        casNo: "string",
+        productName: 'string',
+        casNo: 'string',
       },
-    ]
+    ];
     this.tableConfig.total = 13;
     this.tableConfig.pageIndex = 1;
     /*   this.dataService.getProjectlist(params).subscribe((data) => {
@@ -132,11 +132,11 @@ export class WorkbenchComponent implements OnInit {
   }
 
   // 修改一页几条
-  changePageSize(e: number) {
+  changePageSize(e: number): void {
     this.tableConfig.pageSize = e;
   }
 
-  initForm() {
+  initForm(): void {
     this.validateForm = this.fb.group({
       ruleName: [null],
       desc: [null],
