@@ -4,6 +4,7 @@ import {MyTableConfig} from '../../../share/components/ant-table/ant-table.compo
 import {PageHeaderType} from '../../../share/components/page-header/page-header.component';
 import {NzTableQueryParams} from 'ng-zorro-antd/table';
 import {SearchCommonVO} from '../../../core/services/types';
+import {RoleService} from '../../../core/services/http/internal-manage/role.service';
 
 @Component({
   selector: 'app-role-manage',
@@ -20,11 +21,11 @@ export class RoleManageComponent implements OnInit {
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '查询表格',
     // desc: '表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。',
-    breadcrumb: ['首页', '表单页', '基础表单']
+    breadcrumb: ['首页', '内部管理', '角色管理']
   };
   dataList!: any[];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private dataService: RoleService) {
   }
 
   getDataList(e?: NzTableQueryParams): void {
@@ -35,68 +36,16 @@ export class RoleManageComponent implements OnInit {
     };
     this.dataList = [];
     this.tableConfig.loading = false;
-    this.dataList = [
-      {
-        productName: '1',
-        casNo: 'string',
-      },
-      {
-        productName: '2',
-        casNo: 'string',
-      },
-      {
-        productName: '3',
-        casNo: 'string',
-      },
-      {
-        productName: '4',
-        casNo: 'string',
-      },
-      {
-        productName: '5',
-        casNo: 'string',
-      },
-      {
-        productName: '6',
-        casNo: 'string',
-      },
-      {
-        productName: '7',
-        casNo: 'string',
-      },
-      {
-        productName: '8',
-        casNo: 'string',
-      },
-      {
-        productName: '9',
-        casNo: 'string',
-      },
-      {
-        productName: '0',
-        casNo: 'string',
-      },
-      {
-        productName: '11',
-        casNo: 'string',
-      },
-      {
-        productName: '12',
-        casNo: 'string',
-      },
-    ];
     this.tableConfig.total = 13;
     this.tableConfig.pageIndex = 1;
-    /*   this.dataService.getProjectlist(params).subscribe((data) => {
-         const {list, total, pageNum} = data;
-         this.dataList = list;
-         console.log(this.dataList);
-         this.tableConfig.total = total;
-         this.tableConfig.pageIndex = pageNum;
-         this.tableConfig.loading = false;
-       },()=>{
-         this.tableConfig.loading = false;
-       });*/
+    this.dataService.getRoles(params).subscribe((data => {
+      const {list, total, pageNum} = data;
+      this.dataList = list;
+      console.log(this.dataList);
+      this.tableConfig.total! = total!;
+      this.tableConfig.pageIndex = pageNum!;
+      this.tableConfig.loading = false;
+    }));
   }
 
 
@@ -130,8 +79,8 @@ export class RoleManageComponent implements OnInit {
 
   initForm(): void {
     this.validateForm = this.fb.group({
-      ruleName: [null],
-      desc: [null],
+      roleName: [null],
+      roleDesc: [null],
     });
   }
 
@@ -140,11 +89,11 @@ export class RoleManageComponent implements OnInit {
       headers: [
         {
           title: '角色名称',
-          field: 'productName',
+          field: 'roleName',
         },
         {
           title: '备注',
-          field: 'productName',
+          field: 'roleDesc',
         },
         {
           title: '操作',
