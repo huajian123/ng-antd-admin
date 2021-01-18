@@ -37,59 +37,51 @@ export class RoleManageComponent implements OnInit {
     this.tableConfig.loading = false;
     this.dataList = [
       {
-        productName: 'string',
+        productName: '1',
         casNo: 'string',
       },
       {
-        productName: 'string',
+        productName: '2',
         casNo: 'string',
       },
       {
-        productName: 'string',
+        productName: '3',
         casNo: 'string',
       },
       {
-        productName: 'string',
+        productName: '4',
         casNo: 'string',
       },
       {
-        productName: 'string',
+        productName: '5',
         casNo: 'string',
       },
       {
-        productName: 'string',
+        productName: '6',
         casNo: 'string',
       },
       {
-        productName: 'string',
+        productName: '7',
         casNo: 'string',
       },
       {
-        productName: 'string',
+        productName: '8',
         casNo: 'string',
       },
       {
-        productName: 'string',
+        productName: '9',
         casNo: 'string',
       },
       {
-        productName: 'string',
+        productName: '0',
         casNo: 'string',
       },
       {
-        productName: 'string',
+        productName: '11',
         casNo: 'string',
       },
       {
-        productName: 'string',
-        casNo: 'string',
-      },
-      {
-        productName: 'string',
-        casNo: 'string',
-      },
-      {
-        productName: 'string',
+        productName: '12',
         casNo: 'string',
       },
     ];
@@ -147,68 +139,12 @@ export class RoleManageComponent implements OnInit {
     this.tableConfig = {
       headers: [
         {
-          title: '年龄',
-          width: 100,
+          title: '角色名称',
           field: 'productName',
         },
         {
-          title: '名称',
-          width: 100,
+          title: '备注',
           field: 'productName',
-        }, {
-          title: '年龄',
-          width: 100,
-          field: 'productName',
-        },
-        {
-          title: '名称',
-          width: 100,
-          field: 'productName',
-        },
-        {
-          title: '年龄',
-          width: 100,
-          field: 'productName',
-        },
-        {
-          title: '名称',
-          width: 100,
-          field: 'productName',
-        }, {
-          title: '年龄',
-          width: 100,
-          field: 'productName',
-        },
-        {
-          title: '名称',
-          width: 100,
-          field: 'productName',
-        },
-        {
-          title: '名称',
-          width: 100,
-          field: 'productName',
-        },
-        {
-          title: '名称',
-          width: 100,
-          field: 'productName',
-        },
-        {
-          title: '名称',
-          width: 100,
-          field: 'productName',
-        },
-        {
-          title: '名称',
-          width: 100,
-          field: 'productName',
-        },
-        {
-          title: '名称',
-          width: 100,
-          field: 'productName',
-          fixed: true
         },
         {
           title: '操作',

@@ -16,7 +16,7 @@ export interface TableHeader {
   title: string;                   // 表头名称
   field?: string;                   // 字段
   pipe?: string;                    // 管道
-  width: number;                    // 单元格宽度
+  width?: number;                    // 单元格宽度
   thTemplate?: TemplateRef<any>;    // th单元格模板
   tdTemplate?: TemplateRef<any>;    // td单元格模板
   fixed?: boolean;                  // 是否固定单元格 （只有从最左边或最右边连续固定才有效）
@@ -140,7 +140,7 @@ export class AntTableComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    console.log(this.tableConfig)
+    console.log(this.tableConfig);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
