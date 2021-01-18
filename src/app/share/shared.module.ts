@@ -6,7 +6,7 @@ import {RouterModule} from '@angular/router';
 import {PipesModule} from './pipes/pipes.module';
 import {ComponentsModule} from './components/components.module';
 import {QuicklinkModule} from 'ngx-quicklink';
-import {CardTableWrapModule} from "./components/card-table-wrap/card-table-wrap.module";
+import {CardTableWrapModule} from './components/card-table-wrap/card-table-wrap.module';
 
 const MODULES = [
   CommonModule,

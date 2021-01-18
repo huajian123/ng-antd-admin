@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {PageHeaderModule} from './page-header/page-header.module';
-import {AntTableModule} from "./ant-table/ant-table.module";
+import {AntTableModule} from './ant-table/ant-table.module';
 
 
 @NgModule({
