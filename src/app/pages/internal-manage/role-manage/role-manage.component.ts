@@ -1,10 +1,16 @@
 import {Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MyTableConfig} from '../../../share/components/ant-table/ant-table.component';
 import {PageHeaderType} from '../../../share/components/page-header/page-header.component';
 import {NzTableQueryParams} from 'ng-zorro-antd/table';
-import {SearchCommonVO} from '../../../core/services/types';
+import {Role, SearchCommonVO} from '../../../core/services/types';
 import {RoleService} from '../../../core/services/http/internal-manage/role.service';
+import {NzModalService} from 'ng-zorro-antd/modal';
+import {fnCheckForm} from '../../../utils/tools';
+
+
+interface SearchParam extends Role {
+}
 
 @Component({
   selector: 'app-role-manage',
@@ -15,7 +21,11 @@ import {RoleService} from '../../../core/services/http/internal-manage/role.serv
 export class RoleManageComponent implements OnInit {
 
   @ViewChild('operationTpl', {static: true}) operationTpl!: TemplateRef<any>;
-  validateForm!: FormGroup;
+  searchParam: SearchParam = {
+    roleName: '',
+    roleDesc: ''
+  };
+  addEditForm!: FormGroup;
   isCollapse = true;
   tableConfig!: MyTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
@@ -23,9 +33,13 @@ export class RoleManageComponent implements OnInit {
     // desc: '表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。',
     breadcrumb: ['首页', '内部管理', '角色管理']
   };
-  dataList!: any[];
+  dataList!: Role[];
+  dataItem: Role = {
+    roleDesc: '',
+    roleName: ''
+  };
 
-  constructor(private fb: FormBuilder, private dataService: RoleService) {
+  constructor(private fb: FormBuilder, private dataService: RoleService, private modalSrv: NzModalService) {
   }
 
   getDataList(e?: NzTableQueryParams): void {
@@ -65,11 +79,30 @@ export class RoleManageComponent implements OnInit {
 
   /*重置*/
   resetForm(): void {
-    this.validateForm.reset();
+    this.searchParam = {
+      roleDesc: '',
+      roleName: ''
+    };
   }
 
-  add(): void {
-    console.log(123);
+  add(tpl: TemplateRef<{}>): void {
+    this.addEditForm.reset();
+    this.modalSrv.create({
+      nzTitle: '新建角色',
+      nzContent: tpl,
+      nzOnOk: () => {
+        if (!fnCheckForm(this.addEditForm)) {
+          return false;
+        }
+        this.addData(this.addEditForm.value);
+        return fnCheckForm(this.addEditForm);
+      },
+    });
+  }
+
+  addData(param: Role): void {
+    console.log(param);
+
   }
 
   // 修改一页几条
@@ -78,8 +111,8 @@ export class RoleManageComponent implements OnInit {
   }
 
   initForm(): void {
-    this.validateForm = this.fb.group({
-      roleName: [null],
+    this.addEditForm = this.fb.group({
+      roleName: [null, [Validators.required]],
       roleDesc: [null],
     });
   }

@@ -57,7 +57,9 @@
       true,
       "ignore-params"
     ],
-    "no-non-null-assertion": false, // 禁止非空断言
+    "no-non-null-assertion": false,
+    // 禁止非空断言
+    "no-empty-interface": false,
     "no-redundant-jsdoc": true,
     "no-switch-case-fall-through": true,
     "no-var-requires": false,

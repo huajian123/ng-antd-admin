@@ -1,3 +1,5 @@
+import {FormGroup} from '@angular/forms';
+
 const fnGetFile = function getFile(url: string, isBlob = false): Promise<any> {
   return new Promise((resolve, reject) => {
     const client = new XMLHttpRequest();
@@ -21,7 +23,14 @@ const fnGetFile = function getFile(url: string, isBlob = false): Promise<any> {
   });
 };
 
-
+const fnCheckForm = function checkForm(form: FormGroup): boolean {
+  Object.keys(form.controls).forEach(key => {
+    form.controls[key].markAsDirty();
+    form.controls[key].updateValueAndValidity();
+  });
+  return !form.invalid;
+};
 export {
-  fnGetFile
+  fnGetFile,
+  fnCheckForm
 };
