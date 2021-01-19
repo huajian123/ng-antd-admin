@@ -71,7 +71,6 @@ export class RoleManageComponent implements OnInit {
 
   /*新增*/
   check(name: string): void {
-    console.log(name);
   }
 
   /*重置*/
@@ -104,12 +103,10 @@ export class RoleManageComponent implements OnInit {
 
   // 删除
   del(id: number): void {
-    console.log(id);
   }
 
   // 修改
   edit(id: number): void {
-    console.log(id);
   }
 
   addData(param: Role): void {

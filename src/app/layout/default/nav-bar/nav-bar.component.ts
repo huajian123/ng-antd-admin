@@ -85,25 +85,25 @@ export class NavBarComponent implements OnInit, OnDestroy {
           title: '搜索列表',
           open: false,
           selected: false,
-          path: '',
+          path: '/list/search-list',
           children: [
             {
               title: '搜索列表(文章）',
               open: false,
               selected: false,
-              path: '',
+              path: '/list/search-list/acticle',
             },
             {
               title: '搜索列表(项目)',
               open: false,
               selected: false,
-              path: '',
+              path: '/list/search-list/project',
             },
             {
               title: '搜索列表(应用)',
               open: false,
               selected: false,
-              path: '',
+              path: '/list/search-list/app',
             },
           ]
         },
@@ -111,19 +111,19 @@ export class NavBarComponent implements OnInit, OnDestroy {
           title: '查询表格',
           open: false,
           selected: false,
-          path: '',
+          path: '/search-table',
         },
         {
           title: '标准表格',
           open: false,
           selected: false,
-          path: '',
+          path: '/custom-table',
         },
         {
           title: '卡片列表',
           open: false,
           selected: false,
-          path: '',
+          path: '/card-table',
         },
       ]
     },
@@ -137,13 +137,13 @@ export class NavBarComponent implements OnInit, OnDestroy {
           title: '基础详情页',
           open: false,
           selected: false,
-          path: '',
+          path: '/detail-base',
         },
         {
           title: '高级详情页',
           open: false,
           selected: false,
-          path: '',
+          path: '/detail-adv',
         },
       ]
     },
@@ -157,13 +157,13 @@ export class NavBarComponent implements OnInit, OnDestroy {
           title: '成功页',
           open: false,
           selected: false,
-          path: '',
+          path: '/result/success',
         },
         {
           title: '失败页',
           open: false,
           selected: false,
-          path: '',
+          path: '/result/error',
         },
       ]
     },
@@ -177,19 +177,19 @@ export class NavBarComponent implements OnInit, OnDestroy {
           title: '403',
           open: false,
           selected: false,
-          path: '',
+          path: '/error/403',
         },
         {
           title: '404',
           open: false,
           selected: false,
-          path: '',
+          path: '/error/404',
         },
         {
           title: '500',
           open: false,
           selected: false,
-          path: '',
+          path: '/error/500',
         },
       ]
     },
@@ -203,39 +203,13 @@ export class NavBarComponent implements OnInit, OnDestroy {
           title: '个人中心',
           open: false,
           selected: false,
-          path: '',
+          path: '/user-info',
         },
         {
           title: '个人设置',
           open: false,
           selected: false,
-          path: '',
-        },
-      ]
-    },
-    {
-      title: '图形编辑器',
-      icon: 'highlight',
-      open: false,
-      selected: false,
-      children: [
-        {
-          title: '流程编辑器',
-          open: false,
-          selected: false,
-          path: '',
-        },
-        {
-          title: '脑图编辑器',
-          open: false,
-          selected: false,
-          path: '',
-        },
-        {
-          title: '拓扑编辑器',
-          open: false,
-          selected: false,
-          path: '',
+          path: '/user-setting',
         },
       ]
     },
@@ -261,7 +235,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
           title: '部门管理',
           open: false,
           selected: false,
-          path: '',
+          path: '/default/internal-manage/dept',
         },
       ]
     },

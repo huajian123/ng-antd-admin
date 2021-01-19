@@ -119,7 +119,6 @@ export class WorkbenchComponent implements OnInit {
 
   /*新增*/
   check(name: string): void {
-    console.log(name);
   }
 
   /*重置*/
@@ -128,7 +127,6 @@ export class WorkbenchComponent implements OnInit {
   }
 
   add(): void {
-    console.log(123);
   }
 
   // 修改一页几条
