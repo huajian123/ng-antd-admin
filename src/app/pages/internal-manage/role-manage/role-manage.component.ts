@@ -22,25 +22,14 @@ interface SearchParam extends Role {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RoleManageComponent implements OnInit {
-
   @ViewChild('operationTpl', {static: true}) operationTpl!: TemplateRef<any>;
-  searchParam: SearchParam = {
-    roleName: '',
-    roleDesc: ''
-  };
   addEditForm!: FormGroup;
-  isCollapse = true;
   tableConfig!: MyTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '查询表格',
-    // desc: '表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。',
     breadcrumb: ['首页', '内部管理', '角色管理']
   };
   dataList!: Role[];
-  dataItem: Role = {
-    roleDesc: '',
-    roleName: ''
-  };
 
   constructor(private fb: FormBuilder, private dataService: RoleService,
               private modalSrv: NzModalService, private cdr: ChangeDetectorRef, private messageService: MessageService) {
@@ -59,30 +48,8 @@ export class RoleManageComponent implements OnInit {
       this.tableConfig.total = total!;
       this.tableConfig.pageIndex = pageNum!;
       this.tableConfig.loading = false;
-      this.cdr.detectChanges();
+      this.cdr.markForCheck();
     }));
-  }
-
-
-  /*展开*/
-  toggleCollapse(): void {
-    this.isCollapse = !this.isCollapse;
-  }
-
-  /*新增*/
-  addRow(): void {
-  }
-
-  /*新增*/
-  check(name: string): void {
-  }
-
-  /*重置*/
-  resetForm(): void {
-    this.searchParam = {
-      roleDesc: '',
-      roleName: ''
-    };
   }
 
   add(tpl: TemplateRef<{}>): void {
@@ -119,8 +86,6 @@ export class RoleManageComponent implements OnInit {
   edit(id: number, tpl: TemplateRef<{}>): void {
     const dataDetail = this.dataService.getRolesDetail(id);
     dataDetail.subscribe(res => {
-      console.log(res);
-      console.log(tpl);
       this.addEditForm.patchValue(res);
       this.modalSrv.create({
         nzTitle: '修改角色',
@@ -136,15 +101,6 @@ export class RoleManageComponent implements OnInit {
         },
       });
     });
-    /*  const dataDetail = this.dataService.getRolesDetail(id);
-      dataDetail.pipe(mergeMap(dataItem => {
-        console.log(dataItem);
-        this.addEditForm.patchValue(dataItem);
-        dataItem.id = id!;
-        return this.dataService.editRoles(dataItem);
-      })).subscribe(res => {
-        console.log(res);
-      });*/
   }
 
   editData(param: Role): void {
