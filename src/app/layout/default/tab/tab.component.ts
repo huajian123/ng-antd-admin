@@ -1,5 +1,5 @@
 import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {TabModel, TabService} from '../../../core/services/tab.service';
+import {TabModel, TabService} from '../../../core/services/common/tab.service';
 import {NzContextMenuService, NzDropdownMenuComponent} from 'ng-zorro-antd/dropdown';
 import {ThemeService} from '../../../core/services/store/theme.service';
 

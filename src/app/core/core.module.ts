@@ -3,7 +3,7 @@ import {registerLocaleData} from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import {NZ_I18N, zh_CN} from 'ng-zorro-antd/i18n';
 import {throwIfAlreadyLoaded} from './module-import-guard';
-import {SimpleReuseStrategy} from './services/reuse-strategy';
+import {SimpleReuseStrategy} from './services/common/reuse-strategy';
 import {RouteReuseStrategy} from '@angular/router';
 
 

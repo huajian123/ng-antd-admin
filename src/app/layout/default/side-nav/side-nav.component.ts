@@ -3,7 +3,7 @@ import {filter, map, mergeMap, tap} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {ThemeService} from '../../../core/services/store/theme.service';
-import {TabService} from '../../../core/services/tab.service';
+import {TabService} from '../../../core/services/common/tab.service';
 
 
 

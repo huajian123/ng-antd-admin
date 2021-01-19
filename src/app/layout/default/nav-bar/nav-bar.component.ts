@@ -1,7 +1,7 @@
 import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy, Input} from '@angular/core';
 import {filter, map, mergeMap, tap} from 'rxjs/operators';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
-import {TabService} from '../../../core/services/tab.service';
+import {TabService} from '../../../core/services/common/tab.service';
 import {ThemeService} from '../../../core/services/store/theme.service';
 import {Subscription} from 'rxjs';
 import * as _ from 'lodash';

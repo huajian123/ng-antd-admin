@@ -2,7 +2,7 @@ import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {LoginService} from '../../../core/services/http/login/login.service';
-import {WindowService} from '../../../core/services/window.service';
+import {WindowService} from '../../../core/services/common/window.service';
 import {AuthKey, TokenPre} from '../../../configs/constant';
 import {fnCheckForm} from '../../../utils/tools';
 

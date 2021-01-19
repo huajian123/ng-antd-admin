@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpErrorResponse, HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
-import {WindowService} from '../window.service';
+import {WindowService} from '../common/window.service';
 import {AuthKey} from '../../../configs/constant';
 import {catchError} from 'rxjs/operators';
 import {NzMessageService} from 'ng-zorro-antd/message';

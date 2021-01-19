@@ -7,6 +7,7 @@ import {Role, SearchCommonVO} from '../../../core/services/types';
 import {RoleService} from '../../../core/services/http/internal-manage/role.service';
 import {NzModalService} from 'ng-zorro-antd/modal';
 import {fnCheckForm} from '../../../utils/tools';
+import {MessageService, MessageType} from '../../../core/services/common/message.service';
 
 
 interface SearchParam extends Role {
@@ -39,7 +40,8 @@ export class RoleManageComponent implements OnInit {
     roleName: ''
   };
 
-  constructor(private fb: FormBuilder, private dataService: RoleService, private modalSrv: NzModalService, private cdr: ChangeDetectorRef) {
+  constructor(private fb: FormBuilder, private dataService: RoleService,
+              private modalSrv: NzModalService, private cdr: ChangeDetectorRef, private messageService: MessageService) {
     this.dataList = [];
   }
 
