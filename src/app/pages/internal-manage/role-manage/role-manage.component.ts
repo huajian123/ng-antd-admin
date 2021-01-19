@@ -103,6 +103,12 @@ export class RoleManageComponent implements OnInit {
 
   // 删除
   del(id: number): void {
+    this.dataService.delRoles(id).subscribe(() => {
+      if (this.dataList.length === 1) {
+        this.tableConfig.pageIndex--;
+      }
+      this.getDataList();
+    });
   }
 
   // 修改

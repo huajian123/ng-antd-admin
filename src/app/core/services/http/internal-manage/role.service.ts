@@ -24,6 +24,10 @@ export class RoleService {
 
   public addRoles(param: Role): Observable<void> {
     // return of(this.mockRole);
-    return this.http.put('/role', param);
+    return this.http.post('/role', param);
+  }
+
+  public delRoles(id: number): Observable<void> {
+    return this.http.delete('/role/' + id);
   }
 }

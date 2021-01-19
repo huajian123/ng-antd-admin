@@ -39,6 +39,17 @@ export class BaseHttpService {
     );
   }
 
+  delete<T>(path: string, param?: any, config?: MyHttpConfig): Observable<any> {
+    config = config || {};
+    const params = new HttpParams({fromString: qs.stringify(param)});
+    return this.http.delete<ActionResult<T>>(this.uri + path, {params}).pipe(
+      filter((item) => {
+        return this.handleFilter(item, !!(config?.needSuccessInfo));
+      }),
+      map(item => item.data)
+    );
+  }
+
   post<T>(path: string, param?: any, config?: MyHttpConfig): Observable<any> {
     config = config || {needSuccessInfo: false};
     return this.http.post<ActionResult<T>>(this.uri + path, param).pipe(
@@ -51,7 +62,7 @@ export class BaseHttpService {
 
   put<T>(path: string, param?: any, config?: MyHttpConfig): Observable<any> {
     config = config || {needSuccessInfo: false};
-    return this.http.post<ActionResult<T>>(this.uri + path, param).pipe(
+    return this.http.put<ActionResult<T>>(this.uri + path, param).pipe(
       filter((item) => {
         return this.handleFilter(item, !!(config?.needSuccessInfo));
       }),
