@@ -35,10 +35,10 @@
   <app-card-table-wrap [needAddBtn]="true" (add)="add(modalContent)">
     <app-ant-table (changePageSize)="changePageSize($event)" (changePageNum)="getDataList($event)"
                    [tableConfig]="tableConfig" [tableData]="dataList"></app-ant-table>
-    <ng-template #operationTpl let-name="name">
-      <span class="operate-text" (click)="check(name)">设置权限</span>
-      <span class="operate-text">编辑</span>
-      <span class="operate-text">删除</span>
+    <ng-template #operationTpl let-name="name" let-id="id">
+      <span class="operate-text" (click)="setRole(id)">设置权限</span>
+      <span class="operate-text" (click)="edit(id)">编辑</span>
+      <span class="operate-text" (click)="del(id)">删除</span>
     </ng-template>
   </app-card-table-wrap>
 </div>

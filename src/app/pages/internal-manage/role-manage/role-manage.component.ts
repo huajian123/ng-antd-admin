@@ -52,7 +52,7 @@ export class RoleManageComponent implements OnInit {
     this.dataService.getRoles(params).subscribe((data => {
       const {list, total, pageNum} = data;
       this.dataList = [...list];
-      this.tableConfig.total! = total!;
+      this.tableConfig.total = total!;
       this.tableConfig.pageIndex = pageNum!;
       this.tableConfig.loading = false;
       this.cdr.detectChanges();
@@ -97,9 +97,25 @@ export class RoleManageComponent implements OnInit {
     });
   }
 
-  addData(param: Role): void {
-    console.log(param);
+  // 设置权限
+  setRole(id: number): void {
+    console.log(id);
+  }
 
+  // 删除
+  del(id: number): void {
+    console.log(id);
+  }
+
+  // 修改
+  edit(id: number): void {
+    console.log(id);
+  }
+
+  addData(param: Role): void {
+    this.dataService.addRoles(param).subscribe(res => {
+      this.getDataList();
+    });
   }
 
   // 修改一页几条
