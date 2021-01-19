@@ -7,13 +7,8 @@ import {Role, SearchCommonVO} from '../../../core/services/types';
 import {RoleService} from '../../../core/services/http/internal-manage/role.service';
 import {NzModalService} from 'ng-zorro-antd/modal';
 import {fnCheckForm} from '../../../utils/tools';
-import {MessageService, MessageType} from '../../../core/services/common/message.service';
-import {concat} from 'rxjs';
-import {catchError, mergeMap} from 'rxjs/operators';
+import {MessageService} from '../../../core/services/common/message.service';
 
-
-interface SearchParam extends Role {
-}
 
 @Component({
   selector: 'app-role-manage',
