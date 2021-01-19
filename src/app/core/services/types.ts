@@ -27,15 +27,14 @@ export interface PageInfo<T> {
 }
 
 
-
 export interface UserLogin {
   name: string;
   password: string;
 }
 
 
-
 export interface Role {
+  id?: number;
   roleName: string;
   roleDesc?: string;
 }

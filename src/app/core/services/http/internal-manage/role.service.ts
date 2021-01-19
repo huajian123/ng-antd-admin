@@ -22,6 +22,10 @@ export class RoleService {
     return this.http.get('/role', param);
   }
 
+  public getRolesDetail(id: number): Observable<Role> {
+    return this.http.get('/role/' + id);
+  }
+
   public addRoles(param: Role): Observable<void> {
     // return of(this.mockRole);
     return this.http.post('/role', param);

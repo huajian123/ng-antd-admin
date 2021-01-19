@@ -8,6 +8,8 @@ import {RoleService} from '../../../core/services/http/internal-manage/role.serv
 import {NzModalService} from 'ng-zorro-antd/modal';
 import {fnCheckForm} from '../../../utils/tools';
 import {MessageService, MessageType} from '../../../core/services/common/message.service';
+import {concat} from 'rxjs';
+import {catchError, mergeMap} from 'rxjs/operators';
 
 
 interface SearchParam extends Role {
@@ -93,7 +95,7 @@ export class RoleManageComponent implements OnInit {
           return false;
         }
         this.addData(this.addEditForm.value);
-        return fnCheckForm(this.addEditForm);
+        return true;
       },
     });
   }
@@ -114,7 +116,41 @@ export class RoleManageComponent implements OnInit {
   }
 
   // 修改
-  edit(id: number): void {
+  edit(id: number, tpl: TemplateRef<{}>): void {
+    const dataDetail = this.dataService.getRolesDetail(id);
+    dataDetail.subscribe(res => {
+      console.log(res);
+      console.log(tpl);
+      this.addEditForm.patchValue(res);
+      this.modalSrv.create({
+        nzTitle: '修改角色',
+        nzContent: tpl,
+        nzOnOk: () => {
+          if (!fnCheckForm(this.addEditForm)) {
+            return false;
+          }
+          const param = this.addEditForm.value;
+          param.id = id;
+          this.editData(param);
+          return true;
+        },
+      });
+    });
+    /*  const dataDetail = this.dataService.getRolesDetail(id);
+      dataDetail.pipe(mergeMap(dataItem => {
+        console.log(dataItem);
+        this.addEditForm.patchValue(dataItem);
+        dataItem.id = id!;
+        return this.dataService.editRoles(dataItem);
+      })).subscribe(res => {
+        console.log(res);
+      });*/
+  }
+
+  editData(param: Role): void {
+    this.dataService.editRoles(param).subscribe(res => {
+      this.getDataList();
+    });
   }
 
   addData(param: Role): void {

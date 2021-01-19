@@ -37,7 +37,7 @@
                    [tableConfig]="tableConfig" [tableData]="dataList"></app-ant-table>
     <ng-template #operationTpl let-name="name" let-id="id">
       <span class="operate-text" (click)="setRole(id)">设置权限</span>
-      <span class="operate-text" (click)="edit(id)">编辑</span>
+      <span class="operate-text" (click)="edit(id,modalContent)">编辑</span>
       <span class="operate-text" (click)="del(id)">删除</span>
     </ng-template>
   </app-card-table-wrap>
