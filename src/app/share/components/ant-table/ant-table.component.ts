@@ -140,7 +140,6 @@ export class AntTableComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    console.log(this.tableConfig);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

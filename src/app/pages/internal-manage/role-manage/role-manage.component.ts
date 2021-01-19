@@ -1,4 +1,4 @@
-import {Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MyTableConfig} from '../../../share/components/ant-table/ant-table.component';
 import {PageHeaderType} from '../../../share/components/page-header/page-header.component';
@@ -39,26 +39,23 @@ export class RoleManageComponent implements OnInit {
     roleName: ''
   };
 
-  constructor(private fb: FormBuilder, private dataService: RoleService, private modalSrv: NzModalService) {
+  constructor(private fb: FormBuilder, private dataService: RoleService, private modalSrv: NzModalService, private cdr: ChangeDetectorRef) {
+    this.dataList = [];
   }
 
   getDataList(e?: NzTableQueryParams): void {
     this.tableConfig.loading = true;
     const params: SearchCommonVO<any> = {
       pageSize: this.tableConfig.pageSize!,
-      pageNum: e?.pageIndex! || this.tableConfig.pageIndex!
+      pageNum: e?.pageIndex || this.tableConfig.pageIndex!
     };
-    this.dataList = [];
-    this.tableConfig.loading = false;
-    this.tableConfig.total = 13;
-    this.tableConfig.pageIndex = 1;
     this.dataService.getRoles(params).subscribe((data => {
       const {list, total, pageNum} = data;
-      this.dataList = list;
-      console.log(this.dataList);
+      this.dataList = [...list];
       this.tableConfig.total! = total!;
       this.tableConfig.pageIndex = pageNum!;
       this.tableConfig.loading = false;
+      this.cdr.detectChanges();
     }));
   }
 
@@ -136,7 +133,7 @@ export class RoleManageComponent implements OnInit {
         }
       ],
       total: 0,
-      loading: false,
+      loading: true,
       pageSize: 10,
       pageIndex: 1,
     };

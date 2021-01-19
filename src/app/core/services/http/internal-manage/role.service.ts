@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BaseHttpService} from '../base-http.service';
-import {PageInfo, Role, UserLogin} from '../../types';
+import {PageInfo, Role, SearchCommonVO} from '../../types';
 import {Observable, of} from 'rxjs';
-import {mapTo} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +17,8 @@ export class RoleService {
   constructor(public http: BaseHttpService) {
   }
 
-  public getRoles(params: any): Observable<PageInfo<Role>> {
-    return of(this.mockRole);
-    // return this.http.post('/role', params);
+  public getRoles(param: SearchCommonVO<any>): Observable<PageInfo<Role>> {
+    // return of(this.mockRole);
+    return this.http.get('/role', param);
   }
 }
