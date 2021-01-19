@@ -30,4 +30,8 @@ export class RoleService {
   public delRoles(id: number): Observable<void> {
     return this.http.delete('/role/' + id);
   }
+
+  public editRoles(param: Role): Observable<void> {
+    return this.http.put('/role', param);
+  }
 }
