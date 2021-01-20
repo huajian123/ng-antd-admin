@@ -1,10 +1,11 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { RoleManageRoutingModule } from './role-manage-routing.module';
-import { RoleManageComponent } from './role-manage.component';
+import {RoleManageRoutingModule} from './role-manage-routing.module';
+import {RoleManageComponent} from './role-manage.component';
 import {SharedModule} from '../../../share/shared.module';
-import { SetRoleComponent } from './set-role/set-role.component';
+import {SetRoleComponent} from './set-role/set-role.component';
+import {InternalManageWidgetModule} from '../../../widget/biz-widget/internal-manage/internal-manage-widget.module';
 
 
 @NgModule({
@@ -12,7 +13,9 @@ import { SetRoleComponent } from './set-role/set-role.component';
   imports: [
     CommonModule,
     SharedModule,
+    InternalManageWidgetModule,
     RoleManageRoutingModule
   ]
 })
-export class RoleManageModule { }
+export class RoleManageModule {
+}

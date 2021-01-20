@@ -6,9 +6,8 @@ import {NzTableQueryParams} from 'ng-zorro-antd/table';
 import {Role, SearchCommonVO} from '../../../core/services/types';
 import {RoleService} from '../../../core/services/http/internal-manage/role.service';
 import {NzModalService} from 'ng-zorro-antd/modal';
-import {fnCheckForm} from '../../../utils/tools';
 import {MessageService} from '../../../core/services/common/message.service';
-
+import {InterAddEditService} from '../../../widget/biz-widget/internal-manage/inter-add-edit/inter-add-edit.service';
 
 @Component({
   selector: 'app-role-manage',
@@ -18,7 +17,7 @@ import {MessageService} from '../../../core/services/common/message.service';
 })
 export class RoleManageComponent implements OnInit {
   @ViewChild('operationTpl', {static: true}) operationTpl!: TemplateRef<any>;
-  addEditForm!: FormGroup;
+
   tableConfig!: MyTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '查询表格',
@@ -26,8 +25,11 @@ export class RoleManageComponent implements OnInit {
   };
   dataList!: Role[];
 
-  constructor(private fb: FormBuilder, private dataService: RoleService,
-              private modalSrv: NzModalService, private cdr: ChangeDetectorRef, private messageService: MessageService) {
+  constructor(private dataService: RoleService,
+              private modalSrv: NzModalService,
+              private cdr: ChangeDetectorRef,
+              private messageService: MessageService,
+              private modalService: InterAddEditService) {
     this.dataList = [];
   }
 
@@ -47,19 +49,24 @@ export class RoleManageComponent implements OnInit {
     }));
   }
 
-  add(tpl: TemplateRef<{}>): void {
-    this.addEditForm.reset();
-    this.modalSrv.create({
-      nzTitle: '新建角色',
-      nzContent: tpl,
-      nzOnOk: () => {
-        if (!fnCheckForm(this.addEditForm)) {
-          return false;
-        }
-        this.addData(this.addEditForm.value);
-        return true;
-      },
+  add(): void {
+    this.modalService.show({title: '新增'}).then(res => {
+      console.log(res);
+    }).catch(e => {
+      console.log(e);
     });
+    /*    this.addEditForm.reset();
+        this.modalSrv.create({
+          nzTitle: '新建角色',
+          nzContent: tpl,
+          nzOnOk: () => {
+            if (!fnCheckForm(this.addEditForm)) {
+              return false;
+            }
+            this.addData(this.addEditForm.value);
+            return true;
+          },
+        });*/
   }
 
   // 设置权限
@@ -81,20 +88,20 @@ export class RoleManageComponent implements OnInit {
   edit(id: number, tpl: TemplateRef<{}>): void {
     const dataDetail = this.dataService.getRolesDetail(id);
     dataDetail.subscribe(res => {
-      this.addEditForm.patchValue(res);
-      this.modalSrv.create({
-        nzTitle: '修改角色',
-        nzContent: tpl,
-        nzOnOk: () => {
-          if (!fnCheckForm(this.addEditForm)) {
-            return false;
-          }
-          const param = this.addEditForm.value;
-          param.id = id;
-          this.editData(param);
-          return true;
-        },
-      });
+      /*   this.addEditForm.patchValue(res);
+         this.modalSrv.create({
+           nzTitle: '修改角色',
+           nzContent: tpl,
+           nzOnOk: () => {
+             if (!fnCheckForm(this.addEditForm)) {
+               return false;
+             }
+             const param = this.addEditForm.value;
+             param.id = id;
+             this.editData(param);
+             return true;
+           },
+         });*/
     });
   }
 
@@ -115,12 +122,6 @@ export class RoleManageComponent implements OnInit {
     this.tableConfig.pageSize = e;
   }
 
-  initForm(): void {
-    this.addEditForm = this.fb.group({
-      roleName: [null, [Validators.required]],
-      roleDesc: [null],
-    });
-  }
 
   private initTable(): void {
     this.tableConfig = {
@@ -148,7 +149,7 @@ export class RoleManageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.initForm();
+
     this.initTable();
   }
 }

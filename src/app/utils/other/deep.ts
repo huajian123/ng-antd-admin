@@ -1,4 +1,4 @@
-import extend from 'extend';
+import * as extend from 'extend';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 /**
@@ -49,7 +49,9 @@ export function deepMergeKey(original: any, arrayProcessMethod: boolean, ...obje
     Object.keys(obj)
       .filter(key => key !== '__proto__' && Object.prototype.hasOwnProperty.call(obj, key))
       .forEach(key => {
+
         const fromValue = obj[key];
+        console.log(fromValue);
         const toValue = target[key];
         if (Array.isArray(toValue)) {
           target[key] = arrayProcessMethod ? fromValue : [...toValue, ...fromValue];
