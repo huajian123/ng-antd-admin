@@ -1,7 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {NzModalRef} from 'ng-zorro-antd/modal';
 import {BasicConfirmModalComponent} from '../../../base-modal';
+import {fnCheckForm} from '../../../../utils/tools';
 
 @Component({
   selector: 'app-inter-add-edit',
@@ -12,9 +13,11 @@ import {BasicConfirmModalComponent} from '../../../base-modal';
 export class InterAddEditComponent extends BasicConfirmModalComponent implements OnInit {
 
   addEditForm!: FormGroup;
+  params: object;
 
   constructor(private modalRef: NzModalRef, private fb: FormBuilder) {
     super();
+    this.params = {};
   }
 
   initForm(): void {
@@ -26,12 +29,17 @@ export class InterAddEditComponent extends BasicConfirmModalComponent implements
 
   ngOnInit(): void {
     this.initForm();
+    if (Object.keys(this.params).length > 0) {
+      this.addEditForm.patchValue(this.params);
+    }
   }
 
+  // 返回false则不关闭对话框
   protected getCurrentValue(): any {
-    return {
-      test: 'ok'
-    };
+    if (!fnCheckForm(this.addEditForm)) {
+      return fnCheckForm(this.addEditForm);
+    }
+    return this.addEditForm.value;
   }
 
 }

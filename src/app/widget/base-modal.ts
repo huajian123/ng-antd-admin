@@ -33,7 +33,11 @@ export abstract class BaseModal {
   }
 
   private confirmCallback(contentComponentInstance?: object): void {
-    return this.modalRef.destroy({status: ModalBtnStatus.Ok, value: (contentComponentInstance as any).getCurrentValue()});
+    const value = (contentComponentInstance as any).getCurrentValue();
+    if (!value) {
+      return;
+    }
+    return this.modalRef.destroy({status: ModalBtnStatus.Ok, value});
   }
 
   show(modalOptions: ModalOptions = {}, params: object = {}): Promise<NzSafeAny> {

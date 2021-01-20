@@ -25,11 +25,8 @@ export class RoleManageComponent implements OnInit {
   };
   dataList!: Role[];
 
-  constructor(private dataService: RoleService,
-              private modalSrv: NzModalService,
-              private cdr: ChangeDetectorRef,
-              private messageService: MessageService,
-              private modalService: InterAddEditService) {
+  constructor(private dataService: RoleService, private modalSrv: NzModalService, private cdr: ChangeDetectorRef,
+              private messageService: MessageService, private modalService: InterAddEditService) {
     this.dataList = [];
   }
 
@@ -49,25 +46,6 @@ export class RoleManageComponent implements OnInit {
     }));
   }
 
-  add(): void {
-    this.modalService.show({title: '新增'}).then(res => {
-      console.log(res);
-    }).catch(e => {
-      console.log(e);
-    });
-    /*    this.addEditForm.reset();
-        this.modalSrv.create({
-          nzTitle: '新建角色',
-          nzContent: tpl,
-          nzOnOk: () => {
-            if (!fnCheckForm(this.addEditForm)) {
-              return false;
-            }
-            this.addData(this.addEditForm.value);
-            return true;
-          },
-        });*/
-  }
 
   // 设置权限
   setRole(id: number): void {
@@ -84,35 +62,27 @@ export class RoleManageComponent implements OnInit {
     });
   }
 
+  add(): void {
+    this.modalService.show({nzTitle: '新增'}).then(({value}) => {
+      this.addEditData(value, 'addRoles');
+    }).catch(e => {
+    });
+  }
+
   // 修改
-  edit(id: number, tpl: TemplateRef<{}>): void {
+  edit(id: number): void {
     const dataDetail = this.dataService.getRolesDetail(id);
     dataDetail.subscribe(res => {
-      /*   this.addEditForm.patchValue(res);
-         this.modalSrv.create({
-           nzTitle: '修改角色',
-           nzContent: tpl,
-           nzOnOk: () => {
-             if (!fnCheckForm(this.addEditForm)) {
-               return false;
-             }
-             const param = this.addEditForm.value;
-             param.id = id;
-             this.editData(param);
-             return true;
-           },
-         });*/
+      this.modalService.show({nzTitle: '编辑'}, res).then(({value}) => {
+        value.id = id;
+        this.addEditData(value, 'editRoles');
+      }).catch(e => {
+      });
     });
   }
 
-  editData(param: Role): void {
-    this.dataService.editRoles(param).subscribe(res => {
-      this.getDataList();
-    });
-  }
-
-  addData(param: Role): void {
-    this.dataService.addRoles(param).subscribe(res => {
+  addEditData(param: Role, methodName: 'editRoles' | 'addRoles'): void {
+    this.dataService[methodName](param).subscribe(() => {
       this.getDataList();
     });
   }
@@ -121,7 +91,6 @@ export class RoleManageComponent implements OnInit {
   changePageSize(e: number): void {
     this.tableConfig.pageSize = e;
   }
-
 
   private initTable(): void {
     this.tableConfig = {
@@ -149,7 +118,6 @@ export class RoleManageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.initTable();
   }
 }
