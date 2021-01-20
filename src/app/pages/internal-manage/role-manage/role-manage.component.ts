@@ -1,5 +1,4 @@
 import {Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MyTableConfig} from '../../../share/components/ant-table/ant-table.component';
 import {PageHeaderType} from '../../../share/components/page-header/page-header.component';
 import {NzTableQueryParams} from 'ng-zorro-antd/table';
@@ -49,11 +48,12 @@ export class RoleManageComponent implements OnInit {
 
   // 设置权限
   setRole(id: number): void {
-    console.log(id);
+    this.getDataList();
   }
 
   // 删除
   del(id: number): void {
+    this.tableConfig.loading = true;
     this.dataService.delRoles(id).subscribe(() => {
       if (this.dataList.length === 1) {
         this.tableConfig.pageIndex--;
@@ -64,6 +64,9 @@ export class RoleManageComponent implements OnInit {
 
   add(): void {
     this.modalService.show({nzTitle: '新增'}).then(({value}) => {
+      this.tableConfig.loading = true;
+      this.dataList = [...this.dataList];
+      this.cdr.detectChanges();
       this.addEditData(value, 'addRoles');
     }).catch(e => {
     });
@@ -71,10 +74,13 @@ export class RoleManageComponent implements OnInit {
 
   // 修改
   edit(id: number): void {
-    const dataDetail = this.dataService.getRolesDetail(id);
-    dataDetail.subscribe(res => {
+    this.dataService.getRolesDetail(id).subscribe(res => {
       this.modalService.show({nzTitle: '编辑'}, res).then(({value}) => {
         value.id = id;
+        this.tableConfig.loading = true;
+        // 改变引用手动触发变更检测。
+        this.dataList = [...this.dataList];
+        this.cdr.detectChanges();
         this.addEditData(value, 'editRoles');
       }).catch(e => {
       });

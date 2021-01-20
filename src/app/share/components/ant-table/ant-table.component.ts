@@ -1,5 +1,5 @@
 import {
-  ChangeDetectionStrategy,
+  ChangeDetectionStrategy, ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
@@ -65,7 +65,7 @@ export class AntTableComponent implements OnInit, OnChanges {
   indeterminate: boolean;
   allChecked: boolean;
 
-  constructor() {
+  constructor(private cdr: ChangeDetectorRef) {
     this.indeterminate = false;
     this.allChecked = false;
     this.selectedChange = new EventEmitter<any[]>();
