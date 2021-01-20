@@ -73,7 +73,7 @@ export class MessageService {
         }
       }
     });
-    return modalRef!;
+   // return modalRef!;
   }
 
 }

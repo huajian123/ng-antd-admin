@@ -10,8 +10,9 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
  * @param defaultValue 默认值
  */
 export function deepGet(obj: NzSafeAny | null, path: string | string[] | null | undefined, defaultValue?: NzSafeAny): NzSafeAny {
-  if (!obj || path == null || path.length === 0) return defaultValue;
+  if (!obj || path == null || path.length === 0) { return defaultValue; }
   if (!Array.isArray(path)) {
+    // tslint:disable-next-line:no-bitwise
     path = ~path.indexOf('.') ? path.split('.') : [path];
   }
   if (path.length === 1) {
@@ -40,7 +41,7 @@ export function deepCopy(obj: NzSafeAny): NzSafeAny {
  * @param objects 要合并的对象
  */
 export function deepMergeKey(original: any, arrayProcessMethod: boolean, ...objects: any[]): any {
-  if (Array.isArray(original) || typeof original !== 'object') return original;
+  if (Array.isArray(original) || typeof original !== 'object') { return original; }
 
   const isObject = (v: any) => typeof v === 'object' || typeof v === 'function';
 
