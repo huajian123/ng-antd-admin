@@ -4,7 +4,7 @@ import {RoleManageComponent} from './role-manage.component';
 import {SetRoleComponent} from './set-role/set-role.component';
 
 const routes: Routes = [
-  {path: 'set-role', component: SetRoleComponent, data: {shouldDetach: 'no'}},
+  {path: 'set-role', component: SetRoleComponent, data: {title: '角色管理', key: 'role-manage-setting'}},
   {path: '', component: RoleManageComponent, data: {title: '角色管理', key: 'role-manage'}},
 ];
 

@@ -302,7 +302,6 @@ export class NavBarComponent implements OnInit, OnDestroy {
       item.selected = false;
       // 一级菜单
       if (!item.children || item.children.length === 0) {
-        // todo 今天
         // if (item.path === routePath) {
         if (routePath.includes(item.path!)) {
           item.selected = true;
@@ -314,7 +313,6 @@ export class NavBarComponent implements OnInit, OnDestroy {
         subItem.selected = false;
         subItem.open = false;
         if (!subItem.children || subItem.children?.length === 0) {
-          // todo 今天
           // if (subItem.path === routePath) {
           if (routePath.includes(subItem.path!)) {
             item.open = true;
@@ -325,7 +323,6 @@ export class NavBarComponent implements OnInit, OnDestroy {
           continue;
         }
         for (const thirdItem of subItem.children) {
-          // todo 今天
           // if (thirdItem.path === routePath) {
           if (routePath.includes(thirdItem.path!)) {
             item.open = true;

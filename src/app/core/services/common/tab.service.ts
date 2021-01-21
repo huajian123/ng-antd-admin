@@ -20,6 +20,13 @@ export class TabService {
   }
 
   addTab(param: TabModel): void {
+    this.tabArray.forEach(tab => {
+      // 路由的子菜单，例如用户表单路由的title需和用户表单详情组件路由的title相同
+      if (tab.title === param.title) {
+        tab.path = param.path;
+      }
+    })
+
     if (!this.tabArray.find((value) => value.path === param.path)) {
       this.tabArray.push(param);
     }
@@ -47,7 +54,6 @@ export class TabService {
       this.router.navigateByUrl(this.tabArray[index].path);
     }
   }
-
 
   // 右键移除其他tab
   delOtharTab(path: string, index: number): void {
@@ -94,8 +100,6 @@ export class TabService {
 
   findIndex(path: string): number {
     const current = this.tabArray.findIndex((tabItem) => {
-      // todo 今天
-      // return tabItem.path === path;
       return path.includes(tabItem.path);
     });
     this.currSelectedIndexTab = current;
