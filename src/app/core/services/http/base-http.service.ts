@@ -72,10 +72,11 @@ export class BaseHttpService {
 
   handleFilter(item: ActionResult<any>, needSuccessInfo: boolean): boolean {
     if (item.code !== 0) {
-       this.message.error(item.msg);
+      this.message.error(item.msg);
     } else if (needSuccessInfo) {
-       this.message.success('操作成功');
+      this.message.success('操作成功');
     }
-    return item.code === 0;
+    return true;
+    // return item.code === 0;
   }
 }

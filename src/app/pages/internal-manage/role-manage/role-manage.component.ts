@@ -43,9 +43,8 @@ export class RoleManageComponent implements OnInit {
       this.tableConfig.loading = false;
       this.cdr.markForCheck();
     }), (error => {
-      this.dataList = [...this.dataList];
       this.tableConfig.loading = false;
-      this.cdr.markForCheck();
+      this.tableChangeDectction();
     }));
   }
 
@@ -55,24 +54,39 @@ export class RoleManageComponent implements OnInit {
     this.getDataList();
   }
 
+  // 触发表格变更检测
+  tableChangeDectction(): void {
+    // 改变引用触发变更检测。
+    this.dataList = [...this.dataList];
+    this.cdr.detectChanges();
+  }
+
   // 删除
   del(id: number): void {
-    this.tableConfig.loading = true;
-    this.dataService.delRoles(id).subscribe(() => {
-      if (this.dataList.length === 1) {
-        this.tableConfig.pageIndex--;
+    this.modalSrv.confirm({
+      nzTitle: '确定要删除吗？',
+      nzContent: '删除后不可恢复',
+      nzOnOk: () => {
+        this.tableConfig.loading = true;
+        this.tableChangeDectction();
+        this.dataService.delRoles(id).subscribe(() => {
+          if (this.dataList.length === 1) {
+            this.tableConfig.pageIndex--;
+          }
+          this.getDataList();
+        });
       }
-      this.getDataList();
     });
   }
 
   add(): void {
     this.modalService.show({nzTitle: '新增'}).then(({value}) => {
       this.tableConfig.loading = true;
-      this.dataList = [...this.dataList];
-      this.cdr.detectChanges();
+      this.tableChangeDectction();
       this.addEditData(value, 'addRoles');
     }).catch(e => {
+      this.tableConfig.loading = false;
+      this.tableChangeDectction();
     });
   }
 
@@ -82,9 +96,7 @@ export class RoleManageComponent implements OnInit {
       this.modalService.show({nzTitle: '编辑'}, res).then(({value}) => {
         value.id = id;
         this.tableConfig.loading = true;
-        // 改变引用手动触发变更检测。
-        this.dataList = [...this.dataList];
-        this.cdr.detectChanges();
+        this.tableChangeDectction();
         this.addEditData(value, 'editRoles');
       }).catch(e => {
       });
