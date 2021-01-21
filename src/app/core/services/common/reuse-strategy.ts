@@ -5,7 +5,8 @@ import {RouteReuseStrategy, ActivatedRouteSnapshot, DetachedRouteHandle} from '@
 export class SimpleReuseStrategy implements RouteReuseStrategy {
 
   static handlers: { [key: string]: any } = {};
-  public static waitDelete: string | null;
+  public static waitDelete: string[] = [];
+  // public static waitDelete: string | null;
 
   public static deleteRouteSnapshot(path: string): void {
     if (SimpleReuseStrategy.handlers[path]) {
@@ -21,11 +22,17 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
 
   // 当路由离开时会触发，存储路由
   store(route: ActivatedRouteSnapshot, handle: DetachedRouteHandle): void {
-    if (SimpleReuseStrategy.waitDelete === route.data.key) {
+    const index = SimpleReuseStrategy.waitDelete.indexOf(route.data.key)
+    if (index !== -1) {
+      SimpleReuseStrategy.waitDelete.splice(index, 1);
+      return;
+    }
+
+ /*   if (SimpleReuseStrategy.waitDelete === route.data.key) {
       // 如果待删除是当前路由则不存储快照
       SimpleReuseStrategy.waitDelete = null;
       return;
-    }
+    }*/
     SimpleReuseStrategy.handlers[route.data.key] = handle;
   }
 

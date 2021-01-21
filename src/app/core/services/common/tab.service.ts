@@ -86,7 +86,11 @@ export class TabService {
       this.currSelectedIndexTab = index - 1 < 0 ? 0 : index - 1;
       this.router.navigateByUrl(this.tabArray[this.currSelectedIndexTab].path);
       // 在reuse-strategy.ts中缓存当前的path，如果是当前的path则不缓存当前路由
-      SimpleReuseStrategy.waitDelete = tempPath;
+      if (!SimpleReuseStrategy.waitDelete.find((value) => value === tempPath)) {
+        SimpleReuseStrategy.waitDelete.push(tempPath);
+      }
+     // SimpleReuseStrategy.waitDelete = tempPath;
+
     } else if (index < this.currSelectedIndexTab) {
       this.tabArray.splice(index, 1);
       this.currSelectedIndexTab = this.currSelectedIndexTab - 1;
