@@ -59,19 +59,19 @@ export class NavBarComponent implements OnInit, OnDestroy {
           title: '基础表单',
           open: false,
           selected: false,
-          path: '/default/form/base',
+          path: '/default/form/base-form',
         },
         {
           title: '分布表单',
           open: false,
           selected: false,
-          path: '/default/form/step',
+          path: '/default/form/step-form',
         },
         {
           title: '高级表单',
           open: false,
           selected: false,
-          path: '/default/form/advanced',
+          path: '/default/form/advanced-form',
         },
       ]
     },
