@@ -3,7 +3,7 @@ import {Injector} from '@angular/core';
 import {deepMerge} from '../utils/other';
 import {NzSafeAny} from 'ng-zorro-antd/core/types';
 import * as _ from 'lodash';
-import {observable, Observable, Observer} from "rxjs";
+import {observable, Observable, Observer} from 'rxjs';
 
 export enum ModalBtnStatus {
   Cancel,
@@ -41,7 +41,7 @@ export abstract class BaseModal {
     return this.modalRef.destroy({status: ModalBtnStatus.Ok, value});
   }
 
-  show(modalOptions: ModalOptions = {}, params: object = {}): Observable<any> {
+  show(modalOptions: ModalOptions = {}, params: object = {}): Promise<NzSafeAny> {
     this.modalRef = this.bsModalService.create(_.merge({
       nzTitle: '',
       nzContent: this.getContentComponent(),
@@ -63,30 +63,17 @@ export abstract class BaseModal {
         params
       }, // 参数中的属性将传入nzContent实例中
     }, modalOptions));
-    return new Observable((observer: Observer<any>) => {
+
+    return new Promise((resolve, reject) => {
       this.modalRef.afterClose.subscribe((result: NzSafeAny) => {
         console.log(result);
         if (!result) {
-          observer.error;
-          observer.complete();
+          reject();
         } else {
-          observer.next(result);
+          resolve(result);
         }
-      })
-    })
-
-
-    /*  return new Promise((resolve, reject) => {
-        this.modalRef.afterClose.subscribe((result: NzSafeAny) => {
-          console.log(result);
-           return new Observable()
-          if (!result) {
-            reject();
-          } else {
-            resolve(result);
-          }
-        });
-      });*/
+      });
+    });
   }
 
 }

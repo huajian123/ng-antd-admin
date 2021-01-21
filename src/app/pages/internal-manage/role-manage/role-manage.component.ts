@@ -43,8 +43,7 @@ export class RoleManageComponent implements OnInit {
       this.tableConfig.loading = false;
       this.cdr.markForCheck();
     }), (error => {
-      console.log(1234);
-      this.dataList=[...this.dataList]
+      this.dataList = [...this.dataList];
       this.tableConfig.loading = false;
       this.cdr.markForCheck();
     }));
@@ -68,25 +67,27 @@ export class RoleManageComponent implements OnInit {
   }
 
   add(): void {
-    this.modalService.show({nzTitle: '新增'}).subscribe(({value}) => {
+    this.modalService.show({nzTitle: '新增'}).then(({value}) => {
       this.tableConfig.loading = true;
       this.dataList = [...this.dataList];
       this.cdr.detectChanges();
       this.addEditData(value, 'addRoles');
-    })
+    }).catch(e => {
+    });
   }
 
   // 修改
   edit(id: number): void {
     this.dataService.getRolesDetail(id).subscribe(res => {
-      this.modalService.show({nzTitle: '编辑'}, res).subscribe(({value}) => {
+      this.modalService.show({nzTitle: '编辑'}, res).then(({value}) => {
         value.id = id;
         this.tableConfig.loading = true;
         // 改变引用手动触发变更检测。
         this.dataList = [...this.dataList];
         this.cdr.detectChanges();
         this.addEditData(value, 'editRoles');
-      })
+      }).catch(e => {
+      });
     });
   }
 
