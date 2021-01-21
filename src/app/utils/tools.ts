@@ -30,7 +30,14 @@ const fnCheckForm = function checkForm(form: FormGroup): boolean {
   });
   return !form.invalid;
 };
+
+const fnStopMouseEvent=function stopMouseEvent(e: MouseEvent): void  {
+  e.stopPropagation();
+  e.preventDefault();
+}
+
 export {
   fnGetFile,
-  fnCheckForm
+  fnCheckForm,
+  fnStopMouseEvent
 };
