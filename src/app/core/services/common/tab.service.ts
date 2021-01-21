@@ -94,7 +94,9 @@ export class TabService {
 
   findIndex(path: string): number {
     const current = this.tabArray.findIndex((tabItem) => {
-      return tabItem.path === path;
+      // todo 今天
+      // return tabItem.path === path;
+      return path.includes(tabItem.path);
     });
     this.currSelectedIndexTab = current;
     return current;

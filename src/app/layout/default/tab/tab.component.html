@@ -1,3 +1,21 @@
+<nz-tabset [nzSelectedIndex]="currentIndex"
+           [nzTabBarStyle]="{'margin':'10px 0 0 0','background':(isNightTheme$|async)?'':'#fff'}"
+           [nzTabPosition]="'top'" [nzType]="'editable-card'" [nzHideAdd]="true">
+  <nz-tab nzClosable (nzContextmenu)="contextMenu($event, menu)" [nzTitle]="tab.title" *ngFor="let tab of tabs;let i =index;trackBy:trackByTab;">
+    <nz-dropdown-menu #menu="nzDropdownMenu">
+      <ul nz-menu>
+        <li nz-menu-item [nzDisabled]="tabs.length-1===0" (click)="closeTab(tab,$event,i)">关闭标签</li>
+        <li nz-menu-item [nzDisabled]="tabs.length-1===0" (click)="closeOtherTab(tab,$event,i)">关闭其他标签</li>
+        <li nz-menu-item [nzDisabled]="tabs.length-1===i" (click)="closeRithTab(tab,$event,i)">关闭右侧标签</li>
+      </ul>
+    </nz-dropdown-menu>
+  </nz-tab>
+</nz-tabset>
+
+
+
+
+<!--
 <nz-tabset nzLinkRouter [nzSelectedIndex]="currentIndex"
            [nzTabBarStyle]="{'margin':'10px 0 0 0','background':(isNightTheme$|async)?'':'#fff'}"
            [nzTabPosition]="'top'" [nzType]="'card'">
@@ -17,3 +35,4 @@
     </nz-dropdown-menu>
   </nz-tab>
 </nz-tabset>
+-->

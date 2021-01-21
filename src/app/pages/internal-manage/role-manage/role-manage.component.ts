@@ -7,6 +7,7 @@ import {RoleService} from '../../../core/services/http/internal-manage/role.serv
 import {NzModalService} from 'ng-zorro-antd/modal';
 import {MessageService} from '../../../core/services/common/message.service';
 import {InterAddEditService} from '../../../widget/biz-widget/internal-manage/inter-add-edit/inter-add-edit.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-role-manage',
@@ -25,7 +26,8 @@ export class RoleManageComponent implements OnInit {
   dataList!: Role[];
 
   constructor(private dataService: RoleService, private modalSrv: NzModalService, private cdr: ChangeDetectorRef,
-              private messageService: MessageService, private modalService: InterAddEditService) {
+              private messageService: MessageService, private modalService: InterAddEditService,
+              private router: Router) {
     this.dataList = [];
   }
 
@@ -51,7 +53,7 @@ export class RoleManageComponent implements OnInit {
 
   // 设置权限
   setRole(id: number): void {
-    this.getDataList();
+    this.router.navigate(['/default/internal-manage/role/set-role']);
   }
 
   // 触发表格变更检测
