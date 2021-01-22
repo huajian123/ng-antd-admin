@@ -4,8 +4,8 @@ import {RoleManageComponent} from './role-manage.component';
 import {SetRoleComponent} from './set-role/set-role.component';
 
 const routes: Routes = [
-  {path: 'set-role', component: SetRoleComponent, data: {title: '角色管理', key: 'set-role'}},
-  {path: '', component: RoleManageComponent, data: {title: '角色管理', key: 'role'}},
+  {path: 'set-role', component: SetRoleComponent, data: {title: '角色管理', key: 'set-role', relatedLink: ['role', 'set-role']}},
+  {path: '', component: RoleManageComponent, data: {title: '角色管理', key: 'role', relatedLink: ['role', 'set-role']}},
 ];
 
 @NgModule({

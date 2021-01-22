@@ -2,9 +2,9 @@ import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef} from '@an
 import {TabModel, TabService} from '../../../core/services/common/tab.service';
 import {NzContextMenuService, NzDropdownMenuComponent} from 'ng-zorro-antd/dropdown';
 import {ThemeService} from '../../../core/services/store/theme.service';
-import {NavigationEnd, Router} from "@angular/router";
-import {filter} from "rxjs/operators";
-import {fnStopMouseEvent} from "../../../utils/tools";
+import {NavigationEnd, Router} from '@angular/router';
+import {filter} from 'rxjs/operators';
+import {fnStopMouseEvent} from '../../../utils/tools';
 
 @Component({
   selector: 'app-tab',
@@ -20,9 +20,9 @@ export class TabComponent implements OnInit {
 
   constructor(public tabService: TabService, private nzContextMenuService: NzContextMenuService,
               private themesService: ThemeService,
-              private router: Router, public cdr: ChangeDetectorRef,) {
+              private router: Router, public cdr: ChangeDetectorRef) {
     (this.router.events.pipe(filter((event: any) => event instanceof NavigationEnd))).subscribe((event: any) => {
-        this.cdr.markForCheck();
+      this.cdr.markForCheck();
     });
   }
 
@@ -68,7 +68,7 @@ export class TabComponent implements OnInit {
     if (1 === this.tabs.length) {
       return;
     }
-    this.tabService.delTab(tab.path, index);
+    this.tabService.delTab(tab, index);
   }
 
   contextMenu($event: MouseEvent, menu: NzDropdownMenuComponent): void {

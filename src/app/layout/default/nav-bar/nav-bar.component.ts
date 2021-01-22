@@ -286,7 +286,11 @@ export class NavBarComponent implements OnInit, OnDestroy {
         }),
       )
       .subscribe((routeData) => {
-        this.tabService.addTab({title: routeData['title'], path: this.routerPath});
+        this.tabService.addTab({
+          title: routeData['title'],
+          path: this.routerPath,
+          relatedLink: routeData['relatedLink'] ? routeData['relatedLink'] : []
+        });
         this.tabService.findIndex(this.routerPath);
       });
   }

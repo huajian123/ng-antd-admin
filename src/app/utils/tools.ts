@@ -34,12 +34,12 @@ const fnCheckForm = function checkForm(form: FormGroup): boolean {
 const fnStopMouseEvent = function stopMouseEvent(e: MouseEvent): void {
   e.stopPropagation();
   e.preventDefault();
-}
+};
 
 // 获取路由最后一个/后面的字符串
 const fnFormatePath = function formatePath(path: string): string {
   return path.substring(path.lastIndexOf('\/') + 1);
-}
+};
 
 export {
   fnGetFile,
