@@ -37,13 +37,13 @@ export class RoleManageComponent implements OnInit {
       pageSize: this.tableConfig.pageSize!,
       pageNum: e?.pageIndex || this.tableConfig.pageIndex!
     };
-    this.dataList = [
+/*    this.dataList = [
       {roleDesc: '1', roleName: '33'}
-    ]
+    ];
     this.tableConfig.pageIndex = 1;
     this.tableConfig.pageSize = 1;
-    this.tableConfig.loading=false;
-    return;
+    this.tableConfig.loading = false;
+    return;*/
     this.dataService.getRoles(params).subscribe((data => {
       const {list, total, pageNum} = data;
       this.dataList = [...list];

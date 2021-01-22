@@ -25,7 +25,7 @@ export class TabService {
       if (tab.title === param.title) {
         tab.path = param.path;
       }
-    })
+    });
 
     if (!this.tabArray.find((value) => value.path === param.path)) {
       this.tabArray.push(param);
@@ -81,15 +81,19 @@ export class TabService {
   delTab(path: string, index: number): void {
     const tempPath = this.formatePath(path);
     // 移除当前选中的tab
+    console.log(SimpleReuseStrategy.handlers);
+    console.log(tempPath);
     if (index === this.currSelectedIndexTab) {
       this.tabArray.splice(index, 1);
       this.currSelectedIndexTab = index - 1 < 0 ? 0 : index - 1;
       this.router.navigateByUrl(this.tabArray[this.currSelectedIndexTab].path);
       // 在reuse-strategy.ts中缓存当前的path，如果是当前的path则不缓存当前路由
-      if (!SimpleReuseStrategy.waitDelete.find((value) => value === tempPath)) {
+    /*  if (!SimpleReuseStrategy.waitDelete.find((value) => value === tempPath)) {
         SimpleReuseStrategy.waitDelete.push(tempPath);
-      }
-     // SimpleReuseStrategy.waitDelete = tempPath;
+      }*/
+      console.log(SimpleReuseStrategy.handlers);
+      console.log(tempPath);
+      SimpleReuseStrategy.waitDelete = tempPath;
 
     } else if (index < this.currSelectedIndexTab) {
       this.tabArray.splice(index, 1);
