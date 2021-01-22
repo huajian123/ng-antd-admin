@@ -2,6 +2,14 @@
 
 可以通过在应用程序的 TypeScript 配置文件 tsconfig.json 中设置 strictTemplates: false 来完全禁用严格检查。
 https://angular.cn/guide/template-typecheck
+# 路由的key
+key需要设置成路由地址最后一个'/'后的字符串，并且要唯一
+```typescript
+const routes: Routes = [
+  {path: '', data: {key: 'login', shouldDetach: 'no'}, component: LoginFormComponent}
+];
+```
+
 
 # 模块不需要预加载
 
@@ -16,6 +24,26 @@ export const routes: Routes = [
   }
 ];
 ```
+
+# 模块不需要保存状态
+
+```typescript
+const routes: Routes = [
+  {path: '', data: {key: 'login', shouldDetach: 'no'}, component: LoginFormComponent}
+];
+```
+
+# 模块中有类似详情页面需要跳转，必须设置参数如下
+relatedLink数组中保存相关联的两个路由，值为每个路由地址最后的/后的字符串
+```typescript
+const routes: Routes = [
+  {path: 'set-role', component: SetRoleComponent, data: {title: '角色管理', key: 'set-role', relatedLink: ['role', 'set-role']}},
+  {path: '', component: RoleManageComponent, data: {title: '角色管理', key: 'role', relatedLink: ['role', 'set-role']}},
+];
+
+```
+
+
 
 ## Development server
 
