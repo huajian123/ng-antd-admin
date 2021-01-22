@@ -37,23 +37,21 @@ export class RoleManageComponent implements OnInit {
       pageSize: this.tableConfig.pageSize!,
       pageNum: e?.pageIndex || this.tableConfig.pageIndex!
     };
-/*    this.dataList = [
-      {roleDesc: '1', roleName: '33'}
-    ];
-    this.tableConfig.pageIndex = 1;
-    this.tableConfig.pageSize = 1;
-    this.tableConfig.loading = false;
-    return;*/
+    /*    this.dataList = [
+          {roleDesc: '1', roleName: '33'}
+        ];
+        this.tableConfig.pageIndex = 1;
+        this.tableConfig.pageSize = 1;
+        this.tableConfig.loading = false;
+        return;*/
     this.dataService.getRoles(params).subscribe((data => {
       const {list, total, pageNum} = data;
       this.dataList = [...list];
       this.tableConfig.total = total!;
       this.tableConfig.pageIndex = pageNum!;
-      this.tableConfig.loading = false;
-      this.cdr.markForCheck();
+      this.tableLoading(false);
     }), (error => {
-      this.tableConfig.loading = false;
-      this.tableChangeDectction();
+      this.tableLoading(false);
     }));
   }
 
@@ -70,14 +68,18 @@ export class RoleManageComponent implements OnInit {
     this.cdr.detectChanges();
   }
 
+  tableLoading(isLoading: boolean): void {
+    this.tableConfig.loading = isLoading;
+    this.tableChangeDectction();
+  }
+
   // 删除
   del(id: number): void {
     this.modalSrv.confirm({
       nzTitle: '确定要删除吗？',
       nzContent: '删除后不可恢复',
       nzOnOk: () => {
-        this.tableConfig.loading = true;
-        this.tableChangeDectction();
+        this.tableLoading(true);
         this.dataService.delRoles(id).subscribe(() => {
           if (this.dataList.length === 1) {
             this.tableConfig.pageIndex--;
@@ -89,13 +91,11 @@ export class RoleManageComponent implements OnInit {
   }
 
   add(): void {
-    this.modalService.show({nzTitle: '新增'}).then(({value}) => {
-      this.tableConfig.loading = true;
-      this.tableChangeDectction();
+    this.modalService.show({nzTitle: '新增', nzFooter: null}).then(({value}) => {
+      this.tableLoading(true);
       this.addEditData(value, 'addRoles');
     }).catch(e => {
-      this.tableConfig.loading = false;
-      this.tableChangeDectction();
+      this.tableLoading(false);
     });
   }
 
@@ -104,10 +104,10 @@ export class RoleManageComponent implements OnInit {
     this.dataService.getRolesDetail(id).subscribe(res => {
       this.modalService.show({nzTitle: '编辑'}, res).then(({value}) => {
         value.id = id;
-        this.tableConfig.loading = true;
-        this.tableChangeDectction();
+        this.tableLoading(true);
         this.addEditData(value, 'editRoles');
       }).catch(e => {
+        this.tableLoading(false);
       });
     });
   }

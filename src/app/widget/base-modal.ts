@@ -1,9 +1,7 @@
 import {ModalOptions, NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
 import {Injector} from '@angular/core';
-import {deepMerge} from '../utils/other';
 import {NzSafeAny} from 'ng-zorro-antd/core/types';
 import * as _ from 'lodash';
-import {observable, Observable, Observer} from 'rxjs';
 
 export enum ModalBtnStatus {
   Cancel,

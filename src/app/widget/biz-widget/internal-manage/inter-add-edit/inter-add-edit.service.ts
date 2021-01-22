@@ -18,6 +18,6 @@ export class InterAddEditService extends BaseModal {
   }
 
   public show(modalOptions: ModalOptions = {}, params?: object): Promise<any> {
-    return super.show({nzTitle: modalOptions.nzTitle}, params);
+    return super.show(modalOptions, params);
   }
 }
