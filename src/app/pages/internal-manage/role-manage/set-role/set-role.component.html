@@ -1,1 +1,25 @@
-<input nz-input id="title" placeholder="给目标起个名字"/>
+<!--头部版块-->
+<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+
+<div class="normal-table-wrap">
+  <nz-card>
+    <ul>
+      <li>
+        <div class="first-menu">
+          <label nz-checkbox>内部管理</label>
+          <span class="hand-model"><i nz-icon nzType="right" nzTheme="outline"></i> <span class="operate-text"> 展开</span></span>
+        </div>
+        <nz-divider class="m-0"></nz-divider>
+        <div class="menu-content">
+          <div class="second-menu p-l-25 li-height">
+            <label nz-checkbox>角色管理</label>
+            <nz-divider class="m-0"></nz-divider>
+          </div>
+          <div class="operate-line p-l-35 li-height">
+            操作权限：<label nz-checkbox>新增</label><label nz-checkbox>编辑</label><label nz-checkbox>删除</label>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </nz-card>
+</div>
