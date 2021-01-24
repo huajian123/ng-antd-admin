@@ -1,8 +1,6 @@
 <!--头部版块-->
 <app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
 
-<input nz-input id="title1" placeholder="给目标起个名字"/>
-
 <div class="normal-table-wrap">
   <app-card-table-wrap [needAddBtn]="true" (add)="add()">
     <app-ant-table (changePageSize)="changePageSize($event)" (changePageNum)="getDataList($event)"

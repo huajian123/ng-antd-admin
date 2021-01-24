@@ -32,6 +32,7 @@ import {NzMessageModule} from 'ng-zorro-antd/message';
 import {NzSpinModule} from 'ng-zorro-antd/spin';
 import {NzTypographyModule} from 'ng-zorro-antd/typography';
 import {NzModalModule} from 'ng-zorro-antd/modal';
+import {NzCollapseModule} from "ng-zorro-antd/collapse";
 
 
 export const SHARED_ZORRO_MODULES = [
@@ -69,4 +70,5 @@ export const SHARED_ZORRO_MODULES = [
   NzSpinModule,
   NzTypographyModule,
   NzModalModule,
+  NzCollapseModule,
 ];
