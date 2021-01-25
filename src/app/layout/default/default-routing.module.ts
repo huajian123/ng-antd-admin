@@ -1,10 +1,12 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 import {DefaultComponent} from './default.component';
+import {JudgLoginGuard} from '../../core/services/common/guard/judgLogin.guard';
 
 const routes: Routes = [
   {
     path: '', component: DefaultComponent,
+    canActivate: [JudgLoginGuard],
     children: [
       {
         path: 'dashboard',
@@ -27,4 +29,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class DefaultRoutingModule { }
+export class DefaultRoutingModule {
+}
