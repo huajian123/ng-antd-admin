@@ -1,5 +1,7 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {ThemeService} from '../../core/services/store/theme.service';
+import {WindowService} from '../../core/services/common/window.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-default',
@@ -29,13 +31,20 @@ export class DefaultComponent implements OnInit {
     }
   };
 
-  constructor(private themesService: ThemeService) {
+  constructor(private themesService: ThemeService, private windowServe: WindowService,
+              private router: Router) {
   }
 
 
   changeCollapsed(): void {
     this.isCollapsed = !this.isCollapsed;
     this.themesService.setIsCollapsed(this.isCollapsed);
+  }
+
+  // 退出登陆
+  goLogin(): void {
+    this.windowServe.clearStorage();
+    this.router.navigate(['/login']);
   }
 
   ngOnInit(): void {
