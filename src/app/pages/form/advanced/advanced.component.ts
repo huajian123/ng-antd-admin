@@ -2,12 +2,14 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {NzFormTooltipIcon} from 'ng-zorro-antd/form';
 import {PageHeaderType} from '../../../share/components/page-header/page-header.component';
+
 interface ItemData {
   id: string;
   name: string;
   age: number;
   address: string;
 }
+
 @Component({
   selector: 'app-advanced',
   templateUrl: './advanced.component.html',
@@ -33,8 +35,6 @@ export class AdvancedComponent implements OnInit {
   // 表格
   editCache: { [key: string]: { edit: boolean; data: ItemData } } = {};
   listOfData: ItemData[] = [];
-
-
 
 
   submitForm(): void {
@@ -70,7 +70,7 @@ export class AdvancedComponent implements OnInit {
   cancelEdit(id: string): void {
     const index = this.listOfData.findIndex(item => item.id === id);
     this.editCache[id] = {
-      data: { ...this.listOfData[index] },
+      data: {...this.listOfData[index]},
       edit: false
     };
   }
@@ -85,9 +85,13 @@ export class AdvancedComponent implements OnInit {
     this.listOfData.forEach(item => {
       this.editCache[item.id] = {
         edit: false,
-        data: { ...item }
+        data: {...item}
       };
     });
+  }
+
+  submit(): void {
+    console.log('提交');
   }
 
   ngOnInit(): void {
