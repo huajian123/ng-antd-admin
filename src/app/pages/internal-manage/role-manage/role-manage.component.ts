@@ -91,7 +91,7 @@ export class RoleManageComponent implements OnInit {
   }
 
   add(): void {
-    this.modalService.show({nzTitle: '新增', nzFooter: null}).then(({value}) => {
+    this.modalService.show({nzTitle: '新增'}).then(({value}) => {
       this.tableLoading(true);
       this.addEditData(value, 'addRoles');
     }).catch(e => {
