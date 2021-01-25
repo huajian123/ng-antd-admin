@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BaseHttpService} from '../base-http.service';
-import {PageInfo, Role, SearchCommonVO} from '../../types';
-import {Observable, of} from 'rxjs';
+import {PageInfo, Permission, Role, SearchCommonVO} from '../../types';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +37,10 @@ export class RoleService {
 
   public editRoles(param: Role): Observable<void> {
     return this.http.put('/role', param);
+  }
+
+  // 获取所有权限信息
+  public getPermission(): Observable<Permission[]> {
+    return this.http.get('/permission');
   }
 }

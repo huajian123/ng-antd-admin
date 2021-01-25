@@ -38,3 +38,15 @@ export interface Role {
   roleName: string;
   roleDesc?: string;
 }
+
+
+// 权限
+export interface Permission {
+  menuName: string;
+  code: string;
+  fatherId: number;
+  id: number;
+  menuGrade: number; // 级别
+  permissionVo: Permission[];
+  isOpen?: boolean; // 是否折叠
+}
