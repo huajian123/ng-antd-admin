@@ -1,8 +1,16 @@
 import {AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {TinyColumn} from '@antv/g2plot';
+import {measureTextWidth, Pie, TinyColumn} from '@antv/g2plot';
 import {TinyArea} from '@antv/g2plot';
 import {Progress} from '@antv/g2plot';
 import {Chart} from '@antv/g2';
+import {renderStatistic} from "@antv/g2plot/esm/utils";
+
+interface DataItem {
+  name: string;
+  chinese: number;
+  math: number;
+  english: number;
+}
 
 @Component({
   selector: 'app-analysis',
@@ -27,6 +35,64 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
     {type: '10月', value: 840},
     {type: '11月', value: 769},
     {type: '12月', value: 769},
+  ];
+  ringData = [
+    {type: '分类一', value: 27},
+    {type: '分类二', value: 25},
+    {type: '分类三', value: 18},
+    {type: '分类四', value: 15},
+    {type: '分类五', value: 10},
+    {type: '其他', value: 5},
+  ];
+
+
+  listOfColumn = [
+    {
+      title: '排名',
+      compare: null,
+      priority: false
+    },
+    {
+      title: '搜索关键词',
+      compare: (a: DataItem, b: DataItem) => a.chinese - b.chinese,
+      priority: 3
+    },
+    {
+      title: '用户数',
+      compare: (a: DataItem, b: DataItem) => a.math - b.math,
+      priority: 2
+    },
+    {
+      title: '周涨幅',
+      compare: (a: DataItem, b: DataItem) => a.english - b.english,
+      priority: 1
+    }
+  ];
+  listOfData: DataItem[] = [
+    {
+      name: 'John Brown',
+      chinese: 98,
+      math: 60,
+      english: 70
+    },
+    {
+      name: 'Jim Green',
+      chinese: 98,
+      math: 66,
+      english: 89
+    },
+    {
+      name: 'Joe Black',
+      chinese: 98,
+      math: 90,
+      english: 70
+    },
+    {
+      name: 'Jim Red',
+      chinese: 88,
+      math: 99,
+      english: 89
+    }
   ];
 
   constructor(private cdr: ChangeDetectorRef) {
@@ -105,8 +171,6 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
     chart.interaction('element-active');
 
     chart.legend(false);
-    // todo
-    // @ts-ignore
     chart
       .interval()
       .position('type*value')
@@ -150,6 +214,61 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
     tinyArea.render();
   }
 
+  initRing(): void {
+    const tinyArea = new Pie('ringPie', {
+      appendPadding: 10,
+      data: this.ringData,
+      angleField: 'value',
+      colorField: 'type',
+      radius: 1,
+      innerRadius: 0.64,
+      meta: {
+        value: {
+          formatter: (v) => `${v} ¥`,
+        },
+      },
+      label: {
+        type: 'inner',
+        offset: '-50%',
+        style: {
+          textAlign: 'center',
+        },
+        autoRotate: false,
+        content: '{value}',
+      },
+      statistic: {
+        title: {
+          offsetY: -4,
+          // @ts-ignore
+          customHtml: (container, view, datum) => {
+            const {width, height} = container.getBoundingClientRect();
+            const d = Math.sqrt(Math.pow(width / 2, 2) + Math.pow(height / 2, 2));
+            const text = datum ? datum.type : '总计';
+            // @ts-ignore
+            return renderStatistic(d, text, {fontSize: 28});
+          },
+        },
+        content: {
+          offsetY: 4,
+          style: {
+            fontSize: '32px',
+          },
+          // @ts-ignore
+          customHtml: (container, view, datum, data) => {
+            const {width} = container.getBoundingClientRect();
+
+            const text = datum ? `¥ ${datum.value}` : `¥ ${this.ringData.reduce((r, d) => r + d.value, 0)}`;
+            // @ts-ignore
+            return renderStatistic(width, text, {fontSize: 32});
+          },
+        },
+      },
+      // 添加 中心统计文本 交互
+      interactions: [{type: 'element-selected'}, {type: 'element-active'}, {type: 'pie-statistic-active'}],
+    });
+    tinyArea.render();
+  }
+
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.initMinibar();
@@ -158,6 +277,7 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
       this.initHistogram();
       this.initSearchArea();
       this.initSearchAvgArea();
+      this.initRing();
     });
   }
 }

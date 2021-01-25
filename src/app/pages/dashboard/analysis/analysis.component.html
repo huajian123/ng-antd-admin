@@ -150,7 +150,21 @@
             </div>
             <div id="searchUserAvgChart"></div>
           </div>
-
+          <nz-table class="m-t-25"  nzSize="small" #sortTable [nzData]="listOfData" nzTableLayout="fixed">
+            <thead>
+            <tr>
+              <th *ngFor="let column of listOfColumn" [nzSortFn]="column.compare" [nzSortPriority]="column.priority">{{ column.title }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let data of sortTable.data">
+              <td>{{ data.name }}</td>
+              <td>{{ data.chinese }}</td>
+              <td>{{ data.math }}</td>
+              <td>{{ data.english }}</td>
+            </tr>
+            </tbody>
+          </nz-table>
         </div>
       </nz-card>
       <ng-template #hotExtra>
@@ -160,7 +174,8 @@
     <div class="pipe-wrap" nz-col nzSpan="12">
 
       <nz-card [nzTitle]="'销售额类别占比'">
-
+        <h4>销售额</h4>
+        <div id="ringPie"></div>
 
       </nz-card>
     </div>
