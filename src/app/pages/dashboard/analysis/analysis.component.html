@@ -1,6 +1,6 @@
 <section class="content-wrap">
   <section class="ant-row" nz-row [nzGutter]="[32,16]">
-    <div nz-col [nzXl]="12" [nzXXl]="6" [nzLg]="12" [nzMd]="12" [nzSm]="12" [nzXs]="24">
+    <div nz-col [nzXl]="6" [nzXXl]="6" [nzLg]="12" [nzMd]="12" [nzSm]="12" [nzXs]="24">
       <div class="card-wrap">
         <nz-card [nzBodyStyle]="cardPadding" [nzBordered]="false">
           <div class="card-top">
@@ -27,7 +27,7 @@
 
       </div>
     </div>
-    <div nz-col [nzXl]="12" [nzXXl]="6" [nzLg]="12" [nzMd]="12" [nzSm]="12" [nzXs]="24">
+    <div nz-col [nzXl]="6" [nzXXl]="6" [nzLg]="12" [nzMd]="12" [nzSm]="12" [nzXs]="24">
       <div class="card-wrap">
         <nz-card [nzBodyStyle]="cardPadding" [nzBordered]="false">
           <div class="card-top">
@@ -46,7 +46,7 @@
 
       </div>
     </div>
-    <div nz-col [nzXl]="12" [nzXXl]="6" [nzLg]="12" [nzMd]="12" [nzSm]="12" [nzXs]="24">
+    <div nz-col [nzXl]="6" [nzXXl]="6" [nzLg]="12" [nzMd]="12" [nzSm]="12" [nzXs]="24">
       <div class="card-wrap">
         <nz-card [nzBodyStyle]="cardPadding" [nzBordered]="false">
           <div class="card-top">
@@ -64,7 +64,7 @@
         </nz-card>
       </div>
     </div>
-    <div nz-col [nzXl]="12" [nzXXl]="6" [nzLg]="12" [nzMd]="12" [nzSm]="12" [nzXs]="24">
+    <div nz-col [nzXl]="6" [nzXXl]="6" [nzLg]="12" [nzMd]="12" [nzSm]="12" [nzXs]="24">
       <div class="card-wrap">
         <nz-card [nzBodyStyle]="cardPadding" [nzBordered]="false">
           <div class="card-top">
@@ -124,10 +124,45 @@
     </ng-template>
   </section>
 
-  <section class="hot-search-pipe-wrap" nz-row>
+  <section class="hot-search-pipe-wrap m-t-20" nz-row [nzGutter]="[16,0]">
     <div class="hot-search-wrap" nz-col nzSpan="12">
+      <nz-card [nzExtra]="hotExtra" [nzTitle]="'线上热门搜索'">
+        <div class="search-wrap" nz-row>
+          <div class="search-block" nz-col [nzXl]="12" [nzXXl]="12" [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+            <div>
+              <div>
+                <span nz-typography nzType="secondary">搜索用户数 <i nz-icon nzType="info-circle" nzTheme="outline" nz-tooltip nzTooltipTitle="指标说明"></i></span>
+              </div>
+              <div><h3 class="d-i-b m-r-30" nz-typography>12,321</h3><span>17.1 <i nz-icon nzType="caret-up" style="color: red;font-size: 12px"
+                                       nzTheme="outline"></i></span></div>
+            </div>
+            <div id="searchUserChart"></div>
+          </div>
+          <div class="search-block" nz-col [nzXl]="12" [nzXXl]="12" [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+            <div>
+              <div>
+                <span nz-typography nzType="secondary">
+                  人均搜索次数 <i nz-icon nzType="info-circle" nzTheme="outline" nz-tooltip nzTooltipTitle="指标说明"></i>
+                </span>
+              </div>
+              <div><h3 class="d-i-b m-r-30" nz-typography>12,321</h3><span>17.1 <i nz-icon nzType="caret-up" style="color: red;font-size: 12px"
+                                       nzTheme="outline"></i></span></div>
+            </div>
+            <div id="searchUserAvgChart"></div>
+          </div>
 
+        </div>
+      </nz-card>
+      <ng-template #hotExtra>
+        <a>More</a>
+      </ng-template>
     </div>
-    <div class="pipe-wrap" nz-col nzSpan="12"></div>
+    <div class="pipe-wrap" nz-col nzSpan="12">
+
+      <nz-card [nzTitle]="'销售额类别占比'">
+
+
+      </nz-card>
+    </div>
   </section>
 </section>
