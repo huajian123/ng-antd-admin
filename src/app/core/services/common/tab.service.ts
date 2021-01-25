@@ -118,7 +118,8 @@ export class TabService {
   }
 
   formatePath(path: string): string {
-    return path.substring(path.lastIndexOf('\/') + 1);
+    const newpath = path.replace(/\/[0-9]+/g, '');
+    return newpath.substring(newpath.lastIndexOf('\/') + 1);
   }
 
 }
