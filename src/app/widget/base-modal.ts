@@ -64,7 +64,6 @@ export abstract class BaseModal {
 
     return new Promise((resolve, reject) => {
       this.modalRef.afterClose.subscribe((result: NzSafeAny) => {
-        console.log(result);
         if (!result) {
           reject();
         } else {
