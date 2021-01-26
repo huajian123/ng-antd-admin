@@ -1,9 +1,8 @@
 import {AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {measureTextWidth, Pie, TinyColumn} from '@antv/g2plot';
+import { Pie, TinyColumn} from '@antv/g2plot';
 import {TinyArea} from '@antv/g2plot';
 import {Progress} from '@antv/g2plot';
 import {Chart} from '@antv/g2';
-import {renderStatistic} from "@antv/g2plot/esm/utils";
 
 interface DataItem {
   name: string;
@@ -107,7 +106,7 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
       autoFit: true,
       height: 14,
       width: 200,
-      data: data,
+      data,
     });
 
     tinyColumn.render();
@@ -236,33 +235,7 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
         autoRotate: false,
         content: '{value}',
       },
-      statistic: {
-        title: {
-          offsetY: -4,
-          // @ts-ignore
-          customHtml: (container, view, datum) => {
-            const {width, height} = container.getBoundingClientRect();
-            const d = Math.sqrt(Math.pow(width / 2, 2) + Math.pow(height / 2, 2));
-            const text = datum ? datum.type : '总计';
-            // @ts-ignore
-            return renderStatistic(d, text, {fontSize: 28});
-          },
-        },
-        content: {
-          offsetY: 4,
-          style: {
-            fontSize: '32px',
-          },
-          // @ts-ignore
-          customHtml: (container, view, datum, data) => {
-            const {width} = container.getBoundingClientRect();
-
-            const text = datum ? `¥ ${datum.value}` : `¥ ${this.ringData.reduce((r, d) => r + d.value, 0)}`;
-            // @ts-ignore
-            return renderStatistic(width, text, {fontSize: 32});
-          },
-        },
-      },
+      statistic: {},
       // 添加 中心统计文本 交互
       interactions: [{type: 'element-selected'}, {type: 'element-active'}, {type: 'pie-statistic-active'}],
     });
