@@ -75,6 +75,12 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
       english: 70
     },
     {
+      name: 'John Brown',
+      chinese: 98,
+      math: 60,
+      english: 70
+    },
+    {
       name: 'Jim Green',
       chinese: 98,
       math: 66,
