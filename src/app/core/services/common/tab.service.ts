@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SimpleReuseStrategy} from './reuse-strategy';
+import {fnFormatePath} from '../../../utils/tools';
 
 
 export interface TabModel {
@@ -47,7 +48,7 @@ export class TabService {
     this.tabArray.length = index + 1;
     temp.forEach(({path, relatedLink}) => {
       // relatedLink数组保存相关路由，解决路由中有详情页这样跳转路由，而产生"在哪个页面上关闭状态才会清除"的bug
-      const linkArray = [...relatedLink, this.formatePath(path)];
+      const linkArray = [...relatedLink, fnFormatePath(path)];
       linkArray.forEach(item => {
         SimpleReuseStrategy.deleteRouteSnapshot(item);
       });
@@ -55,7 +56,7 @@ export class TabService {
     if (index < this.currSelectedIndexTab) {
       // todo
       // @ts-ignore
-      SimpleReuseStrategy.waitDelete = this.formatePath(this.activatedRoute['_routerState'].snapshot.url);
+      SimpleReuseStrategy.waitDelete = fnFormatePath(this.activatedRoute['_routerState'].snapshot.url);
       this.router.navigateByUrl(this.tabArray[index].path);
     }
   }
@@ -68,7 +69,7 @@ export class TabService {
         i--;
       }
     }
-    const tempPath = this.formatePath(path);
+    const tempPath = fnFormatePath(path);
     for (const i in SimpleReuseStrategy.handlers) {
       if (i !== tempPath) {
         SimpleReuseStrategy.deleteRouteSnapshot(i);
@@ -77,14 +78,14 @@ export class TabService {
     if (index !== this.currSelectedIndexTab) {
       // todo
       // @ts-ignore
-      SimpleReuseStrategy.waitDelete = this.formatePath(this.activatedRoute['_routerState'].snapshot.url);
+      SimpleReuseStrategy.waitDelete = fnFormatePath(this.activatedRoute['_routerState'].snapshot.url);
     }
     this.router.navigateByUrl(path);
   }
 
   // 点击tab标签上x图标删除tab的动作,右键删除当前tab动作
   delTab(tab: TabModel, index: number): void {
-    const tempPath = this.formatePath(tab.path);
+    const tempPath = fnFormatePath(tab.path);
     // 移除当前选中的tab
     if (index === this.currSelectedIndexTab) {
       this.tabArray.splice(index, 1);
@@ -116,10 +117,4 @@ export class TabService {
   getCurrentTabIndex(): number {
     return this.currSelectedIndexTab;
   }
-
-  formatePath(path: string): string {
-    const newpath = path.replace(/\/[0-9]+/g, '');
-    return newpath.substring(newpath.lastIndexOf('\/') + 1);
-  }
-
 }
