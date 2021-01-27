@@ -3,7 +3,7 @@ import {PageHeaderType} from '../../../../share/components/page-header/page-head
 import {RoleService} from '../../../../core/services/http/internal-manage/role.service';
 import {Permission, PutPermissionParam} from '../../../../core/services/types';
 import {map, mergeMap} from 'rxjs/operators';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-set-role',
@@ -22,8 +22,9 @@ export class SetRoleComponent implements OnInit {
   permissionIdArr: number[] = []; // 存储权限code数组
   permissionList!: Permission[];
   id!: number;
+  roleName!: string;
 
-  constructor(private dataService: RoleService, private cdr: ChangeDetectorRef, private routeInfo: ActivatedRoute) {
+  constructor(private dataService: RoleService, private cdr: ChangeDetectorRef, private routeInfo: ActivatedRoute, private router: Router) {
   }
 
   // 初始化数据
@@ -62,8 +63,18 @@ export class SetRoleComponent implements OnInit {
       permissionIds: this.permissionIdArr,
       roleId: this.id
     };
-    this.dataService.updatePermission(param).subscribe(() => {});
+    this.dataService.updatePermission(param).subscribe(() => {
+    });
+  }
 
+  getRoleName(): void {
+    this.dataService.getRolesDetail(this.id).subscribe(({roleName}) => {
+      this.pageHeaderInfo = {...this.pageHeaderInfo, ...{desc: `当前角色：${roleName}`}};
+    });
+  }
+
+  back(): void {
+    this.router.navigate(['/default/internal-manage/role']);
   }
 
   submit(): void {
@@ -74,5 +85,6 @@ export class SetRoleComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.routeInfo.snapshot.params['id'];
     this.initPermission();
+    this.getRoleName();
   }
 }
