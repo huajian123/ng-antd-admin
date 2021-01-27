@@ -13,8 +13,13 @@ export class AuthService {
 
   parsToken(token: string): string[] {
     const helper = new JwtHelperService();
-    const {rol} = helper.decodeToken(token);
-    return rol.split(',');
+    try {
+      const {rol} = helper.decodeToken(token);
+      return rol.split(',');
+    } catch (e) {
+      return [];
+    }
+
   }
 
   setAuthCode(authArr: string[]): void {
