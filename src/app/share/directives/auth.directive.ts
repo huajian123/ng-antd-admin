@@ -1,15 +1,26 @@
-import {Directive} from '@angular/core';
+import {Directive, Input, TemplateRef, ViewContainerRef} from '@angular/core';
 import {AuthService} from '../../core/services/store/auth.service';
 
 @Directive({
   selector: '[appAuth]'
 })
 export class AuthDirective {
+  codeArray!: string[];
 
-  constructor(private authService: AuthService) {
+  @Input('appAuth')
+  set appAuth(authCode: string) {
+    this.codeArray.includes(authCode) ? this.show(true) : this.show(false);
+  }
+
+  constructor(private authService: AuthService, private templateRef: TemplateRef<any>,
+              private viewContainerRef: ViewContainerRef) {
     this.authService.getAuthCode().subscribe((codeArray) => {
-      console.log(codeArray);
+      this.codeArray = codeArray;
     });
+  }
+
+  private show(hasAuth: boolean): void {
+    hasAuth ? this.viewContainerRef.createEmbeddedView(this.templateRef) : this.viewContainerRef.clear();
   }
 
 }
