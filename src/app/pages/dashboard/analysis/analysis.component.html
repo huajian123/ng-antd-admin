@@ -181,4 +181,31 @@
       </nz-card>
     </div>
   </section>
+
+  <section class="m-t-20">
+    <nz-card>
+      <nz-tabset>
+        <ng-container *ngFor="let i of 51|numberLoop">
+          <nz-tab [nzTitle]="tabTitle">
+            Content of Tab Pane 1
+          </nz-tab>
+        </ng-container>
+      </nz-tabset>
+      <ng-template #tabTitle>
+        <div class="bottom-block-tab-wrap">
+          <div class="tab-title">stores 0</div>
+          <div class="tab-pipe-wrap">
+            <div>
+              <div>转化率</div>
+              <div>90%</div>
+            </div>
+            <div>
+              图标
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </nz-card>
+
+  </section>
 </section>
