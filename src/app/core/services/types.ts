@@ -1,3 +1,7 @@
+/*
+* 通用interface
+* */
+
 export interface SearchCommonVO<T> {
   pageNum: number;
   pageSize: number;
@@ -32,6 +36,9 @@ export interface UserLogin {
   password: string;
 }
 
+/*
+* 角色
+* */
 
 export interface Role {
   id?: number;
@@ -40,7 +47,9 @@ export interface Role {
 }
 
 
-// 权限
+/*
+*  权限
+* */
 export interface Permission {
   menuName: string;
   code: string;
@@ -49,4 +58,11 @@ export interface Permission {
   menuGrade: number; // 级别
   permissionVo: Permission[];
   isOpen?: boolean; // 是否折叠
+  checked: boolean;
+}
+
+// 更新权限参数接口
+export interface PutPermissionParam {
+  permissionIds: number[];
+  roleId: number;
 }

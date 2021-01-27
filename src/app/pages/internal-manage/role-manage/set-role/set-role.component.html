@@ -1,14 +1,12 @@
 <!--头部版块-->
 <app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
-
-<input nz-input>
 <div class="normal-table-wrap">
   <nz-card>
     <ul>
       <li>
         <ng-container *ngFor="let permission of permissionList">
           <div class="first-menu">
-            <label nz-checkbox>{{permission.menuName}}</label>
+            <label [(ngModel)]="permission.checked" nz-checkbox>{{permission.menuName}}</label>
             <span (click)="permission.isOpen=!permission.isOpen" class="hand-model">
               <i nz-icon [nzType]="permission.isOpen?'down':'right'" nzTheme="outline"></i> <span
               class="operate-text"> {{permission.isOpen ? '收起' : '展开'}}</span></span>
@@ -18,13 +16,13 @@
             <ng-container *ngFor="let secondPermission of permission.permissionVo">
               <div class="menu-content m-0 p-0" nz-result-content>
                 <div class="second-menu p-l-25 li-height">
-                  <label nz-checkbox>{{secondPermission.menuName}}</label>
+                  <label [(ngModel)]="secondPermission.checked" nz-checkbox>{{secondPermission.menuName}}</label>
                   <nz-divider class="m-0"></nz-divider>
                 </div>
                 <div class="operate-line p-l-35 li-height">
                   操作权限：
                   <ng-container *ngFor="let thirdPermission of secondPermission.permissionVo">
-                    <label nz-checkbox>{{thirdPermission.menuName}}</label>
+                    <label [(ngModel)]="thirdPermission.checked" nz-checkbox>{{thirdPermission.menuName}}</label>
                   </ng-container>
                 </div>
               </div>
@@ -37,3 +35,6 @@
     </ul>
   </nz-card>
 </div>
+<app-footer-submit>
+  <button class="right" (click)="submit()" nz-button nzType="primary">提交</button>
+</app-footer-submit>

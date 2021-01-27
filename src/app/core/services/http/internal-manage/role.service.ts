@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BaseHttpService} from '../base-http.service';
-import {PageInfo, Permission, Role, SearchCommonVO} from '../../types';
+import {PageInfo, Permission, PutPermissionParam, Role, SearchCommonVO} from '../../types';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -43,4 +43,13 @@ export class RoleService {
   public getPermission(): Observable<Permission[]> {
     return this.http.get('/permission');
   }
+
+  public getPermissionById(id: number): Observable<string[]> {
+    return this.http.get(`/role-permission/${id}`);
+  }
+
+  public updatePermission(param: PutPermissionParam): Observable<any> {
+    return this.http.put('/permission', param, {needSuccessInfo: true});
+  }
+
 }
