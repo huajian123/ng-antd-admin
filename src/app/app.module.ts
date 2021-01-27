@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {CoreModule} from './core/core.module';
 import {BrowserModule} from '@angular/platform-browser';
@@ -7,7 +7,23 @@ import {SharedModule} from './share/shared.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 import interceptors from './core/services/interceptors';
+import {StartupService} from './core/startup/startup.service';
 
+
+export function StartupServiceFactory(startupService: StartupService): any {
+  return () => startupService.load();
+}
+
+// 初始化服务
+const APPINIT_PROVIDES = [
+  StartupService,
+  {
+    provide: APP_INITIALIZER,
+    useFactory: StartupServiceFactory,
+    deps: [StartupService],
+    multi: true,
+  },
+];
 
 @NgModule({
   declarations: [
@@ -21,7 +37,7 @@ import interceptors from './core/services/interceptors';
     SharedModule,
     AppRoutingModule,
   ],
-  providers: interceptors,
+  providers: [...interceptors, ...APPINIT_PROVIDES],
   bootstrap: [AppComponent]
 })
 export class AppModule {

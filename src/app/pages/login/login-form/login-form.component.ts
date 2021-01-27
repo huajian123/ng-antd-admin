@@ -5,6 +5,7 @@ import {LoginService} from '../../../core/services/http/login/login.service';
 import {WindowService} from '../../../core/services/common/window.service';
 import {AuthKey, TokenPre} from '../../../configs/constant';
 import {fnCheckForm} from '../../../utils/tools';
+import {AuthService} from '../../../core/services/store/auth.service';
 
 @Component({
   selector: 'app-login-form',
@@ -17,7 +18,7 @@ export class LoginFormComponent implements OnInit {
   validateForm!: FormGroup;
 
   constructor(private fb: FormBuilder, private router: Router, private dataService: LoginService,
-              private windowServe: WindowService) {
+              private windowServe: WindowService, private authService: AuthService) {
   }
 
 
@@ -29,6 +30,7 @@ export class LoginFormComponent implements OnInit {
     const param = this.validateForm.getRawValue();
     this.dataService.login(param).subscribe(({token}) => {
       this.windowServe.setStorage(AuthKey, TokenPre + token);
+      this.authService.parsToken(token);
       this.router.navigateByUrl('default');
     });
   }
