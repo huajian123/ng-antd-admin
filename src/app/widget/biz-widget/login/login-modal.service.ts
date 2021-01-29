@@ -1,21 +1,21 @@
 import {Injectable, Injector} from '@angular/core';
+import {BaseModal} from '../../base-modal';
 import {NzSafeAny} from 'ng-zorro-antd/core/types';
-import {BaseModal} from '../../../base-modal';
-import {InterAddEditComponent} from './inter-add-edit.component';
+import {LoginModalComponent} from './login-modal.component';
 import {ModalOptions} from 'ng-zorro-antd/modal';
 import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class InterAddEditService extends BaseModal {
+export class LoginModalService  extends BaseModal{
 
   constructor(private injector: Injector) {
     super(injector);
   }
 
   protected getContentComponent(): NzSafeAny {
-    return InterAddEditComponent;
+    return LoginModalComponent;
   }
 
   public show(modalOptions: ModalOptions = {}, params?: object): Observable<any> {

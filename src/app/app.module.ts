@@ -8,6 +8,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 import interceptors from './core/services/interceptors';
 import {StartupService} from './core/startup/startup.service';
+import {LoginModalModule} from './widget/biz-widget/login/login-modal.module';
 
 
 export function StartupServiceFactory(startupService: StartupService): any {
@@ -35,6 +36,7 @@ const APPINIT_PROVIDES = [
     HttpClientModule,
     CoreModule,
     SharedModule,
+    LoginModalModule,
     AppRoutingModule,
   ],
   providers: [...interceptors, ...APPINIT_PROVIDES],

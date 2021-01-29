@@ -35,6 +35,12 @@ export class BaseHttpService {
       filter((item) => {
         return this.handleFilter(item, !!(config?.needSuccessInfo));
       }),
+      map((item) => {
+        if (item.code !== 0) {
+          throw new Error(item.msg);
+        }
+        return item;
+      }),
       map(item => item.data)
     );
   }
@@ -46,6 +52,12 @@ export class BaseHttpService {
       filter((item) => {
         return this.handleFilter(item, !!(config?.needSuccessInfo));
       }),
+      map((item) => {
+        if (item.code !== 0) {
+          throw new Error(item.msg);
+        }
+        return item;
+      }),
       map(item => item.data)
     );
   }
@@ -56,6 +68,12 @@ export class BaseHttpService {
       filter((item) => {
         return this.handleFilter(item, !!(config?.needSuccessInfo));
       }),
+      map((item) => {
+        if (item.code !== 0) {
+          throw new Error(item.msg);
+        }
+        return item;
+      }),
       map(item => item.data)
     );
   }
@@ -65,6 +83,12 @@ export class BaseHttpService {
     return this.http.put<ActionResult<T>>(this.uri + path, param).pipe(
       filter((item) => {
         return this.handleFilter(item, !!(config?.needSuccessInfo));
+      }),
+      map((item) => {
+        if (item.code !== 0) {
+          throw new Error(item.msg);
+        }
+        return item;
       }),
       map(item => item.data)
     );

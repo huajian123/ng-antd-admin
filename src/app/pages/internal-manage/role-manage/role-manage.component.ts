@@ -8,6 +8,7 @@ import {NzModalService} from 'ng-zorro-antd/modal';
 import {MessageService} from '../../../core/services/common/message.service';
 import {InterAddEditService} from '../../../widget/biz-widget/internal-manage/inter-add-edit/inter-add-edit.service';
 import {Router} from '@angular/router';
+import {ModalBtnStatus} from '../../../widget/base-modal';
 
 @Component({
   selector: 'app-role-manage',
@@ -91,24 +92,26 @@ export class RoleManageComponent implements OnInit {
   }
 
   add(): void {
-    this.modalService.show({nzTitle: '新增'}).then(({value}) => {
+    this.modalService.show({nzTitle: '新增'}).subscribe(({modalValue, status}) => {
+      if (status === ModalBtnStatus.Cancel) {
+        return;
+      }
       this.tableLoading(true);
-      this.addEditData(value, 'addRoles');
-    }).catch(e => {
-      this.tableLoading(false);
-    });
+      this.addEditData(modalValue, 'addRoles');
+    }, error => this.tableLoading(false));
   }
 
   // 修改
   edit(id: number): void {
     this.dataService.getRolesDetail(id).subscribe(res => {
-      this.modalService.show({nzTitle: '编辑'}, res).then(({value}) => {
-        value.id = id;
+      this.modalService.show({nzTitle: '编辑'}, res).subscribe(({modalValue, status}) => {
+        if (status === ModalBtnStatus.Cancel) {
+          return;
+        }
+        modalValue.id = id;
         this.tableLoading(true);
-        this.addEditData(value, 'editRoles');
-      }).catch(e => {
-        this.tableLoading(false);
-      });
+        this.addEditData(modalValue, 'editRoles');
+      }, error => this.tableLoading(false));
     });
   }
 

@@ -2,6 +2,8 @@ import {ModalOptions, NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
 import {Injector} from '@angular/core';
 import {NzSafeAny} from 'ng-zorro-antd/core/types';
 import * as _ from 'lodash';
+import {Observable, of} from 'rxjs';
+import {filter, tap} from 'rxjs/operators';
 
 export enum ModalBtnStatus {
   Cancel,
@@ -28,18 +30,30 @@ export abstract class BaseModal {
   protected abstract getContentComponent(): NzSafeAny;
 
   private cancelCallback(contentComponentInstance?: object): void {
-    return this.modalRef.destroy(null);
+    return this.modalRef.destroy({status: ModalBtnStatus.Cancel, value: null});
   }
 
-  private confirmCallback(contentComponentInstance?: object): void {
-    const value = (contentComponentInstance as any).getCurrentValue();
-    if (!value) {
-      return;
-    }
-    return this.modalRef.destroy({status: ModalBtnStatus.Ok, value});
+  private confirmCallback(contentComponentInstance?: object): any {
+    const value: Observable<any> = (contentComponentInstance as any).getCurrentValue().pipe(
+      filter((isValited: boolean) => {
+        return isValited;
+      }),
+      filter((isSuccess: boolean) => {
+        return isSuccess;
+      }),
+      tap((modalValue) => {
+        if (!modalValue) {
+          return of(false);
+        } else {
+          return this.modalRef.destroy({status: ModalBtnStatus.Ok, modalValue});
+        }
+      })
+    );
+    value.subscribe();
+    return value;
   }
 
-  show(modalOptions: ModalOptions = {}, params: object = {}): Promise<NzSafeAny> {
+  show(modalOptions: ModalOptions = {}, params: object = {}): Observable<NzSafeAny> {
     this.modalRef = this.bsModalService.create(_.merge({
       nzTitle: '',
       nzContent: this.getContentComponent(),
@@ -62,15 +76,7 @@ export abstract class BaseModal {
       }, // 参数中的属性将传入nzContent实例中
     }, modalOptions));
 
-    return new Promise((resolve, reject) => {
-      this.modalRef.afterClose.subscribe((result: NzSafeAny) => {
-        if (!result) {
-          reject();
-        } else {
-          resolve(result);
-        }
-      });
-    });
+    return this.modalRef.afterClose;
   }
 
 }
