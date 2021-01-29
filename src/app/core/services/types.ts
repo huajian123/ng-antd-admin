@@ -36,6 +36,10 @@ export interface UserLogin {
   password: string;
 }
 
+export interface User extends UserLogin {
+  token: string;
+}
+
 /*
 * 角色
 * */
