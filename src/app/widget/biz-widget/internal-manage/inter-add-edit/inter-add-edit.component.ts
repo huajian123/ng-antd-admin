@@ -7,7 +7,6 @@ import {fnCheckForm} from '../../../../utils/tools';
 @Component({
   selector: 'app-inter-add-edit',
   templateUrl: './inter-add-edit.component.html',
-  styleUrls: ['./inter-add-edit.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InterAddEditComponent extends BasicConfirmModalComponent implements OnInit {
