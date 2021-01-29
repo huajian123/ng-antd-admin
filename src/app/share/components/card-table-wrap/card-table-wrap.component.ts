@@ -9,6 +9,7 @@ import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output}
 export class CardTableWrapComponent implements OnInit {
   @Input() needAddBtn: boolean;
   @Output() add = new EventEmitter<any>();
+  @Input() actionCode!: string;
 
   constructor() {
     this.needAddBtn = false;

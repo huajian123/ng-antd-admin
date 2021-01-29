@@ -15,6 +15,7 @@ export class AuthService {
     const helper = new JwtHelperService();
     try {
       const {rol} = helper.decodeToken(token);
+      console.log(rol.split(','));
       return rol.split(',');
     } catch (e) {
       return [];

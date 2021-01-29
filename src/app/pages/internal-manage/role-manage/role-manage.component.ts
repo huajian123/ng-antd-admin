@@ -9,6 +9,7 @@ import {MessageService} from '../../../core/services/common/message.service';
 import {InterAddEditService} from '../../../widget/biz-widget/internal-manage/inter-add-edit/inter-add-edit.service';
 import {Router} from '@angular/router';
 import {ModalBtnStatus} from '../../../widget/base-modal';
+import { ActionCode } from 'src/app/configs/actionCode';
 
 @Component({
   selector: 'app-role-manage',
@@ -18,7 +19,7 @@ import {ModalBtnStatus} from '../../../widget/base-modal';
 })
 export class RoleManageComponent implements OnInit {
   @ViewChild('operationTpl', {static: true}) operationTpl!: TemplateRef<any>;
-
+  ActionCode = ActionCode;
   tableConfig!: MyTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '查询表格',
@@ -122,6 +123,7 @@ export class RoleManageComponent implements OnInit {
   }
 
   // 修改一页几条
+
   changePageSize(e: number): void {
     this.tableConfig.pageSize = e;
   }

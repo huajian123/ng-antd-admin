@@ -5,6 +5,7 @@ import {TabService} from '../../../core/services/common/tab.service';
 import {ThemeService} from '../../../core/services/store/theme.service';
 import {Subscription} from 'rxjs';
 import * as _ from 'lodash';
+import {ActionCode} from '../../../configs/actionCode';
 
 interface Menu {
   path?: string;
@@ -13,6 +14,7 @@ interface Menu {
   open?: boolean;
   selected?: boolean;
   children?: Menu[];
+  actionCode?: string;
 }
 
 @Component({
@@ -28,6 +30,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
       icon: 'dashboard',
       open: false,
       selected: false,
+      actionCode: ActionCode.Dashboard,
       children: [
         {
           title: '分析页',
@@ -54,6 +57,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
       icon: 'form',
       open: false,
       selected: false,
+      actionCode: ActionCode.FormModule,
       children: [
         {
           title: '基础表单',
@@ -80,6 +84,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
       icon: 'table',
       open: false,
       selected: false,
+      actionCode: ActionCode.ListModule,
       children: [
         {
           title: '搜索列表',
@@ -132,6 +137,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
       icon: 'profile',
       open: false,
       selected: false,
+      actionCode: ActionCode.DetailModule,
       children: [
         {
           title: '基础详情页',
@@ -152,6 +158,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
       icon: 'check-circle',
       open: false,
       selected: false,
+      actionCode: ActionCode.ResultModule,
       children: [
         {
           title: '成功页',
@@ -172,6 +179,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
       icon: 'warning',
       open: false,
       selected: false,
+      actionCode: ActionCode.ErrorModule,
       children: [
         {
           title: '403',
@@ -198,6 +206,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
       icon: 'user',
       open: false,
       selected: false,
+      actionCode: ActionCode.PersonalModule,
       children: [
         {
           title: '个人中心',
@@ -218,24 +227,28 @@ export class NavBarComponent implements OnInit, OnDestroy {
       icon: 'highlight',
       open: false,
       selected: false,
+      actionCode: ActionCode.InternalModule,
       children: [
         {
           title: '用户管理',
           open: false,
           selected: false,
           path: '/default/internal-manage/user',
+          actionCode: ActionCode.UserManage,
         },
         {
           title: '角色管理',
           open: false,
           selected: false,
           path: '/default/internal-manage/role',
+          actionCode: ActionCode.Role,
         },
         {
           title: '部门管理',
           open: false,
           selected: false,
           path: '/default/internal-manage/dept',
+          actionCode: ActionCode.Dept,
         },
       ]
     },
