@@ -23,6 +23,7 @@ export class DeptManageComponent implements OnInit {
   actionCodeObj = {
     add: ActionCode.RoleAdd
   };
+  ids: number[] = [];
 
   constructor(private dataService: DeptManageService,
               private cdr: ChangeDetectorRef, private modalSrv: NzModalService,
@@ -84,13 +85,24 @@ export class DeptManageComponent implements OnInit {
     });
   }
 
+  getDeptChildIds(deptArray: DeptObj[]): void {
+    deptArray.forEach((item) => {
+      this.ids.push(item.id);
+      if (item.departmentVos && item.departmentVos.length > 0) {
+        this.getDeptChildIds(item.departmentVos);
+      }
+    });
+  }
 
-  del(id: number): void {
+  del(id: number, childArray: DeptObj[]): void {
     this.modalSrv.confirm({
       nzTitle: '确定要删除吗？',
       nzContent: '删除后不可恢复',
       nzOnOk: () => {
-        this.dataService.delDept(id).subscribe(() => {
+        this.ids = [];
+        this.ids.push(id);
+        this.getDeptChildIds(childArray);
+        this.dataService.delDept(this.ids).subscribe(() => {
           this.getDataList();
         });
       }

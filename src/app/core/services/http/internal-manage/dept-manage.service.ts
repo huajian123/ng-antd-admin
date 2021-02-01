@@ -15,8 +15,9 @@ export class DeptManageService {
     return this.http.get('/department');
   }
 
-  public delDept(id: number): Observable<any> {
-    return this.http.delete(`/department/${id}`);
+  public delDept(idarray: number[]): Observable<any> {
+    console.log({ids: idarray});
+    return this.http.delete(`/department`, {ids: idarray});
   }
 
   public getDeptDetail(id: number): Observable<DeptObj> {
