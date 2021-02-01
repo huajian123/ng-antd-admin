@@ -1,11 +1,12 @@
 import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
 import {ActionCode} from 'src/app/configs/actionCode';
 import {PageHeaderType} from '../../../share/components/page-header/page-header.component';
-import {DeptObj, Role} from '../../../core/services/types';
+import {DeptObj} from '../../../core/services/types';
 import {DeptManageService} from '../../../core/services/http/internal-manage/dept-manage.service';
 import {map} from 'rxjs/operators';
 import {DeptManageModalService} from '../../../widget/biz-widget/internal-manage/dept-manage/dept-manage.service';
 import {ModalBtnStatus} from '../../../widget/base-modal';
+import {NzModalService} from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-dept-manage',
@@ -23,7 +24,9 @@ export class DeptManageComponent implements OnInit {
     add: ActionCode.RoleAdd
   };
 
-  constructor(private dataService: DeptManageService, private cdr: ChangeDetectorRef, private modalService: DeptManageModalService) {
+  constructor(private dataService: DeptManageService,
+              private cdr: ChangeDetectorRef, private modalSrv: NzModalService,
+              private modalService: DeptManageModalService) {
   }
 
   collapse(event: boolean, item: DeptObj): void {
@@ -31,14 +34,28 @@ export class DeptManageComponent implements OnInit {
   }
 
   // 新增
-  add(): void {
+  add(departmentGrade: number = 1, id: number = 0): void {
     this.modalService.show({nzTitle: '新增'}).subscribe(({modalValue, status}) => {
       if (status === ModalBtnStatus.Cancel) {
         return;
       }
-      this.addEditData({...modalValue, ...{departmentGrade: 1}}, 'addDept');
+      this.addEditData({...modalValue, ...{departmentGrade: departmentGrade + 1, fatherId: id}}, 'addDept');
     });
   }
+
+  edit(id: number, departmentGrade: number): void {
+    this.dataService.getDeptDetail(id).subscribe(res => {
+      this.modalService.show({nzTitle: '编辑'}, res).subscribe(({modalValue, status}) => {
+        if (status === ModalBtnStatus.Cancel) {
+          return;
+        }
+        modalValue.id = id;
+        modalValue.departmentGrade = departmentGrade;
+        this.addEditData(modalValue, 'editDept');
+      });
+    });
+  }
+
 
   addEditData(param: DeptObj, methodName: 'editDept' | 'addDept'): void {
     this.dataService[methodName](param).subscribe(() => {
@@ -67,12 +84,17 @@ export class DeptManageComponent implements OnInit {
     });
   }
 
-  edit(id: number): void {
-    console.log(id);
-  }
 
   del(id: number): void {
-    console.log(id);
+    this.modalSrv.confirm({
+      nzTitle: '确定要删除吗？',
+      nzContent: '删除后不可恢复',
+      nzOnOk: () => {
+        this.dataService.delDept(id).subscribe(() => {
+          this.getDataList();
+        });
+      }
+    });
   }
 
   ngOnInit(): void {

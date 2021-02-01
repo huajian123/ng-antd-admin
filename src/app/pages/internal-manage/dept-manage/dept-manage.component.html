@@ -37,8 +37,8 @@
 
   </app-card-table-wrap>
 </div>
-<ng-template #operationTpl let-id="id">
-  <span class="operate-text" (click)="edit(id)">编辑</span>
+<ng-template #operationTpl let-id="id" let-departmentGrade="departmentGrade" let-fatherId="fatherId">
+  <span class="operate-text" (click)="edit(id,departmentGrade)">编辑</span>
   <span class="operate-text" (click)="del(id)">删除</span>
-  <span class="operate-text">添加下级</span>
+  <span class="operate-text" (click)="add(departmentGrade,id)">添加下级</span>
 </ng-template>

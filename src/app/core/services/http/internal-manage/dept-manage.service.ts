@@ -15,12 +15,20 @@ export class DeptManageService {
     return this.http.get('/department');
   }
 
+  public delDept(id: number): Observable<any> {
+    return this.http.delete(`/department/${id}`);
+  }
+
+  public getDeptDetail(id: number): Observable<DeptObj> {
+    return this.http.get(`/department/${id}`);
+  }
+
   public addDept(param: DeptObj): Observable<any> {
-    return this.http.post('/department', param);
+    return this.http.post('/department', param, {needSuccessInfo: true});
   }
 
   public editDept(param: DeptObj): Observable<any> {
-    return this.http.put('/department', param);
+    return this.http.put('/department', param, {needSuccessInfo: true});
   }
 
 }
