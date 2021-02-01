@@ -25,7 +25,7 @@
     "@types/qs": "^6.9.5",
     "extend": "^3.0.2",
     "lodash": "^4.17.20",
-    "ng-zorro-antd": "^11.0.2",
+    "ng-zorro-antd": "^11.1.0",
     "ngx-quicklink": "^0.2.6",
     "qs": "^6.9.6",
     "rxjs": "~6.6.0",

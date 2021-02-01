@@ -92,6 +92,34 @@ export class WorkbenchComponent implements OnInit {
         productName: 'string',
         casNo: 'string',
       },
+      {
+        productName: 'string',
+        casNo: 'string',
+      },
+      {
+        productName: 'string',
+        casNo: 'string',
+      },
+      {
+        productName: 'string',
+        casNo: 'string',
+      },
+      {
+        productName: 'string',
+        casNo: 'string',
+      },
+      {
+        productName: 'string',
+        casNo: 'string',
+      },
+      {
+        productName: 'string',
+        casNo: 'string',
+      },
+      {
+        productName: 'string',
+        casNo: 'string',
+      },
     ];
     this.tableConfig.total = 13;
     this.tableConfig.pageIndex = 1;
@@ -174,6 +202,46 @@ export class WorkbenchComponent implements OnInit {
           field: 'productName',
         }, {
           title: '年龄',
+          width: 100,
+          field: 'productName',
+        },
+        {
+          title: '名称',
+          width: 100,
+          field: 'productName',
+        },
+        {
+          title: '名称',
+          width: 100,
+          field: 'productName',
+        },
+        {
+          title: '名称',
+          width: 100,
+          field: 'productName',
+        },
+        {
+          title: '名称',
+          width: 100,
+          field: 'productName',
+        },
+        {
+          title: '名称',
+          width: 100,
+          field: 'productName',
+        },
+        {
+          title: '名称',
+          width: 100,
+          field: 'productName',
+        },
+        {
+          title: '名称',
+          width: 100,
+          field: 'productName',
+        },
+        {
+          title: '名称',
           width: 100,
           field: 'productName',
         },
