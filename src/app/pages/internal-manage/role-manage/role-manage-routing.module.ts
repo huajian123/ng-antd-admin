@@ -9,9 +9,9 @@ const routes: Routes = [
     path: 'set-role/:id',
     canDeactivate: [ComponentLifeGuard],
     component: SetRoleComponent,
-    data: {title: '角色管理', key: 'set-role', relatedLink: ['role', 'set-role']}
+    data: {title: '角色管理', key: 'set-role', relatedLink: ['role-manage', 'set-role']}
   },
-  {path: '', component: RoleManageComponent, data: {title: '角色管理', key: 'role', relatedLink: ['role', 'set-role']}},
+  {path: '', component: RoleManageComponent, data: {title: '角色管理', key: 'role-manage', relatedLink: ['role-manage', 'set-role']}},
 ];
 
 @NgModule({

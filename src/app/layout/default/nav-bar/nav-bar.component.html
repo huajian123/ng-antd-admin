@@ -16,7 +16,7 @@
             <ng-container *ngFor="let menuSecond of menu.children">
               <li nz-menu-item [nzSelected]="menuSecond.selected" *ngIf="!menuSecond.children||menuSecond.children.length===0;">
                 <a [routerLink]="[menuSecond.path]">
-                  <span>{{menuSecond.title}}111</span>
+                  <span>{{menuSecond.title}}</span>
                 </a>
               </li>
               <!--三级菜单-->
