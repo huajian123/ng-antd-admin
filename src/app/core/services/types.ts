@@ -81,4 +81,5 @@ export interface DeptObj {
   fatherId: number;
   departmentGrade: number;
   departmentVos: DeptObj[];
+  expand: boolean;
 }

@@ -3,7 +3,7 @@
 
 <div class="normal-table-wrap">
   <app-card-table-wrap [actionCode]="actionCodeObj" [needAddBtn]="true" (add)="add()">
-    <nz-table nzBordered #expandTable [nzData]="listOfMapData" nzTableLayout="fixed">
+    <nz-table nzSize="small" nzBordered nzTableLayout="fixed" [nzData]="dataList">
       <thead>
       <tr>
         <th>部门名称</th>
@@ -11,18 +11,24 @@
       </tr>
       </thead>
       <tbody>
-      <ng-container *ngFor="let data of expandTable.data">
-        <ng-container *ngFor="let item of mapOfExpandedData[data.key]">
-          <tr *ngIf="(item.parent && item.parent.expand) || !item.parent">
-            <td
-              [nzIndentSize]="item.level! * 20"
-              [nzShowExpand]="!!item.children"
+      <ng-container *ngFor="let item of dataList">
+        <tr>
+          <td [nzShowExpand]="item.departmentVos.length>0"
               [(nzExpand)]="item.expand"
-              (nzExpandChange)="collapse(mapOfExpandedData[data.key], item, $event)"
-            >
-              {{ item.name }}
+              (nzExpandChange)="collapse($event,item)"
+          >{{item.departmentName}}</td>
+          <td>
+            <ng-container *ngTemplateOutlet="operationTpl;context:item"></ng-container>
+          </td>
+        </tr>
+        <ng-container *ngIf="item.departmentVos.length>0&&item.expand">
+          <tr *ngFor="let secondItem of item.departmentVos;">
+            <td [nzIndentSize]="secondItem.departmentGrade! * 5">
+              {{secondItem.departmentName}}
             </td>
-            <td><ng-container *ngTemplateOutlet="operationTpl"></ng-container></td>
+            <td>
+              <ng-container *ngTemplateOutlet="operationTpl;context:secondItem"></ng-container>
+            </td>
           </tr>
         </ng-container>
       </ng-container>
@@ -31,8 +37,8 @@
 
   </app-card-table-wrap>
 </div>
-<ng-template #operationTpl let-name="name" let-id="id">
-  <span class="operate-text">编辑</span>
-  <span class="operate-text">删除</span>
+<ng-template #operationTpl let-id="id">
+  <span class="operate-text" (click)="edit(id)">编辑</span>
+  <span class="operate-text" (click)="del(id)">删除</span>
   <span class="operate-text">添加下级</span>
 </ng-template>
