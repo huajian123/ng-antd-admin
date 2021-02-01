@@ -1,1 +1,9 @@
-<p>dept-manage works!</p>
+<!--头部版块-->
+<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+
+<div class="normal-table-wrap">
+  <app-card-table-wrap [actionCode]="actionCodeObj" [needAddBtn]="true" (add)="add()">
+
+
+  </app-card-table-wrap>
+</div>

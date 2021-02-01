@@ -4,7 +4,7 @@
 <ng-template #tableToolbar>
   <div class="ant-pro-table-toolbar">
     <div class="ant-pro-table-toolbar-option" *ngIf="needAddBtn">
-      <button nz-button nzType="primary" *appAuth="actionCode" (click)="addBtnClick()"><i nz-icon nzType="plus"></i>新建</button>
+      <button nz-button nzType="primary" *appAuth="actionCode.add" (click)="addBtnClick()"><i nz-icon nzType="plus"></i>新建</button>
     </div>
     <div class="ant-pro-table-toolbar-default-option">
       <nz-divider nzType="vertical"></nz-divider>

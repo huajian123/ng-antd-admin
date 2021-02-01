@@ -1,5 +1,9 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
+interface ActionCodeObj {
+  add?: string;
+}
+
 @Component({
   selector: 'app-card-table-wrap',
   templateUrl: './card-table-wrap.component.html',
@@ -9,7 +13,7 @@ import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output}
 export class CardTableWrapComponent implements OnInit {
   @Input() needAddBtn: boolean;
   @Output() add = new EventEmitter<any>();
-  @Input() actionCode!: string;
+  @Input() actionCode!: ActionCodeObj;
 
   constructor() {
     this.needAddBtn = false;

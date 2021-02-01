@@ -9,7 +9,7 @@ import {MessageService} from '../../../core/services/common/message.service';
 import {InterAddEditService} from '../../../widget/biz-widget/internal-manage/inter-add-edit/inter-add-edit.service';
 import {Router} from '@angular/router';
 import {ModalBtnStatus} from '../../../widget/base-modal';
-import { ActionCode } from 'src/app/configs/actionCode';
+import {ActionCode} from 'src/app/configs/actionCode';
 
 @Component({
   selector: 'app-role-manage',
@@ -20,6 +20,9 @@ import { ActionCode } from 'src/app/configs/actionCode';
 export class RoleManageComponent implements OnInit {
   @ViewChild('operationTpl', {static: true}) operationTpl!: TemplateRef<any>;
   ActionCode = ActionCode;
+  actionCodeObj = {
+    add: ActionCode.RoleAdd
+  };
   tableConfig!: MyTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '查询表格',
