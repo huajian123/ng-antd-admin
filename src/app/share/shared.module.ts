@@ -8,6 +8,7 @@ import {ComponentsModule} from './components/components.module';
 import {QuicklinkModule} from 'ngx-quicklink';
 import {CardTableWrapModule} from './components/card-table-wrap/card-table-wrap.module';
 import {DirectivesModule} from './directives/directives.module';
+import {HoverPreloadModule} from 'ngx-hover-preload';
 
 const MODULES = [
   CommonModule,
@@ -17,6 +18,7 @@ const MODULES = [
   PipesModule,
   ComponentsModule,
   QuicklinkModule,
+  HoverPreloadModule,
   CardTableWrapModule,
   DirectivesModule,
   ...SHARED_ZORRO_MODULES
