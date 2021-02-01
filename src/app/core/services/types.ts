@@ -70,3 +70,15 @@ export interface PutPermissionParam {
   permissionIds: number[];
   roleId: number;
 }
+
+/*
+*  部门列表
+* */
+export interface DeptObj {
+  id: number;
+  departmentName: string;
+  departmentDesc: string;
+  fatherId: number;
+  departmentGrade: number;
+  departmentVos: DeptObj[];
+}
