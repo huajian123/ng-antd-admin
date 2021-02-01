@@ -3,7 +3,7 @@
 
 <div class="normal-table-wrap">
   <app-card-table-wrap [actionCode]="actionCodeObj" [needAddBtn]="true" (add)="add()">
-    <nz-table nzSize="small" nzBordered nzTableLayout="fixed" [nzData]="dataList">
+    <nz-table nzShowPagination="false" nzSize="small" nzBordered nzTableLayout="fixed" [nzData]="dataList">
       <thead>
       <tr>
         <th>部门名称</th>
