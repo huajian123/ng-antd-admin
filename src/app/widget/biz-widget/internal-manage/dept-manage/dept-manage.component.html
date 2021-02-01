@@ -1,0 +1,8 @@
+<form nz-form [formGroup]="addEditForm">
+  <nz-form-item>
+    <nz-form-label nzRequired nzFor="departmentName">部门名称</nz-form-label>
+    <nz-form-control nzErrorTip="请输入角色名">
+      <input nz-input formControlName="departmentName" name="departmentName" placeholder="请输入部门名称" id="departmentName"/>
+    </nz-form-control>
+  </nz-form-item>
+</form>

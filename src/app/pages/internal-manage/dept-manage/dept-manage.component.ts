@@ -1,9 +1,11 @@
 import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
 import {ActionCode} from 'src/app/configs/actionCode';
 import {PageHeaderType} from '../../../share/components/page-header/page-header.component';
-import {DeptObj} from '../../../core/services/types';
+import {DeptObj, Role} from '../../../core/services/types';
 import {DeptManageService} from '../../../core/services/http/internal-manage/dept-manage.service';
 import {map} from 'rxjs/operators';
+import {DeptManageModalService} from '../../../widget/biz-widget/internal-manage/dept-manage/dept-manage.service';
+import {ModalBtnStatus} from '../../../widget/base-modal';
 
 @Component({
   selector: 'app-dept-manage',
@@ -21,7 +23,7 @@ export class DeptManageComponent implements OnInit {
     add: ActionCode.RoleAdd
   };
 
-  constructor(private dataService: DeptManageService, private cdr: ChangeDetectorRef) {
+  constructor(private dataService: DeptManageService, private cdr: ChangeDetectorRef, private modalService: DeptManageModalService) {
   }
 
   collapse(event: boolean, item: DeptObj): void {
@@ -30,7 +32,18 @@ export class DeptManageComponent implements OnInit {
 
   // 新增
   add(): void {
-    console.log('点击新增');
+    this.modalService.show({nzTitle: '新增'}).subscribe(({modalValue, status}) => {
+      if (status === ModalBtnStatus.Cancel) {
+        return;
+      }
+      this.addEditData({...modalValue, ...{departmentGrade: 1}}, 'addDept');
+    });
+  }
+
+  addEditData(param: DeptObj, methodName: 'editDept' | 'addDept'): void {
+    this.dataService[methodName](param).subscribe(() => {
+      this.getDataList();
+    });
   }
 
   dataAddExpandFn(dataList: DeptObj[]): DeptObj[] {

@@ -15,4 +15,12 @@ export class DeptManageService {
     return this.http.get('/department');
   }
 
+  public addDept(param: DeptObj): Observable<any> {
+    return this.http.post('/department', param);
+  }
+
+  public editDept(param: DeptObj): Observable<any> {
+    return this.http.put('/department', param);
+  }
+
 }
