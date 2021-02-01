@@ -30,7 +30,8 @@ export class LoginFormComponent implements OnInit {
     const param = this.validateForm.getRawValue();
     this.dataService.login(param).subscribe(({token}) => {
       this.windowServe.setStorage(AuthKey, TokenPre + token);
-      this.authService.parsToken(token);
+     // this.authService.parsToken(token);
+      this.authService.setAuthCode(this.authService.parsToken(TokenPre + token));
       this.router.navigateByUrl('default');
     });
   }

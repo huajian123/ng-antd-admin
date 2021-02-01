@@ -49,7 +49,7 @@ export class RoleService {
   }
 
   public updatePermission(param: PutPermissionParam): Observable<any> {
-    return this.http.put('/permission', param, {needSuccessInfo: true});
+    return this.http.put('/permission', param);
   }
 
 }

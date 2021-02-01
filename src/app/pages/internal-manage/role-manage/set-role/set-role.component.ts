@@ -4,6 +4,7 @@ import {RoleService} from '../../../../core/services/http/internal-manage/role.s
 import {Permission, PutPermissionParam} from '../../../../core/services/types';
 import {map, mergeMap} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
+import {NzMessageService} from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-set-role',
@@ -24,7 +25,8 @@ export class SetRoleComponent implements OnInit {
   id!: number;
   roleName!: string;
 
-  constructor(private dataService: RoleService, private cdr: ChangeDetectorRef, private routeInfo: ActivatedRoute, private router: Router) {
+  constructor(private dataService: RoleService, private cdr: ChangeDetectorRef, private routeInfo: ActivatedRoute, private router: Router,
+              public message: NzMessageService) {
   }
 
   // 初始化数据
@@ -64,6 +66,7 @@ export class SetRoleComponent implements OnInit {
       roleId: this.id
     };
     this.dataService.updatePermission(param).subscribe(() => {
+      this.message.success('操作成功，重新登陆生效');
     });
   }
 
