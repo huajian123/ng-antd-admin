@@ -5,6 +5,7 @@ import {PageHeaderType} from '../../../share/components/page-header/page-header.
 import {MyTableConfig} from '../../../share/components/ant-table/ant-table.component';
 import {NzTableQueryParams} from 'ng-zorro-antd/table';
 import {SearchCommonVO} from '../../../core/services/types';
+import {ActionCode} from '../../../configs/actionCode';
 
 @Component({
   selector: 'app-workbench',
@@ -23,7 +24,9 @@ export class WorkbenchComponent implements OnInit {
     breadcrumb: ['首页', '表单页', '基础表单']
   };
   dataList!: any[];
-
+  actionCodeObj = {
+    add: ActionCode.RoleAdd
+  };
   constructor(private fb: FormBuilder) {
   }
 
