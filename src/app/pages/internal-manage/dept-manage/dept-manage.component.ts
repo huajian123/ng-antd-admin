@@ -35,7 +35,7 @@ export class DeptManageComponent implements OnInit {
   }
 
   // 新增
-  add(departmentGrade: number = 1, id: number = 0): void {
+  add(departmentGrade: number = 0, id: number = 0): void {
     this.modalService.show({nzTitle: '新增'}).subscribe(({modalValue, status}) => {
       if (status === ModalBtnStatus.Cancel) {
         return;
