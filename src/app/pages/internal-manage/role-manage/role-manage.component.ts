@@ -25,7 +25,7 @@ export class RoleManageComponent implements OnInit {
   };
   tableConfig!: MyTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
-    title: '查询表格',
+    title: '角色管理',
     breadcrumb: ['首页', '内部管理', '角色管理']
   };
   dataList!: Role[];
