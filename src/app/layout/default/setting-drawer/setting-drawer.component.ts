@@ -10,6 +10,7 @@ import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {DOCUMENT} from '@angular/common';
 import {SettingInterface, ThemeService} from '../../../core/services/store/theme.service';
+import {ThemeSkinService} from '../../../core/services/common/theme-skin.service';
 
 interface NormalModel {
   image?: string;
@@ -146,7 +147,8 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
     }
   ];
 
-  constructor(private themesService: ThemeService, @Inject(DOCUMENT) private doc: Document) {
+  constructor(private themesService: ThemeService, @Inject(DOCUMENT) private doc: Document,
+              private themeSkinService: ThemeSkinService) {
   }
 
   @HostListener('click', ['$event'])
@@ -210,11 +212,13 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
   changeTheme(themeItem: Theme): void {
     this.selOne(themeItem, this.themes);
     if (themeItem.key === 'night') {
-      this.changeThemeToNight();
+     // this.changeThemeToNight();
+      this.themeSkinService.toggleTheme().then();
       this._themesOptions.theme = 'dark';
       this.themesService.setIsNightTheme(true);
     } else {
-      this.removeNightTheme();
+      // this.removeNightTheme();
+      this.themeSkinService.toggleTheme().then();
       this._themesOptions.theme = themeItem.key;
       this.themesService.setIsNightTheme(false);
     }

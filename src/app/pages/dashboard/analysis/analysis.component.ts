@@ -1,5 +1,5 @@
 import {AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import { Pie, TinyColumn} from '@antv/g2plot';
+import {Pie, RingProgress, TinyColumn} from '@antv/g2plot';
 import {TinyArea} from '@antv/g2plot';
 import {Progress} from '@antv/g2plot';
 import {Chart} from '@antv/g2';
@@ -248,6 +248,19 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
     tinyArea.render();
   }
 
+
+  initMiniRing(): void {
+    const ringProgress = new RingProgress('miniRing', {
+      height: 45,
+      width: 45,
+      autoFit: false,
+      percent: 0.7,
+      color: ['#5B8FF9', '#E8EDF3'],
+    });
+
+    ringProgress.render();
+  }
+
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.initMinibar();
@@ -257,6 +270,8 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
       this.initSearchArea();
       this.initSearchAvgArea();
       this.initRing();
+      this.initMiniRing();
     });
   }
+
 }

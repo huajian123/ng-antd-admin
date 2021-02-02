@@ -58,8 +58,20 @@
               }
             ],
             "styles": [
-              "src/assets/styles/index.less"
+              {
+                "input": "src/styles/default.less",
+                "bundleName": "default",
+                "inject": false
+              },
+              {
+                "input": "src/styles/dark.less",
+                "bundleName": "dark",
+                "inject": false
+              }
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/styles/themes"]
+            },
             "scripts": [],
             "allowedCommonJsDependencies": [
               "@antv/g2",

@@ -9,6 +9,7 @@ import {HttpClientModule} from '@angular/common/http';
 import interceptors from './core/services/interceptors';
 import {StartupService} from './core/startup/startup.service';
 import {LoginModalModule} from './widget/biz-widget/login/login-modal.module';
+import {ThemeSkinService} from './core/services/common/theme-skin.service';
 
 
 export function StartupServiceFactory(startupService: StartupService): any {
@@ -24,6 +25,14 @@ const APPINIT_PROVIDES = [
     deps: [StartupService],
     multi: true,
   },
+  {
+    provide: APP_INITIALIZER,
+    useFactory: (themeService: ThemeSkinService) => () => {
+      return themeService.loadTheme();
+    },
+    deps: [ThemeSkinService],
+    multi: true,
+  }
 ];
 
 @NgModule({
