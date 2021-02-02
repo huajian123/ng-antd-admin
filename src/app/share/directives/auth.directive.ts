@@ -8,7 +8,11 @@ export class AuthDirective {
   codeArray!: string[];
 
   @Input('appAuth')
-  set appAuth(authCode: string) {
+  set appAuth(authCode: string | undefined) {
+    if (!authCode) {
+      this.show(true);
+      return;
+    }
     this.codeArray.includes(authCode) ? this.show(true) : this.show(false);
   }
 

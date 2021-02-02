@@ -66,7 +66,7 @@ export class SetRoleComponent implements OnInit {
       roleId: this.id
     };
     this.dataService.updatePermission(param).subscribe(() => {
-      this.message.success('操作成功，重新登陆生效');
+      this.message.success('用户登录');
     });
   }
 
