@@ -28,11 +28,14 @@
     <td *ngIf="tableConfig.showCheckbox" [nzLeft]="true" (nzCheckedChange)="checkRowSingle($event,rowIndex)"
         [nzChecked]="row['_checked']"></td>
     <td *ngFor="let head of tableConfig.headers" [nzRight]="!!head.fixed">
-      <ng-container *ngIf="head.tdTemplate;else roleTpl">
+      <ng-container *ngIf="head.tdTemplate;else rowTpl">
         <ng-container *ngTemplateOutlet="head.tdTemplate;context:row"></ng-container>
       </ng-container>
-      <ng-template #roleTpl>
-        <ng-container>{{row[head.field!]}}</ng-container>
+      <ng-template #rowTpl>
+        <ng-container *ngIf="head.pipe;else noPipe">{{row[head.field!]|map:head.pipe}}</ng-container>
+        <ng-template #noPipe>
+          <ng-container>{{row[head.field!]}}</ng-container>
+        </ng-template>
       </ng-template>
     </td>
   </tr>
