@@ -14,6 +14,7 @@ import {TabService} from '../../../core/services/common/tab.service';
 export class SideNavComponent implements OnInit {
 
   themesOptions$ = this.themesService.getThemesMode();
+  isNightTheme$ = this.themesService.getIsNightTheme();
   @Input() isCollapsed = false;
 
 
