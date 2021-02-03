@@ -52,6 +52,24 @@ export interface Role {
 
 
 /*
+* 用户管理
+* */
+
+export interface People {
+  id?: number;
+  userName: string;
+  available: boolean;
+  departmentName: string;
+  roleName: string[];
+  sex: 1 | 0;
+  telephone: string;
+  mobile: string;
+  email: string;
+  lastLoginTime: Date;
+}
+
+
+/*
 *  权限
 * */
 export interface Permission {

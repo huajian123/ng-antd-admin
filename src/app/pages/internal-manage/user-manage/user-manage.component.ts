@@ -1,7 +1,7 @@
 import {Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef} from '@angular/core';
 import {PageHeaderType} from '../../../share/components/page-header/page-header.component';
 import {MyTableConfig} from '../../../share/components/ant-table/ant-table.component';
-import {Role, SearchCommonVO} from '../../../core/services/types';
+import {People, Role, SearchCommonVO} from '../../../core/services/types';
 import {RoleService} from '../../../core/services/http/internal-manage/role.service';
 import {NzModalService} from 'ng-zorro-antd/modal';
 import {MessageService} from '../../../core/services/common/message.service';
@@ -10,6 +10,7 @@ import {Router} from '@angular/router';
 import {NzTableQueryParams} from 'ng-zorro-antd/table';
 import {ModalBtnStatus} from '../../../widget/base-modal';
 import { ActionCode } from 'src/app/configs/actionCode';
+import {UserManageService} from '../../../core/services/http/internal-manage/user-manage.service';
 
 @Component({
   selector: 'app-user-manage',
@@ -29,9 +30,9 @@ export class UserManageComponent implements OnInit {
     add: ActionCode.RoleAdd
   };
   tableConfig!: MyTableConfig;
-  dataList!: Role[];
+  dataList!: People[];
 
-  constructor(private dataService: RoleService, private modalSrv: NzModalService, private cdr: ChangeDetectorRef,
+  constructor(private dataService: UserManageService, private modalSrv: NzModalService, private cdr: ChangeDetectorRef,
               private messageService: MessageService, private modalService: InterAddEditService,
               private router: Router) {
     this.dataList = [];
@@ -50,7 +51,7 @@ export class UserManageComponent implements OnInit {
         this.tableConfig.pageSize = 1;
         this.tableConfig.loading = false;
         return;*/
-    this.dataService.getRoles(params).subscribe((data => {
+    this.dataService.getPeoples(params).subscribe((data => {
       const {list, total, pageNum} = data;
       this.dataList = [...list];
       this.tableConfig.total = total!;
@@ -86,12 +87,12 @@ export class UserManageComponent implements OnInit {
       nzContent: '删除后不可恢复',
       nzOnOk: () => {
         this.tableLoading(true);
-        this.dataService.delRoles(id).subscribe(() => {
+       /* this.dataService.delRoles(id).subscribe(() => {
           if (this.dataList.length === 1) {
             this.tableConfig.pageIndex--;
           }
           this.getDataList();
-        });
+        });*/
       }
     });
   }
@@ -108,7 +109,7 @@ export class UserManageComponent implements OnInit {
 
   // 修改
   edit(id: number): void {
-    this.dataService.getRolesDetail(id).subscribe(res => {
+    /*this.dataService.getRolesDetail(id).subscribe(res => {
       this.modalService.show({nzTitle: '编辑'}, res).subscribe(({modalValue, status}) => {
         if (status === ModalBtnStatus.Cancel) {
           return;
@@ -117,13 +118,13 @@ export class UserManageComponent implements OnInit {
         this.tableLoading(true);
         this.addEditData(modalValue, 'editRoles');
       }, error => this.tableLoading(false));
-    });
+    });*/
   }
 
   addEditData(param: Role, methodName: 'editRoles' | 'addRoles'): void {
-    this.dataService[methodName](param).subscribe(() => {
+   /* this.dataService[methodName](param).subscribe(() => {
       this.getDataList();
-    });
+    });*/
   }
 
   // 修改一页几条
@@ -136,12 +137,28 @@ export class UserManageComponent implements OnInit {
     this.tableConfig = {
       headers: [
         {
-          title: '角色名称',
-          field: 'roleName',
+          title: '用户名',
+          field: 'userName',
         },
         {
-          title: '备注',
-          field: 'roleDesc',
+          title: '性别',
+          field: 'sex',
+        },
+        {
+          title: '状态',
+          field: 'available',
+        },
+        {
+          title: '联系电话',
+          field: 'telephone',
+        },
+        {
+          title: '手机号',
+          field: 'mobile',
+        },
+        {
+          title: '所属部门',
+          field: 'mobile',
         },
         {
           title: '操作',
