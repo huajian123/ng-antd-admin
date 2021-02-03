@@ -19,7 +19,7 @@ interface NormalModel {
 }
 
 interface Theme extends NormalModel {
-  key: 'dark' | 'light' | 'night';
+  key: 'dark' | 'light';
 }
 
 interface Color extends NormalModel {
@@ -64,12 +64,6 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
       key: 'light',
       image: '/assets/imgs/theme-light.svg',
       title: '亮色菜单风格',
-      isChecked: false,
-    },
-    {
-      key: 'night',
-      image: '/assets/imgs/theme-dark.svg',
-      title: '黑夜模式风格',
       isChecked: false,
     },
   ];
@@ -156,42 +150,11 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
     this.isCollapsed = !this.isCollapsed;
   }
 
-  // 切换到黑暗主题
-  changeThemeToNight(): void {
-    this.addCss('./assets/themes/style.dark.css', 'dark-theme');
-  }
-
-  addCss(path: string, id: string): void {
-    const doms = this.doc.getElementById(id);
-    if (doms) {
-      return;
-    }
-    const themeUrl = path;
-    // create new link element
-    const style = this.doc.createElement('link') as HTMLLinkElement;
-    // put the link into the document head
-    style.type = 'text/css';
-    style.rel = 'stylesheet';
-    style.id = id;
-    style.href = themeUrl;
-    this.doc.body.appendChild(style);
-  }
-
-  removeCss(select: string): void {
-    const doms = this.doc.querySelectorAll(select);
-    if (doms && doms.length > 0) {
-      doms.forEach((dom) => dom.remove());
-    }
-  }
-
-  removeNightTheme(): void {
-    this.removeCss('#dark-theme');
-  }
-
-  // 切换主题色
-  changePrimaryColor(colorItem: Color): void {
-    this.selOne(colorItem, this.colors);
-    this.addCss('./assets/themes/style.red.css', 'primary-red');
+  // 修改黑夜主题
+  changeNightTheme(isNight: boolean): void {
+    console.log(isNight);
+    this.themesService.setIsNightTheme(isNight);
+    this.themeSkinService.toggleTheme().then();
   }
 
   // 选择一个isChecked为true,其他为false
@@ -211,17 +174,7 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
   // 切换主题
   changeTheme(themeItem: Theme): void {
     this.selOne(themeItem, this.themes);
-    if (themeItem.key === 'night') {
-     // this.changeThemeToNight();
-      this.themeSkinService.toggleTheme().then();
-      this._themesOptions.theme = 'dark';
-      this.themesService.setIsNightTheme(true);
-    } else {
-      // this.removeNightTheme();
-      this.themeSkinService.toggleTheme().then();
-      this._themesOptions.theme = themeItem.key;
-      this.themesService.setIsNightTheme(false);
-    }
+    this._themesOptions.theme = themeItem.key;
     this.setThemeOptions();
   }
 

@@ -39,9 +39,9 @@
     </div>
 
     <nz-list [nzSplit]="false">
-      <nz-list-item [nzActions]="[layoutAction]">固定宽度</nz-list-item>
+      <nz-list-item [nzActions]="[layoutAction]">暗黑模式</nz-list-item>
       <ng-template #layoutAction>
-        <nz-switch nzSize="small"></nz-switch>
+        <nz-switch [ngModel]="_isNightTheme" (ngModelChange)="changeNightTheme($event)" nzSize="small"></nz-switch>
       </ng-template>
     </nz-list>
 
