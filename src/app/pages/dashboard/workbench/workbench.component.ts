@@ -16,7 +16,7 @@ import {ActionCode} from '../../../configs/actionCode';
 export class WorkbenchComponent implements OnInit {
   @ViewChild('operationTpl', {static: true}) operationTpl!: TemplateRef<any>;
   validateForm!: FormGroup;
-  isCollapse = true;
+  isCollapse = false;
   tableConfig!: MyTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '查询表格',

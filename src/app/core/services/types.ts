@@ -2,6 +2,11 @@
 * 通用interface
 * */
 
+export interface OptionsInterface {
+  value: number;
+  label: string;
+}
+
 export interface SearchCommonVO<T> {
   pageNum: number;
   pageSize: number;
