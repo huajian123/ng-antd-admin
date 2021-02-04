@@ -23,8 +23,14 @@ export class UserManageModalComponent extends BasicConfirmModalComponent impleme
 
   initForm(): void {
     this.addEditForm = this.fb.group({
-      roleName: [null, [Validators.required]],
-      roleDesc: [null],
+      userName: [null, [Validators.required]],
+      sex: [1],
+      available: [true],
+      telephone: [null],
+      mobile: [null],
+      email: [null],
+      departmentId: [null],
+      roleId: [null],
     });
   }
 

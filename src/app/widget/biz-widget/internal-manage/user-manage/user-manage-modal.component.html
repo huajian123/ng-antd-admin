@@ -1,15 +1,60 @@
 <form nz-form [formGroup]="addEditForm">
   <nz-form-item>
-    <nz-form-label nzRequired nzFor="roleName">角色名</nz-form-label>
-    <nz-form-control nzErrorTip="请输入角色名">
-      <input nz-input formControlName="roleName" name="roleName" placeholder="请输入角色名" id="roleName"/>
+    <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="sex">用户名</nz-form-label>
+    <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="请输入用户名">
+      <input nz-input formControlName="userName" id="userName" placeholder="用户名"/>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label nzFor="roleDesc">描述</nz-form-label>
-    <nz-form-control>
-      <input nz-input formControlName="roleDesc" name="roleDesc" placeholder="请输入备注" id="roleDesc"/>
+    <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="sex">性别</nz-form-label>
+    <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="性别">
+      <nz-radio-group formControlName="sex" >
+        <label nz-radio [nzValue]="1">男</label>
+        <label nz-radio [nzValue]="2">女</label>
+      </nz-radio-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="available">状态</nz-form-label>
+    <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="状态">
+      <nz-switch formControlName="sex" nzCheckedChildren="可用" nzUnCheckedChildren="禁用"></nz-switch>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="telephone">联系电话</nz-form-label>
+    <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="联系电话">
+      <input nz-input formControlName="telephone" id="telephone" placeholder="联系电话"/>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="mobile">手机号</nz-form-label>
+    <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="手机号">
+      <input nz-input formControlName="mobile" id="mobile" placeholder="手机号"/>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="email">电子邮箱</nz-form-label>
+    <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="电子邮箱">
+      <input nz-input formControlName="email" id="email" placeholder="电子邮箱"/>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="departmentId">所属部门</nz-form-label>
+    <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="所属部门">
+      <input nz-input formControlName="departmentId" id="departmentId" placeholder="标题"/>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="roleId">用户角色</nz-form-label>
+    <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="用户角色">
+      <input nz-input formControlName="roleId" id="roleId" placeholder="用户角色"/>
     </nz-form-control>
   </nz-form-item>
 </form>

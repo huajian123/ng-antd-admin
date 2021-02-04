@@ -4,13 +4,13 @@ import {MyTableConfig} from '../../../share/components/ant-table/ant-table.compo
 import {OptionsInterface, People, Role, SearchCommonVO} from '../../../core/services/types';
 import {NzModalService} from 'ng-zorro-antd/modal';
 import {MessageService} from '../../../core/services/common/message.service';
-import {RoleManageModalService} from '../../../widget/biz-widget/internal-manage/role-manage/role-manage-modal.service';
 import {Router} from '@angular/router';
 import {NzTableQueryParams} from 'ng-zorro-antd/table';
 import {ModalBtnStatus} from '../../../widget/base-modal';
 import {ActionCode} from 'src/app/configs/actionCode';
 import {UserManageService} from '../../../core/services/http/internal-manage/user-manage.service';
 import {MapKeyType, MapPipe, MapSet} from '../../../share/pipes/map.pipe';
+import {UserManageModalService} from '../../../widget/biz-widget/internal-manage/user-manage/user-manage-modal.service';
 
 interface SearchParam {
   userName: string;
@@ -45,7 +45,7 @@ export class UserManageComponent implements OnInit {
   searchParam: Partial<SearchParam> = {};
 
   constructor(private dataService: UserManageService, private modalSrv: NzModalService, private cdr: ChangeDetectorRef,
-              private messageService: MessageService, private modalService: RoleManageModalService,
+              private messageService: MessageService, private modalService: UserManageModalService,
               private router: Router) {
     this.dataList = [];
   }
@@ -116,12 +116,13 @@ export class UserManageComponent implements OnInit {
   }
 
   add(): void {
-    this.modalService.show({nzTitle: '新增'}).subscribe(({modalValue, status}) => {
+    this.modalService.show({nzTitle: '新增人员'}).subscribe(({modalValue, status}) => {
       if (status === ModalBtnStatus.Cancel) {
         return;
       }
-      this.tableLoading(true);
-      this.addEditData(modalValue, 'addRoles');
+      console.log(modalValue);
+      // this.tableLoading(true);
+      // this.addEditData(modalValue, 'addRoles');
     }, error => this.tableLoading(false));
   }
 
@@ -182,7 +183,7 @@ export class UserManageComponent implements OnInit {
         },
         {
           title: '所属部门',
-          field: 'mobile',
+          field: 'departmentName',
         },
         {
           title: '用户角色',
