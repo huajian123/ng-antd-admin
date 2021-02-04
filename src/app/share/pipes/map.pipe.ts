@@ -21,6 +21,10 @@ export const MapSet = {
     0: '女',
     1: '男',
   },
+  available: {
+    true: '可用',
+    false: '禁用'
+  }
 };
 
 export interface MapItem {

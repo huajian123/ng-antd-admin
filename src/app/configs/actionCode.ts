@@ -25,13 +25,15 @@ export const ActionCode = {
 
   Role: '0018', // 角色管理
   RoleAdd: '0118',
-  RoleEdit: '0128',
-  RoleDel: '0138',
-  RoleSetAuth: '0148',
+  RoleEdit: '0218',
+  RoleDel: '0318',
+  RoleSetAuth: '0418',
 
 
   Dept: '0028', // 部门管理
 
   UserManage: '0038',  // 用户管理
+  UserDetail: '0138',  // 查看详情
+  UserEdit: '0238',  // 用户编辑
 
 };

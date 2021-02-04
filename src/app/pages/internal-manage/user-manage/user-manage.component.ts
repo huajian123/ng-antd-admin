@@ -9,7 +9,7 @@ import {InterAddEditService} from '../../../widget/biz-widget/internal-manage/in
 import {Router} from '@angular/router';
 import {NzTableQueryParams} from 'ng-zorro-antd/table';
 import {ModalBtnStatus} from '../../../widget/base-modal';
-import { ActionCode } from 'src/app/configs/actionCode';
+import {ActionCode} from 'src/app/configs/actionCode';
 import {UserManageService} from '../../../core/services/http/internal-manage/user-manage.service';
 
 @Component({
@@ -87,12 +87,12 @@ export class UserManageComponent implements OnInit {
       nzContent: '删除后不可恢复',
       nzOnOk: () => {
         this.tableLoading(true);
-       /* this.dataService.delRoles(id).subscribe(() => {
-          if (this.dataList.length === 1) {
-            this.tableConfig.pageIndex--;
-          }
-          this.getDataList();
-        });*/
+        /* this.dataService.delRoles(id).subscribe(() => {
+           if (this.dataList.length === 1) {
+             this.tableConfig.pageIndex--;
+           }
+           this.getDataList();
+         });*/
       }
     });
   }
@@ -122,9 +122,9 @@ export class UserManageComponent implements OnInit {
   }
 
   addEditData(param: Role, methodName: 'editRoles' | 'addRoles'): void {
-   /* this.dataService[methodName](param).subscribe(() => {
-      this.getDataList();
-    });*/
+    /* this.dataService[methodName](param).subscribe(() => {
+       this.getDataList();
+     });*/
   }
 
   // 修改一页几条
@@ -143,10 +143,12 @@ export class UserManageComponent implements OnInit {
         {
           title: '性别',
           field: 'sex',
+          pipe: 'sex'
         },
         {
           title: '状态',
           field: 'available',
+          pipe: 'available',
         },
         {
           title: '联系电话',
@@ -157,8 +159,21 @@ export class UserManageComponent implements OnInit {
           field: 'mobile',
         },
         {
+          title: '电子邮箱',
+          field: 'email',
+        },
+        {
           title: '所属部门',
           field: 'mobile',
+        },
+        {
+          title: '用户角色',
+          field: 'roleName'
+        },
+        {
+          title: '最后登录时间',
+          field: 'lastLoginTime',
+          pipe: 'date:yyyy-MM-dd HH:mm'
         },
         {
           title: '操作',
