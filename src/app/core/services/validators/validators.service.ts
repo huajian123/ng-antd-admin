@@ -10,6 +10,10 @@ export class ValidatorsService {
   constructor(private vrService: ValidatorsRuleService) {
   }
 
+  // 邮箱校验
+  public emailValidator(): ValidatorFn | null {
+    return this.commonUtil(this.vrService.emailRule);
+  }
 
   // 手机号码校验
   public mobileValidator(): ValidatorFn | null {

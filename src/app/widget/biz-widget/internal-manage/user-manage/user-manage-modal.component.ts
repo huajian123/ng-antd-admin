@@ -4,7 +4,6 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {NzModalRef} from 'ng-zorro-antd/modal';
 import {Observable, of} from 'rxjs';
 import {fnCheckForm} from '../../../../utils/tools';
-import {Router} from '@angular/router';
 import {ValidatorsService} from '../../../../core/services/validators/validators.service';
 
 @Component({
@@ -31,7 +30,7 @@ export class UserManageModalComponent extends BasicConfirmModalComponent impleme
       available: [true],
       telephone: [null, [this.validatorsService.telephoneValidator()]],
       mobile: [null, [Validators.required, this.validatorsService.mobileValidator()]],
-      email: [null],
+      email: [null, [this.validatorsService.emailValidator()]],
       departmentId: [null],
       roleId: [null],
     });

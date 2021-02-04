@@ -9,7 +9,7 @@
   <nz-form-item>
     <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="sex">性别</nz-form-label>
     <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="性别">
-      <nz-radio-group formControlName="sex" >
+      <nz-radio-group formControlName="sex">
         <label nz-radio [nzValue]="1">男</label>
         <label nz-radio [nzValue]="2">女</label>
       </nz-radio-group>
@@ -25,21 +25,21 @@
 
   <nz-form-item>
     <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="telephone">联系电话</nz-form-label>
-    <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="联系电话">
+    <nz-form-control [nzSm]="18" [nzXs]="24" [nzErrorTip]="combineTpl">
       <input nz-input formControlName="telephone" id="telephone" placeholder="联系电话"/>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
     <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="mobile">手机号</nz-form-label>
-    <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="手机号">
-      <input nz-input formControlName="mobile" id="mobile" placeholder="手机号"/>
+    <nz-form-control [nzSm]="18" [nzXs]="24" [nzErrorTip]="combineTpl">
+      <input nz-input formControlName="mobile" maxlength="11" id="mobile" placeholder="手机号"/>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
     <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="email">电子邮箱</nz-form-label>
-    <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="电子邮箱">
+    <nz-form-control [nzSm]="18" [nzXs]="24" [nzErrorTip]="combineTpl">
       <input nz-input formControlName="email" id="email" placeholder="电子邮箱"/>
     </nz-form-control>
   </nz-form-item>
@@ -58,3 +58,7 @@
     </nz-form-control>
   </nz-form-item>
 </form>
+<ng-template #combineTpl let-control>
+  <ng-container *ngIf="control.hasError('message')">{{control.errors.message}}</ng-container>
+  <ng-container *ngIf="control.hasError('required')">必填项</ng-container>
+</ng-template>
