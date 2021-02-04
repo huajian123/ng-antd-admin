@@ -7,10 +7,10 @@ import {Observable, of} from 'rxjs';
 
 @Component({
   selector: 'app-inter-add-edit',
-  templateUrl: './inter-add-edit.component.html',
+  templateUrl: './role-manage-modal.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InterAddEditComponent extends BasicConfirmModalComponent implements OnInit {
+export class RoleManageModalComponent extends BasicConfirmModalComponent implements OnInit {
 
   addEditForm!: FormGroup;
   params: object;

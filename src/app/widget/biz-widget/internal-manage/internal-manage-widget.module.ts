@@ -1,18 +1,18 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {InterAddEditComponent} from './inter-add-edit/inter-add-edit.component';
+import {RoleManageModalComponent} from './role-manage/role-manage-modal.component';
 import {SharedModule} from '../../../share/shared.module';
 import { DeptManageComponent } from './dept-manage/dept-manage.component';
 
 
 @NgModule({
-  declarations: [InterAddEditComponent, DeptManageComponent],
+  declarations: [RoleManageModalComponent, DeptManageComponent],
   imports: [
     CommonModule,
     SharedModule
   ],
   exports: [
-    InterAddEditComponent
+    RoleManageModalComponent
   ]
 })
 export class InternalManageWidgetModule {

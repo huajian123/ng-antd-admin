@@ -6,7 +6,7 @@ import {Role, SearchCommonVO} from '../../../core/services/types';
 import {RoleService} from '../../../core/services/http/internal-manage/role.service';
 import {NzModalService} from 'ng-zorro-antd/modal';
 import {MessageService} from '../../../core/services/common/message.service';
-import {InterAddEditService} from '../../../widget/biz-widget/internal-manage/inter-add-edit/inter-add-edit.service';
+import {RoleManageModalService} from '../../../widget/biz-widget/internal-manage/role-manage/role-manage-modal.service';
 import {Router} from '@angular/router';
 import {ModalBtnStatus} from '../../../widget/base-modal';
 import {ActionCode} from 'src/app/configs/actionCode';
@@ -31,7 +31,7 @@ export class RoleManageComponent implements OnInit {
   dataList!: Role[];
 
   constructor(private dataService: RoleService, private modalSrv: NzModalService, private cdr: ChangeDetectorRef,
-              private messageService: MessageService, private modalService: InterAddEditService,
+              private messageService: MessageService, private modalService: RoleManageModalService,
               private router: Router) {
     this.dataList = [];
   }
