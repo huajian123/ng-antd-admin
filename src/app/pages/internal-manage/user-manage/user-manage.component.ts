@@ -162,12 +162,14 @@ export class UserManageComponent implements OnInit {
         {
           title: '性别',
           field: 'sex',
+          width: 60,
           pipe: 'sex'
         },
         {
           title: '状态',
           field: 'available',
           pipe: 'available',
+          width: 60,
         },
         {
           title: '联系电话',

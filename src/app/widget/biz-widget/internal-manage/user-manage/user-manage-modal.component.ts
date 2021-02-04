@@ -5,20 +5,22 @@ import {NzModalRef} from 'ng-zorro-antd/modal';
 import {Observable, of} from 'rxjs';
 import {fnCheckForm} from '../../../../utils/tools';
 import {ValidatorsService} from '../../../../core/services/validators/validators.service';
+import {DeptManageService} from '../../../../core/services/http/internal-manage/dept-manage.service';
+import {CascaderOption, DeptObj} from '../../../../core/services/types';
 
 @Component({
   selector: 'app-user-manage-modal',
   templateUrl: './user-manage-modal.component.html',
-  styleUrls: ['./user-manage-modal.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserManageModalComponent extends BasicConfirmModalComponent implements OnInit {
 
   addEditForm!: FormGroup;
   params: object;
+  deptOptions: CascaderOption[] = [];
 
   constructor(private modalRef: NzModalRef, private fb: FormBuilder,
-              private validatorsService: ValidatorsService) {
+              private validatorsService: ValidatorsService, private deptService: DeptManageService) {
     super();
     this.params = {};
   }
@@ -51,8 +53,36 @@ export class UserManageModalComponent extends BasicConfirmModalComponent impleme
   }
 
 
+  transtormDept(deptArray: DeptObj[]): CascaderOption[] {
+    const tempArray: CascaderOption[] = [];
+    deptArray.forEach((item) => {
+      const deptOptionObj: CascaderOption = {
+        label: item.departmentName,
+        value: item.id
+      };
+      if (item.departmentVos && item.departmentVos.length > 0) {
+        deptOptionObj.children = this.transtormDept(item.departmentVos);
+      } else {
+        deptOptionObj.isLeaf = true;
+      }
+      tempArray.push(deptOptionObj);
+    });
+
+    return tempArray;
+  }
+
+  getDeptList(): void {
+    this.deptService.getDeptList().subscribe(res => {
+      console.log(res);
+      this.deptOptions = this.transtormDept(res);
+      console.log(this.deptOptions);
+
+    });
+  }
+
   ngOnInit(): void {
     this.initForm();
+    this.getDeptList();
     if (Object.keys(this.params).length > 0) {
       this.addEditForm.patchValue(this.params);
     }

@@ -35,6 +35,14 @@ export interface PageInfo<T> {
   navigatepageNums?: number[];
 }
 
+// 级联选择数据结构
+export interface CascaderOption {
+  value: number|string;
+  label: string;
+  children?: CascaderOption[];
+  isLeaf?: boolean;
+}
+
 
 export interface UserLogin {
   name: string;
