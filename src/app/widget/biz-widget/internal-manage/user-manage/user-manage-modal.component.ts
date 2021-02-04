@@ -1,9 +1,11 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {BasicConfirmModalComponent} from '../../../base-modal';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {NzModalRef} from 'ng-zorro-antd/modal';
 import {Observable, of} from 'rxjs';
 import {fnCheckForm} from '../../../../utils/tools';
+import {Router} from '@angular/router';
+import {ValidatorsService} from '../../../../core/services/validators/validators.service';
 
 @Component({
   selector: 'app-user-manage-modal',
@@ -16,7 +18,8 @@ export class UserManageModalComponent extends BasicConfirmModalComponent impleme
   addEditForm!: FormGroup;
   params: object;
 
-  constructor(private modalRef: NzModalRef, private fb: FormBuilder) {
+  constructor(private modalRef: NzModalRef, private fb: FormBuilder,
+              private validatorsService: ValidatorsService) {
     super();
     this.params = {};
   }
@@ -26,14 +29,13 @@ export class UserManageModalComponent extends BasicConfirmModalComponent impleme
       userName: [null, [Validators.required]],
       sex: [1],
       available: [true],
-      telephone: [null],
-      mobile: [null],
+      telephone: [null, [this.validatorsService.telephoneValidator()]],
+      mobile: [null, [Validators.required, this.validatorsService.mobileValidator()]],
       email: [null],
       departmentId: [null],
       roleId: [null],
     });
   }
-
 
 
   // 此方法为如果有异步数据需要加载，则在该方法中添加

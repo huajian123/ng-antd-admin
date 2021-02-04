@@ -23,6 +23,23 @@ export function isMobile(value: string): boolean {
   return typeof value === 'string' && /^(0|\+?86|17951)?(13[0-9]|15[0-9]|17[0678]|18[0-9]|14[57])[0-9]{8}$/.test(value);
 }
 
+/** 是否为电话号码 */
+export function isTelPhone(value: string): boolean {
+  return typeof value === 'string' && /^(0\d{2,3}-?)?\d{7,8}$/.test(value);
+}
+
+/** 是否邮箱地址 */
+export function isEmail(value: string): boolean {
+  return typeof value === 'string' && /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/.test(value);
+}
+
+/** 密码由6到20位大小写字母 */
+export function isPasswordPass(value: string): boolean {
+  const regTure = /^[^\s]{6,20}$/;
+  const regFalse = /^\d+$/;
+  return typeof value === 'string' && (regTure.test(value) && !regFalse.test(value));
+}
+
 /** 是否URL地址 */
 export function isUrl(url: string): boolean {
   return /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/.test(
