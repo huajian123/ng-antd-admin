@@ -2,18 +2,21 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RoleManageModalComponent} from './role-manage/role-manage-modal.component';
 import {SharedModule} from '../../../share/shared.module';
-import { DeptManageComponent } from './dept-manage/dept-manage.component';
-import { UserManageModalComponent } from './user-manage/user-manage-modal.component';
+import {DeptManageComponent} from './dept-manage/dept-manage.component';
+import {UserManageModalComponent} from './user-manage/user-manage-modal.component';
 
+const MODULES = [
+  RoleManageModalComponent, DeptManageComponent, UserManageModalComponent
+];
 
 @NgModule({
-  declarations: [RoleManageModalComponent, DeptManageComponent, UserManageModalComponent],
+  declarations: [...MODULES],
   imports: [
     CommonModule,
     SharedModule
   ],
   exports: [
-    RoleManageModalComponent
+    ...MODULES
   ]
 })
 export class InternalManageWidgetModule {

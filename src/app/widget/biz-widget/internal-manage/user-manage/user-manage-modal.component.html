@@ -47,14 +47,17 @@
   <nz-form-item>
     <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="departmentId">所属部门</nz-form-label>
     <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="所属部门">
-      <input nz-input formControlName="departmentId" id="departmentId" placeholder="标题"/>
+     <!-- <input nz-input formControlName="departmentId" id="departmentId" placeholder="标题"/>-->
+      <nz-cascader nzChangeOnSelect formControlName="departmentId" [nzOptions]="deptOptions"></nz-cascader>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
     <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="roleId">用户角色</nz-form-label>
     <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="用户角色">
-      <input nz-input formControlName="roleId" id="roleId" placeholder="用户角色"/>
+      <nz-select nzMode="tags" formControlName="roleId" nzPlaceHolder="角色" >
+        <nz-option *ngFor="let option of roleOptions" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+      </nz-select>
     </nz-form-control>
   </nz-form-item>
 </form>

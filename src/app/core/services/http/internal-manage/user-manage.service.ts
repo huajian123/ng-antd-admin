@@ -16,4 +16,12 @@ export class UserManageService {
     return this.http.post('/list-user', param);
   }
 
+  public addUsers(param: People): Observable<any> {
+    return this.http.post('/user', param);
+  }
+
+  public editUsers(param: People): Observable<any> {
+    return this.http.post('/list-user', param);
+  }
+
 }

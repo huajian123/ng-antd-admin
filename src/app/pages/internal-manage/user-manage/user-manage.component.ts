@@ -121,8 +121,8 @@ export class UserManageComponent implements OnInit {
         return;
       }
       console.log(modalValue);
-      // this.tableLoading(true);
-      // this.addEditData(modalValue, 'addRoles');
+      this.tableLoading(true);
+      this.addEditData(modalValue, 'addUsers');
     }, error => this.tableLoading(false));
   }
 
@@ -140,10 +140,15 @@ export class UserManageComponent implements OnInit {
     });*/
   }
 
-  addEditData(param: Role, methodName: 'editRoles' | 'addRoles'): void {
-    /* this.dataService[methodName](param).subscribe(() => {
-       this.getDataList();
-     });*/
+  addEditData(param: People, methodName: 'editUsers' | 'addUsers'): void {
+
+    if (Array.isArray(param.departmentId)) {
+      param.departmentId = param.departmentId.pop()!;
+    }
+    param.mobile = Number(param.mobile);
+    this.dataService[methodName](param).subscribe(() => {
+      this.getDataList();
+    });
   }
 
   // 修改一页几条

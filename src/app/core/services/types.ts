@@ -3,7 +3,7 @@
 * */
 
 export interface OptionsInterface {
-  value: number;
+  value: number | string;
   label: string;
 }
 
@@ -37,7 +37,7 @@ export interface PageInfo<T> {
 
 // 级联选择数据结构
 export interface CascaderOption {
-  value: number|string;
+  value: number | string;
   label: string;
   children?: CascaderOption[];
   isLeaf?: boolean;
@@ -73,10 +73,14 @@ export interface People {
   userName: string;
   available: boolean;
   departmentName: string;
+  departmentId: number | number[];
+  firstDepartmentGradeId: number | null;
+  secondDepartmentGradeId: number | null;
+  thirdDepartmentGradeId: number | null;
   roleName: string[];
   sex: 1 | 0;
   telephone: string;
-  mobile: string;
+  mobile: string | number;
   email: string;
   lastLoginTime: Date;
 }

@@ -32,11 +32,13 @@ import {NzMessageModule} from 'ng-zorro-antd/message';
 import {NzSpinModule} from 'ng-zorro-antd/spin';
 import {NzTypographyModule} from 'ng-zorro-antd/typography';
 import {NzModalModule} from 'ng-zorro-antd/modal';
-import {NzCollapseModule} from "ng-zorro-antd/collapse";
+import {NzCollapseModule} from 'ng-zorro-antd/collapse';
+import {NzCascaderModule} from 'ng-zorro-antd/cascader';
 
 
 export const SHARED_ZORRO_MODULES = [
   IconsProviderModule,
+  NzCascaderModule,
   NzFormModule,
   NzButtonModule,
   NzInputModule,

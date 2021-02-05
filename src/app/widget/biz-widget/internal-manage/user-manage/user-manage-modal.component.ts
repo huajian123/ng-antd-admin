@@ -6,7 +6,8 @@ import {Observable, of} from 'rxjs';
 import {fnCheckForm} from '../../../../utils/tools';
 import {ValidatorsService} from '../../../../core/services/validators/validators.service';
 import {DeptManageService} from '../../../../core/services/http/internal-manage/dept-manage.service';
-import {CascaderOption, DeptObj} from '../../../../core/services/types';
+import {CascaderOption, DeptObj, OptionsInterface} from '../../../../core/services/types';
+import {RoleService} from '../../../../core/services/http/internal-manage/role.service';
 
 @Component({
   selector: 'app-user-manage-modal',
@@ -18,9 +19,11 @@ export class UserManageModalComponent extends BasicConfirmModalComponent impleme
   addEditForm!: FormGroup;
   params: object;
   deptOptions: CascaderOption[] = [];
+  roleOptions: OptionsInterface[] = [];
 
   constructor(private modalRef: NzModalRef, private fb: FormBuilder,
-              private validatorsService: ValidatorsService, private deptService: DeptManageService) {
+              private validatorsService: ValidatorsService, private deptService: DeptManageService,
+              private roleService: RoleService) {
     super();
     this.params = {};
   }
@@ -73,16 +76,27 @@ export class UserManageModalComponent extends BasicConfirmModalComponent impleme
 
   getDeptList(): void {
     this.deptService.getDeptList().subscribe(res => {
-      console.log(res);
       this.deptOptions = this.transtormDept(res);
-      console.log(this.deptOptions);
+    });
+  }
 
+  getRoleList(): void {
+    this.roleService.getRoles({pageNum: 0, pageSize: 0}).subscribe(({list}) => {
+      this.roleOptions = [];
+      list.forEach(({id, roleName}) => {
+        const obj: OptionsInterface = {
+          label: roleName,
+          value: id!,
+        };
+        this.roleOptions.push(obj);
+      });
     });
   }
 
   ngOnInit(): void {
     this.initForm();
     this.getDeptList();
+    this.getRoleList();
     if (Object.keys(this.params).length > 0) {
       this.addEditForm.patchValue(this.params);
     }
