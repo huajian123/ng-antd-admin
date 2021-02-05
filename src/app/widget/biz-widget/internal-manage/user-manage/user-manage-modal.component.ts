@@ -6,7 +6,7 @@ import {Observable, of} from 'rxjs';
 import {fnCheckForm} from '../../../../utils/tools';
 import {ValidatorsService} from '../../../../core/services/validators/validators.service';
 import {DeptManageService} from '../../../../core/services/http/internal-manage/dept-manage.service';
-import {CascaderOption, DeptObj, OptionsInterface} from '../../../../core/services/types';
+import {CascaderOption, DeptObj, OptionsInterface, People} from '../../../../core/services/types';
 import {RoleService} from '../../../../core/services/http/internal-manage/role.service';
 
 @Component({
@@ -17,29 +17,16 @@ import {RoleService} from '../../../../core/services/http/internal-manage/role.s
 export class UserManageModalComponent extends BasicConfirmModalComponent implements OnInit {
 
   addEditForm!: FormGroup;
-  params: object;
+  params!: People;
   deptOptions: CascaderOption[] = [];
   roleOptions: OptionsInterface[] = [];
+  isEdit = false;
 
   constructor(private modalRef: NzModalRef, private fb: FormBuilder,
               private validatorsService: ValidatorsService, private deptService: DeptManageService,
               private roleService: RoleService) {
     super();
-    this.params = {};
-  }
-
-  initForm(): void {
-    this.addEditForm = this.fb.group({
-      userName: [null, [Validators.required]],
-      password: [null, [Validators.required, this.validatorsService.passwordValidator()]],
-      sex: [1],
-      available: [true],
-      telephone: [null, [this.validatorsService.telephoneValidator()]],
-      mobile: [null, [Validators.required, this.validatorsService.mobileValidator()]],
-      email: [null, [this.validatorsService.emailValidator()]],
-      departmentId: [null],
-      roleId: [null],
-    });
+    // this.params = {};
   }
 
 
@@ -94,12 +81,33 @@ export class UserManageModalComponent extends BasicConfirmModalComponent impleme
     });
   }
 
+  initForm(): void {
+    this.addEditForm = this.fb.group({
+      userName: [null, [Validators.required]],
+      password: ['123456', [Validators.required, this.validatorsService.passwordValidator()]],
+      sex: [1],
+      available: [true],
+      telephone: [null, [this.validatorsService.telephoneValidator()]],
+      mobile: [null, [Validators.required, this.validatorsService.mobileValidator()]],
+      email: [null, [this.validatorsService.emailValidator()]],
+      departmentId: [null],
+      roleId: [null],
+    });
+  }
+
+
   ngOnInit(): void {
     this.initForm();
     this.getDeptList();
     this.getRoleList();
     if (Object.keys(this.params).length > 0) {
+      this.params.departmentId = [
+        this.params.firstDepartmentGradeId,
+        this.params.secondDepartmentGradeId,
+        this.params.thirdDepartmentGradeId].filter(item => item !== null);
+      this.isEdit = true;
       this.addEditForm.patchValue(this.params);
+      this.addEditForm.controls['password'].clearValidators();
     }
   }
 }

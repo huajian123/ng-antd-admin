@@ -128,16 +128,16 @@ export class UserManageComponent implements OnInit {
 
   // 修改
   edit(id: number): void {
-    /*this.dataService.getRolesDetail(id).subscribe(res => {
+    this.dataService.getUserDetail(id).subscribe(res => {
       this.modalService.show({nzTitle: '编辑'}, res).subscribe(({modalValue, status}) => {
         if (status === ModalBtnStatus.Cancel) {
           return;
         }
         modalValue.id = id;
         this.tableLoading(true);
-        this.addEditData(modalValue, 'editRoles');
+        this.addEditData(modalValue, 'editUsers');
       }, error => this.tableLoading(false));
-    });*/
+    });
   }
 
   addEditData(param: People, methodName: 'editUsers' | 'addUsers'): void {

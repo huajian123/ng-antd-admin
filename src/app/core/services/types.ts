@@ -75,9 +75,9 @@ export interface People {
   available: boolean;
   departmentName: string;
   departmentId: number | number[];
-  firstDepartmentGradeId: number | null;
-  secondDepartmentGradeId: number | null;
-  thirdDepartmentGradeId: number | null;
+  firstDepartmentGradeId: number;
+  secondDepartmentGradeId: number;
+  thirdDepartmentGradeId: number;
   roleName: string[];
   sex: 1 | 0;
   telephone: string;
