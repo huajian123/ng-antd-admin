@@ -26,7 +26,6 @@ export class UserManageModalComponent extends BasicConfirmModalComponent impleme
               private validatorsService: ValidatorsService, private deptService: DeptManageService,
               private roleService: RoleService) {
     super();
-    // this.params = {};
   }
 
 
@@ -84,7 +83,7 @@ export class UserManageModalComponent extends BasicConfirmModalComponent impleme
   initForm(): void {
     this.addEditForm = this.fb.group({
       userName: [null, [Validators.required]],
-      password: ['123456', [Validators.required, this.validatorsService.passwordValidator()]],
+      password: ['a123456', [Validators.required, this.validatorsService.passwordValidator()]],
       sex: [1],
       available: [true],
       telephone: [null, [this.validatorsService.telephoneValidator()]],
@@ -107,7 +106,7 @@ export class UserManageModalComponent extends BasicConfirmModalComponent impleme
         this.params.thirdDepartmentGradeId].filter(item => item !== null);
       this.isEdit = true;
       this.addEditForm.patchValue(this.params);
-      this.addEditForm.controls['password'].clearValidators();
+      this.addEditForm.controls['password'].disable();
     }
   }
 }

@@ -7,7 +7,7 @@
   </nz-form-item>
   <nz-form-item *ngIf="!isEdit">
     <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="roleId">密码</nz-form-label>
-    <nz-form-control nzExtra="新建用户初始密码为：123456" [nzSm]="18" [nzXs]="24" [nzErrorTip]="combineTpl">
+    <nz-form-control nzExtra="新建用户初始密码为：a123456" [nzSm]="18" [nzXs]="24" [nzErrorTip]="combineTpl">
       <input [type]="'password'" nz-input placeholder="密码" formControlName="password" />
     </nz-form-control>
   </nz-form-item>
@@ -24,7 +24,7 @@
   <nz-form-item>
     <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="available">状态</nz-form-label>
     <nz-form-control [nzSm]="18" [nzXs]="24" [nzErrorTip]="combineTpl">
-      <nz-switch formControlName="sex" nzCheckedChildren="可用" nzUnCheckedChildren="禁用"></nz-switch>
+      <nz-switch formControlName="available" nzCheckedChildren="可用" nzUnCheckedChildren="禁用"></nz-switch>
     </nz-form-control>
   </nz-form-item>
 

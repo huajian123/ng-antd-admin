@@ -11,6 +11,7 @@ import {ActionCode} from 'src/app/configs/actionCode';
 import {UserManageService} from '../../../core/services/http/internal-manage/user-manage.service';
 import {MapKeyType, MapPipe, MapSet} from '../../../share/pipes/map.pipe';
 import {UserManageModalService} from '../../../widget/biz-widget/internal-manage/user-manage/user-manage-modal.service';
+import {ResetPasswordModalService} from '../../../widget/biz-widget/internal-manage/user-manage/reset-password-modal/reset-password-modal.service';
 
 interface SearchParam {
   userName: string;
@@ -34,6 +35,7 @@ export class UserManageComponent implements OnInit {
     breadcrumb: ['首页', '内部管理', '人员管理']
   };
   @ViewChild('operationTpl', {static: true}) operationTpl!: TemplateRef<any>;
+  @ViewChild('statusSwitchTpl', {static: true}) statusSwitchTpl!: TemplateRef<any>;
   ActionCode = ActionCode;
   actionCodeObj = {
     add: ActionCode.RoleAdd
@@ -43,10 +45,11 @@ export class UserManageComponent implements OnInit {
   isCollapse = true;
   isEnabledOptions: OptionsInterface[] = [];
   searchParam: Partial<SearchParam> = {};
+  switchMap = new Map();
 
   constructor(private dataService: UserManageService, private modalSrv: NzModalService, private cdr: ChangeDetectorRef,
               private messageService: MessageService, private modalService: UserManageModalService,
-              private router: Router) {
+              private resetPasswordModalSrv: ResetPasswordModalService) {
     this.dataList = [];
   }
 
@@ -68,12 +71,14 @@ export class UserManageComponent implements OnInit {
       pageNum: e?.pageIndex || this.tableConfig.pageIndex!,
       filters: this.searchParam
     };
-    console.log(this.searchParam);
     this.dataService.getPeoples(params).subscribe((data => {
       const {list, total, pageNum} = data;
       this.dataList = [...list];
       this.tableConfig.total = total!;
       this.tableConfig.pageIndex = pageNum!;
+      this.dataList.forEach(({id, available}) => {
+        this.switchMap.set(id, available);
+      });
       this.tableLoading(false);
     }), (error => {
       this.tableLoading(false);
@@ -81,9 +86,16 @@ export class UserManageComponent implements OnInit {
   }
 
 
-  // 设置权限
-  setRole(id: number): void {
-    this.router.navigate(['/default/internal-manage/role-manage/set-role', id]);
+  // 重置密码
+  resetPassword(id: number): void {
+    this.resetPasswordModalSrv.show({nzTitle: '重置密码'}).subscribe(({modalValue, status}) => {
+      if (status === ModalBtnStatus.Cancel) {
+        return;
+      }
+      modalValue.id = id;
+      this.tableLoading(true);
+      this.addEditData(modalValue, 'editUsers');
+    }, error => this.tableConfig.loading = false);
   }
 
   // 触发表格变更检测
@@ -98,29 +110,11 @@ export class UserManageComponent implements OnInit {
     this.tableChangeDectction();
   }
 
-  // 删除
-  del(id: number): void {
-    this.modalSrv.confirm({
-      nzTitle: '确定要删除吗？',
-      nzContent: '删除后不可恢复',
-      nzOnOk: () => {
-        this.tableLoading(true);
-        /* this.dataService.delRoles(id).subscribe(() => {
-           if (this.dataList.length === 1) {
-             this.tableConfig.pageIndex--;
-           }
-           this.getDataList();
-         });*/
-      }
-    });
-  }
-
   add(): void {
     this.modalService.show({nzTitle: '新增人员'}).subscribe(({modalValue, status}) => {
       if (status === ModalBtnStatus.Cancel) {
         return;
       }
-      console.log(modalValue);
       this.tableLoading(true);
       this.addEditData(modalValue, 'addUsers');
     }, error => this.tableLoading(false));
@@ -157,6 +151,17 @@ export class UserManageComponent implements OnInit {
     this.tableConfig.pageSize = e;
   }
 
+  changeStatus(e: boolean, id: number): void {
+    this.tableConfig.loading = true;
+    const people: Partial<People> = {
+      id,
+      available: !e
+    };
+    this.dataService.editUsers(people as People).subscribe(res => {
+      this.getDataList();
+    });
+  }
+
   private initTable(): void {
     this.tableConfig = {
       headers: [
@@ -172,9 +177,10 @@ export class UserManageComponent implements OnInit {
         },
         {
           title: '状态',
+          tdTemplate: this.statusSwitchTpl,
           field: 'available',
           pipe: 'available',
-          width: 60,
+          width: 80,
         },
         {
           title: '联系电话',

@@ -4,9 +4,13 @@ import {RoleManageModalComponent} from './role-manage/role-manage-modal.componen
 import {SharedModule} from '../../../share/shared.module';
 import {DeptManageComponent} from './dept-manage/dept-manage.component';
 import {UserManageModalComponent} from './user-manage/user-manage-modal.component';
+import {ResetPasswordModalComponent} from './user-manage/reset-password-modal/reset-password-modal.component';
 
 const MODULES = [
-  RoleManageModalComponent, DeptManageComponent, UserManageModalComponent
+  RoleManageModalComponent,
+  DeptManageComponent,
+  UserManageModalComponent,
+  ResetPasswordModalComponent
 ];
 
 @NgModule({

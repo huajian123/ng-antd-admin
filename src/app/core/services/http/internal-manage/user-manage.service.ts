@@ -17,16 +17,16 @@ export class UserManageService {
     return this.http.post('/list-user', param);
   }
 
-  public getUserDetail(id: number): Observable<NzSafeAny>  {
+  public getUserDetail(id: number): Observable<NzSafeAny> {
     return this.http.get(`/user/${id}`);
   }
 
   public addUsers(param: People): Observable<NzSafeAny> {
-    return this.http.post('/user', param);
+    return this.http.post('/user', param, {needSuccessInfo: true});
   }
 
   public editUsers(param: People): Observable<NzSafeAny> {
-    return this.http.put('/user', param);
+    return this.http.put('/user', param, {needSuccessInfo: true});
   }
 
 }
