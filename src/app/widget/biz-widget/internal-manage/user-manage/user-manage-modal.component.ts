@@ -31,6 +31,7 @@ export class UserManageModalComponent extends BasicConfirmModalComponent impleme
   initForm(): void {
     this.addEditForm = this.fb.group({
       userName: [null, [Validators.required]],
+      password: [null, [Validators.required, this.validatorsService.passwordValidator()]],
       sex: [1],
       available: [true],
       telephone: [null, [this.validatorsService.telephoneValidator()]],

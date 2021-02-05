@@ -20,6 +20,11 @@ export class ValidatorsService {
     return this.commonUtil(this.vrService.mobileRule);
   }
 
+  // 密码校验
+  public passwordValidator(): ValidatorFn | null {
+    return this.commonUtil(this.vrService.passwordRule);
+  }
+
   // 电话号码校验
   public telephoneValidator(): ValidatorFn {
     return this.commonUtil(this.vrService.telPhoneRule);

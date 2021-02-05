@@ -70,6 +70,7 @@ export interface Role {
 
 export interface People {
   id?: number;
+  password: string;
   userName: string;
   available: boolean;
   departmentName: string;
