@@ -1,5 +1,5 @@
 import {
-  ChangeDetectionStrategy,
+  ChangeDetectionStrategy, ChangeDetectorRef,
   Component,
   HostListener,
   Inject,
@@ -7,10 +7,12 @@ import {
   OnInit,
 } from '@angular/core';
 import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import {take, takeUntil} from 'rxjs/operators';
 import {DOCUMENT} from '@angular/common';
 import {SettingInterface, ThemeService} from '../../../core/services/store/theme.service';
 import {ThemeSkinService} from '../../../core/services/common/theme-skin.service';
+import {WindowService} from '../../../core/services/common/window.service';
+import {IsNightKey, ThemeOptionsKey} from '../../../configs/constant';
 
 interface NormalModel {
   image?: string;
@@ -142,7 +144,8 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
   ];
 
   constructor(private themesService: ThemeService, @Inject(DOCUMENT) private doc: Document,
-              private themeSkinService: ThemeSkinService) {
+              private themeSkinService: ThemeSkinService, private windowServe: WindowService,
+              private cdr: ChangeDetectorRef) {
   }
 
   @HostListener('click', ['$event'])
@@ -152,7 +155,7 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
 
   // 修改黑夜主题
   changeNightTheme(isNight: boolean): void {
-    console.log(isNight);
+    this.windowServe.setStorage(IsNightKey, '' + isNight);
     this.themesService.setIsNightTheme(isNight);
     this.themeSkinService.toggleTheme().then();
   }
@@ -181,10 +184,42 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
   // 设置主题参数
   setThemeOptions(): void {
     this.themesService.setThemesMode(this._themesOptions);
+    this.windowServe.setStorage(ThemeOptionsKey, JSON.stringify(this._themesOptions));
   }
 
   ngOnInit(): void {
-    this.themesOptions$.pipe(takeUntil(this.destory$)).subscribe((res: SettingInterface) => this._themesOptions = res);
+    // todo 代码有待精简
+    const isNightCash = this.windowServe.getStorage(IsNightKey);
+    if (!!isNightCash) {
+      const JsonParseIsNight: boolean = JSON.parse(isNightCash);
+      this.changeNightTheme(JsonParseIsNight);
+      this._isNightTheme = JsonParseIsNight;
+    } else {
+      this.isNightTheme$.pipe(takeUntil(this.destory$), take(1)).subscribe((res: boolean) => {
+        this._isNightTheme = res;
+      });
+    }
+
+
+    const themeOptionsCash = this.windowServe.getStorage(ThemeOptionsKey);
+    if (!!themeOptionsCash) {
+      const JsonParseThemesOptions = JSON.parse(themeOptionsCash);
+      this._themesOptions = JsonParseThemesOptions;
+      this.setThemeOptions();
+    } else {
+      this.themesOptions$.pipe(takeUntil(this.destory$), take(1)).subscribe((res: SettingInterface) => this._themesOptions = res);
+    }
+
+
+    this.modes.forEach((item) => {
+      item.isChecked = item.key === this._themesOptions.mode;
+    });
+
+    this.themes.forEach((item) => {
+      item.isChecked = item.key === this._themesOptions.theme;
+    });
+
+    this.cdr.markForCheck();
   }
 
   ngOnDestroy(): void {
