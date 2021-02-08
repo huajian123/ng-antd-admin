@@ -1,3 +1,4 @@
+<app-top-progress-bar></app-top-progress-bar>
 <nz-layout [ngClass]="{'color-weak':themesOptions.colorWeak}">
   <nz-sider *ngIf="(themesOptions$|async)!.mode==='side'" class="menu-sidebar" [nzTheme]="(themesOptions$|async)!.theme"
             nzBreakpoint="lg" [nzCollapsible]="true" [nzCollapsed]="isCollapsed$|async"
