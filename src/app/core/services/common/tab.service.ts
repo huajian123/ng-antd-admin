@@ -21,6 +21,10 @@ export class TabService {
     this.tabArray = [];
   }
 
+  clearTabs(): void {
+    this.tabArray = [];
+  }
+
   addTab(param: TabModel): void {
     this.tabArray.forEach(tab => {
       // 路由的子菜单，例如用户表单路由的title需和用户表单详情组件路由的title相同

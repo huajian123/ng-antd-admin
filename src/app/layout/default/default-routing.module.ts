@@ -5,7 +5,7 @@ import {JudgLoginGuard} from '../../core/services/common/guard/judgLogin.guard';
 
 const routes: Routes = [
   {
-    path: '', component: DefaultComponent,
+    path: '', component: DefaultComponent, data: {shouldDetach: 'no'},
     canActivate: [JudgLoginGuard],
     children: [
       {

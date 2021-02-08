@@ -1,7 +1,10 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {ThemeService} from '../../core/services/store/theme.service';
 import {WindowService} from '../../core/services/common/window.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {SimpleReuseStrategy} from '../../core/services/common/reuse-strategy';
+import {TabService} from '../../core/services/common/tab.service';
+import {fnFormatePath} from '../../utils/tools';
 
 @Component({
   selector: 'app-default',
@@ -32,7 +35,8 @@ export class DefaultComponent implements OnInit {
   };
 
   constructor(private themesService: ThemeService, private windowServe: WindowService,
-              private router: Router) {
+              private router: Router, private tabService: TabService,
+              private activatedRoute: ActivatedRoute) {
   }
 
 
@@ -44,6 +48,10 @@ export class DefaultComponent implements OnInit {
   // 退出登陆
   goLogin(): void {
     this.windowServe.clearStorage();
+    this.tabService.clearTabs();
+    SimpleReuseStrategy.handlers = {};
+    // @ts-ignore
+    SimpleReuseStrategy.waitDelete = fnFormatePath(this.activatedRoute.snapshot['_routerState'].url);
     this.router.navigate(['/login']);
   }
 

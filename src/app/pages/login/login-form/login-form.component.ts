@@ -32,7 +32,7 @@ export class LoginFormComponent implements OnInit {
       this.windowServe.setStorage(AuthKey, TokenPre + token);
      // this.authService.parsToken(token);
       this.authService.setAuthCode(this.authService.parsToken(TokenPre + token));
-      this.router.navigateByUrl('default');
+      this.router.navigateByUrl('default/dashboard/analysis');
     });
   }
 

@@ -1,9 +1,9 @@
 import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy, Input} from '@angular/core';
-import {filter, map, mergeMap, tap} from 'rxjs/operators';
+import {filter, map, mergeMap, takeUntil, tap} from 'rxjs/operators';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {TabService} from '../../../core/services/common/tab.service';
 import {ThemeService} from '../../../core/services/store/theme.service';
-import {Subscription} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 import * as _ from 'lodash';
 import {ActionCode} from '../../../configs/actionCode';
 
@@ -24,6 +24,7 @@ interface Menu {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavBarComponent implements OnInit, OnDestroy {
+  private destory$ = new Subject<void>();
   menus: Menu[] = [
     {
       title: 'Dashboard',
@@ -267,10 +268,12 @@ export class NavBarComponent implements OnInit, OnDestroy {
     this.subs[0] = this.router.events
       .pipe(
         filter(event => event instanceof NavigationEnd),
+        takeUntil(this.destory$),
         tap(() => {
           // todo
           // @ts-ignore
           this.routerPath = this.activatedRoute.snapshot['_routerState'].url;
+          console.log(this.routerPath);
           this.clickMenuItem(this.menus);
           this.clickMenuItem(this.copyMenus);
           // 是折叠的菜单
@@ -414,6 +417,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subs.forEach(s => s.unsubscribe());
+    this.destory$.next();
+    this.destory$.complete();
   }
 }
