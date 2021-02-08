@@ -21,7 +21,6 @@ export class TopProgressBarComponent {
     // scroll to top in change page
     router.events.subscribe(evt => {
       // 表示在惰性加载某个路由配置前触发的事件。
-      console.log(!this.isFetching && evt instanceof RouteConfigLoadStart);
       if (!this.isFetching && evt instanceof RouteConfigLoadStart) {
         this.isFetching = true;
         this.cdr.markForCheck();
