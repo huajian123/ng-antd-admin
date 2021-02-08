@@ -17,7 +17,7 @@
   <thead>
   <tr>
     <th [nzLeft]="true" [nzIndeterminate]="indeterminate" *ngIf="tableConfig.showCheckbox"
-        (nzCheckedChange)="onAllChecked($event)" [nzWidth]="'10px'" [nzChecked]="allChecked"></th>
+        (nzCheckedChange)="onAllChecked($event)" [nzWidth]="'40px'" [nzChecked]="allChecked"></th>
     <th [nzWidth]="head.width + 'px'"
         *ngFor="let head of tableConfig.headers;trackBy:trackByTableHead;let headIndex=index"
         [nzRight]="!!head.fixed">{{head.title}}</th>

@@ -29,11 +29,17 @@ export class RoleManageComponent implements OnInit {
     breadcrumb: ['首页', '内部管理', '角色管理']
   };
   dataList!: Role[];
+  checkedCashArray = [];
 
   constructor(private dataService: RoleService, private modalSrv: NzModalService, private cdr: ChangeDetectorRef,
               private messageService: MessageService, private modalService: RoleManageModalService,
               private router: Router) {
     this.dataList = [];
+  }
+
+  selectedChecked(e: any): void {
+    // @ts-ignore
+    this.checkedCashArray = [...e];
   }
 
   getDataList(e?: NzTableQueryParams): void {
@@ -55,6 +61,7 @@ export class RoleManageComponent implements OnInit {
       this.tableConfig.total = total!;
       this.tableConfig.pageIndex = pageNum!;
       this.tableLoading(false);
+      this.checkedCashArray = [...this.checkedCashArray];
     }), (error => {
       this.tableLoading(false);
     }));
@@ -96,12 +103,12 @@ export class RoleManageComponent implements OnInit {
   }
 
   add(): void {
-    this.modalService.show({nzTitle: '新增'}).subscribe(({modalValue, status}) => {
-      if (status === ModalBtnStatus.Cancel) {
+    this.modalService.show({nzTitle: '新增'}).subscribe((res) => {
+      if (!res || res.status === ModalBtnStatus.Cancel) {
         return;
       }
       this.tableLoading(true);
-      this.addEditData(modalValue, 'addRoles');
+      this.addEditData(res.modalValue, 'addRoles');
     }, error => this.tableLoading(false));
   }
 
@@ -133,13 +140,131 @@ export class RoleManageComponent implements OnInit {
 
   private initTable(): void {
     this.tableConfig = {
+      showCheckbox: true,
       headers: [
         {
           title: '角色名称',
           field: 'roleName',
+          width: 100,
+        },
+        {
+          title: '角色名称',
+          field: 'roleName',
+          width: 100,
+        },
+        {
+          title: '角色名称',
+          field: 'roleName',
+          width: 100,
+        },
+        {
+          title: '角色名称',
+          field: 'roleName',
+          width: 100,
+        },
+        {
+          title: '角色名称',
+          field: 'roleName',
+          width: 100,
+        },
+        {
+          title: '角色名称',
+          field: 'roleName',
+          width: 100,
+        },
+        {
+          title: '角色名称',
+          field: 'roleName',
+          width: 100,
+        }, {
+          title: '角色名称',
+          field: 'roleName',
+          width: 100,
+        }, {
+          title: '角色名称',
+          field: 'roleName',
+          width: 100,
+        },
+        {
+          title: '角色名称',
+          field: 'roleName',
+          width: 100,
+        },
+        {
+          title: '角色名称',
+          field: 'roleName',
+          width: 100,
+        },
+        {
+          title: '角色名称',
+          field: 'roleName',
+          width: 100,
+        },
+        {
+          title: '角色名称',
+          field: 'roleName',
+          width: 100,
+        },
+        {
+          title: '角色名称',
+          field: 'roleName',
+          width: 100,
+        },
+        {
+          title: '角色名称',
+          field: 'roleName',
+          width: 100,
+        },
+        {
+          title: '角色名称',
+          field: 'roleName',
+          width: 100,
+        },
+        {
+          title: '角色名称',
+          field: 'roleName',
+          width: 100,
+        },
+        {
+          title: '角色名称',
+          field: 'roleName',
+          width: 100,
+        },
+        {
+          title: '角色名称',
+          field: 'roleName',
+          width: 100,
+        },
+        {
+          title: '角色名称',
+          field: 'roleName',
+          width: 100,
+        },
+        {
+          title: '角色名称',
+          field: 'roleName',
+          width: 100,
+        },
+        {
+          title: '角色名称',
+          field: 'roleName',
+          width: 100,
+        },
+        {
+          title: '角色名称',
+          field: 'roleName',
+          width: 100,
+        },
+
+
+        {
+          title: '角色名称',
+          field: 'roleName',
+          width: 100,
         },
         {
           title: '备注',
+          width: 100,
           field: 'roleDesc',
         },
         {
