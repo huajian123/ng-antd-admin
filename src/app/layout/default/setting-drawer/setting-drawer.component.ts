@@ -192,7 +192,9 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
     const isNightCash = this.windowServe.getStorage(IsNightKey);
     if (!!isNightCash) {
       const JsonParseIsNight: boolean = JSON.parse(isNightCash);
-      this.changeNightTheme(JsonParseIsNight);
+      if (JsonParseIsNight) {
+        this.changeNightTheme(JsonParseIsNight);
+      }
       this._isNightTheme = JsonParseIsNight;
     } else {
       this.isNightTheme$.pipe(takeUntil(this.destory$), take(1)).subscribe((res: boolean) => {
