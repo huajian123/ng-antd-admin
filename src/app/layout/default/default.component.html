@@ -7,7 +7,7 @@
   <ng-container header>
     <app-tool-bar>
       <ng-container left *ngIf="(themeOptions$|async)!.mode==='side'">
-        <i class="trigger" nz-icon [nzType]="layout.collasped ? 'menu-unfold' : 'menu-fold'"
+        <i class="trigger" nz-icon [nzType]="(isCollapsed$|async) ? 'menu-unfold' : 'menu-fold'"
            (click)="changeCollapsed()"></i>
       </ng-container>
       <ng-container left *ngIf="(themeOptions$|async)!.mode!=='side'">
@@ -43,7 +43,7 @@
               <li nz-menu-divider></li>
               <li nz-menu-item>
                 <a (click)="goLogin()"><i nz-icon nzType="logout" nzTheme="outline"
-                      class="bst-header_usr_menu_icon"></i><span>退出登录</span></a>
+                                          class="bst-header_usr_menu_icon"></i><span>退出登录</span></a>
               </li>
             </ul>
           </nz-dropdown-menu>

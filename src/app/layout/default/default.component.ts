@@ -16,7 +16,7 @@ export class DefaultComponent implements OnInit {
   themeOptions = {
     mode: 'side'
   };
-
+  isCollapsed$ = this.themesService.getIsCollapsed();
   themeOptions$ = this.themesService.getThemesMode();
   isCollapsed = false;
   layout = {
