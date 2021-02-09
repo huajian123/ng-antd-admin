@@ -10,6 +10,7 @@ import {CardTableWrapModule} from './components/card-table-wrap/card-table-wrap.
 import {DirectivesModule} from './directives/directives.module';
 import {HoverPreloadModule} from 'ngx-hover-preload';
 
+
 const MODULES = [
   CommonModule,
   FormsModule,

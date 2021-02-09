@@ -34,9 +34,11 @@ import {NzTypographyModule} from 'ng-zorro-antd/typography';
 import {NzModalModule} from 'ng-zorro-antd/modal';
 import {NzCollapseModule} from 'ng-zorro-antd/collapse';
 import {NzCascaderModule} from 'ng-zorro-antd/cascader';
+import {NzStatisticModule} from "ng-zorro-antd/statistic";
 
 
 export const SHARED_ZORRO_MODULES = [
+  NzStatisticModule,
   IconsProviderModule,
   NzCascaderModule,
   NzFormModule,

@@ -1,108 +1,38 @@
-<!--头部版块-->
+<section class="content-wrap">
+  <section nz-row  [nzGutter]="[32,16]">
+    <div nz-col [nzXl]="18" [nzXXl]="6" [nzLg]="12" [nzMd]="12" [nzSm]="12" [nzXs]="24">
+      <nz-card  nzTitle="活动实时交易情况">
+       <div nz-row [nzGutter]="[40,16]">
+         <div nz-col nzSpan="12">
+           <nz-row [nzGutter]="16">
+             <nz-col [nzSpan]="12">
+               <nz-statistic [nzValue]="(124543233 | number)!+'元'" [nzTitle]="'今日交易总额'"></nz-statistic>
+             </nz-col>
+             <nz-col [nzSpan]="12">
+               <nz-statistic [nzValue]="(0.92 | percent)!" [nzTitle]="'销售目标完成率'"></nz-statistic>
+             </nz-col>
+           </nz-row>
+         </div>
+         <div nz-col nzSpan="12">
+           <nz-row [nzGutter]="16">
+             <nz-col [nzSpan]="12">
+               <nz-countdown [nzValue]="deadline" [nzTitle]="'活动剩余时间'" [nzFormat]="'HH:mm:ss:SSS'"></nz-countdown>
+             </nz-col>
+             <nz-col [nzSpan]="12">
+               <nz-statistic [nzValue]="(234 | number)!" [nzTitle]="'每秒交易总额'"></nz-statistic>
+             </nz-col>
+           </nz-row>
+         </div>
+       </div>
+      </nz-card>
+    </div>
+    <div nz-col [nzXl]="6" [nzXXl]="6" [nzLg]="12" [nzMd]="12" [nzSm]="12" [nzXs]="24">
+      <nz-card  nzTitle="活动情况预测">
+        <p>Card content</p>
+        <p>Card content</p>
+        <p>Card content</p>
+      </nz-card>
+    </div>
+  </section>
 
-<div class="normal-table-wrap">
-  <form class="form-wrap" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
-    <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">标题</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入标题">
-        <input nz-input formControlName="email" id="email" placeholder="给目标起个名字" />
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>Password</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your password!">
-        <input nz-input type="password" id="password" formControlName="password" (ngModelChange)="updateConfirmValidator()" />
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkPassword" nzRequired>Confirm Password</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorTpl">
-        <input nz-input type="password" formControlName="checkPassword" id="checkPassword" />
-        <ng-template #errorTpl let-control>
-          <ng-container *ngIf="control.hasError('required')">
-            Please confirm your password!
-          </ng-container>
-          <ng-container *ngIf="control.hasError('confirm')">
-            Two passwords that you enter is inconsistent!
-          </ng-container>
-        </ng-template>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="nickname" nzRequired nzTooltipTitle="What do you want other to call you">
-        <span>Nickname</span>
-      </nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname!">
-        <input nz-input id="nickname" formControlName="nickname" />
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phoneNumber" nzRequired>Phone Number</nz-form-label>
-      <nz-form-control
-        [nzSm]="14"
-        [nzXs]="24"
-        [nzValidateStatus]="validateForm.controls['phoneNumber']"
-        nzErrorTip="Please input your phone number!"
-      >
-        <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
-          <ng-template #addOnBeforeTemplate>
-            <nz-select formControlName="phoneNumberPrefix" class="phone-select">
-              <nz-option nzLabel="+86" nzValue="+86"></nz-option>
-              <nz-option nzLabel="+87" nzValue="+87"></nz-option>
-            </nz-select>
-          </ng-template>
-          <input formControlName="phoneNumber" id="'phoneNumber'" nz-input />
-        </nz-input-group>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="website" nzRequired>Website</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input website!">
-        <input nz-input id="website" formControlName="website" placeholder="website" />
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label
-        [nzSm]="6"
-        [nzXs]="24"
-        nzFor="captcha"
-        nzRequired
-        nzTooltipTitle="Please click 'Get captcha'"
-        [nzTooltipIcon]="captchaTooltipIcon"
-      >
-        Captcha
-      </nz-form-label>
-      <nz-form-control
-        [nzSm]="14"
-        [nzXs]="24"
-        nzErrorTip="Please input the captcha you got!"
-        nzExtra="We must make sure that your are a human."
-      >
-        <div nz-row [nzGutter]="8">
-          <div nz-col [nzSpan]="12">
-            <input nz-input formControlName="captcha" id="captcha" />
-          </div>
-          <div nz-col [nzSpan]="12">
-            <button nz-button (click)="getCaptcha($event)">Get captcha</button>
-          </div>
-        </div>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item nz-row class="register-area">
-      <nz-form-control [nzSpan]="14" [nzOffset]="6">
-        <label nz-checkbox formControlName="agree">
-            <span>
-              I have read the
-              <a>agreement</a>
-            </span>
-        </label>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item nz-row class="register-area">
-      <nz-form-control [nzSpan]="14" [nzOffset]="6">
-        <button nz-button nzType="primary">Register</button>
-      </nz-form-control>
-    </nz-form-item>
-  </form>
-
-</div>
+</section>
