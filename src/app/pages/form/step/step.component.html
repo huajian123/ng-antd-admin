@@ -5,7 +5,7 @@
   <nz-card>
     <section class="page-wrap">
       <section class="step-wrap">
-        <nz-steps [nzCurrent]="1">
+        <nz-steps [nzCurrent]="currentStep-1">
           <nz-step nzTitle="填写转账信息"></nz-step>
           <nz-step nzTitle="确认转账信息"></nz-step>
           <nz-step nzTitle="完成"></nz-step>
@@ -13,7 +13,7 @@
       </section>
 
       <section>
-        <ng-container *ngIf="false">
+        <ng-container *ngIf="currentStep===1">
           <form class="form-wrap p-b-0" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
             <nz-form-item>
               <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="title">付款账户</nz-form-label>
@@ -53,7 +53,7 @@
             </nz-form-item>
             <nz-form-item nz-row class="register-area">
               <nz-form-control [nzSpan]="14" [nzOffset]="6">
-                <button nz-button nzType="primary">下一步</button>
+                <button nz-button nzType="primary" (click)="currentStep=currentStep+1">下一步</button>
               </nz-form-control>
             </nz-form-item>
           </form>
@@ -71,7 +71,7 @@
         </ng-container>
 
 
-        <ng-container *ngIf="false">
+        <ng-container *ngIf="currentStep===2">
           <div class="determine-wrap p-b-0">
             <nz-alert
               nzType="info"
@@ -96,25 +96,25 @@
             </nz-form-item>
             <nz-form-item nz-row class="register-area">
               <nz-form-control [nzSpan]="14" [nzOffset]="6">
-                <button nz-button nzType="primary">提交</button>
-                <button class="m-l-10" nz-button nzType="default">上一步</button>
+                <button nz-button nzType="primary" (click)="currentStep=currentStep+1">提交</button>
+                <button class="m-l-10" nz-button (click)="currentStep=currentStep-1" nzType="default">上一步</button>
               </nz-form-control>
             </nz-form-item>
           </div>
         </ng-container>
 
-        <ng-container *ngIf="true">
+        <ng-container *ngIf="currentStep===3">
           <nz-result
             nzStatus="success"
             nzTitle="操作成功"
             nzSubTitle="预计两小时内到账"
           >
             <div nz-result-extra>
-              <button nz-button nzType="primary">在转一笔</button>
+              <button (click)="currentStep=1" nz-button nzType="primary">在转一笔</button>
               <button nz-button>查看账单</button>
             </div>
           </nz-result>
-          <div class="desc-bg center">
+          <div nz-result-content class="desc-bg center">
             <div class="determine-wrap p-b-0">
 
               <nz-descriptions class="m-t-20">

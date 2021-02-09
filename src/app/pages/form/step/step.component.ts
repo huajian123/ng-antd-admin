@@ -21,6 +21,7 @@ export class StepComponent implements OnInit {
     type: 'info-circle',
     theme: 'twotone'
   };
+  currentStep = 1;
 
   submitForm(): void {
     // tslint:disable-next-line:forin
