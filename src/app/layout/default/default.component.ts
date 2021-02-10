@@ -7,7 +7,7 @@ import {TabService} from '../../core/services/common/tab.service';
 import {fnFormatePath} from '../../utils/tools';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {Subject} from 'rxjs';
-import { switchMap} from 'rxjs/operators';
+import {switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-default',
@@ -63,8 +63,12 @@ export class DefaultComponent implements OnInit, OnDestroy {
     })).subscribe(result => {
       this.isOverMode = result.matches;
       this.themesService.setIsOverMode(this.isOverMode);
+      // 是over模式，展开折叠状态得左侧菜单
       if (this.isOverMode) {
         this.themesService.setIsCollapsed(false);
+      } else {
+        // 非over模式时，关闭左侧菜单抽屉
+        this.showOverModeNav = false;
       }
     });
   }
