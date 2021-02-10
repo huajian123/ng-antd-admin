@@ -415,6 +415,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
     });
   }
 
+
   ngOnInit(): void {
     this.subIsCollapsed();
     this.subThemesSettings();
