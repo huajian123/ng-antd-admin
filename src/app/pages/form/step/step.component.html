@@ -14,7 +14,7 @@
 
       <section>
         <ng-container *ngIf="currentStep===1">
-          <form class="form-wrap p-b-0" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+          <form class="form-wrap p-b-0 center-row" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
             <nz-form-item>
               <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="title">付款账户</nz-form-label>
               <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入标题">
