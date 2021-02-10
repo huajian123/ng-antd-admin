@@ -1,9 +1,9 @@
-import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy, Input} from '@angular/core';
-import {filter, map, mergeMap, takeUntil, tap} from 'rxjs/operators';
+import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy} from '@angular/core';
+import {filter, map, mergeMap, switchMap, takeUntil, tap} from 'rxjs/operators';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {TabService} from '../../../core/services/common/tab.service';
 import {ThemeService} from '../../../core/services/store/theme.service';
-import {Subject, Subscription} from 'rxjs';
+import { Subject, Subscription} from 'rxjs';
 import * as _ from 'lodash';
 import {ActionCode} from '../../../configs/actionCode';
 
@@ -258,6 +258,8 @@ export class NavBarComponent implements OnInit, OnDestroy {
   themesOptions$ = this.themesService.getThemesMode();
   themesMode = 'side';
   isCollapsed$ = this.themesService.getIsCollapsed();
+  isOverMode$ = this.themesService.getIsOverMode();
+  isOverMode = false;
   isCollapsed = false;
   subs: Array<Subscription> = [];
   copyMenus: Menu[] = _.cloneDeep(this.menus);
@@ -273,17 +275,16 @@ export class NavBarComponent implements OnInit, OnDestroy {
           // todo
           // @ts-ignore
           this.routerPath = this.activatedRoute.snapshot['_routerState'].url;
-          console.log(this.routerPath);
           this.clickMenuItem(this.menus);
           this.clickMenuItem(this.copyMenus);
-          // 是折叠的菜单
-          if (this.isCollapsed) {
+          // 是折叠的菜单并且不是over菜单
+          if (this.isCollapsed && !this.isOverMode) {
             this.closeMenuOpen(this.menus);
           } else {
             // this.menus = this.copyMenus;
           }
 
-          if (this.themesMode === 'top') {
+          if (this.themesMode === 'top' && !this.isOverMode) {
             this.closeMenu();
           }
         }),
@@ -403,9 +404,12 @@ export class NavBarComponent implements OnInit, OnDestroy {
   }
 
   subThemesSettings(): void {
-    this.themesOptions$.subscribe(options => {
+    this.isOverMode$.pipe(switchMap(res => {
+      this.isOverMode = res;
+      return this.themesOptions$;
+    })).subscribe(options => {
       this.themesMode = options.mode;
-      if (this.themesMode === 'top') {
+      if (this.themesMode === 'top' && !this.isOverMode) {
         this.closeMenu();
       }
     });

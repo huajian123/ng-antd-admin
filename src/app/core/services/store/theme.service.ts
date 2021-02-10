@@ -16,6 +16,7 @@ export interface SettingInterface {
 export class ThemeService {
 
   private isNightTheme$ = new BehaviorSubject<boolean>(false);
+  private isOverModeTheme$ = new BehaviorSubject<boolean>(false);
   private themesMode$ = new BehaviorSubject<SettingInterface>({
     theme: 'dark',
     color: 'daybreak',
@@ -45,6 +46,15 @@ export class ThemeService {
 
   getIsNightTheme(): Observable<boolean> {
     return this.isNightTheme$.asObservable();
+  }
+
+  // 主题是否over侧边栏
+  setIsOverMode(isNight: boolean): void {
+    this.isOverModeTheme$.next(isNight);
+  }
+
+  getIsOverMode(): Observable<boolean> {
+    return this.isOverModeTheme$.asObservable();
   }
 
   setIsCollapsed(isCollapsed: boolean): void {

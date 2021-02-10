@@ -15,7 +15,6 @@ export class SideNavComponent implements OnInit {
 
   themesOptions$ = this.themesService.getThemesMode();
   isNightTheme$ = this.themesService.getIsNightTheme();
-  @Input() isCollapsed = false;
 
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private tabService: TabService,

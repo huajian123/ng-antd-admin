@@ -22,19 +22,7 @@ export class DefLayoutContentComponent implements OnInit, OnDestroy {
     colorWeak: false
   };
   isCollapsed$ = this.themesService.getIsCollapsed();
-  isCollapsed = true;
-  @Output() collapsedChange = new EventEmitter<boolean>();
-
-  @Input()
-  get collapsed(): boolean {
-    return this.isCollapsed;
-  }
-
-  set collapsed(value: boolean) {
-    this.isCollapsed = value;
-    this.collapsedChange.emit(value);
-  }
-
+  isOverMode$ = this.themesService.getIsOverMode();
 
   constructor(private themesService: ThemeService) {
   }

@@ -1,16 +1,16 @@
-<app-def-layout-content [(collapsed)]="layout.collasped">
+<app-def-layout-content>
 
   <ng-container sider>
-    <app-side-nav [isCollapsed]="layout.collasped"></app-side-nav>
+    <app-side-nav></app-side-nav>
   </ng-container>
 
   <ng-container header>
     <app-tool-bar>
-      <ng-container left *ngIf="(themeOptions$|async)!.mode==='side'">
+      <ng-container left *ngIf="isOverMode||(themeOptions$|async)!.mode==='side'">
         <i class="trigger" nz-icon [nzType]="(isCollapsed$|async) ? 'menu-unfold' : 'menu-fold'"
            (click)="changeCollapsed()"></i>
       </ng-container>
-      <ng-container left *ngIf="(themeOptions$|async)!.mode!=='side'">
+      <ng-container left *ngIf="!isOverMode&&(themeOptions$|async)!.mode!=='side'">
         <app-nav-bar></app-nav-bar>
       </ng-container>
 
@@ -67,3 +67,13 @@
   </ng-container>
 
 </app-def-layout-content>
+<nz-drawer [nzBodyStyle]="{padding:0}" [nzWidth]="256" [nzClosable]="false" [nzVisible]="showOverModeNav" nzPlacement="left" (nzOnClose)="showOverModeNav=false">
+  <ng-container *nzDrawerContent>
+    <nz-layout  style="overflow-x:hidden">
+      <nz-sider class="menu-sidebar" [nzWidth]="256" [nzTrigger]="null" >
+        <app-side-nav></app-side-nav>
+      </nz-sider>
+    </nz-layout>
+
+  </ng-container>
+</nz-drawer>

@@ -1,4 +1,4 @@
-<ul nz-menu [nzInlineCollapsed]="isCollapsed$|async"  [nzTheme]="(themesOptions$|async)!.theme" [nzMode]="(themesOptions$|async)!.mode==='side'?'inline':'horizontal'">
+<ul nz-menu [nzInlineCollapsed]="isCollapsed$|async"  [nzTheme]="(themesOptions$|async)!.theme" [nzMode]="(themesOptions$|async)!.mode==='side'||(isOverMode$|async)?'inline':'horizontal'">
   <ng-container *ngTemplateOutlet="menuTpl;context:{$implicit: menus}"></ng-container>
   <ng-template #menuTpl let-menus>
     <ng-container *ngFor="let menu of menus;">
