@@ -1,10 +1,13 @@
 import {
-  ChangeDetectionStrategy, ChangeDetectorRef,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
+  ElementRef,
   HostListener,
   Inject,
   OnDestroy,
   OnInit,
+  Renderer2,
 } from '@angular/core';
 import {Subject} from 'rxjs';
 import {take, takeUntil} from 'rxjs/operators';
@@ -145,7 +148,7 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
 
   constructor(private themesService: ThemeService, @Inject(DOCUMENT) private doc: Document,
               private themeSkinService: ThemeSkinService, private windowServe: WindowService,
-              private cdr: ChangeDetectorRef) {
+              private cdr: ChangeDetectorRef, private el: ElementRef, private rd2: Renderer2) {
   }
 
   @HostListener('click', ['$event'])
@@ -190,6 +193,12 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
 
   // 修改色弱模式
   changeWeakMode(e: boolean): void {
+    const name = this.doc.getElementsByTagName('html');
+    if (e) {
+      this.rd2.addClass(name[0], 'color-weak');
+    } else {
+      this.rd2.removeClass(name[0], 'color-weak');
+    }
     this._themesOptions.colorWeak = e;
     this.setThemeOptions();
   }
@@ -198,11 +207,11 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
     // todo 代码有待精简
     const isNightCash = this.windowServe.getStorage(IsNightKey);
     if (!!isNightCash) {
-      const JsonParseIsNight: boolean = JSON.parse(isNightCash);
-      if (JsonParseIsNight) {
-        this.changeNightTheme(JsonParseIsNight);
+      const jsonParseIsNight: boolean = JSON.parse(isNightCash);
+      if (jsonParseIsNight) {
+        this.changeNightTheme(jsonParseIsNight);
       }
-      this._isNightTheme = JsonParseIsNight;
+      this._isNightTheme = jsonParseIsNight;
     } else {
       this.isNightTheme$.pipe(takeUntil(this.destory$), take(1)).subscribe((res: boolean) => {
         this._isNightTheme = res;
@@ -212,12 +221,15 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
 
     const themeOptionsCash = this.windowServe.getStorage(ThemeOptionsKey);
     if (!!themeOptionsCash) {
-      const JsonParseThemesOptions = JSON.parse(themeOptionsCash);
-      this._themesOptions = JsonParseThemesOptions;
+      this._themesOptions = JSON.parse(themeOptionsCash);
       this.setThemeOptions();
     } else {
-      this.themesOptions$.pipe(takeUntil(this.destory$), take(1)).subscribe((res: SettingInterface) => this._themesOptions = res);
+      this.themesOptions$.pipe(takeUntil(this.destory$), take(1)).subscribe((res: SettingInterface) => {
+        this._themesOptions = res;
+      });
     }
+
+    this.changeWeakMode(this._themesOptions.colorWeak);
 
 
     this.modes.forEach((item) => {
