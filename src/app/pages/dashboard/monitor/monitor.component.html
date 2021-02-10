@@ -1,6 +1,6 @@
 <section class="content-wrap">
   <section nz-row  [nzGutter]="[32,16]">
-    <div nz-col [nzXl]="18" [nzXXl]="6" [nzLg]="12" [nzMd]="12" [nzSm]="12" [nzXs]="24">
+    <div nz-col [nzXl]="18" [nzXXl]="18" [nzLg]="18" [nzMd]="18" [nzSm]="18" [nzXs]="18">
       <nz-card  nzTitle="活动实时交易情况">
        <div nz-row [nzGutter]="[40,16]">
          <div nz-col nzSpan="12">
@@ -19,14 +19,17 @@
                <nz-countdown [nzValue]="deadline" [nzTitle]="'活动剩余时间'" [nzFormat]="'HH:mm:ss:SSS'"></nz-countdown>
              </nz-col>
              <nz-col [nzSpan]="12">
-               <nz-statistic [nzValue]="(234 | number)!" [nzTitle]="'每秒交易总额'"></nz-statistic>
+               <nz-statistic [nzValue]="(234 | number)!+'元'" [nzTitle]="'每秒交易总额'"></nz-statistic>
              </nz-col>
            </nz-row>
+         </div>
+         <div nz-col nzSpan="24" style="min-height: 452px;width: 96%">
+           <div id="map"></div>
          </div>
        </div>
       </nz-card>
     </div>
-    <div nz-col [nzXl]="6" [nzXXl]="6" [nzLg]="12" [nzMd]="12" [nzSm]="12" [nzXs]="24">
+    <div nz-col [nzXl]="6" [nzXXl]="6" [nzLg]="6" [nzMd]="6" [nzSm]="6" [nzXs]="6">
       <nz-card  nzTitle="活动情况预测">
         <p>Card content</p>
         <p>Card content</p>
