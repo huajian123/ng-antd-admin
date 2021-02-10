@@ -51,7 +51,7 @@
       <nz-list [nzSplit]="false">
         <nz-list-item [nzActions]="[otherAction]">色弱模式</nz-list-item>
         <ng-template #otherAction>
-          <nz-switch (ngModelChange)="setThemeOptions()" [(ngModel)]="_themesOptions.colorWeak" nzSize="small"></nz-switch>
+          <nz-switch (ngModelChange)="changeWeakMode($event)" [ngModel]="_themesOptions.colorWeak" nzSize="small"></nz-switch>
         </ng-template>
       </nz-list>
     </div>

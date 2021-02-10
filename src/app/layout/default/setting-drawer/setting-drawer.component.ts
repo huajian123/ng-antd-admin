@@ -187,6 +187,13 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
     this.windowServe.setStorage(ThemeOptionsKey, JSON.stringify(this._themesOptions));
   }
 
+
+  // 修改色弱模式
+  changeWeakMode(e: boolean): void {
+    this._themesOptions.colorWeak = e;
+    this.setThemeOptions();
+  }
+
   ngOnInit(): void {
     // todo 代码有待精简
     const isNightCash = this.windowServe.getStorage(IsNightKey);
