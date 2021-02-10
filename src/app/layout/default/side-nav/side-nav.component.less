@@ -1,7 +1,6 @@
 @import "mixin";
 .themeMixin({
   :host {
-    // todo 侧边栏收缩起来的样式问题
     .left-nav-wrap{
       display: flex;
       flex-direction: column;
@@ -21,9 +20,7 @@
       // background: @menu-dark-bg;
       transition: all .3s;
 
-      .light {
-        background: white;
-      }
+
     }
 
     .sidebar-logo img {
@@ -43,7 +40,7 @@
       vertical-align: middle;
 
       &.light {
-        color: @primary-6;
+        color: @primary-6!important;
       }
     }
     ::-webkit-scrollbar{/*滚动条整体样式*/
@@ -74,3 +71,6 @@
   }
 });
 
+.light {
+  background: white;
+}

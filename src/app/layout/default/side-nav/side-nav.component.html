@@ -1,4 +1,4 @@
-<div class="left-nav-wrap">
+<div class="left-nav-wrap" [class.light]="(themesOptions$|async)!.theme==='light'&&!(isNightTheme$|async)">
   <div class="sidebar-logo">
     <a href="#" target="_blank">
       <img src="../../../../assets/imgs/logo.svg" alt="logo">
