@@ -20,6 +20,10 @@ const routes: Routes = [
         path: 'internal-manage',
         loadChildren: () => import('../../pages/internal-manage/internal-manage.module').then(m => m.InternalManageModule)
       },
+      {
+        path: 'list',
+        loadChildren: () => import('../../pages/list/list.module').then(m => m.ListModule)
+      },
       {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
     ]
   },

@@ -117,7 +117,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
           title: '查询表格',
           open: false,
           selected: false,
-          path: '/search-table',
+          path: '/default/list/search-table',
         },
         {
           title: '标准表格',
