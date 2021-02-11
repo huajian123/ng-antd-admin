@@ -58,21 +58,22 @@ export class MonitorComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // 地图
-    const scene = new Scene({
-      id: "map",
-      logoPosition: 'bottomright',
-      antialias: false,
-      map: new GaodeMap({
-        pitch: 0,
-        style: "dark",
-        center: [112, 23.69],
-        zoom: 2.5
-      })
-    });
+
 
     setTimeout(() => {
       this.initDashBoard();
+      // 地图
+      const scene = new Scene({
+        id: "map",
+        logoPosition: 'bottomright',
+        antialias: false,
+        map: new GaodeMap({
+          pitch: 0,
+          style: "dark",
+          center: [112, 23.69],
+          zoom: 2.5
+        })
+      });
     });
   }
 
