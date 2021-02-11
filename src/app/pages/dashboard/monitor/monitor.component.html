@@ -1,5 +1,5 @@
 <section class="content-wrap">
-  <section nz-row  [nzGutter]="[32,16]">
+  <section nz-row  [nzGutter]="[16,16]">
     <div nz-col [nzXl]="18" [nzXXl]="18" [nzLg]="18" [nzMd]="18" [nzSm]="18" [nzXs]="18">
       <nz-card  nzTitle="活动实时交易情况">
        <div nz-row [nzGutter]="[40,16]">
@@ -23,22 +23,29 @@
              </nz-col>
            </nz-row>
          </div>
-         <div nz-col nzSpan="24" style="min-height: 452px;">
+         <div nz-col nzSpan="24" style="min-height: 430px;">
            <div id="map"></div>
          </div>
        </div>
       </nz-card>
     </div>
     <div nz-col [nzXl]="6" [nzXXl]="6" [nzLg]="6" [nzMd]="6" [nzSm]="6" [nzXs]="6">
-      <nz-card   nzTitle="活动情况预测">
-        <p>Card content</p>
-        <p>Card content</p>
-        <p>Card content</p>
-      </nz-card>
+      <div class="card-wrap-line">
+        <nz-card nzTitle="活动情况预测">
+          <div class="card-top">
+            <div nz-typography nzType="secondary">目标评估</div>
+            <div class="title">有望达到预期</div>
+          </div>
+          <div>
+            <div id="miniArea"></div>
+          </div>
+        </nz-card>
 
-      <nz-card  nzTitle="券核效率">
-       <div id="dashBoard"></div>
-      </nz-card>
+        <nz-card  nzTitle="券核效率">
+          <div id="dashBoard"></div>
+        </nz-card>
+      </div>
+
     </div>
   </section>
 
