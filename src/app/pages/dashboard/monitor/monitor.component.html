@@ -1,6 +1,6 @@
 <section class="content-wrap">
   <section nz-row  [nzGutter]="[16,16]">
-    <div nz-col [nzXl]="18" [nzXXl]="18" [nzLg]="18" [nzMd]="18" [nzSm]="18" [nzXs]="18">
+    <div nz-col [nzXXl]="18" [nzXl]="18"  [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzXs]="24">
       <nz-card  nzTitle="活动实时交易情况">
        <div nz-row [nzGutter]="[40,16]">
          <div nz-col nzSpan="12">
@@ -29,7 +29,7 @@
        </div>
       </nz-card>
     </div>
-    <div nz-col [nzXl]="6" [nzXXl]="6" [nzLg]="6" [nzMd]="6" [nzSm]="6" [nzXs]="6">
+    <div nz-col [nzXXl]="6" [nzXl]="6"  [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzXs]="24">
       <div class="card-wrap-line">
         <nz-card nzTitle="活动情况预测">
           <div class="card-top">
@@ -41,11 +41,31 @@
           </div>
         </nz-card>
 
-        <nz-card  nzTitle="券核效率">
+        <nz-card class="m-t-15" nzTitle="券核效率">
           <div id="dashBoard"></div>
         </nz-card>
       </div>
 
+    </div>
+
+    <div nz-col [nzXXl]="12" [nzXl]="12"  [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzXs]="24">
+      <nz-card nzTitle="各品类占比">
+        <div nz-row>
+          <div nz-col class="pipe-height center"  nzSpan="8" id="ringProgress1"></div>
+          <div nz-col class="pipe-height center"  nzSpan="8" id="ringProgress2"></div>
+          <div nz-col class="pipe-height center"  nzSpan="8" id="ringProgress3"></div>
+        </div>
+      </nz-card>
+    </div>
+    <div nz-col  [nzXl]="6" [nzXXl]="6" [nzLg]="12" [nzMd]="24" [nzSm]="24" [nzXs]="24">
+      <nz-card nzTitle="热门搜索">
+        <div class="pipe-height" id="wordCloud"></div>
+      </nz-card>
+    </div>
+    <div nz-col [nzXl]="6" [nzXXl]="6" [nzLg]="12" [nzMd]="24" [nzSm]="24" [nzXs]="24">
+      <nz-card nzTitle="资源剩余">
+        <div class="pipe-height"  id="liquidPlot"></div>
+      </nz-card>
     </div>
   </section>
 
