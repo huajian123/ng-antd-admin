@@ -1,0 +1,30 @@
+<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+
+<ng-template #pageHeaderContent>
+  <div nz-row class="mini-screen">
+    <div nz-col  nzFlex="1">
+      <div nz-row>
+        <div nz-col class="m-r-25" nzFlex="72px">
+          <img  src="../../assets/imgs/default_face.png" alt="">
+        </div>
+        <div nz-col nzFlex="1">
+          <h4 nz-typography class="left-start-center m-0" style="height: 50%">早安，Serati Ma，祝你开心每一天！</h4>
+          <div  nz-typography nzType="secondary" class="left-start-center" style="height: 50%">交互专家 |蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED</div>
+        </div>
+      </div>
+    </div>
+    <div nz-col  nzFlex="280px">
+      <nz-row>
+        <nz-col [nzSpan]="8">
+          <nz-statistic [nzValue]="(56 | number)!" [nzTitle]="'项目数'"></nz-statistic>
+        </nz-col>
+        <nz-col [nzSpan]="8">
+          <nz-statistic [nzValue]="'8/24'" [nzTitle]="'团队内排名'"></nz-statistic>
+        </nz-col>
+        <nz-col [nzSpan]="8">
+          <nz-statistic [nzValue]="(2223 | number)!" [nzTitle]="'项目访问'"></nz-statistic>
+        </nz-col>
+      </nz-row>
+    </div>
+  </div>
+</ng-template>

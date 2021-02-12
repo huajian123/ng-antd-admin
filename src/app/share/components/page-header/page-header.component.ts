@@ -1,9 +1,9 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit, TemplateRef} from '@angular/core';
 import {ThemeService} from '../../../core/services/store/theme.service';
 
 export interface PageHeaderType {
   title: string;
-  desc: string;
+  desc: string | TemplateRef<any>;
   breadcrumb: string[];
 }
 

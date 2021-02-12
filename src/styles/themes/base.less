@@ -75,7 +75,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .color-weak {
-  filter: invert(80%)!important;
+  filter: invert(80%) !important;
 }
 
 
@@ -103,6 +103,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .pull-right {
   float: right;
+}
+
+.m-r-25 {
+  margin-right: 25px !important;
 }
 
 .m-r-30 {
@@ -179,6 +183,10 @@ h1, h2, h3, h4, h5, h6 {
   margin-left: 20px !important;
 }
 
+.m-l-25 {
+  margin-left: 25px !important;
+}
+
 .m-l-50 {
   margin-left: 50px !important;
 }
@@ -249,14 +257,23 @@ h1, h2, h3, h4, h5, h6 {
   margin-right: 5px;
 }
 
-.center-row{
+.center-row {
   margin: 0 auto;
+}
+
+.center-fn(@col:center,@row:center) {
+  display: flex;
+  justify-content: @col;
+  align-items: @row;
 }
 
 .center {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  .center-fn()
+}
+
+.left-start-center{
+  .center-fn(flex-start)
 }
 
 .bg-color-no {

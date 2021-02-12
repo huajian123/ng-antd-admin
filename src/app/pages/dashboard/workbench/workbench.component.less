@@ -1,0 +1,22 @@
+
+img{
+  width: 72px;
+}
+:host ::ng-deep{
+  .ant-statistic{
+    text-align: right;
+  }
+}
+@media (max-width: 670px) {
+  .mini-screen {
+    display: block;
+  }
+
+  :host ::ng-deep{
+    .ant-statistic{
+      margin-top: 10px;
+      text-align: left;
+      max-width: 100px;
+    }
+  }
+}
