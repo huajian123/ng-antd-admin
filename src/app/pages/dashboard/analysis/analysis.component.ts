@@ -1,4 +1,4 @@
-import {AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, NgZone, OnInit} from '@angular/core';
 import {Pie, RingProgress, TinyColumn} from '@antv/g2plot';
 import {TinyArea} from '@antv/g2plot';
 import {Progress} from '@antv/g2plot';
@@ -101,7 +101,7 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
     }
   ];
 
-  constructor(private cdr: ChangeDetectorRef) {
+  constructor(private cdr: ChangeDetectorRef, private ngZone: NgZone) {
   }
 
   ngOnInit(): void {
@@ -263,15 +263,19 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    inNextTick().subscribe(()=>{
-      this.initMinibar();
-      this.initMiniArea();
-      this.initProgress();
-      this.initHistogram();
-      this.initSearchArea();
-      this.initSearchAvgArea();
-      this.initRing();
-      this.initMiniRing();
+    inNextTick().subscribe(() => {
+
+      this.ngZone.runOutsideAngular(()=>{
+        this.initMinibar();
+        this.initMiniArea();
+        this.initProgress();
+        this.initHistogram();
+        this.initSearchArea();
+        this.initSearchAvgArea();
+        this.initRing();
+        this.initMiniRing();
+      })
+
     })
   }
 

@@ -1,4 +1,4 @@
-import {AfterViewInit, ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, Component, NgZone, OnInit} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 import {Scene} from '@antv/l7';
 import {GaodeMap} from '@antv/l7-maps';
@@ -350,7 +350,7 @@ export class MonitorComponent implements OnInit, AfterViewInit {
       "category": "europe"
     }]
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private ngZone: NgZone) {
   }
 
   initDashBoard(): void {
@@ -500,26 +500,28 @@ export class MonitorComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     inNextTick().subscribe(() => {
-      this.initDashBoard();
-      this.initArea();
-      this.initLiquidPlot();
-      for (let i = 1; i <= 3; i++) {
-        this.initRingProgress(i);
-      }
+      this.ngZone.runOutsideAngular(()=>{
+        this.initDashBoard();
+        this.initArea();
+        this.initLiquidPlot();
+        for (let i = 1; i <= 3; i++) {
+          this.initRingProgress(i);
+        }
 
-      this.wordCloud();
-      // 地图
-      const scene = new Scene({
-        id: "map",
-        logoPosition: 'bottomright',
-        antialias: false,
-        map: new GaodeMap({
-          pitch: 0,
-          style: "dark",
-          center: [112, 23.69],
-          zoom: 2.5
-        })
-      });
+        this.wordCloud();
+        // 地图
+        const scene = new Scene({
+          id: "map",
+          logoPosition: 'bottomright',
+          antialias: false,
+          map: new GaodeMap({
+            pitch: 0,
+            style: "dark",
+            center: [112, 23.69],
+            zoom: 2.5
+          })
+        });
+      })
     });
   }
 

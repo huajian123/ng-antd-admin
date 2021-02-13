@@ -50,10 +50,21 @@
         </nz-card>
       </div>
       <div nz-col nzSpan="24">
-        <nz-card nzTitle="xx指数"></nz-card>
+        <nz-card nzTitle="xx指数">
+          <div id="randar"></div>
+        </nz-card>
       </div>
       <div nz-col nzSpan="24">
-        <nz-card nzTitle="团队"></nz-card>
+        <nz-card nzTitle="团队">
+          <div nz-row>
+            <div style="padding: 0 25px" nz-col nzSpan="12" *ngFor="let item of 5|numberLoop">
+              <a class="group">
+                <nz-avatar [nzSize]="24" [nzSrc]="'https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png'"></nz-avatar>
+                <span class="m-l-10">全组都是吴彦祖</span>
+              </a>
+            </div>
+          </div>
+        </nz-card>
       </div>
     </div>
   </div>
