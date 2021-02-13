@@ -3,6 +3,7 @@ import {FormBuilder} from '@angular/forms';
 import {Scene} from '@antv/l7';
 import {GaodeMap} from '@antv/l7-maps';
 import {Gauge, Liquid, RingProgress, TinyArea, WordCloud} from '@antv/g2plot';
+import {inNextTick} from "ng-zorro-antd/core/util";
 
 
 @Component({
@@ -498,7 +499,7 @@ export class MonitorComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    setTimeout(() => {
+    inNextTick().subscribe(() => {
       this.initDashBoard();
       this.initArea();
       this.initLiquidPlot();

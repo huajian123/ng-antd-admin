@@ -6,6 +6,7 @@ import {MyTableConfig} from '../../../share/components/ant-table/ant-table.compo
 import {NzTableQueryParams} from 'ng-zorro-antd/table';
 import {SearchCommonVO} from '../../../core/services/types';
 import {ActionCode} from '../../../configs/actionCode';
+import {NzMessageService} from "ng-zorro-antd/message";
 
 @Component({
   selector: 'app-workbench',
@@ -20,8 +21,7 @@ export class WorkbenchComponent implements OnInit,AfterViewInit {
     breadcrumb: [],
     desc: ''
   };
-
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,public msg: NzMessageService) {
   }
 
 

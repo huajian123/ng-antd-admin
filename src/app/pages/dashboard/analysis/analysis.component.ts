@@ -3,6 +3,7 @@ import {Pie, RingProgress, TinyColumn} from '@antv/g2plot';
 import {TinyArea} from '@antv/g2plot';
 import {Progress} from '@antv/g2plot';
 import {Chart} from '@antv/g2';
+import {inNextTick} from "ng-zorro-antd/core/util";
 
 interface DataItem {
   name: string;
@@ -262,7 +263,7 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    setTimeout(() => {
+    inNextTick().subscribe(()=>{
       this.initMinibar();
       this.initMiniArea();
       this.initProgress();
@@ -271,7 +272,7 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
       this.initSearchAvgArea();
       this.initRing();
       this.initMiniRing();
-    });
+    })
   }
 
 }
