@@ -213,13 +213,13 @@ export class NavBarComponent implements OnInit, OnDestroy {
           title: '个人中心',
           open: false,
           selected: false,
-          path: '/user-info',
+          path: '/default/personal/personal-center',
         },
         {
           title: '个人设置',
           open: false,
           selected: false,
-          path: '/user-setting',
+          path: '/default/personal/personal-setting',
         },
       ]
     },

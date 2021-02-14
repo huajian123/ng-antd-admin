@@ -1,10 +1,9 @@
 import {Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef} from '@angular/core';
 import {PageHeaderType} from '../../../share/components/page-header/page-header.component';
 import {MyTableConfig} from '../../../share/components/ant-table/ant-table.component';
-import {OptionsInterface, People, Role, SearchCommonVO} from '../../../core/services/types';
+import {OptionsInterface, People, SearchCommonVO} from '../../../core/services/types';
 import {NzModalService} from 'ng-zorro-antd/modal';
 import {MessageService} from '../../../core/services/common/message.service';
-import {Router} from '@angular/router';
 import {NzTableQueryParams} from 'ng-zorro-antd/table';
 import {ModalBtnStatus} from '../../../widget/base-modal';
 import {ActionCode} from 'src/app/configs/actionCode';
