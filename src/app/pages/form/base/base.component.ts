@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {NzFormTooltipIcon} from 'ng-zorro-antd/form';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PageHeaderType} from '../../../share/components/page-header/page-header.component';
+import {fnCheckForm} from "../../../utils/tools";
 
 @Component({
   selector: 'app-base',
@@ -22,35 +22,12 @@ export class BaseComponent implements OnInit {
   ];
 
   validateForm!: FormGroup;
-  captchaTooltipIcon: NzFormTooltipIcon = {
-    type: 'info-circle',
-    theme: 'twotone'
-  };
+
 
   submitForm(): void {
-    // tslint:disable-next-line:forin
-    for (const i in this.validateForm.controls) {
-      this.validateForm.controls[i].markAsDirty();
-      this.validateForm.controls[i].updateValueAndValidity();
+    if (!fnCheckForm(this.validateForm)) {
+      return;
     }
-  }
-
-  updateConfirmValidator(): void {
-    /** wait for refresh value */
-    Promise.resolve().then(() => this.validateForm.controls.checkPassword.updateValueAndValidity());
-  }
-
-  confirmationValidator = (control: FormControl): { [s: string]: boolean } => {
-    if (!control.value) {
-      return {required: true};
-    } else if (control.value !== this.validateForm.controls.password.value) {
-      return {confirm: true, error: true};
-    }
-    return {};
-  }
-
-  getCaptcha(e: MouseEvent): void {
-    e.preventDefault();
   }
 
   constructor(private fb: FormBuilder) {
@@ -59,16 +36,13 @@ export class BaseComponent implements OnInit {
   initForm(): void {
     this.validateForm = this.fb.group({
       title: [null, [Validators.required]],
-      email: [null, [Validators.email, Validators.required]],
-      password: [null, [Validators.required]],
-      checkPassword: [null, [Validators.required, this.confirmationValidator]],
-      nickname: [null, [Validators.required]],
-      phoneNumberPrefix: ['+86'],
-      phoneNumber: [null, [Validators.required]],
-      website: [null, [Validators.required]],
-      captcha: [null, [Validators.required]],
-      public: ['1'],
-      agree: [false]
+      date: [null, [Validators.required]],
+      desc: [null, [Validators.required]],
+      standard: [null, [Validators.required]],
+      client: [null],
+      invitedCommenter: [null],
+      weights: [null],
+      isPublic: [null],
     });
   }
 
