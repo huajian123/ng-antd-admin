@@ -53,6 +53,22 @@ export interface User extends UserLogin {
   token: string;
 }
 
+
+/*
+* 菜单
+* */
+
+export interface Menu {
+  path?: string;
+  title: string;
+  icon?: string;
+  open?: boolean;
+  selected?: boolean;
+  children?: Menu[];
+  actionCode?: string;
+}
+
+
 /*
 * 角色
 * */

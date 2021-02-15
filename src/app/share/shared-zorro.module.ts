@@ -36,9 +36,11 @@ import {NzCollapseModule} from 'ng-zorro-antd/collapse';
 import {NzCascaderModule} from 'ng-zorro-antd/cascader';
 import {NzStatisticModule} from "ng-zorro-antd/statistic";
 import {NzAvatarModule} from "ng-zorro-antd/avatar";
+import {NzTagModule} from "ng-zorro-antd/tag";
 
 
 export const SHARED_ZORRO_MODULES = [
+  NzTagModule,
   NzAvatarModule,
   NzStatisticModule,
   IconsProviderModule,
