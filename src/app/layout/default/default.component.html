@@ -33,10 +33,10 @@
           </span>
           <nz-dropdown-menu #userSettingMenu>
             <ul nz-menu class="bst-header_usr_menu">
-              <li nz-menu-item>
+              <li nz-menu-item (click)="goPage('personal-center')">
                 <a><i nz-icon nzType="user" nzTheme="outline" class="bst-header_usr_menu_icon"></i><span>个人中心</span></a>
               </li>
-              <li nz-menu-item>
+              <li nz-menu-item (click)="goPage('personal-setting')">
                 <a><i nz-icon nzType="setting" nzTheme="outline"
                       class="bst-header_usr_menu_icon"></i><span>个人设置</span></a>
               </li>

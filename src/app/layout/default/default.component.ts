@@ -28,6 +28,9 @@ export class DefaultComponent implements OnInit, OnDestroy {
               private activatedRoute: ActivatedRoute, private breakpointObserver: BreakpointObserver) {
   }
 
+  goPage(path: string): void {
+    this.router.navigateByUrl(`/default/personal/${path}`);
+  }
 
   changeCollapsed(): void {
     if (this.isOverMode) {
