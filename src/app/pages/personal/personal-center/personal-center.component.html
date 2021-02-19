@@ -53,10 +53,10 @@
       <nz-card>
         <nz-card-tab>
           <nz-tabset nzSize="large">
-            <nz-tab (nzClick)="to(item.route)" [nzTitle]="item.lable" *ngFor="let item of tabData;"></nz-tab>
+            <nz-tab (nzClick)="to(item)" [nzTitle]="item.label" *ngFor="let item of tabData;"></nz-tab>
           </nz-tabset>
         </nz-card-tab>
-       1234
+        <ng-template appAd></ng-template>
       </nz-card>
 
     </div>
