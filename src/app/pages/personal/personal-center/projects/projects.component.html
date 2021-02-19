@@ -1,1 +1,19 @@
-<p>projects works!</p>
+<div nz-row [nzGutter]="[16,16]">
+  <div nz-col  [nzXXl]="12" [nzXl]="12"  [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24" *ngFor="let item of 8|numberLoop">
+    <nz-card [nzCover]="coverTemplate" nzHoverable>
+      <nz-card-meta nzDescription="希望是一个好东西，也许是最好的，好东西是不会消亡的" [nzTitle]="'Alipay'"></nz-card-meta>
+      <div class="card-item-content">
+        <span  nz-typography nzType="secondary">1小时前</span>
+        <nz-avatar-group>
+          <nz-avatar nzIcon="user" nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar>
+          <nz-avatar style="background-color: #f56a00" nzText="U"></nz-avatar>
+          <nz-avatar style="background-color: #87d068" nz-tooltip nzTooltipTitle="NG-ZORRO User" nzIcon="user"></nz-avatar>
+          <nz-avatar style="background-color: #1890ff" nzText="NG"></nz-avatar>
+        </nz-avatar-group>
+      </div>
+    </nz-card>
+  </div>
+</div>
+<ng-template #coverTemplate>
+  <img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />
+</ng-template>
