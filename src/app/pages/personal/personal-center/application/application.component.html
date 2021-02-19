@@ -1,1 +1,46 @@
-<p>application works!</p>
+<div nz-row [nzGutter]="[16,16]">
+  <div nz-col nzSpan="12" *ngFor="let item of 8|numberLoop">
+    <nz-card nzHoverable  [nzActions]="[op1, op2, op3, op4]">
+      <nz-card-meta [nzTitle]="'Alipay'" [nzAvatar]="nzAvatar">
+        <ng-template #nzAvatar>
+          <nz-avatar nzSize="small" [nzSrc]="'assets/imgs/default_face.png'"></nz-avatar>
+        </ng-template>
+      </nz-card-meta>
+      <div class="card-info">
+        <div>
+          <p nz-typography nzType="secondary">活跃用户</p>
+          <p>
+            12
+            <span class="wan">万</span>
+          </p>
+        </div>
+        <div>
+          <p nz-typography nzType="secondary">新增用户</p>
+          <p>{{ 1962 | number: '3.' }}</p>
+        </div>
+      </div>
+    </nz-card>
+  </div>
+</div>
+
+
+<ng-template #op1>
+  <i nz-tooltip nzTooltipTitle="下载" nz-icon nzType="download"></i>
+</ng-template>
+<ng-template #op2>
+  <i nz-tooltip nzTooltipTitle="编辑" nz-icon nzType="edit"></i>
+</ng-template>
+<ng-template #op3>
+  <i nz-tooltip nzTooltipTitle="分享" nz-icon nzType="share-alt"></i>
+</ng-template>
+<ng-template #op4>
+  <i nz-dropdown [nzDropdownMenu]="op4Menu" nzPlacement="bottomLeft" nz-icon nzType="ellipsis"></i>
+  <nz-dropdown-menu #op4Menu="nzDropdownMenu">
+    <i nz-dropdown nz-icon nzType="ellipsis"></i>
+    <ul nz-menu>
+      <li nz-menu-item>1st menu item</li>
+      <li nz-menu-item>2st menu item</li>
+      <li nz-menu-item>3st menu item</li>
+    </ul>
+  </nz-dropdown-menu>
+</ng-template>
