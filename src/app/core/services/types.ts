@@ -35,6 +35,10 @@ export interface PageInfo<T> {
   navigatepageNums?: number[];
 }
 
+export interface AdComponent {
+  data: any;
+}
+
 // 级联选择数据结构
 export interface CascaderOption {
   value: number | string;
