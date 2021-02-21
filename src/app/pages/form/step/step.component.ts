@@ -62,7 +62,7 @@ export class StepComponent implements OnInit {
       phoneNumber: [null, [Validators.required]],
       website: [null, [Validators.required]],
       captcha: [null, [Validators.required]],
-      title: [false],
+      title: [null],
       payWay: ['zhifubao'],
 
 

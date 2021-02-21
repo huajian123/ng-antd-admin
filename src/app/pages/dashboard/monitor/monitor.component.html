@@ -3,7 +3,7 @@
     <div nz-col [nzXXl]="18" [nzXl]="18"  [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzXs]="24">
       <nz-card  nzTitle="活动实时交易情况">
        <div nz-row [nzGutter]="[40,16]">
-         <div nz-col nzSpan="12">
+         <div nz-col [nzXXl]="12" [nzXl]="12"  [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24">
            <nz-row [nzGutter]="16">
              <nz-col [nzSpan]="12">
                <nz-statistic [nzValue]="(124543233 | number)!+'元'" [nzTitle]="'今日交易总额'"></nz-statistic>
@@ -13,7 +13,7 @@
              </nz-col>
            </nz-row>
          </div>
-         <div nz-col nzSpan="12">
+         <div nz-col [nzXXl]="12" [nzXl]="12"  [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24">
            <nz-row [nzGutter]="16">
              <nz-col [nzSpan]="12">
                <nz-countdown [nzValue]="deadline" [nzTitle]="'活动剩余时间'" [nzFormat]="'HH:mm:ss:SSS'"></nz-countdown>
