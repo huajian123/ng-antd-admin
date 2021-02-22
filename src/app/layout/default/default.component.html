@@ -67,10 +67,11 @@
   </ng-container>
 
 </app-def-layout-content>
-<nz-drawer [nzBodyStyle]="{padding:0}" [nzWidth]="256" [nzClosable]="false" [nzVisible]="showOverModeNav" nzPlacement="left" (nzOnClose)="showOverModeNav=false">
+<nz-drawer [nzBodyStyle]="{padding:0}" [nzWidth]="256" [nzClosable]="false" [nzVisible]="showOverModeNav"
+           nzPlacement="left" (nzOnClose)="showOverModeNav=false">
   <ng-container *nzDrawerContent>
-    <nz-layout  style="overflow-x:hidden">
-      <nz-sider class="menu-sidebar" [nzWidth]="256" [nzTrigger]="null" >
+    <nz-layout style="overflow-x:hidden">
+      <nz-sider class="menu-sidebar" [nzWidth]="256" [nzTrigger]="null">
         <app-side-nav></app-side-nav>
       </nz-sider>
     </nz-layout>

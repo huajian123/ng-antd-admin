@@ -1,4 +1,4 @@
-import {ComponentRef, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {CanActivate, CanDeactivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
 import {fnFormatePath} from '../../../../utils/tools';

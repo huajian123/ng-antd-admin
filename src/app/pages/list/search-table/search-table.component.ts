@@ -1,10 +1,10 @@
 import {Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {MyTableConfig} from "../../../share/components/ant-table/ant-table.component";
-import {PageHeaderType} from "../../../share/components/page-header/page-header.component";
-import {ActionCode} from "../../../configs/actionCode";
-import {NzTableQueryParams} from "ng-zorro-antd/table";
-import {SearchCommonVO} from "../../../core/services/types";
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {MyTableConfig} from '../../../share/components/ant-table/ant-table.component';
+import {PageHeaderType} from '../../../share/components/page-header/page-header.component';
+import {ActionCode} from '../../../configs/actionCode';
+import {NzTableQueryParams} from 'ng-zorro-antd/table';
+import {SearchCommonVO} from '../../../core/services/types';
 
 @Component({
   selector: 'app-search-table',
@@ -27,6 +27,7 @@ export class SearchTableComponent implements OnInit {
   actionCodeObj = {
     add: ActionCode.RoleAdd
   };
+
   constructor(private fb: FormBuilder) {
   }
 

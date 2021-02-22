@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PageHeaderType} from '../../../share/components/page-header/page-header.component';
-import {fnCheckForm} from "../../../utils/tools";
+import {fnCheckForm} from '../../../utils/tools';
 
 @Component({
   selector: 'app-base',
@@ -22,7 +22,6 @@ export class BaseComponent implements OnInit {
   ];
 
   validateForm!: FormGroup;
-
 
   submitForm(): void {
     if (!fnCheckForm(this.validateForm)) {
@@ -48,6 +47,5 @@ export class BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-
   }
 }

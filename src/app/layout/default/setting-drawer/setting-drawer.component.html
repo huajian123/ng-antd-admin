@@ -29,7 +29,8 @@
     <div class="m-b">
       <h3 class="title">导航模式</h3>
       <div class="block-checkbox">
-        <div (click)="changeMode(mode)" *ngFor="let mode of modes" class="item" nz-tooltip [nzTooltipTitle]="mode.title">
+        <div (click)="changeMode(mode)" *ngFor="let mode of modes" class="item" nz-tooltip
+             [nzTooltipTitle]="mode.title">
           <img [src]="mode.image" [alt]="mode.title">
           <div class="select-icon" *ngIf="mode.isChecked">
             <i nz-icon nzType="check" nzTheme="outline"></i>
@@ -51,7 +52,8 @@
       <nz-list [nzSplit]="false">
         <nz-list-item [nzActions]="[otherAction]">色弱模式</nz-list-item>
         <ng-template #otherAction>
-          <nz-switch (ngModelChange)="changeWeakMode($event)" [ngModel]="_themesOptions.colorWeak" nzSize="small"></nz-switch>
+          <nz-switch (ngModelChange)="changeWeakMode($event)" [ngModel]="_themesOptions.colorWeak"
+                     nzSize="small"></nz-switch>
         </ng-template>
       </nz-list>
     </div>

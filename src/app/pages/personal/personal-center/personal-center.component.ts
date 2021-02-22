@@ -6,11 +6,11 @@ import {
   ElementRef,
   ComponentFactoryResolver, Type
 } from '@angular/core';
-import {AdDirective} from "../../../share/directives/ad.directive";
-import {ArticleComponent} from "./article/article.component";
-import {ApplicationComponent} from "./application/application.component";
-import {ProjectsComponent} from "./projects/projects.component";
-import {AdComponent} from "../../../core/services/types";
+import {AdDirective} from '../../../share/directives/ad.directive';
+import {ArticleComponent} from './article/article.component';
+import {ApplicationComponent} from './application/application.component';
+import {ProjectsComponent} from './projects/projects.component';
+import {AdComponent} from '../../../core/services/types';
 
 interface TabInterface {
   label: string;
@@ -31,7 +31,7 @@ export class AdItem {
 })
 export class PersonalCenterComponent implements OnInit {
   tagArray: string[] = ['很有想法的', '专注设计', '大长腿', '川妹子', '海纳百川'];
-  inputVisible: boolean = false;
+  inputVisible = false;
   @ViewChild('inputElement', {static: false}) inputElement?: ElementRef;
   inputValue = '';
   tabData: TabInterface[] = [

@@ -1,6 +1,7 @@
 <div nz-row [nzGutter]="[16,16]">
-  <div nz-col  [nzXXl]="12" [nzXl]="12"  [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24" *ngFor="let item of 8|numberLoop">
-    <nz-card nzHoverable  [nzActions]="[op1, op2, op3, op4]">
+  <div nz-col [nzXXl]="12" [nzXl]="12" [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24"
+       *ngFor="let item of 8|numberLoop">
+    <nz-card nzHoverable [nzActions]="[op1, op2, op3, op4]">
       <nz-card-meta [nzTitle]="'Alipay'" [nzAvatar]="nzAvatar">
         <ng-template #nzAvatar>
           <nz-avatar nzSize="small" [nzSrc]="'assets/imgs/default_face.png'"></nz-avatar>

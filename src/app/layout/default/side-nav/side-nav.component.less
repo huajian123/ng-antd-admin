@@ -1,11 +1,13 @@
 @import "mixin";
+
 .themeMixin({
   :host {
-    .left-nav-wrap{
+    .left-nav-wrap {
       display: flex;
       flex-direction: column;
       height: 100%;
-      .nav-ul-wrap{
+
+      .nav-ul-wrap {
         flex: 1 1 0;
         overflow: hidden auto;
       }
@@ -40,28 +42,31 @@
       vertical-align: middle;
 
       &.light {
-        color: @primary-6!important;
+        color: @primary-6 !important;
       }
     }
-    ::-webkit-scrollbar{/*滚动条整体样式*/
+
+    ::-webkit-scrollbar { /*滚动条整体样式*/
       width: 6px;
       height: 6px;
       background: #263848;
     }
 
     ::-webkit-scrollbar-thumb { /*滚动条里面小方块*/
-      background: #53616E!important;
+      background: #53616E !important;
       border-radius: 4px;
     }
 
     /*定义滚动条轨道 内阴影+圆角*/
+
     ::-webkit-scrollbar-track {
       -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
       border-radius: 10px;
     }
 
     /*定义滑块 内阴影+圆角*/
-    ::-webkit-scrollbar-thumb{
+
+    ::-webkit-scrollbar-thumb {
       border-radius: 10px;
       box-shadow: inset 0 0 6px rgba(0, 0, 0, .1);
       -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .1);

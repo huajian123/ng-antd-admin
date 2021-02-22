@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 
-import { AnalysisRoutingModule } from './analysis-routing.module';
-import { AnalysisComponent } from './analysis.component';
+import {AnalysisRoutingModule} from './analysis-routing.module';
+import {AnalysisComponent} from './analysis.component';
 import {SharedModule} from '../../../share/shared.module';
 
 
@@ -12,4 +12,5 @@ import {SharedModule} from '../../../share/shared.module';
     AnalysisRoutingModule
   ]
 })
-export class AnalysisModule { }
+export class AnalysisModule {
+}

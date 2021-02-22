@@ -64,8 +64,6 @@ export class StepComponent implements OnInit {
       captcha: [null, [Validators.required]],
       title: [null],
       payWay: ['zhifubao'],
-
-
     });
   }
 }

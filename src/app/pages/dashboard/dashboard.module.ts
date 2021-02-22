@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { DashboardRoutingModule } from './dashboard-routing.module';
+import {NgModule} from '@angular/core';
+import {DashboardRoutingModule} from './dashboard-routing.module';
 
 @NgModule({
   declarations: [],
@@ -7,4 +7,5 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
     DashboardRoutingModule
   ]
 })
-export class DashboardModule { }
+export class DashboardModule {
+}

@@ -2,12 +2,12 @@
   <nz-card [nzBodyStyle]="{padding:0}">
     <div>
       <div class="menu">
-        <ul nz-menu  nzTheme="light" nzMode="inline">
-          <li *ngFor="let m of menus"  (click)="to(m)" nz-menu-item [nzSelected]="m.selected" >{{ m.title }}</li>
+        <ul nz-menu nzTheme="light" nzMode="inline">
+          <li *ngFor="let m of menus" (click)="to(m)" nz-menu-item [nzSelected]="m.selected">{{ m.title }}</li>
         </ul>
       </div>
       <div class="context"></div>
     </div>
-
+    <ng-template appAd></ng-template>
   </nz-card>
 </div>

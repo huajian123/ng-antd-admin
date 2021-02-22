@@ -5,8 +5,6 @@ import {BaseRoutingModule} from './base-routing.module';
 import {BaseComponent} from './base.component';
 import {SharedModule} from '../../../share/shared.module';
 
-
-
 @NgModule({
   declarations: [BaseComponent],
   imports: [

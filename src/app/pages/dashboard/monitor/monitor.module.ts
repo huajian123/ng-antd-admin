@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { MonitorRoutingModule } from './monitor-routing.module';
-import { MonitorComponent } from './monitor.component';
+import {NgModule} from '@angular/core';
+import {MonitorRoutingModule} from './monitor-routing.module';
+import {MonitorComponent} from './monitor.component';
 import {SharedModule} from '../../../share/shared.module';
 
 
@@ -11,4 +11,5 @@ import {SharedModule} from '../../../share/shared.module';
     MonitorRoutingModule
   ]
 })
-export class MonitorModule { }
+export class MonitorModule {
+}

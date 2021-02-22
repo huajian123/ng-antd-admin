@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { PersonalRoutingModule } from './personal-routing.module';
+import {PersonalRoutingModule} from './personal-routing.module';
 
 
 @NgModule({
@@ -11,4 +11,5 @@ import { PersonalRoutingModule } from './personal-routing.module';
     PersonalRoutingModule
   ]
 })
-export class PersonalModule { }
+export class PersonalModule {
+}

@@ -6,9 +6,9 @@ import {MyTableConfig} from '../../../share/components/ant-table/ant-table.compo
 import {NzTableQueryParams} from 'ng-zorro-antd/table';
 import {SearchCommonVO} from '../../../core/services/types';
 import {ActionCode} from '../../../configs/actionCode';
-import {NzMessageService} from "ng-zorro-antd/message";
-import {inNextTick} from "ng-zorro-antd/core/util";
-import {Radar} from "@antv/g2plot";
+import {NzMessageService} from 'ng-zorro-antd/message';
+import {inNextTick} from 'ng-zorro-antd/core/util';
+import {Radar} from '@antv/g2plot';
 
 @Component({
   selector: 'app-workbench',
@@ -17,28 +17,28 @@ import {Radar} from "@antv/g2plot";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WorkbenchComponent implements OnInit, AfterViewInit {
-  @ViewChild('pageHeaderContent', {static: false}) pageHeaderContent!: TemplateRef<any>
+  @ViewChild('pageHeaderContent', {static: false}) pageHeaderContent!: TemplateRef<any>;
   radarData = [
-    {"item": "Design", "user": "a", "score": 70},
-    {"item": "Design", "user": "b", "score": 30},
-    {"item": "Development", "user": "a", "score": 60},
-    {"item": "Development", "user": "b", "score": 70},
-    {"item": "Marketing", "user": "a", "score": 50},
-    {"item": "Marketing", "user": "b", "score": 60},
-    {"item": "Users", "user": "a", "score": 40},
-    {"item": "Users", "user": "b", "score": 50},
-    {"item": "Test", "user": "a", "score": 60},
-    {"item": "Test", "user": "b", "score": 70},
-    {"item": "Language", "user": "a", "score": 70},
-    {"item": "Language", "user": "b", "score": 50},
-    {"item": "Technology", "user": "a", "score": 50},
-    {"item": "Technology", "user": "b", "score": 40},
-    {"item": "Support", "user": "a", "score": 30},
-    {"item": "Support", "user": "b", "score": 40},
-    {"item": "Sales", "user": "a", "score": 60},
-    {"item": "Sales", "user": "b", "score": 40},
-    {"item": "UX", "user": "a", "score": 50},
-    {"item": "UX", "user": "b", "score": 60}
+    {item: 'Design', user: 'a', score: 70},
+    {item: 'Design', user: 'b', score: 30},
+    {item: 'Development', user: 'a', score: 60},
+    {item: 'Development', user: 'b', score: 70},
+    {item: 'Marketing', user: 'a', score: 50},
+    {item: 'Marketing', user: 'b', score: 60},
+    {item: 'Users', user: 'a', score: 40},
+    {item: 'Users', user: 'b', score: 50},
+    {item: 'Test', user: 'a', score: 60},
+    {item: 'Test', user: 'b', score: 70},
+    {item: 'Language', user: 'a', score: 70},
+    {item: 'Language', user: 'b', score: 50},
+    {item: 'Technology', user: 'a', score: 50},
+    {item: 'Technology', user: 'b', score: 40},
+    {item: 'Support', user: 'a', score: 30},
+    {item: 'Support', user: 'b', score: 40},
+    {item: 'Sales', user: 'a', score: 60},
+    {item: 'Sales', user: 'b', score: 40},
+    {item: 'UX', user: 'a', score: 50},
+    {item: 'UX', user: 'b', score: 60}
   ];
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '',
@@ -61,7 +61,7 @@ export class WorkbenchComponent implements OnInit, AfterViewInit {
     };
     inNextTick().subscribe(() => {
       this.initRadar();
-    })
+    });
 
   }
 
@@ -96,6 +96,6 @@ export class WorkbenchComponent implements OnInit, AfterViewInit {
         },
       });
       radarPlot.render();
-    })
+    });
   }
 }

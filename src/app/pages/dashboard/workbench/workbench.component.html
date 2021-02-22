@@ -42,7 +42,7 @@
               <a (click)="msg.success('点击了')">操作一</a>
             </div>
             <div nz-col nzSpan="6">
-              <button  [nzSize]="'small'" nz-button nzGhost nzType="primary"><i nz-icon nzType="plus"></i>
+              <button [nzSize]="'small'" nz-button nzGhost nzType="primary"><i nz-icon nzType="plus"></i>
                 <span>添加</span></button>
             </div>
 
@@ -59,7 +59,8 @@
           <div nz-row>
             <div style="padding: 0 25px" nz-col nzSpan="12" *ngFor="let item of 5|numberLoop">
               <a class="group">
-                <nz-avatar [nzSize]="24" [nzSrc]="'https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png'"></nz-avatar>
+                <nz-avatar [nzSize]="24"
+                           [nzSrc]="'https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png'"></nz-avatar>
                 <span class="m-l-10">全组都是吴彦祖</span>
               </a>
             </div>

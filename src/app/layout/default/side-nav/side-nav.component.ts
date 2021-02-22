@@ -4,7 +4,6 @@ import {ThemeService} from '../../../core/services/store/theme.service';
 import {TabService} from '../../../core/services/common/tab.service';
 
 
-
 @Component({
   selector: 'app-side-nav',
   templateUrl: './side-nav.component.html',
@@ -21,7 +20,6 @@ export class SideNavComponent implements OnInit {
               private cdr: ChangeDetectorRef, private themesService: ThemeService) {
 
   }
-
 
 
   ngOnInit(): void {

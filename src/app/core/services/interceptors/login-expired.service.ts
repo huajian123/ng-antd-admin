@@ -3,7 +3,7 @@ import {HttpClient, HttpEvent, HttpEventType, HttpHandler, HttpInterceptor, Http
 import {Observable, of} from 'rxjs';
 import {LoginModalService} from '../../../widget/biz-widget/login/login-modal.service';
 import {NzSafeAny} from 'ng-zorro-antd/core/types';
-import { switchMap} from 'rxjs/operators';
+import {switchMap} from 'rxjs/operators';
 import {ModalBtnStatus} from '../../../widget/base-modal';
 import {Router} from '@angular/router';
 import {AuthKey, TokenPre} from '../../../configs/constant';

@@ -1,6 +1,7 @@
 <app-top-progress-bar></app-top-progress-bar>
 <nz-layout>
-  <nz-sider *ngIf="((themesOptions$|async)!.mode==='side')&&!(isOverMode$|async)" class="menu-sidebar" [nzTheme]="(themesOptions$|async)!.theme"
+  <nz-sider *ngIf="((themesOptions$|async)!.mode==='side')&&!(isOverMode$|async)" class="menu-sidebar"
+            [nzTheme]="(themesOptions$|async)!.theme"
             nzBreakpoint="lg" [nzCollapsible]="true" [nzCollapsed]="isCollapsed$|async"
             (nzCollapsedChange)="changeCollapsed($event)" [nzTrigger]="null">
     <ng-content select="ng-container[sider]"></ng-content>

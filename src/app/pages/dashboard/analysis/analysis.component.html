@@ -132,10 +132,12 @@
           <div class="search-block" nz-col [nzXl]="12" [nzXXl]="12" [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24">
             <div>
               <div>
-                <span nz-typography nzType="secondary">搜索用户数 <i nz-icon nzType="info-circle" nzTheme="outline" nz-tooltip nzTooltipTitle="指标说明"></i></span>
+                <span nz-typography nzType="secondary">搜索用户数 <i nz-icon nzType="info-circle" nzTheme="outline"
+                                                                nz-tooltip nzTooltipTitle="指标说明"></i></span>
               </div>
-              <div><h3 class="d-i-b m-r-30" nz-typography>12,321</h3><span>17.1 <i nz-icon nzType="caret-up" style="color: red;font-size: 12px"
-                                       nzTheme="outline"></i></span></div>
+              <div><h3 class="d-i-b m-r-30" nz-typography>12,321</h3><span>17.1 <i nz-icon nzType="caret-up"
+                                                                                   style="color: red;font-size: 12px"
+                                                                                   nzTheme="outline"></i></span></div>
             </div>
             <div id="searchUserChart"></div>
           </div>
@@ -146,15 +148,17 @@
                   人均搜索次数 <i nz-icon nzType="info-circle" nzTheme="outline" nz-tooltip nzTooltipTitle="指标说明"></i>
                 </span>
               </div>
-              <div><h3 class="d-i-b m-r-30" nz-typography>12,321</h3><span>17.1 <i nz-icon nzType="caret-up" style="color: red;font-size: 12px"
-                                       nzTheme="outline"></i></span></div>
+              <div><h3 class="d-i-b m-r-30" nz-typography>12,321</h3><span>17.1 <i nz-icon nzType="caret-up"
+                                                                                   style="color: red;font-size: 12px"
+                                                                                   nzTheme="outline"></i></span></div>
             </div>
             <div id="searchUserAvgChart"></div>
           </div>
-          <nz-table class="m-t-25"  nzSize="small" #sortTable [nzData]="listOfData" nzTableLayout="fixed">
+          <nz-table class="m-t-25" nzSize="small" #sortTable [nzData]="listOfData" nzTableLayout="fixed">
             <thead>
             <tr>
-              <th *ngFor="let column of listOfColumn" [nzSortFn]="column.compare" [nzSortPriority]="column.priority">{{ column.title }}</th>
+              <th *ngFor="let column of listOfColumn" [nzSortFn]="column.compare"
+                  [nzSortPriority]="column.priority">{{ column.title }}</th>
             </tr>
             </thead>
             <tbody>
@@ -174,7 +178,7 @@
     </div>
     <div class="pipe-wrap" nz-col nzSpan="12"
          [nzXl]="12" [nzXXl]="12" [nzLg]="12" [nzMd]="24" [nzSm]="24" [nzXs]="24">
-      <nz-card  [nzBodyStyle]="{'height':'500px'}" [nzTitle]="'销售额类别占比'">
+      <nz-card [nzBodyStyle]="{'height':'500px'}" [nzTitle]="'销售额类别占比'">
         <h4>销售额</h4>
         <div id="ringPie"></div>
 

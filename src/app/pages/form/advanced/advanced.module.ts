@@ -1,10 +1,9 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 
-import { AdvancedRoutingModule } from './advanced-routing.module';
-import { AdvancedComponent } from './advanced.component';
+import {AdvancedRoutingModule} from './advanced-routing.module';
+import {AdvancedComponent} from './advanced.component';
 
 import {SharedModule} from '../../../share/shared.module';
-
 
 
 @NgModule({
@@ -14,4 +13,5 @@ import {SharedModule} from '../../../share/shared.module';
     AdvancedRoutingModule
   ]
 })
-export class AdvancedModule { }
+export class AdvancedModule {
+}
