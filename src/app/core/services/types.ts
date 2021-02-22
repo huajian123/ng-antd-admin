@@ -2,6 +2,13 @@
 * 通用interface
 * */
 
+import {Type} from '@angular/core';
+
+export class DynamicComponent {
+  constructor(public component: Type<any>, public data: any) {
+  }
+}
+
 export interface OptionsInterface {
   value: number | string;
   label: string;

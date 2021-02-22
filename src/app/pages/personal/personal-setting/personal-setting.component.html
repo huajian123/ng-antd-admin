@@ -1,13 +1,12 @@
 <div class="content-wrap">
   <nz-card [nzBodyStyle]="{padding:0}">
-    <div>
-      <div class="menu">
-        <ul nz-menu nzTheme="light" nzMode="inline">
+      <div class="menu-wrap">
+        <ul class="menu" nz-menu nzTheme="light" nzMode="inline">
           <li *ngFor="let m of menus" (click)="to(m)" nz-menu-item [nzSelected]="m.selected">{{ m.title }}</li>
         </ul>
+        <div class="context">
+          <ng-template appAd></ng-template>
+        </div>
       </div>
-      <div class="context"></div>
-    </div>
-    <ng-template appAd></ng-template>
   </nz-card>
 </div>

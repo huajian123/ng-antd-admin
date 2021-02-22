@@ -10,16 +10,11 @@ import {AdDirective} from '../../../share/directives/ad.directive';
 import {ArticleComponent} from './article/article.component';
 import {ApplicationComponent} from './application/application.component';
 import {ProjectsComponent} from './projects/projects.component';
-import {AdComponent} from '../../../core/services/types';
+import {AdComponent, DynamicComponent} from '../../../core/services/types';
 
 interface TabInterface {
   label: string;
-  component: AdItem;
-}
-
-export class AdItem {
-  constructor(public component: Type<any>, public data: any) {
-  }
+  component: DynamicComponent;
 }
 
 
@@ -35,9 +30,9 @@ export class PersonalCenterComponent implements OnInit {
   @ViewChild('inputElement', {static: false}) inputElement?: ElementRef;
   inputValue = '';
   tabData: TabInterface[] = [
-    {label: '文章(8)', component: new AdItem(ArticleComponent, {})},
-    {label: '应用(8)', component: new AdItem(ApplicationComponent, {})},
-    {label: '项目(8)', component: new AdItem(ProjectsComponent, {})},
+    {label: '文章(8)', component: new DynamicComponent(ArticleComponent, {})},
+    {label: '应用(8)', component: new DynamicComponent(ApplicationComponent, {})},
+    {label: '项目(8)', component: new DynamicComponent(ProjectsComponent, {})},
   ];
 
   @ViewChild(AdDirective, {static: true}) adHost!: AdDirective;

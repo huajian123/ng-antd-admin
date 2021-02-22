@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy, Input} from '@angular/core';
 
 @Component({
   selector: 'app-base',
@@ -7,10 +7,13 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BaseComponent implements OnInit {
+  @Input() label!: string;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
+    console.log(this.label);
   }
 
 }
