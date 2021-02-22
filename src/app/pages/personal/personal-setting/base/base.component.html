@@ -1,1 +1,46 @@
-111
+<div nz-row>
+  <div nz-col nzSpan="12">
+    <form [nzLayout]="'vertical'" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+      <nz-form-item>
+        <nz-form-label nzSpan="24" nzRequired nzFor="title">邮箱</nz-form-label>
+        <nz-form-control nzSpan="24" nzErrorTip="请输入邮箱">
+          <input nz-input formControlName="title" id="title" placeholder="邮箱"/>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label nzSpan="24" nzFor="password" nzRequired>昵称</nz-form-label>
+        <nz-form-control nzSpan="24" nzErrorTip="昵称">
+          <input nz-input formControlName="title" id="nickName" placeholder="昵称"/>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label nzSpan="24" nzRequired nzFor="desc">个人简介</nz-form-label>
+        <nz-form-control nzSpan="24" nzErrorTip="请输入个人简介">
+          <textarea rows="4" formControlName="desc" nz-input id="desc" placeholder="请输入个人简介"></textarea>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item nz-row class="register-area">
+        <nz-form-control [nzSpan]="14">
+          <button nz-button nzType="primary">更新基本信息</button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+
+  </div>
+  <div  class="avatar" nz-col nzSpan="12">
+    <div class="m-b-8">头像</div>
+    <div class="avatar-wrap">
+      <nz-avatar class="m-b-8" [nzSize]="144" [nzSrc]="'assets/imgs/default_face.png'"></nz-avatar>
+      <div class="upload">
+        <nz-upload
+          nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+          [nzHeaders]="{ authorization: 'authorization-text' }"
+          (nzChange)="handleChange($event)"
+        >
+          <button nz-button><i nz-icon nzType="upload"></i>更换头像</button>
+        </nz-upload>
+      </div>
+
+    </div>
+  </div>
+</div>
