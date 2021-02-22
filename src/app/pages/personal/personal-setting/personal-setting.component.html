@@ -5,7 +5,14 @@
           <li *ngFor="let m of menus" (click)="to(m)" nz-menu-item [nzSelected]="m.selected">{{ m.title }}</li>
         </ul>
         <div class="context">
-          <ng-template appAd></ng-template>
+          <nz-card>
+            <div nz-row>
+              <h4 nz-typography nz-col nzSpan="24">{{currentTitle}}</h4>
+              <div nz-col>
+                <ng-template appAd></ng-template>
+              </div>
+            </div>
+          </nz-card>
         </div>
       </div>
   </nz-card>

@@ -47,6 +47,7 @@ export class PersonalSettingComponent implements OnInit {
       title: '新消息通知',
     },
   ];
+  currentTitle: string = this.menus[0].title;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver) {
   }
@@ -55,6 +56,7 @@ export class PersonalSettingComponent implements OnInit {
     const selMenu = this.settingComponent.find(({key}) => {
       return key === item.key;
     });
+    this.currentTitle = selMenu!.component.data.label;
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(selMenu!.component.component);
     const viewContainerRef = this.adHost.viewContainerRef;
     viewContainerRef.clear();

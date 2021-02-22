@@ -7,11 +7,11 @@ import {Component, OnInit, ChangeDetectionStrategy, Input} from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BindComponent implements OnInit {
-  @Input() label!: string;
+  @Input() data!: { label: string };
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.label);
+    console.log(this.data);
   }
 
 }
