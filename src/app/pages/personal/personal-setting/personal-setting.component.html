@@ -1,7 +1,7 @@
 <div class="content-wrap">
   <nz-card [nzBodyStyle]="{padding:0}">
-      <div class="menu-wrap">
-        <ul class="menu" nz-menu nzTheme="light" nzMode="inline">
+      <div class="menu-wrap" [ngClass]="{'horizontal-model':tabModel==='horizontal'}">
+        <ul [ngClass]="{'menu':tabModel!=='horizontal'}" nz-menu nzTheme="light" [nzMode]="tabModel">
           <li *ngFor="let m of menus" (click)="to(m)" nz-menu-item [nzSelected]="m.selected">{{ m.title }}</li>
         </ul>
         <div class="context">

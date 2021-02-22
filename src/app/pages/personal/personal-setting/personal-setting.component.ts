@@ -1,10 +1,12 @@
-import {Component, OnInit, ChangeDetectionStrategy, ViewChild, ComponentFactoryResolver} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy, ViewChild, ComponentFactoryResolver, ChangeDetectorRef} from '@angular/core';
 import {AdDirective} from '../../../share/directives/ad.directive';
 import {AdComponent, DynamicComponent} from '../../../core/services/types';
 import {BaseComponent} from './base/base.component';
 import {SafeComponent} from './safe/safe.component';
 import {BindComponent} from './bind/bind.component';
 import {NoticeComponent} from './notice/notice.component';
+import {BreakpointObserver} from '@angular/cdk/layout';
+import {NzMenuModeType} from 'ng-zorro-antd/menu/menu.types';
 
 interface TabInterface {
   key: string;
@@ -19,6 +21,7 @@ interface TabInterface {
 })
 export class PersonalSettingComponent implements OnInit {
   @ViewChild(AdDirective, {static: true}) adHost!: AdDirective;
+  tabModel: NzMenuModeType = 'inline';
   settingComponent: TabInterface[] = [
     {key: 'base', component: new DynamicComponent(BaseComponent, {label: '基本设置'})},
     {key: 'safe', component: new DynamicComponent(SafeComponent, {label: '安全设置'})},
@@ -49,7 +52,8 @@ export class PersonalSettingComponent implements OnInit {
   ];
   currentTitle: string = this.menus[0].title;
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver) {
+  constructor(private componentFactoryResolver: ComponentFactoryResolver,
+              private breakpointObserver: BreakpointObserver, private cdr: ChangeDetectorRef) {
   }
 
   to(item: { key: string; title: string; selected?: boolean }): void {
@@ -64,8 +68,16 @@ export class PersonalSettingComponent implements OnInit {
     componentRef.instance.data = selMenu!.component.data;
   }
 
+  obBreakPoint(): void {
+    this.breakpointObserver.observe(['(max-width: 767px)']).subscribe(result => {
+      this.tabModel = result.matches ? 'horizontal' : 'inline';
+      this.cdr.markForCheck();
+    });
+  }
+
   ngOnInit(): void {
     this.to(this.menus[0]);
+    this.obBreakPoint();
   }
 
 }

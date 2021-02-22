@@ -6,7 +6,6 @@ import {Component, OnInit, ChangeDetectionStrategy, Input} from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NoticeComponent implements OnInit {
-  @Input() data!: { label: string };
   i: {
     password: boolean;
     messages: boolean;
@@ -21,7 +20,6 @@ export class NoticeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.data);
   }
 
 }
