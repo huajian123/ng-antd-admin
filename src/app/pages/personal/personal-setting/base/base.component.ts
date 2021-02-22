@@ -1,8 +1,10 @@
-import {Component, OnInit, ChangeDetectionStrategy, Input} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {fnCheckForm} from '../../../../utils/tools';
 import {NzUploadChangeParam} from 'ng-zorro-antd/upload';
 import {NzMessageService} from 'ng-zorro-antd/message';
+import {ValidatorsService} from '../../../../core/services/validators/validators.service';
+import {BreakpointObserver} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-base',
@@ -13,20 +15,40 @@ import {NzMessageService} from 'ng-zorro-antd/message';
 export class BaseComponent implements OnInit {
   @Input() data!: { label: string };
   validateForm!: FormGroup;
+  selectedProvince = 'Zhejiang';
+  selectedCity = 'Hangzhou';
+  provinceData = ['Zhejiang', 'Jiangsu'];
+  formOrder = 1;
+  avatarOrder = 0;
+  cityData: { [place: string]: string[] } = {
+    Zhejiang: ['Hangzhou', 'Ningbo', 'Wenzhou'],
+    Jiangsu: ['Nanjing', 'Suzhou', 'Zhenjiang']
+  };
 
-  constructor(private fb: FormBuilder, private msg: NzMessageService) {
+
+  constructor(private fb: FormBuilder, private msg: NzMessageService,
+              private validatorsService: ValidatorsService,
+              private breakpointObserver: BreakpointObserver,
+              private cdr: ChangeDetectorRef) {
+  }
+
+  provinceChange(value: string): void {
+    this.selectedCity = this.cityData[value][0];
+    this.selectedProvince = value;
+    this.validateForm.get('city')?.setValue(this.selectedCity);
   }
 
   initForm(): void {
     this.validateForm = this.fb.group({
-      title: [null, [Validators.required]],
-      date: [null, [Validators.required]],
+      email: [null, [Validators.required]],
+      area: [null, [Validators.required]],
+      nickName: [null],
       desc: [null, [Validators.required]],
-      standard: [null, [Validators.required]],
-      client: [null],
-      invitedCommenter: [null],
-      weights: [null],
-      isPublic: [null],
+      city: [null, [Validators.required]],
+      province: [null, [Validators.required]],
+      mobile: [null, [Validators.required, this.validatorsService.mobileValidator()]],
+      telephone: [null, [Validators.required, this.validatorsService.telephoneValidator()]],
+      street: [null, [Validators.required]],
     });
   }
 
@@ -47,9 +69,22 @@ export class BaseComponent implements OnInit {
     }
   }
 
+  obBreakPoint(): void {
+    this.breakpointObserver.observe(['(max-width: 1200px)']).subscribe(result => {
+      if (result.matches) {
+        this.formOrder = 1;
+        this.avatarOrder = 0;
+      } else {
+        this.formOrder = 0;
+        this.avatarOrder = 1;
+      }
+      this.cdr.markForCheck();
+    });
+  }
+
   ngOnInit(): void {
     this.initForm();
-    console.log(this.data);
+    this.obBreakPoint();
   }
 
 }
