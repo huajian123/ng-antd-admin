@@ -164,13 +164,13 @@ export class NavBarComponent implements OnInit, OnDestroy {
           title: '成功页',
           open: false,
           selected: false,
-          path: '/result/success',
+          path: '/default/result/success',
         },
         {
           title: '失败页',
           open: false,
           selected: false,
-          path: '/result/error',
+          path: '/default/result/fail',
         },
       ]
     },

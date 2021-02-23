@@ -32,6 +32,10 @@ const routes: Routes = [
         path: 'except',
         loadChildren: () => import('../../pages/except/except.module').then(m => m.ExceptModule)
       },
+      {
+        path: 'result',
+        loadChildren: () => import('../../pages/result/result.module').then(m => m.ResultModule)
+      },
       {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
     ]
   },
