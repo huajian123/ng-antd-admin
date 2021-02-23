@@ -28,6 +28,10 @@ const routes: Routes = [
         path: 'personal',
         loadChildren: () => import('../../pages/personal/personal.module').then(m => m.PersonalModule)
       },
+      {
+        path: 'except',
+        loadChildren: () => import('../../pages/except/except.module').then(m => m.ExceptModule)
+      },
       {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
     ]
   },

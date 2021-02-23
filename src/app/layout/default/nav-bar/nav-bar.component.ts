@@ -185,19 +185,19 @@ export class NavBarComponent implements OnInit, OnDestroy {
           title: '403',
           open: false,
           selected: false,
-          path: '/error/403',
+          path: '/default/except/except403',
         },
         {
           title: '404',
           open: false,
           selected: false,
-          path: '/error/404',
+          path: '/default/except/except404',
         },
         {
           title: '500',
           open: false,
           selected: false,
-          path: '/error/500',
+          path: '/default/except/except500',
         },
       ]
     },
