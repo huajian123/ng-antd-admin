@@ -6,13 +6,16 @@
       <div nz-row [nzGutter]="[32,32]">
         <div nz-col nzSpan="24">
           <nz-card [nzExtra]="extraTemplate" nzTitle="进行中的项目">
-            <div nz-card-grid *ngFor="let i of 6|numberLoop">
-              <nz-card-meta [nzTitle]="cardTitleTpl" nzDescription="城镇中有那么多的酒馆，她却偏偏走进了我的酒馆"></nz-card-meta>
-              <div class="card-foot">
-                <span nz-typography nzType="secondary">小华</span>
-                <span nz-typography nzType="secondary">4年前</span>
+            <div nz-row>
+              <div [nzXl]="8" [nzXXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24" nz-col nz-card-grid *ngFor="let i of 6|numberLoop">
+                <nz-card-meta [nzTitle]="cardTitleTpl" nzDescription="城镇中有那么多的酒馆，她却偏偏走进了我的酒馆"></nz-card-meta>
+                <div class="card-foot">
+                  <span nz-typography nzType="secondary">小华</span>
+                  <span nz-typography nzType="secondary">4年前</span>
+                </div>
               </div>
             </div>
+
           </nz-card>
         </div>
         <div nz-col nzSpan="24">
