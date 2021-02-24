@@ -10,6 +10,7 @@ import {RoleManageModalService} from '../../../widget/biz-widget/internal-manage
 import {Router} from '@angular/router';
 import {ModalBtnStatus} from '../../../widget/base-modal';
 import {ActionCode} from 'src/app/configs/actionCode';
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-role-manage',
@@ -55,15 +56,15 @@ export class RoleManageComponent implements OnInit {
         this.tableConfig.pageSize = 1;
         this.tableConfig.loading = false;
         return;*/
-    this.dataService.getRoles(params).subscribe((data => {
+    this.dataService.getRoles(params).pipe(finalize(() => {
+      this.tableLoading(false);
+    })).subscribe((data => {
       const {list, total, pageNum} = data;
       this.dataList = [...list];
       this.tableConfig.total = total!;
       this.tableConfig.pageIndex = pageNum!;
       this.tableLoading(false);
       this.checkedCashArray = [...this.checkedCashArray];
-    }), (error => {
-      this.tableLoading(false);
     }));
   }
 
