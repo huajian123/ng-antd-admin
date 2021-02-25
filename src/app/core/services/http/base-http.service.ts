@@ -5,6 +5,7 @@ import * as qs from 'qs';
 import {environment} from '../../../../environments/environment';
 import {filter, map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
+import {localUrl} from '../../../../environments/environment.prod';
 
 export interface MyHttpConfig {
   needIntercept?: boolean;
@@ -25,7 +26,7 @@ export class BaseHttpService {
   uri: string;
 
   protected constructor(public http: HttpClient, public message: NzMessageService) {
-    this.uri = environment.production ? '/' : '/site';
+    this.uri = environment.production ? localUrl : '/site';
   }
 
   get<T>(path: string, param?: any, config?: MyHttpConfig): Observable<any> {
