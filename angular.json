@@ -82,6 +82,11 @@
               "@antv/util",
               "size-sensor",
               "@antv/g-canvas",
+              "@antv/l7-component",
+              "inversify-inject-decorators",
+              "@babel/runtime/helpers/wrapNativeSuper",
+              "merge-json-schemas",
+              "@mapbox/geojson-rewind",
               "lodash",
               "qs"
             ]
