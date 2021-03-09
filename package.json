@@ -27,7 +27,7 @@
     "@types/qs": "^6.9.5",
     "extend": "^3.0.2",
     "lodash": "^4.17.20",
-    "ng-zorro-antd": "^11.1.0",
+    "ng-zorro-antd": "^11.2.0",
     "ngx-hover-preload": "0.0.3",
     "ngx-quicklink": "^0.2.6",
     "qs": "^6.9.6",
