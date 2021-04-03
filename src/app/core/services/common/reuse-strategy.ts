@@ -21,18 +21,26 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
   }
 
   // 当路由离开时会触发，存储路由
-  store(route: ActivatedRouteSnapshot, handle: DetachedRouteHandle): void {
+  store(route: ActivatedRouteSnapshot, handle: any): void {
     if (SimpleReuseStrategy.waitDelete === route.data.key) {
       // 如果待删除是当前路由则不存储快照
       SimpleReuseStrategy.waitDelete = null;
       return;
     }
     SimpleReuseStrategy.handlers[route.data.key] = handle;
+
+    if (handle && handle.componentRef) {
+      this.runHook('_onReuseDestroy', handle.componentRef);
+    }
   }
 
   //  是否允许还原路由
   shouldAttach(route: ActivatedRouteSnapshot): boolean {
-    return !!route.data.key && !!SimpleReuseStrategy.handlers[route.data.key];
+    const ret = !!route.data.key && !!SimpleReuseStrategy.handlers[route.data.key];
+    if (ret) {
+      this.runHook('_onReuseInit', SimpleReuseStrategy.handlers[route.data.key].componentRef);
+    }
+    return ret;
   }
 
 
@@ -46,4 +54,36 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
     return future.data.key === curr.data.key;
   }
 
+  runHook(method: ReuseHookTypes, comp: ReuseComponentRef): void {
+    const compThis = comp.instance;
+    if (comp == null || !compThis) {
+      return;
+    }
+    const fn = compThis[method];
+    if (typeof fn !== 'function') {
+      return;
+    }
+    console.log(method);
+    if (method === '_onReuseInit') {
+      (fn as () => void).call(compThis);
+    } else {
+      (fn as () => void).call(compThis);
+    }
+  }
+
+  private hasInValidRoute(route: ActivatedRouteSnapshot): boolean {
+    return !route.routeConfig || !!route.routeConfig.loadChildren || !!route.routeConfig.children;
+  }
+
+}
+
+export type ReuseHookTypes = '_onReuseInit' | '_onReuseDestroy';
+
+export interface ReuseComponentInstance {
+  _onReuseInit: () => void;
+  _onReuseDestroy: () => void;
+  destroy: () => void;
+}
+export interface ReuseComponentRef {
+  instance: ReuseComponentInstance;
 }
