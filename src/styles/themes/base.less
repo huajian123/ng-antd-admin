@@ -120,6 +120,11 @@ h1, h2, h3, h4, h5, h6 {
 .m-0 {
   margin: 0 !important;
 }
+
+.m-10 {
+  margin: 10px !important;
+}
+
 .m-b-5 {
   margin-bottom: 5px !important;
 }
@@ -210,12 +215,37 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0 !important;
 }
 
+.p-8 {
+  padding: 8px !important;
+}
+
+.p-24 {
+  padding: 24px !important;
+}
+
+.p-t-16 {
+  padding-top: 16px !important;
+}
+
+.p-t-24 {
+  padding-top: 24px !important;
+}
+
+
 .p-l-0 {
   padding-left: 0 !important;
 }
 
 .p-l-10 {
   padding-left: 10px !important;
+}
+
+.p-l-16 {
+  padding-left: 16px !important;
+}
+
+.p-l-24 {
+  padding-left: 24px !important;
 }
 
 .p-l-25 {
@@ -227,16 +257,40 @@ h1, h2, h3, h4, h5, h6 {
   padding-left: 35px !important;
 }
 
+.p-l-55 {
+  padding-left: 55px !important;
+}
+
 .p-r-10 {
   padding-right: 10px !important;
+}
+
+.p-r-16 {
+  padding-right: 16px !important;
+}
+
+.p-r-24 {
+  padding-right: 24px !important;
 }
 
 .p-b-0 {
   padding-bottom: 0 !important;
 }
 
+.p-b-24 {
+  padding-bottom: 24px !important;
+}
+
 .p-b-50 {
   padding-bottom: 50px !important;
+}
+
+.sp-14 {
+  font-size: 14px!important;
+}
+
+.sp-28 {
+  font-size: 28px!important;
 }
 
 .clear-fix:after {
@@ -265,7 +319,9 @@ h1, h2, h3, h4, h5, h6 {
   cursor: pointer;
 }
 
-.text-error{color:#f5222d!important}
+.text-error {
+  color: #f5222d !important
+}
 
 .operate-text {
   .hand-model;
@@ -288,8 +344,14 @@ h1, h2, h3, h4, h5, h6 {
   .center-fn()
 }
 
-.left-start-center{
+
+
+.left-start-center {
   .center-fn(flex-start)
+}
+
+.space-between {
+  .center-fn(space-between)
 }
 
 .bg-color-no {
@@ -343,3 +405,14 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/*覆盖zorro样式*/
+
+// 对话框增加滚动条
+.ant-modal-body{
+  overflow: auto;
+  max-height: 600px;
+}
+
+nz-date-picker{
+  width: 100%;
+}

@@ -38,9 +38,11 @@ import {NzStatisticModule} from 'ng-zorro-antd/statistic';
 import {NzAvatarModule} from 'ng-zorro-antd/avatar';
 import {NzTagModule} from 'ng-zorro-antd/tag';
 import {NzUploadModule} from 'ng-zorro-antd/upload';
+import { NzProgressModule } from 'ng-zorro-antd/progress';
 
 
 export const SHARED_ZORRO_MODULES = [
+  NzProgressModule,
   NzUploadModule,
   NzTagModule,
   NzAvatarModule,

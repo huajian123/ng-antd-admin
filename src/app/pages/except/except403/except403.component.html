@@ -1,0 +1,341 @@
+<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+
+
+<div nz-row>
+  <div nz-col nzSpan="18" class="p-l-55 p-r-24 p-t-24">
+    <div class="progress-info">
+      <div><span>89%</span> 完成度</div>
+      <div class="m-0" nz-typography nzType="secondary">已经完成 58, 任务总数 100</div>
+    </div>
+    <nz-progress [nzPercent]="50" nzSize="small" [nzShowInfo]="false"></nz-progress>
+  </div>
+  <div nz-col nzSpan="6" class="status p-l-24 p-r-24 p-t-24">
+    <div class="m-0" nz-typography nzType="secondary">状态</div>
+    <div nz-typography nzType="success" class="sp-28">正在进行中</div>
+  </div>
+</div>
+
+<div class="normal-table-wrap">
+  <div nz-row [nzGutter]="[32,32]">
+    <div nz-col [nzXl]="18" [nzXXl]="18" [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzXs]="24">
+      <div nz-row [nzGutter]="[32,32]">
+        <div nz-col nzSpan="24">
+          <nz-card nzTitle="计划描述">
+            <p class="m-b-20">这是一段计划描述这是一段计划描述这是一段计划描述这是一段计划描述这是一段计划描述这是一段计划描述这是一段计划描述</p>
+            <p class="m-b-20">这是一段计划描述这是一段计划描述这是一段计划描述这是一段计划描述这是一段计划描述这是一段计划描述这是一段计划描述</p>
+            <p class="m-b-20">这是一段计划描述这是一段计划描述这是一段计划描述这是一段计划描述这是一段计划描述这是一段计划描述这是一段计划描述</p>
+          </nz-card>
+        </div>
+        <div nz-col nzSpan="24">
+          <nz-card>
+            <nz-card-tab>
+              <nz-tabset nzSize="large">
+                <nz-tab nzTitle="任务列表"></nz-tab>
+                <nz-tab nzTitle="执行日志"></nz-tab>
+              </nz-tabset>
+              <ng-container>
+                <div>
+                  <div nz-typography nzType="secondary" class="sp-14 m-t-20">日检任务</div>
+                  <ul>
+                    <li>
+                      <div class="first-menu m-b-10 m-t-10">
+                        <div>任务一  <nz-tag class="m-l-5" [nzColor]="'processing'">进行中</nz-tag></div>
+                        <div>
+                          <nz-switch class="m-r-8" [ngModel]="true" nzCheckedChildren="已完成" nzUnCheckedChildren="未完成"></nz-switch>
+                          <span class="hand-model"><i nz-icon [nzType]="'down'" nzTheme="outline"></i>
+                        <span class="operate-text m-l-5">收起</span></span>
+                        </div>
+
+                      </div>
+                      <nz-divider class="m-0"></nz-divider>
+                      <div class="menu-content m-0 p-0" nz-result-content>
+                        <div class="second-menu p-l-25 li-height">
+                          <div>
+                            <div>
+                              任务1-1  <nz-tag class="m-l-5" [nzColor]="'success'">已完成</nz-tag> <nz-tag class="m-l-5" [nzColor]="'default'">剩余3小时</nz-tag>
+                            </div>
+                            <nz-switch class="m-r-8" [ngModel]="true" nzCheckedChildren="已完成" nzUnCheckedChildren="未完成"></nz-switch>
+                          </div>
+                          <nz-divider class="m-0"></nz-divider>
+                          <div>
+                            <div>
+                              任务1-1  <nz-tag class="m-l-5" [nzColor]="'processing'">进行中</nz-tag> <nz-tag class="m-l-5" [nzColor]="'default'">剩余3小时</nz-tag>
+                            </div>
+                            <nz-switch class="m-r-8" [ngModel]="true" nzCheckedChildren="已完成" nzUnCheckedChildren="未完成"></nz-switch>
+                          </div>
+                          <nz-divider class="m-0"></nz-divider>
+                          <div>
+                            <div>
+                              任务1-1  <nz-tag class="m-l-5" [nzColor]="'processing'">进行中</nz-tag> <nz-tag class="m-l-5" [nzColor]="'default'">剩余3小时</nz-tag>
+                            </div>
+                            <nz-switch class="m-r-8" [ngModel]="true" nzCheckedChildren="已完成" nzUnCheckedChildren="未完成"></nz-switch>
+                          </div>
+                          <nz-divider class="m-0"></nz-divider>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="first-menu m-b-10 m-t-10">
+                        <div>任务一  <nz-tag class="m-l-5" [nzColor]="'processing'">进行中</nz-tag></div>
+                        <div>
+                          <nz-switch class="m-r-8" [ngModel]="true" nzCheckedChildren="已完成" nzUnCheckedChildren="未完成"></nz-switch>
+                          <span class="hand-model"><i nz-icon [nzType]="'down'" nzTheme="outline"></i>
+                        <span class="operate-text m-l-5">收起</span></span>
+                        </div>
+
+                      </div>
+                      <nz-divider class="m-0"></nz-divider>
+                      <div class="menu-content m-0 p-0" nz-result-content>
+                        <div class="second-menu p-l-25 li-height">
+                          <div>
+                            <div>
+                              任务1-1  <nz-tag class="m-l-5" [nzColor]="'processing'">进行中</nz-tag> <nz-tag class="m-l-5" [nzColor]="'default'">剩余3小时</nz-tag>
+                            </div>
+                            <nz-switch class="m-r-8" [ngModel]="true" nzCheckedChildren="已完成" nzUnCheckedChildren="未完成"></nz-switch>
+                          </div>
+                          <nz-divider class="m-0"></nz-divider>
+                          <div>
+                            <div>
+                              任务1-1  <nz-tag class="m-l-5" [nzColor]="'processing'">进行中</nz-tag> <nz-tag class="m-l-5" [nzColor]="'default'">剩余3小时</nz-tag>
+                            </div>
+                            <nz-switch class="m-r-8" [ngModel]="true" nzCheckedChildren="已完成" nzUnCheckedChildren="未完成"></nz-switch>
+                          </div>
+                          <nz-divider class="m-0"></nz-divider>
+                          <div>
+                            <div>
+                              任务1-1  <nz-tag class="m-l-5" [nzColor]="'processing'">进行中</nz-tag> <nz-tag class="m-l-5" [nzColor]="'default'">剩余3小时</nz-tag>
+                            </div>
+                            <nz-switch class="m-r-8" [ngModel]="true" nzCheckedChildren="已完成" nzUnCheckedChildren="未完成"></nz-switch>
+                          </div>
+                          <nz-divider class="m-0"></nz-divider>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                  <!--  <div class="task-list">
+                      <div class="task-item">
+                        <div class="first-menu">
+                          <span>任务一</span>
+                          <nz-switch [ngModel]="true" nzCheckedChildren="已完成" nzUnCheckedChildren="未完成"></nz-switch>
+                        </div>
+                        <div>
+                          <i nz-icon nzType="edit" nzTheme="outline" class="m-r-8"></i>
+                          <i nz-icon nzType="delete" nzTheme="outline"></i>
+                          <span class="hand-model"><i nz-icon [nzType]="'down'" nzTheme="outline"></i> <span
+                            class="operate-text">收起</span></span>
+                        </div>
+                        <nz-divider class="m-0"></nz-divider>
+                      </div>
+                      <nz-divider class="m-10"></nz-divider>
+                    </div>-->
+                </div>
+
+                <div>
+                  <div nz-typography nzType="secondary" class="sp-14 m-t-20">月检任务</div>
+                  <ul>
+                    <li>
+                      <div class="first-menu m-b-10 m-t-10">
+                        <div>任务一  <nz-tag class="m-l-5" [nzColor]="'processing'">进行中</nz-tag></div>
+                        <div>
+                          <nz-switch class="m-r-8" [ngModel]="true" nzCheckedChildren="已完成" nzUnCheckedChildren="未完成"></nz-switch>
+                          <span class="hand-model"><i nz-icon [nzType]="'down'" nzTheme="outline"></i>
+                        <span class="operate-text m-l-5">收起</span></span>
+                        </div>
+
+                      </div>
+                      <nz-divider class="m-0"></nz-divider>
+                      <div class="menu-content m-0 p-0" nz-result-content>
+                        <div class="second-menu p-l-25 li-height">
+                          <div>
+                            <div>
+                              任务1-1  <nz-tag class="m-l-5" [nzColor]="'processing'">进行中</nz-tag> <nz-tag class="m-l-5" [nzColor]="'default'">剩余3小时</nz-tag>
+                            </div>
+                            <nz-switch class="m-r-8" [ngModel]="true" nzCheckedChildren="已完成" nzUnCheckedChildren="未完成"></nz-switch>
+                          </div>
+                          <nz-divider class="m-0"></nz-divider>
+                          <div>
+                            <div>
+                              任务1-1  <nz-tag class="m-l-5" [nzColor]="'processing'">进行中</nz-tag> <nz-tag class="m-l-5" [nzColor]="'default'">剩余3小时</nz-tag>
+                            </div>
+                            <nz-switch class="m-r-8" [ngModel]="true" nzCheckedChildren="已完成" nzUnCheckedChildren="未完成"></nz-switch>
+                          </div>
+                          <nz-divider class="m-0"></nz-divider>
+                          <div>
+                            <div>
+                              任务1-1  <nz-tag class="m-l-5" [nzColor]="'processing'">进行中</nz-tag> <nz-tag class="m-l-5" [nzColor]="'default'">剩余3小时</nz-tag>
+                            </div>
+                            <nz-switch class="m-r-8" [ngModel]="true" nzCheckedChildren="已完成" nzUnCheckedChildren="未完成"></nz-switch>
+                          </div>
+                          <nz-divider class="m-0"></nz-divider>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="first-menu m-b-10 m-t-10">
+                        <div>任务一  <nz-tag class="m-l-5" [nzColor]="'green'">进行中</nz-tag></div>
+                        <div>
+                          <nz-switch class="m-r-8" [ngModel]="true" nzCheckedChildren="已完成" nzUnCheckedChildren="未完成"></nz-switch>
+                          <span class="hand-model"><i nz-icon [nzType]="'down'" nzTheme="outline"></i>
+                        <span class="operate-text m-l-5">收起</span></span>
+                        </div>
+
+                      </div>
+                      <nz-divider class="m-0"></nz-divider>
+                      <div class="menu-content m-0 p-0" nz-result-content>
+                        <div class="second-menu p-l-25 li-height">
+                          <div>
+                            <div>
+                              任务1-1  <nz-tag class="m-l-5" [nzColor]="'processing'">进行中</nz-tag> <nz-tag class="m-l-5" [nzColor]="'default'">剩余3小时</nz-tag>
+                            </div>
+                            <nz-switch class="m-r-8" [ngModel]="true" nzCheckedChildren="已完成" nzUnCheckedChildren="未完成"></nz-switch>
+                          </div>
+                          <nz-divider class="m-0"></nz-divider>
+                          <div>
+                            <div>
+                              任务1-1  <nz-tag class="m-l-5" [nzColor]="'processing'">进行中</nz-tag> <nz-tag class="m-l-5" [nzColor]="'default'">剩余3小时</nz-tag>
+                            </div>
+                            <nz-switch class="m-r-8" [ngModel]="true" nzCheckedChildren="已完成" nzUnCheckedChildren="未完成"></nz-switch>
+                          </div>
+                          <nz-divider class="m-0"></nz-divider>
+                          <div>
+                            <div>
+                              任务1-1  <nz-tag class="m-l-5" [nzColor]="'processing'">进行中</nz-tag> <nz-tag class="m-l-5" [nzColor]="'default'">剩余3小时</nz-tag>
+                            </div>
+                            <nz-switch class="m-r-8" [ngModel]="true" nzCheckedChildren="已完成" nzUnCheckedChildren="未完成"></nz-switch>
+                          </div>
+                          <nz-divider class="m-0"></nz-divider>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                  <!--  <div class="task-list">
+                      <div class="task-item">
+                        <div class="first-menu">
+                          <span>任务一</span>
+                          <nz-switch [ngModel]="true" nzCheckedChildren="已完成" nzUnCheckedChildren="未完成"></nz-switch>
+                        </div>
+                        <div>
+                          <i nz-icon nzType="edit" nzTheme="outline" class="m-r-8"></i>
+                          <i nz-icon nzType="delete" nzTheme="outline"></i>
+                          <span class="hand-model"><i nz-icon [nzType]="'down'" nzTheme="outline"></i> <span
+                            class="operate-text">收起</span></span>
+                        </div>
+                        <nz-divider class="m-0"></nz-divider>
+                      </div>
+                      <nz-divider class="m-10"></nz-divider>
+                    </div>-->
+                </div>
+              </ng-container>
+              <!--<ng-container>
+                <ul class="m-t-20">
+                  <li>
+                    <div>张三 <span class="sp-14">完成任务</span> 任务一</div>
+                    <div  class="sp-14" nz-typography nzType="secondary">2小时前</div>
+                    <nz-divider></nz-divider>
+                  </li>
+                  <li>
+                    <div>张三 <span class="sp-14">完成任务</span> 任务一</div>
+                    <div  class="sp-14" nz-typography nzType="secondary">2小时前</div>
+                    <nz-divider></nz-divider>
+                  </li>
+                  <li>
+                    <div>张三 <span class="sp-14">完成任务</span> 任务一</div>
+                    <div  class="sp-14" nz-typography nzType="secondary">2小时前</div>
+                    <nz-divider></nz-divider>
+                  </li>
+                  <li>
+                    <div>张三 <span class="sp-14">完成任务</span> 任务一</div>
+                    <div  class="sp-14" nz-typography nzType="secondary">2小时前</div>
+                    <nz-divider></nz-divider>
+                  </li>
+                  <li>
+                    <div>张三 <span class="sp-14">完成任务</span> 任务一</div>
+                    <div  class="sp-14" nz-typography nzType="secondary">2小时前</div>
+                    <nz-divider></nz-divider>
+                  </li>
+                  <li>
+                    <div>张三 <span class="sp-14">完成任务</span> 任务一</div>
+                    <div  class="sp-14" nz-typography nzType="secondary">2小时前</div>
+                    <nz-divider></nz-divider>
+                  </li>
+                  <li>
+                    <div>张三 <span class="sp-14">完成任务</span> 任务一</div>
+                    <div  class="sp-14" nz-typography nzType="secondary">2小时前</div>
+                    <nz-divider></nz-divider>
+                  </li>
+                  <li>
+                    <div>张三 <span class="sp-14">完成任务</span> 任务一</div>
+                    <div  class="sp-14" nz-typography nzType="secondary">2小时前</div>
+                    <nz-divider></nz-divider>
+                  </li>
+                </ul>
+              </ng-container>-->
+            </nz-card-tab>
+          </nz-card>
+        </div>
+      </div>
+    </div>
+    <div nz-col [nzXl]="6" [nzXXl]="6" [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzXs]="24">
+      <div nz-row [nzGutter]="[32,32]">
+        <div nz-col nzSpan="24">
+          <nz-card nzTitle="计划详情" [nzBodyStyle]="{'padding':0}">
+            <ul class="plan-detail-ul">
+              <li>
+                <div nz-typography nzType="secondary">公司名称</div>
+                <div>南京化工厂</div>
+              </li>
+              <li>
+                <div nz-typography nzType="secondary">创建人</div>
+                <div>张三</div>
+              </li>
+              <li>
+                <div nz-typography nzType="secondary">创建时间</div>
+                <div>2020.3.5</div>
+              </li>
+              <li>
+                <div nz-typography nzType="secondary"><strong>截止时间</strong></div>
+                <div>2020.3.23</div>
+              </li>
+              <li>
+                <div nz-typography nzType="secondary">优先级</div>
+                <div>
+                  <nz-tag [nzColor]="'red'">高</nz-tag>
+                </div>
+              </li>
+              <li>
+                <div nz-typography nzType="secondary">总耗时(h)</div>
+                <div>100</div>
+              </li>
+            </ul>
+          </nz-card>
+        </div>
+        <div nz-col nzSpan="24">
+          <nz-card nzTitle="团队组长" [nzBodyStyle]="{'padding':0}" [nzExtra]="addTeam">
+            <ul class="plan-detail-ul">
+              <li>
+                <div nz-typography nzType="secondary">张三 13113113131</div>
+                <i nz-icon nzType="close" nzTheme="outline"></i></li>
+            </ul>
+          </nz-card>
+        </div>
+        <div nz-col nzSpan="24">
+          <nz-card nzTitle="团队成员" [nzBodyStyle]="{'padding':0}" [nzExtra]="addTeam">
+            <ul class="plan-detail-ul">
+              <li>
+                <div nz-typography nzType="secondary">张三 13113113131</div>
+                <i nz-icon nzType="close" nzTheme="outline"></i></li>
+              <li>
+                <div nz-typography nzType="secondary">张三 13113113131</div>
+                <i nz-icon nzType="close" nzTheme="outline"></i></li>
+            </ul>
+          </nz-card>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #addTeam let-type="type">
+  <button nz-button nzType="dashed"><i nz-icon nzType="user-add" nzTheme="outline"></i>添加</button>
+</ng-template>
