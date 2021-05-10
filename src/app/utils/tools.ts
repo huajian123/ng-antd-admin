@@ -39,7 +39,14 @@ const fnStopMouseEvent = function stopMouseEvent(e: MouseEvent): void {
 // 获取路由最后一个/后面的字符串
 const fnFormatePath = function formatePath(path: string): string {
   const newpath = path.replace(/\/[0-9]+/g, '');
-  return newpath.substring(newpath.lastIndexOf('\/') + 1);
+  const paramIndex = newpath.substring(newpath.lastIndexOf('\/') + 1).indexOf('?');
+  if (paramIndex > -1) {
+    const tempPath = newpath.substring(newpath.lastIndexOf('\/') + 1);
+    return tempPath.substring(0, paramIndex);
+  } else {
+    return newpath.substring(newpath.lastIndexOf('\/') + 1);
+  }
+
 };
 
 export {
