@@ -69,6 +69,11 @@ export abstract class BaseModal {
         show: true,
         onClick: (this.cancelCallback).bind(this)
       }],
+      nzOnCancel: () => {
+        return new Promise(resolve => {
+          resolve({status: ModalBtnStatus.Cancel, value: null});
+        });
+      },
       nzClosable: true,
       nzWidth: 720,
       nzComponentParams: {
