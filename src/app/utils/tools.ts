@@ -36,6 +36,17 @@ const fnStopMouseEvent = function stopMouseEvent(e: MouseEvent): void {
   e.preventDefault();
 };
 
+
+// 数组对象去重
+const fnRemoveDouble = function removeDouble<T>(list: any[], col: any): T {
+  const obj = {};
+  return list.reduce((cur, next) => {
+    // @ts-ignore
+    obj[next[col]] ? '' : obj[next[col]] = true && cur.push(next);
+    return cur;
+  }, []);
+};
+
 // 获取路由最后一个/后面的字符串
 const fnFormatePath = function formatePath(path: string): string {
   const newpath = path.replace(/\/[0-9]+/g, '');
@@ -53,5 +64,6 @@ export {
   fnGetFile,
   fnCheckForm,
   fnStopMouseEvent,
-  fnFormatePath
+  fnFormatePath,
+  fnRemoveDouble
 };
