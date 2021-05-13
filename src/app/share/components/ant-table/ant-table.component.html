@@ -32,7 +32,7 @@
         <ng-container *ngTemplateOutlet="head.tdTemplate;context:row"></ng-container>
       </ng-container>
       <ng-template #rowTpl>
-        <ng-container *ngIf="head.pipe;else noPipe"><span [title]="row[head.field!]|map:head.pipe"></span></ng-container>
+        <ng-container *ngIf="head.pipe;else noPipe"><span [title]="(row[head.field!]|map:head.pipe)">{{row[head.field!]|map:head.pipe}}</span></ng-container>
         <ng-template #noPipe>
           <ng-container><span [title]="row[head.field!]">{{row[head.field!]}}</span></ng-container>
         </ng-template>
