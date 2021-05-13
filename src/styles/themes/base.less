@@ -109,6 +109,10 @@ h1, h2, h3, h4, h5, h6 {
   margin-right: 8px !important;
 }
 
+.m-r-15 {
+  margin-right: 15px !important;
+}
+
 .m-r-25 {
   margin-right: 25px !important;
 }
@@ -164,6 +168,9 @@ h1, h2, h3, h4, h5, h6 {
   margin-left: 15px !important;
 }
 
+.m-t-0 {
+  margin-top: 0 !important;
+}
 
 .m-t-5 {
   margin-top: 5px !important;
@@ -286,11 +293,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .sp-14 {
-  font-size: 14px!important;
+  font-size: 14px !important;
+}
+
+.sp-18 {
+  font-size: 18px !important;
 }
 
 .sp-28 {
-  font-size: 28px!important;
+  font-size: 28px !important;
 }
 
 .clear-fix:after {
@@ -345,7 +356,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-
 .left-start-center {
   .center-fn(flex-start)
 }
@@ -353,6 +363,8 @@ h1, h2, h3, h4, h5, h6 {
 .space-between {
   .center-fn(space-between)
 }
+
+
 
 .bg-color-no {
   background: none !important;
@@ -408,11 +420,19 @@ h1, h2, h3, h4, h5, h6 {
 /*覆盖zorro样式*/
 
 // 对话框增加滚动条
-.ant-modal-body{
+.ant-modal-body {
   overflow: auto;
   max-height: 600px;
 }
 
-nz-date-picker{
+nz-date-picker {
   width: 100%;
+}
+
+.ant-table-tbody {
+  > tr > td {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 }
