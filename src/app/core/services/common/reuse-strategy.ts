@@ -24,6 +24,8 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
   store(route: ActivatedRouteSnapshot, handle: any): void {
     if (SimpleReuseStrategy.waitDelete === route.data.key) {
       // 如果待删除是当前路由则不存储快照
+      this.runHook('_onReuseDestroy', handle.componentRef);
+      handle.componentRef.destroy();
       SimpleReuseStrategy.waitDelete = null;
       return;
     }
