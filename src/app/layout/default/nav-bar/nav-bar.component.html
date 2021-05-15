@@ -12,7 +12,8 @@
       </li>
       <!--二级菜单-->
       <ng-container *ngIf="menu.children&&menu.children.length>0">
-        <li nz-submenu *appAuth="menu.actionCode" (nzOpenChange)="changeOpen(menu,menus)" [(nzOpen)]="menu.open"
+        <!--*appAuth="menu.actionCode"-->
+        <li nz-submenu  (nzOpenChange)="changeOpen(menu,menus)" [(nzOpen)]="menu.open"
             [nzTitle]="menu.title" [nzIcon]="menu.icon">
           <ul>
             <ng-container *ngFor="let menuSecond of menu.children">

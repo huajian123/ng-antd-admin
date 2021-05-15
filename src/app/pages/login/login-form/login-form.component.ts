@@ -23,7 +23,8 @@ export class LoginFormComponent implements OnInit {
 
 
   submitForm(): void {
-    this.router.navigateByUrl('default');
+    this.windowServe.setStorage(AuthKey, 'TokenPre + token');
+    this.router.navigateByUrl('default/dashboard/analysis');
     if (!fnCheckForm(this.validateForm)) {
       return;
     }
