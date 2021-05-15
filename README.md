@@ -42,8 +42,14 @@ const routes: Routes = [
 ];
 
 ```
+# 切换tab调用的临时声明周期如下
+relatedLink数组中保存相关联的两个路由，值为每个路由地址最后的/后的字符串
+```typescript
+ _onReuseInit: () => void;
+  _onReuseDestroy: () => void;
 
-
+```
+直接在目标组件中写出方法名为_onReuseInit或者_onReuseDestroy的方法即可实现
 
 ## Development server
 
