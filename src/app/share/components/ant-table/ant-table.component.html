@@ -16,18 +16,18 @@
   <ng-template #rangeTemplate let-range="range" let-total> {{ range[0] }}-{{ range[1] }} 共 {{ total }} 条</ng-template>
   <thead>
   <tr>
-    <th [nzLeft]="true" [nzIndeterminate]="indeterminate" *ngIf="tableConfig.showCheckbox"
+    <th nzEllipsis [nzLeft]="true" [nzIndeterminate]="indeterminate" *ngIf="tableConfig.showCheckbox"
         (nzCheckedChange)="onAllChecked($event)" [nzWidth]="'40px'" [nzChecked]="allChecked"></th>
-    <th [nzWidth]="head.width + 'px'"
+    <th nzEllipsis [nzWidth]="head.width + 'px'"
         *ngFor="let head of tableConfig.headers;trackBy:trackByTableHead;let headIndex=index"
         [nzRight]="!!head.fixed">{{head.title}}</th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let row of _dataList;let rowIndex=index;trackBy:trackByTableBody">
-    <td *ngIf="tableConfig.showCheckbox" [nzLeft]="true" (nzCheckedChange)="checkRowSingle($event,rowIndex)"
+    <td nzEllipsis *ngIf="tableConfig.showCheckbox" [nzLeft]="true" (nzCheckedChange)="checkRowSingle($event,rowIndex)"
         [nzChecked]="row['_checked']"></td>
-    <td *ngFor="let head of tableConfig.headers" [nzRight]="!!head.fixed">
+    <td nzEllipsis *ngFor="let head of tableConfig.headers" [nzRight]="!!head.fixed">
       <ng-container *ngIf="head.tdTemplate;else rowTpl">
         <ng-container *ngTemplateOutlet="head.tdTemplate;context:row"></ng-container>
       </ng-container>
