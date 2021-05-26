@@ -1,23 +1,19 @@
-<nz-card style="width:100%;" [nzBordered]="false" [nzTitle]="'查询表格'" [nzExtra]="tableToolbar">
+<nz-card style="width:100%;" [nzBordered]="false" [nzTitle]="needTableTitle?'查询表格':null"
+         [nzExtra]="needTableTitle?tableToolbar:''">
   <ng-content></ng-content>
 </nz-card>
 <ng-template #tableToolbar>
   <div class="ant-pro-table-toolbar">
     <div class="ant-pro-table-toolbar-option" *ngIf="needAddBtn">
-      <button nz-button nzType="primary" *appAuth="actionCode.add" (click)="addBtnClick()"><i nz-icon nzType="plus"></i>新建</button>
+      <button nz-button nzType="primary" *appAuth="actionCode.add" (click)="addBtnClick()"><i nz-icon nzType="plus"></i>新建
+      </button>
     </div>
     <div class="ant-pro-table-toolbar-default-option">
       <nz-divider nzType="vertical"></nz-divider>
       <nz-space [nzSize]="16" nzDirection="horizontal">
-        <nz-space-item>
-          <i nz-icon nzType="column-width" nzTheme="outline"></i>
-        </nz-space-item>
-        <nz-space-item>
-          <i nz-icon nzType="fullscreen" nzTheme="outline"></i>
-        </nz-space-item>
-        <nz-space-item>
-          <i nz-icon nzType="setting" nzTheme="outline"></i>
-        </nz-space-item>
+        <i *nzSpaceItem nz-icon nzType="column-width" nzTheme="outline"></i>
+        <i *nzSpaceItem nz-icon nzType="fullscreen" nzTheme="outline"></i>
+        <i *nzSpaceItem nz-icon nzType="setting" nzTheme="outline"></i>
       </nz-space>
     </div>
   </div>
