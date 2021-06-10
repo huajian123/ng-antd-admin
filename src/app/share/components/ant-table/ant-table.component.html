@@ -27,7 +27,9 @@
   <tr *ngFor="let row of _dataList;let rowIndex=index;trackBy:trackByTableBody">
     <td nzEllipsis *ngIf="tableConfig.showCheckbox" [nzLeft]="true" (nzCheckedChange)="checkRowSingle($event,rowIndex)"
         [nzChecked]="row['_checked']"></td>
-    <td nzEllipsis *ngFor="let head of tableConfig.headers" [nzRight]="!!head.fixed">
+    <td [ngClass]="head.tdClassList?head.tdClassList:''" [nzEllipsis]="!head.notNeedEllipsis"
+        *ngFor="let head of tableConfig.headers"
+        [nzRight]="!!head.fixed">
       <ng-container *ngIf="head.tdTemplate;else rowTpl">
         <ng-container *ngTemplateOutlet="head.tdTemplate;context:row"></ng-container>
       </ng-container>
