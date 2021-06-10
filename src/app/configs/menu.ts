@@ -63,7 +63,7 @@ export const menuNav: Menu[] = [
     selected: false,
     actionCode: ActionCode.ListModule,
     children: [
-      {
+    /*  {
         title: '搜索列表',
         open: false,
         selected: false,
@@ -88,14 +88,14 @@ export const menuNav: Menu[] = [
             path: '/list/search-list/app',
           },
         ]
-      },
+      },*/
       {
         title: '查询表格',
         open: false,
         selected: false,
         path: '/default/list/search-table',
       },
-      {
+     /* {
         title: '标准表格',
         open: false,
         selected: false,
@@ -106,7 +106,7 @@ export const menuNav: Menu[] = [
         open: false,
         selected: false,
         path: '/card-table',
-      },
+      },*/
     ]
   },
   {
@@ -122,12 +122,12 @@ export const menuNav: Menu[] = [
         selected: false,
         path: '/default/detail/base-detail',
       },
-      {
+     /* {
         title: '高级详情页',
         open: false,
         selected: false,
         path: '/detail-adv',
-      },
+      },*/
     ]
   },
   {
