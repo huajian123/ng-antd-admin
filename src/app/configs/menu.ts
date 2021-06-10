@@ -120,7 +120,7 @@ export const menuNav: Menu[] = [
         title: '基础详情页',
         open: false,
         selected: false,
-        path: '/detail-base',
+        path: '/default/detail/base-detail',
       },
       {
         title: '高级详情页',

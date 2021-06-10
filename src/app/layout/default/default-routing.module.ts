@@ -21,6 +21,10 @@ const routes: Routes = [
         loadChildren: () => import('../../pages/internal-manage/internal-manage.module').then(m => m.InternalManageModule)
       },
       {
+        path: 'detail',
+        loadChildren: () => import('../../pages/detail/detail.module').then(m => m.DetailModule)
+      },
+      {
         path: 'list',
         loadChildren: () => import('../../pages/list/list.module').then(m => m.ListModule)
       },

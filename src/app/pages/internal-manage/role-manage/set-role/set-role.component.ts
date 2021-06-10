@@ -85,6 +85,10 @@ export class SetRoleComponent implements OnInit {
     this.getCurrenPermission();
   }
 
+  _onReuseInit(): void {
+    this.ngOnInit();
+  };
+
   ngOnInit(): void {
     this.id = this.routeInfo.snapshot.params['id'];
     this.initPermission();

@@ -1,0 +1,30 @@
+<!--头部版块-->
+<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+
+<div class="normal-table-wrap">
+  <nz-card>
+    <nz-descriptions nzTitle="退款申请">
+      <nz-descriptions-item nzTitle="取货单号">1000000000</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="状态">已取货</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="销售单号">1234123421</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="子订单">3214321432</nz-descriptions-item>
+    </nz-descriptions>
+    <nz-divider></nz-divider>
+    <nz-descriptions nzTitle="用户信息">
+      <nz-descriptions-item nzTitle="用户姓名">付小小</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="联系电话">18100000000</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="常用快递">菜鸟仓储</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="取货地址">浙江省杭州市西湖区万塘路18号</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="备注">无</nz-descriptions-item>
+    </nz-descriptions>
+    <nz-divider></nz-divider>
+    <h2 class="sp-18 m-b-10">退货商品</h2>
+    <app-ant-table [tableConfig]="returnTableConfig" [tableData]="returnDataList"></app-ant-table>
+    <nz-divider class="m-t-0"></nz-divider>
+    <h2 class="sp-18 m-b-10">退货进度</h2>
+    <app-ant-table [tableConfig]="returnTableConfig" [tableData]="returnDataList"></app-ant-table>
+  </nz-card>
+</div>
+<ng-template #returnProductTpl let-num="num">
+  <span class="operate-text">{{num}}</span>
+</ng-template>

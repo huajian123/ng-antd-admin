@@ -20,6 +20,7 @@ export interface TableHeader {
   thTemplate?: TemplateRef<any>;    // th单元格模板
   tdTemplate?: TemplateRef<any>;    // td单元格模板
   fixed?: boolean;                  // 是否固定单元格 （只有从最左边或最右边连续固定才有效）
+  notNeedEllipsis?: boolean;        // 不需要...时给true
   tdClassList?: string[];           // 为td单元格指定类 (父组件中的类必须加上 /deep/ 前缀才能对子组件生效)
   thClassList?: string[];           // 为th单元格指定类  (父组件中的类必须加上 /deep/ 前缀才能对子组件生效)
   show?: boolean;                   // 是否显示列，false:不显示，其他：显示

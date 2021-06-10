@@ -1,4 +1,5 @@
 import {IconsProviderModule} from './icons-provider.module';
+import { NzTreeViewModule } from 'ng-zorro-antd/tree-view';
 import {NzFormModule} from 'ng-zorro-antd/form';
 import {NzButtonModule} from 'ng-zorro-antd/button';
 import {NzInputModule} from 'ng-zorro-antd/input';
@@ -42,6 +43,7 @@ import { NzProgressModule } from 'ng-zorro-antd/progress';
 
 
 export const SHARED_ZORRO_MODULES = [
+  NzTreeViewModule,
   NzProgressModule,
   NzUploadModule,
   NzTagModule,

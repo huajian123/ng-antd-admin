@@ -54,6 +54,10 @@ h1, h2, h3, h4, h5, h6 {
   display: none;
 }
 
+.text-wrap{
+  white-space:pre-wrap;
+}
+
 
 .full-height {
   height: 100%;
@@ -103,6 +107,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .pull-right {
   float: right;
+}
+
+.m-h-100 {
+  min-height: 100%;
+}
+
+.m-r-5 {
+  margin-right: 5px !important;
 }
 
 .m-r-8 {
@@ -355,6 +367,17 @@ h1, h2, h3, h4, h5, h6 {
   .center-fn()
 }
 
+.flex {
+  display: flex;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-auto {
+  flex: auto;
+}
 
 .left-start-center {
   .center-fn(flex-start)
@@ -363,7 +386,6 @@ h1, h2, h3, h4, h5, h6 {
 .space-between {
   .center-fn(space-between)
 }
-
 
 
 .bg-color-no {
@@ -444,4 +466,10 @@ h1, h2, h3, h4, h5, h6 {
 
 nz-date-picker {
   width: 100%;
+}
+
+.overflow-dots {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
