@@ -8,6 +8,7 @@ import {fnFormatePath} from '../../utils/tools';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {Subject} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
+import {SideCollapsedMaxWidth, TopCollapsedMaxWidth} from '../../configs/constant';
 
 @Component({
   selector: 'app-default',
@@ -57,9 +58,9 @@ export class DefaultComponent implements OnInit, OnDestroy {
     this.themesService.getThemesMode().pipe(switchMap((res) => {
       let maxWidth = '';
       if (res.mode === 'side') {
-        maxWidth = '(max-width: 700px)';
+        maxWidth = `(max-width: ${SideCollapsedMaxWidth}px)`;
       } else if (res.mode === 'top') {
-        maxWidth = '(max-width: 1190px)';
+        maxWidth = `(max-width: ${TopCollapsedMaxWidth}px)`;
       }
       // 可以入参[Breakpoints.Small, Breakpoints.XSmall]
       return this.breakpointObserver.observe([maxWidth]);
