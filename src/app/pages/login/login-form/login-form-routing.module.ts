@@ -3,7 +3,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {LoginFormComponent} from './login-form.component';
 
 const routes: Routes = [
-  {path: '', data: {key: 'login', shouldDetach: 'no'}, component: LoginFormComponent}
+  {path: '', data: {shouldDetach: 'no'}, component: LoginFormComponent}
 ];
 
 @NgModule({
