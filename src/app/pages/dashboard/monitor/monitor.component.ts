@@ -482,8 +482,10 @@ export class MonitorComponent implements OnInit, AfterViewInit {
         },
       },
     });
+    inNextTick().subscribe(() => {
+      wordCloud.render();
+    });
 
-    wordCloud.render();
   }
 
   initRingProgress(i: number): void {
