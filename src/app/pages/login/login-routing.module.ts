@@ -4,7 +4,7 @@ import {LoginComponent} from './login.component';
 
 const routes: Routes = [
   {
-    path: '', component: LoginComponent, data: {key: 'login-component'}, children: [
+    path: '', component: LoginComponent, data: {key: 'login', shouldDetach: 'no'}, children: [
       {
         path: 'login-form',
         loadChildren: () => import('./login-form/login-form.module').then(m => m.LoginFormModule)

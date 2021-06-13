@@ -22,7 +22,7 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
 
   // 当路由离开时会触发，存储路由
   store(route: ActivatedRouteSnapshot, handle: any): void {
-    if (route.data.shouldDetach !== 'no') {
+    if (route.data.shouldDetach === 'no') {
       return;
     }
     if (SimpleReuseStrategy.waitDelete === route.data.key) {
@@ -87,7 +87,6 @@ export type ReuseHookTypes = '_onReuseInit' | '_onReuseDestroy';
 export interface ReuseComponentInstance {
   _onReuseInit: () => void;
   _onReuseDestroy: () => void;
-  destroy: () => void;
 }
 
 export interface ReuseComponentRef {
