@@ -50,7 +50,7 @@ export class DefaultComponent implements OnInit, OnDestroy {
     SimpleReuseStrategy.handlers = {};
     // @ts-ignore
     SimpleReuseStrategy.waitDelete = fnFormatePath(this.activatedRoute.snapshot['_routerState'].url);
-    this.router.navigate(['/login']);
+    this.router.navigate(['/login/login-form']);
   }
 
   ngOnInit(): void {
