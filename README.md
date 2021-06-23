@@ -51,6 +51,10 @@ relatedLink数组中保存相关联的两个路由，值为每个路由地址最
 ```
 直接在目标组件中写出方法名为_onReuseInit或者_onReuseDestroy的方法即可实现
 
+## 系统截图
+个人中心
+ ![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/1.png)
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
