@@ -1,3 +1,6 @@
+# 项目视频介绍
+视频介绍地址 [菜鸟教程](https://www.bilibili.com/video/BV12B4y1T7h7/)
+
 # 禁用严格模式
 
 可以通过在应用程序的 TypeScript 配置文件 tsconfig.json 中设置 strictTemplates: false 来完全禁用严格检查。
@@ -52,8 +55,20 @@ relatedLink数组中保存相关联的两个路由，值为每个路由地址最
 直接在目标组件中写出方法名为_onReuseInit或者_onReuseDestroy的方法即可实现
 
 ## 系统截图
-个人中心
+
  ![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/1.png)
+ ![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/2.png)
+ ![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/3.png)
+ ![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/4.jpg)
+ ![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/5.png)
+ ![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/6.png)
+ ![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/7.png)
+ ![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/8.png)
+ ![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/9.png)
+ ![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/10.png)
+ ![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/11.png)
+ ![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/12.png)
+ ![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/13.png)
 
 ## Development server
 
