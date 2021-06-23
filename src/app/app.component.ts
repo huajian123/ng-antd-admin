@@ -18,18 +18,13 @@ import {filter} from 'rxjs/operators';
 })
 export class AppComponent implements OnInit {
   loading$ = this.spinService.getCurrentGlobalSpinStore();
-  isLoading = false;
 
   constructor(private spinService: SpinService, public router: Router) {
   }
 
   ngOnInit(): void {
-
     (this.router.events.pipe(filter((event: any) => event instanceof NavigationEnd))).subscribe((event: any) => {
       this.spinService.setCurrentGlobalSpinStore(false);
     });
-    this.loading$.subscribe(res => {
-      console.log(res);
-    })
   }
 }
