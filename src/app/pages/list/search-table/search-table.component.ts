@@ -13,7 +13,7 @@ import {SearchCommonVO} from '../../../core/services/types';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchTableComponent implements OnInit {
-
+  @ViewChild('highLightTpl', {static: true}) highLightTpl!: TemplateRef<any>;
   @ViewChild('operationTpl', {static: true}) operationTpl!: TemplateRef<any>;
   validateForm!: FormGroup;
   isCollapse = true;
@@ -43,32 +43,32 @@ export class SearchTableComponent implements OnInit {
       {
         productName: '文字超级长文字超级长文字超级长文字超级长文字超级长文字超级长',
         casNo: '没有省略号没有省略号没有省略号没有省略号没有省略号没有省略号没有省略号没有省略号',
-        file3:'加样式'
+        file3: '加样式'
       },
       {
         productName: '文字超级长文字超级长文字超级长文字超级长文字超级长文字超级长',
         casNo: 'string',
-        file3:'加样式',
+        file3: '加样式',
       },
       {
         productName: 'string',
         casNo: 'string',
-        file3:'加样式',
+        file3: '加样式',
       },
       {
         productName: 'string',
         casNo: 'string',
-        file3:'加样式',
+        file3: '加样式',
       },
       {
         productName: 'string',
         casNo: 'string',
-        file3:'加样式',
+        file3: '加样式',
       },
       {
         productName: 'string',
         casNo: 'string',
-        file3:'加样式',
+        file3: '加样式',
       },
     ];
     this.tableConfig.total = 13;
@@ -143,7 +143,7 @@ export class SearchTableComponent implements OnInit {
           title: '名称',
           width: 100,
           field: 'productName',
-          fixed: true
+          tdTemplate: this.highLightTpl,
         },
         {
           title: '操作',

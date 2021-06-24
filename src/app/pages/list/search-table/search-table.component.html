@@ -74,3 +74,6 @@
     </ng-template>
   </app-card-table-wrap>
 </div>
+<ng-template #highLightTpl let-productName="productName">
+  <nz-badge nzStatus="processing" [nzText]="productName"></nz-badge>
+</ng-template>
