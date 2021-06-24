@@ -16,7 +16,7 @@ export class SearchTableComponent implements OnInit {
 
   @ViewChild('operationTpl', {static: true}) operationTpl!: TemplateRef<any>;
   validateForm!: FormGroup;
-  isCollapse = false;
+  isCollapse = true;
   tableConfig!: MyTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '查询表格',
@@ -41,88 +41,34 @@ export class SearchTableComponent implements OnInit {
     this.tableConfig.loading = false;
     this.dataList = [
       {
-        productName: 'string',
+        productName: '文字超级长文字超级长文字超级长文字超级长文字超级长文字超级长',
+        casNo: '没有省略号没有省略号没有省略号没有省略号没有省略号没有省略号没有省略号没有省略号',
+        file3:'加样式'
+      },
+      {
+        productName: '文字超级长文字超级长文字超级长文字超级长文字超级长文字超级长',
         casNo: 'string',
+        file3:'加样式',
       },
       {
         productName: 'string',
         casNo: 'string',
+        file3:'加样式',
       },
       {
         productName: 'string',
         casNo: 'string',
+        file3:'加样式',
       },
       {
         productName: 'string',
         casNo: 'string',
+        file3:'加样式',
       },
       {
         productName: 'string',
         casNo: 'string',
-      },
-      {
-        productName: 'string',
-        casNo: 'string',
-      },
-      {
-        productName: 'string',
-        casNo: 'string',
-      },
-      {
-        productName: 'string',
-        casNo: 'string',
-      },
-      {
-        productName: 'string',
-        casNo: 'string',
-      },
-      {
-        productName: 'string',
-        casNo: 'string',
-      },
-      {
-        productName: 'string',
-        casNo: 'string',
-      },
-      {
-        productName: 'string',
-        casNo: 'string',
-      },
-      {
-        productName: 'string',
-        casNo: 'string',
-      },
-      {
-        productName: 'string',
-        casNo: 'string',
-      },
-      {
-        productName: 'string',
-        casNo: 'string',
-      },
-      {
-        productName: 'string',
-        casNo: 'string',
-      },
-      {
-        productName: 'string',
-        casNo: 'string',
-      },
-      {
-        productName: 'string',
-        casNo: 'string',
-      },
-      {
-        productName: 'string',
-        casNo: 'string',
-      },
-      {
-        productName: 'string',
-        casNo: 'string',
-      },
-      {
-        productName: 'string',
-        casNo: 'string',
+        file3:'加样式',
       },
     ];
     this.tableConfig.total = 13;
@@ -177,102 +123,21 @@ export class SearchTableComponent implements OnInit {
     this.tableConfig = {
       headers: [
         {
-          title: '年龄',
+          title: '文字很长',
           width: 100,
           field: 'productName',
         },
         {
-          title: '名称',
+          title: '换行',
           width: 100,
-          field: 'productName',
+          field: 'casNo',
+          notNeedEllipsis: true,
+          tdClassList: ['text-wrap'],
         }, {
-          title: '年龄',
+          title: '加样式',
           width: 100,
           field: 'productName',
-        },
-        {
-          title: '名称',
-          width: 100,
-          field: 'productName',
-        },
-        {
-          title: '年龄',
-          width: 100,
-          field: 'productName',
-        },
-        {
-          title: '名称',
-          width: 100,
-          field: 'productName',
-        }, {
-          title: '年龄',
-          width: 100,
-          field: 'productName',
-        },
-        {
-          title: '名称',
-          width: 100,
-          field: 'productName',
-        },
-        {
-          title: '名称',
-          width: 100,
-          field: 'productName',
-        },
-        {
-          title: '名称',
-          width: 100,
-          field: 'productName',
-        },
-        {
-          title: '名称',
-          width: 100,
-          field: 'productName',
-        },
-        {
-          title: '名称',
-          width: 100,
-          field: 'productName',
-        },
-        {
-          title: '名称',
-          width: 100,
-          field: 'productName',
-        },
-        {
-          title: '名称',
-          width: 100,
-          field: 'productName',
-        },
-        {
-          title: '名称',
-          width: 100,
-          field: 'productName',
-        },
-        {
-          title: '名称',
-          width: 100,
-          field: 'productName',
-        },
-        {
-          title: '名称',
-          width: 100,
-          field: 'productName',
-        },
-        {
-          title: '名称',
-          width: 100,
-          field: 'productName',
-        },
-        {
-          title: '名称',
-          width: 100,
-          field: 'productName',
-        },
-        {
-          title: '名称',
-          width: 100,
-          field: 'productName',
+          tdClassList: ['operate-text'],
         },
         {
           title: '名称',

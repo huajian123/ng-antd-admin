@@ -54,7 +54,8 @@
           <button nz-button class="m-l-15" (click)="resetForm()"><i nz-icon nzType="close-circle" nzTheme="outline"></i>重置
           </button>
           <a class="collapse operate-text" (click)="toggleCollapse()">
-            展开
+            <span *ngIf="isCollapse">展开</span>
+            <span *ngIf="!isCollapse">收起</span>
             <i nz-icon [nzType]="isCollapse ? 'down' : 'up'"></i>
           </a>
         </div>
