@@ -1,13 +1,18 @@
-<nz-page-header (nzBack)="back()" [nzBackIcon]="backTpl?backTpl:null" [nzGhost]="false" class="site-page-header">
+<nz-page-header (nzBack)="back()" [nzTitle]="pageHeaderInfo.title" [nzBackIcon]="backTpl?backTpl:null" [nzGhost]="false" class="site-page-header">
   <nz-breadcrumb nz-page-header-breadcrumb>
     <nz-breadcrumb-item *ngFor="let breadcrumb of pageHeaderInfo.breadcrumb">
       <a>{{breadcrumb}}</a>
     </nz-breadcrumb-item>
   </nz-breadcrumb>
+  <nz-page-header-extra>
+    <ng-container *nzStringTemplateOutlet="pageHeaderInfo.extra">{{pageHeaderInfo.extra}}</ng-container>
+  </nz-page-header-extra>
   <nz-page-header-content *ngIf="pageHeaderInfo.desc">
     <ng-container *nzStringTemplateOutlet="pageHeaderInfo.desc">{{pageHeaderInfo.desc}}</ng-container>
   </nz-page-header-content>
-  <nz-page-header-title>{{pageHeaderInfo.title}}</nz-page-header-title>
+  <nz-page-header-footer *ngIf="pageHeaderInfo.footer">
+    <ng-container *nzStringTemplateOutlet="pageHeaderInfo.footer">{{pageHeaderInfo.footer}}</ng-container>
+  </nz-page-header-footer>
 </nz-page-header>
 
 

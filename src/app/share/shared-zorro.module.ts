@@ -40,10 +40,13 @@ import {NzAvatarModule} from 'ng-zorro-antd/avatar';
 import {NzTagModule} from 'ng-zorro-antd/tag';
 import {NzUploadModule} from 'ng-zorro-antd/upload';
 import { NzProgressModule } from 'ng-zorro-antd/progress';
+import {NzEmptyModule} from 'ng-zorro-antd/empty';
+import {NzPopoverModule} from 'ng-zorro-antd/popover';
 
 
 export const SHARED_ZORRO_MODULES = [
   NzTreeViewModule,
+  NzPopoverModule,
   NzProgressModule,
   NzUploadModule,
   NzTagModule,
@@ -70,6 +73,7 @@ export const SHARED_ZORRO_MODULES = [
   NzSwitchModule,
   NzTimePickerModule,
   NzPageHeaderModule,
+  NzEmptyModule,
   NzBreadCrumbModule,
   NzDrawerModule,
   NzListModule,

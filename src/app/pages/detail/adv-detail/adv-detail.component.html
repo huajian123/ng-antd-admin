@@ -1,0 +1,89 @@
+<!--头部版块-->
+<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+<ng-template #headerExtra>
+  <nz-radio-group>
+    <label nz-radio-button>操作一</label>
+    <label nz-radio-button>操作二</label>
+    <label nz-radio-button nz-dropdown [nzDropdownMenu]="menu" [nzPlacement]="'bottomRight'">
+      <i nz-icon nzType="ellipsis" nzTheme="outline"></i>
+    </label>
+    <nz-dropdown-menu #menu="nzDropdownMenu">
+      <ul nz-menu nzSelectable>
+        <li nz-menu-item>选项一</li>
+        <li nz-menu-item>选项二</li>
+        <li nz-menu-item>选项三</li>
+      </ul>
+    </nz-dropdown-menu>
+  </nz-radio-group>
+  <button nz-button nzType="primary">主操作</button>
+</ng-template>
+<ng-template #headerContent>
+  <div nz-row>
+    <div nz-col [nzXXl]="20" [nzXl]="18" [nzLg]="18" [nzMd]="16" [nzSm]="24" [nzXs]="24">
+      <nz-descriptions nzSize="small" [nzColumn]="{ xxl: 2, xl: 2, lg: 2, md: 2, sm: 1, xs: 1 }">
+        <nz-descriptions-item nzTitle="创建人">曲丽丽</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="订购产品">XX 服务</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="创建时间">2017-07-07</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="关联单据"><a class="operate-text">12421</a></nz-descriptions-item>
+        <nz-descriptions-item nzTitle="生效日期">2017-07-07 ~ 2017-08-08</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="备注">请于两个工作日内确认</nz-descriptions-item>
+      </nz-descriptions>
+    </div>
+    <div nz-col [nzXXl]="4" [nzXl]="6" [nzLg]="6" [nzMd]="8" [nzSm]="24" [nzXs]="24">
+      <div class="left-start-center">
+        <nz-statistic class="m-r-25" nzTitle="状态" nzValue="待审批"></nz-statistic>
+        <nz-statistic nzTitle="订单金额" [nzValue]="568.08" nzPrefix="¥"></nz-statistic>
+      </div>
+
+    </div>
+  </div>
+</ng-template>
+<ng-template #headerFooter>
+  <nz-tabset>
+    <nz-tab nzTitle="详情"></nz-tab>
+    <nz-tab nzTitle="规则"></nz-tab>
+  </nz-tabset>
+</ng-template>
+
+<div class="normal-table-wrap">
+  <nz-card [nzTitle]="'流程进度'">
+    <nz-steps [nzDirection]="stepDirection" [nzCurrent]="1" [nzProgressDot]="progressTemplate">
+      <nz-step nzTitle="创建项目" [nzDescription]="createTpl"></nz-step>
+      <nz-step nzTitle="部门初审" [nzDescription]="trialTpl"></nz-step>
+      <nz-step nzTitle="财务复核"></nz-step>
+      <nz-step nzTitle="完成"></nz-step>
+    </nz-steps>
+    <ng-template #createTpl>
+      <div>
+        <span class="m-r-8">曲丽丽</span>
+        <i nz-icon nzType="dingding" nzTheme="outline"></i>
+      </div>
+      <div>
+        2016-12-12 12:32
+      </div>
+    </ng-template>
+    <ng-template #trialTpl>
+      <div>
+        <span class="m-r-8">周毛毛</span>
+        <i nz-icon nzType="dingding" nzTheme="outline" style="color: rgb(0, 160, 233);"></i>
+      </div>
+      <div>
+        <a class="operate-text">催一下</a>
+      </div>
+    </ng-template>
+    <ng-template #progressTemplate let-dot let-status="status" let-index="index">
+      <span nz-popover [nzPopoverContent]="trialPopTpl" style="margin-left: -100%;">
+        <ng-template [ngTemplateOutlet]="dot"></ng-template>
+      </span>
+    </ng-template>
+    <ng-template #trialPopTpl>
+      <div style="width: 160px;">
+        <div class="flex">
+          <div class="flex-1">吴加号</div>
+          <nz-badge nzStatus="default" nzText="未响应"></nz-badge>
+        </div>
+        <div class="mt5">耗时：2小时25分钟</div>
+      </div>
+    </ng-template>
+  </nz-card>
+</div>

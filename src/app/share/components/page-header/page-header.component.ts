@@ -5,7 +5,9 @@ import {Router} from '@angular/router';
 export interface PageHeaderType {
   title: string;
   desc: string | TemplateRef<any>;
+  extra:string | TemplateRef<any>;
   breadcrumb: string[];
+  footer: string | TemplateRef<any>;
 }
 
 
