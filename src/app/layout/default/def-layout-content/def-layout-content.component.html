@@ -3,7 +3,7 @@
   <nz-sider *ngIf="((themesOptions$|async)!.mode==='side')&&!(isOverMode$|async)" class="menu-sidebar"
             [nzTheme]="(themesOptions$|async)!.theme"
             nzBreakpoint="lg" [nzCollapsible]="true" [nzCollapsed]="isCollapsed$|async"
-            (nzCollapsedChange)="changeCollapsed($event)" [nzTrigger]="null">
+            (nzCollapsedChange)="changeCollapsed($event)" [nzTrigger]="trigger">
     <ng-content select="ng-container[sider]"></ng-content>
   </nz-sider>
   <nz-layout style="overflow-x:hidden">
@@ -20,3 +20,11 @@
 
   </nz-layout>
 </nz-layout>
+<ng-template #trigger>
+  <ul nz-menu [nzTheme]="(themesOptions$|async)!.theme" nzMode="inline" [nzSelectable]="false">
+    <li nz-menu-item>
+      <i class="trigger sp-18" nz-icon [nzType]="(isCollapsed$|async) ? 'menu-unfold' : 'menu-fold'"></i>
+    </li>
+  </ul>
+
+</ng-template>
