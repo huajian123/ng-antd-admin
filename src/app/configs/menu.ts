@@ -95,18 +95,18 @@ export const menuNav: Menu[] = [
         selected: false,
         path: '/default/list/search-table',
       },
-     /* {
+      {
         title: '标准表格',
         open: false,
         selected: false,
-        path: '/custom-table',
+        path: '/default/list/standard-table',
       },
       {
         title: '卡片列表',
         open: false,
         selected: false,
-        path: '/card-table',
-      },*/
+        path: '/default/list/card-table',
+      },
     ]
   },
   {
