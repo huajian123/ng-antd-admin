@@ -1,12 +1,11 @@
 {
   "/site": {
-    "target": "http://192.168.1.106:8000/",
+    "target": "http://192.168.1.104:8003/",
     "secure": false,
     "changeOrigin": true,
     "pathRewrite": {
       "^/site": ""
-    },
-    "fanbaoling": "http://192.168.1.106:8000/"
+    }
   },
   "/localhost": {
     "target": "http://localhost:4201/",

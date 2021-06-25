@@ -63,32 +63,31 @@ export const menuNav: Menu[] = [
     selected: false,
     actionCode: ActionCode.ListModule,
     children: [
-    /*  {
+      {
         title: '搜索列表',
         open: false,
         selected: false,
-        path: '/list/search-list',
         children: [
           {
             title: '搜索列表(文章）',
             open: false,
             selected: false,
-            path: '/list/search-list/acticle',
+            path: '/default/list/search-list/article',
           },
           {
             title: '搜索列表(项目)',
             open: false,
             selected: false,
-            path: '/list/search-list/project',
+            path: '/default/list/search-list/project',
           },
           {
             title: '搜索列表(应用)',
             open: false,
             selected: false,
-            path: '/list/search-list/app',
+            path: '/default/list/search-list/application',
           },
         ]
-      },*/
+      },
       {
         title: '查询表格',
         open: false,
