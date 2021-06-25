@@ -1,1 +1,44 @@
-<p>standard-table works!</p>
+<!--头部版块-->
+<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+
+<div class="normal-table-wrap">
+  <nz-card>
+    <div nz-row>
+      <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="8" [nzSm]="8" [nzXs]="24" class="center">
+        <nz-statistic [nzValue]="'8个任务'" [nzTitle]="'我的待办'"></nz-statistic>
+      </div>
+      <div nz-col nz-row [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="8" [nzSm]="8" [nzXs]="24" class="center">
+        <nz-divider nzType="vertical"></nz-divider>
+        <div nz-col nzFlex="1">
+          <nz-statistic [nzValue]="'32分钟'" [nzTitle]="'本周任务平均处理时间'"></nz-statistic>
+        </div>
+        <nz-divider nzType="vertical"></nz-divider>
+      </div>
+      <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="8" [nzSm]="8" [nzXs]="24" class="center">
+        <nz-statistic [nzValue]="'24个任务'" [nzTitle]="'本周完成任务数'"></nz-statistic>
+      </div>
+    </div>
+  </nz-card>
+<nz-card nzTitle="基本列表" [nzExtra]="extraTpl" class="m-t-20">
+  <ng-template #extraTpl>
+    <div>
+      <nz-radio-group class="m-r-8">
+        <label nz-radio-button nzValue="all">全部</label>
+        <label nz-radio-button nzValue="ongoing">进行中</label>
+        <label nz-radio-button nzValue="stay">等待中</label>
+      </nz-radio-group>
+      <nz-input-group  style="width: 270px" nzSearch [nzAddOnAfter]="suffixIconButton">
+        <input type="text" nz-input placeholder="请输入" />
+      </nz-input-group>
+      <ng-template #suffixIconButton>
+        <button nz-button nzSearch><i nz-icon nzType="search"></i></button>
+      </ng-template>
+    </div>
+
+  </ng-template>
+  <button nzBlock nz-button nzType="dashed" >
+    <i nz-icon nzType="plus" nzTheme="outline"></i>
+    <span>添加</span>
+  </button>
+</nz-card>
+</div>

@@ -21,7 +21,7 @@ export class SearchTableComponent implements OnInit {
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '查询表格',
     // desc: '表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。',
-    breadcrumb: ['首页', '表单页', '基础表单']
+    breadcrumb: ['首页', '列表页', '查询表格']
   };
   dataList!: any[];
   actionCodeObj = {
