@@ -42,11 +42,13 @@ import {NzUploadModule} from 'ng-zorro-antd/upload';
 import { NzProgressModule } from 'ng-zorro-antd/progress';
 import {NzEmptyModule} from 'ng-zorro-antd/empty';
 import {NzPopoverModule} from 'ng-zorro-antd/popover';
+import {NzPaginationModule} from 'ng-zorro-antd/pagination';
 
 
 export const SHARED_ZORRO_MODULES = [
   NzTreeViewModule,
   NzPopoverModule,
+  NzPaginationModule,
   NzProgressModule,
   NzUploadModule,
   NzTagModule,

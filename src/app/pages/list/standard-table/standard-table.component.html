@@ -3,6 +3,7 @@
 
 <div class="normal-table-wrap">
   <nz-card>
+    <app-water-mark></app-water-mark>
     <div nz-row>
       <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="8" [nzSm]="8" [nzXs]="24" class="center">
         <nz-statistic [nzValue]="'8个任务'" [nzTitle]="'我的待办'"></nz-statistic>
@@ -20,6 +21,7 @@
     </div>
   </nz-card>
 <nz-card nzTitle="基本列表" [nzExtra]="extraTpl" class="m-t-20">
+  <app-water-mark></app-water-mark>
   <ng-template #extraTpl>
     <div>
       <nz-radio-group class="m-r-8">
@@ -40,5 +42,51 @@
     <i nz-icon nzType="plus" nzTheme="outline"></i>
     <span>添加</span>
   </button>
+  <nz-list [nzLoading]="isSpinning">
+    <nz-list-item *ngFor="let item of list">
+      <nz-list-item-meta>
+        <nz-list-item-meta-avatar [nzSrc]="item.avatar"> </nz-list-item-meta-avatar>
+        <nz-list-item-meta-title>
+          <a>{{ item.name }}</a>
+        </nz-list-item-meta-title>
+        <nz-list-item-meta-description>
+          {{ item.desc }}
+        </nz-list-item-meta-description>
+      </nz-list-item-meta>
+      <div class="listContent">
+        <div class="listContentItem">
+          <div>Owner</div>
+          <div>{{item.owner}}</div>
+        </div>
+        <div class="listContentItem">
+          <div>开始时间</div>
+          <div>{{item.time}}</div>
+        </div>
+        <div class="listContentItem">
+          <nz-progress [nzPercent]="item.progress" [nzStatus]="item.progress_status"></nz-progress>
+        </div>
+      </div>
+      <ul nz-list-item-actions>
+        <nz-list-item-action>
+          <a (click)="edit(item)">编辑</a>
+        </nz-list-item-action>
+        <nz-list-item-action>
+          <a nz-dropdown [nzDropdownMenu]="menu">
+            更多<i nz-icon nzType="down" nzTheme="outline"></i>
+          </a>
+          <nz-dropdown-menu #menu="nzDropdownMenu">
+            <ul nz-menu>
+              <li nz-menu-item (click)="edit(item)">编辑</li>
+              <li nz-menu-item (click)="deleteItem(item)">删除</li>
+            </ul>
+          </nz-dropdown-menu>
+        </nz-list-item-action>
+      </ul>
+    </nz-list-item>
+    <nz-list-pagination>
+      <nz-pagination [nzPageIndex]="1" [nzPageSize]="5" [nzTotal]="50" nzShowQuickJumper nzShowSizeChanger>
+      </nz-pagination>
+    </nz-list-pagination>
+  </nz-list>
 </nz-card>
 </div>
