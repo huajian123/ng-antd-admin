@@ -1,1 +1,46 @@
-<p>card-table works!</p>
+<!--头部版块-->
+<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+<ng-template #headerContent>
+  <div nz-row>
+    <div nz-col nzFlex="1">
+      <div>
+        段落示意：蚂蚁金服务设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态， 提供跨越设计与开发的体验解决方案。
+      </div>
+      <div class="content-link">
+        <a><img alt="" src="https://gw.alipayobjects.com/zos/rmsportal/MjEImQtenlyueSmVEfUD.svg">快速开始</a>
+        <a><img alt="" src="https://gw.alipayobjects.com/zos/rmsportal/NbuDUAuBlIApFuDvWiND.svg">产品简介</a>
+        <a><img alt="" src="https://gw.alipayobjects.com/zos/rmsportal/ohOEPSYdDTNnyMbGuyLb.svg">产品文档</a>
+      </div>
+    </div>
+    <div *ngIf="!(isOverMode$|async)" nz-col nzFlex="230px">
+      <img style="width: 155px; margin-top: -20px;" src="https://gw.alipayobjects.com/zos/rmsportal/RzwpdLnhmvDJToTdfDPe.png">
+    </div>
+  </div>
+</ng-template>
+<div class="normal-table-wrap m-t-0">
+  <div nz-row [nzGutter]="16">
+    <div nz-col class="flex" [nzXXl]="6" [nzXl]="8" [nzLg]="12" [nzMd]="12" [nzSm]="12" [nzXs]="24">
+      <nz-card class="m-t-20 flex-1" [nzBodyStyle]="{padding:0,height:'100%',display:'flex',justifyContent:'center',minHeight:'160px'}">
+        <div class="center new-btn">
+          <i class="m-r-8" nz-icon nzType="plus" nzTheme="outline"></i>
+          <span>新增产品</span>
+        </div>
+      </nz-card>
+    </div>
+    <div nz-col  [nzXXl]="6" [nzXl]="8" [nzLg]="12" [nzMd]="12" [nzSm]="12" [nzXs]="24" *ngFor="let item of list">
+      <nz-card nzHoverable class="m-t-20" [nzActions]="[actionSetting, actionEdit]">
+        <nz-card-meta [nzAvatar]="avatarTemplate" [nzTitle]="item.name" [nzDescription]="item.desc">
+        </nz-card-meta>
+      </nz-card>
+      <ng-template #avatarTemplate>
+        <nz-avatar [nzSrc]="item.avatar"></nz-avatar>
+      </ng-template>
+      <ng-template #actionSetting>
+        操作一
+      </ng-template>
+      <ng-template #actionEdit>
+        操作二
+      </ng-template>
+    </div>
+  </div>
+</div>
