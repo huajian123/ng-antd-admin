@@ -8,14 +8,8 @@ import {SearchListComponent} from './search-list.component';
 
 const routes: Routes = [
   {
-    path: '', component: SearchListComponent, data: {key: 'search-list', shouldDetach: 'no'}, children: [
-      {path: 'article', component: ArticleComponent, data: {title: '搜索列表(文章)', key: 'article'}},
-      {path: 'project', component: ProjectComponent, data: {title: '搜索列表(项目)', key: 'project'}},
-      {path: 'application', component: ApplicationComponent, data: {title: '搜索列表(应用)', key: 'application'}},
-    ]
+    path: '', component: SearchListComponent, data: {key: 'search-list', title: '搜索列表'}
   },
-
-  {path: '', redirectTo: '/search-list', pathMatch: 'full'},
 ];
 
 @NgModule({
