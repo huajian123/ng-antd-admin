@@ -3,7 +3,6 @@ import {Routes, RouterModule} from '@angular/router';
 import {ArticleComponent} from './article/article.component';
 import {ProjectComponent} from './project/project.component';
 import {ApplicationComponent} from './application/application.component';
-import {SearchTableComponent} from '../search-table/search-table.component';
 import {SearchListComponent} from './search-list.component';
 
 const routes: Routes = [

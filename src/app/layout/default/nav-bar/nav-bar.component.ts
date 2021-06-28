@@ -6,6 +6,7 @@ import {ThemeService} from '../../../core/services/store/theme.service';
 import { Subject, Subscription} from 'rxjs';
 import * as _ from 'lodash';
 import {menuNav} from '../../../configs/menu';
+import {Title} from '@angular/platform-browser';
 
 interface Menu {
   path?: string;
@@ -36,7 +37,8 @@ export class NavBarComponent implements OnInit, OnDestroy {
   copyMenus: Menu[] = _.cloneDeep(this.menus);
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private tabService: TabService,
-              private cdr: ChangeDetectorRef, private themesService: ThemeService) {
+              private cdr: ChangeDetectorRef, private themesService: ThemeService,
+              private titleServe: Title,) {
     this.routerPath = this.router.url;
     this.subs[0] = this.router.events
       .pipe(
@@ -80,6 +82,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
           relatedLink: routeData['relatedLink'] ? routeData['relatedLink'] : []
         });
         this.tabService.findIndex(this.routerPath);
+        this.titleServe.setTitle(routeData['title']+' - ng antd admin')
       });
   }
 
