@@ -14,10 +14,12 @@
 </ng-template>
 
 <ng-template #headerFooter>
-  <nz-tabset>
-    <nz-tab nzTitle="文章"></nz-tab>
-    <nz-tab nzTitle="项目"></nz-tab>
-    <nz-tab nzTitle="应用"></nz-tab>
+  <nz-tabset [(nzSelectedIndex)]="currentSelTab" >
+    <nz-tab [nzTitle]="item.label" (nzClick)="to(item)" *ngFor="let item of tabData;"></nz-tab>
   </nz-tabset>
 </ng-template>
-<router-outlet></router-outlet>
+<div class="normal-table-wrap">
+  <router-outlet></router-outlet>
+</div>
+
+

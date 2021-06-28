@@ -1,8 +1,24 @@
-import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy, ViewChild, TemplateRef} from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  OnDestroy,
+  ViewChild,
+  TemplateRef,
+  ComponentFactoryResolver, AfterViewInit
+} from '@angular/core';
 import {PageHeaderType} from '../../../share/components/page-header/page-header.component';
 import {SearchListService} from '../../../core/services/store/biz-store-service/search-list/search-list.service';
 import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import {filter, takeUntil} from 'rxjs/operators';
+import {AdDirective} from '../../../share/directives/ad.directive';
+import {ActivatedRoute, NavigationEnd, NavigationStart, Router, RouterEvent} from '@angular/router';
+
+interface TabInterface {
+  label: string;
+  url: string;
+}
 
 @Component({
   selector: 'app-search-list',
@@ -19,10 +35,17 @@ export class SearchListComponent implements OnInit, OnDestroy {
     breadcrumb: ['首页', '列表页', '查询表格'],
     footer: this.headerFooter
   };
+  currentSelTab: number = 0;
 
   private destory$ = new Subject<void>();
+  tabData: TabInterface[] = [
+    {label: '文章', url: '/default/list/search-list/article'},
+    {label: '项目', url: '/default/list/search-list/project'},
+    {label: '应用', url: '/default/list/search-list/application'},
+  ];
 
-  constructor(private searchListService: SearchListService, private cdr: ChangeDetectorRef) {
+  constructor(private searchListService: SearchListService, private activatedRoute: ActivatedRoute,
+              private router: Router, private cdr: ChangeDetectorRef) {
     this.searchListService.getCurrentSearchListComponentStore().pipe(takeUntil(this.destory$)).subscribe(componentType => {
       this.pageHeaderInfo = {
         title: componentType,
@@ -32,10 +55,21 @@ export class SearchListComponent implements OnInit, OnDestroy {
       };
       this.cdr.markForCheck();
     });
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)).subscribe((event) => {
+      if (event instanceof RouterEvent) {
+        this.currentSelTab = this.tabData.findIndex(item => {
+          return item.url === event.url;
+        });
+      }
+    });
+  }
+
+  to(item: TabInterface): void {
+    this.router.navigateByUrl(item.url);
   }
 
   ngOnInit(): void {
-
   }
 
   ngOnDestroy(): void {

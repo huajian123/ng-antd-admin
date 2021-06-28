@@ -1,2 +1,91 @@
-<p>application works!</p>
-<input nz-input>
+<nz-card>
+  <div nz-row>
+    <div nz-col nzFlex="94px">所属类目:</div>
+    <div nz-col nzFlex="1" class="tag-wrap" [ngStyle]="{maxHeight:expanded?'58px':'33px'}">
+      <nz-tag (click)="allSel()" class="m-r-25 m-b-10" nzMode="checkable">
+        <span class="sp-14">全部</span>
+      </nz-tag>
+      <ng-container *ngFor="let tag of tagArray">
+        <nz-tag class="m-r-25 m-b-10" nzMode="checkable" [(nzChecked)]="tag.isChecked">
+          <span class="sp-14">{{tag.name}}</span>
+        </nz-tag>
+      </ng-container>
+    </div>
+    <div nz-col nzFlex="50px">
+      <a class="operate-text" *ngIf="!expanded" (click)="expanded = true">展开<i nz-icon nzType="down"
+                                                                               nzTheme="outline"></i></a>
+      <a class="operate-text" *ngIf="expanded" (click)="expanded = false">收起<i nz-icon nzType="up"
+                                                                               nzTheme="outline"></i></a>
+    </div>
+  </div>
+  <nz-divider class="m-0" nzDashed></nz-divider>
+  <div nz-row class="m-t-20 m-b-20" [nzAlign]="'middle'">
+    <div nz-col nzFlex="94px">其它选项:</div>
+    <div nz-col nzFlex="1">
+      <div nz-row>
+        <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" nzSm="12" nzXs="12">
+          作者：
+          <nz-select [(ngModel)]="searchInfo.author" [nzPlaceHolder]="'不限'" class="max-width">
+            <nz-option nzValue="1" nzLabel="李三"></nz-option>
+          </nz-select>
+        </div>
+        <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" nzSm="12" nzXs="12">
+          好评度：
+          <nz-select [(ngModel)]="searchInfo.like" [nzPlaceHolder]="'不限'" class="max-width">
+            <nz-option nzValue="1" nzLabel="优秀"></nz-option>
+            <nz-option nzValue="2" nzLabel="普通"></nz-option>
+          </nz-select>
+        </div>
+      </div>
+    </div>
+  </div>
+</nz-card>
+<nz-card class="m-t-20">
+  <div nz-row [nzGutter]="[16,16]">
+    <div nz-col [nzXXl]="6" [nzXl]="6" [nzLg]="6" [nzMd]="12" [nzSm]="24" [nzXs]="24"
+         *ngFor="let item of 8|numberLoop">
+      <nz-card nzHoverable [nzActions]="[op1, op2, op3, op4]">
+        <nz-card-meta [nzTitle]="'Alipay'" [nzAvatar]="nzAvatar">
+          <ng-template #nzAvatar>
+            <nz-avatar nzSize="small" [nzSrc]="'assets/imgs/default_face.png'"></nz-avatar>
+          </ng-template>
+        </nz-card-meta>
+        <div class="card-info">
+          <div>
+            <p nz-typography nzType="secondary">活跃用户</p>
+            <p>
+              12
+              <span class="wan">万</span>
+            </p>
+          </div>
+          <div>
+            <p nz-typography nzType="secondary">新增用户</p>
+            <p>{{ 1962 | number: '3.' }}</p>
+          </div>
+        </div>
+      </nz-card>
+    </div>
+  </div>
+
+
+  <ng-template #op1>
+    <i nz-tooltip nzTooltipTitle="下载" nz-icon nzType="download"></i>
+  </ng-template>
+  <ng-template #op2>
+    <i nz-tooltip nzTooltipTitle="编辑" nz-icon nzType="edit"></i>
+  </ng-template>
+  <ng-template #op3>
+    <i nz-tooltip nzTooltipTitle="分享" nz-icon nzType="share-alt"></i>
+  </ng-template>
+  <ng-template #op4>
+    <i nz-dropdown [nzDropdownMenu]="op4Menu" nzPlacement="bottomLeft" nz-icon nzType="ellipsis"></i>
+    <nz-dropdown-menu #op4Menu="nzDropdownMenu">
+      <ul nz-menu>
+        <li nz-menu-item>1st menu item</li>
+        <li nz-menu-item>2st menu item</li>
+        <li nz-menu-item>3st menu item</li>
+      </ul>
+    </nz-dropdown-menu>
+  </ng-template>
+
+</nz-card>
