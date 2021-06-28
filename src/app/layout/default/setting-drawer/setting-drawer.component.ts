@@ -15,7 +15,7 @@ import {DOCUMENT} from '@angular/common';
 import {SettingInterface, ThemeService} from '../../../core/services/store/theme.service';
 import {ThemeSkinService} from '../../../core/services/common/theme-skin.service';
 import {WindowService} from '../../../core/services/common/window.service';
-import {IsNightKey, ThemeOptionsKey} from '../../../configs/constant';
+import { IsNightKey, ThemeOptionsKey} from '../../../configs/constant';
 
 interface NormalModel {
   image?: string;
@@ -53,7 +53,8 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
     color: 'daybreak',
     mode: 'side',
     fixedWidth: false,
-    colorWeak: false
+    colorWeak: false,
+    fixedHead: false
   };
   isCollapsed = false;
 
@@ -188,6 +189,12 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
   setThemeOptions(): void {
     this.themesService.setThemesMode(this._themesOptions);
     this.windowServe.setStorage(ThemeOptionsKey, JSON.stringify(this._themesOptions));
+  }
+
+  // 修改固定头部
+  changeFixedHead(isFixedHead: boolean): void {
+    this._themesOptions.fixedHead = isFixedHead;
+    this.setThemeOptions();
   }
 
 

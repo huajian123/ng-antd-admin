@@ -7,6 +7,7 @@ export interface SettingInterface {
   mode: 'side' | 'top';
   fixedWidth: boolean;
   colorWeak: boolean;
+  fixedHead: boolean;
 }
 
 
@@ -22,7 +23,8 @@ export class ThemeService {
     color: 'daybreak',
     mode: 'side',
     fixedWidth: false,
-    colorWeak: false
+    colorWeak: false,
+    fixedHead: false,
   });
 
   private isCollapsed$ = new BehaviorSubject<boolean>(false);

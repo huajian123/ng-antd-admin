@@ -45,7 +45,12 @@
         <nz-switch [ngModel]="_isNightTheme" (ngModelChange)="changeNightTheme($event)" nzSize="small"></nz-switch>
       </ng-template>
     </nz-list>
-
+    <nz-list [nzSplit]="false">
+      <nz-list-item [nzActions]="[fixedHeadAction]">固定头部</nz-list-item>
+      <ng-template #fixedHeadAction>
+        <nz-switch [ngModel]="_themesOptions.fixedHead" (ngModelChange)="changeFixedHead($event)" nzSize="small"></nz-switch>
+      </ng-template>
+    </nz-list>
     <nz-divider></nz-divider>
     <div class="m-b">
       <h3 class="title">其他设置</h3>

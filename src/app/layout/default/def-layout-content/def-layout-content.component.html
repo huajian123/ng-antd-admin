@@ -8,12 +8,14 @@
   </nz-sider>
   <nz-layout style="overflow-x:hidden">
     <nz-header
-      [ngClass]="{'dark-top-nav-bg':themesOptions.mode==='top'&&themesOptions.theme==='dark'&&!(isNightTheme$|async)}">
+               [ngClass]="{'dark-top-nav-bg':themesOptions.mode==='top'&&themesOptions.theme==='dark'&&!(isNightTheme$|async),
+               'fixed':themesOptions.fixedHead,'screen-full-width':themesOptions.mode==='top'}">
       <ng-content select="ng-container[header]"></ng-content>
     </nz-header>
 
 
-    <nz-content style="min-height: auto">
+    <nz-content [ngStyle]="{marginTop:themesOptions.fixedHead?'64px':0}"
+                style="min-height: auto">
       <ng-content></ng-content>
     </nz-content>
     <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer>

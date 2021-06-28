@@ -1,4 +1,5 @@
 import {FormGroup} from '@angular/forms';
+import {silentEvent} from 'ng-zorro-antd/core/util';
 
 const fnGetFile = function getFile(url: string, isBlob = false): Promise<any> {
   return new Promise((resolve, reject) => {
@@ -32,8 +33,7 @@ const fnCheckForm = function checkForm(form: FormGroup): boolean {
 };
 
 const fnStopMouseEvent = function stopMouseEvent(e: MouseEvent): void {
-  e.stopPropagation();
-  e.preventDefault();
+  silentEvent(e);
 };
 
 

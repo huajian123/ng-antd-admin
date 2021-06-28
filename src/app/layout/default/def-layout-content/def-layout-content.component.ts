@@ -1,5 +1,5 @@
-import {Component, EventEmitter, OnInit, ChangeDetectionStrategy, Output, Input, OnDestroy} from '@angular/core';
-import {ThemeService} from '../../../core/services/store/theme.service';
+import {Component, OnInit, ChangeDetectionStrategy, Output, Input, OnDestroy} from '@angular/core';
+import {SettingInterface, ThemeService} from '../../../core/services/store/theme.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 
@@ -14,12 +14,13 @@ export class DefLayoutContentComponent implements OnInit, OnDestroy {
   private destory$ = new Subject<void>();
   themesOptions$ = this.themesService.getThemesMode();
   isNightTheme$ = this.themesService.getIsNightTheme();
-  themesOptions = {
-    theme: '',
+  themesOptions: SettingInterface = {
+    theme: 'dark',
     color: '',
-    mode: '',
+    mode: 'side',
     fixedWidth: false,
-    colorWeak: false
+    colorWeak: false,
+    fixedHead: false,
   };
   isCollapsed$ = this.themesService.getIsCollapsed();
   isOverMode$ = this.themesService.getIsOverMode();
