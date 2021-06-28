@@ -19,7 +19,9 @@
 </ng-template>
 <div class="normal-table-wrap m-t-0">
   <div nz-row [nzGutter]="16">
+
     <div nz-col class="flex" [nzXXl]="6" [nzXl]="8" [nzLg]="12" [nzMd]="12" [nzSm]="12" [nzXs]="24">
+      <app-water-mark></app-water-mark>
       <nz-card class="m-t-20 flex-1" [nzBodyStyle]="{padding:0,height:'100%',display:'flex',justifyContent:'center',minHeight:'160px'}">
         <div class="center new-btn">
           <i class="m-r-8" nz-icon nzType="plus" nzTheme="outline"></i>
@@ -28,6 +30,7 @@
       </nz-card>
     </div>
     <div nz-col  [nzXXl]="6" [nzXl]="8" [nzLg]="12" [nzMd]="12" [nzSm]="12" [nzXs]="24" *ngFor="let item of list">
+      <app-water-mark></app-water-mark>
       <nz-card nzHoverable class="m-t-20" [nzActions]="[actionSetting, actionEdit]">
         <nz-card-meta [nzAvatar]="avatarTemplate" [nzTitle]="item.name" [nzDescription]="item.desc">
         </nz-card-meta>
