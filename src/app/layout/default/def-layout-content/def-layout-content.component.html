@@ -8,8 +8,10 @@
   </nz-sider>
   <nz-layout style="overflow-x:hidden">
     <nz-header
-               [ngClass]="{'dark-top-nav-bg':themesOptions.mode==='top'&&themesOptions.theme==='dark'&&!(isNightTheme$|async),
-               'fixed':themesOptions.fixedHead,'screen-full-width':themesOptions.mode==='top'}">
+      [ngClass]="{'dark-top-nav-bg':themesOptions.mode==='top'&&themesOptions.theme==='dark'&&!(isNightTheme$|async),
+      'animate':themesOptions.mode==='side',
+               'fixed':themesOptions.fixedHead,'screen-full-width':themesOptions.mode==='top','fixed-collapsed':themesOptions.fixedHead&&themesOptions.mode==='side'&&(isCollapsed$|async),
+               'fixed-over-mode':themesOptions.fixedHead&&themesOptions.mode==='side'&&(isOverMode$|async)}">
       <ng-content select="ng-container[header]"></ng-content>
     </nz-header>
 

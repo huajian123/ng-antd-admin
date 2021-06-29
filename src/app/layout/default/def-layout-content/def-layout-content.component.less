@@ -27,6 +27,9 @@ nz-footer {
 .color-weak {
   filter: invert(80%) !important;
 }
+.animate{
+  transition: width 50ms;
+}
 
 .fixed {
   position: fixed;
@@ -36,4 +39,12 @@ nz-footer {
   z-index: 999;
   width: calc(100% - 200px);
   flex: auto;
+}
+
+.fixed-collapsed {
+  width: calc(100% - 80px);
+}
+
+.fixed-over-mode {
+  width: 100%;
 }

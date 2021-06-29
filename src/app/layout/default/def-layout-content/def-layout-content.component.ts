@@ -1,6 +1,6 @@
 import {Component, OnInit, ChangeDetectionStrategy, Output, Input, OnDestroy} from '@angular/core';
 import {SettingInterface, ThemeService} from '../../../core/services/store/theme.service';
-import {Subject} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 
 
@@ -22,8 +22,8 @@ export class DefLayoutContentComponent implements OnInit, OnDestroy {
     colorWeak: false,
     fixedHead: false,
   };
-  isCollapsed$ = this.themesService.getIsCollapsed();
-  isOverMode$ = this.themesService.getIsOverMode();
+  isCollapsed$: Observable<boolean> = this.themesService.getIsCollapsed();
+  isOverMode$: Observable<boolean> = this.themesService.getIsOverMode();
 
   constructor(private themesService: ThemeService) {
   }
