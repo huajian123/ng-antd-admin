@@ -8,6 +8,10 @@ export interface SettingInterface {
   fixedWidth: boolean;
   colorWeak: boolean;
   fixedHead: boolean;
+  hasTopArea: boolean;
+  hasFooterArea: boolean;
+  hasNavArea: boolean;
+  hasNavHeadArea: boolean;
 }
 
 
@@ -25,6 +29,10 @@ export class ThemeService {
     fixedWidth: false,
     colorWeak: false,
     fixedHead: false,
+    hasTopArea: true,
+    hasFooterArea: true,
+    hasNavArea: true,
+    hasNavHeadArea: true,
   });
 
   private isCollapsed$ = new BehaviorSubject<boolean>(false);

@@ -1,13 +1,13 @@
 <app-top-progress-bar></app-top-progress-bar>
 <nz-layout>
-  <nz-sider *ngIf="((themesOptions$|async)!.mode==='side')&&!(isOverMode$|async)" class="menu-sidebar"
+  <nz-sider *ngIf="((themesOptions$|async)!.mode==='side')&&!(isOverMode$|async)&&(themesOptions$|async)!.hasNavArea" class="menu-sidebar"
             [nzTheme]="(themesOptions$|async)!.theme"
             nzBreakpoint="lg" [nzCollapsible]="true" [nzCollapsed]="isCollapsed$|async"
             (nzCollapsedChange)="changeCollapsed($event)" [nzTrigger]="trigger">
     <ng-content select="ng-container[sider]"></ng-content>
   </nz-sider>
   <nz-layout style="overflow-x:hidden">
-    <nz-header
+    <nz-header *ngIf="(themesOptions$|async)!.hasTopArea"
       [ngClass]="{'dark-top-nav-bg':themesOptions.mode==='top'&&themesOptions.theme==='dark'&&!(isNightTheme$|async),
       'animate':themesOptions.mode==='side',
                'fixed':themesOptions.fixedHead,'screen-full-width':themesOptions.mode==='top','fixed-collapsed':themesOptions.fixedHead&&themesOptions.mode==='side'&&(isCollapsed$|async),
@@ -20,19 +20,9 @@
                 style="min-height: auto">
       <ng-content></ng-content>
     </nz-content>
-    <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer>
+    <nz-footer *ngIf="themesOptions.hasFooterArea">Ant Design ©2020 Implement By Angular</nz-footer>
 
-    <app-setting-drawer>
-      <div class="drawer-handle" [class.open]="visibleSettingDrawer" (click)="changeSettingDrawer()">
-        <ng-container *ngIf="!visibleSettingDrawer; then settingIcon else closeIcon"></ng-container>
-        <ng-template #settingIcon>
-          <i nz-icon nzType="setting" nzTheme="outline"></i>
-        </ng-template>
-        <ng-template #closeIcon>
-          <i nz-icon nzType="close" nzTheme="outline"></i>
-        </ng-template>
-      </div>
-    </app-setting-drawer>
+    <app-setting-drawer></app-setting-drawer>
   </nz-layout>
 </nz-layout>
 <ng-template #trigger>

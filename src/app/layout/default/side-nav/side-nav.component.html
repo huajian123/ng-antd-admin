@@ -1,5 +1,5 @@
 <div class="left-nav-wrap" [class.light]="(themesOptions$|async)!.theme==='light'&&!(isNightTheme$|async)">
-  <div class="sidebar-logo">
+  <div class="sidebar-logo" *ngIf="(themesOptions$|async)!.hasNavHeadArea">
     <a href="#" target="_blank">
       <img src="../../../../assets/imgs/logo.svg" alt="logo">
       <h1 [class.light]="(themesOptions$|async)!.theme==='light'&&!(isNightTheme$|async)">Ant Design Pro</h1>

@@ -3,7 +3,6 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  HostListener,
   Inject,
   OnDestroy,
   OnInit,
@@ -15,7 +14,7 @@ import {DOCUMENT} from '@angular/common';
 import {SettingInterface, ThemeService} from '../../../core/services/store/theme.service';
 import {ThemeSkinService} from '../../../core/services/common/theme-skin.service';
 import {WindowService} from '../../../core/services/common/window.service';
-import { IsNightKey, ThemeOptionsKey} from '../../../configs/constant';
+import {IsNightKey, ThemeOptionsKey} from '../../../configs/constant';
 
 interface NormalModel {
   image?: string;
@@ -54,7 +53,11 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
     mode: 'side',
     fixedWidth: false,
     colorWeak: false,
-    fixedHead: false
+    fixedHead: false,
+    hasTopArea: true,
+    hasFooterArea: true,
+    hasNavArea: true,
+    hasNavHeadArea: true,
   };
   isCollapsed = false;
 
@@ -143,8 +146,7 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
               private cdr: ChangeDetectorRef, private el: ElementRef, private rd2: Renderer2) {
   }
 
-  @HostListener('click', ['$event'])
-  onClicked(): void {
+  changeCollapsed():void{
     this.isCollapsed = !this.isCollapsed;
   }
 
@@ -183,8 +185,8 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
   }
 
   // 修改固定头部
-  changeFixedHead(isFixedHead: boolean): void {
-    this._themesOptions.fixedHead = isFixedHead;
+  changeFixed(isFixed: boolean, type: 'fixedHead'|'hasTopArea'|'hasFooterArea'|'hasNavArea'|'hasNavHeadArea'): void {
+    this._themesOptions[type] = isFixed;
     this.setThemeOptions();
   }
 

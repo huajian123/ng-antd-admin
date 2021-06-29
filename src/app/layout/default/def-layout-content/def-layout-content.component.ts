@@ -20,6 +20,10 @@ export class DefLayoutContentComponent implements OnInit, OnDestroy {
     fixedWidth: false,
     colorWeak: false,
     fixedHead: false,
+    hasTopArea: true,
+    hasFooterArea: true,
+    hasNavArea: true,
+    hasNavHeadArea: true,
   };
   isCollapsed$: Observable<boolean> = this.themesService.getIsCollapsed();
   isOverMode$: Observable<boolean> = this.themesService.getIsOverMode();

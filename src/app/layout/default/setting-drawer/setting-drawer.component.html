@@ -1,6 +1,14 @@
-<ng-content></ng-content>
-
-<nz-drawer [nzWidth]="300" [(nzVisible)]="isCollapsed" (nzOnClose)="isCollapsed = !isCollapsed">
+<div class="drawer-handle" [class.open]="isCollapsed" (click)="changeCollapsed()">
+  <ng-container *ngIf="!isCollapsed; then settingIcon else closeIcon"></ng-container>
+  <ng-template #settingIcon>
+    <i nz-icon nzType="setting" nzTheme="outline"></i>
+  </ng-template>
+  <ng-template #closeIcon>
+    <i nz-icon nzType="close" nzTheme="outline"></i>
+  </ng-template>
+</div>
+<nz-drawer [nzWidth]="300" [(nzVisible)]="isCollapsed"
+           (nzOnClose)="isCollapsed = !isCollapsed">
   <ng-container *nzDrawerContent>
     <div class="m-b">
       <h3 class="title">整体风格设置</h3>
@@ -43,7 +51,8 @@
     <nz-list [nzSplit]="false">
       <nz-list-item [nzActions]="[fixedHeadAction]">固定头部</nz-list-item>
       <ng-template #fixedHeadAction>
-        <nz-switch [ngModel]="_themesOptions.fixedHead" (ngModelChange)="changeFixedHead($event)" nzSize="small"></nz-switch>
+        <nz-switch [ngModel]="_themesOptions.fixedHead" (ngModelChange)="changeFixed($event,'fixedHead')"
+                   nzSize="small"></nz-switch>
       </ng-template>
     </nz-list>
     <nz-divider></nz-divider>
@@ -52,28 +61,29 @@
       <nz-list [nzSplit]="false">
         <nz-list-item [nzActions]="[topAreaAction]">顶栏</nz-list-item>
         <ng-template #topAreaAction>
-          <nz-switch (ngModelChange)="changeWeakMode($event)" [ngModel]="_themesOptions.colorWeak"
+          <nz-switch (ngModelChange)="changeFixed($event,'hasTopArea')" [ngModel]="_themesOptions.hasTopArea"
                      nzSize="small"></nz-switch>
         </ng-template>
       </nz-list>
       <nz-list [nzSplit]="false">
         <nz-list-item [nzActions]="[footerAreaAction]">页脚</nz-list-item>
         <ng-template #footerAreaAction>
-          <nz-switch (ngModelChange)="changeWeakMode($event)" [ngModel]="_themesOptions.colorWeak"
+          <nz-switch (ngModelChange)="changeFixed($event,'hasFooterArea')" [ngModel]="_themesOptions.hasFooterArea"
                      nzSize="small"></nz-switch>
         </ng-template>
       </nz-list>
       <nz-list [nzSplit]="false">
         <nz-list-item [nzActions]="[navAreaAction]">菜单</nz-list-item>
         <ng-template #navAreaAction>
-          <nz-switch (ngModelChange)="changeWeakMode($event)" [ngModel]="_themesOptions.colorWeak"
+          <nz-switch (ngModelChange)="changeFixed($event,'hasNavArea')" [ngModel]="_themesOptions.hasNavArea"
                      nzSize="small"></nz-switch>
         </ng-template>
       </nz-list>
       <nz-list [nzSplit]="false">
         <nz-list-item [nzActions]="[navHeadAreaAction]">菜单头</nz-list-item>
         <ng-template #navHeadAreaAction>
-          <nz-switch (ngModelChange)="changeWeakMode($event)" [ngModel]="_themesOptions.colorWeak"
+          <nz-switch (ngModelChange)="changeFixed($event,'hasNavHeadArea')"
+                     [ngModel]="_themesOptions.hasNavHeadArea"
                      nzSize="small"></nz-switch>
         </ng-template>
       </nz-list>
