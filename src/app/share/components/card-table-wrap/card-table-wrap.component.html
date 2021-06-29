@@ -9,15 +9,9 @@
     <div class="ant-pro-table-toolbar-default-option">
       <nz-divider nzType="vertical"></nz-divider>
       <nz-space [nzSize]="16" nzDirection="horizontal">
-        <nz-space-item>
-          <i nz-icon nzType="column-width" nzTheme="outline"></i>
-        </nz-space-item>
-        <nz-space-item>
-          <i nz-icon nzType="fullscreen" nzTheme="outline"></i>
-        </nz-space-item>
-        <nz-space-item>
-          <i nz-icon nzType="setting" nzTheme="outline"></i>
-        </nz-space-item>
+        <i nz-icon *nzSpaceItem nzType="column-width" nzTheme="outline"></i>
+        <i nz-icon *nzSpaceItem nzType="fullscreen" nzTheme="outline"></i>
+        <i nz-icon *nzSpaceItem nzType="setting" nzTheme="outline"></i>
       </nz-space>
     </div>
   </div>
