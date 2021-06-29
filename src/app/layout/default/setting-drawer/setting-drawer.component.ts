@@ -137,15 +137,6 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
       isChecked: false,
     }
   ];
-  layouts = [
-    {
-      key: 'fixedWidth',
-      title: '固定宽度',
-      disabled(setting: { mode: string; }): boolean {
-        return setting.mode === 'side';
-      }
-    }
-  ];
 
   constructor(private themesService: ThemeService, @Inject(DOCUMENT) private doc: Document,
               private themeSkinService: ThemeSkinService, private windowServe: WindowService,

@@ -39,12 +39,7 @@
       </div>
     </div>
 
-    <nz-list [nzSplit]="false">
-      <nz-list-item [nzActions]="[layoutAction]">暗黑模式</nz-list-item>
-      <ng-template #layoutAction>
-        <nz-switch [ngModel]="_isNightTheme" (ngModelChange)="changeNightTheme($event)" nzSize="small"></nz-switch>
-      </ng-template>
-    </nz-list>
+
     <nz-list [nzSplit]="false">
       <nz-list-item [nzActions]="[fixedHeadAction]">固定头部</nz-list-item>
       <ng-template #fixedHeadAction>
@@ -53,7 +48,45 @@
     </nz-list>
     <nz-divider></nz-divider>
     <div class="m-b">
+      <h3 class="title">内容区域</h3>
+      <nz-list [nzSplit]="false">
+        <nz-list-item [nzActions]="[topAreaAction]">顶栏</nz-list-item>
+        <ng-template #topAreaAction>
+          <nz-switch (ngModelChange)="changeWeakMode($event)" [ngModel]="_themesOptions.colorWeak"
+                     nzSize="small"></nz-switch>
+        </ng-template>
+      </nz-list>
+      <nz-list [nzSplit]="false">
+        <nz-list-item [nzActions]="[footerAreaAction]">页脚</nz-list-item>
+        <ng-template #footerAreaAction>
+          <nz-switch (ngModelChange)="changeWeakMode($event)" [ngModel]="_themesOptions.colorWeak"
+                     nzSize="small"></nz-switch>
+        </ng-template>
+      </nz-list>
+      <nz-list [nzSplit]="false">
+        <nz-list-item [nzActions]="[navAreaAction]">菜单</nz-list-item>
+        <ng-template #navAreaAction>
+          <nz-switch (ngModelChange)="changeWeakMode($event)" [ngModel]="_themesOptions.colorWeak"
+                     nzSize="small"></nz-switch>
+        </ng-template>
+      </nz-list>
+      <nz-list [nzSplit]="false">
+        <nz-list-item [nzActions]="[navHeadAreaAction]">菜单头</nz-list-item>
+        <ng-template #navHeadAreaAction>
+          <nz-switch (ngModelChange)="changeWeakMode($event)" [ngModel]="_themesOptions.colorWeak"
+                     nzSize="small"></nz-switch>
+        </ng-template>
+      </nz-list>
+    </div>
+    <nz-divider></nz-divider>
+    <div class="m-b">
       <h3 class="title">其他设置</h3>
+      <nz-list [nzSplit]="false">
+        <nz-list-item [nzActions]="[layoutAction]">暗黑模式</nz-list-item>
+        <ng-template #layoutAction>
+          <nz-switch [ngModel]="_isNightTheme" (ngModelChange)="changeNightTheme($event)" nzSize="small"></nz-switch>
+        </ng-template>
+      </nz-list>
       <nz-list [nzSplit]="false">
         <nz-list-item [nzActions]="[otherAction]">色弱模式</nz-list-item>
         <ng-template #otherAction>

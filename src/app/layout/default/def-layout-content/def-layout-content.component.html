@@ -22,6 +22,17 @@
     </nz-content>
     <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer>
 
+    <app-setting-drawer>
+      <div class="drawer-handle" [class.open]="visibleSettingDrawer" (click)="changeSettingDrawer()">
+        <ng-container *ngIf="!visibleSettingDrawer; then settingIcon else closeIcon"></ng-container>
+        <ng-template #settingIcon>
+          <i nz-icon nzType="setting" nzTheme="outline"></i>
+        </ng-template>
+        <ng-template #closeIcon>
+          <i nz-icon nzType="close" nzTheme="outline"></i>
+        </ng-template>
+      </div>
+    </app-setting-drawer>
   </nz-layout>
 </nz-layout>
 <ng-template #trigger>
