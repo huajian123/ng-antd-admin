@@ -32,7 +32,7 @@ interface Color extends NormalModel {
 }
 
 interface Mode extends NormalModel {
-  key: 'side' | 'top';
+  key: 'side' | 'top' | 'mixi';
 }
 
 
@@ -138,6 +138,12 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
       image: '/assets/imgs/menu-top.svg',
       title: '顶部菜单布局',
       isChecked: false,
+    },
+    {
+      key: 'mixi',
+      image: '/assets/imgs/menu-top.svg',
+      title: '混合菜单布局',
+      isChecked: false,
     }
   ];
 
@@ -146,7 +152,7 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
               private cdr: ChangeDetectorRef, private el: ElementRef, private rd2: Renderer2) {
   }
 
-  changeCollapsed():void{
+  changeCollapsed(): void {
     this.isCollapsed = !this.isCollapsed;
   }
 
@@ -185,7 +191,7 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
   }
 
   // 修改固定头部
-  changeFixed(isFixed: boolean, type: 'fixedHead'|'hasTopArea'|'hasFooterArea'|'hasNavArea'|'hasNavHeadArea'): void {
+  changeFixed(isFixed: boolean, type: 'fixedHead' | 'hasTopArea' | 'hasFooterArea' | 'hasNavArea' | 'hasNavHeadArea'): void {
     this._themesOptions[type] = isFixed;
     this.setThemeOptions();
   }

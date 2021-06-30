@@ -6,7 +6,7 @@
             (nzCollapsedChange)="changeCollapsed($event)" [nzTrigger]="trigger">
     <ng-content select="ng-container[sider]"></ng-content>
   </nz-sider>
-  <nz-layout style="overflow-x:hidden">
+  <nz-layout style="overflow-x:hidden" class="screen-full-height">
     <nz-header *ngIf="(themesOptions$|async)!.hasTopArea"
       [ngClass]="{'dark-top-nav-bg':themesOptions.mode==='top'&&themesOptions.theme==='dark'&&!(isNightTheme$|async),
       'animate':themesOptions.mode==='side',
