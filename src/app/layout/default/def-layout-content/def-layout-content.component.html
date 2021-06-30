@@ -1,5 +1,7 @@
 <app-top-progress-bar></app-top-progress-bar>
 <nz-layout>
+
+  <!--非混合模式sider-->
   <nz-sider
     *ngIf="!isMixiMode&&((themesOptions$|async)!.mode==='side')&&!(isOverMode$|async)&&(themesOptions$|async)!.hasNavArea"
     class="menu-sidebar"
@@ -10,6 +12,8 @@
   </nz-sider>
 
 
+
+  <!--混合模式header-->
   <nz-header *ngIf="isMixiMode&&themesOptions.hasTopArea" class="fixed screen-full-width"
              [ngClass]="{'dark-top-nav-bg':!(isNightTheme$|async)}">
     <ng-content select="ng-container[mixheader]"></ng-content>
@@ -19,6 +23,7 @@
 
 
   <nz-layout [class.screen-full-height]="!isMixiMode&&isFixedLeftNav" [class.left-nav-fixed]="isFixedLeftNav" [style]="{marginTop:isMixiMode&&themesOptions.hasTopArea?'48px':0,overflowX:isFixedLeftNav?'auto':'hidden'}">
+    <!--非混合模式header-->
     <nz-header *ngIf="!isMixiMode&&(themesOptions$|async)!.hasTopArea"
                [ngClass]="{'dark-top-nav-bg':themesOptions.mode==='top'&&themesOptions.theme==='dark'&&!(isNightTheme$|async),
       'animate':themesOptions.mode==='side',
@@ -27,6 +32,7 @@
       <ng-content select="ng-container[header]"></ng-content>
     </nz-header>
 
+    <!--混合模式sider-->
     <nz-sider
       *ngIf="isMixiMode&&themesOptions.hasNavArea"
       class="menu-sidebar"
