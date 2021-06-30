@@ -3,7 +3,7 @@ import {filter, map, mergeMap, switchMap, takeUntil, tap} from 'rxjs/operators';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {TabService} from '../../../core/services/common/tab.service';
 import {ThemeService} from '../../../core/services/store/theme.service';
-import { Subject, Subscription} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 import * as _ from 'lodash';
 import {menuNav} from '../../../configs/menu';
 import {Title} from '@angular/platform-browser';
@@ -33,6 +33,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
   isOverMode$ = this.themesService.getIsOverMode();
   isOverMode = false;
   isCollapsed = false;
+  isMixiMode = false;
   subs: Array<Subscription> = [];
   copyMenus: Menu[] = _.cloneDeep(this.menus);
 
@@ -82,7 +83,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
           relatedLink: routeData['relatedLink'] ? routeData['relatedLink'] : []
         });
         this.tabService.findIndex(this.routerPath);
-        this.titleServe.setTitle(routeData['title']+' - ng antd admin')
+        this.titleServe.setTitle(routeData['title'] + ' - ng antd admin');
       });
   }
 
@@ -183,6 +184,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
       return this.themesOptions$;
     })).subscribe(options => {
       this.themesMode = options.mode;
+      this.isMixiMode = this.themesMode === 'mixi';
       if (this.themesMode === 'top' && !this.isOverMode) {
         this.closeMenu();
       }

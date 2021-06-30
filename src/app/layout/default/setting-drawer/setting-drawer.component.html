@@ -55,6 +55,13 @@
                    nzSize="small"></nz-switch>
       </ng-template>
     </nz-list>
+    <nz-list [nzSplit]="false">
+      <nz-list-item [nzActions]="[fixedLeftNavAction]">固定侧边栏</nz-list-item>
+      <ng-template #fixedLeftNavAction>
+        <nz-switch [ngModel]="_themesOptions.fixedLeftNav" (ngModelChange)="changeFixed($event,'fixedLeftNav')"
+                   nzSize="small"></nz-switch>
+      </ng-template>
+    </nz-list>
     <nz-divider></nz-divider>
     <div class="m-b">
       <h3 class="title">内容区域</h3>

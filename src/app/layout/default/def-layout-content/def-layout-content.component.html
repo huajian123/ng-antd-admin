@@ -1,30 +1,54 @@
 <app-top-progress-bar></app-top-progress-bar>
 <nz-layout>
-  <nz-sider *ngIf="((themesOptions$|async)!.mode==='side')&&!(isOverMode$|async)&&(themesOptions$|async)!.hasNavArea" class="menu-sidebar"
-            [nzTheme]="(themesOptions$|async)!.theme"
-            nzBreakpoint="lg" [nzCollapsible]="true" [nzCollapsed]="isCollapsed$|async"
-            (nzCollapsedChange)="changeCollapsed($event)" [nzTrigger]="trigger">
+  <nz-sider
+    *ngIf="!isMixiMode&&((themesOptions$|async)!.mode==='side')&&!(isOverMode$|async)&&(themesOptions$|async)!.hasNavArea"
+    class="menu-sidebar"
+    [nzTheme]="(themesOptions$|async)!.theme"
+    nzBreakpoint="lg" [nzCollapsible]="true" [nzCollapsed]="isCollapsed$|async"
+    (nzCollapsedChange)="changeCollapsed($event)" [nzTrigger]="trigger">
     <ng-content select="ng-container[sider]"></ng-content>
   </nz-sider>
-  <nz-layout style="overflow-x:hidden" class="screen-full-height">
-    <nz-header *ngIf="(themesOptions$|async)!.hasTopArea"
-      [ngClass]="{'dark-top-nav-bg':themesOptions.mode==='top'&&themesOptions.theme==='dark'&&!(isNightTheme$|async),
+
+
+  <nz-header *ngIf="isMixiMode&&themesOptions.hasTopArea" class="fixed screen-full-width"
+             [ngClass]="{'dark-top-nav-bg':!(isNightTheme$|async)}">
+    <ng-content select="ng-container[mixheader]"></ng-content>
+  </nz-header>
+
+
+
+
+  <nz-layout [class.screen-full-height]="!isMixiMode&&isFixedLeftNav" [class.left-nav-fixed]="isFixedLeftNav" [style]="{marginTop:isMixiMode&&themesOptions.hasTopArea?'48px':0,overflowX:isFixedLeftNav?'auto':'hidden'}">
+    <nz-header *ngIf="!isMixiMode&&(themesOptions$|async)!.hasTopArea"
+               [ngClass]="{'dark-top-nav-bg':themesOptions.mode==='top'&&themesOptions.theme==='dark'&&!(isNightTheme$|async),
       'animate':themesOptions.mode==='side',
                'fixed':themesOptions.fixedHead,'screen-full-width':themesOptions.mode==='top','fixed-collapsed':themesOptions.fixedHead&&themesOptions.mode==='side'&&(isCollapsed$|async),
                'fixed-over-mode':themesOptions.fixedHead&&themesOptions.mode==='side'&&(isOverMode$|async)}">
       <ng-content select="ng-container[header]"></ng-content>
     </nz-header>
 
+    <nz-sider
+      *ngIf="isMixiMode&&themesOptions.hasNavArea"
+      class="menu-sidebar"
+      [class.mixi-left-nav-fixed]="themesOptions.fixedLeftNav"
+      [class.t-0]="!themesOptions.hasTopArea&&themesOptions.fixedLeftNav"
+      [nzTheme]="'light'"
+      nzBreakpoint="lg" [nzCollapsible]="true" [nzCollapsed]="isCollapsed$|async"
+      (nzCollapsedChange)="changeCollapsed($event)" [nzTrigger]="trigger">
+      <ng-content select="ng-container[mixsider]"></ng-content>
+    </nz-sider>
 
-    <nz-content [ngStyle]="{marginTop:themesOptions.fixedHead?'48px':0}"
-                style="min-height: auto">
-      <ng-content></ng-content>
-    </nz-content>
-    <nz-footer *ngIf="themesOptions.hasFooterArea">Ant Design ©2020 Implement By Angular</nz-footer>
+    <nz-layout class="mix-layout" [class.m-l-200]="isMixiMode&&themesOptions.fixedLeftNav&&themesOptions.hasNavArea">
+      <nz-content [ngStyle]="{marginTop:themesOptions.fixedHead&&!isMixiMode?'48px':0}"
+                  style="min-height: auto">
+        <ng-content></ng-content>
+      </nz-content>
+      <nz-footer *ngIf="themesOptions.hasFooterArea">Ant Design ©2020 Implement By Angular</nz-footer>
+    </nz-layout>
 
-    <app-setting-drawer></app-setting-drawer>
   </nz-layout>
 </nz-layout>
+<app-setting-drawer></app-setting-drawer>
 <ng-template #trigger>
   <ul nz-menu [nzTheme]="(themesOptions$|async)!.theme" nzMode="inline" [nzSelectable]="false">
     <li nz-menu-item>

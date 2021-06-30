@@ -53,6 +53,7 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
     mode: 'side',
     fixedWidth: false,
     colorWeak: false,
+    fixedLeftNav: false,
     fixedHead: false,
     hasTopArea: true,
     hasFooterArea: true,
@@ -191,7 +192,7 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
   }
 
   // 修改固定头部
-  changeFixed(isFixed: boolean, type: 'fixedHead' | 'hasTopArea' | 'hasFooterArea' | 'hasNavArea' | 'hasNavHeadArea'): void {
+  changeFixed(isFixed: boolean, type: 'fixedLeftNav'|'fixedHead' | 'hasTopArea' | 'hasFooterArea' | 'hasNavArea' | 'hasNavHeadArea'): void {
     this._themesOptions[type] = isFixed;
     this.setThemeOptions();
   }

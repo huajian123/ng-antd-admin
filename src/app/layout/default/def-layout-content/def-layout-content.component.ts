@@ -20,6 +20,7 @@ export class DefLayoutContentComponent implements OnInit, OnDestroy {
     fixedWidth: false,
     colorWeak: false,
     fixedHead: false,
+    fixedLeftNav: false,
     hasTopArea: true,
     hasFooterArea: true,
     hasNavArea: true,
@@ -27,6 +28,8 @@ export class DefLayoutContentComponent implements OnInit, OnDestroy {
   };
   isCollapsed$: Observable<boolean> = this.themesService.getIsCollapsed();
   isOverMode$: Observable<boolean> = this.themesService.getIsOverMode();
+  isMixiMode = false;
+  isFixedLeftNav = false;
   visibleSettingDrawer = false;
 
   constructor(private themesService: ThemeService, private cdr: ChangeDetectorRef) {
@@ -39,6 +42,8 @@ export class DefLayoutContentComponent implements OnInit, OnDestroy {
   getThemeOptions(): void {
     this.themesOptions$.pipe(takeUntil(this.destory$)).subscribe(res => {
       this.themesOptions = res;
+      this.isMixiMode = res.mode === 'mixi';
+      this.isFixedLeftNav=this.themesOptions.fixedLeftNav;
     });
   }
 
