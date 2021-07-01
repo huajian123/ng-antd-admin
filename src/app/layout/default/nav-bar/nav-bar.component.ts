@@ -83,7 +83,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
           relatedLink: routeData['relatedLink'] ? routeData['relatedLink'] : []
         });
         this.tabService.findIndex(this.routerPath);
-        this.titleServe.setTitle(routeData['title'] + ' - ng antd admin');
+        this.titleServe.setTitle(routeData['title'] + ' - Ant Design Pro');
       });
   }
 

@@ -94,11 +94,11 @@
                 <i nz-icon nzType="bell" nzTheme="outline"></i>
             </nz-badge>
           </span>
-          <span class="bst-header-icon" nz-dropdown [nzDropdownMenu]="userSettingMenu">
+          <span class="bst-header-icon" nz-dropdown [nzDropdownMenu]="mixiUserSettingMenu">
             <img class="avatar" src="assets/imgs/default_face.png">
             <span class="base-font-size">Serati Ma</span>
           </span>
-          <nz-dropdown-menu #userSettingMenu>
+          <nz-dropdown-menu #mixiUserSettingMenu>
             <ul nz-menu class="bst-header_usr_menu">
               <li nz-menu-item (click)="goPage('personal-center')">
                 <a><i nz-icon nzType="user" nzTheme="outline" class="bst-header_usr_menu_icon"></i><span>个人中心</span></a>
