@@ -12,7 +12,6 @@
   </nz-sider>
 
 
-
   <!--混合模式header-->
   <nz-header *ngIf="isMixiMode&&themesOptions.hasTopArea" class="fixed screen-full-width"
              [ngClass]="{'dark-top-nav-bg':!(isNightTheme$|async)}">
@@ -20,13 +19,12 @@
   </nz-header>
 
 
-
-
-  <nz-layout [class.screen-full-height]="!isMixiMode&&isFixedLeftNav" [class.left-nav-fixed]="isFixedLeftNav" [style]="{marginTop:isMixiMode&&themesOptions.hasTopArea?'48px':0,overflowX:isFixedLeftNav?'auto':'hidden'}">
+  <nz-layout [class.screen-full-height]="!isMixiMode&&isFixedLeftNav" [class.left-nav-fixed]="isFixedLeftNav"
+             [style]="{marginTop:isMixiMode&&themesOptions.hasTopArea?'48px':0,overflowX:isFixedLeftNav?'auto':'hidden'}">
     <!--非混合模式header-->
     <nz-header *ngIf="!isMixiMode&&(themesOptions$|async)!.hasTopArea"
                [ngClass]="{'dark-top-nav-bg':themesOptions.mode==='top'&&themesOptions.theme==='dark'&&!(isNightTheme$|async),
-      'animate':themesOptions.mode==='side',
+      'animate':themesOptions.mode==='side','with-full':!themesOptions.hasNavArea,
                'fixed':themesOptions.fixedHead,'screen-full-width':themesOptions.mode==='top','fixed-collapsed':themesOptions.fixedHead&&themesOptions.mode==='side'&&(isCollapsed$|async),
                'fixed-over-mode':themesOptions.fixedHead&&themesOptions.mode==='side'&&(isOverMode$|async)}">
       <ng-content select="ng-container[header]"></ng-content>
@@ -45,7 +43,7 @@
     </nz-sider>
 
     <nz-layout class="mix-layout" [class.m-l-200]="isMixiMode&&themesOptions.fixedLeftNav&&themesOptions.hasNavArea">
-      <nz-content [ngStyle]="{marginTop:themesOptions.fixedHead&&!isMixiMode?'48px':0}"
+      <nz-content [ngStyle]="{marginTop:(themesOptions.fixedHead&&!isMixiMode)&&themesOptions.hasTopArea?'48px':0}"
                   style="min-height: auto">
         <ng-content></ng-content>
       </nz-content>
