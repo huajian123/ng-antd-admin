@@ -62,7 +62,7 @@
 
   <ng-template #headleft>
     <div class="bst-header-wrap">
-          <span class="bst-header-icon">
+          <span class="bst-header-icon" nz-tooltip nzTooltipTitle="用自动完成组件，实在懒得写" nzTooltipPlacement="bottom">
               <i nz-icon nzType="search" nzTheme="outline"></i>
           </span>
       <span class="bst-header-icon" nz-tooltip nzTooltipTitle="Use documentation" nzTooltipPlacement="bottom">
@@ -95,9 +95,19 @@
         </ul>
       </nz-dropdown-menu>
 
-      <span class="bst-header-icon">
+      <span class="bst-header-icon" nz-dropdown [nzDropdownMenu]="language" [nzPlacement]="'bottomRight'">
               <i nz-icon nzType="font-size" nzTheme="outline"></i>
-          </span>
+      </span>
+      <nz-dropdown-menu #language="nzDropdownMenu">
+        <ul nz-menu nzSelectable>
+          <li nz-menu-item>English</li>
+          <li nz-menu-item>Bahasa Indonesia</li>
+          <li nz-menu-item>日本語</li>
+          <li nz-menu-item>Português</li>
+          <li nz-menu-item nzSelected>简体中文</li>
+          <li nz-menu-item>繁體中文</li>
+        </ul>
+      </nz-dropdown-menu>
     </div>
 
 
