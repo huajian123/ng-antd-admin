@@ -1,7 +1,7 @@
 # 项目视频介绍
 如果本项目对你有用，如果你愿意的话，麻烦点个star啊
 视频介绍地址 [项目介绍](https://www.bilibili.com/video/BV12B4y1T7h7/)
-
+在线预览地址 [在线预览](http://124.71.128.53:8081/)
 # 禁用严格模式
 
 可以通过在应用程序的 TypeScript 配置文件 tsconfig.json 中设置 strictTemplates: false 来完全禁用严格检查。
