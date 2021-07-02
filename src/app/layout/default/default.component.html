@@ -77,7 +77,7 @@
           <img class="m-l-10" style="max-height: 32px;max-width: 54px;" src="../../../assets/imgs/logo.svg" alt="">
           <span class="sp-18 m-r-20">Ant Design Pro</span>
           <div class="flex-1">
-            <app-nav-bar [isMixiHead]="true"></app-nav-bar>
+            <app-nav-bar *ngIf="(themeOptions$|async)!.splitNav" [isMixiHead]="true"></app-nav-bar>
           </div>
         </div>
       </ng-container>
@@ -125,7 +125,7 @@
   </ng-container>
 
   <ng-container mixsider>
-    <app-nav-bar [isMixiLeft]="true"></app-nav-bar>
+    <app-nav-bar [isMixiLeft]="(themeOptions$|async)!.splitNav"></app-nav-bar>
   </ng-container>
 
 </app-def-layout-content>
