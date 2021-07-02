@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BaseHttpService} from '../base-http.service';
 import {Observable} from 'rxjs';
-import {DeptObj} from '../../types';
+import {DeptObj, PageInfo, SearchCommonVO} from '../../types';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +11,8 @@ export class DeptManageService {
   constructor(public http: BaseHttpService) {
   }
 
-  public getDeptList(): Observable<DeptObj[]> {
-    return this.http.get('/department');
+  public getDeptList(param: SearchCommonVO<any>): Observable<PageInfo<DeptObj>> {
+    return this.http.post('/department', param);
   }
 
   public delDept(idArray: number[]): Observable<any> {

@@ -1,6 +1,6 @@
 {
   "/site": {
-    "target": "http://192.168.1.104:8003/",
+    "target": "http://127.0.0.1:8003/",
     "secure": false,
     "changeOrigin": true,
     "pathRewrite": {

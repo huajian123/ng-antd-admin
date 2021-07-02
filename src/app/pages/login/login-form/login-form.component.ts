@@ -7,6 +7,7 @@ import {AuthKey, TokenPre} from '../../../configs/constant';
 import {fnCheckForm} from '../../../utils/tools';
 import {AuthService} from '../../../core/services/store/auth.service';
 import {SpinService} from '../../../core/services/store/spin/spin.service';
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-login-form',
@@ -35,8 +36,11 @@ export class LoginFormComponent implements OnInit {
     if (!fnCheckForm(this.validateForm)) {
       return;
     }
+    this.spinService.setCurrentGlobalSpinStore(true);
     const param = this.validateForm.getRawValue();
-    this.dataService.login(param).subscribe(({token}) => {
+    this.dataService.login(param).pipe(finalize(() => {
+      this.spinService.setCurrentGlobalSpinStore(false);
+    })).subscribe(({token}) => {
       this.windowServe.setStorage(AuthKey, TokenPre + token);
       // this.authService.parsToken(token);
       this.authService.setAuthCode(this.authService.parsToken(TokenPre + token));

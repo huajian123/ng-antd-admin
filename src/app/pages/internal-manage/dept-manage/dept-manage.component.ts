@@ -3,7 +3,6 @@ import {ActionCode} from 'src/app/configs/actionCode';
 import {PageHeaderType} from '../../../share/components/page-header/page-header.component';
 import {DeptObj} from '../../../core/services/types';
 import {DeptManageService} from '../../../core/services/http/internal-manage/dept-manage.service';
-import {map} from 'rxjs/operators';
 import {DeptManageModalService} from '../../../widget/biz-widget/internal-manage/dept-manage/dept-manage.service';
 import {ModalBtnStatus} from '../../../widget/base-modal';
 import {NzModalService} from 'ng-zorro-antd/modal';
@@ -19,7 +18,7 @@ export class DeptManageComponent implements OnInit {
     title: '部门管理',
     breadcrumb: ['首页', '内部管理', '部门管理']
   };
-  dataList!: DeptObj[];
+  dataList: DeptObj[] = [];
   actionCodeObj = {
     add: ActionCode.RoleAdd
   };
@@ -79,10 +78,15 @@ export class DeptManageComponent implements OnInit {
   }
 
   getDataList(): void {
-    this.dataService.getDeptList().pipe(map((res: DeptObj[]) => this.dataAddExpand(res))).subscribe(result => {
-      this.dataList = result;
-      this.cdr.markForCheck();
-    });
+    this.dataList = [
+      {
+        id: 1, departmentName: '一级部门1', departmentDesc: '描述1', fatherId: 0, departmentGrade: 1, departmentVos: [{
+          id: 100, departmentName: '一级部门子1', departmentDesc: '描述1', fatherId: 1, departmentGrade: 2, departmentVos: [], expand: false
+        }], expand: false
+      },
+      {id: 2, departmentName: '一级部门2', departmentDesc: '描述2', fatherId: 0, departmentGrade: 1, departmentVos: [], expand: false}
+
+    ];
   }
 
   getDeptChildIds(deptArray: DeptObj[]): void {
