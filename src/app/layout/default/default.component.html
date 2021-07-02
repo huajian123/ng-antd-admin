@@ -21,43 +21,7 @@
       </ng-container>
 
       <ng-container right>
-        <div class="bst-header-wrap">
-          <span class="bst-header-icon">
-              <i nz-icon nzType="search" nzTheme="outline"></i>
-          </span>
-          <span class="bst-header-icon">
-            <i nz-icon nzType="question-circle" nzTheme="outline"></i>
-          </span>
-          <span class="bst-header-icon">
-            <nz-badge [nzCount]="11" class="bst-badge">
-                <i nz-icon nzType="bell" nzTheme="outline"></i>
-            </nz-badge>
-          </span>
-          <span class="bst-header-icon" nz-dropdown [nzDropdownMenu]="userSettingMenu">
-            <img class="avatar" src="assets/imgs/default_face.png">
-            <span class="base-font-size">Serati Ma</span>
-          </span>
-          <nz-dropdown-menu #userSettingMenu>
-            <ul nz-menu class="bst-header_usr_menu">
-              <li nz-menu-item (click)="goPage('personal-center')">
-                <a><i nz-icon nzType="user" nzTheme="outline" class="bst-header_usr_menu_icon"></i><span>个人中心</span></a>
-              </li>
-              <li nz-menu-item (click)="goPage('personal-setting')">
-                <a><i nz-icon nzType="setting" nzTheme="outline"
-                      class="bst-header_usr_menu_icon"></i><span>个人设置</span></a>
-              </li>
-              <li nz-menu-divider></li>
-              <li nz-menu-item>
-                <a (click)="goLogin()"><i nz-icon nzType="logout" nzTheme="outline"
-                                          class="bst-header_usr_menu_icon"></i><span>退出登录</span></a>
-              </li>
-            </ul>
-          </nz-dropdown-menu>
-
-          <span class="bst-header-icon">
-              <i nz-icon nzType="font-size" nzTheme="outline"></i>
-          </span>
-        </div>
+        <ng-container *ngTemplateOutlet="headleft"></ng-container>
       </ng-container>
     </app-tool-bar>
   </ng-container>
@@ -72,7 +36,12 @@
 
   <ng-container mixheader>
     <app-tool-bar>
-      <ng-container left>
+      <ng-container left *ngIf="isOverMode">
+        <i class="trigger" nz-icon [nzType]="(isCollapsed$|async) ? 'menu-unfold' : 'menu-fold'"
+           (click)="changeCollapsed()"></i>
+      </ng-container>
+
+      <ng-container left  *ngIf="!isOverMode">
         <div class="left-start-center flex-1" style="z-index: 100">
           <img class="m-l-10" style="max-height: 32px;max-width: 54px;" src="../../../assets/imgs/logo.svg" alt="">
           <span class="sp-18 m-r-20">Ant Design Pro</span>
@@ -81,45 +50,8 @@
           </div>
         </div>
       </ng-container>
-
       <ng-container right>
-        <div class="bst-header-wrap">
-          <span class="bst-header-icon">
-              <i nz-icon nzType="search" nzTheme="outline"></i>
-          </span>
-          <span class="bst-header-icon">
-            <i nz-icon nzType="question-circle" nzTheme="outline"></i>
-          </span>
-          <span class="bst-header-icon">
-            <nz-badge [nzCount]="11" class="bst-badge">
-                <i nz-icon nzType="bell" nzTheme="outline"></i>
-            </nz-badge>
-          </span>
-          <span class="bst-header-icon" nz-dropdown [nzDropdownMenu]="mixiUserSettingMenu">
-            <img class="avatar" src="assets/imgs/default_face.png">
-            <span class="base-font-size">Serati Ma</span>
-          </span>
-          <nz-dropdown-menu #mixiUserSettingMenu>
-            <ul nz-menu class="bst-header_usr_menu">
-              <li nz-menu-item (click)="goPage('personal-center')">
-                <a><i nz-icon nzType="user" nzTheme="outline" class="bst-header_usr_menu_icon"></i><span>个人中心</span></a>
-              </li>
-              <li nz-menu-item (click)="goPage('personal-setting')">
-                <a><i nz-icon nzType="setting" nzTheme="outline"
-                      class="bst-header_usr_menu_icon"></i><span>个人设置</span></a>
-              </li>
-              <li nz-menu-divider></li>
-              <li nz-menu-item>
-                <a (click)="goLogin()"><i nz-icon nzType="logout" nzTheme="outline"
-                                          class="bst-header_usr_menu_icon"></i><span>退出登录</span></a>
-              </li>
-            </ul>
-          </nz-dropdown-menu>
-
-          <span class="bst-header-icon">
-              <i nz-icon nzType="font-size" nzTheme="outline"></i>
-          </span>
-        </div>
+        <ng-container *ngTemplateOutlet="headleft"></ng-container>
       </ng-container>
     </app-tool-bar>
   </ng-container>
@@ -127,6 +59,46 @@
   <ng-container mixsider>
     <app-nav-bar [isMixiLeft]="(themeOptions$|async)!.splitNav"></app-nav-bar>
   </ng-container>
+
+  <ng-template #headleft>
+    <div class="bst-header-wrap">
+          <span class="bst-header-icon">
+              <i nz-icon nzType="search" nzTheme="outline"></i>
+          </span>
+      <span class="bst-header-icon">
+            <i nz-icon nzType="question-circle" nzTheme="outline"></i>
+          </span>
+      <span class="bst-header-icon">
+            <nz-badge [nzCount]="11" class="bst-badge">
+                <i nz-icon nzType="bell" nzTheme="outline"></i>
+            </nz-badge>
+          </span>
+      <span class="bst-header-icon" nz-dropdown [nzDropdownMenu]="mixiUserSettingMenu">
+            <img class="avatar" src="assets/imgs/default_face.png">
+            <span class="base-font-size">Serati Ma</span>
+          </span>
+      <nz-dropdown-menu #mixiUserSettingMenu>
+        <ul nz-menu class="bst-header_usr_menu">
+          <li nz-menu-item (click)="goPage('personal-center')">
+            <a><i nz-icon nzType="user" nzTheme="outline" class="bst-header_usr_menu_icon"></i><span>个人中心</span></a>
+          </li>
+          <li nz-menu-item (click)="goPage('personal-setting')">
+            <a><i nz-icon nzType="setting" nzTheme="outline"
+                  class="bst-header_usr_menu_icon"></i><span>个人设置</span></a>
+          </li>
+          <li nz-menu-divider></li>
+          <li nz-menu-item>
+            <a (click)="goLogin()"><i nz-icon nzType="logout" nzTheme="outline"
+                                      class="bst-header_usr_menu_icon"></i><span>退出登录</span></a>
+          </li>
+        </ul>
+      </nz-dropdown-menu>
+
+      <span class="bst-header-icon">
+              <i nz-icon nzType="font-size" nzTheme="outline"></i>
+          </span>
+    </div>
+  </ng-template>
 
 </app-def-layout-content>
 <nz-drawer [nzBodyStyle]="{padding:0}" [nzWidth]="256" [nzClosable]="false" [nzVisible]="showOverModeNav"

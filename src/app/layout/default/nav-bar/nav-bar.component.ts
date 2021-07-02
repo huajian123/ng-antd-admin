@@ -87,7 +87,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
           relatedLink: routeData['relatedLink'] ? routeData['relatedLink'] : []
         });
         this.tabService.findIndex(this.routerPath);
-        this.titleServe.setTitle(routeData['title'] + ' - Ant Design Pro');
+        this.titleServe.setTitle(routeData['title'] + ' - Ant Design');
 
         // 混合模式时，切换tab，让左侧菜单也相应变化
         this.menus.forEach(item => {

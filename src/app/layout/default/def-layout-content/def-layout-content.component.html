@@ -32,7 +32,7 @@
 
     <!--混合模式sider-->
     <nz-sider
-      *ngIf="isMixiMode&&themesOptions.hasNavArea"
+      *ngIf="isMixiMode&&themesOptions.hasNavArea&&!(isOverMode$|async)"
       class="menu-sidebar"
       [class.mixi-left-nav-fixed]="themesOptions.fixedLeftNav"
       [class.t-0]="!themesOptions.hasTopArea&&themesOptions.fixedLeftNav"
@@ -42,7 +42,10 @@
       <ng-content select="ng-container[mixsider]"></ng-content>
     </nz-sider>
 
-    <nz-layout class="mix-layout animate" [class.m-l-80]="isMixiMode&&themesOptions.fixedLeftNav&&themesOptions.hasNavArea&&(isCollapsed$|async)" [class.m-l-200]="isMixiMode&&themesOptions.fixedLeftNav&&themesOptions.hasNavArea&&!(isCollapsed$|async)">
+    <nz-layout class="mix-layout animate"
+               [class.m-l-80]="isMixiMode&&themesOptions.fixedLeftNav&&themesOptions.hasNavArea&&(isCollapsed$|async)"
+               [class.m-l-200]="isMixiMode&&themesOptions.fixedLeftNav&&themesOptions.hasNavArea&&!(isCollapsed$|async)&&!(isOverMode$|async)"
+               [class.m-l-0]="isMixiMode&&themesOptions.fixedLeftNav&&themesOptions.hasNavArea&&(isOverMode$|async)">
       <nz-content [ngStyle]="{marginTop:(themesOptions.fixedHead&&!isMixiMode)&&themesOptions.hasTopArea?'48px':0}"
                   style="min-height: auto">
         <ng-content></ng-content>
@@ -54,7 +57,7 @@
 </nz-layout>
 <app-setting-drawer></app-setting-drawer>
 <ng-template #trigger>
-  <ul nz-menu [nzTheme]="(themesOptions$|async)!.theme" nzMode="inline" [nzSelectable]="false">
+  <ul nz-menu [nzTheme]="(isMixiMode&&!(isOverMode$|async))?'light':(themesOptions$|async)!.theme" nzMode="inline" [nzSelectable]="false">
     <li nz-menu-item>
       <i class="trigger sp-18" nz-icon [nzType]="(isCollapsed$|async) ? 'menu-unfold' : 'menu-fold'"></i>
     </li>
