@@ -41,7 +41,7 @@
            (click)="changeCollapsed()"></i>
       </ng-container>
 
-      <ng-container left  *ngIf="!isOverMode">
+      <ng-container left *ngIf="!isOverMode">
         <div class="left-start-center flex-1" style="z-index: 100">
           <img class="m-l-10" style="max-height: 32px;max-width: 54px;" src="../../../assets/imgs/logo.svg" alt="">
           <span class="sp-18 m-r-20">Ant Design Pro</span>
@@ -65,19 +65,20 @@
           <span class="bst-header-icon">
               <i nz-icon nzType="search" nzTheme="outline"></i>
           </span>
-      <span class="bst-header-icon">
+      <span class="bst-header-icon" nz-tooltip nzTooltipTitle="Use documentation" nzTooltipPlacement="bottom">
             <i nz-icon nzType="question-circle" nzTheme="outline"></i>
           </span>
-      <span class="bst-header-icon">
+      <span class="bst-header-icon" nz-dropdown [nzDropdownMenu]="noticeMenu"
+            nzTrigger="click" nzPlacement="bottomRight">
             <nz-badge [nzCount]="11" class="bst-badge">
                 <i nz-icon nzType="bell" nzTheme="outline"></i>
             </nz-badge>
           </span>
-      <span class="bst-header-icon" nz-dropdown [nzDropdownMenu]="mixiUserSettingMenu">
+      <span class="bst-header-icon" nz-dropdown [nzDropdownMenu]="userSettingMenu">
             <img class="avatar" src="assets/imgs/default_face.png">
             <span class="base-font-size">Serati Ma</span>
           </span>
-      <nz-dropdown-menu #mixiUserSettingMenu>
+      <nz-dropdown-menu #userSettingMenu>
         <ul nz-menu class="bst-header_usr_menu">
           <li nz-menu-item (click)="goPage('personal-center')">
             <a><i nz-icon nzType="user" nzTheme="outline" class="bst-header_usr_menu_icon"></i><span>个人中心</span></a>
@@ -98,6 +99,51 @@
               <i nz-icon nzType="font-size" nzTheme="outline"></i>
           </span>
     </div>
+
+
+    <nz-dropdown-menu #noticeMenu="nzDropdownMenu">
+      <nz-card [nzBodyStyle]="{padding:0}">
+        <nz-tabset nzCentered [nzTabBarStyle]="{paddingLeft:'15px',paddingRight:'15px'}">
+          <nz-tab nzTitle="Notification (4)">
+           <ng-container *ngTemplateOutlet="notificationTpl"></ng-container>
+          </nz-tab>
+          <nz-tab nzTitle="Message (3)">
+            <ng-container *ngTemplateOutlet="notificationTpl"></ng-container>
+          </nz-tab>
+          <nz-tab nzTitle="To do (4)">
+            <ng-container *ngTemplateOutlet="notificationTpl"></ng-container>
+          </nz-tab>
+        </nz-tabset>
+      </nz-card>
+    </nz-dropdown-menu>
+
+    <ng-template #notificationTpl>
+      <nz-list nzItemLayout="horizontal">
+        <nz-list-item *ngFor="let i of 4|numberLoop" >
+          <nz-list-item-meta>
+            <nz-list-item-meta-title>
+              <div class="flex p-l-10 p-r-10">
+                      <span nz-typography
+                            nzEllipsis
+                            class="flex-1">第三方紧急代码变更</span>
+                <nz-tag class="m-l-10" [nzColor]="'red'">马上到期</nz-tag>
+              </div>
+            </nz-list-item-meta-title>
+            <nz-list-item-meta-description>
+              <div class="p-l-10 p-r-10">
+                <p nz-typography nzType="secondary" nzEllipsis [nzEllipsisRows]="3">冠霖提交于 2017-01-06，需在 2017-01-07 前完成代码变更任务</p>
+                <p>审核时间：222</p>
+              </div>
+
+            </nz-list-item-meta-description>
+          </nz-list-item-meta>
+        </nz-list-item>
+        <!--  <nz-list-empty *ngIf="deptNoticeListObj.checkRecordDtos.length === 0"></nz-list-empty>-->
+        <nz-list-footer>
+          <div class="center operate-text" style="width:100%;height:100%">清空通知</div>
+        </nz-list-footer>
+      </nz-list>
+    </ng-template>
   </ng-template>
 
 </app-def-layout-content>

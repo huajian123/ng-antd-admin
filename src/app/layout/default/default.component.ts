@@ -23,7 +23,6 @@ export class DefaultComponent implements OnInit, OnDestroy {
   isOverMode = false; // 窗口变窄时，导航栏是否变成抽屉模式
   showOverModeNav = false;
   private destory$ = new Subject<void>();
-
   constructor(private themesService: ThemeService, private windowServe: WindowService,
               private router: Router, private tabService: TabService,
               private activatedRoute: ActivatedRoute, private breakpointObserver: BreakpointObserver) {
