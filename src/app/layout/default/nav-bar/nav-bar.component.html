@@ -1,6 +1,7 @@
-<ul nz-menu [nzInlineCollapsed]="isCollapsed$|async" [nzTheme]="isMixiMode?'light':(themesOptions$|async)!.theme"
-    [nzMode]="(themesOptions$|async)!.mode==='side'||(isOverMode$|async)?'inline':'horizontal'">
-  <ng-container *ngTemplateOutlet="menuTpl;context:{$implicit: menus}"></ng-container>
+<ul nz-menu *ngIf="!isMixiHead" [nzInlineCollapsed]="isCollapsed$|async"
+    [nzTheme]="isMixiMode?'light':(themesOptions$|async)!.theme"
+    [nzMode]="((themesOptions$|async)!.mode==='side'||(themesOptions$|async)!.mode==='mixi'||(isOverMode$|async))?'inline':'horizontal'">
+  <ng-container *ngTemplateOutlet="menuTpl;context:{$implicit: isMixiLeft?(leftMenuArray$|async):menus}"></ng-container>
   <ng-template #menuTpl let-menus>
     <ng-container *ngFor="let menu of menus;">
       <!--一级菜单-->
@@ -13,7 +14,7 @@
       <!--二级菜单-->
       <ng-container *ngIf="menu.children&&menu.children.length>0">
         <!--*appAuth="menu.actionCode"-->
-        <li nz-submenu  (nzOpenChange)="changeOpen(menu,menus)" [(nzOpen)]="menu.open"
+        <li nz-submenu (nzOpenChange)="changeOpen(menu,menus)" [(nzOpen)]="menu.open"
             [nzTitle]="menu.title" [nzIcon]="menu.icon">
           <ul>
             <ng-container *ngFor="let menuSecond of menu.children">
@@ -43,4 +44,22 @@
     </ng-container>
   </ng-template>
 </ul>
+
+<ul *ngIf="isMixiHead" nz-menu nzTheme="dark" nzMode="horizontal">
+  <ng-container *ngFor="let menu of menus;let i=index;">
+    <li nz-menu-item *ngIf="!menu.children||menu.children.length===0" [nzSelected]="menu.selected">
+      <a [routerLink]="[menu.path]">
+        <i *ngIf="menu.icon" nz-icon [nzType]="menu.icon"></i>
+        <span>{{menu.title}}</span>
+      </a>
+    </li>
+
+    <li nz-menu-item (click)="changTopNav(i)" *ngIf="menu.children&&menu.children.length>0"
+        [nzSelected]="menu.selected">
+      <i *ngIf="menu.icon" nz-icon [nzType]="menu.icon"></i>
+      <span>{{menu.title}}</span>
+    </li>
+  </ng-container>
+</ul>
+
 

@@ -15,6 +15,7 @@ import {SettingInterface, ThemeService} from '../../../core/services/store/theme
 import {ThemeSkinService} from '../../../core/services/common/theme-skin.service';
 import {WindowService} from '../../../core/services/common/window.service';
 import {IsNightKey, ThemeOptionsKey} from '../../../configs/constant';
+import {NzMessageService} from 'ng-zorro-antd/message';
 
 interface NormalModel {
   image?: string;
@@ -52,6 +53,7 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
     color: 'daybreak',
     mode: 'side',
     fixedWidth: false,
+    splitNav: false,
     colorWeak: false,
     fixedLeftNav: false,
     fixedHead: false,
@@ -149,12 +151,18 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
   ];
 
   constructor(private themesService: ThemeService, @Inject(DOCUMENT) private doc: Document,
+              public message: NzMessageService,
               private themeSkinService: ThemeSkinService, private windowServe: WindowService,
               private cdr: ChangeDetectorRef, private el: ElementRef, private rd2: Renderer2) {
   }
 
   changeCollapsed(): void {
     this.isCollapsed = !this.isCollapsed;
+  }
+
+  changePrimaryColor(color: Color): void {
+    this.selOne(color as NormalModel, this.colors);
+    this.message.success('我不会写哈哈哈');
   }
 
   // 修改黑夜主题
@@ -192,7 +200,7 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
   }
 
   // 修改固定头部
-  changeFixed(isFixed: boolean, type: 'fixedLeftNav'|'fixedHead' | 'hasTopArea' | 'hasFooterArea' | 'hasNavArea' | 'hasNavHeadArea'): void {
+  changeFixed(isFixed: boolean, type: 'splitNav' | 'fixedLeftNav' | 'fixedHead' | 'hasTopArea' | 'hasFooterArea' | 'hasNavArea' | 'hasNavHeadArea'): void {
     this._themesOptions[type] = isFixed;
     this.setThemeOptions();
   }

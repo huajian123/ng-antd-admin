@@ -59,7 +59,7 @@ export class DefaultComponent implements OnInit, OnDestroy {
       let maxWidth = '';
       if (res.mode === 'side') {
         maxWidth = `(max-width: ${SideCollapsedMaxWidth}px)`;
-      } else if (res.mode === 'top') {
+      } else if (res.mode === 'top'||res.mode==='mixi') {
         maxWidth = `(max-width: ${TopCollapsedMaxWidth}px)`;
       }
       // 可以入参[Breakpoints.Small, Breakpoints.XSmall]

@@ -19,7 +19,7 @@
   </nz-header>
 
 
-  <nz-layout [class.screen-full-height]="!isMixiMode&&isFixedLeftNav" [class.left-nav-fixed]="isFixedLeftNav"
+  <nz-layout [class.screen-full-height]="!isMixiMode&&isFixedLeftNav"
              [style]="{marginTop:isMixiMode&&themesOptions.hasTopArea?'48px':0,overflowX:isFixedLeftNav?'auto':'hidden'}">
     <!--非混合模式header-->
     <nz-header *ngIf="!isMixiMode&&(themesOptions$|async)!.hasTopArea"
@@ -42,7 +42,7 @@
       <ng-content select="ng-container[mixsider]"></ng-content>
     </nz-sider>
 
-    <nz-layout class="mix-layout" [class.m-l-200]="isMixiMode&&themesOptions.fixedLeftNav&&themesOptions.hasNavArea">
+    <nz-layout class="mix-layout animate" [class.m-l-80]="isMixiMode&&themesOptions.fixedLeftNav&&themesOptions.hasNavArea&&(isCollapsed$|async)" [class.m-l-200]="isMixiMode&&themesOptions.fixedLeftNav&&themesOptions.hasNavArea&&!(isCollapsed$|async)">
       <nz-content [ngStyle]="{marginTop:(themesOptions.fixedHead&&!isMixiMode)&&themesOptions.hasTopArea?'48px':0}"
                   style="min-height: auto">
         <ng-content></ng-content>

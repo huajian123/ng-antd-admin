@@ -1,4 +1,4 @@
-import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy, Input} from '@angular/core';
 import {filter, map, mergeMap, switchMap, takeUntil, tap} from 'rxjs/operators';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {TabService} from '../../../core/services/common/tab.service';
@@ -7,6 +7,7 @@ import {Subject, Subscription} from 'rxjs';
 import * as _ from 'lodash';
 import {menuNav} from '../../../configs/menu';
 import {Title} from '@angular/platform-browser';
+import {SplitNavStoreService} from '../../../core/services/store/split-nav-store/split-nav-store.service';
 
 interface Menu {
   path?: string;
@@ -24,6 +25,9 @@ interface Menu {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavBarComponent implements OnInit, OnDestroy {
+  // 是混合模式顶部导航
+  @Input() isMixiHead: boolean = false;
+  @Input() isMixiLeft: boolean = false;
   private destory$ = new Subject<void>();
   menus: Menu[] = menuNav;
   routerPath = '';
@@ -31,22 +35,22 @@ export class NavBarComponent implements OnInit, OnDestroy {
   themesMode = 'side';
   isCollapsed$ = this.themesService.getIsCollapsed();
   isOverMode$ = this.themesService.getIsOverMode();
+  leftMenuArray$ = this.splitNavStoreService.getSplitLeftNavArrayStore();
   isOverMode = false;
   isCollapsed = false;
   isMixiMode = false;
-  subs: Array<Subscription> = [];
   copyMenus: Menu[] = _.cloneDeep(this.menus);
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private tabService: TabService,
+  constructor(private router: Router, private splitNavStoreService: SplitNavStoreService,
+              private activatedRoute: ActivatedRoute, private tabService: TabService,
               private cdr: ChangeDetectorRef, private themesService: ThemeService,
               private titleServe: Title,) {
     this.routerPath = this.router.url;
-    this.subs[0] = this.router.events
+    this.router.events
       .pipe(
         filter(event => event instanceof NavigationEnd),
         takeUntil(this.destory$),
         tap(() => {
-          // todo
           // @ts-ignore
           this.routerPath = this.activatedRoute.snapshot['_routerState'].url;
           this.clickMenuItem(this.menus);
@@ -84,7 +88,31 @@ export class NavBarComponent implements OnInit, OnDestroy {
         });
         this.tabService.findIndex(this.routerPath);
         this.titleServe.setTitle(routeData['title'] + ' - Ant Design Pro');
+
+        // 混合模式时，切换tab，让左侧菜单也相应变化
+        this.menus.forEach(item => {
+          if (item.selected) {
+            this.splitNavStoreService.setSplitLeftNavArrayStore(item.children!);
+          }
+        });
       });
+  }
+
+  // 混合模式点击一级菜单
+  changTopNav(index: number): void {
+    // 当前选中的第一级菜单对象
+    const currentTopNav = this.menus[index];
+    if (currentTopNav.children && currentTopNav.children.length > 0) {
+      // 当前左侧导航数组
+      const currentLeftNavArray = currentTopNav.children;
+      if (!currentLeftNavArray[0].children) {
+        this.router.navigateByUrl(currentLeftNavArray[0].path!);
+        this.splitNavStoreService.setSplitLeftNavArrayStore(currentLeftNavArray);
+      } else {
+        this.router.navigateByUrl(currentLeftNavArray[0].children[0].path!);
+        this.splitNavStoreService.setSplitLeftNavArrayStore(currentLeftNavArray);
+      }
+    }
   }
 
   clickMenuItem(menus: Menu[]): void {

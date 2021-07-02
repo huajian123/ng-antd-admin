@@ -18,6 +18,7 @@ export class DefLayoutContentComponent implements OnInit, OnDestroy {
     color: '',
     mode: 'side',
     fixedWidth: false,
+    splitNav: false,
     colorWeak: false,
     fixedHead: false,
     fixedLeftNav: false,

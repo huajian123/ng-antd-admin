@@ -8,6 +8,7 @@ export interface SettingInterface {
   fixedWidth: boolean;
   colorWeak: boolean;
   fixedHead: boolean;
+  splitNav: boolean;
   fixedLeftNav: boolean;
   hasTopArea: boolean;
   hasFooterArea: boolean;
@@ -29,6 +30,7 @@ export class ThemeService {
     mode: 'side',
     fixedWidth: false,
     colorWeak: false,
+    splitNav: false,
     fixedHead: false,
     fixedLeftNav: false,
     hasTopArea: true,
