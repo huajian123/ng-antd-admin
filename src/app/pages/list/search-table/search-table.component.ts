@@ -5,6 +5,7 @@ import {PageHeaderType} from '../../../share/components/page-header/page-header.
 import {ActionCode} from '../../../configs/actionCode';
 import {NzTableQueryParams} from 'ng-zorro-antd/table';
 import {SearchCommonVO} from '../../../core/services/types';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-search-table',
@@ -28,7 +29,7 @@ export class SearchTableComponent implements OnInit {
     add: ActionCode.RoleAdd
   };
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router) {
   }
 
   getDataList(e?: NzTableQueryParams): void {
@@ -95,8 +96,10 @@ export class SearchTableComponent implements OnInit {
   addRow(): void {
   }
 
-  /*新增*/
+  /*查看*/
   check(name: string): void {
+    //skipLocationChange导航时不要把新状态记入历史时设置为true
+    this.router.navigate(['default/list/search-table/search-table-detail'], {queryParams: {name}, skipLocationChange: true});
   }
 
   /*重置*/
