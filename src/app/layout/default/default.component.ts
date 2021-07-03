@@ -56,9 +56,9 @@ export class DefaultComponent implements OnInit, OnDestroy {
     this.themesService.getIsCollapsed().subscribe(res => this.isCollapsed = res);
     this.themesService.getThemesMode().pipe(switchMap((res) => {
       let maxWidth = '';
-      if (res.mode === 'side'||(res.mode==='mixi'&&!res.splitNav)) {
+      if (res.mode === 'side' || (res.mode === 'mixi' && !res.splitNav)) {
         maxWidth = `(max-width: ${SideCollapsedMaxWidth}px)`;
-      } else if (res.mode === 'top'||(res.mode==='mixi'&&res.splitNav)) {
+      } else if (res.mode === 'top' || (res.mode === 'mixi' && res.splitNav)) {
         maxWidth = `(max-width: ${TopCollapsedMaxWidth}px)`;
       }
       // 可以入参[Breakpoints.Small, Breakpoints.XSmall]

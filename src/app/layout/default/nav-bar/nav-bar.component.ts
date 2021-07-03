@@ -26,8 +26,8 @@ interface Menu {
 })
 export class NavBarComponent implements OnInit, OnDestroy {
   // 是混合模式顶部导航
-  @Input() isMixiHead: boolean = false;
-  @Input() isMixiLeft: boolean = false;
+  @Input() isMixiHead = false;
+  @Input() isMixiLeft = false;
   private destory$ = new Subject<void>();
   menus: Menu[] = menuNav;
   routerPath = '';
@@ -44,7 +44,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private splitNavStoreService: SplitNavStoreService,
               private activatedRoute: ActivatedRoute, private tabService: TabService,
               private cdr: ChangeDetectorRef, private themesService: ThemeService,
-              private titleServe: Title,) {
+              private titleServe: Title) {
     this.routerPath = this.router.url;
     this.router.events
       .pipe(

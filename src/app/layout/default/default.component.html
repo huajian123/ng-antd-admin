@@ -62,10 +62,10 @@
 
   <ng-template #headleft>
     <div class="bst-header-wrap">
-          <span class="bst-header-icon" nz-tooltip nzTooltipTitle="用自动完成组件，实在懒得写" nzTooltipPlacement="bottom">
+          <span *appScreenLessHidden="'320'" class="bst-header-icon" nz-tooltip nzTooltipTitle="用自动完成组件，实在懒得写" nzTooltipPlacement="bottom">
               <i nz-icon nzType="search" nzTheme="outline"></i>
           </span>
-      <span class="bst-header-icon" nz-tooltip nzTooltipTitle="Use documentation" nzTooltipPlacement="bottom">
+      <span *appScreenLessHidden="'320'" class="bst-header-icon" nz-tooltip nzTooltipTitle="Use documentation" nzTooltipPlacement="bottom">
             <i nz-icon nzType="question-circle" nzTheme="outline"></i>
           </span>
       <span class="bst-header-icon" nz-dropdown [nzDropdownMenu]="noticeMenu"
@@ -95,7 +95,7 @@
         </ul>
       </nz-dropdown-menu>
 
-      <span class="bst-header-icon" nz-dropdown [nzDropdownMenu]="language" [nzPlacement]="'bottomRight'">
+      <span class="bst-header-icon" nz-dropdown [nzDropdownMenu]="language">
               <i nz-icon nzType="font-size" nzTheme="outline"></i>
       </span>
       <nz-dropdown-menu #language="nzDropdownMenu">

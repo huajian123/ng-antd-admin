@@ -21,7 +21,7 @@
             2016-12-12 ~ 2017-12-12
           </div>
         </div>
-        <nz-steps [nzCurrent]="1" nzProgressDot>
+        <nz-steps [nzDirection]="stepDirection" [nzCurrent]="1" nzProgressDot>
           <nz-step [nzTitle]="'创建项目'" [nzDescription]="createDesc">
             <ng-template #createDesc>
               <div style="font-size: 14px; position: relative">

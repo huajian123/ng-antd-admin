@@ -6,4 +6,4 @@ export const ThemeOptionsKey = 'ThemeOptionsKey';
 
 // 菜单为左侧模式时，最少出现抽屉宽度
 export const SideCollapsedMaxWidth = 700;
-export const TopCollapsedMaxWidth = 1340;
+export const TopCollapsedMaxWidth = 1270;

@@ -224,7 +224,7 @@ export const menuNav: Menu[] = [
       },
     ]
   },
-  {
+/*  {
     title: '内部管理',
     icon: 'highlight',
     open: false,
@@ -257,5 +257,5 @@ export const menuNav: Menu[] = [
         actionCode: ActionCode.Dept,
       },
     ]
-  },
+  },*/
 ];
