@@ -62,11 +62,11 @@
 
   <ng-template #headleft>
     <div class="bst-header-wrap">
-          <span *appScreenLessHidden="'320'" class="bst-header-icon" nz-tooltip nzTooltipTitle="用自动完成组件，实在懒得写" nzTooltipPlacement="bottom">
+          <span *appScreenLessHidden="'375'" class="bst-header-icon" nz-tooltip nzTooltipTitle="用自动完成组件，实在懒得写" nzTooltipPlacement="bottom">
               <i nz-icon nzType="search" nzTheme="outline"></i>
           </span>
-      <span *appScreenLessHidden="'375'" class="bst-header-icon" nz-tooltip nzTooltipTitle="Use documentation" nzTooltipPlacement="bottom">
-            <i nz-icon nzType="question-circle" nzTheme="outline"></i>
+      <span *appScreenLessHidden="'320'" class="bst-header-icon" nz-tooltip nzTooltipTitle="帮我点个star，老铁么么哒" nzTooltipPlacement="bottom">
+            <a href="https://github.com/huajian123/ng-ant-admin" target="_blank"><i nz-icon nzType="github" nzTheme="outline"></i></a>
           </span>
       <span class="bst-header-icon" nz-dropdown [nzDropdownMenu]="noticeMenu"
             nzTrigger="click" nzPlacement="bottomRight">
