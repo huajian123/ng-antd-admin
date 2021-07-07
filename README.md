@@ -1,7 +1,7 @@
 # 项目视频介绍
-如果本项目对你有用，如果你愿意的话，麻烦点个star啊
-if help you, if you want ,please give me a star ,thank you
-视频介绍地址 [项目介绍](https://www.bilibili.com/video/BV12B4y1T7h7/)
+如果本项目对你有用，如果你愿意的话，麻烦点个star啊<br>
+if help you, if you want ,please give me a star ,thank you<br>
+视频介绍地址 [项目介绍](https://www.bilibili.com/video/BV12B4y1T7h7/)<br>
 online demo地址 [demo](http://124.71.128.53:8081/)
 # 禁用严格模式
 
