@@ -2,6 +2,7 @@ import {Component, OnInit, ChangeDetectionStrategy, Output, Input, OnDestroy, Vi
 import {SettingInterface, ThemeService} from '../../../core/services/store/theme.service';
 import {Observable, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {SplitNavStoreService} from '../../../core/services/store/split-nav-store/split-nav-store.service';
 
 @Component({
   selector: 'app-def-layout-content',
@@ -13,6 +14,8 @@ export class DefLayoutContentComponent implements OnInit, OnDestroy {
   private destory$ = new Subject<void>();
   themesOptions$ = this.themesService.getThemesMode();
   isNightTheme$ = this.themesService.getIsNightTheme();
+  // 混合模式下，判断顶部菜单是否有子菜单，如果没有子菜单，要隐藏左侧菜单
+  mixiModeTopNavHasChild = this.splitNavStoreService.getSplitLeftNavArrayStore();
   themesOptions: SettingInterface = {
     theme: 'dark',
     color: '',
@@ -33,7 +36,7 @@ export class DefLayoutContentComponent implements OnInit, OnDestroy {
   isFixedLeftNav = false;
   visibleSettingDrawer = false;
 
-  constructor(private themesService: ThemeService, private cdr: ChangeDetectorRef) {
+  constructor(private themesService: ThemeService, private cdr: ChangeDetectorRef, private splitNavStoreService: SplitNavStoreService) {
   }
 
   changeCollapsed(isCollapsed: boolean): void {

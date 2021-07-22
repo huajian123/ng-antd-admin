@@ -5,14 +5,14 @@
         <nz-form-item>
           <nz-form-control nzErrorTip="请输入用户名!">
             <nz-input-group [nzSize]="'large'" nzPrefixIcon="user">
-              <input type="text" nz-input formControlName="userName" placeholder="用户名"/>
+              <input [placeholder]="'没有账号密码直接登陆'" type="text" nz-input formControlName="userName" placeholder="用户名"/>
             </nz-input-group>
           </nz-form-control>
         </nz-form-item>
         <nz-form-item>
           <nz-form-control nzErrorTip="请输入密码!">
             <nz-input-group [nzSize]="'large'" nzPrefixIcon="lock">
-              <input type="password" nz-input formControlName="password" placeholder="密码"/>
+              <input [placeholder]="'no username and password,just login'" type="password" nz-input formControlName="password" placeholder="密码"/>
             </nz-input-group>
           </nz-form-control>
         </nz-form-item>

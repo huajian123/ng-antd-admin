@@ -3,7 +3,7 @@
 
   <!--非混合模式sider-->
   <nz-sider
-    *ngIf="!isMixiMode&&((themesOptions$|async)!.mode==='side')&&!(isOverMode$|async)&&(themesOptions$|async)!.hasNavArea"
+    *ngIf="(mixiModeTopNavHasChild|async)&&!isMixiMode&&((themesOptions$|async)!.mode==='side')&&!(isOverMode$|async)&&(themesOptions$|async)!.hasNavArea"
     class="menu-sidebar"
     [nzTheme]="(themesOptions$|async)!.theme"
     nzBreakpoint="lg" [nzCollapsible]="true" [nzCollapsed]="isCollapsed$|async"
