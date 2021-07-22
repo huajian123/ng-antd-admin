@@ -2,7 +2,8 @@
 如果本项目对你有用，如果你愿意的话，麻烦点个star啊<br>
 if help you, if you want ,please give me a star ,thank you<br>
 视频介绍地址 [项目介绍](https://www.bilibili.com/video/BV12B4y1T7h7/)<br>
-online demo地址 [demo](http://124.71.128.53:8081/)
+online demo地址 [demo](http://124.71.128.53:8081/)<br>
+等过一阵子再升级ng12，让别人先把坑踩了再说
 # 禁用严格模式
 
 可以通过在应用程序的 TypeScript 配置文件 tsconfig.json 中设置 strictTemplates: false 来完全禁用严格检查。
