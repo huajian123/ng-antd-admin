@@ -27,6 +27,7 @@ export interface TableHeader {
 }
 
 export interface MyTableConfig {
+  needNoScroll?: boolean;           //列表是否需要横向滚动条
   showCheckbox?: boolean;
   pageIndex: number;                 // 当前页码，（与页面中页码双向绑定）
   pageSize: number;                // 每一页显示的数据条数（与页面中pageSize双向绑定）
@@ -55,7 +56,8 @@ export class AntTableComponent implements OnInit, OnChanges {
       });
     }
   }
-  get tableData(): any[]{
+
+  get tableData(): any[] {
     return this._dataList;
   }
 

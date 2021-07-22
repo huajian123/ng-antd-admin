@@ -7,11 +7,11 @@ import {PipesModule} from '../../pipes/pipes.module';
 
 @NgModule({
   declarations: [AntTableComponent],
-    imports: [
-        CommonModule,
-        SHARED_ZORRO_MODULES,
-        PipesModule
-    ],
+  imports: [
+    CommonModule,
+    SHARED_ZORRO_MODULES,
+    PipesModule
+  ],
   exports: [
     AntTableComponent
   ]

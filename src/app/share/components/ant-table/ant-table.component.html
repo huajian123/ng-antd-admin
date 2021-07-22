@@ -5,7 +5,7 @@
           nzShowSizeChanger [nzBordered]="true" [nzData]="_dataList"
           [nzTotal]="tableConfig!.total"
           [nzPageIndex]="tableConfig.pageIndex"
-          [nzScroll]="{ x: '1100px' }"
+          [nzScroll]="tableConfig.needNoScroll?{}:{ x: '1100px' }"
           [nzPageSize]="tableConfig.pageSize"
           (nzQueryParams)="onQueryParamsChange($event)"
           (nzPageSizeChange)="onPageSizeChange($event)"
