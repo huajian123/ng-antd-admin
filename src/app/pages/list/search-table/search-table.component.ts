@@ -47,7 +47,7 @@ export class SearchTableComponent implements OnInit {
         file3: '加样式'
       },
       {
-        productName: '文字超级长文字超级长文字超级长文字超级长文字超级长文字超级长',
+        productName: '文字超级长',
         casNo: 'string',
         file3: '加样式',
       },

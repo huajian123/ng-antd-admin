@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {PageHeaderType} from '../../../../share/components/page-header/page-header.component';
 import {ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -32,6 +32,10 @@ export class SearchTableDetailComponent implements OnInit {
     if (!fnCheckForm(this.validateForm)) {
       return;
     }
+  }
+
+  _onReuseDestroy():void{
+    console.log('销毁了');
   }
 
   ngOnInit(): void {
