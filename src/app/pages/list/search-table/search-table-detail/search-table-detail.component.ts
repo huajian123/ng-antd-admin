@@ -25,16 +25,22 @@ export class SearchTableDetailComponent implements OnInit {
   initForm(): void {
     this.validateForm = this.fb.group({
       userName: [null, [Validators.required]],
+      passWord: [null, [Validators.required]],
     });
   }
 
   submitForm(): void {
-    if (!fnCheckForm(this.validateForm)) {
-      return;
+    for (const i in this.validateForm.controls) {
+      if (this.validateForm.controls.hasOwnProperty(i)) {
+        this.validateForm.controls[i].markAsDirty();
+        this.validateForm.controls[i].updateValueAndValidity();
+      }
     }
+    if (this.validateForm.invalid) { return; }
+    alert('登录成功');
   }
 
-  _onReuseDestroy():void{
+  _onReuseDestroy(): void{
     console.log('销毁了');
   }
 
@@ -42,7 +48,7 @@ export class SearchTableDetailComponent implements OnInit {
     this.initForm();
     this.routeParam.queryParams.subscribe(
       params => {
-        this.name= params['name'];
+        this.name = params['name'];
         this.validateForm.get('userName')?.setValue(this.name);
       }
     );

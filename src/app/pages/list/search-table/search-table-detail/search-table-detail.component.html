@@ -5,8 +5,8 @@
 <ng-template #back>
   <span class="operate-text">返回</span>
 </ng-template>
-
-<h1>输入框演示</h1>
+<div class="search-detail">
+  <h1>输入框演示</h1>
 <input nz-input [(ngModel)]="name">
 
 <nz-divider></nz-divider>
@@ -14,10 +14,18 @@
 <h1>表单演示</h1>
 <form nz-form [formGroup]="validateForm"  (ngSubmit)="submitForm()">
   <nz-form-item>
-    <nz-form-control nzErrorTip="请输入用户名!">
-      <input type="text" nz-input formControlName="userName" placeholder="用户名"/>
+    <nz-form-label nzRequired>用户名</nz-form-label>
+    <nz-form-control nzErrorTip="请输入用户名">
+      <input nz-input formControlName="userName" placeholder="用户名"/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzRequired>密码</nz-form-label>
+    <nz-form-control nzErrorTip="请输入任意密码">
+      <input nz-input formControlName="passWord" placeholder="密码"/>
     </nz-form-control>
   </nz-form-item>
   <button nz-button nzSize="large" [nzType]="'primary'">登 录</button>
-
 </form>
+</div>
+
