@@ -1,4 +1,4 @@
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {Observable} from 'rxjs';
 import * as qs from 'qs';
@@ -93,6 +93,13 @@ export class BaseHttpService {
       }),
       map(item => item.data)
     );
+  }
+
+  downZip(path: string, param?: any): Observable<any> {
+    return this.http.post(this.uri + path, param, {
+      responseType: 'blob',
+      headers: new HttpHeaders().append('Content-Type', 'application/json')
+    });
   }
 
   handleFilter(item: ActionResult<any>, needSuccessInfo: boolean): boolean {
