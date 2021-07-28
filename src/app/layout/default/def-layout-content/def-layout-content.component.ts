@@ -12,6 +12,7 @@ import {SplitNavStoreService} from '../../../core/services/store/split-nav-store
 })
 export class DefLayoutContentComponent implements OnInit, OnDestroy {
   private destory$ = new Subject<void>();
+  showChats = true;
   themesOptions$ = this.themesService.getThemesMode();
   isNightTheme$ = this.themesService.getIsNightTheme();
   // 混合模式下，判断顶部菜单是否有子菜单，如果没有子菜单，要隐藏左侧菜单

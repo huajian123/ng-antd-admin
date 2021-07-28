@@ -56,7 +56,7 @@
   </nz-layout>
 </nz-layout>
 <app-setting-drawer></app-setting-drawer>
-<app-chat></app-chat>
+<app-chat (changeShows)="showChats=false" *ngIf="showChats"></app-chat>
 <ng-template #trigger>
   <ul nz-menu [nzTheme]="(isMixiMode&&!(isOverMode$|async))?'light':(themesOptions$|async)!.theme" nzMode="inline" [nzSelectable]="false">
     <li nz-menu-item>

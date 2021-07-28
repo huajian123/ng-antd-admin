@@ -16,7 +16,6 @@ export class SuccessComponent implements OnInit {
 
   ngOnInit(): void {
     this.breakpointObserver.observe(['(max-width: 770px)']).subscribe(result => {
-      console.log(result.matches);
       let tempDir: 'vertical' | 'horizontal' = 'vertical';
       if (result.matches) {
         tempDir = 'vertical';

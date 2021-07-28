@@ -83,6 +83,7 @@
               "size-sensor",
               "@antv/g-canvas",
               "@antv/l7-component",
+              "inversify",
               "inversify-inject-decorators",
               "@babel/runtime/helpers/wrapNativeSuper",
               "merge-json-schemas",
