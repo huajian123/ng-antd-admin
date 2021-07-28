@@ -10,10 +10,10 @@
         </div>
         <div nz-col nzFlex="30px"></div>
       </div>
-      <div nz-row class="m-t-20" *ngFor="let item of userSubmitArray">
+      <div nz-row class="m-t-20" *ngFor="let item of userSubmitArray;let last = last;">
         <div nz-col nzFlex="30px"></div>
         <div class="m-t-0 p-8 text-break" nz-result-content nz-col nzFlex="1">
-          <span nz-typography>{{item}}</span>
+          <span nz-typography>{{item}}</span>{{last ? scrollToBottom() : ''}}
         </div>
         <div nz-col nzFlex="8px"></div>
         <nz-avatar nz-col nzFlex="30px" nzIcon="user"
@@ -32,11 +32,11 @@
     <span class="sp-14">联系管理员</span>
   </ng-template>
   <ng-template #inputTpl>
-    <form [formGroup]="validateForm" (keyup.enter)="submitDesc(validateForm.get('question')?.value)">
-      <nz-form-item>
-      <textarea style="resize:none" formControlName="question" name="question" [nzBorderless]="true" rows="4" nz-input id="remark"
-                placeholder="反馈些什么"></textarea>
-      </nz-form-item>
+    <form [formGroup]="validateForm">
+   <textarea #msgInput formControlName="question" (keydown.enter)="sendMessage(msgInput.value);" style="resize:none"
+             name="question" [nzBorderless]="true" rows="4" nz-input
+             id="remark"
+             placeholder="反馈些什么"></textarea>
     </form>
   </ng-template>
 </div>
