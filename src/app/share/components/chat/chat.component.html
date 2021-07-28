@@ -12,9 +12,19 @@
       </div>
       <div nz-row class="m-t-20" *ngFor="let item of userSubmitArray;let last = last;">
         <div nz-col nzFlex="30px"></div>
-        <div class="m-t-0 p-8 text-break" nz-result-content nz-col nzFlex="1">
-          <span nz-typography>{{item}}</span>{{last ? scrollToBottom() : ''}}
+        <!--有未读的样式-->
+        <div nz-col nzFlex="1" style="display: flex;flex-direction: column;">
+          <div class="m-t-0 p-8 text-break" nz-result-content>
+            <span nz-typography>{{item}}</span>{{last ? scrollToBottom() : ''}}
+          </div>
+          <span class="sp-12 text-right m-t-5"  nz-typography nzType="secondary">未读</span>
         </div>
+
+        <!--没有未读的样式-->
+       <!-- <div class="m-t-0 p-8 text-break" nz-result-content nz-col nzFlex="1">
+          <span nz-typography>{{item}}</span>{{last ? scrollToBottom() : ''}}
+        </div>-->
+
         <div nz-col nzFlex="8px"></div>
         <nz-avatar nz-col nzFlex="30px" nzIcon="user"
                    nzSrc="../../../../assets/imgs/default_face.png"></nz-avatar>
