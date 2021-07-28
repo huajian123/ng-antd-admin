@@ -33,11 +33,19 @@ export class ChatComponent implements OnInit, OnDestroy {
     }
   }
 
-  sendMessage(msg: string): void {
-    this.userSubmitArray.push(msg);
+  clearMsgInput(): void {
     setTimeout(() => {
-      this.validateForm.get('question')?.setValue(null);
+      this.validateForm.get('question')?.reset();
     });
+  }
+
+  sendMessage(msg: string): void {
+    if (!(msg.trim())) {
+      this.clearMsgInput();
+      return;
+    }
+    this.userSubmitArray.push(msg);
+    this.clearMsgInput();
   }
 
   ngOnInit(): void {
@@ -46,5 +54,4 @@ export class ChatComponent implements OnInit, OnDestroy {
     });
     this.scrollToBottom();
   }
-
 }

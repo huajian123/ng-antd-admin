@@ -34,6 +34,8 @@ const fnCheckForm = function checkForm(form: FormGroup): boolean {
 
 const fnStopMouseEvent = function stopMouseEvent(e: MouseEvent): void {
   silentEvent(e);
+  // e.stopPropagation();
+  // e.preventDefault();
 };
 
 
