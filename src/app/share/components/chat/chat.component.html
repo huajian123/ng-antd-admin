@@ -33,7 +33,7 @@
   </ng-template>
   <ng-template #inputTpl>
     <form [formGroup]="validateForm">
-   <textarea #msgInput formControlName="question" (keydown.enter)="sendMessage(msgInput.value);" style="resize:none"
+   <textarea #msgInput formControlName="question" (keydown.enter)="sendMessage(msgInput.value,$event);" style="resize:none"
              name="question" [nzBorderless]="true" rows="4" nz-input
              id="remark"
              placeholder="反馈些什么"></textarea>

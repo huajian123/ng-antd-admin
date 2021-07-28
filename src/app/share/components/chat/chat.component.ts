@@ -39,8 +39,10 @@ export class ChatComponent implements OnInit, OnDestroy {
     });
   }
 
-  sendMessage(msg: string): void {
+  sendMessage(msg: string,event:Event): void {
     if (!(msg.trim())) {
+      event.preventDefault();
+      event.stopPropagation();
       this.clearMsgInput();
       return;
     }
