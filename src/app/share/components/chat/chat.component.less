@@ -1,0 +1,38 @@
+.chat-wrap {
+  position: fixed;
+  bottom: -646px;
+  right: 30px;
+  width: 320px;
+  z-index: 998;
+  transition: bottom 0.3s;
+
+  .chart-content {
+    flex-direction: column;
+    width: 320px;
+    height: 500px;
+    overflow: auto;
+    padding: 24px
+  }
+
+}
+
+:host ::ng-deep .ant-card-head {
+  height: 32px;
+  min-height: 32px;
+
+  .ant-card-head-wrapper {
+    height: 32px;
+
+    .ant-card-head-title {
+      padding: 0;
+    }
+  }
+}
+
+.desc-wrap {
+  color: rgba(0, 0, 0, .45);
+}
+
+.show {
+  bottom: -2px !important;
+}
