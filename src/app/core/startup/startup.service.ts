@@ -10,7 +10,7 @@ export class StartupService {
               private preloaderService: PreloaderService) {
   }
 
-  load(): Promise<any> {
+  load(): Promise<void> {
     return new Promise((resolve, reject) => {
       console.log('项目启动前初始化工作');
       this.preloaderService.removePreLoader();

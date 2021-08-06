@@ -1,11 +1,9 @@
 import {NgModule} from '@angular/core';
 import {NZ_ICONS, NzIconModule} from 'ng-zorro-antd/icon';
 
-import {
-  FontSizeOutline
-} from '@ant-design/icons-angular/icons';
+import {MenuFoldOutline, MenuUnfoldOutline, FormOutline, DashboardOutline, FontSizeOutline} from '@ant-design/icons-angular/icons';
 
-const icons = [FontSizeOutline];
+const icons = [MenuFoldOutline, MenuUnfoldOutline, DashboardOutline, FormOutline, FontSizeOutline];
 
 @NgModule({
   imports: [NzIconModule],

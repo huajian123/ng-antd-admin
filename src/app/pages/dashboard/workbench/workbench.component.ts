@@ -1,11 +1,6 @@
 import {AfterViewInit, ChangeDetectionStrategy, Component, NgZone, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {NzFormTooltipIcon} from 'ng-zorro-antd/form';
+import {FormBuilder} from '@angular/forms';
 import {PageHeaderType} from '../../../share/components/page-header/page-header.component';
-import {MyTableConfig} from '../../../share/components/ant-table/ant-table.component';
-import {NzTableQueryParams} from 'ng-zorro-antd/table';
-import {SearchCommonVO} from '../../../core/services/types';
-import {ActionCode} from '../../../configs/actionCode';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {inNextTick} from 'ng-zorro-antd/core/util';
 import {Radar} from '@antv/g2plot';
