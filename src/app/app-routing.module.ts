@@ -12,9 +12,9 @@ const routes: Routes = [
 
 // http://www.deathghost.cn/article/angular/88
 @NgModule({
-  // imports: [RouterModule.forRoot(routes, {preloadingStrategy: QuicklinkStrategy})],
+  // imports: [RouterModule.forRoot(routes, {preloadingStrategy: HoverPreloadStrategy})],
   imports: [RouterModule.forRoot(routes, {
-    preloadingStrategy: HoverPreloadStrategy,
+    preloadingStrategy: QuicklinkStrategy,
     scrollPositionRestoration: 'enabled',
     initialNavigation: 'enabledBlocking'
   })],
