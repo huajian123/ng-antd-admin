@@ -1,7 +1,8 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PageHeaderType} from '../../../share/components/page-header/page-header.component';
 import {fnCheckForm} from '../../../utils/tools';
+import {UserManageModalService} from "../../../widget/biz-widget/internal-manage/user-manage/user-manage-modal.service";
 
 @Component({
   selector: 'app-base',
@@ -10,6 +11,7 @@ import {fnCheckForm} from '../../../utils/tools';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BaseComponent implements OnInit {
+  @ViewChild('dragTpl', {static: true}) dragTpl!: TemplateRef<any>;
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '基础表单',
     desc: '表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。',
@@ -23,13 +25,17 @@ export class BaseComponent implements OnInit {
 
   validateForm!: FormGroup;
 
+  show(): void {
+    this.userManageModalService.show({nzTitle:this.dragTpl}).subscribe()
+  }
+
   submitForm(): void {
     if (!fnCheckForm(this.validateForm)) {
       return;
     }
   }
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private userManageModalService: UserManageModalService) {
   }
 
   initForm(): void {
