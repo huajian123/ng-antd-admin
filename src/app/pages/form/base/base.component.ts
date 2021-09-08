@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PageHeaderType} from '../../../share/components/page-header/page-header.component';
 import {fnCheckForm} from '../../../utils/tools';
@@ -26,7 +26,7 @@ export class BaseComponent implements OnInit {
   validateForm!: FormGroup;
 
   show(): void {
-    this.userManageModalService.show({nzTitle:this.dragTpl}).subscribe()
+    this.userManageModalService.show({nzTitle: this.dragTpl, nzMask: false,nzMaskStyle:{display:'none'},nzWrapClassName:"pointer-events-none"}).subscribe()
   }
 
   submitForm(): void {
