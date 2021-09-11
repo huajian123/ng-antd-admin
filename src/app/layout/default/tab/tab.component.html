@@ -5,6 +5,7 @@
           *ngFor="let tab of tabs;let i =index;trackBy:trackByTab;">
     <nz-dropdown-menu #menu="nzDropdownMenu">
       <ul nz-menu>
+        <li nz-menu-item  (click)="refresh()">刷新</li>
         <li nz-menu-item [nzDisabled]="tabs.length-1===0" (click)="closeTab(tab,$event,i)">关闭标签</li>
         <li nz-menu-item [nzDisabled]="tabs.length-1===0" (click)="closeOtherTab(tab,$event,i)">关闭其他标签</li>
         <li nz-menu-item [nzDisabled]="tabs.length-1===i" (click)="closeRithTab(tab,$event,i)">关闭右侧标签</li>

@@ -71,6 +71,13 @@ export class TabComponent implements OnInit {
     this.tabService.delTab(tab, index);
   }
 
+  refresh(): void {
+    const currentRoute = this.router.url;
+    this.router.navigateByUrl("/", { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentRoute]);
+    });
+  }
+
   contextMenu($event: MouseEvent, menu: NzDropdownMenuComponent): void {
     this.nzContextMenuService.create($event, menu);
   }
