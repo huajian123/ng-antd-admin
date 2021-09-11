@@ -126,7 +126,7 @@ export class SearchTableComponent implements OnInit {
     this.tableConfig = {
       headers: [
         {
-          title: '文字很长',
+          title: '文字很长1',
           width: 100,
           field: 'productName',
         },
@@ -144,14 +144,13 @@ export class SearchTableComponent implements OnInit {
         },
         {
           title: '名称',
-          width: 100,
           field: 'productName',
           tdTemplate: this.highLightTpl,
         },
         {
           title: '操作',
           tdTemplate: this.operationTpl,
-          width: 25,
+          width: 60,
           fixed: true
         }
       ],

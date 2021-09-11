@@ -16,11 +16,30 @@
   <ng-template #rangeTemplate let-range="range" let-total> {{ range[0] }}-{{ range[1] }} 共 {{ total }} 条</ng-template>
   <thead>
   <tr>
-    <th nzEllipsis [nzLeft]="true" [nzIndeterminate]="indeterminate" *ngIf="tableConfig.showCheckbox"
+    <th [nzLeft]="true" [nzIndeterminate]="indeterminate" *ngIf="tableConfig.showCheckbox"
         (nzCheckedChange)="onAllChecked($event)" [nzWidth]="'40px'" [nzChecked]="allChecked"></th>
-    <th nzEllipsis [nzWidth]="head.width + 'px'"
-        *ngFor="let head of tableConfig.headers;trackBy:trackByTableHead;let headIndex=index"
-        [nzRight]="!!head.fixed">{{head.title}}</th>
+   <ng-container  *ngFor="let head of tableConfig.headers;let headIndex=index">
+     <th [nzWidth]="head.width + 'px'"
+         nz-resizable
+         nzPreview
+         nzBounds="parent"
+         [nzMaxWidth]="1200"
+         [nzMinWidth]="1"
+         (nzResizeEnd)="onResize($event, head.title)"
+        *ngIf="head.width&&!head.fixed"
+        >
+       <nz-resize-handle nzDirection="right">
+         <div class="resize-trigger"></div>
+       </nz-resize-handle><span ></span>{{head.title}}
+     </th>
+     <th *ngIf="head.fixed" [nzRight]="true" [nzWidth]="head.width + 'px'">
+       {{head.title}}
+     </th>
+     <th *ngIf="!head.width">
+       {{ head.title }}
+     </th>
+   </ng-container>
+
   </tr>
   </thead>
   <tbody>
