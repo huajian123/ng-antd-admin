@@ -1,9 +1,5 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {NzSafeAny} from 'ng-zorro-antd/core/types';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef} from '@angular/core';
 
-interface ActionCodeObj {
-  add?: string;
-}
 
 @Component({
   selector: 'app-card-table-wrap',
@@ -12,18 +8,9 @@ interface ActionCodeObj {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardTableWrapComponent implements OnInit {
-  @Input() needTableTitle: boolean;
-  @Input() needAddBtn: boolean;
-  @Output() add = new EventEmitter<NzSafeAny>();
-  @Input() actionCode!: ActionCodeObj;
+  @Input() btnTpl: TemplateRef<any> | undefined;
 
   constructor() {
-    this.needAddBtn = false;
-    this.needTableTitle = true;
-  }
-
-  addBtnClick(): void {
-    this.add.emit();
   }
 
   ngOnInit(): void {

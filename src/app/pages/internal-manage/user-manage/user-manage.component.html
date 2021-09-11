@@ -60,7 +60,7 @@
   </nz-card>
 
 
-  <app-card-table-wrap [actionCode]="actionCodeObj" [needAddBtn]="true" (add)="add()">
+  <app-card-table-wrap>
     <app-ant-table (changePageSize)="changePageSize($event)" (changePageNum)="getDataList($event)"
                    [tableConfig]="tableConfig" [tableData]="dataList"></app-ant-table>
     <ng-template #operationTpl let-name="name" let-id="id">
