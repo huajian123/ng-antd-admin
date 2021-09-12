@@ -43,9 +43,10 @@ import { NzProgressModule } from 'ng-zorro-antd/progress';
 import {NzEmptyModule} from 'ng-zorro-antd/empty';
 import {NzPopoverModule} from 'ng-zorro-antd/popover';
 import {NzPaginationModule} from 'ng-zorro-antd/pagination';
-
+import { NzResizableModule } from 'ng-zorro-antd/resizable';
 
 export const SHARED_ZORRO_MODULES = [
+  NzResizableModule,
   NzTreeViewModule,
   NzPopoverModule,
   NzPaginationModule,

@@ -3,8 +3,8 @@
 </nz-card>
 <ng-template #tableToolbar>
   <div class="ant-pro-table-toolbar">
-    <div class="ant-pro-table-toolbar-option" *ngIf="needAddBtn">
-      <button nz-button nzType="primary" *appAuth="actionCode.add" (click)="addBtnClick()"><i nz-icon nzType="plus"></i>新建</button>
+    <div class="ant-pro-table-toolbar-option" *ngIf="btnTpl">
+      <ng-container *ngTemplateOutlet="btnTpl"></ng-container>
     </div>
     <div class="ant-pro-table-toolbar-default-option">
       <nz-divider nzType="vertical"></nz-divider>

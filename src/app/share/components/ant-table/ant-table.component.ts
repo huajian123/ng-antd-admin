@@ -10,6 +10,7 @@ import {
   TemplateRef
 } from '@angular/core';
 import {NzTableQueryParams} from 'ng-zorro-antd/table';
+import {NzResizeEvent} from "ng-zorro-antd/resizable";
 
 
 export interface TableHeader {
@@ -94,6 +95,12 @@ export class AntTableComponent implements OnInit, OnChanges {
     this.changePageSize.emit($event);
   }
 
+  onResize({width}: NzResizeEvent, col: string): void {
+    this.tableConfig.headers = (this.tableConfig.headers.map(e => (e.title === col ? {
+      ...e,
+      width: +`${width}`
+    } : e))) as TableHeader[];
+  }
 
   checkFn(dataItem: any, isChecked: boolean): void {
     dataItem['_checked'] = isChecked;
