@@ -14,7 +14,7 @@ export class UserManageService {
 
 
   public getPeoples(param: SearchCommonVO<any>): Observable<PageInfo<People>> {
-    return this.http.post('/list-user', param);
+    return this.http.post('/user/list', param);
   }
 
   public getUserDetail(id: number): Observable<NzSafeAny> {

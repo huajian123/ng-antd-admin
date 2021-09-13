@@ -6,6 +6,7 @@ import {DeptManageService} from '../../../core/services/http/internal-manage/dep
 import {DeptManageModalService} from '../../../widget/biz-widget/internal-manage/dept-manage/dept-manage.service';
 import {ModalBtnStatus} from '../../../widget/base-modal';
 import {NzModalService} from 'ng-zorro-antd/modal';
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-dept-manage',
@@ -43,13 +44,14 @@ export class DeptManageComponent implements OnInit {
     });
   }
 
-  edit(id: number, departmentGrade: number): void {
+  edit(id: number, departmentGrade: number, fatherId: number): void {
     this.dataService.getDeptDetail(id).subscribe(res => {
       this.modalService.show({nzTitle: '编辑'}, res).subscribe(({modalValue, status}) => {
         if (status === ModalBtnStatus.Cancel) {
           return;
         }
         modalValue.id = id;
+        modalValue.fatherId = fatherId;
         modalValue.departmentGrade = departmentGrade;
         this.addEditData(modalValue, 'editDept');
       });
@@ -78,15 +80,11 @@ export class DeptManageComponent implements OnInit {
   }
 
   getDataList(): void {
-    this.dataList = [
-      {
-        id: 1, departmentName: '一级部门1', departmentDesc: '描述1', fatherId: 0, departmentGrade: 1, departmentVos: [{
-          id: 100, departmentName: '一级部门子1', departmentDesc: '描述1', fatherId: 1, departmentGrade: 2, departmentVos: [], expand: false
-        }], expand: false
-      },
-      {id: 2, departmentName: '一级部门2', departmentDesc: '描述2', fatherId: 0, departmentGrade: 1, departmentVos: [], expand: false}
-
-    ];
+    this.dataService.getDeptList().pipe(map((res: DeptObj[]) => this.dataAddExpand(res))).subscribe(result => {
+      this.dataList = result;
+      console.log(this.dataList);
+      this.cdr.markForCheck();
+    });
   }
 
   getDeptChildIds(deptArray: DeptObj[]): void {

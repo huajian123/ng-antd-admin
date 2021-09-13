@@ -5,7 +5,7 @@ import {NzTableQueryParams} from 'ng-zorro-antd/table';
 import {Role, SearchCommonVO} from '../../../core/services/types';
 import {RoleService} from '../../../core/services/http/internal-manage/role.service';
 import {NzModalService} from 'ng-zorro-antd/modal';
-import {MessageService} from '../../../core/services/common/message.service';
+import {MessageService, MessageType} from '../../../core/services/common/message.service';
 import {RoleManageModalService} from '../../../widget/biz-widget/internal-manage/role-manage/role-manage-modal.service';
 import {Router} from '@angular/router';
 import {ModalBtnStatus} from '../../../widget/base-modal';
@@ -30,7 +30,7 @@ export class RoleManageComponent implements OnInit {
     breadcrumb: ['首页', '内部管理', '角色管理']
   };
   dataList!: Role[];
-  checkedCashArray = [];
+  checkedCashArray:Role[] = [];
 
   constructor(private dataService: RoleService, private modalSrv: NzModalService, private cdr: ChangeDetectorRef,
               private messageService: MessageService, private modalService: RoleManageModalService,
@@ -86,6 +86,32 @@ export class RoleManageComponent implements OnInit {
     this.tableChangeDectction();
   }
 
+  allDel():void{
+    if (this.checkedCashArray.length > 0) {
+      this.modalSrv.confirm({
+        nzTitle: '确定要删除吗？',
+        nzContent: '删除后不可恢复',
+        nzOnOk: () => {
+          const tempArrays: number[] = [];
+          this.checkedCashArray.forEach((item) => {
+            tempArrays.push(item.id!);
+          });
+          this.tableLoading(true);
+          this.dataService.delRoles(tempArrays).subscribe(() => {
+            if (this.dataList.length === 1) {
+              this.tableConfig.pageIndex--;
+            }
+            this.getDataList();
+            this.checkedCashArray = [];
+          }, error => this.tableLoading(false));
+        }
+      });
+    } else {
+      this.messageService.showAlertMessage('请勾选数据',MessageType.Error);
+      return;
+    }
+  }
+
   // 删除
   del(id: number): void {
     this.modalSrv.confirm({
@@ -93,7 +119,7 @@ export class RoleManageComponent implements OnInit {
       nzContent: '删除后不可恢复',
       nzOnOk: () => {
         this.tableLoading(true);
-        this.dataService.delRoles(id).subscribe(() => {
+        this.dataService.delRoles([id]).subscribe(() => {
           if (this.dataList.length === 1) {
             this.tableConfig.pageIndex--;
           }

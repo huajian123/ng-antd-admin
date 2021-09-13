@@ -12,11 +12,11 @@ export class DeptManageService {
   }
 
   public getDeptList(): Observable<DeptObj[]> {
-    return this.http.get('/department');
+    return this.http.get('/department/list');
   }
 
   public delDept(idArray: number[]): Observable<any> {
-    return this.http.post(`/del-department`, {ids: idArray});
+    return this.http.post(`department/del`, {ids: idArray});
   }
 
   public getDeptDetail(id: number): Observable<DeptObj> {

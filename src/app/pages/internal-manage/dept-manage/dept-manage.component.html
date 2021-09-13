@@ -2,7 +2,7 @@
 <app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
 
 <div class="normal-table-wrap">
-  <app-card-table-wrap >
+  <app-card-table-wrap [btnTpl]="tableBtns">
     <nz-table nzShowPagination="false" nzSize="small" nzBordered nzTableLayout="fixed" [nzData]="dataList">
       <thead>
       <tr>
@@ -22,14 +22,27 @@
           </td>
         </tr>
         <ng-container *ngIf="item.departmentVos.length>0&&item.expand">
-          <tr *ngFor="let secondItem of item.departmentVos;">
-            <td [nzIndentSize]="secondItem.departmentGrade! * 5">
-              {{secondItem.departmentName}}
-            </td>
-            <td>
-              <ng-container *ngTemplateOutlet="operationTpl;context:secondItem"></ng-container>
-            </td>
-          </tr>
+          <ng-container *ngFor="let secondItem of item.departmentVos;">
+            <tr>
+              <td  (nzExpandChange)="collapse($event,secondItem)" [(nzExpand)]="secondItem.expand" [nzShowExpand]="secondItem.departmentVos.length>0" [nzIndentSize]="secondItem.departmentGrade! * 5">
+                {{secondItem.departmentName}}
+              </td>
+              <td>
+                <ng-container *ngTemplateOutlet="operationTpl;context:secondItem"></ng-container>
+              </td>
+            </tr>
+            <ng-container *ngIf="secondItem.departmentVos.length>0&&secondItem.expand">
+              <ng-container *ngFor="let thirdItem of secondItem.departmentVos">
+                <tr>
+                  <td [nzIndentSize]="thirdItem.departmentGrade! * 5">
+                    {{thirdItem.departmentName}}
+                  </td>
+                  <td>
+                  </td>
+                </tr>
+              </ng-container>
+            </ng-container>
+          </ng-container>
         </ng-container>
       </ng-container>
       </tbody>
@@ -39,7 +52,11 @@
 </div>
 <ng-template #operationTpl let-id="id" let-departmentVos="departmentVos" let-departmentGrade="departmentGrade"
              let-fatherId="fatherId">
-  <span class="operate-text" (click)="edit(id,departmentGrade)">编辑</span>
+  <span class="operate-text" (click)="edit(id,departmentGrade,fatherId)">编辑</span>
   <span class="operate-text" (click)="del(id,departmentVos)">删除</span>
   <span class="operate-text" (click)="add(departmentGrade,id)">添加下级</span>
+</ng-template>
+<ng-template #tableBtns>
+  <button nz-button nzType="primary" (click)="add()" class="m-r-8"><i nz-icon nzType="plus"></i>新建</button>
+  <button nz-button nzType="default"><i nz-icon nzType="delete"></i>删除</button>
 </ng-template>

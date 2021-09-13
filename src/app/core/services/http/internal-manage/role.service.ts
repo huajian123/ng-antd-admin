@@ -7,19 +7,11 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class RoleService {
-  mockRole: PageInfo<Role> = {
-    pageNum: 2,
-    pageSize: 3,
-    total: 12,
-    list: [{roleName: '超级管理员', roleDesc: '拥有所有权限'}]
-  };
-
   constructor(public http: BaseHttpService) {
   }
 
   public getRoles(param: SearchCommonVO<any>): Observable<PageInfo<Role>> {
-    // return of(this.mockRole);
-    return this.http.get('/role', param);
+    return this.http.get('/role/list', param);
   }
 
   public getRolesDetail(id: number): Observable<Role> {
@@ -27,12 +19,11 @@ export class RoleService {
   }
 
   public addRoles(param: Role): Observable<void> {
-    // return of(this.mockRole);
     return this.http.post('/role', param);
   }
 
-  public delRoles(id: number): Observable<void> {
-    return this.http.delete('/role/' + id);
+  public delRoles(ids: number[]): Observable<void> {
+    return this.http.post('/role/del', {ids});
   }
 
   public editRoles(param: Role): Observable<void> {
@@ -41,11 +32,11 @@ export class RoleService {
 
   // 获取所有权限信息
   public getPermission(): Observable<Permission[]> {
-    return this.http.get('/permission');
+    return this.http.get('/permission/list');
   }
 
   public getPermissionById(id: number): Observable<string[]> {
-    return this.http.get(`/role-permission/${id}`);
+    return this.http.get(`/permission/${id}`);
   }
 
   public updatePermission(param: PutPermissionParam): Observable<any> {

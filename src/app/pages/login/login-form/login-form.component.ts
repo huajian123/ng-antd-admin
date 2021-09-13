@@ -40,7 +40,7 @@ export class LoginFormComponent implements OnInit {
     const param = this.validateForm.getRawValue();
     this.dataService.login(param).pipe(finalize(() => {
       this.spinService.setCurrentGlobalSpinStore(false);
-    })).subscribe(({token}) => {
+    })).subscribe((token) => {
       this.windowServe.setStorage(AuthKey, TokenPre + token);
       // this.authService.parsToken(token);
       this.authService.setAuthCode(this.authService.parsToken(TokenPre + token));
