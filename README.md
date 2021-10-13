@@ -1,5 +1,6 @@
 # 项目视频介绍
-船新版本！我愿称之为ant desgin pro2.0，呕心沥血扣细节，重构了主题布局，完善表格功能，添加了很多贴心的小功能<br>
+船新版本！我愿称之为ant desgin pro2.0，呕心沥血扣细节，重构了主题布局（更加贴近ant design pro），完善表格功能，添加了很多贴心的小功能(完善了表格功能，添加搜索菜单，联系客服等功能)<br>
+项目目标：我想把vue-vben-admin的大多数功能搬过来使用ng来实现，这样以后遇到业务就有的参考了。<br>
 如果本项目对你有用，如果你愿意的话，麻烦点个star，谢谢啊<br>
 if help you, if you want ,please give me a star ,thank you<br>
 视频介绍地址 [项目介绍](https://www.bilibili.com/video/BV12B4y1T7h7/)<br>
