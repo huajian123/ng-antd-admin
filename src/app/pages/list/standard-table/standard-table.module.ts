@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { StandardTableRoutingModule } from './standard-table-routing.module';
 import { StandardTableComponent } from './standard-table.component';
-import {SharedModule} from '../../../share/shared.module';
+import {SharedModule} from '../../../shared/shared.module';
 
 @NgModule({
   declarations: [StandardTableComponent],

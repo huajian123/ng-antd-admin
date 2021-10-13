@@ -15,67 +15,47 @@
 
     .sidebar-logo {
       position: relative;
+      padding-left: 16px;
       height: 64px;
-      padding-left: 25px;
-      overflow: hidden;
       line-height: 64px;
-      // background: @menu-dark-bg;
+      overflow: hidden;
       transition: all .3s;
 
+      a {
+        min-height: 32px;
+        display: inline-block;
+        img {
+          display: inline-block;
+          height: 32px;
+          width: 32px;
+          vertical-align: middle;
+        }
 
-    }
-
-    .sidebar-logo img {
-      display: inline-block;
-      height: 32px;
-      width: 32px;
-      vertical-align: middle;
-    }
-
-    .sidebar-logo h1 {
-      display: inline-block;
-      margin: 0 0 0 20px;
-      color: @text-color-inverse;
-      font-weight: 600;
-      font-size: 14px;
-      font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
-      vertical-align: middle;
-
-      &.light {
-        color: @primary-6 !important;
+        h1 {
+          display: inline-block;
+          margin: 0 0 0 12px;
+          font-weight: 600;
+          font-size: 18px;
+          color: @text-color-inverse;
+          vertical-align: middle;
+          &.light {
+            color: @primary-6 !important;
+          }
+        }
       }
     }
-
-    ::-webkit-scrollbar { /*滚动条整体样式*/
-      width: 6px;
-      height: 6px;
-      background: #263848;
-    }
-
-    ::-webkit-scrollbar-thumb { /*滚动条里面小方块*/
-      background: #53616E !important;
-      border-radius: 4px;
-    }
-
-    /*定义滚动条轨道 内阴影+圆角*/
-
-    ::-webkit-scrollbar-track {
-      -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-      border-radius: 10px;
-    }
-
-    /*定义滑块 内阴影+圆角*/
-
-    ::-webkit-scrollbar-thumb {
-      border-radius: 10px;
-      box-shadow: inset 0 0 6px rgba(0, 0, 0, .1);
-      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .1);
-      background-color: #c8c8c8;
-    }
-
   }
 });
 
-.light {
-  background: white;
+.dark-scrollbar{
+  ::-webkit-scrollbar { /*滚动条整体样式*/
+    width: 6px;
+    height: 6px;
+    background: #263848!important;
+  }
+
+  ::-webkit-scrollbar-thumb { /*滚动条里面小方块*/
+    background: #53616E !important;
+    border-radius: 4px;
+  }
 }

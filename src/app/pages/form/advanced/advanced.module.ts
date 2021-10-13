@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {AdvancedRoutingModule} from './advanced-routing.module';
 import {AdvancedComponent} from './advanced.component';
 
-import {SharedModule} from '../../../share/shared.module';
+import {SharedModule} from '../../../shared/shared.module';
 
 
 @NgModule({

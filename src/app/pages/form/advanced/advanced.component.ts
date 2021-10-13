@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {NzFormTooltipIcon} from 'ng-zorro-antd/form';
-import {PageHeaderType} from '../../../share/components/page-header/page-header.component';
+import {PageHeaderType} from '../../../shared/components/page-header/page-header.component';
 
 interface ItemData {
   id: string;

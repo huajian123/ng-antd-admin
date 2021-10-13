@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { Except500RoutingModule } from './except500-routing.module';
 import { Except500Component } from './except500.component';
-import {SharedModule} from '../../../share/shared.module';
+import {SharedModule} from '../../../shared/shared.module';
 
 
 @NgModule({

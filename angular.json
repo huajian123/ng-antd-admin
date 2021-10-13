@@ -91,8 +91,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
+                  "maximumWarning": "10kb",
+                  "maximumError": "15kb"
                 }
               ],
               "fileReplacements": [
@@ -116,10 +116,6 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "ng-ant-admin:build",
-            "proxyConfig": "proxy.conf.json"
-          },
           "configurations": {
             "production": {
               "browserTarget": "ng-ant-admin:build:production"
@@ -149,7 +145,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/assets/styles/index.less"
+              "src/styles.less"
             ],
             "scripts": []
           }

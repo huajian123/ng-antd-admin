@@ -1,7 +1,22 @@
 @import (multiple) '../../../node_modules/ng-zorro-antd/src/style/themes/default';
 @import './base';
 
-@layout-header-background: #ffffff;
-@layout-sider-background: #001529;
-@menu-dark-bg: @layout-sider-background;
-@layout-header-height: 48px;
+
+@layout-header-background: @component-background;
+@menu-dark-bg: #001529;
+@layout-sider-background: @menu-dark-bg;
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background: #f1f1f1;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+*::-webkit-scrollbar-corner {
+  background: #f1f1f1;
+}

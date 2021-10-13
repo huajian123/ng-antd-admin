@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CardTableRoutingModule } from './card-table-routing.module';
 import { CardTableComponent } from './card-table.component';
-import {SharedModule} from '../../../share/shared.module';
+import {SharedModule} from '../../../shared/shared.module';
 
 
 @NgModule({

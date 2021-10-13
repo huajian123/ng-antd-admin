@@ -21,7 +21,6 @@ export interface SettingInterface {
   providedIn: 'root'
 })
 export class ThemeService {
-
   private isNightTheme$ = new BehaviorSubject<boolean>(false);
   private isOverModeTheme$ = new BehaviorSubject<boolean>(false);
   private themesMode$ = new BehaviorSubject<SettingInterface>({
@@ -71,6 +70,7 @@ export class ThemeService {
     return this.isOverModeTheme$.asObservable();
   }
 
+  // 菜单是否折叠
   setIsCollapsed(isCollapsed: boolean): void {
     this.isCollapsed$.next(isCollapsed);
   }

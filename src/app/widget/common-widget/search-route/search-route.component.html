@@ -1,0 +1,49 @@
+<div class="p-24">
+  <nz-input-group [nzSuffix]="inputClearTpl" nzSize="large" [nzPrefix]="prefixTemplateUser">
+    <input #searchInput nzSize="large" [(ngModel)]="inputValue" type="text" nz-input placeholder="搜索"/>
+  </nz-input-group>
+  <ng-template #inputClearTpl>
+    <i
+      nz-icon
+      class="ant-input-clear-icon"
+      nzTheme="fill"
+      nzType="close-circle"
+      *ngIf="inputValue"
+      (click)="clearInput()"
+    ></i>
+  </ng-template>
+
+  <div class="m-t-15">
+
+    <ng-template #noResult>
+      <nz-empty nzNotFoundImage="simple"></nz-empty>
+    </ng-template>
+    <ul *ngIf="resultListShow.length>0; else noResult">
+      <li *ngFor="let item of resultListShow;"
+          (click)="resultClick(item)"
+          [class.result-item-bg]="item.showIcon"
+          [style]="{color:item.showIcon?'white':''}"
+          (mouseover)="mouseOverItem(item)"
+          class="result-item sp-16" nz-row>
+        <div nz-col nzFlex="auto">
+          <i class="m-r-8" nz-icon [nzType]="item.icon!" nzTheme="outline"></i>
+          <span>{{item.title}}</span>
+        </div>
+        <i *ngIf="item.showIcon" style="color: white" class="sp-18 m-r-8" nz-col nzFlex="30px" nz-icon
+           nzType="enter" nzTheme="outline"></i>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<nz-divider class="m-0"></nz-divider>
+<div class="p-l-24 p-t-16 p-b-16">
+  <footer class="flex left-start-center">
+    <i class="footer-icon" nz-icon nzType="enter" nzTheme="outline"></i>确认
+    <i class="footer-icon m-l-8" nz-icon nzType="arrow-up" nzTheme="outline"></i>
+    <i class="footer-icon m-l-8" nz-icon nzType="arrow-down" nzTheme="outline"></i>切换
+    <span class="footer-icon sp-12 m-l-8">ESC</span>关闭
+  </footer>
+</div>
+
+<ng-template #prefixTemplateUser><i nz-icon nzType="search"></i></ng-template>

@@ -1,7 +1,6 @@
-import {RouteReuseStrategy, ActivatedRouteSnapshot, DetachedRouteHandle} from '@angular/router';
+import {ActivatedRouteSnapshot, DetachedRouteHandle, RouteReuseStrategy} from '@angular/router';
 
 // 参考https://zhuanlan.zhihu.com/p/29823560
-// tslint:disable-next-line:max-line-length
 // https://blog.csdn.net/weixin_30561425/article/details/96985967?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control
 export class SimpleReuseStrategy implements RouteReuseStrategy {
 
@@ -41,11 +40,7 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
 
   //  是否允许还原路由
   shouldAttach(route: ActivatedRouteSnapshot): boolean {
-    const ret = !!route.data.key && !!SimpleReuseStrategy.handlers[route.data.key];
-    if (ret) {
-      this.runHook('_onReuseInit', SimpleReuseStrategy.handlers[route.data.key].componentRef);
-    }
-    return ret;
+    return !!route.data.key && !!SimpleReuseStrategy.handlers[route.data.key];
   }
 
 
@@ -56,6 +51,9 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
 
   // 进入路由触发，是否同一路由时复用路由
   shouldReuseRoute(future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot): boolean {
+    if(!!future.data.key&&SimpleReuseStrategy.handlers[future.data.key]){
+      this.runHook('_onReuseInit', SimpleReuseStrategy.handlers[future.data.key].componentRef);
+    }
     return future.data.key === curr.data.key;
   }
 
@@ -69,17 +67,8 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
       return;
     }
     console.log(method);
-    if (method === '_onReuseInit') {
-      (fn as () => void).call(compThis);
-    } else {
-      (fn as () => void).call(compThis);
-    }
+    (fn as () => void).call(compThis);
   }
-
-  private hasInValidRoute(route: ActivatedRouteSnapshot): boolean {
-    return !route.routeConfig || !!route.routeConfig.loadChildren || !!route.routeConfig.children;
-  }
-
 }
 
 export type ReuseHookTypes = '_onReuseInit' | '_onReuseDestroy';

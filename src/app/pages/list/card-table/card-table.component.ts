@@ -1,5 +1,5 @@
 import {Component, OnInit, ChangeDetectionStrategy, AfterViewInit, ViewChild, TemplateRef} from '@angular/core';
-import {PageHeaderType} from '../../../share/components/page-header/page-header.component';
+import {PageHeaderType} from '../../../shared/components/page-header/page-header.component';
 import {ThemeService} from '../../../core/services/store/theme.service';
 
 @Component({

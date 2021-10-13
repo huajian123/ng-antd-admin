@@ -1,23 +1,15 @@
-import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy, Input} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy, Input, Inject} from '@angular/core';
 import {filter, map, mergeMap, switchMap, takeUntil, tap} from 'rxjs/operators';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {TabService} from '../../../core/services/common/tab.service';
 import {ThemeService} from '../../../core/services/store/theme.service';
-import {Subject, Subscription} from 'rxjs';
+import {Subject} from 'rxjs';
 import * as _ from 'lodash';
-import {menuNav} from '../../../configs/menu';
 import {Title} from '@angular/platform-browser';
 import {SplitNavStoreService} from '../../../core/services/store/split-nav-store/split-nav-store.service';
-
-interface Menu {
-  path?: string;
-  title: string;
-  icon?: string;
-  open?: boolean;
-  selected?: boolean;
-  children?: Menu[];
-  actionCode?: string;
-}
+import {menuNav} from "../../../config/menu";
+import {Menu} from "../../../core/services/types";
+import {DOCUMENT} from "@angular/common";
 
 @Component({
   selector: 'app-nav-bar',
@@ -33,6 +25,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
   routerPath = '';
   themesOptions$ = this.themesService.getThemesMode();
   themesMode = 'side';
+  isNightTheme$ = this.themesService.getIsNightTheme();
   isCollapsed$ = this.themesService.getIsCollapsed();
   isOverMode$ = this.themesService.getIsOverMode();
   leftMenuArray$ = this.splitNavStoreService.getSplitLeftNavArrayStore();
@@ -44,7 +37,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private splitNavStoreService: SplitNavStoreService,
               private activatedRoute: ActivatedRoute, private tabService: TabService,
               private cdr: ChangeDetectorRef, private themesService: ThemeService,
-              private titleServe: Title) {
+              private titleServe: Title, @Inject(DOCUMENT) private doc: Document) {
     this.routerPath = this.router.url;
     this.router.events
       .pipe(
@@ -58,10 +51,9 @@ export class NavBarComponent implements OnInit, OnDestroy {
           // 是折叠的菜单并且不是over菜单
           if (this.isCollapsed && !this.isOverMode) {
             this.closeMenuOpen(this.menus);
-          } else {
-            // this.menus = this.copyMenus;
           }
 
+          // 顶部菜单模式，并且不是over模式
           if (this.themesMode === 'top' && !this.isOverMode) {
             this.closeMenu();
           }
@@ -127,7 +119,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
       // 一级菜单
       if (!item.children || item.children.length === 0) {
         // if (item.path === routePath) {
-        if (routePath.includes(item.path!)) {
+        if (routePath.includes(item.path!) && !item.isNewLink) {
           item.selected = true;
         }
         continue;
@@ -138,7 +130,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
         subItem.open = false;
         if (!subItem.children || subItem.children?.length === 0) {
           // if (subItem.path === routePath) {
-          if (routePath.includes(subItem.path!)) {
+          if (routePath.includes(subItem.path!) && !item.isNewLink) {
             item.open = true;
             item.selected = true;
             subItem.selected = true;
@@ -148,7 +140,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
         }
         for (const thirdItem of subItem.children) {
           // if (thirdItem.path === routePath) {
-          if (routePath.includes(thirdItem.path!)) {
+          if (routePath.includes(thirdItem.path!) && !item.isNewLink) {
             item.open = true;
             item.selected = true;
             subItem.selected = true;
@@ -184,6 +176,21 @@ export class NavBarComponent implements OnInit, OnDestroy {
     });
   }
 
+  changeRoute(menu: Menu): void {
+    if (menu.isNewLink) {
+      this.menus = _.cloneDeep(this.copyMenus);
+      if (this.themesMode === 'top' && !this.isOverMode) {
+        this.closeMenu();
+      }
+      this.doc.body.click();
+      window.open(menu.path, '_blank');
+      return;
+    }
+    this.router.navigate([menu.path]);
+
+  }
+
+
   // 监听折叠菜单事件
   subIsCollapsed(): void {
     this.isCollapsed$.subscribe(isCollapsed => {
@@ -218,7 +225,6 @@ export class NavBarComponent implements OnInit, OnDestroy {
       }
     });
   }
-
 
   ngOnInit(): void {
     this.subIsCollapsed();

@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {PageHeaderType} from '../../../../share/components/page-header/page-header.component';
+import {PageHeaderType} from '../../../../shared/components/page-header/page-header.component';
 import {ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {fnCheckForm} from '../../../../utils/tools';

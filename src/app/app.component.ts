@@ -2,10 +2,10 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {SpinService} from './core/services/store/spin/spin.service';
 import {NavigationEnd, Router} from '@angular/router';
 import {filter} from 'rxjs/operators';
-
 @Component({
   selector: 'app-root',
   template: `
+    <nz-back-top></nz-back-top>
     <router-outlet></router-outlet>
     <div *ngIf="loading$|async"
          style="position:fixed;top:0px;left:0px;width:100%;height:100%;z-index:1001;background:rgba(24,144,255,0.1);">
@@ -14,7 +14,7 @@ import {filter} from 'rxjs/operators';
       </div>
     </div>
   `,
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {
   loading$ = this.spinService.getCurrentGlobalSpinStore();
@@ -28,3 +28,4 @@ export class AppComponent implements OnInit {
     });
   }
 }
+

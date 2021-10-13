@@ -10,7 +10,7 @@
 <nz-drawer [nzWidth]="300" [(nzVisible)]="isCollapsed"
            (nzOnClose)="isCollapsed = !isCollapsed">
   <ng-container *nzDrawerContent>
-    <div class="m-b">
+    <div class="m-b-24">
       <h3 class="title">整体风格设置</h3>
       <div class="block-checkbox">
         <div *ngFor="let theme of themes" class="item" nz-tooltip [nzTooltipTitle]="theme.title"
@@ -24,17 +24,17 @@
 
     </div>
 
-     <div class="m-b theme-color">
-       <h3 class="title">主题色</h3>
-       <div class="content">
-         <div *ngFor="let color of colors" class="color-block" nz-tooltip [nzTooltipTitle]="color.title"
-              [style.background]="color.color" (click)="changePrimaryColor(color)">
-           <i *ngIf="color.isChecked" nz-icon nzType="check" nzTheme="outline"></i>
-         </div>
-       </div>
-     </div>
+    <div class="m-b-24 theme-color">
+      <h3 class="title">主题色</h3>
+      <div class="content">
+        <div *ngFor="let color of colors" class="color-block" nz-tooltip [nzTooltipTitle]="color.title"
+             [style.background]="color.color" (click)="changePrimaryColor(color)">
+          <i *ngIf="color.isChecked" nz-icon nzType="check" nzTheme="outline"></i>
+        </div>
+      </div>
+    </div>
     <nz-divider></nz-divider>
-    <div class="m-b">
+    <div class="m-b-24">
       <h3 class="title">导航模式</h3>
       <div class="block-checkbox">
         <div (click)="changeMode(mode)" *ngFor="let mode of modes" class="item" nz-tooltip
@@ -70,7 +70,7 @@
       </ng-template>
     </nz-list>
     <nz-divider></nz-divider>
-    <div class="m-b">
+    <div class="m-b-24">
       <h3 class="title">内容区域</h3>
       <nz-list [nzSplit]="false">
         <nz-list-item [nzActions]="[topAreaAction]">顶栏</nz-list-item>
@@ -103,7 +103,7 @@
       </nz-list>
     </div>
     <nz-divider></nz-divider>
-    <div class="m-b">
+    <div class="m-b-24">
       <h3 class="title">其他设置</h3>
       <nz-list [nzSplit]="false">
         <nz-list-item [nzActions]="[layoutAction]">暗黑模式</nz-list-item>

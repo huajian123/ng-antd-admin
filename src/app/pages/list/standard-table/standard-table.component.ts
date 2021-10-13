@@ -1,5 +1,5 @@
 import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {PageHeaderType} from '../../../share/components/page-header/page-header.component';
+import {PageHeaderType} from '../../../shared/components/page-header/page-header.component';
 import {NzProgressStatusType} from 'ng-zorro-antd/progress/typings';
 
 @Component({

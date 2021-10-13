@@ -77,6 +77,7 @@ export interface Menu {
   selected?: boolean;
   children?: Menu[];
   actionCode?: string;
+  isNewLink?: boolean;
 }
 
 

@@ -12,7 +12,7 @@
         <nz-form-item>
           <nz-form-control nzErrorTip="请输入密码!">
             <nz-input-group [nzSize]="'large'" nzPrefixIcon="lock">
-              <input [placeholder]="'no username and password,just login'" type="password" nz-input formControlName="password" placeholder="密码"/>
+              <input autocomplete="on" [placeholder]="'no username and password,just login'" type="password" nz-input formControlName="password" placeholder="密码"/>
             </nz-input-group>
           </nz-form-control>
         </nz-form-item>
@@ -22,7 +22,7 @@
         <nz-form-item>
           <nz-form-control nzErrorTip="请输入用户名!">
             <nz-input-group [nzSize]="'large'" nzPrefixIcon="mobile">
-              <input type="text" nz-input formControlName="userName" placeholder="手机号"/>
+              <input autocomplete="on" type="text" nz-input formControlName="userName" placeholder="手机号"/>
             </nz-input-group>
           </nz-form-control>
         </nz-form-item>

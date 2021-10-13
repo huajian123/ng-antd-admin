@@ -1,6 +1,6 @@
 import {Component, OnInit, ChangeDetectionStrategy, TemplateRef, ViewChild} from '@angular/core';
-import {PageHeaderType} from '../../../share/components/page-header/page-header.component';
-import {MyTableConfig} from '../../../share/components/ant-table/ant-table.component';
+import {PageHeaderType} from '../../../shared/components/page-header/page-header.component';
+import {MyTableConfig} from '../../../shared/components/ant-table/ant-table.component';
 
 interface ReturnObj {
   num: string;

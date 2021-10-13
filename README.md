@@ -1,4 +1,5 @@
 # 项目视频介绍
+船新版本！我愿称之为ant desgin pro2.0，呕心沥血扣细节，重构了主题布局，完善表格功能，添加了很多贴心的小功能<br>
 如果本项目对你有用，如果你愿意的话，麻烦点个star，谢谢啊<br>
 if help you, if you want ,please give me a star ,thank you<br>
 视频介绍地址 [项目介绍](https://www.bilibili.com/video/BV12B4y1T7h7/)<br>

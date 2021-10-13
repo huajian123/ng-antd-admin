@@ -1,0 +1,57 @@
+<ng-container *ngTemplateOutlet="headRight"></ng-container>
+<ng-template #headRight>
+  <div class="bst-header-wrap">
+          <span (click)="showSearchModal()" *appScreenLessHidden="'375'" class="bst-header-icon" nz-tooltip nzTooltipTitle="搜索"
+                nzTooltipPlacement="bottom">
+              <i nz-icon nzType="search" nzTheme="outline"></i>
+          </span>
+    <span *appScreenLessHidden="'320'" class="bst-header-icon" nz-tooltip nzTooltipTitle="帮助文档"
+          nzTooltipPlacement="bottom">
+            <a href="https://www.baidu.com/" target="_blank"><i nz-icon nzType="question-circle"
+                                                                                    nzTheme="outline"></i></a>
+          </span>
+    <span class="bst-header-icon" nz-dropdown [nzDropdownMenu]="noticeMenu"
+          nzTrigger="click" nzPlacement="bottomRight">
+            <nz-badge [nzCount]="11" class="bst-badge">
+                <i nz-icon nzType="bell" nzTheme="outline"></i>
+            </nz-badge>
+          </span>
+    <span class="bst-header-icon" nz-dropdown [nzDropdownMenu]="userSettingMenu">
+            <img class="avatar" src="assets/imgs/default_face.png" alt="">
+            <span class="base-font-size">Serati Ma</span>
+          </span>
+    <nz-dropdown-menu #userSettingMenu>
+      <ul nz-menu>
+        <li nz-menu-item (click)="goPage('personal-center')">
+          <a><i nz-icon nzType="user" nzTheme="outline" class="m-r-8"></i><span>个人中心</span></a>
+        </li>
+        <li nz-menu-item (click)="goPage('personal-setting')">
+          <a><i nz-icon nzType="setting" nzTheme="outline" class="m-r-8"></i><span>个人设置</span></a>
+        </li>
+        <li nz-menu-divider></li>
+        <li nz-menu-item>
+          <a (click)="goLogin()">
+            <i nz-icon nzType="logout" nzTheme="outline" class="m-r-8"></i>
+            <span>退出登录</span></a>
+        </li>
+      </ul>
+    </nz-dropdown-menu>
+
+    <span class="bst-header-icon" nz-dropdown [nzDropdownMenu]="language">
+              <i nz-icon nzType="font-size" nzTheme="outline"></i>
+            </span>
+    <nz-dropdown-menu #language="nzDropdownMenu">
+      <ul nz-menu nzSelectable>
+        <li nz-menu-item (click)="showMessage()">English</li>
+        <li nz-menu-item (click)="showMessage()">Bahasa Indonesia</li>
+        <li nz-menu-item (click)="showMessage()">日本語</li>
+        <li nz-menu-item (click)="showMessage()">Português</li>
+        <li nz-menu-item (click)="showMessage()" nzSelected>简体中文</li>
+        <li nz-menu-item (click)="showMessage()">繁體中文</li>
+      </ul>
+    </nz-dropdown-menu>
+  </div>
+  <nz-dropdown-menu #noticeMenu="nzDropdownMenu">
+    <app-home-notice></app-home-notice>
+  </nz-dropdown-menu>
+</ng-template>

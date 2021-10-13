@@ -1,12 +1,10 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
-import {DefaultComponent} from './default.component';
-import {JudgLoginGuard} from '../../core/services/common/guard/judgLogin.guard';
+import {RouterModule, Routes} from '@angular/router';
+import {DefaultComponent} from "./default.component";
 
 const routes: Routes = [
   {
     path: '', component: DefaultComponent, data: {shouldDetach: 'no'},
-    canActivate: [JudgLoginGuard],
     children: [
       {
         path: 'dashboard',
@@ -15,10 +13,6 @@ const routes: Routes = [
       {
         path: 'form',
         loadChildren: () => import('../../pages/form/form.module').then(m => m.FormModule)
-      },
-      {
-        path: 'internal-manage',
-        loadChildren: () => import('../../pages/internal-manage/internal-manage.module').then(m => m.InternalManageModule)
       },
       {
         path: 'detail',
@@ -40,9 +34,13 @@ const routes: Routes = [
         path: 'result',
         loadChildren: () => import('../../pages/result/result.module').then(m => m.ResultModule)
       },
+      {
+        path: 'about',
+        loadChildren: () => import('../../pages/about/about.module').then(m => m.AboutModule)
+      },
       {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
     ]
-  },
+  }
 ];
 
 @NgModule({

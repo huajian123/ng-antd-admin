@@ -9,13 +9,13 @@ import {
   Renderer2,
 } from '@angular/core';
 import {Subject} from 'rxjs';
-import {take, takeUntil} from 'rxjs/operators';
+import {first} from 'rxjs/operators';
 import {DOCUMENT} from '@angular/common';
-import {SettingInterface, ThemeService} from '../../../core/services/store/theme.service';
-import {ThemeSkinService} from '../../../core/services/common/theme-skin.service';
-import {WindowService} from '../../../core/services/common/window.service';
-import {IsNightKey, ThemeOptionsKey} from '../../../configs/constant';
 import {NzMessageService} from 'ng-zorro-antd/message';
+import {SettingInterface, ThemeService} from "../../../core/services/store/theme.service";
+import {ThemeSkinService} from "../../../core/services/common/theme-skin.service";
+import {WindowService} from "../../../core/services/common/window.service";
+import {IsNightKey, ThemeOptionsKey} from "../../../config/constant";
 
 interface NormalModel {
   image?: string;
@@ -218,44 +218,22 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
     this.setThemeOptions();
   }
 
-  ngOnInit(): void {
-    // todo 代码有待精简
-    const isNightCash = this.windowServe.getStorage(IsNightKey);
-    if (!!isNightCash) {
-      const jsonParseIsNight: boolean = JSON.parse(isNightCash);
-      if (jsonParseIsNight) {
-        this.changeNightTheme(jsonParseIsNight);
-      }
-      this._isNightTheme = jsonParseIsNight;
-    } else {
-      this.isNightTheme$.pipe(takeUntil(this.destory$), take(1)).subscribe((res: boolean) => {
-        this._isNightTheme = res;
-      });
-    }
-
-
-    const themeOptionsCash = this.windowServe.getStorage(ThemeOptionsKey);
-    if (!!themeOptionsCash) {
-      this._themesOptions = JSON.parse(themeOptionsCash);
-      this.setThemeOptions();
-    } else {
-      this.themesOptions$.pipe(takeUntil(this.destory$), take(1)).subscribe((res: SettingInterface) => {
-        this._themesOptions = res;
-      });
-    }
-
+  initThemeOption(): void {
+    this.isNightTheme$.pipe(first()).subscribe(res => this._isNightTheme = res);
+    this.themesOptions$.pipe(first()).subscribe(res => {
+      this._themesOptions = res;
+    });
     this.changeWeakMode(this._themesOptions.colorWeak);
-
-
     this.modes.forEach((item) => {
       item.isChecked = item.key === this._themesOptions.mode;
     });
-
     this.themes.forEach((item) => {
       item.isChecked = item.key === this._themesOptions.theme;
     });
+  }
 
-    this.cdr.markForCheck();
+  ngOnInit(): void {
+    this.initThemeOption();
   }
 
   ngOnDestroy(): void {

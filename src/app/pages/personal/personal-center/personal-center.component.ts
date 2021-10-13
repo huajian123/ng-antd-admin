@@ -6,7 +6,7 @@ import {
   ElementRef,
   ComponentFactoryResolver, Type
 } from '@angular/core';
-import {AdDirective} from '../../../share/directives/ad.directive';
+import {AdDirective} from '../../../shared/directives/ad.directive';
 import {ArticleComponent} from './article/article.component';
 import {ApplicationComponent} from './application/application.component';
 import {ProjectsComponent} from './projects/projects.component';

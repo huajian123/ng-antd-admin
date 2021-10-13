@@ -5,11 +5,10 @@ import {isPlatformBrowser} from '@angular/common';
   providedIn: 'root'
 })
 export class WindowService {
-  private isBrowser: boolean;
+  private readonly isBrowser: boolean;
 
   constructor(@Inject(PLATFORM_ID) private platformId: object) {
     this.isBrowser = isPlatformBrowser(this.platformId);
-    console.log('isBrowser', this.isBrowser);
   }
 
   alert(message: string): void {

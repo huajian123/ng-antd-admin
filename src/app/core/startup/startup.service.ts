@@ -1,23 +1,18 @@
 import {Injectable} from '@angular/core';
-import {AuthService} from '../services/store/auth.service';
-import {WindowService} from '../services/common/window.service';
-import {AuthKey} from '../../configs/constant';
-import {PreloaderService} from '../services/common/preloader.service';
+import {PreloaderService} from "../services/common/preloader.service";
+import {WindowService} from "../services/common/window.service";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class StartupService {
-  constructor(private authService: AuthService, private windowSer: WindowService,
+  constructor(private windowSer: WindowService,
               private preloaderService: PreloaderService) {
   }
 
   load(): Promise<void> {
+    this.preloaderService.removePreLoader();
     return new Promise((resolve, reject) => {
-      console.log('项目启动前初始化工作');
-      this.preloaderService.removePreLoader();
-      const token = this.windowSer.getStorage(AuthKey);
-      if (token) {
-        this.authService.setAuthCode(this.authService.parsToken(token));
-      }
       return resolve();
     });
   }

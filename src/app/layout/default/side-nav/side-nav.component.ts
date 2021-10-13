@@ -2,6 +2,7 @@ import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Input, On
 import {ActivatedRoute, Router} from '@angular/router';
 import {ThemeService} from '../../../core/services/store/theme.service';
 import {TabService} from '../../../core/services/common/tab.service';
+import {Observable} from "rxjs";
 
 
 @Component({
@@ -14,7 +15,7 @@ export class SideNavComponent implements OnInit {
 
   themesOptions$ = this.themesService.getThemesMode();
   isNightTheme$ = this.themesService.getIsNightTheme();
-
+  isCollapsed$: Observable<boolean> = this.themesService.getIsCollapsed();
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private tabService: TabService,
               private cdr: ChangeDetectorRef, private themesService: ThemeService) {

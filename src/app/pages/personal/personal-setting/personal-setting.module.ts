@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 
 import {PersonalSettingRoutingModule} from './personal-setting-routing.module';
 import {PersonalSettingComponent} from './personal-setting.component';
-import {SharedModule} from '../../../share/shared.module';
+import {SharedModule} from '../../../shared/shared.module';
 import {BaseComponent} from './base/base.component';
 import {SafeComponent} from './safe/safe.component';
 import {BindComponent} from './bind/bind.component';

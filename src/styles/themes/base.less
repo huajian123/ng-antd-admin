@@ -1,7 +1,10 @@
 @import "../minireset.less";
 @import "../../../node_modules/ng-zorro-antd/resizable/style/entry.less";
-@layout-header-padding: 0;
 
+@layout-header-height: 48px;
+@layout-header-padding: 0;
+@menu-collapsed-width: 48px;
+@layout-trigger-height: 40px;
 // 如果存在所有主题通用的样式变量,基本样式文件并在每个主题样式定制文件中引入它：
 * {
   box-sizing: border-box;
@@ -58,13 +61,21 @@ h1, h2, h3, h4, h5, h6 {
   white-space: pre-wrap;
 }
 
-.text-break{
+.text-break {
   word-break: break-all
 }
 
-
 .full-height {
   height: 100%;
+}
+
+
+.full-with {
+  width: 100% !important;
+}
+
+.min-screen-full-height {
+  min-height: 100vh !important;
 }
 
 .screen-full-height {
@@ -75,12 +86,12 @@ h1, h2, h3, h4, h5, h6 {
   width: 100vw !important;
 }
 
-.ellipsis {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  word-wrap: normal;
-}
+//.ellipsis {
+//  overflow: hidden;
+//  text-overflow: ellipsis;
+//  white-space: nowrap;
+//  word-wrap: normal;
+//}
 
 .clearfix:after {
   clear: both;
@@ -122,19 +133,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .t-0 {
-  top: 0!important;
+  top: 0 !important;
 }
 
 .l-0 {
-  left:0!important;
+  left: 0 !important;
 }
 
 .b-0 {
-  bottom: 0!important;
+  bottom: 0 !important;
 }
 
 .r-0 {
-  right:0!important;
+  right: 0 !important;
 }
 
 .m-h-100 {
@@ -155,6 +166,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .m-r-20 {
   margin-right: 20px !important;
+}
+
+.m-r-23 {
+  margin-right: 23px !important;
 }
 
 .m-r-25 {
@@ -189,9 +204,14 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 20px !important;
 }
 
+.m-b-24 {
+  margin-bottom: 24px !important;
+}
+
 .m-b-30 {
   margin-bottom: 30px !important;
 }
+
 .m-l-0 {
   margin-left: 0 !important;
 }
@@ -300,6 +320,11 @@ h1, h2, h3, h4, h5, h6 {
   padding-left: 0 !important;
 }
 
+.p-l-8 {
+  padding-left: 8px !important;
+}
+
+
 .p-l-10 {
   padding-left: 10px !important;
 }
@@ -341,6 +366,10 @@ h1, h2, h3, h4, h5, h6 {
   padding-bottom: 0 !important;
 }
 
+.p-b-16 {
+  padding-bottom: 16px !important;
+}
+
 .p-b-24 {
   padding-bottom: 24px !important;
 }
@@ -357,6 +386,14 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 14px !important;
 }
 
+.sp-12 {
+  font-size: 12px !important;
+}
+
+.sp-16 {
+  font-size: 16px !important;
+}
+
 .sp-18 {
   font-size: 18px !important;
 }
@@ -365,15 +402,20 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 28px !important;
 }
 
+.animate-02 {
+  transition: all 0.2s;
+}
+
+.animate-03 {
+  transition: all .3s;
+}
+
 .clear-fix:after {
   content: '';
   clear: both;
   display: block;
 }
 
-.with-full {
-  width: 100%!important;
-}
 
 .default-theme {
   background: #ffffff;
@@ -387,7 +429,7 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-block !important;
 }
 
-.pointer-events-none{
+.pointer-events-none {
   pointer-events: none;
 }
 
@@ -501,21 +543,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-/* =========== 自定义所有滚动条样式 */
-*::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-  background: #f1f1f1;
-}
-
-*::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 6px / 2;
-}
-
-*::-webkit-scrollbar-corner {
-  background: #f1f1f1;
-}
 
 /*覆盖zorro样式*/
 
@@ -525,12 +552,16 @@ h1, h2, h3, h4, h5, h6 {
   max-height: 600px;
 }
 
+.ant-menu-inline, .ant-menu-vertical, .ant-menu-vertical-left {
+  border: none;
+}
+
 nz-date-picker {
   width: 100%;
 }
-
-.overflow-dots {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
+//
+//.overflow-dots {
+//  overflow: hidden;
+//  white-space: nowrap;
+//  text-overflow: ellipsis;
+//}

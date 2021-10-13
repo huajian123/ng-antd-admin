@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BaseDetailRoutingModule } from './base-detail-routing.module';
 import { BaseDetailComponent } from './base-detail.component';
-import {SharedModule} from '../../../share/shared.module';
+import {SharedModule} from '../../../shared/shared.module';
 
 
 @NgModule({
