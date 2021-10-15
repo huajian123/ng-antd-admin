@@ -8,12 +8,9 @@ import {WaterMarkService} from '../../../core/services/common/water-mark.service
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WaterMarkComponent implements OnInit, AfterViewInit {
-
   @ViewChild('watermark', {static: false}) watermark!: ElementRef;
 
-  constructor(
-    private waterMarkService: WaterMarkService
-  ) {
+  constructor(private waterMarkService: WaterMarkService) {
   }
 
   ngOnInit(): void {

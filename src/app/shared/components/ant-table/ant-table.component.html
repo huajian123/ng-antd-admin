@@ -28,12 +28,11 @@
           (nzResizeEnd)="onResize($event, head.title)"
           [nzRight]="(!!head.fixed&&head.fixedDir==='right')"
           [nzLeft]="(!!head.fixed&&head.fixedDir==='left')"
-          *ngIf="(head.show===undefined||head.show===true)"
-      >
+          *ngIf="(head.show===undefined||head.show===true)">
         <nz-resize-handle *ngIf="!last&&(tableConfig.showCheckbox?true:!last)" nzDirection="right">
           <div class="resize-trigger"></div>
         </nz-resize-handle>
-        <span></span>{{head.title}}
+        {{head.title}}
       </th>
     </ng-container>
 

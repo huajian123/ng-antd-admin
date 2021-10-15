@@ -1,17 +1,6 @@
-import {
-  ChangeDetectionStrategy, ChangeDetectorRef,
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChanges,
-  TemplateRef
-} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef} from '@angular/core';
 import {NzTableQueryParams, NzTableSize} from 'ng-zorro-antd/table';
 import {NzResizeEvent} from "ng-zorro-antd/resizable";
-
 
 export interface TableHeader {
   title: string;                   // 表头名称
@@ -21,7 +10,7 @@ export interface TableHeader {
   thTemplate?: TemplateRef<any>;    // th单元格模板
   tdTemplate?: TemplateRef<any>;    // td单元格模板
   fixed?: boolean;                  // 是否固定单元格 （只有从最左边或最右边连续固定才有效）
-  fixedDir?: 'left'|'right';        // 固定在左边还是右边，需要配合fixed来使用
+  fixedDir?: 'left' | 'right';        // 固定在左边还是右边，需要配合fixed来使用
   notNeedEllipsis?: boolean;        // 不需要...时给true
   tdClassList?: string[];           // 为td单元格指定类 (父组件中的类必须加上 /deep/ 前缀才能对子组件生效)
   thClassList?: string[];           // 为th单元格指定类  (父组件中的类必须加上 /deep/ 前缀才能对子组件生效)
@@ -38,10 +27,20 @@ export interface MyTableConfig {
   headers: TableHeader[];            // 列设置
 }
 
+export abstract class AntTableComponentToken {
+  tableSize!: NzTableSize;
+  tableConfig!: MyTableConfig;
+
+  abstract tableChangeDectction(): void;
+}
+
 @Component({
   selector: 'app-ant-table',
   templateUrl: './ant-table.component.html',
   styleUrls: ['./ant-table.component.less'],
+  providers: [
+    {provide: AntTableComponentToken, useExisting: AntTableComponent}
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AntTableComponent implements OnInit, OnChanges {

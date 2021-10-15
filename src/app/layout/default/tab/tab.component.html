@@ -1,7 +1,6 @@
 <nz-card class="m-t-10" style="height: 35px" [nzBodyStyle]="{padding:0}" [nzBordered]="false">
   <nz-tabset (nzClose)="clickCloseIcon($event)" [nzSelectedIndex]="currentIndex"
-             [nzTabBarStyle]="{
-           'height':'35px'}"
+             [nzTabBarStyle]="{'height':'35px'}"
              [nzTabPosition]="'top'" [nzType]="'editable-card'" [nzHideAdd]="true">
     <nz-tab (nzClick)="goPage(tab)" nzClosable (nzContextmenu)="contextMenu($event, menu)" [nzTitle]="tab.title"
             *ngFor="let tab of tabs;let i =index;trackBy:trackByTab;">
@@ -15,6 +14,4 @@
       </nz-dropdown-menu>
     </nz-tab>
   </nz-tabset>
-
-
 </nz-card>

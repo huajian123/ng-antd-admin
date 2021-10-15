@@ -4,8 +4,6 @@ import { ChatComponent } from './chat.component';
 import {SHARED_ZORRO_MODULES} from '../../shared-zorro.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
-
-
 @NgModule({
   declarations: [ChatComponent],
   exports: [

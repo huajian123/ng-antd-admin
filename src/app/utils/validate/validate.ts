@@ -15,29 +15,29 @@ export function isDecimal(value: string | number): boolean {
 
 /** 是否为身份证 */
 export function isIdCard(value: string): boolean {
-  return typeof value === 'string' && /(^\d{15}$)|(^\d{17}([0-9]|X)$)/i.test(value);
+  return /(^\d{15}$)|(^\d{17}([0-9]|X)$)/i.test(value);
 }
 
 /** 是否为手机号 */
 export function isMobile(value: string): boolean {
-  return typeof value === 'string' && /^(0|\+?86|17951)?(13[0-9]|15[0-9]|17[0678]|18[0-9]|14[57])[0-9]{8}$/.test(value);
+  return /^(0|\+?86|17951)?(13[0-9]|15[0-9]|17[0678]|18[0-9]|14[57])[0-9]{8}$/.test(value);
 }
 
 /** 是否为电话号码 */
 export function isTelPhone(value: string): boolean {
-  return typeof value === 'string' && /^(0\d{2,3}-?)?\d{7,8}$/.test(value);
+  return /^(0\d{2,3}-?)?\d{7,8}$/.test(value);
 }
 
 /** 是否邮箱地址 */
 export function isEmail(value: string): boolean {
-  return typeof value === 'string' && /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/.test(value);
+  return /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/.test(value);
 }
 
 /** 密码由6到20位大小写字母 */
 export function isPasswordPass(value: string): boolean {
   const regTure = /^[^\s]{6,20}$/;
   const regFalse = /^\d+$/;
-  return typeof value === 'string' && (regTure.test(value) && !regFalse.test(value));
+  return (regTure.test(value) && !regFalse.test(value));
 }
 
 /** 是否URL地址 */

@@ -4,6 +4,7 @@ import {NzSafeAny} from 'ng-zorro-antd/core/types';
 import * as _ from 'lodash';
 import {Observable, of} from 'rxjs';
 import {filter, tap} from 'rxjs/operators';
+import {DragDrop} from "@angular/cdk/drag-drop";
 
 export enum ModalBtnStatus {
   Cancel,
@@ -23,7 +24,7 @@ export abstract class BaseModal {
   protected modalRef!: NzModalRef;
   protected bsModalService: NzModalService;
 
-  protected constructor(private baseInjector: Injector) {
+  protected constructor(private baseInjector: Injector, public dragDrop: DragDrop) {
     this.bsModalService = this.baseInjector.get(NzModalService);
   }
 

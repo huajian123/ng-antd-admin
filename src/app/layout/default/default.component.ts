@@ -1,9 +1,6 @@
 import {Component, OnInit, ChangeDetectionStrategy, OnDestroy, ViewChild} from '@angular/core';
 import {ThemeService} from "../../core/services/store/theme.service";
-import {Observable, Subject} from "rxjs";
-import {WindowService} from "../../core/services/common/window.service";
-import {TabService} from "../../core/services/common/tab.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Subject} from "rxjs";
 import {takeUntil} from "rxjs/operators";
 import {NavDrawerComponent} from "./nav-drawer/nav-drawer.component";
 
@@ -21,9 +18,7 @@ export class DefaultComponent implements OnInit, OnDestroy {
   private destory$ = new Subject<void>();
   @ViewChild('navDrawer') navDrawer!: NavDrawerComponent
 
-  constructor(private themesService: ThemeService, private windowServe: WindowService,
-              private router: Router, private tabService: TabService,
-              private activatedRoute: ActivatedRoute) {
+  constructor(private themesService: ThemeService) {
   }
 
   changeCollapsed(): void {
@@ -31,12 +26,9 @@ export class DefaultComponent implements OnInit, OnDestroy {
       this.navDrawer.showDraw();
       return;
     }
-
     this.isCollapsed = !this.isCollapsed;
     this.themesService.setIsCollapsed(this.isCollapsed);
   }
-
-
 
   // 监听各种流
   subTheme(): void {

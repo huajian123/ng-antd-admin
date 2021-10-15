@@ -21,7 +21,6 @@ export class NavDrawerComponent implements OnInit, OnDestroy {
     this.themesService.getIsOverMode().pipe(takeUntil(this.destory$)).subscribe(res => {
       if (!res) {
         this.isShowModal = false;
-        // this.cdr.markForCheck();
       }
     });
   }

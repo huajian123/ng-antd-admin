@@ -4,7 +4,7 @@ import {BlankComponent} from './blank.component';
 
 const routes: Routes = [
   {
-    path: '', component: BlankComponent, data: {shouldDetach: 'no'}, children: [
+    path: '', component: BlankComponent, data: {key:'blank',shouldDetach: 'no'}, children: [
       {
         path: 'empty-page',
         loadChildren: () => import('../../pages/empty/empty.module').then(m => m.EmptyModule)

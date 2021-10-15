@@ -1,4 +1,4 @@
-<ul [nzNoAnimation]="(themesOptions$|async)!.mode==='top'" nz-menu *ngIf="!isMixiHead" [nzInlineCollapsed]="isCollapsed$|async"
+<ul *ngIf="!isMixiHead" nz-menu [nzNoAnimation]="(themesOptions$|async)!.mode==='top'"  [nzInlineCollapsed]="isCollapsed$|async"
     [nzTheme]="(isMixiMode&&!(isOverMode$|async)&&!(isNightTheme$|async))?'light':(isMixiMode&&(isNightTheme$|async)?'dark':((themesOptions$|async)!.theme))"
     [nzMode]="((themesOptions$|async)!.mode==='side'||(themesOptions$|async)!.mode==='mixi'||(isOverMode$|async))?'inline':'horizontal'">
   <ng-container *ngTemplateOutlet="menuTpl;context:{$implicit: isMixiLeft?(leftMenuArray$|async):menus}"></ng-container>

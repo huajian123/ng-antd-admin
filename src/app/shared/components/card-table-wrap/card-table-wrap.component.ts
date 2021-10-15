@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {NzTableSize} from "ng-zorro-antd/table";
-import {AntTableComponent, TableHeader} from "../ant-table/ant-table.component";
+import {AntTableComponentToken, TableHeader} from "../ant-table/ant-table.component";
 
 interface TableSizeItem {
   sizeName: string,
@@ -19,16 +19,16 @@ interface TableSizeItem {
   value: NzTableSize,
 }
 
+
 @Component({
   selector: 'app-card-table-wrap',
   templateUrl: './card-table-wrap.component.html',
-  styleUrls: ['./card-table-wrap.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardTableWrapComponent implements OnInit, AfterContentInit {
   @Input() btnTpl: TemplateRef<any> | undefined;
   @Output() reload = new EventEmitter<any>();
-  @ContentChild(AntTableComponent) antTableComponent!: AntTableComponent;
+  @ContentChild(AntTableComponentToken) antTableComponent!: AntTableComponentToken;
   tableConfigVisible = false;
   tableSizeOptions: TableSizeItem[] = [
     {sizeName: '默认', selected: true, value: "default"},
@@ -36,7 +36,6 @@ export class CardTableWrapComponent implements OnInit, AfterContentInit {
     {sizeName: '紧凑', selected: false, value: "small"},
   ];
   tableHeaders: TableHeader[] = [];
-
 
   constructor() {
   }

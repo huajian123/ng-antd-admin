@@ -33,6 +33,7 @@
     "ngx-quicklink": "^0.2.7",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
+    "uuid": "^8.3.2",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
@@ -42,6 +43,7 @@
     "@types/jasmine": "~3.8.0",
     "@types/lodash": "^4.14.173",
     "@types/node": "^12.11.1",
+    "@types/uuid": "^8.3.1",
     "jasmine-core": "~3.8.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",

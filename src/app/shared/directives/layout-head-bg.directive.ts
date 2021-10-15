@@ -8,6 +8,7 @@ import {Subject} from "rxjs";
 })
 export class LayoutHeadBgDirective implements OnInit, OnDestroy {
   private destory$ = new Subject<void>();
+
   constructor(private el: ElementRef, private themesService: ThemeService, private renderer2: Renderer2) {
   }
 

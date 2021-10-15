@@ -51,14 +51,13 @@ export class TabService {
     // 移除右键选中右边的tab
     this.tabArray.length = index + 1;
     temp.forEach(({path, relatedLink}) => {
-      // relatedLink数组保存相关路由，解决路由中有详情页这样跳转路由，而产生"在哪个页面上关闭状态才会清除"的bug
+      // relatedLink数组保存相关路由，解决路由中有详情页这样跳转路由，而产生"在哪个页面上点击关闭按钮,保存的状态才会清除"的bug
       const linkArray = [...relatedLink, fnFormatePath(path)];
       linkArray.forEach(item => {
         SimpleReuseStrategy.deleteRouteSnapshot(item);
       });
     });
     if (index < this.currSelectedIndexTab) {
-      // todo
       // @ts-ignore
       SimpleReuseStrategy.waitDelete = fnFormatePath(this.activatedRoute['_routerState'].snapshot.url);
       this.router.navigateByUrl(this.tabArray[index].path);
@@ -80,7 +79,6 @@ export class TabService {
       }
     }
     if (index !== this.currSelectedIndexTab) {
-      // todo
       // @ts-ignore
       SimpleReuseStrategy.waitDelete = fnFormatePath(this.activatedRoute['_routerState'].snapshot.url);
     }

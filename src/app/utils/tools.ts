@@ -1,5 +1,6 @@
 import {FormGroup} from '@angular/forms';
 import {silentEvent} from 'ng-zorro-antd/core/util';
+import {v4 as uuidv4} from 'uuid';
 
 const fnGetFile = function getFile(url: string, isBlob = false): Promise<any> {
   return new Promise((resolve, reject) => {
@@ -59,13 +60,18 @@ const fnFormatePath = function formatePath(path: string): string {
   } else {
     return newpath.substring(newpath.lastIndexOf('\/') + 1);
   }
-
 };
+
+// 返回uuid
+const fnGetUUID = function getUUID(): string {
+  return uuidv4();
+}
 
 export {
   fnGetFile,
   fnCheckForm,
   fnStopMouseEvent,
   fnFormatePath,
-  fnRemoveDouble
+  fnRemoveDouble,
+  fnGetUUID
 };

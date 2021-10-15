@@ -1,4 +1,6 @@
-/*accidentTypeOptions: OptionsInterface[];
+/*
+使用方法：
+accidentTypeOptions: OptionsInterface[];
 this.accidentTypeOptions = [...MapPipe.transformMapToArray(MapSet.accidentType)];*/
 
 import {Pipe, PipeTransform} from '@angular/core';
@@ -75,7 +77,6 @@ export class MapPipe implements PipeTransform {
         return this.datePipe.transform(value, param);
       default:
         // @ts-ignore
-        // todo
         return (this.mapObj[type] ? this.mapObj[type][value] : '');
     }
   }

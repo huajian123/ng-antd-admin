@@ -3,7 +3,6 @@ import {FooterSubmitComponent} from './footer-submit.component';
 import {SHARED_ZORRO_MODULES} from '../../shared-zorro.module';
 import {CommonModule} from '@angular/common';
 
-
 @NgModule({
   declarations: [FooterSubmitComponent],
   imports: [
@@ -11,7 +10,6 @@ import {CommonModule} from '@angular/common';
     SHARED_ZORRO_MODULES,
   ],
   exports: [FooterSubmitComponent]
-
 })
 export class FooterSubmitModule {
 }

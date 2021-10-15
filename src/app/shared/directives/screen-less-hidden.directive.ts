@@ -6,7 +6,6 @@ import {BreakpointObserver} from '@angular/cdk/layout';
   selector: '[appScreenLessHidden]'
 })
 export class ScreenLessHiddenDirective {
-
   @Input('appScreenLessHidden')
   set appScreenLessHidden(lessScreen: string | undefined) {
     if (!lessScreen) {
@@ -25,7 +24,6 @@ export class ScreenLessHiddenDirective {
   constructor(private breakpointObserver: BreakpointObserver,
               private templateRef: TemplateRef<any>, private viewContainerRef: ViewContainerRef) {
   }
-
 
   private show(matched: boolean): void {
     matched ? this.viewContainerRef.createEmbeddedView(this.templateRef) : this.viewContainerRef.clear();

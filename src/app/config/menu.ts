@@ -247,6 +247,13 @@ export const menuNav: Menu[] = [
         open: false,
         selected: false,
         path: '/blank/empty-page',
+      },
+      {
+        title: '外部链接',
+        icon: 'usergroup-delete',
+        open: false,
+        selected: false,
+        path: 'https://www.baidu.com/',
         isNewLink: true,
       },
     ]

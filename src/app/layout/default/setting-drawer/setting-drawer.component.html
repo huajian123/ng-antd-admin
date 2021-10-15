@@ -21,7 +21,6 @@
           </div>
         </div>
       </div>
-
     </div>
 
     <div class="m-b-24 theme-color">
@@ -33,7 +32,9 @@
         </div>
       </div>
     </div>
+
     <nz-divider></nz-divider>
+
     <div class="m-b-24">
       <h3 class="title">导航模式</h3>
       <div class="block-checkbox">
@@ -47,7 +48,6 @@
       </div>
     </div>
 
-
     <nz-list [nzSplit]="false">
       <nz-list-item [nzActions]="[fixedHeadAction]">固定头部</nz-list-item>
       <ng-template #fixedHeadAction>
@@ -55,6 +55,7 @@
                    nzSize="small"></nz-switch>
       </ng-template>
     </nz-list>
+
     <nz-list [nzSplit]="false">
       <nz-list-item [nzActions]="[fixedLeftNavAction]">固定侧边栏</nz-list-item>
       <ng-template #fixedLeftNavAction>
@@ -62,6 +63,7 @@
                    nzSize="small"></nz-switch>
       </ng-template>
     </nz-list>
+
     <nz-list [nzSplit]="false">
       <nz-list-item [nzActions]="[splitNavAction]">自动分割菜单</nz-list-item>
       <ng-template #splitNavAction>
@@ -69,7 +71,9 @@
                    nzSize="small"></nz-switch>
       </ng-template>
     </nz-list>
+
     <nz-divider></nz-divider>
+
     <div class="m-b-24">
       <h3 class="title">内容区域</h3>
       <nz-list [nzSplit]="false">
@@ -102,7 +106,9 @@
         </ng-template>
       </nz-list>
     </div>
+
     <nz-divider></nz-divider>
+
     <div class="m-b-24">
       <h3 class="title">其他设置</h3>
       <nz-list [nzSplit]="false">
@@ -119,6 +125,7 @@
         </ng-template>
       </nz-list>
     </div>
+
   </ng-container>
 
 </nz-drawer>

@@ -118,7 +118,6 @@ export class NavBarComponent implements OnInit, OnDestroy {
       item.selected = false;
       // 一级菜单
       if (!item.children || item.children.length === 0) {
-        // if (item.path === routePath) {
         if (routePath.includes(item.path!) && !item.isNewLink) {
           item.selected = true;
         }
@@ -129,8 +128,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
         subItem.selected = false;
         subItem.open = false;
         if (!subItem.children || subItem.children?.length === 0) {
-          // if (subItem.path === routePath) {
-          if (routePath.includes(subItem.path!) && !item.isNewLink) {
+          if (routePath.includes(subItem.path!)) {
             item.open = true;
             item.selected = true;
             subItem.selected = true;
@@ -139,8 +137,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
           continue;
         }
         for (const thirdItem of subItem.children) {
-          // if (thirdItem.path === routePath) {
-          if (routePath.includes(thirdItem.path!) && !item.isNewLink) {
+          if (routePath.includes(thirdItem.path!)) {
             item.open = true;
             item.selected = true;
             subItem.selected = true;

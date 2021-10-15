@@ -2,7 +2,12 @@ import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 
 @Component({
   selector: 'app-tool-bar',
-  templateUrl: './tool-bar.component.html',
+  template: `
+    <div class="app-header">
+      <ng-content select="ng-container[left]"></ng-content>
+      <ng-content select="ng-container[right]"></ng-content>
+    </div>
+  `,
   styleUrls: ['./tool-bar.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

@@ -76,17 +76,20 @@
     </nz-sider>
 
     <nz-layout>
-
       <nz-content [ngStyle]="{marginTop:(themesOptions.fixedHead&&!isMixiMode)&&themesOptions.hasTopArea?'48px':0}">
         <ng-content></ng-content>
       </nz-content>
       <nz-footer *ngIf="themesOptions.hasFooterArea" class="text-center">Ant Design ©2021 Implement By Angular
       </nz-footer>
     </nz-layout>
+
   </nz-layout>
 </nz-layout>
+
 <app-setting-drawer></app-setting-drawer>
+
 <app-chat (changeShows)="showChats=false" *ngIf="showChats"></app-chat>
+
 <ng-template #trigger>
   <ul nz-menu [nzTheme]="(isMixiMode&&!(isOverMode$|async))?'light':(themesOptions$|async)!.theme" nzMode="inline"
       [nzSelectable]="false">

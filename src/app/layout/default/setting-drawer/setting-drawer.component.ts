@@ -1,13 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  Inject,
-  OnDestroy,
-  OnInit,
-  Renderer2,
-} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit, Renderer2,} from '@angular/core';
 import {Subject} from 'rxjs';
 import {first} from 'rxjs/operators';
 import {DOCUMENT} from '@angular/common';
@@ -153,7 +144,7 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
   constructor(private themesService: ThemeService, @Inject(DOCUMENT) private doc: Document,
               public message: NzMessageService,
               private themeSkinService: ThemeSkinService, private windowServe: WindowService,
-              private cdr: ChangeDetectorRef, private el: ElementRef, private rd2: Renderer2) {
+              private rd2: Renderer2) {
   }
 
   changeCollapsed(): void {
@@ -162,7 +153,7 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
 
   changePrimaryColor(color: Color): void {
     this.selOne(color as NormalModel, this.colors);
-    this.message.success('我不会写哈哈哈');
+    this.message.success('很遗憾，我不会写');
   }
 
   // 修改黑夜主题

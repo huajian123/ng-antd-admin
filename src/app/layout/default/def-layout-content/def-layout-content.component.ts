@@ -1,6 +1,4 @@
-import {
-  Component, OnInit, ChangeDetectionStrategy, Renderer2, ViewChild, ElementRef, AfterViewInit
-} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy, AfterViewInit} from '@angular/core';
 import {Observable, Subject} from "rxjs";
 import {SettingInterface, ThemeService} from "../../../core/services/store/theme.service";
 import {takeUntil} from "rxjs/operators";
@@ -12,7 +10,7 @@ import {SplitNavStoreService} from "../../../core/services/store/split-nav-store
   styleUrls: ['./def-layout-content.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DefLayoutContentComponent implements OnInit, AfterViewInit {
+export class DefLayoutContentComponent implements OnInit {
   showChats = true;
   isNightTheme$ = this.themesService.getIsNightTheme();
   themesOptions$ = this.themesService.getThemesMode();
@@ -41,7 +39,6 @@ export class DefLayoutContentComponent implements OnInit, AfterViewInit {
   constructor(private themesService: ThemeService, private splitNavStoreService: SplitNavStoreService) {
   }
 
-
   changeCollapsed(isCollapsed: boolean): void {
     this.themesService.setIsCollapsed(isCollapsed);
   }
@@ -56,11 +53,6 @@ export class DefLayoutContentComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.getThemeOptions();
-  }
-
-
-  ngAfterViewInit(): void {
-
   }
 
   ngOnDestroy(): void {

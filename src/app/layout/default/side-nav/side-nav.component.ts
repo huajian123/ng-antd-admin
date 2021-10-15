@@ -12,16 +12,11 @@ import {Observable} from "rxjs";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SideNavComponent implements OnInit {
-
   themesOptions$ = this.themesService.getThemesMode();
   isNightTheme$ = this.themesService.getIsNightTheme();
   isCollapsed$: Observable<boolean> = this.themesService.getIsCollapsed();
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private tabService: TabService,
-              private cdr: ChangeDetectorRef, private themesService: ThemeService) {
-
-  }
-
+  constructor(private themesService: ThemeService) {}
 
   ngOnInit(): void {
   }
