@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 import {QuicklinkStrategy} from "ngx-quicklink";
 
 const routes: Routes = [
@@ -14,8 +14,10 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, {
     preloadingStrategy: QuicklinkStrategy,
     scrollPositionRestoration: 'enabled',
-    initialNavigation: 'enabledBlocking'
+    initialNavigation: 'enabledBlocking',
+    useHash: true
   })],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

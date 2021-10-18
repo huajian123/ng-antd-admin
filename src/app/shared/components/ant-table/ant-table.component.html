@@ -16,10 +16,10 @@
   <ng-template #rangeTemplate let-range="range" let-total> {{ range[0] }}-{{ range[1] }} 共 {{ total }} 条</ng-template>
   <thead>
   <tr>
-    <th [nzLeft]="true" [nzIndeterminate]="indeterminate" *ngIf="tableConfig.showCheckbox"
+    <th class="animate-bg-0" [nzLeft]="true" [nzIndeterminate]="indeterminate" *ngIf="tableConfig.showCheckbox"
         (nzCheckedChange)="onAllChecked($event)" [nzWidth]="'40px'" [nzChecked]="allChecked"></th>
     <ng-container *ngFor="let head of tableConfig.headers;let headIndex=index;let last=last;let first=first;">
-      <th [nzWidth]="head.width + 'px'"
+      <th class="animate-bg-0" [nzWidth]="head.width + 'px'"
           nz-resizable
           nzPreview
           nzBounds="parent"
@@ -32,7 +32,14 @@
         <nz-resize-handle *ngIf="!last&&(tableConfig.showCheckbox?true:!last)" nzDirection="right">
           <div class="resize-trigger"></div>
         </nz-resize-handle>
-        {{head.title}}
+        <div class="center">
+          {{head.title}}
+          <div class="sort-wrap m-l-8 hand-model" (click)="changeSort(head)" *ngIf="head.showSort">
+            <i class="sort-caret ascending" [class.sort-caret-sel-asc]="head.sortDir==='asc'"></i>
+            <i class="sort-caret descending" [class.sort-caret-sel-desc]="head.sortDir==='desc'"></i>
+          </div>
+        </div>
+
       </th>
     </ng-container>
 
@@ -40,10 +47,11 @@
   </thead>
   <tbody>
   <tr *ngFor="let row of _dataList;let rowIndex=index;trackBy:trackByTableBody">
-    <td nzEllipsis *ngIf="tableConfig.showCheckbox" [nzLeft]="true" (nzCheckedChange)="checkRowSingle($event,rowIndex)"
+    <td class="animate-bg-0" nzEllipsis *ngIf="tableConfig.showCheckbox" [nzLeft]="true"
+        (nzCheckedChange)="checkRowSingle($event,rowIndex)"
         [nzChecked]="row['_checked']"></td>
     <ng-container *ngFor="let head of tableConfig.headers">
-      <td  *ngIf="(head.show===undefined||head.show===true)" [ngClass]="head.tdClassList?head.tdClassList:''"
+      <td *ngIf="(head.show===undefined||head.show===true)" [ngClass]="head.tdClassList?head.tdClassList:''"
           [nzEllipsis]="!head.notNeedEllipsis"
           [nzLeft]="(!!head.fixed&&head.fixedDir==='left')"
           [nzRight]="(!!head.fixed&&head.fixedDir==='right')">

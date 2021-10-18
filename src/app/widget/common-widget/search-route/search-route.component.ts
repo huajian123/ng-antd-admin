@@ -1,12 +1,12 @@
-import {Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef, HostListener} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef, HostListener, Inject} from '@angular/core';
 import {BasicConfirmModalComponent} from "../../base-modal";
 import {ThemeService} from "../../../core/services/store/theme.service";
-import {menuNav} from "../../../config/menu";
 import {Menu} from "../../../core/services/types";
 import {fromEvent, of} from "rxjs";
 import {debounceTime, distinctUntilChanged, map, switchMap} from "rxjs/operators";
 import {Router} from "@angular/router";
 import {NzModalRef} from "ng-zorro-antd/modal";
+import {MENU_TOKEN} from "../../../config/menu";
 
 interface ResultItem {
   showIcon: boolean;
@@ -25,11 +25,11 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
   isNightTheme$ = this.themesService.getIsNightTheme();
   resultListShow: ResultItem[] = [];
   resultList: ResultItem[] = [];
-  menuNavList: Menu[] = menuNav;
   @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
   inputValue: string | null = null;
 
   constructor(private themesService: ThemeService, private cdr: ChangeDetectorRef,
+              @Inject(MENU_TOKEN) private menuNavList: Menu[],
               private router: Router, private nzModalRef: NzModalRef) {
     super();
   }

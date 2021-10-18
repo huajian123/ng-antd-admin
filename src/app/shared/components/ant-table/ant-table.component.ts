@@ -6,6 +6,8 @@ export interface TableHeader {
   title: string;                   // 表头名称
   field?: string;                   // 字段
   pipe?: string;                    // 管道
+  showSort?: boolean;               // 是否显示排序
+  sortDir?: undefined | 'asc' | 'desc';  // 排序方向
   width?: number;                    // 单元格宽度
   thTemplate?: TemplateRef<any>;    // th单元格模板
   tdTemplate?: TemplateRef<any>;    // td单元格模板
@@ -32,6 +34,11 @@ export abstract class AntTableComponentToken {
   tableConfig!: MyTableConfig;
 
   abstract tableChangeDectction(): void;
+}
+
+export interface SortFile {
+  fileName: string;
+  sortDir: undefined | 'desc' | 'asc'
 }
 
 @Component({
@@ -64,7 +71,7 @@ export class AntTableComponent implements OnInit, OnChanges {
 
   _tableSize: NzTableSize = 'default';
   set tableSize(value: NzTableSize) {
-    this._tableSize = value
+    this._tableSize = value;
     this.tableChangeDectction();
   }
 
@@ -76,6 +83,7 @@ export class AntTableComponent implements OnInit, OnChanges {
   @Output() changePageNum = new EventEmitter<NzTableQueryParams>();
   @Output() changePageSize = new EventEmitter<number>();
   @Output() selectedChange: EventEmitter<any[]>;
+  @Output() sortFn: EventEmitter<SortFile>;
   indeterminate: boolean;
   allChecked: boolean;
 
@@ -83,7 +91,20 @@ export class AntTableComponent implements OnInit, OnChanges {
     this.indeterminate = false;
     this.allChecked = false;
     this.selectedChange = new EventEmitter<any[]>();
+    this.sortFn = new EventEmitter<SortFile>();
     this.checkedCashArrayFromComment = [];
+  }
+
+  changeSort(tableHeader: TableHeader): void {
+    this.tableConfig.headers.forEach(item => {
+      if (item.field !== tableHeader.field) {
+        item.sortDir = undefined;
+      }
+    })
+    const sortDicArray: [undefined, 'asc', 'desc'] = [undefined, 'asc', 'desc'];
+    const index = sortDicArray.findIndex((item) => item === tableHeader.sortDir);
+    tableHeader.sortDir = (index === sortDicArray.length - 1) ? sortDicArray[0] : sortDicArray[index + 1];
+    this.sortFn.emit({fileName: tableHeader.field!, sortDir: tableHeader.sortDir})
   }
 
   tableChangeDectction(): void {
