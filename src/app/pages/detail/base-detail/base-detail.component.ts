@@ -24,6 +24,7 @@ export class BaseDetailComponent implements OnInit {
     breadcrumb: ['首页', '详情页', '基础详情页']
   };
   returnTableConfig!: MyTableConfig;
+  returnTableConfig2!: MyTableConfig;
   returnDataList: ReturnObj[] = [{
     num: '1234561',
     name: '矿泉水 550ml',
@@ -71,32 +72,70 @@ export class BaseDetailComponent implements OnInit {
         {
           title: '商品编号',
           field: 'num',
-          width: 50,
+          width: 150,
           tdTemplate: this.returnProductTpl
         },
         {
           title: '商品名称',
-          width: 60,
+          width: 160,
           field: 'name',
         },
         {
           title: '商品条码',
-          width: 50,
+          width: 150,
           field: 'code',
         },
         {
           title: '单价',
-          width: 50,
+          width: 150,
           field: 'unitPrice',
         },
         {
           title: '数量（件）',
-          width: 50,
+          width: 150,
           field: 'number',
         },
         {
           title: '金额',
-          width: 50,
+          field: 'price',
+        },
+      ],
+      total: 0,
+      loading: false,
+      pageSize: 10,
+      pageIndex: 1,
+    };
+    this.returnTableConfig2 = {
+      showCheckbox: false,
+      headers: [
+        {
+          title: '商品编号',
+          field: 'num',
+          width: 150,
+          tdTemplate: this.returnProductTpl
+        },
+        {
+          title: '商品名称',
+          width: 160,
+          field: 'name',
+        },
+        {
+          title: '商品条码',
+          width: 150,
+          field: 'code',
+        },
+        {
+          title: '单价',
+          width: 150,
+          field: 'unitPrice',
+        },
+        {
+          title: '数量（件）',
+          width: 150,
+          field: 'number',
+        },
+        {
+          title: '金额',
           field: 'price',
         },
       ],
