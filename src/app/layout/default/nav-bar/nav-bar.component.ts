@@ -7,9 +7,9 @@ import {Subject} from 'rxjs';
 import * as _ from 'lodash';
 import {Title} from '@angular/platform-browser';
 import {SplitNavStoreService} from '../../../core/services/store/split-nav-store/split-nav-store.service';
-import {menuNav} from "../../../config/menu";
 import {Menu} from "../../../core/services/types";
 import {DOCUMENT} from "@angular/common";
+import {MENU_TOKEN} from "../../../config/menu";
 
 @Component({
   selector: 'app-nav-bar',
@@ -21,7 +21,6 @@ export class NavBarComponent implements OnInit, OnDestroy {
   @Input() isMixiHead = false;
   @Input() isMixiLeft = false;
   private destory$ = new Subject<void>();
-  menus: Menu[] = menuNav;
   routerPath = '';
   themesOptions$ = this.themesService.getThemesMode();
   themesMode = 'side';
@@ -34,7 +33,9 @@ export class NavBarComponent implements OnInit, OnDestroy {
   isMixiMode = false;
   copyMenus: Menu[] = _.cloneDeep(this.menus);
 
-  constructor(private router: Router, private splitNavStoreService: SplitNavStoreService,
+  constructor(private router: Router,
+              @Inject(MENU_TOKEN) public menus: Menu[],
+              private splitNavStoreService: SplitNavStoreService,
               private activatedRoute: ActivatedRoute, private tabService: TabService,
               private cdr: ChangeDetectorRef, private themesService: ThemeService,
               private titleServe: Title, @Inject(DOCUMENT) private doc: Document) {

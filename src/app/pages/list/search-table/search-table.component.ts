@@ -1,6 +1,6 @@
 import {Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {MyTableConfig} from '../../../shared/components/ant-table/ant-table.component';
+import {MyTableConfig, SortFile} from '../../../shared/components/ant-table/ant-table.component';
 import {PageHeaderType} from '../../../shared/components/page-header/page-header.component';
 
 import {NzTableQueryParams} from 'ng-zorro-antd/table';
@@ -126,9 +126,13 @@ export class SearchTableComponent implements OnInit {
 
   }
 
-  del():void{
+  del(): void {
     this.message.info('控制台打印出被勾选中的列了，是支持分页保存的')
     console.log(this.cashArray);
+  }
+
+  changeSort(e: SortFile): void {
+    this.message.info(`排序字段：${e.fileName},排序为:${e.sortDir}`);
   }
 
   // 修改一页几条
@@ -147,15 +151,17 @@ export class SearchTableComponent implements OnInit {
     this.tableConfig = {
       headers: [
         {
-          title: '文字很长1',
-          width: 100,
+          title: '文字很长',
+          width: 130,
           field: 'productName',
+          showSort: true,
         },
         {
           title: '换行',
           width: 100,
           field: 'casNo',
           notNeedEllipsis: true,
+          showSort: true,
           tdClassList: ['text-wrap'],
         }, {
           title: '加样式',

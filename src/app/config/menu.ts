@@ -1,7 +1,15 @@
 import {ActionCode} from './actionCode';
 import {Menu} from '../core/services/types';
+import {InjectionToken} from "@angular/core";
 
-export const menuNav: Menu[] = [
+
+export const MENU_TOKEN = new InjectionToken<Menu[]>('menu-token', {
+  providedIn: 'root', factory(): Menu[] {
+    return menuNav;
+  }
+})
+
+const menuNav: Menu[] = [
   {
     title: 'Dashboard',
     icon: 'dashboard',
