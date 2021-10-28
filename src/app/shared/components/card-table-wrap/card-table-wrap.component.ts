@@ -27,6 +27,7 @@ interface TableSizeItem {
 })
 export class CardTableWrapComponent implements OnInit, AfterContentInit {
   @Input() btnTpl: TemplateRef<any> | undefined;
+  @Input() isNormalTable = true;
   @Output() reload = new EventEmitter<any>();
   @ContentChild(AntTableComponentToken) antTableComponent!: AntTableComponentToken;
   tableConfigVisible = false;
@@ -85,8 +86,10 @@ export class CardTableWrapComponent implements OnInit, AfterContentInit {
   }
 
   ngAfterContentInit(): void {
-    this.tableHeaders = [...this.antTableComponent.tableConfig.headers];
-    this.tableHeaders.forEach(item => item.show = true);
+    if (this.isNormalTable) {
+      this.tableHeaders = [...this.antTableComponent.tableConfig.headers];
+      this.tableHeaders.forEach(item => item.show = true);
+    }
   }
 
 }

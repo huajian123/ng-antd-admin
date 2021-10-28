@@ -1,10 +1,12 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {DefaultComponent} from "./default.component";
+import {JudgLoginGuard} from "../../core/services/common/guard/judgLogin.guard";
 
 const routes: Routes = [
   {
     path: '', component: DefaultComponent, data: {shouldDetach: 'no'},
+    canActivate: [JudgLoginGuard],
     children: [
       {
         path: 'dashboard',
@@ -33,6 +35,10 @@ const routes: Routes = [
       {
         path: 'result',
         loadChildren: () => import('../../pages/result/result.module').then(m => m.ResultModule)
+      },
+      {
+        path: 'internal-manage',
+        loadChildren: () => import('../../pages/internal-manage/internal-manage.module').then(m => m.InternalManageModule)
       },
       {
         path: 'about',

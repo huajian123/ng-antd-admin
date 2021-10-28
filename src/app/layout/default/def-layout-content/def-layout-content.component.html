@@ -66,6 +66,7 @@
       class="menu-sidebar"
       nzNoAnimation
       [class.mixi-left-nav-fixed]="isFixedLeftNav"
+      [class.t-0]="!themesOptions.hasTopArea"
       [nzTheme]="(isNightTheme$|async)?'dark':'light'"
       [nzWidth]="208"
       [nzCollapsedWidth]="48"

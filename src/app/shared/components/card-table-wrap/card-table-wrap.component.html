@@ -6,7 +6,7 @@
     <div class="ant-pro-table-toolbar-option" *ngIf="btnTpl">
       <ng-container *ngTemplateOutlet="btnTpl"></ng-container>
     </div>
-    <div class="ant-pro-table-toolbar-default-option">
+    <div class="ant-pro-table-toolbar-default-option" *ngIf="isNormalTable">
       <nz-divider nzType="vertical"></nz-divider>
       <nz-space [nzSize]="16" nzDirection="horizontal">
         <i class="hand-model" nz-popover

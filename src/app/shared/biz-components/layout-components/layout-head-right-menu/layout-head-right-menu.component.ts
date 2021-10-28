@@ -7,6 +7,7 @@ import {fnFormatePath} from '../../../../utils/tools';
 import {SearchRouteService} from "../../../../widget/common-widget/search-route/search-route.service";
 import {ModalOptions} from "ng-zorro-antd/modal";
 import {NzMessageService} from "ng-zorro-antd/message";
+import {AuthKey} from "../../../../config/constant";
 
 @Component({
   selector: 'app-layout-head-right-menu',
@@ -35,6 +36,7 @@ export class LayoutHeadRightMenuComponent implements OnInit {
 
   goLogin(): void {
     this.tabService.clearTabs();
+    this.windowServe.removeStorage(AuthKey);
     SimpleReuseStrategy.handlers = {};
     // @ts-ignore
     SimpleReuseStrategy.waitDelete = fnFormatePath(this.activatedRoute.snapshot['_routerState'].url);

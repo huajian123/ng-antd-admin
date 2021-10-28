@@ -10,6 +10,7 @@ import {SplitNavStoreService} from '../../../core/services/store/split-nav-store
 import {Menu} from "../../../core/services/types";
 import {DOCUMENT} from "@angular/common";
 import {MENU_TOKEN} from "../../../config/menu";
+import {AuthService} from "../../../core/services/store/auth.service";
 
 @Component({
   selector: 'app-nav-bar',
@@ -32,8 +33,10 @@ export class NavBarComponent implements OnInit, OnDestroy {
   isCollapsed = false;
   isMixiMode = false;
   copyMenus: Menu[] = _.cloneDeep(this.menus);
+  authCodeArray: string[] = [];
 
   constructor(private router: Router,
+              private authService: AuthService,
               @Inject(MENU_TOKEN) public menus: Menu[],
               private splitNavStoreService: SplitNavStoreService,
               private activatedRoute: ActivatedRoute, private tabService: TabService,
@@ -97,14 +100,26 @@ export class NavBarComponent implements OnInit, OnDestroy {
     const currentTopNav = this.menus[index];
     if (currentTopNav.children && currentTopNav.children.length > 0) {
       // 当前左侧导航数组
-      const currentLeftNavArray = currentTopNav.children;
-      if (!currentLeftNavArray[0].children) {
+      /*添加了权限版*/
+      let currentLeftNavArray = currentTopNav.children;
+      currentLeftNavArray = currentLeftNavArray.filter(item => {
+        return this.authCodeArray.includes(item.actionCode!);
+      });
+      if (currentLeftNavArray.length > 0 && !currentLeftNavArray[0].children) {
         this.router.navigateByUrl(currentLeftNavArray[0].path!);
-        this.splitNavStoreService.setSplitLeftNavArrayStore(currentLeftNavArray);
-      } else {
+      } else if (currentLeftNavArray.length > 0 && currentLeftNavArray[0].children) {
         this.router.navigateByUrl(currentLeftNavArray[0].children[0].path!);
-        this.splitNavStoreService.setSplitLeftNavArrayStore(currentLeftNavArray);
       }
+      this.splitNavStoreService.setSplitLeftNavArrayStore(currentLeftNavArray);
+      /*添加了权限版结束*/
+      // const currentLeftNavArray = currentTopNav.children;
+      // if (!currentLeftNavArray[0].children) {
+      //   this.router.navigateByUrl(currentLeftNavArray[0].path!);
+      //   this.splitNavStoreService.setSplitLeftNavArrayStore(currentLeftNavArray);
+      // } else {
+      //   this.router.navigateByUrl(currentLeftNavArray[0].children[0].path!);
+      //   this.splitNavStoreService.setSplitLeftNavArrayStore(currentLeftNavArray);
+      // }
     }
   }
 
@@ -211,6 +226,10 @@ export class NavBarComponent implements OnInit, OnDestroy {
     this.closeMenuOpen(this.menus);
   }
 
+  subAuth(): void {
+    this.authService.getAuthCode().pipe(takeUntil(this.destory$)).subscribe(res => this.authCodeArray = res);
+  }
+
   subThemesSettings(): void {
     this.isOverMode$.pipe(switchMap(res => {
       this.isOverMode = res;
@@ -227,6 +246,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subIsCollapsed();
     this.subThemesSettings();
+    this.subAuth();
   }
 
   ngOnDestroy(): void {

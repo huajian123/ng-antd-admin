@@ -32,7 +32,7 @@
         <nz-resize-handle *ngIf="!last&&(tableConfig.showCheckbox?true:!last)" nzDirection="right">
           <div class="resize-trigger"></div>
         </nz-resize-handle>
-        <div class="center">
+        <div>
           {{head.title}}
           <div class="sort-wrap m-l-8 hand-model" (click)="changeSort(head)" *ngIf="head.showSort">
             <i class="sort-caret ascending" [class.sort-caret-sel-asc]="head.sortDir==='asc'"></i>

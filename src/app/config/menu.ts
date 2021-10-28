@@ -16,12 +16,13 @@ const menuNav: Menu[] = [
     open: false,
     selected: false,
     path: '/default/dashboard',
-    actionCode: ActionCode.Dashboard,
+    actionCode: ActionCode.UserManage,
     children: [
       {
         title: '分析页',
         open: false,
         selected: false,
+        actionCode: ActionCode.UserManage,
         icon: 'dashboard',
         path: '/default/dashboard/analysis',
       },
@@ -29,6 +30,7 @@ const menuNav: Menu[] = [
         title: '监控页',
         open: false,
         selected: false,
+        actionCode: ActionCode.UserManage,
         icon: 'dashboard',
         path: '/default/dashboard/monitor',
       },
@@ -36,6 +38,7 @@ const menuNav: Menu[] = [
         title: '工作台',
         open: false,
         selected: false,
+        actionCode: ActionCode.UserManage,
         icon: 'dashboard',
         path: '/default/dashboard/workbench',
       },
@@ -46,7 +49,7 @@ const menuNav: Menu[] = [
     icon: 'form',
     open: false,
     selected: false,
-    actionCode: ActionCode.FormModule,
+    actionCode: ActionCode.UserManage,
     path: '/default/form',
     children: [
       {
@@ -54,12 +57,14 @@ const menuNav: Menu[] = [
         open: false,
         selected: false,
         icon: 'form',
+        actionCode: ActionCode.UserManage,
         path: '/default/form/base-form',
       },
       {
         title: '分步表单',
         open: false,
         selected: false,
+        actionCode: ActionCode.UserManage,
         icon: 'form',
         path: '/default/form/step-form',
       },
@@ -67,6 +72,7 @@ const menuNav: Menu[] = [
         title: '高级表单',
         open: false,
         selected: false,
+        actionCode: ActionCode.UserManage,
         icon: 'form',
         path: '/default/form/advanced-form',
       },
@@ -77,13 +83,14 @@ const menuNav: Menu[] = [
     icon: 'table',
     open: false,
     selected: false,
-    actionCode: ActionCode.ListModule,
+    actionCode: ActionCode.UserManage,
     path: '/default/list',
     children: [
       {
         title: '搜索列表',
         open: false,
         selected: false,
+        actionCode: ActionCode.UserManage,
         icon: 'table',
         children: [
           {
@@ -91,6 +98,7 @@ const menuNav: Menu[] = [
             open: false,
             selected: false,
             icon: 'table',
+            actionCode: ActionCode.UserManage,
             path: '/default/list/search-list/article',
           },
           {
@@ -98,6 +106,7 @@ const menuNav: Menu[] = [
             open: false,
             selected: false,
             icon: 'table',
+            actionCode: ActionCode.UserManage,
             path: '/default/list/search-list/project',
           },
           {
@@ -105,6 +114,7 @@ const menuNav: Menu[] = [
             open: false,
             selected: false,
             icon: 'table',
+            actionCode: ActionCode.UserManage,
             path: '/default/list/search-list/application',
           },
         ]
@@ -114,6 +124,7 @@ const menuNav: Menu[] = [
         open: false,
         selected: false,
         icon: 'table',
+        actionCode: ActionCode.UserManage,
         path: '/default/list/search-table',
       },
       {
@@ -121,6 +132,7 @@ const menuNav: Menu[] = [
         open: false,
         selected: false,
         icon: 'table',
+        actionCode: ActionCode.UserManage,
         path: '/default/list/standard-table',
       },
       {
@@ -128,6 +140,7 @@ const menuNav: Menu[] = [
         open: false,
         selected: false,
         icon: 'table',
+        actionCode: ActionCode.UserManage,
         path: '/default/list/card-table',
       },
     ]
@@ -137,13 +150,14 @@ const menuNav: Menu[] = [
     icon: 'profile',
     open: false,
     selected: false,
-    actionCode: ActionCode.DetailModule,
+    actionCode: ActionCode.UserManage,
     path: '/default/detail',
     children: [
       {
         title: '基础详情页',
         open: false,
         selected: false,
+        actionCode: ActionCode.UserManage,
         icon: 'profile',
         path: '/default/detail/base-detail',
       },
@@ -151,6 +165,7 @@ const menuNav: Menu[] = [
         title: '高级详情页',
         open: false,
         selected: false,
+        actionCode: ActionCode.UserManage,
         icon: 'profile',
         path: '/default/detail/adv-detail',
       },
@@ -161,7 +176,7 @@ const menuNav: Menu[] = [
     icon: 'check-circle',
     open: false,
     selected: false,
-    actionCode: ActionCode.ResultModule,
+    actionCode: ActionCode.UserManage,
     path: '/default/result',
     children: [
       {
@@ -169,12 +184,14 @@ const menuNav: Menu[] = [
         open: false,
         selected: false,
         icon: 'check-circle',
+        actionCode: ActionCode.UserManage,
         path: '/default/result/success',
       },
       {
         title: '失败页',
         open: false,
         selected: false,
+        actionCode: ActionCode.UserManage,
         icon: 'check-circle',
         path: '/default/result/fail',
       },
@@ -185,12 +202,13 @@ const menuNav: Menu[] = [
     icon: 'warning',
     open: false,
     selected: false,
-    actionCode: ActionCode.ErrorModule,
+    actionCode: ActionCode.UserManage,
     path: '/default/except',
     children: [
       {
         title: '403',
         open: false,
+        actionCode: ActionCode.UserManage,
         selected: false,
         icon: 'warning',
         path: '/default/except/except403',
@@ -200,12 +218,14 @@ const menuNav: Menu[] = [
         open: false,
         selected: false,
         icon: 'warning',
+        actionCode: ActionCode.UserManage,
         path: '/default/except/except404',
       },
       {
         title: '500',
         open: false,
         selected: false,
+        actionCode: ActionCode.UserManage,
         icon: 'warning',
         path: '/default/except/except500',
       },
@@ -216,7 +236,7 @@ const menuNav: Menu[] = [
     icon: 'user',
     open: false,
     selected: false,
-    actionCode: ActionCode.PersonalModule,
+    actionCode: ActionCode.UserManage,
     path: '/default/personal',
     children: [
       {
@@ -224,21 +244,58 @@ const menuNav: Menu[] = [
         open: false,
         selected: false,
         icon: 'user',
+        actionCode: ActionCode.UserManage,
         path: '/default/personal/personal-center',
       },
       {
         title: '个人设置',
         open: false,
+        actionCode: ActionCode.UserManage,
         selected: false,
         icon: 'user',
         path: '/default/personal/personal-setting',
       },
     ]
   },
+/*    {
+    title: '内部管理',
+    icon: 'highlight',
+    open: false,
+    selected: false,
+    actionCode: ActionCode.InternalModule,
+    path: '/default/internal-manage',
+    children: [
+      {
+        title: '用户管理',
+        open: false,
+        selected: false,
+        icon: 'highlight',
+        path: '/default/internal-manage/user-manage',
+        actionCode: ActionCode.UserManage,
+      },
+      {
+        title: '角色管理',
+        open: false,
+        selected: false,
+        icon: 'highlight',
+        path: '/default/internal-manage/role-manage',
+        actionCode: ActionCode.Role,
+      },
+      {
+        title: '部门管理',
+        open: false,
+        selected: false,
+        icon: 'highlight',
+        path: '/default/internal-manage/dept-manage',
+        actionCode: ActionCode.Dept,
+      },
+    ]
+  },*/
   {
     title: '功能',
     icon: 'dashboard',
     open: false,
+    actionCode: ActionCode.UserManage,
     selected: false,
     path: '/default/about',
     children: [
@@ -246,12 +303,14 @@ const menuNav: Menu[] = [
         title: '拖拽modal',
         icon: 'dashboard',
         open: false,
+        actionCode: ActionCode.UserManage,
         selected: false,
         path: '/default/about',
       },
       {
         title: '空白页',
         icon: 'usergroup-delete',
+        actionCode: ActionCode.UserManage,
         open: false,
         selected: false,
         path: '/blank/empty-page',
@@ -260,6 +319,7 @@ const menuNav: Menu[] = [
         title: '外部链接',
         icon: 'usergroup-delete',
         open: false,
+        actionCode: ActionCode.UserManage,
         selected: false,
         path: 'https://www.baidu.com/',
         isNewLink: true,

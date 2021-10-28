@@ -31,9 +31,15 @@ export const ActionCode = {
 
 
   Dept: '0028', // 部门管理
+  DeptAdd: '0128',
+  DeptEdit: '0228',
+  DeptDel: '0328',
+
 
   UserManage: '0038',  // 用户管理
   UserDetail: '0138',  // 查看详情
   UserEdit: '0238',  // 用户编辑
+  UserAdd: '0338',  // 用户新增
+
 
 };

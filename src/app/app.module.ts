@@ -12,6 +12,8 @@ import {SubWindowWithService} from "./core/services/common/sub-window-with.servi
 import {InitThemeService} from "./core/services/common/init-theme.service";
 import {QuicklinkModule} from "ngx-quicklink";
 import {SharedModule} from "./shared/shared.module";
+import interceptors from './core/services/interceptors';
+import {LoginModalModule} from "./widget/biz-widget/login/login-modal.module";
 
 
 export function StartupServiceFactory(startupService: StartupService) {
@@ -19,13 +21,12 @@ export function StartupServiceFactory(startupService: StartupService) {
 }
 
 export function InitThemeServiceFactory(initThemeService: InitThemeService) {
-  return async () =>await initThemeService.initTheme();
+  return async () => await initThemeService.initTheme();
 }
 
 export function SubWindowWithServiceFactory(subWindowWithService: SubWindowWithService) {
   return () => subWindowWithService.subWindowWidth();
 }
-
 
 
 // 初始化服务
@@ -68,10 +69,11 @@ const APPINIT_PROVIDES = [
     HttpClientModule,
     CoreModule,
     SharedModule,
+    LoginModalModule,
     QuicklinkModule,
     AppRoutingModule,
   ],
-  providers: [...APPINIT_PROVIDES],
+  providers: [...interceptors, ...APPINIT_PROVIDES],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -1,64 +1,88 @@
-<ul *ngIf="!isMixiHead" nz-menu [nzNoAnimation]="(themesOptions$|async)!.mode==='top'"  [nzInlineCollapsed]="isCollapsed$|async"
+<ul *ngIf="!isMixiHead" nz-menu [nzNoAnimation]="(themesOptions$|async)!.mode==='top'"
+    [nzInlineCollapsed]="isCollapsed$|async"
     [nzTheme]="(isMixiMode&&!(isOverMode$|async)&&!(isNightTheme$|async))?'light':(isMixiMode&&(isNightTheme$|async)?'dark':((themesOptions$|async)!.theme))"
     [nzMode]="((themesOptions$|async)!.mode==='side'||(themesOptions$|async)!.mode==='mixi'||(isOverMode$|async))?'inline':'horizontal'">
   <ng-container *ngTemplateOutlet="menuTpl;context:{$implicit: isMixiLeft?(leftMenuArray$|async):menus}"></ng-container>
   <ng-template #menuTpl let-menus>
     <ng-container *ngFor="let menu of menus;">
-      <!--一级菜单-->
-      <li [nzPaddingLeft]="themesMode!=='top'?16:0" nz-menu-item *ngIf="!menu.children||menu.children.length===0" [nzSelected]="menu.selected">
-        <a (click)="changeRoute(menu)">
-          <i nz-icon [nzType]="menu.icon"></i>
-          <span>{{menu.title}}</span>
-        </a>
-      </li>
-      <!--二级菜单-->
-      <ng-container *ngIf="menu.children&&menu.children.length>0">
-        <!--*appAuth="menu.actionCode"-->
-        <li [nzPaddingLeft]="themesMode!=='top'?16:0" nz-submenu (nzOpenChange)="changeOpen(menu,menus)" [(nzOpen)]="menu.open"
-            [nzTitle]="menu.title" [nzIcon]="menu.icon">
-          <ul>
-            <ng-container *ngFor="let menuSecond of menu.children">
-              <li [nzPaddingLeft]="themesMode!=='top'?32:0" nz-menu-item [nzSelected]="menuSecond.selected"
-                  *ngIf="!menuSecond.children||menuSecond.children.length===0;">
-                <a (click)="changeRoute(menuSecond)">
-                  <span>{{menuSecond.title}}</span>
-                </a>
-              </li>
-              <!--三级菜单-->
-              <li [nzPaddingLeft]="themesMode!=='top'?32:0" *ngIf="menuSecond.children&&menuSecond.children.length>0" nz-submenu
-                  (nzOpenChange)="changeOpen(menuSecond,menu.children)" [(nzOpen)]="menuSecond.open"
-                  [nzTitle]="menuSecond.title" [nzIcon]="menuSecond.icon">
-                <ul>
-                  <li [nzPaddingLeft]="themesMode!=='top'?48:0" nz-menu-item [nzSelected]="menuThird.selected" *ngFor="let menuThird of menuSecond.children">
-                    <a (click)="changeRoute(menuThird)">
-                      <span>{{menuThird.title}}</span>
+
+      <!--权限1-->
+      <ng-container *appAuth="menu.actionCode">
+        <!--一级菜单-->
+        <li [nzPaddingLeft]="themesMode!=='top'?16:0" nz-menu-item *ngIf="!menu.children||menu.children.length===0"
+            [nzSelected]="menu.selected">
+          <a (click)="changeRoute(menu)">
+            <i nz-icon [nzType]="menu.icon"></i>
+            <span>{{menu.title}}</span>
+          </a>
+        </li>
+        <!--二级菜单-->
+        <ng-container *ngIf="menu.children&&menu.children.length>0">
+          <!--*appAuth="menu.actionCode"-->
+          <li [nzPaddingLeft]="themesMode!=='top'?16:0" nz-submenu (nzOpenChange)="changeOpen(menu,menus)"
+              [(nzOpen)]="menu.open"
+              [nzTitle]="menu.title" [nzIcon]="menu.icon">
+            <ul>
+              <ng-container *ngFor="let menuSecond of menu.children">
+                <!--权限2-->
+                <ng-container *appAuth="menuSecond.actionCode">
+
+
+                  <li [nzPaddingLeft]="themesMode!=='top'?32:0" nz-menu-item [nzSelected]="menuSecond.selected"
+                      *ngIf="!menuSecond.children||menuSecond.children.length===0;">
+                    <a (click)="changeRoute(menuSecond)">
+                      <span>{{menuSecond.title}}</span>
                     </a>
                   </li>
-                </ul>
-              </li>
-            </ng-container>
-          </ul>
-        </li>
+                  <!--三级菜单-->
+                  <li [nzPaddingLeft]="themesMode!=='top'?32:0"
+                      *ngIf="menuSecond.children&&menuSecond.children.length>0" nz-submenu
+                      (nzOpenChange)="changeOpen(menuSecond,menu.children)" [(nzOpen)]="menuSecond.open"
+                      [nzTitle]="menuSecond.title" [nzIcon]="menuSecond.icon">
+                    <ul>
+                      <li [nzPaddingLeft]="themesMode!=='top'?48:0" nz-menu-item [nzSelected]="menuThird.selected"
+                          *ngFor="let menuThird of menuSecond.children">
+                        <a (click)="changeRoute(menuThird)">
+                          <span>{{menuThird.title}}</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+
+                </ng-container>
+                <!--权限2结束-->
+              </ng-container>
+            </ul>
+          </li>
+        </ng-container>
+
       </ng-container>
+      <!--权限1结束-->
+
 
     </ng-container>
   </ng-template>
 </ul>
 
 <ul *ngIf="isMixiHead" nz-menu nzTheme="dark" nzMode="horizontal">
+
   <ng-container *ngFor="let menu of menus;let i=index;">
-    <li nz-menu-item *ngIf="!menu.children||menu.children.length===0" [nzSelected]="menu.selected">
-      <a [routerLink]="[menu.path]">
+    <!--权限1（不需要时删除此ng-container节点）-->
+    <ng-container *appAuth="menu.actionCode">
+      <li nz-menu-item *ngIf="!menu.children||menu.children.length===0" [nzSelected]="menu.selected">
+        <a [routerLink]="[menu.path]">
+          <i *ngIf="menu.icon" nz-icon [nzType]="menu.icon"></i>
+          <span>{{menu.title}}</span>
+        </a>
+      </li>
+
+      <li nz-menu-item (click)="changTopNav(i)" *ngIf="menu.children&&menu.children.length>0"
+          [nzSelected]="menu.selected">
         <i *ngIf="menu.icon" nz-icon [nzType]="menu.icon"></i>
         <span>{{menu.title}}</span>
-      </a>
-    </li>
-
-    <li nz-menu-item (click)="changTopNav(i)" *ngIf="menu.children&&menu.children.length>0"
-        [nzSelected]="menu.selected">
-      <i *ngIf="menu.icon" nz-icon [nzType]="menu.icon"></i>
-      <span>{{menu.title}}</span>
-    </li>
+      </li>
+    </ng-container>
+    <!--权限1结束-->
   </ng-container>
 </ul>
 
