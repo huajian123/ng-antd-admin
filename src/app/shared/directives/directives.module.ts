@@ -4,8 +4,10 @@ import {AdDirective} from './ad.directive';
 import {ScreenLessHiddenDirective} from './screen-less-hidden.directive';
 import {LayoutHeadBgDirective} from './layout-head-bg.directive';
 import {AuthDirective} from "./auth.directive";
+import {DebounceClickDirective} from "./debounceClick.directive";
+import {DisabledDirective} from "./disabled.directive";
 
-const DIRECTIVES = [AdDirective, ScreenLessHiddenDirective, LayoutHeadBgDirective, AuthDirective];
+const DIRECTIVES = [DisabledDirective, DebounceClickDirective, AdDirective, ScreenLessHiddenDirective, LayoutHeadBgDirective, AuthDirective];
 
 @NgModule({
   declarations: [...DIRECTIVES],
