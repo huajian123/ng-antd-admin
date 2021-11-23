@@ -88,7 +88,7 @@ export class SearchTableComponent implements OnInit {
         file3: '加样式',
       },
     ];
-    this.tableConfig.total = 13;
+    this.tableConfig.total = 6;
     this.tableConfig.pageIndex = 1;
     /*   this.dataService.getProjectlist(params).subscribe((data) => {
          const {list, total, pageNum} = data;

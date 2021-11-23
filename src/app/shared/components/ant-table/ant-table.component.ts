@@ -165,6 +165,7 @@ export class AntTableComponent implements OnInit, OnChanges {
       this.checkFn(item, isChecked);
     });
     this.selectedChange.emit(this.checkedCashArrayFromComment);
+    this.refreshStatus();
   }
 
   // 刷新复选框状态
