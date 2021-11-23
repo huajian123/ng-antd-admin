@@ -21,6 +21,7 @@ export class AuthService {
       return rol.split(',');
     } catch (e) {
       const rol  = "0006,0028,0138,0007,0018,0238,0128,0004,0005,0002,0001,0518,0318,0418,0008,0118,0338,0038,0228,0218,0009,0328";
+      console.log('模拟权限码' + rol.split(','));
       return rol.split(',');
     }
 

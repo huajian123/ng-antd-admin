@@ -30,7 +30,9 @@ export class LoginFormComponent implements OnInit {
 
   submitForm(): void {
     this.spinService.setCurrentGlobalSpinStore(true);
+    /*模拟登录*/
     this.windowServe.setStorage(AuthKey, 'TokenPre + token');
+    this.authService.setAuthCode(this.authService.parsToken(TokenPre));
     // if (!fnCheckForm(this.validateForm)) {
     //   return;
     // }

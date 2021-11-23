@@ -321,7 +321,7 @@ const menuNav: Menu[] = [
         open: false,
         actionCode: ActionCode.UserManage,
         selected: false,
-        path: 'https://www.baidu.com/',
+        path: 'https://docs.chat.hypergo.net/docs/intro/',
         isNewLink: true,
       },
     ]
