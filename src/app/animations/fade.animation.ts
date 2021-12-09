@@ -24,30 +24,45 @@ export const fadeAnimation = trigger('fadeAnimation', [
     ])
 ]);
 
+/*
+export const fadeRouteAnimation = trigger('fadeRouteAnimation', [
+  transition('* <=> *', [
+    style({ position: 'relative' }),
+    query(':enter, :leave', [
+      style({
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%'
+      }),
+      animateChild(),
+    ], options),
+    query(':enter', [
+      style({ opacity: 0 })
+    ], options),
+    group([
+      query(':leave', [
+        animate('.5s ease-in', style({ opacity: 0 }))
+      ], options),
+      query(':enter', [
+        animate('.5s ease-in', style({ opacity: 1 }))
+      ], options)
+    ]),
+  ])
+]);
+
+*/
+
+
 /** 渐隐渐显路由动画 */
 export const fadeRouteAnimation = trigger('fadeRouteAnimation', [
-    transition('* <=> *', [
-        style({ position: 'relative' }),
-        query(':enter, :leave', [
-            style({
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%'
-            }),
-            animateChild(),
-        ], options),
-        query(':enter', [
-            style({ opacity: 0 })
-        ], options),
-        group([
-            query(':leave', [
-                animate('5s ease-in', style({ opacity: 0 }))
-            ], options),
-            query(':enter', [
-                animate('5s ease-in', style({ opacity: 1 }))
-            ], options)
-        ]),
-    ])
+  transition('*<=>*', [
+
+    // css styles at start of transition
+    style({ opacity: 0 }),
+
+    // animation and styles at end of transition
+    animate('0.3s ease-in', style({ opacity: 1 }))
+  ]),
 ]);

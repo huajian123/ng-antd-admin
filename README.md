@@ -3,7 +3,7 @@
 项目目标：我想把vue-vben-admin的大多数功能搬过来使用ng来实现，这样以后遇到业务就有的参考了。<br>
 如果本项目对你有用，如果你愿意的话，麻烦点个star，谢谢啊<br>
 if help you, if you want ,please give me a star ,thank you<br>
-视频介绍地址 [项目介绍](https://www.bilibili.com/video/BV12B4y1T7h7/)<br>
+视频介绍地址 [项目介绍](https://www.bilibili.com/video/BV1EM4y1w7zd/)<br>
 online demo地址 [demo](http://124.71.128.53:8081/)<br>
 # 禁用严格模式
 
@@ -52,8 +52,8 @@ const routes: Routes = [
 # 切换tab调用的临时声明周期如下
 relatedLink数组中保存相关联的两个路由，值为每个路由地址最后的/后的字符串
 ```typescript
- _onReuseInit: () => void;
-  _onReuseDestroy: () => void;
+_onReuseInit: () => void;
+_onReuseDestroy: () => void;
 
 ```
 直接在目标组件中写出方法名为_onReuseInit或者_onReuseDestroy的方法即可实现

@@ -69,7 +69,9 @@
   <ng-container content>
     <div>
       <app-tab></app-tab>
-      <router-outlet></router-outlet>
+      <div  [@fadeRouteAnimation]="prepareRoute(outlet)">
+        <router-outlet #outlet="outlet"></router-outlet>
+      </div>
     </div>
   </ng-container>
 </app-def-layout-content>

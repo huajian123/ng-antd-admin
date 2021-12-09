@@ -3,12 +3,17 @@ import {ThemeService} from "../../core/services/store/theme.service";
 import {Subject} from "rxjs";
 import {takeUntil} from "rxjs/operators";
 import {NavDrawerComponent} from "./nav-drawer/nav-drawer.component";
+import {RouterOutlet} from "@angular/router";
+import {fadeRouteAnimation} from "../../animations/fade.animation";
 
 @Component({
   selector: 'app-default',
   templateUrl: './default.component.html',
   styleUrls: ['./default.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    fadeRouteAnimation
+  ]
 })
 export class DefaultComponent implements OnInit, OnDestroy {
   isCollapsed$ = this.themesService.getIsCollapsed();
@@ -34,6 +39,10 @@ export class DefaultComponent implements OnInit, OnDestroy {
   subTheme(): void {
     this.themesService.getIsCollapsed().pipe(takeUntil(this.destory$)).subscribe(res => this.isCollapsed = res);
     this.themesService.getIsOverMode().pipe(takeUntil(this.destory$)).subscribe(res => this.isOverMode = res);
+  }
+
+  prepareRoute(outlet: RouterOutlet) {
+    return outlet?.activatedRouteData?.key;
   }
 
   ngOnInit(): void {

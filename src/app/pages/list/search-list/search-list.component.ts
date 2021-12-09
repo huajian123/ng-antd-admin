@@ -6,14 +6,13 @@ import {
   OnDestroy,
   ViewChild,
   TemplateRef,
-  ComponentFactoryResolver, AfterViewInit
 } from '@angular/core';
 import {PageHeaderType} from '../../../shared/components/page-header/page-header.component';
 import {SearchListService} from '../../../core/services/store/biz-store-service/search-list/search-list.service';
 import {Subject} from 'rxjs';
 import {filter, takeUntil} from 'rxjs/operators';
-import {AdDirective} from '../../../shared/directives/ad.directive';
-import {ActivatedRoute, NavigationEnd, NavigationStart, Router, RouterEvent} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router, RouterEvent, RouterOutlet} from '@angular/router';
+import {fadeRouteAnimation} from "../../../animations/fade.animation";
 
 interface TabInterface {
   label: string;
@@ -24,7 +23,10 @@ interface TabInterface {
   selector: 'app-search-list',
   templateUrl: './search-list.component.html',
   styleUrls: ['./search-list.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    fadeRouteAnimation
+  ]
 })
 export class SearchListComponent implements OnInit, OnDestroy {
   @ViewChild('headerContent', {static: true}) headerContent!: TemplateRef<any>;
@@ -63,6 +65,10 @@ export class SearchListComponent implements OnInit, OnDestroy {
         });
       }
     });
+  }
+
+  prepareRoute(outlet: RouterOutlet) {
+    return outlet?.activatedRouteData?.key;
   }
 
   to(item: TabInterface): void {
