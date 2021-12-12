@@ -3,19 +3,19 @@
 
 <div class="normal-table-wrap">
   <nz-card>
-    <section class="page-wrap">
+    <section class="page-wrap" [class.p-0]="stepDirection==='vertical'">
       <app-water-mark></app-water-mark>
       <section class="step-wrap">
-        <nz-steps [nzCurrent]="currentStep-1">
+        <nz-steps [nzDirection]="stepDirection" [nzCurrent]="currentStep-1">
           <nz-step nzTitle="填写转账信息"></nz-step>
           <nz-step nzTitle="确认转账信息"></nz-step>
           <nz-step nzTitle="完成"></nz-step>
         </nz-steps>
       </section>
 
-      <section>
+      <section >
         <ng-container *ngIf="currentStep===1">
-          <form class="form-wrap p-b-0 center-row" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+          <form [class.p-0]="stepDirection==='vertical'" class="form-wrap p-b-0 center-row" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
             <nz-form-item>
               <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="title">付款账户</nz-form-label>
               <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入标题">
@@ -53,14 +53,15 @@
               </nz-form-control>
             </nz-form-item>
             <nz-form-item nz-row class="register-area">
-              <nz-form-control [nzSpan]="14" [nzOffset]="6">
+              <div nz-col [nzSpan]="6" ></div>
+              <nz-form-control [nzSm]="14" [nzXs]="24">
                 <button nz-button nzType="primary" (click)="currentStep=currentStep+1">下一步</button>
               </nz-form-control>
             </nz-form-item>
           </form>
 
           <nz-divider></nz-divider>
-          <section class="desc-wrap">
+          <section class="desc-wrap"  [class.p-0]="stepDirection==='vertical'">
             <h3 nz-typography nzType="secondary">说明</h3>
             <h4 nz-typography nzType="secondary">转账到支付宝账户</h4>
             <p nz-typography nzType="secondary">
@@ -115,10 +116,10 @@
               <button nz-button>查看账单</button>
             </div>
           </nz-result>
-          <div nz-result-content class="desc-bg center">
+          <div nz-result-content class="desc-bg center"  [class.p-l-16]="stepDirection==='vertical'">
             <div class="determine-wrap p-b-0">
 
-              <nz-descriptions class="m-t-20">
+              <nz-descriptions class="m-t-20 p-0" >
                 <nz-descriptions-item nzTitle="付款账户">ant-design@alipay.com</nz-descriptions-item>
                 <nz-descriptions-item nzTitle="收款账户">test@example.com</nz-descriptions-item>
                 <nz-descriptions-item nzTitle="收款人姓名">Alex</nz-descriptions-item>

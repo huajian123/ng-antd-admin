@@ -1,7 +1,8 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {NzFormTooltipIcon} from 'ng-zorro-antd/form';
 import {PageHeaderType} from '../../../shared/components/page-header/page-header.component';
+import {BreakpointObserver} from "@angular/cdk/layout";
 
 @Component({
   selector: 'app-step',
@@ -10,7 +11,7 @@ import {PageHeaderType} from '../../../shared/components/page-header/page-header
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StepComponent implements OnInit {
-
+  stepDirection: 'horizontal' | 'vertical' = 'horizontal';
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '分步表单',
     desc: '将一个冗长或用户不熟悉的表单任务分成多个步骤，指导用户完成。',
@@ -49,7 +50,7 @@ export class StepComponent implements OnInit {
     e.preventDefault();
   }
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private breakpointObserver: BreakpointObserver, private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
@@ -64,6 +65,19 @@ export class StepComponent implements OnInit {
       captcha: [null, [Validators.required]],
       title: [null],
       payWay: ['zhifubao'],
+    });
+
+    this.breakpointObserver.observe(['(max-width: 770px)']).subscribe(result => {
+      let tempDir: 'vertical' | 'horizontal' = 'vertical';
+      if (result.matches) {
+        tempDir = 'vertical';
+      } else {
+        tempDir = 'horizontal';
+      }
+      if (tempDir !== this.stepDirection) {
+        this.stepDirection = tempDir;
+        this.cdr.markForCheck();
+      }
     });
   }
 }
