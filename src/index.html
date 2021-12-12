@@ -7,36 +7,82 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <style type="text/css">
-    .dis-no {
-      display: none !important;
-    }
-
-    .preloader{
-      position:fixed;top:0;left:0;width:100%;height:100%;overflow:hidden;
+    .global-loader {
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 18px;
-      animation: fade 3000ms infinite;
-      transition: all 0.60s;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      opacity: 1;
+      will-change: transform;
+      transition: opacity .5s ease-in-out;
     }
 
-    @keyframes fade {
-      from {
-        opacity: 1.0;
+    .global-loader-fade-in {
+      will-change: transform;
+      opacity: 0;
+    }
+
+    .global-loader-hidden {
+      display: none;
+    }
+
+    .global-loader h1 {
+      font-family: "Helvetica Neue", Helvetica, sans-serif;
+      font-weight: normal;
+      font-size: 18px;
+      letter-spacing: .04rem;
+      white-space: pre;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-image: repeating-linear-gradient(
+        to right,
+        #f44336,
+        #9c27b0,
+        #3f51b5,
+        #03a9f4,
+        #009688,
+        #8bc34a,
+        #ffeb3b,
+        #ff9800
+      );
+      background-size: 750% auto;
+      background-position: 0 100%;
+      animation: gradient 20s infinite;
+      animation-fill-mode: forwards;
+      animation-timing-function: linear;
+    }
+
+    .night-bg {
+      background-color: #141414;
+    }
+
+    @keyframes gradient {
+      0% {
+        background-position: 0 0;
       }
-      50% {
-        opacity: 0.4;
-      }
-      to {
-        opacity: 1.0;
+
+      100% {
+        background-position: -750% 0;
       }
     }
   </style>
 </head>
 <body>
-  <app-root></app-root>
-  <div class="preloader">loading...
-  </div>
+<app-root></app-root>
+<div id="globalLoader" class="global-loader">
+  <h1>loading...</h1>
+</div>
 </body>
+<script>
+  const isNight = window.localStorage.getItem('IsNightKey');
+  if (isNight === "true") {
+    document.getElementById("globalLoader").className += " night-bg"
+  }
+</script>
 </html>

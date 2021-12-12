@@ -402,8 +402,8 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 28px !important;
 }
 
-.animate-bg-0{
-  transition: background-color 0s!important;
+.animate-bg-0 {
+  transition: background-color 0s !important;
 }
 
 .animate-02 {
@@ -524,6 +524,7 @@ h1, h2, h3, h4, h5, h6 {
       flex: 1 1;
       font-size: 16px;
       line-height: 24px;
+      will-change: transform;
       opacity: .85;
     }
 
@@ -547,7 +548,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-
 /*覆盖zorro样式*/
 
 // 对话框增加滚动条
@@ -564,9 +564,10 @@ nz-date-picker {
   width: 100%;
 }
 
-input[nz-input]{
+input[nz-input] {
   .animate-bg-0;
 }
+
 //
 //.overflow-dots {
 //  overflow: hidden;

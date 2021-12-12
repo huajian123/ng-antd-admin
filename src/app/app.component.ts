@@ -1,8 +1,10 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {SpinService} from './core/services/store/spin/spin.service';
 import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
 import {filter} from 'rxjs/operators';
 import {fadeRouteAnimation} from "./animations/fade.animation";
+import {PreloaderService} from "./core/services/common/preloader.service";
+
 @Component({
   selector: 'app-root',
   template: `
@@ -22,18 +24,24 @@ import {fadeRouteAnimation} from "./animations/fade.animation";
     fadeRouteAnimation
   ]
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   loading$ = this.spinService.getCurrentGlobalSpinStore();
 
-  constructor(private spinService: SpinService, public router: Router) {
+  constructor(private preloader: PreloaderService,private spinService: SpinService, public router: Router) {
   }
+
   prepareRoute(outlet: RouterOutlet) {
     return outlet?.activatedRouteData?.key;
   }
+
   ngOnInit(): void {
     (this.router.events.pipe(filter((event: any) => event instanceof NavigationEnd))).subscribe((event: any) => {
       this.spinService.setCurrentGlobalSpinStore(false);
     });
+  }
+
+  ngAfterViewInit(): void {
+    this.preloader.removePreLoader();
   }
 }
 

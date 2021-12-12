@@ -8,12 +8,10 @@ import {AuthService} from "../services/store/auth.service";
   providedIn: 'root',
 })
 export class StartupService {
-  constructor(private authService: AuthService, private windowSer: WindowService,
-              private preloaderService: PreloaderService) {
+  constructor(private authService: AuthService, private windowSer: WindowService) {
   }
 
   load(): Promise<void> {
-    this.preloaderService.removePreLoader();
     const token = this.windowSer.getStorage(AuthKey);
     if (token) {
       this.authService.setAuthCode(this.authService.parsToken(token));

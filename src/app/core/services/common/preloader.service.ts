@@ -10,12 +10,15 @@ export class PreloaderService {
   }
 
   removePreLoader(): void {
-    const preloader = this.doc.querySelector('.preloader');
-    if (!preloader) {
-      return;
+    const el = this.doc.getElementById('globalLoader');
+    if (el) {
+      el.addEventListener('transitionend', () => {
+        el.className = 'global-loader-hidden';
+      });
+
+      if (!el.classList.contains('global-loader-hidden')) {
+        el.className += ' global-loader-fade-in';
+      }
     }
-    preloader.addEventListener('transitionend', () => {
-      preloader.className = 'dis-no';
-    });
   }
 }
