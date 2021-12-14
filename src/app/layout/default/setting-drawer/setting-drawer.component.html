@@ -1,4 +1,4 @@
-<div class="drawer-handle" [class.open]="isCollapsed" (click)="changeCollapsed()">
+<div class="drawer-handle" id="drawer-handle" [class.open]="isCollapsed" (click)="changeCollapsed()">
   <ng-container *ngIf="!isCollapsed; then settingIcon else closeIcon"></ng-container>
   <ng-template #settingIcon>
     <i nz-icon nzType="setting" nzTheme="outline"></i>

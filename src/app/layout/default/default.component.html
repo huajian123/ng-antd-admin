@@ -18,7 +18,7 @@
   <ng-template #headerTpl>
     <app-tool-bar>
       <ng-container left *ngIf="isOverMode||(themeOptions$|async)!.mode==='side';else topHeadTpl">
-        <i class="trigger" nz-icon [nzType]="(isCollapsed$|async) ? 'menu-unfold' : 'menu-fold'"
+        <i id="trigger" class="trigger" nz-icon [nzType]="(isCollapsed$|async) ? 'menu-unfold' : 'menu-fold'"
            (click)="changeCollapsed()"></i>
       </ng-container>
       <ng-template #topHeadTpl>

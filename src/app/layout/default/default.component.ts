@@ -1,10 +1,13 @@
-import {Component, OnInit, ChangeDetectionStrategy, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy, OnDestroy, ViewChild, AfterViewInit} from '@angular/core';
 import {ThemeService} from "../../core/services/store/theme.service";
 import {Subject} from "rxjs";
 import {takeUntil} from "rxjs/operators";
 import {NavDrawerComponent} from "./nav-drawer/nav-drawer.component";
 import {RouterOutlet} from "@angular/router";
 import {fadeRouteAnimation} from "../../animations/fade.animation";
+import {DriverService} from "../../core/services/common/driver.service";
+import {WindowService} from "../../core/services/common/window.service";
+import {IsFirstLogin} from "../../config/constant";
 
 @Component({
   selector: 'app-default',
@@ -15,7 +18,7 @@ import {fadeRouteAnimation} from "../../animations/fade.animation";
     fadeRouteAnimation
   ]
 })
-export class DefaultComponent implements OnInit, OnDestroy {
+export class DefaultComponent implements OnInit, OnDestroy, AfterViewInit {
   isCollapsed$ = this.themesService.getIsCollapsed();
   themeOptions$ = this.themesService.getThemesMode();
   isCollapsed = false;
@@ -23,7 +26,18 @@ export class DefaultComponent implements OnInit, OnDestroy {
   private destory$ = new Subject<void>();
   @ViewChild('navDrawer') navDrawer!: NavDrawerComponent
 
-  constructor(private themesService: ThemeService) {
+  constructor(private themesService: ThemeService, private driverService: DriverService, private windowService: WindowService) {
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      if (this.windowService.getStorage(IsFirstLogin) === "false") {
+        return;
+      }
+      this.windowService.setStorage(IsFirstLogin, "false");
+      this.driverService.load();
+    }, 500)
+
   }
 
   changeCollapsed(): void {

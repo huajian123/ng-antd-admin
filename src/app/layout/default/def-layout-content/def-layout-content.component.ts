@@ -36,7 +36,7 @@ export class DefLayoutContentComponent implements OnInit {
   mixiModeHasLeftNav = this.splitNavStoreService.getSplitLeftNavArrayStore();
   private destory$ = new Subject<void>();
 
-  constructor(private themesService: ThemeService, private splitNavStoreService: SplitNavStoreService) {
+  constructor( private themesService: ThemeService, private splitNavStoreService: SplitNavStoreService) {
   }
 
   changeCollapsed(isCollapsed: boolean): void {
@@ -53,6 +53,7 @@ export class DefLayoutContentComponent implements OnInit {
 
   ngOnInit(): void {
     this.getThemeOptions();
+
   }
 
   ngOnDestroy(): void {
