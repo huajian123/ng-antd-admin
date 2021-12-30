@@ -68,7 +68,7 @@ export class SearchListComponent implements OnInit, OnDestroy {
   }
 
   prepareRoute(outlet: RouterOutlet) {
-    return outlet?.activatedRouteData?.key;
+    return outlet?.activatedRouteData?.['key'];
   }
 
   to(item: TabInterface): void {

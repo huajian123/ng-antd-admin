@@ -1,4 +1,4 @@
-import {Component, OnInit, ChangeDetectionStrategy, ViewChild, ComponentFactoryResolver, ChangeDetectorRef} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy, ViewChild, ChangeDetectorRef} from '@angular/core';
 import {AdDirective} from '../../../shared/directives/ad.directive';
 import {AdComponent, DynamicComponent} from '../../../core/services/types';
 import {BaseComponent} from './base/base.component';
@@ -52,19 +52,16 @@ export class PersonalSettingComponent implements OnInit {
   ];
   currentTitle: string = this.menus[0].title;
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver,
-              private breakpointObserver: BreakpointObserver, private cdr: ChangeDetectorRef) {
-  }
+  constructor(private breakpointObserver: BreakpointObserver, private cdr: ChangeDetectorRef) {}
 
   to(item: { key: string; title: string; selected?: boolean }): void {
     const selMenu = this.settingComponent.find(({key}) => {
       return key === item.key;
     });
     this.currentTitle = selMenu!.component.data.label;
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(selMenu!.component.component);
     const viewContainerRef = this.adHost.viewContainerRef;
     viewContainerRef.clear();
-    const componentRef = viewContainerRef.createComponent<AdComponent>(componentFactory);
+    const componentRef = viewContainerRef.createComponent<AdComponent>(selMenu!.component.component);
     componentRef.instance.data = selMenu!.component.data;
   }
 

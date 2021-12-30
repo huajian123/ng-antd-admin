@@ -13,7 +13,7 @@ import {NzModalRef} from 'ng-zorro-antd/modal';
 })
 export class DeptManageComponent extends BasicConfirmModalComponent implements OnInit {
   addEditForm!: FormGroup;
-  params: object;
+  override params: object;
 
   constructor(private modalRef: NzModalRef, private fb: FormBuilder) {
     super();

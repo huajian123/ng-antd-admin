@@ -56,7 +56,7 @@ export class DefaultComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   prepareRoute(outlet: RouterOutlet) {
-    return outlet?.activatedRouteData?.key;
+    return outlet?.activatedRouteData?.['key'];
   }
 
   ngOnInit(): void {

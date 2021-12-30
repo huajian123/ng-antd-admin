@@ -13,7 +13,7 @@ import {ValidatorsService} from '../../../../../core/services/validators/validat
 })
 export class ResetPasswordModalComponent extends BasicConfirmModalComponent implements OnInit {
   addEditForm!: FormGroup;
-  params!: People;
+  override params!: People;
 
   constructor(private fb: FormBuilder, private validatorsService: ValidatorsService) {
     super();

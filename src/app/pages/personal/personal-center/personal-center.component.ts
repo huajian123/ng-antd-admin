@@ -4,7 +4,6 @@ import {
   ChangeDetectionStrategy,
   ViewChild,
   ElementRef,
-  ComponentFactoryResolver, Type
 } from '@angular/core';
 import {AdDirective} from '../../../shared/directives/ad.directive';
 import {ArticleComponent} from './article/article.component';
@@ -37,15 +36,12 @@ export class PersonalCenterComponent implements OnInit {
 
   @ViewChild(AdDirective, {static: true}) adHost!: AdDirective;
 
-
-  constructor(private componentFactoryResolver: ComponentFactoryResolver) {
-  }
+  constructor() {}
 
   to(adItem: TabInterface): void {
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(adItem.component.component);
     const viewContainerRef = this.adHost.viewContainerRef;
     viewContainerRef.clear();
-    const componentRef = viewContainerRef.createComponent<AdComponent>(componentFactory);
+    const componentRef = viewContainerRef.createComponent<AdComponent>(adItem.component.component);
     componentRef.instance.data = adItem.component.data;
   }
 

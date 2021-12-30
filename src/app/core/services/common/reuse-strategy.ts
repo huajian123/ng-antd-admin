@@ -16,22 +16,22 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
 
   // 是否允许复用路由
   shouldDetach(route: ActivatedRouteSnapshot): boolean {
-    return route.data.shouldDetach !== 'no';
+    return route.data['shouldDetach'] !== 'no';
   }
 
   // 当路由离开时会触发，存储路由
   store(route: ActivatedRouteSnapshot, handle: any): void {
-    if (route.data.shouldDetach === 'no') {
+    if (route.data['shouldDetach'] === 'no') {
       return;
     }
-    if (SimpleReuseStrategy.waitDelete === route.data.key) {
+    if (SimpleReuseStrategy.waitDelete === route.data['key']) {
       // 如果待删除是当前路由则不存储快照
       this.runHook('_onReuseDestroy', handle.componentRef);
       handle.componentRef.destroy();
       SimpleReuseStrategy.waitDelete = null;
       return;
     }
-    SimpleReuseStrategy.handlers[route.data.key] = handle;
+    SimpleReuseStrategy.handlers[route.data['key']] = handle;
 
     if (handle && handle.componentRef) {
       this.runHook('_onReuseDestroy', handle.componentRef);
@@ -40,21 +40,21 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
 
   //  是否允许还原路由
   shouldAttach(route: ActivatedRouteSnapshot): boolean {
-    return !!route.data.key && !!SimpleReuseStrategy.handlers[route.data.key];
+    return !!route.data['key'] && !!SimpleReuseStrategy.handlers[route.data['key']];
   }
 
 
   // 获取存储路由
   retrieve(route: ActivatedRouteSnapshot): DetachedRouteHandle {
-    return !route.data.key ? null : SimpleReuseStrategy.handlers[route.data.key];
+    return !route.data['key'] ? null : SimpleReuseStrategy.handlers[route.data['key']];
   }
 
   // 进入路由触发，是否同一路由时复用路由
   shouldReuseRoute(future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot): boolean {
-    if(!!future.data.key&&SimpleReuseStrategy.handlers[future.data.key]){
-      this.runHook('_onReuseInit', SimpleReuseStrategy.handlers[future.data.key].componentRef);
+    if(!!future.data['key']&&SimpleReuseStrategy.handlers[future.data['key']]){
+      this.runHook('_onReuseInit', SimpleReuseStrategy.handlers[future.data['key']].componentRef);
     }
-    return future.data.key === curr.data.key;
+    return future.data['key'] === curr.data['key'];
   }
 
   runHook(method: ReuseHookTypes, comp: ReuseComponentRef): void {

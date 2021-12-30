@@ -15,7 +15,7 @@ import {catchError} from 'rxjs/operators';
 export class LoginModalComponent extends BasicConfirmModalComponent implements OnInit {
 
   loginModalForm!: FormGroup;
-  params: object;
+  override params: object;
 
   constructor(private modalRef: NzModalRef, private fb: FormBuilder, private loginService: LoginService) {
     super();

@@ -39,6 +39,7 @@ export class DefLayoutContentComponent implements OnInit {
   constructor( private themesService: ThemeService, private splitNavStoreService: SplitNavStoreService) {
   }
 
+
   changeCollapsed(isCollapsed: boolean): void {
     this.themesService.setIsCollapsed(isCollapsed);
   }

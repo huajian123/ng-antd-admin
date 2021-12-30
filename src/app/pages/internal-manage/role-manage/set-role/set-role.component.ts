@@ -91,7 +91,7 @@ export class SetRoleComponent implements OnInit {
 
   ngOnInit(): void {
     this.routeInfo.queryParams.subscribe(res => {
-      this.id = res.id;
+      this.id = res['id'];
     })
 
     this.initPermission();

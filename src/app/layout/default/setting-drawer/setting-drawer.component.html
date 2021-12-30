@@ -7,7 +7,7 @@
     <i nz-icon nzType="close" nzTheme="outline"></i>
   </ng-template>
 </div>
-<nz-drawer [nzWidth]="300" [(nzVisible)]="isCollapsed"
+<nz-drawer nzTitle="主题设置" [nzWidth]="300" [(nzVisible)]="isCollapsed"
            (nzOnClose)="isCollapsed = !isCollapsed">
   <ng-container *nzDrawerContent>
     <div class="m-b-24">

@@ -13,7 +13,7 @@ import {Observable, of} from 'rxjs';
 export class RoleManageModalComponent extends BasicConfirmModalComponent implements OnInit {
 
   addEditForm!: FormGroup;
-  params: object;
+  override params: object;
 
   constructor(private modalRef: NzModalRef, private fb: FormBuilder) {
     super();

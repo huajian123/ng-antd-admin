@@ -11,7 +11,7 @@ import {Observable, of} from "rxjs";
 })
 export class DragComponent  extends BasicConfirmModalComponent implements OnInit {
 
-  params: object;
+  override params: object;
 
   constructor(private modalRef: NzModalRef) {
     super();

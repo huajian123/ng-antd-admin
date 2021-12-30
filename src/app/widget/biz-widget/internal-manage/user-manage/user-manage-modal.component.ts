@@ -17,7 +17,7 @@ import {RoleService} from '../../../../core/services/http/internal-manage/role.s
 export class UserManageModalComponent extends BasicConfirmModalComponent implements OnInit {
 
   addEditForm!: FormGroup;
-  params!: People;
+  override params!: People;
   deptOptions: CascaderOption[] = [];
   roleOptions: OptionsInterface[] = [];
   isEdit = false;

@@ -37,16 +37,16 @@ export class ModalWrapService {
   }
 
   private cancelCallback(modalButtonOptions: ModalButtonOptions): void {
-    return modalButtonOptions.modalRef.destroy({status: ModalBtnStatus.Cancel, value: null});
+    return modalButtonOptions['modalRef'].destroy({status: ModalBtnStatus.Cancel, value: null});
   }
 
   private confirmCallback(modalButtonOptions: ModalButtonOptions): void {
-    (modalButtonOptions.modalRef.componentInstance as any).getCurrentValue().pipe(
+    (modalButtonOptions['modalRef'].componentInstance as any).getCurrentValue().pipe(
       tap((modalValue) => {
         if (!modalValue) {
           return of(false);
         } else {
-          return modalButtonOptions.modalRef.destroy({status: ModalBtnStatus.Ok, modalValue});
+          return modalButtonOptions['modalRef'].destroy({status: ModalBtnStatus.Ok, modalValue});
         }
       })
     ).subscribe();
