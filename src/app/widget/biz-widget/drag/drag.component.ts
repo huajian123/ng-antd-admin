@@ -13,8 +13,8 @@ export class DragComponent  extends BasicConfirmModalComponent implements OnInit
 
   override params: object;
 
-  constructor(private modalRef: NzModalRef) {
-    super();
+  constructor(override modalRef: NzModalRef) {
+    super(modalRef);
     this.params = {};
   }
 

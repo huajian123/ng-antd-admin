@@ -18,7 +18,7 @@ export enum ModalBtnStatus {
 // 组件实例需要继承此类
 export abstract class BasicConfirmModalComponent {
   protected params: any; // service传给component instance的参数
-  protected constructor() {
+  protected constructor(protected modalRef: NzModalRef) {
   }
 
   protected abstract getCurrentValue(): any;
@@ -102,7 +102,7 @@ export class ModalWrapService {
       handle.className += ' hand-model-move';
       return this.dragDrop.createDrag(handle).withHandles([handle]).withRootElement(rootElement);
     }
-    return null
+    return this.dragDrop.createDrag(rootElement).withHandles([rootElement]);
   }
 
   protected fixedWrapElementStyle(wrapElement: HTMLElement): void {
