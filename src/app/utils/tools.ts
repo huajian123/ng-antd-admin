@@ -67,7 +67,17 @@ const fnGetUUID = function getUUID(): string {
   return uuidv4();
 }
 
+const fnGetBase64 = function getBase64(file: File): Promise<string | ArrayBuffer | null> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
+};
+
 export {
+  fnGetBase64,
   fnGetFile,
   fnCheckForm,
   fnStopMouseEvent,
