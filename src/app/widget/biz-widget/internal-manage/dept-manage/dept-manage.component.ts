@@ -1,8 +1,8 @@
 import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {BasicConfirmModalComponent} from '../../../base-modal';
+import {BasicConfirmModalComponent} from '@widget/base-modal';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Observable, of} from 'rxjs';
-import {fnCheckForm} from '../../../../utils/tools';
+import {fnCheckForm} from '@utils/tools';
 import {NzModalRef} from 'ng-zorro-antd/modal';
 
 @Component({
@@ -15,8 +15,8 @@ export class DeptManageComponent extends BasicConfirmModalComponent implements O
   addEditForm!: FormGroup;
   override params: object;
 
-  constructor(private modalRef: NzModalRef, private fb: FormBuilder) {
-    super();
+  constructor(protected override modalRef: NzModalRef, private fb: FormBuilder) {
+    super(modalRef);
     this.params = {};
   }
 

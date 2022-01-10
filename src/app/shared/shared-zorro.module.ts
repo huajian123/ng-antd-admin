@@ -1,4 +1,3 @@
-import {IconsProviderModule} from './icons-provider.module';
 import {NzTreeViewModule} from 'ng-zorro-antd/tree-view';
 import {NzFormModule} from 'ng-zorro-antd/form';
 import {NzButtonModule} from 'ng-zorro-antd/button';
@@ -45,6 +44,7 @@ import {NzPopoverModule} from 'ng-zorro-antd/popover';
 import {NzPaginationModule} from 'ng-zorro-antd/pagination';
 import {NzResizableModule} from 'ng-zorro-antd/resizable';
 import {NzBackTopModule} from 'ng-zorro-antd/back-top';
+import {IconsProviderModule} from "@shared/icons-provider.module";
 
 export const SHARED_ZORRO_MODULES = [
   NzBackTopModule,

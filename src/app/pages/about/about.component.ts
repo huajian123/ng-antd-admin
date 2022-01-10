@@ -1,6 +1,6 @@
-import {Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef} from '@angular/core';
-import {PageHeaderType} from "../../shared/components/page-header/page-header.component";
-import {DragService} from "../../widget/biz-widget/drag/drag.service";
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
+import {PageHeaderType} from "@shared/components/page-header/page-header.component";
+import {DragService} from "@widget/biz-widget/drag/drag.service";
 
 @Component({
   selector: 'app-about',

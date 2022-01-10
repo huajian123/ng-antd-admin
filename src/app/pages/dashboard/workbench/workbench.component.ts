@@ -1,6 +1,6 @@
 import {AfterViewInit, ChangeDetectionStrategy, Component, NgZone, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
-import {PageHeaderType} from '../../../shared/components/page-header/page-header.component';
+import {PageHeaderType} from '@shared/components/page-header/page-header.component';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {inNextTick} from 'ng-zorro-antd/core/util';
 import {Radar} from '@antv/g2plot';

@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import { ModalWrapService} from "../../base-modal";
 import {NzSafeAny} from "ng-zorro-antd/core/types";
 import {SearchRouteComponent} from "./search-route.component";
 import {ModalOptions} from "ng-zorro-antd/modal";
 import {Observable} from "rxjs";
+import {ModalWrapService} from "@widget/base-modal";
 
 @Injectable({
   providedIn: 'root'

@@ -1,7 +1,7 @@
-import {ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {PageHeaderType} from '../../../shared/components/page-header/page-header.component';
-import {fnCheckForm} from '../../../utils/tools';
+import {PageHeaderType} from '@shared/components/page-header/page-header.component';
+import {fnCheckForm} from '@utils/tools';
 
 @Component({
   selector: 'app-base',

@@ -6,7 +6,7 @@ import {SearchListComponent} from './search-list.component';
 import {ArticleComponent} from './article/article.component';
 import {ProjectComponent} from './project/project.component';
 import {ApplicationComponent} from './application/application.component';
-import {SharedModule} from '../../../shared/shared.module';
+import {SharedModule} from '@shared/shared.module';
 
 
 @NgModule({

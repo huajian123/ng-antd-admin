@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { FailRoutingModule } from './fail-routing.module';
 import { FailComponent } from './fail.component';
-import {SharedModule} from '../../../shared/shared.module';
+import {SharedModule} from '@shared/shared.module';
 
 
 @NgModule({

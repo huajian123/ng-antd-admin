@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {BreakpointObserver} from "@angular/cdk/layout";
 import {switchMap} from "rxjs/operators";
-import {ThemeService} from "../store/theme.service";
-import {SideCollapsedMaxWidth, TopCollapsedMaxWidth} from "../../../config/constant";
+import {ThemeService} from "@store/theme.service";
+import {SideCollapsedMaxWidth, TopCollapsedMaxWidth} from "@config/constant";
 
 @Injectable({
   providedIn: 'root'

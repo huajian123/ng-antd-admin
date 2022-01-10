@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ThemeService} from "../store/theme.service";
+import {ThemeService} from "@store/theme.service";
 import {first} from "rxjs/operators";
 
 enum ThemeType {
@@ -13,7 +13,8 @@ enum ThemeType {
 export class ThemeSkinService {
   currentTheme!: ThemeType;
 
-  constructor(private themesService: ThemeService) {}
+  constructor(private themesService: ThemeService) {
+  }
 
   reverseTheme(theme: ThemeType): ThemeType {
     return theme === ThemeType.dark ? ThemeType.default : ThemeType.dark;
@@ -40,7 +41,7 @@ export class ThemeSkinService {
   }
 
   public loadTheme(firstLoad = true): Promise<Event> {
-    if(firstLoad){
+    if (firstLoad) {
       this.themesService.getIsNightTheme().pipe(first()).subscribe(res => {
         this.currentTheme = res ? ThemeType.dark : ThemeType.default
       })

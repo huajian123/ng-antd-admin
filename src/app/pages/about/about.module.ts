@@ -1,9 +1,9 @@
 import {NgModule} from '@angular/core';
 import {AboutRoutingModule} from './about-routing.module';
 import {AboutComponent} from './about.component';
-import {SharedModule} from "../../shared/shared.module";
 import {DragDropModule} from "@angular/cdk/drag-drop";
-import {DragModule} from "../../widget/biz-widget/drag/drag.module";
+import {SharedModule} from "@shared/shared.module";
+import { DragModule } from '@app/widget/biz-widget/drag/drag.module';
 
 
 @NgModule({

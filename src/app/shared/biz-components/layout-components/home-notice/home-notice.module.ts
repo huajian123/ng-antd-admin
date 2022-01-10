@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {HomeNoticeComponent} from './home-notice.component';
-import {SHARED_ZORRO_MODULES} from "../../../shared-zorro.module";
 import {CommonModule} from "@angular/common";
-import {PipesModule} from "../../../pipes/pipes.module";
+import {SHARED_ZORRO_MODULES} from "@shared/shared-zorro.module";
+import {PipesModule} from "@shared/pipes/pipes.module";
 
 
 @NgModule({

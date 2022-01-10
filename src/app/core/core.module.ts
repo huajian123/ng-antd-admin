@@ -8,7 +8,6 @@ import {RouteReuseStrategy} from "@angular/router";
 
 registerLocaleData(zh);
 
-
 @NgModule({
   providers: [{provide: RouteReuseStrategy, useClass: SimpleReuseStrategy}, {provide: NZ_I18N, useValue: zh_CN}],
 })

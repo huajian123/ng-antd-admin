@@ -3,8 +3,7 @@ import {NzSafeAny} from "ng-zorro-antd/core/types";
 import {DragComponent} from "./drag.component";
 import {ModalOptions} from "ng-zorro-antd/modal";
 import {Observable} from "rxjs";
-import {ModalWrapService} from "../../base-modal";
-
+import {ModalWrapService} from "@widget/base-modal";
 @Injectable({
   providedIn: 'root'
 })

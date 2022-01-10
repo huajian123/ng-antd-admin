@@ -1,4 +1,13 @@
-import {animate, animateChild, AnimationQueryOptions, group, query, style, transition, trigger} from '@angular/animations';
+import {
+  animate,
+  animateChild,
+  AnimationQueryOptions,
+  group,
+  query,
+  style,
+  transition,
+  trigger
+} from '@angular/animations';
 
 const options: AnimationQueryOptions = {
   optional: true

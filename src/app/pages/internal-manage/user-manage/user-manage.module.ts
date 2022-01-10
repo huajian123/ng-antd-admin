@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 
 import {UserManageRoutingModule} from './user-manage-routing.module';
 import {UserManageComponent} from './user-manage.component';
-import {SharedModule} from '../../../shared/shared.module';
+import {SharedModule} from '@shared/shared.module';
 import {NzNoAnimationModule} from 'ng-zorro-antd/core/no-animation';
 
 @NgModule({

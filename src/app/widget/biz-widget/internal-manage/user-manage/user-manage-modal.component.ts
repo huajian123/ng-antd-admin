@@ -1,13 +1,13 @@
 import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {BasicConfirmModalComponent} from '../../../base-modal';
+import {BasicConfirmModalComponent} from '@widget/base-modal';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {NzModalRef} from 'ng-zorro-antd/modal';
 import {Observable, of} from 'rxjs';
-import {fnCheckForm} from '../../../../utils/tools';
-import {ValidatorsService} from '../../../../core/services/validators/validators.service';
-import {DeptManageService} from '../../../../core/services/http/internal-manage/dept-manage.service';
-import {CascaderOption, DeptObj, OptionsInterface, People} from '../../../../core/services/types';
-import {RoleService} from '../../../../core/services/http/internal-manage/role.service';
+import {fnCheckForm} from '@utils/tools';
+import {ValidatorsService} from '@core/services/validators/validators.service';
+import {DeptManageService} from '@core/services/http/internal-manage/dept-manage.service';
+import {CascaderOption, DeptObj, OptionsInterface, People} from '@core/services/types';
+import {RoleService} from '@core/services/http/internal-manage/role.service';
 
 @Component({
   selector: 'app-user-manage-modal',
@@ -22,10 +22,10 @@ export class UserManageModalComponent extends BasicConfirmModalComponent impleme
   roleOptions: OptionsInterface[] = [];
   isEdit = false;
 
-  constructor(private modalRef: NzModalRef, private fb: FormBuilder,
+  constructor(protected override modalRef: NzModalRef, private fb: FormBuilder,
               private validatorsService: ValidatorsService, private deptService: DeptManageService,
               private roleService: RoleService) {
-    super();
+    super(modalRef);
   }
 
 

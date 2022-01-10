@@ -1,13 +1,13 @@
 import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {SimpleReuseStrategy} from "../../../../core/services/common/reuse-strategy";
-import {WindowService} from "../../../../core/services/common/window.service";
-import {TabService} from "../../../../core/services/common/tab.service";
-import {fnFormatePath} from '../../../../utils/tools';
-import {SearchRouteService} from "../../../../widget/common-widget/search-route/search-route.service";
+import {SimpleReuseStrategy} from "@core/services/common/reuse-strategy";
+import {WindowService} from "@core/services/common/window.service";
+import {TabService} from "@core/services/common/tab.service";
+import {fnFormatePath} from '@utils/tools';
+import {SearchRouteService} from "@widget/common-widget/search-route/search-route.service";
 import {ModalOptions} from "ng-zorro-antd/modal";
 import {NzMessageService} from "ng-zorro-antd/message";
-import {AuthKey} from "../../../../config/constant";
+import {AuthKey} from "@config/constant";
 
 @Component({
   selector: 'app-layout-head-right-menu',

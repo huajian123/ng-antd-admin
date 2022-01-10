@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {FooterSubmitComponent} from './footer-submit.component';
-import {SHARED_ZORRO_MODULES} from '../../shared-zorro.module';
 import {CommonModule} from '@angular/common';
+import {SHARED_ZORRO_MODULES} from "@shared/shared-zorro.module";
 
 @NgModule({
   declarations: [FooterSubmitComponent],

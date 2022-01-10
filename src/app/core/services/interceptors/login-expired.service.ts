@@ -9,14 +9,14 @@ import {
   HttpResponse
 } from '@angular/common/http';
 import {Observable, of} from 'rxjs';
-import {LoginModalService} from '../../../widget/biz-widget/login/login-modal.service';
+import {LoginModalService} from '@widget/biz-widget/login/login-modal.service';
 import {NzSafeAny} from 'ng-zorro-antd/core/types';
 import {filter, finalize, share, switchMap} from 'rxjs/operators';
-import {ModalBtnStatus} from '../../../widget/base-modal';
+import {ModalBtnStatus} from '@widget/base-modal';
 import {Router} from '@angular/router';
 import {WindowService} from '../common/window.service';
-import {AuthService} from '../store/auth.service';
-import {AuthKey, TokenPre} from "../../../config/constant";
+import {AuthService} from '@store/auth.service';
+import {AuthKey, TokenPre} from "@config/constant";
 
 @Injectable()
 export class LoginExpiredService implements HttpInterceptor {
@@ -40,7 +40,7 @@ export class LoginExpiredService implements HttpInterceptor {
       }
       this.refresher = null;
       const copyReq = request.clone(httpConfig);
-      return next.handle(copyReq).pipe( finalize(() => this.refresher = null));
+      return next.handle(copyReq).pipe(finalize(() => this.refresher = null));
     }), finalize(() => this.refresher = null))
   }
 
@@ -71,5 +71,4 @@ export class LoginExpiredService implements HttpInterceptor {
       return this.refresher;
     });
   }
-
 }

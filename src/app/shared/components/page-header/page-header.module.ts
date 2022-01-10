@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {PageHeaderComponent} from './page-header.component';
-import {SHARED_ZORRO_MODULES} from '../../shared-zorro.module';
 import {CommonModule} from '@angular/common';
 import {NzOutletModule} from "ng-zorro-antd/core/outlet";
+import {SHARED_ZORRO_MODULES} from "@shared/shared-zorro.module";
 
 @NgModule({
   declarations: [PageHeaderComponent],

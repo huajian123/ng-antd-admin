@@ -1,5 +1,5 @@
 import {Component, OnInit, ChangeDetectionStrategy, Input, TemplateRef, Renderer2, ElementRef} from '@angular/core';
-import {ThemeService} from '../../../core/services/store/theme.service';
+import {ThemeService} from '@core/services/store/theme.service';
 import {switchMap} from "rxjs/operators";
 
 @Component({

@@ -11,7 +11,7 @@ import {Observable, throwError} from 'rxjs';
 import {WindowService} from '../common/window.service';
 import {catchError, filter} from 'rxjs/operators';
 import {NzMessageService} from 'ng-zorro-antd/message';
-import {AuthKey} from "../../../config/constant";
+import {AuthKey} from "@config/constant";
 
 interface CustomHttpConfig {
   headers?: HttpHeaders;

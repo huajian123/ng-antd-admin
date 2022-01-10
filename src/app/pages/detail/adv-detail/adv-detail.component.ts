@@ -1,7 +1,7 @@
 import {Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, AfterViewInit} from '@angular/core';
-import {PageHeaderType} from '../../../shared/components/page-header/page-header.component';
+import {PageHeaderType} from '@shared/components/page-header/page-header.component';
 import {BreakpointObserver} from '@angular/cdk/layout';
-import {MyTableConfig} from '../../../shared/components/ant-table/ant-table.component';
+import {MyTableConfig} from '@shared/components/ant-table/ant-table.component';
 
 interface ReturnObj {
   num: string;

@@ -22,6 +22,19 @@
       "es2020",
       "dom"
     ],
+    "paths": {
+      "@app/*": ["src/app/*"],
+      "@app": ["src/app"],
+      "@store/*": ["src/app/core/services/store/*"],
+      "@config/*": ["src/app/config/*"],
+      "@core/*": ["src/app/core/*"],
+      "@services/*": ["src/app/core/services/http/*"],
+      "@utils/*": ["src/app/utils/*"],
+      "@widget/*": ["src/app/widget/*"],
+      "@env/*": ["src/environments/*"],
+      "@shared/*": ["src/app/shared/*"],
+      "@assets/*": ["src/assets/*"]
+    },
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true
   },

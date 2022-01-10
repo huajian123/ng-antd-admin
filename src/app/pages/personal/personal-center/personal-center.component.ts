@@ -5,11 +5,11 @@ import {
   ViewChild,
   ElementRef,
 } from '@angular/core';
-import {AdDirective} from '../../../shared/directives/ad.directive';
+import {AdDirective} from '@shared/directives/ad.directive';
 import {ArticleComponent} from './article/article.component';
 import {ApplicationComponent} from './application/application.component';
 import {ProjectsComponent} from './projects/projects.component';
-import {AdComponent, DynamicComponent} from '../../../core/services/types';
+import {AdComponent, DynamicComponent} from '@core/services/types';
 
 interface TabInterface {
   label: string;

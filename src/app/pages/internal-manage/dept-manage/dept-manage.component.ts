@@ -1,12 +1,12 @@
 import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
-import {PageHeaderType} from '../../../shared/components/page-header/page-header.component';
-import {DeptObj} from '../../../core/services/types';
-import {DeptManageService} from '../../../core/services/http/internal-manage/dept-manage.service';
-import {DeptManageModalService} from '../../../widget/biz-widget/internal-manage/dept-manage/dept-manage.service';
-import {ModalBtnStatus} from '../../../widget/base-modal';
+import {PageHeaderType} from '@shared/components/page-header/page-header.component';
+import {DeptObj} from '@core/services/types';
+import {DeptManageService} from '@core/services/http/internal-manage/dept-manage.service';
+import {DeptManageModalService} from '@widget/biz-widget/internal-manage/dept-manage/dept-manage.service';
+import {ModalBtnStatus} from '@widget/base-modal';
 import {NzModalService} from 'ng-zorro-antd/modal';
 import {map} from "rxjs/operators";
-import {ActionCode} from "../../../config/actionCode";
+import {ActionCode} from "@config/actionCode";
 
 @Component({
   selector: 'app-dept-manage',

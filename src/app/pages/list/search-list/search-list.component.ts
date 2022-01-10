@@ -7,12 +7,12 @@ import {
   ViewChild,
   TemplateRef,
 } from '@angular/core';
-import {PageHeaderType} from '../../../shared/components/page-header/page-header.component';
-import {SearchListService} from '../../../core/services/store/biz-store-service/search-list/search-list.service';
+import {PageHeaderType} from '@shared/components/page-header/page-header.component';
+import {SearchListService} from '@core/services/store/biz-store-service/search-list/search-list.service';
 import {Subject} from 'rxjs';
 import {filter, takeUntil} from 'rxjs/operators';
 import {ActivatedRoute, NavigationEnd, Router, RouterEvent, RouterOutlet} from '@angular/router';
-import {fadeRouteAnimation} from "../../../animations/fade.animation";
+import {fadeRouteAnimation} from "@app/animations/fade.animation";
 
 interface TabInterface {
   label: string;

@@ -1,12 +1,12 @@
 import {Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {MyTableConfig, SortFile} from '../../../shared/components/ant-table/ant-table.component';
-import {PageHeaderType} from '../../../shared/components/page-header/page-header.component';
+import {MyTableConfig, SortFile} from '@shared/components/ant-table/ant-table.component';
+import {PageHeaderType} from '@shared/components/page-header/page-header.component';
 
 import {NzTableQueryParams} from 'ng-zorro-antd/table';
-import {SearchCommonVO} from '../../../core/services/types';
+import {SearchCommonVO} from '@core/services/types';
 import {Router} from '@angular/router';
-import {ActionCode} from "../../../config/actionCode";
+import {ActionCode} from "@config/actionCode";
 import {NzMessageService} from "ng-zorro-antd/message";
 
 @Component({

@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {UserManageComponent} from './user-manage.component';
-import {JudgAuthGuard} from "../../../core/services/common/guard/judgAuth.guard";
+import {JudgAuthGuard} from "@core/services/common/guard/judgAuth.guard";
 
 const routes: Routes = [
   {

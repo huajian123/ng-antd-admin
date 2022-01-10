@@ -2,8 +2,8 @@ import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {BasicConfirmModalComponent} from '../../base-modal';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {NzModalRef} from 'ng-zorro-antd/modal';
-import {fnCheckForm} from '../../../utils/tools';
-import {LoginService} from '../../../core/services/http/login/login.service';
+import {fnCheckForm} from '@utils/tools';
+import {LoginService} from '@core/services/http/login/login.service';
 import {Observable, of} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 
@@ -17,8 +17,8 @@ export class LoginModalComponent extends BasicConfirmModalComponent implements O
   loginModalForm!: FormGroup;
   override params: object;
 
-  constructor(private modalRef: NzModalRef, private fb: FormBuilder, private loginService: LoginService) {
-    super();
+  constructor(protected override modalRef: NzModalRef, private fb: FormBuilder, private loginService: LoginService) {
+    super(modalRef);
     this.params = {};
   }
 

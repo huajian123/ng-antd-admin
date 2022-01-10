@@ -1,13 +1,13 @@
 import {Component, OnInit, ChangeDetectionStrategy, OnDestroy, ViewChild, AfterViewInit} from '@angular/core';
-import {ThemeService} from "../../core/services/store/theme.service";
+import {ThemeService} from "@core/services/store/theme.service";
 import {Subject} from "rxjs";
 import {takeUntil} from "rxjs/operators";
 import {NavDrawerComponent} from "./nav-drawer/nav-drawer.component";
 import {RouterOutlet} from "@angular/router";
-import {fadeRouteAnimation} from "../../animations/fade.animation";
-import {DriverService} from "../../core/services/common/driver.service";
-import {WindowService} from "../../core/services/common/window.service";
-import {IsFirstLogin} from "../../config/constant";
+import {DriverService} from "@core/services/common/driver.service";
+import {WindowService} from "@core/services/common/window.service";
+import {IsFirstLogin} from "@config/constant";
+import {fadeRouteAnimation} from "@app/animations/fade.animation";
 
 @Component({
   selector: 'app-default',

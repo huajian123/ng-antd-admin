@@ -1,5 +1,5 @@
 import {Directive, ElementRef, OnDestroy, OnInit, Renderer2} from '@angular/core';
-import {ThemeService} from "../../core/services/store/theme.service";
+import {ThemeService} from "@core/services/store/theme.service";
 import {takeUntil} from "rxjs/operators";
 import {Subject} from "rxjs";
 

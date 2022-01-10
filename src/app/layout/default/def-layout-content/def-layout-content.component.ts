@@ -1,8 +1,8 @@
-import {Component, OnInit, ChangeDetectionStrategy, AfterViewInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy, OnDestroy} from '@angular/core';
 import {Observable, Subject} from "rxjs";
-import {SettingInterface, ThemeService} from "../../../core/services/store/theme.service";
+import {SettingInterface, ThemeService} from "@store/theme.service";
 import {takeUntil} from "rxjs/operators";
-import {SplitNavStoreService} from "../../../core/services/store/split-nav-store/split-nav-store.service";
+import {SplitNavStoreService} from "@store/split-nav-store/split-nav-store.service";
 
 @Component({
   selector: 'app-def-layout-content',
@@ -10,7 +10,7 @@ import {SplitNavStoreService} from "../../../core/services/store/split-nav-store
   styleUrls: ['./def-layout-content.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DefLayoutContentComponent implements OnInit {
+export class DefLayoutContentComponent implements OnInit, OnDestroy {
   showChats = true;
   isNightTheme$ = this.themesService.getIsNightTheme();
   themesOptions$ = this.themesService.getThemesMode();
@@ -36,7 +36,7 @@ export class DefLayoutContentComponent implements OnInit {
   mixiModeHasLeftNav = this.splitNavStoreService.getSplitLeftNavArrayStore();
   private destory$ = new Subject<void>();
 
-  constructor( private themesService: ThemeService, private splitNavStoreService: SplitNavStoreService) {
+  constructor(private themesService: ThemeService, private splitNavStoreService: SplitNavStoreService) {
   }
 
 

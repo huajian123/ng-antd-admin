@@ -7,7 +7,6 @@ import {Menu} from '../../types';
 })
 export class SplitNavStoreService {
   private splitLeftNavArray$ = new BehaviorSubject<Menu[]>([]);
-  private splitTopNavArray$ = new BehaviorSubject<Menu[]>([]);
 
   constructor() {
   }
@@ -20,12 +19,4 @@ export class SplitNavStoreService {
     return this.splitLeftNavArray$.asObservable();
   }
 
-
-  setSplitTopNavArrayStore(menu: Menu[]): void {
-    this.splitTopNavArray$.next(menu);
-  }
-
-  getSplitTopNavArrayStore(): Observable<Menu[]> {
-    return this.splitTopNavArray$.asObservable();
-  }
 }

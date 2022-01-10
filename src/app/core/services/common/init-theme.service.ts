@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {ThemeService} from "../store/theme.service";
+import {ThemeService} from "@store/theme.service";
 import {WindowService} from "./window.service";
-import {IsNightKey, ThemeOptionsKey} from "../../../config/constant";
+import {IsNightKey, ThemeOptionsKey} from "@config/constant";
 import {first} from "rxjs/operators";
 import {Observable} from "rxjs";
 
@@ -33,7 +33,7 @@ export class InitThemeService {
   constructor(private themesService: ThemeService, private windowServe: WindowService) {
   }
 
-  initTheme(): Promise<void>{
+  initTheme(): Promise<void> {
     return new Promise((resolve) => {
       this.themeInitOption.forEach(item => {
         const hasCash = this.windowServe.getStorage(item.storageKey);

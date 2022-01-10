@@ -1,5 +1,5 @@
 import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {SearchListService} from '../../../../core/services/store/biz-store-service/search-list/search-list.service';
+import {SearchListService} from '@core/services/store/biz-store-service/search-list/search-list.service';
 
 @Component({
   selector: 'app-article',

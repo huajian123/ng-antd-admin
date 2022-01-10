@@ -1,27 +1,28 @@
-import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { filter, share } from 'rxjs/operators';
-
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import {DOCUMENT} from '@angular/common';
+import {Inject, Injectable} from '@angular/core';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {filter, share} from 'rxjs/operators';
+import type {NzSafeAny} from 'ng-zorro-antd/core/types';
 
 export interface LazyResult {
   path: string;
   status: 'ok' | 'error' | 'loading';
   error?: NzSafeAny;
 }
+
 // this.lazy.load(["https://unpkg.com/driver.js/dist/driver.min.js", "https://unpkg.com/driver.js/dist/driver.min.css"]).then(() => {
 
 /**
  * 延迟加载资源（js 或 css）服务
  */
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class LazyService {
   private list: { [key: string]: boolean } = {};
   private cached: { [key: string]: LazyResult } = {};
   private _notify: BehaviorSubject<LazyResult[]> = new BehaviorSubject<LazyResult[]>([]);
 
-  constructor(@Inject(DOCUMENT) private doc: NzSafeAny) {}
+  constructor(@Inject(DOCUMENT) private doc: NzSafeAny) {
+  }
 
   get change(): Observable<LazyResult[]> {
     return this._notify.asObservable().pipe(
@@ -58,7 +59,7 @@ export class LazyService {
   loadScript(path: string, innerContent?: string): Promise<LazyResult> {
     return new Promise(resolve => {
       if (this.list[path] === true) {
-        resolve({ ...this.cached[path], status: 'loading' });
+        resolve({...this.cached[path], status: 'loading'});
         return;
       }
 

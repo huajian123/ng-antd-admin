@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import { ModalWrapService} from '../../../base-modal';
+import { ModalWrapService} from '@widget/base-modal';
 import {NzSafeAny} from 'ng-zorro-antd/core/types';
 import {ModalOptions} from 'ng-zorro-antd/modal';
 import {Observable} from 'rxjs';

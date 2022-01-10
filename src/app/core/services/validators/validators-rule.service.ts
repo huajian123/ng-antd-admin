@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ValidationErrors} from '@angular/forms';
-import {isEmail, isMobile, isPasswordPass, isTelPhone} from '../../../utils/validate/validate';
+import {isEmail, isMobile, isPasswordPass, isTelPhone} from '@utils/validate/validate';
 
 @Injectable({
   providedIn: 'root'

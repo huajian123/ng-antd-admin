@@ -1,15 +1,15 @@
 import {Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef} from '@angular/core';
-import {PageHeaderType} from '../../../shared/components/page-header/page-header.component';
-import {MyTableConfig} from '../../../shared/components/ant-table/ant-table.component';
-import {OptionsInterface, People, SearchCommonVO} from '../../../core/services/types';
+import {PageHeaderType} from '@shared/components/page-header/page-header.component';
+import {MyTableConfig} from '@shared/components/ant-table/ant-table.component';
+import {OptionsInterface, People, SearchCommonVO} from '@core/services/types';
 import {NzModalService} from 'ng-zorro-antd/modal';
-import {MessageService} from '../../../core/services/common/message.service';
+import {MessageService} from '@core/services/common/message.service';
 import {NzTableQueryParams} from 'ng-zorro-antd/table';
-import {ModalBtnStatus} from '../../../widget/base-modal';
-import {UserManageService} from '../../../core/services/http/internal-manage/user-manage.service';
-import {MapKeyType, MapPipe, MapSet} from '../../../shared/pipes/map.pipe';
-import {UserManageModalService} from '../../../widget/biz-widget/internal-manage/user-manage/user-manage-modal.service';
-import {ResetPasswordModalService} from '../../../widget/biz-widget/internal-manage/user-manage/reset-password-modal/reset-password-modal.service';
+import {ModalBtnStatus} from '@widget/base-modal';
+import {UserManageService} from '@core/services/http/internal-manage/user-manage.service';
+import {MapKeyType, MapPipe, MapSet} from '@shared/pipes/map.pipe';
+import {UserManageModalService} from '@widget/biz-widget/internal-manage/user-manage/user-manage-modal.service';
+import {ResetPasswordModalService} from '@widget/biz-widget/internal-manage/user-manage/reset-password-modal/reset-password-modal.service';
 import { ActionCode } from 'src/app/config/actionCode';
 
 interface SearchParam {

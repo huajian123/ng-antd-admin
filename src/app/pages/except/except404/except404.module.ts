@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { Except404RoutingModule } from './except404-routing.module';
 import { Except404Component } from './except404.component';
-import {SharedModule} from '../../../shared/shared.module';
+import {SharedModule} from '@shared/shared.module';
 
 
 @NgModule({

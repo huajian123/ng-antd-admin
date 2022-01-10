@@ -4,7 +4,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 export interface SettingInterface {
   theme: 'dark' | 'light';
   color: string;
-  mode: 'side' | 'top'|'mixi';
+  mode: 'side' | 'top' | 'mixi';
   fixedWidth: boolean;
   colorWeak: boolean;
   fixedHead: boolean;

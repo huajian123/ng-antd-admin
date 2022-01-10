@@ -2,10 +2,10 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {Observable} from 'rxjs';
 import * as qs from 'qs';
-import {environment} from '../../../../environments/environment';
+import {environment} from '@env/environment';
 import {filter, map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
-import {localUrl} from '../../../../environments/environment.prod';
+import {localUrl} from '@env/environment.prod';
 
 export interface MyHttpConfig {
   needIntercept?: boolean;

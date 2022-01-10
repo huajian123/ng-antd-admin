@@ -1,8 +1,8 @@
 import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {NzModalRef} from 'ng-zorro-antd/modal';
-import {BasicConfirmModalComponent} from '../../../base-modal';
-import {fnCheckForm} from '../../../../utils/tools';
+import {BasicConfirmModalComponent} from '@widget/base-modal';
+import {fnCheckForm} from '@utils/tools';
 import {Observable, of} from 'rxjs';
 
 @Component({
@@ -15,8 +15,8 @@ export class RoleManageModalComponent extends BasicConfirmModalComponent impleme
   addEditForm!: FormGroup;
   override params: object;
 
-  constructor(private modalRef: NzModalRef, private fb: FormBuilder) {
-    super();
+  constructor(protected override modalRef: NzModalRef, private fb: FormBuilder) {
+    super(modalRef);
     this.params = {};
   }
 
@@ -26,7 +26,6 @@ export class RoleManageModalComponent extends BasicConfirmModalComponent impleme
       roleDesc: [null],
     });
   }
-
 
 
   // 此方法为如果有异步数据需要加载，则在该方法中添加

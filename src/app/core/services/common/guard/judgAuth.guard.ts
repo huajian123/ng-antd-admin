@@ -1,17 +1,18 @@
-import {Inject, Injectable, OnInit} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {WindowService} from '../window.service';
-import {MENU_TOKEN} from "../../../../config/menu";
+import {MENU_TOKEN} from "@config/menu";
 import {Menu} from "../../types";
-import {AuthService} from "../../store/auth.service";
+import {AuthService} from "@store/auth.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class JudgAuthGuard implements CanActivate{
+export class JudgAuthGuard implements CanActivate {
   authCodeArray: string[] = [];
   selMenu!: Menu;
+
   constructor(private windowSrc: WindowService, private router: Router, @Inject(MENU_TOKEN) private menuNavList: Menu[], private authService: AuthService) {
   }
 

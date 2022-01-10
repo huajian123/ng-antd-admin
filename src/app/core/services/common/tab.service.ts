@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SimpleReuseStrategy} from './reuse-strategy';
-import {fnFormatePath} from '../../../utils/tools';
-
+import {fnFormatePath} from '@utils/tools';
 
 export interface TabModel {
   title: string;
@@ -43,7 +42,6 @@ export class TabService {
   }
 
   // 右键移除右边所有tab
-  // 右键移除tab
   delRightTab(tabPath: string, index: number): void {
     const temp = this.tabArray.filter((item, tabindex) => {
       return tabindex > index;

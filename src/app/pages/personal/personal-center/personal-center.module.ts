@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 
 import {PersonalCenterRoutingModule} from './personal-center-routing.module';
 import {PersonalCenterComponent} from './personal-center.component';
-import {SharedModule} from '../../../shared/shared.module';
+import {SharedModule} from '@shared/shared.module';
 import {NzNoAnimationModule} from 'ng-zorro-antd/core/no-animation';
 import {ArticleComponent} from './article/article.component';
 import {ApplicationComponent} from './application/application.component';

@@ -1,9 +1,9 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {CardTableWrapComponent} from './card-table-wrap.component';
-import {SHARED_ZORRO_MODULES} from '../../shared-zorro.module';
-import {DirectivesModule} from '../../directives/directives.module';
 import {DragDropModule} from "@angular/cdk/drag-drop";
+import {SHARED_ZORRO_MODULES} from "@shared/shared-zorro.module";
+import {DirectivesModule} from "@shared/directives/directives.module";
 
 
 @NgModule({

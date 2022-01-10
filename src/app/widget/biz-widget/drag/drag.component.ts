@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import {BasicConfirmModalComponent} from "../../base-modal";
 import {NzModalRef} from "ng-zorro-antd/modal";
 import {Observable, of} from "rxjs";
+import {BasicConfirmModalComponent} from "@widget/base-modal";
 
 @Component({
   selector: 'app-drag',

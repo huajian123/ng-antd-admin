@@ -1,7 +1,7 @@
 <div class="left-nav-wrap" [class.dark-scrollbar]="(themesOptions$|async)!.theme==='dark'">
   <div class="sidebar-logo" *ngIf="(themesOptions$|async)!.hasNavHeadArea" [class.p-l-8]="isCollapsed$|async">
     <a href="#" target="_blank">
-      <img src="../../../../assets/imgs/logo.svg" alt="logo">
+      <img src="assets/imgs/logo.svg" alt="logo">
       <h1 class="animate-02" [class.light]="(themesOptions$|async)!.theme==='light'&&!(isNightTheme$|async)">Ant Design Pro</h1>
     </a>
   </div>

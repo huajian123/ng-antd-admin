@@ -32,7 +32,7 @@
 
   <nz-layout [style]="{marginTop:isMixiMode&&themesOptions.hasTopArea?'48px':0}">
     <!--sider模式的 header-->
-    <nz-header  style="transition:width 0.2s"
+    <nz-header style="transition:width 0.2s"
                *ngIf="!isMixiMode&&themesOptions.hasTopArea&&themesOptions.mode==='side'"
                [ngClass]="{
                'full-with':!themesOptions.hasNavArea,
@@ -90,7 +90,7 @@
 
 <app-setting-drawer></app-setting-drawer>
 
-<app-chat  (changeShows)="showChats=false" *ngIf="showChats"></app-chat>
+<app-chat (changeShows)="showChats=false" *ngIf="showChats"></app-chat>
 
 <ng-template #trigger>
   <ul nz-menu [nzTheme]="(isMixiMode&&!(isOverMode$|async))?'light':(themesOptions$|async)!.theme" nzMode="inline"

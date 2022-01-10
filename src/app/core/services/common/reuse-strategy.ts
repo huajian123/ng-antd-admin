@@ -51,7 +51,7 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
 
   // 进入路由触发，是否同一路由时复用路由
   shouldReuseRoute(future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot): boolean {
-    if(!!future.data['key']&&SimpleReuseStrategy.handlers[future.data['key']]){
+    if (!!future.data['key'] && SimpleReuseStrategy.handlers[future.data['key']]) {
       this.runHook('_onReuseInit', SimpleReuseStrategy.handlers[future.data['key']].componentRef);
     }
     return future.data['key'] === curr.data['key'];

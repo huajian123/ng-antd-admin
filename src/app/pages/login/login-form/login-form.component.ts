@@ -1,13 +1,13 @@
 import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {fnCheckForm} from '../../../utils/tools';
-import {SpinService} from "../../../core/services/store/spin/spin.service";
-import {WindowService} from "../../../core/services/common/window.service";
-import {AuthKey, TokenPre} from "../../../config/constant";
-import {LoginService} from "../../../core/services/http/login/login.service";
+import {fnCheckForm} from '@utils/tools';
+import {SpinService} from "@core/services/store/spin/spin.service";
+import {WindowService} from "@core/services/common/window.service";
+import {AuthKey, TokenPre} from "@config/constant";
+import {LoginService} from "@core/services/http/login/login.service";
 import {finalize} from "rxjs/operators";
-import {AuthService} from "../../../core/services/store/auth.service";
+import {AuthService} from "@core/services/store/auth.service";
 
 @Component({
   selector: 'app-login-form',

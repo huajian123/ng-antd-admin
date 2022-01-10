@@ -1,6 +1,6 @@
 import {Component, OnInit, ChangeDetectionStrategy, ViewChild, ChangeDetectorRef} from '@angular/core';
-import {AdDirective} from '../../../shared/directives/ad.directive';
-import {AdComponent, DynamicComponent} from '../../../core/services/types';
+import {AdDirective} from '@shared/directives/ad.directive';
+import {AdComponent, DynamicComponent} from '@core/services/types';
 import {BaseComponent} from './base/base.component';
 import {SafeComponent} from './safe/safe.component';
 import {BindComponent} from './bind/bind.component';

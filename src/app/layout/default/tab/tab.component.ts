@@ -1,10 +1,10 @@
 import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
-import {TabModel, TabService} from '../../../core/services/common/tab.service';
+import {TabModel, TabService} from '@core/services/common/tab.service';
 import {NzContextMenuService, NzDropdownMenuComponent} from 'ng-zorro-antd/dropdown';
-import {ThemeService} from '../../../core/services/store/theme.service';
+import {ThemeService} from '@core/services/store/theme.service';
 import {NavigationEnd, Router} from '@angular/router';
 import {filter} from 'rxjs/operators';
-import {fnStopMouseEvent} from '../../../utils/tools';
+import {fnStopMouseEvent} from '@utils/tools';
 
 @Component({
   selector: 'app-tab',
@@ -73,7 +73,7 @@ export class TabComponent implements OnInit {
 
   refresh(): void {
     const currentRoute = this.router.url;
-    this.router.navigateByUrl("/", { skipLocationChange: true }).then(() => {
+    this.router.navigateByUrl("/", {skipLocationChange: true}).then(() => {
       this.router.navigate([currentRoute]);
     });
   }

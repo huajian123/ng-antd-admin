@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { LoginFormRoutingModule } from './login-form-routing.module';
 import { LoginFormComponent } from './login-form.component';
-import {SharedModule} from "../../../shared/shared.module";
+import {SharedModule} from "@shared/shared.module";
 
 
 @NgModule({

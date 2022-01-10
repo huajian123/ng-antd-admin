@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef} from '@angular/core';
-import {ThemeService} from '../../../core/services/store/theme.service';
+import {ThemeService} from '@core/services/store/theme.service';
 import {Router} from '@angular/router';
 
 export interface PageHeaderType {

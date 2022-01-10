@@ -1,12 +1,12 @@
 import {Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef, HostListener, Inject} from '@angular/core';
-import {BasicConfirmModalComponent} from "../../base-modal";
-import {ThemeService} from "../../../core/services/store/theme.service";
-import {Menu} from "../../../core/services/types";
+import {ThemeService} from "@core/services/store/theme.service";
+import {Menu} from "@core/services/types";
 import {fromEvent, of} from "rxjs";
 import {debounceTime, distinctUntilChanged, map, switchMap} from "rxjs/operators";
 import {Router} from "@angular/router";
 import {NzModalRef} from "ng-zorro-antd/modal";
-import {MENU_TOKEN} from "../../../config/menu";
+import {MENU_TOKEN} from "@config/menu";
+import {BasicConfirmModalComponent} from "@widget/base-modal";
 
 interface ResultItem {
   showIcon: boolean;
@@ -30,8 +30,8 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
 
   constructor(private themesService: ThemeService, private cdr: ChangeDetectorRef,
               @Inject(MENU_TOKEN) private menuNavList: Menu[],
-              private router: Router, private nzModalRef: NzModalRef) {
-    super();
+              private router: Router, protected override modalRef: NzModalRef) {
+    super(modalRef);
   }
 
   changeSelAnswerIndex(dir: 'up' | 'down'): number | null {
@@ -82,7 +82,7 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
 
   resultClick(resultItem: ResultItem): void {
     this.router.navigate([resultItem.routePath]);
-    this.nzModalRef.destroy();
+    this.modalRef.destroy();
   }
 
 

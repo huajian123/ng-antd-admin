@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {PageHeaderType} from '../../../../shared/components/page-header/page-header.component';
-import {RoleService} from '../../../../core/services/http/internal-manage/role.service';
-import {Permission, PutPermissionParam} from '../../../../core/services/types';
+import {PageHeaderType} from '@shared/components/page-header/page-header.component';
+import {RoleService} from '@core/services/http/internal-manage/role.service';
+import {Permission, PutPermissionParam} from '@core/services/types';
 import {map, mergeMap} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NzMessageService} from 'ng-zorro-antd/message';

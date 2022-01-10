@@ -1,5 +1,5 @@
-import {Component, OnInit, ChangeDetectionStrategy, ViewChild, ChangeDetectorRef, OnDestroy} from '@angular/core';
-import {ThemeService} from "../../../core/services/store/theme.service";
+import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy} from '@angular/core';
+import {ThemeService} from "@core/services/store/theme.service";
 import {Subject} from "rxjs";
 import {takeUntil} from "rxjs/operators";
 

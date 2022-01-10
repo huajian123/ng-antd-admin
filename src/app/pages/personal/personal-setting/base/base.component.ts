@@ -1,9 +1,9 @@
 import {Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {fnCheckForm} from '../../../../utils/tools';
+import {fnCheckForm} from '@utils/tools';
 import {NzUploadChangeParam} from 'ng-zorro-antd/upload';
 import {NzMessageService} from 'ng-zorro-antd/message';
-import {ValidatorsService} from '../../../../core/services/validators/validators.service';
+import {ValidatorsService} from '@core/services/validators/validators.service';
 import {BreakpointObserver} from '@angular/cdk/layout';
 
 @Component({

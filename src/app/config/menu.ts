@@ -1,5 +1,5 @@
 import {ActionCode} from './actionCode';
-import {Menu} from '../core/services/types';
+import {Menu} from '@core/services/types';
 import {InjectionToken} from "@angular/core";
 
 
@@ -257,40 +257,40 @@ const menuNav: Menu[] = [
       },
     ]
   },
-/*    {
-    title: '内部管理',
-    icon: 'highlight',
-    open: false,
-    selected: false,
-    actionCode: ActionCode.InternalModule,
-    path: '/default/internal-manage',
-    children: [
-      {
-        title: '用户管理',
-        open: false,
-        selected: false,
-        icon: 'highlight',
-        path: '/default/internal-manage/user-manage',
-        actionCode: ActionCode.UserManage,
-      },
-      {
-        title: '角色管理',
-        open: false,
-        selected: false,
-        icon: 'highlight',
-        path: '/default/internal-manage/role-manage',
-        actionCode: ActionCode.Role,
-      },
-      {
-        title: '部门管理',
-        open: false,
-        selected: false,
-        icon: 'highlight',
-        path: '/default/internal-manage/dept-manage',
-        actionCode: ActionCode.Dept,
-      },
-    ]
-  },*/
+  /*    {
+      title: '内部管理',
+      icon: 'highlight',
+      open: false,
+      selected: false,
+      actionCode: ActionCode.InternalModule,
+      path: '/default/internal-manage',
+      children: [
+        {
+          title: '用户管理',
+          open: false,
+          selected: false,
+          icon: 'highlight',
+          path: '/default/internal-manage/user-manage',
+          actionCode: ActionCode.UserManage,
+        },
+        {
+          title: '角色管理',
+          open: false,
+          selected: false,
+          icon: 'highlight',
+          path: '/default/internal-manage/role-manage',
+          actionCode: ActionCode.Role,
+        },
+        {
+          title: '部门管理',
+          open: false,
+          selected: false,
+          icon: 'highlight',
+          path: '/default/internal-manage/dept-manage',
+          actionCode: ActionCode.Dept,
+        },
+      ]
+    },*/
   {
     title: '功能',
     icon: 'dashboard',

@@ -3,7 +3,7 @@ import {NzSafeAny} from 'ng-zorro-antd/core/types';
 import {ModalOptions} from 'ng-zorro-antd/modal';
 import {Observable} from 'rxjs';
 import {ResetPasswordModalComponent} from './reset-password-modal.component';
-import {ModalWrapService} from "../../../../base-modal";
+import {ModalWrapService} from "@widget/base-modal";
 
 @Injectable({
   providedIn: 'root'

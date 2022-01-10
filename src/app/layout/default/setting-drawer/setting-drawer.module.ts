@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {SettingDrawerComponent} from './setting-drawer.component';
-import {SharedModule} from "../../../shared/shared.module";
+import {SharedModule} from "@shared/shared.module";
 
 
 @NgModule({

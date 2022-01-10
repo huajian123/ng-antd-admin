@@ -1,10 +1,11 @@
 import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {People} from '../../../../../core/services/types';
-import {BasicConfirmModalComponent} from '../../../../base-modal';
+import {People} from '@core/services/types';
+import {BasicConfirmModalComponent} from '@widget/base-modal';
 import {Observable, of} from 'rxjs';
-import {fnCheckForm} from '../../../../../utils/tools';
-import {ValidatorsService} from '../../../../../core/services/validators/validators.service';
+import {fnCheckForm} from '@utils/tools';
+import {ValidatorsService} from '@core/services/validators/validators.service';
+import {NzModalRef} from "ng-zorro-antd/modal";
 
 @Component({
   selector: 'app-reset-password-modal',
@@ -15,8 +16,8 @@ export class ResetPasswordModalComponent extends BasicConfirmModalComponent impl
   addEditForm!: FormGroup;
   override params!: People;
 
-  constructor(private fb: FormBuilder, private validatorsService: ValidatorsService) {
-    super();
+  constructor(protected override modalRef: NzModalRef,private fb: FormBuilder, private validatorsService: ValidatorsService) {
+    super(modalRef);
   }
 
 
