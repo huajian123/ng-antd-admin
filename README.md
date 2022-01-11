@@ -1,4 +1,5 @@
 # 项目视频介绍
+使用本项目遇到问题，可以加入376065816 qq群号与我沟通。<br>
 如果本项目对你有用，如果你愿意的话，麻烦点个star，谢谢啊<br>
 if help you, if you want ,please give me a star ,thank you<br>
 视频介绍地址 [项目介绍](https://www.bilibili.com/video/BV1EM4y1w7zd/)<br>
