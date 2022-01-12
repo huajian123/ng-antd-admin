@@ -6,15 +6,16 @@ import {LayoutHeadBgDirective} from './layout-head-bg.directive';
 import {AuthDirective} from "./auth.directive";
 import {DebounceClickDirective} from "./debounceClick.directive";
 import {DisabledDirective} from "./disabled.directive";
+import {ToggleFullscreenDirective} from './toggle-fullscreen.directive';
 
-const DIRECTIVES = [DisabledDirective, DebounceClickDirective, AdDirective, ScreenLessHiddenDirective, LayoutHeadBgDirective, AuthDirective];
+const DIRECTIVES = [ToggleFullscreenDirective, DisabledDirective, DebounceClickDirective, AdDirective, ScreenLessHiddenDirective, LayoutHeadBgDirective, AuthDirective];
 
 @NgModule({
-  declarations: [...DIRECTIVES],
+  declarations: [...DIRECTIVES,],
   imports: [
     CommonModule
   ],
-  exports: [...DIRECTIVES]
+  exports: [...DIRECTIVES,]
 })
 export class DirectivesModule {
 }
