@@ -1,4 +1,4 @@
-import {Directive, HostListener, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Directive, HostListener, OnInit} from '@angular/core';
 import screenfull from "screenfull";
 
 @Directive({
@@ -7,11 +7,13 @@ import screenfull from "screenfull";
 })
 export class ToggleFullscreenDirective implements OnInit {
   isFullscreenFlag = true;
-
+  constructor(private cdr: ChangeDetectorRef) {
+  }
   ngOnInit(): void {
     screenfull.onchange(() => {
       setTimeout(() => {
         this.isFullscreenFlag = !this.isFullscreenFlag;
+        this.cdr.markForCheck();
       },10)
     })
   }
