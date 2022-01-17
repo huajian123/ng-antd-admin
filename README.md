@@ -1,3 +1,6 @@
+# ng-ant-admin
+[![CodeFactor](https://www.codefactor.io/repository/github/huajian123/ng-ant-admin/badge)](https://www.codefactor.io/repository/github/huajian123/ng-ant-admin)
+
 # 项目视频介绍
 使用本项目遇到问题，可以加入376065816 qq群号与我沟通。<br>
 如果本项目对你有用，如果你愿意的话，麻烦点个star，谢谢啊<br>
@@ -72,3 +75,6 @@ _onReuseDestroy: () => void;
 ![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/11.png)
 ![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/12.png)
 ![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/13.png)
+### License
+
+MIT 

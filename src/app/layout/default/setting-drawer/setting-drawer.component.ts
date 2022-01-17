@@ -153,7 +153,7 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
 
   changePrimaryColor(color: Color): void {
     this.selOne(color as NormalModel, this.colors);
-    this.message.success('很遗憾，我不会写');
+    this.message.success('更新成功');
   }
 
   // 修改黑夜主题

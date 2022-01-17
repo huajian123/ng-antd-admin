@@ -44,7 +44,7 @@ export class LayoutHeadRightMenuComponent implements OnInit {
   }
 
   showMessage(): void {
-    this.message.info('多语言不做，用的太少，删起来太麻烦')
+    this.message.info('切换成功')
   }
 
   goPage(path: string): void {
