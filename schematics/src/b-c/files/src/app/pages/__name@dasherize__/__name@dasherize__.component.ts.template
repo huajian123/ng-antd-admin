@@ -1,0 +1,191 @@
+import {Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef} from '@angular/core';
+import {SearchCommonVO,} from "@core/services/types";
+import {MyTableConfig, SortFile} from "@shared/components/ant-table/ant-table.component";
+import {PageHeaderType} from "@shared/components/page-header/page-header.component";
+import {NzModalService} from "ng-zorro-antd/modal";
+import {NzMessageService} from "ng-zorro-antd/message";
+import {Router} from "@angular/router";
+import {NzTableQueryParams} from "ng-zorro-antd/table";
+import {finalize} from "rxjs/operators";
+import {ModalBtnStatus} from "@widget/base-modal";
+import {<%= classify(name) %>Service} from "@services/<%= dasherize(name) %>/<%= dasherize(name) %>.service";
+
+
+interface SearchParam {
+  personId: number;
+  title: string;
+}
+
+@Component({
+  selector: 'app-<%= dasherize(name) %>',
+  templateUrl: './<%= dasherize(name) %>.component.html',
+  styleUrls: ['./<%= dasherize(name) %>.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class <%= classify(name) %>Component implements OnInit {
+  @ViewChild('highLightTpl', {static: true}) highLightTpl!: TemplateRef<any>;
+  @ViewChild('operationTpl', {static: true}) operationTpl!: TemplateRef<any>;
+  isCollapse = true;
+  tableConfig!: MyTableConfig;
+  pageHeaderInfo: Partial<PageHeaderType> = {
+    title: '查询表格（表头可拖动）',
+    // desc: '表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。',
+    breadcrumb: ['首页', '列表页', '查询表格']
+  };
+  cashArray: <%= classify(name) %>Obj[] = [];
+  dataList: <%= classify(name) %>Obj[] = [];
+  searchParam: Partial<SearchParam> = {};
+
+  constructor(private dataService: <%= classify(name) %>Service,
+              private modalService: <%= classify(name) %>ModalService,
+              private modalSrv: NzModalService,
+              public message: NzMessageService,
+              private router: Router, private cdr: ChangeDetectorRef) {
+  }
+
+  reloadTable(): void {
+    this.message.info('刷新成功')
+    this.getDataList();
+  }
+
+  // 触发表格变更检测
+  tableChangeDectction(): void {
+    // 改变引用触发变更检测。
+    this.dataList = [...this.dataList];
+    this.cdr.detectChanges();
+  }
+
+  tableLoading(isLoading: boolean): void {
+    this.tableConfig.loading = isLoading;
+    this.tableChangeDectction();
+  }
+
+  getDataList(e?: NzTableQueryParams): void {
+    this.tableLoading(true);
+    const params: SearchCommonVO<any> = {
+      pageSize: this.tableConfig.pageSize!,
+      pageNum: e?.pageIndex! || this.tableConfig.pageIndex!,
+      filters: this.searchParam
+    };
+    this.dataService.get<%= classify(name) %>List(params).pipe(finalize(() => this.tableLoading(false))).subscribe(data => {
+      const {list, total, pageNum} = data;
+      this.dataList = [...list];
+      this.tableConfig.total = total;
+      this.tableConfig.pageIndex = pageNum;
+      this.tableLoading(false);
+    })
+  }
+
+  /*展开*/
+  toggleCollapse(): void {
+    this.isCollapse = !this.isCollapse;
+  }
+
+  /*重置*/
+  resetForm(): void {
+    this.searchParam = {};
+    this.getDataList();
+  }
+
+  add(): void {
+    this.modalService.show({nzTitle: '新增碑帖'}).subscribe(({modalValue, status}) => {
+      if (status === ModalBtnStatus.Cancel) {
+        return;
+      }
+      this.addEditData(modalValue, 'add<%= classify(name) %>');
+    })
+  }
+
+  // 修改
+  edit(id: number): void {
+    this.dataService.get<%= classify(name) %>Detail(id).subscribe(res => {
+      this.modalService.show({nzTitle: '编辑', nzWidth: '800'}, res).subscribe(({modalValue, status}) => {
+        if (status === ModalBtnStatus.Cancel) {
+          return;
+        }
+        modalValue.id = id;
+        this.tableLoading(true);
+        this.addEditData(modalValue, 'edit<%= classify(name) %>');
+      }, error => this.tableLoading(false));
+    });
+  }
+
+
+  addEditData(param: <%= classify(name) %>Obj, methodName: 'edit<%= classify(name) %>' | 'add<%= classify(name) %>'): void {
+    this.dataService[methodName](param).subscribe(() => {
+      this.getDataList();
+    });
+  }
+
+  del(id: number): void {
+    this.modalSrv.confirm({
+      nzTitle: '确定要删除吗？',
+      nzContent: '删除后不可恢复',
+      nzOnOk: () => {
+        this.tableLoading(true);
+        this.dataService.del<%= classify(name) %>(id).subscribe(() => {
+          if (this.dataList.length === 1) {
+            this.tableConfig.pageIndex--;
+          }
+          this.getDataList();
+        });
+      }
+    });
+  }
+
+  changeSort(e: SortFile): void {
+    this.message.info(`排序字段：${e.fileName},排序为:${e.sortDir}`);
+  }
+
+  // 修改一页几条
+  changePageSize(e: number): void {
+    this.tableConfig.pageSize = e;
+  }
+
+  private initTable(): void {
+    this.tableConfig = {
+      headers: [
+        {
+          title: '文字很长',
+          width: 130,
+          field: 'productName',
+          showSort: true,
+        },
+        {
+          title: '换行',
+          width: 100,
+          field: 'casNo',
+          notNeedEllipsis: true,
+          showSort: true,
+          tdClassList: ['text-wrap'],
+        }, {
+          title: '加样式',
+          width: 100,
+          field: 'productName',
+          tdClassList: ['operate-text'],
+        },
+        {
+          title: '名称',
+          field: 'productName',
+          tdTemplate: this.highLightTpl,
+        },
+        {
+          title: '操作',
+          tdTemplate: this.operationTpl,
+          width: 80,
+          fixed: true,
+          fixedDir: "right"
+        }
+      ],
+      total: 0,
+      showCheckbox: true,
+      loading: false,
+      pageSize: 10,
+      pageIndex: 1,
+    };
+  }
+
+  ngOnInit(): void {
+    this.initTable();
+  }
+}

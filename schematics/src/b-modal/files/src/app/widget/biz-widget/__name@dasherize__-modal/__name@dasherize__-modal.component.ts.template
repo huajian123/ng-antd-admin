@@ -1,0 +1,48 @@
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {OptionsInterface} from "@core/services/types";
+import {NzModalRef} from "ng-zorro-antd/modal";
+import {NzMessageService} from "ng-zorro-antd/message";
+import {Observable, of} from "rxjs";
+import {fnCheckForm} from "@utils/tools";
+import {MapPipe, MapSet} from "@shared/pipes/map.pipe";
+
+@Component({
+  selector: 'app-<%= dasherize(name) %>-modal',
+  templateUrl: './<%= dasherize(name) %>-modal.component.html',
+  styleUrls: ['./<%= dasherize(name) %>-modal.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class <%= classify(name) %>ModalComponent implements OnInit {
+
+  addEditForm!: FormGroup;
+  params: <%= classify(name) %>Obj;
+  typeOptions: OptionsInterface[] = [];
+
+  constructor(private modalRef: NzModalRef, private fb: FormBuilder, private msg: NzMessageService) {
+    this.params = {};
+  }
+  initForm(): void {
+    this.addEditForm = this.fb.group({
+      name: [null, [Validators.required]],
+      classes: [null, [Validators.required]],
+    });
+  }
+
+  // 返回false则不关闭对话框
+  protected getCurrentValue(): Observable<any> {
+    if (!fnCheckForm(this.addEditForm)) {
+      return of(false);
+    }
+    return of(this.addEditForm.value);
+  }
+
+  ngOnInit(): void {
+    this.typeOptions = [...MapPipe.transformMapToArray(MapSet.ClassesGrade)];
+    this.initForm();
+    if (Object.keys(this.params).length > 0) {
+      this.addEditForm.patchValue(this.params);
+    }
+  }
+
+}
