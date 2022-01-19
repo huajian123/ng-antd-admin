@@ -1,13 +1,11 @@
 import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {SimpleReuseStrategy} from "@core/services/common/reuse-strategy";
 import {WindowService} from "@core/services/common/window.service";
-import {TabService} from "@core/services/common/tab.service";
-import {fnFormatePath} from '@utils/tools';
 import {SearchRouteService} from "@widget/common-widget/search-route/search-route.service";
 import {ModalOptions} from "ng-zorro-antd/modal";
 import {NzMessageService} from "ng-zorro-antd/message";
-import {AuthKey} from "@config/constant";
+import {LockWidgetService} from "@widget/common-widget/lock-widget/lock-widget.service";
+import {LoginOutService} from "@core/services/common/login-out.service";
 
 @Component({
   selector: 'app-layout-head-right-menu',
@@ -17,10 +15,26 @@ import {AuthKey} from "@config/constant";
 })
 export class LayoutHeadRightMenuComponent implements OnInit {
 
-  constructor(private router: Router, private windowServe: WindowService,
+  constructor(private router: Router,
+              private loginOutService: LoginOutService,
+              private lockWidgetService: LockWidgetService,
+              private windowServe: WindowService,
               private activatedRoute: ActivatedRoute,
               private searchRouteService: SearchRouteService,
-              private tabService: TabService, public message: NzMessageService,) {
+              public message: NzMessageService,) {
+  }
+
+  // 锁定屏幕
+  lockScreen(): void {
+    this.lockWidgetService.show({
+      nzTitle: '锁定屏幕',
+      nzStyle: {top: '25px'},
+      nzWidth: '520px',
+      nzFooter: null,
+      nzMaskClosable: true
+    }).subscribe(res => {
+      console.log(res);
+    })
   }
 
   showSearchModal(): void {
@@ -35,12 +49,7 @@ export class LayoutHeadRightMenuComponent implements OnInit {
   }
 
   goLogin(): void {
-    this.tabService.clearTabs();
-    this.windowServe.removeStorage(AuthKey);
-    SimpleReuseStrategy.handlers = {};
-    // @ts-ignore
-    SimpleReuseStrategy.waitDelete = fnFormatePath(this.activatedRoute.snapshot['_routerState'].url);
-    this.router.navigate(['/login/login-form']);
+    this.loginOutService.loginOut().then();
   }
 
   showMessage(): void {

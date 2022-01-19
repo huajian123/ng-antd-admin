@@ -5,15 +5,16 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {CoreModule} from "./core/core.module";
-import {StartupService} from "./core/startup/startup.service";
-import {ThemeSkinService} from "./core/services/common/theme-skin.service";
-import {SubWindowWithService} from "./core/services/common/sub-window-with.service";
-import {InitThemeService} from "./core/services/common/init-theme.service";
+import {CoreModule} from "@core/core.module";
+import {StartupService} from "@core/startup/startup.service";
+import {ThemeSkinService} from "@core/services/common/theme-skin.service";
+import {SubWindowWithService} from "@core/services/common/sub-window-with.service";
+import {InitThemeService} from "@core/services/common/init-theme.service";
 import {QuicklinkModule} from "ngx-quicklink";
-import {SharedModule} from "./shared/shared.module";
+import {SharedModule} from "@shared/shared.module";
 import interceptors from './core/services/interceptors';
-import {LoginModalModule} from "./widget/biz-widget/login/login-modal.module";
+import {LoginModalModule} from "@widget/biz-widget/login/login-modal.module";
+import {SubLockedStatusService} from "@core/services/common/sub-locked-status.service";
 
 
 export function StartupServiceFactory(startupService: StartupService) {
@@ -22,6 +23,10 @@ export function StartupServiceFactory(startupService: StartupService) {
 
 export function InitThemeServiceFactory(initThemeService: InitThemeService) {
   return async () => await initThemeService.initTheme();
+}
+
+export function InitLockedStatusServiceFactory(subLockedStatusService: SubLockedStatusService) {
+  return () => subLockedStatusService.initLockedStatus();
 }
 
 export function SubWindowWithServiceFactory(subWindowWithService: SubWindowWithService) {
@@ -35,6 +40,12 @@ const APPINIT_PROVIDES = [
     provide: APP_INITIALIZER,
     useFactory: StartupServiceFactory,
     deps: [StartupService],
+    multi: true,
+  },
+  {
+    provide: APP_INITIALIZER,
+    useFactory: InitLockedStatusServiceFactory,
+    deps: [SubLockedStatusService],
     multi: true,
   },
   {

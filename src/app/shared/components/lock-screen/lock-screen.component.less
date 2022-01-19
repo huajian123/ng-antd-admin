@@ -1,0 +1,116 @@
+.full-screen {
+  z-index: 9999999;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: black;
+}
+
+.form {
+  width: 260px;
+  height: 100vh;
+}
+
+.lock-page-entry {
+  z-index: 10000000;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  backdrop-filter: blur(8px) !important;
+
+  .name {
+    color: #bababa;
+    font-weight: 500
+  }
+}
+
+.title {
+  position: absolute;
+  height: 80px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 20px;
+
+  &.clock {
+    top: 50px;
+  }
+
+  &.bottom-time {
+    bottom: 20px;
+    font-size: 40px;
+    z-index: 2;
+  }
+
+  &.bottom-date {
+    bottom: -40px;
+    z-index: 2;
+  }
+
+
+  @media screen and (max-width: 500px) {
+    font-size: 14px;
+    &.clock {
+      top: 30px;
+    }
+
+    &.bottom-date {
+      bottom: -65px;
+    }
+  }
+
+  @media (min-width: 501px) and (max-width: 768px) {
+    font-size: 16px;
+    &.clock {
+      top: 30px;
+    }
+
+    &.bottom-date {
+      bottom: -65px;
+    }
+  }
+  @media (min-width: 769px) and (max-width: 992px) {
+    font-size: 18px;
+    &.clock {
+      top: 30px;
+    }
+
+    &.bottom-date {
+      bottom: -55px;
+    }
+  }
+  @media (min-width: 993px) and (max-width: 1200px) {
+    font-size: 20px;
+  }
+
+}
+
+.hour {
+  display: flex;
+  font-weight: 700;
+  color: #bababa;
+  background-color: #141313;
+  border-radius: 30px;
+  font-size: 320px;
+  height: 80%;
+
+  @media screen and (max-width: 500px) {
+    font-size: 120px;
+  }
+
+  @media (min-width: 501px) and (max-width: 768px) {
+    font-size: 160px;
+  }
+  @media (min-width: 769px) and (max-width: 992px) {
+    font-size: 160px;
+  }
+  @media (min-width: 993px) and (max-width: 1200px) {
+    font-size: 220px;
+  }
+}

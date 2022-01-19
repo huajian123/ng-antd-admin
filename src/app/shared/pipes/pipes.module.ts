@@ -3,8 +3,9 @@ import {NumberLoopPipe} from './number-loop.pipe';
 import {HtmlPipe} from './html.pipe';
 import {MapPipe} from './map.pipe';
 import {TableFiledPipe} from "./table-filed.pipe";
+import {ChangNumberToChinesePipe} from './chang-number-to-chinese.pipe';
 
-const PIPES = [NumberLoopPipe, HtmlPipe, MapPipe, TableFiledPipe];
+const PIPES = [ChangNumberToChinesePipe, NumberLoopPipe, HtmlPipe, MapPipe, TableFiledPipe];
 
 @NgModule({
   declarations: [...PIPES],

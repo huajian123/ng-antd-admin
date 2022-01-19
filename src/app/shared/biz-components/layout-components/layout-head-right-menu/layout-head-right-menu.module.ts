@@ -5,6 +5,7 @@ import {HomeNoticeModule} from "../home-notice/home-notice.module";
 import {SearchRouteModule} from "@widget/common-widget/search-route/search-route.module";
 import {SHARED_ZORRO_MODULES} from "@shared/shared-zorro.module";
 import {DirectivesModule} from "@shared/directives/directives.module";
+import {LockWidgetModule} from "@widget/common-widget/lock-widget/lock-widget.module";
 
 
 @NgModule({
@@ -12,6 +13,7 @@ import {DirectivesModule} from "@shared/directives/directives.module";
     LayoutHeadRightMenuComponent
   ],
   imports: [
+    LockWidgetModule,
     DirectivesModule,
     HomeNoticeModule,
     SearchRouteModule,
