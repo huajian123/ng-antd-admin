@@ -64,6 +64,7 @@ export class LockScreenComponent implements OnInit, OnDestroy {
 
   // 点击解锁按钮
   unlockBtn(): void {
+    this.validateForm.reset();
     this.showUnlock = true;
   }
 
