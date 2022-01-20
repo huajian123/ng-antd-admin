@@ -1,6 +1,8 @@
 import {FormGroup} from '@angular/forms';
+import CryptoJS from 'crypto-js';
 import {silentEvent} from 'ng-zorro-antd/core/util';
 import {v4 as uuidv4} from 'uuid';
+
 
 const fnGetFile = function getFile(url: string, isBlob = false): Promise<any> {
   return new Promise((resolve, reject) => {
@@ -76,7 +78,20 @@ const fnGetBase64 = function getBase64(file: File): Promise<string | ArrayBuffer
   });
 };
 
+// 加密
+const fnEncrypt = function encrypt(word: any, keyStr: string) {
+  return CryptoJS.AES.encrypt(JSON.stringify(word), keyStr).toString();
+}
+
+// 解密
+const fnDecrypt = function decrypt(word: any, keyStr: string) {
+  const bytes = CryptoJS.AES.decrypt(word, keyStr);
+  return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+}
+
 export {
+  fnDecrypt,
+  fnEncrypt,
   fnGetBase64,
   fnGetFile,
   fnCheckForm,
