@@ -4,6 +4,7 @@ import {BehaviorSubject, Observable} from "rxjs";
 export interface LockScreenFlag {
   locked: boolean;
   password: string;
+  beforeLockPath: string;
 }
 
 @Injectable({
@@ -11,7 +12,7 @@ export interface LockScreenFlag {
 })
 export class LockScreenStoreService {
 
-  private lockScreenStore$ = new BehaviorSubject<LockScreenFlag>({locked: false, password: ''});
+  private lockScreenStore$ = new BehaviorSubject<LockScreenFlag>({locked: false, password: '', beforeLockPath: ''});
 
   constructor() {
   }

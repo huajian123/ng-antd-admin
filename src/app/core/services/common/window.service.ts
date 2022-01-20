@@ -48,4 +48,30 @@ export class WindowService {
       localStorage.clear();
     }
   }
+
+
+  setSessionStorage(key: string, value: string): void {
+    if (this.isBrowser) {
+      sessionStorage.setItem(key, value);
+    }
+  }
+
+  getSessionStorage(key: string): string | null {
+    if (this.isBrowser) {
+      return sessionStorage.getItem(key);
+    }
+    return null;
+  }
+
+  removeSessionStorage(key: string): void {
+    if (this.isBrowser) {
+      sessionStorage.removeItem(key);
+    }
+  }
+
+  clearSessionStorage(): void {
+    if (this.isBrowser) {
+      sessionStorage.clear();
+    }
+  }
 }

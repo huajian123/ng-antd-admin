@@ -15,11 +15,11 @@ export class SubLockedStatusService {
   }
 
   initLockedStatus(): void {
-    const hasCash = this.windowSer.getStorage(LockedKey);
+    const hasCash = this.windowSer.getSessionStorage(LockedKey);
     if (hasCash) {
       this.lockScreenStoreService.setLockScreenStore(fnDecrypt(hasCash, salt));
     } else {
-      this.lockScreenStoreService.getLockScreenStore().pipe(first()).subscribe(res => this.windowSer.setStorage(LockedKey, fnEncrypt(JSON.stringify(res), salt)));
+      this.lockScreenStoreService.getLockScreenStore().pipe(first()).subscribe(res => this.windowSer.setSessionStorage(LockedKey, fnEncrypt(JSON.stringify(res), salt)));
     }
   }
 }

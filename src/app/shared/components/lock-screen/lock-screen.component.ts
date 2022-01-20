@@ -14,6 +14,7 @@ import {LockedKey, salt} from "@config/constant";
 import {WindowService} from "@core/services/common/window.service";
 import {LockScreenFlag, LockScreenStoreService} from "@store/lock-screen-store/lock-screen-store.service";
 import {LoginOutService} from "@core/services/common/login-out.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-lock-screen',
@@ -29,15 +30,18 @@ export class LockScreenComponent implements OnInit, OnDestroy {
   passwordVisible = false;
   lockedState: LockScreenFlag = {
     locked: false,
-    password: ''
+    password: '',
+    beforeLockPath: ''// 锁屏前的页面路由
   }
 
-  constructor(private loginOutService: LoginOutService, private lockScreenStoreService: LockScreenStoreService, private fb: FormBuilder, private windowSrv: WindowService) {
+
+  constructor(private router: Router, private loginOutService: LoginOutService, private lockScreenStoreService: LockScreenStoreService, private fb: FormBuilder, private windowSrv: WindowService) {
   }
 
   // 返回登录页面则解锁
   loginOut(): void {
-    this.loginOutService.loginOut().then(() => this.unlock());
+    this.unlock()
+    this.loginOutService.loginOut().then();
   }
 
   // 进入系统
@@ -48,6 +52,7 @@ export class LockScreenComponent implements OnInit, OnDestroy {
     if (this.lockedState.locked) {
       // 密码正确则解锁
       if (this.lockedState.password === this.validateForm.get('password')!.value) {
+        this.router.navigateByUrl(this.lockedState.beforeLockPath);
         this.unlock();
       } else {
         this.validateForm.get('password')!.setErrors({notRight: true})
@@ -57,9 +62,9 @@ export class LockScreenComponent implements OnInit, OnDestroy {
 
   // 解锁
   unlock(): void {
-    const lockedStatus = {locked: false, password: ''};
+    const lockedStatus = {locked: false, password: '', beforeLockPath: ''};
     this.lockScreenStoreService.setLockScreenStore(lockedStatus);
-    this.windowSrv.setStorage(LockedKey, fnEncrypt(lockedStatus, salt));
+    this.windowSrv.setSessionStorage(LockedKey, fnEncrypt(lockedStatus, salt));
   }
 
   // 点击解锁按钮

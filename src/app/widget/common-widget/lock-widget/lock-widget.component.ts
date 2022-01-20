@@ -7,6 +7,7 @@ import {WindowService} from "@core/services/common/window.service";
 import {LockedKey, salt} from "@config/constant";
 import {LockScreenFlag, LockScreenStoreService} from "@store/lock-screen-store/lock-screen-store.service";
 import {of} from "rxjs";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-lock-widget',
@@ -18,7 +19,7 @@ export class LockWidgetComponent extends BasicConfirmModalComponent implements O
   validateForm!: FormGroup;
   passwordVisible = false;
 
-  constructor(private lockScreenStoreService: LockScreenStoreService, protected override modalRef: NzModalRef, private fb: FormBuilder, private windowSrv: WindowService) {
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private lockScreenStoreService: LockScreenStoreService, protected override modalRef: NzModalRef, private fb: FormBuilder, private windowSrv: WindowService) {
     super(modalRef);
   }
 
@@ -34,11 +35,14 @@ export class LockWidgetComponent extends BasicConfirmModalComponent implements O
     }
     const lockedState: LockScreenFlag = {
       locked: true,
-      password: this.validateForm.value["password"]
+      password: this.validateForm.value["password"],
+      // @ts-ignore
+      beforeLockPath: this.activatedRoute.snapshot['_routerState'].url
     }
     this.lockScreenStoreService.setLockScreenStore(lockedState)
-    this.windowSrv.setStorage(LockedKey, fnEncrypt(lockedState, salt));
+    this.windowSrv.setSessionStorage(LockedKey, fnEncrypt(lockedState, salt));
     this.modalRef.destroy();
+    this.router.navigateByUrl(`/blank/empty-for-lock`);
   }
 
   ngOnInit(): void {
