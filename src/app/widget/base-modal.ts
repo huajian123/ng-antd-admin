@@ -62,7 +62,7 @@ export class ModalWrapService {
    */
   getModalMaxZIndex(wrapElement: HTMLElement): ModalZIndex {
     return this.bsModalService.openModals.reduce<ModalZIndex>((prev, modal) => {
-      const element = modal.containerInstance.modalElementRef.nativeElement;
+      const element = modal.containerInstance["host"].nativeElement;
       if (wrapElement === element) {
         return prev;
       }
