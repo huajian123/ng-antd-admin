@@ -11,6 +11,7 @@ import {MapKeyType, MapPipe, MapSet} from '@shared/pipes/map.pipe';
 import {UserManageModalService} from '@widget/biz-widget/internal-manage/user-manage/user-manage-modal.service';
 import {ResetPasswordModalService} from '@widget/biz-widget/internal-manage/user-manage/reset-password-modal/reset-password-modal.service';
 import { ActionCode } from 'src/app/config/actionCode';
+import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 interface SearchParam {
   userName: string;
@@ -33,8 +34,8 @@ export class UserManageComponent implements OnInit {
     title: '人员管理',
     breadcrumb: ['首页', '内部管理', '人员管理']
   };
-  @ViewChild('operationTpl', {static: true}) operationTpl!: TemplateRef<any>;
-  @ViewChild('statusSwitchTpl', {static: true}) statusSwitchTpl!: TemplateRef<any>;
+  @ViewChild('operationTpl', {static: true}) operationTpl!: TemplateRef<NzSafeAny>;
+  @ViewChild('statusSwitchTpl', {static: true}) statusSwitchTpl!: TemplateRef<NzSafeAny>;
   ActionCode = ActionCode;
   actionCodeObj = {
     add: ActionCode.RoleAdd

@@ -1,10 +1,11 @@
 import {ActivatedRouteSnapshot, DetachedRouteHandle, RouteReuseStrategy} from '@angular/router';
+import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 // 参考https://zhuanlan.zhihu.com/p/29823560
 // https://blog.csdn.net/weixin_30561425/article/details/96985967?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control
 export class SimpleReuseStrategy implements RouteReuseStrategy {
 
-  static handlers: { [key: string]: any } = {};
+  static handlers: { [key: string]: NzSafeAny } = {};
   public static waitDelete: string | null;
 
   public static deleteRouteSnapshot(path: string): void {
@@ -20,7 +21,7 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
   }
 
   // 当路由离开时会触发，存储路由
-  store(route: ActivatedRouteSnapshot, handle: any): void {
+  store(route: ActivatedRouteSnapshot, handle: NzSafeAny): void {
     if (route.data['shouldDetach'] === 'no') {
       return;
     }

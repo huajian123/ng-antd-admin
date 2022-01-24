@@ -4,6 +4,7 @@ import {PageHeaderType} from '@shared/components/page-header/page-header.compone
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {inNextTick} from 'ng-zorro-antd/core/util';
 import {Radar} from '@antv/g2plot';
+import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 @Component({
   selector: 'app-workbench',
@@ -12,7 +13,7 @@ import {Radar} from '@antv/g2plot';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WorkbenchComponent implements OnInit, AfterViewInit {
-  @ViewChild('pageHeaderContent', {static: false}) pageHeaderContent!: TemplateRef<any>;
+  @ViewChild('pageHeaderContent', {static: false}) pageHeaderContent!: TemplateRef<NzSafeAny>;
   radarData = [
     {item: 'Design', user: 'a', score: 70},
     {item: 'Design', user: 'b', score: 30},

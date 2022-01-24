@@ -6,6 +6,7 @@ import {environment} from '@env/environment';
 import {filter, map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {localUrl} from '@env/environment.prod';
+import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 export interface MyHttpConfig {
   needIntercept?: boolean;
@@ -29,7 +30,7 @@ export class BaseHttpService {
     this.uri = environment.production ? localUrl : '/site';
   }
 
-  get<T>(path: string, param?: any, config?: MyHttpConfig): Observable<any> {
+  get<T>(path: string, param?: NzSafeAny, config?: MyHttpConfig): Observable<NzSafeAny> {
     config = config || {};
     const params = new HttpParams({fromString: qs.stringify(param)});
     return this.http.get<ActionResult<T>>(this.uri + path, {params}).pipe(
@@ -46,7 +47,7 @@ export class BaseHttpService {
     );
   }
 
-  delete<T>(path: string, param?: any, config?: MyHttpConfig): Observable<any> {
+  delete<T>(path: string, param?: NzSafeAny, config?: MyHttpConfig): Observable<NzSafeAny> {
     config = config || {};
     const params = new HttpParams({fromString: qs.stringify(param)});
     return this.http.delete<ActionResult<T>>(this.uri + path, {params}).pipe(
@@ -63,7 +64,7 @@ export class BaseHttpService {
     );
   }
 
-  post<T>(path: string, param?: any, config?: MyHttpConfig): Observable<any> {
+  post<T>(path: string, param?: NzSafeAny, config?: MyHttpConfig): Observable<NzSafeAny> {
     config = config || {needSuccessInfo: false};
     return this.http.post<ActionResult<T>>(this.uri + path, param).pipe(
       filter((item) => {
@@ -79,7 +80,7 @@ export class BaseHttpService {
     );
   }
 
-  put<T>(path: string, param?: any, config?: MyHttpConfig): Observable<any> {
+  put<T>(path: string, param?: NzSafeAny, config?: MyHttpConfig): Observable<NzSafeAny> {
     config = config || {needSuccessInfo: false};
     return this.http.put<ActionResult<T>>(this.uri + path, param).pipe(
       filter((item) => {
@@ -95,14 +96,14 @@ export class BaseHttpService {
     );
   }
 
-  downZip(path: string, param?: any): Observable<any> {
+  downZip(path: string, param?: NzSafeAny): Observable<NzSafeAny> {
     return this.http.post(this.uri + path, param, {
       responseType: 'blob',
       headers: new HttpHeaders().append('Content-Type', 'application/json')
     });
   }
 
-  handleFilter(item: ActionResult<any>, needSuccessInfo: boolean): boolean {
+  handleFilter(item: ActionResult<NzSafeAny>, needSuccessInfo: boolean): boolean {
     if (item.code !== 0) {
       this.message.error(item.msg);
     } else if (needSuccessInfo) {

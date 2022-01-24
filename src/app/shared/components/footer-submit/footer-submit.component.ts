@@ -1,6 +1,7 @@
 import {Component, OnInit, ChangeDetectionStrategy, Input, TemplateRef, Renderer2, ElementRef} from '@angular/core';
 import {ThemeService} from '@core/services/store/theme.service';
 import {switchMap} from "rxjs/operators";
+import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 @Component({
   selector: 'app-footer-submit',
@@ -10,7 +11,7 @@ import {switchMap} from "rxjs/operators";
 })
 export class FooterSubmitComponent implements OnInit {
 
-  @Input() leftTpl!: TemplateRef<any>;
+  @Input() leftTpl!: TemplateRef<NzSafeAny>;
   themesOptions$ = this.themesService.getThemesMode();
   isNightTheme$ = this.themesService.getIsNightTheme();
   isCollapsed$ = this.themesService.getIsCollapsed();

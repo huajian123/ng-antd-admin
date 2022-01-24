@@ -9,7 +9,7 @@ import {DragService} from "@widget/biz-widget/drag/drag.service";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AboutComponent implements OnInit {
-  // @ViewChild('dragTpl', {static: true}) dragTpl!: TemplateRef<any>;
+  // @ViewChild('dragTpl', {static: true}) dragTpl!: TemplateRef<NzSafeAny>;
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '可拖动对话框',
     breadcrumb: ['首页', '拖拽modal'],

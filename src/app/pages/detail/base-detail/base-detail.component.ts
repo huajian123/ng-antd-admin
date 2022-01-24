@@ -1,6 +1,7 @@
 import {Component, OnInit, ChangeDetectionStrategy, TemplateRef, ViewChild} from '@angular/core';
 import {PageHeaderType} from '@shared/components/page-header/page-header.component';
 import {MyTableConfig} from '@shared/components/ant-table/ant-table.component';
+import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 interface ReturnObj {
   num: string;
@@ -18,7 +19,7 @@ interface ReturnObj {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BaseDetailComponent implements OnInit {
-  @ViewChild('returnProductTpl', {static: true}) returnProductTpl!: TemplateRef<any>;
+  @ViewChild('returnProductTpl', {static: true}) returnProductTpl!: TemplateRef<NzSafeAny>;
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '基础详情页',
     breadcrumb: ['首页', '详情页', '基础详情页']

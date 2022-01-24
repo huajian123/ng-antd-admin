@@ -3,9 +3,10 @@
 * */
 
 import {Type} from '@angular/core';
+import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 export class DynamicComponent {
-  constructor(public component: Type<any>, public data: any) {
+  constructor(public component: Type<NzSafeAny>, public data: NzSafeAny) {
   }
 }
 
@@ -43,7 +44,7 @@ export interface PageInfo<T> {
 }
 
 export interface AdComponent {
-  data: any;
+  data: NzSafeAny;
 }
 
 // 级联选择数据结构

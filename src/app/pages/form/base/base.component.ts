@@ -2,6 +2,7 @@ import {ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild} from
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PageHeaderType} from '@shared/components/page-header/page-header.component';
 import {fnCheckForm} from '@utils/tools';
+import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 @Component({
   selector: 'app-base',
@@ -10,7 +11,7 @@ import {fnCheckForm} from '@utils/tools';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BaseComponent implements OnInit {
-  @ViewChild('dragTpl', {static: true}) dragTpl!: TemplateRef<any>;
+  @ViewChild('dragTpl', {static: true}) dragTpl!: TemplateRef<NzSafeAny>;
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '基础表单',
     desc: '表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。',

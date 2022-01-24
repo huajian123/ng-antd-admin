@@ -87,7 +87,7 @@ export class LockScreenComponent implements OnInit, OnDestroy {
   subLockedState(): void {
     this.lockScreenStoreService.getLockScreenStore().pipe(takeUntil(this.destory$)).subscribe(res => {
       this.lockedState = res;
-    });
+    })
   }
 
   ngOnInit(): void {

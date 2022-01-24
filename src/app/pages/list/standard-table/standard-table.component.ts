@@ -1,6 +1,7 @@
 import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {PageHeaderType} from '@shared/components/page-header/page-header.component';
 import {NzProgressStatusType} from 'ng-zorro-antd/progress/typings';
+import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 @Component({
   selector: 'app-standard-table',
@@ -85,10 +86,10 @@ export class StandardTableComponent implements OnInit {
   constructor() {
   }
 
-  edit(item: any): void {
+  edit(item: NzSafeAny): void {
   }
 
-  deleteItem(item: any): void {
+  deleteItem(item: NzSafeAny): void {
 
   }
 

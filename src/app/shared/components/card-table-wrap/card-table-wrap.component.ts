@@ -1,17 +1,8 @@
-import {
-  AfterContentInit,
-  ChangeDetectionStrategy,
-  Component,
-  ContentChild,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  TemplateRef
-} from '@angular/core';
+import {AfterContentInit, ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, OnInit, Output, TemplateRef} from '@angular/core';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {NzTableSize} from "ng-zorro-antd/table";
 import {AntTableComponentToken, TableHeader} from "../ant-table/ant-table.component";
+import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 interface TableSizeItem {
   sizeName: string,
@@ -26,9 +17,9 @@ interface TableSizeItem {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardTableWrapComponent implements OnInit, AfterContentInit {
-  @Input() btnTpl: TemplateRef<any> | undefined;
+  @Input() btnTpl: TemplateRef<NzSafeAny> | undefined;
   @Input() isNormalTable = true;
-  @Output() reload = new EventEmitter<any>();
+  @Output() reload = new EventEmitter<NzSafeAny>();
   @ContentChild(AntTableComponentToken) antTableComponent!: AntTableComponentToken;
   tableConfigVisible = false;
   tableSizeOptions: TableSizeItem[] = [

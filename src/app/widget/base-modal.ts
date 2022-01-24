@@ -17,11 +17,11 @@ export enum ModalBtnStatus {
 
 // 组件实例需要继承此类
 export abstract class BasicConfirmModalComponent {
-  protected params: any; // service传给component instance的参数
+  protected params: NzSafeAny; // service传给component instance的参数
   protected constructor(protected modalRef: NzModalRef) {
   }
 
-  protected abstract getCurrentValue(): any;
+  protected abstract getCurrentValue(): NzSafeAny;
 }
 
 @Injectable()
@@ -41,7 +41,7 @@ export class ModalWrapService {
   }
 
   private confirmCallback(modalButtonOptions: ModalButtonOptions): void {
-    (modalButtonOptions['modalRef'].componentInstance as any).getCurrentValue().pipe(
+    (modalButtonOptions['modalRef'].componentInstance as NzSafeAny).getCurrentValue().pipe(
       tap((modalValue) => {
         if (!modalValue) {
           return of(false);
@@ -109,7 +109,7 @@ export class ModalWrapService {
   }
 
   // 创建对话框的配置项
-  createModalConfig(component: Type<any>, modalOptions: ModalOptions = {}, params: object = {}, wrapCls: string): ModalOptions {
+  createModalConfig(component: Type<NzSafeAny>, modalOptions: ModalOptions = {}, params: object = {}, wrapCls: string): ModalOptions {
     const defaultOptions: ModalOptions = {
       nzTitle: '',
       nzContent: component,
@@ -141,7 +141,7 @@ export class ModalWrapService {
     return newOptions;
   }
 
-  show(component: Type<any>, modalOptions: ModalOptions = {}, params: object = {}): Observable<NzSafeAny> {
+  show(component: Type<NzSafeAny>, modalOptions: ModalOptions = {}, params: object = {}): Observable<NzSafeAny> {
     const wrapCls = this.getRandomCls();
     const newOptions = this.createModalConfig(component, modalOptions, params, wrapCls);
     const modalRef = this.bsModalService.create(newOptions);

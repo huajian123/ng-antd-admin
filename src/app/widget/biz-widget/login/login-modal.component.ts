@@ -6,6 +6,7 @@ import {fnCheckForm} from '@utils/tools';
 import {LoginService} from '@core/services/http/login/login.service';
 import {Observable, of} from 'rxjs';
 import {catchError} from 'rxjs/operators';
+import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 @Component({
   selector: 'app-login-modal',
@@ -23,7 +24,7 @@ export class LoginModalComponent extends BasicConfirmModalComponent implements O
   }
 
   // 返回false则不关闭对话框
-  protected getCurrentValue(): Observable<any> {
+  protected getCurrentValue(): Observable<NzSafeAny> {
     if (!fnCheckForm(this.loginModalForm)) {
       return of(false);
     }

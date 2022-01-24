@@ -8,6 +8,7 @@ import {LockedKey, salt} from "@config/constant";
 import {LockScreenFlag, LockScreenStoreService} from "@store/lock-screen-store/lock-screen-store.service";
 import {of} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
+import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 @Component({
   selector: 'app-lock-widget',
@@ -49,7 +50,7 @@ export class LockWidgetComponent extends BasicConfirmModalComponent implements O
     this.initForm();
   }
 
-  protected getCurrentValue(): any {
+  protected getCurrentValue(): NzSafeAny {
     return of(true);
   }
 

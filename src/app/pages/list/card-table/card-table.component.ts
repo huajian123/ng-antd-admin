@@ -1,6 +1,7 @@
 import {Component, OnInit, ChangeDetectionStrategy, AfterViewInit, ViewChild, TemplateRef} from '@angular/core';
 import {PageHeaderType} from '@shared/components/page-header/page-header.component';
 import {ThemeService} from '@core/services/store/theme.service';
+import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 @Component({
   selector: 'app-card-table',
@@ -66,7 +67,7 @@ export class CardTableComponent implements OnInit, AfterViewInit {
       desc: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。'
     },
   ];
-  @ViewChild('headerContent', {static: false}) headerContent!: TemplateRef<any>;
+  @ViewChild('headerContent', {static: false}) headerContent!: TemplateRef<NzSafeAny>;
 
   constructor( private themesService: ThemeService) {
   }

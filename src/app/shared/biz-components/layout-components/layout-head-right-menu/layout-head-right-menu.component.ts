@@ -32,9 +32,7 @@ export class LayoutHeadRightMenuComponent implements OnInit {
       nzWidth: '520px',
       nzFooter: null,
       nzMaskClosable: true
-    }).subscribe(res => {
-      console.log(res);
-    })
+    }).subscribe();
   }
 
   showSearchModal(): void {

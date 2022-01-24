@@ -8,6 +8,7 @@ import {SearchCommonVO} from '@core/services/types';
 import {Router} from '@angular/router';
 import {ActionCode} from "@config/actionCode";
 import {NzMessageService} from "ng-zorro-antd/message";
+import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 @Component({
   selector: 'app-search-table',
@@ -16,8 +17,8 @@ import {NzMessageService} from "ng-zorro-antd/message";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchTableComponent implements OnInit {
-  @ViewChild('highLightTpl', {static: true}) highLightTpl!: TemplateRef<any>;
-  @ViewChild('operationTpl', {static: true}) operationTpl!: TemplateRef<any>;
+  @ViewChild('highLightTpl', {static: true}) highLightTpl!: TemplateRef<NzSafeAny>;
+  @ViewChild('operationTpl', {static: true}) operationTpl!: TemplateRef<NzSafeAny>;
   validateForm!: FormGroup;
   isCollapse = true;
   tableConfig!: MyTableConfig;
@@ -26,8 +27,8 @@ export class SearchTableComponent implements OnInit {
     // desc: '表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。',
     breadcrumb: ['首页', '列表页', '查询表格']
   };
-  cashArray: any[] = [];
-  dataList: any[] = [];
+  cashArray: NzSafeAny[] = [];
+  dataList: NzSafeAny[] = [];
   actionCodeObj = {
     add: ActionCode.RoleAdd
   };
@@ -44,7 +45,7 @@ export class SearchTableComponent implements OnInit {
 
   getDataList(e?: NzTableQueryParams): void {
     this.tableConfig.loading = true;
-    const params: SearchCommonVO<any> = {
+    const params: SearchCommonVO<NzSafeAny> = {
       pageSize: this.tableConfig.pageSize!,
       pageNum: e?.pageIndex! || this.tableConfig.pageIndex!
     };

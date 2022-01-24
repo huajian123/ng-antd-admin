@@ -12,7 +12,7 @@ export class UserManageService {
   constructor(public http: BaseHttpService) {
   }
 
-  public getPeoples(param: SearchCommonVO<any>): Observable<PageInfo<People>> {
+  public getPeoples(param: SearchCommonVO<NzSafeAny>): Observable<PageInfo<People>> {
     return this.http.post('/user/list', param);
   }
 

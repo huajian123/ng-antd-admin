@@ -5,6 +5,7 @@ this.accidentTypeOptions = [...MapPipe.transformMapToArray(MapSet.accidentType)]
 
 import {Pipe, PipeTransform} from '@angular/core';
 import {DatePipe} from '@angular/common';
+import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 export enum DateFormat {
   Date = 'yyyy-MM-dd',
@@ -31,7 +32,7 @@ export const MapSet = {
 
 export interface MapItem {
   label: string;
-  value: any;
+  value: NzSafeAny;
 }
 
 @Pipe({
@@ -41,9 +42,9 @@ export class MapPipe implements PipeTransform {
   private datePipe: DatePipe = new DatePipe('en-US');
   private mapObj = MapSet;
 
-  static transformMapToArray(data: any, mapKeyType: MapKeyType = MapKeyType.Number): MapItem[] {
+  static transformMapToArray(data: NzSafeAny, mapKeyType: MapKeyType = MapKeyType.Number): MapItem[] {
     return Object.keys(data || {}).map(key => {
-      let value: any;
+      let value: NzSafeAny;
       switch (mapKeyType) {
         case MapKeyType.Number:
           value = Number(key);
@@ -60,7 +61,7 @@ export class MapPipe implements PipeTransform {
     });
   }
 
-  transform(value: any, arg?: any): any {
+  transform(value: NzSafeAny, arg?: NzSafeAny): NzSafeAny {
     if (arg === undefined) {
       return value;
     }

@@ -7,6 +7,7 @@ import {Router} from "@angular/router";
 import {NzModalRef} from "ng-zorro-antd/modal";
 import {MENU_TOKEN} from "@config/menu";
 import {BasicConfirmModalComponent} from "@widget/base-modal";
+import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 interface ResultItem {
   showIcon: boolean;
@@ -161,7 +162,7 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
     this.resultListFactory();
   }
 
-  protected getCurrentValue(): any {
+  protected getCurrentValue(): NzSafeAny {
   }
 
 }

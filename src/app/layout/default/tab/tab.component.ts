@@ -5,6 +5,7 @@ import {ThemeService} from '@core/services/store/theme.service';
 import {NavigationEnd, Router} from '@angular/router';
 import {filter} from 'rxjs/operators';
 import {fnStopMouseEvent} from '@utils/tools';
+import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 @Component({
   selector: 'app-tab',
@@ -13,7 +14,6 @@ import {fnStopMouseEvent} from '@utils/tools';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TabComponent implements OnInit {
-
   tabs = this.tabService.getTabArray();
   themesOptions$ = this.themesService.getThemesMode();
   isNightTheme$ = this.themesService.getIsNightTheme();
@@ -21,7 +21,7 @@ export class TabComponent implements OnInit {
   constructor(public tabService: TabService, private nzContextMenuService: NzContextMenuService,
               private themesService: ThemeService,
               private router: Router, public cdr: ChangeDetectorRef) {
-    (this.router.events.pipe(filter((event: any) => event instanceof NavigationEnd))).subscribe((event: any) => {
+    (this.router.events.pipe(filter((event: NzSafeAny) => event instanceof NavigationEnd))).subscribe((event: NzSafeAny) => {
       this.cdr.markForCheck();
     });
   }
@@ -50,7 +50,6 @@ export class TabComponent implements OnInit {
     fnStopMouseEvent(e);
     this.tabService.delOtharTab(tab.path, index);
   }
-
 
   // 右键关闭当前Tab
   closeTab(tab: TabModel, e: MouseEvent, index: number): void {
@@ -86,8 +85,6 @@ export class TabComponent implements OnInit {
     this.nzContextMenuService.close();
   }
 
-
   ngOnInit(): void {
   }
-
 }

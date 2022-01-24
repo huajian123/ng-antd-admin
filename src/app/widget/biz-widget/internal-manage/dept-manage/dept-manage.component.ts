@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Observable, of} from 'rxjs';
 import {fnCheckForm} from '@utils/tools';
 import {NzModalRef} from 'ng-zorro-antd/modal';
+import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 @Component({
   selector: 'app-dept-manage',
@@ -27,11 +28,11 @@ export class DeptManageComponent extends BasicConfirmModalComponent implements O
   }
 
   // 此方法为如果有异步数据需要加载，则在该方法中添加
-  protected getAsyncFnData(modalValue: any): Observable<any> {
+  protected getAsyncFnData(modalValue: NzSafeAny): Observable<NzSafeAny> {
     return of(modalValue);
   }
 
-  protected getCurrentValue(): Observable<any> {
+  protected getCurrentValue(): Observable<NzSafeAny> {
     if (!fnCheckForm(this.addEditForm)) {
       return of(false);
     }

@@ -8,6 +8,7 @@ import {ValidatorsService} from '@core/services/validators/validators.service';
 import {DeptManageService} from '@core/services/http/internal-manage/dept-manage.service';
 import {CascaderOption, DeptObj, OptionsInterface, People} from '@core/services/types';
 import {RoleService} from '@core/services/http/internal-manage/role.service';
+import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 @Component({
   selector: 'app-user-manage-modal',
@@ -30,12 +31,12 @@ export class UserManageModalComponent extends BasicConfirmModalComponent impleme
 
 
   // 此方法为如果有异步数据需要加载，则在该方法中添加
-  protected getAsyncFnData(modalValue: any): Observable<any> {
+  protected getAsyncFnData(modalValue: NzSafeAny): Observable<NzSafeAny> {
     return of(modalValue);
   }
 
   // 返回false则不关闭对话框
-  protected getCurrentValue(): Observable<any> {
+  protected getCurrentValue(): Observable<NzSafeAny> {
     if (!fnCheckForm(this.addEditForm)) {
       return of(false);
     }

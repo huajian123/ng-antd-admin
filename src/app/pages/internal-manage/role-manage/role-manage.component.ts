@@ -11,6 +11,7 @@ import {ModalBtnStatus} from '@widget/base-modal';
 import {finalize} from 'rxjs/operators';
 import {MessageService, MessageType} from 'src/app/core/services/common/message.service';
 import {ActionCode} from 'src/app/config/actionCode';
+import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 @Component({
   selector: 'app-role-manage',
@@ -19,7 +20,7 @@ import {ActionCode} from 'src/app/config/actionCode';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RoleManageComponent implements OnInit {
-  @ViewChild('operationTpl', {static: true}) operationTpl!: TemplateRef<any>;
+  @ViewChild('operationTpl', {static: true}) operationTpl!: TemplateRef<NzSafeAny>;
   ActionCode = ActionCode;
   actionCodeObj = {
     add: ActionCode.RoleAdd
@@ -38,14 +39,14 @@ export class RoleManageComponent implements OnInit {
     this.dataList = [];
   }
 
-  selectedChecked(e: any): void {
+  selectedChecked(e: NzSafeAny): void {
     // @ts-ignore
     this.checkedCashArray = [...e];
   }
 
   getDataList(e?: NzTableQueryParams): void {
     this.tableConfig.loading = true;
-    const params: SearchCommonVO<any> = {
+    const params: SearchCommonVO<NzSafeAny> = {
       pageSize: this.tableConfig.pageSize!,
       pageNum: e?.pageIndex || this.tableConfig.pageIndex!
     };

@@ -23,23 +23,6 @@
       </nz-form-control>
     </nz-form-item>
 
-
-    <!--  <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkPassword" nzRequired>Confirm Password</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorTpl">
-          <input nz-input type="password" formControlName="checkPassword" id="checkPassword" />
-          <ng-template #errorTpl let-control>
-            <ng-container *ngIf="control.hasError('required')">
-              Please confirm your password!
-            </ng-container>
-            <ng-container *ngIf="control.hasError('confirm')">
-              Two passwords that you enter is inconsistent!
-            </ng-container>
-          </ng-template>
-        </nz-form-control>
-      </nz-form-item>-->
-
-
     <nz-form-item>
       <nz-form-control nzErrorTip="请输入手机号!">
         <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate" [nzSize]="'large'">
@@ -56,7 +39,7 @@
     </nz-form-item>
 
     <nz-form-item nz-row nzJustify="space-between">
-      <nz-form-control nz-col nzSpan="16" nzErrorTip="请输入验证码!">
+      <nz-form-control style="flex: 1;max-width: max-content" nz-col nzSpan="16" nzErrorTip="请输入验证码!">
         <nz-input-group [nzSize]="'large'">
           <input type="password" nz-input formControlName="password" placeholder="验证码"/>
         </nz-input-group>
@@ -68,7 +51,7 @@
       <div nz-col [nzSpan]="12">
         <button nz-button nzSize="large" class="login-form-button login-form-margin" [nzType]="'primary'">注 册</button>
       </div>
-      <div class="text-right" nz-col [nzSpan]="8">
+      <div class="text-right" nz-col [nzSpan]="9">
         <a class="password-login" routerLink="/login/login-form">使用已有帐号登陆</a>
       </div>
     </div>

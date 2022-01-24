@@ -6,6 +6,7 @@ import {Observable, of} from 'rxjs';
 import {fnCheckForm} from '@utils/tools';
 import {ValidatorsService} from '@core/services/validators/validators.service';
 import {NzModalRef} from "ng-zorro-antd/modal";
+import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 @Component({
   selector: 'app-reset-password-modal',
@@ -22,12 +23,12 @@ export class ResetPasswordModalComponent extends BasicConfirmModalComponent impl
 
 
   // 此方法为如果有异步数据需要加载，则在该方法中添加
-  protected getAsyncFnData(modalValue: any): Observable<any> {
+  protected getAsyncFnData(modalValue: NzSafeAny): Observable<NzSafeAny> {
     return of(modalValue);
   }
 
   // 返回false则不关闭对话框
-  protected getCurrentValue(): Observable<any> {
+  protected getCurrentValue(): Observable<NzSafeAny> {
     if (!fnCheckForm(this.addEditForm)) {
       return of(false);
     }

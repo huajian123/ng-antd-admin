@@ -1,17 +1,11 @@
 import {Injectable} from '@angular/core';
-import {
-  HttpErrorResponse,
-  HttpEvent,
-  HttpHandler,
-  HttpHeaders,
-  HttpInterceptor,
-  HttpRequest
-} from '@angular/common/http';
+import {HttpErrorResponse, HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {WindowService} from '../common/window.service';
 import {catchError, filter} from 'rxjs/operators';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {AuthKey} from "@config/constant";
+import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 interface CustomHttpConfig {
   headers?: HttpHeaders;
@@ -23,7 +17,7 @@ export class HttpInterceptorService implements HttpInterceptor {
   constructor(private windowServe: WindowService, public message: NzMessageService) {
   }
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(req: HttpRequest<NzSafeAny>, next: HttpHandler): Observable<HttpEvent<NzSafeAny>> {
     const auth = this.windowServe.getStorage(AuthKey);
     let httpConfig: CustomHttpConfig = {};
     if (!!auth) {

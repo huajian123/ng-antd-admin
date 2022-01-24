@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef} from '@angular/core';
 import {NzTableQueryParams, NzTableSize} from 'ng-zorro-antd/table';
 import {NzResizeEvent} from "ng-zorro-antd/resizable";
+import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 export interface TableHeader {
   title: string;                   // 表头名称
@@ -9,8 +10,8 @@ export interface TableHeader {
   showSort?: boolean;               // 是否显示排序
   sortDir?: undefined | 'asc' | 'desc';  // 排序方向
   width?: number;                    // 单元格宽度
-  thTemplate?: TemplateRef<any>;    // th单元格模板
-  tdTemplate?: TemplateRef<any>;    // td单元格模板
+  thTemplate?: TemplateRef<NzSafeAny>;    // th单元格模板
+  tdTemplate?: TemplateRef<NzSafeAny>;    // td单元格模板
   fixed?: boolean;                  // 是否固定单元格 （只有从最左边或最右边连续固定才有效）
   fixedDir?: 'left' | 'right';        // 固定在左边还是右边，需要配合fixed来使用
   notNeedEllipsis?: boolean;        // 不需要...时给true
@@ -51,12 +52,12 @@ export interface SortFile {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AntTableComponent implements OnInit, OnChanges {
-  _dataList!: any[];
+  _dataList!: NzSafeAny[];
   // 从业务组件中传入的缓存的已经选中的checkbox数据数组
-  @Input() checkedCashArrayFromComment: any[];
+  @Input() checkedCashArrayFromComment: NzSafeAny[];
 
   @Input()
-  set tableData(value: any[]) {
+  set tableData(value: NzSafeAny[]) {
     this._dataList = value;
     if (this.tableConfig.showCheckbox) {
       this._dataList.forEach((item) => {
@@ -65,7 +66,7 @@ export class AntTableComponent implements OnInit, OnChanges {
     }
   }
 
-  get tableData(): any[] {
+  get tableData(): NzSafeAny[] {
     return this._dataList;
   }
 
@@ -82,7 +83,7 @@ export class AntTableComponent implements OnInit, OnChanges {
   @Input() tableConfig!: MyTableConfig;
   @Output() changePageNum = new EventEmitter<NzTableQueryParams>();
   @Output() changePageSize = new EventEmitter<number>();
-  @Output() selectedChange: EventEmitter<any[]>;
+  @Output() selectedChange: EventEmitter<NzSafeAny[]>;
   @Output() sortFn: EventEmitter<SortFile>;
   indeterminate: boolean;
   allChecked: boolean;
@@ -90,7 +91,7 @@ export class AntTableComponent implements OnInit, OnChanges {
   constructor(private cdr: ChangeDetectorRef) {
     this.indeterminate = false;
     this.allChecked = false;
-    this.selectedChange = new EventEmitter<any[]>();
+    this.selectedChange = new EventEmitter<NzSafeAny[]>();
     this.sortFn = new EventEmitter<SortFile>();
     this.checkedCashArrayFromComment = [];
   }
@@ -113,11 +114,11 @@ export class AntTableComponent implements OnInit, OnChanges {
     this.cdr.markForCheck();
   }
 
-  public trackByTableHead(index: number, item: any): any {
+  public trackByTableHead(index: number, item: NzSafeAny): NzSafeAny {
     return item;
   }
 
-  public trackByTableBody(index: number, item: any): any {
+  public trackByTableBody(index: number, item: NzSafeAny): NzSafeAny {
     return item;
   }
 
@@ -127,7 +128,7 @@ export class AntTableComponent implements OnInit, OnChanges {
   }
 
   // 修改一页几条的页码
-  onPageSizeChange($event: any): void {
+  onPageSizeChange($event: NzSafeAny): void {
     this.changePageSize.emit($event);
   }
 
@@ -138,7 +139,7 @@ export class AntTableComponent implements OnInit, OnChanges {
     } : e))) as TableHeader[];
   }
 
-  checkFn(dataItem: any, isChecked: boolean): void {
+  checkFn(dataItem: NzSafeAny, isChecked: boolean): void {
     dataItem['_checked'] = isChecked;
     const index = this.checkedCashArrayFromComment.findIndex((cashItem) => cashItem.id === dataItem.id);
     if (isChecked) {

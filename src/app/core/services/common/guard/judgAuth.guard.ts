@@ -6,6 +6,7 @@ import {MENU_TOKEN} from "@config/menu";
 import {Menu} from "../../types";
 import {AuthService} from "@store/auth.service";
 
+// 用于切换路由时判断该用户是否有权限进入该业务页面，如果没有权限则跳转到登录页
 @Injectable({
   providedIn: 'root'
 })

@@ -15,7 +15,7 @@ export class StartupService {
     if (token) {
       this.authService.setAuthCode(this.authService.parsToken(token));
     }
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       return resolve();
     });
   }

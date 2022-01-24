@@ -1,13 +1,14 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef} from '@angular/core';
 import {ThemeService} from '@core/services/store/theme.service';
 import {Router} from '@angular/router';
+import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 export interface PageHeaderType {
   title: string;
-  desc: string | TemplateRef<any>;
-  extra: string | TemplateRef<any>;
+  desc: string | TemplateRef<NzSafeAny>;
+  extra: string | TemplateRef<NzSafeAny>;
   breadcrumb: string[];
-  footer: string | TemplateRef<any>;
+  footer: string | TemplateRef<NzSafeAny>;
 }
 
 
@@ -18,7 +19,7 @@ export interface PageHeaderType {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PageHeaderComponent implements OnInit {
-  @Input() backTpl!: TemplateRef<any> | null;
+  @Input() backTpl!: TemplateRef<NzSafeAny> | null;
   @Input() pageHeaderInfo: Partial<PageHeaderType> = {};
   @Input() backUrl = '';
   themesOptions$ = this.themesService.getThemesMode();

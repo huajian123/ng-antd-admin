@@ -54,7 +54,6 @@ export class DefLayoutContentComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getThemeOptions();
-
   }
 
   ngOnDestroy(): void {

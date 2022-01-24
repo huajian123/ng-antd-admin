@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import {NzModalRef} from "ng-zorro-antd/modal";
 import {Observable, of} from "rxjs";
 import {BasicConfirmModalComponent} from "@widget/base-modal";
+import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 @Component({
   selector: 'app-drag',
@@ -18,7 +19,7 @@ export class DragComponent  extends BasicConfirmModalComponent implements OnInit
     this.params = {};
   }
 
-  protected getCurrentValue(): Observable<any> {
+  protected getCurrentValue(): Observable<NzSafeAny> {
     return of(true);
   }
 

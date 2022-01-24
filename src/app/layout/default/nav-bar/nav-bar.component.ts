@@ -200,9 +200,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
       return;
     }
     this.router.navigate([menu.path]);
-
   }
-
 
   // 监听折叠菜单事件
   subIsCollapsed(): void {

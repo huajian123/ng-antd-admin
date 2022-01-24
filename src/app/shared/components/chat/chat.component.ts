@@ -1,4 +1,13 @@
-import {Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, OnDestroy, Output, EventEmitter} from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  ViewChild,
+  ElementRef,
+  OnDestroy,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 
 
@@ -39,7 +48,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     });
   }
 
-  sendMessage(msg: string,event:Event): void {
+  sendMessage(msg: string, event: Event): void {
     if (!(msg.trim())) {
       event.preventDefault();
       event.stopPropagation();

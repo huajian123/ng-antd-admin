@@ -5,6 +5,7 @@ import {filter} from 'rxjs/operators';
 import {fadeRouteAnimation} from "./animations/fade.animation";
 import {PreloaderService} from "@core/services/common/preloader.service";
 import {LockScreenStoreService} from "@store/lock-screen-store/lock-screen-store.service";
+import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 @Component({
   selector: 'app-root',
@@ -38,7 +39,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    (this.router.events.pipe(filter((event: any) => event instanceof NavigationEnd))).subscribe((event: any) => {
+    (this.router.events.pipe(filter((event: NzSafeAny) => event instanceof NavigationEnd))).subscribe((event: NzSafeAny) => {
       this.spinService.setCurrentGlobalSpinStore(false);
     });
   }

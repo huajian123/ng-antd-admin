@@ -1,6 +1,8 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {ThemeService} from "@store/theme.service";
 import {first} from "rxjs/operators";
+import {DOCUMENT} from "@angular/common";
+import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 enum ThemeType {
   dark = 'dark',
@@ -13,7 +15,7 @@ enum ThemeType {
 export class ThemeSkinService {
   currentTheme!: ThemeType;
 
-  constructor(private themesService: ThemeService) {
+  constructor(private themesService: ThemeService, @Inject(DOCUMENT) private doc: NzSafeAny) {
   }
 
   reverseTheme(theme: ThemeType): ThemeType {
@@ -21,22 +23,22 @@ export class ThemeSkinService {
   }
 
   removeUnusedTheme(theme: ThemeType): void {
-    document.documentElement.classList.remove(theme);
-    const removedThemeStyle = document.getElementById(theme);
+    this.doc.documentElement.classList.remove(theme);
+    const removedThemeStyle = this.doc.getElementById(theme);
     if (removedThemeStyle) {
-      document.head.removeChild(removedThemeStyle);
+      this.doc.head.removeChild(removedThemeStyle);
     }
   }
 
   private loadCss(href: string, id: string): Promise<Event> {
     return new Promise((resolve, reject) => {
-      const style = document.createElement('link');
+      const style = this.doc.createElement('link');
       style.rel = 'stylesheet';
       style.href = href;
       style.id = id;
       style.onload = resolve;
       style.onerror = reject;
-      document.head.append(style);
+      this.doc.head.append(style);
     });
   }
 
@@ -48,13 +50,13 @@ export class ThemeSkinService {
     }
     const theme = this.currentTheme;
     if (firstLoad) {
-      document.documentElement.classList.add(theme);
+      this.doc.documentElement.classList.add(theme);
     }
     return new Promise<Event>((resolve, reject) => {
       this.loadCss(`${theme}.css`, theme).then(
         (e) => {
           if (!firstLoad) {
-            document.documentElement.classList.add(theme);
+            this.doc.documentElement.classList.add(theme);
           }
           this.removeUnusedTheme(this.reverseTheme(theme));
           resolve(e);

@@ -13,6 +13,7 @@ import {Subject} from 'rxjs';
 import {filter, takeUntil} from 'rxjs/operators';
 import {ActivatedRoute, NavigationEnd, Router, RouterEvent, RouterOutlet} from '@angular/router';
 import {fadeRouteAnimation} from "@app/animations/fade.animation";
+import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 interface TabInterface {
   label: string;
@@ -29,8 +30,8 @@ interface TabInterface {
   ]
 })
 export class SearchListComponent implements OnInit, OnDestroy {
-  @ViewChild('headerContent', {static: true}) headerContent!: TemplateRef<any>;
-  @ViewChild('headerFooter', {static: true}) headerFooter!: TemplateRef<any>;
+  @ViewChild('headerContent', {static: true}) headerContent!: TemplateRef<NzSafeAny>;
+  @ViewChild('headerFooter', {static: true}) headerFooter!: TemplateRef<NzSafeAny>;
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '搜索列表（文章）',
     desc: this.headerContent,

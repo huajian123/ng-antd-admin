@@ -1,13 +1,5 @@
 import {Injectable} from '@angular/core';
-import {
-  HttpClient,
-  HttpEvent,
-  HttpEventType,
-  HttpHandler,
-  HttpInterceptor,
-  HttpRequest,
-  HttpResponse
-} from '@angular/common/http';
+import {HttpClient, HttpEvent, HttpEventType, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {LoginModalService} from '@widget/biz-widget/login/login-modal.service';
 import {NzSafeAny} from 'ng-zorro-antd/core/types';
@@ -20,18 +12,18 @@ import {AuthKey, TokenPre} from "@config/constant";
 
 @Injectable()
 export class LoginExpiredService implements HttpInterceptor {
-  private refresher: Observable<any> | null = null;
+  private refresher: Observable<NzSafeAny> | null = null;
 
   constructor(private loginModalService: LoginModalService, private router: Router,
               private windowServe: WindowService, private authService: AuthService, private http: HttpClient) {
   }
 
-  intercept(req: HttpRequest<string>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(req: HttpRequest<string>, next: HttpHandler): Observable<HttpEvent<NzSafeAny>> {
     const newReq = req.clone();
     return next.handle(newReq).pipe(filter(e => e.type !== 0), this.loginExpiredFn(newReq, next));
   }
 
-  private sendRequest(request: HttpRequest<any>, next: HttpHandler) {
+  private sendRequest(request: HttpRequest<NzSafeAny>, next: HttpHandler) {
     return this.refresher!.pipe(switchMap(() => {
       const auth = this.windowServe.getStorage(AuthKey);
       let httpConfig = {};
@@ -45,8 +37,8 @@ export class LoginExpiredService implements HttpInterceptor {
   }
 
   // 登录过期拦截
-  private loginExpiredFn(req: HttpRequest<string>, next: HttpHandler): any {
-    return switchMap((event: HttpResponse<NzSafeAny>): any => {
+  private loginExpiredFn(req: HttpRequest<string>, next: HttpHandler): NzSafeAny {
+    return switchMap((event: HttpResponse<NzSafeAny>): NzSafeAny => {
       if (event.type !== HttpEventType.Response || event.body.code !== 3013) {
         return of(event);
       }
@@ -62,7 +54,7 @@ export class LoginExpiredService implements HttpInterceptor {
           }
           const token = modalValue;
           this.windowServe.setStorage(AuthKey, TokenPre + token);
-          this.http.request(req).subscribe((data: any) => {
+          this.http.request(req).subscribe((data: NzSafeAny) => {
             this.refresher = null;
             observer.next(data);
           });

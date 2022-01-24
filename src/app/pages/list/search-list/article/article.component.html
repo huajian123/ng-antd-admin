@@ -23,14 +23,16 @@
   <div nz-row class="m-t-20 m-b-20">
     <div nz-col nzFlex="94px">owner:</div>
     <div nz-col class="flex-1">
-      <nz-select nzMode="multiple" [(ngModel)]="searchInfo.owner" [nzPlaceHolder]="'不限'">
-        <nz-option nzValue="1" nzLabel="我自己"></nz-option>
-        <nz-option nzValue="2" nzLabel="吴家豪"></nz-option>
-        <nz-option nzValue="3" nzLabel="周星星"></nz-option>
-        <nz-option nzValue="4" nzLabel="赵丽颖"></nz-option>
-        <nz-option nzValue="5" nzLabel="姚明"></nz-option>
-      </nz-select>
-      <a class="operate-text m-l-7">只看自己的</a>
+      <div nz-row class="left-start-center">
+        <nz-select nzMode="multiple" [(ngModel)]="searchInfo.owner" [nzPlaceHolder]="'不限'">
+          <nz-option nzValue="1" nzLabel="我自己"></nz-option>
+          <nz-option nzValue="2" nzLabel="吴家豪"></nz-option>
+          <nz-option nzValue="3" nzLabel="周星星"></nz-option>
+          <nz-option nzValue="4" nzLabel="赵丽颖"></nz-option>
+          <nz-option nzValue="5" nzLabel="姚明"></nz-option>
+        </nz-select>
+        <a class="operate-text m-l-7">只看自己的</a>
+      </div>
     </div>
   </div>
   <nz-divider class="m-0" nzDashed></nz-divider>
@@ -72,10 +74,12 @@
       段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台
       ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。
       <div class="m-t-15 info">
-        <nz-avatar class="m-r-8" [nzSize]="'small'" [nzSrc]="'assets/imgs/default_face.png'"></nz-avatar>
-        <a class="operate-text">付小小</a> <span class="m-r-8">发布在 </span> <a
-        class="m-r-8 operate-text">https://ant.design</a>
-        <time nz-typography nzType="secondary">2021-02-19 14:21</time>
+        <div nz-row>
+          <nz-avatar class="m-r-8" [nzSize]="'small'" [nzSrc]="'assets/imgs/default_face.png'"></nz-avatar>
+          <a class="operate-text">付小小</a> <span class="m-r-8">发布在 </span> <a
+          class="m-r-8 operate-text">https://ant.design</a>
+          <time nz-typography nzType="secondary">2021-02-19 14:21</time>
+        </div>
       </div>
       <ul nz-list-item-actions>
         <nz-list-item-action><i nz-icon nzType="star" class="m-r-8"></i> 156</nz-list-item-action>

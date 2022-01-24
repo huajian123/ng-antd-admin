@@ -2,9 +2,10 @@ import {FormGroup} from '@angular/forms';
 import CryptoJS from 'crypto-js';
 import {silentEvent} from 'ng-zorro-antd/core/util';
 import {v4 as uuidv4} from 'uuid';
+import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 
-const fnGetFile = function getFile(url: string, isBlob = false): Promise<any> {
+const fnGetFile = function getFile(url: string, isBlob = false): Promise<NzSafeAny> {
   return new Promise((resolve, reject) => {
     const client = new XMLHttpRequest();
     client.responseType = isBlob ? 'blob' : '';
@@ -43,7 +44,7 @@ const fnStopMouseEvent = function stopMouseEvent(e: MouseEvent): void {
 
 
 // 数组对象去重
-const fnRemoveDouble = function removeDouble<T>(list: any[], col: any): T {
+const fnRemoveDouble = function removeDouble<T>(list: NzSafeAny[], col: NzSafeAny): T {
   const obj = {};
   return list.reduce((cur, next) => {
     // @ts-ignore
@@ -79,12 +80,12 @@ const fnGetBase64 = function getBase64(file: File): Promise<string | ArrayBuffer
 };
 
 // 加密
-const fnEncrypt = function encrypt(word: any, keyStr: string) {
+const fnEncrypt = function encrypt(word: NzSafeAny, keyStr: string) {
   return CryptoJS.AES.encrypt(JSON.stringify(word), keyStr).toString();
 }
 
 // 解密
-const fnDecrypt = function decrypt(word: any, keyStr: string) {
+const fnDecrypt = function decrypt(word: NzSafeAny, keyStr: string) {
   const bytes = CryptoJS.AES.decrypt(word, keyStr);
   return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
 }

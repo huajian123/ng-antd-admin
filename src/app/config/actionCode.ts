@@ -40,6 +40,4 @@ export const ActionCode = {
   UserDetail: '0138',  // 查看详情
   UserEdit: '0238',  // 用户编辑
   UserAdd: '0338',  // 用户新增
-
-
 };

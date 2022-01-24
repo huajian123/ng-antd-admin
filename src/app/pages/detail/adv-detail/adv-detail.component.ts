@@ -2,6 +2,7 @@ import {Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, Afte
 import {PageHeaderType} from '@shared/components/page-header/page-header.component';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {MyTableConfig} from '@shared/components/ant-table/ant-table.component';
+import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 interface ReturnObj {
   num: string;
@@ -20,10 +21,10 @@ interface ReturnObj {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AdvDetailComponent implements OnInit, AfterViewInit {
-  @ViewChild('headerExtra', {static: false}) headerExtra!: TemplateRef<any>;
-  @ViewChild('headerContent', {static: false}) headerContent!: TemplateRef<any>;
-  @ViewChild('headerFooter', {static: false}) headerFooter!: TemplateRef<any>;
-  @ViewChild('highLightTpl', {static: true}) highLightTpl!: TemplateRef<any>;
+  @ViewChild('headerExtra', {static: false}) headerExtra!: TemplateRef<NzSafeAny>;
+  @ViewChild('headerContent', {static: false}) headerContent!: TemplateRef<NzSafeAny>;
+  @ViewChild('headerFooter', {static: false}) headerFooter!: TemplateRef<NzSafeAny>;
+  @ViewChild('highLightTpl', {static: true}) highLightTpl!: TemplateRef<NzSafeAny>;
   stepDirection: 'horizontal' | 'vertical' = 'horizontal';
   returnTableConfig!: MyTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {

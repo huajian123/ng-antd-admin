@@ -490,8 +490,8 @@ export class MonitorComponent implements OnInit, AfterViewInit {
 
   initRingProgress(i: number): void {
     const ringProgress = new RingProgress(`ringProgress${i}`, {
-      height: 100,
-      width: 100,
+      height: 90,
+      width: 90,
       autoFit: false,
       percent: 0.7,
       color: ['#5B8FF9', '#E8EDF3'],

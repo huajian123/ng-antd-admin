@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {BaseHttpService} from '../base-http.service';
 import {PageInfo, Permission, PutPermissionParam, Role, SearchCommonVO} from '../../types';
 import {Observable} from 'rxjs';
+import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class RoleService {
   constructor(public http: BaseHttpService) {
   }
 
-  public getRoles(param: SearchCommonVO<any>): Observable<PageInfo<Role>> {
+  public getRoles(param: SearchCommonVO<NzSafeAny>): Observable<PageInfo<Role>> {
     return this.http.get('/role/list', param);
   }
 
@@ -39,7 +40,7 @@ export class RoleService {
     return this.http.get(`/permission/${id}`);
   }
 
-  public updatePermission(param: PutPermissionParam): Observable<any> {
+  public updatePermission(param: PutPermissionParam): Observable<NzSafeAny> {
     return this.http.put('/permission', param);
   }
 

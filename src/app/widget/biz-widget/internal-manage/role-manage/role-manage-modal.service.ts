@@ -17,7 +17,7 @@ export class RoleManageModalService {
     return RoleManageModalComponent;
   }
 
-  public show(modalOptions: ModalOptions = {}, params?: object): Observable<any> {
+  public show(modalOptions: ModalOptions = {}, params?: object): Observable<NzSafeAny> {
     return this.modalWrapService.show(this.getContentComponent(), modalOptions, params)
   }
 }

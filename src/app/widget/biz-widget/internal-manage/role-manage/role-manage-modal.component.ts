@@ -4,6 +4,7 @@ import {NzModalRef} from 'ng-zorro-antd/modal';
 import {BasicConfirmModalComponent} from '@widget/base-modal';
 import {fnCheckForm} from '@utils/tools';
 import {Observable, of} from 'rxjs';
+import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 @Component({
   selector: 'app-inter-add-edit',
@@ -29,12 +30,12 @@ export class RoleManageModalComponent extends BasicConfirmModalComponent impleme
 
 
   // 此方法为如果有异步数据需要加载，则在该方法中添加
-  protected getAsyncFnData(modalValue: any): Observable<any> {
+  protected getAsyncFnData(modalValue: NzSafeAny): Observable<NzSafeAny> {
     return of(modalValue);
   }
 
   // 返回false则不关闭对话框
-  protected getCurrentValue(): Observable<any> {
+  protected getCurrentValue(): Observable<NzSafeAny> {
     if (!fnCheckForm(this.addEditForm)) {
       return of(false);
     }

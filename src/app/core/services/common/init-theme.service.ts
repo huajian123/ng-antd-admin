@@ -4,6 +4,7 @@ import {WindowService} from "./window.service";
 import {IsNightKey, ThemeOptionsKey} from "@config/constant";
 import {first} from "rxjs/operators";
 import {Observable} from "rxjs";
+import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 type setThemeProp = 'setIsNightTheme' | 'setThemesMode';
 type getThemeProp = 'getIsNightTheme' | 'getThemesMode';
@@ -40,7 +41,7 @@ export class InitThemeService {
         if (hasCash) {
           this.themesService[item.setMethodName](JSON.parse(hasCash));
         } else {
-          (this.themesService[item.getMethodName]() as Observable<any>).pipe(first()).subscribe(res => this.windowServe.setStorage(item.storageKey, JSON.stringify(res)));
+          (this.themesService[item.getMethodName]() as Observable<NzSafeAny>).pipe(first()).subscribe(res => this.windowServe.setStorage(item.storageKey, JSON.stringify(res)));
         }
       });
       return resolve();
