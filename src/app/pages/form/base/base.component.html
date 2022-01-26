@@ -12,7 +12,7 @@
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>起止日期</nz-form-label>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="date" nzRequired>起止日期</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请选择起止日期">
           <nz-range-picker formControlName="date" class="with-full"></nz-range-picker>
         </nz-form-control>
@@ -67,18 +67,13 @@
           </div>
         </nz-form-control>
       </nz-form-item>
-      <nz-form-item nz-row class="register-area">
+      <nz-form-item nz-row>
         <nz-form-control [nzSpan]="14" [nzOffset]="6">
           <button nz-button nzType="primary">提交</button>
-          <button class="m-l-10" (click)="show()" nz-button nzType="default">保存</button>
+          <button class="m-l-10" nz-button nzType="default">保存</button>
         </nz-form-control>
       </nz-form-item>
     </form>
   </nz-card>
-
-
 </div>
-<ng-template #dragTpl>
-  <div class="hand-model-move" cdkDragHandle cdkDrag cdkDragBoundary="nz-modal-container"
-       cdkDragRootElement=".ant-modal-content">这是一个可拖动modal，外面内容可以复制</div>
-</ng-template>
+

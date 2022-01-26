@@ -5,7 +5,7 @@
   <nz-card [nzBodyStyle]="{'padding-bottom':0}" class="m-b-10">
     <form nz-form>
       <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24}">
-        <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" nzSm="24" nzXs="24">
+        <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
           <nz-form-item>
             <nz-form-label [nzFor]="">用户名</nz-form-label>
             <nz-form-control>
@@ -13,7 +13,7 @@
             </nz-form-control>
           </nz-form-item>
         </div>
-        <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" nzSm="24" nzXs="24">
+        <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
           <nz-form-item>
             <nz-form-label [nzFor]="">手机号</nz-form-label>
             <nz-form-control>
@@ -22,7 +22,7 @@
           </nz-form-item>
         </div>
         <ng-container *ngIf="!isCollapse">
-          <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" nzSm="24" nzXs="24">
+          <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
             <nz-form-item>
               <nz-form-label [nzFor]="">用户状态</nz-form-label>
               <nz-form-control>
@@ -33,7 +33,7 @@
               </nz-form-control>
             </nz-form-item>
           </div>
-          <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" nzSm="24" nzXs="24">
+          <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
             <nz-form-item>
               <nz-form-label [nzFor]="">创建时间</nz-form-label>
               <nz-form-control>
@@ -43,10 +43,10 @@
               </nz-form-control>
             </nz-form-item>
           </div>
-          <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" nzSm="24" nzXs="24"></div>
+          <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24"></div>
         </ng-container>
 
-        <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" nzSm="24" nzXs="24" class="text-right p-0">
+        <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24" class="text-right p-0">
           <button nz-button [nzType]="'primary'" (click)="getDataList()"><i nz-icon nzType="search"></i>搜索</button>
           <button nz-button class="m-l-15" (click)="resetForm()"><i nz-icon nzType="close-circle" nzTheme="outline"></i>重置
           </button>

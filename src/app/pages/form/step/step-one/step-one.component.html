@@ -1,0 +1,55 @@
+<form [formGroup]="validateForm" [class.p-0]="stepDirection==='vertical'" class="form-wrap p-b-0 center-row" nz-form>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="title">付款账户</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入付款账户">
+      <nz-select formControlName="paymentAccount">
+        <nz-option nzValue="ant-design@alipay.com" nzLabel="ant-design@alipay.com"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="a">收款账户</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入收款账户">
+      <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
+        <ng-template #addOnBeforeTemplate>
+          <nz-select formControlName="payWay" class="phone-select">
+            <nz-option nzLabel="支付宝" nzValue="zhifubao"></nz-option>
+            <nz-option nzLabel="银行卡" nzValue="bankcard"></nz-option>
+          </nz-select>
+        </ng-template>
+        <input formControlName="payWayNo" id="'payWayNo'" nz-input/>
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="payeeName">收款人姓名</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入收款人姓名">
+      <input nz-input formControlName="payeeName" id="payeeName" placeholder="收款人姓名"/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="a">收款金额</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入收款金额">
+      <nz-input-group nzPrefix="￥">
+        <input formControlName="amount" type="number" nz-input/>
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item nz-row>
+    <div nz-col [nzSpan]="6" ></div>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <button nz-button nzType="primary" (click)="goNext()">下一步</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+
+<nz-divider></nz-divider>
+<section class="desc-wrap"  [class.p-0]="stepDirection==='vertical'">
+  <h3 nz-typography nzType="secondary">说明</h3>
+  <h4 nz-typography nzType="secondary">转账到支付宝账户</h4>
+  <p nz-typography nzType="secondary">
+    如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。</p>
+  <h4 nz-typography nzType="secondary">转账到银行卡</h4>
+  <p nz-typography nzType="secondary">
+    如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。</p>
+</section>

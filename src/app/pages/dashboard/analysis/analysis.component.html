@@ -106,11 +106,11 @@
                  [nzTabBarExtraContent]="extraTemplate">
         <nz-tab nzTitle="销售额">
           <div nz-row>
-            <div nz-col nzXl="17" nzLg="12" nzMd="13" nzSm="24" nzXs="24">
+            <div nz-col [nzXl]="17" [nzLg]="12" [nzMd]="13" [nzSm]="24" [nzXs]="24">
               <h3 class="p-l-35">销售趋势</h3>
               <div id="histogram"></div>
             </div>
-            <div nz-col nzXl="7" nzLg="12" nzMd="11" nzSm="24" nzXs="24">
+            <div nz-col [nzXl]="7" [nzLg]="12" [nzMd]="11" [nzSm]="24" [nzXs]="24">
               <h3 class="p-l-35 m-b-20">门店销售额排名</h3>
               <div title="工专路 {{i}} 号店" class="rank-list" *ngFor="let item of 7|numberLoop;let i=index">
                 <div class="center">

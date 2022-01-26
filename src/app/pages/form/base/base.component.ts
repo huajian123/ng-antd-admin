@@ -25,13 +25,11 @@ export class BaseComponent implements OnInit {
 
   validateForm!: FormGroup;
 
-  show(): void {
-  }
-
   submitForm(): void {
     if (!fnCheckForm(this.validateForm)) {
       return;
     }
+    console.log(this.validateForm.value);
   }
 
   constructor(private fb: FormBuilder) {
