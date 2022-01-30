@@ -41,8 +41,8 @@ const routes: Routes = [
         loadChildren: () => import('../../pages/internal-manage/internal-manage.module').then(m => m.InternalManageModule)
       },
       {
-        path: 'about',
-        loadChildren: () => import('../../pages/about/about.module').then(m => m.AboutModule)
+        path: 'feat',
+        loadChildren: () => import('../../pages/feat/feat.module').then(m => m.FeatModule)
       },
       {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
     ]

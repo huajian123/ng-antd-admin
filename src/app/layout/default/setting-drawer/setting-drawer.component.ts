@@ -54,7 +54,7 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
     hasNavHeadArea: true,
   };
   isCollapsed = false;
-
+  dragging = false;
 
   themes: Theme[] = [
     {
@@ -148,7 +148,11 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
   }
 
   changeCollapsed(): void {
-    this.isCollapsed = !this.isCollapsed;
+    if (!this.dragging) {
+      this.isCollapsed = !this.isCollapsed;
+    } else {
+      this.dragging = false;
+    }
   }
 
   changePrimaryColor(color: Color): void {
@@ -230,5 +234,13 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destory$.next();
     this.destory$.complete();
+  }
+
+  dragEnd() {
+    if (this.dragging) {
+      setTimeout(() => {
+        this.dragging = false
+      })
+    }
   }
 }

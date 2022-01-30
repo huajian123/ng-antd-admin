@@ -22,7 +22,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
   @Input() isMixiHead = false;
   @Input() isMixiLeft = false;
   private destory$ = new Subject<void>();
-  routerPath = '';
+  routerPath = this.router.url;
   themesOptions$ = this.themesService.getThemesMode();
   themesMode = 'side';
   isNightTheme$ = this.themesService.getIsNightTheme();
@@ -42,7 +42,9 @@ export class NavBarComponent implements OnInit, OnDestroy {
               private activatedRoute: ActivatedRoute, private tabService: TabService,
               private cdr: ChangeDetectorRef, private themesService: ThemeService,
               private titleServe: Title, @Inject(DOCUMENT) private doc: Document) {
-    this.routerPath = this.router.url;
+    this.subIsCollapsed();
+    this.subThemesSettings();
+    this.subAuth();
     this.router.events
       .pipe(
         filter(event => event instanceof NavigationEnd),
@@ -241,11 +243,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit(): void {
-    this.subIsCollapsed();
-    this.subThemesSettings();
-    this.subAuth();
-  }
+  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     this.destory$.next();

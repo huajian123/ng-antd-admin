@@ -1,0 +1,50 @@
+<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+
+<div class="normal-table-wrap">
+  <nz-card [nzBodyStyle]="{padding:0}" class="relative">
+    <div class="p-0 m-t-0" nz-result-content nz-row nzJustify="space-between">
+      <div>
+        <button nz-tooltip nzTooltipTitle="置前" nzTooltipPlacement="bottom" nz-button nzType="text">
+          <i nz-icon nzType="vertical-align-top" nzTheme="outline"></i>
+        </button>
+        <button nz-tooltip nzTooltipTitle="置后" nzTooltipPlacement="bottom" nz-button nzType="text">
+          <i nz-icon nzType="vertical-align-bottom" nzTheme="outline"></i>
+        </button>
+        <button nz-tooltip nzTooltipTitle="开启框选" nzTooltipPlacement="bottom" nz-button nzType="text">
+          <i nz-icon nzType="gateway" nzTheme="outline"></i>
+        </button>
+        <button nz-tooltip nzTooltipTitle="新建群组" nzTooltipPlacement="bottom" nz-button nzType="text">
+          <i nz-icon nzType="group" nzTheme="outline"></i>
+        </button>
+        <button nz-tooltip nzTooltipTitle="解散群组" nzTooltipPlacement="bottom" nz-button nzType="text">
+          <i nz-icon nzType="ungroup" nzTheme="outline"></i>
+        </button>
+        <button nz-tooltip nzTooltipTitle="保存" nzTooltipPlacement="bottom" nz-button nzType="text">
+          <i nz-icon nzType="save" nzTheme="outline"></i>
+        </button>
+      </div>
+      <div>
+        <button nz-tooltip nzTooltipTitle="放大" nzTooltipPlacement="bottom" nz-button nzType="text">
+          <i nz-icon nzType="plus-circle" nzTheme="outline"></i>
+        </button>
+        <button nz-tooltip nzTooltipTitle="缩小" nzTooltipPlacement="bottom" nz-button nzType="text">
+          <i nz-icon nzType="minus-circle" nzTheme="outline"></i>
+        </button>
+        <button nz-tooltip nzTooltipTitle="缩放到1：1" nzTooltipPlacement="bottom" nz-button nzType="text">
+          <i nz-icon nzType="one-to-one" nzTheme="outline"></i>
+        </button>
+        <button nz-tooltip nzTooltipTitle="缩放到适应屏幕" nzTooltipPlacement="bottom" nz-button nzType="text">
+          <i nz-icon nzType="compress" nzTheme="outline"></i>
+        </button>
+      </div>
+    </div>
+    <div #container id="container">
+    </div>
+    <nz-card [nzBodyStyle]="{padding:0}" class="absolute node-sel-bar">
+      <div class="flex flex-coloum">
+        <i shap="rect" (mousedown)="drag($event)" nz-icon nzType="border" nzTheme="outline"></i>
+        <i shap="circle" (mousedown)="drag($event)" nz-icon nzType="user" nzTheme="outline"></i>
+      </div>
+    </nz-card>
+  </nz-card>
+</div>

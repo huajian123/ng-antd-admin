@@ -41,7 +41,7 @@ export class DriverService {
         element: '#drawer-handle',
         popover: {
           title: '主题设置按钮',
-          description: '点击展开设置主题',
+          description: '点击展开设置主题，可以上下拖动',
           position: 'left'
         }
       },
@@ -49,7 +49,7 @@ export class DriverService {
         element: '#tools',
         popover: {
           title: '工具栏',
-          description: '搜索菜单，帮助文档，通知消息，退出登录，多语言',
+          description: '锁屏，搜索菜单，全屏，通知消息，退出登录，多语言',
           position: 'bottom'
         }
       },
@@ -65,7 +65,7 @@ export class DriverService {
         element: '#trigger',
         popover: {
           title: '折叠菜单',
-          description: '点击可以折叠菜单',
+          description: '菜单折叠',
           position: 'bottom'
         }
       },

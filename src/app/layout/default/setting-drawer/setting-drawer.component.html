@@ -1,4 +1,4 @@
-<div class="drawer-handle" id="drawer-handle" [class.open]="isCollapsed" (click)="changeCollapsed()">
+<div (cdkDragEnded)="dragEnd()" (cdkDragStarted)="dragging=true" cdkDragLockAxis="y" cdkDrag class="drawer-handle" id="drawer-handle" [class.open]="isCollapsed" (click)="changeCollapsed()">
   <ng-container *ngIf="!isCollapsed; then settingIcon else closeIcon"></ng-container>
   <ng-template #settingIcon>
     <i nz-icon nzType="setting" nzTheme="outline"></i>

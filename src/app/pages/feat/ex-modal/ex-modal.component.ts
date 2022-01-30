@@ -1,14 +1,15 @@
-import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import {PageHeaderType} from "@shared/components/page-header/page-header.component";
 import {DragService} from "@widget/biz-widget/drag/drag.service";
 
 @Component({
-  selector: 'app-about',
-  templateUrl: './about.component.html',
-  styleUrls: ['./about.component.less'],
+  selector: 'app-ex-modal',
+  templateUrl: './ex-modal.component.html',
+  styleUrls: ['./ex-modal.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AboutComponent implements OnInit {
+export class ExModalComponent implements OnInit {
+
   // @ViewChild('dragTpl', {static: true}) dragTpl!: TemplateRef<NzSafeAny>;
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '可拖动对话框',

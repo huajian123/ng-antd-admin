@@ -292,12 +292,12 @@ const menuNav: Menu[] = [
       ]
     },*/
   {
-    title: '功能',
+    title: '拓展功能',
     icon: 'dashboard',
     open: false,
     actionCode: ActionCode.UserManage,
     selected: false,
-    path: '/default/about',
+    path: '/default/feat',
     children: [
       {
         title: '拖拽modal',
@@ -305,7 +305,25 @@ const menuNav: Menu[] = [
         open: false,
         actionCode: ActionCode.UserManage,
         selected: false,
-        path: '/default/about',
+        path: '/default/feat/ex-modal',
+      },
+      {
+        title: '图形编辑器',
+        icon: 'dashboard',
+        open: false,
+        actionCode: ActionCode.UserManage,
+        selected: false,
+        path: '/default/feat/flow',
+        children: [
+          {
+            title: '流程图',
+            open: false,
+            selected: false,
+            icon: 'highlight',
+            path: '/default/feat/flow/flow-chat',
+            actionCode: ActionCode.UserManage,
+          },
+        ]
       },
       {
         title: '空白页',
