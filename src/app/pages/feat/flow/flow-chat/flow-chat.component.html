@@ -2,7 +2,7 @@
 
 <div class="normal-table-wrap">
   <nz-card [nzBodyStyle]="{padding:0}" class="relative">
-    <div class="p-0 m-t-0" nz-result-content nz-row nzJustify="space-between">
+    <div id="wrap" class="p-0 m-t-0" nz-result-content nz-row nzJustify="space-between">
       <div>
         <button nz-tooltip nzTooltipTitle="置前" nzTooltipPlacement="bottom" nz-button nzType="text">
           <i nz-icon nzType="vertical-align-top" nzTheme="outline"></i>
@@ -38,12 +38,14 @@
         </button>
       </div>
     </div>
-    <div #container id="container">
+    <div class="flex">
+      <div #container id="container" class="flex-1"></div>
     </div>
+
     <nz-card [nzBodyStyle]="{padding:0}" class="absolute node-sel-bar">
       <div class="flex flex-coloum">
-        <i shap="rect" (mousedown)="drag($event)" nz-icon nzType="border" nzTheme="outline"></i>
-        <i shap="circle" (mousedown)="drag($event)" nz-icon nzType="user" nzTheme="outline"></i>
+        <i nz-tooltip nzTooltipTitle="正方形" nzTooltipPlacement="right" shap="rect" (mousedown)="drag($event)" nz-icon nzType="border" nzTheme="outline"></i>
+        <i nz-tooltip nzTooltipTitle="圆形" nzTooltipPlacement="right" shap="circle" (mousedown)="drag($event)" nz-icon nzType="user" nzTheme="outline"></i>
       </div>
     </nz-card>
   </nz-card>

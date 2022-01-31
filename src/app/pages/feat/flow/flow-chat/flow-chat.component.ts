@@ -19,7 +19,7 @@ export class FlowChatComponent implements OnInit, AfterViewInit {
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '流程编辑器',
     breadcrumb: ['首页', '扩展功能', '图形编辑器', '流程图'],
-    desc: '千言万语不如一张图，流程图是表示算法思路的好方法'
+    desc: '千言万语不如一张图，流程图是表示算法思路的好方法(简单流程图示例,具体功能需要自己完善，antV x6)'
   };
   graph!: Graph;
   @ViewChild('container') container!: ElementRef;
@@ -62,9 +62,61 @@ export class FlowChatComponent implements OnInit, AfterViewInit {
       width: 100,
       height: 100,
       shape: shap,
+      ports:  {
+        groups: {
+          // 输入链接桩群组定义
+          in: {
+            position: 'top',
+            attrs: {
+              circle: {
+                r: 6,
+                magnet: true,
+                stroke: '#31d0c6',
+                strokeWidth: 2,
+                fill: '#fff',
+              },
+            },
+          },
+          // 输出链接桩群组定义
+          out: {
+            position: 'bottom',
+            attrs: {
+              circle: {
+                r: 6,
+                magnet: true,
+                stroke: '#31d0c6',
+                strokeWidth: 2,
+                fill: '#fff',
+              },
+            },
+          },
+        },
+        items: [
+          {
+            id: 'port1',
+            group: 'in',
+          },
+          {
+            id: 'port2',
+            group: 'in',
+          },
+          {
+            id: 'port3',
+            group: 'in',
+          },
+          {
+            id: 'port4',
+            group: 'out',
+          },
+          {
+            id: 'port5',
+            group: 'out',
+          },
+        ],
+      },
       attrs: {
         body: {
-          fill: '#ccc'
+          // fill: '#ccc'
         }
       }
     });
