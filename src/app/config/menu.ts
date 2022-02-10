@@ -11,6 +11,77 @@ export const MENU_TOKEN = new InjectionToken<Menu[]>('menu-token', {
 
 const menuNav: Menu[] = [
   {
+    title: '拓展功能',
+    icon: 'star',
+    open: false,
+    actionCode: ActionCode.UserManage,
+    selected: false,
+    path: '/default/feat',
+    children: [
+      {
+        title: '拖拽modal',
+        icon: 'dashboard',
+        open: false,
+        actionCode: ActionCode.UserManage,
+        selected: false,
+        path: '/default/feat/ex-modal',
+      },
+      {
+        title: '其他登录方式',
+        icon: 'dashboard',
+        open: false,
+        actionCode: ActionCode.UserManage,
+        selected: false,
+        path: '/blank/other-login',
+        children: [
+          {
+            title: '第一种',
+            open: false,
+            selected: false,
+            icon: 'highlight',
+            path: '/blank/other-login/login1',
+            actionCode: ActionCode.UserManage,
+          },
+        ]
+      },
+      {
+        title: '图形编辑器',
+        icon: 'dashboard',
+        open: false,
+        actionCode: ActionCode.UserManage,
+        selected: false,
+        path: '/default/feat/flow',
+        children: [
+          {
+            title: '流程图',
+            open: false,
+            selected: false,
+            icon: 'highlight',
+            path: '/default/feat/flow/flow-chat',
+            actionCode: ActionCode.UserManage,
+          },
+        ]
+      },
+      {
+        title: '空白页',
+        icon: 'usergroup-delete',
+        actionCode: ActionCode.UserManage,
+        open: false,
+        selected: false,
+        path: '/blank/empty-page',
+      },
+      {
+        title: '外部链接',
+        icon: 'usergroup-delete',
+        open: false,
+        actionCode: ActionCode.UserManage,
+        selected: false,
+        path: 'https://github.com/huajian123/ng-ant-admin',
+        isNewLink: true,
+      },
+    ]
+  },
+  {
     title: 'Dashboard',
     icon: 'dashboard',
     open: false,
@@ -291,58 +362,5 @@ const menuNav: Menu[] = [
         },
       ]
     },*/
-  {
-    title: '拓展功能',
-    icon: 'dashboard',
-    open: false,
-    actionCode: ActionCode.UserManage,
-    selected: false,
-    path: '/default/feat',
-    children: [
-      {
-        title: '拖拽modal',
-        icon: 'dashboard',
-        open: false,
-        actionCode: ActionCode.UserManage,
-        selected: false,
-        path: '/default/feat/ex-modal',
-      },
-      {
-        title: '图形编辑器',
-        icon: 'dashboard',
-        open: false,
-        actionCode: ActionCode.UserManage,
-        selected: false,
-        path: '/default/feat/flow',
-        children: [
-          {
-            title: '流程图',
-            open: false,
-            selected: false,
-            icon: 'highlight',
-            path: '/default/feat/flow/flow-chat',
-            actionCode: ActionCode.UserManage,
-          },
-        ]
-      },
-      {
-        title: '空白页',
-        icon: 'usergroup-delete',
-        actionCode: ActionCode.UserManage,
-        open: false,
-        selected: false,
-        path: '/blank/empty-page',
-      },
-      {
-        title: '外部链接',
-        icon: 'usergroup-delete',
-        open: false,
-        actionCode: ActionCode.UserManage,
-        selected: false,
-        path: 'https://docs.chat.hypergo.net/docs/intro/',
-        isNewLink: true,
-      },
-    ]
-  },
 
 ];

@@ -15,6 +15,10 @@ const routes: Routes = [
         path: 'empty-for-lock',
         loadChildren: () => import('../../pages/empty-for-lock/empty-for-lock.module').then(m => m.EmptyForLockModule)
       },
+      {
+        path: 'other-login',
+        loadChildren: () => import('../../pages/other-login/other-login.module').then(m => m.OtherLoginModule)
+      },
     ]
   }
 ];

@@ -1,0 +1,72 @@
+.container {
+  &:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin-left: -48%;
+    background-image: url('../../../../assets/imgs/login1/login1-bg.svg');
+    background-position: 100%;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    content: "";
+  }
+
+  &.is-night:before {
+    background-image: url('../../../../assets/imgs/login1/login1-bg-dark.svg');
+  }
+
+  &.over-modal:before {
+    background-image: none;
+  }
+
+  .logo {
+    top: 40px;
+    height: 80px;
+
+    img {
+      width: 48px
+    }
+
+    span {
+      font-size: 24px;
+      color: white;
+      margin-left: 8px;
+    }
+  }
+
+  .desc {
+    margin-top: 55px;
+    font-weight: 500;
+    color: white;
+    font-size: 32px;
+  }
+
+  .sub-desc {
+    margin-top: 8px;
+
+    color: white;
+    font-size: 16px;
+  }
+}
+
+.over-modal {
+  background: #293146 !important;
+}
+
+:host ::ng-deep .ant-card.over-modal, .ant-card.is-night {
+  background: #293146 !important;
+}
+
+:host ::ng-deep .container.is-night {
+  background: #293146 !important;
+}
+
+:host ::ng-deep .ant-switch {
+  background: black!important;
+}
+
+img {
+  width: 14px;
+}

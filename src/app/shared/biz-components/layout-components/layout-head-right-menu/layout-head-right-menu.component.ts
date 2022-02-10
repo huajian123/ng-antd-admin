@@ -50,6 +50,13 @@ export class LayoutHeadRightMenuComponent implements OnInit {
     this.loginOutService.loginOut().then();
   }
 
+  clean(): void {
+    this.windowServe.clearStorage();
+    this.windowServe.clearSessionStorage();
+    this.loginOutService.loginOut().then();
+    this.message.success('清除成功，请重新登录');
+  }
+
   showMessage(): void {
     this.message.info('切换成功')
   }

@@ -52,6 +52,9 @@
           <a><i nz-icon nzType="setting" nzTheme="outline" class="m-r-8"></i><span>个人设置</span></a>
         </li>
         <li nz-menu-divider></li>
+        <li nz-menu-item (click)="clean()">
+          <a><i nz-icon nzType="clear" nzTheme="outline" class="m-r-8"></i><span>清除缓存</span></a>
+        </li>
         <li nz-menu-item (click)="lockScreen()">
           <a><i nz-icon nzType="lock" nzTheme="outline" class="m-r-8"></i><span>锁定屏幕</span></a>
         </li>

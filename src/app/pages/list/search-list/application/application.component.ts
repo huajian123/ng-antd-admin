@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import {SearchListService} from '@core/services/store/biz-store-service/search-list/search-list.service';
+import {SearchListStoreService} from '@store/biz-store-service/search-list/search-list-store.service';
 
 @Component({
   selector: 'app-application',
@@ -28,7 +28,7 @@ export class ApplicationComponent implements OnInit {
     {name: '类目十', isChecked: false},
     {name: '类目十一', isChecked: false},
     {name: '类目十二', isChecked: false}];
-  constructor(private searchListService: SearchListService) {
+  constructor(private searchListService: SearchListStoreService) {
     this._onReuseInit();
   }
 

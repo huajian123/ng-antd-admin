@@ -6,7 +6,7 @@ type componentName = '搜索列表（文章）' | '搜索列表（项目）' | '
 @Injectable({
   providedIn: 'root'
 })
-export class SearchListService {
+export class SearchListStoreService {
   private SearchListComponentStore = new Subject<componentName>();
 
   constructor() {

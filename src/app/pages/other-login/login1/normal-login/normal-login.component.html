@@ -1,0 +1,49 @@
+<div>
+  <h2 class="m-b-8" [class.is-over-model]="isOverModel">登 录</h2>
+  <div class="full-with">
+    <form nz-form class="login-form-wrap" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+      <nz-form-item>
+        <nz-form-control nzErrorTip="请输入用户名!">
+          <input nzSize="large" [placeholder]="'没有账号密码直接登陆'" type="text" nz-input formControlName="userName"
+                 placeholder="用户名"/>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="请输入密码!">
+          <nz-input-group [nzSize]="'large'" [nzSuffix]="suffixTemplate">
+            <input autocomplete="on" [placeholder]="'no username and password,just login'"
+                   [type]="passwordVisible ? 'text' : 'password'" nz-input formControlName="password" placeholder="密码"/>
+          </nz-input-group>
+          <ng-template #suffixTemplate>
+            <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+               (click)="passwordVisible = !passwordVisible"></i>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+      <div nz-row nzJustify="space-between">
+        <div nz-col>
+          <label nz-checkbox formControlName="remember">
+            <span>记住密码</span>
+          </label>
+        </div>
+        <div nz-col>
+          <a class="operate-text">忘记密码?</a>
+        </div>
+      </div>
+      <button nz-button nzSize="large" class="full-with m-t-15 btn" [nzType]="'primary'">登 录</button>
+      <div nz-row nzJustify="space-between" class="m-t-15">
+        <button (click)="goOtherWay(typeEnum.Phone)" nz-col nzSpan="7" nz-button nzType="default">手机登录</button>
+        <button (click)="goOtherWay(typeEnum.Qr)" nz-col nzSpan="7" nz-button nzType="default">二维码登录</button>
+        <button (click)="goOtherWay(typeEnum.Register)" nz-col nzSpan="7" nz-button nzType="default">注 册</button>
+      </div>
+      <nz-divider nzPlain nzText="其他登录方式"></nz-divider>
+      <div nz-row nzJustify="space-around">
+        <i nz-col nz-icon nzType="alipay-circle" nzTheme="fill"></i>
+        <i nz-col nz-icon nzType="taobao-circle" nzTheme="fill"></i>
+        <i nz-col nz-icon nzType="weibo-circle" nzTheme="fill"></i>
+        <i nz-col nz-icon nzType="qq-circle" nzTheme="fill"></i>
+        <i nz-col nz-icon nzType="google-circle" nzTheme="fill"></i>
+      </div>
+    </form>
+  </div>
+</div>

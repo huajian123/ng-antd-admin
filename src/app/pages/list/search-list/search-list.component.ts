@@ -8,7 +8,7 @@ import {
   TemplateRef,
 } from '@angular/core';
 import {PageHeaderType} from '@shared/components/page-header/page-header.component';
-import {SearchListService} from '@core/services/store/biz-store-service/search-list/search-list.service';
+import {SearchListStoreService} from '@store/biz-store-service/search-list/search-list-store.service';
 import {Subject} from 'rxjs';
 import {filter, takeUntil} from 'rxjs/operators';
 import {ActivatedRoute, NavigationEnd, Router, RouterEvent, RouterOutlet} from '@angular/router';
@@ -47,7 +47,7 @@ export class SearchListComponent implements OnInit, OnDestroy {
     {label: '应用', url: '/default/list/search-list/application'},
   ];
 
-  constructor(private searchListService: SearchListService, private activatedRoute: ActivatedRoute,
+  constructor(private searchListService: SearchListStoreService, private activatedRoute: ActivatedRoute,
               private router: Router, private cdr: ChangeDetectorRef) {
     this.searchListService.getCurrentSearchListComponentStore().pipe(takeUntil(this.destory$)).subscribe(componentType => {
       this.pageHeaderInfo = {
