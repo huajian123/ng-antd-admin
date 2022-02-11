@@ -32,9 +32,9 @@
       </div>
       <button nz-button nzSize="large" class="full-with m-t-15 btn" [nzType]="'primary'">登 录</button>
       <div nz-row nzJustify="space-between" class="m-t-15">
-        <button (click)="goOtherWay(typeEnum.Phone)" nz-col nzSpan="7" nz-button nzType="default">手机登录</button>
-        <button (click)="goOtherWay(typeEnum.Qr)" nz-col nzSpan="7" nz-button nzType="default">二维码登录</button>
-        <button (click)="goOtherWay(typeEnum.Register)" nz-col nzSpan="7" nz-button nzType="default">注 册</button>
+        <button class="m-b-8" (click)="goOtherWay(typeEnum.Phone)" nz-col [nzSm]="7" [nzXs]="24" nz-button nzType="default">手机登录</button>
+        <button class="m-b-8" (click)="goOtherWay(typeEnum.Qr)" nz-col [nzSm]="7" [nzXs]="24" nz-button nzType="default">二维码登录</button>
+        <button class="m-b-8" (click)="goOtherWay(typeEnum.Register)" nz-col [nzSm]="7" [nzXs]="24" nz-button nzType="default">注 册</button>
       </div>
       <nz-divider nzPlain nzText="其他登录方式"></nz-divider>
       <div nz-row nzJustify="space-around">

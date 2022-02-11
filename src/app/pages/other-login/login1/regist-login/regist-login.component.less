@@ -10,16 +10,20 @@ h2 {
 }
 
 .login-form-wrap {
-  width: 404px;
+  @media (min-width: 470px) {
+    width: 404px;
+  }
 
-  .btn{
+  .btn {
     background: #0C63BD;
-    &:hover{
+
+    &:hover {
       opacity: .8;
     }
   }
 }
-.is-over-model{
+
+.is-over-model {
   text-align: center;
   font-size: 24px;
 }

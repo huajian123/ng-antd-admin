@@ -4,6 +4,7 @@ import {LoginType} from "@app/pages/other-login/login1/login1.component";
 import {Login1StoreService} from "@store/biz-store-service/other-login/login1-store.service";
 import {Subject} from "rxjs";
 import {takeUntil} from "rxjs/operators";
+import {EquipmentWidth, WindowsWidthService} from "@store/windows-width-store/windows-width.service";
 
 /*https://www.npmjs.com/package/angular-password-strength-meter*/
 @Component({
@@ -19,12 +20,20 @@ export class RegistLoginComponent implements OnInit, OnDestroy {
   compirePasswordVisible = false;
   private destory$ = new Subject<void>();
   isOverModel = false;
-
+  equipmentWidthEnum = EquipmentWidth;
+  currentEquipmentWidth: EquipmentWidth = EquipmentWidth.md;
   get password() {
     return this.validateForm.get('password');
   }
 
-  constructor(private cdr: ChangeDetectorRef, private fb: FormBuilder, private login1StoreService: Login1StoreService,) {
+  constructor(private windowsWidthService: WindowsWidthService,private cdr: ChangeDetectorRef, private fb: FormBuilder, private login1StoreService: Login1StoreService,) {
+  }
+
+  subScreenWidth(): void {
+    this.windowsWidthService.getWindowWidthStore().subscribe(res => {
+      this.currentEquipmentWidth = res;
+      this.cdr.markForCheck();
+    })
   }
 
   submitForm(): void {
@@ -48,17 +57,27 @@ export class RegistLoginComponent implements OnInit, OnDestroy {
     return {};
   };
 
-  ngOnInit(): void {
-    this.login1StoreService.getIsLogin1OverModelStore().pipe(takeUntil(this.destory$)).pipe(takeUntil(this.destory$)).subscribe((res => {
-      this.isOverModel = res;
-      this.cdr.markForCheck();
-    }));
+  initForm():void{
     this.validateForm = this.fb.group({
       userName: [null, [Validators.required]],
       password: [null, [Validators.required]],
       checkPassword: [null, [Validators.required, this.confirmationValidator]],
       remember: [null],
     });
+  }
+
+  subLogin1Store(): void {
+    this.login1StoreService.getIsLogin1OverModelStore().pipe(takeUntil(this.destory$)).subscribe((res => {
+      this.isOverModel = res;
+      this.cdr.markForCheck();
+    }));
+  }
+
+  ngOnInit(): void {
+    this.subScreenWidth();
+    this.initForm();
+    this.subLogin1Store();
+
   }
 
   ngOnDestroy() {

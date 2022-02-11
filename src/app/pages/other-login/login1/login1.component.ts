@@ -68,7 +68,6 @@ export class Login1Component implements OnInit, OnDestroy {
   }
 
   changeNight(isNight: boolean): void {
-    console.log(isNight);
     this.windowServe.setStorage(IsNightKey, '' + isNight);
     this.themesService.setIsNightTheme(isNight);
     this.themeSkinService.toggleTheme().then(() => {

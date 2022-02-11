@@ -1,5 +1,5 @@
 import {AfterViewInit, ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {SpinService} from '@core/services/store/spin/spin.service';
+import {SpinService} from '@core/services/store/spin-store/spin.service';
 import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
 import {filter} from 'rxjs/operators';
 import {fadeRouteAnimation} from "./animations/fade.animation";

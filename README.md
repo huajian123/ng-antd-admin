@@ -3,7 +3,7 @@
 
 # 项目视频介绍
 使用本项目遇到问题，可以加入376065816 qq群号与我沟通。<br>
-如果本项目对你有用，如果你愿意的话，麻烦点个star，谢谢啊<br>
+看到拓展功能菜单的图标没？像什么？哦~像一个金闪闪的star啊<br>
 if help you, if you want ,please give me a star ,thank you<br>
 视频介绍地址 [项目介绍](https://www.bilibili.com/video/BV1EM4y1w7zd/)<br>
 online demo地址 [demo](http://124.71.128.53:8081/)<br>
@@ -17,6 +17,27 @@ key需要设置成路由地址最后一个'/'后的字符串，并且要唯一
 const routes: Routes = [
   {path: '', data: {key: 'login', shouldDetach: 'no'}, component: LoginFormComponent}
 ];
+```
+# 栅格系统监听
+```angular2html
+enum EquipmentWidth {
+  xs,  // (max-width: 575.98px)
+  sm,  // (min-width: 576px) and (max-width: 767.98px)
+  md,  // (min-width: 768px) and (max-width: 991.98px)
+  lg,  // (min-width: 992px) and (max-width: 1199.98px)
+  xl,  // (min-width: 1200px) and (max-width: 1599.98px)
+  xxl  // (min-width: 1600px)
+}
+```
+使用方式
+```
+  constructor(private windowsWidthService: WindowsWidthService) {
+  }
+  
+  this.windowsWidthService.getWindowWidthStore().pipe(takeUntil(this.destory$)).subscribe(res => {
+    this.currentEquipmentWidth = res;
+    this.cdr.markForCheck();
+  })
 ```
 
 
@@ -33,6 +54,7 @@ export const routes: Routes = [
   }
 ];
 ```
+
 
 # 模块不需要保存状态
 
