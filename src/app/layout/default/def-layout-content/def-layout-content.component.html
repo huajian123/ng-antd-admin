@@ -1,6 +1,6 @@
 <app-top-progress-bar></app-top-progress-bar>
 <nz-layout class="min-screen-full-height">
-  <!--非混合模式侧边栏固定时站位-->
+  <!--非混合模式侧边栏固定时占位-->
   <nz-sider
     [nzTheme]="(themesOptions$|async)!.theme"
     [nzWidth]="208"
@@ -50,7 +50,7 @@
       <ng-content select="ng-container[top-header]"></ng-content>
     </nz-header>
 
-    <!--混合模式sider固定时站位-->
+    <!--混合模式sider固定时占位-->
     <nz-sider
       nzNoAnimation
       *ngIf="isFixedLeftNav&&isMixiMode&&themesOptions.hasNavArea&&!(isOverMode$|async)&&(!!(mixiModeHasLeftNav|async)||!themesOptions.splitNav)"

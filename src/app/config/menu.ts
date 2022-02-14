@@ -199,6 +199,14 @@ const menuNav: Menu[] = [
         path: '/default/list/search-table',
       },
       {
+        title: '树状表格',
+        open: false,
+        selected: false,
+        icon: 'table',
+        actionCode: ActionCode.UserManage,
+        path: '/default/list/tree-list',
+      },
+      {
         title: '标准表格',
         open: false,
         selected: false,

@@ -56,37 +56,43 @@ export class SearchTableComponent implements OnInit {
         id: '1',
         productName: '文字超级长文字超级长文字超级长文字超级长文字超级长文字超级长',
         casNo: '没有省略号没有省略号没有省略号没有省略号没有省略号没有省略号没有省略号没有省略号',
-        file3: '加样式'
+        file3: '加样式',
+        obj: {a: {b:'点出来的值1'}},
       },
       {
         id: '2',
         productName: '文字超级长',
         casNo: 'string',
         file3: '加样式',
+        obj: {a: {b:'点出来的值1'}},
       },
       {
         id: '3',
         productName: 'string',
         casNo: 'string',
         file3: '加样式',
+        obj: {a: {b:'点出来的值1'}},
       },
       {
         id: '4',
         productName: 'string',
         casNo: 'string',
         file3: '加样式',
+        obj: {a: {b:'点出来的值1'}},
       },
       {
         id: '5',
         productName: 'string',
         casNo: 'string',
         file3: '加样式',
+        obj: {a: {b:'点出来的值1'}},
       },
       {
         id: '6',
         productName: 'string',
         casNo: 'string',
         file3: '加样式',
+        obj: {a: {b:'点出来的值1'}},
       },
     ];
     this.tableConfig.total = 13;
@@ -128,8 +134,15 @@ export class SearchTableComponent implements OnInit {
   }
 
   del(): void {
-    this.message.info('控制台打印出被勾选中的列了，是支持分页保存的')
-    console.log(this.cashArray);
+    if (this.cashArray.length === 0) {
+      this.message.error('请勾选数据');
+      return;
+    }
+    const temp: string[] = [];
+    this.cashArray.forEach(item => {
+      temp.push(item.id)
+    })
+    this.message.info('id数组(支持分页保存):' + JSON.stringify(temp))
   }
 
   changeSort(e: SortFile): void {
@@ -149,6 +162,10 @@ export class SearchTableComponent implements OnInit {
   }
 
   private initTable(): void {
+    /*
+    * 注意，这里需要留一列不要设置width，让列表自适应宽度
+    *
+    * */
     this.tableConfig = {
       headers: [
         {
@@ -174,6 +191,11 @@ export class SearchTableComponent implements OnInit {
           title: '名称',
           field: 'productName',
           tdTemplate: this.highLightTpl,
+          width: 100,
+        },
+        {
+          title: '对象点出来（obj.a.b）',
+          field: 'obj.a.b',
         },
         {
           title: '操作',

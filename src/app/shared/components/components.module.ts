@@ -6,8 +6,9 @@ import {TopProgressBarModule} from './top-progress-bar/top-progress-bar.module';
 import {WaterMarkModule} from './water-mark/water-mark.module';
 import {ChatModule} from './chat/chat.module';
 import {LockScreenModule} from "@shared/components/lock-screen/lock-screen.module";
+import {TreeTableModule} from "@shared/components/tree-table/tree-table.module";
 
-const MODULES = [LockScreenModule, FooterSubmitModule, ChatModule, PageHeaderModule, AntTableModule, TopProgressBarModule, WaterMarkModule];
+const MODULES = [LockScreenModule, TreeTableModule, FooterSubmitModule, ChatModule, PageHeaderModule, AntTableModule, TopProgressBarModule, WaterMarkModule];
 
 @NgModule({
   declarations: [],

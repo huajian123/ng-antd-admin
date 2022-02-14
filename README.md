@@ -3,7 +3,7 @@
 
 # 项目视频介绍
 使用本项目遇到问题，可以加入376065816 qq群号与我沟通。<br>
-看到拓展功能菜单的图标没？像什么？哦~像一个金闪闪的star啊<br>
+如果本项目对您有用，麻烦帮我点个star，谢谢啊<br>
 if help you, if you want ,please give me a star ,thank you<br>
 视频介绍地址 [项目介绍](https://www.bilibili.com/video/BV1EM4y1w7zd/)<br>
 online demo地址 [demo](http://124.71.128.53:8081/)<br>

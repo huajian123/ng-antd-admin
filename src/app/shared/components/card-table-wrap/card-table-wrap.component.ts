@@ -3,6 +3,7 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {NzTableSize} from "ng-zorro-antd/table";
 import {AntTableComponentToken, TableHeader} from "../ant-table/ant-table.component";
 import {NzSafeAny} from "ng-zorro-antd/core/types";
+import {AntTreeTableComponentToken} from "@shared/components/tree-table/tree-table.component";
 
 interface TableSizeItem {
   sizeName: string,
@@ -18,9 +19,10 @@ interface TableSizeItem {
 })
 export class CardTableWrapComponent implements OnInit, AfterContentInit {
   @Input() btnTpl: TemplateRef<NzSafeAny> | undefined;
-  @Input() isNormalTable = true;
+  @Input() isNormalTable = true; // 如果只是需要card-table-wrap的样式，这里设置为false
   @Output() reload = new EventEmitter<NzSafeAny>();
   @ContentChild(AntTableComponentToken) antTableComponent!: AntTableComponentToken;
+  @ContentChild(AntTreeTableComponentToken) antTreeTableComponent!: AntTreeTableComponentToken;
   tableConfigVisible = false;
   tableSizeOptions: TableSizeItem[] = [
     {sizeName: '默认', selected: true, value: "default"},
@@ -28,6 +30,7 @@ export class CardTableWrapComponent implements OnInit, AfterContentInit {
     {sizeName: '紧凑', selected: false, value: "small"},
   ];
   tableHeaders: TableHeader[] = [];
+  currentTableComponent!: AntTableComponentToken | AntTreeTableComponentToken;
 
   constructor() {
   }
@@ -35,7 +38,7 @@ export class CardTableWrapComponent implements OnInit, AfterContentInit {
   tableSizeMenuClick(item: TableSizeItem): void {
     this.tableSizeOptions.forEach(tableSizeItem => tableSizeItem.selected = false);
     item.selected = true;
-    this.antTableComponent.tableSize = item.value;
+    this.currentTableComponent.tableSize = item.value;
   }
 
   changeTableConfigShow(): void {
@@ -54,8 +57,8 @@ export class CardTableWrapComponent implements OnInit, AfterContentInit {
         noFixedArray.push(item)
       }
     });
-    this.antTableComponent.tableConfig.headers = [...fixedLeftArray, ...noFixedArray, ...fixedRightArray];
-    this.antTableComponent.tableChangeDectction();
+    this.currentTableComponent.tableConfig.headers = [...fixedLeftArray, ...noFixedArray, ...fixedRightArray];
+    this.currentTableComponent.tableChangeDectction();
   }
 
   dropTableConfig(event: CdkDragDrop<string[]>) {
@@ -77,8 +80,10 @@ export class CardTableWrapComponent implements OnInit, AfterContentInit {
   }
 
   ngAfterContentInit(): void {
+    this.currentTableComponent = this.antTableComponent || this.antTreeTableComponent;
+
     if (this.isNormalTable) {
-      this.tableHeaders = [...this.antTableComponent.tableConfig.headers];
+      this.tableHeaders = [...this.currentTableComponent.tableConfig.headers];
       this.tableHeaders.forEach(item => item.show = true);
     }
   }

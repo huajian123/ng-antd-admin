@@ -1,0 +1,51 @@
+.resize-trigger {
+  width: 1px;
+  height: 30px;
+}
+
+.nz-resizable-preview {
+  border-width: 0;
+  border-right-width: 1px;
+}
+
+.sort-wrap {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  height: 34px;
+  width: 24px;
+  vertical-align: middle;
+  cursor: pointer;
+  overflow: initial;
+  position: relative;
+
+  .sort-caret {
+    width: 0;
+    height: 0;
+    border: 5px solid transparent;
+    position: absolute;
+    left: 7px;
+
+    &.ascending {
+      border-bottom-color: #c0c4cc;
+      top: 5px;
+    }
+
+    &.descending {
+      border-top-color: #c0c4cc;
+      bottom: 7px;
+    }
+  }
+}
+
+@import "mixin";
+.themeMixin({
+  :host {
+    .sort-caret-sel-asc {
+      border-bottom-color: @primary-color!important;
+    }
+    .sort-caret-sel-desc {
+      border-top-color: @primary-color!important;
+    }
+  }
+});
