@@ -4,13 +4,13 @@
 <div class="normal-table-wrap">
   <nz-card [nzBodyStyle]="{'padding-bottom':0}" class="m-b-10">
     <app-water-mark></app-water-mark>
-    <form nz-form [formGroup]="validateForm">
+    <form nz-form>
       <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24}">
         <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
           <nz-form-item>
             <nz-form-label [nzFor]="">规则名称</nz-form-label>
             <nz-form-control>
-              <input nz-input placeholder="请输入" formControlName="ruleName"/>
+              <input nz-input placeholder="请输入" name="ruleName" [(ngModel)]="searchParam.ruleName" />
             </nz-form-control>
           </nz-form-item>
         </div>
@@ -18,7 +18,7 @@
           <nz-form-item>
             <nz-form-label [nzFor]="">描述</nz-form-label>
             <nz-form-control>
-              <input nz-input placeholder="请输入" formControlName="desc"/>
+              <input nz-input placeholder="请输入" name="desc" [(ngModel)]="searchParam.desc"/>
             </nz-form-control>
           </nz-form-item>
         </div>
@@ -27,7 +27,7 @@
             <nz-form-item>
               <nz-form-label [nzFor]="">服务调用次数</nz-form-label>
               <nz-form-control>
-                <input nz-input placeholder="请输入" formControlName="desc"/>
+                <input nz-input placeholder="请输入"  name="desc" [(ngModel)]="searchParam.desc"/>
               </nz-form-control>
             </nz-form-item>
           </div>
@@ -35,7 +35,7 @@
             <nz-form-item>
               <nz-form-label [nzFor]="">状态</nz-form-label>
               <nz-form-control>
-                <input nz-input placeholder="请输入" formControlName="desc"/>
+                <input nz-input placeholder="请输入"  name="desc" [(ngModel)]="searchParam.desc"/>
               </nz-form-control>
             </nz-form-item>
           </div>
@@ -43,7 +43,7 @@
             <nz-form-item>
               <nz-form-label [nzFor]="">上次调度时间</nz-form-label>
               <nz-form-control>
-                <input nz-input placeholder="请输入" formControlName="ruleName"/>
+                <input nz-input placeholder="请输入"  name="desc" [(ngModel)]="searchParam.desc"/>
               </nz-form-control>
             </nz-form-item>
           </div>
@@ -65,15 +65,20 @@
 
   <app-card-table-wrap (reload)="reloadTable()" [btnTpl]="tableBtns">
     <app-tree-table
-      [checkedCashArrayFromComment]="cashArray"
+      (selectedChange)="selectedChecked($event)"
+      [cashArray]="checkedCashArray"
       (sortFn)="changeSort($event)"
       [tableConfig]="tableConfig"
       (changePageSize)="changePageSize($event)"
       (changePageNum)="getDataList($event)"
       [tableData]="dataList">
     </app-tree-table>
-    <ng-template #operationTpl let-id="id">
-      <span class="operate-text" (click)="check(id)">查看</span>
+    <ng-template #operationTpl let-id="id" let-children='children' let-parent='parent'>
+      <span class="operate-text" (click)="check(id,children,parent)">查看</span>
+      <!--添加了权限的写法-->
+      <!-- <span *appAuth="ActionCode.FireSysSettingDel" class="operate-text" (click)="del(id)">删除</span>-->
+      <span class="operate-text" (click)="del(id)">删除</span>
+      <span class="operate-text" (click)="edit(id)">编辑</span>
     </ng-template>
   </app-card-table-wrap>
 </div>
@@ -82,5 +87,5 @@
 </ng-template>
 <ng-template #tableBtns>
   <button (click)="add()" nz-button nzType="primary" class="m-r-8"><i nz-icon nzType="plus"></i>新建</button>
-  <button (click)="del()" nz-button nzType="default"><i nz-icon nzType="delete"></i>删除</button>
+  <button (click)="allDel()" nz-button  nzType="default"><i nz-icon nzType="delete"></i>删除</button>
 </ng-template>

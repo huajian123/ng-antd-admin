@@ -1,12 +1,19 @@
 import {Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef} from '@angular/core';
 import {PageHeaderType} from "@shared/components/page-header/page-header.component";
 import {NzSafeAny} from "ng-zorro-antd/core/types";
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder} from "@angular/forms";
 import {MyTableConfig, SortFile} from "@shared/components/ant-table/ant-table.component";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {Router} from "@angular/router";
 import {NzTableQueryParams} from "ng-zorro-antd/table";
 import {SearchCommonVO} from "@core/services/types";
+import {NzModalService} from "ng-zorro-antd/modal";
+import {fnFlattenTreeDataByDataList} from "@utils/treeTableTools";
+
+interface SearchParam {
+  ruleName: number;
+  desc: string;
+}
 
 @Component({
   selector: 'app-tree-list',
@@ -17,18 +24,20 @@ import {SearchCommonVO} from "@core/services/types";
 export class TreeListComponent implements OnInit {
   @ViewChild('highLightTpl', {static: true}) highLightTpl!: TemplateRef<NzSafeAny>;
   @ViewChild('operationTpl', {static: true}) operationTpl!: TemplateRef<NzSafeAny>;
-  validateForm!: FormGroup;
+  searchParam: Partial<SearchParam> = {};
+
   isCollapse = true;
   tableConfig!: MyTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
-    title: '树状表格',
+    title: '树状表格（演示默认值的情况，删除或者查看，可以打印选中行的id）',
     // desc: '表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。',
     breadcrumb: ['首页', '列表页', '树状表格']
   };
-  cashArray: NzSafeAny[] = [];
+  checkedCashArray: any[] = [];
   dataList: NzSafeAny[] = [];
 
   constructor(private fb: FormBuilder,
+              private modalSrv: NzModalService,
               public message: NzMessageService,
               private router: Router, private cdr: ChangeDetectorRef) {
   }
@@ -38,6 +47,18 @@ export class TreeListComponent implements OnInit {
     this.getDataList();
   }
 
+  // 触发表格变更检测
+  tableChangeDectction(): void {
+    // 改变引用触发变更检测。
+    this.dataList = [...this.dataList];
+    this.cdr.detectChanges();
+  }
+
+  tableLoading(isLoading: boolean): void {
+    this.tableConfig.loading = isLoading;
+    this.tableChangeDectction();
+  }
+
   getDataList(e?: NzTableQueryParams): void {
     this.tableConfig.loading = true;
     const params: SearchCommonVO<NzSafeAny> = {
@@ -45,22 +66,89 @@ export class TreeListComponent implements OnInit {
       pageNum: e?.pageIndex! || this.tableConfig.pageIndex!
     };
     this.dataList = [];
-    this.tableConfig.loading = false;
-    this.dataList = [
-      {
+    setTimeout(() => {
+      this.dataList = [
+        {
+          id: `1`,
+          name: 'John Brown sr.',
+          sex: '男',
+          age: 60,
+          address: 'New York No. 1 Lake Park',
+          children: [
+            {
+              id: `1-1`,
+              name: 'John Brown',
+              age: 42,
+              sex: '男',
+              address: 'New York No. 2 Lake Park'
+            },
+            {
+              id: `1-2`,
+              name: 'John Brown jr.',
+              age: 30,
+              sex: '男',
+              address: 'New York No. 3 Lake Park',
+              children: [
+                {
+                  id: `1-2-1`,
+                  name: 'Jimmy Brown',
+                  sex: '男',
+                  age: 16,
+                  address: 'New York No. 3 Lake Park'
+                }
+              ]
+            },
+            {
+              id: `1-3`,
+              name: 'Jim Green sr.',
+              age: 72,
+              sex: '男',
+              address: 'London No. 1 Lake Park',
+              children: [
+                {
+                  id: `1-3-1`,
+                  name: 'Jim Green',
+                  sex: '男',
+                  age: 42,
+                  address: 'London No. 2 Lake Park',
+                  children: [
+                    {
+                      id: `1-3-1-1`,
+                      name: 'Jim Green jr.',
+                      sex: '男',
+                      age: 25,
+                      address: 'London No. 3 Lake Park'
+                    },
+                    {
+                      id: `1-3-1-2`,
+                      name: 'Jimmy Green sr.',
+                      sex: '男',
+                      age: 18,
+                      address: 'London No. 4 Lake Park'
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          id: `2`,
+          name: 'Joe Black',
+          sex: '男',
+          age: 32,
+          address: 'Sidney No. 1 Lake Park'
+        }
+      ];
+      this.tableConfig.total = 13;
+      this.tableConfig.pageIndex = 1;
+      const cashFromHttp = [{
         id: `1`,
         name: 'John Brown sr.',
         sex: '男',
         age: 60,
         address: 'New York No. 1 Lake Park',
         children: [
-          {
-            id: `1-1`,
-            name: 'John Brown',
-            age: 42,
-            sex: '男',
-            address: 'New York No. 2 Lake Park'
-          },
           {
             id: `1-2`,
             name: 'John Brown jr.',
@@ -110,27 +198,29 @@ export class TreeListComponent implements OnInit {
             ]
           }
         ]
-      },
-      {
-        id: `2`,
-        name: 'Joe Black',
-        sex: '男',
-        age: 32,
-        address: 'Sidney No. 1 Lake Park'
-      }
-    ];
-    this.tableConfig.total = 13;
-    this.tableConfig.pageIndex = 1;
-    /*   this.dataService.getProjectlist(params).subscribe((data) => {
-         const {list, total, pageNum} = data;
-         this.dataList = list;
-         console.log(this.dataList);
-         this.tableConfig.total = total;
-         this.tableConfig.pageIndex = pageNum;
-         this.tableConfig.loading = false;
-       },()=>{
-         this.tableConfig.loading = false;
-       });*/
+      },];
+      this.checkedCashArray = fnFlattenTreeDataByDataList(cashFromHttp);
+      // this.checkedCashArray = [...this.checkedCashArray];
+      this.tableLoading(false);
+    })
+
+    /*-----实际业务请求http接口如下------*/
+    // this.tableConfig.loading = true;
+    // const params: SearchCommonVO<any> = {
+    //   pageSize: this.tableConfig.pageSize!,
+    //   pageNum: e?.pageIndex || this.tableConfig.pageIndex!,
+    //   filters: this.searchParam
+    // };
+    // this.dataService.getFireSysList(params).pipe(finalize(() => {
+    //   this.tableLoading(false);
+    // })).subscribe((data => {
+    //   const {list, total, pageNum} = data;
+    //   this.dataList = [...list];
+    //   this.tableConfig.total = total!;
+    //   this.tableConfig.pageIndex = pageNum!;
+    //   this.tableLoading(false);
+    //   this.checkedCashArray = [...this.checkedCashArray];
+    // }));
   }
 
 
@@ -140,45 +230,111 @@ export class TreeListComponent implements OnInit {
   }
 
   /*查看*/
-  check(id: string): void {
+  check(id: string, children: any[], parent: any[]): void {
     this.message.success(id);
   }
 
   /*重置*/
   resetForm(): void {
-    this.validateForm.reset();
+    this.searchParam = {};
+    this.getDataList();
   }
 
   add(): void {
-
+    // this.modalService.show({nzTitle: '新增'}).subscribe((res) => {
+    //   if (!res || res.status === ModalBtnStatus.Cancel) {
+    //     return;
+    //   }
+    //   this.tableLoading(true);
+    //   this.addEditData(res.modalValue, 'addFireSys');
+    // }, error => this.tableLoading(false));
   }
 
-  del(): void {
-    if (this.cashArray.length === 0) {
+  del(id: number): void {
+    this.modalSrv.confirm({
+      nzTitle: '确定要删除吗？',
+      nzContent: '删除后不可恢复',
+      nzOnOk: () => {
+        this.tableLoading(true);
+        this.message.info('id数组(支持分页保存):' + JSON.stringify(id))
+        this.getDataList();
+        this.checkedCashArray.splice(this.checkedCashArray.findIndex(item => item.id === id), 1);
+        this.tableLoading(false);
+        /*注释的是模拟接口调用*/
+        // this.dataService.delFireSys([id]).subscribe(() => {
+        //   if (this.dataList.length === 1) {
+        //     this.tableConfig.pageIndex--;
+        //   }
+        //   this.getDataList();
+        //   this.checkedCashArray.splice(this.checkedCashArray.findIndex(item => item.id === id), 1);
+        // }, error => this.tableLoading(false));
+      }
+    });
+  }
+
+  allDel(): void {
+    if (this.checkedCashArray.length > 0) {
+      this.modalSrv.confirm({
+        nzTitle: '确定要删除吗？',
+        nzContent: '删除后不可恢复',
+        nzOnOk: () => {
+          const tempArrays: number[] = [];
+          this.checkedCashArray.forEach((item) => {
+            tempArrays.push(item.id);
+          });
+          this.tableLoading(true);
+          this.message.info('数组(支持分页保存):' + JSON.stringify(tempArrays))
+          this.getDataList();
+          this.checkedCashArray = [];
+          this.tableLoading(false);
+          // 注释的是模拟接口的调用
+          // this.dataService.delFireSys(tempArrays).subscribe(() => {
+          //   if (this.dataList.length === 1) {
+          //     this.tableConfig.pageIndex--;
+          //   }
+          //   this.getDataList();
+          //   this.checkedCashArray = [];
+          // }, error => this.tableLoading(false));
+        }
+      });
+    } else {
       this.message.error('请勾选数据');
       return;
     }
-    const temp: string[] = [];
-    this.cashArray.forEach(item => {
-      temp.push(item.id)
-    })
-    this.message.info('id数组(支持分页保存):' + JSON.stringify(temp))
   }
+
+  // 修改
+  edit(id: number): void {
+    // this.dataService.getFireSysDetail(id).subscribe(res => {
+    //   this.modalService.show({nzTitle: '编辑'}, res).subscribe(({modalValue, status}) => {
+    //     if (status === ModalBtnStatus.Cancel) {
+    //       return;
+    //     }
+    //     modalValue.id = id;
+    //     this.tableLoading(true);
+    //     this.addEditData(modalValue, 'editFireSys');
+    //   }, error => this.tableLoading(false));
+    // });
+  }
+
+  // addEditData(param: FireSysObj, methodName: 'editFireSys' | 'addFireSys'): void {
+  //   this.dataService[methodName](param).subscribe(() => {
+  //     this.getDataList();
+  //   });
+  // }
 
   changeSort(e: SortFile): void {
     this.message.info(`排序字段：${e.fileName},排序为:${e.sortDir}`);
   }
 
+  // 最左侧复选框选中触发
+  selectedChecked(e: any): void {
+    this.checkedCashArray = [...e];
+  }
+
   // 修改一页几条
   changePageSize(e: number): void {
     this.tableConfig.pageSize = e;
-  }
-
-  initForm(): void {
-    this.validateForm = this.fb.group({
-      ruleName: [null],
-      desc: [null],
-    });
   }
 
   private initTable(): void {
@@ -211,13 +367,13 @@ export class TreeListComponent implements OnInit {
           title: '住址',
           field: 'address',
         },
-         {
-           title: '操作',
-           tdTemplate: this.operationTpl,
-           width: 80,
-           fixed: true,
-           fixedDir: "right"
-         }
+        {
+          title: '操作',
+          tdTemplate: this.operationTpl,
+          width: 180,
+          fixed: true,
+          fixedDir: "right"
+        }
       ],
       total: 0,
       showCheckbox: true,
@@ -228,7 +384,6 @@ export class TreeListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.initForm();
     this.initTable();
   }
 }

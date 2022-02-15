@@ -1,14 +1,19 @@
 import {Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder} from '@angular/forms';
 import {MyTableConfig, SortFile} from '@shared/components/ant-table/ant-table.component';
 import {PageHeaderType} from '@shared/components/page-header/page-header.component';
 
 import {NzTableQueryParams} from 'ng-zorro-antd/table';
 import {SearchCommonVO} from '@core/services/types';
 import {Router} from '@angular/router';
-import {ActionCode} from "@config/actionCode";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {NzSafeAny} from "ng-zorro-antd/core/types";
+import {NzModalService} from "ng-zorro-antd/modal";
+
+interface SearchParam {
+  ruleName: number;
+  desc: string;
+}
 
 @Component({
   selector: 'app-search-table',
@@ -17,9 +22,9 @@ import {NzSafeAny} from "ng-zorro-antd/core/types";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchTableComponent implements OnInit {
+  searchParam: Partial<SearchParam> = {};
   @ViewChild('highLightTpl', {static: true}) highLightTpl!: TemplateRef<NzSafeAny>;
   @ViewChild('operationTpl', {static: true}) operationTpl!: TemplateRef<NzSafeAny>;
-  validateForm!: FormGroup;
   isCollapse = true;
   tableConfig!: MyTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
@@ -27,21 +32,55 @@ export class SearchTableComponent implements OnInit {
     // desc: '表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。',
     breadcrumb: ['首页', '列表页', '查询表格']
   };
-  cashArray: NzSafeAny[] = [];
-  dataList: NzSafeAny[] = [];
-  actionCodeObj = {
-    add: ActionCode.RoleAdd
-  };
+  checkedCashArray: NzSafeAny[] = [
+    {
+      id: '1',
+      productName: '文字超级长文字超级长文字超级长文字超级长文字超级长文字超级长',
+      casNo: '没有省略号没有省略号没有省略号没有省略号没有省略号没有省略号没有省略号没有省略号',
+      file3: '加样式',
+      obj: {a: {b: '点出来的值1'}},
+    },
+    {
+      id: '2',
+      productName: '文字超级长',
+      casNo: 'string',
+      file3: '加样式',
+      obj: {a: {b: '点出来的值1'}},
+    },
+  ]; // 需修改为对应业务的数据类型
+  dataList: NzSafeAny[] = []; // 需修改为对应业务的数据类型
+
 
   constructor(private fb: FormBuilder,
+              private modalSrv: NzModalService,
               public message: NzMessageService,
               private router: Router, private cdr: ChangeDetectorRef) {
   }
 
+
+  // 最左侧复选框选中触发
+  selectedChecked(e: any): void {
+    this.checkedCashArray = [...e];
+  }
+
+  // 刷新页面
   reloadTable(): void {
     this.message.info('已经刷新了')
     this.getDataList();
   }
+
+  // 触发表格变更检测
+  tableChangeDectction(): void {
+    // 改变引用触发变更检测。
+    this.dataList = [...this.dataList];
+    this.cdr.detectChanges();
+  }
+
+  tableLoading(isLoading: boolean): void {
+    this.tableConfig.loading = isLoading;
+    this.tableChangeDectction();
+  }
+
 
   getDataList(e?: NzTableQueryParams): void {
     this.tableConfig.loading = true;
@@ -50,63 +89,81 @@ export class SearchTableComponent implements OnInit {
       pageNum: e?.pageIndex! || this.tableConfig.pageIndex!
     };
     this.dataList = [];
-    this.tableConfig.loading = false;
-    this.dataList = [
-      {
-        id: '1',
-        productName: '文字超级长文字超级长文字超级长文字超级长文字超级长文字超级长',
-        casNo: '没有省略号没有省略号没有省略号没有省略号没有省略号没有省略号没有省略号没有省略号',
-        file3: '加样式',
-        obj: {a: {b:'点出来的值1'}},
-      },
-      {
-        id: '2',
-        productName: '文字超级长',
-        casNo: 'string',
-        file3: '加样式',
-        obj: {a: {b:'点出来的值1'}},
-      },
-      {
-        id: '3',
-        productName: 'string',
-        casNo: 'string',
-        file3: '加样式',
-        obj: {a: {b:'点出来的值1'}},
-      },
-      {
-        id: '4',
-        productName: 'string',
-        casNo: 'string',
-        file3: '加样式',
-        obj: {a: {b:'点出来的值1'}},
-      },
-      {
-        id: '5',
-        productName: 'string',
-        casNo: 'string',
-        file3: '加样式',
-        obj: {a: {b:'点出来的值1'}},
-      },
-      {
-        id: '6',
-        productName: 'string',
-        casNo: 'string',
-        file3: '加样式',
-        obj: {a: {b:'点出来的值1'}},
-      },
-    ];
-    this.tableConfig.total = 13;
-    this.tableConfig.pageIndex = 1;
-    /*   this.dataService.getProjectlist(params).subscribe((data) => {
-         const {list, total, pageNum} = data;
-         this.dataList = list;
-         console.log(this.dataList);
-         this.tableConfig.total = total;
-         this.tableConfig.pageIndex = pageNum;
-         this.tableConfig.loading = false;
-       },()=>{
-         this.tableConfig.loading = false;
-       });*/
+    setTimeout(() => {
+      this.dataList = [
+        {
+          id: '1',
+          productName: '文字超级长文字超级长文字超级长文字超级长文字超级长文字超级长',
+          casNo: '没有省略号没有省略号没有省略号没有省略号没有省略号没有省略号没有省略号没有省略号',
+          file3: '加样式',
+          obj: {a: {b: '点出来的值1'}},
+        },
+        {
+          id: '2',
+          productName: '文字超级长',
+          casNo: 'string',
+          file3: '加样式',
+          obj: {a: {b: '点出来的值1'}},
+        },
+        {
+          id: '3',
+          productName: 'string',
+          casNo: 'string',
+          file3: '加样式',
+          obj: {a: {b: '点出来的值1'}},
+        },
+        {
+          id: '4',
+          productName: 'string',
+          casNo: 'string',
+          file3: '加样式',
+          obj: {a: {b: '点出来的值1'}},
+        },
+        {
+          id: '5',
+          productName: 'string',
+          casNo: 'string',
+          file3: '加样式',
+          obj: {a: {b: '点出来的值1'}},
+        },
+        {
+          id: '6',
+          productName: 'string',
+          casNo: 'string',
+          file3: '加样式',
+          obj: {a: {b: '点出来的值1'}},
+        },
+      ];
+      this.tableConfig.total = 13;
+      this.tableConfig.pageIndex = 1;
+      this.checkedCashArray = [...this.checkedCashArray];
+      this.tableLoading(false);
+    })
+
+    /*-----实际业务请求http接口如下------*/
+    // this.tableConfig.loading = true;
+    // const params: SearchCommonVO<any> = {
+    //   pageSize: this.tableConfig.pageSize!,
+    //   pageNum: e?.pageIndex || this.tableConfig.pageIndex!,
+    //   filters: this.searchParam
+    // };
+    // this.dataService.getFireSysList(params).pipe(finalize(() => {
+    //   this.tableLoading(false);
+    // })).subscribe((data => {
+    //   const {list, total, pageNum} = data;
+    //   this.dataList = [...list];
+    //   this.tableConfig.total = total!;
+    //   this.tableConfig.pageIndex = pageNum!;
+    //   this.tableLoading(false);
+    //   this.checkedCashArray = [...this.checkedCashArray];
+    // }));
+  }
+
+
+  /*重置*/
+  resetForm(): void {
+    this.searchParam = {};
+    this.getDataList();
   }
 
 
@@ -124,25 +181,94 @@ export class SearchTableComponent implements OnInit {
     });
   }
 
-  /*重置*/
-  resetForm(): void {
-    this.validateForm.reset();
-  }
+
 
   add(): void {
-
+    // this.modalService.show({nzTitle: '新增'}).subscribe((res) => {
+    //   if (!res || res.status === ModalBtnStatus.Cancel) {
+    //     return;
+    //   }
+    //   this.tableLoading(true);
+    //   this.addEditData(res.modalValue, 'addFireSys');
+    // }, error => this.tableLoading(false));
   }
 
-  del(): void {
-    if (this.cashArray.length === 0) {
+  // 修改
+  edit(id: number): void {
+    // this.dataService.getFireSysDetail(id).subscribe(res => {
+    //   this.modalService.show({nzTitle: '编辑'}, res).subscribe(({modalValue, status}) => {
+    //     if (status === ModalBtnStatus.Cancel) {
+    //       return;
+    //     }
+    //     modalValue.id = id;
+    //     this.tableLoading(true);
+    //     this.addEditData(modalValue, 'editFireSys');
+    //   }, error => this.tableLoading(false));
+    // });
+  }
+
+  // addEditData(param: FireSysObj, methodName: 'editFireSys' | 'addFireSys'): void {
+  //   this.dataService[methodName](param).subscribe(() => {
+  //     this.getDataList();
+  //   });
+  // }
+
+  del(id: number): void {
+    this.modalSrv.confirm({
+      nzTitle: '确定要删除吗？',
+      nzContent: '删除后不可恢复',
+      nzOnOk: () => {
+        this.tableLoading(true);
+        /*注释的是模拟接口调用*/
+        // this.dataService.delFireSys([id]).subscribe(() => {
+        //   if (this.dataList.length === 1) {
+        //     this.tableConfig.pageIndex--;
+        //   }
+        //   this.getDataList();
+        //   this.checkedCashArray.splice(this.checkedCashArray.findIndex(item => item.id === id), 1);
+        // }, error => this.tableLoading(false));
+
+        setTimeout(()=>{
+          this.message.info('id数组(支持分页保存):' + JSON.stringify(id))
+          this.getDataList();
+          this.checkedCashArray.splice(this.checkedCashArray.findIndex(item => item.id === id), 1);
+          this.tableLoading(false);
+        },3000)
+      }
+    });
+  }
+
+  allDel(): void {
+    if (this.checkedCashArray.length > 0) {
+      this.modalSrv.confirm({
+        nzTitle: '确定要删除吗？',
+        nzContent: '删除后不可恢复',
+        nzOnOk: () => {
+          const tempArrays: number[] = [];
+          this.checkedCashArray.forEach((item) => {
+            tempArrays.push(item.id);
+          });
+          this.tableLoading(true);
+          // 注释的是模拟接口的调用
+          // this.dataService.delFireSys(tempArrays).subscribe(() => {
+          //   if (this.dataList.length === 1) {
+          //     this.tableConfig.pageIndex--;
+          //   }
+          //   this.getDataList();
+          //   this.checkedCashArray = [];
+          // }, error => this.tableLoading(false));
+          setTimeout(()=>{
+            this.message.info('id数组(支持分页保存):' + JSON.stringify(tempArrays))
+            this.getDataList();
+            this.checkedCashArray = [];
+            this.tableLoading(false);
+          },1000)
+        }
+      });
+    } else {
       this.message.error('请勾选数据');
       return;
     }
-    const temp: string[] = [];
-    this.cashArray.forEach(item => {
-      temp.push(item.id)
-    })
-    this.message.info('id数组(支持分页保存):' + JSON.stringify(temp))
   }
 
   changeSort(e: SortFile): void {
@@ -152,13 +278,6 @@ export class SearchTableComponent implements OnInit {
   // 修改一页几条
   changePageSize(e: number): void {
     this.tableConfig.pageSize = e;
-  }
-
-  initForm(): void {
-    this.validateForm = this.fb.group({
-      ruleName: [null],
-      desc: [null],
-    });
   }
 
   private initTable(): void {
@@ -200,7 +319,7 @@ export class SearchTableComponent implements OnInit {
         {
           title: '操作',
           tdTemplate: this.operationTpl,
-          width: 80,
+          width: 120,
           fixed: true,
           fixedDir: "right"
         }
@@ -214,7 +333,6 @@ export class SearchTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.initForm();
     this.initTable();
   }
 }

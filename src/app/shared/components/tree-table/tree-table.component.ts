@@ -11,6 +11,8 @@ import {NzSafeAny} from "ng-zorro-antd/core/types";
 import {NzTableQueryParams, NzTableSize} from "ng-zorro-antd/table";
 import {MyTableConfig, SortFile, TableHeader} from "@shared/components/ant-table/ant-table.component";
 import {NzResizeEvent} from "ng-zorro-antd/resizable";
+import {fnGetFlattenTreeDataByMap, fnTreeDataToMap} from "@utils/treeTableTools";
+
 
 export interface TreeNodeInterface {
   id: string;
@@ -42,9 +44,10 @@ export class TreeTableComponent implements OnInit, OnChanges {
   _dataList!: TreeNodeInterface[];
   allChecked: boolean = false;
   indeterminate = false;
-  // 从业务组件中传入的缓存的已经选中的checkbox数据数组
-  @Input() checkedCashArrayFromComment: NzSafeAny[] = [];
-  @Output() sortFn: EventEmitter<SortFile>;
+  // 从业务组件中传入的缓存的已经选中的checkbox数据数组,相当于缓存的tableData
+  @Input() cashArray: NzSafeAny[] = [];
+  checkedCashArrayFromComment: NzSafeAny[] = [];
+  @Output() sortFn: EventEmitter<SortFile> = new EventEmitter<SortFile>();
   @Output() changePageNum = new EventEmitter<NzTableQueryParams>();
   @Output() changePageSize = new EventEmitter<number>();
   mapOfExpandedData: { [key: string]: TreeNodeInterface[] } = {};
@@ -54,9 +57,8 @@ export class TreeTableComponent implements OnInit, OnChanges {
   @Input()
   set tableData(value: TreeNodeInterface[]) {
     this._dataList = value;
-    this._dataList.forEach(item => {
-      this.mapOfExpandedData[item.id] = this.convertTreeToList(item);
-    });
+    // 根据dataList获取map形式的treeData,每一个key对应一组（也就是有子集）的数据
+    this.mapOfExpandedData = fnTreeDataToMap(this._dataList);
   }
 
   get tableData(): NzSafeAny[] {
@@ -74,7 +76,6 @@ export class TreeTableComponent implements OnInit, OnChanges {
   }
 
   constructor(private cdr: ChangeDetectorRef) {
-    this.sortFn = new EventEmitter<SortFile>();
   }
 
   tableChangeDectction(): void {
@@ -83,6 +84,7 @@ export class TreeTableComponent implements OnInit, OnChanges {
     this.cdr.markForCheck();
   }
 
+  // 表头拖动
   onResize(nzResizeEvent: NzResizeEvent, col: string): void {
     this.tableConfig.headers = (this.tableConfig.headers.map(e => (e.title === col ? {
       ...e,
@@ -90,6 +92,7 @@ export class TreeTableComponent implements OnInit, OnChanges {
     } : e))) as TableHeader[];
   }
 
+  // 点击排序
   changeSort(tableHeader: TableHeader): void {
     this.tableConfig.headers.forEach(item => {
       if (item.field !== tableHeader.field) {
@@ -126,33 +129,8 @@ export class TreeTableComponent implements OnInit, OnChanges {
     }
   }
 
-  convertTreeToList(root: TreeNodeInterface): TreeNodeInterface[] {
-    const stack: TreeNodeInterface[] = [];
-    const array: TreeNodeInterface[] = [];
-    const hashMap = {};
-    stack.push({...root, level: 0, expand: false, _checked: false});
-
-    while (stack.length !== 0) {
-      const node = stack.pop()!;
-      this.visitNode(node, hashMap, array);
-      if (node.children) {
-        for (let i = node.children.length - 1; i >= 0; i--) {
-          stack.push({...node.children[i], level: node.level! + 1, _checked: false, expand: false, parent: node});
-        }
-      }
-    }
-
-    return array;
-  }
-
-  visitNode(node: TreeNodeInterface, hashMap: { [key: string]: boolean }, array: TreeNodeInterface[]): void {
-    if (!hashMap[node.id]) {
-      hashMap[node.id] = true;
-      array.push(node);
-    }
-  }
-
-  checkFn(dataItem: NzSafeAny, isChecked: boolean): void {
+  // 设置选中与否，并处理缓存值
+  setIsCheckFn(dataItem: NzSafeAny, isChecked: boolean): void {
     dataItem['_checked'] = isChecked;
     const index = this.checkedCashArrayFromComment.findIndex((cashItem) => cashItem.id === dataItem.id);
     if (isChecked) {
@@ -168,40 +146,41 @@ export class TreeTableComponent implements OnInit, OnChanges {
 
   // 全选
   onAllChecked(isChecked: boolean): void {
-    this._dataList.forEach(item => {
-      this.mapOfExpandedData[item.id].forEach(treeItem => {
-        this.checkFn(treeItem, isChecked);
-      })
-    });
+    fnGetFlattenTreeDataByMap(this.mapOfExpandedData).forEach(row => {
+      this.setIsCheckFn(row, isChecked);
+    })
     this.selectedChange.emit(this.checkedCashArrayFromComment);
     this.refreshStatus();
   }
 
   // 单选
   public checkRowSingle(isChecked: boolean, selectIndex: number, row: TreeNodeInterface): void {
-    this.checkFn(row, isChecked);
+    this.setIsCheckFn(row, isChecked);
     this.selectedChange.emit(this.checkedCashArrayFromComment);
     this.refreshStatus();
   }
 
   // 刷新复选框状态
   refreshStatus(): void {
-    const dataTempArray: TreeNodeInterface[] = [];
-    Object.values(this.mapOfExpandedData).forEach(item => {
-      item.forEach(item_1 => {
-        dataTempArray.push(item_1);
-      })
-    })
+    // 获取铺平的treeData
+    const dataTempArray: TreeNodeInterface[] = fnGetFlattenTreeDataByMap(this.mapOfExpandedData);
+
     const allChecked = dataTempArray.length > 0 && dataTempArray.every((item) => {
       return item['_checked'] === true;
     });
-    const allUnChecked = dataTempArray.every(item => item['_checked'] !== true);
+    const allUnChecked = dataTempArray.length > 0 && dataTempArray.every(item => item['_checked'] !== true);
     this.allChecked = allChecked;
     this.indeterminate = !allChecked && !allUnChecked;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['checkedCashArrayFromComment']) {
+    if (changes['cashArray'] && !changes['cashArray'].firstChange) {
+      this.checkedCashArrayFromComment = [...changes['cashArray'].currentValue];
+      fnGetFlattenTreeDataByMap(this.mapOfExpandedData).forEach(row => {
+        // 判断缓存中是否有该值，有的话设置成true
+        const index = this.checkedCashArrayFromComment.findIndex(item => item.id === row.id);
+        this.setIsCheckFn(row, index!==-1);
+      })
       this.refreshStatus();
     }
   }

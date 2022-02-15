@@ -1,17 +1,21 @@
-<nz-table nzShowPagination nzTableLayout="fixed"
-          [nzFrontPagination]="false"
-          [nzSize]="tableSize"
-          [nzOuterBordered]="true"
-          nzShowSizeChanger [nzBordered]="true" [nzData]="_dataList"
-          [nzTotal]="tableConfig!.total"
-          [nzPageIndex]="tableConfig.pageIndex"
-          [nzScroll]="tableConfig.needNoScroll?{}:{ x: '1100px' }"
-          [nzPageSize]="tableConfig.pageSize"
-          (nzQueryParams)="onQueryParamsChange($event)"
-          (nzPageSizeChange)="onPageSizeChange($event)"
-          [nzLoading]="tableConfig.loading"
-          nzShowQuickJumper
-          [nzShowTotal]="rangeTemplate"
+<nz-table
+  nzShowPagination
+  nzTableLayout="fixed"
+  [nzFrontPagination]="false"
+  [nzSize]="tableSize"
+  [nzOuterBordered]="true"
+  nzShowSizeChanger
+  [nzBordered]="true"
+  [nzData]="_dataList"
+  [nzTotal]="tableConfig!.total"
+  [nzPageIndex]="tableConfig.pageIndex"
+  [nzScroll]="tableConfig.needNoScroll?{}:{ x: '1100px' }"
+  [nzPageSize]="tableConfig.pageSize"
+  (nzQueryParams)="onQueryParamsChange($event)"
+  (nzPageSizeChange)="onPageSizeChange($event)"
+  [nzLoading]="tableConfig.loading"
+  nzShowQuickJumper
+  [nzShowTotal]="rangeTemplate"
 >
   <ng-template #rangeTemplate let-range="range" let-total> {{ range[0] }}-{{ range[1] }} 共 {{ total }} 条</ng-template>
   <thead>
@@ -19,7 +23,8 @@
     <th class="animate-bg-0" [nzLeft]="true" [nzIndeterminate]="indeterminate" *ngIf="tableConfig.showCheckbox"
         (nzCheckedChange)="onAllChecked($event)" [nzWidth]="'40px'" [nzChecked]="allChecked"></th>
     <ng-container *ngFor="let head of tableConfig.headers;let headIndex=index;let last=last;let first=first;">
-      <th class="animate-bg-0" [nzWidth]="head.width + 'px'"
+      <th class="animate-bg-0"
+          [nzWidth]="head.width + 'px'"
           nz-resizable
           nzPreview
           nzBounds="parent"
@@ -51,7 +56,8 @@
         (nzCheckedChange)="checkRowSingle($event,rowIndex)"
         [nzChecked]="row['_checked']"></td>
     <ng-container *ngFor="let head of tableConfig.headers">
-      <td *ngIf="(head.show===undefined||head.show===true)" [ngClass]="head.tdClassList?head.tdClassList:''"
+      <td *ngIf="(head.show===undefined||head.show===true)"
+          [ngClass]="head.tdClassList?head.tdClassList:''"
           [nzEllipsis]="!head.notNeedEllipsis"
           [nzLeft]="(!!head.fixed&&head.fixedDir==='left')"
           [nzRight]="(!!head.fixed&&head.fixedDir==='right')">

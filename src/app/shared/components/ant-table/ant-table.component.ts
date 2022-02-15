@@ -1,4 +1,15 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  TemplateRef
+} from '@angular/core';
 import {NzTableQueryParams, NzTableSize} from 'ng-zorro-antd/table';
 import {NzResizeEvent} from "ng-zorro-antd/resizable";
 import {NzSafeAny} from "ng-zorro-antd/core/types";
@@ -54,7 +65,7 @@ export interface SortFile {
 export class AntTableComponent implements OnInit, OnChanges {
   _dataList!: NzSafeAny[];
   // 从业务组件中传入的缓存的已经选中的checkbox数据数组
-  @Input() checkedCashArrayFromComment: NzSafeAny[];
+  @Input() checkedCashArrayFromComment: NzSafeAny[] = [];
 
   @Input()
   set tableData(value: NzSafeAny[]) {
@@ -83,17 +94,12 @@ export class AntTableComponent implements OnInit, OnChanges {
   @Input() tableConfig!: MyTableConfig;
   @Output() changePageNum = new EventEmitter<NzTableQueryParams>();
   @Output() changePageSize = new EventEmitter<number>();
-  @Output() selectedChange: EventEmitter<NzSafeAny[]>;
-  @Output() sortFn: EventEmitter<SortFile>;
-  indeterminate: boolean;
-  allChecked: boolean;
+  @Output() selectedChange: EventEmitter<NzSafeAny[]> = new EventEmitter<NzSafeAny[]>();
+  @Output() sortFn: EventEmitter<SortFile> = new EventEmitter<SortFile>();
+  indeterminate: boolean = false;
+  allChecked: boolean = false;
 
   constructor(private cdr: ChangeDetectorRef) {
-    this.indeterminate = false;
-    this.allChecked = false;
-    this.selectedChange = new EventEmitter<NzSafeAny[]>();
-    this.sortFn = new EventEmitter<SortFile>();
-    this.checkedCashArrayFromComment = [];
   }
 
   changeSort(tableHeader: TableHeader): void {
