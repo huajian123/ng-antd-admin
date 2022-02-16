@@ -4,6 +4,11 @@ import {silentEvent} from 'ng-zorro-antd/core/util';
 import {v4 as uuidv4} from 'uuid';
 import {NzSafeAny} from "ng-zorro-antd/core/types";
 
+/*获取1到100之间的随机整数 this.randomNum(1,101)*/
+const fnGetRandomNum = function getRandomNum(m: number, n: number) {
+  let num = Math.floor(Math.random() * (m - n) + n);
+  return num
+}
 
 const fnGetFile = function getFile(url: string, isBlob = false): Promise<NzSafeAny> {
   return new Promise((resolve, reject) => {
@@ -99,5 +104,6 @@ export {
   fnStopMouseEvent,
   fnFormatePath,
   fnRemoveDouble,
+  fnGetRandomNum,
   fnGetUUID
 };
