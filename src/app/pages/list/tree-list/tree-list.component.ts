@@ -232,6 +232,8 @@ export class TreeListComponent implements OnInit {
   /*查看*/
   check(id: string, children: any[], parent: any[]): void {
     this.message.success(id);
+    console.log(children);
+    console.log(parent);
   }
 
   /*重置*/
@@ -330,6 +332,7 @@ export class TreeListComponent implements OnInit {
   // 最左侧复选框选中触发
   selectedChecked(e: any): void {
     this.checkedCashArray = [...e];
+    console.log(this.checkedCashArray);
   }
 
   // 修改一页几条

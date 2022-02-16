@@ -27,6 +27,32 @@ const menuNav: Menu[] = [
         path: '/default/feat/ex-modal',
       },
       {
+        title: '富文本',
+        icon: 'dashboard',
+        open: false,
+        actionCode: ActionCode.UserManage,
+        selected: false,
+        path: '/default/feat/rich-text',
+      },
+      {
+        title: '地图',
+        icon: 'dashboard',
+        open: false,
+        actionCode: ActionCode.UserManage,
+        selected: false,
+        path: '/default/feat/map',
+        children: [
+          {
+            title: '高德',
+            open: false,
+            selected: false,
+            icon: 'highlight',
+            path: '/default/feat/map/gaode',
+            actionCode: ActionCode.UserManage,
+          },
+        ]
+      },
+      {
         title: '其他登录方式',
         icon: 'dashboard',
         open: false,
