@@ -34,8 +34,7 @@ interface Mode extends NormalModel {
   styleUrls: ['./setting-drawer.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SettingDrawerComponent implements OnInit, OnDestroy {
-  private destory$ = new Subject<void>();
+export class SettingDrawerComponent implements OnInit {
   themesOptions$ = this.themesService.getThemesMode();
   isNightTheme$ = this.themesService.getIsNightTheme();
   _isNightTheme = false;
@@ -229,11 +228,6 @@ export class SettingDrawerComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initThemeOption();
-  }
-
-  ngOnDestroy(): void {
-    this.destory$.next();
-    this.destory$.complete();
   }
 
   dragEnd() {

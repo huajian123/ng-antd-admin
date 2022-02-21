@@ -8,6 +8,7 @@ import {DriverService} from "@core/services/common/driver.service";
 import {WindowService} from "@core/services/common/window.service";
 import {IsFirstLogin} from "@config/constant";
 import {fadeRouteAnimation} from "@app/animations/fade.animation";
+import {DestroyService} from "@core/services/common/destory.service";
 
 @Component({
   selector: 'app-default',
@@ -16,17 +17,17 @@ import {fadeRouteAnimation} from "@app/animations/fade.animation";
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     fadeRouteAnimation
-  ]
+  ],
+  providers: [DestroyService]
 })
-export class DefaultComponent implements OnInit, OnDestroy, AfterViewInit {
+export class DefaultComponent implements OnInit, AfterViewInit {
   isCollapsed$ = this.themesService.getIsCollapsed();
   themeOptions$ = this.themesService.getThemesMode();
   isCollapsed = false;
   isOverMode = false; // 窗口变窄时，导航栏是否变成抽屉模式
-  private destory$ = new Subject<void>();
   @ViewChild('navDrawer') navDrawer!: NavDrawerComponent
 
-  constructor(private themesService: ThemeService, private driverService: DriverService, private windowService: WindowService) {
+  constructor(private destroy$: DestroyService,private themesService: ThemeService, private driverService: DriverService, private windowService: WindowService) {
   }
 
   ngAfterViewInit(): void {
@@ -51,8 +52,8 @@ export class DefaultComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // 监听各种流
   subTheme(): void {
-    this.themesService.getIsCollapsed().pipe(takeUntil(this.destory$)).subscribe(res => this.isCollapsed = res);
-    this.themesService.getIsOverMode().pipe(takeUntil(this.destory$)).subscribe(res => this.isOverMode = res);
+    this.themesService.getIsCollapsed().pipe(takeUntil(this.destroy$)).subscribe(res => this.isCollapsed = res);
+    this.themesService.getIsOverMode().pipe(takeUntil(this.destroy$)).subscribe(res => this.isOverMode = res);
   }
 
   prepareRoute(outlet: RouterOutlet) {
@@ -61,10 +62,5 @@ export class DefaultComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit(): void {
     this.subTheme();
-  }
-
-  ngOnDestroy(): void {
-    this.destory$.next();
-    this.destory$.complete();
   }
 }

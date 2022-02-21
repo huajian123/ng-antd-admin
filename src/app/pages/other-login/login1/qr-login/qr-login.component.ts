@@ -2,23 +2,23 @@ import {Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {LoginType} from "@app/pages/other-login/login1/login1.component";
 import {Login1StoreService} from "@store/biz-store-service/other-login/login1-store.service";
-import {Subject} from "rxjs";
 import {takeUntil} from "rxjs/operators";
+import {DestroyService} from "@core/services/common/destory.service";
 
 @Component({
   selector: 'app-qr-login',
   templateUrl: './qr-login.component.html',
   styleUrls: ['./qr-login.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [DestroyService]
 })
-export class QrLoginComponent implements OnInit, OnDestroy {
+export class QrLoginComponent implements OnInit {
 
   validateForm!: FormGroup;
   password?: string;
   typeEnum = LoginType;
-  private destory$ = new Subject<void>();
   isOverModel = false;
-  constructor(private cdr: ChangeDetectorRef,private fb: FormBuilder, private login1StoreService: Login1StoreService,) {
+  constructor(private destroy$: DestroyService,private cdr: ChangeDetectorRef,private fb: FormBuilder, private login1StoreService: Login1StoreService,) {
   }
 
   submitForm(): void {
@@ -30,7 +30,7 @@ export class QrLoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.login1StoreService.getIsLogin1OverModelStore().pipe(takeUntil(this.destory$)).pipe(takeUntil(this.destory$)).subscribe((res => {
+    this.login1StoreService.getIsLogin1OverModelStore().pipe(takeUntil(this.destroy$)).subscribe((res => {
       this.isOverModel = res;
       this.cdr.markForCheck();
     }));
@@ -39,9 +39,5 @@ export class QrLoginComponent implements OnInit, OnDestroy {
       password: [null, [Validators.required]],
       remember: [null],
     });
-  }
-  ngOnDestroy() {
-    this.destory$.next();
-    this.destory$.complete();
   }
 }

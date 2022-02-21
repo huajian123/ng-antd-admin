@@ -13,6 +13,7 @@ import {ThemeService} from "@store/theme.service";
 import {IsNightKey} from "@config/constant";
 import {ThemeSkinService} from "@core/services/common/theme-skin.service";
 import {WindowService} from "@core/services/common/window.service";
+import {DestroyService} from "@core/services/common/destory.service";
 
 export enum LoginType {
   Normal,
@@ -30,9 +31,10 @@ interface LoginFormComponentInterface {
   selector: 'app-login1',
   templateUrl: './login1.component.html',
   styleUrls: ['./login1.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [DestroyService]
 })
-export class Login1Component implements OnInit, OnDestroy {
+export class Login1Component implements OnInit {
   private adHost!: AdDirective;
   isOverModel = true;
   isNightTheme$ = this.themesService.getIsNightTheme();
@@ -45,7 +47,7 @@ export class Login1Component implements OnInit, OnDestroy {
     }
   }
 
-  private destory$ = new Subject<void>();
+
   formData: LoginFormComponentInterface[] = [
     {type: LoginType.Normal, component: new DynamicComponent(NormalLoginComponent, {})},
     {type: LoginType.Phone, component: new DynamicComponent(PhoneLoginComponent, {})},
@@ -53,7 +55,7 @@ export class Login1Component implements OnInit, OnDestroy {
     {type: LoginType.Register, component: new DynamicComponent(RegistLoginComponent, {})},
   ];
 
-  constructor(private themeSkinService: ThemeSkinService, private windowServe: WindowService, private cdr: ChangeDetectorRef, private login1StoreService: Login1StoreService, private breakpointObserver: BreakpointObserver, private themesService: ThemeService) {
+  constructor(private destroy$: DestroyService,private themeSkinService: ThemeSkinService, private windowServe: WindowService, private cdr: ChangeDetectorRef, private login1StoreService: Login1StoreService, private breakpointObserver: BreakpointObserver, private themesService: ThemeService) {
   }
 
   getCurrentComponent(type: LoginType): LoginFormComponentInterface {
@@ -77,21 +79,16 @@ export class Login1Component implements OnInit, OnDestroy {
   }
 
   subLoginType(): void {
-    this.login1StoreService.getLoginTypeStore().pipe(takeUntil(this.destory$)).subscribe(res => {
+    this.login1StoreService.getLoginTypeStore().pipe(takeUntil(this.destroy$)).subscribe(res => {
       this.to(this.getCurrentComponent(res));
     });
   }
 
   ngOnInit(): void {
-    this.breakpointObserver.observe(['(max-width: 1200px)']).pipe(takeUntil(this.destory$)).subscribe(res => {
+    this.breakpointObserver.observe(['(max-width: 1200px)']).pipe(takeUntil(this.destroy$)).subscribe(res => {
       this.isOverModel = res.matches;
       this.login1StoreService.setIsLogin1OverModelStore(res.matches);
       this.cdr.detectChanges();
     })
-  }
-
-  ngOnDestroy() {
-    this.destory$.next();
-    this.destory$.complete();
   }
 }

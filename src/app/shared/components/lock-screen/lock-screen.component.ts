@@ -2,30 +2,30 @@ import {
   Component,
   OnInit,
   ChangeDetectionStrategy,
-  OnDestroy,
 } from '@angular/core';
-import {Observable, Subject, timer} from "rxjs";
+import {Observable, timer} from "rxjs";
 import {map, takeUntil} from "rxjs/operators";
 import {getDay} from 'date-fns'
 import {NzSafeAny} from 'ng-zorro-antd/core/types';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {fnCheckForm, fnDecrypt, fnEncrypt} from "@utils/tools";
+import {fnCheckForm, fnEncrypt} from "@utils/tools";
 import {LockedKey, salt} from "@config/constant";
 import {WindowService} from "@core/services/common/window.service";
 import {LockScreenFlag, LockScreenStoreService} from "@store/lock-screen-store/lock-screen-store.service";
 import {LoginOutService} from "@core/services/common/login-out.service";
 import {Router} from "@angular/router";
+import {DestroyService} from "@core/services/common/destory.service";
 
 @Component({
   selector: 'app-lock-screen',
   templateUrl: './lock-screen.component.html',
   styleUrls: ['./lock-screen.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [DestroyService]
 })
-export class LockScreenComponent implements OnInit, OnDestroy {
-  private destory$ = new Subject<void>();
+export class LockScreenComponent implements OnInit {
   public showUnlock = false;
-  public time$: Observable<Date> = timer(0, 1000).pipe(map(() => new Date()), takeUntil(this.destory$));
+  public time$: Observable<Date> = timer(0, 1000).pipe(map(() => new Date()), takeUntil(this.destroy$));
   validateForm!: FormGroup;
   passwordVisible = false;
   lockedState: LockScreenFlag = {
@@ -35,7 +35,7 @@ export class LockScreenComponent implements OnInit, OnDestroy {
   }
 
 
-  constructor(private router: Router, private loginOutService: LoginOutService, private lockScreenStoreService: LockScreenStoreService, private fb: FormBuilder, private windowSrv: WindowService) {
+  constructor(private destroy$: DestroyService, private router: Router, private loginOutService: LoginOutService, private lockScreenStoreService: LockScreenStoreService, private fb: FormBuilder, private windowSrv: WindowService) {
   }
 
   // 返回登录页面则解锁
@@ -85,7 +85,7 @@ export class LockScreenComponent implements OnInit, OnDestroy {
   }
 
   subLockedState(): void {
-    this.lockScreenStoreService.getLockScreenStore().pipe(takeUntil(this.destory$)).subscribe(res => {
+    this.lockScreenStoreService.getLockScreenStore().pipe(takeUntil(this.destroy$)).subscribe(res => {
       this.lockedState = res;
     })
   }
@@ -94,10 +94,4 @@ export class LockScreenComponent implements OnInit, OnDestroy {
     this.subLockedState();
     this.initForm();
   }
-
-  ngOnDestroy() {
-    this.destory$.next();
-    this.destory$.complete();
-  }
-
 }

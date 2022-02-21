@@ -3,6 +3,7 @@ import {Observable, Subject} from "rxjs";
 import {SettingInterface, ThemeService} from "@store/theme.service";
 import {takeUntil} from "rxjs/operators";
 import {SplitNavStoreService} from "@store/split-nav-store/split-nav-store.service";
+import {DestroyService} from "@core/services/common/destory.service";
 
 @Component({
   selector: 'app-def-layout-content',
@@ -10,7 +11,7 @@ import {SplitNavStoreService} from "@store/split-nav-store/split-nav-store.servi
   styleUrls: ['./def-layout-content.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DefLayoutContentComponent implements OnInit, OnDestroy {
+export class DefLayoutContentComponent implements OnInit {
   showChats = true;
   isNightTheme$ = this.themesService.getIsNightTheme();
   themesOptions$ = this.themesService.getThemesMode();
@@ -34,9 +35,8 @@ export class DefLayoutContentComponent implements OnInit, OnDestroy {
   isCollapsed$: Observable<boolean> = this.themesService.getIsCollapsed();
   // 混合模式下，判断顶部菜单是否有子菜单，如果没有子菜单，要隐藏左侧菜单
   mixiModeHasLeftNav = this.splitNavStoreService.getSplitLeftNavArrayStore();
-  private destory$ = new Subject<void>();
 
-  constructor(private themesService: ThemeService, private splitNavStoreService: SplitNavStoreService) {
+  constructor(private destroy$: DestroyService,private themesService: ThemeService, private splitNavStoreService: SplitNavStoreService) {
   }
 
 
@@ -45,7 +45,7 @@ export class DefLayoutContentComponent implements OnInit, OnDestroy {
   }
 
   getThemeOptions(): void {
-    this.themesOptions$.pipe(takeUntil(this.destory$)).subscribe(res => {
+    this.themesOptions$.pipe(takeUntil(this.destroy$)).subscribe(res => {
       this.themesOptions = res;
       this.isMixiMode = res.mode === 'mixi';
       this.isFixedLeftNav = this.themesOptions.fixedLeftNav;
@@ -54,10 +54,5 @@ export class DefLayoutContentComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getThemeOptions();
-  }
-
-  ngOnDestroy(): void {
-    this.destory$.next();
-    this.destory$.complete();
   }
 }

@@ -14,6 +14,7 @@ import {filter, takeUntil} from 'rxjs/operators';
 import {ActivatedRoute, NavigationEnd, Router, RouterEvent, RouterOutlet} from '@angular/router';
 import {fadeRouteAnimation} from "@app/animations/fade.animation";
 import {NzSafeAny} from "ng-zorro-antd/core/types";
+import { DestroyService } from '@app/core/services/common/destory.service';
 
 interface TabInterface {
   label: string;
@@ -27,9 +28,10 @@ interface TabInterface {
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     fadeRouteAnimation
-  ]
+  ],
+  providers: [DestroyService]
 })
-export class SearchListComponent implements OnInit, OnDestroy {
+export class SearchListComponent implements OnInit {
   @ViewChild('headerContent', {static: true}) headerContent!: TemplateRef<NzSafeAny>;
   @ViewChild('headerFooter', {static: true}) headerFooter!: TemplateRef<NzSafeAny>;
   pageHeaderInfo: Partial<PageHeaderType> = {
@@ -40,7 +42,6 @@ export class SearchListComponent implements OnInit, OnDestroy {
   };
   currentSelTab: number = 0;
 
-  private destory$ = new Subject<void>();
   tabData: TabInterface[] = [
     {label: '文章', url: '/default/list/search-list/article'},
     {label: '项目', url: '/default/list/search-list/project'},
@@ -48,8 +49,9 @@ export class SearchListComponent implements OnInit, OnDestroy {
   ];
 
   constructor(private searchListService: SearchListStoreService, private activatedRoute: ActivatedRoute,
+              private destroy$: DestroyService,
               private router: Router, private cdr: ChangeDetectorRef) {
-    this.searchListService.getCurrentSearchListComponentStore().pipe(takeUntil(this.destory$)).subscribe(componentType => {
+    this.searchListService.getCurrentSearchListComponentStore().pipe(takeUntil(this.destroy$)).subscribe(componentType => {
       this.pageHeaderInfo = {
         title: componentType,
         desc: this.headerContent,
@@ -77,10 +79,5 @@ export class SearchListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-  }
-
-  ngOnDestroy(): void {
-    this.destory$.next();
-    this.destory$.complete();
   }
 }

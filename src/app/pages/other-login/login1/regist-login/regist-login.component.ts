@@ -2,23 +2,24 @@ import {Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {LoginType} from "@app/pages/other-login/login1/login1.component";
 import {Login1StoreService} from "@store/biz-store-service/other-login/login1-store.service";
-import {Subject} from "rxjs";
 import {takeUntil} from "rxjs/operators";
 import {EquipmentWidth, WindowsWidthService} from "@store/windows-width-store/windows-width.service";
+import {DestroyService} from "@core/services/common/destory.service";
 
 /*https://www.npmjs.com/package/angular-password-strength-meter*/
 @Component({
   selector: 'app-regist-login',
   templateUrl: './regist-login.component.html',
   styleUrls: ['./regist-login.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [DestroyService]
 })
-export class RegistLoginComponent implements OnInit, OnDestroy {
+export class RegistLoginComponent implements OnInit {
   validateForm!: FormGroup;
   typeEnum = LoginType;
   passwordVisible = false;
   compirePasswordVisible = false;
-  private destory$ = new Subject<void>();
+
   isOverModel = false;
   equipmentWidthEnum = EquipmentWidth;
   currentEquipmentWidth: EquipmentWidth = EquipmentWidth.md;
@@ -26,7 +27,7 @@ export class RegistLoginComponent implements OnInit, OnDestroy {
     return this.validateForm.get('password');
   }
 
-  constructor(private windowsWidthService: WindowsWidthService,private cdr: ChangeDetectorRef, private fb: FormBuilder, private login1StoreService: Login1StoreService,) {
+  constructor(private destroy$: DestroyService,private windowsWidthService: WindowsWidthService,private cdr: ChangeDetectorRef, private fb: FormBuilder, private login1StoreService: Login1StoreService,) {
   }
 
   subScreenWidth(): void {
@@ -67,7 +68,7 @@ export class RegistLoginComponent implements OnInit, OnDestroy {
   }
 
   subLogin1Store(): void {
-    this.login1StoreService.getIsLogin1OverModelStore().pipe(takeUntil(this.destory$)).subscribe((res => {
+    this.login1StoreService.getIsLogin1OverModelStore().pipe(takeUntil(this.destroy$)).subscribe((res => {
       this.isOverModel = res;
       this.cdr.markForCheck();
     }));
@@ -77,11 +78,5 @@ export class RegistLoginComponent implements OnInit, OnDestroy {
     this.subScreenWidth();
     this.initForm();
     this.subLogin1Store();
-
-  }
-
-  ngOnDestroy() {
-    this.destory$.next();
-    this.destory$.complete();
   }
 }

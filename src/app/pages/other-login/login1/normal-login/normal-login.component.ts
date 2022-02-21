@@ -9,22 +9,24 @@ import {AuthKey, TokenPre} from "@config/constant";
 import {AuthService} from "@store/auth.service";
 import {Router} from "@angular/router";
 import {WindowService} from "@core/services/common/window.service";
+import {DestroyService} from "@core/services/common/destory.service";
 
 @Component({
   selector: 'app-normal-login',
   templateUrl: './normal-login.component.html',
   styleUrls: ['./normal-login.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [DestroyService]
 })
-export class NormalLoginComponent implements OnInit, OnDestroy {
+export class NormalLoginComponent implements OnInit {
   validateForm!: FormGroup;
   passwordVisible = false;
   password?: string;
   typeEnum = LoginType;
   isOverModel = false;
-  private destory$ = new Subject<void>();
 
-  constructor(private authService: AuthService,
+
+  constructor(private destroy$: DestroyService, private authService: AuthService,
               private router: Router,
               private windowServe: WindowService,
               private spinService: SpinService, private cdr: ChangeDetectorRef, private fb: FormBuilder, private login1StoreService: Login1StoreService,) {
@@ -50,7 +52,7 @@ export class NormalLoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.login1StoreService.getIsLogin1OverModelStore().pipe(takeUntil(this.destory$)).pipe(takeUntil(this.destory$)).subscribe((res => {
+    this.login1StoreService.getIsLogin1OverModelStore().pipe(takeUntil(this.destroy$)).subscribe((res => {
       this.isOverModel = res;
       this.cdr.markForCheck();
     }));
@@ -59,10 +61,5 @@ export class NormalLoginComponent implements OnInit, OnDestroy {
       password: [null, [Validators.required]],
       remember: [null],
     });
-  }
-
-  ngOnDestroy() {
-    this.destory$.next();
-    this.destory$.complete();
   }
 }

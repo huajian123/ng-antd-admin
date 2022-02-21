@@ -11,17 +11,18 @@ import {DOCUMENT} from "@angular/common";
 import {MENU_TOKEN} from "@config/menu";
 import {AuthService} from "@core/services/store/auth.service";
 import {TabService} from "@core/services/common/tab.service";
+import {DestroyService} from "@core/services/common/destory.service";
 
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [DestroyService]
 })
-export class NavBarComponent implements OnInit, OnDestroy {
+export class NavBarComponent implements OnInit {
   // 是混合模式顶部导航
   @Input() isMixiHead = false;
   @Input() isMixiLeft = false;
-  private destory$ = new Subject<void>();
   routerPath = this.router.url;
   themesOptions$ = this.themesService.getThemesMode();
   themesMode = 'side';
@@ -36,6 +37,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
   authCodeArray: string[] = [];
 
   constructor(private router: Router,
+              private destroy$: DestroyService,
               private authService: AuthService,
               @Inject(MENU_TOKEN) public menus: Menu[],
               private splitNavStoreService: SplitNavStoreService,
@@ -48,7 +50,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
     this.router.events
       .pipe(
         filter(event => event instanceof NavigationEnd),
-        takeUntil(this.destory$),
+        takeUntil(this.destroy$),
         tap(() => {
           // @ts-ignore
           this.routerPath = this.activatedRoute.snapshot['_routerState'].url;
@@ -227,7 +229,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
   }
 
   subAuth(): void {
-    this.authService.getAuthCode().pipe(takeUntil(this.destory$)).subscribe(res => this.authCodeArray = res);
+    this.authService.getAuthCode().pipe(takeUntil(this.destroy$)).subscribe(res => this.authCodeArray = res);
   }
 
   subThemesSettings(): void {
@@ -244,9 +246,4 @@ export class NavBarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {}
-
-  ngOnDestroy(): void {
-    this.destory$.next();
-    this.destory$.complete();
-  }
 }
