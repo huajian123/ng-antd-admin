@@ -1,5 +1,5 @@
 import {ModalButtonOptions, ModalOptions, NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
-import {Injectable, Injector, Type} from '@angular/core';
+import {Injectable, Injector, Renderer2, RendererFactory2, TemplateRef, Type} from '@angular/core';
 import {NzSafeAny} from 'ng-zorro-antd/core/types';
 import * as _ from 'lodash';
 import {Observable, of} from 'rxjs';
@@ -27,9 +27,28 @@ export abstract class BasicConfirmModalComponent {
 @Injectable()
 export class ModalWrapService {
   protected bsModalService: NzModalService;
+  private btnTpl!: TemplateRef<any>;
+  fullScreenFlag = false;
+  private renderer: Renderer2;
 
-  constructor(private baseInjector: Injector, public dragDrop: DragDrop) {
+  constructor(private baseInjector: Injector, public dragDrop: DragDrop, rendererFactory: RendererFactory2) {
     this.bsModalService = this.baseInjector.get(NzModalService);
+    this.renderer = rendererFactory.createRenderer(null, null);
+  }
+
+  fullScreenIconClick(): void {
+    this.fullScreenFlag = !this.fullScreenFlag;
+    this.bsModalService.openModals.forEach(modal => {
+      if (this.fullScreenFlag) {
+        this.renderer.addClass(modal.containerInstance["host"].nativeElement, 'fullscreen-modal')
+      } else {
+        this.renderer.removeClass(modal.containerInstance["host"].nativeElement, 'fullscreen-modal')
+      }
+    })
+  }
+
+  setTemplate(btnTpl: TemplateRef<any>): void {
+    this.btnTpl = btnTpl;
   }
 
   protected getRandomCls() {
@@ -113,6 +132,7 @@ export class ModalWrapService {
     const defaultOptions: ModalOptions = {
       nzTitle: '',
       nzContent: component,
+      nzCloseIcon: this.btnTpl,
       nzMaskClosable: false,
       nzFooter: [{
         label: '确认',

@@ -1,4 +1,4 @@
-import {AfterViewInit, ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {SpinService} from '@core/services/store/spin-store/spin.service';
 import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
 import {filter} from 'rxjs/operators';
@@ -6,13 +6,15 @@ import {fadeRouteAnimation} from "./animations/fade.animation";
 import {PreloaderService} from "@core/services/common/preloader.service";
 import {LockScreenStoreService} from "@store/lock-screen-store/lock-screen-store.service";
 import {NzSafeAny} from "ng-zorro-antd/core/types";
+import {ModalWrapService} from "@widget/base-modal";
+import {fnStopMouseEvent} from "@utils/tools";
 
 @Component({
   selector: 'app-root',
   template: `
     <app-lock-screen *ngIf="(lockedState$|async)!.locked"></app-lock-screen>
     <nz-back-top></nz-back-top>
-    <div style="height: 100%" [@fadeRouteAnimation]="prepareRoute(outlet)">
+    <div class="full-height" [@fadeRouteAnimation]="prepareRoute(outlet)">
       <router-outlet #outlet="outlet"></router-outlet>
     </div>
     <div *ngIf="loading$|async"
@@ -21,6 +23,17 @@ import {NzSafeAny} from "ng-zorro-antd/core/types";
         <nz-spin nzSize="large"></nz-spin>
       </div>
     </div>
+
+    <ng-template #modalBtnTpl>
+      <div class="center">
+        <span class="hover-blue full-height flex-auto text-right d-i-b" (click)="fullScreenIconClick($event)">
+            <i class="m-r-8" nz-icon [nzType]="!modalFullScreenFlag?'fullscreen':'fullscreen-exit'" nzTheme="outline"></i>
+        </span>
+        <span class="hover-red full-height flex-auto d-i-b">
+            <i nz-icon nzType="close" nzTheme="outline"></i>
+        </span>
+      </div>
+    </ng-template>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
@@ -30,8 +43,17 @@ import {NzSafeAny} from "ng-zorro-antd/core/types";
 export class AppComponent implements OnInit, AfterViewInit {
   loading$ = this.spinService.getCurrentGlobalSpinStore();
   lockedState$ = this.lockScreenStoreService.getLockScreenStore();
+  @ViewChild("modalBtnTpl") template!: TemplateRef<any>;
+  modalFullScreenFlag = false;
 
-  constructor(private lockScreenStoreService: LockScreenStoreService, private preloader: PreloaderService, private spinService: SpinService, public router: Router) {
+  constructor(private modalWrapService: ModalWrapService, private lockScreenStoreService: LockScreenStoreService, private preloader: PreloaderService, private spinService: SpinService, public router: Router) {
+  }
+
+  // 所有对话框扩展最大化按钮，将templateRef传入Modal基础service的妥协方法
+  fullScreenIconClick($event: MouseEvent): void {
+    this.modalFullScreenFlag = !this.modalFullScreenFlag;
+    fnStopMouseEvent($event);
+    this.modalWrapService.fullScreenIconClick();
   }
 
   prepareRoute(outlet: RouterOutlet) {
@@ -46,6 +68,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.preloader.removePreLoader();
+    this.modalWrapService.setTemplate(this.template);
   }
 }
 
