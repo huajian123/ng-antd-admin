@@ -1,5 +1,5 @@
-import {Component, OnInit, ChangeDetectionStrategy, OnDestroy} from '@angular/core';
-import {Observable, Subject} from "rxjs";
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
+import {Observable} from "rxjs";
 import {SettingInterface, ThemeService} from "@store/theme.service";
 import {takeUntil} from "rxjs/operators";
 import {SplitNavStoreService} from "@store/split-nav-store/split-nav-store.service";
@@ -36,7 +36,7 @@ export class DefLayoutContentComponent implements OnInit {
   // 混合模式下，判断顶部菜单是否有子菜单，如果没有子菜单，要隐藏左侧菜单
   mixiModeHasLeftNav = this.splitNavStoreService.getSplitLeftNavArrayStore();
 
-  constructor(private destroy$: DestroyService,private themesService: ThemeService, private splitNavStoreService: SplitNavStoreService) {
+  constructor(private destroy$: DestroyService, private themesService: ThemeService, private splitNavStoreService: SplitNavStoreService) {
   }
 
 

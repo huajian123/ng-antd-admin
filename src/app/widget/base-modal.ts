@@ -173,6 +173,7 @@ export class ModalWrapService {
     return modalRef.afterClose.pipe(tap(() => {
       drag!.dispose();
       drag = null;
+      this.fullScreenFlag = false;
     }));
   }
 

@@ -28,23 +28,27 @@ export class SearchTableComponent implements OnInit {
   isCollapse = true;
   tableConfig!: MyTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
-    title: '查询表格（表头可拖动）',
+    title: '查询表格（表头可拖动，点击列表的"查看"按钮，演示详情操作）',
     // desc: '表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。',
     breadcrumb: ['首页', '列表页', '查询表格']
   };
   checkedCashArray: NzSafeAny[] = [
     {
       id: '1',
-      productName: '文字超级长文字超级长文字超级长文字超级长文字超级长文字超级长',
-      casNo: '没有省略号没有省略号没有省略号没有省略号没有省略号没有省略号没有省略号没有省略号',
-      file3: '加样式',
+      noShow: '默认不展示',
+      longText: '文字超级长文字超级长文字超级长文字超级长文字超级长文字超级长',
+      newline: '没有省略号没有省略号没有省略号没有省略号没有省略号没有省略号没有省略号没有省略号',
+      addStyle: '加样式',
+      name: '自定义模板',
       obj: {a: {b: '点出来的值1'}},
     },
     {
       id: '2',
-      productName: '文字超级长',
-      casNo: 'string',
-      file3: '加样式',
+      noShow: '默认不展示',
+      longText: '文字超级长',
+      newline: 'string',
+      name: '自定义模板',
+      addStyle: '加样式',
       obj: {a: {b: '点出来的值1'}},
     },
   ]; // 需修改为对应业务的数据类型
@@ -93,44 +97,56 @@ export class SearchTableComponent implements OnInit {
       this.dataList = [
         {
           id: '1',
-          productName: '文字超级长文字超级长文字超级长文字超级长文字超级长文字超级长',
-          casNo: '没有省略号没有省略号没有省略号没有省略号没有省略号没有省略号没有省略号没有省略号',
-          file3: '加样式',
+          noShow: '默认不展示',
+          longText: '文字超级长文字超级长文字超级长文字超级长文字超级长文字超级长',
+          newline: '没有省略号没有省略号没有省略号没有省略号没有省略号没有省略号没有省略号没有省略号',
+          addStyle: '加样式',
+          name: '自定义模板',
           obj: {a: {b: '点出来的值1'}},
         },
         {
           id: '2',
-          productName: '文字超级长',
-          casNo: 'string',
-          file3: '加样式',
+          noShow: '默认不展示',
+          longText: '文字超级长',
+          newline: 'string',
+          name: '自定义模板',
+          addStyle: '加样式',
           obj: {a: {b: '点出来的值1'}},
         },
         {
           id: '3',
-          productName: 'string',
-          casNo: 'string',
-          file3: '加样式',
+          noShow: '默认不展示',
+          longText: 'string',
+          newline: 'string',
+          name: '自定义模板',
+          addStyle: '加样式',
           obj: {a: {b: '点出来的值1'}},
         },
         {
           id: '4',
-          productName: 'string',
-          casNo: 'string',
-          file3: '加样式',
+          noShow: '默认不展示',
+          longText: 'string',
+          newline: 'string',
+          name: '自定义模板',
+          addStyle: '加样式',
           obj: {a: {b: '点出来的值1'}},
         },
         {
           id: '5',
-          productName: 'string',
-          casNo: 'string',
-          file3: '加样式',
+          noShow: '默认不展示',
+          longText: 'string',
+          newline: 'string',
+          name: '自定义模板',
+          addStyle: '加样式',
           obj: {a: {b: '点出来的值1'}},
         },
         {
           id: '6',
-          productName: 'string',
-          casNo: 'string',
-          file3: '加样式',
+          noShow: '默认不展示',
+          longText: 'string',
+          newline: 'string',
+          name: '自定义模板',
+          addStyle: '加样式',
           obj: {a: {b: '点出来的值1'}},
         },
       ];
@@ -182,7 +198,6 @@ export class SearchTableComponent implements OnInit {
   }
 
 
-
   add(): void {
     // this.modalService.show({nzTitle: '新增'}).subscribe((res) => {
     //   if (!res || res.status === ModalBtnStatus.Cancel) {
@@ -228,12 +243,12 @@ export class SearchTableComponent implements OnInit {
         //   this.checkedCashArray.splice(this.checkedCashArray.findIndex(item => item.id === id), 1);
         // }, error => this.tableLoading(false));
 
-        setTimeout(()=>{
+        setTimeout(() => {
           this.message.info('id数组(支持分页保存):' + JSON.stringify(id))
           this.getDataList();
           this.checkedCashArray.splice(this.checkedCashArray.findIndex(item => item.id === id), 1);
           this.tableLoading(false);
-        },3000)
+        }, 3000)
       }
     });
   }
@@ -257,12 +272,12 @@ export class SearchTableComponent implements OnInit {
           //   this.getDataList();
           //   this.checkedCashArray = [];
           // }, error => this.tableLoading(false));
-          setTimeout(()=>{
+          setTimeout(() => {
             this.message.info('id数组(支持分页保存):' + JSON.stringify(tempArrays))
             this.getDataList();
             this.checkedCashArray = [];
             this.tableLoading(false);
-          },1000)
+          }, 1000)
         }
       });
     } else {
@@ -288,29 +303,35 @@ export class SearchTableComponent implements OnInit {
     this.tableConfig = {
       headers: [
         {
+          title: '默认不显示',
+          width: 130,
+          field: 'noShow',
+          show: false,
+        },
+        {
           title: '文字很长',
           width: 130,
-          field: 'productName',
+          field: 'longText',
           showSort: true,
         },
         {
           title: '换行',
           width: 100,
-          field: 'casNo',
+          field: 'newline',
           notNeedEllipsis: true,
           showSort: true,
           tdClassList: ['text-wrap'],
         }, {
           title: '加样式',
           width: 100,
-          field: 'productName',
+          field: 'addStyle',
           tdClassList: ['operate-text'],
         },
         {
           title: '名称',
-          field: 'productName',
+          field: 'name',
           tdTemplate: this.highLightTpl,
-          width: 100,
+          width: 140,
         },
         {
           title: '对象点出来（obj.a.b）',

@@ -10,7 +10,7 @@
       <nz-divider nzType="vertical"></nz-divider>
       <nz-space [nzSize]="16" nzDirection="horizontal">
         <i class="hand-model" nz-popover
-           nzPopoverTitle="Title"
+           [nzPopoverTitle]="popoverTitle"
            nzPopoverPlacement="bottomRight"
            [(nzPopoverVisible)]="tableConfigVisible"
            nzPopoverTrigger="click"
@@ -40,7 +40,8 @@
     <li cdkDrag class="flex space-between" style="padding: 4px 16px 8px 0" *ngFor="let item of tableHeaders">
       <div>
         <i cdkDragHandle class="m-r-8 hand-model-move" nz-icon nzType="drag" nzTheme="outline"></i>
-        <label nz-checkbox (nzCheckedChange)="changeTableConfigShow()" [(nzChecked)]="item.show">{{item.title}}</label>
+        <label nz-checkbox (nzCheckedChange)="changeSignalCheck($event,item)"
+               [(nzChecked)]="item.show">{{item.title}}</label>
       </div>
       <div>
         <i class="hand-model" (click)="fixedTableHead('left',item)"
@@ -53,4 +54,18 @@
       </div>
     </li>
   </ul>
+</ng-template>
+<ng-template #popoverTitle>
+  <div class="space-between">
+    <span>
+      <label nz-checkbox (nzCheckedChange)="changeTableCheckBoxShow($event)"
+             [(nzChecked)]="currentTableComponent.tableConfig.showCheckbox">勾选列
+      </label>
+      <label nz-checkbox (nzCheckedChange)="changeAllTableTableConfigShow($event)"
+             [nzIndeterminate]="allTableFieldIndeterminate" [(nzChecked)]="allTableFieldChecked">列展示
+      </label>
+    </span>
+    <button (click)="reset()" class="operate-text" nz-button nzType="text">重置</button>
+  </div>
+
 </ng-template>

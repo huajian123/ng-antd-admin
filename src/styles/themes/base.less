@@ -580,7 +580,7 @@ h1, h2, h3, h4, h5, h6 {
   max-height: 600px;
 }
 
-.ant-modal-close-x{
+.ant-modal-close-x {
   display: inline-block;
   width: 96px;
   height: 56px;
@@ -599,13 +599,15 @@ h1, h2, h3, h4, h5, h6 {
     height: 100%;
     max-width: initial;
     padding: 0;
-    transform: translate3d(0, 0, 0)!important;
+    transform: translate3d(0, 0, 0) !important;
+
     &-content {
       height: 100%;
-      transform: translate3d(0, 0, 0)!important;
+      transform: translate3d(0, 0, 0) !important;
+
       .ant-modal-body {
         max-height: none;
-        height: 90%;
+        height: calc(100% - 55px - 53px);
       }
     }
   }

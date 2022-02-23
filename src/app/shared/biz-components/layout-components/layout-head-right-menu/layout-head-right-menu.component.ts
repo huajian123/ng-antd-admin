@@ -6,6 +6,9 @@ import {ModalOptions} from "ng-zorro-antd/modal";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {LockWidgetService} from "@widget/common-widget/lock-widget/lock-widget.service";
 import {LoginOutService} from "@core/services/common/login-out.service";
+import {SpinService} from "@store/spin-store/spin.service";
+import {ChangePasswordService} from "@widget/biz-widget/change-password/change-password.service";
+import {ModalBtnStatus} from "@widget/base-modal";
 
 @Component({
   selector: 'app-layout-head-right-menu',
@@ -16,6 +19,8 @@ import {LoginOutService} from "@core/services/common/login-out.service";
 export class LayoutHeadRightMenuComponent implements OnInit {
 
   constructor(private router: Router,
+              private changePasswordModalService: ChangePasswordService,
+              private spinService: SpinService,
               private loginOutService: LoginOutService,
               private lockWidgetService: LockWidgetService,
               private windowServe: WindowService,
@@ -33,6 +38,23 @@ export class LayoutHeadRightMenuComponent implements OnInit {
       nzFooter: null,
       nzMaskClosable: true
     }).subscribe();
+  }
+
+  // 修改密码
+  changePassWorld(): void {
+    this.changePasswordModalService.show({nzTitle: '修改密码'}).subscribe(({modalValue, status}) => {
+      if (status === ModalBtnStatus.Cancel) {
+        return;
+      }
+      this.message.success(`新密码：${modalValue.newPassword},旧密码：${modalValue.oldPassword}`);
+      this.spinService.setCurrentGlobalSpinStore(true);
+      setTimeout(() => {
+        this.spinService.setCurrentGlobalSpinStore(false);
+      }, 3000)
+
+      this.loginOutService.loginOut().then();
+      this.message.success('修改成功，请重新登录');
+    });
   }
 
   showSearchModal(): void {

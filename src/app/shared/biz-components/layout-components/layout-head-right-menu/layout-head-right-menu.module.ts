@@ -6,6 +6,7 @@ import {SearchRouteModule} from "@widget/common-widget/search-route/search-route
 import {SHARED_ZORRO_MODULES} from "@shared/shared-zorro.module";
 import {DirectivesModule} from "@shared/directives/directives.module";
 import {LockWidgetModule} from "@widget/common-widget/lock-widget/lock-widget.module";
+import {ChangePasswordModule} from "@widget/biz-widget/change-password/change-password.module";
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import {LockWidgetModule} from "@widget/common-widget/lock-widget/lock-widget.mo
     DirectivesModule,
     HomeNoticeModule,
     SearchRouteModule,
+    ChangePasswordModule,
     CommonModule,
     SHARED_ZORRO_MODULES,
   ],

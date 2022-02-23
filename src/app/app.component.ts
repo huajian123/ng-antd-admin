@@ -29,7 +29,7 @@ import {fnStopMouseEvent} from "@utils/tools";
         <span class="hover-blue full-height flex-auto text-right d-i-b" (click)="fullScreenIconClick($event)">
             <i class="m-r-8" nz-icon [nzType]="!modalFullScreenFlag?'fullscreen':'fullscreen-exit'" nzTheme="outline"></i>
         </span>
-        <span class="hover-red full-height flex-auto d-i-b">
+        <span (click)="modalFullScreenFlag=false" class="hover-red full-height flex-auto d-i-b">
             <i nz-icon nzType="close" nzTheme="outline"></i>
         </span>
       </div>
