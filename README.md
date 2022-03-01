@@ -7,10 +7,7 @@
 if help you, if you want ,please give me a star ,thank you<br>
 视频介绍地址 [项目介绍](https://www.bilibili.com/video/BV1EM4y1w7zd/)<br>
 online demo地址 [demo](http://124.71.128.53:8081/)<br>
-# 禁用严格模式
 
-可以通过在应用程序的 TypeScript 配置文件 tsconfig.json 中设置 strictTemplates: false 来完全禁用严格检查。
-https://angular.cn/guide/template-typecheck
 # 路由的key
 key需要设置成路由地址最后一个'/'后的字符串，并且要唯一
 ```typescript
@@ -97,6 +94,15 @@ _onReuseDestroy: () => void;
 ![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/11.png)
 ![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/12.png)
 ![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/13.png)
+
+## 不是捐赠
+如果您将本项目用于生产，如果您愿意的话，请转1分钱给我，以此让我知道有人用于生产了，我好高兴高兴。多的我不要啊。<br>
+If you use this project for production ,if you want ,please give me 0.01￥ to tell me, Someone is using this project,let me happy.<br>
+![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/weixin.jpeg)
+![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/zhifubao.jpeg)
+
+
+
 ### License
 
 MIT 
