@@ -105,6 +105,14 @@ const menuNav: Menu[] = [
         path: 'https://github.com/huajian123/ng-ant-admin',
         isNewLink: true,
       },
+      {
+        title: '关于',
+        icon: 'dashboard',
+        open: false,
+        actionCode: ActionCode.UserManage,
+        selected: false,
+        path: '/default/feat/about',
+      },
     ]
   },
   {

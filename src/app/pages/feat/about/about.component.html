@@ -1,0 +1,43 @@
+<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+
+
+<div class="normal-table-wrap bg-color-no p-b-50">
+    <nz-card [nzBordered]="true" class="m-b-20">
+      <nz-descriptions
+        nzTitle="项目信息"
+        nzBordered
+        [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }"
+      >
+        <nz-descriptions-item nzTitle="版本"><nz-tag [nzColor]="'cyan'">1.0.0</nz-tag></nz-descriptions-item>
+        <nz-descriptions-item nzTitle="最后编译时间"><nz-tag [nzColor]="'cyan'">{{data|date:dateFormat}}</nz-tag></nz-descriptions-item>
+        <nz-descriptions-item nzTitle="文档地址">正在策划中...</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="预览地址"><nz-tag [nzColor]="'cyan'"><a href="http://124.71.128.53:8081/">预览地址</a></nz-tag></nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Github"><a href="https://github.com/huajian123/ng-ant-admin">Github</a></nz-descriptions-item>
+        <nz-descriptions-item nzTitle="码云地址"><a href="https://gitee.com/hjxiaoqianduan/ng-ant-admin">码云地址</a></nz-descriptions-item>
+      </nz-descriptions>
+    </nz-card>
+
+  <nz-card [nzBordered]="true" class="m-b-20">
+    <nz-descriptions
+      nzTitle="第三方包"
+      nzBordered
+      [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }"
+    >
+      <nz-descriptions-item nzTitle="@amap/amap-jsapi-loader">高德地图</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="@antv/g2plot">g2图表</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="@antv/l7">antv l7地图</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="@antv/x6">x6流程图</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="@auth0/angular-jwt">jwt解析</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="@tinymce/tinymce-angular">富文本</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="angular-password-strength-meter">密码强度</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="zxcvbn3">上一个密码强度同时要安装这个</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="crypto-js">做锁屏时加密解密用的</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="angular2-qrcode">二维码</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="driver.js">第一次加载时引导页</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="ng-zorro-antd">zorro</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="ngx-quicklink">预加载策略</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="screenfull">全屏</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="uuid">唯一id</nz-descriptions-item>
+    </nz-descriptions>
+  </nz-card>
+</div>

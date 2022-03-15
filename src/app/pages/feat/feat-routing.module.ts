@@ -6,6 +6,7 @@ const routes: Routes = [
   {path: 'flow', loadChildren: () => import('./flow/flow.module').then(m => m.FlowModule)},
   {path: 'rich-text', loadChildren: () => import('./rich-text/rich-text.module').then(m => m.RichTextModule)},
   {path: 'map', loadChildren: () => import('./map/map.module').then(m => m.MapModule)},
+  {path: 'about', loadChildren: () => import('./about/about.module').then(m => m.AboutModule)},
   {path: '', redirectTo: 'ex-modal', pathMatch: 'full'},
 ];
 
