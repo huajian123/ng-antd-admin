@@ -12,6 +12,7 @@ export interface MyHttpConfig {
   needIntercept?: boolean;
   needSuccessInfo?: boolean;
   showLoading?: boolean;
+  otherUrl?: boolean;
 }
 
 export interface ActionResult<T> {
@@ -31,9 +32,13 @@ export class BaseHttpService {
   }
 
   get<T>(path: string, param?: NzSafeAny, config?: MyHttpConfig): Observable<NzSafeAny> {
-    config = config || {};
+    config = config || {needSuccessInfo: false};
+    let reqPath = this.uri + path;
+    if (config.otherUrl) {
+      reqPath = path;
+    }
     const params = new HttpParams({fromString: qs.stringify(param)});
-    return this.http.get<ActionResult<T>>(this.uri + path, {params}).pipe(
+    return this.http.get<ActionResult<T>>(reqPath, {params}).pipe(
       filter((item) => {
         return this.handleFilter(item, !!(config?.needSuccessInfo));
       }),
@@ -48,9 +53,13 @@ export class BaseHttpService {
   }
 
   delete<T>(path: string, param?: NzSafeAny, config?: MyHttpConfig): Observable<NzSafeAny> {
-    config = config || {};
+    config = config || {needSuccessInfo: false};
+    let reqPath = this.uri + path;
+    if (config.otherUrl) {
+      reqPath = path;
+    }
     const params = new HttpParams({fromString: qs.stringify(param)});
-    return this.http.delete<ActionResult<T>>(this.uri + path, {params}).pipe(
+    return this.http.delete<ActionResult<T>>(reqPath, {params}).pipe(
       filter((item) => {
         return this.handleFilter(item, !!(config?.needSuccessInfo));
       }),
@@ -66,7 +75,11 @@ export class BaseHttpService {
 
   post<T>(path: string, param?: NzSafeAny, config?: MyHttpConfig): Observable<NzSafeAny> {
     config = config || {needSuccessInfo: false};
-    return this.http.post<ActionResult<T>>(this.uri + path, param).pipe(
+    let reqPath = this.uri + path;
+    if (config.otherUrl) {
+      reqPath = path;
+    }
+    return this.http.post<ActionResult<T>>(reqPath, param).pipe(
       filter((item) => {
         return this.handleFilter(item, !!(config?.needSuccessInfo));
       }),
@@ -82,7 +95,11 @@ export class BaseHttpService {
 
   put<T>(path: string, param?: NzSafeAny, config?: MyHttpConfig): Observable<NzSafeAny> {
     config = config || {needSuccessInfo: false};
-    return this.http.put<ActionResult<T>>(this.uri + path, param).pipe(
+    let reqPath = this.uri + path;
+    if (config.otherUrl) {
+      reqPath = path;
+    }
+    return this.http.put<ActionResult<T>>(reqPath, param).pipe(
       filter((item) => {
         return this.handleFilter(item, !!(config?.needSuccessInfo));
       }),
@@ -96,8 +113,13 @@ export class BaseHttpService {
     );
   }
 
-  downZip(path: string, param?: NzSafeAny): Observable<NzSafeAny> {
-    return this.http.post(this.uri + path, param, {
+  downZip(path: string, param?: NzSafeAny, config?: MyHttpConfig): Observable<NzSafeAny> {
+    config = config || {needSuccessInfo: false};
+    let reqPath = this.uri + path;
+    if (config.otherUrl) {
+      reqPath = path;
+    }
+    return this.http.post(reqPath, param, {
       responseType: 'blob',
       headers: new HttpHeaders().append('Content-Type', 'application/json')
     });

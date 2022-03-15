@@ -1,7 +1,8 @@
 import {Component, OnInit, ChangeDetectionStrategy, Input, TemplateRef, Renderer2, ElementRef} from '@angular/core';
 import {ThemeService} from '@core/services/store/theme.service';
-import {switchMap} from "rxjs/operators";
+import {tap} from "rxjs/operators";
 import {NzSafeAny} from "ng-zorro-antd/core/types";
+import {merge} from "rxjs";
 
 @Component({
   selector: 'app-footer-submit',
@@ -17,7 +18,9 @@ export class FooterSubmitComponent implements OnInit {
   isCollapsed$ = this.themesService.getIsCollapsed();
   isOverMode$ = this.themesService.getIsOverMode();
   isCollapsed = false;
-  hasLeftNav = true;
+  isOverMode = false;
+  hasLeftNav = false;
+  isTopMode = false;
 
   constructor(private themesService: ThemeService, private rd2: Renderer2, private el: ElementRef) {
   }
@@ -28,22 +31,28 @@ export class FooterSubmitComponent implements OnInit {
   }
 
   subTheme(): void {
-    this.isOverMode$.subscribe(res => {
-      if (res) {
+    const sub1$ = this.themesOptions$.pipe(tap(themesOptions => {
+      this.hasLeftNav = themesOptions.hasNavArea;
+      this.isTopMode = themesOptions.mode === "top";
+    }));
+    const sub2$ = this.isCollapsed$.pipe(tap(isCollapsed => {
+      this.isCollapsed = isCollapsed;
+    }));
+    const sub3$ = this.isOverMode$.pipe(tap(res => {
+      this.isOverMode = res;
+    }));
+    merge(sub1$, sub2$, sub3$).subscribe(() => {
+      if (this.isOverMode || this.isTopMode) {
         this.setWidth(0);
       } else {
-        this.themesOptions$.pipe(switchMap(themesOptions => {
-          this.hasLeftNav = themesOptions.hasNavArea;
-          return this.isCollapsed$;
-        })).subscribe(isCollapsed => {
-          let width = 0;
-          if (this.hasLeftNav) {
-            width = isCollapsed ? 48 : 208;
-          }
-          this.setWidth(width);
-        });
+        let width = 0;
+        if (this.hasLeftNav) {
+          width = this.isCollapsed ? 48 : 208;
+        }
+        this.setWidth(width);
       }
     })
+
   }
 
   ngOnInit(): void {

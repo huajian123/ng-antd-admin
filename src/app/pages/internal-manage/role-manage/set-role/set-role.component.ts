@@ -1,10 +1,10 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {PageHeaderType} from '@shared/components/page-header/page-header.component';
-import {RoleService} from '@core/services/http/internal-manage/role.service';
-import {Permission, PutPermissionParam} from '@core/services/types';
-import {map, mergeMap} from 'rxjs/operators';
-import {ActivatedRoute, Router} from '@angular/router';
-import {NzMessageService} from 'ng-zorro-antd/message';
+import {PageHeaderType} from "@shared/components/page-header/page-header.component";
+import {Permission, PutPermissionParam} from "@core/services/types";
+import {RoleService} from "@services/internal-manage/role.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {NzMessageService} from "ng-zorro-antd/message";
+import {map, mergeMap} from "rxjs/operators";
 
 @Component({
   selector: 'app-set-role',
@@ -25,7 +25,8 @@ export class SetRoleComponent implements OnInit {
   id!: number;
   roleName!: string;
 
-  constructor(private dataService: RoleService, private cdr: ChangeDetectorRef, private routeInfo: ActivatedRoute, private router: Router,
+  constructor(private dataService: RoleService, private cdr: ChangeDetectorRef,
+              private routeInfo: ActivatedRoute, private router: Router,
               public message: NzMessageService) {
   }
 
@@ -53,7 +54,9 @@ export class SetRoleComponent implements OnInit {
         // 如果点击提交，更新权限信息，则
         item.checked ? this.permissionIdArr.push(item.id) : null;
       }
-      if (item.permissionVo && item.permissionVo.length > 0) {
+      const hasChildren = item.permissionVo && item.permissionVo.length > 0;
+      item.hasChildren = hasChildren;
+      if (hasChildren) {
         this.getAuthIdArr(item.permissionVo, type);
       }
     });
@@ -66,13 +69,14 @@ export class SetRoleComponent implements OnInit {
       roleId: this.id
     };
     this.dataService.updatePermission(param).subscribe(() => {
-      this.message.success('操作成功，重新登录后生效');
+      this.message.success('设置成功，重新登录后生效');
     });
   }
 
   getRoleName(): void {
     this.dataService.getRolesDetail(this.id).subscribe(({roleName}) => {
       this.pageHeaderInfo = {...this.pageHeaderInfo, ...{desc: `当前角色：${roleName}`}};
+      this.cdr.markForCheck();
     });
   }
 

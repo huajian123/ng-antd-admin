@@ -1,4 +1,4 @@
-import {FormGroup} from '@angular/forms';
+import {FormArray, FormGroup} from '@angular/forms';
 import CryptoJS from 'crypto-js';
 import {silentEvent} from 'ng-zorro-antd/core/util';
 import {v4 as uuidv4} from 'uuid';
@@ -41,6 +41,13 @@ const fnCheckForm = function checkForm(form: FormGroup): boolean {
   return !form.invalid;
 };
 
+// 清空formArray
+const fnClearFormArray = function clearFormArray(formArray: FormArray) {
+  while (formArray.length !== 0) {
+    formArray.removeAt(0)
+  }
+}
+
 const fnStopMouseEvent = function stopMouseEvent(e: MouseEvent): void {
   silentEvent(e);
   // e.stopPropagation();
@@ -69,6 +76,15 @@ const fnFormatePath = function formatePath(path: string): string {
     return newpath.substring(newpath.lastIndexOf('\/') + 1);
   }
 };
+
+// 获取没有参数的路由
+const fnGetPathWithoutParam = function getPathWithoutParam(path: string): string {
+  const paramIndex = path.indexOf('?');
+  if (paramIndex > -1) {
+    return path.substring(0, paramIndex);
+  }
+  return path;
+}
 
 // 返回uuid
 const fnGetUUID = function getUUID(): string {
@@ -99,7 +115,9 @@ export {
   fnDecrypt,
   fnEncrypt,
   fnGetBase64,
+  fnGetPathWithoutParam,
   fnGetFile,
+  fnClearFormArray,
   fnCheckForm,
   fnStopMouseEvent,
   fnFormatePath,

@@ -9,12 +9,14 @@ import {Router} from '@angular/router';
 import {WindowService} from '../common/window.service';
 import {AuthService} from '@store/auth.service';
 import {AuthKey, TokenPre} from "@config/constant";
+import {LoginOutService} from "@core/services/common/login-out.service";
 
 @Injectable()
 export class LoginExpiredService implements HttpInterceptor {
   private refresher: Observable<NzSafeAny> | null = null;
 
   constructor(private loginModalService: LoginModalService, private router: Router,
+              private loginOutService: LoginOutService,
               private windowServe: WindowService, private authService: AuthService, private http: HttpClient) {
   }
 
@@ -49,6 +51,8 @@ export class LoginExpiredService implements HttpInterceptor {
       this.refresher = new Observable((observer) => {
         this.loginModalService.show({nzTitle: '登录信息过期，重新登录'}).subscribe(({modalValue, status}) => {
           if (status === ModalBtnStatus.Cancel) {
+            this.loginOutService.loginOut();
+            this.refresher = null;
             this.router.navigateByUrl('/login/login-form');
             return;
           }

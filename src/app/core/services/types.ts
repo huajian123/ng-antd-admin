@@ -120,6 +120,7 @@ export interface People {
 *  权限
 * */
 export interface Permission {
+  hasChildren: boolean;
   menuName: string;
   code: string;
   fatherId: number;

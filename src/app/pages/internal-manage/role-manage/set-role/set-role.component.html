@@ -1,5 +1,7 @@
 <!--头部版块-->
-<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+<app-page-header [backTpl]="backTpl" [backUrl]="'/default/internal-manage/role-manage'"
+                 [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+<ng-template #backTpl>返回</ng-template>
 <div class="normal-table-wrap">
   <nz-card>
     <ul>
@@ -12,20 +14,30 @@
               class="operate-text"> {{permission.isOpen ? '收起' : '展开'}}</span></span>
           </div>
           <nz-divider class="m-0"></nz-divider>
-          <ng-container *ngIf="permission.permissionVo.length>0&&permission.isOpen">
-            <ng-container *ngFor="let secondPermission of permission.permissionVo">
-              <div class="menu-content m-0 p-0" nz-result-content>
-                <div class="second-menu p-l-25 li-height">
-                  <label [(ngModel)]="secondPermission.checked" nz-checkbox>{{secondPermission.menuName}}</label>
-                  <nz-divider class="m-0"></nz-divider>
+          <ng-container *ngIf="permission.permissionVo&&permission.permissionVo.length>0&&permission.isOpen">
+            <!--如果是一级菜单-->
+            <div class="operate-line p-l-35 li-height m-0 p-0" nz-result-content *ngIf="!permission.permissionVo[0].hasChildren">
+              操作权限：
+              <ng-container *ngFor="let thirdPermission of permission.permissionVo">
+                <label [(ngModel)]="thirdPermission.checked" nz-checkbox>{{thirdPermission.menuName}}</label>
+              </ng-container>
+            </div>
+
+            <ng-container *ngFor="let secondPermission of permission.permissionVo;">
+              <ng-container *ngIf="secondPermission.hasChildren">
+                <div class="menu-content m-0 p-0" nz-result-content>
+                  <div class="second-menu p-l-25 li-height">
+                    <label [(ngModel)]="secondPermission.checked" nz-checkbox>{{secondPermission.menuName}}</label>
+                    <nz-divider class="m-0"></nz-divider>
+                  </div>
+                  <div class="operate-line p-l-35 li-height">
+                    操作权限：
+                    <ng-container *ngFor="let thirdPermission of secondPermission.permissionVo">
+                      <label [(ngModel)]="thirdPermission.checked" nz-checkbox>{{thirdPermission.menuName}}</label>
+                    </ng-container>
+                  </div>
                 </div>
-                <div class="operate-line p-l-35 li-height">
-                  操作权限：
-                  <ng-container *ngFor="let thirdPermission of secondPermission.permissionVo">
-                    <label [(ngModel)]="thirdPermission.checked" nz-checkbox>{{thirdPermission.menuName}}</label>
-                  </ng-container>
-                </div>
-              </div>
+              </ng-container>
             </ng-container>
           </ng-container>
 
