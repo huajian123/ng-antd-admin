@@ -95,13 +95,6 @@ _onReuseDestroy: () => void;
 ![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/12.png)
 ![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/13.png)
 
-## 不是捐赠
-如果您将本项目用于生产，如果您愿意的话，请转1分钱给我，以此让我知道有人用于生产了，我好高兴高兴。多的我不要啊。<br>
-If you use this project for production ,if you want ,please give me 0.01￥ to tell me, Someone is using this project,let me happy.<br>
-![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/weixin.jpeg)
-![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/zhifubao.jpeg)
-
-
 
 ### License
 
