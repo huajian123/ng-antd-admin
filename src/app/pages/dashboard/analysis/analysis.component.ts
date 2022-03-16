@@ -273,7 +273,7 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
         this.initSearchArea();
         this.initSearchAvgArea();
         this.initRing();
-        this.initMiniRing();
+        // this.initMiniRing();
       });
 
     });

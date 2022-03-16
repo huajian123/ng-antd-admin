@@ -4,6 +4,7 @@
 <div class="normal-table-wrap bg-color-no p-b-50">
     <nz-card [nzBordered]="true" class="m-b-20">
       <nz-descriptions
+        [nzSize]="'small'"
         nzTitle="项目信息"
         nzBordered
         [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }"
@@ -13,13 +14,14 @@
         <nz-descriptions-item nzTitle="文档地址">正在策划中...</nz-descriptions-item>
         <nz-descriptions-item nzTitle="预览地址"><nz-tag [nzColor]="'cyan'"><a href="http://124.71.128.53:8081/">预览地址</a></nz-tag></nz-descriptions-item>
         <nz-descriptions-item nzTitle="Github"><a href="https://github.com/huajian123/ng-ant-admin">Github</a></nz-descriptions-item>
-        <nz-descriptions-item nzTitle="码云地址"><a href="https://gitee.com/hjxiaoqianduan/ng-ant-admin">码云地址</a></nz-descriptions-item>
+        <nz-descriptions-item nzTitle="码云"><a href="https://gitee.com/hjxiaoqianduan/ng-ant-admin">码云</a></nz-descriptions-item>
       </nz-descriptions>
     </nz-card>
 
   <nz-card [nzBordered]="true" class="m-b-20">
     <nz-descriptions
-      nzTitle="第三方包"
+      [nzSize]="'small'"
+      nzTitle="package.json中使用到的第三方包"
       nzBordered
       [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }"
     >

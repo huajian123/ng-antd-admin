@@ -48,7 +48,6 @@ export class NavBarComponent implements OnInit {
     this.router.events
       .pipe(
         filter(event => event instanceof NavigationEnd),
-        takeUntil(this.destroy$),
         tap(() => {
           // @ts-ignore
           this.routerPath = this.activatedRoute.snapshot['_routerState'].url;
@@ -77,6 +76,7 @@ export class NavBarComponent implements OnInit {
         mergeMap((route) => {
           return route.data;
         }),
+        takeUntil(this.destroy$),
       )
       .subscribe((routeData) => {
         this.tabService.addTab({
