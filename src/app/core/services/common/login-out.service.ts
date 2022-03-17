@@ -6,6 +6,10 @@ import {AuthKey} from "@config/constant";
 import {SimpleReuseStrategy} from "@core/services/common/reuse-strategy";
 import {fnFormatePath} from "@utils/tools";
 
+/*
+* 退出登录
+* */
+
 @Injectable({
   providedIn: 'root'
 })

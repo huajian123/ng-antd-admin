@@ -8,7 +8,9 @@ export interface TabModel {
   path: string;
   relatedLink: string[];
 }
-
+/*
+* tab操作的服务
+* */
 @Injectable({
   providedIn: 'root'
 })

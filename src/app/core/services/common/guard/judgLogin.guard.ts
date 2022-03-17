@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {WindowService} from '../window.service';
 import {AuthKey} from "@config/constant";
 
+// 路由守卫，没有authKey则跳转登录页
 @Injectable({
   providedIn: 'root'
 })

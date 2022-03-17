@@ -8,7 +8,9 @@ enum ThemeType {
   dark = 'dark',
   default = 'default',
 }
-
+/*
+* 切换主题服务
+* */
 @Injectable({
   providedIn: 'root',
 })

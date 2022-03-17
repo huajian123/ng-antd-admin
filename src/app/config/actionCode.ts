@@ -1,3 +1,4 @@
+/*配置权限码*/
 export const ActionCode = {
 
   Dashboard: '0001', /*Dashboard*/

@@ -17,7 +17,7 @@ import {Addon, Graph} from "@antv/x6";
 })
 export class FlowChatComponent implements OnInit, AfterViewInit {
   pageHeaderInfo: Partial<PageHeaderType> = {
-    title: '流程编辑器',
+    title: '流程编辑器，有了流程图，我就该知道未来该做什么了',
     breadcrumb: ['首页', '扩展功能', '图形编辑器', '流程图'],
     desc: '千言万语不如一张图，流程图是表示算法思路的好方法(简单流程图示例,具体功能需要自己完善，antV x6)'
   };

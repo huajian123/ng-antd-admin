@@ -1,7 +1,10 @@
 import {Inject, Injectable} from '@angular/core';
 import Driver from 'driver.js';
 import {DOCUMENT} from "@angular/common";
-
+/*
+* https://madewith.cn/766
+* 引导页
+* */
 @Injectable({
   providedIn: 'root'
 })
@@ -10,9 +13,7 @@ export class DriverService {
   constructor(@Inject(DOCUMENT) private doc: Document) {
   }
 
-  /*
-  * https://madewith.cn/766
-  * */
+
   load(): void {
     const driver = new Driver({
       animate: false,

@@ -9,6 +9,7 @@ import {
 import {Observable} from 'rxjs';
 import {LockScreenFlag, LockScreenStoreService} from "@store/lock-screen-store/lock-screen-store.service";
 
+/*守卫锁屏页面*/
 @Injectable({
   providedIn: 'root'
 })

@@ -11,7 +11,7 @@ import { environment } from '@env/environment';
 })
 export class RichTextComponent implements OnInit {
   pageHeaderInfo: Partial<PageHeaderType> = {
-    title: '富文本',
+    title: '富文本，人们总是喜欢用花里胡哨的文字，表达自己空虚的情感',
     breadcrumb: ['首页', '扩展功能', '富文本'],
   };
   localUrl = 'http://139.9.225.248:8088'

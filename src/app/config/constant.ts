@@ -1,3 +1,6 @@
+/*定义常量*/
+
+
 // 请求头token的pre
 export const TokenPre = 'Bearer ';
 export const AuthKey = 'Authorization';

@@ -5,6 +5,7 @@ import {ThemeService} from "@store/theme.service";
 import {SideCollapsedMaxWidth, TopCollapsedMaxWidth} from "@config/constant";
 import {EquipmentWidth, WindowsWidthService} from "@store/windows-width-store/windows-width.service";
 
+/*监听屏幕宽度服务*/
 @Injectable({
   providedIn: 'root'
 })

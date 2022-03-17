@@ -9,10 +9,10 @@ import {localUrl} from '@env/environment.prod';
 import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 export interface MyHttpConfig {
-  needIntercept?: boolean;
-  needSuccessInfo?: boolean;
-  showLoading?: boolean;
-  otherUrl?: boolean;
+  needIntercept?: boolean; // 是否需要被拦截
+  needSuccessInfo?: boolean; // 是否需要"操作成功"提示
+  showLoading?: boolean; // 是否需要loading
+  otherUrl?: boolean; // 是否是第三方接口
 }
 
 export interface ActionResult<T> {

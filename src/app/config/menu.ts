@@ -2,7 +2,7 @@ import {ActionCode} from './actionCode';
 import {Menu} from '@core/services/types';
 import {InjectionToken} from "@angular/core";
 
-
+/*定义菜单*/
 export const MENU_TOKEN = new InjectionToken<Menu[]>('menu-token', {
   providedIn: 'root', factory(): Menu[] {
     return menuNav;
@@ -33,6 +33,14 @@ const menuNav: Menu[] = [
         actionCode: ActionCode.UserManage,
         selected: false,
         path: '/default/feat/rich-text',
+      },
+      {
+        title: 'clickOutSide',
+        icon: 'dashboard',
+        open: false,
+        actionCode: ActionCode.UserManage,
+        selected: false,
+        path: '/default/feat/click-out-side',
       },
       {
         title: '地图',

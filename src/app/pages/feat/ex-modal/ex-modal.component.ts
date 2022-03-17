@@ -12,7 +12,7 @@ export class ExModalComponent implements OnInit {
 
   // @ViewChild('dragTpl', {static: true}) dragTpl!: TemplateRef<NzSafeAny>;
   pageHeaderInfo: Partial<PageHeaderType> = {
-    title: '用service的方式创建 可拖动,全屏的对话框',
+    title: '用service的方式创建 可拖动,全屏的对话框，花了不少心思呢',
     breadcrumb: ['首页', '拖拽modal'],
   };
 

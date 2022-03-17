@@ -10,7 +10,7 @@ import AMapLoader from '@amap/amap-jsapi-loader';
 })
 export class GaodeComponent implements OnInit, AfterViewInit {
   pageHeaderInfo: Partial<PageHeaderType> = {
-    title: '高德地图',
+    title: '高德地图，可不要暴露行踪了哟',
     breadcrumb: ['首页', '扩展功能', '地图', '高德地图'],
   };
   marker: any[] = [116.437253, 39.935033];

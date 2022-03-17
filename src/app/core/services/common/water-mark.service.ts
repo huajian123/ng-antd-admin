@@ -1,5 +1,8 @@
 import {Injectable} from '@angular/core';
 
+/*
+* 水印服务
+* */
 @Injectable({
   providedIn: 'root'
 })

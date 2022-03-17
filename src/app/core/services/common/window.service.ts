@@ -1,6 +1,7 @@
 import {Inject, Injectable, PLATFORM_ID} from '@angular/core';
 import {isPlatformBrowser} from '@angular/common';
 
+/*window对象封装服务*/
 @Injectable({
   providedIn: 'root'
 })
