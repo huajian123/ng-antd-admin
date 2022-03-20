@@ -5,7 +5,8 @@
 使用本项目遇到问题，可以加入376065816 qq群号与我沟通。<br>
 如果本项目对您有用，麻烦帮我点个star，谢谢啊<br>
 if help you, if you want ,please give me a star ,thank you<br>
-视频介绍地址 [项目介绍](https://www.bilibili.com/video/BV1EM4y1w7zd/)<br>
+快速二开使用详解 [快速二开使用详解](https://www.bilibili.com/video/BV1gF411x7rN/)<br>
+项目搭建简易教程 [项目搭建简易教程](https://www.bilibili.com/video/BV1EM4y1w7zd/)<br>
 online demo地址 [demo](http://124.71.128.53:8081/)<br>
 
 # 路由的key
