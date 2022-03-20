@@ -1,6 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy, TemplateRef, ViewChild} from '@angular/core';
 import {PageHeaderType} from "@shared/components/page-header/page-header.component";
 import {DragService} from "@widget/biz-widget/drag/drag.service";
+import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 @Component({
   selector: 'app-ex-modal',
@@ -10,13 +11,32 @@ import {DragService} from "@widget/biz-widget/drag/drag.service";
 })
 export class ExModalComponent implements OnInit {
 
-  // @ViewChild('dragTpl', {static: true}) dragTpl!: TemplateRef<NzSafeAny>;
+  @ViewChild('dragTpl', {static: true}) dragTpl!: TemplateRef<NzSafeAny>;
   pageHeaderInfo: Partial<PageHeaderType> = {
-    title: '用service的方式创建 可拖动,全屏的对话框，花了不少心思呢',
+    title: '拖动Modal，树挪死，人挪活',
     breadcrumb: ['首页', '拖拽modal'],
   };
+  isVisible = false;
 
   constructor(private dragService: DragService) {
+  }
+
+  showModal(): void {
+    this.isVisible = true;
+  }
+
+  handleOk(): void {
+    console.log('Button ok clicked!');
+    this.isVisible = false;
+  }
+
+  handleCancel(): void {
+    console.log('Button cancel clicked!');
+    this.isVisible = false;
+  }
+
+  showDailog1(): void {
+    this.isVisible = true;
   }
 
   showDailog(): void {

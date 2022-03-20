@@ -6,10 +6,29 @@ import {NzModalService} from "ng-zorro-antd/modal";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {Router} from "@angular/router";
 import {NzTableQueryParams} from "ng-zorro-antd/table";
-import {finalize} from "rxjs/operators";
-import {ModalBtnStatus} from "@widget/base-modal";
-import {<%= classify(name) %>Service} from "@services/<%= dasherize(name) %>/<%= dasherize(name) %>.service";
+import {finalize, takeUntil} from "rxjs/operators";
 
+  <% if(mName==name){%>
+import {<%= classify(name) %>Obj,<%= classify(name) %>Service} from "@services/<%= dasherize(name) %>/<%= dasherize(name) %>.service";
+  <%}else{%>
+import {<%= classify(name) %>Obj,<%= classify(name) %>Service} from "@services/<%= dasherize(mName) %>/<%= dasherize(name) %>.service";
+  <%}%>
+
+import {DestroyService} from "@core/services/common/destory.service";
+  <% if(needAddModal){%>
+import {ModalBtnStatus} from "@widget/base-modal";
+  <%}else{%>
+  <%}%>
+<% if(needAddModal){%>
+  <% if(mName==name){%>
+import {<%=classify(name)%>ModalService} from "@widget/biz-widget/<%= dasherize(name) %>-modal/<%= dasherize(name) %>-modal.service";
+  <%}else{%>
+import {<%=classify(name)%>ModalService} from "@widget/biz-widget/<%= dasherize(mName) %>/<%= dasherize(name) %>-modal/<%= dasherize(name) %>-modal.service";
+  <%}%>
+
+    <%}else{%>
+
+    <%}%>
 
 interface SearchParam {
   personId: number;
@@ -20,7 +39,8 @@ interface SearchParam {
   selector: 'app-<%= dasherize(name) %>',
   templateUrl: './<%= dasherize(name) %>.component.html',
   styleUrls: ['./<%= dasherize(name) %>.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [DestroyService]
 })
 export class <%= classify(name) %>Component implements OnInit {
   @ViewChild('highLightTpl', {static: true}) highLightTpl!: TemplateRef<any>;
@@ -32,13 +52,17 @@ export class <%= classify(name) %>Component implements OnInit {
     // desc: '表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。',
     breadcrumb: ['首页', '列表页', '查询表格']
   };
-  cashArray: <%= classify(name) %>Obj[] = [];
+  checkedCashArray: <%= classify(name) %>Obj[] = [];
   dataList: <%= classify(name) %>Obj[] = [];
   searchParam: Partial<SearchParam> = {};
 
   constructor(private dataService: <%= classify(name) %>Service,
-              private modalService: <%= classify(name) %>ModalService,
+  <% if(needAddModal){%>
+  private modalService: <%= classify(name) %>ModalService,
+  <%}else{%>
+  <%}%>
               private modalSrv: NzModalService,
+              private destroy$: DestroyService,
               public message: NzMessageService,
               private router: Router, private cdr: ChangeDetectorRef) {
   }
@@ -60,6 +84,7 @@ export class <%= classify(name) %>Component implements OnInit {
     this.tableChangeDectction();
   }
 
+  // 获取数据
   getDataList(e?: NzTableQueryParams): void {
     this.tableLoading(true);
     const params: SearchCommonVO<any> = {
@@ -67,12 +92,15 @@ export class <%= classify(name) %>Component implements OnInit {
       pageNum: e?.pageIndex! || this.tableConfig.pageIndex!,
       filters: this.searchParam
     };
-    this.dataService.get<%= classify(name) %>List(params).pipe(finalize(() => this.tableLoading(false))).subscribe(data => {
+    this.dataService.get<%= classify(name) %>List(params).pipe(finalize(() => {
+        this.tableLoading(false);
+    }), takeUntil(this.destroy$)).subscribe(data => {
       const {list, total, pageNum} = data;
       this.dataList = [...list];
       this.tableConfig.total = total;
       this.tableConfig.pageIndex = pageNum;
       this.tableLoading(false);
+      this.checkedCashArray = [...this.checkedCashArray];
     })
   }
 
@@ -87,26 +115,34 @@ export class <%= classify(name) %>Component implements OnInit {
     this.getDataList();
   }
 
+  // 新增
   add(): void {
-    this.modalService.show({nzTitle: '新增碑帖'}).subscribe(({modalValue, status}) => {
-      if (status === ModalBtnStatus.Cancel) {
-        return;
-      }
-      this.addEditData(modalValue, 'add<%= classify(name) %>');
-    })
+      <% if(needAddModal){%>
+      this.modalService.show({nzTitle: '新增'}).pipe(takeUntil(this.destroy$)).subscribe(({modalValue, status}) => {
+           if (status === ModalBtnStatus.Cancel) {
+             return;
+           }
+           this.addEditData(modalValue, 'add<%= classify(name) %>');
+         })
+      <%}else{%>
+      <%}%>
   }
 
   // 修改
   edit(id: number): void {
-    this.dataService.get<%= classify(name) %>Detail(id).subscribe(res => {
-      this.modalService.show({nzTitle: '编辑', nzWidth: '800'}, res).subscribe(({modalValue, status}) => {
-        if (status === ModalBtnStatus.Cancel) {
-          return;
-        }
-        modalValue.id = id;
-        this.tableLoading(true);
-        this.addEditData(modalValue, 'edit<%= classify(name) %>');
-      }, error => this.tableLoading(false));
+    this.dataService.get<%= classify(name) %>Detail(id).pipe(takeUntil(this.destroy$)).subscribe(res => {
+      <% if(needAddModal){%>
+       this.modalService.show({nzTitle: '编辑', nzWidth: '800'}, res).subscribe(({modalValue, status}) => {
+              if (status === ModalBtnStatus.Cancel) {
+                return;
+              }
+              modalValue.id = id;
+              this.tableLoading(true);
+              this.addEditData(modalValue, 'edit<%= classify(name) %>');
+            }, error => this.tableLoading(false));
+      <%}else{%>
+
+      <%}%>
     });
   }
 
@@ -118,21 +154,56 @@ export class <%= classify(name) %>Component implements OnInit {
   }
 
   del(id: number): void {
+    const ids: number[] = [id];
     this.modalSrv.confirm({
       nzTitle: '确定要删除吗？',
       nzContent: '删除后不可恢复',
       nzOnOk: () => {
         this.tableLoading(true);
-        this.dataService.del<%= classify(name) %>(id).subscribe(() => {
+        this.dataService.del<%= classify(name) %>(ids).pipe(finalize(() => {
+          this.tableLoading(false);
+        }),takeUntil(this.destroy$)).subscribe(() => {
           if (this.dataList.length === 1) {
             this.tableConfig.pageIndex--;
           }
           this.getDataList();
-        });
+          this.checkedCashArray.splice(this.checkedCashArray.findIndex(item => item.id === id), 1);
+        }, error => this.tableLoading(false));
       }
     });
   }
 
+  allDel(): void {
+    if (this.checkedCashArray.length > 0) {
+      const tempArrays: number[] = [];
+      this.modalSrv.confirm({
+        nzTitle: '确定要删除吗？',
+        nzContent: '删除后不可恢复',
+        nzOnOk: () => {
+          this.checkedCashArray.forEach((item) => {
+            tempArrays.push(item.id);
+          });
+          this.tableLoading(true);
+          // 注释的是模拟接口的调用
+          this.dataService.del<%= classify(name) %>(tempArrays).pipe(finalize(() => {
+            this.tableLoading(false);
+          }), takeUntil(this.destroy$)).subscribe(() => {
+            if (this.dataList.length === 1) {
+              this.tableConfig.pageIndex--;
+            }
+            this.getDataList();
+            this.checkedCashArray = [];
+          }, error => this.tableLoading(false));
+
+        }
+      });
+    } else {
+      this.message.error('请勾选数据');
+      return;
+    }
+  }
+
+  // 表格排序
   changeSort(e: SortFile): void {
     this.message.info(`排序字段：${e.fileName},排序为:${e.sortDir}`);
   }
@@ -184,6 +255,7 @@ export class <%= classify(name) %>Component implements OnInit {
       pageIndex: 1,
     };
   }
+
 
   ngOnInit(): void {
     this.initTable();

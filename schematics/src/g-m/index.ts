@@ -22,7 +22,7 @@ export default function (_options: any): Rule {
                 schematic('b-s', {dirname: _options.name, filename: _options.name}),
                 schematic('b-m', {name: _options.name, isTwoLevel: false}),
                 schematic('b-c', {name: _options.name, mName: _options.name}),
-                fnGenerateImport(_options.name, `src/app/pages/${dasherize(_options.name)}/${dasherize(_options.name)}-routing.module.ts`, `./${dasherize(_options.name)}.component`, tree)
+                fnGenerateImport(_options.name, `src/app/pages/${dasherize(_options.name)}/${dasherize(_options.name)}-routing.module.ts`, tree)
             ]);
         }
     };

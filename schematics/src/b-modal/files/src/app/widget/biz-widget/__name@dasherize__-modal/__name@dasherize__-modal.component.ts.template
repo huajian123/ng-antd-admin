@@ -6,21 +6,31 @@ import {NzMessageService} from "ng-zorro-antd/message";
 import {Observable, of} from "rxjs";
 import {fnCheckForm} from "@utils/tools";
 import {MapPipe, MapSet} from "@shared/pipes/map.pipe";
+import {DestroyService} from "@core/services/common/destory.service";
+  <% if(isOneLevel){%>
+import {<%= classify(name) %>Obj} from "@services/<%= dasherize(name) %>/<%= dasherize(name) %>.service";
+  <%}else{%>
+import {<%= classify(name) %>Obj} from "@services/<%= dasherize(mName) %>/<%= dasherize(name) %>.service";
+  <%}%>
 
 @Component({
   selector: 'app-<%= dasherize(name) %>-modal',
   templateUrl: './<%= dasherize(name) %>-modal.component.html',
   styleUrls: ['./<%= dasherize(name) %>-modal.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [DestroyService]
 })
 export class <%= classify(name) %>ModalComponent implements OnInit {
 
   addEditForm!: FormGroup;
-  params: <%= classify(name) %>Obj;
+  params!: <%= classify(name) %>Obj;
   typeOptions: OptionsInterface[] = [];
 
-  constructor(private modalRef: NzModalRef, private fb: FormBuilder, private msg: NzMessageService) {
-    this.params = {};
+  // private modalRef: NzModalRef不能删除
+  constructor(private modalRef: NzModalRef,
+              private destroy$: DestroyService,
+              private fb: FormBuilder,
+              private msg: NzMessageService) {
   }
   initForm(): void {
     this.addEditForm = this.fb.group({
@@ -38,7 +48,8 @@ export class <%= classify(name) %>ModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.typeOptions = [...MapPipe.transformMapToArray(MapSet.ClassesGrade)];
+    // 这里是举例modal中form使用下拉的场景
+    // this.typeOptions = [...MapPipe.transformMapToArray(MapSet.ClassesGrade)];
     this.initForm();
     if (Object.keys(this.params).length > 0) {
       this.addEditForm.patchValue(this.params);

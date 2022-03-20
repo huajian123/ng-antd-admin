@@ -22,13 +22,13 @@ export interface SearchCommonVO<T> {
 }
 
 export interface PageInfo<T> {
-  pageNum?: number;
-  pageSize?: number;
+  pageNum: number;
+  pageSize: number;
   size?: number;
   orderBy?: string;
   startRow?: number;
   endRow?: number;
-  total?: number;
+  total: number;
   pages?: number;
   list: Array<T>;
   firstPage?: number;

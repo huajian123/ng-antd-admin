@@ -3,6 +3,10 @@ import {BaseHttpService} from "../base-http.service";
 import {PageInfo, SearchCommonVO} from "../../types";
 import {Observable} from "rxjs";
 
+export interface <%= classify(filename) %>Obj {
+    id: number;
+}
+
 @Injectable({
     providedIn: 'root'
 })
@@ -27,7 +31,7 @@ export class <%= classify(filename) %>Service {
         return this.http.post('/<%= filename %>/list', param);
     }
 
-    del<%= classify(filename) %>(id: number): Observable<void> {
-        return this.http.delete(`/<%= filename %>/del/${id}`, null, {needSuccessInfo: true})
+    del<%= classify(filename) %>(ids: number[]): Observable<void> {
+        return this.http.delete(`/<%= filename %>/del`, {ids}, {needSuccessInfo: true})
     }
 }

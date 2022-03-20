@@ -14,20 +14,13 @@ import {classify, dasherize} from "@angular-devkit/core/src/utils/strings";
 import {addDeclarationToModule} from "@schematics/angular/utility/ast-utils";
 import {InsertChange} from "@schematics/angular/utility/change";
 import {ts} from "dtsgenerator";
-import {fnGenerateImport, fnGenerateRouteModulePath} from "../until";
+import {fnGenerateImport, fnGenerateModalModule, fnGenerateRouteModulePath} from "../until";
 
 
 export default function (_options: any): Rule {
     const isOneLevel = _options.mName === _options.name;
     return (tree: Tree, _context: SchematicContext) => {
         let rules: Rule[] = [];
-        if (_options.needAddModal) {
-            rules.push(schematic("b-modal", {name: _options.name}));
-            if(!isOneLevel){
-                rules.push(move(`./src/app/widget/biz-widget/${_options.name}-modal`, `./src/app/widget/biz-widget/${_options.mName}/${_options.name}-modal`),)
-            }
-
-        }
         // 是一级菜单
         if (isOneLevel) {
             rules = [...rules, ...[
@@ -38,17 +31,30 @@ export default function (_options: any): Rule {
                     name: _options.name
                 },),
             ]]
-            return chain(rules);
         } else {
             rules = [...rules, ...[
                 twoLevelRule(_options),
                 addDeclarationToNgModule(_options, `${dasherize(_options.mName)}/${dasherize(_options.name)}/${dasherize(_options.name)}`),
-                fnGenerateImport(_options.name, `src/app/pages/${dasherize(_options.mName)}/${dasherize(_options.name)}/${dasherize(_options.name)}-routing.module.ts`, `./${dasherize(_options.name)}.component`, tree),
+                fnGenerateImport(_options.name, `src/app/pages/${dasherize(_options.mName)}/${dasherize(_options.name)}/${dasherize(_options.name)}-routing.module.ts`, tree),
                 fnGenerateRouteModulePath(tree, `src/app/pages/${dasherize(_options.mName)}/${dasherize(_options.mName)}-routing.module.ts`, _options.name,)
             ]]
-            return chain(rules);
-        }
 
+        }
+        if (_options.needAddModal) {
+            rules.push(schematic("b-modal", {name: _options.name,isOneLevel:isOneLevel,mName:_options.mName}));
+            // 业务组件中modal位置
+            let modalComponentFilePath = `./src/app/pages/${_options.name}/${_options.name}.module.ts`;
+            if (!isOneLevel) {
+                rules.push(move(`./src/app/widget/biz-widget/${_options.name}-modal`, `./src/app/widget/biz-widget/${_options.mName}/${_options.name}-modal`),)
+                modalComponentFilePath = `./src/app/pages/${_options.mName}/${_options.name}/${_options.name}.module.ts`;
+            }
+            // 添加import
+            rules.push(fnGenerateImport(_options.name, modalComponentFilePath, tree, "Modal",isOneLevel,_options.mName))
+            // 添加imports[]里面的
+            rules.push(fnGenerateModalModule(tree,modalComponentFilePath,_options.name))
+
+        }
+        return chain(rules);
     };
 }
 

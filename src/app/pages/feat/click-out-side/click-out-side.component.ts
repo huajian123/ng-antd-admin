@@ -24,7 +24,7 @@ export class ClickOutSideComponent implements OnInit, AfterViewInit {
     title: '点内外部触发事件，点一点总会有好运',
     breadcrumb: ['首页', '功能', 'ClickOutSide'],
   };
-  text: string = '打击敌人';
+  text: string = '点击内部或者外部';
   winClick$!: Observable<Event>; // 绑定window的click事件
   @ViewChild('targetHtml') targetHtml!: ElementRef;
   targetHtmlClick$!: Observable<any>;
@@ -35,10 +35,10 @@ export class ClickOutSideComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.targetHtmlClick$ = fromEvent(this.targetHtml.nativeElement, 'click').pipe(tap(e => {
       fnStopMouseEvent(<MouseEvent>e);
-      this.text = '心里受到了创伤';
+      this.text = '刀斩肉身';
     }));
     this.winClick$ = fromEvent(this.doc, 'click').pipe(tap(() => {
-      this.text = '身体受到了创伤'
+      this.text = '心斩灵魂'
     }));
     merge(this.targetHtmlClick$, this.winClick$).subscribe(res => {
         this.cdr.markForCheck();
