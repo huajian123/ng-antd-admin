@@ -2,6 +2,7 @@ import {Component, OnInit, ChangeDetectionStrategy, TemplateRef, ViewChild} from
 import {PageHeaderType} from "@shared/components/page-header/page-header.component";
 import {DragService} from "@widget/biz-widget/drag/drag.service";
 import {NzSafeAny} from "ng-zorro-antd/core/types";
+import {ModalBtnStatus} from "@widget/base-modal";
 
 @Component({
   selector: 'app-ex-modal',
@@ -47,7 +48,12 @@ export class ExModalComponent implements OnInit {
       nzMask: false,
       nzMaskStyle: {display: 'none'},
       nzWrapClassName: "pointer-events-none"
-    }).subscribe(res => console.log(res))
+    }).subscribe(({modalValue, status})=>{
+      if (status === ModalBtnStatus.Cancel) {
+        return;
+      }
+      console.log(modalValue);
+    })
   }
 
   ngOnInit(): void {

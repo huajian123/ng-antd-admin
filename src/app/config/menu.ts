@@ -97,6 +97,14 @@ const menuNav: Menu[] = [
         ]
       },
       {
+        title: '颜色选择器',
+        icon: 'usergroup-delete',
+        actionCode: ActionCode.UserManage,
+        open: false,
+        selected: false,
+        path: '/default/feat/color-sel',
+      },
+      {
         title: '空白页',
         icon: 'usergroup-delete',
         actionCode: ActionCode.UserManage,
