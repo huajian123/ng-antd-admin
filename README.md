@@ -7,7 +7,7 @@
 if help you, if you want ,please give me a star ,thank you<br>
 快速二开使用详解 [快速二开使用详解](https://www.bilibili.com/video/BV1gF411x7rN/)<br>
 项目搭建简易教程 [项目搭建简易教程](https://www.bilibili.com/video/BV1EM4y1w7zd/)<br>
-online demo地址 [demo](http://124.71.128.53:8081/)<br>
+online demo地址 [demo](http://124.71.128.53:8080/)<br>
 
 # 路由的key
 key需要设置成路由地址最后一个'/'后的字符串，并且要唯一
