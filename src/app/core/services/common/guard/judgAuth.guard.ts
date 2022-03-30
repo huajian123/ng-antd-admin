@@ -19,7 +19,7 @@ export class JudgAuthGuard implements CanActivate {
 
   getMenu(menu: Menu[], url: string): void {
     for (let i = 0; i < menu.length; i++) {
-      if (menu[i].path === url) {
+      if (url.includes(menu[i].path)) {
         this.selMenu = menu[i];
         return;
       } else {

@@ -71,7 +71,7 @@ export interface User extends UserLogin {
 * */
 
 export interface Menu {
-  path?: string;
+  path: string;
   title: string;
   icon?: string;
   open?: boolean;

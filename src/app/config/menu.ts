@@ -213,6 +213,7 @@ const menuNav: Menu[] = [
         selected: false,
         actionCode: ActionCode.UserManage,
         icon: 'table',
+        path: '/default/list/search-list',
         children: [
           {
             title: '搜索列表(文章）',
