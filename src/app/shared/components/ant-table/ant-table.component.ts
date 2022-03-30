@@ -32,7 +32,10 @@ export interface TableHeader {
 }
 
 export interface MyTableConfig {
-  needNoScroll?: boolean;           //列表是否需要横向滚动条
+  needNoScroll?: boolean;           //列表是否需要滚动条
+  xScroll?: number;                 //列表横向滚动条
+  yScroll?: number;                 //列表纵向滚动条
+  virtualItemSize?: number;         //虚拟滚动时每一列的高度，与 cdk itemSize 相同
   showCheckbox?: boolean;           // 如果需要checkBox,则需要showCheckbox=true,并且使用app-ant-table组件时传入 [checkedCashArrayFromComment]="cashArray"，cashArray为业务组件中自己定义的数组，并且需要table中的data都有一个id属性
   pageIndex: number;                 // 当前页码，（与页面中页码双向绑定）
   pageSize: number;                // 每一页显示的数据条数（与页面中pageSize双向绑定）
@@ -64,6 +67,8 @@ export interface SortFile {
 })
 export class AntTableComponent implements OnInit, OnChanges {
   _dataList!: NzSafeAny[];
+  _tableConfig!: MyTableConfig;
+  _scrollConfig: { x: string, y: string } | {} = {}
   // 从业务组件中传入的缓存的已经选中的checkbox数据数组
   @Input() checkedCashArrayFromComment: NzSafeAny[] = [];
 
@@ -91,7 +96,16 @@ export class AntTableComponent implements OnInit, OnChanges {
     return this._tableSize;
   }
 
-  @Input() tableConfig!: MyTableConfig;
+  @Input()
+  set tableConfig(value: MyTableConfig) {
+    this._tableConfig = value;
+    this.setScrollConfig(value)
+  }
+
+  get tableConfig(): MyTableConfig {
+    return this._tableConfig;
+  }
+
   @Output() changePageNum = new EventEmitter<NzTableQueryParams>();
   @Output() changePageSize = new EventEmitter<number>();
   @Output() selectedChange: EventEmitter<NzSafeAny[]> = new EventEmitter<NzSafeAny[]>();
@@ -100,6 +114,24 @@ export class AntTableComponent implements OnInit, OnChanges {
   allChecked: boolean = false;
 
   constructor(private cdr: ChangeDetectorRef) {
+  }
+
+  setScrollConfig(value: MyTableConfig): void {
+    if (value && !value.needNoScroll) {
+      // 默认x：100
+      this._scrollConfig = {x: '100px'};
+      let tempX = {};
+      if (value.xScroll !== undefined) {
+        tempX = {x: `${value.xScroll}px`};
+      }
+      let tempY = {};
+      if (value.yScroll !== undefined) {
+        tempY = {y: `${value.yScroll}px`};
+      }
+      this._scrollConfig = {...this._scrollConfig, ...tempX, ...tempY};
+    } else {
+      this._scrollConfig = {};
+    }
   }
 
   changeSort(tableHeader: TableHeader): void {
@@ -118,6 +150,10 @@ export class AntTableComponent implements OnInit, OnChanges {
     // 改变引用触发变更检测。
     this._dataList = [...this._dataList];
     this.cdr.markForCheck();
+  }
+
+  trackById(_: number, data: { id: number }): number {
+    return data.id;
   }
 
   public trackByTableHead(index: number, item: NzSafeAny): NzSafeAny {
