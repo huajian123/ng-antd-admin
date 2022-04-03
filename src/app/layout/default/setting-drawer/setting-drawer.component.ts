@@ -43,6 +43,7 @@ export class SettingDrawerComponent implements OnInit {
     color: 'daybreak',
     mode: 'side',
     fixedWidth: false,
+    fixedTab: false,
     splitNav: true,
     colorWeak: false,
     fixedLeftNav: true,
@@ -194,7 +195,11 @@ export class SettingDrawerComponent implements OnInit {
   }
 
   // 修改固定头部
-  changeFixed(isFixed: boolean, type: 'splitNav' | 'fixedLeftNav' | 'fixedHead' | 'hasTopArea' | 'hasFooterArea' | 'hasNavArea' | 'hasNavHeadArea'): void {
+  changeFixed(isFixed: boolean, type: 'splitNav' | 'fixedTab' | 'fixedLeftNav' | 'fixedHead' | 'hasTopArea' | 'hasFooterArea' | 'hasNavArea' | 'hasNavHeadArea'): void {
+    // 非固定头部时，设置标签也不固定
+    if(type==="fixedHead"&&!isFixed){
+      this._themesOptions['fixedTab'] = false;
+    }
     this._themesOptions[type] = isFixed;
     this.setThemeOptions();
   }

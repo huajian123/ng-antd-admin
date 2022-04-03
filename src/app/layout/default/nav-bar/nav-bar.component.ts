@@ -22,8 +22,8 @@ export class NavBarComponent implements OnInit {
   @Input() isMixiHead = false;
   @Input() isMixiLeft = false;
   routerPath = this.router.url;
+  themesMode: 'side' | 'top' | 'mixi' = 'side';
   themesOptions$ = this.themesService.getThemesMode();
-  themesMode = 'side';
   isNightTheme$ = this.themesService.getIsNightTheme();
   isCollapsed$ = this.themesService.getIsCollapsed();
   isOverMode$ = this.themesService.getIsOverMode();
@@ -31,6 +31,7 @@ export class NavBarComponent implements OnInit {
   isOverMode = false;
   isCollapsed = false;
   isMixiMode = false;
+  leftMenuArray: Menu[] = [];
   copyMenus: Menu[] = this.cloneMenuArray(this.menus);
   authCodeArray: string[] = [];
 
@@ -42,23 +43,24 @@ export class NavBarComponent implements OnInit {
               private activatedRoute: ActivatedRoute, private tabService: TabService,
               private cdr: ChangeDetectorRef, private themesService: ThemeService,
               private titleServe: Title, @Inject(DOCUMENT) private doc: Document) {
+    this.subMixiModeSideMenu();
     this.subIsCollapsed();
-    this.subThemesSettings();
     this.subAuth();
     this.router.events
       .pipe(
         filter(event => event instanceof NavigationEnd),
         tap(() => {
+          this.subThemesSettings();
           // @ts-ignore
           this.routerPath = this.activatedRoute.snapshot['_routerState'].url;
           this.clickMenuItem(this.menus);
           this.clickMenuItem(this.copyMenus);
-          // 是折叠的菜单并且不是over菜单
+          // 是折叠的菜单并且不是over菜单,解决折叠左侧菜单时，切换tab会有悬浮框菜单的bug
           if (this.isCollapsed && !this.isOverMode) {
             this.closeMenuOpen(this.menus);
           }
 
-          // 顶部菜单模式，并且不是over模式
+          // 顶部菜单模式，并且不是over模式，解决顶部模式时，切换tab会有悬浮框菜单的bug
           if (this.themesMode === 'top' && !this.isOverMode) {
             this.closeMenu();
           }
@@ -86,7 +88,6 @@ export class NavBarComponent implements OnInit {
         });
         this.tabService.findIndex(this.routerPath);
         this.titleServe.setTitle(routeData['title'] + ' - Ant Design');
-
         // 混合模式时，切换tab，让左侧菜单也相应变化
         this.setMixModeLeftMenu();
       });
@@ -124,7 +125,7 @@ export class NavBarComponent implements OnInit {
   }
 
 
-  // 混合模式点击一级菜单
+  // 混合模式点击一级菜单，要让一级菜单下的第一个子菜单被选中
   changTopNav(index: number): void {
     // 当前选中的第一级菜单对象
     const currentTopNav = this.menus[index];
@@ -142,6 +143,7 @@ export class NavBarComponent implements OnInit {
       }
       this.splitNavStoreService.setSplitLeftNavArrayStore(currentLeftNavArray);
       /*添加了权限版结束*/
+      /*注释的是没有权限版*/
       // const currentLeftNavArray = currentTopNav.children;
       // if (!currentLeftNavArray[0].children) {
       //   this.router.navigateByUrl(currentLeftNavArray[0].path!);
@@ -236,10 +238,17 @@ export class NavBarComponent implements OnInit {
   subIsCollapsed(): void {
     this.isCollapsed$.subscribe(isCollapsed => {
       this.isCollapsed = isCollapsed;
+      // 这里重新赋值解决混合模式菜单下，折叠的菜单再展开，open变为false的情况
+      // @ts-ignore
+      this.routerPath = this.activatedRoute.snapshot['_routerState'].url;
       // 菜单展开
       if (!this.isCollapsed) {
         this.menus = this.cloneMenuArray(this.copyMenus);
         this.clickMenuItem(this.menus);
+        // 混合模式下要在点击一下左侧菜单数据源
+        if (this.themesMode === "mixi") {
+          this.clickMenuItem(this.leftMenuArray);
+        }
       } else { // 菜单收起
         this.copyMenus = this.cloneMenuArray(this.menus);
         this.closeMenuOpen(this.menus);
@@ -262,20 +271,35 @@ export class NavBarComponent implements OnInit {
     this.isOverMode$.pipe(switchMap(res => {
       this.isOverMode = res;
       return this.themesOptions$;
-    })).subscribe(options => {
+    }), takeUntil(this.destroy$)).subscribe(options => {
       this.themesMode = options.mode;
       this.isMixiMode = this.themesMode === 'mixi';
-      // 顶部模式时要关闭menu的open状态
-      if (this.themesMode === 'top' && !this.isOverMode) {
-        this.closeMenu();
-      } else {
-        // 非top模式时，需要重新设置一下左侧mixi模式左侧菜单数据源
-        // 不然会出现在'top模式和自动分割菜单的混合模式互相切换，有二级菜单的左侧菜单不自动展开'的bug
+      // 混合模式下，设置左侧菜单数据源
+      if (this.isMixiMode) {
         this.setMixModeLeftMenu();
       }
     });
   }
 
+  subTheme() {
+    // 顶部模式时要关闭menu的open状态
+    this.themesOptions$.pipe(takeUntil(this.destroy$)).subscribe(options => {
+      this.themesMode = options.mode;
+      this.isMixiMode = this.themesMode === 'mixi';
+      if (options.mode === 'top' && !this.isOverMode) {
+        this.closeMenu();
+      }
+    })
+  }
+
+  // 监听混合模式下左侧菜单数据源
+  private subMixiModeSideMenu() {
+    this.leftMenuArray$.pipe(takeUntil(this.destroy$)).subscribe(res => {
+      this.leftMenuArray = res;
+    })
+  }
+
   ngOnInit(): void {
+    this.subTheme();
   }
 }

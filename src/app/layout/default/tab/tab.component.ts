@@ -1,25 +1,44 @@
 import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
 import {TabModel, TabService} from '@core/services/common/tab.service';
 import {NzContextMenuService, NzDropdownMenuComponent} from 'ng-zorro-antd/dropdown';
-import {ThemeService} from '@core/services/store/theme.service';
+import {SettingInterface, ThemeService} from '@core/services/store/theme.service';
 import {NavigationEnd, Router} from '@angular/router';
-import {filter} from 'rxjs/operators';
+import {filter, takeUntil} from 'rxjs/operators';
 import {fnStopMouseEvent} from '@utils/tools';
 import {NzSafeAny} from "ng-zorro-antd/core/types";
+import {DestroyService} from "@core/services/common/destory.service";
 
 @Component({
   selector: 'app-tab',
   templateUrl: './tab.component.html',
   styleUrls: ['./tab.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [DestroyService]
 })
 export class TabComponent implements OnInit {
   tabs = this.tabService.getTabArray();
   themesOptions$ = this.themesService.getThemesMode();
   isNightTheme$ = this.themesService.getIsNightTheme();
+  themeOptinons: SettingInterface = {
+    color: "",
+    colorWeak: false,
+    fixedHead: false,
+    fixedLeftNav: false,
+    fixedTab: false,
+    fixedWidth: false,
+    hasFooterArea: false,
+    hasNavArea: false,
+    hasNavHeadArea: false,
+    hasTopArea: false,
+    mode: 'side',
+    splitNav: false,
+    theme: 'dark'
+  };
+  top = "48px";
 
   constructor(public tabService: TabService, private nzContextMenuService: NzContextMenuService,
               private themesService: ThemeService,
+              private destroy$: DestroyService,
               private router: Router, public cdr: ChangeDetectorRef) {
     (this.router.events.pipe(filter((event: NzSafeAny) => event instanceof NavigationEnd))).subscribe((event: NzSafeAny) => {
       this.cdr.markForCheck();
@@ -86,5 +105,9 @@ export class TabComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.themesOptions$.pipe(takeUntil(this.destroy$)).subscribe(res => {
+      this.themeOptinons = res;
+      this.top = !this.themeOptinons.hasTopArea ? "0px" : '48px';
+    });
   }
 }

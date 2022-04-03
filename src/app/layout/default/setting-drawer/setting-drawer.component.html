@@ -10,7 +10,7 @@
 <nz-drawer [nzClosable]="false" [nzWidth]="300" [(nzVisible)]="isCollapsed"
            (nzOnClose)="isCollapsed = !isCollapsed">
   <ng-container *nzDrawerContent>
-    <div class="m-b-24">
+    <div class="m-b-24" *ngIf="_themesOptions.mode!=='mixi'">
       <h3 class="title">整体风格设置</h3>
       <div class="block-checkbox">
         <div *ngFor="let theme of themes" class="item" nz-tooltip [nzTooltipTitle]="theme.title"
@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <div class="m-b-24 theme-color">
+    <div [class.m-t-25]="_themesOptions.mode!=='mixi'" class="m-b-24  theme-color">
       <h3 class="title">主题色</h3>
       <div class="content">
         <div *ngFor="let color of colors" class="color-block" nz-tooltip [nzTooltipTitle]="color.title"
@@ -47,7 +47,13 @@
         </div>
       </div>
     </div>
-
+    <nz-list [nzSplit]="false">
+      <nz-list-item [nzActions]="[fixedTabAction]">固定tab</nz-list-item>
+      <ng-template #fixedTabAction>
+        <nz-switch [nzDisabled]="!_themesOptions.fixedHead"  (ngModelChange)="changeFixed($event,'fixedTab')" [ngModel]="_themesOptions.fixedTab"
+                   nzSize="small"></nz-switch>
+      </ng-template>
+    </nz-list>
     <nz-list [nzSplit]="false">
       <nz-list-item [nzActions]="[fixedHeadAction]">固定头部</nz-list-item>
       <ng-template #fixedHeadAction>
@@ -124,6 +130,7 @@
                      nzSize="small"></nz-switch>
         </ng-template>
       </nz-list>
+
     </div>
 
   </ng-container>

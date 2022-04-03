@@ -78,6 +78,14 @@ export class DriverService {
           position: 'bottom'
         }
       },
+      {
+        element: '#multi-tab2',
+        popover: {
+          title: '多标签',
+          description: '鼠标右键点击单个标签可以展开多个选项',
+          position: 'bottom'
+        }
+      },
     ]);
     driver.start();
   }

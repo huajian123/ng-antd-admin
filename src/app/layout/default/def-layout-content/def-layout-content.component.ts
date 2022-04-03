@@ -22,6 +22,7 @@ export class DefLayoutContentComponent implements OnInit {
     mode: 'side',
     fixedWidth: false,
     splitNav: false,
+    fixedTab: false,
     colorWeak: false,
     fixedHead: false,
     fixedLeftNav: false,
@@ -35,6 +36,7 @@ export class DefLayoutContentComponent implements OnInit {
   isCollapsed$: Observable<boolean> = this.themesService.getIsCollapsed();
   // 混合模式下，判断顶部菜单是否有子菜单，如果没有子菜单，要隐藏左侧菜单
   mixiModeHasLeftNav = this.splitNavStoreService.getSplitLeftNavArrayStore();
+  contentMarginTop = '48px';
 
   constructor(private destroy$: DestroyService, private themesService: ThemeService, private splitNavStoreService: SplitNavStoreService) {
   }
@@ -49,6 +51,13 @@ export class DefLayoutContentComponent implements OnInit {
       this.themesOptions = res;
       this.isMixiMode = res.mode === 'mixi';
       this.isFixedLeftNav = this.themesOptions.fixedLeftNav;
+
+      if ((this.themesOptions.fixedHead && !this.isMixiMode) && this.themesOptions.hasTopArea) {
+        this.contentMarginTop = this.themesOptions.fixedTab ? '96px' : '48px';
+      } else {
+        this.contentMarginTop = this.themesOptions.fixedTab ? '48px' : '0px';
+      }
+
     });
   }
 

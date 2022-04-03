@@ -10,6 +10,7 @@ export interface SettingInterface {
   fixedHead: boolean;
   splitNav: boolean;
   fixedLeftNav: boolean;
+  fixedTab: boolean;
   hasTopArea: boolean;
   hasFooterArea: boolean;
   hasNavArea: boolean;
@@ -30,6 +31,7 @@ export class ThemeService {
     fixedWidth: true,
     colorWeak: false,
     splitNav: false,
+    fixedTab: false,
     fixedHead: true,
     fixedLeftNav: true,
     hasTopArea: true,

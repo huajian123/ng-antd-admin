@@ -2,7 +2,7 @@
     [nzInlineCollapsed]="isCollapsed$|async"
     [nzTheme]="(isMixiMode&&!(isOverMode$|async)&&!(isNightTheme$|async))?'light':(isMixiMode&&(isNightTheme$|async)?'dark':((themesOptions$|async)!.theme))"
     [nzMode]="((themesOptions$|async)!.mode==='side'||(themesOptions$|async)!.mode==='mixi'||(isOverMode$|async))?'inline':'horizontal'">
-  <ng-container *ngTemplateOutlet="menuTpl;context:{$implicit: isMixiLeft?(leftMenuArray$|async):menus}"></ng-container>
+  <ng-container *ngTemplateOutlet="menuTpl;context:{$implicit: isMixiLeft?leftMenuArray:menus}"></ng-container>
   <ng-template #menuTpl let-menus>
     <ng-container *ngFor="let menu of menus;">
 

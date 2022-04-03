@@ -1,4 +1,5 @@
-<nz-card id="multi-tab" class="m-t-10" style="height: 35px" [nzBodyStyle]="{padding:0}" [nzBordered]="false">
+<nz-card *ngIf="!(themesOptions$|async)?.fixedTab;else fixTabTpl" id="multi-tab" class="m-t-10" style="height: 35px"
+         [nzBodyStyle]="{padding:0}" [nzBordered]="false">
   <nz-tabset (nzClose)="clickCloseIcon($event)" [nzSelectedIndex]="currentIndex"
              [nzTabBarStyle]="{'height':'35px'}"
              [nzTabPosition]="'top'" [nzType]="'editable-card'" [nzHideAdd]="true">
@@ -15,3 +16,28 @@
     </nz-tab>
   </nz-tabset>
 </nz-card>
+<ng-template #fixTabTpl>
+  <nz-card class="fixed-tab" [ngStyle]="{top:top}" id="multi-tab2"
+           [nzBodyStyle]="{padding:0}" [nzBordered]="true">
+    <nz-tabset
+      [nzAnimated]="false"
+      [nzTabBarStyle]="{'padding':'0 16px'}"
+      [nzSelectedIndex]="currentIndex"
+      [nzTabPosition]="'top'">
+      <nz-tab (nzClick)="goPage(tab)" nzClosable (nzContextmenu)="contextMenu($event, menu)" [nzTitle]="titleTemplate"
+              *ngFor="let tab of tabs;let i =index;trackBy:trackByTab;">
+        <ng-template #titleTemplate>
+          <span class="text-center p-l-16 p-r-16 relative d-i-b" appMouseHoverShow style="min-width: 60px">{{ tab.title }} <i class="m-0 none" (click)="clickCloseIcon({index:i})" nz-icon [nzType]="'close'"></i></span>
+        </ng-template>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu>
+            <li nz-menu-item (click)="refresh()">刷新</li>
+            <li nz-menu-item [nzDisabled]="tabs.length-1===0" (click)="closeTab(tab,$event,i)">关闭标签</li>
+            <li nz-menu-item [nzDisabled]="tabs.length-1===0" (click)="closeOtherTab(tab,$event,i)">关闭其他标签</li>
+            <li nz-menu-item [nzDisabled]="tabs.length-1===i" (click)="closeRithTab(tab,$event,i)">关闭右侧标签</li>
+          </ul>
+        </nz-dropdown-menu>
+      </nz-tab>
+    </nz-tabset>
+  </nz-card>
+</ng-template>
