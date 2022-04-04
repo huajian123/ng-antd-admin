@@ -78,7 +78,7 @@
     </nz-sider>
 
     <nz-layout>
-      <nz-content [ngStyle]="{marginTop:(themesOptions.fixedHead&&!isMixiMode)&&themesOptions.hasTopArea?'48px':0}">
+      <nz-content [ngStyle]="{marginTop:contentMarginTop}">
         <ng-content></ng-content>
       </nz-content>
       <nz-footer *ngIf="themesOptions.hasFooterArea" class="text-center">Ant Design ©2021 Implement By Angular

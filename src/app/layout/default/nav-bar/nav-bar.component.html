@@ -26,8 +26,6 @@
               <ng-container *ngFor="let menuSecond of menu.children">
                 <!--权限2-->
                 <ng-container *appAuth="menuSecond.actionCode">
-
-
                   <li [nzPaddingLeft]="themesMode!=='top'?32:0" nz-menu-item [nzSelected]="menuSecond.selected"
                       *ngIf="!menuSecond.children||menuSecond.children.length===0;">
                     <a (click)="changeRoute(menuSecond)">
@@ -40,12 +38,29 @@
                       (nzOpenChange)="changeOpen(menuSecond,menu.children)" [(nzOpen)]="menuSecond.open"
                       [nzTitle]="menuSecond.title" [nzIcon]="menuSecond.icon">
                     <ul>
-                      <li [nzPaddingLeft]="themesMode!=='top'?48:0" nz-menu-item [nzSelected]="menuThird.selected"
-                          *ngFor="let menuThird of menuSecond.children">
-                        <a (click)="changeRoute(menuThird)">
-                          <span>{{menuThird.title}}</span>
-                        </a>
-                      </li>
+                      <ng-container *ngFor="let menuThird of menuSecond.children">
+                        <li [nzPaddingLeft]="themesMode!=='top'?48:0" nz-menu-item [nzSelected]="menuThird.selected"
+                            *ngIf="!menuThird.children||menuThird.children.length===0;">
+                          <a (click)="changeRoute(menuThird)">
+                            <span>{{menuThird.title}}</span>
+                          </a>
+                        </li>
+
+                        <!--四级菜单-->
+                        <li [nzPaddingLeft]="themesMode!=='top'?48:0"
+                            *ngIf="menuThird.children&&menuThird.children.length>0" nz-submenu
+                            (nzOpenChange)="changeOpen(menuThird,menuSecond.children)" [(nzOpen)]="menuThird.open"
+                            [nzTitle]="menuThird.title" [nzIcon]="menuThird.icon">
+                          <ul>
+                            <li [nzPaddingLeft]="themesMode!=='top'?64:0" nz-menu-item [nzSelected]="forthThird.selected"
+                                *ngFor="let forthThird of menuThird.children">
+                              <a (click)="changeRoute(forthThird)">
+                                <span>{{forthThird.title}}</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </li>
+                      </ng-container>
                     </ul>
                   </li>
 

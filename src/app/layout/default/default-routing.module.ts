@@ -44,6 +44,10 @@ const routes: Routes = [
         path: 'feat',
         loadChildren: () => import('../../pages/feat/feat.module').then(m => m.FeatModule)
       },
+      {
+        path: 'level',
+        loadChildren: () => import('../../pages/level/level.module').then(m => m.LevelModule)
+      },
       {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
     ]
   }

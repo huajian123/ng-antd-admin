@@ -10,6 +10,41 @@ export const MENU_TOKEN = new InjectionToken<Menu[]>('menu-token', {
 })
 
 const menuNav: Menu[] = [
+
+  {
+    title: 'Dashboard',
+    icon: 'dashboard',
+    open: false,
+    selected: false,
+    path: '/default/dashboard',
+    actionCode: ActionCode.UserManage,
+    children: [
+      {
+        title: '分析页',
+        open: false,
+        selected: false,
+        actionCode: ActionCode.UserManage,
+        icon: 'dashboard',
+        path: '/default/dashboard/analysis',
+      },
+      {
+        title: '监控页',
+        open: false,
+        selected: false,
+        actionCode: ActionCode.UserManage,
+        icon: 'dashboard',
+        path: '/default/dashboard/monitor',
+      },
+      {
+        title: '工作台',
+        open: false,
+        selected: false,
+        actionCode: ActionCode.UserManage,
+        icon: 'dashboard',
+        path: '/default/dashboard/workbench',
+      },
+    ]
+  },
   {
     title: '拓展功能',
     icon: 'star',
@@ -128,40 +163,6 @@ const menuNav: Menu[] = [
         actionCode: ActionCode.UserManage,
         selected: false,
         path: '/default/feat/about',
-      },
-    ]
-  },
-  {
-    title: 'Dashboard',
-    icon: 'dashboard',
-    open: false,
-    selected: false,
-    path: '/default/dashboard',
-    actionCode: ActionCode.UserManage,
-    children: [
-      {
-        title: '分析页',
-        open: false,
-        selected: false,
-        actionCode: ActionCode.UserManage,
-        icon: 'dashboard',
-        path: '/default/dashboard/analysis',
-      },
-      {
-        title: '监控页',
-        open: false,
-        selected: false,
-        actionCode: ActionCode.UserManage,
-        icon: 'dashboard',
-        path: '/default/dashboard/monitor',
-      },
-      {
-        title: '工作台',
-        open: false,
-        selected: false,
-        actionCode: ActionCode.UserManage,
-        icon: 'dashboard',
-        path: '/default/dashboard/workbench',
       },
     ]
   },
@@ -387,39 +388,66 @@ const menuNav: Menu[] = [
       },
     ]
   },
-  /*    {
-      title: '内部管理',
-      icon: 'highlight',
-      open: false,
-      selected: false,
-      actionCode: ActionCode.InternalModule,
-      path: '/default/internal-manage',
-      children: [
-        {
-          title: '用户管理',
-          open: false,
-          selected: false,
-          icon: 'highlight',
-          path: '/default/internal-manage/user-manage',
-          actionCode: ActionCode.UserManage,
-        },
-        {
-          title: '角色管理',
-          open: false,
-          selected: false,
-          icon: 'highlight',
-          path: '/default/internal-manage/role-manage',
-          actionCode: ActionCode.Role,
-        },
-        {
-          title: '部门管理',
-          open: false,
-          selected: false,
-          icon: 'highlight',
-          path: '/default/internal-manage/dept-manage',
-          actionCode: ActionCode.Dept,
-        },
-      ]
-    },*/
-
+  {
+    title: '多级菜单',
+    icon: 'user',
+    open: false,
+    selected: false,
+    actionCode: ActionCode.UserManage,
+    path: '/default/level',
+    children: [
+      {
+        title: 'Menu1',
+        icon: 'user',
+        open: false,
+        selected: false,
+        actionCode: ActionCode.UserManage,
+        path: '/default/level/menu1',
+        children: [
+          {
+            title: 'Menu1-1',
+            icon: 'user',
+            open: false,
+            selected: false,
+            actionCode: ActionCode.UserManage,
+            path: '/default/level/menu1/menu1-1',
+            children: [
+              {
+                title: 'Menu1-1-1',
+                icon: 'user',
+                open: false,
+                selected: false,
+                actionCode: ActionCode.UserManage,
+                path: '/default/level/menu1/menu1-1/menu1-1-1',
+              },
+              {
+                title: 'Menu1-1-2',
+                icon: 'user',
+                open: false,
+                selected: false,
+                actionCode: ActionCode.UserManage,
+                path: '/default/level/menu1/menu1-1/menu1-1-2',
+              },
+            ]
+          },
+          {
+            title: 'Menu1-2',
+            icon: 'user',
+            open: false,
+            selected: false,
+            actionCode: ActionCode.UserManage,
+            path: '/default/level/menu1/menu1-2',
+          }
+        ]
+      },
+      {
+        title: 'Menu2',
+        icon: 'user',
+        open: false,
+        selected: false,
+        actionCode: ActionCode.UserManage,
+        path: '/default/level/menu2',
+      },
+    ]
+  }
 ];

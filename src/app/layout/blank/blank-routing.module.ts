@@ -13,7 +13,7 @@ const routes: Routes = [
       {
         canDeactivate: [LockLeaveGuard],
         path: 'empty-for-lock',
-        loadChildren: () => import('../../pages/empty-for-lock/empty-for-lock.module').then(m => m.EmptyForLockModule)
+        loadChildren: () => import('../../shared/components/empty-for-lock/empty-for-lock.module').then(m => m.EmptyForLockModule)
       },
       {
         path: 'other-login',

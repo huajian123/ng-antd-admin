@@ -1,5 +1,5 @@
 import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy, Input, Inject} from '@angular/core';
-import {filter, map, mergeMap, switchMap, takeUntil, tap} from 'rxjs/operators';
+import {filter, map, mergeMap, share, switchMap, takeUntil, tap} from 'rxjs/operators';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {ThemeService} from '@core/services/store/theme.service';
 import {Title} from '@angular/platform-browser';
@@ -10,6 +10,7 @@ import {MENU_TOKEN} from "@config/menu";
 import {AuthService} from "@core/services/store/auth.service";
 import {TabService} from "@core/services/common/tab.service";
 import {DestroyService} from "@core/services/common/destory.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-nav-bar',
@@ -34,6 +35,7 @@ export class NavBarComponent implements OnInit {
   leftMenuArray: Menu[] = [];
   copyMenus: Menu[] = this.cloneMenuArray(this.menus);
   authCodeArray: string[] = [];
+  subTheme$: Observable<any>;
 
   constructor(private router: Router,
               private destroy$: DestroyService,
@@ -43,14 +45,30 @@ export class NavBarComponent implements OnInit {
               private activatedRoute: ActivatedRoute, private tabService: TabService,
               private cdr: ChangeDetectorRef, private themesService: ThemeService,
               private titleServe: Title, @Inject(DOCUMENT) private doc: Document) {
+    this.subTheme$ = this.isOverMode$.pipe(switchMap(res => {
+      this.isOverMode = res;
+      return this.themesOptions$;
+    }), tap(options => {
+      this.themesMode = options.mode;
+      this.isMixiMode = this.themesMode === 'mixi';
+    }), share(), takeUntil(this.destroy$));
+
+    // 监听混合模式下左侧菜单数据源
     this.subMixiModeSideMenu();
+    // 监听折叠菜单事件
     this.subIsCollapsed();
     this.subAuth();
     this.router.events
       .pipe(
         filter(event => event instanceof NavigationEnd),
         tap(() => {
-          this.subThemesSettings();
+          this.subTheme$.subscribe(() => {
+            // 主题切换为混合模式下，设置左侧菜单数据源
+            // 如果放在ngInit监听里面，会在混合模式下，刷新完页面切换路由，runOutSideAngular
+            if (this.isMixiMode) {
+              this.setMixModeLeftMenu();
+            }
+          })
           // @ts-ignore
           this.routerPath = this.activatedRoute.snapshot['_routerState'].url;
           this.clickMenuItem(this.menus);
@@ -155,50 +173,29 @@ export class NavBarComponent implements OnInit {
     }
   }
 
+  flatMenu(menus: Menu[], routePath: string): void {
+    menus.forEach(item => {
+      item.selected = false;
+      item.open = false;
+      if (routePath.includes(item.path) && !item.isNewLink) {
+        item.selected = true;
+        item.open = true;
+      }
+      if (!!item.children && item.children.length > 0) {
+        this.flatMenu(item.children, routePath)
+      }
+    })
+
+
+  }
+
   clickMenuItem(menus: Menu[]): void {
     if (!menus) {
       return;
     }
     const index = this.routerPath.indexOf('?') === -1 ? this.routerPath.length : this.routerPath.indexOf('?');
     const routePath = this.routerPath.substring(0, index);
-    for (const item of menus) {
-      item.open = false;
-      item.selected = false;
-      // 一级菜单
-      if (!item.children || item.children.length === 0) {
-        if (routePath.includes(item.path!) && !item.isNewLink) {
-          item.selected = true;
-        }
-        continue;
-      }
-      // 二级菜单
-      for (const subItem of item.children) {
-        subItem.selected = false;
-        subItem.open = false;
-        if (!subItem.children || subItem.children?.length === 0) {
-          if (routePath.includes(subItem.path!)) {
-            item.open = true;
-            item.selected = true;
-            subItem.selected = true;
-            subItem.open = true;
-          }
-          continue;
-        }
-        for (const thirdItem of subItem.children) {
-          if (routePath.includes(thirdItem.path!)) {
-            item.open = true;
-            item.selected = true;
-            subItem.selected = true;
-            subItem.open = true;
-            thirdItem.open = true;
-            thirdItem.selected = true;
-          } else {
-            thirdItem.open = false;
-            thirdItem.selected = false;
-          }
-        }
-      }
-    }
+    this.flatMenu(menus, routePath);
     this.cdr.markForCheck();
   }
 
@@ -238,14 +235,11 @@ export class NavBarComponent implements OnInit {
   subIsCollapsed(): void {
     this.isCollapsed$.subscribe(isCollapsed => {
       this.isCollapsed = isCollapsed;
-      // 这里重新赋值解决混合模式菜单下，折叠的菜单再展开，open变为false的情况
-      // @ts-ignore
-      this.routerPath = this.activatedRoute.snapshot['_routerState'].url;
       // 菜单展开
       if (!this.isCollapsed) {
         this.menus = this.cloneMenuArray(this.copyMenus);
         this.clickMenuItem(this.menus);
-        // 混合模式下要在点击一下左侧菜单数据源
+        // 混合模式下要在点击一下左侧菜单数据源,不然有二级菜单的菜单在折叠状态变为展开时，不open
         if (this.themesMode === "mixi") {
           this.clickMenuItem(this.leftMenuArray);
         }
@@ -267,31 +261,6 @@ export class NavBarComponent implements OnInit {
     this.authService.getAuthCode().pipe(takeUntil(this.destroy$)).subscribe(res => this.authCodeArray = res);
   }
 
-  subThemesSettings(): void {
-    this.isOverMode$.pipe(switchMap(res => {
-      this.isOverMode = res;
-      return this.themesOptions$;
-    }), takeUntil(this.destroy$)).subscribe(options => {
-      this.themesMode = options.mode;
-      this.isMixiMode = this.themesMode === 'mixi';
-      // 混合模式下，设置左侧菜单数据源
-      if (this.isMixiMode) {
-        this.setMixModeLeftMenu();
-      }
-    });
-  }
-
-  subTheme() {
-    // 顶部模式时要关闭menu的open状态
-    this.themesOptions$.pipe(takeUntil(this.destroy$)).subscribe(options => {
-      this.themesMode = options.mode;
-      this.isMixiMode = this.themesMode === 'mixi';
-      if (options.mode === 'top' && !this.isOverMode) {
-        this.closeMenu();
-      }
-    })
-  }
-
   // 监听混合模式下左侧菜单数据源
   private subMixiModeSideMenu() {
     this.leftMenuArray$.pipe(takeUntil(this.destroy$)).subscribe(res => {
@@ -300,6 +269,11 @@ export class NavBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.subTheme();
+    // 顶部模式时要关闭menu的open状态
+    this.subTheme$.subscribe((options) => {
+      if (options.mode === 'top' && !this.isOverMode) {
+        this.closeMenu();
+      }
+    })
   }
 }
