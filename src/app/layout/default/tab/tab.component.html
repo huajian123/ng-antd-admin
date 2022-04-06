@@ -21,8 +21,8 @@
 <ng-template #fixTabTpl>
   <nz-card class="fixed-tab" [ngClass]="{
   'fixed-collapsed':(isCollapsed$|async),
-  'fixed-over-mode':(isOverMode$|async)
-  }" [ngStyle]="{top:top}" id="multi-tab2"
+  'fixed-over-mode':(isOverMode$|async)||(themesOptions$|async)?.mode==='top'||((themesOptions$|async)?.mode==='mixi'&&!(leftMenuArray$|async)&&(themesOptions$|async)?.splitNav)
+  }" [ngStyle]="{top:(themesOptions$|async)!.hasTopArea?'48px' : '0'}" id="multi-tab2"
            [nzBodyStyle]="{padding:0}" [nzBordered]="true">
     <nz-tabset
       [nzAnimated]="false"

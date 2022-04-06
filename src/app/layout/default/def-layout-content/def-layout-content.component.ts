@@ -9,7 +9,8 @@ import {DestroyService} from "@core/services/common/destory.service";
   selector: 'app-def-layout-content',
   templateUrl: './def-layout-content.component.html',
   styleUrls: ['./def-layout-content.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [DestroyService]
 })
 export class DefLayoutContentComponent implements OnInit {
   showChats = true;

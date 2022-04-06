@@ -1,12 +1,13 @@
 import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
 import {TabModel, TabService} from '@core/services/common/tab.service';
 import {NzContextMenuService, NzDropdownMenuComponent} from 'ng-zorro-antd/dropdown';
-import {SettingInterface, ThemeService} from '@core/services/store/theme.service';
+import {ThemeService} from '@core/services/store/theme.service';
 import {NavigationEnd, Router} from '@angular/router';
-import {filter, takeUntil} from 'rxjs/operators';
+import {filter} from 'rxjs/operators';
 import {fnStopMouseEvent} from '@utils/tools';
 import {NzSafeAny} from "ng-zorro-antd/core/types";
 import {DestroyService} from "@core/services/common/destory.service";
+import {SplitNavStoreService} from "@store/split-nav-store/split-nav-store.service";
 
 @Component({
   selector: 'app-tab',
@@ -19,29 +20,14 @@ export class TabComponent implements OnInit {
   tabs = this.tabService.getTabArray();
   themesOptions$ = this.themesService.getThemesMode();
   isNightTheme$ = this.themesService.getIsNightTheme();
-  themeOptinons: SettingInterface = {
-    color: "",
-    colorWeak: false,
-    fixedHead: false,
-    fixedLeftNav: false,
-    fixedTab: false,
-    fixedWidth: false,
-    hasFooterArea: false,
-    hasNavArea: false,
-    hasNavHeadArea: false,
-    hasTopArea: false,
-    mode: 'side',
-    splitNav: false,
-    theme: 'dark'
-  };
-  top = "48px";
-  left = `208px`;
+  leftMenuArray$ = this.splitNavStoreService.getSplitLeftNavArrayStore();
   isOverMode$ = this.themesService.getIsOverMode();
   isOverMode = false;
   isCollapsed$ = this.themesService.getIsCollapsed();
   isCollapsed = false;
 
   constructor(public tabService: TabService, private nzContextMenuService: NzContextMenuService,
+              private splitNavStoreService: SplitNavStoreService,
               private themesService: ThemeService,
               private destroy$: DestroyService,
               private router: Router, public cdr: ChangeDetectorRef) {
@@ -110,33 +96,5 @@ export class TabComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.themesOptions$.pipe(takeUntil(this.destroy$)).subscribe(res => {
-      this.themeOptinons = res;
-      this.top = !this.themeOptinons.hasTopArea ? "0px" : '48px';
-      if (this.themeOptinons.hasNavArea) {
-        this.left = '208px';
-        if (this.isCollapsed) {
-          this.left = '48px';
-        }
-      } else {
-        this.left = '0px';
-      }
-    });
-
-
-    this.isOverMode$.pipe(takeUntil(this.destroy$)).subscribe(res => {
-      this.isOverMode = res;
-      if (this.isCollapsed) {
-        this.left = '0px';
-      }
-    });
-    this.isCollapsed$.pipe(takeUntil(this.destroy$)).subscribe(res => {
-      this.isCollapsed = res
-      if (this.isCollapsed) {
-        this.left = '48px';
-      }
-    });
-
-
   }
 }

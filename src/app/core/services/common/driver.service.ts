@@ -74,7 +74,7 @@ export class DriverService {
         element: '#multi-tab',
         popover: {
           title: '多标签',
-          description: '鼠标右键点击单个标签可以展开多个选项',
+          description: '鼠标右键点击单个标签可以展开多个选项，超出屏幕后，滚动鼠标滚轮可以进行页签滚动',
           position: 'bottom'
         }
       },
@@ -82,7 +82,7 @@ export class DriverService {
         element: '#multi-tab2',
         popover: {
           title: '多标签',
-          description: '鼠标右键点击单个标签可以展开多个选项',
+          description: '鼠标右键点击单个标签可以展开多个选项，超出屏幕后，滚动鼠标滚轮可以进行页签滚动',
           position: 'bottom'
         }
       },
