@@ -15,10 +15,15 @@ import {SharedModule} from "@shared/shared.module";
 import interceptors from './core/services/interceptors';
 import {LoginModalModule} from "@widget/biz-widget/login/login-modal.module";
 import {SubLockedStatusService} from "@core/services/common/sub-locked-status.service";
+import {LoadAliIconCdnService} from "@core/services/common/load-ali-icon-cdn.service";
 
 
 export function StartupServiceFactory(startupService: StartupService) {
   return () => startupService.load();
+}
+
+export function LoadAliIconCdnFactory(loadAliIconCdnService: LoadAliIconCdnService) {
+  return () => loadAliIconCdnService.load();
 }
 
 export function InitThemeServiceFactory(initThemeService: InitThemeService) {
@@ -36,30 +41,42 @@ export function SubWindowWithServiceFactory(subWindowWithService: SubWindowWithS
 
 // 初始化服务
 const APPINIT_PROVIDES = [
+  // 项目启动
   {
     provide: APP_INITIALIZER,
     useFactory: StartupServiceFactory,
     deps: [StartupService],
     multi: true,
   },
+  // load阿里图标库cdn
+  {
+    provide: APP_INITIALIZER,
+    useFactory: LoadAliIconCdnFactory,
+    deps: [LoadAliIconCdnService],
+    multi: true,
+  },
+  // 初始化锁屏服务
   {
     provide: APP_INITIALIZER,
     useFactory: InitLockedStatusServiceFactory,
     deps: [SubLockedStatusService],
     multi: true,
   },
+  // 初始化主题
   {
     provide: APP_INITIALIZER,
     useFactory: InitThemeServiceFactory,
     deps: [InitThemeService],
     multi: true,
   },
+  // 初始化监听屏幕宽度服务
   {
     provide: APP_INITIALIZER,
     useFactory: SubWindowWithServiceFactory,
     deps: [SubWindowWithService],
     multi: true,
   },
+  // 初始化暗黑模式还是default模式的css
   {
     provide: APP_INITIALIZER,
     useFactory: (themeService: ThemeSkinService) => () => {

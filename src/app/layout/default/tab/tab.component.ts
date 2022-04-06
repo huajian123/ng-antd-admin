@@ -35,6 +35,11 @@ export class TabComponent implements OnInit {
     theme: 'dark'
   };
   top = "48px";
+  left = `208px`;
+  isOverMode$ = this.themesService.getIsOverMode();
+  isOverMode = false;
+  isCollapsed$ = this.themesService.getIsCollapsed();
+  isCollapsed = false;
 
   constructor(public tabService: TabService, private nzContextMenuService: NzContextMenuService,
               private themesService: ThemeService,
@@ -108,6 +113,30 @@ export class TabComponent implements OnInit {
     this.themesOptions$.pipe(takeUntil(this.destroy$)).subscribe(res => {
       this.themeOptinons = res;
       this.top = !this.themeOptinons.hasTopArea ? "0px" : '48px';
+      if (this.themeOptinons.hasNavArea) {
+        this.left = '208px';
+        if (this.isCollapsed) {
+          this.left = '48px';
+        }
+      } else {
+        this.left = '0px';
+      }
     });
+
+
+    this.isOverMode$.pipe(takeUntil(this.destroy$)).subscribe(res => {
+      this.isOverMode = res;
+      if (this.isCollapsed) {
+        this.left = '0px';
+      }
+    });
+    this.isCollapsed$.pipe(takeUntil(this.destroy$)).subscribe(res => {
+      this.isCollapsed = res
+      if (this.isCollapsed) {
+        this.left = '48px';
+      }
+    });
+
+
   }
 }

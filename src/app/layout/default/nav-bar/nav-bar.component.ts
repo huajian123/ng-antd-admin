@@ -1,4 +1,4 @@
-import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy, Input, Inject} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Input, Inject} from '@angular/core';
 import {filter, map, mergeMap, share, switchMap, takeUntil, tap} from 'rxjs/operators';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {ThemeService} from '@core/services/store/theme.service';
@@ -124,7 +124,7 @@ export class NavBarComponent implements OnInit {
   // 深拷贝克隆菜单数组
   cloneMenuArray(sourceMenuArray: Menu[], target: Menu[] = []): Menu[] {
     sourceMenuArray.forEach(item => {
-      const obj: Menu = {title: "", path: ''};
+      const obj: Menu = {title: "", path: '', showIcon: false};
       for (let i in item) {
         if (item.hasOwnProperty(i)) {
           // @ts-ignore

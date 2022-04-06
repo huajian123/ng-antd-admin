@@ -13,28 +13,13 @@ const routes: Routes = [
         loadChildren: () => import('../../pages/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
       {
-        path: 'form',
-        loadChildren: () => import('../../pages/form/form.module').then(m => m.FormModule)
+        path: 'page-demo',
+        loadChildren: () => import('../../pages/page-demo/page-demo.module').then(m => m.PageDemoModule)
       },
-      {
-        path: 'detail',
-        loadChildren: () => import('../../pages/detail/detail.module').then(m => m.DetailModule)
-      },
+
       {
         path: 'list',
         loadChildren: () => import('../../pages/list/list.module').then(m => m.ListModule)
-      },
-      {
-        path: 'personal',
-        loadChildren: () => import('../../pages/personal/personal.module').then(m => m.PersonalModule)
-      },
-      {
-        path: 'except',
-        loadChildren: () => import('../../pages/except/except.module').then(m => m.ExceptModule)
-      },
-      {
-        path: 'result',
-        loadChildren: () => import('../../pages/result/result.module').then(m => m.ResultModule)
       },
       {
         path: 'internal-manage',
@@ -47,6 +32,14 @@ const routes: Routes = [
       {
         path: 'level',
         loadChildren: () => import('../../pages/level/level.module').then(m => m.LevelModule)
+      },
+      {
+        path: 'flow',
+        loadChildren: () => import('../../pages/flow/flow.module').then(m => m.FlowModule)
+      },
+      {
+        path: 'about',
+        loadChildren: () => import('../../pages/about/about.module').then(m => m.AboutModule)
       },
       {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
     ]

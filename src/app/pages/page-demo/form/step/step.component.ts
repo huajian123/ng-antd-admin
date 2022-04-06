@@ -9,11 +9,12 @@ import {
 import {FormBuilder} from '@angular/forms';
 import {PageHeaderType} from '@shared/components/page-header/page-header.component';
 import {BreakpointObserver} from "@angular/cdk/layout";
-import {ComponentPortal, CdkPortalOutletAttachedRef, DomPortal, Portal, TemplatePortal} from '@angular/cdk/portal';
-import {StepOneComponent} from "@app/pages/form/step/step-one/step-one.component";
-import {StepTwoComponent} from "@app/pages/form/step/step-two/step-two.component";
-import {StepThreeComponent} from "@app/pages/form/step/step-three/step-three.component";
+import {ComponentPortal, CdkPortalOutletAttachedRef, Portal} from '@angular/cdk/portal';
+
 import {ComponentType} from "@angular/cdk/portal/portal";
+import { StepOneComponent } from './step-one/step-one.component';
+import { StepTwoComponent } from './step-two/step-two.component';
+import {StepThreeComponent} from "@app/pages/page-demo/form/step/step-three/step-three.component";
 
 @Component({
   selector: 'app-step',

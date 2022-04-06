@@ -1,3 +1,4 @@
+<!--非固定tab模式-->
 <nz-card *ngIf="!(themesOptions$|async)?.fixedTab;else fixTabTpl" id="multi-tab" class="m-t-10" style="height: 35px"
          [nzBodyStyle]="{padding:0}" [nzBordered]="false">
   <nz-tabset (nzClose)="clickCloseIcon($event)" [nzSelectedIndex]="currentIndex"
@@ -16,12 +17,15 @@
     </nz-tab>
   </nz-tabset>
 </nz-card>
+<!--固定tab模式-->
 <ng-template #fixTabTpl>
-  <nz-card class="fixed-tab" [ngStyle]="{top:top}" id="multi-tab2"
+  <nz-card class="fixed-tab" [ngClass]="{
+  'fixed-collapsed':(isCollapsed$|async),
+  'fixed-over-mode':(isOverMode$|async)
+  }" [ngStyle]="{top:top}" id="multi-tab2"
            [nzBodyStyle]="{padding:0}" [nzBordered]="true">
     <nz-tabset
       [nzAnimated]="false"
-      [nzTabBarStyle]="{'padding':'0 16px'}"
       [nzSelectedIndex]="currentIndex"
       [nzTabPosition]="'top'">
       <nz-tab (nzClick)="goPage(tab)" nzClosable (nzContextmenu)="contextMenu($event, menu)" [nzTitle]="titleTemplate"

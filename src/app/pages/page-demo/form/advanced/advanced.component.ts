@@ -2,9 +2,11 @@ import {ChangeDetectionStrategy, Component, OnInit, ViewChild} from '@angular/co
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PageHeaderType} from '@shared/components/page-header/page-header.component';
 import {fnCheckForm} from "@utils/tools";
-import {WarehouseManageFormComponent} from "@app/pages/form/advanced/warehouse-manage-form/warehouse-manage-form.component";
-import {TaskManageFormComponent} from "@app/pages/form/advanced/task-manage-form/task-manage-form.component";
 import {NzMessageService} from "ng-zorro-antd/message";
+import {
+  WarehouseManageFormComponent
+} from "@app/pages/page-demo/form/advanced/warehouse-manage-form/warehouse-manage-form.component";
+import {TaskManageFormComponent} from "@app/pages/page-demo/form/advanced/task-manage-form/task-manage-form.component";
 
 // 自定义表单
 /*https://juejin.cn/post/6844904018922176520*/

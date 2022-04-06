@@ -10,8 +10,10 @@
 
 }
 .fixed-tab{
-  width: 100%;
+  transition: width 0.2s;
+  width: calc(100% - 208px);
   position: fixed;
+  right: 0;
   z-index: 999;
   i{
     display: none;
@@ -19,4 +21,13 @@
     top: 4px;
     right: 0;
   }
+}
+
+
+.fixed-collapsed {
+  width: calc(100% - 48px);
+}
+
+.fixed-over-mode {
+  width: 100%;
 }

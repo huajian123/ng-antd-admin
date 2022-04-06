@@ -73,12 +73,14 @@ export interface User extends UserLogin {
 export interface Menu {
   path: string;
   title: string;
-  icon?: string;
+  icon?: string; // 如果showIcon为false，设置这个为搜索窗口时，最左侧的icon
+  alIcon?: string; // 如果showIcon为false，设置这个为搜索窗口时，最左侧的icon
   open?: boolean;
+  showIcon: boolean; // 是否展示icon
   selected?: boolean;
   children?: Menu[];
   actionCode?: string;
-  isNewLink?: boolean;
+  isNewLink?: boolean; // 是否是新页
 }
 
 

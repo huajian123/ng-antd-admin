@@ -48,7 +48,7 @@
       </div>
     </div>
     <nz-list [nzSplit]="false">
-      <nz-list-item [nzActions]="[fixedTabAction]">固定tab</nz-list-item>
+      <nz-list-item [nzActions]="[fixedTabAction]">固定页签</nz-list-item>
       <ng-template #fixedTabAction>
         <nz-switch [nzDisabled]="!_themesOptions.fixedHead"  (ngModelChange)="changeFixed($event,'fixedTab')" [ngModel]="_themesOptions.fixedTab"
                    nzSize="small"></nz-switch>

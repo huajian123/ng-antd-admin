@@ -31,7 +31,7 @@ export class ThemeService {
     fixedWidth: true,
     colorWeak: false,
     splitNav: false,
-    fixedTab: false,
+    fixedTab: true,
     fixedHead: true,
     fixedLeftNav: true,
     hasTopArea: true,
