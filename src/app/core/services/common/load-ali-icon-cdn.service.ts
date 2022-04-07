@@ -12,7 +12,7 @@ export class LoadAliIconCdnService {
 
   load(): void {
     this.iconService.fetchFromIconfont({
-      scriptUrl: 'https://at.alicdn.com/t/font_3303907_ae3xrkj46ra.js'
+      scriptUrl: 'https://at.alicdn.com/t/font_3303907_htrdo3n69kc.js'
     });
   }
 }

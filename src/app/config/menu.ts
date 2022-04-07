@@ -260,6 +260,15 @@ const menuNav: Menu[] = [
         path: '/default/feat/click-out-side',
       },
       {
+        title: '缓存滚动条',
+        icon: 'dashboard',
+        open: false,
+        showIcon: true,
+        actionCode: ActionCode.UserManage,
+        selected: false,
+        path: '/default/feat/keep-scroll-page',
+      },
+      {
         title: '地图',
         icon: 'dashboard',
         open: false,
@@ -509,7 +518,7 @@ const menuNav: Menu[] = [
   },
   {
     title: '关于',
-    icon:'format-painter',
+    alIcon:'icon-medium',
     showIcon: true,
     open: false,
     actionCode: ActionCode.UserManage,

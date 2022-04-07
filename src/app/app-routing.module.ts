@@ -13,7 +13,7 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
      preloadingStrategy: QuicklinkStrategy,
-     scrollPositionRestoration: 'enabled',
+     scrollPositionRestoration: 'top',
      // initialNavigation: 'enabledBlocking',
     useHash: true
   })],

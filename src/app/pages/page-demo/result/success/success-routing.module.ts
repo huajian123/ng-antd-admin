@@ -3,7 +3,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {SuccessComponent} from './success.component';
 
 const routes: Routes = [
-  {path: '', component: SuccessComponent, data: {title: '成功页', key: 'success', shouldDetach: 'no'}}
+  {path: '', component: SuccessComponent, data: {title: '成功页', key: 'success', }}
 ];
 
 @NgModule({

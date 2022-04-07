@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {Except500Component} from './except500.component';
 
 const routes: Routes = [
-  {path: '', component: Except500Component, data: {title: '500', key: 'except500', shouldDetach: 'no'}}
+  {path: '', component: Except500Component, data: {title: '500', key: 'except500'}}
 ];
 
 @NgModule({
