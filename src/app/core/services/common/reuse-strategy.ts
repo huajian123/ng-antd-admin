@@ -65,7 +65,7 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
 
     SimpleReuseStrategy.scrollHandlers[route.data['key']] = {scroll: innerScrollContainer};
     SimpleReuseStrategy.handlers[route.data['key']] = handle;
-    /*修改*/
+
     if (handle && handle.componentRef) {
       this.runHook('_onReuseDestroy', handle.componentRef);
     }

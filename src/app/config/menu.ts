@@ -224,7 +224,7 @@ const menuNav: Menu[] = [
     ]
   },
   {
-    title: '拓展功能',
+    title: '功能',
     icon: 'star',
     open: false,
     actionCode: ActionCode.UserManage,
@@ -232,6 +232,15 @@ const menuNav: Menu[] = [
     showIcon: true,
     path: '/default/feat',
     children: [
+      {
+        title: '图标',
+        icon: 'dashboard',
+        open: false,
+        showIcon: true,
+        actionCode: ActionCode.UserManage,
+        selected: false,
+        path: '/default/feat/icons',
+      },
       {
         title: '拖拽modal',
         icon: 'dashboard',

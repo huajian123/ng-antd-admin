@@ -8,8 +8,9 @@ import {DisabledDirective} from "./disabled.directive";
 import {ToggleFullscreenDirective} from './toggle-fullscreen.directive';
 import {TrackByPropertyDirective} from "@shared/directives/track-by-property.directive";
 import {MouseHoverShowDirective} from './mouse-hover-show.directive';
+import {NamedTemplate} from "@shared/directives/named-template";
 
-const DIRECTIVES = [MouseHoverShowDirective, TrackByPropertyDirective, ToggleFullscreenDirective, DisabledDirective, DebounceClickDirective, AdDirective, ScreenLessHiddenDirective, AuthDirective];
+const DIRECTIVES = [NamedTemplate, MouseHoverShowDirective, TrackByPropertyDirective, ToggleFullscreenDirective, DisabledDirective, DebounceClickDirective, AdDirective, ScreenLessHiddenDirective, AuthDirective];
 
 @NgModule({
   declarations: [...DIRECTIVES,],
