@@ -23,6 +23,7 @@ export class LoginOutService {
       this.tabService.clearTabs();
       this.windowServe.removeStorage(AuthKey);
       SimpleReuseStrategy.handlers = {};
+      SimpleReuseStrategy.scrollHandlers = {};
       // @ts-ignore
       SimpleReuseStrategy.waitDelete = fnFormatePath(this.activatedRoute.snapshot['_routerState'].url);
       this.router.navigate(['/login/login-form']).then(()=>{

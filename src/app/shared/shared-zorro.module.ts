@@ -46,6 +46,7 @@ import {NzResizableModule} from 'ng-zorro-antd/resizable';
 import {NzBackTopModule} from 'ng-zorro-antd/back-top';
 import {IconsProviderModule} from "@shared/icons-provider.module";
 
+
 export const SHARED_ZORRO_MODULES = [
   NzBackTopModule,
   NzResizableModule,

@@ -93,8 +93,8 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
     while (future.firstChild) {
       future = future.firstChild;
     }
-    if (SimpleReuseStrategy.scrollHandlers[future.data['key']] || SimpleReuseStrategy.waitDelete) {
-      const key = future.data['key'] || SimpleReuseStrategy.waitDelete;
+    if (SimpleReuseStrategy.scrollHandlers[future.data['key']]) {
+      const key = future.data['key'];
       if (key) {
         SimpleReuseStrategy.scrollHandlers[key].scroll.forEach((elOptionItem: { [key: string]: [number, number] }) => {
           Object.keys(elOptionItem).forEach(element => {

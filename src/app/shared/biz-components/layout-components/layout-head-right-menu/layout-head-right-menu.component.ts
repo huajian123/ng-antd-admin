@@ -84,7 +84,7 @@ export class LayoutHeadRightMenuComponent implements OnInit {
   }
 
   goPage(path: string): void {
-    this.router.navigateByUrl(`/default/personal/${path}`);
+    this.router.navigateByUrl(`/default/page-demo/personal/${path}`);
   }
 
   ngOnInit(): void {
