@@ -9,6 +9,8 @@ const routes: Routes = [
   {path: 'keep-scroll-page', loadChildren: () => import('./keep-scroll-page/keep-scroll-page.module').then(m => m.KeepScrollPageModule)},
   {path: 'icons', loadChildren: () => import('./icons/icons.module').then(m => m.IconsModule)},
   {path: 'map', loadChildren: () => import('./map/map.module').then(m => m.MapModule)},
+  {path: 'ripple', loadChildren: () => import('./ripple/ripple.module').then(m => m.RippleModule)},
+  {path: 'copy', loadChildren: () => import('./copy/copy.module').then(m => m.CopyModule)},
   {path: '', redirectTo: 'ex-modal', pathMatch: 'full'},
 ];
 

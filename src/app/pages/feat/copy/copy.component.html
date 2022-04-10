@@ -1,0 +1,11 @@
+<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+<div class="normal-table-wrap">
+<nz-card nzTitle="复制示例">
+  <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
+    <input type="text" nz-input  [(ngModel)]="value" placeholder="input search text" />
+  </nz-input-group>
+  <ng-template #suffixButton>
+    <button nz-button nzType="primary" (click)="info()" [cdkCopyToClipboard]="value" nzSize="large" nzSearch>copy</button>
+  </ng-template>
+</nz-card>
+</div>

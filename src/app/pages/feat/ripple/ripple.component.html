@@ -1,0 +1,27 @@
+<app-page-header  [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+
+<div class="normal-table-wrap">
+  <nz-card>
+    <div>
+      <label nz-checkbox [(ngModel)]="centered">centered</label>
+      <label nz-checkbox [(ngModel)]="disabled">disabled</label>
+      <label nz-checkbox [(ngModel)]="unbounded">unbounded</label>
+      <nz-input-number [(ngModel)]="radius" [nzMin]="0"></nz-input-number>
+      <input [style.background]="color"
+             [colorPicker]="color"
+             (colorPickerChange)="color=$event"/>
+    </div>
+
+    <div class="center" style="height: 400px;box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2)"
+         matRipple
+         [matRippleCentered]="centered"
+         [matRippleDisabled]="disabled"
+         [matRippleUnbounded]="unbounded"
+         [matRippleRadius]="radius"
+         [matRippleColor]="color">
+      Click me
+    </div>
+
+
+  </nz-card>
+</div>
