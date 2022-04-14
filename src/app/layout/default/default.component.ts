@@ -31,13 +31,11 @@ export class DefaultComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    setTimeout(() => {
-      if (this.windowService.getStorage(IsFirstLogin) === "false") {
-        return;
-      }
-      this.windowService.setStorage(IsFirstLogin, "false");
-      this.driverService.load();
-    }, 500)
+    if (this.windowService.getStorage(IsFirstLogin) === "false") {
+      return;
+    }
+    this.windowService.setStorage(IsFirstLogin, "false");
+    this.driverService.load();
 
   }
 

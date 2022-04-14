@@ -8,6 +8,7 @@ import {LockScreenStoreService} from "@store/lock-screen-store/lock-screen-store
 import {NzSafeAny} from "ng-zorro-antd/core/types";
 import {ModalWrapService} from "@widget/base-modal";
 import {fnStopMouseEvent} from "@utils/tools";
+import {DrawerWrapService} from "@app/drawer/base-drawer";
 
 @Component({
   selector: 'app-root',
@@ -27,12 +28,21 @@ import {fnStopMouseEvent} from "@utils/tools";
     <ng-template #modalBtnTpl>
       <div class="center">
         <span class="hover-blue full-height flex-auto text-right d-i-b" (click)="fullScreenIconClick($event)">
-            <i class="m-r-8" nz-icon [nzType]="!modalFullScreenFlag?'fullscreen':'fullscreen-exit'" nzTheme="outline"></i>
+            <i class="m-r-8" nz-icon [nzType]="!modalFullScreenFlag?'fullscreen':'fullscreen-exit'"
+               nzTheme="outline"></i>
         </span>
         <span (click)="modalFullScreenFlag=false" class="hover-red full-height flex-auto d-i-b">
             <i nz-icon nzType="close" nzTheme="outline"></i>
         </span>
       </div>
+    </ng-template>
+
+    <ng-template #drawerFootDefaultTpl>
+      <div class="end-start-center">
+        <button nzType="default" class="m-r-8" (click)="drawerWrapService.cancel()" nz-button>取消</button>
+        <button nzType="primary" (click)="drawerWrapService.sure()" nz-button >确定</button>
+      </div>
+
     </ng-template>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -43,10 +53,11 @@ import {fnStopMouseEvent} from "@utils/tools";
 export class AppComponent implements OnInit, AfterViewInit {
   loading$ = this.spinService.getCurrentGlobalSpinStore();
   lockedState$ = this.lockScreenStoreService.getLockScreenStore();
-  @ViewChild("modalBtnTpl") template!: TemplateRef<any>;
+  @ViewChild("modalBtnTpl") modalBtnTpl!: TemplateRef<any>;
+  @ViewChild("drawerFootDefaultTpl") drawerFootDefaultTpl!: TemplateRef<any>;
   modalFullScreenFlag = false;
 
-  constructor(private modalWrapService: ModalWrapService, private lockScreenStoreService: LockScreenStoreService, private preloader: PreloaderService, private spinService: SpinService, public router: Router) {
+  constructor(public drawerWrapService: DrawerWrapService, private modalWrapService: ModalWrapService, private lockScreenStoreService: LockScreenStoreService, private preloader: PreloaderService, private spinService: SpinService, public router: Router) {
   }
 
   // 所有对话框扩展最大化按钮，将templateRef传入Modal基础service的妥协方法
@@ -68,7 +79,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.preloader.removePreLoader();
-    this.modalWrapService.setTemplate(this.template);
+    this.modalWrapService.setTemplate(this.modalBtnTpl);
+    this.drawerWrapService.setTemplate(this.drawerFootDefaultTpl);
   }
 }
 

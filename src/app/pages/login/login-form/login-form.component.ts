@@ -29,8 +29,8 @@ export class LoginFormComponent implements OnInit {
 
 
   submitForm(): void {
+    /*直到43行的 return 都是模拟登录，实际操作可以直接将33-43行删除*/
     this.spinService.setCurrentGlobalSpinStore(true);
-    /*模拟登录*/
     this.windowServe.setStorage(AuthKey, 'TokenPre + token');
     this.authService.setAuthCode(this.authService.parsToken(TokenPre));
     // if (!fnCheckForm(this.validateForm)) {
@@ -41,16 +41,21 @@ export class LoginFormComponent implements OnInit {
       this.spinService.setCurrentGlobalSpinStore(false);
     }, 100);
     return;
+    // 校验表单
     if (!fnCheckForm(this.validateForm)) {
       return;
     }
+    // 设置全局loading
     this.spinService.setCurrentGlobalSpinStore(true);
+    // 获取表单的值
     const param = this.validateForm.getRawValue();
+    // 调用登录接口
     this.dataService.login(param).pipe(finalize(() => {
       this.spinService.setCurrentGlobalSpinStore(false);
     })).subscribe((token) => {
+      // 从登录接口返回的token设置storage中
       this.windowServe.setStorage(AuthKey, TokenPre + token);
-      // this.authService.parsToken(token);
+      // 将token中解析出来的该用户拥有的权限码设置于全局状态
       this.authService.setAuthCode(this.authService.parsToken(TokenPre + token));
       this.router.navigateByUrl('default/dashboard/analysis');
     });

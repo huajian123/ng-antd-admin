@@ -20,7 +20,12 @@ export class LockWidgetComponent extends BasicConfirmModalComponent implements O
   validateForm!: FormGroup;
   passwordVisible = false;
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, private lockScreenStoreService: LockScreenStoreService, protected override modalRef: NzModalRef, private fb: FormBuilder, private windowSrv: WindowService) {
+  constructor(private activatedRoute: ActivatedRoute,
+              private router: Router,
+              private lockScreenStoreService: LockScreenStoreService,
+              protected override modalRef: NzModalRef,
+              private fb: FormBuilder,
+              private windowSrv: WindowService) {
     super(modalRef);
   }
 

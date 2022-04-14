@@ -41,6 +41,10 @@ const routes: Routes = [
         path: 'about',
         loadChildren: () => import('../../pages/about/about.module').then(m => m.AboutModule)
       },
+      {
+        path: 'setup',
+        loadChildren: () => import('../../pages/setup/setup.module').then(m => m.SetupModule)
+      },
       {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
     ]
   }

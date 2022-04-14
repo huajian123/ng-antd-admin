@@ -251,6 +251,15 @@ const menuNav: Menu[] = [
         path: '/default/feat/ex-modal',
       },
       {
+        title: '封装抽屉',
+        icon: 'dashboard',
+        open: false,
+        showIcon: true,
+        actionCode: ActionCode.UserManage,
+        selected: false,
+        path: '/default/feat/ex-drawer',
+      },
+      {
         title: '富文本',
         icon: 'dashboard',
         open: false,
@@ -542,6 +551,15 @@ const menuNav: Menu[] = [
         actionCode: ActionCode.UserManage,
       },
     ]
+  },
+  {
+    title: '引导页',
+    alIcon:'icon-medium',
+    showIcon: true,
+    open: false,
+    actionCode: ActionCode.UserManage,
+    selected: false,
+    path: '/default/setup',
   },
   {
     title: '关于',
