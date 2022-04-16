@@ -28,6 +28,7 @@ interface TableSizeItem {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardTableWrapComponent implements OnInit, AfterContentInit {
+  @Input() tableTitle: string | TemplateRef<NzSafeAny> | undefined;
   @Input() btnTpl: TemplateRef<NzSafeAny> | undefined;
   @Input() isNormalTable = true; // 如果只是需要card-table-wrap的样式，这里设置为false
   @Output() reload = new EventEmitter<NzSafeAny>();

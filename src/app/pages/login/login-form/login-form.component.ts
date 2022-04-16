@@ -50,6 +50,13 @@ export class LoginFormComponent implements OnInit {
     // 获取表单的值
     const param = this.validateForm.getRawValue();
     // 调用登录接口
+    // 登录后台返回统一模式为,如果code不为0，会自动被拦截，如果需要修改，请在
+    // src/app/core/services/http/base-http.service.ts中进行修改
+    // {
+    //   code:number,
+    //   data:any,
+    //   msg：string
+    // }
     this.dataService.login(param).pipe(finalize(() => {
       this.spinService.setCurrentGlobalSpinStore(false);
     })).subscribe((token) => {

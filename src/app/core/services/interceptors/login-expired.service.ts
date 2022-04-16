@@ -8,7 +8,7 @@ import {ModalBtnStatus} from '@widget/base-modal';
 import {Router} from '@angular/router';
 import {WindowService} from '../common/window.service';
 import {AuthService} from '@store/auth.service';
-import {AuthKey, TokenPre} from "@config/constant";
+import {AuthKey, loginTimeOutCode, TokenPre} from "@config/constant";
 import {LoginOutService} from "@core/services/common/login-out.service";
 
 @Injectable()
@@ -41,7 +41,7 @@ export class LoginExpiredService implements HttpInterceptor {
   // 登录过期拦截
   private loginExpiredFn(req: HttpRequest<string>, next: HttpHandler): NzSafeAny {
     return switchMap((event: HttpResponse<NzSafeAny>): NzSafeAny => {
-      if (event.type !== HttpEventType.Response || event.body.code !== 3013) {
+      if (event.type !== HttpEventType.Response || event.body.code !== loginTimeOutCode) {
         return of(event);
       }
       if (this.refresher) {

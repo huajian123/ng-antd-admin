@@ -11,6 +11,9 @@ export const IsFirstLogin = 'IsFirstLogin';
 export const LockedKey = 'LockedKey';
 export const salt = "EIpWsyfiy@R@X#qn17!StJNdZK1fFF8iV6ffN!goZkqt#JxO"; // 加盐
 
+// 登录超时code码
+export const loginTimeOutCode = 3013;
+
 // 左侧菜单变成over模式最大的宽度
 export const SideCollapsedMaxWidth = 700;
 // 顶部菜单变成over模式最大的宽度

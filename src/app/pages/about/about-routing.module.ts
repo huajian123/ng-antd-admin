@@ -4,7 +4,6 @@ import {AboutComponent} from "@app/pages/about/about.component";
 
 const routes: Routes = [
   {path: '', component: AboutComponent, data: {title: '关于', key: 'about'}}
-
 ];
 
 @NgModule({

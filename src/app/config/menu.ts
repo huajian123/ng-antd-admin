@@ -278,13 +278,33 @@ const menuNav: Menu[] = [
         path: '/default/feat/click-out-side',
       },
       {
-        title: '缓存滚动条',
+        title: '滚动条',
         icon: 'dashboard',
         open: false,
         showIcon: true,
         actionCode: ActionCode.UserManage,
         selected: false,
-        path: '/default/feat/keep-scroll-page',
+        path: '/default/feat/scroll',
+        children: [
+          {
+            title: '缓存滚动条',
+            icon: 'dashboard',
+            open: false,
+            showIcon: false,
+            actionCode: ActionCode.UserManage,
+            selected: false,
+            path: '/default/feat/scroll/keep-scroll-page',
+          },
+          {
+            title: '玩弄滚动条',
+            icon: 'dashboard',
+            open: false,
+            showIcon: false,
+            actionCode: ActionCode.UserManage,
+            selected: false,
+            path: '/default/feat/scroll/play-scroll',
+          }
+        ]
       },
       {
         title: '地图',
