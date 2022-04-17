@@ -4,7 +4,7 @@ import {NzContextMenuService, NzDropdownMenuComponent} from 'ng-zorro-antd/dropd
 import {ThemeService} from '@store/common-store/theme.service';
 import {NavigationEnd, Router} from '@angular/router';
 import {filter} from 'rxjs/operators';
-import { fnStopMouseEvent} from '@utils/tools';
+import {fnStopMouseEvent} from '@utils/tools';
 import {NzSafeAny} from "ng-zorro-antd/core/types";
 import {DestroyService} from "@core/services/common/destory.service";
 import {SplitNavStoreService} from "@store/common-store/split-nav-store.service";
@@ -58,6 +58,9 @@ export class TabComponent implements OnInit {
 
   // 右键点击关闭左侧tab
   closeLeftTab(tab: TabModel, e: MouseEvent, index: number): void {
+    if (index === 0) {
+      return;
+    }
     fnStopMouseEvent(e);
     this.tabService.delLeftTab(tab.path, index);
   }
