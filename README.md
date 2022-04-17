@@ -3,9 +3,6 @@
 
 # 项目视频介绍
 使用本项目遇到问题，可以加入376065816 qq群号与我沟通。<br>
-如果您使用本项目用于生产，请于[此issues](https://github.com/huajian123/ng-ant-admin/issues/10)
-中通知告诉我，让我高兴高兴。
-。<br>
 如果本项目对您有用，麻烦帮我点个star，谢谢啊<br>
 if help you, if you want ,please give me a star ,thank you<br>
 If you use this project for production ,if you want ,please tell me on this way[issues](https://github.com/huajian123/ng-ant-admin/issues/10), Someone is using this project,let me happy.<br>

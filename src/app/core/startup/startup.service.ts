@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {WindowService} from "../services/common/window.service";
 import {AuthKey} from "@config/constant";
-import {AuthService} from "@store/auth.service";
+import {AuthService} from "@store/common-store/auth.service";
 
 @Injectable({
   providedIn: 'root',

@@ -5,19 +5,20 @@
 <ng-template #back>
   <span class="operate-text">返回</span>
 </ng-template>
+<div class="normal-table-wrap">
+  <h1>输入框演示</h1>
+  <input nz-input [(ngModel)]="name">
 
-<h1>输入框演示</h1>
-<input nz-input [(ngModel)]="name">
+  <nz-divider></nz-divider>
 
-<nz-divider></nz-divider>
+  <h1>表单演示</h1>
+  <form nz-form [formGroup]="validateForm"  (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-control nzErrorTip="请输入用户名!">
+        <input type="text" nz-input formControlName="userName" placeholder="用户名"/>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
 
-<h1>表单演示</h1>
-<form nz-form [formGroup]="validateForm"  (ngSubmit)="submitForm()">
-  <nz-form-item>
-    <nz-form-control nzErrorTip="请输入用户名!">
-      <input type="text" nz-input formControlName="userName" placeholder="用户名"/>
-    </nz-form-control>
-  </nz-form-item>
-  <button nz-button nzSize="large" [nzType]="'primary'">登 录</button>
+</div>
 
-</form>

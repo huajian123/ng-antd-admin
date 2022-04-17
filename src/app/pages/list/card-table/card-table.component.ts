@@ -1,6 +1,6 @@
 import {Component, OnInit, ChangeDetectionStrategy, AfterViewInit, ViewChild, TemplateRef} from '@angular/core';
 import {PageHeaderType} from '@shared/components/page-header/page-header.component';
-import {ThemeService} from '@core/services/store/theme.service';
+import {ThemeService} from '@store/common-store/theme.service';
 import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 @Component({

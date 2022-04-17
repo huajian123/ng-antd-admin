@@ -7,7 +7,7 @@ import {
   UrlTree
 } from '@angular/router';
 import {Observable} from 'rxjs';
-import {LockScreenFlag, LockScreenStoreService} from "@store/lock-screen-store/lock-screen-store.service";
+import {LockScreenFlag, LockScreenStoreService} from "@store/common-store/lock-screen-store.service";
 
 /*守卫锁屏页面*/
 @Injectable({

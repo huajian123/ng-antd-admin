@@ -1,5 +1,5 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef} from '@angular/core';
-import {ThemeService} from '@core/services/store/theme.service';
+import {ChangeDetectionStrategy, Component, Input, OnInit, Output, TemplateRef} from '@angular/core';
+import {ThemeService} from '@store/common-store/theme.service';
 import {Router} from '@angular/router';
 import {NzSafeAny} from "ng-zorro-antd/core/types";
 

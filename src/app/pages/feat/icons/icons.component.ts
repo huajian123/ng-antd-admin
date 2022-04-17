@@ -10,6 +10,7 @@ interface IconItem {
   icon: string;
   isChecked: boolean;
 }
+
 const THUMBUP_ICON =
   `
   <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px">
@@ -19,6 +20,7 @@ const THUMBUP_ICON =
   `1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-1.91l-.01-.01L23 10z"/>
   </svg>
 `;
+
 @Component({
   selector: 'app-icons',
   templateUrl: './icons.component.html',
@@ -33,6 +35,7 @@ export class IconsComponent implements OnInit, AfterViewInit {
     breadcrumb: ['首页', '功能', '图标'],
     desc: '在图标选择器中演示：搜索防抖，前端分页功能。'
   };
+  visible = false;
   // 做图标搜索防抖
   private searchText$ = new Subject<string>();
   seletedIcon = '';
@@ -57,7 +60,7 @@ export class IconsComponent implements OnInit, AfterViewInit {
     width: '10%',
   };
 
-  constructor(private cdr: ChangeDetectorRef, private destroy$: DestroyService,iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+  constructor(private cdr: ChangeDetectorRef, private destroy$: DestroyService, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
     // Note that we provide the icon here as a string literal here due to a limitation in
     // Stackblitz. If you want to provide the icon from a URL, you can use:
     // `iconRegistry.addSvgIcon('thumbs-up', sanitizer.bypassSecurityTrustResourceUrl('icon.svg'));`

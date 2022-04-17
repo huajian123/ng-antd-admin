@@ -7,7 +7,7 @@ import {filter, finalize, share, switchMap} from 'rxjs/operators';
 import {ModalBtnStatus} from '@widget/base-modal';
 import {Router} from '@angular/router';
 import {WindowService} from '../common/window.service';
-import {AuthService} from '@store/auth.service';
+import {AuthService} from '@store/common-store/auth.service';
 import {AuthKey, loginTimeOutCode, TokenPre} from "@config/constant";
 import {LoginOutService} from "@core/services/common/login-out.service";
 

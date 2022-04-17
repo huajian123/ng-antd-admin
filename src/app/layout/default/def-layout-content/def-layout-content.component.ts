@@ -1,8 +1,8 @@
 import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {Observable} from "rxjs";
-import {SettingInterface, ThemeService} from "@store/theme.service";
+import {SettingInterface, ThemeService} from "@store/common-store/theme.service";
 import {takeUntil} from "rxjs/operators";
-import {SplitNavStoreService} from "@store/split-nav-store/split-nav-store.service";
+import {SplitNavStoreService} from "@store/common-store/split-nav-store.service";
 import {DestroyService} from "@core/services/common/destory.service";
 
 @Component({

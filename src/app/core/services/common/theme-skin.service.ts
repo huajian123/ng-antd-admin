@@ -1,5 +1,5 @@
 import {Inject, Injectable} from '@angular/core';
-import {ThemeService} from "@store/theme.service";
+import {ThemeService} from "@store/common-store/theme.service";
 import {first} from "rxjs/operators";
 import {DOCUMENT} from "@angular/common";
 import {NzSafeAny} from "ng-zorro-antd/core/types";

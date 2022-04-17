@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ThemeService} from "@store/theme.service";
+import {ThemeService} from "@store/common-store/theme.service";
 import {WindowService} from "./window.service";
 import {IsNightKey, ThemeOptionsKey} from "@config/constant";
 import {first} from "rxjs/operators";

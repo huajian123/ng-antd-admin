@@ -1,5 +1,5 @@
 import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {ThemeService} from '@core/services/store/theme.service';
+import {ThemeService} from '@store/common-store/theme.service';
 import {Observable} from "rxjs";
 
 

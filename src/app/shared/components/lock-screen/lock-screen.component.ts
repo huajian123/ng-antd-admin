@@ -1,8 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {Observable, timer} from "rxjs";
 import {map, takeUntil} from "rxjs/operators";
 import {getDay} from 'date-fns'
@@ -11,7 +7,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {fnCheckForm, fnEncrypt} from "@utils/tools";
 import {LockedKey, salt} from "@config/constant";
 import {WindowService} from "@core/services/common/window.service";
-import {LockScreenFlag, LockScreenStoreService} from "@store/lock-screen-store/lock-screen-store.service";
+import {LockScreenFlag, LockScreenStoreService} from "@store/common-store/lock-screen-store.service";
 import {LoginOutService} from "@core/services/common/login-out.service";
 import {Router} from "@angular/router";
 import {DestroyService} from "@core/services/common/destory.service";

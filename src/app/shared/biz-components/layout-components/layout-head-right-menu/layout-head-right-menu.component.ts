@@ -6,7 +6,7 @@ import {ModalOptions} from "ng-zorro-antd/modal";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {LockWidgetService} from "@widget/common-widget/lock-widget/lock-widget.service";
 import {LoginOutService} from "@core/services/common/login-out.service";
-import {SpinService} from "@store/spin-store/spin.service";
+import {SpinService} from "@store/common-store/spin.service";
 import {ChangePasswordService} from "@widget/biz-widget/change-password/change-password.service";
 import {ModalBtnStatus} from "@widget/base-modal";
 

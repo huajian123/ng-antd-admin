@@ -1,9 +1,9 @@
 import {Component, OnInit, ChangeDetectionStrategy, Input, TemplateRef, Renderer2, ElementRef} from '@angular/core';
-import {ThemeService} from '@core/services/store/theme.service';
+import {ThemeService} from '@store/common-store/theme.service';
 import { takeUntil, tap} from "rxjs/operators";
 import {NzSafeAny} from "ng-zorro-antd/core/types";
 import {merge} from "rxjs";
-import {SplitNavStoreService} from "@store/split-nav-store/split-nav-store.service";
+import {SplitNavStoreService} from "@store/common-store/split-nav-store.service";
 import {DestroyService} from "@core/services/common/destory.service";
 import {Menu} from "@core/services/types";
 

@@ -6,10 +6,9 @@ import {PhoneLoginComponent} from "@app/pages/other-login/login1/phone-login/pho
 import {QrLoginComponent} from "@app/pages/other-login/login1/qr-login/qr-login.component";
 import {RegistLoginComponent} from "@app/pages/other-login/login1/regist-login/regist-login.component";
 import {Login1StoreService} from "@store/biz-store-service/other-login/login1-store.service";
-import {Subject} from "rxjs";
 import {takeUntil} from "rxjs/operators";
 import {BreakpointObserver} from "@angular/cdk/layout";
-import {ThemeService} from "@store/theme.service";
+import {ThemeService} from "@store/common-store/theme.service";
 import {IsNightKey} from "@config/constant";
 import {ThemeSkinService} from "@core/services/common/theme-skin.service";
 import {WindowService} from "@core/services/common/window.service";

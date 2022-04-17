@@ -1,13 +1,13 @@
 import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
 import {TabModel, TabService} from '@core/services/common/tab.service';
 import {NzContextMenuService, NzDropdownMenuComponent} from 'ng-zorro-antd/dropdown';
-import {ThemeService} from '@core/services/store/theme.service';
+import {ThemeService} from '@store/common-store/theme.service';
 import {NavigationEnd, Router} from '@angular/router';
 import {filter} from 'rxjs/operators';
-import {fnStopMouseEvent} from '@utils/tools';
+import { fnStopMouseEvent} from '@utils/tools';
 import {NzSafeAny} from "ng-zorro-antd/core/types";
 import {DestroyService} from "@core/services/common/destory.service";
-import {SplitNavStoreService} from "@store/split-nav-store/split-nav-store.service";
+import {SplitNavStoreService} from "@store/common-store/split-nav-store.service";
 
 @Component({
   selector: 'app-tab',
@@ -18,6 +18,7 @@ import {SplitNavStoreService} from "@store/split-nav-store/split-nav-store.servi
 })
 export class TabComponent implements OnInit {
   tabs = this.tabService.getTabArray();
+  tabsSourceData$ = this.tabService.getTabArray$();
   themesOptions$ = this.themesService.getThemesMode();
   isNightTheme$ = this.themesService.getIsNightTheme();
   leftMenuArray$ = this.splitNavStoreService.getSplitLeftNavArrayStore();
@@ -30,7 +31,7 @@ export class TabComponent implements OnInit {
               private splitNavStoreService: SplitNavStoreService,
               private themesService: ThemeService,
               private destroy$: DestroyService,
-              private router: Router, public cdr: ChangeDetectorRef) {
+              public router: Router, public cdr: ChangeDetectorRef) {
     (this.router.events.pipe(filter((event: NzSafeAny) => event instanceof NavigationEnd))).subscribe((event: NzSafeAny) => {
       this.cdr.markForCheck();
     });
@@ -53,6 +54,12 @@ export class TabComponent implements OnInit {
   closeRithTab(tab: TabModel, e: MouseEvent, index: number): void {
     fnStopMouseEvent(e);
     this.tabService.delRightTab(tab.path, index);
+  }
+
+  // 右键点击关闭左侧tab
+  closeLeftTab(tab: TabModel, e: MouseEvent, index: number): void {
+    fnStopMouseEvent(e);
+    this.tabService.delLeftTab(tab.path, index);
   }
 
   // 关闭其他tab
@@ -81,10 +88,7 @@ export class TabComponent implements OnInit {
   }
 
   refresh(): void {
-    const currentRoute = this.router.url;
-    this.router.navigateByUrl("/", {skipLocationChange: true}).then(() => {
-      this.router.navigate([currentRoute]);
-    });
+    this.tabService.refresh();
   }
 
   contextMenu($event: MouseEvent, menu: NzDropdownMenuComponent): void {

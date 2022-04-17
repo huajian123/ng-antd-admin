@@ -2,11 +2,13 @@
 
 <div class="normal-table-wrap">
   <nz-card nzTitle="图标选择器">
+    <button nz-button nzType="primary" class="m-b-8" (click)="visible=true">打开图标选择器</button>
     <nz-input-group [nzAddOnAfter]="selIcon">
       <input nz-input [placeholder]="'点击右侧图标选择图标，这句话有点绕'" disabled [(ngModel)]="seletedIcon">
     </nz-input-group>
     <ng-template #selIcon>
       <i nz-popover
+         [(nzPopoverVisible)]="visible"
          [nzPopoverTitle]="searchTitle"
          nzPopoverTrigger="click"
          [nzPopoverContent]="contentTemplate"

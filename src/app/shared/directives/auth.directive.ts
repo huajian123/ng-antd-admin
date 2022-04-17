@@ -1,5 +1,5 @@
 import {Directive, Input, TemplateRef, ViewContainerRef} from '@angular/core';
-import {AuthService} from '@core/services/store/auth.service';
+import {AuthService} from '@store/common-store/auth.service';
 import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 @Directive({

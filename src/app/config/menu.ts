@@ -242,6 +242,15 @@ const menuNav: Menu[] = [
         path: '/default/feat/icons',
       },
       {
+        title: '标签页操作',
+        icon: 'dashboard',
+        open: false,
+        showIcon: true,
+        actionCode: ActionCode.UserManage,
+        selected: false,
+        path: '/default/feat/tabs',
+      },
+      {
         title: '拖拽modal',
         icon: 'dashboard',
         open: false,

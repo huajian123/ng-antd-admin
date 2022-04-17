@@ -1,13 +1,13 @@
 import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Input, Inject} from '@angular/core';
 import {filter, map, mergeMap, share, switchMap, takeUntil, tap} from 'rxjs/operators';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
-import {ThemeService} from '@core/services/store/theme.service';
+import {ThemeService} from '@store/common-store/theme.service';
 import {Title} from '@angular/platform-browser';
-import {SplitNavStoreService} from '@core/services/store/split-nav-store/split-nav-store.service';
+import {SplitNavStoreService} from '@store/common-store/split-nav-store.service';
 import {Menu} from "@core/services/types";
 import {DOCUMENT} from "@angular/common";
 import {MENU_TOKEN} from "@config/menu";
-import {AuthService} from "@core/services/store/auth.service";
+import {AuthService} from "@store/common-store/auth.service";
 import {TabService} from "@core/services/common/tab.service";
 import {DestroyService} from "@core/services/common/destory.service";
 import {Observable} from "rxjs";

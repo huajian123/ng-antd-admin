@@ -2,11 +2,10 @@ import {Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {LoginType} from "@app/pages/other-login/login1/login1.component";
 import {Login1StoreService} from "@store/biz-store-service/other-login/login1-store.service";
-import {Subject} from "rxjs";
 import {takeUntil} from "rxjs/operators";
-import {SpinService} from "@store/spin-store/spin.service";
+import {SpinService} from "@store/common-store/spin.service";
 import {AuthKey, TokenPre} from "@config/constant";
-import {AuthService} from "@store/auth.service";
+import {AuthService} from "@store/common-store/auth.service";
 import {Router} from "@angular/router";
 import {WindowService} from "@core/services/common/window.service";
 import {DestroyService} from "@core/services/common/destory.service";

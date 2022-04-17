@@ -8,6 +8,7 @@ const routes: Routes = [
   {path: 'click-out-side', loadChildren: () => import('./click-out-side/click-out-side.module').then(m => m.ClickOutSideModule)},
   {path: 'color-sel', loadChildren: () => import('./color-sel/color-sel.module').then(m => m.ColorSelModule)},
   {path: 'scroll', loadChildren: () => import('./scroll/scroll.module').then(m => m.ScrollModule)},
+  {path: 'tabs', loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsModule)},
   {path: 'icons', loadChildren: () => import('./icons/icons.module').then(m => m.IconsModule)},
   {path: 'map', loadChildren: () => import('./map/map.module').then(m => m.MapModule)},
   {path: 'ripple', loadChildren: () => import('./ripple/ripple.module').then(m => m.RippleModule)},

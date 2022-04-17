@@ -3,7 +3,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {LoginType} from "@app/pages/other-login/login1/login1.component";
 import {Login1StoreService} from "@store/biz-store-service/other-login/login1-store.service";
 import {takeUntil} from "rxjs/operators";
-import {EquipmentWidth, WindowsWidthService} from "@store/windows-width-store/windows-width.service";
+import {EquipmentWidth, WindowsWidthService} from "@store/common-store/windows-width.service";
 import {DestroyService} from "@core/services/common/destory.service";
 
 /*https://www.npmjs.com/package/angular-password-strength-meter*/

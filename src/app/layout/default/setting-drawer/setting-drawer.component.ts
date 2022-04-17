@@ -1,9 +1,8 @@
-import {ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit, Renderer2,} from '@angular/core';
-import {Subject} from 'rxjs';
+import {ChangeDetectionStrategy, Component, Inject, OnInit, Renderer2,} from '@angular/core';
 import {first} from 'rxjs/operators';
 import {DOCUMENT} from '@angular/common';
 import {NzMessageService} from 'ng-zorro-antd/message';
-import {SettingInterface, ThemeService} from "@core/services/store/theme.service";
+import {SettingInterface, ThemeService} from "@store/common-store/theme.service";
 import {ThemeSkinService} from "@core/services/common/theme-skin.service";
 import {WindowService} from "@core/services/common/window.service";
 import {IsNightKey, ThemeOptionsKey} from "@config/constant";

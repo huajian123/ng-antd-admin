@@ -5,7 +5,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {fnCheckForm, fnEncrypt} from "@utils/tools";
 import {WindowService} from "@core/services/common/window.service";
 import {LockedKey, salt} from "@config/constant";
-import {LockScreenFlag, LockScreenStoreService} from "@store/lock-screen-store/lock-screen-store.service";
+import {LockScreenFlag, LockScreenStoreService} from "@store/common-store/lock-screen-store.service";
 import {of} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NzSafeAny} from "ng-zorro-antd/core/types";

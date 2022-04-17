@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {BreakpointObserver} from "@angular/cdk/layout";
 import {switchMap} from "rxjs/operators";
-import {ThemeService} from "@store/theme.service";
+import {ThemeService} from "@store/common-store/theme.service";
 import {SideCollapsedMaxWidth, TopCollapsedMaxWidth} from "@config/constant";
-import {EquipmentWidth, WindowsWidthService} from "@store/windows-width-store/windows-width.service";
+import {EquipmentWidth, WindowsWidthService} from "@store/common-store/windows-width.service";
 
 /*监听屏幕宽度服务*/
 @Injectable({

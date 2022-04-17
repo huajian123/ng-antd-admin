@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {WindowService} from "@core/services/common/window.service";
-import {LockScreenStoreService} from "@store/lock-screen-store/lock-screen-store.service";
+import {LockScreenStoreService} from "@store/common-store/lock-screen-store.service";
 import {LockedKey, salt} from "@config/constant";
 import {fnDecrypt, fnEncrypt} from "@utils/tools";
 import {first} from "rxjs/operators";

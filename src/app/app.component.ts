@@ -1,10 +1,10 @@
 import {AfterViewInit, ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {SpinService} from '@core/services/store/spin-store/spin.service';
+import {SpinService} from '@store/common-store/spin.service';
 import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
 import {filter} from 'rxjs/operators';
 import {fadeRouteAnimation} from "./animations/fade.animation";
 import {PreloaderService} from "@core/services/common/preloader.service";
-import {LockScreenStoreService} from "@store/lock-screen-store/lock-screen-store.service";
+import {LockScreenStoreService} from "@store/common-store/lock-screen-store.service";
 import {NzSafeAny} from "ng-zorro-antd/core/types";
 import {ModalWrapService} from "@widget/base-modal";
 import {fnStopMouseEvent} from "@utils/tools";
