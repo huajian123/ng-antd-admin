@@ -26,7 +26,15 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
     }
   }
 
+
   constructor(@Inject(DOCUMENT) private doc: Document, private scrollService: ScrollService) {
+  }
+
+
+  getKey(route: ActivatedRouteSnapshot): string {
+    return route.data['newTab'] === 'true' ?
+      route.data['key'] + JSON.stringify(route.queryParams) :
+      route.data['key'];
   }
 
   // 是否允许复用路由
@@ -39,12 +47,13 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
     if (route.data['shouldDetach'] === 'no') {
       return;
     }
-    if (SimpleReuseStrategy.waitDelete === route.data['key']) {
+    const key = this.getKey(route);
+    if (SimpleReuseStrategy.waitDelete === key) {
       // 如果待删除是当前路由则不存储快照
       this.runHook('_onReuseDestroy', handle.componentRef);
       handle.componentRef.destroy();
       SimpleReuseStrategy.waitDelete = null;
-      delete SimpleReuseStrategy.scrollHandlers[route.data['key']]
+      delete SimpleReuseStrategy.scrollHandlers[key]
       return;
     }
 
@@ -63,8 +72,8 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
       innerScrollContainer.push({'window': this.scrollService.getScrollPosition()});
     }
 
-    SimpleReuseStrategy.scrollHandlers[route.data['key']] = {scroll: innerScrollContainer};
-    SimpleReuseStrategy.handlers[route.data['key']] = handle;
+    SimpleReuseStrategy.scrollHandlers[key] = {scroll: innerScrollContainer};
+    SimpleReuseStrategy.handlers[key] = handle;
 
     if (handle && handle.componentRef) {
       this.runHook('_onReuseDestroy', handle.componentRef);
@@ -73,30 +82,33 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
 
   //  是否允许还原路由
   shouldAttach(route: ActivatedRouteSnapshot): boolean {
-    return !!route.data['key'] && !!SimpleReuseStrategy.handlers[route.data['key']];
+    const key = this.getKey(route);
+    return !!key && !!SimpleReuseStrategy.handlers[key];
   }
 
 
   // 获取存储路由
   retrieve(route: ActivatedRouteSnapshot): DetachedRouteHandle {
-    return !route.data['key'] ? null : SimpleReuseStrategy.handlers[route.data['key']];
+    const key = this.getKey(route);
+    return !key ? null : SimpleReuseStrategy.handlers[key];
   }
 
   // 进入路由触发，是否同一路由时复用路由
   shouldReuseRoute(future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot): boolean {
-    if (!!future.data['key'] && SimpleReuseStrategy.handlers[future.data['key']]) {
-      this.runHook('_onReuseInit', SimpleReuseStrategy.handlers[future.data['key']].componentRef);
+    const futureKey = this.getKey(future);
+    const currKey = this.getKey(curr);
+    if (!!futureKey && SimpleReuseStrategy.handlers[futureKey]) {
+      this.runHook('_onReuseInit', SimpleReuseStrategy.handlers[futureKey].componentRef);
     }
     // 在这里记住是否复用路由的结果，因为下面要改变future的路由
-    const result = future.data['key'] === curr.data['key'];
+    const result = futureKey === currKey;
     // 懒加载读取不到data，通过此方法下钻到最下一级路由
     while (future.firstChild) {
       future = future.firstChild;
     }
-    if (SimpleReuseStrategy.scrollHandlers[future.data['key']]) {
-      const key = future.data['key'];
-      if (key) {
-        SimpleReuseStrategy.scrollHandlers[key].scroll.forEach((elOptionItem: { [key: string]: [number, number] }) => {
+    if (SimpleReuseStrategy.scrollHandlers[futureKey]) {
+      if (futureKey) {
+        SimpleReuseStrategy.scrollHandlers[futureKey].scroll.forEach((elOptionItem: { [key: string]: [number, number] }) => {
           Object.keys(elOptionItem).forEach(element => {
             setTimeout(() => {
               this.scrollService.scrollToPosition(this.doc.querySelector(element), elOptionItem[element])

@@ -3,7 +3,7 @@ import {TabModel, TabService} from '@core/services/common/tab.service';
 import {NzContextMenuService, NzDropdownMenuComponent} from 'ng-zorro-antd/dropdown';
 import {ThemeService} from '@store/common-store/theme.service';
 import {NavigationEnd, Router} from '@angular/router';
-import {filter} from 'rxjs/operators';
+import {filter, takeUntil} from 'rxjs/operators';
 import {fnStopMouseEvent} from '@utils/tools';
 import {NzSafeAny} from "ng-zorro-antd/core/types";
 import {DestroyService} from "@core/services/common/destory.service";
@@ -17,7 +17,7 @@ import {SplitNavStoreService} from "@store/common-store/split-nav-store.service"
   providers: [DestroyService]
 })
 export class TabComponent implements OnInit {
-  tabs = this.tabService.getTabArray();
+  tabsSourceData: TabModel[] = [];
   tabsSourceData$ = this.tabService.getTabArray$();
   themesOptions$ = this.themesService.getThemesMode();
   isNightTheme$ = this.themesService.getIsNightTheme();
@@ -79,12 +79,12 @@ export class TabComponent implements OnInit {
 
   // 点击tab上的关闭icon
   clickCloseIcon(indexObj: { index: number }): void {
-    this.closeCurrentTab(this.tabs[indexObj.index], indexObj.index);
+    this.closeCurrentTab(this.tabsSourceData[indexObj.index], indexObj.index);
   }
 
   // 关闭当前Tab
   closeCurrentTab(tab: TabModel, index: number): void {
-    if (1 === this.tabs.length) {
+    if (1 === this.tabsSourceData.length) {
       return;
     }
     this.tabService.delTab(tab, index);
@@ -103,5 +103,8 @@ export class TabComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.tabsSourceData$.pipe(takeUntil(this.destroy$)).subscribe(res => {
+      this.tabsSourceData = res;
+    });
   }
 }

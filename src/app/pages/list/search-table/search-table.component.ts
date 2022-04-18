@@ -28,7 +28,7 @@ export class SearchTableComponent implements OnInit {
   isCollapse = true;
   tableConfig!: MyTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
-    title: '查询表格（表头可拖动，点击列表的"查看"按钮，演示详情操作）',
+    title: '查询表格（表头可拖动，点击列表的"查看"按钮，演示在当前tab打开详情操作，如果需要新开tab展示详情，请跳转到"功能>页签操作"中查看演示效果）',
     // desc: '表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。',
     breadcrumb: ['首页', '列表页', '查询表格']
   };

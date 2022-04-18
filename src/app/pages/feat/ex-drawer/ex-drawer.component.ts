@@ -2,7 +2,6 @@ import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef} from '@an
 import {PageHeaderType} from "@shared/components/page-header/page-header.component";
 import {ExDrawerDrawerService} from "@app/drawer/biz-drawer/ex-drawer-drawer/ex-drawer-drawer.service";
 import {ModalBtnStatus} from "@widget/base-modal";
-import {NzMessageService} from "ng-zorro-antd/message";
 
 @Component({
   selector: 'app-ex-drawer',

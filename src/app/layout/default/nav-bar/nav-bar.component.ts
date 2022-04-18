@@ -99,11 +99,13 @@ export class NavBarComponent implements OnInit {
         takeUntil(this.destroy$),
       )
       .subscribe((routeData) => {
+        // 详情页是否是打开新tab页签形式
+        let isNewTabDetailPage = routeData['newTab'] === 'true';
         this.tabService.addTab({
           title: routeData['title'],
           path: this.routerPath,
-          relatedLink: routeData['relatedLink'] ? routeData['relatedLink'] : []
-        });
+          relatedLink: routeData['relatedLink'] ? routeData['relatedLink'] : [],
+        }, isNewTabDetailPage);
         this.tabService.findIndex(this.routerPath);
         this.titleServe.setTitle(routeData['title'] + ' - Ant Design');
         // 混合模式时，切换tab，让左侧菜单也相应变化

@@ -41,10 +41,10 @@ export class TabService {
     this.setTabsSourceData();
   }
 
-  addTab(param: TabModel): void {
+  addTab(param: TabModel, isNewTabDetailPage = false): void {
     this.tabArray.forEach(tab => {
       // 路由的子菜单，例如用户表单路由的title需和用户表单详情组件路由的title相同
-      if (tab.title === param.title) {
+      if (tab.title === param.title && !isNewTabDetailPage) {
         tab.path = param.path;
       }
     });
@@ -73,14 +73,14 @@ export class TabService {
     this.tabArray.length = index + 1;
     temp.forEach(({path, relatedLink}) => {
       // relatedLink数组保存相关路由，解决路由中有详情页这样跳转路由，而产生"在哪个页面上点击关闭按钮,保存的状态才会清除"的bug
-      const linkArray = [...relatedLink, fnFormatePath(path)];
+      const linkArray = [...relatedLink, this.getPathKey(path)];
       linkArray.forEach(item => {
         SimpleReuseStrategy.deleteRouteSnapshot(item);
       });
     });
     if (index < this.currSelectedIndexTab) {
       // @ts-ignore
-      SimpleReuseStrategy.waitDelete = fnFormatePath(this.activatedRoute['_routerState'].snapshot.url);
+      SimpleReuseStrategy.waitDelete = this.getPathKey(this.activatedRoute['_routerState'].snapshot.url);
       this.router.navigateByUrl(this.tabArray[index].path);
     }
     this.setTabsSourceData();
@@ -102,7 +102,7 @@ export class TabService {
       this.currSelectedIndexTab = 0;
     } else if (this.currSelectedIndexTab < index) {
       // 如果鼠标点击的tab索引大于当前索引，需要将当前页的path放到waitDelete中
-      SimpleReuseStrategy.waitDelete = fnFormatePath(this.tabArray[this.currSelectedIndexTab].path)
+      SimpleReuseStrategy.waitDelete = this.getPathKey(this.tabArray[this.currSelectedIndexTab].path)
       this.currSelectedIndexTab = 0;
     } else if (this.currSelectedIndexTab > index) {
       this.currSelectedIndexTab = this.currSelectedIndexTab - temp.length;
@@ -111,7 +111,7 @@ export class TabService {
     this.tabArray = this.tabArray.splice(temp.length);
     temp.forEach(({path, relatedLink}) => {
       // relatedLink数组保存相关路由，解决路由中有详情页这样跳转路由，而产生"在哪个页面上点击关闭按钮,保存的状态才会清除"的bug
-      const linkArray = [...relatedLink, fnFormatePath(path)];
+      const linkArray = [...relatedLink, this.getPathKey(path)];
       linkArray.forEach(item => {
         SimpleReuseStrategy.deleteRouteSnapshot(item);
       });
@@ -142,16 +142,26 @@ export class TabService {
     this.setTabsSourceData();
   }
 
+  getPathKey(path: string): string {
+    const tempPath = fnFormatePath(path);
+    const pathParam = this.router.parseUrl(path).queryParams;
+    let pathParamString = '';
+    if (Object.keys(pathParam).length > 0) {
+      pathParamString = JSON.stringify(this.router.parseUrl(path).queryParams);
+    }
+    return tempPath + pathParamString
+  }
+
   // 点击tab标签上x图标删除tab的动作,右键删除当前tab动作
   delTab(tab: TabModel, index: number): void {
-    const tempPath = fnFormatePath(tab.path);
+    const pathKey = this.getPathKey(tab.path);
     // 移除当前选中的tab
     if (index === this.currSelectedIndexTab) {
       this.tabArray.splice(index, 1);
       this.currSelectedIndexTab = index - 1 < 0 ? 0 : index - 1;
       this.router.navigateByUrl(this.tabArray[this.currSelectedIndexTab].path);
       // 在reuse-strategy.ts中缓存当前的path，如果是当前的path则不缓存当前路由
-      SimpleReuseStrategy.waitDelete = tempPath;
+      SimpleReuseStrategy.waitDelete = pathKey;
     } else if (index < this.currSelectedIndexTab) {
       this.tabArray.splice(index, 1);
       this.currSelectedIndexTab = this.currSelectedIndexTab - 1;
@@ -161,14 +171,14 @@ export class TabService {
     }
     // 此操作为了解决例如列表页中有详情页，列表页和详情页两个页面的状态保存问题，解决了只能移除
     // 当前页面关闭的tab中状态的bug
-    const beDeltabArray = [...tab.relatedLink, tempPath];
+    const beDeltabArray = [...tab.relatedLink, pathKey];
     beDeltabArray.forEach(item => SimpleReuseStrategy.deleteRouteSnapshot(item));
     this.setTabsSourceData();
   }
 
   findIndex(path: string): number {
     const current = this.tabArray.findIndex((tabItem) => {
-      return path.includes(tabItem.path);
+      return path === tabItem.path;
     });
     this.currSelectedIndexTab = current;
     return current;

@@ -1,6 +1,7 @@
 # ng-ant-admin
 [![CodeFactor](https://www.codefactor.io/repository/github/huajian123/ng-ant-admin/badge)](https://www.codefactor.io/repository/github/huajian123/ng-ant-admin)
 
+
 # 项目视频介绍
 使用本项目遇到问题，可以加入376065816 qq群号与我沟通。<br>
 如果本项目对您有用，麻烦帮我点个star，谢谢啊<br>
@@ -72,6 +73,23 @@ const routes: Routes = [
 ];
 
 ```
+
+# 模块中打开新tab页来展示详情，必须设置参数如下
+在data中设置newTab
+```typescript
+const routes: Routes = [
+  {path: '', component: TabsComponent, data: {title: '标签页操作', key: 'tabs'}},
+  {path: 'example-detail', component: DetailComponent, data: {newTab:'true', title: '演示详情', key: 'example-detail'}}
+];
+```
+
+# 缓存页面中指定容器的滚动条
+在data中设置scrollContain 为元素选择器
+```typescript
+  {path: '', component: KeepScrollPageComponent, data: {title: '缓存滚动条', key: 'keep-scroll-page',scrollContain:['#div-scroll1','#div-scroll2']}}
+
+```
+
 # 切换tab调用的临时声明周期如下
 relatedLink数组中保存相关联的两个路由，值为每个路由地址最后的/后的字符串
 ```typescript
@@ -80,6 +98,10 @@ _onReuseDestroy: () => void;
 
 ```
 直接在目标组件中写出方法名为_onReuseInit或者_onReuseDestroy的方法即可实现
+
+# 我在线求全职或者兼职或者接单
+坐标南京，希望做Angular，java,flutter,go，小程序，vue
+请联系287643967@qq.com
 
 ## 系统截图
 
@@ -96,6 +118,14 @@ _onReuseDestroy: () => void;
 ![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/11.png)
 ![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/12.png)
 ![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/13.png)
+
+
+## 捐赠
+如果本项目对您有用，正巧您如果想请我喝一杯咖啡，请扫下面的码，哈哈<br>
+If this project is useful to you, and you happen to want to invite me for a cup of coffee, please scan Alipay or WeChat<br>
+![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/weixin.jpeg)
+![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/zhifubao.jpeg)
+
 
 
 ### License

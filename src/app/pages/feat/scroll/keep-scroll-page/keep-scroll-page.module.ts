@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
 
 import {KeepScrollPageRoutingModule} from './keep-scroll-page-routing.module';
 import {KeepScrollPageComponent} from './keep-scroll-page.component';
