@@ -3,6 +3,7 @@ import CryptoJS from 'crypto-js';
 import {silentEvent} from 'ng-zorro-antd/core/util';
 import {v4 as uuidv4} from 'uuid';
 import {NzSafeAny} from "ng-zorro-antd/core/types";
+import {endOfDay, startOfDay} from "date-fns";
 
 /*获取1到100之间的随机整数 this.randomNum(1,101)*/
 const fnGetRandomNum = function getRandomNum(m: number, n: number) {
@@ -111,6 +112,15 @@ const fnDecrypt = function decrypt(word: NzSafeAny, keyStr: string) {
   return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
 }
 
+/*import {endOfDay, startOfDay} from 'date-fns';*/
+const fnStartOfDay = function StartOfDay(time: number) {
+  return startOfDay(time).getTime();
+}
+
+const fnEndOfDay = function EndOfDay(time: number) {
+  return endOfDay(time).getTime();
+}
+
 export {
   fnDecrypt,
   fnEncrypt,
@@ -123,5 +133,7 @@ export {
   fnFormatePath,
   fnRemoveDouble,
   fnGetRandomNum,
+  fnStartOfDay,
+  fnEndOfDay,
   fnGetUUID
 };

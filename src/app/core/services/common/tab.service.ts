@@ -185,11 +185,12 @@ export class TabService {
   }
 
   refresh(): void {
-    // 只有当前页签会刷新，如果涉及到tab页内详情的页面也不会刷新
-    const currentRoute = fnGetPathWithoutParam(this.router.url);
-    const queryParams = this.router.parseUrl(this.router.url).queryParams
+    const sourceUrl = this.router.url;
+    // 只有当前页签会刷新，如果涉及到tab页内的详情的页面不会刷新
+    const currentRoute = fnGetPathWithoutParam(sourceUrl);
+    const queryParams = this.router.parseUrl(sourceUrl).queryParams
     this.router.navigateByUrl("/", {skipLocationChange: true}).then(() => {
-      SimpleReuseStrategy.deleteRouteSnapshot(fnFormatePath(currentRoute));
+      SimpleReuseStrategy.deleteRouteSnapshot(this.getPathKey(sourceUrl));
       this.router.navigate([currentRoute], {queryParams});
     });
   }

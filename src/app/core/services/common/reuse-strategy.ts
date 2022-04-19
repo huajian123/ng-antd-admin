@@ -16,13 +16,13 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
 
   public static waitDelete: string | null;
 
-  public static deleteRouteSnapshot(path: string): void {
-    if (SimpleReuseStrategy.handlers[path]) {
-      if (SimpleReuseStrategy.handlers[path].componentRef) {
-        SimpleReuseStrategy.handlers[path].componentRef.destroy();
+  public static deleteRouteSnapshot(key: string): void {
+    if (SimpleReuseStrategy.handlers[key]) {
+      if (SimpleReuseStrategy.handlers[key].componentRef) {
+        SimpleReuseStrategy.handlers[key].componentRef.destroy();
       }
-      delete SimpleReuseStrategy.handlers[path];
-      delete SimpleReuseStrategy.scrollHandlers[path];
+      delete SimpleReuseStrategy.handlers[key];
+      delete SimpleReuseStrategy.scrollHandlers[key];
     }
   }
 
@@ -106,9 +106,11 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
     while (future.firstChild) {
       future = future.firstChild;
     }
-    if (SimpleReuseStrategy.scrollHandlers[futureKey]) {
-      if (futureKey) {
-        SimpleReuseStrategy.scrollHandlers[futureKey].scroll.forEach((elOptionItem: { [key: string]: [number, number] }) => {
+    // 重新获取是因为future在上面while循环中已经变了
+    const scrollFutureKey = this.getKey(future);
+    if (SimpleReuseStrategy.scrollHandlers[scrollFutureKey]) {
+      if (scrollFutureKey) {
+        SimpleReuseStrategy.scrollHandlers[scrollFutureKey].scroll.forEach((elOptionItem: { [key: string]: [number, number] }) => {
           Object.keys(elOptionItem).forEach(element => {
             setTimeout(() => {
               this.scrollService.scrollToPosition(this.doc.querySelector(element), elOptionItem[element])
