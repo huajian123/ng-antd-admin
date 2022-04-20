@@ -42,6 +42,10 @@ const routes: Routes = [
         loadChildren: () => import('../../pages/about/about.module').then(m => m.AboutModule)
       },
       {
+        path: 'system',
+        loadChildren: () => import('../../pages/system/system.module').then(m => m.SystemModule)
+      },
+      {
         path: 'setup',
         loadChildren: () => import('../../pages/setup/setup.module').then(m => m.SetupModule)
       },

@@ -17,7 +17,8 @@ import {ActionCode} from "@config/actionCode";
 export class DeptManageComponent implements OnInit {
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '部门管理',
-    breadcrumb: ['首页', '内部管理', '部门管理']
+    breadcrumb: ['首页', '内部管理', '部门管理'],
+    desc:'正在开发中。。。'
   };
   dataList: DeptObj[] = [];
   actionCodeObj = {

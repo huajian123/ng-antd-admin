@@ -45,10 +45,11 @@ import {NzPaginationModule} from 'ng-zorro-antd/pagination';
 import {NzResizableModule} from 'ng-zorro-antd/resizable';
 import {NzBackTopModule} from 'ng-zorro-antd/back-top';
 import {IconsProviderModule} from "@shared/icons-provider.module";
-
+import { NzImageModule } from 'ng-zorro-antd/image';
 
 export const SHARED_ZORRO_MODULES = [
   NzBackTopModule,
+  NzImageModule,
   NzResizableModule,
   NzTreeViewModule,
   NzPopoverModule,

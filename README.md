@@ -6,10 +6,11 @@
 使用本项目遇到问题，可以加入376065816 qq群号与我沟通。<br>
 如果本项目对您有用，麻烦帮我点个star，谢谢啊<br>
 if help you, if you want ,please give me a star ,thank you<br>
-If you use this project for production ,if you want ,please tell me on this way[issues](https://github.com/huajian123/ng-ant-admin/issues/10), Someone is using this project,let me happy.<br>
 快速二开使用详解 [快速二开使用详解](https://www.bilibili.com/video/BV1gF411x7rN/)<br>
 项目搭建简易教程 [项目搭建简易教程](https://www.bilibili.com/video/BV1EM4y1w7zd/)<br>
 online demo地址 [demo](http://124.71.128.53:8080/)<br>
+纯净版项目地址 [pure](https://gitee.com/hjxiaoqianduan/ng-ant-admin-pure/)<br>
+pure project address [pure](https://gitee.com/hjxiaoqianduan/ng-ant-admin-pure/)<br>
 
 # 路由的key
 key需要设置成路由地址最后一个'/'后的字符串，并且要唯一
@@ -104,21 +105,7 @@ _onReuseDestroy: () => void;
 请联系287643967@qq.com
 
 ## 系统截图
-
-![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/1.png)
-![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/2.png)
-![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/3.png)
-![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/4.jpg)
-![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/5.png)
-![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/6.png)
-![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/7.png)
-![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/8.png)
-![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/9.png)
-![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/10.png)
-![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/11.png)
-![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/12.png)
-![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/13.png)
-
+![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/11.jpg)
 
 ## 捐赠
 如果本项目对您有用，正巧您如果想请我喝一杯咖啡，请扫下面的码，哈哈<br>

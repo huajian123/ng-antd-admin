@@ -242,6 +242,24 @@ const menuNav: Menu[] = [
         path: '/default/feat/icons',
       },
       {
+        title: '右键菜单',
+        icon: 'dashboard',
+        open: false,
+        showIcon: true,
+        actionCode: ActionCode.UserManage,
+        selected: false,
+        path: '/default/feat/context-menu',
+      },
+      {
+        title: '图片预览',
+        icon: 'dashboard',
+        open: false,
+        showIcon: true,
+        actionCode: ActionCode.UserManage,
+        selected: false,
+        path: '/default/feat/img-preview',
+      },
+      {
         title: '标签页操作',
         icon: 'dashboard',
         open: false,
@@ -590,6 +608,28 @@ const menuNav: Menu[] = [
     selected: false,
     path: '/default/setup',
   },
+ /* {
+    title:'系统管理',
+    icon: '',
+    alIcon: 'icon-mel-help',
+    open: false,
+    showIcon: true,
+    actionCode: ActionCode.UserManage,
+    selected: false,
+    path: '/default/system',
+    children:[
+      {
+        title:'部门管理',
+        icon: '',
+        alIcon: 'icon-mel-help',
+        open: false,
+        showIcon: true,
+        actionCode: ActionCode.UserManage,
+        selected: false,
+        path: '/default/system/dept',
+      }
+    ]
+  },*/
   {
     title: '关于',
     alIcon:'icon-medium',
