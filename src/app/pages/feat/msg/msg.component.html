@@ -1,0 +1,47 @@
+<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+
+<div class="normal-table-wrap">
+  <nz-card nzTitle="Message">
+    <button nz-button nzType="primary" (click)="msg('info')">Info</button>
+    <button nz-button class="success"(click)="msg('success')">Success</button>
+    <button nz-button class="warning" (click)="msg('warning')">Warning</button>
+    <button nz-button nzDanger nzType="primary" (click)="msg('error')">Error</button>
+    <button nz-button class="loading" (click)="msg('loading')">Loading</button>
+  </nz-card>
+
+  <nz-card nzTitle="Confirm">
+    <button nz-button nzType="primary" (click)="modalShow('confirm','info')">Info</button>
+    <button nz-button class="success"(click)="modalShow('confirm','success')">Success</button>
+    <button nz-button class="warning" (click)="modalShow('confirm','warning')">Warning</button>
+    <button nz-button nzDanger nzType="primary" (click)="modalShow('confirm','error')">Error</button>
+  </nz-card>
+
+  <nz-card nzTitle="modal">
+    <button nz-button nzType="primary" (click)="modalShow('info','info')">Info</button>
+    <button nz-button class="success"(click)="modalShow('success','success')">Success</button>
+    <button nz-button class="warning" (click)="modalShow('warning','warning')">Warning</button>
+    <button nz-button nzDanger nzType="primary" (click)="modalShow('error','error')">Error</button>
+  </nz-card>
+
+  <nz-card nzTitle="Notification">
+    <button nz-button [nzType]="'primary'" (click)="createBasicNotification(template)">
+        notification
+    </button>
+  </nz-card>
+
+  <ng-template #template>
+    <div class="ant-notification-notice-content">
+      <div class="ant-notification-notice-with-icon">
+          <span class="ant-notification-notice-icon">
+            <i nz-icon nzType="check" style="color: rgb(16, 142, 233);"></i>
+          </span>
+        <div class="ant-notification-notice-message">Notification Title</div>
+        <div class="ant-notification-notice-description">
+           content success
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+</div>
+
