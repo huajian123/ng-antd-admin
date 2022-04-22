@@ -233,6 +233,15 @@ const menuNav: Menu[] = [
     path: '/default/feat',
     children: [
       {
+        title: '消息提示',
+        icon: 'dashboard',
+        open: false,
+        showIcon: true,
+        actionCode: ActionCode.UserManage,
+        selected: false,
+        path: '/default/feat/msg',
+      },
+      {
         title: '图标',
         icon: 'dashboard',
         open: false,
