@@ -269,6 +269,15 @@ const menuNav: Menu[] = [
         path: '/default/feat/img-preview',
       },
       {
+        title: '全屏',
+        icon: 'dashboard',
+        open: false,
+        showIcon: true,
+        actionCode: ActionCode.UserManage,
+        selected: false,
+        path: '/default/feat/full-screen',
+      },
+      {
         title: '标签页操作',
         icon: 'dashboard',
         open: false,

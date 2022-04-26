@@ -25,6 +25,7 @@
         (nzCheckedChange)="onAllChecked($event)" [nzWidth]="'40px'" [nzChecked]="allChecked"></th>
     <ng-container *ngFor="let head of _tableConfig.headers;let headIndex=index;let last=last;let first=first;">
       <th class="animate-bg-0"
+          [ngClass]="[(head.thClassList?head.thClassList:[]),head.thClassFn?head.thClassFn(head):''].flat()"
           [nzWidth]="head.width + 'px'"
           nz-resizable
           nzPreview
@@ -58,7 +59,7 @@
         [nzChecked]="row['_checked']"></td>
     <ng-container *ngFor="let head of _tableConfig.headers">
       <td *ngIf="(head.show===undefined||head.show===true)"
-          [ngClass]="head.tdClassList?head.tdClassList:''"
+          [ngClass]="[(head.tdClassList?head.tdClassList:[]),head.tdClassFn?head.tdClassFn(row,rowIndex):''].flat()"
           [nzEllipsis]="!head.notNeedEllipsis"
           [nzLeft]="(!!head.fixed&&head.fixedDir==='left')"
           [nzRight]="(!!head.fixed&&head.fixedDir==='right')">
