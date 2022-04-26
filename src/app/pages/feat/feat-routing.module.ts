@@ -17,6 +17,7 @@ const routes: Routes = [
   {path: 'map', loadChildren: () => import('./map/map.module').then(m => m.MapModule)},
   {path: 'ripple', loadChildren: () => import('./ripple/ripple.module').then(m => m.RippleModule)},
   {path: 'copy', loadChildren: () => import('./copy/copy.module').then(m => m.CopyModule)},
+  {path: 'setup', loadChildren: () => import('./setup/setup.module').then(m => m.SetupModule)},
   {path: '', redirectTo: 'ex-modal', pathMatch: 'full'},
 ];
 

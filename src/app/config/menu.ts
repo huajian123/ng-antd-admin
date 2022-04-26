@@ -97,6 +97,91 @@ const menuNav: Menu[] = [
         ]
       },
       {
+        title: '列表页',
+        icon: 'table',
+        open: false,
+        selected: false,
+        showIcon: true,
+        actionCode: ActionCode.UserManage,
+        path: '/default/page-demo/list',
+        children: [
+          {
+            title: '搜索列表',
+            open: false,
+            selected: false,
+            actionCode: ActionCode.UserManage,
+            icon: 'table',
+            showIcon: false,
+            path: '/default/page-demo/list/search-list',
+            children: [
+              {
+                title: '搜索列表(文章）',
+                open: false,
+                selected: false,
+                icon: 'table',
+                showIcon: false,
+                actionCode: ActionCode.UserManage,
+                path: '/default/page-demo/list/search-list/article',
+              },
+              {
+                title: '搜索列表(项目)',
+                open: false,
+                selected: false,
+                icon: 'table',
+                showIcon: false,
+                actionCode: ActionCode.UserManage,
+                path: '/default/page-demo/list/search-list/project',
+              },
+              {
+                title: '搜索列表(应用)',
+                open: false,
+                selected: false,
+                icon: 'table',
+                showIcon: false,
+                actionCode: ActionCode.UserManage,
+                path: '/default/page-demo/list/search-list/application',
+              },
+            ]
+          },
+          {
+            title: '查询表格',
+            open: false,
+            selected: false,
+            icon: 'table',
+            showIcon: true,
+            actionCode: ActionCode.UserManage,
+            path: '/default/page-demo/list/search-table',
+          },
+          {
+            title: '树状表格',
+            open: false,
+            selected: false,
+            icon: 'table',
+            showIcon: true,
+            actionCode: ActionCode.UserManage,
+            path: '/default/page-demo/list/tree-list',
+          },
+          {
+            title: '标准表格',
+            open: false,
+            selected: false,
+            icon: 'table',
+            showIcon: true,
+            actionCode: ActionCode.UserManage,
+            path: '/default/page-demo/list/standard-table',
+          },
+          {
+            title: '卡片列表',
+            open: false,
+            selected: false,
+            icon: 'table',
+            showIcon: true,
+            actionCode: ActionCode.UserManage,
+            path: '/default/page-demo/list/card-table',
+          },
+        ]
+      },
+      {
         title: '详情页',
         icon: 'profile',
         open: false,
@@ -218,6 +303,27 @@ const menuNav: Menu[] = [
             icon: 'user',
             showIcon: false,
             path: '/default/page-demo/personal/personal-setting',
+          },
+        ]
+      },
+      {
+        title: '图形编辑器',
+        icon: '',
+        alIcon: 'icon-mel-help',
+        open: false,
+        showIcon: true,
+        actionCode: ActionCode.UserManage,
+        selected: false,
+        path: '/default/page-demo/flow',
+        children: [
+          {
+            title: '流程图',
+            open: false,
+            selected: false,
+            icon: 'highlight',
+            showIcon: true,
+            path: '/default/page-demo/flow/flow-chat',
+            actionCode: ActionCode.UserManage,
           },
         ]
       },
@@ -438,94 +544,19 @@ const menuNav: Menu[] = [
         path: 'https://github.com/huajian123/ng-ant-admin',
         isNewLink: true,
       },
+      {
+        title: '引导页',
+        alIcon:'icon-medium',
+        showIcon: true,
+        open: false,
+        actionCode: ActionCode.UserManage,
+        selected: false,
+        path: '/default/feat/setup',
+      },
     ]
   },
 
-  {
-    title: '列表页',
-    icon: 'table',
-    open: false,
-    selected: false,
-    showIcon: true,
-    actionCode: ActionCode.UserManage,
-    path: '/default/list',
-    children: [
-      {
-        title: '搜索列表',
-        open: false,
-        selected: false,
-        actionCode: ActionCode.UserManage,
-        icon: 'table',
-        showIcon: true,
-        path: '/default/list/search-list',
-        children: [
-          {
-            title: '搜索列表(文章）',
-            open: false,
-            selected: false,
-            icon: 'table',
-            showIcon: false,
-            actionCode: ActionCode.UserManage,
-            path: '/default/list/search-list/article',
-          },
-          {
-            title: '搜索列表(项目)',
-            open: false,
-            selected: false,
-            icon: 'table',
-            showIcon: false,
-            actionCode: ActionCode.UserManage,
-            path: '/default/list/search-list/project',
-          },
-          {
-            title: '搜索列表(应用)',
-            open: false,
-            selected: false,
-            icon: 'table',
-            showIcon: false,
-            actionCode: ActionCode.UserManage,
-            path: '/default/list/search-list/application',
-          },
-        ]
-      },
-      {
-        title: '查询表格',
-        open: false,
-        selected: false,
-        icon: 'table',
-        showIcon: true,
-        actionCode: ActionCode.UserManage,
-        path: '/default/list/search-table',
-      },
-      {
-        title: '树状表格',
-        open: false,
-        selected: false,
-        icon: 'table',
-        showIcon: true,
-        actionCode: ActionCode.UserManage,
-        path: '/default/list/tree-list',
-      },
-      {
-        title: '标准表格',
-        open: false,
-        selected: false,
-        icon: 'table',
-        showIcon: true,
-        actionCode: ActionCode.UserManage,
-        path: '/default/list/standard-table',
-      },
-      {
-        title: '卡片列表',
-        open: false,
-        selected: false,
-        icon: 'table',
-        showIcon: true,
-        actionCode: ActionCode.UserManage,
-        path: '/default/list/card-table',
-      },
-    ]
-  },
+
 
   {
     title: '多级菜单',
@@ -596,36 +627,8 @@ const menuNav: Menu[] = [
       },
     ]
   },
-  {
-    title: '图形编辑器',
-    icon: '',
-    alIcon: 'icon-mel-help',
-    open: false,
-    showIcon: true,
-    actionCode: ActionCode.UserManage,
-    selected: false,
-    path: '/default/flow',
-    children: [
-      {
-        title: '流程图',
-        open: false,
-        selected: false,
-        icon: 'highlight',
-        showIcon: true,
-        path: '/default/flow/flow-chat',
-        actionCode: ActionCode.UserManage,
-      },
-    ]
-  },
-  {
-    title: '引导页',
-    alIcon:'icon-medium',
-    showIcon: true,
-    open: false,
-    actionCode: ActionCode.UserManage,
-    selected: false,
-    path: '/default/setup',
-  },
+
+
  /* {
     title:'系统管理',
     icon: '',

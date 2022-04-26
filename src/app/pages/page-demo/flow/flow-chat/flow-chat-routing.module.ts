@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {SetupComponent} from "@app/pages/setup/setup.component";
+import { FlowChatComponent } from './flow-chat.component';
 
 const routes: Routes = [
-  {path: '', component: SetupComponent, data: {title: '引导页', key: 'setup'}}
+  {path: '', component: FlowChatComponent, data: {title: '流程图', key: 'flow-chat'}}
+
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class SetupRoutingModule { }
+export class FlowChatRoutingModule { }

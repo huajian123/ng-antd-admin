@@ -7,6 +7,10 @@ const routes: Routes = [
     loadChildren: () => import('./form/form.module').then(m => m.FormModule)
   },
   {
+    path: 'list',
+    loadChildren: () => import('./list/list.module').then(m => m.ListModule)
+  },
+  {
     path: 'detail',
     loadChildren: () => import('./detail/detail.module').then(m => m.DetailModule)
   },
@@ -22,6 +26,10 @@ const routes: Routes = [
   {
     path: 'result',
     loadChildren: () => import('./result/result.module').then(m => m.ResultModule)
+  },
+  {
+    path: 'flow',
+    loadChildren: () => import('./flow/flow.module').then(m => m.FlowModule)
   },
 ];
 
