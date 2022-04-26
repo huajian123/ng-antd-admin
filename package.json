@@ -11,7 +11,7 @@
   "private": true,
   "dependencies": {
     "@amap/amap-jsapi-loader": "^1.0.1",
-    "@angular/animations": "~13.2.6",
+    "@angular/animations": "^13.3.4",
     "@angular/cdk": "^13.3.1",
     "@angular/common": "~13.2.6",
     "@angular/compiler": "~13.2.6",
@@ -35,6 +35,7 @@
     "@antv/x6": "^1.30.0",
     "@auth0/angular-jwt": "^5.0.2",
     "@tinymce/tinymce-angular": "^5.0.1",
+    "angular-animations": "^0.11.0",
     "angular-password-strength-meter": "^3.0.1",
     "angular2-qrcode": "^2.0.3",
     "crypto-js": "^4.1.1",

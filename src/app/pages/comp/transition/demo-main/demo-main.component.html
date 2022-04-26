@@ -1,0 +1,134 @@
+<div class="container">
+  <h1 [@enter1] class="center sp-28">
+    Angular Animations 有点骚气啊
+  </h1>
+
+  <div [ngSwitch]="animation" [@enter2] class="center">
+    <div class="angular-img-wrapper">
+      <!-- Attention seekers -->
+      <app-angular-img *ngSwitchCase="'bounce'" [@bounce]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'flash'" [@flash]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'pulse'" [@pulse]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'rubberBand'" [@rubberBand]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'shake'" [@shake]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'swing'" [@swing]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'tada'" [@tada]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'wobble'" [@wobble]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'jello'" [@jello]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'heartBeat'" [@heartBeat]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'headShake'" [@headShake]="animationState"></app-angular-img>
+      <!-- Bouncing entrances -->
+      <app-angular-img *ngSwitchCase="'bounceIn'" [@bounceIn]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'bounceInDown'" [@bounceInDown]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'bounceInLeft'" [@bounceInLeft]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'bounceInRight'" [@bounceInRight]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'bounceInUp'" [@bounceInUp]="animationState"></app-angular-img>
+      <!-- Bouncing exits -->
+      <app-angular-img *ngSwitchCase="'bounceOut'" [@bounceOut]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'bounceOutDown'" [@bounceOutDown]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'bounceOutLeft'" [@bounceOutLeft]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'bounceOutRight'" [@bounceOutRight]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'bounceOutUp'" [@bounceOutUp]="animationState"></app-angular-img>
+      <!-- Fading entrances -->
+      <app-angular-img *ngSwitchCase="'fadeIn'" [@fadeIn]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'fadeInDown'" [@fadeInDown]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'fadeInDownBig'" [@fadeInDownBig]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'fadeInLeft'" [@fadeInLeft]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'fadeInLeftBig'" [@fadeInLeftBig]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'fadeInRight'" [@fadeInRight]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'fadeInRightBig'" [@fadeInRightBig]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'fadeInUp'" [@fadeInUp]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'fadeInUpBig'" [@fadeInUpBig]="animationState"></app-angular-img>
+      <!-- Fading exits -->
+      <app-angular-img *ngSwitchCase="'fadeOut'" [@fadeOut]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'fadeOutDown'" [@fadeOutDown]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'fadeOutDownBig'" [@fadeOutDownBig]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'fadeOutLeft'" [@fadeOutLeft]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'fadeOutLeftBig'" [@fadeOutLeftBig]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'fadeOutRight'" [@fadeOutRight]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'fadeOutRightBig'" [@fadeOutRightBig]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'fadeOutUp'" [@fadeOutUp]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'fadeOutUpBig'" [@fadeOutUpBig]="animationState"></app-angular-img>
+      <!-- Flippers -->
+      <app-angular-img *ngSwitchCase="'flip'" [@flip]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'flipInX'" [@flipInX]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'flipInY'" [@flipInY]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'flipOutX'" [@flipOutX]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'flipOutY'" [@flipOutY]="animationState"></app-angular-img>
+      <!-- Light speed -->
+      <app-angular-img *ngSwitchCase="'lightSpeedIn'" [@lightSpeedIn]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'lightSpeedOut'" [@lightSpeedOut]="animationState"></app-angular-img>
+      <!-- Rotating entrances -->
+      <app-angular-img *ngSwitchCase="'rotateIn'" [@rotateIn]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'rotateInDownLeft'" [@rotateInDownLeft]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'rotateInDownRight'" [@rotateInDownRight]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'rotateInUpLeft'" [@rotateInUpLeft]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'rotateInUpRight'" [@rotateInUpRight]="animationState"></app-angular-img>
+      <!--Rotating exits  -->
+      <app-angular-img *ngSwitchCase="'rotateOut'" [@rotateOut]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'rotateOutDownLeft'" [@rotateOutDownLeft]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'rotateOutDownRight'" [@rotateOutDownRight]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'rotateOutUpLeft'" [@rotateOutUpLeft]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'rotateOutUpRight'" [@rotateOutUpRight]="animationState"></app-angular-img>
+      <!-- Sliding entrances -->
+      <app-angular-img *ngSwitchCase="'slideInUp'" [@slideInUp]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'slideInDown'" [@slideInDown]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'slideInLeft'" [@slideInLeft]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'slideInRight'" [@slideInRight]="animationState"></app-angular-img>
+      <!-- Sliding exits -->
+      <app-angular-img *ngSwitchCase="'slideOutUp'" [@slideOutUp]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'slideOutDown'" [@slideOutDown]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'slideOutLeft'" [@slideOutLeft]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'slideOutRight'" [@slideOutRight]="animationState"></app-angular-img>
+      <!-- Zooming entrances -->
+      <app-angular-img *ngSwitchCase="'zoomIn'" [@zoomIn]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'zoomInDown'" [@zoomInDown]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'zoomInLeft'" [@zoomInLeft]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'zoomInRight'" [@zoomInRight]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'zoomInUp'" [@zoomInUp]="animationState"></app-angular-img>
+      <!-- Zooming exits -->
+      <app-angular-img *ngSwitchCase="'zoomOut'" [@zoomOut]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'zoomOutDown'" [@zoomOutDown]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'zoomOutLeft'" [@zoomOutLeft]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'zoomOutRight'" [@zoomOutRight]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'zoomOutUp'" [@zoomOutUp]="animationState"></app-angular-img>
+      <!-- Specials -->
+      <app-angular-img *ngSwitchCase="'hinge'" [@hinge]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'jackInTheBox'" [@jackInTheBox]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'rollIn'" [@rollIn]="animationState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'rollOut'" [@rollOut]="animationState"></app-angular-img>
+      <!-- Other -->
+      <app-angular-img *ngSwitchCase="'collapse'" [@collapse]="animationWithState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'collapseHorizontally'" [@collapseHorizontally]="animationWithState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'rotate'" [@rotate]="animationWithState"></app-angular-img>
+      <app-angular-img *ngSwitchCase="'rotate90'" [@rotate90]="animationWithState"></app-angular-img>
+      <app-angular-img
+        *ngSwitchCase="'rotate720'"
+        [@rotate]="{ value: animationWithState, params: { duration: 700, degrees: 720 } }"
+      ></app-angular-img>
+      <app-angular-img *ngSwitchCase="'hueRotate'" [@hueRotate]="animationState"></app-angular-img>
+    </div>
+
+    <div *ngSwitchDefault>选择动画</div>
+  </div>
+
+  <div [@enter3] class="center" (@enter3.done)="animationState = !animationState">
+
+    <nz-select class="m-r-8" style="width:200px" [(ngModel)]="animation"  (ngModelChange)="animate()" nzAllowClear nzPlaceHolder="Choose" nzShowSearch>
+      <nz-option-group *ngFor="let option of options"  [nzLabel]="option.label">
+        <nz-option *ngFor="let animation of option.animations" [nzValue]="animation" [nzLabel]="animation"></nz-option>
+      </nz-option-group>
+    </nz-select>
+
+    <button nz-button nzType="default"
+            [@hueButton]="hueBtnState"
+            (@hueButton.done)="hueBtnState = !hueBtnState"
+            (click)="animate()">点击骚动起来</button>
+  </div>
+
+  <div [@enter3]>
+    <div class="center">
+      鼠标悬停这个按钮，颜色会渐变
+    </div>
+  </div>
+</div>

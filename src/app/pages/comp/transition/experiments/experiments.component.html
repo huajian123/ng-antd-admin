@@ -1,0 +1,30 @@
+
+  <div class="center">
+    <app-angular-img *ngFor="let i of [0,1,2,3,4]" [@enter]="{value: '', params: { delay: i * 150 }}" (@enter.done)="hueState = !hueState"></app-angular-img>
+  </div>
+
+  <button nz-button nzType="default"
+          [@btnEnter] [@btnEnterFadeIn]
+          (click)="animate()">在搞一下</button>
+
+
+  <div [@flash]="flashState">
+    <div>
+      <div class="letter" *ngFor="let letter of text1; let i = index; let last = last" [@enterLetterAnim1]="{value: '', params: { delay: 1500 + i * 100} }"
+           [@letterAnim1]="{value: animationState, params: { delay: i * 30} }" [@hueLetter]="{value: hueState, params: {delay: i * 50}}"
+           (@letterAnim1.done)="last && hueState = !hueState">{{letter}}</div>
+    </div>
+
+    <div>
+      <div class="letter" *ngFor="let letter of text2; let i = index; let last = last" [@enterLetterAnim2]="{value: '', params: { delay: 6000 + getDelay(i, text2.length) } }"
+           [@letterAnim2]="{value: animationState, params: { delay: 500 + i * 30} }" [@hueLetter]="{value: hueState, params: {delay: i * 75}}"
+           (@enterLetterAnim2.done)="last && hueState = !hueState">{{letter}}</div>
+    </div>
+
+
+    <div>
+      <div class="letter" *ngFor="let letter of text3; let i = index; let last = last; let first = first"
+           [@enterLetterAnim3]="{value: '', params: { delay: 8000 + text3.length * 100 - i * 100} }" [@letterAnim3]="{value: animationState, params: { delay: 1000 + i * 30} }"
+           [@hueLetter]="{value: hueState, params: {delay: i * 150}}" (@enterLetterAnim3.done)="first && flashState = !flashState">{{letter}}</div>
+    </div>
+  </div>

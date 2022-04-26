@@ -1,0 +1,173 @@
+<div class="container">
+  <h1 [@enter1] class="center sp-28">
+    进场/离场动画.
+  </h1>
+
+  <div [@enter2]>
+    <nz-select class="m-r-8" style="width:200px" [(ngModel)]="animation"  (ngModelChange)="state = false" nzAllowClear nzPlaceHolder="Choose" nzShowSearch>
+      <nz-option-group *ngFor="let option of options"  [nzLabel]="option.label">
+        <nz-option *ngFor="let animation of option.animations" [nzValue]="animation" [nzLabel]="animation"></nz-option>
+      </nz-option-group>
+    </nz-select>
+
+    <button nz-button nzType="default"
+            (click)="toggleState()">点击切换</button>
+  </div>
+
+  <div [ngSwitch]="animation" [@enter3] class="center-children-horizontally">
+    <div class="angular-img-wrapper">
+      <!-- Bouncing -->
+      <ng-container *ngSwitchCase="'bounceIn'">
+        <app-angular-img *ngIf="state" [@bounceInOnEnter]="{ value: '', params: { duration: 1000 } }" [@bounceOutOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'bounceInUp'">
+        <app-angular-img *ngIf="state" [@bounceInUpOnEnter] [@bounceOutUpOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'bounceInDown'">
+        <app-angular-img *ngIf="state" [@bounceInDownOnEnter] [@bounceOutDownOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'bounceInLeft'">
+        <app-angular-img *ngIf="state" [@bounceInLeftOnEnter] [@bounceOutRightOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'bounceInRight'">
+        <app-angular-img *ngIf="state" [@bounceInRightOnEnter] [@bounceOutLeftOnLeave]></app-angular-img>
+      </ng-container>
+      <!-- Fading -->
+      <ng-container *ngSwitchCase="'fadeInOut'">
+        <app-angular-img *ngIf="state" [@fadeInOnEnter] [@fadeOutOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'fadeInUpOutUp'">
+        <app-angular-img *ngIf="state" [@fadeInUpOnEnter] [@fadeOutUpOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'fadeInDownOutDown'">
+        <app-angular-img *ngIf="state" [@fadeInDownOnEnter] [@fadeOutDownOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'fadeInLeftOutRight'">
+        <app-angular-img *ngIf="state" [@fadeInLeftOnEnter] [@fadeOutRightOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'fadeInRightOutLeft'">
+        <app-angular-img *ngIf="state" [@fadeInRightOnEnter] [@fadeOutLeftOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'fadeInUpBigOutUpBig'">
+        <app-angular-img *ngIf="state" [@fadeInUpBigOnEnter] [@fadeOutUpBigOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'fadeInDownBigOutDownBig'">
+        <app-angular-img *ngIf="state" [@fadeInDownBigOnEnter] [@fadeOutDownBigOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'fadeInLeftBigOutRightBig'">
+        <app-angular-img *ngIf="state" [@fadeInLeftBigOnEnter] [@fadeOutRightBigOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'fadeInRightBigOutLeftBig'">
+        <app-angular-img *ngIf="state" [@fadeInRightBigOnEnter] [@fadeOutLeftBigOnLeave]></app-angular-img>
+      </ng-container>
+      <!-- Flip -->
+      <ng-container *ngSwitchCase="'flipX'">
+        <app-angular-img *ngIf="state" [@flipInXOnEnter] [@flipOutXOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'flipY'">
+        <app-angular-img *ngIf="state" [@flipInYOnEnter] [@flipOutYOnLeave]></app-angular-img>
+      </ng-container>
+      <!-- LightSpeed -->
+      <ng-container *ngSwitchCase="'lightSpeed'">
+        <app-angular-img *ngIf="state" [@lightSpeedInOnEnter] [@lightSpeedOutOnLeave]></app-angular-img>
+      </ng-container>
+      <!-- Rotate -->
+      <ng-container *ngSwitchCase="'rotateInOut'">
+        <app-angular-img *ngIf="state" [@rotateInOnEnter] [@rotateOutOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'rotateInOutDownLeft'">
+        <app-angular-img *ngIf="state" [@rotateInDownLeftOnEnter] [@rotateOutDownLeftOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'rotateInOutDownRight'">
+        <app-angular-img *ngIf="state" [@rotateInDownRightOnEnter] [@rotateOutDownRightOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'rotateInOutUpLeft'">
+        <app-angular-img *ngIf="state" [@rotateInUpLeftOnEnter] [@rotateOutUpLeftOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'rotateInOutUpRight'">
+        <app-angular-img *ngIf="state" [@rotateInUpRightOnEnter] [@rotateOutUpRightOnLeave]></app-angular-img>
+      </ng-container>
+      <!-- Sliding -->
+      <ng-container *ngSwitchCase="'slideInUpOutUp'">
+        <app-angular-img *ngIf="state" [@slideInUpOnEnter] [@slideOutUpOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'slideInDownOutDown'">
+        <app-angular-img *ngIf="state" [@slideInDownOnEnter] [@slideOutDownOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'slideInLeftOutRight'">
+        <app-angular-img *ngIf="state" [@slideInLeftOnEnter] [@slideOutRightOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'slideInRightOutLeft'">
+        <app-angular-img *ngIf="state" [@slideInRightOnEnter] [@slideOutLeftOnLeave]></app-angular-img>
+      </ng-container>
+      <!-- Zooming -->
+      <ng-container *ngSwitchCase="'zoomInOut'">
+        <app-angular-img *ngIf="state" [@zoomInOnEnter] [@zoomOutOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'zoomInUpOutUp'">
+        <app-angular-img *ngIf="state" [@zoomInUpOnEnter] [@zoomOutUpOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'zoomInDownOutDown'">
+        <app-angular-img *ngIf="state" [@zoomInDownOnEnter] [@zoomOutDownOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'zoomInLeftOutRight'">
+        <app-angular-img *ngIf="state" [@zoomInLeftOnEnter] [@zoomOutRightOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'zoomInRightOutLeft'">
+        <app-angular-img *ngIf="state" [@zoomInRightOnEnter] [@zoomOutLeftOnLeave]></app-angular-img>
+      </ng-container>
+      <!-- Specials -->
+      <ng-container *ngSwitchCase="'jackInTheBoxOnEnterHingeOnLeave'">
+        <app-angular-img *ngIf="state" [@jackInTheBoxOnEnter] [@hingeOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'rollInOut'">
+        <app-angular-img *ngIf="state" [@rollInOnEnter] [@rollOutOnLeave]></app-angular-img>
+      </ng-container>
+      <!-- Attention Seekers -->
+      <ng-container *ngSwitchCase="'bounce'">
+        <app-angular-img *ngIf="state" [@bounceOnEnter] [@fadeOutOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'flash'">
+        <app-angular-img *ngIf="state" [@flashOnEnter] [@fadeOutOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'pulse'">
+        <app-angular-img *ngIf="state" [@pulseOnEnter] [@fadeOutOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'rubberBand'">
+        <app-angular-img *ngIf="state" [@rubberBandOnEnter] [@fadeOutOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'shake'">
+        <app-angular-img *ngIf="state" [@shakeOnEnter] [@fadeOutOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'swing'">
+        <app-angular-img *ngIf="state" [@swingOnEnter] [@fadeOutOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'tada'">
+        <app-angular-img *ngIf="state" [@tadaOnEnter] [@fadeOutOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'wobble'">
+        <app-angular-img *ngIf="state" [@wobbleOnEnter] [@fadeOutOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'jello'">
+        <app-angular-img *ngIf="state" [@jelloOnEnter] [@fadeOutOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'flip'">
+        <app-angular-img *ngIf="state" [@flipOnEnter] [@fadeOutOnLeave]></app-angular-img>
+      </ng-container>
+      <!-- Other -->
+      <ng-container *ngSwitchCase="'expandCollapse'">
+        <app-angular-img *ngIf="state" [@expandOnEnter] [@collapseOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'fadeInExpandFadeOutCollapse'">
+        <app-angular-img *ngIf="state" [@fadeInExpandOnEnter] [@fadeOutCollapseOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'expandRightCollapseLeft'">
+        <app-angular-img *ngIf="state" [@expandRightOnEnter] [@collapseLeftOnLeave]></app-angular-img>
+      </ng-container>
+      <ng-container *ngSwitchCase="'fadeInExpandRightFadeOutCollapseLeft'">
+        <app-angular-img *ngIf="state" [@fadeInExpandRightOnEnter] [@fadeOutCollapseLeftOnLeave]></app-angular-img>
+      </ng-container>
+    </div>
+    <div *ngSwitchDefault>Select animaion</div>
+  </div>
+</div>
