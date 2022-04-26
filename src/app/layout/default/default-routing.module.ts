@@ -25,6 +25,10 @@ const routes: Routes = [
         loadChildren: () => import('../../pages/feat/feat.module').then(m => m.FeatModule)
       },
       {
+        path: 'comp',
+        loadChildren: () => import('../../pages/comp/comp.module').then(m => m.CompModule)
+      },
+      {
         path: 'level',
         loadChildren: () => import('../../pages/level/level.module').then(m => m.LevelModule)
       },

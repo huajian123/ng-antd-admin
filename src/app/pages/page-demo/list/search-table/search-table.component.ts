@@ -191,7 +191,7 @@ export class SearchTableComponent implements OnInit {
   /*查看*/
   check(name: string): void {
     // skipLocationChange导航时不要把新状态记入历史时设置为true
-    this.router.navigate(['default/list/search-table/search-table-detail'], {
+    this.router.navigate(['default/page-demo/list/search-table/search-table-detail'], {
       queryParams: {name},
       // skipLocationChange: true
     });

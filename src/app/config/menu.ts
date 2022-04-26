@@ -555,7 +555,26 @@ const menuNav: Menu[] = [
       },
     ]
   },
-
+  {
+    title: '组件',
+    icon: 'star',
+    open: false,
+    actionCode: ActionCode.UserManage,
+    selected: false,
+    showIcon: true,
+    path: '/default/comp',
+    children: [
+      {
+        title: '动画组件',
+        icon: 'dashboard',
+        open: false,
+        showIcon: true,
+        actionCode: ActionCode.UserManage,
+        selected: false,
+        path: '/default/comp/transition',
+      },
+    ]
+  },
 
 
   {

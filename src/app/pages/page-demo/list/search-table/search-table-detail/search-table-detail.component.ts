@@ -17,7 +17,7 @@ export class SearchTableDetailComponent implements OnInit {
   };
   validateForm!: FormGroup;
   name = '';
-  backUrl = '/default/list/search-table';
+  backUrl = '/default/page-demo/list/search-table';
 
   constructor(private routeParam: ActivatedRoute, public cdr: ChangeDetectorRef, private fb: FormBuilder) {
   }
