@@ -1,31 +1,31 @@
 <app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
 
 <div class="normal-table-wrap">
-  <nz-card nzTitle="Message">
+  <nz-card class="m-b-10" nzTitle="Message">
     <button nz-button nzType="primary" (click)="msg('info')">Info</button>
-    <button nz-button class="success"(click)="msg('success')">Success</button>
+    <button nz-button class="success" (click)="msg('success')">Success</button>
     <button nz-button class="warning" (click)="msg('warning')">Warning</button>
     <button nz-button nzDanger nzType="primary" (click)="msg('error')">Error</button>
     <button nz-button class="loading" (click)="msg('loading')">Loading</button>
   </nz-card>
 
-  <nz-card nzTitle="Confirm">
+  <nz-card class="m-b-10" nzTitle="Confirm">
     <button nz-button nzType="primary" (click)="modalShow('confirm','info')">Info</button>
-    <button nz-button class="success"(click)="modalShow('confirm','success')">Success</button>
+    <button nz-button class="success" (click)="modalShow('confirm','success')">Success</button>
     <button nz-button class="warning" (click)="modalShow('confirm','warning')">Warning</button>
     <button nz-button nzDanger nzType="primary" (click)="modalShow('confirm','error')">Error</button>
   </nz-card>
 
-  <nz-card nzTitle="modal">
+  <nz-card class="m-b-10" nzTitle="modal">
     <button nz-button nzType="primary" (click)="modalShow('info','info')">Info</button>
-    <button nz-button class="success"(click)="modalShow('success','success')">Success</button>
+    <button nz-button class="success" (click)="modalShow('success','success')">Success</button>
     <button nz-button class="warning" (click)="modalShow('warning','warning')">Warning</button>
     <button nz-button nzDanger nzType="primary" (click)="modalShow('error','error')">Error</button>
   </nz-card>
 
-  <nz-card nzTitle="Notification">
+  <nz-card class="m-b-10" nzTitle="Notification">
     <button nz-button [nzType]="'primary'" (click)="createBasicNotification(template)">
-        notification
+      notification
     </button>
   </nz-card>
 
@@ -37,11 +37,10 @@
           </span>
         <div class="ant-notification-notice-message">Notification Title</div>
         <div class="ant-notification-notice-description">
-           content success
+          content success
         </div>
       </div>
     </div>
   </ng-template>
-
 </div>
 

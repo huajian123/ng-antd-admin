@@ -14,7 +14,7 @@ import {filter, takeUntil} from 'rxjs/operators';
 import {ActivatedRoute, NavigationEnd, Router, RouterEvent, RouterOutlet} from '@angular/router';
 import {fadeRouteAnimation} from "@app/animations/fade.animation";
 import {NzSafeAny} from "ng-zorro-antd/core/types";
-import { DestroyService } from '@app/core/services/common/destory.service';
+import { DestroyService } from '@core/services/common/destory.service';
 
 interface TabInterface {
   label: string;
@@ -43,9 +43,9 @@ export class SearchListComponent implements OnInit {
   currentSelTab: number = 0;
 
   tabData: TabInterface[] = [
-    {label: '文章', url: '/default/list/search-list/article'},
-    {label: '项目', url: '/default/list/search-list/project'},
-    {label: '应用', url: '/default/list/search-list/application'},
+    {label: '文章', url: '/default/page-demo/list/search-list/article'},
+    {label: '项目', url: '/default/page-demo/list/search-list/project'},
+    {label: '应用', url: '/default/page-demo/list/search-list/application'},
   ];
 
   constructor(private searchListService: SearchListStoreService, private activatedRoute: ActivatedRoute,
