@@ -6,6 +6,7 @@ import { ExModalComponent } from './ex-modal.component';
 import {SharedModule} from "@shared/shared.module";
 import {DragModule} from "@widget/biz-widget/drag/drag.module";
 import {DragDropModule} from "@angular/cdk/drag-drop";
+import {NzxModalModule} from "@widget/modal/modal.module";
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import {DragDropModule} from "@angular/cdk/drag-drop";
     SharedModule,
     DragDropModule,
     DragModule,
+    NzxModalModule,
     ExModalRoutingModule
   ]
 })

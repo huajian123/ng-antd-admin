@@ -1,8 +1,15 @@
 <app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
 
 <div class="normal-table-wrap">
-  <button nz-button class="m-r-8" (click)="showDailog()">服务的方式</button>
-  <button nz-button (click)="showDailog1()">modal标签</button>
+  <button nz-button class="m-r-8 m-b-8" (click)="showDailog()">服务的方式创建自定义modal</button>
+  <button nz-button class="m-r-8 m-b-8" (click)="showDailog1()">modal标签通过传nzTitle来进行拖拽</button>
+  <button nz-button class="m-r-8 m-b-8" (click)="showDailogConfirm()">创建可拖动的confirm（by山间之明月）</button>
+  <button nz-button class="m-r-8 m-b-8" (click)="showDailogInfo()">创建可拖动的info（by山间之明月）</button>
+  <button nz-button class="m-r-8 m-b-8" (click)="showDailogSuccess()">创建可拖动的success（by山间之明月）</button>
+  <button nz-button class="m-r-8 m-b-8" (click)="showDailogError()">创建可拖动的error（by山间之明月）</button>
+  <button nz-button class="m-r-8 m-b-8" (click)="showDailogWarning()">创建可拖动的warning（by山间之明月）</button>
+  <button nz-button class="m-r-8 m-b-8" (click)="isVisibleByDir=true">指令创建（by山间之明月）</button>
+
 </div>
 
 <nz-modal [(nzVisible)]="isVisible" [nzTitle]="dragTpl" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
@@ -13,6 +20,16 @@
     <p>低头思故乡</p>
   </ng-container>
 </nz-modal>
+
+<nz-modal [(nzVisible)]="isVisibleByDir" nzxModalDrag [nzTitle]="'指令创建可拖拽'" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <ng-container *nzModalContent>
+    <p>床前明月光</p>
+    <p>疑似地上霜</p>
+    <p>举头望明月</p>
+    <p>低头思故乡</p>
+  </ng-container>
+</nz-modal>
+
 <!--可以将下列代码放开，放到modal的nzTitle中，也能达到拖动效果-->
 <ng-template #dragTpl>
   <div class="hand-model-move" cdkDragHandle cdkDrag cdkDragBoundary="nz-modal-container"
