@@ -5,7 +5,8 @@ import { CompRoutingModule } from './comp-routing.module';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+  ],
   imports: [
     CommonModule,
     CompRoutingModule

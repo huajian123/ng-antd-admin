@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
 const routes: Routes = [
+  {path: 'msg', loadChildren: () => import('./msg/msg.module').then(m => m.MsgModule)},
   {path: 'ex-modal', loadChildren: () => import('./ex-modal/ex-modal.module').then(m => m.ExModalModule)},
   {path: 'ex-drawer', loadChildren: () => import('./ex-drawer/ex-drawer.module').then(m => m.ExDrawerModule)},
   {path: 'msg', loadChildren: () => import('./msg/msg.module').then(m => m.MsgModule)},
