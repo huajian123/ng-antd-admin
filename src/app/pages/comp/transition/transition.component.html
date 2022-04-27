@@ -1,1 +1,18 @@
-<p>transition works!</p>
+<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+<div class="normal-table-wrap">
+  <button nz-button class="m-r-8" nzType="primary" (click)="currentComp='home'">主动画</button>
+  <button nz-button class="m-r-8" nzType="primary" (click)="currentComp='EnterLeave'">进场/离场</button>
+  <button nz-button class="m-r-8" nzType="primary" (click)="currentComp='Dynamic'">动态参数</button>
+  <button nz-button class="m-r-8" nzType="primary" (click)="currentComp='Experiments'">实验性</button>
+
+  <nz-card class="m-t-8">
+    <div class="center">
+      <app-demo-main *ngIf="currentComp==='home'"></app-demo-main>
+      <app-demo-on-enter-on-leave *ngIf="currentComp==='EnterLeave'"></app-demo-on-enter-on-leave>
+      <app-demo-dynamic-params *ngIf="currentComp==='Dynamic'"></app-demo-dynamic-params>
+      <app-experiments *ngIf="currentComp==='Experiments'"></app-experiments>
+    </div>
+
+  </nz-card>
+
+</div>
