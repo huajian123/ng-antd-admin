@@ -565,6 +565,15 @@ const menuNav: Menu[] = [
     path: '/default/comp',
     children: [
       {
+        title: '在线excel',
+        icon: 'dashboard',
+        open: false,
+        showIcon: true,
+        actionCode: ActionCode.UserManage,
+        selected: false,
+        path: '/default/comp/luckysheet',
+      },
+      {
         title: '动画组件',
         icon: 'dashboard',
         open: false,
