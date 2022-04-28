@@ -22,11 +22,6 @@ export class DescComponent implements OnInit {
     desc: '一系列详情组件'
   };
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
   listOfData: Person[] = [
     {
       userName: '张三',
@@ -50,4 +45,9 @@ export class DescComponent implements OnInit {
       mobile: 111
     }
   ];
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
 }

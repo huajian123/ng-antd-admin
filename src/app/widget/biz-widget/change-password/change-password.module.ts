@@ -16,7 +16,7 @@ import {PasswordStrengthMeterModule} from "angular-password-strength-meter";
     FormsModule,
     ReactiveFormsModule,
     SHARED_ZORRO_MODULES,
-    PasswordStrengthMeterModule,
+    PasswordStrengthMeterModule.forChild(),
   ]
 })
 export class ChangePasswordModule { }

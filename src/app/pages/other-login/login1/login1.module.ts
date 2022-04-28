@@ -22,7 +22,7 @@ import {PasswordStrengthMeterModule} from "angular-password-strength-meter";
   ],
   imports: [
     SharedModule,
-    PasswordStrengthMeterModule,
+    PasswordStrengthMeterModule.forChild(),
     QRCodeModule,
     Login1RoutingModule
   ]

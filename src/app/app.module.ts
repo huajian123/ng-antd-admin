@@ -16,6 +16,7 @@ import interceptors from './core/services/interceptors';
 import {LoginModalModule} from "@widget/biz-widget/login/login-modal.module";
 import {SubLockedStatusService} from "@core/services/common/sub-locked-status.service";
 import {LoadAliIconCdnService} from "@core/services/common/load-ali-icon-cdn.service";
+import {PasswordStrengthMeterModule} from "angular-password-strength-meter";
 
 
 export function StartupServiceFactory(startupService: StartupService) {
@@ -98,6 +99,7 @@ const APPINIT_PROVIDES = [
     CoreModule,
     SharedModule,
     LoginModalModule,
+    PasswordStrengthMeterModule.forRoot(),
     QuicklinkModule,
     AppRoutingModule,
   ],
