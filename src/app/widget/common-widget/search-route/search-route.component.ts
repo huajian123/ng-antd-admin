@@ -1,4 +1,15 @@
-import {Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef, HostListener, Inject} from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+  ChangeDetectorRef,
+  HostListener,
+  Inject,
+  NgZone
+} from '@angular/core';
 import {ThemeService} from "@store/common-store/theme.service";
 import {Menu} from "@core/services/types";
 import {fromEvent, of} from "rxjs";
@@ -8,6 +19,7 @@ import {NzModalRef} from "ng-zorro-antd/modal";
 import {MENU_TOKEN} from "@config/menu";
 import {BasicConfirmModalComponent} from "@widget/base-modal";
 import {NzSafeAny} from "ng-zorro-antd/core/types";
+import {normalizePassiveListenerOptions} from "@angular/cdk/platform";
 
 interface ResultItem {
   showIcon: boolean;
@@ -15,6 +27,8 @@ interface ResultItem {
   routePath: string;
   icon: string;
 }
+
+const passiveEventListenerOptions = <AddEventListenerOptions>normalizePassiveListenerOptions({passive: true});
 
 @Component({
   selector: 'app-search-route',
@@ -30,6 +44,7 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
   inputValue: string | null = null;
 
   constructor(private themesService: ThemeService, private cdr: ChangeDetectorRef,
+              private ngZone: NgZone,
               @Inject(MENU_TOKEN) private menuNavList: Menu[],
               private router: Router, protected override modalRef: NzModalRef) {
     super(modalRef);
@@ -121,30 +136,35 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
   }
 
   subSearchFn(): void {
-    fromEvent(this.searchInput.nativeElement, 'input').pipe(
-      map(e => (e.target as HTMLInputElement).value),
-      debounceTime(500),
-      distinctUntilChanged(),
-      switchMap((item) => {
-        return of(item)
-      })
-    ).subscribe(res => {
-      this.resultListShow = [];
-      this.resultList.forEach(item => {
-        if (item.title.includes(res)) {
-          this.resultListShow.push(item)
-        }
-      });
-      if (this.resultListShow.length > 0) {
-        this.resultListShow[0].showIcon = true;
-      }
-      this.resultListShow = [...this.resultListShow];
-      // 清空搜索条件时将结果集置空
-      if (!res) {
+    this.ngZone.runOutsideAngular(() => {
+      fromEvent(this.searchInput.nativeElement, 'input', passiveEventListenerOptions).pipe(
+        map(e => (e.target as HTMLInputElement).value),
+        debounceTime(500),
+        distinctUntilChanged(),
+        switchMap((item) => {
+          return of(item)
+        })
+      ).subscribe(res => {
         this.resultListShow = [];
-      }
-      this.cdr.markForCheck();
+        this.resultList.forEach(item => {
+          if (item.title.includes(res)) {
+            this.resultListShow.push(item)
+          }
+        });
+        if (this.resultListShow.length > 0) {
+          this.resultListShow[0].showIcon = true;
+        }
+        this.resultListShow = [...this.resultListShow];
+        // 清空搜索条件时将结果集置空
+        if (!res) {
+          this.resultListShow = [];
+        }
+        this.ngZone.run(()=>{
+          this.cdr.markForCheck();
+        })
+      })
     })
+
   }
 
   mouseOverItem(item: ResultItem): void {
