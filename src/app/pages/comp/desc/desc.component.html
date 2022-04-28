@@ -1,0 +1,63 @@
+<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+
+<div class="normal-table-wrap">
+  <div nz-row [nzGutter]="[32,16]">
+    <div nz-col nzSpan="24">
+      <nz-card class="m-b-10" [nzTitle]="nzBasicTitle" nzSize="default">
+        <nz-descriptions nzBordered [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }">
+          <nz-descriptions-item nzTitle="用户名">test</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="昵称">test-VB</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="联系电话">15695909xxx</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="邮箱">190848757@qq.com</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="地址">厦门市思明区</nz-descriptions-item>
+        </nz-descriptions>
+      </nz-card>
+
+      <nz-card class="m-b-10" [nzTitle]="nzVerticalTitle" nzSize="default">
+        <nz-descriptions nzBordered nzLayout="vertical" [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 2 }">
+          <nz-descriptions-item nzTitle="用户名">test</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="昵称">test-VB</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="联系电话">15695909xxx</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="邮箱">190848757@qq.com</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="地址">厦门市思明区</nz-descriptions-item>
+        </nz-descriptions>
+      </nz-card>
+
+      <nz-card class="m-b-10" nzTitle="userDescription" nzSize="default">
+        <nz-descriptions nzBordered [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }">
+          <nz-descriptions-item nzTitle="用户名">test</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="昵称">test-VB</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="联系电话">15695909xxx</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="邮箱">190848757@qq.com</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="地址">厦门市思明区</nz-descriptions-item>
+        </nz-descriptions>
+      </nz-card>
+
+      <nz-card class="m-b-10" nzTitle="无边框" nzSize="default">
+        <nz-descriptions  [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }">
+          <nz-descriptions-item nzTitle="用户名">test</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="昵称">test-VB</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="联系电话">15695909xxx</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="邮箱">190848757@qq.com</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="地址">厦门市思明区</nz-descriptions-item>
+        </nz-descriptions>
+      </nz-card>
+
+
+    </div>
+  </div>
+
+  <ng-template #nzBasicTitle>
+    <div>
+      基础示例
+      <span nz-tooltip nzTooltipTitle="prompt text"><i nz-icon nzType="question-circle" nzTheme="outline"></i></span>
+    </div>
+  </ng-template>
+
+  <ng-template #nzVerticalTitle>
+    <div>
+      垂直示例
+      <span nz-tooltip nzTooltipTitle="prompt text"><i nz-icon nzType="question-circle" nzTheme="outline"></i></span>
+    </div>
+  </ng-template>
+</div>

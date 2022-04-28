@@ -582,6 +582,15 @@ const menuNav: Menu[] = [
         selected: false,
         path: '/default/comp/basic',
       },
+      {
+        title: '详情组件',
+        icon: 'dashboard',
+        open: false,
+        showIcon: true,
+        actionCode: ActionCode.UserManage,
+        selected: false,
+        path: '/default/comp/desc',
+      },
     ]
   },
 
