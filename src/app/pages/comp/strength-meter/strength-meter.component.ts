@@ -16,7 +16,7 @@ export class StrengthMeterComponent implements OnInit {
   passwordVisible = false;
   newPassword!:string;
 
-  constructor(private fb: FormBuilder) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
