@@ -1,0 +1,25 @@
+<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+
+<div class="normal-table-wrap">
+  <div nz-row [nzGutter]="[32,16]" nzJustify="center" >
+    <div nz-col  [nzXXl]="12" [nzXl]="12" [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzXs]="24">
+      <nz-card  nzSize="default" style="border-radius: 10px">
+        <nz-input-group [nzSuffix]="suffixTemplate1">
+          <input nz-input [type]="passwordVisible ? 'text' : 'password'" [(ngModel)]="newPassword"
+                 id="newPassword" placeholder="新密码"/>
+        </nz-input-group>
+        <password-strength-meter [password]="newPassword"></password-strength-meter>
+        <nz-input-group [nzSuffix]="suffixTemplate1">
+          <input nz-input [disabled]="true"
+                 id="disablePassword" placeholder="禁用"/>
+        </nz-input-group>
+        <password-strength-meter [password]="'fasdfasd23423'"></password-strength-meter>
+      </nz-card>
+    </div>
+  </div>
+</div>
+
+<ng-template #suffixTemplate1>
+  <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+     (click)="passwordVisible = !passwordVisible"></i>
+</ng-template>
