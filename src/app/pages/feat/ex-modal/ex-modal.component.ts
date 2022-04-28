@@ -3,6 +3,8 @@ import {PageHeaderType} from "@shared/components/page-header/page-header.compone
 import {DragService} from "@widget/biz-widget/drag/drag.service";
 import {NzSafeAny} from "ng-zorro-antd/core/types";
 import {ModalBtnStatus} from "@widget/base-modal";
+import {ModalDragService} from "@widget/modal/modal-drag.service";
+import {NzModalWrapService} from "@widget/modal/nz-modal-wrap.service";
 
 @Component({
   selector: 'app-ex-modal',
@@ -18,26 +20,45 @@ export class ExModalComponent implements OnInit {
     breadcrumb: ['首页', '拖拽modal'],
   };
   isVisible = false;
+  isVisibleByDir = false;
 
-  constructor(private dragService: DragService) {
-  }
-
-  showModal(): void {
-    this.isVisible = true;
+  constructor(private dragService: DragService, private modalDragService: NzModalWrapService) {
   }
 
   handleOk(): void {
     console.log('Button ok clicked!');
     this.isVisible = false;
+    this.isVisibleByDir = false;
   }
 
   handleCancel(): void {
     console.log('Button cancel clicked!');
     this.isVisible = false;
+    this.isVisibleByDir = false;
   }
 
   showDailog1(): void {
     this.isVisible = true;
+  }
+
+  showDailogConfirm(): void {
+    this.modalDragService.confirm({nzTitle: 'Confirm', nzContent: '提示一下的内容'})
+  }
+
+  showDailogInfo(): void {
+    this.modalDragService.info({nzTitle: 'Info', nzContent: '提示一下的内容'})
+  }
+
+  showDailogSuccess(): void {
+    this.modalDragService.success({nzTitle: 'Success', nzContent: '提示一下的内容'})
+  }
+
+  showDailogError(): void {
+    this.modalDragService.error({nzTitle: 'Error', nzContent: '提示一下的内容'})
+  }
+
+  showDailogWarning(): void {
+    this.modalDragService.warning({nzTitle: 'Warning', nzContent: '提示一下的内容'})
   }
 
   showDailog(): void {
@@ -48,7 +69,7 @@ export class ExModalComponent implements OnInit {
       nzMask: false,
       nzMaskStyle: {display: 'none'},
       nzWrapClassName: "pointer-events-none"
-    }).subscribe(({modalValue, status})=>{
+    }).subscribe(({modalValue, status}) => {
       if (status === ModalBtnStatus.Cancel) {
         return;
       }
