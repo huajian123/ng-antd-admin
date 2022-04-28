@@ -1,6 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import {PageHeaderType} from "@shared/components/page-header/page-header.component";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-strength-meter',
@@ -20,13 +19,6 @@ export class StrengthMeterComponent implements OnInit {
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.initForm();
   }
-
-  initForm(): void {
-
-  }
-
-
 
 }
