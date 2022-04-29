@@ -5,11 +5,9 @@ import {
   NgModule,
   Input,
   Output,
-  EventEmitter,
-  OnDestroy, SimpleChanges
+  EventEmitter, SimpleChanges
 } from '@angular/core';
 import {SharedModule} from "@shared/shared.module";
-import {Subject} from "rxjs";
 import {DestroyService} from "@core/services/common/destory.service";
 
 export enum LazySelPeopleEnum {

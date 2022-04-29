@@ -5,7 +5,6 @@ import {
   LazyTargCompComponent
 } from "@app/pages/comp/lazy/lazy-basic/lazy-targ-comp/lazy-targ-comp.component";
 import {AdDirective} from "@shared/directives/ad.directive";
-import {DestroyService} from "@core/services/common/destory.service";
 import {takeUntil} from "rxjs/operators";
 
 @Component({
@@ -19,7 +18,7 @@ export class LazyBasicComponent implements OnInit {
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '详情组件示例',
     breadcrumb: ['首页', '组件', '详情组件'],
-    desc: '懒加载组件,我永远喜欢蔡依林'
+    desc: '懒加载组件,我永远喜欢周杰伦'
   };
   isStarted = false;
   @ViewChild(AdDirective, {static: true}) adHost!: AdDirective;
