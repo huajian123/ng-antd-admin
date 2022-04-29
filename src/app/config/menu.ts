@@ -565,13 +565,13 @@ const menuNav: Menu[] = [
     path: '/default/comp',
     children: [
       {
-        title: '在线excel',
+        title: '基础组件',
         icon: 'dashboard',
         open: false,
         showIcon: true,
         actionCode: ActionCode.UserManage,
         selected: false,
-        path: '/default/comp/luckysheet',
+        path: '/default/comp/basic',
       },
       {
         title: '动画组件',
@@ -583,13 +583,33 @@ const menuNav: Menu[] = [
         path: '/default/comp/transition',
       },
       {
-        title: '基础组件',
+        title: '在线excel',
         icon: 'dashboard',
         open: false,
         showIcon: true,
         actionCode: ActionCode.UserManage,
         selected: false,
-        path: '/default/comp/basic',
+        path: '/default/comp/luckysheet',
+      },
+      {
+        title: '组件懒加载',
+        icon: 'dashboard',
+        open: false,
+        showIcon: true,
+        actionCode: ActionCode.UserManage,
+        selected: false,
+        path: '/default/comp/lazy',
+        children: [
+          {
+            title: '基础懒加载组件',
+            icon: 'dashboard',
+            open: false,
+            showIcon: true,
+            actionCode: ActionCode.UserManage,
+            selected: false,
+            path: '/default/comp/lazy/lazy-basic',
+          }
+        ]
       },
       {
         title: '详情组件',
