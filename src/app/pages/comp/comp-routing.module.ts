@@ -6,6 +6,7 @@ const routes: Routes = [
   {path: 'basic', loadChildren: () => import('./basic/basic.module').then(m => m.BasicModule)},
   {path: 'luckysheet', loadChildren: () => import('./luckysheet/luckysheet.module').then(m => m.LuckysheetModule)},
   {path: 'desc', loadChildren: () => import('./desc/desc.module').then(m => m.DescModule)},
+  {path: 'strength-meter', loadChildren: () => import('./strength-meter/strength-meter.module').then(m => m.StrengthMeterModule)},
   {path: '', redirectTo: 'transition', pathMatch: 'full'},
 ];
 

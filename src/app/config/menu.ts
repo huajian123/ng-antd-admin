@@ -600,6 +600,15 @@ const menuNav: Menu[] = [
         selected: false,
         path: '/default/comp/desc',
       },
+      {
+        title: '密码强度校验组件',
+        icon: 'dashboard',
+        open: false,
+        showIcon: true,
+        actionCode: ActionCode.UserManage,
+        selected: false,
+        path: '/default/comp/strength-meter',
+      },
     ]
   },
 
