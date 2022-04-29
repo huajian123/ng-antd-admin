@@ -1,8 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {TransitionComponent} from "@app/pages/comp/transition/transition.component";
-import {BasicComponent} from "@app/pages/comp/basic/basic.component";
-import {DescComponent} from "@app/pages/comp/desc/desc.component";
 import {StrengthMeterComponent} from "@app/pages/comp/strength-meter/strength-meter.component";
 
 const routes: Routes = [
@@ -13,4 +10,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class strengthMeterRoutingModule { }
+export class StrengthMeterRoutingModule { }

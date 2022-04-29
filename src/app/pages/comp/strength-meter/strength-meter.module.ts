@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import {StrengthMeterComponent} from "@app/pages/comp/strength-meter/strength-meter.component";
-import {strengthMeterRoutingModule} from "@app/pages/comp/strength-meter/strength-meter-routing.module";
+import {StrengthMeterRoutingModule} from "@app/pages/comp/strength-meter/strength-meter-routing.module";
 import {SharedModule} from "@shared/shared.module";
 import {PasswordStrengthMeterModule} from "angular-password-strength-meter";
-
 
 
 @NgModule({
@@ -11,7 +10,7 @@ import {PasswordStrengthMeterModule} from "angular-password-strength-meter";
     StrengthMeterComponent
   ],
   imports: [
-    strengthMeterRoutingModule,
+    StrengthMeterRoutingModule,
     SharedModule,
     PasswordStrengthMeterModule.forChild(),
   ]
