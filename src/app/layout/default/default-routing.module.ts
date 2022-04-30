@@ -17,10 +17,6 @@ const routes: Routes = [
         loadChildren: () => import('../../pages/page-demo/page-demo.module').then(m => m.PageDemoModule)
       },
       {
-        path: 'internal-manage',
-        loadChildren: () => import('../../pages/internal-manage/internal-manage.module').then(m => m.InternalManageModule)
-      },
-      {
         path: 'feat',
         loadChildren: () => import('../../pages/feat/feat.module').then(m => m.FeatModule)
       },
