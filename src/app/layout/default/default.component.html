@@ -63,7 +63,10 @@
 
   <!--混合模式sider-->
   <ng-container mixsider>
-    <app-nav-bar [isMixiLeft]="(themeOptions$|async)!.splitNav"></app-nav-bar>
+    <div class="screen-full-height" style="overflow:hidden auto;">
+      <app-nav-bar [isMixiLeft]="(themeOptions$|async)!.splitNav"></app-nav-bar>
+    </div>>
+
   </ng-container>
 
   <ng-container content>

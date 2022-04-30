@@ -3,7 +3,6 @@ import {PageHeaderType} from "@shared/components/page-header/page-header.compone
 import {DragService} from "@widget/biz-widget/drag/drag.service";
 import {NzSafeAny} from "ng-zorro-antd/core/types";
 import {ModalBtnStatus} from "@widget/base-modal";
-import {ModalDragService} from "@widget/modal/modal-drag.service";
 import {NzModalWrapService} from "@widget/modal/nz-modal-wrap.service";
 
 @Component({
@@ -42,7 +41,14 @@ export class ExModalComponent implements OnInit {
   }
 
   showDailogConfirm(): void {
-    this.modalDragService.confirm({nzTitle: 'Confirm', nzContent: '提示一下的内容'})
+    this.modalDragService.confirm({
+      nzTitle: 'Confirm', nzContent: '提示一下的内容', nzOnOk: () => {
+        console.log('确定');
+      },
+      nzOnCancel:()=>{
+        console.log('取消');
+      }
+    })
   }
 
   showDailogInfo(): void {
