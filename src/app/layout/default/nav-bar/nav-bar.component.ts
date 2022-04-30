@@ -6,11 +6,11 @@ import {Title} from '@angular/platform-browser';
 import {SplitNavStoreService} from '@store/common-store/split-nav-store.service';
 import {Menu} from "@core/services/types";
 import {DOCUMENT} from "@angular/common";
-import {MENU_TOKEN} from "@config/menu";
-import {AuthService} from "@store/common-store/auth.service";
 import {TabService} from "@core/services/common/tab.service";
 import {DestroyService} from "@core/services/common/destory.service";
 import {Observable} from "rxjs";
+import {MenuStoreService} from "@store/common-store/menu-store.service";
+import {UserInfoService} from "@store/common-store/userInfo.service";
 
 @Component({
   selector: 'app-nav-bar',
@@ -33,18 +33,21 @@ export class NavBarComponent implements OnInit {
   isCollapsed = false;
   isMixiMode = false;
   leftMenuArray: Menu[] = [];
-  copyMenus: Menu[] = this.cloneMenuArray(this.menus);
+  menus: Menu[] = [];
+  copyMenus: Menu[] = [];
   authCodeArray: string[] = [];
   subTheme$: Observable<any>;
 
   constructor(private router: Router,
               private destroy$: DestroyService,
-              private authService: AuthService,
-              @Inject(MENU_TOKEN) public menus: Menu[],
+              private userInfoService: UserInfoService,
+              private menuServices: MenuStoreService,
               private splitNavStoreService: SplitNavStoreService,
               private activatedRoute: ActivatedRoute, private tabService: TabService,
               private cdr: ChangeDetectorRef, private themesService: ThemeService,
               private titleServe: Title, @Inject(DOCUMENT) private doc: Document) {
+    this.initMenus();
+
     this.subTheme$ = this.isOverMode$.pipe(switchMap(res => {
       this.isOverMode = res;
       return this.themesOptions$;
@@ -111,6 +114,13 @@ export class NavBarComponent implements OnInit {
         // 混合模式时，切换tab，让左侧菜单也相应变化
         this.setMixModeLeftMenu();
       });
+  }
+
+  initMenus(): void {
+    this.menuServices.getMenuArrayStore().pipe(takeUntil(this.destroy$)).subscribe(menusArray => {
+      this.menus = menusArray;
+      this.copyMenus = this.cloneMenuArray(this.menus)
+    })
   }
 
   // 设置混合模式时，左侧菜单"自动分割菜单"模式的数据源
@@ -260,7 +270,7 @@ export class NavBarComponent implements OnInit {
   }
 
   subAuth(): void {
-    this.authService.getAuthCode().pipe(takeUntil(this.destroy$)).subscribe(res => this.authCodeArray = res);
+    this.userInfoService.getUserInfo().pipe(takeUntil(this.destroy$)).subscribe(res => this.authCodeArray = res.authCode);
   }
 
   // 监听混合模式下左侧菜单数据源

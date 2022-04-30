@@ -8,7 +8,7 @@ import {fnCheckForm, fnEncrypt} from "@utils/tools";
 import {LockedKey, salt} from "@config/constant";
 import {WindowService} from "@core/services/common/window.service";
 import {LockScreenFlag, LockScreenStoreService} from "@store/common-store/lock-screen-store.service";
-import {LoginOutService} from "@core/services/common/login-out.service";
+import {LoginInOutService} from "@core/services/common/login-in-out.service";
 import {Router} from "@angular/router";
 import {DestroyService} from "@core/services/common/destory.service";
 
@@ -31,7 +31,12 @@ export class LockScreenComponent implements OnInit {
   }
 
 
-  constructor(private destroy$: DestroyService, private router: Router, private loginOutService: LoginOutService, private lockScreenStoreService: LockScreenStoreService, private fb: FormBuilder, private windowSrv: WindowService) {
+  constructor(private destroy$: DestroyService,
+              private router: Router,
+              private loginOutService: LoginInOutService,
+              private lockScreenStoreService: LockScreenStoreService,
+              private fb: FormBuilder,
+              private windowSrv: WindowService) {
   }
 
   // 返回登录页面则解锁

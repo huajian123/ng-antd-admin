@@ -5,22 +5,26 @@
 import {Type} from '@angular/core';
 import {NzSafeAny} from "ng-zorro-antd/core/types";
 
+// 动态组件
 export class DynamicComponent {
   constructor(public component: Type<NzSafeAny>, public data: NzSafeAny) {
   }
 }
 
+// select下拉
 export interface OptionsInterface {
   value: number | string;
   label: string;
 }
 
+// 列表搜索
 export interface SearchCommonVO<T> {
   pageNum: number;
   pageSize: number;
   filters?: T;
 }
 
+// 分页
 export interface PageInfo<T> {
   pageNum: number;
   pageSize: number;
@@ -43,6 +47,7 @@ export interface PageInfo<T> {
   navigatepageNums?: number[];
 }
 
+// 动态组件
 export interface AdComponent {
   data: NzSafeAny;
 }
@@ -55,13 +60,7 @@ export interface CascaderOption {
   isLeaf?: boolean;
 }
 
-
-export interface UserLogin {
-  name: string;
-  password: string;
-}
-
-export interface User extends UserLogin {
+export interface UserToken {
   token: string;
 }
 
@@ -77,77 +76,10 @@ export interface Menu {
   alIcon?: string; // 如果showIcon为false，设置这个为搜索窗口时，最左侧的icon
   open?: boolean;
   showIcon: boolean; // 是否展示icon
-  selected?: boolean;
+  selected?: boolean; // 是否选中
   children?: Menu[];
-  actionCode?: string;
+  actionCode?: string; // 权限码
   isNewLink?: boolean; // 是否是新页
 }
 
 
-/*
-* 角色
-* */
-
-export interface Role {
-  id?: number;
-  roleName: string;
-  roleDesc?: string;
-}
-
-
-/*
-* 用户管理
-* */
-
-export interface People {
-  id?: number;
-  password: string;
-  userName: string;
-  available: boolean;
-  departmentName: string;
-  departmentId: number | number[];
-  firstDepartmentGradeId: number;
-  secondDepartmentGradeId: number;
-  thirdDepartmentGradeId: number;
-  roleName: string[];
-  sex: 1 | 0;
-  telephone: string;
-  mobile: string | number;
-  email: string;
-  lastLoginTime: Date;
-}
-
-
-/*
-*  权限
-* */
-export interface Permission {
-  hasChildren: boolean;
-  menuName: string;
-  code: string;
-  fatherId: number;
-  id: number;
-  menuGrade: number; // 级别
-  permissionVo: Permission[];
-  isOpen?: boolean; // 是否折叠
-  checked: boolean;
-}
-
-// 更新权限参数接口
-export interface PutPermissionParam {
-  permissionIds: number[];
-  roleId: number;
-}
-
-/*
-*  部门列表
-* */
-export interface DeptObj {
-  id: number;
-  departmentName: string;
-  departmentDesc: string;
-  fatherId: number;
-  departmentGrade: number;
-  departmentVos: DeptObj[];
-  expand: boolean;
-}

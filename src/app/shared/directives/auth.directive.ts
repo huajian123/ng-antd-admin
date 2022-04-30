@@ -1,6 +1,6 @@
 import {Directive, Input, TemplateRef, ViewContainerRef} from '@angular/core';
-import {AuthService} from '@store/common-store/auth.service';
 import {NzSafeAny} from "ng-zorro-antd/core/types";
+import {UserInfoService} from "@store/common-store/userInfo.service";
 
 @Directive({
   selector: '[appAuth]'
@@ -17,11 +17,11 @@ export class AuthDirective {
     this.codeArray.includes(authCode) ? this.show(true) : this.show(false);
   }
 
-  constructor(private authService: AuthService, private templateRef: TemplateRef<NzSafeAny>,
+  constructor(private userInfoService: UserInfoService, private templateRef: TemplateRef<NzSafeAny>,
               private viewContainerRef: ViewContainerRef) {
-    this.authService.getAuthCode().subscribe((codeArray) => {
-      this.codeArray = codeArray;
-    });
+    this.userInfoService.getUserInfo().subscribe(userInfo => {
+      this.codeArray = userInfo.authCode;
+    })
   }
 
   private show(hasAuth: boolean): void {

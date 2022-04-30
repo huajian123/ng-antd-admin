@@ -4,7 +4,7 @@ import {Observable, throwError} from 'rxjs';
 import {WindowService} from '../common/window.service';
 import {catchError, filter} from 'rxjs/operators';
 import {NzMessageService} from 'ng-zorro-antd/message';
-import {AuthKey} from "@config/constant";
+import {TokenKey} from "@config/constant";
 import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 interface CustomHttpConfig {
@@ -18,10 +18,10 @@ export class HttpInterceptorService implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<NzSafeAny>, next: HttpHandler): Observable<HttpEvent<NzSafeAny>> {
-    const auth = this.windowServe.getStorage(AuthKey);
+    const token = this.windowServe.getStorage(TokenKey);
     let httpConfig: CustomHttpConfig = {};
-    if (!!auth) {
-      httpConfig = {headers: req.headers.set(AuthKey, auth)};
+    if (!!token) {
+      httpConfig = {headers: req.headers.set(TokenKey, token)};
     }
     const copyReq = req.clone(httpConfig);
     return next.handle(copyReq).pipe(filter(e => e.type !== 0), catchError(error => this.handleError(error)));

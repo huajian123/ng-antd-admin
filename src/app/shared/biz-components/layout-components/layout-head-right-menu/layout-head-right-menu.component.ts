@@ -5,7 +5,7 @@ import {SearchRouteService} from "@widget/common-widget/search-route/search-rout
 import {ModalOptions} from "ng-zorro-antd/modal";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {LockWidgetService} from "@widget/common-widget/lock-widget/lock-widget.service";
-import {LoginOutService} from "@core/services/common/login-out.service";
+import {LoginInOutService} from "@core/services/common/login-in-out.service";
 import {SpinService} from "@store/common-store/spin.service";
 import {ChangePasswordService} from "@widget/biz-widget/change-password/change-password.service";
 import {ModalBtnStatus} from "@widget/base-modal";
@@ -21,7 +21,7 @@ export class LayoutHeadRightMenuComponent implements OnInit {
   constructor(private router: Router,
               private changePasswordModalService: ChangePasswordService,
               private spinService: SpinService,
-              private loginOutService: LoginOutService,
+              private loginOutService: LoginInOutService,
               private lockWidgetService: LockWidgetService,
               private windowServe: WindowService,
               private activatedRoute: ActivatedRoute,

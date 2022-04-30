@@ -7,17 +7,16 @@ import {filter, finalize, share, switchMap} from 'rxjs/operators';
 import {ModalBtnStatus} from '@widget/base-modal';
 import {Router} from '@angular/router';
 import {WindowService} from '../common/window.service';
-import {AuthService} from '@store/common-store/auth.service';
-import {AuthKey, loginTimeOutCode, TokenPre} from "@config/constant";
-import {LoginOutService} from "@core/services/common/login-out.service";
+import {TokenKey, loginTimeOutCode} from "@config/constant";
+import {LoginInOutService} from "@core/services/common/login-in-out.service";
 
 @Injectable()
 export class LoginExpiredService implements HttpInterceptor {
   private refresher: Observable<NzSafeAny> | null = null;
 
   constructor(private loginModalService: LoginModalService, private router: Router,
-              private loginOutService: LoginOutService,
-              private windowServe: WindowService, private authService: AuthService, private http: HttpClient) {
+              private loginInOutService: LoginInOutService,
+              private windowServe: WindowService, private http: HttpClient) {
   }
 
   intercept(req: HttpRequest<string>, next: HttpHandler): Observable<HttpEvent<NzSafeAny>> {
@@ -27,10 +26,10 @@ export class LoginExpiredService implements HttpInterceptor {
 
   private sendRequest(request: HttpRequest<NzSafeAny>, next: HttpHandler) {
     return this.refresher!.pipe(switchMap(() => {
-      const auth = this.windowServe.getStorage(AuthKey);
+      const token = this.windowServe.getStorage(TokenKey);
       let httpConfig = {};
-      if (!!auth) {
-        httpConfig = {headers: request.headers.set(AuthKey, auth)};
+      if (!!token) {
+        httpConfig = {headers: request.headers.set(TokenKey, token)};
       }
       this.refresher = null;
       const copyReq = request.clone(httpConfig);
@@ -51,13 +50,13 @@ export class LoginExpiredService implements HttpInterceptor {
       this.refresher = new Observable((observer) => {
         this.loginModalService.show({nzTitle: '登录信息过期，重新登录'}).subscribe(({modalValue, status}) => {
           if (status === ModalBtnStatus.Cancel) {
-            this.loginOutService.loginOut();
+            this.loginInOutService.loginOut();
             this.refresher = null;
             this.router.navigateByUrl('/login/login-form');
             return;
           }
           const token = modalValue;
-          this.windowServe.setStorage(AuthKey, TokenPre + token);
+          this.loginInOutService.loginIn(token);
           this.http.request(req).subscribe((data: NzSafeAny) => {
             this.refresher = null;
             observer.next(data);

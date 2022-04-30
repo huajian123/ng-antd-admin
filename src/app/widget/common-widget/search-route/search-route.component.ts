@@ -7,19 +7,19 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   HostListener,
-  Inject,
   NgZone
 } from '@angular/core';
 import {ThemeService} from "@store/common-store/theme.service";
 import {Menu} from "@core/services/types";
 import {fromEvent, of} from "rxjs";
-import {debounceTime, distinctUntilChanged, map, switchMap} from "rxjs/operators";
+import {debounceTime, distinctUntilChanged, map, switchMap, takeUntil} from "rxjs/operators";
 import {Router} from "@angular/router";
 import {NzModalRef} from "ng-zorro-antd/modal";
-import {MENU_TOKEN} from "@config/menu";
 import {BasicConfirmModalComponent} from "@widget/base-modal";
 import {NzSafeAny} from "ng-zorro-antd/core/types";
 import {normalizePassiveListenerOptions} from "@angular/cdk/platform";
+import {MenuStoreService} from "@store/common-store/menu-store.service";
+import {DestroyService} from "@core/services/common/destory.service";
 
 interface ResultItem {
   showIcon: boolean;
@@ -34,7 +34,8 @@ const passiveEventListenerOptions = <AddEventListenerOptions>normalizePassiveLis
   selector: 'app-search-route',
   templateUrl: './search-route.component.html',
   styleUrls: ['./search-route.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [DestroyService]
 })
 export class SearchRouteComponent extends BasicConfirmModalComponent implements OnInit, AfterViewInit {
   isNightTheme$ = this.themesService.getIsNightTheme();
@@ -42,10 +43,12 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
   resultList: ResultItem[] = [];
   @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
   inputValue: string | null = null;
+  menuNavList: Menu[] = [];
 
   constructor(private themesService: ThemeService, private cdr: ChangeDetectorRef,
               private ngZone: NgZone,
-              @Inject(MENU_TOKEN) private menuNavList: Menu[],
+              private destroy$: DestroyService,
+              private menuStoreService: MenuStoreService,
               private router: Router, protected override modalRef: NzModalRef) {
     super(modalRef);
   }
@@ -143,7 +146,8 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
         distinctUntilChanged(),
         switchMap((item) => {
           return of(item)
-        })
+        }),
+        takeUntil(this.destroy$)
       ).subscribe(res => {
         this.resultListShow = [];
         this.resultList.forEach(item => {
@@ -159,7 +163,7 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
         if (!res) {
           this.resultListShow = [];
         }
-        this.ngZone.run(()=>{
+        this.ngZone.run(() => {
           this.cdr.markForCheck();
         })
       })
@@ -178,7 +182,14 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
     this.subSearchFn();
   }
 
+  getMenus(): void {
+    this.menuStoreService.getMenuArrayStore().pipe(takeUntil(this.destroy$)).subscribe(menus => {
+      this.menuNavList = menus;
+    })
+  }
+
   ngOnInit(): void {
+    this.getMenus();
     this.resultListFactory();
   }
 
