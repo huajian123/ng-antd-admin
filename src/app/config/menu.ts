@@ -429,6 +429,36 @@ const menuNav: Menu[] = [
         path: '/default/feat/click-out-side',
       },
       {
+        title: '外部文档',
+        icon: 'dashboard',
+        open: false,
+        showIcon: true,
+        actionCode: ActionCode.UserManage,
+        selected: false,
+        path: '/default/feat/frame',
+        children: [
+          {
+            title: 'zorro文档',
+            icon: 'dashboard',
+            open: false,
+            showIcon: true,
+            actionCode: ActionCode.UserManage,
+            selected: false,
+            path: '/default/feat/frame/zorro-doc',
+          },
+          {
+            title: '外部链接',
+            icon: 'usergroup-delete',
+            open: false,
+            actionCode: ActionCode.UserManage,
+            selected: false,
+            showIcon: true,
+            path: 'https://github.com/huajian123/ng-ant-admin',
+            isNewLink:true
+          },
+        ]
+      },
+      {
         title: '滚动条',
         icon: 'dashboard',
         open: false,
@@ -534,16 +564,7 @@ const menuNav: Menu[] = [
         showIcon: true,
         path: '/blank/empty-page',
       },
-      {
-        title: '外部链接',
-        icon: 'usergroup-delete',
-        open: false,
-        actionCode: ActionCode.UserManage,
-        selected: false,
-        showIcon: true,
-        path: 'https://github.com/huajian123/ng-ant-admin',
-        isNewLink: true,
-      },
+
       {
         title: '引导页',
         alIcon:'icon-medium',
