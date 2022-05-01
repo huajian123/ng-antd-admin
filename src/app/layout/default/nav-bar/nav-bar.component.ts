@@ -11,6 +11,7 @@ import {DestroyService} from "@core/services/common/destory.service";
 import {Observable} from "rxjs";
 import {MenuStoreService} from "@store/common-store/menu-store.service";
 import {UserInfoService} from "@store/common-store/userInfo.service";
+import {fnStopMouseEvent} from "@utils/tools";
 
 @Component({
   selector: 'app-nav-bar',
@@ -230,13 +231,9 @@ export class NavBarComponent implements OnInit {
     });
   }
 
-  changeRoute(menu: Menu): void {
+  changeRoute(e: MouseEvent, menu: Menu): void {
     if (menu.isNewLink) {
-      this.menus = this.cloneMenuArray(this.copyMenus);
-      if (this.themesMode === 'top' && !this.isOverMode) {
-        this.closeMenu();
-      }
-      this.doc.body.click();
+      fnStopMouseEvent(e);
       window.open(menu.path, '_blank');
       return;
     }
