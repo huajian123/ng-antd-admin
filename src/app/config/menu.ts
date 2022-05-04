@@ -629,6 +629,15 @@ const menuNav: Menu[] = [
             actionCode: ActionCode.UserManage,
             selected: false,
             path: '/default/comp/lazy/lazy-basic',
+          },
+          {
+            title: '滚动懒加载',
+            icon: 'dashboard',
+            open: false,
+            showIcon: true,
+            actionCode: ActionCode.UserManage,
+            selected: false,
+            path: '/default/comp/lazy/lazy-scroll',
           }
         ]
       },
