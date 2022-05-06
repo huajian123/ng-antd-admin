@@ -7,9 +7,9 @@ import {CoolTheme} from './data';
   selector: 'app-theme-charts',
   template: `
     <div class="m-b-20" >
-      <button class="m-r-8" (click)="theme='dark'" nz-button nzType="default">dark主题</button>
-      <button class="m-r-8" (click)="theme='macarons'" nz-button nzType="default">macarons主题</button>
-      <button class="m-r-8" (click)="theme=coolTheme" nz-button nzType="default">自定义主题</button>
+      <button class="m-r-8 m-b-8" (click)="theme='dark'" nz-button nzType="default">dark主题</button>
+      <button class="m-r-8 m-b-8" (click)="theme='macarons'" nz-button nzType="default">macarons主题</button>
+      <button class="m-r-8 m-b-8" (click)="theme=coolTheme" nz-button nzType="default">自定义主题</button>
     </div>
     <div echarts [options]="options" [theme]="theme" class="demo-chart"></div>
   `,

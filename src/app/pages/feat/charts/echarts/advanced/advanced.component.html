@@ -1,5 +1,5 @@
 <nz-card nzTitle="高级">
-  <nz-tabset [nzTabPosition]="'left'">
+  <nz-tabset [nzTabPosition]="tabPosition">
     <nz-tab (nzClick)="to(index)" *ngFor="let item of tabArray;let index=index" [nzTitle]="item.label">
       <ng-template [cdkPortalOutlet]="selectedPortal"></ng-template>
     </nz-tab>

@@ -6,11 +6,11 @@ import {EChartsOption} from "echarts/types/dist/echarts";
   selector: 'app-instance-opts-charts',
   template: `
     <div class="m-b-20">
-      <button class="m-r-8" (click)="callMethod('getWidth')" nz-button nzType="default">getWidth()</button>
-      <button class="m-r-8" (click)="callMethod('getHeight')" nz-button nzType="default">getHeight()</button>
-      <button class="m-r-8" (click)="callMethod('getDom')" nz-button nzType="default">getDom()</button>
-      <button class="m-r-8" (click)="callMethod('getOption')" nz-button nzType="default">getOption()</button>
-      <button class="m-r-8" (click)="callMethod('clear')" nz-button nzType="default">clear()</button>
+      <button class="m-r-8 m-b-8" (click)="callMethod('getWidth')" nz-button nzType="default">getWidth()</button>
+      <button class="m-r-8 m-b-8" (click)="callMethod('getHeight')" nz-button nzType="default">getHeight()</button>
+      <button class="m-r-8 m-b-8" (click)="callMethod('getDom')" nz-button nzType="default">getDom()</button>
+      <button class="m-r-8 m-b-8" (click)="callMethod('getOption')" nz-button nzType="default">getOption()</button>
+      <button class="m-r-8 m-b-8" (click)="callMethod('clear')" nz-button nzType="default">clear()</button>
     </div>
     <div echarts (chartInit)="onChartInit($event)" [options]="options" class="demo-chart"></div>
   `,

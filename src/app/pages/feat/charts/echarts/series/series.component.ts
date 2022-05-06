@@ -1,9 +1,11 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
 import {ComponentPortal, Portal} from "@angular/cdk/portal";
 import {ComponentType} from "@angular/cdk/portal/portal";
 import {SimpleGraphComponent} from "@app/pages/feat/charts/echarts/series/simple-graph/simple-graph.component";
 import {FromLeftToRightComponent} from "@app/pages/feat/charts/echarts/series/from-left-to-right/from-left-to-right.component";
 import {RadialTreeComponent} from "@app/pages/feat/charts/echarts/series/radial-tree/radial-tree.component";
+import {BreakpointObserver} from "@angular/cdk/layout";
+import {NzTabPosition} from "ng-zorro-antd/tabs/interfaces";
 
 type targetComp =
   SimpleGraphComponent
@@ -23,8 +25,10 @@ export class SeriesComponent implements OnInit {
     {label: 'From Left To Right', value: FromLeftToRightComponent},
     {label: 'Radial Tree', value: RadialTreeComponent},
   ];
+  tabPosition: NzTabPosition = 'left';
 
-  constructor() { }
+  constructor(private cdr: ChangeDetectorRef, private breakpointObserver: BreakpointObserver,) {
+  }
   to(tabIndex: number): void {
     this.componentPortal = new ComponentPortal(this.tabArray[tabIndex].value);
     this.selectedPortal = this.componentPortal;
@@ -32,6 +36,10 @@ export class SeriesComponent implements OnInit {
 
   ngOnInit(): void {
     this.to(0);
+    this.breakpointObserver.observe(['(max-width: 767px)']).subscribe(result => {
+      this.tabPosition = result.matches ? 'top' : 'left';
+      this.cdr.markForCheck();
+    });
   }
 
 }

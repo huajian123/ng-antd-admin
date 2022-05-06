@@ -2,7 +2,7 @@
 
 
 // 请求头token的pre
-export const TokenPre = 'Bearer ';
+export const TokenPre  = 'Bearer ';
 export const TokenKey = 'Authorization';
 export const IsNightKey = 'IsNightKey';
 export const ThemeOptionsKey = 'ThemeOptionsKey';

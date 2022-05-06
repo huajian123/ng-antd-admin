@@ -1,4 +1,4 @@
-import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
 import {ComponentType} from "@angular/cdk/portal/portal";
 import {EventsChartsComponent} from "@app/pages/feat/charts/echarts/started/events-charts/events-charts.component";
 import {
@@ -12,6 +12,8 @@ import {MergeChartsComponent} from "@app/pages/feat/charts/echarts/started/merge
 import {SimpleChartComponent} from "@app/pages/feat/charts/echarts/started/simple-chart/simple-chart.component";
 import {ThemeChartsComponent} from "@app/pages/feat/charts/echarts/started/theme-charts/theme-charts.component";
 import {ComponentPortal, Portal} from "@angular/cdk/portal";
+import {NzTabPosition} from "ng-zorro-antd/tabs/interfaces";
+import {BreakpointObserver} from "@angular/cdk/layout";
 
 type targetComp =
   EventsChartsComponent
@@ -29,6 +31,7 @@ type targetComp =
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StartedComponent implements OnInit {
+  tabPosition: NzTabPosition = 'left';
   componentPortal?: ComponentPortal<targetComp>;
   selectedPortal!: Portal<any>;
   tabArray: { label: string, value: ComponentType<targetComp> }[] = [
@@ -41,7 +44,7 @@ export class StartedComponent implements OnInit {
     {label: 'ECharts Instance', value: InstanceOptsChartsComponent},
   ];
 
-  constructor() {
+  constructor(private cdr: ChangeDetectorRef, private breakpointObserver: BreakpointObserver,) {
   }
 
   to(tabIndex: number): void {
@@ -51,6 +54,11 @@ export class StartedComponent implements OnInit {
 
   ngOnInit(): void {
     this.to(0);
+
+    this.breakpointObserver.observe(['(max-width: 767px)']).subscribe(result => {
+      this.tabPosition = result.matches ? 'top' : 'left';
+      this.cdr.markForCheck();
+    });
   }
 
 }
