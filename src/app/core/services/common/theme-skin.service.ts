@@ -4,7 +4,7 @@ import {first} from "rxjs/operators";
 import {DOCUMENT} from "@angular/common";
 import {NzSafeAny} from "ng-zorro-antd/core/types";
 
-enum ThemeType {
+const enum ThemeType {
   dark = 'dark',
   default = 'default',
 }

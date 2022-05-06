@@ -488,13 +488,13 @@ const menuNav: Menu[] = [
         ]
       },
       {
-        title: '地图',
+        title: '图表',
         icon: 'dashboard',
         open: false,
         showIcon: true,
         actionCode: ActionCode.UserManage,
         selected: false,
-        path: '/default/feat/map',
+        path: '/default/feat/charts',
         children: [
           {
             title: '高德',
@@ -502,7 +502,25 @@ const menuNav: Menu[] = [
             selected: false,
             icon: 'highlight',
             showIcon: false,
-            path: '/default/feat/map/gaode',
+            path: '/default/feat/charts/gaode-map',
+            actionCode: ActionCode.UserManage,
+          },
+          {
+            title: '百度',
+            open: false,
+            selected: false,
+            icon: 'highlight',
+            showIcon: false,
+            path: '/default/feat/charts/baidu-map',
+            actionCode: ActionCode.UserManage,
+          },
+          {
+            title: 'Echarts',
+            open: false,
+            selected: false,
+            icon: 'highlight',
+            showIcon: false,
+            path: '/default/feat/charts/echarts',
             actionCode: ActionCode.UserManage,
           },
         ]

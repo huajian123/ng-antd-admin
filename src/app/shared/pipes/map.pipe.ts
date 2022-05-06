@@ -7,13 +7,13 @@ import {Pipe, PipeTransform} from '@angular/core';
 import {DatePipe} from '@angular/common';
 import {NzSafeAny} from "ng-zorro-antd/core/types";
 
-export enum DateFormat {
+export const enum DateFormat {
   Date = 'yyyy-MM-dd',
   DateHour = 'yyyy-MM-dd HH',
   DateTime = 'yyyy-MM-dd HH:mm',
 }
 
-export enum MapKeyType {
+export const enum MapKeyType {
   String,
   Number,
   Boolean

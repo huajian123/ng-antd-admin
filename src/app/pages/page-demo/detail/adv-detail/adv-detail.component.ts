@@ -1,4 +1,12 @@
-import {Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, AfterViewInit} from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  ViewChild,
+  TemplateRef,
+  AfterViewInit,
+  ChangeDetectorRef
+} from '@angular/core';
 import {PageHeaderType} from '@shared/components/page-header/page-header.component';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {MyTableConfig} from '@shared/components/ant-table/ant-table.component';
@@ -13,6 +21,10 @@ interface ReturnObj {
   price: string;
 }
 
+enum TabEnum {
+  Detail,
+  Rule
+}
 
 @Component({
   selector: 'app-adv-detail',
@@ -34,6 +46,8 @@ export class AdvDetailComponent implements OnInit, AfterViewInit {
     desc: '',
     footer: '',
   };
+  tabEnum = TabEnum;
+  currentSelTab: number =this.tabEnum.Detail;
 
   returnDataList: ReturnObj[] = [{
     num: '1234561',
@@ -72,7 +86,12 @@ export class AdvDetailComponent implements OnInit, AfterViewInit {
     price: '2.00',
   }];
 
-  constructor(private breakpointObserver: BreakpointObserver) {
+  constructor(private cdr: ChangeDetectorRef, private breakpointObserver: BreakpointObserver) {
+  }
+
+  to(tabIndex: TabEnum): void {
+    this.currentSelTab = tabIndex;
+    this.cdr.detectChanges();
   }
 
   private initReturnTable(): void {
@@ -113,7 +132,6 @@ export class AdvDetailComponent implements OnInit, AfterViewInit {
       pageIndex: 1,
     };
   }
-
 
 
   ngOnInit(): void {

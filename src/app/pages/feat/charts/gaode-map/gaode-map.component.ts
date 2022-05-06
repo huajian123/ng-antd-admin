@@ -1,19 +1,20 @@
-import {Component, OnInit, ChangeDetectionStrategy, AfterViewInit, ChangeDetectorRef} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
 import {PageHeaderType} from "@shared/components/page-header/page-header.component";
-import AMapLoader from '@amap/amap-jsapi-loader';
+import AMapLoader from "@amap/amap-jsapi-loader";
 
 @Component({
-  selector: 'app-gaode',
-  templateUrl: './gaode.component.html',
-  styleUrls: ['./gaode.component.less'],
+  selector: 'app-gaode-map',
+  templateUrl: './gaode-map.component.html',
+  styleUrls: ['./gaode-map.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GaodeComponent implements OnInit, AfterViewInit {
+export class GaodeMapComponent implements OnInit {
+
   pageHeaderInfo: Partial<PageHeaderType> = {
-    title: '高德地图，可不要暴露行踪了哟',
-    breadcrumb: ['首页', '扩展功能', '地图', '高德地图'],
+    title: '百度地图，可不要暴露行踪了哟',
+    breadcrumb: ['首页', '功能', '图表', '高德地图'],
   };
-  marker: any[] = [116.437253, 39.935033];
+  marker:  [number, number] = [116.437253, 39.935033];
   markerPosition: string = this.marker.join(',')
 
   constructor(private cdr: ChangeDetectorRef) {

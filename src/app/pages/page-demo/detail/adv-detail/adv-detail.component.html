@@ -39,9 +39,9 @@
   </div>
 </ng-template>
 <ng-template #headerFooter>
-  <nz-tabset>
-    <nz-tab nzTitle="详情"></nz-tab>
-    <nz-tab nzTitle="规则"></nz-tab>
+  <nz-tabset [(nzSelectedIndex)]="currentSelTab">
+    <nz-tab (nzClick)="to(tabEnum.Detail)" nzTitle="详情"></nz-tab>
+    <nz-tab (nzClick)="to(tabEnum.Rule)" nzTitle="规则"></nz-tab>
   </nz-tabset>
 </ng-template>
 

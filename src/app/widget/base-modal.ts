@@ -10,7 +10,7 @@ import {DragRef} from "@angular/cdk/drag-drop/drag-ref";
 
 type ModalZIndex = { zIndex: number, canChange: boolean };
 
-export enum ModalBtnStatus {
+export const enum ModalBtnStatus {
   Cancel,
   Ok
 }

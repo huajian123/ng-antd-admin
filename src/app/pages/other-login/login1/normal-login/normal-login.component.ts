@@ -1,4 +1,4 @@
-import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {LoginType} from "@app/pages/other-login/login1/login1.component";
 import {Login1StoreService} from "@store/biz-store-service/other-login/login1-store.service";

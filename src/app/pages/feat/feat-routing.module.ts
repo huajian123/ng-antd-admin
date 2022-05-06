@@ -16,7 +16,7 @@ const routes: Routes = [
   {path: 'tabs', loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsModule)},
   {path: 'full-screen', loadChildren: () => import('./full-screen/full-screen.module').then(m => m.FullScreenModule)},
   {path: 'icons', loadChildren: () => import('./icons/icons.module').then(m => m.IconsModule)},
-  {path: 'map', loadChildren: () => import('./map/map.module').then(m => m.MapModule)},
+  {path: 'charts', loadChildren: () => import('./charts/charts.module').then(m => m.ChartsModule)},
   {path: 'ripple', loadChildren: () => import('./ripple/ripple.module').then(m => m.RippleModule)},
   {path: 'copy', loadChildren: () => import('./copy/copy.module').then(m => m.CopyModule)},
   {path: 'setup', loadChildren: () => import('./setup/setup.module').then(m => m.SetupModule)},

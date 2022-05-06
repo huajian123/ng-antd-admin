@@ -6,7 +6,7 @@ import {ModalOptions} from 'ng-zorro-antd/modal/modal-types';
 import {filter} from 'rxjs/operators';
 import {NzSafeAny} from "ng-zorro-antd/core/types";
 
-export enum MessageType {
+export const enum MessageType {
   Info = 'info',
   Error = 'error',
   Warning = 'warning',
@@ -15,7 +15,7 @@ export enum MessageType {
   Loading = 'loading'
 }
 
-export enum MessageCallback {
+export const enum MessageCallback {
   Cancel = 'onCancel',
   Ok = 'onOk'
 }

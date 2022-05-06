@@ -3,6 +3,7 @@ import {PageHeaderType} from "@shared/components/page-header/page-header.compone
 import {DragService} from "@widget/biz-widget/drag/drag.service";
 import {NzSafeAny} from "ng-zorro-antd/core/types";
 import {ModalBtnStatus} from "@widget/base-modal";
+import {ModalDragService} from "@widget/modal/modal-drag.service";
 import {NzModalWrapService} from "@widget/modal/nz-modal-wrap.service";
 
 @Component({
