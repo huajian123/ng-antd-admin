@@ -1,5 +1,11 @@
 import {Injectable} from '@angular/core';
-import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router} from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+  UrlTree,
+  Router,
+  CanActivateChild
+} from '@angular/router';
 import {Observable} from 'rxjs';
 import {WindowService} from '../window.service';
 import {TokenKey} from "@config/constant";
@@ -8,17 +14,15 @@ import {TokenKey} from "@config/constant";
 @Injectable({
   providedIn: 'root'
 })
-export class JudgLoginGuard implements CanActivate {
+export class JudgLoginGuard implements CanActivateChild {
   constructor(private windowSrc: WindowService, private router: Router) {
   }
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const isLogin = !!this.windowSrc.getStorage(TokenKey);
+  canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+    const isLogin = !!this.windowSrc.getSessionStorage(TokenKey);
     if (isLogin) {
       return true;
     }
     return this.router.parseUrl('/login');
-  }
+    }
 }

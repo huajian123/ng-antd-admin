@@ -22,7 +22,8 @@ import {MenuStoreService} from "@store/common-store/menu-store.service";
 import {DestroyService} from "@core/services/common/destory.service";
 
 interface ResultItem {
-  showIcon: boolean;
+  selItem: boolean;
+  isAliIcon: boolean;
   title: string;
   routePath: string;
   icon: string;
@@ -54,7 +55,7 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
   }
 
   changeSelAnswerIndex(dir: 'up' | 'down'): number | null {
-    const index = this.resultListShow.findIndex(item => item.showIcon);
+    const index = this.resultListShow.findIndex(item => item.selItem);
     if (index > -1) {
       // 向上
       if (dir === 'up') {
@@ -77,7 +78,7 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
 
   @HostListener('window:keyup.enter')
   onEnterUp() {
-    const index = this.resultListShow.findIndex(item => item.showIcon);
+    const index = this.resultListShow.findIndex(item => item.selItem);
     if (index > -1) {
       this.resultClick(this.resultListShow[index]);
     }
@@ -106,12 +107,13 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
 
 
   getResultItem(menu: Menu, fatherTitle: string = ''): ResultItem[] {
-    const fatherTitleTemp = fatherTitle === '' ? menu.title : fatherTitle + ' > ' + menu.title;
+    const fatherTitleTemp = fatherTitle === '' ? menu.menuName : fatherTitle + ' > ' + menu.menuName;
     let resultItem: ResultItem = {
       title: fatherTitleTemp,
       routePath: menu.path!,
-      showIcon: false,
-      icon: menu.icon!
+      selItem: false,
+      isAliIcon: !!menu.alIcon,
+      icon: menu.icon! || menu.alIcon!
     }
     if (menu.children && menu.children.length > 0) {
       let resultArrayTemp: ResultItem[] = []
@@ -156,7 +158,7 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
           }
         });
         if (this.resultListShow.length > 0) {
-          this.resultListShow[0].showIcon = true;
+          this.resultListShow[0].selItem = true;
         }
         this.resultListShow = [...this.resultListShow];
         // 清空搜索条件时将结果集置空
@@ -173,9 +175,9 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
 
   mouseOverItem(item: ResultItem): void {
     this.resultListShow.forEach(resultItem => {
-      resultItem.showIcon = false;
+      resultItem.selItem = false;
     })
-    item.showIcon = true;
+    item.selItem = true;
   }
 
   ngAfterViewInit(): void {

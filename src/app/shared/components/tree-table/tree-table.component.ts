@@ -15,7 +15,7 @@ import {fnGetFlattenTreeDataByMap, fnTreeDataToMap} from "@utils/treeTableTools"
 
 
 export interface TreeNodeInterface {
-  id: string;
+  id: string | number;
   level?: number;
   expand?: boolean;
   children?: TreeNodeInterface[];
@@ -179,7 +179,7 @@ export class TreeTableComponent implements OnInit, OnChanges {
       fnGetFlattenTreeDataByMap(this.mapOfExpandedData).forEach(row => {
         // 判断缓存中是否有该值，有的话设置成true
         const index = this.checkedCashArrayFromComment.findIndex(item => item.id === row.id);
-        this.setIsCheckFn(row, index!==-1);
+        this.setIsCheckFn(row, index !== -1);
       })
       this.refreshStatus();
     }

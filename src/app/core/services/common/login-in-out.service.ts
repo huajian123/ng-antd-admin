@@ -10,6 +10,8 @@ import {UserInfo, UserInfoService} from "@store/common-store/userInfo.service";
 import {LoginService} from "@services/login/login.service";
 import {Observable} from "rxjs";
 import {Menu} from "@core/services/types";
+import {fnFlatDataHasParentToTree} from "@utils/treeTableTools";
+import {finalize} from "rxjs/operators";
 
 /*
 * 退出登录
@@ -35,11 +37,19 @@ export class LoginInOutService {
 
   loginIn(token: string): Promise<void> {
     return new Promise(resolve => {
-      this.windowServe.setStorage(TokenKey, TokenPre + token);
-      const userInfo: UserInfo = this.userInfoService.parsToken(TokenPre);
+      this.windowServe.setSessionStorage(TokenKey, TokenPre + token);
+      const userInfo: UserInfo = this.userInfoService.parsToken(TokenPre + token);
       this.userInfoService.setUserInfo(userInfo);
-      this.getMenuByUserId(userInfo.userId).subscribe(menus => {
-        this.menuService.setMenuArrayStore(menus);
+      this.getMenuByUserId(userInfo.userId).pipe(finalize(()=>{
+        resolve();
+      })).subscribe(menus => {
+        menus = menus.filter(item => {
+          item.selected = false;
+          item.open = false;
+          return item.menuType === 'C';
+        });
+        const temp = fnFlatDataHasParentToTree(menus);
+        this.menuService.setMenuArrayStore(temp);
         resolve();
       })
     })
@@ -49,7 +59,7 @@ export class LoginInOutService {
     return new Promise(resolve => {
       // 清空tab
       this.tabService.clearTabs();
-      this.windowServe.removeStorage(TokenKey);
+      this.windowServe.removeSessionStorage(TokenKey);
       SimpleReuseStrategy.handlers = {};
       SimpleReuseStrategy.scrollHandlers = {};
       this.menuService.setMenuArrayStore([]);

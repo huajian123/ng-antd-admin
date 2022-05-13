@@ -1,8 +1,9 @@
 import {Inject, Injectable} from '@angular/core';
 import {delay, Observable, of} from 'rxjs';
 import {BaseHttpService} from "@services/base-http.service";
-import {Menu, UserToken} from "@core/services/types";
-import {MENU_TOKEN} from "@config/menu";
+import {Menu} from "@core/services/types";
+/*import {MENU_TOKEN} from "@config/menu";*/
+import {MenusService} from "@services/system/menus.service";
 
 export interface UserLogin {
   name: string;
@@ -14,15 +15,18 @@ export interface UserLogin {
 })
 export class LoginService {
 
-  constructor(public http: BaseHttpService, @Inject(MENU_TOKEN) public menus: Menu[],) {
+  constructor(public http: BaseHttpService,
+              // @Inject(MENU_TOKEN) public menus: Menu[],
+              private menuService:MenusService) {
   }
 
-  public login(params: UserLogin): Observable<UserToken> {
+  public login(params: UserLogin): Observable<string> {
     return this.http.post('/login', params, {needSuccessInfo: false});
   }
 
   public getMenuByUserId(userId: number): Observable<Menu[]> {
     // 延迟两秒发送，模拟从接口获取
-    return of(this.menus).pipe(delay(1));
+    // return of(this.menus).pipe(delay(1));
+   return  this.http.get(`/sysPermission/menu/${userId}`);
   }
 }

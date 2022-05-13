@@ -3,6 +3,7 @@ import {NgModule} from '@angular/core';
 import {DeptRoutingModule} from './dept-routing.module';
 import {DeptComponent} from './dept.component';
 import {SharedModule} from "@shared/shared.module";
+import {DeptManageModalModule} from "@widget/biz-widget/system/dept-manage-modal/dept-manage-modal.module";
 
 
 @NgModule({
@@ -11,6 +12,7 @@ import {SharedModule} from "@shared/shared.module";
   ],
   imports: [
     SharedModule,
+    DeptManageModalModule,
     DeptRoutingModule
   ]
 })

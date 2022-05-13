@@ -47,8 +47,9 @@ import {NzBackTopModule} from 'ng-zorro-antd/back-top';
 import {IconsProviderModule} from "@shared/icons-provider.module";
 import { NzImageModule } from 'ng-zorro-antd/image';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
-
+import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 export const SHARED_ZORRO_MODULES = [
+  NzTreeSelectModule,
   NzNotificationModule,
   NzBackTopModule,
   NzImageModule,

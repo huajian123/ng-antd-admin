@@ -5,7 +5,6 @@ import {DriverService} from "@core/services/common/driver.service";
 @Component({
   selector: 'app-setup',
   templateUrl: './setup.component.html',
-  styleUrls: ['./setup.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SetupComponent implements OnInit {
@@ -19,7 +18,6 @@ export class SetupComponent implements OnInit {
   }
 
   go(): void {
-    console.log(111);
     this.driverService.load();
   }
 

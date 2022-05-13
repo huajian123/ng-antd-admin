@@ -120,7 +120,10 @@ export class NavBarComponent implements OnInit {
   initMenus(): void {
     this.menuServices.getMenuArrayStore().pipe(takeUntil(this.destroy$)).subscribe(menusArray => {
       this.menus = menusArray;
-      this.copyMenus = this.cloneMenuArray(this.menus)
+      this.copyMenus = this.cloneMenuArray(this.menus);
+      this.clickMenuItem(this.menus);
+      this.clickMenuItem(this.copyMenus);
+      this.cdr.markForCheck();
     })
   }
 
@@ -137,7 +140,7 @@ export class NavBarComponent implements OnInit {
   // 深拷贝克隆菜单数组
   cloneMenuArray(sourceMenuArray: Menu[], target: Menu[] = []): Menu[] {
     sourceMenuArray.forEach(item => {
-      const obj: Menu = {title: "", path: '', showIcon: false};
+      const obj: Menu = {menuName: "", menuType: 'C', path: '', id: -1, parentId: -1};
       for (let i in item) {
         if (item.hasOwnProperty(i)) {
           // @ts-ignore
@@ -165,7 +168,7 @@ export class NavBarComponent implements OnInit {
       /*添加了权限版*/
       let currentLeftNavArray = currentTopNav.children;
       currentLeftNavArray = currentLeftNavArray.filter(item => {
-        return this.authCodeArray.includes(item.actionCode!);
+        return this.authCodeArray.includes(item.code!);
       });
       if (currentLeftNavArray.length > 0 && !currentLeftNavArray[0].children) {
         this.router.navigateByUrl(currentLeftNavArray[0].path!);
@@ -190,7 +193,7 @@ export class NavBarComponent implements OnInit {
     menus.forEach(item => {
       item.selected = false;
       item.open = false;
-      if (routePath.includes(item.path) && !item.isNewLink) {
+      if (routePath.includes(item.path) && !item.newLinkFlag) {
         item.selected = true;
         item.open = true;
       }
@@ -232,7 +235,7 @@ export class NavBarComponent implements OnInit {
   }
 
   changeRoute(e: MouseEvent, menu: Menu): void {
-    if (menu.isNewLink) {
+    if (menu.newLinkFlag) {
       fnStopMouseEvent(e);
       window.open(menu.path, '_blank');
       return;

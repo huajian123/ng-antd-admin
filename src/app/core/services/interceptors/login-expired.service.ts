@@ -1,14 +1,23 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpEvent, HttpEventType, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from '@angular/common/http';
-import {Observable, of} from 'rxjs';
+import {Injectable, NgZone} from '@angular/core';
+import {
+  HttpClient,
+  HttpEvent,
+  HttpEventType,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
+  HttpResponse
+} from '@angular/common/http';
+import { Observable, of} from 'rxjs';
 import {LoginModalService} from '@widget/biz-widget/login/login-modal.service';
 import {NzSafeAny} from 'ng-zorro-antd/core/types';
 import {filter, finalize, share, switchMap} from 'rxjs/operators';
 import {ModalBtnStatus} from '@widget/base-modal';
 import {Router} from '@angular/router';
 import {WindowService} from '../common/window.service';
-import {TokenKey, loginTimeOutCode} from "@config/constant";
+import {TokenKey, loginTimeOutCode, tokenErrorCode} from "@config/constant";
 import {LoginInOutService} from "@core/services/common/login-in-out.service";
+import {NzMessageService} from "ng-zorro-antd/message";
 
 @Injectable()
 export class LoginExpiredService implements HttpInterceptor {
@@ -16,6 +25,8 @@ export class LoginExpiredService implements HttpInterceptor {
 
   constructor(private loginModalService: LoginModalService, private router: Router,
               private loginInOutService: LoginInOutService,
+              private zone: NgZone,
+              private message: NzMessageService,
               private windowServe: WindowService, private http: HttpClient) {
   }
 
@@ -26,7 +37,7 @@ export class LoginExpiredService implements HttpInterceptor {
 
   private sendRequest(request: HttpRequest<NzSafeAny>, next: HttpHandler) {
     return this.refresher!.pipe(switchMap(() => {
-      const token = this.windowServe.getStorage(TokenKey);
+      const token = this.windowServe.getSessionStorage(TokenKey);
       let httpConfig = {};
       if (!!token) {
         httpConfig = {headers: request.headers.set(TokenKey, token)};
@@ -37,31 +48,57 @@ export class LoginExpiredService implements HttpInterceptor {
     }), finalize(() => this.refresher = null))
   }
 
+  private loginOut(): void {
+    this.loginInOutService.loginOut();
+    this.refresher = null;
+    this.router.navigateByUrl('/login/login-form');
+  }
+
   // 登录过期拦截
   private loginExpiredFn(req: HttpRequest<string>, next: HttpHandler): NzSafeAny {
     return switchMap((event: HttpResponse<NzSafeAny>): NzSafeAny => {
       if (event.type !== HttpEventType.Response || event.body.code !== loginTimeOutCode) {
         return of(event);
       }
+      if (event.body.code === tokenErrorCode) {
+        this.loginOut();
+        return;
+      }
+
       if (this.refresher) {
         return this.sendRequest(req, next);
       }
 
       this.refresher = new Observable((observer) => {
-        this.loginModalService.show({nzTitle: '登录信息过期，重新登录'}).subscribe(({modalValue, status}) => {
-          if (status === ModalBtnStatus.Cancel) {
-            this.loginInOutService.loginOut();
-            this.refresher = null;
-            this.router.navigateByUrl('/login/login-form');
-            return;
-          }
-          const token = modalValue;
-          this.loginInOutService.loginIn(token);
-          this.http.request(req).subscribe((data: NzSafeAny) => {
-            this.refresher = null;
-            observer.next(data);
+        // setTimeout为了解决刷新页面的时候，由于zorro样式未加载，登录对话框会闪屏
+        setTimeout(() => {
+          this.loginModalService.show({nzTitle: '登录信息过期，重新登录'}).subscribe(({modalValue, status}) => {
+            if (status === ModalBtnStatus.Cancel) {
+              // 这么做是为了登录状态下token过期，刷新页面，登录窗口点击取消，需要在startUp中的获取menu的接口完成掉,
+              // 不然进不去angular应用，路由不跳转
+              observer.next(new HttpResponse({
+                body: {
+                  code: 3013,
+                  msg: '取消后请重新登录',
+                  data: null
+                }
+              }));
+              this.loginOut();
+              return;
+            }
+            const token = modalValue;
+            this.loginInOutService.loginIn(token).then();
+            this.http.request(req).subscribe((data: NzSafeAny) => {
+              this.refresher = null;
+              observer.next(data);
+            }, error => {
+              // 如果先用admin登录超时弹框，登录的却是normal账号，对目标模块没有权限，则返回登录页
+              // 这里靠后端判断新的token没有权限，请求报错403
+              this.message.error('您没有权限登录该模块');
+              this.loginOut();
+            });
           });
-        });
+        }, 100)
       }).pipe(share(), finalize(() => this.refresher = null));
       return this.refresher;
     });

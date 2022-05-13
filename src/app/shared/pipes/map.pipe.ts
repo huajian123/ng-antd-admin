@@ -27,6 +27,14 @@ export const MapSet = {
   available: {
     true: '可用',
     false: '禁用'
+  } ,
+  isOrNot: {
+    true: '是',
+    false: '否'
+  },
+  visible: {
+    true: '展示',
+    false: '隐藏'
   }
 };
 

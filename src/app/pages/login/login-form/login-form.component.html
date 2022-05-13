@@ -3,16 +3,16 @@
     <nz-tabset [nzAnimated]="false">
       <nz-tab nzTitle="账户密码登录">
         <nz-form-item>
-          <nz-form-control nzErrorTip="请输入用户名!">
+          <nz-form-control nzErrorTip="账号名：admin">
             <nz-input-group [nzSize]="'large'" nzPrefixIcon="user">
-              <input [placeholder]="'没有账号密码直接登陆'" type="text" nz-input formControlName="userName" placeholder="用户名"/>
+              <input [placeholder]="'账号名：admin'" type="text" nz-input formControlName="userName" placeholder="用户名"/>
             </nz-input-group>
           </nz-form-control>
         </nz-form-item>
         <nz-form-item>
-          <nz-form-control nzErrorTip="请输入密码!">
+          <nz-form-control nzErrorTip="密码：123456">
             <nz-input-group [nzSize]="'large'" nzPrefixIcon="lock">
-              <input autocomplete="on" [placeholder]="'no username and password,just login'" type="password" nz-input formControlName="password" placeholder="密码"/>
+              <input autocomplete="on" [placeholder]="'密码：123456'" type="password" nz-input formControlName="password" placeholder="密码"/>
             </nz-input-group>
           </nz-form-control>
         </nz-form-item>

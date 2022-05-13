@@ -328,7 +328,7 @@ export class SearchTableComponent implements OnInit {
           tdClassList: ['operate-text'],
         },
         {
-          title: '名称',
+          title: '自定义模板',
           field: 'name',
           tdTemplate: this.highLightTpl,
           width: 140,

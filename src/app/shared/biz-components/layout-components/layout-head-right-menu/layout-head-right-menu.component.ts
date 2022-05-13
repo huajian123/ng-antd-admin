@@ -9,6 +9,9 @@ import {LoginInOutService} from "@core/services/common/login-in-out.service";
 import {SpinService} from "@store/common-store/spin.service";
 import {ChangePasswordService} from "@widget/biz-widget/change-password/change-password.service";
 import {ModalBtnStatus} from "@widget/base-modal";
+import {UserInfoService} from "@store/common-store/userInfo.service";
+import {User, UserPsd} from "@core/services/types";
+import {AccountService} from "@services/system/account.service";
 
 @Component({
   selector: 'app-layout-head-right-menu',
@@ -17,6 +20,7 @@ import {ModalBtnStatus} from "@widget/base-modal";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LayoutHeadRightMenuComponent implements OnInit {
+  user!: UserPsd;
 
   constructor(private router: Router,
               private changePasswordModalService: ChangePasswordService,
@@ -26,7 +30,9 @@ export class LayoutHeadRightMenuComponent implements OnInit {
               private windowServe: WindowService,
               private activatedRoute: ActivatedRoute,
               private searchRouteService: SearchRouteService,
-              public message: NzMessageService,) {
+              public message: NzMessageService,
+              private userInfoService: UserInfoService,
+              private accountService: AccountService) {
   }
 
   // 锁定屏幕
@@ -46,14 +52,17 @@ export class LayoutHeadRightMenuComponent implements OnInit {
       if (status === ModalBtnStatus.Cancel) {
         return;
       }
-      this.message.success(`新密码：${modalValue.newPassword},旧密码：${modalValue.oldPassword}`);
-      this.spinService.setCurrentGlobalSpinStore(true);
-      setTimeout(() => {
-        this.spinService.setCurrentGlobalSpinStore(false);
-      }, 3000)
-
-      this.loginOutService.loginOut().then();
-      this.message.success('修改成功，请重新登录');
+      this.userInfoService.getUserInfo().subscribe(res =>{
+        this.user = {
+          id: res.userId,
+          oldPassword: modalValue.oldPassword,
+          newPassword: modalValue.newPassword,
+        }
+      })
+      this.accountService.editAccountPsd(this.user).subscribe(() =>{
+        this.loginOutService.loginOut().then();
+        this.message.success('修改成功，请重新登录');
+      });
     });
   }
 

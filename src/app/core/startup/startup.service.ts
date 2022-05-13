@@ -14,9 +14,9 @@ export class StartupService {
   }
 
   load(): Promise<void> {
-    const token = this.windowSer.getStorage(TokenKey);
+    const token = this.windowSer.getSessionStorage(TokenKey);
     if (token) {
-     return this.loginInOutService.loginIn(token).then()
+     return this.loginInOutService.loginIn(token)
     }
     return new Promise((resolve) => {
       return resolve();

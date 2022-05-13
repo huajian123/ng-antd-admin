@@ -1,44 +1,22 @@
 /*配置权限码*/
 export const ActionCode = {
+  /*系统管理*/
+  AccountAdd: 'default:system:account:add',// 账号管理新增
+  AccountEdit: 'default:system:account:edit',// 账号管理编辑
+  AccountDel: 'default:system:account:del',// 账号管理删除
 
-  Dashboard: '0001', /*Dashboard*/
+  RoleManagerAdd: 'default:system:role-manager:add',// 角色管理新增
+  RoleManagerEdit: 'default:system:role-manager:edit',// 角色管理编辑
+  RoleManagerDel: 'default:system:role-manager:del',// 角色管理删除
+  RoleManagerSetRole: 'default:system:role-manager:set-role',// 角色管理设置角色
 
+  MenuAdd: 'default:system:menu:add',// 菜单新增
+  MenuEdit: 'default:system:menu:edit',// 菜单编辑
+  MenuDel: 'default:system:menu:del',// 菜单删除
+  MenuAddLowLevel: 'default:system:menu:addlowlevel',// 菜单添加下级
 
-  FormModule: '0002',  /*表单页*/
-
-
-  ListModule: '0003', /*列表页*/
-
-
-  DetailModule: '0004', /*详情页*/
-
-
-  ResultModule: '0005', /*结果页*/
-
-
-  ErrorModule: '0006', /*异常页*/
-
-
-  PersonalModule: '0007', /*个人页*/
-
-
-  InternalModule: '0008', /*内部管理*/
-
-  Role: '0018', // 角色管理
-  RoleAdd: '0118',
-  RoleEdit: '0218',
-  RoleDel: '0318',
-  RoleSetAuth: '0418',
-
-
-  Dept: '0028', // 部门管理
-  DeptAdd: '0128',
-  DeptEdit: '0228',
-  DeptDel: '0328',
-
-
-  UserManage: '0038',  // 用户管理
-  UserDetail: '0138',  // 查看详情
-  UserEdit: '0238',  // 用户编辑
-  UserAdd: '0338',  // 用户新增
+  DeptAdd: 'default:system:dept:add',// 部门管理新增
+  DeptEdit: 'default:system:dept:edit',// 部门管理编辑
+  DeptDel: 'default:system:dept:del',// 部门管理删除
+  DeptAddLowLevel: 'default:system:dept:addlowlevel',// 部门管理添加下级
 };

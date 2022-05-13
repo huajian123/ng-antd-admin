@@ -21,15 +21,18 @@
     <ul *ngIf="resultListShow.length>0; else noResult">
       <li *ngFor="let item of resultListShow;"
           (click)="resultClick(item)"
-          [class.result-item-bg]="item.showIcon"
-          [style]="{color:item.showIcon?'white':''}"
+          [class.result-item-bg]="item.selItem"
+          [style]="{color:item.selItem?'white':''}"
           (mouseover)="mouseOverItem(item)"
           class="result-item sp-16" nz-row>
         <div nz-col nzFlex="auto">
-          <i class="m-r-8" nz-icon [nzType]="item.icon!" nzTheme="outline"></i>
+          <i *ngIf="!item.isAliIcon;else zorroIcon" class="m-r-8" nz-icon [nzType]="item.icon!" nzTheme="outline"></i>
+          <ng-template #zorroIcon>
+            <i class="m-r-8" nz-icon [nzIconfont]="item.icon!"></i>
+          </ng-template>
           <span>{{item.title}}</span>
         </div>
-        <i *ngIf="item.showIcon" style="color: white" class="sp-18 m-r-8" nz-col nzFlex="30px" nz-icon
+        <i *ngIf="item.selItem" style="color: white" class="sp-18 m-r-8" nz-col nzFlex="30px" nz-icon
            nzType="enter" nzTheme="outline"></i>
       </li>
     </ul>

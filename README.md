@@ -1,8 +1,12 @@
 # ng-ant-admin
-[![CodeFactor](https://www.codefactor.io/repository/github/huajian123/ng-ant-admin/badge)](https://www.codefactor.io/repository/github/huajian123/ng-ant-admin)
+[![CodeFactor](https://www.codefactor.io/repository/github/ng-ant-admin/badge)](https://www.codefactor.io/repository/github/ng-ant-admin)
 
 
 # 项目视频介绍
+Ng-Ant-Admin 3.0发布(其实就是添加了服务端真实接口)<br>
+默认登录超时时间为1h，上传，下载，websocket，系统管理模块均为真实接口调用展示。（自费服务器，流量少，试试就行了哈）。<br>
+完成了最常用的权限控制，人员账号管理，角色管理，菜单管理，登录超时等。添加了大量业务示例，开箱即用。<br>
+
 使用本项目遇到问题，可以加入376065816 qq群号与我沟通。<br>
 如果本项目对您有用，麻烦帮我点个star，谢谢啊<br>
 if help you, if you want ,please give me a star ,thank you<br>
@@ -12,6 +16,8 @@ If you use this project for production ,if you want ,please tell me on this way[
 online demo地址 [demo](http://124.71.128.53:8080/)<br>
 纯净版项目地址 [pure](https://gitee.com/hjxiaoqianduan/ng-ant-admin-pure/)<br>
 pure project address [pure](https://gitee.com/hjxiaoqianduan/ng-ant-admin-pure/)<br>
+服务端源码地址 [serviceApi](https://github.com/huajian123/ng-ant-admin-api)<br>
+serviceApi address [serviceApi](https://github.com/huajian123/ng-ant-admin-api)<br>
 
 # 路由的key
 key需要设置成路由地址最后一个'/'后的字符串，并且要唯一

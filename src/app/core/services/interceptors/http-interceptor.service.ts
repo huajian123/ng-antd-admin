@@ -18,7 +18,7 @@ export class HttpInterceptorService implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<NzSafeAny>, next: HttpHandler): Observable<HttpEvent<NzSafeAny>> {
-    const token = this.windowServe.getStorage(TokenKey);
+    const token = this.windowServe.getSessionStorage(TokenKey);
     let httpConfig: CustomHttpConfig = {};
     if (!!token) {
       httpConfig = {headers: req.headers.set(TokenKey, token)};
