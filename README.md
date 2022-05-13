@@ -10,10 +10,9 @@ Ng-Ant-Admin 3.0发布(其实就是添加了服务端真实接口)<br>
 使用本项目遇到问题，可以加入376065816 qq群号与我沟通。<br>
 如果本项目对您有用，麻烦帮我点个star，谢谢啊<br>
 if help you, if you want ,please give me a star ,thank you<br>
-If you use this project for production ,if you want ,please tell me on this way[issues](https://gitee.com/hjxiaoqianduan/ng-ant-admin/issues/10), Someone is using this project,let me happy.<br>
 快速二开使用详解 [快速二开使用详解](https://www.bilibili.com/video/BV1gF411x7rN/)<br>
 项目搭建简易教程 [项目搭建简易教程](https://www.bilibili.com/video/BV1EM4y1w7zd/)<br>
-online demo地址 [demo](http://124.71.128.53:8080/)<br>
+online demo地址 [demo](http://1.117.181.242/)<br>
 纯净版项目地址 [pure](https://gitee.com/hjxiaoqianduan/ng-ant-admin-pure/)<br>
 pure project address [pure](https://gitee.com/hjxiaoqianduan/ng-ant-admin-pure/)<br>
 服务端源码地址 [serviceApi](https://github.com/huajian123/ng-ant-admin-api)<br>
