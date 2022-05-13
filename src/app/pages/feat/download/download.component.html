@@ -1,0 +1,16 @@
+<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+
+<div class="normal-table-wrap">
+  <nz-card class="m-b-10" nzTitle="根据后台接口文件流下载">
+    <button nz-button nzType="primary" (click)="fileStreamDownload()">文件流下载</button>
+  </nz-card>
+  <nz-card class="m-b-10" nzTitle="根据文件地址下载文件">
+    <button nz-button nzType="primary" (click)="fileStreamDownload()">文件地址下载</button>
+  </nz-card>
+  <nz-card class="m-b-10" nzTitle="base64流下载">
+    <button nz-button nzType="primary" (click)="fileStreamDownload()">base64流下载</button>
+  </nz-card>
+  <nz-card class="m-b-10" nzTitle="图片Url下载,如果有跨域问题，需要处理图片跨域">
+    <button nz-button nzType="primary" (click)="fileStreamDownload()">图片Url下载</button>
+  </nz-card>
+</div>

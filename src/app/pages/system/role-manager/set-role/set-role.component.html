@@ -1,0 +1,54 @@
+<!--头部版块-->
+<app-page-header [backTpl]="backTpl" [backUrl]="'/default/system/role-manager'"
+                 [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+<ng-template #backTpl>返回</ng-template>
+<div class="normal-table-wrap">
+  <nz-card>
+    <ul>
+      <li *ngFor="let permission of permissionList;">
+        <div class="first-menu">
+          <label [(ngModel)]="permission.checked" nz-checkbox>{{permission.menuName}}</label>
+          <span *ngIf="permission.children&&permission.children.length>0" (click)="permission.isOpen=!permission.isOpen" class="hand-model">
+              <i nz-icon [nzType]="permission.isOpen?'down':'right'" nzTheme="outline"></i>
+            <span
+              class="operate-text"> {{permission.isOpen ? '收起' : '展开'}}
+            </span>
+          </span>
+        </div>
+        <nz-divider class="m-0"></nz-divider>
+        <div class="menu-content m-0 p-0" nz-result-content>
+          <ng-container *ngTemplateOutlet="permissionTpl;context:{$implicit: permission.children,isOpen:permission.isOpen}"></ng-container>
+        </div>
+        <ng-template #permissionTpl let-childPermissionArray let-isOpen='isOpen'>
+          <ng-container *ngIf="isOpen">
+            <ng-container *ngFor="let childPermission of childPermissionArray;let first=first;">
+              <ng-container *ngIf="childPermission.menuType==='C';else operateTpl">
+                <div class="first-menu" [ngStyle]="{paddingLeft:childPermission.level*16+'px'}">
+                  <label [(ngModel)]="childPermission.checked" nz-checkbox>{{childPermission.menuName}}</label>
+                  <span  *ngIf="childPermission.children&&childPermission.children.length>0" (click)="childPermission.isOpen=!childPermission.isOpen" class="hand-model">
+                          <i nz-icon [nzType]="childPermission.isOpen?'down':'right'" nzTheme="outline"></i>
+                        <span class="operate-text"> {{childPermission.isOpen ? '收起' : '展开'}}</span>
+                </span>
+                </div>
+              </ng-container>
+              <ng-template #operateTpl>
+                <ng-container *ngIf="first">
+                  <div class="operate-line li-height m-0 p-0 p-l-35" >
+                    <span >操作权限：</span>
+                    <label *ngFor="let operate of childPermissionArray" [(ngModel)]="operate.checked" nz-checkbox>{{operate.menuName}}</label>
+                    <nz-divider class="m-0"></nz-divider>
+                  </div>
+                </ng-container>
+              </ng-template>
+              <ng-container *ngTemplateOutlet="permissionTpl; context: { $implicit: childPermission.children,isOpen:childPermission.isOpen }"></ng-container>
+            </ng-container>
+          </ng-container>
+        </ng-template>
+      </li>
+    </ul>
+  </nz-card>
+</div>
+<app-footer-submit>
+  <button class="right" (click)="submit()" nz-button nzType="primary">提交</button>
+  <button class="right m-l-20" nzGhost (click)="back()" nz-button nzType="primary">返回</button>
+</app-footer-submit>

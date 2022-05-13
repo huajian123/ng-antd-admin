@@ -1,0 +1,22 @@
+<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+<div class="normal-table-wrap">
+  <div nz-row [nzGutter]="[16,16]">
+    <div nz-col nzFlex="300px">
+      <textarea class="m-b-8" [(ngModel)]="msg" nz-input placeholder="发送的内容服务端会返回"
+                [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
+      <button (click)="send()" nz-button nzType="primary">发送</button>
+      <button (click)="end()" nz-button class="m-l-8" nzType="default">断开连接</button>
+      <span>链接状态：{{concate}}</span>
+    </div>
+    <div nz-col nzFlex="auto">
+      <nz-card nzTitle="消息内容">
+        <ng-container *ngFor="let item of result">
+        <div class="m-t-0 p-8 text-break m-b-8"  nz-result-content>
+          <span nz-typography>{{item}}</span>
+        </div>
+        <div class="sp-12 text-right m-t-5" nz-typography nzType="secondary">已读</div>
+        </ng-container>
+      </nz-card>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,81 @@
+<form nz-form [formGroup]="validateForm">
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="menuName">名称</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="combineTpl">
+      <input nz-input formControlName="menuName" id="menuName" placeholder="名称"/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="menuType">类型</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="combineTpl">
+      <nz-radio-group (ngModelChange)="changeMenuType($event)" formControlName="menuType">
+        <label nz-radio [nzValue]="'C'">菜单</label>
+        <label nz-radio [nzValue]="'F'">按钮</label>
+      </nz-radio-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item *ngIf="menuType==='C'">
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="icon">zorro图标</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-input-group [nzAddOnAfter]="selIcon">
+        <input nz-input formControlName="icon">
+      </nz-input-group>
+      <ng-template #selIcon>
+        <app-icon-sel [visible]="selIconVisible" (selIcon)="seledIcon($event)"></app-icon-sel>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item *ngIf="menuType==='C'">
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="alIcon">阿里图标</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="alIcon" id="alIcon" placeholder="阿里图标"/>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="code">权限码</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="combineTpl">
+      <input nz-input formControlName="code" id="code" placeholder="权限码"/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item *ngIf="menuType==='C'">
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="path">路由地址</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="combineTpl">
+      <input nz-input formControlName="path" id="path" placeholder="路由地址"/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="orderNum">排序</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="combineTpl">
+      <nz-input-number formControlName="orderNum" [nzMin]="1"  [nzStep]="1"></nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item *ngIf="menuType==='C'">
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="visible">展示</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="combineTpl">
+      <nz-radio-group formControlName="visible">
+        <label nz-radio [nzValue]="true">是</label>
+        <label nz-radio [nzValue]="false">否</label>
+      </nz-radio-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="status">状态</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="combineTpl">
+      <nz-switch formControlName="status" nzCheckedChildren="可用" nzUnCheckedChildren="禁用"></nz-switch>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item *ngIf="menuType==='C'">
+    <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="newLinkFlag">外链</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-radio-group formControlName="newLinkFlag">
+        <label nz-radio [nzValue]="true">是</label>
+        <label nz-radio [nzValue]="false">否</label>
+      </nz-radio-group>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+<ng-template #combineTpl let-control>
+  <ng-container *ngIf="control.hasError('message')">{{control.errors.message}}</ng-container>
+  <ng-container *ngIf="control.hasError('required')">必填项</ng-container>
+</ng-template>

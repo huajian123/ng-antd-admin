@@ -1,0 +1,51 @@
+<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+<div class="normal-table-wrap">
+  <nz-card nzTitle="简单实例，服务器返回的文件地址统一，演示功能不会保存上传的文件">
+    <nz-upload
+      [nzName]="'document'"
+      [nzShowButton]="true"
+      [nzAction]="uploadUrl"
+      [nzLimit]="1"
+      [nzSize]="1024*5"
+      (nzChange)="handleChange($event)"
+      [nzFileList]="fileList"
+    >
+      <button nz-button><i nz-icon nzType="upload"></i>导入材料(自费服务器，最大测试上传5M，泪奔)</button>
+    </nz-upload>
+  </nz-card>
+  <nz-card class="m-t-20" nzTitle="嵌入表单，加入表单验证">
+    <form nz-form nzLayout="vertical" [formGroup]="validateForm">
+      <nz-form-item nz-col nzSpan="24" >
+        <nz-form-control [nzSm]="6" [nzXs]="24" [nzErrorTip]="combineTpl">
+          <nz-form-label [nzSm]="14" [nzXs]="24">附件：</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24">
+            <nz-upload
+              [nzName]="'document'"
+              (nzChange)="uploadFn($event)"
+              [nzAction]="uploadUrl"
+              [nzSize]="1024*5"
+              [nzFileList]="fileFormList"
+              [nzLimit]="1"
+            >
+              <button nz-button>
+                <i nz-icon nzType="upload"></i>
+                上传附件(自费服务器，最大测试上传5M，泪奔)
+              </button>
+              <input formControlName="file" [hidden]="true">
+            </nz-upload>
+          </nz-form-control>
+        </nz-form-control>
+        <nz-form-item nz-row class="m-t-20">
+          <nz-form-control [nzSpan]="14">
+            <button nz-button (click)="submitForm()" nzType="primary">提交</button>
+            <button class="m-l-10" (click)="resetForm()" nz-button nzType="default">重置</button>
+          </nz-form-control>
+        </nz-form-item>
+      </nz-form-item>
+    </form>
+  </nz-card>
+</div>
+<ng-template #combineTpl let-control>
+  <ng-container *ngIf="control.hasError('message')">{{control.errors.message}}</ng-container>
+  <ng-container *ngIf="control.hasError('required')">必填项</ng-container>
+</ng-template>
