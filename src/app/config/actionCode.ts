@@ -1,5 +1,8 @@
 /*配置权限码*/
 export const ActionCode = {
+  /*标签页操作打开详情*/
+  TabsDetail:'default:feat:tabs:example-detail',
+
   /*系统管理*/
   AccountAdd: 'default:system:account:add',// 账号管理新增
   AccountEdit: 'default:system:account:edit',// 账号管理编辑

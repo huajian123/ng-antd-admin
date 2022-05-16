@@ -12,6 +12,7 @@ import {Observable} from "rxjs";
 import {Menu} from "@core/services/types";
 import {fnFlatDataHasParentToTree} from "@utils/treeTableTools";
 import {finalize} from "rxjs/operators";
+import {ActionCode} from "@config/actionCode";
 
 /*
 * 退出登录
@@ -39,6 +40,8 @@ export class LoginInOutService {
     return new Promise(resolve => {
       this.windowServe.setSessionStorage(TokenKey, TokenPre + token);
       const userInfo: UserInfo = this.userInfoService.parsToken(TokenPre + token);
+      // todo  这里是手动添加静态页面标签页操作中，打开详情的按钮的权限，实际操作中可以删除第44行
+      userInfo.authCode.push(ActionCode.TabsDetail)
       this.userInfoService.setUserInfo(userInfo);
       this.getMenuByUserId(userInfo.userId).pipe(finalize(()=>{
         resolve();
