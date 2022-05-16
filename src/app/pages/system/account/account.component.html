@@ -3,10 +3,10 @@
 
 <div class="normal-table-wrap">
   <div nz-row [nzGutter]="[16,16]">
-    <div nz-col nzFlex="300px">
+    <div nz-col [nzXl]="6" [nzXXl]="6" [nzLg]="6" [nzMd]="24" [nzSm]="24" [nzXs]="24">
       <app-dept-tree #deptTree (deptIdEven)="searchDeptIdUser($event)"></app-dept-tree>
     </div>
-    <div nz-col nzFlex="auto">
+    <div nz-col [nzXl]="18" [nzXXl]="18" [nzLg]="18" [nzMd]="24" [nzSm]="24" [nzXs]="24">
       <nz-card nzHoverable [nzBodyStyle]="{'padding-bottom':0}" class="m-b-10">
         <form nz-form>
           <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24}">
@@ -40,11 +40,11 @@
                   </nz-form-control>
                 </nz-form-item>
               </div>
-              <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+              <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="0" [nzXs]="0">
                 <nz-form-item>
                 </nz-form-item>
               </div>
-              <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+              <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="0" [nzXs]="0">
                 <nz-form-item>
                 </nz-form-item>
               </div>

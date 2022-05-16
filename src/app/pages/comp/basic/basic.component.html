@@ -32,7 +32,7 @@
         <button nz-button nzType="default" style="color: #55d187;border-color: #55d187" class="m-b-8" nzGhost>幽灵成功</button>
         <button nz-button nzType="default" style="color: #efbd47;border-color: #efbd47" class="m-b-8" nzGhost>幽灵警告</button>
         <button nz-button nzType="default" style="color: #ed6f6f;border-color: #ed6f6f" class="m-b-8" nzGhost>幽灵错误</button>
-        <button nz-button nzType="dashed" style="color: #efbd47;border-color: #efbd47"  class="m-b-8" nzGhost>幽灵警告disabled</button>
+        <button nz-button nzType="dashed" disabled style="color: #efbd47;border-color: #efbd47"  class="m-b-8" nzGhost>幽灵警告disabled</button>
         <button nz-button nzType="default" style="color: #ed6f6f;border-color: #ed6f6f" class="m-b-8" nzGhost>幽灵危险</button>
 
       </nz-card>
@@ -40,24 +40,24 @@
     <div nz-col [nzXXl]="14" [nzXl]="16" [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzXs]="24">
       <nz-card class="m-b-10" nzTitle="BasicButton Types" nzSize="default">
         <div class="title">primary</div>
-        <button nz-button style="color: #ffffff;border-color: #0960bd;background-color: #0960bd">
+        <button nz-button class="m-b-8" style="color: #ffffff;border-color: #0960bd;background-color: #0960bd">
           <i nz-icon nzType="menu-unfold" nzTheme="outline"></i>主按钮
         </button>
-        <button nz-button nzType="default" disabled>禁用</button>
-        <button nz-button nzType="primary" nzDanger><i nz-icon nzType="menu-unfold" nzTheme="outline"></i>危险</button>
-        <button nz-button nzType="primary" nzLoading>loading</button>
-        <a nz-button nzType="link">link</a>
-        <a nz-button nzType="link" nzLoading>loading link</a>
-        <a nz-button nzType="link" disabled>disabled link</a>
+        <button nz-button class="m-b-8" nzType="default" disabled>禁用</button>
+        <button nz-button class="m-b-8" nzType="primary" nzDanger><i nz-icon nzType="menu-unfold" nzTheme="outline"></i>危险</button>
+        <button nz-button class="m-b-8" nzType="primary" nzLoading>loading</button>
+        <a nz-button class="m-b-8" nzType="link">link</a>
+        <a nz-button class="m-b-8" nzType="link" nzLoading>loading link</a>
+        <a nz-button class="m-b-8" nzType="link" disabled>disabled link</a>
 
         <div class="title">default</div>
-        <button nz-button> 默认</button>
-        <button nz-button nzType="default" disabled>禁用</button>
-        <button nz-button nzType="default" style="color: red;border-color: red">危险</button>
-        <button nz-button nzLoading>loading</button>
-        <a nz-button nzType="link">link</a>
-        <a nz-button nzType="link" nzLoading>loading link</a>
-        <a nz-button nzType="link" disabled>disabled link</a>
+        <button class="m-b-8"  nz-button> 默认</button>
+        <button class="m-b-8"  nz-button nzType="default" disabled>禁用</button>
+        <button class="m-b-8"  nz-button nzType="default" style="color: red;border-color: red">危险</button>
+        <button class="m-b-8"  nz-button nzLoading>loading</button>
+        <a  class="m-b-8" nz-button nzType="link">link</a>
+        <a  class="m-b-8" nz-button nzType="link" nzLoading>loading link</a>
+        <a  class="m-b-8" nz-button nzType="link" disabled>disabled link</a>
 
         <div class="title">dashed</div>
         <button nz-button nzType="dashed">dashed</button>

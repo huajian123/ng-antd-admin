@@ -373,7 +373,7 @@ export class TreeListComponent implements OnInit {
         {
           title: '操作',
           tdTemplate: this.operationTpl,
-          width: 180,
+          width: 130,
           fixed: true,
           fixedDir: "right"
         }

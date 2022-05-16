@@ -10,7 +10,7 @@
       (nzChange)="handleChange($event)"
       [nzFileList]="fileList"
     >
-      <button nz-button><i nz-icon nzType="upload"></i>导入材料(自费服务器，最大测试上传5M，泪奔)</button>
+      <button nz-button><i nz-icon nzType="upload"></i>导入材料(最大测试上传5M)</button>
     </nz-upload>
   </nz-card>
   <nz-card class="m-t-20" nzTitle="嵌入表单，加入表单验证">
@@ -29,7 +29,7 @@
             >
               <button nz-button>
                 <i nz-icon nzType="upload"></i>
-                上传附件(自费服务器，最大测试上传5M，泪奔)
+                上传附件(最大测试上传5M)
               </button>
               <input formControlName="file" [hidden]="true">
             </nz-upload>

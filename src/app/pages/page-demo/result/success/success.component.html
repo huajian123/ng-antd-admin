@@ -24,23 +24,23 @@
         <nz-steps [nzDirection]="stepDirection" [nzCurrent]="1" nzProgressDot>
           <nz-step [nzTitle]="'创建项目'" [nzDescription]="createDesc">
             <ng-template #createDesc>
-              <div style="font-size: 14px; position: relative">
-                <div style="margin-top: 8px; margin-bottom: 4px;">
+              <div class="sp-14 relative">
+                <div class="m-t-8 m-b-4">
                   曲丽丽
-                  <i nz-icon nzType="dingding" style="margin-left: 8px"></i>
+                  <i nz-icon nzType="dingding" class="m-l-8"></i>
                 </div>
-                <div style="margin-top: 8px; margin-bottom: 4px;">2016-12-12 12:32</div>
+                <div class="m-t-8 m-b-4">2016-12-12 12:32</div>
               </div>
             </ng-template>
           </nz-step>
           <nz-step [nzTitle]="'部门初审'" [nzDescription]="checkedDesc">
             <ng-template #checkedDesc>
-              <div style="font-size: 14px; position: relative">
-                <div style="margin-top: 8px; margin-bottom: 4px;">
+              <div class="sp-14 relative">
+                <div class="m-t-8 m-b-4">
                   周毛毛
-                  <i nz-icon nzType="dingding" style="margin-left: 8px"></i>
+                  <i nz-icon nzType="dingding" class="m-l-8"></i>
                 </div>
-                <div class="m-t-8" style="margin-bottom: 4px;">
+                <div class="m-t-8 m-b-4">
                   <a class="operate-text">催一下</a>
                 </div>
               </div>
@@ -51,9 +51,11 @@
         </nz-steps>
       </div>
       <div nz-result-extra>
-        <button nz-button nzType="primary">返回列表</button>
-        <button nz-button>查看项目</button>
-        <button nz-button>打 印</button>
+        <div nz-row nzJustify="space-between">
+          <button nz-button nzType="primary">返回列表</button>
+          <button nz-button>查看项目</button>
+          <button nz-button>打 印</button>
+        </div>
       </div>
 
     </nz-result>

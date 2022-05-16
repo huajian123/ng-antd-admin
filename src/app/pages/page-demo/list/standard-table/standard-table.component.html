@@ -24,7 +24,7 @@
   <app-water-mark></app-water-mark>
   <ng-template #extraTpl>
     <div>
-      <nz-radio-group class="m-r-8">
+      <nz-radio-group class="m-r-8 m-b-8">
         <label nz-radio-button nzValue="all">全部</label>
         <label nz-radio-button nzValue="ongoing">进行中</label>
         <label nz-radio-button nzValue="stay">等待中</label>
@@ -53,16 +53,16 @@
           {{ item.desc }}
         </nz-list-item-meta-description>
       </nz-list-item-meta>
-      <div class="listContent">
-        <div class="listContentItem">
+      <div>
+        <div class="list-content-item">
           <div>Owner</div>
           <div>{{item.owner}}</div>
         </div>
-        <div class="listContentItem">
+        <div class="list-content-item">
           <div>开始时间</div>
           <div>{{item.time}}</div>
         </div>
-        <div class="listContentItem">
+        <div class="list-content-item">
           <nz-progress [nzPercent]="item.progress" [nzStatus]="item.progress_status"></nz-progress>
         </div>
       </div>

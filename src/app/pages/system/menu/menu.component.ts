@@ -218,7 +218,7 @@ export class MenuComponent implements OnInit {
           title: '操作',
           tdTemplate: this.operationTpl,
           width: 180,
-          fixed: true,
+          fixed: false,
           fixedDir: "right"
         }
       ],

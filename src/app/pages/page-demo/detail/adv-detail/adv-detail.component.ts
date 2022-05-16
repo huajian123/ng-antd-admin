@@ -47,7 +47,7 @@ export class AdvDetailComponent implements OnInit, AfterViewInit {
     footer: '',
   };
   tabEnum = TabEnum;
-  currentSelTab: number =this.tabEnum.Detail;
+  currentSelTab: number = this.tabEnum.Detail;
 
   returnDataList: ReturnObj[] = [{
     num: '1234561',
@@ -126,6 +126,7 @@ export class AdvDetailComponent implements OnInit, AfterViewInit {
           field: 'number',
         },
       ],
+      xScroll: 500,
       total: 0,
       loading: false,
       pageSize: 10,
