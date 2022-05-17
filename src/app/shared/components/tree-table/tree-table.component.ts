@@ -53,12 +53,30 @@ export class TreeTableComponent implements OnInit, OnChanges {
   mapOfExpandedData: { [key: string]: TreeNodeInterface[] } = {};
   @Input() tableConfig!: MyTableConfig;
   @Output() selectedChange: EventEmitter<NzSafeAny[]> = new EventEmitter<NzSafeAny[]>();
+  cashExpandIdArray: (number | string)[] = []; // 缓存已经展开的节点的id
 
   @Input()
   set tableData(value: TreeNodeInterface[]) {
     this._dataList = value;
     // 根据dataList获取map形式的treeData,每一个key对应一组（也就是有子集）的数据
     this.mapOfExpandedData = fnTreeDataToMap(this._dataList);
+    const beFilterId: (string | number)[] = []; // 待删除的展开数据的child集的id数组
+    Object.values(this.mapOfExpandedData).forEach(menuArray => {
+      menuArray.forEach(menuItem => {
+        if (this.cashExpandIdArray.includes(menuItem.id)) {
+          menuItem.expand = true;
+          // 让当前节点子集进行缓存，下面再删除，不然会多余出子集的数据到expand为true的平级上
+          if (menuItem.children && menuItem.children.length > 0) {
+            menuItem.children.forEach(item => {
+              beFilterId.push(item.id);
+            })
+          }
+        }
+      })
+    })
+    beFilterId.forEach(item => {
+      delete this.mapOfExpandedData[item];
+    })
   }
 
   get tableData(): NzSafeAny[] {
@@ -115,7 +133,21 @@ export class TreeTableComponent implements OnInit, OnChanges {
     this.changePageSize.emit($event);
   }
 
+  changecashExpandIdArray(id: number | string, expand: boolean): void {
+    const index = this.cashExpandIdArray.indexOf(id)
+    if (expand) {
+      if (index === -1) {
+        this.cashExpandIdArray.push(id);
+      }
+    } else {
+      if (index !== -1) {
+        this.cashExpandIdArray.splice(index, 1);
+      }
+    }
+  }
+
   collapse(array: TreeNodeInterface[], data: TreeNodeInterface, $event: boolean): void {
+    this.changecashExpandIdArray(data.id, $event);
     if (!$event) {
       if (data.children) {
         data.children.forEach(d => {
