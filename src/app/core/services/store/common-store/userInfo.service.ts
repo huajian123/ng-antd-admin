@@ -30,7 +30,6 @@ export class UserInfoService {
         authCode: []
       }
     }
-
   }
 
   setUserInfo(userInfo: UserInfo): void {

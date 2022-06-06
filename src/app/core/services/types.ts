@@ -66,7 +66,7 @@ export interface CascaderOption {
 
 export interface Menu {
   id: number | string;
-  parentId: number | string;
+  fatherId: number | string;
   path: string;
   menuName: string;
   menuType: 'C' | 'F'; // c:菜单，f按钮

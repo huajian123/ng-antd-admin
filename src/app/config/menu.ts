@@ -13,7 +13,7 @@ const menuNav: Menu[] = [
   {
     menuName: 'Dashboard',
     id: 1,
-    parentId: 0,
+    fatherId: 0,
     icon: 'dashboard',
     open: false,
     selected: false,
@@ -23,7 +23,7 @@ const menuNav: Menu[] = [
     children: [
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '分析页',
         open: false,
         icon: "fund",
@@ -34,7 +34,7 @@ const menuNav: Menu[] = [
       },
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '监控页',
         open: false,
         icon: "fund",
@@ -45,7 +45,7 @@ const menuNav: Menu[] = [
       },
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '工作台',
         open: false,
         icon: "appstore",
@@ -61,7 +61,7 @@ const menuNav: Menu[] = [
     icon: 'appstore',
     open: false,
     id: 1,
-    parentId: 0,
+    fatherId: 0,
     code: '',
     selected: false,
     menuType: 'C',
@@ -69,7 +69,7 @@ const menuNav: Menu[] = [
     children: [
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '表单页',
         icon: 'form',
         open: false,
@@ -80,7 +80,7 @@ const menuNav: Menu[] = [
         children: [
           {
             id: 1,
-            parentId: 0,
+            fatherId: 0,
             menuName: '基础表单',
             open: false,
             selected: false,
@@ -91,7 +91,7 @@ const menuNav: Menu[] = [
           },
           {
             id: 1,
-            parentId: 0,
+            fatherId: 0,
             menuName: '分步表单',
             open: false,
             selected: false,
@@ -102,7 +102,7 @@ const menuNav: Menu[] = [
           },
           {
             id: 1,
-            parentId: 0,
+            fatherId: 0,
             menuName: '高级表单',
             open: false,
             selected: false,
@@ -121,12 +121,12 @@ const menuNav: Menu[] = [
         menuType: 'C',
         code: '',
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         path: '/default/page-demo/list',
         children: [
           {
             id: 1,
-            parentId: 0,
+            fatherId: 0,
             menuName: '搜索列表',
             open: false,
             selected: false,
@@ -137,7 +137,7 @@ const menuNav: Menu[] = [
             children: [
               {
                 id: 1,
-                parentId: 0,
+                fatherId: 0,
                 menuName: '搜索列表(文章）',
                 open: false,
                 selected: false,
@@ -148,7 +148,7 @@ const menuNav: Menu[] = [
               },
               {
                 id: 1,
-                parentId: 0,
+                fatherId: 0,
                 menuName: '搜索列表(项目)',
                 open: false,
                 selected: false,
@@ -159,7 +159,7 @@ const menuNav: Menu[] = [
               },
               {
                 id: 1,
-                parentId: 0,
+                fatherId: 0,
                 menuName: '搜索列表(应用)',
                 open: false,
                 selected: false,
@@ -172,7 +172,7 @@ const menuNav: Menu[] = [
           },
           {
             id: 1,
-            parentId: 0,
+            fatherId: 0,
             menuName: '查询表格',
             open: false,
             selected: false,
@@ -183,7 +183,7 @@ const menuNav: Menu[] = [
           },
           {
             id: 1,
-            parentId: 0,
+            fatherId: 0,
             menuName: '树状表格',
             open: false,
             selected: false,
@@ -194,7 +194,7 @@ const menuNav: Menu[] = [
           },
           {
             id: 1,
-            parentId: 0,
+            fatherId: 0,
             menuName: '标准表格',
             open: false,
             selected: false,
@@ -205,7 +205,7 @@ const menuNav: Menu[] = [
           },
           {
             id: 1,
-            parentId: 0,
+            fatherId: 0,
             menuName: '卡片列表',
             open: false,
             selected: false,
@@ -218,7 +218,7 @@ const menuNav: Menu[] = [
       },
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '详情页',
         icon: 'profile',
         open: false,
@@ -229,7 +229,7 @@ const menuNav: Menu[] = [
         children: [
           {
             id: 1,
-            parentId: 0,
+            fatherId: 0,
             menuName: '基础详情页',
             open: false,
             selected: false,
@@ -240,7 +240,7 @@ const menuNav: Menu[] = [
           },
           {
             id: 1,
-            parentId: 0,
+            fatherId: 0,
             menuName: '高级详情页',
             open: false,
             selected: false,
@@ -253,7 +253,7 @@ const menuNav: Menu[] = [
       },
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '结果页',
         icon: 'check-circle',
         open: false,
@@ -264,7 +264,7 @@ const menuNav: Menu[] = [
         children: [
           {
             id: 1,
-            parentId: 0,
+            fatherId: 0,
             menuName: '成功页',
             open: false,
             selected: false,
@@ -275,7 +275,7 @@ const menuNav: Menu[] = [
           },
           {
             id: 1,
-            parentId: 0,
+            fatherId: 0,
             menuName: '失败页',
             open: false,
             selected: false,
@@ -288,7 +288,7 @@ const menuNav: Menu[] = [
       },
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '异常页',
         icon: 'warning',
         open: false,
@@ -299,7 +299,7 @@ const menuNav: Menu[] = [
         children: [
           {
             id: 1,
-            parentId: 0,
+            fatherId: 0,
             menuName: '403',
             open: false,
             code: '',
@@ -310,7 +310,7 @@ const menuNav: Menu[] = [
           },
           {
             id: 1,
-            parentId: 0,
+            fatherId: 0,
             menuName: '404',
             open: false,
             selected: false,
@@ -321,7 +321,7 @@ const menuNav: Menu[] = [
           },
           {
             id: 1,
-            parentId: 0,
+            fatherId: 0,
             menuName: '500',
             open: false,
             selected: false,
@@ -334,7 +334,7 @@ const menuNav: Menu[] = [
       },
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '个人页',
         icon: 'user',
         open: false,
@@ -345,7 +345,7 @@ const menuNav: Menu[] = [
         children: [
           {
             id: 1,
-            parentId: 0,
+            fatherId: 0,
             menuName: '个人中心',
             open: false,
             selected: false,
@@ -356,7 +356,7 @@ const menuNav: Menu[] = [
           },
           {
             id: 1,
-            parentId: 0,
+            fatherId: 0,
             menuName: '个人设置',
             open: false,
             code: '',
@@ -369,7 +369,7 @@ const menuNav: Menu[] = [
       },
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '图形编辑器',
         icon: '',
         alIcon: 'icon-mel-help',
@@ -381,7 +381,7 @@ const menuNav: Menu[] = [
         children: [
           {
             id: 1,
-            parentId: 0,
+            fatherId: 0,
             menuName: '流程图',
             open: false,
             selected: false,
@@ -396,7 +396,7 @@ const menuNav: Menu[] = [
   },
   {
     id: 1,
-    parentId: 0,
+    fatherId: 0,
     menuName: '功能',
     icon: 'star',
     open: false,
@@ -407,7 +407,7 @@ const menuNav: Menu[] = [
     children: [
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '消息提示',
         icon: 'dashboard',
         open: false,
@@ -418,7 +418,7 @@ const menuNav: Menu[] = [
       },
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '文件下载',
         icon: 'dashboard',
         open: false,
@@ -429,7 +429,7 @@ const menuNav: Menu[] = [
       },
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '图标',
         icon: 'dashboard',
         open: false,
@@ -440,7 +440,7 @@ const menuNav: Menu[] = [
       },
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '右键菜单',
         icon: 'dashboard',
         open: false,
@@ -451,7 +451,7 @@ const menuNav: Menu[] = [
       },
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '图片预览',
         icon: 'dashboard',
         open: false,
@@ -462,7 +462,7 @@ const menuNav: Menu[] = [
       },
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '全屏',
         icon: 'dashboard',
         open: false,
@@ -473,7 +473,7 @@ const menuNav: Menu[] = [
       },
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '标签页操作',
         icon: 'dashboard',
         open: false,
@@ -484,7 +484,7 @@ const menuNav: Menu[] = [
       },
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '拖拽modal',
         icon: 'dashboard',
         open: false,
@@ -495,7 +495,7 @@ const menuNav: Menu[] = [
       },
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '封装抽屉',
         icon: 'dashboard',
         open: false,
@@ -506,7 +506,7 @@ const menuNav: Menu[] = [
       },
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '富文本',
         icon: 'dashboard',
         open: false,
@@ -517,7 +517,7 @@ const menuNav: Menu[] = [
       },
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: 'clickOutSide',
         icon: 'dashboard',
         open: false,
@@ -528,7 +528,7 @@ const menuNav: Menu[] = [
       },
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '外部文档',
         icon: 'dashboard',
         open: false,
@@ -539,7 +539,7 @@ const menuNav: Menu[] = [
         children: [
           {
             id: 1,
-            parentId: 0,
+            fatherId: 0,
             menuName: 'zorro文档',
             icon: 'dashboard',
             open: false,
@@ -550,7 +550,7 @@ const menuNav: Menu[] = [
           },
           {
             id: 1,
-            parentId: 0,
+            fatherId: 0,
             menuName: '外部链接',
             icon: 'usergroup-delete',
             open: false,
@@ -564,7 +564,7 @@ const menuNav: Menu[] = [
       },
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '滚动条',
         icon: 'dashboard',
         open: false,
@@ -575,7 +575,7 @@ const menuNav: Menu[] = [
         children: [
           {
             id: 1,
-            parentId: 0,
+            fatherId: 0,
             menuName: '缓存滚动条',
             icon: 'dashboard',
             open: false,
@@ -586,7 +586,7 @@ const menuNav: Menu[] = [
           },
           {
             id: 1,
-            parentId: 0,
+            fatherId: 0,
             menuName: '玩弄滚动条',
             icon: 'dashboard',
             open: false,
@@ -599,7 +599,7 @@ const menuNav: Menu[] = [
       },
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '图表',
         icon: 'dashboard',
         open: false,
@@ -610,7 +610,7 @@ const menuNav: Menu[] = [
         children: [
           {
             id: 1,
-            parentId: 0,
+            fatherId: 0,
             menuName: '高德',
             open: false,
             selected: false,
@@ -621,7 +621,7 @@ const menuNav: Menu[] = [
           },
           {
             id: 1,
-            parentId: 0,
+            fatherId: 0,
             menuName: '百度',
             open: false,
             selected: false,
@@ -632,7 +632,7 @@ const menuNav: Menu[] = [
           },
           {
             id: 1,
-            parentId: 0,
+            fatherId: 0,
             menuName: 'Echarts',
             open: false,
             selected: false,
@@ -645,7 +645,7 @@ const menuNav: Menu[] = [
       },
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '其他登录方式',
         icon: 'dashboard',
         open: false,
@@ -656,7 +656,7 @@ const menuNav: Menu[] = [
         children: [
           {
             id: 1,
-            parentId: 0,
+            fatherId: 0,
             menuName: '第一种',
             open: false,
             selected: false,
@@ -670,7 +670,7 @@ const menuNav: Menu[] = [
 
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '颜色选择器',
         icon: 'usergroup-delete',
         code: '',
@@ -681,7 +681,7 @@ const menuNav: Menu[] = [
       },
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '登录超时',
         icon: 'usergroup-delete',
         code: '',
@@ -692,7 +692,7 @@ const menuNav: Menu[] = [
       },
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '水波纹',
         icon: 'usergroup-delete',
         code: '',
@@ -703,7 +703,7 @@ const menuNav: Menu[] = [
       },
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '剪切板',
         icon: 'usergroup-delete',
         code: '',
@@ -714,7 +714,7 @@ const menuNav: Menu[] = [
       },
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '空白页',
         icon: 'usergroup-delete',
         code: '',
@@ -726,7 +726,7 @@ const menuNav: Menu[] = [
 
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '引导页',
         alIcon: 'icon-medium',
         open: false,
@@ -739,7 +739,7 @@ const menuNav: Menu[] = [
   },
   {
     id: 1,
-    parentId: 0,
+    fatherId: 0,
     menuName: '组件',
     icon: 'star',
     open: false,
@@ -750,7 +750,7 @@ const menuNav: Menu[] = [
     children: [
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '基础组件',
         icon: 'dashboard',
         open: false,
@@ -761,7 +761,7 @@ const menuNav: Menu[] = [
       },
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '动画组件',
         icon: 'dashboard',
         open: false,
@@ -772,7 +772,7 @@ const menuNav: Menu[] = [
       },
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '在线excel',
         icon: 'dashboard',
         open: false,
@@ -783,7 +783,7 @@ const menuNav: Menu[] = [
       },
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '组件懒加载',
         icon: 'dashboard',
         open: false,
@@ -794,7 +794,7 @@ const menuNav: Menu[] = [
         children: [
           {
             id: 1,
-            parentId: 0,
+            fatherId: 0,
             menuName: '基础懒加载组件',
             icon: 'dashboard',
             open: false,
@@ -805,7 +805,7 @@ const menuNav: Menu[] = [
           },
           {
             id: 1,
-            parentId: 0,
+            fatherId: 0,
             menuName: '滚动懒加载',
             icon: 'dashboard',
             open: false,
@@ -818,7 +818,7 @@ const menuNav: Menu[] = [
       },
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '详情组件',
         icon: 'dashboard',
         open: false,
@@ -829,7 +829,7 @@ const menuNav: Menu[] = [
       },
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '密码强度校验组件',
         icon: 'dashboard',
         open: false,
@@ -844,7 +844,7 @@ const menuNav: Menu[] = [
 
   {
     id: 1,
-    parentId: 0,
+    fatherId: 0,
     menuName: '多级菜单',
     icon: 'menu',
     open: false,
@@ -855,7 +855,7 @@ const menuNav: Menu[] = [
     children: [
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: 'Menu1',
         icon: 'menu',
         open: false,
@@ -866,7 +866,7 @@ const menuNav: Menu[] = [
         children: [
           {
             id: 1,
-            parentId: 0,
+            fatherId: 0,
             menuName: 'Menu1-1',
             icon: 'menu',
             open: false,
@@ -877,7 +877,7 @@ const menuNav: Menu[] = [
             children: [
               {
                 id: 1,
-                parentId: 0,
+                fatherId: 0,
                 menuName: 'Menu1-1-1',
                 icon: 'menu',
                 open: false,
@@ -888,7 +888,7 @@ const menuNav: Menu[] = [
               },
               {
                 id: 1,
-                parentId: 0,
+                fatherId: 0,
                 menuName: 'Menu1-1-2',
                 icon: 'menu',
                 open: false,
@@ -901,7 +901,7 @@ const menuNav: Menu[] = [
           },
           {
             id: 1,
-            parentId: 0,
+            fatherId: 0,
             menuName: 'Menu1-2',
             icon: 'menu',
             open: false,
@@ -914,7 +914,7 @@ const menuNav: Menu[] = [
       },
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: 'Menu2',
         icon: 'menu',
         open: false,
@@ -929,7 +929,7 @@ const menuNav: Menu[] = [
 
   {
     id: 1,
-    parentId: 0,
+    fatherId: 0,
     menuName: '系统管理',
     icon: '',
     alIcon: 'icon-mel-help',
@@ -941,7 +941,7 @@ const menuNav: Menu[] = [
     children: [
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '账号管理',
         icon: '',
         alIcon: 'icon-mel-help',
@@ -953,7 +953,7 @@ const menuNav: Menu[] = [
       },
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '角色管理',
         icon: '',
         alIcon: 'icon-mel-help',
@@ -965,7 +965,7 @@ const menuNav: Menu[] = [
       },
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '菜单管理',
         icon: '',
         alIcon: 'icon-mel-help',
@@ -977,7 +977,7 @@ const menuNav: Menu[] = [
       },
       {
         id: 1,
-        parentId: 0,
+        fatherId: 0,
         menuName: '部门管理',
         icon: '',
         alIcon: 'icon-mel-help',
@@ -991,7 +991,7 @@ const menuNav: Menu[] = [
   },
   {
     id: 1,
-    parentId: 0,
+    fatherId: 0,
     menuName: '关于',
     alIcon: 'icon-medium',
     open: false,

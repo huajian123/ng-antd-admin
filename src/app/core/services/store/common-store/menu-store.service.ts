@@ -7,6 +7,7 @@ import {Menu} from "@core/services/types";
 })
 export class MenuStoreService {
   private menuArray$ = new BehaviorSubject<Menu[]>([]);
+
   constructor() { }
 
   setMenuArrayStore(menuArray: Menu[]): void {

@@ -40,8 +40,9 @@ export class LoginInOutService {
     return new Promise(resolve => {
       this.windowServe.setSessionStorage(TokenKey, TokenPre + token);
       const userInfo: UserInfo = this.userInfoService.parsToken(TokenPre + token);
-      // todo  这里是手动添加静态页面标签页操作中，打开详情的按钮的权限，实际操作中可以删除第44行
+      // todo  这里是手动添加静态页面标签页操作中，打开详情的按钮的权限，实际操作中可以删除第44,45行
       userInfo.authCode.push(ActionCode.TabsDetail)
+      userInfo.authCode.push(ActionCode.SearchTableDetail)
       this.userInfoService.setUserInfo(userInfo);
       this.getMenuByUserId(userInfo.userId).pipe(finalize(()=>{
         resolve();

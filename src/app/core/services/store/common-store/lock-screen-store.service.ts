@@ -17,7 +17,6 @@ export class LockScreenStoreService {
   constructor() {
   }
 
-
   setLockScreenStore(store: LockScreenFlag): void {
     this.lockScreenStore$.next(store);
   }

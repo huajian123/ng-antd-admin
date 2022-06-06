@@ -1,7 +1,6 @@
-import {Inject, Injectable} from '@angular/core';
-import {delay, Observable, of} from 'rxjs';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
 import {BaseHttpService} from "@services/base-http.service";
-import {Menu} from "@core/services/types";
 export interface DownLoadObj {
   downloadUrl: string;
 }

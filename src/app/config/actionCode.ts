@@ -2,6 +2,8 @@
 export const ActionCode = {
   /*标签页操作打开详情*/
   TabsDetail:'default:feat:tabs:example-detail',
+  /*查询表格 打开查看*/
+  SearchTableDetail:'default:page-demo:search-table:example-detail',
 
   /*系统管理*/
   AccountAdd: 'default:system:account:add',// 账号管理新增
