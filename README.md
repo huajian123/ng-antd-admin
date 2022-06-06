@@ -1,16 +1,20 @@
 # ng-ant-admin
-[![CodeFactor](https://www.codefactor.io/repository/github/ng-ant-admin/badge)](https://www.codefactor.io/repository/github/ng-ant-admin)
+[![CodeFactor](https://www.codefactor.io/repository/github/huajian123/ng-ant-admin/badge)](https://www.codefactor.io/repository/github/huajian123/ng-ant-admin)
 
+# 在线文档
+[doc](http://1.117.181.242:8081/)
 
-# 项目视频介绍
-Ng-Ant-Admin 3.0发布(其实就是添加了服务端真实接口)<br>
+# 项目介绍
+Ng-Ant-Admin 3.0发布(添加服务端真实接口)<br>
+自费服务器，在线示例网速比较慢，抱歉<br>
+如果本项目对您有用，麻烦帮我点个star，谢谢啊<br>
+if help you, if you want ,please give me a star ,thank you<br>
 账号admin，密码123456 ,数据库每10分钟从备份恢复一次<br>
 默认登录超时时间为1h，上传，下载，websocket，系统管理模块均为真实接口调用展示。<br>
 完成最常用的权限控制，人员账号管理，角色管理，菜单管理，登录超时等。添加了大量业务示例，开箱即用。<br>
-
 使用本项目遇到问题，可以加入376065816 qq群号与我沟通。<br>
-如果本项目对您有用，麻烦帮我点个star，谢谢啊<br>
-if help you, if you want ,please give me a star ,thank you<br>
+
+
 快速二开使用详解 [快速二开使用详解](https://www.bilibili.com/video/BV1gF411x7rN/)<br>
 项目搭建简易教程 [项目搭建简易教程](https://www.bilibili.com/video/BV1EM4y1w7zd/)<br>
 online demo地址 [demo](http://1.117.181.242/)<br>
@@ -107,15 +111,11 @@ _onReuseDestroy: () => void;
 ```
 直接在目标组件中写出方法名为_onReuseInit或者_onReuseDestroy的方法即可实现
 
-# 我在线求全职或者兼职或者接单
-坐标南京，希望做Angular，java,flutter,go，小程序，vue
-请联系287643967@qq.com
-
 ## 系统截图
-![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/11.jpg)
+![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/11.png)
 
 ## 捐赠
-如果本项目对您有用，正巧您如果想请我喝一杯咖啡，请扫下面的码，哈哈<br>
+如果本项目对您有用，正巧您如果也想请我喝一杯咖啡，请扫下面的码，哈哈<br>
 If this project is useful to you, and you happen to want to invite me for a cup of coffee, please scan Alipay or WeChat<br>
 ![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/weixin.jpeg)
 ![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/zhifubao.jpeg)
