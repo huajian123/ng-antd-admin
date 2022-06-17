@@ -10,8 +10,7 @@ import {SpinService} from "@store/common-store/spin.service";
 import {ChangePasswordService} from "@widget/biz-widget/change-password/change-password.service";
 import {ModalBtnStatus} from "@widget/base-modal";
 import {UserInfoService} from "@store/common-store/userInfo.service";
-import {User, UserPsd} from "@core/services/types";
-import {AccountService} from "@services/system/account.service";
+import {AccountService, UserPsd} from "@services/system/account.service";
 
 @Component({
   selector: 'app-layout-head-right-menu',

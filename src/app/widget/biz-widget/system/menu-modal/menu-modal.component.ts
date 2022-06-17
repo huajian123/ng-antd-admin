@@ -77,7 +77,6 @@ export class MenuModalComponent implements OnInit {
     if (Object.keys(this.params).length > 0) {
       this.changeMenuType(this.params.menuType)
       this.validateForm.patchValue(this.params);
-      console.log(this.params);
     }
   }
 

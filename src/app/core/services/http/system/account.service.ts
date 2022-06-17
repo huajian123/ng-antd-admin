@@ -1,7 +1,39 @@
 import {Injectable} from '@angular/core';
 import {BaseHttpService} from '../base-http.service';
-import {Dept, Menu, PageInfo, SearchCommonVO, User, UserPsd} from '../../types';
+import { PageInfo, SearchCommonVO} from '../../types';
 import {Observable} from 'rxjs';
+
+
+/*
+* 用户管理
+* */
+
+export interface User {
+  id: number;
+  password: string;
+  userName?: string;
+  available?: boolean;
+  roleName?: string[];
+  sex?: 1 | 0;
+  telephone?: string;
+  mobile?: string | number;
+  email?: string;
+  lastLoginTime?: Date;
+  oldPassword?: string;
+  departmentId?: number;
+  departmentName?: string;
+}
+
+/*
+* 用户修改密码
+* */
+export interface UserPsd {
+  id: number;
+  oldPassword: string;
+  newPassword: string;
+}
+
+
 
 @Injectable({
   providedIn: 'root'

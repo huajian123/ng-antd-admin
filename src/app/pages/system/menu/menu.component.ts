@@ -42,7 +42,7 @@ export class MenuComponent implements OnInit {
 
   tableConfig!: MyTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
-    title: '菜单管理',
+    title: '菜单管理(数据库每10分钟从备份恢复一次),新增完菜单记得给对应角色添加刚刚新增的菜单权限，不然无法展示',
     breadcrumb: ['首页', '系统管理', '菜单管理']
   };
   dataList: TreeNodeInterface[] = [];

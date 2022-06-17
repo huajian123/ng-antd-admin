@@ -14,8 +14,8 @@
         <li [nzPaddingLeft]="((themesMode!=='top'||isOverMode)&&!isCollapsed)?16:0" nz-menu-item *ngIf="!menu.children||menu.children.length===0"
             [nzSelected]="menu.selected">
           <a (click)="changeRoute($event,menu)">
-            <i *ngIf="menu.icon" nz-icon [nzType]="menu.icon"></i>
-            <i *ngIf="menu.alIcon" nz-icon [nzIconfont]="menu.alIcon"></i>
+              <i *ngIf="menu.icon" nz-icon [nzType]="menu.icon"></i>
+              <i *ngIf="menu.alIcon" nz-icon [nzIconfont]="menu.alIcon"></i>
             <span>{{menu.menuName}}</span>
           </a>
         </li>
@@ -26,8 +26,8 @@
               [(nzOpen)]="menu.open"
               [nzTitle]="titleTpl">
             <ng-template #titleTpl>
-              <i *ngIf="menu.icon" nz-icon [nzType]="menu.icon"></i>
-              <i *ngIf="menu.alIcon" nz-icon [nzIconfont]="menu.alIcon"></i>
+                <i *ngIf="menu.icon" nz-icon [nzType]="menu.icon"></i>
+                <i *ngIf="menu.alIcon" nz-icon [nzIconfont]="menu.alIcon"></i>
               <span>{{menu.menuName}}</span>
             </ng-template>
             <ul>
@@ -48,8 +48,8 @@
                       (nzOpenChange)="changeOpen(menuSecond,menu.children)" [(nzOpen)]="menuSecond.open"
                       [nzTitle]="titleTpl">
                     <ng-template #titleTpl>
-                      <i *ngIf="menuSecond.icon" nz-icon [nzType]="menuSecond.icon"></i>
-                      <i *ngIf="menuSecond.alIcon" nz-icon [nzIconfont]="menuSecond.alIcon"></i>
+                        <i *ngIf="menuSecond.icon" nz-icon [nzType]="menuSecond.icon"></i>
+                        <i *ngIf="menuSecond.alIcon" nz-icon [nzIconfont]="menuSecond.alIcon"></i>
                       <span>{{menuSecond.menuName}}</span></ng-template>
                     <ul>
                       <ng-container *ngFor="let menuThird of menuSecond.children;trackByProperty:'id'">
@@ -67,8 +67,8 @@
                               *ngIf="menuThird.children&&menuThird.children.length>0" nz-submenu
                               (nzOpenChange)="changeOpen(menuThird,menuSecond.children)" [(nzOpen)]="menuThird.open"
                               [nzTitle]="menuThird.menuName">
-                            <i *ngIf="menuThird.icon" nz-icon [nzType]="menuThird.icon"></i>
-                            <i *ngIf="menuThird.alIcon" nz-icon [nzIconfont]="menuThird.alIcon"></i>
+                              <i *ngIf="menuThird.icon" nz-icon [nzType]="menuThird.icon"></i>
+                              <i *ngIf="menuThird.alIcon" nz-icon [nzIconfont]="menuThird.alIcon"></i>
                             <ul>
                               <ng-container *ngFor="let forthThird of menuThird.children;trackByProperty:'id'">
                                 <ng-container *appAuth="forthThird.code">

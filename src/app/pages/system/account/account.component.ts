@@ -1,7 +1,7 @@
 import {Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef} from '@angular/core';
 import {PageHeaderType} from "@shared/components/page-header/page-header.component";
 import {MyTableConfig} from "@shared/components/ant-table/ant-table.component";
-import {OptionsInterface, SearchCommonVO, User} from "@core/services/types";
+import {OptionsInterface, SearchCommonVO} from "@core/services/types";
 import {NzModalService} from "ng-zorro-antd/modal";
 import {MessageService} from "@core/services/common/message.service";
 import {Router} from "@angular/router";
@@ -10,7 +10,7 @@ import {NzTableQueryParams} from "ng-zorro-antd/table";
 import {finalize} from "rxjs/operators";
 import {ModalBtnStatus} from "@widget/base-modal";
 import {ActionCode} from '@app/config/actionCode';
-import {AccountService} from "@services/system/account.service";
+import {AccountService, User} from "@services/system/account.service";
 import {AccountModalService} from "@widget/biz-widget/system/account-modal/account-modal.service";
 import {NzSafeAny} from "ng-zorro-antd/core/types";
 import {MapKeyType, MapPipe, MapSet} from "@shared/pipes/map.pipe";
@@ -34,7 +34,7 @@ export class AccountComponent implements OnInit {
   searchParam: Partial<SearchParam> = {};
   tableConfig!: MyTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
-    title: '账号管理',
+    title: '账号管理(数据库每10分钟从备份恢复一次)',
     breadcrumb: ['首页', '用户管理', '账号管理']
   };
   dataList: User[] = [];
@@ -228,7 +228,7 @@ export class AccountComponent implements OnInit {
         },
         {
           title: '性别',
-          width: 50,
+          width: 70,
           field: 'sex',
           pipe:'sex'
         },
@@ -244,7 +244,7 @@ export class AccountComponent implements OnInit {
         },
         {
           title: '最后登录时间',
-          width: 100,
+          width: 120,
           field: 'lastLoginTime',
           pipe: 'date:yyyy-MM-dd HH:mm',
         },

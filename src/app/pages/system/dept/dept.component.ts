@@ -4,17 +4,15 @@ import {NzSafeAny} from "ng-zorro-antd/core/types";
 import {MyTableConfig} from "@shared/components/ant-table/ant-table.component";
 import {TreeNodeInterface} from "@shared/components/tree-table/tree-table.component";
 import {FormBuilder} from "@angular/forms";
-import {MenuModalService} from "@widget/biz-widget/system/menu-modal/menu-modal.service";
-import {MenuListObj, MenusService} from "@services/system/menus.service";
 import {NzModalService} from "ng-zorro-antd/modal";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {Router} from "@angular/router";
 import {NzTableQueryParams} from "ng-zorro-antd/table";
-import {Dept, OptionsInterface, SearchCommonVO} from "@core/services/types";
+import { OptionsInterface, SearchCommonVO} from "@core/services/types";
 import {finalize} from "rxjs/operators";
 import {fnFlatDataHasParentToTree, fnFlattenTreeDataByDataList} from "@utils/treeTableTools";
 import {ModalBtnStatus} from "@widget/base-modal";
-import {DeptService} from "@services/system/dept.service";
+import {Dept, DeptService} from "@services/system/dept.service";
 import {DeptManageModalService} from "@widget/biz-widget/system/dept-manage-modal/dept-manage-modal.service";
 import {MapKeyType, MapPipe, MapSet} from "@shared/pipes/map.pipe";
 import { ActionCode } from '@app/config/actionCode';
@@ -40,7 +38,7 @@ export class DeptComponent implements OnInit {
 
   tableConfig!: MyTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
-    title: '部门管理',
+    title: '部门管理(数据库每10分钟从备份恢复一次)',
     breadcrumb: ['首页', '系统管理', '部门管理']
   };
   dataList: TreeNodeInterface[] = [];

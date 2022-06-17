@@ -4,13 +4,14 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {NzModalRef} from "ng-zorro-antd/modal";
 import {Observable, of} from "rxjs";
 import {fnCheckForm} from "@utils/tools";
-import {CascaderOption, OptionsInterface, User} from "@core/services/types";
+import {OptionsInterface} from "@core/services/types";
 import {ValidatorsService} from "@core/services/validators/validators.service";
 import {RoleService} from "@services/system/role.service";
 import {NzSafeAny} from "ng-zorro-antd/core/types";
 import {DeptService} from "@services/system/dept.service";
-import {fnAddTreeDataGradeAndLeaf, fnFlatDataHasParentToTree, fnFlattenTreeDataByDataList} from "@utils/treeTableTools";
+import {fnAddTreeDataGradeAndLeaf, fnFlatDataHasParentToTree} from "@utils/treeTableTools";
 import {NzTreeNodeOptions} from "ng-zorro-antd/core/tree";
+import {User} from "@services/system/account.service";
 
 @Component({
   selector: 'app-account-modal',

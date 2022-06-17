@@ -1,7 +1,18 @@
 import {Injectable} from '@angular/core';
 import {BaseHttpService} from '../base-http.service';
-import {Dept, Menu, PageInfo, SearchCommonVO} from '../../types';
+import {PageInfo, SearchCommonVO} from '../../types';
 import {Observable} from 'rxjs';
+
+/*
+*  部门列表
+* */
+export interface Dept {
+  id?: number;
+  departmentName: string;
+  fatherId: number;
+  state: 1 | 0;
+  orderNum: number;
+}
 
 @Injectable({
   providedIn: 'root'

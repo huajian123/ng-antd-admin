@@ -1,8 +1,8 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {MyTableConfig} from "@shared/components/ant-table/ant-table.component";
 import {PageHeaderType} from "@shared/components/page-header/page-header.component";
-import {Role, SearchCommonVO} from "@core/services/types";
-import {RoleService} from "@services/system/role.service";
+import { SearchCommonVO} from "@core/services/types";
+import {Role, RoleService} from "@services/system/role.service";
 import {NzModalService} from "ng-zorro-antd/modal";
 import {MessageService} from "@core/services/common/message.service";
 import {Router} from "@angular/router";
@@ -28,7 +28,7 @@ export class RoleManageComponent implements OnInit {
   searchParam: Partial<SearchParam> = {};
   tableConfig!: MyTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
-    title: '角色管理',
+    title: '角色管理(数据库每10分钟从备份恢复一次)',
     breadcrumb: ['首页', '用户管理', '角色管理']
   };
   dataList: Role[] = [];
