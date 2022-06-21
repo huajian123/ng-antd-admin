@@ -6,6 +6,7 @@ import {SettingInterface, ThemeService} from "@store/common-store/theme.service"
 import {ThemeSkinService} from "@core/services/common/theme-skin.service";
 import {WindowService} from "@core/services/common/window.service";
 import {IsNightKey, ThemeOptionsKey} from "@config/constant";
+import {NzConfigService} from 'ng-zorro-antd/core/config';
 
 interface NormalModel {
   image?: string;
@@ -39,7 +40,7 @@ export class SettingDrawerComponent implements OnInit {
   _isNightTheme = false;
   _themesOptions: SettingInterface = {
     theme: 'dark',
-    color: 'daybreak',
+    color: '#1890FF',
     mode: 'side',
     fixedWidth: false,
     fixedTab: false,
@@ -142,6 +143,7 @@ export class SettingDrawerComponent implements OnInit {
 
   constructor(private themesService: ThemeService, @Inject(DOCUMENT) private doc: Document,
               public message: NzMessageService,
+              private nzConfigService: NzConfigService,
               private themeSkinService: ThemeSkinService, private windowServe: WindowService,
               private rd2: Renderer2) {
   }
@@ -156,7 +158,9 @@ export class SettingDrawerComponent implements OnInit {
 
   changePrimaryColor(color: Color): void {
     this.selOne(color as NormalModel, this.colors);
-    this.message.success('更新成功');
+    this.nzConfigService.set('theme', {primaryColor: color.color});
+    this._themesOptions.color = color.color;
+    this.setThemeOptions();
   }
 
   // 修改黑夜主题
@@ -196,7 +200,7 @@ export class SettingDrawerComponent implements OnInit {
   // 修改固定头部
   changeFixed(isFixed: boolean, type: 'splitNav' | 'fixedTab' | 'fixedLeftNav' | 'fixedHead' | 'hasTopArea' | 'hasFooterArea' | 'hasNavArea' | 'hasNavHeadArea'): void {
     // 非固定头部时，设置标签也不固定
-    if(type==="fixedHead"&&!isFixed){
+    if (type === "fixedHead" && !isFixed) {
       this._themesOptions['fixedTab'] = false;
     }
     this._themesOptions[type] = isFixed;
@@ -225,6 +229,10 @@ export class SettingDrawerComponent implements OnInit {
     this.modes.forEach((item) => {
       item.isChecked = item.key === this._themesOptions.mode;
     });
+    this.colors.forEach((item) => {
+      item.isChecked = item.color === this._themesOptions.color;
+    });
+    this.changePrimaryColor(this.colors.find(item=>item.isChecked)!);
     this.themes.forEach((item) => {
       item.isChecked = item.key === this._themesOptions.theme;
     });

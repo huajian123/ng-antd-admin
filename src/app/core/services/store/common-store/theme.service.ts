@@ -26,7 +26,7 @@ export class ThemeService {
   private isOverModeTheme$ = new BehaviorSubject<boolean>(false);
   private themesMode$ = new BehaviorSubject<SettingInterface>({
     theme: 'dark',
-    color: 'daybreak',
+    color: '#1890FF',
     mode: 'side',
     fixedWidth: true,
     colorWeak: false,
