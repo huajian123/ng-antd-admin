@@ -46,6 +46,7 @@
     "ng-zorro-antd": "^13.3.0",
     "ngx-color-picker": "^12.0.1",
     "ngx-echarts": "^8.0.1",
+    "ngx-monaco-editor": "^12.0.0",
     "ngx-quicklink": "^0.2.7",
     "rxjs": "~7.4.0",
     "screenfull": "^6.0.0",
