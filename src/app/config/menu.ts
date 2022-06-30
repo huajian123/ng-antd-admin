@@ -727,6 +727,18 @@ const menuNav: Menu[] = [
       {
         id: 1,
         fatherId: 0,
+        menuName: '代码编辑器',
+        alIcon: 'icon-medium',
+        open: false,
+        code: '',
+        selected: false,
+        menuType: 'C',
+        path: '/default/feat/editor',
+      },
+
+      {
+        id: 1,
+        fatherId: 0,
         menuName: '引导页',
         alIcon: 'icon-medium',
         open: false,
