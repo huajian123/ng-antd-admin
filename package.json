@@ -43,7 +43,9 @@
     "crypto-js": "^4.1.1",
     "driver.js": "^0.9.8",
     "echarts": "^5.3.2",
-    "ng-zorro-antd": "^13.3.0",
+    "file-saver": "^2.0.5",
+    "monaco-editor": "^0.33.0",
+    "ng-zorro-antd": "^13.3.2",
     "ngx-color-picker": "^12.0.1",
     "ngx-echarts": "^8.0.1",
     "ngx-monaco-editor": "^12.0.0",
@@ -53,8 +55,7 @@
     "tslib": "^2.3.0",
     "uuid": "^8.3.2",
     "zone.js": "~0.11.4",
-    "zxcvbn3": "^0.1.1",
-    "file-saver": "^2.0.5"
+    "zxcvbn3": "^0.1.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~13.2.6",
