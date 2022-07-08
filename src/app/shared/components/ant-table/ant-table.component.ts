@@ -29,8 +29,8 @@ export interface TableHeader {
   tdClassList?: string[];           // 为td单元格指定类 (父组件中的类必须加上 /deep/ 前缀才能对子组件生效)
   thClassList?: string[];           // 为th单元格指定类  (父组件中的类必须加上 /deep/ 前缀才能对子组件生效)
   show?: boolean;                   // 是否显示列，false:不显示，其他：显示
-  tdClassFn?: (data:any,index:number) => string[];
-  thClassFn?: (data:any) => string[];
+  tdClassFn?: (data: any, index: number) => string[];
+  thClassFn?: (data: any) => string[];
 }
 
 export interface MyTableConfig {
@@ -219,9 +219,7 @@ export class AntTableComponent implements OnInit, OnChanges {
       const index = this.checkedCashArrayFromComment.findIndex((cashItem) => {
         return item.id === cashItem.id;
       });
-      if (index !== -1) {
-        item['_checked'] = true;
-      }
+      item['_checked'] = index !== -1;
     });
     const allChecked = this._dataList.length > 0 && this._dataList.every((item) => {
       return item['_checked'] === true;
