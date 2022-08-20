@@ -4,9 +4,8 @@ import {NzSafeAny} from 'ng-zorro-antd/core/types';
 import * as _ from 'lodash';
 import {Observable, of} from 'rxjs';
 import {first, tap} from 'rxjs/operators';
-import {DragDrop} from "@angular/cdk/drag-drop";
+import {DragDrop, DragRef} from "@angular/cdk/drag-drop";
 import {fnGetUUID} from "@utils/tools";
-import {DragRef} from "@angular/cdk/drag-drop/drag-ref";
 
 type ModalZIndex = { zIndex: number, canChange: boolean };
 

@@ -1,5 +1,4 @@
 import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
-import {ComponentType} from "@angular/cdk/portal/portal";
 import {EventsChartsComponent} from "@app/pages/feat/charts/echarts/started/events-charts/events-charts.component";
 import {
   InitOptsChartsComponent
@@ -11,7 +10,7 @@ import {LoadingChartsComponent} from "@app/pages/feat/charts/echarts/started/loa
 import {MergeChartsComponent} from "@app/pages/feat/charts/echarts/started/merge-charts/merge-charts.component";
 import {SimpleChartComponent} from "@app/pages/feat/charts/echarts/started/simple-chart/simple-chart.component";
 import {ThemeChartsComponent} from "@app/pages/feat/charts/echarts/started/theme-charts/theme-charts.component";
-import {ComponentPortal, Portal} from "@angular/cdk/portal";
+import {ComponentPortal, ComponentType, Portal} from "@angular/cdk/portal";
 import {NzTabPosition} from "ng-zorro-antd/tabs/interfaces";
 import {BreakpointObserver} from "@angular/cdk/layout";
 

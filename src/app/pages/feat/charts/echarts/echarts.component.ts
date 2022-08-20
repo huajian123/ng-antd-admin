@@ -9,8 +9,7 @@ import {
 } from '@angular/core';
 import {PageHeaderType} from "@shared/components/page-header/page-header.component";
 import {NzSafeAny} from "ng-zorro-antd/core/types";
-import {ComponentType} from "@angular/cdk/portal/portal";
-import { ComponentPortal, Portal} from "@angular/cdk/portal";
+import {ComponentPortal, ComponentType, Portal} from "@angular/cdk/portal";
 import {AdvancedComponent} from "@app/pages/feat/charts/echarts/advanced/advanced.component";
 import {SeriesComponent} from "@app/pages/feat/charts/echarts/series/series.component";
 import {StartedComponent} from "@app/pages/feat/charts/echarts/started/started.component";

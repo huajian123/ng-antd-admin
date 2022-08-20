@@ -1,6 +1,5 @@
 import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
-import {ComponentPortal, Portal} from "@angular/cdk/portal";
-import {ComponentType} from "@angular/cdk/portal/portal";
+import {ComponentPortal, ComponentType, Portal} from "@angular/cdk/portal";
 import {SimpleGraphComponent} from "@app/pages/feat/charts/echarts/series/simple-graph/simple-graph.component";
 import {FromLeftToRightComponent} from "@app/pages/feat/charts/echarts/series/from-left-to-right/from-left-to-right.component";
 import {RadialTreeComponent} from "@app/pages/feat/charts/echarts/series/radial-tree/radial-tree.component";

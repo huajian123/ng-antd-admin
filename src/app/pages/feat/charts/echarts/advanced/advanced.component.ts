@@ -3,8 +3,7 @@ import {ConnectChartsComponent} from "@app/pages/feat/charts/echarts/advanced/co
 import {
   DraggableChartsComponent
 } from "@app/pages/feat/charts/echarts/advanced/draggable-charts/draggable-charts.component";
-import {ComponentPortal, Portal} from "@angular/cdk/portal";
-import {ComponentType} from "@angular/cdk/portal/portal";
+import {ComponentPortal, ComponentType, Portal} from "@angular/cdk/portal";
 import {NzTabPosition} from "ng-zorro-antd/tabs/interfaces";
 import {BreakpointObserver} from "@angular/cdk/layout";
 
