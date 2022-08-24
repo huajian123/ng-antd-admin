@@ -7,15 +7,14 @@
       <button *nzSpaceItem (click)="toggle()" nz-button nzType="primary">切换全屏</button>
       <button *nzSpaceItem (click)="exitFull()" nz-button nzType="primary">退出全屏</button>
     </nz-space>
-    <div>当前全屏状态：{{!isFullscreenFlag}}</div>
+    <div>当前全屏状态：{{ !isFullscreenFlag }}</div>
   </nz-card>
 
   <nz-card class="m-t-15" nzTitle="Dom Full Screen">
     <button (click)="intoDomFull(dom)" nz-button nzType="primary">下面的dom全屏</button>
   </nz-card>
 
-  <div #dom class="m-t-30 center"
-       style="height: 600px;background: white;margin-left: auto;margin-right: auto">
+  <div #dom class="m-t-30 center" style="height: 600px; background: white; margin-left: auto; margin-right: auto">
     <button (click)="exitFull()" nz-button nzType="primary">下面的dom取消全屏</button>
   </div>
 </div>

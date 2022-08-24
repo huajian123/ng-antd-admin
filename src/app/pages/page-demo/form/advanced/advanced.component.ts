@@ -1,12 +1,11 @@
-import {ChangeDetectionStrategy, Component, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {PageHeaderType} from '@shared/components/page-header/page-header.component';
-import {fnCheckForm} from "@utils/tools";
-import {NzMessageService} from "ng-zorro-antd/message";
-import {
-  WarehouseManageFormComponent
-} from "@app/pages/page-demo/form/advanced/warehouse-manage-form/warehouse-manage-form.component";
-import {TaskManageFormComponent} from "@app/pages/page-demo/form/advanced/task-manage-form/task-manage-form.component";
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { TaskManageFormComponent } from '@app/pages/page-demo/form/advanced/task-manage-form/task-manage-form.component';
+import { WarehouseManageFormComponent } from '@app/pages/page-demo/form/advanced/warehouse-manage-form/warehouse-manage-form.component';
+import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { fnCheckForm } from '@utils/tools';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 // 自定义表单
 /*https://juejin.cn/post/6844904018922176520*/
@@ -14,7 +13,7 @@ import {TaskManageFormComponent} from "@app/pages/page-demo/form/advanced/task-m
   selector: 'app-advanced',
   templateUrl: './advanced.component.html',
   styleUrls: ['./advanced.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AdvancedComponent implements OnInit {
   @ViewChild('warehouseManageComponent') warehouseManageComponent!: WarehouseManageFormComponent;
@@ -26,22 +25,21 @@ export class AdvancedComponent implements OnInit {
   };
   validateForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, public message: NzMessageService,) {
-  }
+  constructor(private fb: FormBuilder, public message: NzMessageService) {}
 
   submit(): void {
     // @ts-ignore
     if (!fnCheckForm(this.validateForm) | this.warehouseManageComponent.checkForm() | this.taskManageComponent.checkForm()) {
       return;
     }
-    this.message.info('控制台打印出了表单数据')
+    this.message.info('控制台打印出了表单数据');
     console.log(this.validateForm.value);
   }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
       warehouseManage: [null, [Validators.required]],
-      taskManage: [null, [Validators.required]],
+      taskManage: [null, [Validators.required]]
     });
   }
 }

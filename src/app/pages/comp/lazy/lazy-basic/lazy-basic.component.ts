@@ -1,13 +1,8 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  ViewChild,
-  AfterViewInit
-} from '@angular/core';
-import {PageHeaderType} from "@shared/components/page-header/page-header.component";
-import {AdDirective} from "@shared/directives/ad.directive";
-import {LazyServiceService} from "@app/pages/comp/lazy/lazy-service.service";
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, AfterViewInit } from '@angular/core';
+
+import { LazyServiceService } from '@app/pages/comp/lazy/lazy-service.service';
+import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { AdDirective } from '@shared/directives/ad.directive';
 
 @Component({
   selector: 'app-lazy-basic',
@@ -22,17 +17,14 @@ export class LazyBasicComponent implements OnInit, AfterViewInit {
     breadcrumb: ['首页', '组件', '懒加载组件'],
     desc: '懒加载组件,我永远喜欢周杰伦'
   };
-  @ViewChild(AdDirective, {static: true}) adHost!: AdDirective;
+  @ViewChild(AdDirective, { static: true }) adHost!: AdDirective;
   isStarted = false;
 
-  constructor(public lazyServiceService: LazyServiceService) {
-  }
+  constructor(public lazyServiceService: LazyServiceService) {}
 
   ngAfterViewInit(): void {
     this.lazyServiceService.adHost = this.adHost;
   }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

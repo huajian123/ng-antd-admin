@@ -1,9 +1,10 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {NzModalRef} from "ng-zorro-antd/modal";
-import {NzSafeAny} from "ng-zorro-antd/core/types";
-import {Observable, of} from "rxjs";
-import {fnCheckForm} from "@utils/tools";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable, of } from 'rxjs';
+
+import { fnCheckForm } from '@utils/tools';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzModalRef } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-role-manage-modal',
@@ -22,10 +23,9 @@ export class RoleManageModalComponent implements OnInit {
   initForm(): void {
     this.addEditForm = this.fb.group({
       roleName: [null, [Validators.required]],
-      roleDesc: [null],
+      roleDesc: [null]
     });
   }
-
 
   // 此方法为如果有异步数据需要加载，则在该方法中添加
   protected getAsyncFnData(modalValue: NzSafeAny): Observable<NzSafeAny> {
@@ -39,7 +39,6 @@ export class RoleManageModalComponent implements OnInit {
     }
     return of(this.addEditForm.value);
   }
-
 
   ngOnInit(): void {
     this.initForm();

@@ -1,9 +1,9 @@
 <app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
 
 <div class="normal-table-wrap">
-  <input nz-input class="m-b-20" [(ngModel)]="data" [placeholder]="'传入到抽屉的值'">
+  <input nz-input class="m-b-20" [(ngModel)]="data" [placeholder]="'传入到抽屉的值'" />
 
-  {{'这是从抽屉中返回的值:'+dataFromDrawer}}<br>
+  {{ '这是从抽屉中返回的值:' + dataFromDrawer }}<br />
 
   <button nz-button (click)="showDrawer()">服务的方式创建</button>
 </div>

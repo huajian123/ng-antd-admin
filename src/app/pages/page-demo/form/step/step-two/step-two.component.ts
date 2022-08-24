@@ -1,7 +1,8 @@
-import {Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter} from '@angular/core';
-import {NzSafeAny} from "ng-zorro-antd/core/types";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {fnCheckForm} from "@utils/tools";
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { fnCheckForm } from '@utils/tools';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 @Component({
   selector: 'app-step-two',
@@ -14,8 +15,7 @@ export class StepTwoComponent implements OnInit {
   @Output() previous = new EventEmitter<NzSafeAny>();
   validateForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {
-  }
+  constructor(private fb: FormBuilder) {}
 
   submit(): void {
     if (!fnCheckForm(this.validateForm)) {
@@ -26,12 +26,11 @@ export class StepTwoComponent implements OnInit {
 
   initForm(): void {
     this.validateForm = this.fb.group({
-      password: [null, [Validators.required]],
+      password: [null, [Validators.required]]
     });
   }
 
   ngOnInit(): void {
     this.initForm();
   }
-
 }

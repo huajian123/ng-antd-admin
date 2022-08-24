@@ -1,8 +1,9 @@
-import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {NzModalRef} from "ng-zorro-antd/modal";
-import {Observable, of} from "rxjs";
-import {fnCheckForm} from "@utils/tools";
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable, of } from 'rxjs';
+
+import { fnCheckForm } from '@utils/tools';
+import { NzModalRef } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-change-password',
@@ -15,8 +16,7 @@ export class ChangePasswordComponent implements OnInit {
   passwordVisible = false;
   compirePasswordVisible = false;
 
-  constructor(private modalRef: NzModalRef, private fb: FormBuilder,) {
-  }
+  constructor(private modalRef: NzModalRef, private fb: FormBuilder) {}
 
   get newPassword() {
     return this.validateForm.get('newPassword');
@@ -46,13 +46,11 @@ export class ChangePasswordComponent implements OnInit {
     this.validateForm = this.fb.group({
       oldPassword: [null, [Validators.required]],
       newPassword: [null, [Validators.required]],
-      sureNewPassword: [null, [Validators.required, this.confirmationValidator]],
-
+      sureNewPassword: [null, [Validators.required, this.confirmationValidator]]
     });
   }
 
   ngOnInit(): void {
     this.initForm();
   }
-
 }

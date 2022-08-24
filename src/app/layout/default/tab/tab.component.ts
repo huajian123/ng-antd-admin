@@ -1,13 +1,14 @@
-import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
-import {TabModel, TabService} from '@core/services/common/tab.service';
-import {NzContextMenuService, NzDropdownMenuComponent} from 'ng-zorro-antd/dropdown';
-import {ThemeService} from '@store/common-store/theme.service';
-import {NavigationEnd, Router} from '@angular/router';
-import {filter, takeUntil} from 'rxjs/operators';
-import {fnStopMouseEvent} from '@utils/tools';
-import {NzSafeAny} from "ng-zorro-antd/core/types";
-import {DestroyService} from "@core/services/common/destory.service";
-import {SplitNavStoreService} from "@store/common-store/split-nav-store.service";
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter, takeUntil } from 'rxjs/operators';
+
+import { DestroyService } from '@core/services/common/destory.service';
+import { TabModel, TabService } from '@core/services/common/tab.service';
+import { SplitNavStoreService } from '@store/common-store/split-nav-store.service';
+import { ThemeService } from '@store/common-store/theme.service';
+import { fnStopMouseEvent } from '@utils/tools';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzContextMenuService, NzDropdownMenuComponent } from 'ng-zorro-antd/dropdown';
 
 @Component({
   selector: 'app-tab',
@@ -27,12 +28,16 @@ export class TabComponent implements OnInit {
   isCollapsed$ = this.themesService.getIsCollapsed();
   isCollapsed = false;
 
-  constructor(public tabService: TabService, private nzContextMenuService: NzContextMenuService,
-              private splitNavStoreService: SplitNavStoreService,
-              private themesService: ThemeService,
-              private destroy$: DestroyService,
-              public router: Router, public cdr: ChangeDetectorRef) {
-    (this.router.events.pipe(filter((event: NzSafeAny) => event instanceof NavigationEnd))).subscribe((event: NzSafeAny) => {
+  constructor(
+    public tabService: TabService,
+    private nzContextMenuService: NzContextMenuService,
+    private splitNavStoreService: SplitNavStoreService,
+    private themesService: ThemeService,
+    private destroy$: DestroyService,
+    public router: Router,
+    public cdr: ChangeDetectorRef
+  ) {
+    this.router.events.pipe(filter((event: NzSafeAny) => event instanceof NavigationEnd)).subscribe((event: NzSafeAny) => {
       this.cdr.markForCheck();
     });
   }
@@ -84,7 +89,7 @@ export class TabComponent implements OnInit {
 
   // 关闭当前Tab
   closeCurrentTab(tab: TabModel, index: number): void {
-    if (1 === this.tabsSourceData.length) {
+    if (this.tabsSourceData.length === 1) {
       return;
     }
     this.tabService.delTab(tab, index);

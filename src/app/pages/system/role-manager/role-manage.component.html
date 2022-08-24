@@ -2,22 +2,26 @@
 <app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
 
 <div class="normal-table-wrap">
-  <nz-card nzHoverable [nzBodyStyle]="{'padding-bottom':0}" class="m-b-10">
+  <nz-card nzHoverable [nzBodyStyle]="{ 'padding-bottom': 0 }" class="m-b-10">
     <form nz-form>
-      <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24}">
+      <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24 }">
         <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
           <nz-form-item>
             <nz-form-label [nzFor]="">角色名称</nz-form-label>
             <nz-form-control>
-              <input nz-input name="roleName" [(ngModel)]="searchParam.roleName" placeholder="请输入角色名称"/>
+              <input nz-input name="roleName" [(ngModel)]="searchParam.roleName" placeholder="请输入角色名称" />
             </nz-form-control>
           </nz-form-item>
         </div>
-        <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
-        </div>
+        <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24"></div>
         <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24" class="text-right p-0 m-b-10">
-          <button nz-button [nzType]="'primary'" (click)="getDataList()"><i nz-icon nzType="search"></i>搜索</button>
-          <button nz-button class="m-l-15" (click)="resetForm()"><i nz-icon nzType="close-circle" nzTheme="outline"></i>重置
+          <button nz-button [nzType]="'primary'" (click)="getDataList()">
+            <i nz-icon nzType="search"></i>
+            搜索
+          </button>
+          <button nz-button class="m-l-15" (click)="resetForm()">
+            <i nz-icon nzType="close-circle" nzTheme="outline"></i>
+            重置
           </button>
         </div>
       </div>
@@ -25,12 +29,7 @@
   </nz-card>
 
   <app-card-table-wrap [tableTitle]="'角色列表'" (reload)="reloadTable()" [btnTpl]="tableBtns">
-    <app-ant-table
-      [tableConfig]="tableConfig"
-      (changePageSize)="changePageSize($event)"
-      (changePageNum)="getDataList($event)"
-      [tableData]="dataList">
-    </app-ant-table>
+    <app-ant-table [tableConfig]="tableConfig" (changePageSize)="changePageSize($event)" (changePageNum)="getDataList($event)" [tableData]="dataList"></app-ant-table>
     <ng-template #operationTpl let-id="id">
       <span *appAuth="ActionCode.RoleManagerSetRole" class="operate-text" (click)="setRole(id)">设置权限</span>
       <span *appAuth="ActionCode.RoleManagerEdit" class="operate-text" (click)="edit(id)">编辑</span>
@@ -41,7 +40,7 @@
 
 <ng-template #tableBtns>
   <button *appAuth="ActionCode.RoleManagerAdd" (click)="add()" nz-button nzType="primary" class="m-r-8">
-    <i nz-icon nzType="plus"></i>新建
+    <i nz-icon nzType="plus"></i>
+    新建
   </button>
 </ng-template>
-

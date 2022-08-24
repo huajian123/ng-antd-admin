@@ -1,8 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import {NzModalRef} from "ng-zorro-antd/modal";
-import {Observable, of} from "rxjs";
-import {BasicConfirmModalComponent} from "@widget/base-modal";
-import {NzSafeAny} from "ng-zorro-antd/core/types";
+import { Observable, of } from 'rxjs';
+
+import { BasicConfirmModalComponent } from '@widget/base-modal';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzModalRef } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-drag',
@@ -10,8 +11,7 @@ import {NzSafeAny} from "ng-zorro-antd/core/types";
   styleUrls: ['./drag.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DragComponent  extends BasicConfirmModalComponent implements OnInit {
-
+export class DragComponent extends BasicConfirmModalComponent implements OnInit {
   override params: object;
 
   constructor(override modalRef: NzModalRef) {
@@ -23,7 +23,5 @@ export class DragComponent  extends BasicConfirmModalComponent implements OnInit
     return of(true);
   }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

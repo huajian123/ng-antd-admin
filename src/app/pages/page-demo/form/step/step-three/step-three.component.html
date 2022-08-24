@@ -1,14 +1,10 @@
-<nz-result
-  nzStatus="success"
-  nzTitle="操作成功"
-  nzSubTitle="预计两小时内到账"
->
+<nz-result nzStatus="success" nzTitle="操作成功" nzSubTitle="预计两小时内到账">
   <div nz-result-extra>
     <button (click)="next.emit()" nz-button nzType="primary">在转一笔</button>
     <button nz-button>查看账单</button>
   </div>
 </nz-result>
-<div nz-result-content class="desc-bg center" [class.p-l-16]="stepDirection==='vertical'">
+<div nz-result-content class="desc-bg center" [class.p-l-16]="stepDirection === 'vertical'">
   <div class="determine-wrap p-b-0">
     <nz-descriptions class="m-t-20 p-0">
       <nz-descriptions-item nzTitle="付款账户">ant-design@alipay.com</nz-descriptions-item>

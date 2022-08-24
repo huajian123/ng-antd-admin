@@ -1,10 +1,12 @@
-import {Injectable} from '@angular/core';
-import {ThemeService} from "@store/common-store/theme.service";
-import {WindowService} from "./window.service";
-import {IsNightKey, ThemeOptionsKey} from "@config/constant";
-import {first} from "rxjs/operators";
-import {Observable} from "rxjs";
-import {NzSafeAny} from "ng-zorro-antd/core/types";
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { first } from 'rxjs/operators';
+
+import { IsNightKey, ThemeOptionsKey } from '@config/constant';
+import { ThemeService } from '@store/common-store/theme.service';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
+import { WindowService } from './window.service';
 
 type setThemeProp = 'setIsNightTheme' | 'setThemesMode';
 type getThemeProp = 'getIsNightTheme' | 'getThemesMode';
@@ -16,8 +18,8 @@ interface InitThemeOption {
 }
 
 /*
-* 初始化theme
-* */
+ * 初始化theme
+ * */
 
 @Injectable({
   providedIn: 'root'
@@ -33,19 +35,21 @@ export class InitThemeService {
       storageKey: ThemeOptionsKey,
       setMethodName: 'setThemesMode',
       getMethodName: 'getThemesMode'
-    }];
+    }
+  ];
 
-  constructor(private themesService: ThemeService, private windowServe: WindowService) {
-  }
+  constructor(private themesService: ThemeService, private windowServe: WindowService) {}
 
   initTheme(): Promise<void> {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       this.themeInitOption.forEach(item => {
         const hasCash = this.windowServe.getStorage(item.storageKey);
         if (hasCash) {
           this.themesService[item.setMethodName](JSON.parse(hasCash));
         } else {
-          (this.themesService[item.getMethodName]() as Observable<NzSafeAny>).pipe(first()).subscribe(res => this.windowServe.setStorage(item.storageKey, JSON.stringify(res)));
+          (this.themesService[item.getMethodName]() as Observable<NzSafeAny>)
+            .pipe(first())
+            .subscribe(res => this.windowServe.setStorage(item.storageKey, JSON.stringify(res)));
         }
       });
       return resolve();

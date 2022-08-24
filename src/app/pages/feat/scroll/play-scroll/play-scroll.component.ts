@@ -1,8 +1,8 @@
-import {Component, OnInit, ChangeDetectionStrategy, Inject} from '@angular/core';
-import {PageHeaderType} from "@shared/components/page-header/page-header.component";
-import {DOCUMENT} from "@angular/common";
-import {NzScrollService} from "ng-zorro-antd/core/services";
+import { DOCUMENT } from '@angular/common';
+import { Component, OnInit, ChangeDetectionStrategy, Inject } from '@angular/core';
 
+import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { NzScrollService } from 'ng-zorro-antd/core/services';
 
 /*https://segmentfault.com/a/1190000020769492*/
 @Component({
@@ -18,31 +18,27 @@ export class PlayScrollComponent implements OnInit {
     desc: '传说有一位少年骑着电驴去买瓜'
   };
 
-  constructor(private scrollService: NzScrollService, @Inject(DOCUMENT) private _doc: Document) {
-  }
-
+  constructor(private scrollService: NzScrollService, @Inject(DOCUMENT) private _doc: Document) {}
 
   toDocBottom(): void {
-    this.scrollService.scrollTo(null, this._doc.body.scrollHeight)
+    this.scrollService.scrollTo(null, this._doc.body.scrollHeight);
   }
 
   toDoc100(): void {
-    this.scrollService.scrollTo(null, 100)
+    this.scrollService.scrollTo(null, 100);
   }
 
   toBox1(): void {
-    this.scrollService.scrollTo(this._doc.querySelector('#div-scroll3'), 100)
+    this.scrollService.scrollTo(this._doc.querySelector('#div-scroll3'), 100);
   }
 
   toBox2(): void {
-    this.scrollService.scrollTo(this._doc.querySelector('#div-scroll4'), 100)
+    this.scrollService.scrollTo(this._doc.querySelector('#div-scroll4'), 100);
   }
 
   toDocHead(): void {
-    this.scrollService.scrollTo(null, 0)
+    this.scrollService.scrollTo(null, 0);
   }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

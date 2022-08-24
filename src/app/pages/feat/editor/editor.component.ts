@@ -1,5 +1,6 @@
-import {Component, OnInit, OnDestroy, ChangeDetectionStrategy} from '@angular/core';
-import {PageHeaderType} from "@shared/components/page-header/page-header.component";
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+
+import { PageHeaderType } from '@shared/components/page-header/page-header.component';
 
 @Component({
   selector: 'app-editor',
@@ -9,17 +10,14 @@ import {PageHeaderType} from "@shared/components/page-header/page-header.compone
 export class EditorComponent implements OnInit, OnDestroy {
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '代码编辑器，vscode的起源',
-    breadcrumb: ['首页', '扩展功能', '代码编辑器'],
+    breadcrumb: ['首页', '扩展功能', '代码编辑器']
   };
-  editorOptions = {theme: 'vs-dark', language: 'javascript'};
+  editorOptions = { theme: 'vs-dark', language: 'javascript' };
   code: string = 'function x() {\n\tconsole.log("Hello world!");\n}';
 
-  constructor() {
-  }
+  constructor() {}
 
-  initEditor(): void {
-
-  }
+  initEditor(): void {}
 
   ngOnInit(): void {
     this.initEditor();
@@ -28,5 +26,4 @@ export class EditorComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     // this.monacoInstance.dispose()
   }
-
 }

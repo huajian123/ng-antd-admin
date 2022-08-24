@@ -1,20 +1,19 @@
-import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {Observable, of} from "rxjs";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {fnCheckForm} from "@utils/tools";
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable, of } from 'rxjs';
+
+import { fnCheckForm } from '@utils/tools';
 
 @Component({
   selector: 'app-ex-drawer-drawer',
   templateUrl: './ex-drawer-drawer.component.html',
-  styleUrls: ['./ex-drawer-drawer.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExDrawerDrawerComponent implements OnInit {
-  params: { name: string } = {name: ''};
+  params: { name: string } = { name: '' };
   validateForm!: FormGroup;
 
-  constructor(private fb: FormBuilder,) {
-  }
+  constructor(private fb: FormBuilder) {}
 
   getCurrentValue(): Observable<any> {
     if (!fnCheckForm(this.validateForm)) {
@@ -25,12 +24,11 @@ export class ExDrawerDrawerComponent implements OnInit {
 
   initForm(): void {
     this.validateForm = this.fb.group({
-      password: [null, [Validators.required]],
+      password: [null, [Validators.required]]
     });
   }
 
   ngOnInit(): void {
     this.initForm();
   }
-
 }

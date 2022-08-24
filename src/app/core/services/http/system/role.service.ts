@@ -1,13 +1,14 @@
-import {Injectable} from '@angular/core';
-import {BaseHttpService} from '../base-http.service';
-import {PageInfo, SearchCommonVO} from '../../types';
-import {Observable} from 'rxjs';
-import {NzSafeAny} from "ng-zorro-antd/core/types";
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
+import { PageInfo, SearchCommonVO } from '../../types';
+import { BaseHttpService } from '../base-http.service';
 
 /*
-*  权限
-* */
+ *  权限
+ * */
 export interface Permission {
   hasChildren: boolean;
   menuName: string;
@@ -26,24 +27,20 @@ export interface PutPermissionParam {
   roleId: number;
 }
 
-
-
 /*
-* 角色
-* */
+ * 角色
+ * */
 export interface Role {
   id?: number;
   roleName: string;
   roleDesc?: string;
 }
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class RoleService {
-  constructor(public http: BaseHttpService) {
-  }
+  constructor(public http: BaseHttpService) {}
 
   public getRoles(param: SearchCommonVO<Role>): Observable<PageInfo<Role>> {
     return this.http.post('/role/list/', param);
@@ -58,7 +55,7 @@ export class RoleService {
   }
 
   public delRoles(ids: number[]): Observable<void> {
-    return this.http.post('/role/del/', {ids});
+    return this.http.post('/role/del/', { ids });
   }
 
   public editRoles(param: Role): Observable<void> {
@@ -72,5 +69,4 @@ export class RoleService {
   public updatePermission(param: PutPermissionParam): Observable<NzSafeAny> {
     return this.http.put('/permission/', param);
   }
-
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 
 import {
   bounceAnimation,
@@ -183,8 +183,7 @@ import {
     hueRotateAnimation({ anchor: 'hueButton', duration: 20000 })
   ]
 })
-export class DemoMainComponent{
-
+export class DemoMainComponent {
   options = [
     {
       label: 'Attention Seekers',
@@ -200,31 +199,11 @@ export class DemoMainComponent{
     },
     {
       label: 'Fading Entrances',
-      animations: [
-        'fadeIn',
-        'fadeInDown',
-        'fadeInDownBig',
-        'fadeInLeft',
-        'fadeInLeftBig',
-        'fadeInRight',
-        'fadeInRightBig',
-        'fadeInUp',
-        'fadeInUpBig'
-      ]
+      animations: ['fadeIn', 'fadeInDown', 'fadeInDownBig', 'fadeInLeft', 'fadeInLeftBig', 'fadeInRight', 'fadeInRightBig', 'fadeInUp', 'fadeInUpBig']
     },
     {
       label: 'Fading Exits',
-      animations: [
-        'fadeOut',
-        'fadeOutDown',
-        'fadeOutDownBig',
-        'fadeOutLeft',
-        'fadeOutLeftBig',
-        'fadeOutRight',
-        'fadeOutRightBig',
-        'fadeOutUp',
-        'fadeOutUpBig'
-      ]
+      animations: ['fadeOut', 'fadeOutDown', 'fadeOutDownBig', 'fadeOutLeft', 'fadeOutLeftBig', 'fadeOutRight', 'fadeOutRightBig', 'fadeOutUp', 'fadeOutUpBig']
     },
     {
       label: 'Flippers',
@@ -272,10 +251,9 @@ export class DemoMainComponent{
   animationWithState = false;
   hueBtnState = false;
 
-  constructor( private cdr: ChangeDetectorRef) {
-  }
+  constructor(private cdr: ChangeDetectorRef) {}
 
-  animate() {
+  animate(): void {
     this.animationState = false;
     setTimeout(() => {
       this.animationState = true;

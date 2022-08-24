@@ -34,7 +34,6 @@
         <nz-statistic class="m-r-25" nzTitle="状态" nzValue="待审批"></nz-statistic>
         <nz-statistic nzTitle="订单金额" [nzValue]="568.08" nzPrefix="¥"></nz-statistic>
       </div>
-
     </div>
   </div>
 </ng-template>
@@ -59,26 +58,24 @@
         <span class="m-r-8">曲丽丽</span>
         <i nz-icon nzType="dingding" nzTheme="outline"></i>
       </div>
-      <div>
-        2016-12-12 12:32
-      </div>
+      <div>2016-12-12 12:32</div>
     </ng-template>
     <ng-template #trialTpl>
       <div>
         <span class="m-r-8">周毛毛</span>
-        <i nz-icon nzType="dingding" nzTheme="outline" style="color: rgb(0, 160, 233);"></i>
+        <i nz-icon nzType="dingding" nzTheme="outline" style="color: rgb(0, 160, 233)"></i>
       </div>
       <div>
         <a class="operate-text">催一下</a>
       </div>
     </ng-template>
     <ng-template #progressTemplate let-dot let-status="status" let-index="index">
-      <span nz-popover [nzPopoverContent]="trialPopTpl" style="margin-left: -100%;">
+      <span nz-popover [nzPopoverContent]="trialPopTpl" style="margin-left: -100%">
         <ng-template [ngTemplateOutlet]="dot"></ng-template>
       </span>
     </ng-template>
     <ng-template #trialPopTpl>
-      <div style="width: 160px;">
+      <div style="width: 160px">
         <div class="flex">
           <div class="flex-1">吴加号</div>
           <nz-badge nzStatus="default" nzText="未响应"></nz-badge>
@@ -95,9 +92,7 @@
       <nz-descriptions-item nzTitle="会员卡号">32943898021309809423</nz-descriptions-item>
       <nz-descriptions-item nzTitle="身份证">3321944288191034921</nz-descriptions-item>
       <nz-descriptions-item nzTitle="联系方式">18112345678</nz-descriptions-item>
-      <nz-descriptions-item nzTitle="联系地址" [nzSpan]="2">
-        曲丽丽 18100000000 浙江省杭州市西湖区黄姑山路工专路交叉路口
-      </nz-descriptions-item>
+      <nz-descriptions-item nzTitle="联系地址" [nzSpan]="2">曲丽丽 18100000000 浙江省杭州市西湖区黄姑山路工专路交叉路口</nz-descriptions-item>
     </nz-descriptions>
     <nz-descriptions nzTitle="信息组" class="m-t-20">
       <nz-descriptions-item nzTitle="某某数据">725</nz-descriptions-item>
@@ -106,7 +101,8 @@
       <nz-descriptions-item nzTitle="该数据更新时间">2017-08-08</nz-descriptions-item>
     </nz-descriptions>
     <ng-template #dataTitleTpl>
-      某某数据<i nz-tooltip nzTooltipTitle="数据说明" nz-icon nzType="info-circle" nzTheme="outline" class="title-icon"></i>
+      某某数据
+      <i nz-tooltip nzTooltipTitle="数据说明" nz-icon nzType="info-circle" nzTheme="outline" class="title-icon"></i>
     </ng-template>
     <h3 class="m-t-20">信息组</h3>
     <nz-card nzType="inner" nzTitle="多层级信息组" class="m-t-20">
@@ -115,15 +111,11 @@
         <nz-descriptions-item nzTitle="角色码">1234567</nz-descriptions-item>
         <nz-descriptions-item nzTitle="所属部门">XX公司 - YY部</nz-descriptions-item>
         <nz-descriptions-item nzTitle="过期时间">2017-08-08</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="描述" [nzSpan]="2">
-          这段描述很长很长很长很长很长很长很长很长很长很长很长很长很长很长...
-        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="描述" [nzSpan]="2">这段描述很长很长很长很长很长很长很长很长很长很长很长很长很长很长...</nz-descriptions-item>
       </nz-descriptions>
       <nz-divider></nz-divider>
       <nz-descriptions nzTitle="组名称" [nzColumn]="1">
-        <nz-descriptions-item nzTitle="学名">
-          Citrullus lanatus (Thunb.) Matsum. et Nakai一年生蔓生藤本；茎、枝粗壮，具明显的棱。卷须较粗..
-        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="学名">Citrullus lanatus (Thunb.) Matsum. et Nakai一年生蔓生藤本；茎、枝粗壮，具明显的棱。卷须较粗..</nz-descriptions-item>
       </nz-descriptions>
       <nz-divider></nz-divider>
       <nz-descriptions nzTitle="组名称">
@@ -152,5 +144,6 @@
 </div>
 
 <ng-template #highLightTpl let-code="code">
-  <nz-badge nzStatus="processing" nzText="成功"></nz-badge> 并且{{code}}
+  <nz-badge nzStatus="processing" nzText="成功"></nz-badge>
+  并且{{ code }}
 </ng-template>

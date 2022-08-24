@@ -1,8 +1,10 @@
-import {Injectable} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {SimpleReuseStrategy} from './reuse-strategy';
-import {fnFormatePath, fnGetPathWithoutParam} from '@utils/tools';
-import {BehaviorSubject, Observable} from "rxjs";
+import { Injectable } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BehaviorSubject, Observable } from 'rxjs';
+
+import { fnFormatePath, fnGetPathWithoutParam } from '@utils/tools';
+
+import { SimpleReuseStrategy } from './reuse-strategy';
 
 export interface TabModel {
   title: string;
@@ -11,8 +13,8 @@ export interface TabModel {
 }
 
 /*
-* tab操作的服务
-* */
+ * tab操作的服务
+ * */
 @Injectable({
   providedIn: 'root'
 })
@@ -21,8 +23,7 @@ export class TabService {
   private tabArray: TabModel[] = [];
   private currSelectedIndexTab = 0;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
-  }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
 
   getTabArray$(): Observable<TabModel[]> {
     return this.tabArray$.asObservable();
@@ -49,7 +50,7 @@ export class TabService {
       }
     });
 
-    if (!this.tabArray.find((value) => value.path === param.path)) {
+    if (!this.tabArray.find(value => value.path === param.path)) {
       this.tabArray.push(param);
     }
     this.setTabsSourceData();
@@ -71,7 +72,7 @@ export class TabService {
     });
     // 移除右键选中右边的tab
     this.tabArray.length = index + 1;
-    temp.forEach(({path, relatedLink}) => {
+    temp.forEach(({ path, relatedLink }) => {
       // relatedLink数组保存相关路由，解决路由中有详情页这样跳转路由，而产生"在哪个页面上点击关闭按钮,保存的状态才会清除"的bug
       const linkArray = [...relatedLink, this.getPathKey(path)];
       linkArray.forEach(item => {
@@ -86,11 +87,10 @@ export class TabService {
     this.setTabsSourceData();
   }
 
-
   // 右键移除左边所有tab
   /*
-  * @params index 当前鼠标点击右键所在的tab索引
-  * */
+   * @params index 当前鼠标点击右键所在的tab索引
+   * */
   delLeftTab(tabPath: string, index: number): void {
     // 要删除的tab
     const temp = this.tabArray.filter((item, tabindex) => {
@@ -102,14 +102,14 @@ export class TabService {
       this.currSelectedIndexTab = 0;
     } else if (this.currSelectedIndexTab < index) {
       // 如果鼠标点击的tab索引大于当前索引，需要将当前页的path放到waitDelete中
-      SimpleReuseStrategy.waitDelete = this.getPathKey(this.tabArray[this.currSelectedIndexTab].path)
+      SimpleReuseStrategy.waitDelete = this.getPathKey(this.tabArray[this.currSelectedIndexTab].path);
       this.currSelectedIndexTab = 0;
     } else if (this.currSelectedIndexTab > index) {
       this.currSelectedIndexTab = this.currSelectedIndexTab - temp.length;
     }
     // 剩余的tab
     this.tabArray = this.tabArray.splice(temp.length);
-    temp.forEach(({path, relatedLink}) => {
+    temp.forEach(({ path, relatedLink }) => {
       // relatedLink数组保存相关路由，解决路由中有详情页这样跳转路由，而产生"在哪个页面上点击关闭按钮,保存的状态才会清除"的bug
       const linkArray = [...relatedLink, this.getPathKey(path)];
       linkArray.forEach(item => {
@@ -149,7 +149,7 @@ export class TabService {
     if (Object.keys(pathParam).length > 0) {
       pathParamString = JSON.stringify(this.router.parseUrl(path).queryParams);
     }
-    return tempPath + pathParamString
+    return tempPath + pathParamString;
   }
 
   // 点击tab标签上x图标删除tab的动作,右键删除当前tab动作
@@ -177,7 +177,7 @@ export class TabService {
   }
 
   findIndex(path: string): number {
-    const current = this.tabArray.findIndex((tabItem) => {
+    const current = this.tabArray.findIndex(tabItem => {
       return path === tabItem.path;
     });
     this.currSelectedIndexTab = current;
@@ -188,10 +188,10 @@ export class TabService {
     const sourceUrl = this.router.url;
     // 只有当前页签会刷新，如果涉及到tab页内的详情的页面不会刷新
     const currentRoute = fnGetPathWithoutParam(sourceUrl);
-    const queryParams = this.router.parseUrl(sourceUrl).queryParams
-    this.router.navigateByUrl("/", {skipLocationChange: true}).then(() => {
+    const queryParams = this.router.parseUrl(sourceUrl).queryParams;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       SimpleReuseStrategy.deleteRouteSnapshot(this.getPathKey(sourceUrl));
-      this.router.navigate([currentRoute], {queryParams});
+      this.router.navigate([currentRoute], { queryParams });
     });
   }
 

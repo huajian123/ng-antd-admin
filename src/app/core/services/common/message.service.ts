@@ -1,10 +1,11 @@
-import {Injectable} from '@angular/core';
-import {NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
-import {NavigationEnd, Router} from '@angular/router';
-import {NzMessageService} from 'ng-zorro-antd/message';
-import {ModalOptions} from 'ng-zorro-antd/modal/modal-types';
-import {filter} from 'rxjs/operators';
-import {NzSafeAny} from "ng-zorro-antd/core/types";
+import { Injectable } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
+
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { ModalOptions } from 'ng-zorro-antd/modal/modal-types';
 
 export const enum MessageType {
   Info = 'info',
@@ -26,15 +27,15 @@ export const enum MessageCallback {
 export class MessageService {
   modalCtrl: NzModalRef[] = [];
 
-  constructor(private nzModalService: NzModalService,
-              private router: Router,
-              private toastService: NzMessageService) {
-    (this.router.events.pipe(filter((event: NzSafeAny) => event instanceof NavigationEnd))).subscribe((event: NzSafeAny) => {
-      for (let i = 0, len = this.modalCtrl.length; i < len; i++) {
-        this.modalCtrl[i].destroy(MessageCallback.Cancel);
-      }
-      this.modalCtrl = [];
-    });
+  constructor(private nzModalService: NzModalService, private router: Router, private toastService: NzMessageService) {
+    this.router.events
+      .pipe(filter((event: NzSafeAny) => event instanceof NavigationEnd))
+      .subscribe((event: NzSafeAny) => {
+        for (let i = 0, len = this.modalCtrl.length; i < len; i++) {
+          this.modalCtrl[i].destroy(MessageCallback.Cancel);
+        }
+        this.modalCtrl = [];
+      });
   }
 
   public showAlertMessage(title: string, message: string, type: MessageType = MessageType.Info): void {
@@ -74,7 +75,5 @@ export class MessageService {
         }
       }
     });
-    // return modalRef!;
   }
-
 }

@@ -2,51 +2,44 @@
   <div nz-row>
     <nz-form-item nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
       <nz-form-label nzRequired nzSpan="24" nzFor="warehouseName">仓库名</nz-form-label>
-      <nz-form-control [nzXl]="18" [nzXXl]="18" [nzLg]="18" [nzMd]="24" [nzSm]="24"
-                       [nzErrorTip]="combineTpl">
-        <input nz-input formControlName="warehouseName" id="warehouseName"/>
+      <nz-form-control [nzXl]="18" [nzXXl]="18" [nzLg]="18" [nzMd]="24" [nzSm]="24" [nzErrorTip]="combineTpl">
+        <input nz-input formControlName="warehouseName" id="warehouseName" />
       </nz-form-control>
     </nz-form-item>
     <nz-form-item nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
       <nz-form-label nzRequired nzSpan="24" nzFor="warehouseDomainName">仓库域名</nz-form-label>
-      <nz-form-control [nzXl]="18" [nzXXl]="18" [nzLg]="18" [nzMd]="24" [nzSm]="24"
-                       [nzErrorTip]="combineTpl">
-        <input nz-input formControlName="warehouseDomainName" id="warehouseDomainName"/>
+      <nz-form-control [nzXl]="18" [nzXXl]="18" [nzLg]="18" [nzMd]="24" [nzSm]="24" [nzErrorTip]="combineTpl">
+        <input nz-input formControlName="warehouseDomainName" id="warehouseDomainName" />
       </nz-form-control>
     </nz-form-item>
     <nz-form-item nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="24" [nzSm]="24" [nzXs]="24">
       <nz-form-label nzRequired nzSpan="24" nzRequired nzFor="warehouseManager">仓库管理员</nz-form-label>
-      <nz-form-control [nzXl]="24" [nzXXl]="24" [nzLg]="24" [nzMd]="24" [nzSm]="24"
-                       [nzErrorTip]="combineTpl">
-        <input nz-input formControlName="warehouseManager" id="warehouseManager"/>
+      <nz-form-control [nzXl]="24" [nzXXl]="24" [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzErrorTip]="combineTpl">
+        <input nz-input formControlName="warehouseManager" id="warehouseManager" />
       </nz-form-control>
     </nz-form-item>
 
-
     <nz-form-item nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
       <nz-form-label nzRequired nzSpan="24" nzFor="approver">审批人</nz-form-label>
-      <nz-form-control [nzXl]="18" [nzXXl]="18" [nzLg]="18" [nzMd]="24" [nzSm]="24"
-                       [nzErrorTip]="combineTpl">
-        <input nz-input formControlName="approver" id="approver"/>
+      <nz-form-control [nzXl]="18" [nzXXl]="18" [nzLg]="18" [nzMd]="24" [nzSm]="24" [nzErrorTip]="combineTpl">
+        <input nz-input formControlName="approver" id="approver" />
       </nz-form-control>
     </nz-form-item>
     <nz-form-item nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
       <nz-form-label nzRequired nzSpan="24" nzFor="effectiveTime">生效日期</nz-form-label>
-      <nz-form-control [nzLg]="18" [nzXl]="18" [nzXXl]="18" [nzMd]="24" [nzSm]="24"
-                       [nzErrorTip]="combineTpl">
-        <input nz-input formControlName="effectiveTime" id="effectiveTime"/>
+      <nz-form-control [nzLg]="18" [nzXl]="18" [nzXXl]="18" [nzMd]="24" [nzSm]="24" [nzErrorTip]="combineTpl">
+        <input nz-input formControlName="effectiveTime" id="effectiveTime" />
       </nz-form-control>
     </nz-form-item>
     <nz-form-item nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="24" [nzSm]="24" [nzXs]="24">
-      <nz-form-label  nzSpan="24" nzRequired nzFor="warehouseType">仓库类型</nz-form-label>
-      <nz-form-control [nzXl]="24" [nzXXl]="24" [nzLg]="24" [nzMd]="24" [nzSm]="24"
-                       [nzErrorTip]="combineTpl">
-        <input nz-input formControlName="warehouseType" id="warehouseType"/>
+      <nz-form-label nzSpan="24" nzRequired nzFor="warehouseType">仓库类型</nz-form-label>
+      <nz-form-control [nzXl]="24" [nzXXl]="24" [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzErrorTip]="combineTpl">
+        <input nz-input formControlName="warehouseType" id="warehouseType" />
       </nz-form-control>
     </nz-form-item>
   </div>
 </ng-container>
 <ng-template #combineTpl let-control>
-  <ng-container *ngIf="control.hasError('message')">{{control.errors.message}}</ng-container>
+  <ng-container *ngIf="control.hasError('message')">{{ control.errors.message }}</ng-container>
   <ng-container *ngIf="control.hasError('required')">必填项</ng-container>
 </ng-template>

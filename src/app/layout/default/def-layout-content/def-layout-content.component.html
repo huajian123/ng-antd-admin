@@ -2,103 +2,115 @@
 <nz-layout class="min-screen-full-height">
   <!--非混合模式侧边栏固定时占位-->
   <nz-sider
-    [nzTheme]="(themesOptions$|async)!.theme"
+    [nzTheme]="(themesOptions$ | async)!.theme"
     [nzWidth]="208"
     [nzCollapsedWidth]="48"
     nzBreakpoint="lg"
-    [nzCollapsed]="isCollapsed$|async"
-    *ngIf="!isMixiMode&&((themesOptions$|async)!.mode==='side')&&!(isOverMode$|async)&&(themesOptions$|async)!.hasNavArea&&isFixedLeftNav">
-  </nz-sider>
+    [nzCollapsed]="isCollapsed$ | async"
+    *ngIf="!isMixiMode && (themesOptions$ | async)!.mode === 'side' && (isOverMode$ | async) === false && (themesOptions$ | async)!.hasNavArea && isFixedLeftNav"
+  ></nz-sider>
 
   <!--非混合模式侧边栏-->
   <nz-sider
     id="menuNav"
     [class.left-nav-fixed]="isFixedLeftNav"
-    *ngIf="!isMixiMode&&((themesOptions$|async)!.mode==='side')&&!(isOverMode$|async)&&(themesOptions$|async)!.hasNavArea"
+    *ngIf="!isMixiMode && (themesOptions$ | async)!.mode === 'side' && (isOverMode$ | async) === false && (themesOptions$ | async)!.hasNavArea"
     class="menu-sidebar"
     [nzWidth]="208"
     [nzCollapsedWidth]="48"
-    [nzTheme]="(themesOptions$|async)!.theme"
-    nzBreakpoint="lg" [nzCollapsible]="true" [nzCollapsed]="isCollapsed$|async"
-    (nzCollapsedChange)="changeCollapsed($event)" [nzTrigger]="trigger">
+    [nzTheme]="(themesOptions$ | async)!.theme"
+    nzBreakpoint="lg"
+    [nzCollapsible]="true"
+    [nzCollapsed]="isCollapsed$ | async"
+    (nzCollapsedChange)="changeCollapsed($event)"
+    [nzTrigger]="trigger"
+  >
     <ng-content select="ng-container[sider]"></ng-content>
   </nz-sider>
 
   <!--混合模式顶部菜单header-->
-  <nz-header class="animate-02 dark-top-nav-bg top-fixed screen-full-width"
-             *ngIf="isMixiMode&&themesOptions.hasTopArea">
+  <nz-header class="animate-02 dark-top-nav-bg top-fixed screen-full-width" *ngIf="isMixiMode && themesOptions.hasTopArea">
     <ng-content select="ng-container[mixheader]"></ng-content>
   </nz-header>
 
-  <nz-layout [style]="{marginTop:isMixiMode&&themesOptions.hasTopArea?'48px':0}">
+  <nz-layout [style]="{ marginTop: isMixiMode && themesOptions.hasTopArea ? '48px' : 0 }">
     <!--sider模式的 header-->
-    <nz-header style="transition:width 0.2s"
-               *ngIf="!isMixiMode&&themesOptions.hasTopArea&&themesOptions.mode==='side'"
-               [ngClass]="{
-               'full-with':!themesOptions.hasNavArea,
-               'fixed':themesOptions.fixedHead,
-               'fixed-collapsed':themesOptions.fixedHead&&(isCollapsed$|async),
-               'fixed-over-mode':themesOptions.fixedHead&&(isOverMode$|async)}">
+    <nz-header
+      style="transition: width 0.2s"
+      *ngIf="!isMixiMode && themesOptions.hasTopArea && themesOptions.mode === 'side'"
+      [ngClass]="{
+        'full-with': !themesOptions.hasNavArea,
+        fixed: themesOptions.fixedHead,
+        'fixed-collapsed': themesOptions.fixedHead && (isCollapsed$ | async),
+        'fixed-over-mode': themesOptions.fixedHead && (isOverMode$ | async)
+      }"
+    >
       <ng-content select="ng-container[sider-header]"></ng-content>
     </nz-header>
     <!--top模式header-->
-    <nz-header *ngIf="!isMixiMode&&themesOptions.hasTopArea&&themesOptions.mode==='top'"
-               [ngClass]="{
-      'dark-top-nav-bg':(themesOptions$|async)!.theme==='dark',
-      'top-fixed':themesOptions.fixedHead
-      }">
+    <nz-header
+      *ngIf="!isMixiMode && themesOptions.hasTopArea && themesOptions.mode === 'top'"
+      [ngClass]="{
+        'dark-top-nav-bg': (themesOptions$ | async)!.theme === 'dark',
+        'top-fixed': themesOptions.fixedHead
+      }"
+    >
       <ng-content select="ng-container[top-header]"></ng-content>
     </nz-header>
 
     <!--混合模式sider固定时占位-->
     <nz-sider
       nzNoAnimation
-      *ngIf="isFixedLeftNav&&isMixiMode&&themesOptions.hasNavArea&&!(isOverMode$|async)&&(!!(mixiModeHasLeftNav|async)||!themesOptions.splitNav)"
+      *ngIf="isFixedLeftNav && isMixiMode && themesOptions.hasNavArea && (isOverMode$ | async) === false && (!!(mixiModeHasLeftNav | async) || !themesOptions.splitNav)"
       [nzWidth]="208"
-      [nzTheme]="(isNightTheme$|async)?'dark':'light'"
+      [nzTheme]="(isNightTheme$ | async) ? 'dark' : 'light'"
       [nzCollapsedWidth]="48"
       nzBreakpoint="lg"
-      [nzCollapsed]="isCollapsed$|async"
-    >
-
-    </nz-sider>
+      [nzCollapsed]="isCollapsed$ | async"
+    ></nz-sider>
     <!--混合模式sider-->
     <nz-sider
       class="menu-sidebar"
       nzNoAnimation
       [class.mixi-left-nav-fixed]="isFixedLeftNav"
       [class.t-0]="!themesOptions.hasTopArea"
-      [nzTheme]="(isNightTheme$|async)?'dark':'light'"
+      [nzTheme]="(isNightTheme$ | async) ? 'dark' : 'light'"
       [nzWidth]="208"
       [nzCollapsedWidth]="48"
-      nzBreakpoint="lg" [nzCollapsible]="true" [nzCollapsed]="isCollapsed$|async"
-      (nzCollapsedChange)="changeCollapsed($event)" [nzTrigger]="trigger"
-      *ngIf="isMixiMode&&themesOptions.hasNavArea&&!(isOverMode$|async)&&(!!(mixiModeHasLeftNav|async)||!themesOptions.splitNav)">
+      nzBreakpoint="lg"
+      [nzCollapsible]="true"
+      [nzCollapsed]="isCollapsed$ | async"
+      (nzCollapsedChange)="changeCollapsed($event)"
+      [nzTrigger]="trigger"
+      *ngIf="isMixiMode && themesOptions.hasNavArea && (isOverMode$ | async) === false && (!!(mixiModeHasLeftNav | async) || !themesOptions.splitNav)"
+    >
       <ng-content select="ng-container[mixsider]"></ng-content>
     </nz-sider>
 
     <nz-layout>
-      <nz-content [ngStyle]="{marginTop:contentMarginTop}">
+      <nz-content [ngStyle]="{ marginTop: contentMarginTop }">
         <ng-content></ng-content>
       </nz-content>
-      <nz-footer *ngIf="themesOptions.hasFooterArea" class="text-center">Ant Design ©2022 Implement By Angular
-      </nz-footer>
+      <nz-footer *ngIf="themesOptions.hasFooterArea" class="text-center">Ant Design ©2022 Implement By Angular</nz-footer>
     </nz-layout>
-
   </nz-layout>
 </nz-layout>
 
 <app-setting-drawer></app-setting-drawer>
 
-<app-chat (changeShows)="showChats=false" *ngIf="showChats"></app-chat>
+<app-chat (changeShows)="showChats = false" *ngIf="showChats"></app-chat>
 
 <ng-template #trigger>
-  <ul nz-menu [nzTheme]="(isMixiMode&&!(isOverMode$|async))?'light':(themesOptions$|async)!.theme" nzMode="inline"
-      [nzSelectable]="false">
-    <li class="trigger-top-border m-0"
-        [ngStyle]="{'border-top-color':(((!isMixiMode&&(themesOptions$|async)?.theme)==='dark')||(isNightTheme$|async))?'rgba(0,0,0,0.25)':'rgb(240,240,240)'}"
-        [nzPaddingLeft]="16" nz-menu-item>
-      <i class="sp-16" nz-icon [nzType]="(isCollapsed$|async) ? 'menu-unfold' : 'menu-fold'"></i>
+  <ul nz-menu [nzTheme]="isMixiMode && (isOverMode$ | async) === false ? 'light' : (themesOptions$ | async)!.theme" nzMode="inline" [nzSelectable]="false">
+    <li
+      class="trigger-top-border m-0"
+      [ngStyle]="{
+        'border-top-color': (!isMixiMode && (themesOptions$ | async)?.theme) === 'dark' || (isNightTheme$ | async) ? 'rgba(0,0,0,0.25)' : 'rgb(240,240,240)'
+      }"
+      [nzPaddingLeft]="16"
+      nz-menu-item
+    >
+      <i class="sp-16" nz-icon [nzType]="(isCollapsed$ | async) ? 'menu-unfold' : 'menu-fold'"></i>
     </li>
   </ul>
 </ng-template>

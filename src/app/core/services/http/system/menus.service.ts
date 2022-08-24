@@ -1,7 +1,8 @@
-import {Injectable} from '@angular/core';
-import {BaseHttpService} from "@services/base-http.service";
-import {Observable} from "rxjs";
-import {Menu, PageInfo, SearchCommonVO} from "@core/services/types";
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+
+import { Menu, PageInfo, SearchCommonVO } from '@core/services/types';
+import { BaseHttpService } from '@services/base-http.service';
 
 export interface MenuListObj {
   menuName: string;
@@ -20,24 +21,22 @@ export interface MenuListObj {
   providedIn: 'root'
 })
 export class MenusService {
-
-  constructor(public http: BaseHttpService) {
-  }
+  constructor(public http: BaseHttpService) {}
 
   public getMenuList(param: SearchCommonVO<any>): Observable<PageInfo<Menu>> {
     return this.http.post('/sysPermission/list', param);
   }
 
   public addMenus(param: MenuListObj): Observable<void> {
-    return this.http.post('/sysPermission', param, {needSuccessInfo: true});
+    return this.http.post('/sysPermission', param, { needSuccessInfo: true });
   }
 
   public editMenus(param: MenuListObj): Observable<void> {
-    return this.http.put('/sysPermission', param, {needSuccessInfo: true});
+    return this.http.put('/sysPermission', param, { needSuccessInfo: true });
   }
 
   public delMenus(id: number): Observable<void> {
-    return this.http.post('/sysPermission/del', {ids: [id]}, {needSuccessInfo: true});
+    return this.http.post('/sysPermission/del', { ids: [id] }, { needSuccessInfo: true });
   }
 
   public getMenuDetail(id: number): Observable<MenuListObj> {

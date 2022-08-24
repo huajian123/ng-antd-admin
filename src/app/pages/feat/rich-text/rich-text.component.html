@@ -5,13 +5,10 @@
     <app-water-mark></app-water-mark>
     <form class="form-wrap" nz-form [formGroup]="validateForm">
       <nz-form-item nz-col [nzXXl]="24" [nzXl]="24" [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzXs]="24">
-        <nz-form-label  nzSpan="24" nzRequired nzFor="detail">描述</nz-form-label>
-        <nz-form-control  [nzErrorTip]="combineTpl" [nzXl]="18" [nzXXl]="18" [nzLg]="18" [nzMd]="24" nzSm="24">
+        <nz-form-label nzSpan="24" nzRequired nzFor="detail">描述</nz-form-label>
+        <nz-form-control [nzErrorTip]="combineTpl" [nzXl]="18" [nzXXl]="18" [nzLg]="18" [nzMd]="24" nzSm="24">
           <!--自己去申请一个key啊-->
-          <editor [init]="editInit"
-                  [apiKey]="'95b1w09g3ruzin5ylg5inr4afxzm3oxotroc0ofkh8pwcefz'"
-                  formControlName="detail"
-          ></editor>
+          <editor [init]="editInit" [apiKey]="'95b1w09g3ruzin5ylg5inr4afxzm3oxotroc0ofkh8pwcefz'" formControlName="detail"></editor>
         </nz-form-control>
       </nz-form-item>
     </form>

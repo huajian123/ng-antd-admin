@@ -1,16 +1,17 @@
-import {Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {LoginType} from "@app/pages/other-login/login1/login1.component";
-import {Login1StoreService} from "@store/biz-store-service/other-login/login1-store.service";
-import {takeUntil} from "rxjs/operators";
-import {SpinService} from "@store/common-store/spin.service";
-import {TokenKey, TokenPre} from "@config/constant";
-import {Router} from "@angular/router";
-import {WindowService} from "@core/services/common/window.service";
-import {DestroyService} from "@core/services/common/destory.service";
-import {UserInfoService} from "@store/common-store/userInfo.service";
-import {LoginService} from "@services/login/login.service";
-import {MenuStoreService} from "@store/common-store/menu-store.service";
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { takeUntil } from 'rxjs/operators';
+
+import { LoginType } from '@app/pages/other-login/login1/login1.component';
+import { TokenKey, TokenPre } from '@config/constant';
+import { DestroyService } from '@core/services/common/destory.service';
+import { WindowService } from '@core/services/common/window.service';
+import { LoginService } from '@services/login/login.service';
+import { Login1StoreService } from '@store/biz-store-service/other-login/login1-store.service';
+import { MenuStoreService } from '@store/common-store/menu-store.service';
+import { SpinService } from '@store/common-store/spin.service';
+import { UserInfoService } from '@store/common-store/userInfo.service';
 
 @Component({
   selector: 'app-normal-login',
@@ -26,31 +27,36 @@ export class NormalLoginComponent implements OnInit {
   typeEnum = LoginType;
   isOverModel = false;
 
-
-  constructor(private destroy$: DestroyService, private userInfoService: UserInfoService,
-              private router: Router,
-              private menuService: MenuStoreService,
-              private dataService: LoginService,
-              private windowServe: WindowService,
-              private spinService: SpinService, private cdr: ChangeDetectorRef, private fb: FormBuilder, private login1StoreService: Login1StoreService,) {
-  }
+  constructor(
+    private destroy$: DestroyService,
+    private userInfoService: UserInfoService,
+    private router: Router,
+    private menuService: MenuStoreService,
+    private dataService: LoginService,
+    private windowServe: WindowService,
+    private spinService: SpinService,
+    private cdr: ChangeDetectorRef,
+    private fb: FormBuilder,
+    private login1StoreService: Login1StoreService
+  ) {}
 
   submitForm(): void {
     this.spinService.setCurrentGlobalSpinStore(true);
     this.windowServe.setSessionStorage(TokenKey, 'TokenPre + token');
     const userInfo = this.userInfoService.parsToken(TokenPre);
-    this.userInfoService.setUserInfo(userInfo)
+    this.userInfoService.setUserInfo(userInfo);
     // if (!fnCheckForm(this.validateForm)) {
     //   return;
     // }
     setTimeout(() => {
-      // 这里是模拟的随便写的-1，实际情况请往下看
-      this.dataService.getMenuByUserId(-1).subscribe(menus=>{
+      // 请查看src/app/pages/login/login-form/login-form.component.ts文件中的登录逻辑
+      // 这里的登录逻辑只是做个展示示例
+      this.dataService.getMenuByUserId(-1).subscribe(menus => {
         this.menuService.setMenuArrayStore(menus);
-        this.router.navigateByUrl('default/dashboard/analysis').then(()=>{
+        this.router.navigateByUrl('default/dashboard/analysis').then(() => {
           this.spinService.setCurrentGlobalSpinStore(false);
-        })
-      })
+        });
+      });
     }, 100);
   }
 
@@ -59,14 +65,17 @@ export class NormalLoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.login1StoreService.getIsLogin1OverModelStore().pipe(takeUntil(this.destroy$)).subscribe((res => {
-      this.isOverModel = res;
-      this.cdr.markForCheck();
-    }));
+    this.login1StoreService
+      .getIsLogin1OverModelStore()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(res => {
+        this.isOverModel = res;
+        this.cdr.markForCheck();
+      });
     this.validateForm = this.fb.group({
       userName: [null, [Validators.required]],
       password: [null, [Validators.required]],
-      remember: [null],
+      remember: [null]
     });
   }
 }

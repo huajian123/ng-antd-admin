@@ -2,21 +2,25 @@
   <app-water-mark></app-water-mark>
   <div nz-row>
     <div nz-col nzFlex="94px">所属类目:</div>
-    <div nz-col nzFlex="1" class="tag-wrap" [ngStyle]="{maxHeight:expanded?'58px':'33px'}">
+    <div nz-col nzFlex="1" class="tag-wrap" [ngStyle]="{ maxHeight: expanded ? '58px' : '33px' }">
       <nz-tag (click)="allSel()" class="m-r-25 m-b-10" nzMode="checkable">
         <span class="sp-14">全部</span>
       </nz-tag>
       <ng-container *ngFor="let tag of tagArray">
         <nz-tag class="m-r-25 m-b-10" nzMode="checkable" [(nzChecked)]="tag.isChecked">
-          <span class="sp-14">{{tag.name}}</span>
+          <span class="sp-14">{{ tag.name }}</span>
         </nz-tag>
       </ng-container>
     </div>
     <div nz-col nzFlex="50px">
-      <a class="operate-text" *ngIf="!expanded" (click)="expanded = true">展开<i nz-icon nzType="down"
-                                                                               nzTheme="outline"></i></a>
-      <a class="operate-text" *ngIf="expanded" (click)="expanded = false">收起<i nz-icon nzType="up"
-                                                                               nzTheme="outline"></i></a>
+      <a class="operate-text" *ngIf="!expanded" (click)="expanded = true">
+        展开
+        <i nz-icon nzType="down" nzTheme="outline"></i>
+      </a>
+      <a class="operate-text" *ngIf="expanded" (click)="expanded = false">
+        收起
+        <i nz-icon nzType="up" nzTheme="outline"></i>
+      </a>
     </div>
   </div>
   <nz-divider class="m-0" nzDashed></nz-divider>
@@ -43,9 +47,8 @@
 </nz-card>
 <nz-card class="m-t-20">
   <app-water-mark></app-water-mark>
-  <div nz-row [nzGutter]="[16,16]">
-    <div nz-col [nzXXl]="6" [nzXl]="6" [nzLg]="6" [nzMd]="12" [nzSm]="24" [nzXs]="24"
-         *ngFor="let item of 8|numberLoop">
+  <div nz-row [nzGutter]="[16, 16]">
+    <div nz-col [nzXXl]="6" [nzXl]="6" [nzLg]="6" [nzMd]="12" [nzSm]="24" [nzXs]="24" *ngFor="let item of 8 | numberLoop">
       <nz-card nzHoverable [nzActions]="[op1, op2, op3, op4]">
         <nz-card-meta [nzTitle]="'Alipay'" [nzAvatar]="nzAvatar">
           <ng-template #nzAvatar>
@@ -69,7 +72,6 @@
     </div>
   </div>
 
-
   <ng-template #op1>
     <i nz-tooltip nzTooltipTitle="下载" nz-icon nzType="download"></i>
   </ng-template>
@@ -89,5 +91,4 @@
       </ul>
     </nz-dropdown-menu>
   </ng-template>
-
 </nz-card>

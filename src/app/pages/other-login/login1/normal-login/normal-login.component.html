@@ -4,19 +4,16 @@
     <form nz-form class="login-form-wrap" [formGroup]="validateForm" (ngSubmit)="submitForm()">
       <nz-form-item>
         <nz-form-control nzErrorTip="请输入用户名!">
-          <input nzSize="large" [placeholder]="'没有账号密码直接登陆'" type="text" nz-input formControlName="userName"
-                 placeholder="用户名"/>
+          <input nzSize="large" [placeholder]="'没有账号密码直接登陆'" type="text" nz-input formControlName="userName" placeholder="用户名" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-control nzErrorTip="请输入密码!">
           <nz-input-group [nzSize]="'large'" [nzSuffix]="suffixTemplate">
-            <input autocomplete="on" [placeholder]="'no username and password,just login'"
-                   [type]="passwordVisible ? 'text' : 'password'" nz-input formControlName="password" placeholder="密码"/>
+            <input autocomplete="on" [placeholder]="'no username and password,just login'" [type]="passwordVisible ? 'text' : 'password'" nz-input formControlName="password" placeholder="密码" />
           </nz-input-group>
           <ng-template #suffixTemplate>
-            <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
-               (click)="passwordVisible = !passwordVisible"></i>
+            <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
           </ng-template>
         </nz-form-control>
       </nz-form-item>

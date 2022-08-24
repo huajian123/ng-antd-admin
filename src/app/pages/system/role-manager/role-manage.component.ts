@@ -1,17 +1,18 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {MyTableConfig} from "@shared/components/ant-table/ant-table.component";
-import {PageHeaderType} from "@shared/components/page-header/page-header.component";
-import { SearchCommonVO} from "@core/services/types";
-import {Role, RoleService} from "@services/system/role.service";
-import {NzModalService} from "ng-zorro-antd/modal";
-import {MessageService} from "@core/services/common/message.service";
-import {Router} from "@angular/router";
-import {NzTableQueryParams} from "ng-zorro-antd/table";
-import {finalize} from "rxjs/operators";
-import {ModalBtnStatus} from "@widget/base-modal";
-import {NzMessageService} from "ng-zorro-antd/message";
-import {ActionCode} from '@app/config/actionCode';
-import {RoleManageModalService} from "@widget/biz-widget/system/role-manage-modal/role-manage-modal.service";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
+
+import { ActionCode } from '@app/config/actionCode';
+import { MessageService } from '@core/services/common/message.service';
+import { SearchCommonVO } from '@core/services/types';
+import { Role, RoleService } from '@services/system/role.service';
+import { MyTableConfig } from '@shared/components/ant-table/ant-table.component';
+import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { ModalBtnStatus } from '@widget/base-modal';
+import { RoleManageModalService } from '@widget/biz-widget/system/role-manage-modal/role-manage-modal.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzTableQueryParams } from 'ng-zorro-antd/table';
 
 interface SearchParam {
   roleName: string;
@@ -24,7 +25,7 @@ interface SearchParam {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RoleManageComponent implements OnInit {
-  @ViewChild('operationTpl', {static: true}) operationTpl!: TemplateRef<any>;
+  @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<any>;
   searchParam: Partial<SearchParam> = {};
   tableConfig!: MyTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
@@ -35,10 +36,15 @@ export class RoleManageComponent implements OnInit {
   checkedCashArray = [];
   ActionCode = ActionCode;
 
-  constructor(private dataService: RoleService, private modalSrv: NzModalService, private cdr: ChangeDetectorRef,
-              private messageService: MessageService, private modalService: RoleManageModalService,
-              private router: Router, public message: NzMessageService) {
-  }
+  constructor(
+    private dataService: RoleService,
+    private modalSrv: NzModalService,
+    private cdr: ChangeDetectorRef,
+    private messageService: MessageService,
+    private modalService: RoleManageModalService,
+    private router: Router,
+    public message: NzMessageService
+  ) {}
 
   selectedChecked(e: any): void {
     // @ts-ignore
@@ -57,22 +63,26 @@ export class RoleManageComponent implements OnInit {
       pageNum: e?.pageIndex || this.tableConfig.pageIndex!,
       filters: this.searchParam
     };
-    this.dataService.getRoles(params).pipe(finalize(() => {
-      this.tableLoading(false);
-    })).subscribe((data => {
-      const {list, total, pageNum} = data;
-      this.dataList = [...list];
-      this.tableConfig.total = total!;
-      this.tableConfig.pageIndex = pageNum!;
-      this.tableLoading(false);
-      this.checkedCashArray = [...this.checkedCashArray];
-    }));
+    this.dataService
+      .getRoles(params)
+      .pipe(
+        finalize(() => {
+          this.tableLoading(false);
+        })
+      )
+      .subscribe(data => {
+        const { list, total, pageNum } = data;
+        this.dataList = [...list];
+        this.tableConfig.total = total!;
+        this.tableConfig.pageIndex = pageNum!;
+        this.tableLoading(false);
+        this.checkedCashArray = [...this.checkedCashArray];
+      });
   }
-
 
   // 设置权限
   setRole(id: number): void {
-    this.router.navigate(['/default/system/role-manager/set-role'], {queryParams: {id: id}});
+    this.router.navigate(['/default/system/role-manager/set-role'], { queryParams: { id: id } });
   }
 
   // 触发表格变更检测
@@ -87,34 +97,39 @@ export class RoleManageComponent implements OnInit {
     this.tableChangeDectction();
   }
 
-
   add(): void {
-    this.modalService.show({nzTitle: '新增'}).subscribe((res) => {
-      if (!res || res.status === ModalBtnStatus.Cancel) {
-        return;
-      }
-      const param = {...res.modalValue};
-      this.tableLoading(true);
-      this.addEditData(param, 'addRoles');
-    }, error => this.tableLoading(false));
+    this.modalService.show({ nzTitle: '新增' }).subscribe(
+      res => {
+        if (!res || res.status === ModalBtnStatus.Cancel) {
+          return;
+        }
+        const param = { ...res.modalValue };
+        this.tableLoading(true);
+        this.addEditData(param, 'addRoles');
+      },
+      error => this.tableLoading(false)
+    );
   }
 
   reloadTable(): void {
-    this.message.info('刷新成功')
+    this.message.info('刷新成功');
     this.getDataList();
   }
 
   // 修改
   edit(id: number): void {
     this.dataService.getRolesDetail(id).subscribe(res => {
-      this.modalService.show({nzTitle: '编辑'}, res).subscribe(({modalValue, status}) => {
-        if (status === ModalBtnStatus.Cancel) {
-          return;
-        }
-        modalValue.id = id;
-        this.tableLoading(true);
-        this.addEditData(modalValue, 'editRoles');
-      }, error => this.tableLoading(false));
+      this.modalService.show({ nzTitle: '编辑' }, res).subscribe(
+        ({ modalValue, status }) => {
+          if (status === ModalBtnStatus.Cancel) {
+            return;
+          }
+          modalValue.id = id;
+          this.tableLoading(true);
+          this.addEditData(modalValue, 'editRoles');
+        },
+        error => this.tableLoading(false)
+      );
     });
   }
 
@@ -131,12 +146,15 @@ export class RoleManageComponent implements OnInit {
       nzContent: '删除后不可恢复',
       nzOnOk: () => {
         this.tableLoading(true);
-        this.dataService.delRoles(ids).subscribe(() => {
-          if (this.dataList.length === 1) {
-            this.tableConfig.pageIndex--;
-          }
-          this.getDataList();
-        }, error => this.tableLoading(false));
+        this.dataService.delRoles(ids).subscribe(
+          () => {
+            if (this.dataList.length === 1) {
+              this.tableConfig.pageIndex--;
+            }
+            this.getDataList();
+          },
+          error => this.tableLoading(false)
+        );
       }
     });
   }
@@ -157,12 +175,12 @@ export class RoleManageComponent implements OnInit {
         {
           title: '角色名称',
           field: 'roleName',
-          width: 100,
+          width: 100
         },
         {
           title: '备注',
           width: 100,
-          field: 'roleDesc',
+          field: 'roleDesc'
         },
         {
           title: '操作',
@@ -174,7 +192,7 @@ export class RoleManageComponent implements OnInit {
       total: 0,
       loading: true,
       pageSize: 10,
-      pageIndex: 1,
+      pageIndex: 1
     };
   }
 }

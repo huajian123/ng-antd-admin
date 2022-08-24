@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 export interface SettingInterface {
   theme: 'dark' | 'light';
@@ -16,7 +16,6 @@ export interface SettingInterface {
   hasNavArea: boolean;
   hasNavHeadArea: boolean;
 }
-
 
 @Injectable({
   providedIn: 'root'
@@ -37,13 +36,12 @@ export class ThemeService {
     hasTopArea: true,
     hasFooterArea: true,
     hasNavArea: true,
-    hasNavHeadArea: true,
+    hasNavHeadArea: true
   });
 
   private isCollapsed$ = new BehaviorSubject<boolean>(false);
 
-  constructor() {
-  }
+  constructor() {}
 
   // 获取主题参数
   setThemesMode(mode: SettingInterface): void {
@@ -80,5 +78,4 @@ export class ThemeService {
   getIsCollapsed(): Observable<boolean> {
     return this.isCollapsed$.asObservable();
   }
-
 }

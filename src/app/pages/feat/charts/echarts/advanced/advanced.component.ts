@@ -1,15 +1,12 @@
-import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
-import {ConnectChartsComponent} from "@app/pages/feat/charts/echarts/advanced/connect-charts/connect-charts.component";
-import {
-  DraggableChartsComponent
-} from "@app/pages/feat/charts/echarts/advanced/draggable-charts/draggable-charts.component";
-import {ComponentPortal, ComponentType, Portal} from "@angular/cdk/portal";
-import {NzTabPosition} from "ng-zorro-antd/tabs/interfaces";
-import {BreakpointObserver} from "@angular/cdk/layout";
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { ComponentPortal, ComponentType, Portal } from '@angular/cdk/portal';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 
-type targetComp =
-  ConnectChartsComponent
-  | DraggableChartsComponent;
+import { ConnectChartsComponent } from '@app/pages/feat/charts/echarts/advanced/connect-charts/connect-charts.component';
+import { DraggableChartsComponent } from '@app/pages/feat/charts/echarts/advanced/draggable-charts/draggable-charts.component';
+import { NzTabPosition } from 'ng-zorro-antd/tabs/interfaces';
+
+type targetComp = ConnectChartsComponent | DraggableChartsComponent;
 
 @Component({
   selector: 'app-advanced',
@@ -19,15 +16,14 @@ type targetComp =
 export class AdvancedComponent implements OnInit {
   componentPortal?: ComponentPortal<targetComp>;
   selectedPortal!: Portal<any>;
-  tabArray: { label: string, value: ComponentType<targetComp> }[] = [
-    {label: 'Connect Charts', value: ConnectChartsComponent},
-    {label: 'Draggable Chart', value: DraggableChartsComponent},
+  tabArray: Array<{ label: string; value: ComponentType<targetComp> }> = [
+    { label: 'Connect Charts', value: ConnectChartsComponent },
+    { label: 'Draggable Chart', value: DraggableChartsComponent }
   ];
 
   tabPosition: NzTabPosition = 'left';
 
-  constructor(private cdr: ChangeDetectorRef, private breakpointObserver: BreakpointObserver,) {
-  }
+  constructor(private cdr: ChangeDetectorRef, private breakpointObserver: BreakpointObserver) {}
 
   to(tabIndex: number): void {
     this.componentPortal = new ComponentPortal(this.tabArray[tabIndex].value);
@@ -41,5 +37,4 @@ export class AdvancedComponent implements OnInit {
       this.cdr.markForCheck();
     });
   }
-
 }

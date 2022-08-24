@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {FilteredTreeResult, TreeNode} from "@app/pages/system/account/dept-tree/filtered-tree-result";
-import {DeptTreeService, FlatNode} from "@app/pages/system/account/dept-tree/dept-tree.service";
-import { BehaviorSubject, combineLatest} from "rxjs";
-import {debounceTime, distinctUntilChanged, map} from "rxjs/operators";
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, combineLatest } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
+import { DeptTreeService, FlatNode } from '@app/pages/system/account/dept-tree/dept-tree.service';
+import { FilteredTreeResult, TreeNode } from '@app/pages/system/account/dept-tree/filtered-tree-result';
 
 @Injectable()
 export class DeptTreeSearchService {
@@ -58,7 +58,7 @@ export class DeptTreeSearchService {
       if (Array.isArray(node.children)) {
         const nodes = node.children.reduce((a, b) => _filter(b, a), [] as TreeNode[]);
         if (nodes.length) {
-          const parentNode = {...node, children: nodes};
+          const parentNode = { ...node, children: nodes };
           // @ts-ignore
           needsToExpanded.add(parentNode);
           // @ts-ignore

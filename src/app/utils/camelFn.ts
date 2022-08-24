@@ -13,8 +13,6 @@ const fnKebabCase = function kebabCase(value: string): string {
     .replace(/([0-9])([a-zA-Z]+)$/g, '-$1-$2')
     .replace(/[\s_]+/g, '-')
     .toLowerCase();
-}
+};
 
-export {
-  fnKebabCase
-}
+export { fnKebabCase };

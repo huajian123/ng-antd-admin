@@ -1,4 +1,4 @@
-import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 
 import {
   rotateInDownLeftOnEnterAnimation,
@@ -41,10 +41,9 @@ export class ExperimentsComponent implements OnInit {
   hueState = false;
   flashState = false;
 
-  constructor( private cdr: ChangeDetectorRef) {
-  }
+  constructor(private cdr: ChangeDetectorRef) {}
 
-  getDelay(index: number, lenght: number) {
+  getDelay(index: number, lenght: number): number {
     if (index < lenght / 2 - 2) {
       return index * 100;
     } else {
@@ -52,7 +51,7 @@ export class ExperimentsComponent implements OnInit {
     }
   }
 
-  animate() {
+  animate(): void {
     this.animationState = false;
     setTimeout(() => {
       this.animationState = true;
@@ -60,5 +59,5 @@ export class ExperimentsComponent implements OnInit {
     }, 1);
   }
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 }

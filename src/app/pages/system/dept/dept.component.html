@@ -2,14 +2,14 @@
 <app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
 
 <div class="normal-table-wrap">
-  <nz-card nzHoverable [nzBodyStyle]="{'padding-bottom':0}" class="m-b-10">
+  <nz-card nzHoverable [nzBodyStyle]="{ 'padding-bottom': 0 }" class="m-b-10">
     <form nz-form>
-      <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24}">
+      <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24 }">
         <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
           <nz-form-item>
             <nz-form-label [nzFor]="">部门名称</nz-form-label>
             <nz-form-control>
-              <input nz-input placeholder="请输入部门名称" name="departmentName" [(ngModel)]="searchParam.departmentName"/>
+              <input nz-input placeholder="请输入部门名称" name="departmentName" [(ngModel)]="searchParam.departmentName" />
             </nz-form-control>
           </nz-form-item>
         </div>
@@ -18,16 +18,20 @@
             <nz-form-label [nzFor]="">状态</nz-form-label>
             <nz-form-control>
               <nz-select name="state" [(ngModel)]="searchParam.state" nzPlaceHolder="下拉选择" nzAllowClear>
-                <nz-option *ngFor="let item of stateOptions" [nzValue]="item.value"
-                           [nzLabel]="item.label"></nz-option>
+                <nz-option *ngFor="let item of stateOptions" [nzValue]="item.value" [nzLabel]="item.label"></nz-option>
               </nz-select>
             </nz-form-control>
           </nz-form-item>
         </div>
 
         <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24" class="text-right p-0 m-b-10">
-          <button (click)="getDataList()" nz-button [nzType]="'primary'"><i nz-icon nzType="search"></i>搜索</button>
-          <button nz-button class="m-l-15" (click)="resetForm()"><i nz-icon nzType="close-circle" nzTheme="outline"></i>重置
+          <button (click)="getDataList()" nz-button [nzType]="'primary'">
+            <i nz-icon nzType="search"></i>
+            搜索
+          </button>
+          <button nz-button class="m-l-15" (click)="resetForm()">
+            <i nz-icon nzType="close-circle" nzTheme="outline"></i>
+            重置
           </button>
         </div>
       </div>
@@ -35,14 +39,9 @@
   </nz-card>
 
   <app-card-table-wrap [tableTitle]="'部门列表'" (reload)="reloadTable()" [btnTpl]="tableBtns">
-    <app-tree-table
-      [tableConfig]="tableConfig"
-      (changePageSize)="changePageSize($event)"
-      (changePageNum)="getDataList($event)"
-      [tableData]="dataList">
-    </app-tree-table>
-    <ng-template #operationTpl let-id="id" let-fatherId='fatherId'>
-      <span *appAuth="ActionCode.DeptEdit" class="operate-text" (click)="edit(id,fatherId)">编辑</span>
+    <app-tree-table [tableConfig]="tableConfig" (changePageSize)="changePageSize($event)" (changePageNum)="getDataList($event)" [tableData]="dataList"></app-tree-table>
+    <ng-template #operationTpl let-id="id" let-fatherId="fatherId">
+      <span *appAuth="ActionCode.DeptEdit" class="operate-text" (click)="edit(id, fatherId)">编辑</span>
       <span *appAuth="ActionCode.DeptDel" class="operate-text" (click)="del(id)">删除</span>
       <span *appAuth="ActionCode.DeptAddLowLevel" class="operate-text" (click)="add(id)">添加下级</span>
     </ng-template>
@@ -50,13 +49,16 @@
 </div>
 
 <ng-template #tableBtns>
-  <button (click)="add(0)" nz-button nzType="primary" class="m-r-8"><i nz-icon nzType="plus"></i>新建</button>
+  <button (click)="add(0)" nz-button nzType="primary" class="m-r-8">
+    <i nz-icon nzType="plus"></i>
+    新建
+  </button>
 </ng-template>
 
 <ng-template #state let-state="state">
-  <ng-container *ngTemplateOutlet="state?yesTpl:notTpl"></ng-container>
+  <ng-container *ngTemplateOutlet="state ? yesTpl : notTpl"></ng-container>
 </ng-template>
-<ng-template #yesTpl >
+<ng-template #yesTpl>
   <nz-tag [nzColor]="'green'">可用</nz-tag>
 </ng-template>
 <ng-template #notTpl>

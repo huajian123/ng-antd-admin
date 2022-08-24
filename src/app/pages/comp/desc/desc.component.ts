@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import {PageHeaderType} from "@shared/components/page-header/page-header.component";
+
+import { PageHeaderType } from '@shared/components/page-header/page-header.component';
 
 interface Person {
   userName: string;
@@ -15,7 +16,6 @@ interface Person {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DescComponent implements OnInit {
-
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '详情组件示例',
     breadcrumb: ['首页', '组件', '详情组件'],
@@ -25,29 +25,28 @@ export class DescComponent implements OnInit {
   listOfData: Person[] = [
     {
       userName: '张三',
-      email: "321111.com",
+      email: '321111.com',
       nickName: 'John Brown',
       address: 'New York No. 1 Lake Park',
       mobile: 111
     },
     {
       userName: '李四',
-      email: "321111.com",
+      email: '321111.com',
       nickName: 'John Brown',
       address: 'New York No. 1 Lake Park',
       mobile: 111
     },
     {
       userName: '王麻子',
-      email: "321111.com",
+      email: '321111.com',
       nickName: 'John Brown',
       address: 'New York No. 1 Lake Park',
       mobile: 111
     }
   ];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 }

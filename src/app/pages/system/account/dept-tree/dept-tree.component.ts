@@ -1,8 +1,9 @@
-import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Output, EventEmitter} from '@angular/core';
-import {FlatTreeControl} from '@angular/cdk/tree';
-import {SelectionModel} from "@angular/cdk/collections";
-import {DeptTreeService, FlatNode} from "@app/pages/system/account/dept-tree/dept-tree.service";
-import {DeptTreeSearchService} from "@app/pages/system/account/dept-tree/dept-tree-search.service";
+import { SelectionModel } from '@angular/cdk/collections';
+import { FlatTreeControl } from '@angular/cdk/tree';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
+
+import { DeptTreeSearchService } from '@app/pages/system/account/dept-tree/dept-tree-search.service';
+import { DeptTreeService, FlatNode } from '@app/pages/system/account/dept-tree/dept-tree.service';
 
 @Component({
   selector: 'app-dept-tree',
@@ -14,7 +15,7 @@ import {DeptTreeSearchService} from "@app/pages/system/account/dept-tree/dept-tr
 export class DeptTreeComponent implements OnInit {
   selectListSelection: SelectionModel<FlatNode>;
   treeControl: FlatTreeControl<FlatNode>;
-  @Output() deptIdEven = new EventEmitter<number>();
+  @Output() readonly deptIdEven = new EventEmitter<number>();
 
   constructor(public deptTreeService: DeptTreeService, public deptTreeSearchService: DeptTreeSearchService) {
     this.selectListSelection = this.deptTreeService.selectListSelection;
@@ -26,11 +27,11 @@ export class DeptTreeComponent implements OnInit {
   }
 
   clickNode(node: FlatNode): void {
-    this.deptTreeService.clickNode(node)
+    this.deptTreeService.clickNode(node);
     this.deptIdEven.emit(node.id);
   }
 
-  resetTree():void{
+  resetTree(): void {
     this.deptTreeService.resetTree();
   }
 

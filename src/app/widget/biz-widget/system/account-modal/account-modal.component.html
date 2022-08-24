@@ -2,7 +2,7 @@
   <nz-form-item>
     <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="sex">用户名</nz-form-label>
     <nz-form-control [nzSm]="18" [nzXs]="24" [nzErrorTip]="combineTpl">
-      <input nz-input formControlName="userName" id="userName" placeholder="用户名"/>
+      <input nz-input formControlName="userName" id="userName" placeholder="用户名" />
     </nz-form-control>
   </nz-form-item>
   <nz-form-item *ngIf="!isEdit">
@@ -31,50 +31,41 @@
   <nz-form-item>
     <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="telephone">联系电话</nz-form-label>
     <nz-form-control [nzSm]="18" [nzXs]="24" [nzErrorTip]="combineTpl">
-      <input nz-input formControlName="telephone" id="telephone" placeholder="联系电话"/>
+      <input nz-input formControlName="telephone" id="telephone" placeholder="联系电话" />
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
     <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="mobile">手机号</nz-form-label>
     <nz-form-control [nzSm]="18" [nzXs]="24" [nzErrorTip]="combineTpl">
-      <input nz-input formControlName="mobile" maxlength="11" id="mobile" placeholder="手机号"/>
+      <input nz-input formControlName="mobile" maxlength="11" id="mobile" placeholder="手机号" />
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
     <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="email">电子邮箱</nz-form-label>
     <nz-form-control [nzSm]="18" [nzXs]="24" [nzErrorTip]="combineTpl">
-      <input nz-input formControlName="email" id="email" placeholder="电子邮箱"/>
+      <input nz-input formControlName="email" id="email" placeholder="电子邮箱" />
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
     <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="departmentId">所属部门</nz-form-label>
     <nz-form-control [nzSm]="18" [nzXs]="24" [nzErrorTip]="combineTpl">
-      <nz-tree-select
-        [nzNodes]="deptNodes"
-        nzShowSearch
-        [nzDropdownMatchSelectWidth]="true"
-        nzPlaceHolder="Please select"
-        formControlName="departmentId"
-      >
-      </nz-tree-select>
+      <nz-tree-select [nzNodes]="deptNodes" nzShowSearch [nzDropdownMatchSelectWidth]="true" nzPlaceHolder="Please select" formControlName="departmentId"></nz-tree-select>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
     <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="roleId">用户角色</nz-form-label>
     <nz-form-control [nzSm]="18" [nzXs]="24" [nzErrorTip]="combineTpl">
-      <nz-select nzMode="multiple" formControlName="roleId" nzPlaceHolder="角色" >
+      <nz-select nzMode="multiple" formControlName="roleId" nzPlaceHolder="角色">
         <nz-option *ngFor="let option of roleOptions" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
       </nz-select>
     </nz-form-control>
   </nz-form-item>
-
-
 </form>
 <ng-template #combineTpl let-control>
-  <ng-container *ngIf="control.hasError('message')">{{control.errors.message}}</ng-container>
+  <ng-container *ngIf="control.hasError('message')">{{ control.errors.message }}</ng-container>
   <ng-container *ngIf="control.hasError('required')">必填项</ng-container>
 </ng-template>

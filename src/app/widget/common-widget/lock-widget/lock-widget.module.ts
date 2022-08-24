@@ -1,19 +1,13 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {LockWidgetComponent} from './lock-widget.component';
-import {SHARED_ZORRO_MODULES} from "@shared/shared-zorro.module";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { SHARED_ZORRO_MODULES } from '@shared/shared-zorro.module';
+
+import { LockWidgetComponent } from './lock-widget.component';
 
 @NgModule({
-  declarations: [
-    LockWidgetComponent
-  ],
-  imports: [
-    FormsModule,
-    ReactiveFormsModule,
-    CommonModule,
-    SHARED_ZORRO_MODULES,
-  ]
+  declarations: [LockWidgetComponent],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, SHARED_ZORRO_MODULES]
 })
-export class LockWidgetModule {
-}
+export class LockWidgetModule {}

@@ -1,16 +1,7 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  ViewChild,
-  ElementRef,
-  OnDestroy,
-  Output,
-  EventEmitter, ChangeDetectorRef
-} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {fnGetRandomNum} from '@app/utils/tools';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, OnDestroy, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
+import { fnGetRandomNum } from '@app/utils/tools';
 
 @Component({
   selector: 'app-chat',
@@ -22,20 +13,20 @@ export class ChatComponent implements OnInit, OnDestroy {
   @ViewChild('scrollMe') private myScrollContainer!: ElementRef;
   @Output() changeShows = new EventEmitter<boolean>();
   validateForm!: FormGroup;
-  messageArray: { msg: string, dir: 'left' | 'right', isReaded: boolean }[] = [];
+  messageArray: Array<{ msg: string; dir: 'left' | 'right'; isReaded: boolean }> = [];
   isSending = false;
   show = false;
   randomReport: string[] = [
-    "抱歉我现在有事不在 等一下也不想理你",
-    "您好，发送一元红包自动解锁聊天模式",
-    "您好，我现在不无聊 希望无聊时您再找我",
-    "您的小可爱正八百里加急赶往你的聊天界面",
-    "魔仙堡打盹中醒了回你",
-    "咕噜咕噜魔仙堡专线在为你接通",
-    "不要烦我噢，我在冒泡泡Oooooo",
-    "老爹古董店，有事请留言",
-    "俺没回就是去拔萝卜了Ooo",
-    "我不喜欢回消息，感觉我上辈子就是个免打扰",
+    '抱歉我现在有事不在 等一下也不想理你',
+    '您好，发送一元红包自动解锁聊天模式',
+    '您好，我现在不无聊 希望无聊时您再找我',
+    '您的小可爱正八百里加急赶往你的聊天界面',
+    '魔仙堡打盹中醒了回你',
+    '咕噜咕噜魔仙堡专线在为你接通',
+    '不要烦我噢，我在冒泡泡Oooooo',
+    '老爹古董店，有事请留言',
+    '俺没回就是去拔萝卜了Ooo',
+    '我不喜欢回消息，感觉我上辈子就是个免打扰',
     '人工服务请按1',
     '目前心动已售完，欢迎下次光临',
     '去宇宙摘星星啦，马上回来',
@@ -94,11 +85,10 @@ export class ChatComponent implements OnInit, OnDestroy {
     '对方已中毒，发送我爱你即可解毒',
     '对方网络不稳定，请稍后重试',
     '等会再下凡见见尔等凡夫俗子',
-    '闭关修炼中',
-  ]
+    '闭关修炼中'
+  ];
 
-  constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef) {
-  }
+  constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef) {}
 
   ngOnDestroy(): void {
     console.log('客服功能销毁了');
@@ -109,12 +99,11 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   scrollToBottom(): void {
-    setTimeout(()=>{
+    setTimeout(() => {
       try {
         this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
-      } catch (err) {
-      }
-    })
+      } catch (err) {}
+    });
   }
 
   clearMsgInput(): void {
@@ -124,29 +113,28 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   sendMessage(msg: string, event: Event): void {
-    if (!(msg.trim())) {
+    if (!msg.trim()) {
       event.preventDefault();
       event.stopPropagation();
       this.clearMsgInput();
       return;
     }
-    this.messageArray.push({msg, dir: "right", isReaded: false});
+    this.messageArray.push({ msg, dir: 'right', isReaded: false });
     this.clearMsgInput();
 
-    setTimeout(()=>{
+    setTimeout(() => {
       this.isSending = true;
       this.messageArray.forEach(item => {
-        if (item.dir === "right") {
+        if (item.dir === 'right') {
           item.isReaded = true;
         }
-      })
+      });
       this.cdr.markForCheck();
-    },1000)
+    }, 1000);
 
     setTimeout(() => {
-
-      const index = fnGetRandomNum(0, this.randomReport.length)
-      this.messageArray.push({msg: this.randomReport[index], dir: "left", isReaded: false});
+      const index = fnGetRandomNum(0, this.randomReport.length);
+      this.messageArray.push({ msg: this.randomReport[index], dir: 'left', isReaded: false });
 
       this.isSending = false;
       this.scrollToBottom();
@@ -156,7 +144,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      question: [null],
+      question: [null]
     });
     this.scrollToBottom();
   }

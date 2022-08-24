@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+
 import {
   bounceOnEnterAnimation,
   flashOnEnterAnimation,
@@ -181,7 +182,6 @@ import {
   ]
 })
 export class DemoOnEnterOnLeaveComponent {
-
   options = [
     {
       label: 'Bouncing',
@@ -189,17 +189,7 @@ export class DemoOnEnterOnLeaveComponent {
     },
     {
       label: 'Fading',
-      animations: [
-        'fadeInOut',
-        'fadeInUpOutUp',
-        'fadeInDownOutDown',
-        'fadeInLeftOutRight',
-        'fadeInRightOutLeft',
-        'fadeInUpBigOutUpBig',
-        'fadeInDownBigOutDownBig',
-        'fadeInLeftBigOutRightBig',
-        'fadeInRightBigOutLeftBig'
-      ]
+      animations: ['fadeInOut', 'fadeInUpOutUp', 'fadeInDownOutDown', 'fadeInLeftOutRight', 'fadeInRightOutLeft', 'fadeInUpBigOutUpBig', 'fadeInDownBigOutDownBig', 'fadeInLeftBigOutRightBig', 'fadeInRightBigOutLeftBig']
     },
     {
       label: 'Flippers',
@@ -238,7 +228,7 @@ export class DemoOnEnterOnLeaveComponent {
 
   state = true;
 
-  toggleState() {
+  toggleState(): void {
     this.state = !this.state;
   }
 }

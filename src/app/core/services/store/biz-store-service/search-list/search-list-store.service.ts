@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {Observable, Subject} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 
 type componentName = '搜索列表（文章）' | '搜索列表（项目）' | '搜索列表（应用）';
 
@@ -9,8 +9,7 @@ type componentName = '搜索列表（文章）' | '搜索列表（项目）' | '
 export class SearchListStoreService {
   private SearchListComponentStore = new Subject<componentName>();
 
-  constructor() {
-  }
+  constructor() {}
 
   setCurrentSearchListComponentStore(componentName: componentName): void {
     this.SearchListComponentStore.next(componentName);

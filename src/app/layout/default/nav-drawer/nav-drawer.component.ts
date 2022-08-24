@@ -1,7 +1,8 @@
-import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy} from '@angular/core';
-import {ThemeService} from "@store/common-store/theme.service";
-import {takeUntil} from "rxjs/operators";
-import {DestroyService} from "@core/services/common/destory.service";
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { takeUntil } from 'rxjs/operators';
+
+import { DestroyService } from '@core/services/common/destory.service';
+import { ThemeService } from '@store/common-store/theme.service';
 
 @Component({
   selector: 'app-nav-drawer',
@@ -14,18 +15,20 @@ export class NavDrawerComponent implements OnInit {
   isShowModal = false;
   themesOptions$ = this.themesService.getThemesMode();
 
-  constructor(private destroy$: DestroyService, private cdr: ChangeDetectorRef, private themesService: ThemeService) {
-  }
+  constructor(private destroy$: DestroyService, private cdr: ChangeDetectorRef, private themesService: ThemeService) {}
 
   subTheme(): void {
-    this.themesService.getIsOverMode().pipe(takeUntil(this.destroy$)).subscribe(res => {
-      if (!res) {
-        this.isShowModal = false;
-      }
-    });
+    this.themesService
+      .getIsOverMode()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(res => {
+        if (!res) {
+          this.isShowModal = false;
+        }
+      });
   }
 
-  showDraw() {
+  showDraw(): void {
     this.isShowModal = true;
     this.cdr.markForCheck();
   }
@@ -33,5 +36,4 @@ export class NavDrawerComponent implements OnInit {
   ngOnInit(): void {
     this.subTheme();
   }
-
 }

@@ -1,12 +1,13 @@
-import {ChangeDetectionStrategy, Component, Inject, OnInit, Renderer2,} from '@angular/core';
-import {first} from 'rxjs/operators';
-import {DOCUMENT} from '@angular/common';
-import {NzMessageService} from 'ng-zorro-antd/message';
-import {SettingInterface, ThemeService} from "@store/common-store/theme.service";
-import {ThemeSkinService} from "@core/services/common/theme-skin.service";
-import {WindowService} from "@core/services/common/window.service";
-import {IsNightKey, ThemeOptionsKey} from "@config/constant";
-import {NzConfigService} from 'ng-zorro-antd/core/config';
+import { DOCUMENT } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Inject, OnInit, Renderer2 } from '@angular/core';
+import { first } from 'rxjs/operators';
+
+import { IsNightKey, ThemeOptionsKey } from '@config/constant';
+import { ThemeSkinService } from '@core/services/common/theme-skin.service';
+import { WindowService } from '@core/services/common/window.service';
+import { SettingInterface, ThemeService } from '@store/common-store/theme.service';
+import { NzConfigService } from 'ng-zorro-antd/core/config';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 interface NormalModel {
   image?: string;
@@ -27,12 +28,11 @@ interface Mode extends NormalModel {
   key: 'side' | 'top' | 'mixi';
 }
 
-
 @Component({
   selector: 'app-setting-drawer',
   templateUrl: './setting-drawer.component.html',
   styleUrls: ['./setting-drawer.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SettingDrawerComponent implements OnInit {
   themesOptions$ = this.themesService.getThemesMode();
@@ -51,7 +51,7 @@ export class SettingDrawerComponent implements OnInit {
     hasTopArea: true,
     hasFooterArea: true,
     hasNavArea: true,
-    hasNavHeadArea: true,
+    hasNavHeadArea: true
   };
   isCollapsed = false;
   dragging = false;
@@ -61,14 +61,14 @@ export class SettingDrawerComponent implements OnInit {
       key: 'dark',
       image: '/assets/imgs/theme-dark.svg',
       title: '暗色菜单风格',
-      isChecked: true,
+      isChecked: true
     },
     {
       key: 'light',
       image: '/assets/imgs/theme-light.svg',
       title: '亮色菜单风格',
-      isChecked: false,
-    },
+      isChecked: false
+    }
   ];
   colors: Color[] = [
     {
@@ -118,7 +118,7 @@ export class SettingDrawerComponent implements OnInit {
       color: '#722ED1',
       title: '酱紫',
       isChecked: false
-    },
+    }
   ];
   modes: Mode[] = [
     {
@@ -131,22 +131,25 @@ export class SettingDrawerComponent implements OnInit {
       key: 'top',
       image: '/assets/imgs/menu-top.svg',
       title: '顶部菜单布局',
-      isChecked: false,
+      isChecked: false
     },
     {
       key: 'mixi',
       image: '/assets/imgs/menu-top.svg',
       title: '混合菜单布局',
-      isChecked: false,
+      isChecked: false
     }
   ];
 
-  constructor(private themesService: ThemeService, @Inject(DOCUMENT) private doc: Document,
-              public message: NzMessageService,
-              private nzConfigService: NzConfigService,
-              private themeSkinService: ThemeSkinService, private windowServe: WindowService,
-              private rd2: Renderer2) {
-  }
+  constructor(
+    private themesService: ThemeService,
+    @Inject(DOCUMENT) private doc: Document,
+    public message: NzMessageService,
+    private nzConfigService: NzConfigService,
+    private themeSkinService: ThemeSkinService,
+    private windowServe: WindowService,
+    private rd2: Renderer2
+  ) {}
 
   changeCollapsed(): void {
     if (!this.dragging) {
@@ -158,24 +161,23 @@ export class SettingDrawerComponent implements OnInit {
 
   changePrimaryColor(color: Color): void {
     this.selOne(color as NormalModel, this.colors);
-    this.nzConfigService.set('theme', {primaryColor: color.color});
+    this.nzConfigService.set('theme', { primaryColor: color.color });
     this._themesOptions.color = color.color;
     this.setThemeOptions();
   }
 
   // 修改黑夜主题
   changeNightTheme(isNight: boolean): void {
-    this.windowServe.setStorage(IsNightKey, '' + isNight);
+    this.windowServe.setStorage(IsNightKey, `${isNight}`);
     this.themesService.setIsNightTheme(isNight);
     this.themeSkinService.toggleTheme().then();
   }
 
   // 选择一个isChecked为true,其他为false
   selOne(item: NormalModel, itemArray: NormalModel[]): void {
-    itemArray.forEach((_item) => _item.isChecked = false);
+    itemArray.forEach(_item => (_item.isChecked = false));
     item.isChecked = true;
   }
-
 
   changeMode(mode: Mode): void {
     this.selOne(mode, this.modes);
@@ -200,13 +202,12 @@ export class SettingDrawerComponent implements OnInit {
   // 修改固定头部
   changeFixed(isFixed: boolean, type: 'splitNav' | 'fixedTab' | 'fixedLeftNav' | 'fixedHead' | 'hasTopArea' | 'hasFooterArea' | 'hasNavArea' | 'hasNavHeadArea'): void {
     // 非固定头部时，设置标签也不固定
-    if (type === "fixedHead" && !isFixed) {
+    if (type === 'fixedHead' && !isFixed) {
       this._themesOptions['fixedTab'] = false;
     }
     this._themesOptions[type] = isFixed;
     this.setThemeOptions();
   }
-
 
   // 修改色弱模式
   changeWeakMode(e: boolean): void {
@@ -221,19 +222,19 @@ export class SettingDrawerComponent implements OnInit {
   }
 
   initThemeOption(): void {
-    this.isNightTheme$.pipe(first()).subscribe(res => this._isNightTheme = res);
+    this.isNightTheme$.pipe(first()).subscribe(res => (this._isNightTheme = res));
     this.themesOptions$.pipe(first()).subscribe(res => {
       this._themesOptions = res;
     });
     this.changeWeakMode(this._themesOptions.colorWeak);
-    this.modes.forEach((item) => {
+    this.modes.forEach(item => {
       item.isChecked = item.key === this._themesOptions.mode;
     });
-    this.colors.forEach((item) => {
+    this.colors.forEach(item => {
       item.isChecked = item.color === this._themesOptions.color;
     });
-    this.changePrimaryColor(this.colors.find(item=>item.isChecked)!);
-    this.themes.forEach((item) => {
+    this.changePrimaryColor(this.colors.find(item => item.isChecked)!);
+    this.themes.forEach(item => {
       item.isChecked = item.key === this._themesOptions.theme;
     });
   }
@@ -242,11 +243,11 @@ export class SettingDrawerComponent implements OnInit {
     this.initThemeOption();
   }
 
-  dragEnd() {
+  dragEnd(): void {
     if (this.dragging) {
       setTimeout(() => {
-        this.dragging = false
-      })
+        this.dragging = false;
+      });
     }
   }
 }

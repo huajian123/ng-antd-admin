@@ -1,35 +1,40 @@
-<i nz-popover
-   [(nzPopoverVisible)]="visible"
-   [nzPopoverTitle]="searchTitle"
-   nzPopoverTrigger="click"
-   [nzPopoverContent]="contentTemplate"
-   class="input-after-icon hand-model"
-   nz-icon [nzType]="seletedIcon||'appstore'"
-   nzTheme="outline"></i>
+<i
+  nz-popover
+  [(nzPopoverVisible)]="visible"
+  [nzPopoverTitle]="searchTitle"
+  nzPopoverTrigger="click"
+  [nzPopoverContent]="contentTemplate"
+  class="input-after-icon hand-model"
+  nz-icon
+  [nzType]="seletedIcon || 'appstore'"
+  nzTheme="outline"
+></i>
 <ng-template #searchTitle>
-  <input nz-input (input)="searchIcon($event)" [placeholder]="'搜索图标的type'">
+  <input nz-input (input)="searchIcon($event)" [placeholder]="'搜索图标的type'" />
 </ng-template>
 <ng-template #contentTemplate>
-  <nz-card style="width: 300px;max-height: 220px;overflow: auto" [nzBodyStyle]="{padding:'0'}" [nzBorderless]="true">
-    <nz-card *ngIf="iconsStrShowArray&&iconsStrShowArray.length>0;else noResult">
-      <ng-container *ngFor="let item of iconsStrShowArray;">
-        <div (click)="selIconFn(item)" class="center" nz-card-grid
-             [ngStyle]="gridStyle">
-          <i [ngStyle]="{'color':item.isChecked?'#409eff':''}" nz-icon class="sp-18" [nzType]="item.icon" nzTheme="outline"></i>
+  <nz-card style="width: 300px; max-height: 220px; overflow: auto" [nzBodyStyle]="{ padding: '0' }" [nzBorderless]="true">
+    <nz-card *ngIf="iconsStrShowArray && iconsStrShowArray.length > 0; else noResult">
+      <ng-container *ngFor="let item of iconsStrShowArray">
+        <div (click)="selIconFn(item)" class="center" nz-card-grid [ngStyle]="gridStyle">
+          <i [ngStyle]="{ color: item.isChecked ? '#409eff' : '' }" nz-icon class="sp-18" [nzType]="item.icon" nzTheme="outline"></i>
         </div>
       </ng-container>
-
     </nz-card>
     <ng-template #noResult>
       <nz-empty></nz-empty>
     </ng-template>
   </nz-card>
-  <nz-pagination [nzPageSizeOptions]="[20,50]"
-                 style="max-width: 300px;" class="m-t-10"
-                 (nzPageSizeChange)="pageSizeChange($event)"
-                 nzShowSizeChanger [nzSize]="'small'"
-                 [nzPageSize]="pageObj.pageSize"
-                 (nzPageIndexChange)="getData($event)"
-                 [(nzPageIndex)]="pageObj.pageNum"
-                 [nzTotal]="iconsStrAllArray.length"></nz-pagination>
+  <nz-pagination
+    [nzPageSizeOptions]="[20, 50]"
+    style="max-width: 300px"
+    class="m-t-10"
+    (nzPageSizeChange)="pageSizeChange($event)"
+    nzShowSizeChanger
+    [nzSize]="'small'"
+    [nzPageSize]="pageObj.pageSize"
+    (nzPageIndexChange)="getData($event)"
+    [(nzPageIndex)]="pageObj.pageNum"
+    [nzTotal]="iconsStrAllArray.length"
+  ></nz-pagination>
 </ng-template>

@@ -1,27 +1,21 @@
-<nz-card [nzBordered]="false" [nzBodyStyle]="{padding:'10px 24px'}">
+<nz-card [nzBordered]="false" [nzBodyStyle]="{ padding: '10px 24px' }">
   <div class="left-start-center">
     <nz-breadcrumb>
-      <nz-breadcrumb-item>
-        首页
-      </nz-breadcrumb-item>
-      <nz-breadcrumb-item>
-        Dashboard
-      </nz-breadcrumb-item>
-      <nz-breadcrumb-item>
-        监控页
-      </nz-breadcrumb-item>
+      <nz-breadcrumb-item> 首页 </nz-breadcrumb-item>
+      <nz-breadcrumb-item> Dashboard </nz-breadcrumb-item>
+      <nz-breadcrumb-item> 监控页 </nz-breadcrumb-item>
     </nz-breadcrumb>
   </div>
 </nz-card>
 <section class="content-wrap">
-  <section nz-row [nzGutter]="[16,16]">
+  <section nz-row [nzGutter]="[16, 16]">
     <div nz-col [nzXXl]="18" [nzXl]="18" [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzXs]="24">
       <nz-card nzTitle="活动实时交易情况">
-        <div nz-row [nzGutter]="[40,16]">
+        <div nz-row [nzGutter]="[40, 16]">
           <div nz-col [nzXXl]="12" [nzXl]="12" [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24">
             <nz-row [nzGutter]="16">
               <nz-col [nzXXl]="12" [nzXl]="12" [nzLg]="12" [nzMd]="24" [nzSm]="24" [nzXs]="24">
-                <nz-statistic [nzValue]="(124543233 | number)!+'元'" [nzTitle]="'今日交易总额'"></nz-statistic>
+                <nz-statistic [nzValue]="(124543233 | number)! + '元'" [nzTitle]="'今日交易总额'"></nz-statistic>
               </nz-col>
               <nz-col [nzXXl]="12" [nzXl]="12" [nzLg]="12" [nzMd]="24" [nzSm]="24" [nzXs]="24">
                 <nz-statistic [nzValue]="(0.92 | percent)!" [nzTitle]="'销售目标完成率'"></nz-statistic>
@@ -34,11 +28,11 @@
                 <nz-countdown [nzValue]="deadline" [nzTitle]="'活动剩余时间'" [nzFormat]="'HH:mm:ss:SSS'"></nz-countdown>
               </nz-col>
               <nz-col [nzXXl]="12" [nzXl]="12" [nzLg]="12" [nzMd]="24" [nzSm]="24" [nzXs]="24">
-                <nz-statistic [nzValue]="(234 | number)!+'元'" [nzTitle]="'每秒交易总额'"></nz-statistic>
+                <nz-statistic [nzValue]="(234 | number)! + '元'" [nzTitle]="'每秒交易总额'"></nz-statistic>
               </nz-col>
             </nz-row>
           </div>
-          <div nz-col nzSpan="24" style="min-height: 430px;">
+          <div nz-col nzSpan="24" style="min-height: 430px">
             <div id="map"></div>
           </div>
         </div>
@@ -60,15 +54,14 @@
           <div id="dashBoard"></div>
         </nz-card>
       </div>
-
     </div>
 
     <div nz-col [nzXXl]="12" [nzXl]="12" [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzXs]="24">
       <nz-card nzTitle="各品类占比">
         <div nz-row>
-          <div nz-col class="pipe-height center"  [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="8" [nzSm]="8" [nzXs]="8" id="ringProgress1"></div>
-          <div nz-col class="pipe-height center"  [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="8" [nzSm]="8" [nzXs]="8" id="ringProgress2"></div>
-          <div nz-col class="pipe-height center"  [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="8" [nzSm]="8" [nzXs]="8" id="ringProgress3"></div>
+          <div nz-col class="pipe-height center" [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="8" [nzSm]="8" [nzXs]="8" id="ringProgress1"></div>
+          <div nz-col class="pipe-height center" [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="8" [nzSm]="8" [nzXs]="8" id="ringProgress2"></div>
+          <div nz-col class="pipe-height center" [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="8" [nzSm]="8" [nzXs]="8" id="ringProgress3"></div>
         </div>
       </nz-card>
     </div>
@@ -83,5 +76,4 @@
       </nz-card>
     </div>
   </section>
-
 </section>

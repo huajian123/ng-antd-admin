@@ -1,9 +1,10 @@
-import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {Observable} from "rxjs";
-import {SettingInterface, ThemeService} from "@store/common-store/theme.service";
-import {takeUntil} from "rxjs/operators";
-import {SplitNavStoreService} from "@store/common-store/split-nav-store.service";
-import {DestroyService} from "@core/services/common/destory.service";
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Observable } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
+import { DestroyService } from '@core/services/common/destory.service';
+import { SplitNavStoreService } from '@store/common-store/split-nav-store.service';
+import { SettingInterface, ThemeService } from '@store/common-store/theme.service';
 
 @Component({
   selector: 'app-def-layout-content',
@@ -30,7 +31,7 @@ export class DefLayoutContentComponent implements OnInit {
     hasTopArea: true,
     hasFooterArea: true,
     hasNavArea: true,
-    hasNavHeadArea: true,
+    hasNavHeadArea: true
   };
   isFixedLeftNav = false;
   isOverMode$: Observable<boolean> = this.themesService.getIsOverMode();
@@ -39,9 +40,11 @@ export class DefLayoutContentComponent implements OnInit {
   mixiModeHasLeftNav = this.splitNavStoreService.getSplitLeftNavArrayStore();
   contentMarginTop = '48px';
 
-  constructor(private destroy$: DestroyService, private themesService: ThemeService, private splitNavStoreService: SplitNavStoreService) {
-  }
-
+  constructor(
+    private destroy$: DestroyService,
+    private themesService: ThemeService,
+    private splitNavStoreService: SplitNavStoreService
+  ) {}
 
   changeCollapsed(isCollapsed: boolean): void {
     this.themesService.setIsCollapsed(isCollapsed);
@@ -53,12 +56,11 @@ export class DefLayoutContentComponent implements OnInit {
       this.isMixiMode = res.mode === 'mixi';
       this.isFixedLeftNav = this.themesOptions.fixedLeftNav;
 
-      if ((this.themesOptions.fixedHead && !this.isMixiMode) && this.themesOptions.hasTopArea) {
+      if (this.themesOptions.fixedHead && !this.isMixiMode && this.themesOptions.hasTopArea) {
         this.contentMarginTop = this.themesOptions.fixedTab ? '96px' : '48px';
       } else {
         this.contentMarginTop = this.themesOptions.fixedTab ? '48px' : '0px';
       }
-
     });
   }
 

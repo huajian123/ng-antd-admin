@@ -1,18 +1,17 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
 /*
-* 水印服务
-* */
+ * 水印服务
+ * */
 @Injectable({
   providedIn: 'root'
 })
 export class WaterMarkService {
   watermark = '';
 
-  constructor() {
-  }
+  constructor() {}
 
-  getWatermark() {
+  getWatermark(): string {
     if (!this.watermark) {
       const canvas = document.createElement('canvas');
       canvas.width = 332;

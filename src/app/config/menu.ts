@@ -545,7 +545,7 @@ const menuNav: Menu[] = [
             icon: 'dashboard',
             open: false,
             code: '',
-            selected: false,
+             selected: false,
             menuType: 'C',
             path: '/default/feat/frame/zorro-doc',
           },

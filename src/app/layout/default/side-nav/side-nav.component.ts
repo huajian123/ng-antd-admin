@@ -1,7 +1,7 @@
-import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {ThemeService} from '@store/common-store/theme.service';
-import {Observable} from "rxjs";
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Observable } from 'rxjs';
 
+import { ThemeService } from '@store/common-store/theme.service';
 
 @Component({
   selector: 'app-side-nav',
@@ -14,10 +14,7 @@ export class SideNavComponent implements OnInit {
   isNightTheme$ = this.themesService.getIsNightTheme();
   isCollapsed$: Observable<boolean> = this.themesService.getIsCollapsed();
 
-  constructor(private themesService: ThemeService) {
-  }
+  constructor(private themesService: ThemeService) {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

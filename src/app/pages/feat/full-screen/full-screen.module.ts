@@ -1,17 +1,12 @@
 import { NgModule } from '@angular/core';
 
+import { SharedModule } from '@shared/shared.module';
+
 import { FullScreenRoutingModule } from './full-screen-routing.module';
 import { FullScreenComponent } from './full-screen.component';
-import {SharedModule} from "@shared/shared.module";
-
 
 @NgModule({
-  declarations: [
-    FullScreenComponent
-  ],
-  imports: [
-    SharedModule,
-    FullScreenRoutingModule
-  ]
+  declarations: [FullScreenComponent],
+  imports: [SharedModule, FullScreenRoutingModule]
 })
-export class FullScreenModule { }
+export class FullScreenModule {}

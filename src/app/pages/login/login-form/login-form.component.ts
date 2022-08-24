@@ -1,14 +1,15 @@
-import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
-import {fnCheckForm} from '@utils/tools';
-import {SpinService} from "@store/common-store/spin.service";
-import {WindowService} from "@core/services/common/window.service";
-import {LoginService} from "@core/services/http/login/login.service";
-import {UserInfoService} from "@store/common-store/userInfo.service";
-import {MenuStoreService} from "@store/common-store/menu-store.service";
-import {LoginInOutService} from "@core/services/common/login-in-out.service";
-import {finalize} from "rxjs/operators";
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
+
+import { LoginInOutService } from '@core/services/common/login-in-out.service';
+import { WindowService } from '@core/services/common/window.service';
+import { LoginService } from '@core/services/http/login/login.service';
+import { MenuStoreService } from '@store/common-store/menu-store.service';
+import { SpinService } from '@store/common-store/spin.service';
+import { UserInfoService } from '@store/common-store/userInfo.service';
+import { fnCheckForm } from '@utils/tools';
 
 @Component({
   selector: 'app-login-form',
@@ -17,18 +18,18 @@ import {finalize} from "rxjs/operators";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginFormComponent implements OnInit {
-
   validateForm!: FormGroup;
 
-  constructor(private fb: FormBuilder,
-              private loginInOutService: LoginInOutService,
-              private menuService: MenuStoreService,
-              private dataService: LoginService,
-              private spinService: SpinService,
-              private windowServe: WindowService,
-              private userInfoService: UserInfoService,
-              private router: Router) {
-  }
+  constructor(
+    private fb: FormBuilder,
+    private loginInOutService: LoginInOutService,
+    private menuService: MenuStoreService,
+    private dataService: LoginService,
+    private spinService: SpinService,
+    private windowServe: WindowService,
+    private userInfoService: UserInfoService,
+    private router: Router
+  ) {}
 
   submitForm(): void {
     // 校验表单
@@ -46,23 +47,30 @@ export class LoginFormComponent implements OnInit {
     //   data:any,
     //   msg：string
     // }
-    this.dataService.login(param).pipe(finalize(()=>{
-      this.spinService.setCurrentGlobalSpinStore(false);
-    })).subscribe(userToken => {
-      this.loginInOutService.loginIn(userToken).then(() => {
-        this.router.navigateByUrl('default/dashboard/analysis');
-      }).finally(()=>{
-        this.spinService.setCurrentGlobalSpinStore(false);
-      })
-    })
+    this.dataService
+      .login(param)
+      .pipe(
+        finalize(() => {
+          this.spinService.setCurrentGlobalSpinStore(false);
+        })
+      )
+      .subscribe(userToken => {
+        this.loginInOutService
+          .loginIn(userToken)
+          .then(() => {
+            this.router.navigateByUrl('default/dashboard/analysis');
+          })
+          .finally(() => {
+            this.spinService.setCurrentGlobalSpinStore(false);
+          });
+      });
   }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
       userName: [null, [Validators.required]],
       password: [null, [Validators.required]],
-      remember: [null],
+      remember: [null]
     });
   }
-
 }

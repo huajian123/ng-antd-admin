@@ -1,25 +1,16 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  ViewChild,
-  ElementRef,
-  AfterViewInit,
-  ChangeDetectorRef,
-  HostListener,
-  NgZone
-} from '@angular/core';
-import {ThemeService} from "@store/common-store/theme.service";
-import {Menu} from "@core/services/types";
-import {fromEvent, of} from "rxjs";
-import {debounceTime, distinctUntilChanged, map, switchMap, takeUntil} from "rxjs/operators";
-import {Router} from "@angular/router";
-import {NzModalRef} from "ng-zorro-antd/modal";
-import {BasicConfirmModalComponent} from "@widget/base-modal";
-import {NzSafeAny} from "ng-zorro-antd/core/types";
-import {normalizePassiveListenerOptions} from "@angular/cdk/platform";
-import {MenuStoreService} from "@store/common-store/menu-store.service";
-import {DestroyService} from "@core/services/common/destory.service";
+import { normalizePassiveListenerOptions } from '@angular/cdk/platform';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef, HostListener, NgZone } from '@angular/core';
+import { Router } from '@angular/router';
+import { fromEvent, of } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, switchMap, takeUntil } from 'rxjs/operators';
+
+import { DestroyService } from '@core/services/common/destory.service';
+import { Menu } from '@core/services/types';
+import { MenuStoreService } from '@store/common-store/menu-store.service';
+import { ThemeService } from '@store/common-store/theme.service';
+import { BasicConfirmModalComponent } from '@widget/base-modal';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzModalRef } from 'ng-zorro-antd/modal';
 
 interface ResultItem {
   selItem: boolean;
@@ -29,7 +20,7 @@ interface ResultItem {
   icon: string;
 }
 
-const passiveEventListenerOptions = <AddEventListenerOptions>normalizePassiveListenerOptions({passive: true});
+const passiveEventListenerOptions = <AddEventListenerOptions>normalizePassiveListenerOptions({ passive: true });
 
 @Component({
   selector: 'app-search-route',
@@ -46,11 +37,15 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
   inputValue: string | null = null;
   menuNavList: Menu[] = [];
 
-  constructor(private themesService: ThemeService, private cdr: ChangeDetectorRef,
-              private ngZone: NgZone,
-              private destroy$: DestroyService,
-              private menuStoreService: MenuStoreService,
-              private router: Router, protected override modalRef: NzModalRef) {
+  constructor(
+    private themesService: ThemeService,
+    private cdr: ChangeDetectorRef,
+    private ngZone: NgZone,
+    private destroy$: DestroyService,
+    private menuStoreService: MenuStoreService,
+    private router: Router,
+    protected override modalRef: NzModalRef
+  ) {
     super(modalRef);
   }
 
@@ -72,7 +67,7 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
         }
       }
     } else {
-      return null
+      return null;
     }
   }
 
@@ -86,7 +81,7 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
 
   @HostListener('window:keyup.arrowUp')
   onArrowUp() {
-    const index = this.changeSelAnswerIndex("up");
+    const index = this.changeSelAnswerIndex('up');
     if (index !== null) {
       this.mouseOverItem(this.resultListShow[index]);
     }
@@ -94,7 +89,7 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
 
   @HostListener('window:keyup.arrowDown')
   onArrowDown() {
-    const index = this.changeSelAnswerIndex("down");
+    const index = this.changeSelAnswerIndex('down');
     if (index !== null) {
       this.mouseOverItem(this.resultListShow[index]);
     }
@@ -105,18 +100,17 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
     this.modalRef.destroy();
   }
 
-
   getResultItem(menu: Menu, fatherTitle: string = ''): ResultItem[] {
-    const fatherTitleTemp = fatherTitle === '' ? menu.menuName : fatherTitle + ' > ' + menu.menuName;
+    const fatherTitleTemp = fatherTitle === '' ? menu.menuName : `${fatherTitle} > ${menu.menuName}`;
     let resultItem: ResultItem = {
       title: fatherTitleTemp,
       routePath: menu.path!,
       selItem: false,
       isAliIcon: !!menu.alIcon,
       icon: menu.icon! || menu.alIcon!
-    }
+    };
     if (menu.children && menu.children.length > 0) {
-      let resultArrayTemp: ResultItem[] = []
+      let resultArrayTemp: ResultItem[] = [];
       menu.children.forEach(menuChild => {
         resultArrayTemp = [...resultArrayTemp, ...this.getResultItem(menuChild, fatherTitleTemp)];
       });
@@ -142,41 +136,42 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
 
   subSearchFn(): void {
     this.ngZone.runOutsideAngular(() => {
-      fromEvent(this.searchInput.nativeElement, 'input', passiveEventListenerOptions).pipe(
-        map(e => (e.target as HTMLInputElement).value),
-        debounceTime(500),
-        distinctUntilChanged(),
-        switchMap((item) => {
-          return of(item)
-        }),
-        takeUntil(this.destroy$)
-      ).subscribe(res => {
-        this.resultListShow = [];
-        this.resultList.forEach(item => {
-          if (item.title.includes(res)) {
-            this.resultListShow.push(item)
-          }
-        });
-        if (this.resultListShow.length > 0) {
-          this.resultListShow[0].selItem = true;
-        }
-        this.resultListShow = [...this.resultListShow];
-        // 清空搜索条件时将结果集置空
-        if (!res) {
+      fromEvent(this.searchInput.nativeElement, 'input', passiveEventListenerOptions)
+        .pipe(
+          map(e => (e.target as HTMLInputElement).value),
+          debounceTime(500),
+          distinctUntilChanged(),
+          switchMap(item => {
+            return of(item);
+          }),
+          takeUntil(this.destroy$)
+        )
+        .subscribe(res => {
           this.resultListShow = [];
-        }
-        this.ngZone.run(() => {
-          this.cdr.markForCheck();
-        })
-      })
-    })
-
+          this.resultList.forEach(item => {
+            if (item.title.includes(res)) {
+              this.resultListShow.push(item);
+            }
+          });
+          if (this.resultListShow.length > 0) {
+            this.resultListShow[0].selItem = true;
+          }
+          this.resultListShow = [...this.resultListShow];
+          // 清空搜索条件时将结果集置空
+          if (!res) {
+            this.resultListShow = [];
+          }
+          this.ngZone.run(() => {
+            this.cdr.markForCheck();
+          });
+        });
+    });
   }
 
   mouseOverItem(item: ResultItem): void {
     this.resultListShow.forEach(resultItem => {
       resultItem.selItem = false;
-    })
+    });
     item.selItem = true;
   }
 
@@ -185,9 +180,12 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
   }
 
   getMenus(): void {
-    this.menuStoreService.getMenuArrayStore().pipe(takeUntil(this.destroy$)).subscribe(menus => {
-      this.menuNavList = menus;
-    })
+    this.menuStoreService
+      .getMenuArrayStore()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(menus => {
+        this.menuNavList = menus;
+      });
   }
 
   ngOnInit(): void {
@@ -195,7 +193,5 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
     this.resultListFactory();
   }
 
-  protected getCurrentValue(): NzSafeAny {
-  }
-
+  protected getCurrentValue(): NzSafeAny {}
 }

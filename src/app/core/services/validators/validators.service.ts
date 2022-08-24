@@ -1,14 +1,13 @@
-import {Injectable} from '@angular/core';
-import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
-import {ValidatorsRuleService} from './validators-rule.service';
+import { Injectable } from '@angular/core';
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+
+import { ValidatorsRuleService } from './validators-rule.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ValidatorsService {
-
-  constructor(private vrService: ValidatorsRuleService) {
-  }
+  constructor(private vrService: ValidatorsRuleService) {}
 
   // 邮箱校验
   public emailValidator(): ValidatorFn | null {

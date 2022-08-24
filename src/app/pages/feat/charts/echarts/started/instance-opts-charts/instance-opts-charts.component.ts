@@ -1,6 +1,7 @@
-import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {NzMessageService} from 'ng-zorro-antd/message';
-import {EChartsOption} from "echarts/types/dist/echarts";
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+
+import { EChartsOption } from 'echarts/types/dist/echarts';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-instance-opts-charts',
@@ -18,7 +19,6 @@ import {EChartsOption} from "echarts/types/dist/echarts";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InstanceOptsChartsComponent {
-
   chartInstance: any;
 
   options: EChartsOption = {
@@ -28,20 +28,20 @@ export class InstanceOptsChartsComponent {
       left: 'center',
       top: 20,
       textStyle: {
-        color: '#ccc',
-      },
+        color: '#ccc'
+      }
     },
     tooltip: {
       trigger: 'item',
-      formatter: '{a} <br/>{b} : {c} ({d}%)',
+      formatter: '{a} <br/>{b} : {c} ({d}%)'
     },
     visualMap: {
       show: false,
       min: 80,
       max: 600,
       inRange: {
-        colorLightness: [0, 1],
-      },
+        colorLightness: [0, 1]
+      }
     },
     series: [
       {
@@ -50,57 +50,56 @@ export class InstanceOptsChartsComponent {
         radius: '55%',
         center: ['50%', '50%'],
         data: [
-          {value: 335, name: 'C-1'},
-          {value: 310, name: 'C-2'},
-          {value: 274, name: 'C-3'},
-          {value: 235, name: 'C-4'},
-          {value: 400, name: 'C-5'},
+          { value: 335, name: 'C-1' },
+          { value: 310, name: 'C-2' },
+          { value: 274, name: 'C-3' },
+          { value: 235, name: 'C-4' },
+          { value: 400, name: 'C-5' }
         ].sort((a, b) => a.value - b.value),
         roseType: 'radius',
         label: {
           // @ts-ignore
           normal: {
             textStyle: {
-              color: 'rgba(255, 255, 255, 0.3)',
-            },
-          },
+              color: 'rgba(255, 255, 255, 0.3)'
+            }
+          }
         },
         labelLine: {
           // @ts-ignore
           normal: {
             lineStyle: {
-              color: 'rgba(255, 255, 255, 0.3)',
+              color: 'rgba(255, 255, 255, 0.3)'
             },
             smooth: 0.2,
             length: 10,
-            length2: 20,
-          },
+            length2: 20
+          }
         },
         itemStyle: {
           // @ts-ignore
           normal: {
             color: '#c23531',
             shadowBlur: 200,
-            shadowColor: 'rgba(0, 0, 0, 0.5)',
-          },
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+          }
         },
 
         animationType: 'scale',
         animationEasing: 'elasticOut',
-        animationDelay: () => Math.random() * 200,
-      },
-    ],
+        animationDelay: () => Math.random() * 200
+      }
+    ]
   };
 
-  constructor(private msg: NzMessageService) {
-  }
+  constructor(private msg: NzMessageService) {}
 
-  onChartInit(e: any) {
+  onChartInit(e: any): void {
     this.chartInstance = e;
     console.log('on chart init:', e);
   }
 
-  callMethod(type: string) {
+  callMethod(type: string): void {
     if (this.chartInstance) {
       const result = this.chartInstance[type]();
       this.msg.info(`${type}(): ${result || 'void'}`);

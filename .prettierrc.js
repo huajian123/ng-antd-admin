@@ -1,10 +1,10 @@
 module.exports = {
   singleQuote: true,
   useTabs: false,
-  printWidth: 120,
+  printWidth: 200,
   tabWidth: 2,
   semi: true,
-  htmlWhitespaceSensitivity: 'strict',
+  htmlWhitespaceSensitivity: 'ignore',
   arrowParens: 'avoid',
   bracketSpacing: true,
   proseWrap: 'preserve',

@@ -1,16 +1,12 @@
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
 
-import {AnalysisRoutingModule} from './analysis-routing.module';
-import {AnalysisComponent} from './analysis.component';
-import {SharedModule} from '@shared/shared.module';
+import { SharedModule } from '@shared/shared.module';
 
+import { AnalysisRoutingModule } from './analysis-routing.module';
+import { AnalysisComponent } from './analysis.component';
 
 @NgModule({
   declarations: [AnalysisComponent],
-  imports: [
-    SharedModule,
-    AnalysisRoutingModule
-  ]
+  imports: [SharedModule, AnalysisRoutingModule]
 })
-export class AnalysisModule {
-}
+export class AnalysisModule {}

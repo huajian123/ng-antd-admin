@@ -1,18 +1,12 @@
-import {NgModule} from '@angular/core';
-import {IconSelComponent} from './icon-sel.component';
-import {SharedModule} from "@shared/shared.module";
+import { NgModule } from '@angular/core';
 
+import { SharedModule } from '@shared/shared.module';
+
+import { IconSelComponent } from './icon-sel.component';
 
 @NgModule({
-  declarations: [
-    IconSelComponent
-  ],
-  exports: [
-    IconSelComponent
-  ],
-  imports: [
-    SharedModule
-  ]
+  declarations: [IconSelComponent],
+  exports: [IconSelComponent],
+  imports: [SharedModule]
 })
-export class IconSelModule {
-}
+export class IconSelModule {}

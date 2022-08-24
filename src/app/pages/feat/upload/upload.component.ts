@@ -1,10 +1,11 @@
-import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {PageHeaderType} from "@shared/components/page-header/page-header.component";
-import {environment} from "@env/environment";
-import {NzUploadChangeParam, NzUploadFile} from "ng-zorro-antd/upload";
-import {NzMessageService} from "ng-zorro-antd/message";
-import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {fnCheckForm} from "@utils/tools";
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { environment } from '@env/environment';
+import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { fnCheckForm } from '@utils/tools';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 
 @Component({
   selector: 'app-upload',
@@ -23,22 +24,20 @@ export class UploadComponent implements OnInit {
   fileFormList: NzUploadFile[] = [];
   validateForm!: FormGroup;
 
-  constructor(public message: NzMessageService, private fb: FormBuilder,) {
-  }
+  constructor(public message: NzMessageService, private fb: FormBuilder) {}
 
   handleChange(info: NzUploadChangeParam): void {
     if (info.type === 'success') {
       if (info.file.response.code === 0) {
-        this.message.success('服务器上返回的文件路径：' + info.file.response.data.data)
+        this.message.success(`服务器上返回的文件路径：${info.file.response.data.data}`);
       }
     }
   }
 
-
   uploadFn(e: NzUploadChangeParam): void {
     if (e.type === 'success') {
       if (e.file.response.code === 0) {
-        this.validateForm.get('file')?.setValue(e.file.response.data.data)
+        this.validateForm.get('file')?.setValue(e.file.response.data.data);
       }
     }
   }
@@ -56,12 +55,11 @@ export class UploadComponent implements OnInit {
 
   initForm(): void {
     this.validateForm = this.fb.group({
-      file: [null, [Validators.required]],
+      file: [null, [Validators.required]]
     });
   }
 
   ngOnInit(): void {
     this.initForm();
   }
-
 }

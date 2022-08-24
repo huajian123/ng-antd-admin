@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import {PageHeaderType} from "@shared/components/page-header/page-header.component";
+
+import { PageHeaderType } from '@shared/components/page-header/page-header.component';
 
 @Component({
   selector: 'app-strength-meter',
@@ -14,11 +15,9 @@ export class StrengthMeterComponent implements OnInit {
     desc: '看看你密码强度够不够'
   };
   passwordVisible = false;
-  newPassword!:string;
+  newPassword!: string;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

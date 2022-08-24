@@ -1,4 +1,4 @@
-import {Component, OnInit, ChangeDetectionStrategy, Input} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'app-notice',
@@ -13,13 +13,10 @@ export class NoticeComponent implements OnInit {
   } = {
     password: true,
     messages: true,
-    todo: true,
+    todo: true
   };
 
-  constructor() {
-  }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

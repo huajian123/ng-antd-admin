@@ -1,17 +1,12 @@
 import { NgModule } from '@angular/core';
 
-import { GaodeMapRoutingModule } from './gaode-map-routing.module';
-import {SharedModule} from "@shared/shared.module";
-import {GaodeMapComponent} from "@app/pages/feat/charts/gaode-map/gaode-map.component";
+import { GaodeMapComponent } from '@app/pages/feat/charts/gaode-map/gaode-map.component';
+import { SharedModule } from '@shared/shared.module';
 
+import { GaodeMapRoutingModule } from './gaode-map-routing.module';
 
 @NgModule({
-  declarations: [
-    GaodeMapComponent
-  ],
-  imports: [
-    SharedModule,
-    GaodeMapRoutingModule
-  ]
+  declarations: [GaodeMapComponent],
+  imports: [SharedModule, GaodeMapRoutingModule]
 })
-export class GaodeMapModule { }
+export class GaodeMapModule {}

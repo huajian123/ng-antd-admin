@@ -1,12 +1,12 @@
-import {Injectable} from '@angular/core';
-import {BaseHttpService} from '../base-http.service';
-import { PageInfo, SearchCommonVO} from '../../types';
-import {Observable} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
+import { PageInfo, SearchCommonVO } from '../../types';
+import { BaseHttpService } from '../base-http.service';
 
 /*
-* 用户管理
-* */
+ * 用户管理
+ * */
 
 export interface User {
   id: number;
@@ -25,25 +25,22 @@ export interface User {
 }
 
 /*
-* 用户修改密码
-* */
+ * 用户修改密码
+ * */
 export interface UserPsd {
   id: number;
   oldPassword: string;
   newPassword: string;
 }
 
-
-
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
-  constructor(public http: BaseHttpService) {
-  }
+  constructor(public http: BaseHttpService) {}
 
   public getAccount(param: SearchCommonVO<User>): Observable<PageInfo<User>> {
-    return this.http.post('/user/list/',param);
+    return this.http.post('/user/list/', param);
   }
 
   public getAccountDetail(id: number): Observable<User> {
@@ -55,7 +52,7 @@ export class AccountService {
   }
 
   public delAccount(ids: number[]): Observable<void> {
-    return this.http.post('/user/del/', {ids});
+    return this.http.post('/user/del/', { ids });
   }
 
   public editAccount(param: User): Observable<void> {
@@ -65,5 +62,4 @@ export class AccountService {
   public editAccountPsd(param: UserPsd): Observable<void> {
     return this.http.put('/user/psd', param);
   }
-
 }

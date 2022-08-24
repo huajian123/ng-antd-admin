@@ -1,7 +1,7 @@
 <app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
 
 <div class="normal-table-wrap">
-  <nz-card [nzBodyStyle]="{padding:0}" class="relative">
+  <nz-card [nzBodyStyle]="{ padding: 0 }" class="relative">
     <div id="wrap" class="p-0 m-t-0" nz-result-content nz-row nzJustify="space-between">
       <div>
         <button nz-tooltip nzTooltipTitle="置前" nzTooltipPlacement="bottom" nz-button nzType="text">
@@ -42,7 +42,7 @@
       <div #container id="container" class="flex-1"></div>
     </div>
 
-    <nz-card [nzBodyStyle]="{padding:0}" class="absolute node-sel-bar">
+    <nz-card [nzBodyStyle]="{ padding: 0 }" class="absolute node-sel-bar">
       <div class="flex flex-coloum">
         <i nz-tooltip nzTooltipTitle="正方形" nzTooltipPlacement="right" shap="rect" (mousedown)="drag($event)" nz-icon nzType="border" nzTheme="outline"></i>
         <i nz-tooltip nzTooltipTitle="圆形" nzTooltipPlacement="right" shap="circle" (mousedown)="drag($event)" nz-icon nzType="user" nzTheme="outline"></i>

@@ -1,10 +1,13 @@
-import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
-import {PersonalCenterComponent} from './personal-center.component';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
+import { PersonalCenterComponent } from './personal-center.component';
 
 const routes: Routes = [
   {
-    path: '', component: PersonalCenterComponent, data: {title: '个人中心', key: 'personal-center'},
+    path: '',
+    component: PersonalCenterComponent,
+    data: { title: '个人中心', key: 'personal-center' }
   }
 ];
 
@@ -12,5 +15,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class PersonalCenterRoutingModule {
-}
+export class PersonalCenterRoutingModule {}

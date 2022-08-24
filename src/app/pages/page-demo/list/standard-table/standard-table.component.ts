@@ -1,7 +1,8 @@
-import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {PageHeaderType} from '@shared/components/page-header/page-header.component';
-import {NzProgressStatusType} from 'ng-zorro-antd/progress/typings';
-import {NzSafeAny} from "ng-zorro-antd/core/types";
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+
+import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzProgressStatusType } from 'ng-zorro-antd/progress/typings';
 
 @Component({
   selector: 'app-standard-table',
@@ -15,7 +16,7 @@ export class StandardTableComponent implements OnInit {
     breadcrumb: ['首页', '列表页面', '标准列表']
   };
   isSpinning = false;
-  list: {
+  list: Array<{
     id: number;
     name: string;
     desc: string;
@@ -24,8 +25,8 @@ export class StandardTableComponent implements OnInit {
     owner_id: string;
     time: string;
     progress: number;
-    progress_status: NzProgressStatusType
-  }[] = [
+    progress_status: NzProgressStatusType;
+  }> = [
     {
       id: 1,
       name: 'Alipay',
@@ -80,20 +81,14 @@ export class StandardTableComponent implements OnInit {
       time: '2020-11-19 01:51',
       progress: 91,
       progress_status: 'exception'
-    },
+    }
   ];
 
-  constructor() {
-  }
+  constructor() {}
 
-  edit(item: NzSafeAny): void {
-  }
+  edit(item: NzSafeAny): void {}
 
-  deleteItem(item: NzSafeAny): void {
+  deleteItem(item: NzSafeAny): void {}
 
-  }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

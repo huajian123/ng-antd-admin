@@ -1,10 +1,11 @@
-import {Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {LoginType} from "@app/pages/other-login/login1/login1.component";
-import {Login1StoreService} from "@store/biz-store-service/other-login/login1-store.service";
-import {takeUntil} from "rxjs/operators";
-import {EquipmentWidth, WindowsWidthService} from "@store/common-store/windows-width.service";
-import {DestroyService} from "@core/services/common/destory.service";
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { takeUntil } from 'rxjs/operators';
+
+import { LoginType } from '@app/pages/other-login/login1/login1.component';
+import { DestroyService } from '@core/services/common/destory.service';
+import { Login1StoreService } from '@store/biz-store-service/other-login/login1-store.service';
+import { EquipmentWidth, WindowsWidthService } from '@store/common-store/windows-width.service';
 
 /*https://www.npmjs.com/package/angular-password-strength-meter*/
 @Component({
@@ -27,19 +28,22 @@ export class RegistLoginComponent implements OnInit {
     return this.validateForm.get('password');
   }
 
-  constructor(private destroy$: DestroyService,private windowsWidthService: WindowsWidthService,private cdr: ChangeDetectorRef, private fb: FormBuilder, private login1StoreService: Login1StoreService,) {
-  }
+  constructor(
+    private destroy$: DestroyService,
+    private windowsWidthService: WindowsWidthService,
+    private cdr: ChangeDetectorRef,
+    private fb: FormBuilder,
+    private login1StoreService: Login1StoreService
+  ) {}
 
   subScreenWidth(): void {
     this.windowsWidthService.getWindowWidthStore().subscribe(res => {
       this.currentEquipmentWidth = res;
       this.cdr.markForCheck();
-    })
+    });
   }
 
-  submitForm(): void {
-
-  }
+  submitForm(): void {}
 
   goOtherWay(type: LoginType): void {
     this.login1StoreService.setLoginTypeStore(type);
@@ -58,20 +62,23 @@ export class RegistLoginComponent implements OnInit {
     return {};
   };
 
-  initForm():void{
+  initForm(): void {
     this.validateForm = this.fb.group({
       userName: [null, [Validators.required]],
       password: [null, [Validators.required]],
       checkPassword: [null, [Validators.required, this.confirmationValidator]],
-      remember: [null],
+      remember: [null]
     });
   }
 
   subLogin1Store(): void {
-    this.login1StoreService.getIsLogin1OverModelStore().pipe(takeUntil(this.destroy$)).subscribe((res => {
-      this.isOverModel = res;
-      this.cdr.markForCheck();
-    }));
+    this.login1StoreService
+      .getIsLogin1OverModelStore()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(res => {
+        this.isOverModel = res;
+        this.cdr.markForCheck();
+      });
   }
 
   ngOnInit(): void {

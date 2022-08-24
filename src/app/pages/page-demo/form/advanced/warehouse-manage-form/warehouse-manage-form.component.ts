@@ -1,8 +1,9 @@
-import {Component, OnInit, ChangeDetectionStrategy, forwardRef} from '@angular/core';
-import {ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators} from "@angular/forms";
-import {debounceTime, distinctUntilChanged} from "rxjs/operators";
-import {fnCheckForm} from "@utils/tools";
-import {NzSafeAny} from "ng-zorro-antd/core/types";
+import { Component, OnInit, ChangeDetectionStrategy, forwardRef } from '@angular/core';
+import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+
+import { fnCheckForm } from '@utils/tools';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 // 不要在这里定义，这里只是写个例子
 interface WareHouseManageObj {
@@ -18,8 +19,7 @@ const EXE_COUNTER_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
   multi: true,
   useExisting: forwardRef(() => WarehouseManageFormComponent)
-}
-
+};
 
 @Component({
   selector: 'app-warehouse-manage-form',
@@ -33,8 +33,7 @@ export class WarehouseManageFormComponent implements OnInit, ControlValueAccesso
   onChange: (value: string) => void = () => null;
   onTouched: () => void = () => null;
 
-  constructor(private fb: FormBuilder) {
-  }
+  constructor(private fb: FormBuilder) {}
 
   initForm(): void {
     this.validateForm = this.fb.group({
@@ -43,24 +42,22 @@ export class WarehouseManageFormComponent implements OnInit, ControlValueAccesso
       warehouseManager: [null, [Validators.required]],
       approver: [null, [Validators.required]],
       effectiveTime: [null, [Validators.required]],
-      warehouseType: [null, [Validators.required]],
+      warehouseType: [null, [Validators.required]]
     });
   }
 
   ngOnInit(): void {
     this.initForm();
-    this.validateForm.valueChanges.pipe(debounceTime(500),
-      distinctUntilChanged(),).subscribe(res => {
+    this.validateForm.valueChanges.pipe(debounceTime(500), distinctUntilChanged()).subscribe(res => {
       this.onChange(res);
-    })
+    });
   }
 
   registerOnChange(fn: NzSafeAny): void {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: NzSafeAny): void {
-  }
+  registerOnTouched(fn: NzSafeAny): void {}
 
   checkForm(): boolean {
     // 用下面方式让formArray每一项置脏（如果有formArray的话，这里只是做个示例）
@@ -70,8 +67,7 @@ export class WarehouseManageFormComponent implements OnInit, ControlValueAccesso
     return !fnCheckForm(this.validateForm);
   }
 
-  setDisabledState(isDisabled: boolean): void {
-  }
+  setDisabledState(isDisabled: boolean): void {}
 
   writeValue(obj: WareHouseManageObj): void {
     if (obj) {

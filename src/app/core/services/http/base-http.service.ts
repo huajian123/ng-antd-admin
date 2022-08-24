@@ -1,12 +1,13 @@
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {NzMessageService} from 'ng-zorro-antd/message';
-import {Observable} from 'rxjs';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
+
+import { environment } from '@env/environment';
+import { localUrl } from '@env/environment.prod';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import * as qs from 'qs';
-import {environment} from '@env/environment';
-import {filter, map} from 'rxjs/operators';
-import {Injectable} from '@angular/core';
-import {localUrl} from '@env/environment.prod';
-import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 export interface MyHttpConfig {
   needIntercept?: boolean; // 是否需要被拦截
@@ -32,17 +33,17 @@ export class BaseHttpService {
   }
 
   get<T>(path: string, param?: NzSafeAny, config?: MyHttpConfig): Observable<NzSafeAny> {
-    config = config || {needSuccessInfo: false};
+    config = config || { needSuccessInfo: false };
     let reqPath = this.uri + path;
     if (config.otherUrl) {
       reqPath = path;
     }
-    const params = new HttpParams({fromString: qs.stringify(param)});
-    return this.http.get<ActionResult<T>>(reqPath, {params}).pipe(
-      filter((item) => {
-        return this.handleFilter(item, !!(config?.needSuccessInfo));
+    const params = new HttpParams({ fromString: qs.stringify(param) });
+    return this.http.get<ActionResult<T>>(reqPath, { params }).pipe(
+      filter(item => {
+        return this.handleFilter(item, !!config?.needSuccessInfo);
       }),
-      map((item) => {
+      map(item => {
         if (item.code !== 0) {
           throw new Error(item.msg);
         }
@@ -53,17 +54,17 @@ export class BaseHttpService {
   }
 
   delete<T>(path: string, param?: NzSafeAny, config?: MyHttpConfig): Observable<NzSafeAny> {
-    config = config || {needSuccessInfo: false};
+    config = config || { needSuccessInfo: false };
     let reqPath = this.uri + path;
     if (config.otherUrl) {
       reqPath = path;
     }
-    const params = new HttpParams({fromString: qs.stringify(param)});
-    return this.http.delete<ActionResult<T>>(reqPath, {params}).pipe(
-      filter((item) => {
-        return this.handleFilter(item, !!(config?.needSuccessInfo));
+    const params = new HttpParams({ fromString: qs.stringify(param) });
+    return this.http.delete<ActionResult<T>>(reqPath, { params }).pipe(
+      filter(item => {
+        return this.handleFilter(item, !!config?.needSuccessInfo);
       }),
-      map((item) => {
+      map(item => {
         if (item.code !== 0) {
           throw new Error(item.msg);
         }
@@ -74,16 +75,16 @@ export class BaseHttpService {
   }
 
   post<T>(path: string, param?: NzSafeAny, config?: MyHttpConfig): Observable<NzSafeAny> {
-    config = config || {needSuccessInfo: false};
+    config = config || { needSuccessInfo: false };
     let reqPath = this.uri + path;
     if (config.otherUrl) {
       reqPath = path;
     }
     return this.http.post<ActionResult<T>>(reqPath, param).pipe(
-      filter((item) => {
-        return this.handleFilter(item, !!(config?.needSuccessInfo));
+      filter(item => {
+        return this.handleFilter(item, !!config?.needSuccessInfo);
       }),
-      map((item) => {
+      map(item => {
         if (item.code !== 0) {
           throw new Error(item.msg);
         }
@@ -94,16 +95,16 @@ export class BaseHttpService {
   }
 
   put<T>(path: string, param?: NzSafeAny, config?: MyHttpConfig): Observable<NzSafeAny> {
-    config = config || {needSuccessInfo: false};
+    config = config || { needSuccessInfo: false };
     let reqPath = this.uri + path;
     if (config.otherUrl) {
       reqPath = path;
     }
     return this.http.put<ActionResult<T>>(reqPath, param).pipe(
-      filter((item) => {
-        return this.handleFilter(item, !!(config?.needSuccessInfo));
+      filter(item => {
+        return this.handleFilter(item, !!config?.needSuccessInfo);
       }),
-      map((item) => {
+      map(item => {
         if (item.code !== 0) {
           throw new Error(item.msg);
         }
@@ -114,7 +115,7 @@ export class BaseHttpService {
   }
 
   downZip(path: string, param?: NzSafeAny, config?: MyHttpConfig): Observable<NzSafeAny> {
-    config = config || {needSuccessInfo: false};
+    config = config || { needSuccessInfo: false };
     let reqPath = this.uri + path;
     if (config.otherUrl) {
       reqPath = path;
