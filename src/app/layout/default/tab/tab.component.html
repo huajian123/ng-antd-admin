@@ -21,7 +21,10 @@
     [ngClass]="{
       'fixed-collapsed': (isCollapsed$ | async),
       'fixed-over-mode':
-        (isOverMode$ | async) || !(themesOptions$ | async)!.hasNavArea || (themesOptions$ | async)?.mode === 'top' || ((themesOptions$ | async)?.mode === 'mixi' && (leftMenuArray$ | async) === false && (themesOptions$ | async)?.splitNav)
+        (isOverMode$ | async) ||
+        !(themesOptions$ | async)!.hasNavArea ||
+        (themesOptions$ | async)?.mode === 'top' ||
+        ((themesOptions$ | async)?.mode === 'mixi' && (leftMenuArray$ | async) === null && (themesOptions$ | async)?.splitNav)
     }"
     [ngStyle]="{ top: (themesOptions$ | async)!.hasTopArea ? '48px' : '0', left: !(themesOptions$ | async)!.hasNavArea ? '0' : '' }"
     id="multi-tab2"
@@ -31,7 +34,10 @@
     <nz-tabset [nzAnimated]="false" [nzSelectedIndex]="currentIndex" [nzTabPosition]="'top'">
       <nz-tab (nzClick)="goPage(tab)" nzClosable (nzContextmenu)="contextMenu($event, menu)" [nzTitle]="titleTemplate" *ngFor="let tab of tabsSourceData$ | async; let i = index; trackBy: trackByTab">
         <ng-template #titleTemplate>
-          <span class="text-center p-l-16 p-r-16 relative d-i-b" appMouseHoverShow style="min-width: 60px">{{ tab.title }} <i class="m-0 none" (click)="clickCloseIcon({ index: i })" nz-icon [nzType]="'close'"></i></span>
+          <span class="text-center p-l-16 p-r-16 relative d-i-b" appMouseHoverShow style="min-width: 60px">
+            {{ tab.title }}
+            <i class="m-0 none" (click)="clickCloseIcon({ index: i })" nz-icon [nzType]="'close'"></i>
+          </span>
         </ng-template>
         <nz-dropdown-menu #menu="nzDropdownMenu">
           <ul nz-menu>

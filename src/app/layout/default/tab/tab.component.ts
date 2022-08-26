@@ -1,9 +1,11 @@
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
 import { DestroyService } from '@core/services/common/destory.service';
 import { TabModel, TabService } from '@core/services/common/tab.service';
+import { Menu } from '@core/services/types';
 import { SplitNavStoreService } from '@store/common-store/split-nav-store.service';
 import { ThemeService } from '@store/common-store/theme.service';
 import { fnStopMouseEvent } from '@utils/tools';
@@ -22,7 +24,7 @@ export class TabComponent implements OnInit {
   tabsSourceData$ = this.tabService.getTabArray$();
   themesOptions$ = this.themesService.getThemesMode();
   isNightTheme$ = this.themesService.getIsNightTheme();
-  leftMenuArray$ = this.splitNavStoreService.getSplitLeftNavArrayStore();
+  leftMenuArray$: Observable<Menu[]> = this.splitNavStoreService.getSplitLeftNavArrayStore();
   isOverMode$ = this.themesService.getIsOverMode();
   isOverMode = false;
   isCollapsed$ = this.themesService.getIsCollapsed();
