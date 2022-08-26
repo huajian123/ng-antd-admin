@@ -1,14 +1,15 @@
-import {Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef} from '@angular/core';
-import {PageHeaderType} from "@shared/components/page-header/page-header.component";
-import {NzSafeAny} from "ng-zorro-antd/core/types";
-import {FormBuilder} from "@angular/forms";
-import {MyTableConfig, SortFile} from "@shared/components/ant-table/ant-table.component";
-import {NzMessageService} from "ng-zorro-antd/message";
-import {Router} from "@angular/router";
-import {NzTableQueryParams} from "ng-zorro-antd/table";
-import {SearchCommonVO} from "@core/services/types";
-import {NzModalService} from "ng-zorro-antd/modal";
-import {fnFlattenTreeDataByDataList} from "@utils/treeTableTools";
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
+
+import { SearchCommonVO } from '@core/services/types';
+import { MyTableConfig, SortFile } from '@shared/components/ant-table/ant-table.component';
+import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { fnFlattenTreeDataByDataList } from '@utils/treeTableTools';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzTableQueryParams } from 'ng-zorro-antd/table';
 
 interface SearchParam {
   ruleName: number;
@@ -22,8 +23,8 @@ interface SearchParam {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TreeListComponent implements OnInit {
-  @ViewChild('highLightTpl', {static: true}) highLightTpl!: TemplateRef<NzSafeAny>;
-  @ViewChild('operationTpl', {static: true}) operationTpl!: TemplateRef<NzSafeAny>;
+  @ViewChild('highLightTpl', { static: true }) highLightTpl!: TemplateRef<NzSafeAny>;
+  @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<NzSafeAny>;
   searchParam: Partial<SearchParam> = {};
 
   isCollapse = true;
@@ -36,14 +37,10 @@ export class TreeListComponent implements OnInit {
   checkedCashArray: any[] = [];
   dataList: NzSafeAny[] = [];
 
-  constructor(private fb: FormBuilder,
-              private modalSrv: NzModalService,
-              public message: NzMessageService,
-              private router: Router, private cdr: ChangeDetectorRef) {
-  }
+  constructor(private fb: FormBuilder, private modalSrv: NzModalService, public message: NzMessageService, private router: Router, private cdr: ChangeDetectorRef) {}
 
   reloadTable(): void {
-    this.message.info('已经刷新了')
+    this.message.info('已经刷新了');
     this.getDataList();
   }
 
@@ -142,67 +139,69 @@ export class TreeListComponent implements OnInit {
       ];
       this.tableConfig.total = 13;
       this.tableConfig.pageIndex = 1;
-      const cashFromHttp = [{
-        id: `1`,
-        name: 'John Brown sr.',
-        sex: '男',
-        age: 60,
-        address: 'New York No. 1 Lake Park',
-        children: [
-          {
-            id: `1-2`,
-            name: 'John Brown jr.',
-            age: 30,
-            sex: '男',
-            address: 'New York No. 3 Lake Park',
-            children: [
-              {
-                id: `1-2-1`,
-                name: 'Jimmy Brown',
-                sex: '男',
-                age: 16,
-                address: 'New York No. 3 Lake Park'
-              }
-            ]
-          },
-          {
-            id: `1-3`,
-            name: 'Jim Green sr.',
-            age: 72,
-            sex: '男',
-            address: 'London No. 1 Lake Park',
-            children: [
-              {
-                id: `1-3-1`,
-                name: 'Jim Green',
-                sex: '男',
-                age: 42,
-                address: 'London No. 2 Lake Park',
-                children: [
-                  {
-                    id: `1-3-1-1`,
-                    name: 'Jim Green jr.',
-                    sex: '男',
-                    age: 25,
-                    address: 'London No. 3 Lake Park'
-                  },
-                  {
-                    id: `1-3-1-2`,
-                    name: 'Jimmy Green sr.',
-                    sex: '男',
-                    age: 18,
-                    address: 'London No. 4 Lake Park'
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },];
+      const cashFromHttp = [
+        {
+          id: `1`,
+          name: 'John Brown sr.',
+          sex: '男',
+          age: 60,
+          address: 'New York No. 1 Lake Park',
+          children: [
+            {
+              id: `1-2`,
+              name: 'John Brown jr.',
+              age: 30,
+              sex: '男',
+              address: 'New York No. 3 Lake Park',
+              children: [
+                {
+                  id: `1-2-1`,
+                  name: 'Jimmy Brown',
+                  sex: '男',
+                  age: 16,
+                  address: 'New York No. 3 Lake Park'
+                }
+              ]
+            },
+            {
+              id: `1-3`,
+              name: 'Jim Green sr.',
+              age: 72,
+              sex: '男',
+              address: 'London No. 1 Lake Park',
+              children: [
+                {
+                  id: `1-3-1`,
+                  name: 'Jim Green',
+                  sex: '男',
+                  age: 42,
+                  address: 'London No. 2 Lake Park',
+                  children: [
+                    {
+                      id: `1-3-1-1`,
+                      name: 'Jim Green jr.',
+                      sex: '男',
+                      age: 25,
+                      address: 'London No. 3 Lake Park'
+                    },
+                    {
+                      id: `1-3-1-2`,
+                      name: 'Jimmy Green sr.',
+                      sex: '男',
+                      age: 18,
+                      address: 'London No. 4 Lake Park'
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ];
       this.checkedCashArray = fnFlattenTreeDataByDataList(cashFromHttp);
       // this.checkedCashArray = [...this.checkedCashArray];
       this.tableLoading(false);
-    })
+    });
 
     /*-----实际业务请求http接口如下------*/
     // this.tableConfig.loading = true;
@@ -222,7 +221,6 @@ export class TreeListComponent implements OnInit {
     //   this.checkedCashArray = [...this.checkedCashArray];
     // }));
   }
-
 
   /*展开*/
   toggleCollapse(): void {
@@ -258,9 +256,12 @@ export class TreeListComponent implements OnInit {
       nzContent: '删除后不可恢复',
       nzOnOk: () => {
         this.tableLoading(true);
-        this.message.info('id数组(支持分页保存):' + JSON.stringify(id))
+        this.message.info(`id数组(支持分页保存):${JSON.stringify(id)}`);
         this.getDataList();
-        this.checkedCashArray.splice(this.checkedCashArray.findIndex(item => item.id === id), 1);
+        this.checkedCashArray.splice(
+          this.checkedCashArray.findIndex(item => item.id === id),
+          1
+        );
         this.tableLoading(false);
         /*注释的是模拟接口调用*/
         // this.dataService.delFireSys([id]).subscribe(() => {
@@ -281,11 +282,11 @@ export class TreeListComponent implements OnInit {
         nzContent: '删除后不可恢复',
         nzOnOk: () => {
           const tempArrays: number[] = [];
-          this.checkedCashArray.forEach((item) => {
+          this.checkedCashArray.forEach(item => {
             tempArrays.push(item.id);
           });
           this.tableLoading(true);
-          this.message.info('数组(支持分页保存):' + JSON.stringify(tempArrays))
+          this.message.info(`数组(支持分页保存):${JSON.stringify(tempArrays)}`);
           this.getDataList();
           this.checkedCashArray = [];
           this.tableLoading(false);
@@ -342,9 +343,9 @@ export class TreeListComponent implements OnInit {
 
   private initTable(): void {
     /*
-  * 注意，这里需要留一列不要设置width，让列表自适应宽度
-  *
-  * */
+     * 注意，这里需要留一列不要设置width，让列表自适应宽度
+     *
+     * */
     this.tableConfig = {
       headers: [
         {
@@ -352,37 +353,37 @@ export class TreeListComponent implements OnInit {
           width: 230,
           field: 'name',
           showSort: true,
-          tdClassList: ['operate-text'],
+          tdClassList: ['operate-text']
         },
         {
           title: '性别',
           field: 'sex',
           width: 230,
-          tdTemplate: this.highLightTpl,
+          tdTemplate: this.highLightTpl
         },
         {
           title: '年龄',
           field: 'age',
           width: 230,
-          showSort: true,
+          showSort: true
         },
         {
           title: '住址',
-          field: 'address',
+          field: 'address'
         },
         {
           title: '操作',
           tdTemplate: this.operationTpl,
           width: 130,
           fixed: true,
-          fixedDir: "right"
+          fixedDir: 'right'
         }
       ],
       total: 0,
       showCheckbox: true,
       loading: false,
       pageSize: 10,
-      pageIndex: 1,
+      pageIndex: 1
     };
   }
 

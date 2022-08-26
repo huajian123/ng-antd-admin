@@ -1,5 +1,4 @@
-import {Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef} from '@angular/core';
-import {ScrollService} from "@core/services/common/scroll.service";
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-zorro-doc',
@@ -8,10 +7,7 @@ import {ScrollService} from "@core/services/common/scroll.service";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ZorroDocComponent implements OnInit {
-  constructor() {
-  }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

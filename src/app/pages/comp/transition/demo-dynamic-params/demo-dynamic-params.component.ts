@@ -1,4 +1,5 @@
-import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+
 import {
   bounceAnimation,
   flashAnimation,
@@ -86,19 +87,18 @@ import {
   rotateInUpLeftOnEnterAnimation
 } from 'angular-animations';
 
-
 @Component({
   selector: 'app-demo-dynamic-params',
   templateUrl: './demo-dynamic-params.component.html',
   styleUrls: ['./demo-dynamic-params.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
-    fadeInRightOnEnterAnimation({anchor: 'enter1', translate: '100%'}),
-    rollInOnEnterAnimation({anchor: 'enter2', translate: '800px', degrees: 360, delay: 250}),
-    rotateInUpLeftOnEnterAnimation({anchor: 'enter3'}),
+    fadeInRightOnEnterAnimation({ anchor: 'enter1', translate: '100%' }),
+    rollInOnEnterAnimation({ anchor: 'enter2', translate: '800px', degrees: 360, delay: 250 }),
+    rotateInUpLeftOnEnterAnimation({ anchor: 'enter3' }),
     bounceAnimation(),
     flashAnimation(),
-    pulseAnimation({anchor: 'pulse'}),
+    pulseAnimation({ anchor: 'pulse' }),
     rubberBandAnimation(),
     shakeAnimation(),
     swingAnimation(),
@@ -176,9 +176,9 @@ import {
     collapseAnimation(),
     collapseHorizontallyAnimation(),
     rotateAnimation(),
-    rotateAnimation({anchor: 'rotate90', degrees: 90}),
+    rotateAnimation({ anchor: 'rotate90', degrees: 90 }),
     hueRotateAnimation(),
-    hueRotateAnimation({anchor: 'hueButton', duration: 20000})
+    hueRotateAnimation({ anchor: 'hueButton', duration: 20000 })
   ]
 })
 export class DemoDynamicParamsComponent implements OnInit {
@@ -203,31 +203,11 @@ export class DemoDynamicParamsComponent implements OnInit {
     },
     {
       label: 'Fading Entrances',
-      animations: [
-        'fadeIn',
-        'fadeInDown',
-        'fadeInDownBig',
-        'fadeInLeft',
-        'fadeInLeftBig',
-        'fadeInRight',
-        'fadeInRightBig',
-        'fadeInUp',
-        'fadeInUpBig'
-      ]
+      animations: ['fadeIn', 'fadeInDown', 'fadeInDownBig', 'fadeInLeft', 'fadeInLeftBig', 'fadeInRight', 'fadeInRightBig', 'fadeInUp', 'fadeInUpBig']
     },
     {
       label: 'Fading Exits',
-      animations: [
-        'fadeOut',
-        'fadeOutDown',
-        'fadeOutDownBig',
-        'fadeOutLeft',
-        'fadeOutLeftBig',
-        'fadeOutRight',
-        'fadeOutRightBig',
-        'fadeOutUp',
-        'fadeOutUpBig'
-      ]
+      animations: ['fadeOut', 'fadeOutDown', 'fadeOutDownBig', 'fadeOutLeft', 'fadeOutLeftBig', 'fadeOutRight', 'fadeOutRightBig', 'fadeOutUp', 'fadeOutUpBig']
     },
     {
       label: 'Flippers',
@@ -274,10 +254,9 @@ export class DemoDynamicParamsComponent implements OnInit {
   animationState = false;
   animationWithState = false;
 
-  constructor(private cdr: ChangeDetectorRef) {
-  }
+  constructor(private cdr: ChangeDetectorRef) {}
 
-  animate() {
+  animate(): void {
     this.animationState = false;
     setTimeout(() => {
       this.animationState = !this.animationState;
@@ -286,12 +265,12 @@ export class DemoDynamicParamsComponent implements OnInit {
     }, 1);
   }
 
-  animationChanged() {
+  animationChanged(): void {
     this.setDefaultParams();
     this.animate();
   }
 
-  setDefaultParams() {
+  setDefaultParams(): void {
     this.duration = 1000;
     this.delay = 0;
     switch (this.animation) {
@@ -425,7 +404,7 @@ export class DemoDynamicParamsComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.setDefaultParams();
   }
 }

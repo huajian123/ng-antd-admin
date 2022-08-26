@@ -1,12 +1,13 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {PageHeaderType} from "@shared/components/page-header/page-header.component";
-import {Menu} from "@core/services/types";
-import {PutPermissionParam, RoleService} from "@services/system/role.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {NzMessageService} from "ng-zorro-antd/message";
-import {concatMap} from "rxjs/operators";
-import {MenusService} from "@services/system/menus.service";
-import {fnAddTreeDataGradeAndLeaf, fnFlatDataHasParentToTree, fnFlattenTreeDataByDataList} from "@utils/treeTableTools";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { concatMap } from 'rxjs/operators';
+
+import { Menu } from '@core/services/types';
+import { MenusService } from '@services/system/menus.service';
+import { PutPermissionParam, RoleService } from '@services/system/role.service';
+import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { fnAddTreeDataGradeAndLeaf, fnFlatDataHasParentToTree, fnFlattenTreeDataByDataList } from '@utils/treeTableTools';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-set-role',
@@ -22,38 +23,46 @@ export class SetRoleComponent implements OnInit {
     breadcrumb: ['首页', '用户管理', '角色管理', '设置权限']
   };
   authCodeArr: string[] = [];
-  permissionList: (Menu & { isOpen?: boolean, checked?: boolean })[] = [];
+  permissionList: Array<Menu & { isOpen?: boolean; checked?: boolean }> = [];
   id!: number;
   roleName!: string;
 
-  constructor(private dataService: RoleService, private cdr: ChangeDetectorRef,
-              private menusService: MenusService,
-              private routeInfo: ActivatedRoute, private router: Router,
-              public message: NzMessageService) {
-  }
+  constructor(
+    private dataService: RoleService,
+    private cdr: ChangeDetectorRef,
+    private menusService: MenusService,
+    private routeInfo: ActivatedRoute,
+    private router: Router,
+    public message: NzMessageService
+  ) {}
 
   // 初始化数据
   initPermission(): void {
     // 通过角色id获取这个角色拥有的权限码
-    this.dataService.getPermissionById(this.id).pipe(concatMap((authCodeArr => {
-      this.authCodeArr = authCodeArr;
-      // 获取所有菜单
-      return this.menusService.getMenuList({pageNum: 0, pageSize: 0})
-    }))).subscribe(response => {
-      // isOpen表示 节点是否展开
-      const menuArray: (Menu & { isOpen?: boolean, checked?: boolean })[] = response.list;
-      menuArray.forEach(item => {
-        item.isOpen = false;
-        item.checked = this.authCodeArr.includes(item.code!);
+    this.dataService
+      .getPermissionById(this.id)
+      .pipe(
+        concatMap(authCodeArr => {
+          this.authCodeArr = authCodeArr;
+          // 获取所有菜单
+          return this.menusService.getMenuList({ pageNum: 0, pageSize: 0 });
+        })
+      )
+      .subscribe(response => {
+        // isOpen表示 节点是否展开
+        const menuArray: Array<Menu & { isOpen?: boolean; checked?: boolean }> = response.list;
+        menuArray.forEach(item => {
+          item.isOpen = false;
+          item.checked = this.authCodeArr.includes(item.code!);
+        });
+        this.permissionList = fnAddTreeDataGradeAndLeaf(fnFlatDataHasParentToTree(menuArray));
+        this.cdr.markForCheck();
       });
-      this.permissionList = fnAddTreeDataGradeAndLeaf(fnFlatDataHasParentToTree(menuArray));
-      this.cdr.markForCheck();
-    })
   }
 
   getRoleName(): void {
-    this.dataService.getRolesDetail(this.id).subscribe(({roleName}) => {
-      this.pageHeaderInfo = {...this.pageHeaderInfo, ...{desc: `当前角色：${roleName}`}};
+    this.dataService.getRolesDetail(this.id).subscribe(({ roleName }) => {
+      this.pageHeaderInfo = { ...this.pageHeaderInfo, ...{ desc: `当前角色：${roleName}` } };
       this.cdr.markForCheck();
     });
   }
@@ -63,14 +72,14 @@ export class SetRoleComponent implements OnInit {
   }
 
   submit(): void {
-    const temp = [...this.permissionList]
+    const temp = [...this.permissionList];
     const flatArray = fnFlattenTreeDataByDataList(temp);
     const seledAuthArray: number[] = [];
     flatArray.forEach(item => {
       if (item['checked']) {
-        seledAuthArray.push(+item.id)
+        seledAuthArray.push(+item.id);
       }
-    })
+    });
     const param: PutPermissionParam = {
       permissionIds: seledAuthArray,
       roleId: +this.id

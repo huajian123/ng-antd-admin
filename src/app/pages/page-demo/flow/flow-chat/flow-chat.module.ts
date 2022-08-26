@@ -1,18 +1,12 @@
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
 
-import {FlowChatRoutingModule} from './flow-chat-routing.module';
-import {FlowChatComponent} from './flow-chat.component';
-import {SharedModule} from "@shared/shared.module";
+import { SharedModule } from '@shared/shared.module';
 
+import { FlowChatRoutingModule } from './flow-chat-routing.module';
+import { FlowChatComponent } from './flow-chat.component';
 
 @NgModule({
-  declarations: [
-    FlowChatComponent
-  ],
-  imports: [
-    SharedModule,
-    FlowChatRoutingModule
-  ]
+  declarations: [FlowChatComponent],
+  imports: [SharedModule, FlowChatRoutingModule]
 })
-export class FlowChatModule {
-}
+export class FlowChatModule {}

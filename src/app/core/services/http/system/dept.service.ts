@@ -1,11 +1,12 @@
-import {Injectable} from '@angular/core';
-import {BaseHttpService} from '../base-http.service';
-import {PageInfo, SearchCommonVO} from '../../types';
-import {Observable} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+
+import { PageInfo, SearchCommonVO } from '../../types';
+import { BaseHttpService } from '../base-http.service';
 
 /*
-*  部门列表
-* */
+ *  部门列表
+ * */
 export interface Dept {
   id?: number;
   departmentName: string;
@@ -18,11 +19,10 @@ export interface Dept {
   providedIn: 'root'
 })
 export class DeptService {
-  constructor(public http: BaseHttpService) {
-  }
+  constructor(public http: BaseHttpService) {}
 
   public getDepts(param: SearchCommonVO<Dept>): Observable<PageInfo<Dept>> {
-    return this.http.post('/department/list/',param);
+    return this.http.post('/department/list/', param);
   }
 
   public getDeptsDetail(id: number): Observable<Dept> {
@@ -34,12 +34,10 @@ export class DeptService {
   }
 
   public delDepts(ids: number[]): Observable<void> {
-    return this.http.post('/department/del/', {ids});
+    return this.http.post('/department/del/', { ids });
   }
 
   public editDepts(param: Dept): Observable<void> {
     return this.http.put('/department/', param);
   }
-
-
 }

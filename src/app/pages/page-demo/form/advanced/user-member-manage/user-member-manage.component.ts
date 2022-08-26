@@ -16,7 +16,7 @@ export class UserMemberManageComponent implements OnInit {
   // 表格
   editCache: { [key: string]: { edit: boolean; data: ItemData } } = {};
   listOfData: ItemData[] = [];
-  constructor() { }
+  constructor() {}
 
   startEdit(id: string): void {
     this.editCache[id].edit = true;
@@ -25,7 +25,7 @@ export class UserMemberManageComponent implements OnInit {
   cancelEdit(id: string): void {
     const index = this.listOfData.findIndex(item => item.id === id);
     this.editCache[id] = {
-      data: {...this.listOfData[index]},
+      data: { ...this.listOfData[index] },
       edit: false
     };
   }
@@ -40,13 +40,12 @@ export class UserMemberManageComponent implements OnInit {
     this.listOfData.forEach(item => {
       this.editCache[item.id] = {
         edit: false,
-        data: {...item}
+        data: { ...item }
       };
     });
   }
 
   ngOnInit(): void {
-
     const data = [];
     for (let i = 0; i < 10; i++) {
       data.push({
@@ -59,5 +58,4 @@ export class UserMemberManageComponent implements OnInit {
     this.listOfData = data;
     this.updateEditCache();
   }
-
 }

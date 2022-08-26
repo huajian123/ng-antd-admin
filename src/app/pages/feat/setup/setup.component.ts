@@ -1,6 +1,7 @@
-import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {PageHeaderType} from "@shared/components/page-header/page-header.component";
-import {DriverService} from "@core/services/common/driver.service";
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+
+import { DriverService } from '@core/services/common/driver.service';
+import { PageHeaderType } from '@shared/components/page-header/page-header.component';
 
 @Component({
   selector: 'app-setup',
@@ -14,14 +15,11 @@ export class SetupComponent implements OnInit {
     desc: '用于给用户的指引操作'
   };
 
-  constructor(private driverService: DriverService) {
-  }
+  constructor(private driverService: DriverService) {}
 
   go(): void {
     this.driverService.load();
   }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

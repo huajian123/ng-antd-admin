@@ -1,20 +1,13 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  ComponentRef,
-  OnInit
-} from '@angular/core';
-import {FormBuilder} from '@angular/forms';
-import {PageHeaderType} from '@shared/components/page-header/page-header.component';
-import {BreakpointObserver} from "@angular/cdk/layout";
-import {ComponentPortal, CdkPortalOutletAttachedRef, Portal} from '@angular/cdk/portal';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { ComponentPortal, CdkPortalOutletAttachedRef, Portal, ComponentType } from '@angular/cdk/portal';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ComponentRef, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
-import {ComponentType} from "@angular/cdk/portal/portal";
-import {StepOneComponent} from './step-one/step-one.component';
-import {StepTwoComponent} from './step-two/step-two.component';
-import {StepThreeComponent} from "@app/pages/page-demo/form/step/step-three/step-three.component";
+import { StepThreeComponent } from '@app/pages/page-demo/form/step/step-three/step-three.component';
+import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+
+import { StepOneComponent } from './step-one/step-one.component';
+import { StepTwoComponent } from './step-two/step-two.component';
 
 type comp = StepOneComponent | StepTwoComponent | StepThreeComponent;
 
@@ -28,7 +21,7 @@ enum StepEnum {
   selector: 'app-step',
   templateUrl: './step.component.html',
   styleUrls: ['./step.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StepComponent implements OnInit, AfterViewInit {
   selectedPortal!: Portal<any>;
@@ -39,11 +32,10 @@ export class StepComponent implements OnInit, AfterViewInit {
     breadcrumb: ['首页', '表单页', '分步表单']
   };
   currentStep = 1;
-  stepComponentArray: ComponentType<comp>[] = [StepOneComponent, StepTwoComponent, StepThreeComponent];
+  stepComponentArray: Array<ComponentType<comp>> = [StepOneComponent, StepTwoComponent, StepThreeComponent];
   componentPortal?: ComponentPortal<comp>;
 
-  constructor(private fb: FormBuilder, private breakpointObserver: BreakpointObserver, private cdr: ChangeDetectorRef) {
-  }
+  constructor(private fb: FormBuilder, private breakpointObserver: BreakpointObserver, private cdr: ChangeDetectorRef) {}
 
   go(step: StepEnum, ref: CdkPortalOutletAttachedRef, currentStepNum: number): void {
     this.currentStep = currentStepNum;
@@ -57,21 +49,21 @@ export class StepComponent implements OnInit, AfterViewInit {
       if (ref.instance instanceof StepOneComponent) {
         ref.instance.stepDirection = this.stepDirection;
         ref.instance.next.subscribe(() => {
-          this.go(StepEnum.Two, ref, this.currentStep + 1)
+          this.go(StepEnum.Two, ref, this.currentStep + 1);
         });
       }
       if (ref.instance instanceof StepTwoComponent) {
         ref.instance.previous.subscribe(() => {
-          this.go(StepEnum.One, ref, this.currentStep - 1)
+          this.go(StepEnum.One, ref, this.currentStep - 1);
         });
         ref.instance.next.subscribe(() => {
-          this.go(StepEnum.Three, ref, this.currentStep + 1)
+          this.go(StepEnum.Three, ref, this.currentStep + 1);
         });
       }
       if (ref.instance instanceof StepThreeComponent) {
         ref.instance.stepDirection = this.stepDirection;
         ref.instance.next.subscribe(() => {
-          this.go(StepEnum.One, ref, 1)
+          this.go(StepEnum.One, ref, 1);
         });
       }
     }
@@ -79,7 +71,7 @@ export class StepComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.breakpointObserver.observe(['(max-width: 770px)']).subscribe(result => {
-      let tempDir: 'vertical' | 'horizontal' = result.matches ? 'vertical' : 'horizontal'
+      let tempDir: 'vertical' | 'horizontal' = result.matches ? 'vertical' : 'horizontal';
       if (tempDir !== this.stepDirection) {
         this.stepDirection = tempDir;
         this.cdr.markForCheck();

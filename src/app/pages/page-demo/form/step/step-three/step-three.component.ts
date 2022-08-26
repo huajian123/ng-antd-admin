@@ -1,5 +1,6 @@
-import {Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter} from '@angular/core';
-import {NzSafeAny} from "ng-zorro-antd/core/types";
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 @Component({
   selector: 'app-step-three',
@@ -9,11 +10,9 @@ import {NzSafeAny} from "ng-zorro-antd/core/types";
 })
 export class StepThreeComponent implements OnInit {
   @Input('stepDirection') stepDirection: 'horizontal' | 'vertical' = 'horizontal';
-  @Output() next = new EventEmitter<NzSafeAny>();
+  @Output() readonly next = new EventEmitter<NzSafeAny>();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

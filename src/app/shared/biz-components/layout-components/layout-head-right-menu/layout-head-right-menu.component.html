@@ -1,77 +1,90 @@
 <ng-container *ngTemplateOutlet="headRight"></ng-container>
 <ng-template #headRight>
   <div class="bst-header-wrap" id="tools">
-
-
-<!--      <span *appScreenLessHidden="'375'" (click)="lockScreen()" class="bst-header-icon" nz-tooltip nzTooltipTitle="锁屏"
+    <!--      <span *appScreenLessHidden="'375'" (click)="lockScreen()" class="bst-header-icon" nz-tooltip nzTooltipTitle="锁屏"
             nzTooltipPlacement="bottom">
          <i nz-icon nzType="lock"
             nzTheme="outline"></i>
         </span>-->
 
-    <span (click)="showSearchModal()" *appScreenLessHidden="'320'" class="bst-header-icon" nz-tooltip
-          nzTooltipTitle="搜索"
-          nzTooltipPlacement="bottom">
-              <i nz-icon nzType="search" nzTheme="outline"></i>
-          </span>
+    <span (click)="showSearchModal()" *appScreenLessHidden="'320'" class="bst-header-icon" nz-tooltip nzTooltipTitle="搜索" nzTooltipPlacement="bottom">
+      <i nz-icon nzType="search" nzTheme="outline"></i>
+    </span>
     <!--注释的是一个弹出外连接的按钮-->
     <!-- <span *appScreenLessHidden="'375'" class="bst-header-icon" nz-tooltip nzTooltipTitle="OnChat的帮助文档"
            nzTooltipPlacement="bottom">
              <a href="https://docs.chat.hypergo.net/docs/intro/" target="_blank"><i nz-icon nzType="question-circle"
                                                                                     nzTheme="outline"></i></a>
            </span>-->
-    <span *appScreenLessHidden="'393'" class="bst-header-icon"
-          appToggleFullscreen
-          #toogleFullScreenDir="appToggleFullscreen"
-          nz-tooltip
-          [nzTooltipTitle]="toogleFullScreenDir.isFullscreenFlag?'全屏':'退出全屏'"
-          nzTooltipPlacement="bottom">
-            <i nz-icon *ngIf="toogleFullScreenDir.isFullscreenFlag;else exitFullTpl" nzType="fullscreen"
-               nzTheme="outline"></i>
-            <ng-template #exitFullTpl>
-                          <i nz-icon nzType="fullscreen-exit" nzTheme="outline"></i>
-            </ng-template>
-          </span>
+    <span
+      *appScreenLessHidden="'393'"
+      class="bst-header-icon"
+      appToggleFullscreen
+      #toogleFullScreenDir="appToggleFullscreen"
+      nz-tooltip
+      [nzTooltipTitle]="toogleFullScreenDir.isFullscreenFlag ? '全屏' : '退出全屏'"
+      nzTooltipPlacement="bottom"
+    >
+      <i nz-icon *ngIf="toogleFullScreenDir.isFullscreenFlag; else exitFullTpl" nzType="fullscreen" nzTheme="outline"></i>
+      <ng-template #exitFullTpl>
+        <i nz-icon nzType="fullscreen-exit" nzTheme="outline"></i>
+      </ng-template>
+    </span>
 
-    <span class="bst-header-icon" nz-dropdown [nzDropdownMenu]="noticeMenu"
-          nzTrigger="click" nzPlacement="bottomRight">
-            <nz-badge [nzCount]="11" class="bst-badge">
-                <i nz-icon nzType="bell" nzTheme="outline"></i>
-            </nz-badge>
-          </span>
+    <span class="bst-header-icon" nz-dropdown [nzDropdownMenu]="noticeMenu" nzTrigger="click" nzPlacement="bottomRight">
+      <nz-badge [nzCount]="11" class="bst-badge">
+        <i nz-icon nzType="bell" nzTheme="outline"></i>
+      </nz-badge>
+    </span>
     <span class="bst-header-icon" nz-dropdown [nzDropdownMenu]="userSettingMenu">
-            <img class="avatar" src="assets/imgs/default_face.png" alt="">
-            <span class="base-font-size">Serati Ma</span>
-          </span>
+      <img class="avatar" src="assets/imgs/default_face.png" alt="" />
+      <span class="base-font-size">Serati Ma</span>
+    </span>
     <nz-dropdown-menu #userSettingMenu>
       <ul nz-menu>
         <li nz-menu-item (click)="goPage('personal-center')">
-          <a><i nz-icon nzType="user" nzTheme="outline" class="m-r-8"></i><span>个人中心</span></a>
+          <a>
+            <i nz-icon nzType="user" nzTheme="outline" class="m-r-8"></i>
+            <span>个人中心</span>
+          </a>
         </li>
         <li nz-menu-item (click)="goPage('personal-setting')">
-          <a><i nz-icon nzType="setting" nzTheme="outline" class="m-r-8"></i><span>个人设置</span></a>
+          <a>
+            <i nz-icon nzType="setting" nzTheme="outline" class="m-r-8"></i>
+            <span>个人设置</span>
+          </a>
         </li>
         <li nz-menu-item (click)="changePassWorld()">
-          <a><i nz-icon nzType="lock" nzTheme="outline" class="m-r-8"></i><span>修改密码</span></a>
+          <a>
+            <i nz-icon nzType="lock" nzTheme="outline" class="m-r-8"></i>
+            <span>修改密码</span>
+          </a>
         </li>
         <li nz-menu-divider></li>
         <li nz-menu-item (click)="clean()">
-          <a><i nz-icon nzType="clear" nzTheme="outline" class="m-r-8"></i><span>清除缓存</span></a>
+          <a>
+            <i nz-icon nzType="clear" nzTheme="outline" class="m-r-8"></i>
+            <span>清除缓存</span>
+          </a>
         </li>
         <li nz-menu-item (click)="lockScreen()">
-          <a><i nz-icon nzType="lock" nzTheme="outline" class="m-r-8"></i><span>锁定屏幕</span></a>
+          <a>
+            <i nz-icon nzType="lock" nzTheme="outline" class="m-r-8"></i>
+            <span>锁定屏幕</span>
+          </a>
         </li>
         <li nz-menu-item>
           <a (click)="goLogin()">
             <i nz-icon nzType="logout" nzTheme="outline" class="m-r-8"></i>
-            <span>退出登录</span></a>
+            <span>退出登录</span>
+          </a>
         </li>
       </ul>
     </nz-dropdown-menu>
 
     <span class="bst-header-icon" nz-dropdown [nzDropdownMenu]="language">
-              <i nz-icon nzType="font-size" nzTheme="outline"></i>
-            </span>
+      <i nz-icon nzType="font-size" nzTheme="outline"></i>
+    </span>
     <nz-dropdown-menu #language="nzDropdownMenu">
       <ul nz-menu nzSelectable>
         <li nz-menu-item (click)="showMessage()">English</li>

@@ -1,13 +1,7 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  AfterViewInit,
-  ViewChild,
-  ElementRef
-} from '@angular/core';
-import {PageHeaderType} from "@shared/components/page-header/page-header.component";
-import {Addon, Graph} from "@antv/x6";
+import { Component, OnInit, ChangeDetectionStrategy, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+
+import { Addon, Graph } from '@antv/x6';
+import { PageHeaderType } from '@shared/components/page-header/page-header.component';
 
 @Component({
   selector: 'app-flow-chat',
@@ -27,8 +21,8 @@ export class FlowChatComponent implements OnInit, AfterViewInit {
   /** x6画布的一些基础属性 */
   graphBasicConfig = {
     grid: {
-      size: 10,      // 网格大小 10px
-      visible: true, // 渲染网格背景
+      size: 10, // 网格大小 10px
+      visible: true // 渲染网格背景
     },
     panning: true, // 画布拖拽
     selecting: true,
@@ -44,25 +38,23 @@ export class FlowChatComponent implements OnInit, AfterViewInit {
     }
   };
 
-  constructor() {
-  }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   drag(event: MouseEvent): void {
     const target = event.currentTarget as HTMLElement;
     const shap = target.getAttribute('shap')!;
 
     const dnd = new Addon.Dnd({
-      target: this.graph,
-    })
+      target: this.graph
+    });
 
     const node = this.graph.createNode({
       width: 100,
       height: 100,
       shape: shap,
-      ports:  {
+      ports: {
         groups: {
           // 输入链接桩群组定义
           in: {
@@ -73,9 +65,9 @@ export class FlowChatComponent implements OnInit, AfterViewInit {
                 magnet: true,
                 stroke: '#31d0c6',
                 strokeWidth: 2,
-                fill: '#fff',
-              },
-            },
+                fill: '#fff'
+              }
+            }
           },
           // 输出链接桩群组定义
           out: {
@@ -86,33 +78,33 @@ export class FlowChatComponent implements OnInit, AfterViewInit {
                 magnet: true,
                 stroke: '#31d0c6',
                 strokeWidth: 2,
-                fill: '#fff',
-              },
-            },
-          },
+                fill: '#fff'
+              }
+            }
+          }
         },
         items: [
           {
             id: 'port1',
-            group: 'in',
+            group: 'in'
           },
           {
             id: 'port2',
-            group: 'in',
+            group: 'in'
           },
           {
             id: 'port3',
-            group: 'in',
+            group: 'in'
           },
           {
             id: 'port4',
-            group: 'out',
+            group: 'out'
           },
           {
             id: 'port5',
-            group: 'out',
-          },
-        ],
+            group: 'out'
+          }
+        ]
       },
       attrs: {
         body: {
@@ -126,13 +118,12 @@ export class FlowChatComponent implements OnInit, AfterViewInit {
   initGraph(): void {
     const graphConfig = {
       ...this.graphBasicConfig,
-      container: this.container.nativeElement,
-    }
+      container: this.container.nativeElement
+    };
     this.graph = new Graph(graphConfig);
   }
 
   ngAfterViewInit(): void {
     this.initGraph();
   }
-
 }

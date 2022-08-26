@@ -1,5 +1,5 @@
-<div (cdkDragEnded)="dragEnd()" (cdkDragStarted)="dragging=true" cdkDragLockAxis="y" cdkDrag class="drawer-handle" id="drawer-handle" [class.open]="isCollapsed" (click)="changeCollapsed()">
-  <ng-container *ngIf="!isCollapsed; then settingIcon else closeIcon"></ng-container>
+<div (cdkDragEnded)="dragEnd()" (cdkDragStarted)="dragging = true" cdkDragLockAxis="y" cdkDrag class="drawer-handle" id="drawer-handle" [class.open]="isCollapsed" (click)="changeCollapsed()">
+  <ng-container *ngIf="!isCollapsed; then settingIcon; else closeIcon"></ng-container>
   <ng-template #settingIcon>
     <i nz-icon nzType="setting" nzTheme="outline"></i>
   </ng-template>
@@ -7,15 +7,13 @@
     <i nz-icon nzType="close" nzTheme="outline"></i>
   </ng-template>
 </div>
-<nz-drawer [nzClosable]="false" [nzWidth]="300" [(nzVisible)]="isCollapsed"
-           (nzOnClose)="isCollapsed = !isCollapsed">
+<nz-drawer [nzClosable]="false" [nzWidth]="300" [(nzVisible)]="isCollapsed" (nzOnClose)="isCollapsed = !isCollapsed">
   <ng-container *nzDrawerContent>
-    <div class="m-b-24" *ngIf="_themesOptions.mode!=='mixi'">
+    <div class="m-b-24" *ngIf="_themesOptions.mode !== 'mixi'">
       <h3 class="title">整体风格设置</h3>
       <div class="block-checkbox">
-        <div *ngFor="let theme of themes" class="item" nz-tooltip [nzTooltipTitle]="theme.title"
-             (click)="changeTheme(theme)">
-          <img [src]="theme.image" [alt]="theme.title">
+        <div *ngFor="let theme of themes" class="item" nz-tooltip [nzTooltipTitle]="theme.title" (click)="changeTheme(theme)">
+          <img [src]="theme.image" [alt]="theme.title" />
           <div class="select-icon" *ngIf="theme.isChecked">
             <i nz-icon nzType="check" nzTheme="outline"></i>
           </div>
@@ -23,11 +21,10 @@
       </div>
     </div>
 
-    <div [class.m-t-25]="_themesOptions.mode!=='mixi'" class="m-b-24  theme-color">
+    <div [class.m-t-25]="_themesOptions.mode !== 'mixi'" class="m-b-24 theme-color">
       <h3 class="title">主题色</h3>
       <div class="content">
-        <div *ngFor="let color of colors" class="color-block" nz-tooltip [nzTooltipTitle]="color.title"
-             [style.background]="color.color" (click)="changePrimaryColor(color)">
+        <div *ngFor="let color of colors" class="color-block" nz-tooltip [nzTooltipTitle]="color.title" [style.background]="color.color" (click)="changePrimaryColor(color)">
           <i *ngIf="color.isChecked" nz-icon nzType="check" nzTheme="outline"></i>
         </div>
       </div>
@@ -38,9 +35,8 @@
     <div class="m-b-24">
       <h3 class="title">导航模式</h3>
       <div class="block-checkbox">
-        <div (click)="changeMode(mode)" *ngFor="let mode of modes" class="item" nz-tooltip
-             [nzTooltipTitle]="mode.title">
-          <img [src]="mode.image" [alt]="mode.title">
+        <div (click)="changeMode(mode)" *ngFor="let mode of modes" class="item" nz-tooltip [nzTooltipTitle]="mode.title">
+          <img [src]="mode.image" [alt]="mode.title" />
           <div class="select-icon" *ngIf="mode.isChecked">
             <i nz-icon nzType="check" nzTheme="outline"></i>
           </div>
@@ -50,31 +46,27 @@
     <nz-list [nzSplit]="false">
       <nz-list-item [nzActions]="[fixedTabAction]">固定页签</nz-list-item>
       <ng-template #fixedTabAction>
-        <nz-switch [nzDisabled]="!_themesOptions.fixedHead"  (ngModelChange)="changeFixed($event,'fixedTab')" [ngModel]="_themesOptions.fixedTab"
-                   nzSize="small"></nz-switch>
+        <nz-switch [nzDisabled]="!_themesOptions.fixedHead" (ngModelChange)="changeFixed($event, 'fixedTab')" [ngModel]="_themesOptions.fixedTab" nzSize="small"></nz-switch>
       </ng-template>
     </nz-list>
     <nz-list [nzSplit]="false">
       <nz-list-item [nzActions]="[fixedHeadAction]">固定头部</nz-list-item>
       <ng-template #fixedHeadAction>
-        <nz-switch [ngModel]="_themesOptions.fixedHead" (ngModelChange)="changeFixed($event,'fixedHead')"
-                   nzSize="small"></nz-switch>
+        <nz-switch [ngModel]="_themesOptions.fixedHead" (ngModelChange)="changeFixed($event, 'fixedHead')" nzSize="small"></nz-switch>
       </ng-template>
     </nz-list>
 
     <nz-list [nzSplit]="false">
       <nz-list-item [nzActions]="[fixedLeftNavAction]">固定侧边栏</nz-list-item>
       <ng-template #fixedLeftNavAction>
-        <nz-switch [ngModel]="_themesOptions.fixedLeftNav" (ngModelChange)="changeFixed($event,'fixedLeftNav')"
-                   nzSize="small"></nz-switch>
+        <nz-switch [ngModel]="_themesOptions.fixedLeftNav" (ngModelChange)="changeFixed($event, 'fixedLeftNav')" nzSize="small"></nz-switch>
       </ng-template>
     </nz-list>
 
     <nz-list [nzSplit]="false">
       <nz-list-item [nzActions]="[splitNavAction]">自动分割菜单</nz-list-item>
       <ng-template #splitNavAction>
-        <nz-switch [ngModel]="_themesOptions.splitNav" (ngModelChange)="changeFixed($event,'splitNav')"
-                   nzSize="small"></nz-switch>
+        <nz-switch [ngModel]="_themesOptions.splitNav" (ngModelChange)="changeFixed($event, 'splitNav')" nzSize="small"></nz-switch>
       </ng-template>
     </nz-list>
 
@@ -85,30 +77,25 @@
       <nz-list [nzSplit]="false">
         <nz-list-item [nzActions]="[topAreaAction]">顶栏</nz-list-item>
         <ng-template #topAreaAction>
-          <nz-switch (ngModelChange)="changeFixed($event,'hasTopArea')" [ngModel]="_themesOptions.hasTopArea"
-                     nzSize="small"></nz-switch>
+          <nz-switch (ngModelChange)="changeFixed($event, 'hasTopArea')" [ngModel]="_themesOptions.hasTopArea" nzSize="small"></nz-switch>
         </ng-template>
       </nz-list>
       <nz-list [nzSplit]="false">
         <nz-list-item [nzActions]="[footerAreaAction]">页脚</nz-list-item>
         <ng-template #footerAreaAction>
-          <nz-switch (ngModelChange)="changeFixed($event,'hasFooterArea')" [ngModel]="_themesOptions.hasFooterArea"
-                     nzSize="small"></nz-switch>
+          <nz-switch (ngModelChange)="changeFixed($event, 'hasFooterArea')" [ngModel]="_themesOptions.hasFooterArea" nzSize="small"></nz-switch>
         </ng-template>
       </nz-list>
       <nz-list [nzSplit]="false">
         <nz-list-item [nzActions]="[navAreaAction]">菜单</nz-list-item>
         <ng-template #navAreaAction>
-          <nz-switch (ngModelChange)="changeFixed($event,'hasNavArea')" [ngModel]="_themesOptions.hasNavArea"
-                     nzSize="small"></nz-switch>
+          <nz-switch (ngModelChange)="changeFixed($event, 'hasNavArea')" [ngModel]="_themesOptions.hasNavArea" nzSize="small"></nz-switch>
         </ng-template>
       </nz-list>
       <nz-list [nzSplit]="false">
         <nz-list-item [nzActions]="[navHeadAreaAction]">菜单头</nz-list-item>
         <ng-template #navHeadAreaAction>
-          <nz-switch (ngModelChange)="changeFixed($event,'hasNavHeadArea')"
-                     [ngModel]="_themesOptions.hasNavHeadArea"
-                     nzSize="small"></nz-switch>
+          <nz-switch (ngModelChange)="changeFixed($event, 'hasNavHeadArea')" [ngModel]="_themesOptions.hasNavHeadArea" nzSize="small"></nz-switch>
         </ng-template>
       </nz-list>
     </div>
@@ -126,14 +113,9 @@
       <nz-list [nzSplit]="false">
         <nz-list-item [nzActions]="[otherAction]">色弱模式</nz-list-item>
         <ng-template #otherAction>
-          <nz-switch (ngModelChange)="changeWeakMode($event)" [ngModel]="_themesOptions.colorWeak"
-                     nzSize="small"></nz-switch>
+          <nz-switch (ngModelChange)="changeWeakMode($event)" [ngModel]="_themesOptions.colorWeak" nzSize="small"></nz-switch>
         </ng-template>
       </nz-list>
-
     </div>
-
   </ng-container>
-
 </nz-drawer>
-

@@ -2,59 +2,24 @@
 
 <div class="normal-table-wrap">
   <nz-card>
-    <input [style.background]="color"
-           [colorPicker]="color"
-           (colorPickerChange)="color=$event"/>
+    <input [style.background]="color" [colorPicker]="color" (colorPickerChange)="color = $event" />
     <p>Grayscale color mode:</p>
-    <input [(colorPicker)]="color" [cpColorMode]="'grayscale'"
-           [style.background]="color"/>
+    <input [(colorPicker)]="color" [cpColorMode]="'grayscale'" [style.background]="color" />
     <p>Show the color in the input field:</p>
-    <input [value]="color"
-           [style.background]="color"
-           [(colorPicker)]="color"/>
+    <input [value]="color" [style.background]="color" [(colorPicker)]="color" />
     <p>Output format:</p>
-    <input [value]="color"
-           [style.background]="color"
-           [cpOutputFormat]="'rgba'"
-           [(colorPicker)]="color"/>
+    <input [value]="color" [style.background]="color" [cpOutputFormat]="'rgba'" [(colorPicker)]="color" />
     <p>Changing dialog position:</p>
-    <input [value]="color"
-           [style.background]="color"
-           [cpPosition]="'top-right'"
-           [(colorPicker)]="color"/>
+    <input [value]="color" [style.background]="color" [cpPosition]="'top-right'" [(colorPicker)]="color" />
     <p>You can introduce a offset of the color picker relative to the html element:</p>
-    <span [style.color]="color"
-          [cpPosition]="'bottom'"
-          [cpPositionOffset]="'50%'"
-          [cpPositionRelativeToArrow]="true"
-          [(colorPicker)]="color">Change me!</span>
+    <span [style.color]="color" [cpPosition]="'bottom'" [cpPositionOffset]="'50%'" [cpPositionRelativeToArrow]="true" [(colorPicker)]="color">Change me!</span>
     <p>Show cancel button:</p>
-    <input [value]="color"
-           [style.background]="color"
-           [cpCancelButton]="true"
-           [(colorPicker)]="color"/>
+    <input [value]="color" [style.background]="color" [cpCancelButton]="true" [(colorPicker)]="color" />
     <p>Change cancel button class, in this example we are using a bootstrap button:</p>
-    <input [value]="color"
-           [style.background]="color"
-           [cpCancelButton]="true"
-           [cpCancelButtonClass]= "'btn btn-primary btn-xs'"
-           [(colorPicker)]="color"/>
+    <input [value]="color" [style.background]="color" [cpCancelButton]="true" [cpCancelButtonClass]="'btn btn-primary btn-xs'" [(colorPicker)]="color" />
     <p>Show OK button:</p>
-    <input [value]="color"
-           [style.background]="color"
-           [cpOKButton]="true"
-           [cpSaveClickOutside]="false"
-           [cpOKButtonClass]= "'btn btn-primary btn-xs'"
-           [(colorPicker)]="color"/>
-    <p>Enable Eye Dropper:
-      You can open the eye dropper by clicking the colored circle.</p>
-    <input [value]="color"
-           [style.background]="color"
-           [cpEyeDropper]="true"
-           [cpSaveClickOutside]="false"
-           [cpOKButtonClass]= "'btn btn-primary btn-xs'"
-           [(colorPicker)]="color"/>
+    <input [value]="color" [style.background]="color" [cpOKButton]="true" [cpSaveClickOutside]="false" [cpOKButtonClass]="'btn btn-primary btn-xs'" [(colorPicker)]="color" />
+    <p>Enable Eye Dropper: You can open the eye dropper by clicking the colored circle.</p>
+    <input [value]="color" [style.background]="color" [cpEyeDropper]="true" [cpSaveClickOutside]="false" [cpOKButtonClass]="'btn btn-primary btn-xs'" [(colorPicker)]="color" />
   </nz-card>
-
-
 </div>

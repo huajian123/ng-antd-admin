@@ -1,18 +1,15 @@
-import {Component, OnInit, ChangeDetectionStrategy, OnDestroy} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-simple-chart',
-  template: `
-    <div echarts [options]="options" class="demo-chart"></div>
-  `,
+  template: ` <div echarts [options]="options" class="demo-chart"></div> `,
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SimpleChartComponent implements OnInit {
   options: any;
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit(): void {
     const xAxisData = [];
@@ -20,7 +17,7 @@ export class SimpleChartComponent implements OnInit {
     const data2 = [];
 
     for (let i = 0; i < 100; i++) {
-      xAxisData.push('category' + i);
+      xAxisData.push(`category${i}`);
       data1.push((Math.sin(i / 5) * (i / 5 - 10) + i / 6) * 5);
       data2.push((Math.cos(i / 5) * (i / 5 - 10) + i / 6) * 5);
     }
@@ -28,15 +25,15 @@ export class SimpleChartComponent implements OnInit {
     this.options = {
       legend: {
         data: ['bar', 'bar2'],
-        align: 'left',
+        align: 'left'
       },
       tooltip: {},
       xAxis: {
         data: xAxisData,
         silent: false,
         splitLine: {
-          show: false,
-        },
+          show: false
+        }
       },
       yAxis: {},
       series: [
@@ -44,17 +41,17 @@ export class SimpleChartComponent implements OnInit {
           name: 'bar',
           type: 'bar',
           data: data1,
-          animationDelay: (idx: number) => idx * 10,
+          animationDelay: (idx: number) => idx * 10
         },
         {
           name: 'bar2',
           type: 'bar',
           data: data2,
-          animationDelay: (idx: number) => idx * 10 + 100,
-        },
+          animationDelay: (idx: number) => idx * 10 + 100
+        }
       ],
       animationEasing: 'elasticOut',
-      animationDelayUpdate: (idx: number) => idx * 5,
+      animationDelayUpdate: (idx: number) => idx * 5
     };
   }
 }

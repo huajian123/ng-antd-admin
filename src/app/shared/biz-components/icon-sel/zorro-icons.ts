@@ -127,21 +127,7 @@ const edit = [
   'ColumnHeight'
 ];
 
-const data = [
-  'AreaChart',
-  'PieChart',
-  'BarChart',
-  'DotChart',
-  'LineChart',
-  'RadarChart',
-  'HeatMap',
-  'Fall',
-  'Rise',
-  'Stock',
-  'BoxPlot',
-  'Fund',
-  'Sliders'
-];
+const data = ['AreaChart', 'PieChart', 'BarChart', 'DotChart', 'LineChart', 'RadarChart', 'HeatMap', 'Fall', 'Rise', 'Stock', 'BoxPlot', 'Fund', 'Sliders'];
 
 const logo = [
   'Android',
@@ -205,16 +191,11 @@ const newIconNames: string[] = [
   // 'colum-width',
   // data
   // other
-  'eye-invisible',
+  'eye-invisible'
   // 'batch-folding',
   // logo
   // 'code-sandbox',
   // 'code-sandbox-circle'
 ];
 
-export const zorroIcons = [...direction,
-  ...newIconNames,
-  ...suggestion,
-  ...edit,
-  ...data,
-  ...logo];
+export const zorroIcons = [...direction, ...newIconNames, ...suggestion, ...edit, ...data, ...logo];

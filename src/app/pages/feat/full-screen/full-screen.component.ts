@@ -1,6 +1,7 @@
-import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
-import {PageHeaderType} from "@shared/components/page-header/page-header.component";
-import screenfull from "screenfull";
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+
+import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import screenfull from 'screenfull';
 
 @Component({
   selector: 'app-full-screen',
@@ -11,13 +12,12 @@ import screenfull from "screenfull";
 export class FullScreenComponent implements OnInit {
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '全屏示例',
-    breadcrumb: ['首页', '功能', '全屏示例'],
+    breadcrumb: ['首页', '功能', '全屏示例']
   };
 
   isFullscreenFlag = true;
 
-  constructor(private cdr: ChangeDetectorRef) {
-  }
+  constructor(private cdr: ChangeDetectorRef) {}
 
   toggle(): void {
     if (screenfull.isEnabled) {
@@ -48,8 +48,7 @@ export class FullScreenComponent implements OnInit {
       setTimeout(() => {
         this.isFullscreenFlag = !this.isFullscreenFlag;
         this.cdr.markForCheck();
-      }, 10)
-    })
+      }, 10);
+    });
   }
-
 }

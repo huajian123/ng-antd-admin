@@ -1,19 +1,14 @@
-import {Injectable} from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-  UrlTree,
-  Router,
-  CanActivateChild
-} from '@angular/router';
-import {Observable} from 'rxjs';
-import {WindowService} from '../window.service';
-import {Menu} from "../../types";
-import {MenuStoreService} from "@store/common-store/menu-store.service";
-import {UserInfoService} from "@store/common-store/userInfo.service";
-import {NzMessageService} from "ng-zorro-antd/message";
-import {LoginInOutService} from "@core/services/common/login-in-out.service";
-import {fnGetUUID} from "@utils/tools";
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router, CanActivateChild } from '@angular/router';
+
+import { LoginInOutService } from '@core/services/common/login-in-out.service';
+import { MenuStoreService } from '@store/common-store/menu-store.service';
+import { UserInfoService } from '@store/common-store/userInfo.service';
+import { fnGetUUID } from '@utils/tools';
+import { NzMessageService } from 'ng-zorro-antd/message';
+
+import { Menu } from '../../types';
+import { WindowService } from '../window.service';
 
 // 用于切换路由时判断该用户是否有权限进入该业务页面，如果没有权限则跳转到登录页
 @Injectable({
@@ -24,10 +19,14 @@ export class JudgAuthGuard implements CanActivateChild {
   selMenu!: Menu | null;
   menuNavList: Menu[] = [];
 
-  constructor(private windowSrc: WindowService,
-              private loginOutService: LoginInOutService,
-              private router: Router, private userInfoService: UserInfoService,
-              private menuStoreService: MenuStoreService, private message: NzMessageService) {
+  constructor(
+    private windowSrc: WindowService,
+    private loginOutService: LoginInOutService,
+    private router: Router,
+    private userInfoService: UserInfoService,
+    private menuStoreService: MenuStoreService,
+    private message: NzMessageService
+  ) {
     this.menuStoreService.getMenuArrayStore().subscribe(res => {
       this.menuNavList = res;
     });
@@ -46,7 +45,7 @@ export class JudgAuthGuard implements CanActivateChild {
     }
   }
 
-  getResult(code: string, authCodeArray: string[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+  getResult(code: string, authCodeArray: string[]): boolean | UrlTree {
     if (authCodeArray.includes(code)) {
       return true;
     } else {
@@ -56,10 +55,8 @@ export class JudgAuthGuard implements CanActivateChild {
     }
   }
 
-  canActivateChild(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    this.userInfoService.getUserInfo().subscribe(res => this.authCodeArray = res.authCode);
+  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree {
+    this.userInfoService.getUserInfo().subscribe(res => (this.authCodeArray = res.authCode));
     // 如果有authCode，则表示是页面上点击按钮跳转到新的路由，而不是菜单中的路由
     while (route.firstChild) {
       route = route.firstChild;

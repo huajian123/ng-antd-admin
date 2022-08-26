@@ -1,4 +1,4 @@
-<nz-card nzHoverable style="width:100%;" [nzBordered]="false" [nzTitle]="tableTitle" [nzExtra]="tableToolbar">
+<nz-card nzHoverable style="width: 100%" [nzBordered]="false" [nzTitle]="tableTitle" [nzExtra]="tableToolbar">
   <ng-content></ng-content>
 </nz-card>
 <ng-template #tableToolbar>
@@ -9,19 +9,24 @@
     <div class="ant-pro-table-toolbar-default-option" *ngIf="isNormalTable">
       <nz-divider nzType="vertical"></nz-divider>
       <nz-space [nzSize]="16" nzDirection="horizontal">
-        <i class="hand-model" nz-popover
-           [nzPopoverTitle]="popoverTitle"
-           nzPopoverPlacement="bottomRight"
-           [(nzPopoverVisible)]="tableConfigVisible"
-           nzPopoverTrigger="click"
-           [nzPopoverContent]="contentTemplate" nz-icon *nzSpaceItem nzType="setting" nzTheme="outline"
-           nz-tooltip
-           nzTooltipTitle="列设置"></i>
-        <i class="hand-model" (click)="reloadClick()" nz-icon *nzSpaceItem nzType="reload" nzTheme="outline" nz-tooltip
-           nzTooltipTitle="刷新"></i>
+        <i
+          class="hand-model"
+          nz-popover
+          [nzPopoverTitle]="popoverTitle"
+          nzPopoverPlacement="bottomRight"
+          [(nzPopoverVisible)]="tableConfigVisible"
+          nzPopoverTrigger="click"
+          [nzPopoverContent]="contentTemplate"
+          nz-icon
+          *nzSpaceItem
+          nzType="setting"
+          nzTheme="outline"
+          nz-tooltip
+          nzTooltipTitle="列设置"
+        ></i>
+        <i class="hand-model" (click)="reloadClick()" nz-icon *nzSpaceItem nzType="reload" nzTheme="outline" nz-tooltip nzTooltipTitle="刷新"></i>
         <ng-container *appScreenLessHidden="'393'">
-          <i class="hand-model" nzTrigger="click" nz-dropdown [nzDropdownMenu]="tableSizeMenu" nz-icon *nzSpaceItem
-             nzType="column-height" nzTheme="outline" nz-tooltip nzTooltipTitle="密度"></i>
+          <i class="hand-model" nzTrigger="click" nz-dropdown [nzDropdownMenu]="tableSizeMenu" nz-icon *nzSpaceItem nzType="column-height" nzTheme="outline" nz-tooltip nzTooltipTitle="密度"></i>
         </ng-container>
       </nz-space>
     </div>
@@ -29,28 +34,40 @@
 </ng-template>
 <nz-dropdown-menu #tableSizeMenu>
   <ul nz-menu>
-    <li nz-menu-item (click)="tableSizeMenuClick(item)" [nzSelected]="item.selected"
-        *ngFor="let item of tableSizeOptions">
-      <span>{{item.sizeName}}</span>
+    <li nz-menu-item (click)="tableSizeMenuClick(item)" [nzSelected]="item.selected" *ngFor="let item of tableSizeOptions">
+      <span>{{ item.sizeName }}</span>
     </li>
   </ul>
 </nz-dropdown-menu>
 <ng-template #contentTemplate>
-  <ul style="min-width: 315px;" cdkDropList (cdkDropListDropped)="dropTableConfig($event)">
+  <ul style="min-width: 315px" cdkDropList (cdkDropListDropped)="dropTableConfig($event)">
     <li cdkDrag class="flex space-between" style="padding: 4px 16px 8px 0" *ngFor="let item of tableHeaders">
       <div>
         <i cdkDragHandle class="m-r-8 hand-model-move" nz-icon nzType="drag" nzTheme="outline"></i>
-        <label nz-checkbox (nzCheckedChange)="changeSignalCheck($event,item)"
-               [(nzChecked)]="item.show">{{item.title}}</label>
+        <label nz-checkbox (nzCheckedChange)="changeSignalCheck($event, item)" [(nzChecked)]="item.show">{{ item.title }}</label>
       </div>
       <div>
-        <i class="hand-model" (click)="fixedTableHead('left',item)"
-           [ngStyle]="{color:item.fixedDir==='left'&&item.fixed?'#409eff':''}" nz-tooltip nzTooltipTitle="固定到左侧" nz-icon
-           nzType="vertical-right" nzTheme="outline"></i>
+        <i
+          class="hand-model"
+          (click)="fixedTableHead('left', item)"
+          [ngStyle]="{ color: item.fixedDir === 'left' && item.fixed ? '#409eff' : '' }"
+          nz-tooltip
+          nzTooltipTitle="固定到左侧"
+          nz-icon
+          nzType="vertical-right"
+          nzTheme="outline"
+        ></i>
         <nz-divider nzType="vertical"></nz-divider>
-        <i class="hand-model" (click)="fixedTableHead('right',item)"
-           [ngStyle]="{color:item.fixedDir==='right'&&item.fixed?'#409eff':''}" nz-tooltip nzTooltipTitle="固定到右侧"
-           nz-icon nzType="vertical-left" nzTheme="outline"></i>
+        <i
+          class="hand-model"
+          (click)="fixedTableHead('right', item)"
+          [ngStyle]="{ color: item.fixedDir === 'right' && item.fixed ? '#409eff' : '' }"
+          nz-tooltip
+          nzTooltipTitle="固定到右侧"
+          nz-icon
+          nzType="vertical-left"
+          nzTheme="outline"
+        ></i>
       </div>
     </li>
   </ul>
@@ -58,14 +75,9 @@
 <ng-template #popoverTitle>
   <div class="space-between">
     <span>
-      <label nz-checkbox (nzCheckedChange)="changeTableCheckBoxShow($event)"
-             [(nzChecked)]="currentTableComponent.tableConfig.showCheckbox">勾选列
-      </label>
-      <label nz-checkbox (nzCheckedChange)="changeAllTableTableConfigShow($event)"
-             [nzIndeterminate]="allTableFieldIndeterminate" [(nzChecked)]="allTableFieldChecked">列展示
-      </label>
+      <label nz-checkbox (nzCheckedChange)="changeTableCheckBoxShow($event)" [(nzChecked)]="currentTableComponent.tableConfig.showCheckbox">勾选列</label>
+      <label nz-checkbox (nzCheckedChange)="changeAllTableTableConfigShow($event)" [nzIndeterminate]="allTableFieldIndeterminate" [(nzChecked)]="allTableFieldChecked">列展示</label>
     </span>
     <button (click)="reset()" class="operate-text" nz-button nzType="text">重置</button>
   </div>
-
 </ng-template>

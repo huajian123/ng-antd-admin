@@ -1,18 +1,12 @@
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
 
-import {SessionTimeoutRoutingModule} from './session-timeout-routing.module';
-import {SessionTimeoutComponent} from './session-timeout.component';
-import {SharedModule} from "@shared/shared.module";
+import { SharedModule } from '@shared/shared.module';
 
+import { SessionTimeoutRoutingModule } from './session-timeout-routing.module';
+import { SessionTimeoutComponent } from './session-timeout.component';
 
 @NgModule({
-  declarations: [
-    SessionTimeoutComponent
-  ],
-  imports: [
-    SharedModule,
-    SessionTimeoutRoutingModule
-  ]
+  declarations: [SessionTimeoutComponent],
+  imports: [SharedModule, SessionTimeoutRoutingModule]
 })
-export class SessionTimeoutModule {
-}
+export class SessionTimeoutModule {}

@@ -1,17 +1,14 @@
 <div class="container">
-  <h1 [@enter1] class="center sp-28">
-    进场/离场动画.
-  </h1>
+  <h1 [@enter1] class="center sp-28"> 进场/离场动画. </h1>
 
   <div [@enter2]>
-    <nz-select class="m-r-8" style="width:200px" [(ngModel)]="animation"  (ngModelChange)="state = false" nzAllowClear nzPlaceHolder="Choose" nzShowSearch>
-      <nz-option-group *ngFor="let option of options"  [nzLabel]="option.label">
+    <nz-select class="m-r-8" style="width: 200px" [(ngModel)]="animation" (ngModelChange)="state = false" nzAllowClear nzPlaceHolder="Choose" nzShowSearch>
+      <nz-option-group *ngFor="let option of options" [nzLabel]="option.label">
         <nz-option *ngFor="let animation of option.animations" [nzValue]="animation" [nzLabel]="animation"></nz-option>
       </nz-option-group>
     </nz-select>
 
-    <button nz-button nzType="default"
-            (click)="toggleState()">点击切换</button>
+    <button nz-button nzType="default" (click)="toggleState()">点击切换</button>
   </div>
 
   <div [ngSwitch]="animation" [@enter3] class="center-children-horizontally">

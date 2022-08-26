@@ -1,7 +1,8 @@
-import {ChangeDetectorRef, Injectable, SimpleChange} from '@angular/core';
-import {LazySelPeopleEnum} from "@app/pages/comp/lazy/lazy-targ-comp/lazy-targ-comp.component";
-import {takeUntil} from "rxjs/operators";
-import {AdDirective} from "@shared/directives/ad.directive";
+import { ChangeDetectorRef, Injectable, SimpleChange } from '@angular/core';
+import { takeUntil } from 'rxjs/operators';
+
+import { LazySelPeopleEnum } from '@app/pages/comp/lazy/lazy-targ-comp/lazy-targ-comp.component';
+import { AdDirective } from '@shared/directives/ad.directive';
 
 @Injectable()
 export class LazyServiceService {
@@ -14,21 +15,20 @@ export class LazyServiceService {
     this._adHost = value;
   }
 
-  constructor(public cdr: ChangeDetectorRef) {
-  }
+  constructor(public cdr: ChangeDetectorRef) {}
 
   async create(selPerson: LazySelPeopleEnum = LazySelPeopleEnum.YiLin): Promise<void> {
     await this.lazyLoadCard(selPerson);
     this.cdr.detectChanges();
   }
 
-  async lazyLoadCard(selPerson: LazySelPeopleEnum = LazySelPeopleEnum.YiLin) {
+  async lazyLoadCard(selPerson: LazySelPeopleEnum = LazySelPeopleEnum.YiLin): Promise<void> {
     const viewContainerRef = this._adHost.viewContainerRef;
-    const {LazyTargCompComponent} = await import('./lazy-targ-comp/lazy-targ-comp.component');
-    const {instance} = viewContainerRef.createComponent(LazyTargCompComponent);
+    const { LazyTargCompComponent } = await import('./lazy-targ-comp/lazy-targ-comp.component');
+    const { instance } = viewContainerRef.createComponent(LazyTargCompComponent);
     instance.purChoosePeople = selPerson;
     instance.currentPeople.pipe(takeUntil(instance.destroy$)).subscribe(() => {
-      this.create(instance.purChoosePeople)
+      this.create(instance.purChoosePeople);
     });
     // 实现OnChange钩子
     (instance as any).ngOnChanges({

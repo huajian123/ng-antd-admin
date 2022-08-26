@@ -1,14 +1,14 @@
-import {ActivatedRouteSnapshot, DetachedRouteHandle, RouteReuseStrategy} from '@angular/router';
-import {NzSafeAny} from "ng-zorro-antd/core/types";
-import {Inject} from "@angular/core";
-import {DOCUMENT} from "@angular/common";
-import {ScrollService} from "@core/services/common/scroll.service";
+import { DOCUMENT } from '@angular/common';
+import { Inject } from '@angular/core';
+import { ActivatedRouteSnapshot, DetachedRouteHandle, RouteReuseStrategy } from '@angular/router';
+
+import { ScrollService } from '@core/services/common/scroll.service';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 /*路由复用*/
 // 参考https://zhuanlan.zhihu.com/p/29823560
 // https://blog.csdn.net/weixin_30561425/article/details/96985967?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control
 export class SimpleReuseStrategy implements RouteReuseStrategy {
-
   // 缓存每个component的map
   static handlers: { [key: string]: NzSafeAny } = {};
   // 缓存每个页面的scroll位置,为啥不放在handlers里面呢,因为路由离开时路由复用导致以当前页为key为null了
@@ -26,15 +26,10 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
     }
   }
 
-
-  constructor(@Inject(DOCUMENT) private doc: Document, private scrollService: ScrollService) {
-  }
-
+  constructor(@Inject(DOCUMENT) private doc: Document, private scrollService: ScrollService) {}
 
   getKey(route: ActivatedRouteSnapshot): string {
-    return route.data['newTab'] === 'true' ?
-      route.data['key'] + JSON.stringify(route.queryParams) :
-      route.data['key'];
+    return route.data['newTab'] === 'true' ? route.data['key'] + JSON.stringify(route.queryParams) : route.data['key'];
   }
 
   // 是否允许复用路由
@@ -53,7 +48,7 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
       this.runHook('_onReuseDestroy', handle.componentRef);
       handle.componentRef.destroy();
       SimpleReuseStrategy.waitDelete = null;
-      delete SimpleReuseStrategy.scrollHandlers[key]
+      delete SimpleReuseStrategy.scrollHandlers[key];
       return;
     }
 
@@ -66,13 +61,13 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
         const el = this.doc.querySelector(item)!;
         if (el) {
           const postion = this.scrollService.getScrollPosition(el);
-          innerScrollContainer.push({[item]: postion});
+          innerScrollContainer.push({ [item]: postion });
         }
-      })
-      innerScrollContainer.push({'window': this.scrollService.getScrollPosition()});
+      });
+      innerScrollContainer.push({ window: this.scrollService.getScrollPosition() });
     }
 
-    SimpleReuseStrategy.scrollHandlers[key] = {scroll: innerScrollContainer};
+    SimpleReuseStrategy.scrollHandlers[key] = { scroll: innerScrollContainer };
     SimpleReuseStrategy.handlers[key] = handle;
 
     if (handle && handle.componentRef) {
@@ -85,7 +80,6 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
     const key = this.getKey(route);
     return !!key && !!SimpleReuseStrategy.handlers[key];
   }
-
 
   // 获取存储路由
   retrieve(route: ActivatedRouteSnapshot): DetachedRouteHandle {
@@ -110,15 +104,16 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
     const scrollFutureKey = this.getKey(future);
     if (SimpleReuseStrategy.scrollHandlers[scrollFutureKey]) {
       if (scrollFutureKey) {
-        SimpleReuseStrategy.scrollHandlers[scrollFutureKey].scroll.forEach((elOptionItem: { [key: string]: [number, number] }) => {
-          Object.keys(elOptionItem).forEach(element => {
-            setTimeout(() => {
-              this.scrollService.scrollToPosition(this.doc.querySelector(element), elOptionItem[element])
-            }, 1)
-          })
-        })
+        SimpleReuseStrategy.scrollHandlers[scrollFutureKey].scroll.forEach(
+          (elOptionItem: { [key: string]: [number, number] }) => {
+            Object.keys(elOptionItem).forEach(element => {
+              setTimeout(() => {
+                this.scrollService.scrollToPosition(this.doc.querySelector(element), elOptionItem[element]);
+              }, 1);
+            });
+          }
+        );
       }
-
     }
     return result;
   }

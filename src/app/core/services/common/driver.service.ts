@@ -1,18 +1,16 @@
-import {Inject, Injectable} from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable } from '@angular/core';
+
 import Driver from 'driver.js';
-import {DOCUMENT} from "@angular/common";
 /*
-* https://madewith.cn/766
-* 引导页
-* */
+ * https://madewith.cn/766
+ * 引导页
+ * */
 @Injectable({
   providedIn: 'root'
 })
 export class DriverService {
-
-  constructor(@Inject(DOCUMENT) private doc: Document) {
-  }
-
+  constructor(@Inject(DOCUMENT) private doc: Document) {}
 
   load(): void {
     setTimeout(() => {
@@ -86,10 +84,9 @@ export class DriverService {
             description: '鼠标右键点击单个标签可以展开多个选项，超出屏幕后，滚动鼠标滚轮可以进行页签滚动',
             position: 'bottom'
           }
-        },
+        }
       ]);
       driver.start();
-    }, 500)
-
+    }, 500);
   }
 }

@@ -1,7 +1,8 @@
+/*
 import {Menu} from '@core/services/types';
 import {InjectionToken} from "@angular/core";
 
-/*定义菜单*/
+/!*定义菜单*!/
 export const MENU_TOKEN = new InjectionToken<Menu[]>('menu-token', {
   providedIn: 'root', factory(): Menu[] {
     return menuNav;
@@ -544,7 +545,7 @@ const menuNav: Menu[] = [
             icon: 'dashboard',
             open: false,
             code: '',
-            selected: false,
+             selected: false,
             menuType: 'C',
             path: '/default/feat/frame/zorro-doc',
           },
@@ -558,7 +559,7 @@ const menuNav: Menu[] = [
             selected: false,
             menuType: 'C',
             path: 'https://github.com/huajian123/ng-ant-admin',
-            newLinkFlag: true
+            newLinkFlag: 1
           },
         ]
       },
@@ -1013,3 +1014,4 @@ const menuNav: Menu[] = [
     path: '/default/about',
   },
 ];
+*/

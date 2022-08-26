@@ -1,5 +1,6 @@
-import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {PageHeaderType} from "@shared/components/page-header/page-header.component";
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+
+import { PageHeaderType } from '@shared/components/page-header/page-header.component';
 
 @Component({
   selector: 'app-ripple',
@@ -10,7 +11,7 @@ import {PageHeaderType} from "@shared/components/page-header/page-header.compone
 export class RippleComponent implements OnInit {
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '水波纹',
-    breadcrumb: ['首页', '功能', '水波纹'],
+    breadcrumb: ['首页', '功能', '水波纹']
   };
   centered = false;
   disabled = false;
@@ -18,11 +19,7 @@ export class RippleComponent implements OnInit {
   radius: number = 0;
   color: string = 'red';
 
-  constructor() {
+  constructor() {}
 
-  }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

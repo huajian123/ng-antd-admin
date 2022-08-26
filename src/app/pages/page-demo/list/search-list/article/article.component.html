@@ -2,21 +2,25 @@
   <app-water-mark></app-water-mark>
   <div nz-row>
     <div nz-col nzFlex="94px">所属类目:</div>
-    <div nz-col nzFlex="1" class="tag-wrap" [ngStyle]="{maxHeight:expanded?'58px':'33px'}">
+    <div nz-col nzFlex="1" class="tag-wrap" [ngStyle]="{ maxHeight: expanded ? '58px' : '33px' }">
       <nz-tag (click)="allSel()" class="m-r-25 m-b-10" nzMode="checkable">
         <span class="sp-14">全部</span>
       </nz-tag>
       <ng-container *ngFor="let tag of tagArray">
         <nz-tag class="m-r-25 m-b-10" nzMode="checkable" [(nzChecked)]="tag.isChecked">
-          <span class="sp-14">{{tag.name}}</span>
+          <span class="sp-14">{{ tag.name }}</span>
         </nz-tag>
       </ng-container>
     </div>
     <div nz-col nzFlex="50px">
-      <a class="operate-text" *ngIf="!expanded" (click)="expanded = true">展开<i nz-icon nzType="down"
-                                                                               nzTheme="outline"></i></a>
-      <a class="operate-text" *ngIf="expanded" (click)="expanded = false">收起<i nz-icon nzType="up"
-                                                                               nzTheme="outline"></i></a>
+      <a class="operate-text" *ngIf="!expanded" (click)="expanded = true">
+        展开
+        <i nz-icon nzType="down" nzTheme="outline"></i>
+      </a>
+      <a class="operate-text" *ngIf="expanded" (click)="expanded = false">
+        收起
+        <i nz-icon nzType="up" nzTheme="outline"></i>
+      </a>
     </div>
   </div>
   <nz-divider class="m-0" nzDashed></nz-divider>
@@ -60,7 +64,7 @@
 <nz-card class="m-t-20">
   <app-water-mark></app-water-mark>
   <nz-list [nzItemLayout]="'vertical'">
-    <nz-list-item nzNoFlex *ngFor="let item of 8|numberLoop">
+    <nz-list-item nzNoFlex *ngFor="let item of 8 | numberLoop">
       <nz-list-item-meta>
         <nz-list-item-meta-title>
           <a>Alipay</a>
@@ -76,17 +80,26 @@
       <div class="m-t-15 info">
         <div nz-row>
           <nz-avatar class="m-r-8" [nzSize]="'small'" [nzSrc]="'assets/imgs/default_face.png'"></nz-avatar>
-          <a class="operate-text">付小小</a> <span class="m-r-8">发布在 </span> <a
-          class="m-r-8 operate-text">https://ant.design</a>
+          <a class="operate-text">付小小</a>
+          <span class="m-r-8">发布在</span>
+          <a class="m-r-8 operate-text">https://ant.design</a>
           <time nz-typography nzType="secondary">2021-02-19 14:21</time>
         </div>
       </div>
       <ul nz-list-item-actions>
-        <nz-list-item-action><i nz-icon nzType="star" class="m-r-8"></i> 156</nz-list-item-action>
-        <nz-list-item-action><i nz-icon nzType="like" class="m-r-8"></i> 156</nz-list-item-action>
-        <nz-list-item-action><i nz-icon nzType="message" class="m-r-8"></i> 2</nz-list-item-action>
+        <nz-list-item-action>
+          <i nz-icon nzType="star" class="m-r-8"></i>
+          156
+        </nz-list-item-action>
+        <nz-list-item-action>
+          <i nz-icon nzType="like" class="m-r-8"></i>
+          156
+        </nz-list-item-action>
+        <nz-list-item-action>
+          <i nz-icon nzType="message" class="m-r-8"></i>
+          2
+        </nz-list-item-action>
       </ul>
     </nz-list-item>
   </nz-list>
-
 </nz-card>

@@ -1,16 +1,14 @@
-import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {EChartsOption} from "echarts/types/dist/echarts";
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+
+import { EChartsOption } from 'echarts/types/dist/echarts';
 
 @Component({
   selector: 'app-init-opts-charts',
-  template: `
-    <echarts [initOpts]="initOpts" [options]="options"></echarts>
-  `,
+  template: ` <echarts [initOpts]="initOpts" [options]="options"></echarts> `,
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InitOptsChartsComponent {
-
   initOpts = {
     renderer: 'svg',
     width: 300,
@@ -40,14 +38,18 @@ export class InitOptsChartsComponent {
         }
       }
     ],
-    yAxis: [{
-      type: 'value'
-    }],
-    series: [{
-      name: 'Counters',
-      type: 'bar',
-      barWidth: '60%',
-      data: [10, 52, 200, 334, 390, 330, 220]
-    }]
+    yAxis: [
+      {
+        type: 'value'
+      }
+    ],
+    series: [
+      {
+        name: 'Counters',
+        type: 'bar',
+        barWidth: '60%',
+        data: [10, 52, 200, 334, 390, 330, 220]
+      }
+    ]
   };
 }

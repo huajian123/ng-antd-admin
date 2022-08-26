@@ -1,17 +1,12 @@
 import { NgModule } from '@angular/core';
 
+import { SharedModule } from '@shared/shared.module';
+
 import { PlayScrollRoutingModule } from './play-scroll-routing.module';
 import { PlayScrollComponent } from './play-scroll.component';
-import {SharedModule} from "@shared/shared.module";
-
 
 @NgModule({
-  declarations: [
-    PlayScrollComponent
-  ],
-  imports: [
-    SharedModule,
-    PlayScrollRoutingModule
-  ]
+  declarations: [PlayScrollComponent],
+  imports: [SharedModule, PlayScrollRoutingModule]
 })
-export class PlayScrollModule { }
+export class PlayScrollModule {}

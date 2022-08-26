@@ -1,7 +1,5 @@
 <div class="container">
-  <h1 [@enter1] class="center sp-28">
-    Angular Animations 有点骚气啊
-  </h1>
+  <h1 [@enter1] class="center sp-28"> Angular Animations 有点骚气啊 </h1>
 
   <div [ngSwitch]="animation" [@enter2] class="center">
     <div class="angular-img-wrapper">
@@ -102,10 +100,7 @@
       <app-angular-img *ngSwitchCase="'collapseHorizontally'" [@collapseHorizontally]="animationWithState"></app-angular-img>
       <app-angular-img *ngSwitchCase="'rotate'" [@rotate]="animationWithState"></app-angular-img>
       <app-angular-img *ngSwitchCase="'rotate90'" [@rotate90]="animationWithState"></app-angular-img>
-      <app-angular-img
-        *ngSwitchCase="'rotate720'"
-        [@rotate]="{ value: animationWithState, params: { duration: 700, degrees: 720 } }"
-      ></app-angular-img>
+      <app-angular-img *ngSwitchCase="'rotate720'" [@rotate]="{ value: animationWithState, params: { duration: 700, degrees: 720 } }"></app-angular-img>
       <app-angular-img *ngSwitchCase="'hueRotate'" [@hueRotate]="animationState"></app-angular-img>
     </div>
 
@@ -113,22 +108,16 @@
   </div>
 
   <div [@enter3] class="center" (@enter3.done)="animationState = !animationState">
-
-    <nz-select class="m-r-8" style="width:200px" [(ngModel)]="animation"  (ngModelChange)="animate()" nzAllowClear nzPlaceHolder="Choose" nzShowSearch>
-      <nz-option-group *ngFor="let option of options"  [nzLabel]="option.label">
+    <nz-select class="m-r-8" style="width: 200px" [(ngModel)]="animation" (ngModelChange)="animate()" nzAllowClear nzPlaceHolder="Choose" nzShowSearch>
+      <nz-option-group *ngFor="let option of options" [nzLabel]="option.label">
         <nz-option *ngFor="let animation of option.animations" [nzValue]="animation" [nzLabel]="animation"></nz-option>
       </nz-option-group>
     </nz-select>
 
-    <button nz-button nzType="default"
-            [@hueButton]="hueBtnState"
-            (@hueButton.done)="hueBtnState = !hueBtnState"
-            (click)="animate()">点击骚动起来</button>
+    <button nz-button nzType="default" [@hueButton]="hueBtnState" (@hueButton.done)="hueBtnState = !hueBtnState" (click)="animate()">点击骚动起来</button>
   </div>
 
   <div [@enter3]>
-    <div class="center">
-      鼠标悬停这个按钮，颜色会渐变
-    </div>
+    <div class="center"> 鼠标悬停这个按钮，颜色会渐变 </div>
   </div>
 </div>

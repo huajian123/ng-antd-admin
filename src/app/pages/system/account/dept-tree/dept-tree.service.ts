@@ -1,11 +1,12 @@
-import {ChangeDetectorRef, Injectable, OnInit} from '@angular/core';
-import {SelectionModel} from "@angular/cdk/collections";
-import {FlatTreeControl} from "@angular/cdk/tree";
-import {NzTreeFlatDataSource, NzTreeFlattener} from "ng-zorro-antd/tree-view";
-import {DeptService} from "@services/system/dept.service";
-import {SearchCommonVO} from "@core/services/types";
-import {fnFlatDataHasParentToTree, fnFlattenTreeDataByDataList} from "@utils/treeTableTools";
-import {BehaviorSubject} from "rxjs";
+import { SelectionModel } from '@angular/cdk/collections';
+import { FlatTreeControl } from '@angular/cdk/tree';
+import { ChangeDetectorRef, Injectable, OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+
+import { SearchCommonVO } from '@core/services/types';
+import { DeptService } from '@services/system/dept.service';
+import { fnFlatDataHasParentToTree, fnFlattenTreeDataByDataList } from '@utils/treeTableTools';
+import { NzTreeFlatDataSource, NzTreeFlattener } from 'ng-zorro-antd/tree-view';
 
 interface TreeNode {
   id: number;
@@ -14,7 +15,6 @@ interface TreeNode {
   children?: TreeNode[];
 }
 
-
 export interface FlatNode {
   expandable: boolean;
   departmentName: string;
@@ -22,7 +22,6 @@ export interface FlatNode {
   level: number;
   disabled: boolean;
 }
-
 
 @Injectable()
 export class DeptTreeService {
@@ -53,9 +52,7 @@ export class DeptTreeService {
   dataSource = new NzTreeFlatDataSource(this.treeControl, this.treeFlattener);
   hasChild = (_: number, node: FlatNode): boolean => node.expandable;
 
-  constructor(private dataService: DeptService, private cdr: ChangeDetectorRef) {
-
-  }
+  constructor(private dataService: DeptService, private cdr: ChangeDetectorRef) {}
 
   resetTree(): void {
     if (this.currentSelNode) {
@@ -73,10 +70,10 @@ export class DeptTreeService {
   initDate(): void {
     const params: SearchCommonVO<any> = {
       pageSize: 0,
-      pageNum: 0,
+      pageNum: 0
     };
     this.dataService.getDepts(params).subscribe(deptList => {
-      this.TREE_DATA$.next(fnFlatDataHasParentToTree(deptList.list))
-    })
+      this.TREE_DATA$.next(fnFlatDataHasParentToTree(deptList.list));
+    });
   }
 }

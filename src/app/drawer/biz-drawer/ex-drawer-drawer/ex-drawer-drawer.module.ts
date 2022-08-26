@@ -1,15 +1,11 @@
 import { NgModule } from '@angular/core';
+
+import { SharedModule } from '@shared/shared.module';
+
 import { ExDrawerDrawerComponent } from './ex-drawer-drawer.component';
-import {SharedModule} from "@shared/shared.module";
-
-
 
 @NgModule({
-  declarations: [
-    ExDrawerDrawerComponent
-  ],
-  imports: [
-    SharedModule
-  ]
+  declarations: [ExDrawerDrawerComponent],
+  imports: [SharedModule]
 })
-export class ExDrawerDrawerModule { }
+export class ExDrawerDrawerModule {}

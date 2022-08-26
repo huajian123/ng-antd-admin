@@ -1,25 +1,25 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {JwtHelperService} from '@auth0/angular-jwt';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 export interface UserInfo {
-  userId: number,
-  authCode: string[]
+  userId: number;
+  authCode: string[];
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserInfoService {
-  private userInfo$ = new BehaviorSubject<UserInfo>({userId: -1, authCode: []});
+  private userInfo$ = new BehaviorSubject<UserInfo>({ userId: -1, authCode: [] });
 
-  constructor() {
-  }
+  constructor() {}
 
   parsToken(token: string): UserInfo {
     const helper = new JwtHelperService();
     try {
-      const {rol, userId} = helper.decodeToken(token);
+      const { rol, userId } = helper.decodeToken(token);
       return {
         userId,
         authCode: rol.split(',')
@@ -28,7 +28,7 @@ export class UserInfoService {
       return {
         userId: -1,
         authCode: []
-      }
+      };
     }
   }
 

@@ -1,4 +1,4 @@
-import {Component, OnInit, ChangeDetectionStrategy, Input} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'app-bind',
@@ -8,10 +8,9 @@ import {Component, OnInit, ChangeDetectionStrategy, Input} from '@angular/core';
 })
 export class BindComponent implements OnInit {
   @Input() data!: { label: string };
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     console.log(this.data);
   }
-
 }

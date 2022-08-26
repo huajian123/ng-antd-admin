@@ -1,14 +1,10 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
 import { FrameRoutingModule } from './frame-routing.module';
 
-
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-    FrameRoutingModule
-  ]
+  imports: [CommonModule, FrameRoutingModule]
 })
-export class FrameModule { }
+export class FrameModule {}

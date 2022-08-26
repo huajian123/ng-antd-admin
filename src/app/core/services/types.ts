@@ -1,14 +1,14 @@
 /*
-* 通用interface
-* */
+ * 通用interface
+ * */
 
-import {Type} from '@angular/core';
-import {NzSafeAny} from "ng-zorro-antd/core/types";
+import { Type } from '@angular/core';
+
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 // 动态组件
 export class DynamicComponent {
-  constructor(public component: Type<NzSafeAny>, public data: NzSafeAny) {
-  }
+  constructor(public component: Type<NzSafeAny>, public data: NzSafeAny) {}
 }
 
 // select下拉
@@ -34,7 +34,7 @@ export interface PageInfo<T> {
   endRow?: number;
   total: number;
   pages?: number;
-  list: Array<T>;
+  list: T[];
   firstPage?: number;
   prePage?: number;
   nextPage?: number;
@@ -61,8 +61,8 @@ export interface CascaderOption {
 }
 
 /*
-* 菜单
-* */
+ * 菜单
+ * */
 
 export interface Menu {
   id: number | string;
@@ -78,11 +78,3 @@ export interface Menu {
   code?: string; // 权限码
   newLinkFlag?: 0 | 1; // 是否是新页
 }
-
-
-
-
-
-
-
-

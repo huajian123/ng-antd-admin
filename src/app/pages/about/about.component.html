@@ -1,32 +1,23 @@
 <app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
 
-
 <div class="normal-table-wrap bg-color-no p-b-50">
-    <nz-card [nzBordered]="true" class="m-b-20">
-      <nz-descriptions
-        [nzSize]="'small'"
-        nzTitle="项目信息"
-        nzBordered
-        [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }"
+  <nz-card [nzBordered]="true" class="m-b-20">
+    <nz-descriptions [nzSize]="'small'" nzTitle="项目信息" nzBordered [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }">
+      <nz-descriptions-item nzTitle="版本"><nz-tag [nzColor]="'cyan'">1.0.0</nz-tag></nz-descriptions-item>
+      <nz-descriptions-item nzTitle="最后编译时间"
+        ><nz-tag [nzColor]="'cyan'">{{ data | date: dateFormat }}</nz-tag></nz-descriptions-item
       >
-        <nz-descriptions-item nzTitle="版本"><nz-tag [nzColor]="'cyan'">1.0.0</nz-tag></nz-descriptions-item>
-        <nz-descriptions-item nzTitle="最后编译时间"><nz-tag [nzColor]="'cyan'">{{data|date:dateFormat}}</nz-tag></nz-descriptions-item>
-        <nz-descriptions-item nzTitle="文档地址">正在策划中...</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="预览地址"><a class="operate-text" href="http://124.71.128.53:8081/">预览地址</a></nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Github"><a class="operate-text" href="https://github.com/huajian123/ng-ant-admin">Github</a></nz-descriptions-item>
-        <nz-descriptions-item nzTitle="码云"><a class="operate-text" href="https://gitee.com/hjxiaoqianduan/ng-ant-admin">码云</a></nz-descriptions-item>
-        <nz-descriptions-item nzTitle="纯净版项目地址"><a class="operate-text" href="https://gitee.com/hjxiaoqianduan/ng-ant-admin-pure">纯净版项目地址</a></nz-descriptions-item>
-        <nz-descriptions-item nzTitle="在线文档"><a class="operate-text" href="http://1.117.181.242:8081/">在线文档</a></nz-descriptions-item>
-      </nz-descriptions>
-    </nz-card>
+      <nz-descriptions-item nzTitle="文档地址">正在策划中...</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="预览地址"><a class="operate-text" href="http://124.71.128.53:8081/">预览地址</a></nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Github"><a class="operate-text" href="https://github.com/huajian123/ng-ant-admin">Github</a></nz-descriptions-item>
+      <nz-descriptions-item nzTitle="码云"><a class="operate-text" href="https://gitee.com/hjxiaoqianduan/ng-ant-admin">码云</a></nz-descriptions-item>
+      <nz-descriptions-item nzTitle="纯净版项目地址"><a class="operate-text" href="https://gitee.com/hjxiaoqianduan/ng-ant-admin-pure">纯净版项目地址</a></nz-descriptions-item>
+      <nz-descriptions-item nzTitle="在线文档"><a class="operate-text" href="http://1.117.181.242:8081/">在线文档</a></nz-descriptions-item>
+    </nz-descriptions>
+  </nz-card>
 
   <nz-card [nzBordered]="true" class="m-b-20">
-    <nz-descriptions
-      [nzSize]="'small'"
-      nzTitle="package.json中使用到的第三方包"
-      nzBordered
-      [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }"
-    >
+    <nz-descriptions [nzSize]="'small'" nzTitle="package.json中使用到的第三方包" nzBordered [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }">
       <nz-descriptions-item nzTitle="@amap/amap-jsapi-loader">高德地图</nz-descriptions-item>
       <nz-descriptions-item nzTitle="@antv/g2plot">g2图表</nz-descriptions-item>
       <nz-descriptions-item nzTitle="@antv/l7">antv l7地图</nz-descriptions-item>

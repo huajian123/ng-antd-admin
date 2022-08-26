@@ -1,7 +1,8 @@
-import {Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {fnCheckForm} from "@utils/tools";
-import {NzSafeAny} from "ng-zorro-antd/core/types";
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { fnCheckForm } from '@utils/tools';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 @Component({
   selector: 'app-step-one',
@@ -14,8 +15,7 @@ export class StepOneComponent implements OnInit {
   validateForm!: FormGroup;
   @Output() next = new EventEmitter<NzSafeAny>();
 
-  constructor(private fb: FormBuilder,) {
-  }
+  constructor(private fb: FormBuilder) {}
 
   // 下一步
   goNext(): void {
@@ -38,5 +38,4 @@ export class StepOneComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
   }
-
 }

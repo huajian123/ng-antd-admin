@@ -1,17 +1,18 @@
-import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Input, Inject} from '@angular/core';
-import {filter, map, mergeMap, share, switchMap, takeUntil, tap} from 'rxjs/operators';
-import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
-import {ThemeService} from '@store/common-store/theme.service';
-import {Title} from '@angular/platform-browser';
-import {SplitNavStoreService} from '@store/common-store/split-nav-store.service';
-import {Menu} from "@core/services/types";
-import {DOCUMENT} from "@angular/common";
-import {TabService} from "@core/services/common/tab.service";
-import {DestroyService} from "@core/services/common/destory.service";
-import {Observable} from "rxjs";
-import {MenuStoreService} from "@store/common-store/menu-store.service";
-import {UserInfoService} from "@store/common-store/userInfo.service";
-import {fnStopMouseEvent} from "@utils/tools";
+import { DOCUMENT } from '@angular/common';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Input, Inject } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { filter, map, mergeMap, share, switchMap, takeUntil, tap } from 'rxjs/operators';
+
+import { DestroyService } from '@core/services/common/destory.service';
+import { TabService } from '@core/services/common/tab.service';
+import { Menu } from '@core/services/types';
+import { MenuStoreService } from '@store/common-store/menu-store.service';
+import { SplitNavStoreService } from '@store/common-store/split-nav-store.service';
+import { ThemeService } from '@store/common-store/theme.service';
+import { UserInfoService } from '@store/common-store/userInfo.service';
+import { fnStopMouseEvent } from '@utils/tools';
 
 @Component({
   selector: 'app-nav-bar',
@@ -39,23 +40,33 @@ export class NavBarComponent implements OnInit {
   authCodeArray: string[] = [];
   subTheme$: Observable<any>;
 
-  constructor(private router: Router,
-              private destroy$: DestroyService,
-              private userInfoService: UserInfoService,
-              private menuServices: MenuStoreService,
-              private splitNavStoreService: SplitNavStoreService,
-              private activatedRoute: ActivatedRoute, private tabService: TabService,
-              private cdr: ChangeDetectorRef, private themesService: ThemeService,
-              private titleServe: Title, @Inject(DOCUMENT) private doc: Document) {
+  constructor(
+    private router: Router,
+    private destroy$: DestroyService,
+    private userInfoService: UserInfoService,
+    private menuServices: MenuStoreService,
+    private splitNavStoreService: SplitNavStoreService,
+    private activatedRoute: ActivatedRoute,
+    private tabService: TabService,
+    private cdr: ChangeDetectorRef,
+    private themesService: ThemeService,
+    private titleServe: Title,
+    @Inject(DOCUMENT) private doc: Document
+  ) {
     this.initMenus();
 
-    this.subTheme$ = this.isOverMode$.pipe(switchMap(res => {
-      this.isOverMode = res;
-      return this.themesOptions$;
-    }), tap(options => {
-      this.themesMode = options.mode;
-      this.isMixiMode = this.themesMode === 'mixi';
-    }), share(), takeUntil(this.destroy$));
+    this.subTheme$ = this.isOverMode$.pipe(
+      switchMap(res => {
+        this.isOverMode = res;
+        return this.themesOptions$;
+      }),
+      tap(options => {
+        this.themesMode = options.mode;
+        this.isMixiMode = this.themesMode === 'mixi';
+      }),
+      share(),
+      takeUntil(this.destroy$)
+    );
 
     // 监听混合模式下左侧菜单数据源
     this.subMixiModeSideMenu();
@@ -72,7 +83,7 @@ export class NavBarComponent implements OnInit {
             if (this.isMixiMode) {
               this.setMixModeLeftMenu();
             }
-          })
+          });
           // @ts-ignore
           this.routerPath = this.activatedRoute.snapshot['_routerState'].url;
           this.clickMenuItem(this.menus);
@@ -88,43 +99,49 @@ export class NavBarComponent implements OnInit {
           }
         }),
         map(() => this.activatedRoute),
-        map((route) => {
+        map(route => {
           while (route.firstChild) {
             route = route.firstChild;
           }
           return route;
         }),
-        filter((route) => {
+        filter(route => {
           return route.outlet === 'primary';
         }),
-        mergeMap((route) => {
+        mergeMap(route => {
           return route.data;
         }),
-        takeUntil(this.destroy$),
+        takeUntil(this.destroy$)
       )
-      .subscribe((routeData) => {
+      .subscribe(routeData => {
         // 详情页是否是打开新tab页签形式
         let isNewTabDetailPage = routeData['newTab'] === 'true';
-        this.tabService.addTab({
-          title: routeData['title'],
-          path: this.routerPath,
-          relatedLink: routeData['relatedLink'] ? routeData['relatedLink'] : [],
-        }, isNewTabDetailPage);
+        this.tabService.addTab(
+          {
+            title: routeData['title'],
+            path: this.routerPath,
+            relatedLink: routeData['relatedLink'] ? routeData['relatedLink'] : []
+          },
+          isNewTabDetailPage
+        );
         this.tabService.findIndex(this.routerPath);
-        this.titleServe.setTitle(routeData['title'] + ' - Ant Design');
+        this.titleServe.setTitle(`${routeData['title']} - Ant Design`);
         // 混合模式时，切换tab，让左侧菜单也相应变化
         this.setMixModeLeftMenu();
       });
   }
 
   initMenus(): void {
-    this.menuServices.getMenuArrayStore().pipe(takeUntil(this.destroy$)).subscribe(menusArray => {
-      this.menus = menusArray;
-      this.copyMenus = this.cloneMenuArray(this.menus);
-      this.clickMenuItem(this.menus);
-      this.clickMenuItem(this.copyMenus);
-      this.cdr.markForCheck();
-    })
+    this.menuServices
+      .getMenuArrayStore()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(menusArray => {
+        this.menus = menusArray;
+        this.copyMenus = this.cloneMenuArray(this.menus);
+        this.clickMenuItem(this.menus);
+        this.clickMenuItem(this.copyMenus);
+        this.cdr.markForCheck();
+      });
   }
 
   // 设置混合模式时，左侧菜单"自动分割菜单"模式的数据源
@@ -136,11 +153,10 @@ export class NavBarComponent implements OnInit {
     });
   }
 
-
   // 深拷贝克隆菜单数组
   cloneMenuArray(sourceMenuArray: Menu[], target: Menu[] = []): Menu[] {
     sourceMenuArray.forEach(item => {
-      const obj: Menu = {menuName: "", menuType: 'C', path: '', id: -1, fatherId: -1};
+      const obj: Menu = { menuName: '', menuType: 'C', path: '', id: -1, fatherId: -1 };
       for (let i in item) {
         if (item.hasOwnProperty(i)) {
           // @ts-ignore
@@ -153,11 +169,10 @@ export class NavBarComponent implements OnInit {
           }
         }
       }
-      target.push({...obj});
-    })
+      target.push({ ...obj });
+    });
     return target;
   }
-
 
   // 混合模式点击一级菜单，要让一级菜单下的第一个子菜单被选中
   changTopNav(index: number): void {
@@ -198,11 +213,9 @@ export class NavBarComponent implements OnInit {
         item.open = true;
       }
       if (!!item.children && item.children.length > 0) {
-        this.flatMenu(item.children, routePath)
+        this.flatMenu(item.children, routePath);
       }
-    })
-
-
+    });
   }
 
   clickMenuItem(menus: Menu[]): void {
@@ -217,7 +230,7 @@ export class NavBarComponent implements OnInit {
 
   // 改变当前菜单展示状态
   changeOpen(currentMenu: Menu, allMenu: Menu[]): void {
-    allMenu.forEach((item) => {
+    allMenu.forEach(item => {
       item.open = false;
     });
     currentMenu.open = true;
@@ -252,10 +265,11 @@ export class NavBarComponent implements OnInit {
         this.menus = this.cloneMenuArray(this.copyMenus);
         this.clickMenuItem(this.menus);
         // 混合模式下要在点击一下左侧菜单数据源,不然有二级菜单的菜单在折叠状态变为展开时，不open
-        if (this.themesMode === "mixi") {
+        if (this.themesMode === 'mixi') {
           this.clickMenuItem(this.leftMenuArray);
         }
-      } else { // 菜单收起
+      } else {
+        // 菜单收起
         this.copyMenus = this.cloneMenuArray(this.menus);
         this.closeMenuOpen(this.menus);
       }
@@ -270,22 +284,25 @@ export class NavBarComponent implements OnInit {
   }
 
   subAuth(): void {
-    this.userInfoService.getUserInfo().pipe(takeUntil(this.destroy$)).subscribe(res => this.authCodeArray = res.authCode);
+    this.userInfoService
+      .getUserInfo()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(res => (this.authCodeArray = res.authCode));
   }
 
   // 监听混合模式下左侧菜单数据源
-  private subMixiModeSideMenu() {
+  private subMixiModeSideMenu(): void {
     this.leftMenuArray$.pipe(takeUntil(this.destroy$)).subscribe(res => {
       this.leftMenuArray = res;
-    })
+    });
   }
 
   ngOnInit(): void {
     // 顶部模式时要关闭menu的open状态
-    this.subTheme$.subscribe((options) => {
+    this.subTheme$.subscribe(options => {
       if (options.mode === 'top' && !this.isOverMode) {
         this.closeMenu();
       }
-    })
+    });
   }
 }

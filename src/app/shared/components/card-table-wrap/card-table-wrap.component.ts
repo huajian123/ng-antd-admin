@@ -1,54 +1,43 @@
-import {
-  AfterContentInit,
-  ChangeDetectionStrategy,
-  Component,
-  ContentChild,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  TemplateRef
-} from '@angular/core';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
-import {NzTableSize} from "ng-zorro-antd/table";
-import {AntTableComponentToken, TableHeader} from "../ant-table/ant-table.component";
-import {NzSafeAny} from "ng-zorro-antd/core/types";
-import {AntTreeTableComponentToken} from "@shared/components/tree-table/tree-table.component";
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { AfterContentInit, ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
+
+import { AntTreeTableComponentToken } from '@shared/components/tree-table/tree-table.component';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzTableSize } from 'ng-zorro-antd/table';
+
+import { AntTableComponentToken, TableHeader } from '../ant-table/ant-table.component';
 
 interface TableSizeItem {
-  sizeName: string,
-  selected: boolean,
-  value: NzTableSize,
+  sizeName: string;
+  selected: boolean;
+  value: NzTableSize;
 }
-
 
 @Component({
   selector: 'app-card-table-wrap',
   templateUrl: './card-table-wrap.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardTableWrapComponent implements OnInit, AfterContentInit {
   @Input() tableTitle: string | TemplateRef<NzSafeAny> | undefined;
   @Input() btnTpl: TemplateRef<NzSafeAny> | undefined;
   @Input() isNormalTable = true; // 如果只是需要card-table-wrap的样式，这里设置为false
-  @Output() reload = new EventEmitter<NzSafeAny>();
+  @Output() readonly reload = new EventEmitter<NzSafeAny>();
   @ContentChild(AntTableComponentToken) antTableComponent!: AntTableComponentToken;
   @ContentChild(AntTreeTableComponentToken) antTreeTableComponent!: AntTreeTableComponentToken;
   tableConfigVisible = false;
   tableSizeOptions: TableSizeItem[] = [
-    {sizeName: '默认', selected: true, value: "default"},
-    {sizeName: '中等', selected: false, value: "middle"},
-    {sizeName: '紧凑', selected: false, value: "small"},
+    { sizeName: '默认', selected: true, value: 'default' },
+    { sizeName: '中等', selected: false, value: 'middle' },
+    { sizeName: '紧凑', selected: false, value: 'small' }
   ];
   tableHeaders: TableHeader[] = [];
   currentTableComponent!: AntTableComponentToken | AntTreeTableComponentToken;
-  allTableFieldChecked = false;  // 设置里面全选列
+  allTableFieldChecked = false; // 设置里面全选列
   allTableFieldIndeterminate = false; // 设置里面全选列的半选状态
-  copyHeader: TableHeader[] = [];  // 缓存默认配置
+  copyHeader: TableHeader[] = []; // 缓存默认配置
 
-
-  constructor() {
-  }
+  constructor() {}
 
   // 是否展示复选框
   changeTableCheckBoxShow(e: boolean): void {
@@ -58,7 +47,7 @@ export class CardTableWrapComponent implements OnInit, AfterContentInit {
 
   // 大中小表格密度
   tableSizeMenuClick(item: TableSizeItem): void {
-    this.tableSizeOptions.forEach(tableSizeItem => tableSizeItem.selected = false);
+    this.tableSizeOptions.forEach(tableSizeItem => (tableSizeItem.selected = false));
     item.selected = true;
     this.currentTableComponent.tableSize = item.value;
   }
@@ -69,7 +58,7 @@ export class CardTableWrapComponent implements OnInit, AfterContentInit {
       this.allTableFieldChecked = e;
       this.allTableFieldIndeterminate = false;
     }
-    this.tableHeaders.forEach(item => item.show = e);
+    this.tableHeaders.forEach(item => (item.show = e));
     this.tableChangeDectction();
   }
 
@@ -81,20 +70,20 @@ export class CardTableWrapComponent implements OnInit, AfterContentInit {
     const noFixedArray: TableHeader[] = [];
     tempArray.forEach(item => {
       if (item.fixed) {
-        if (item.fixedDir === "left") {
+        if (item.fixedDir === 'left') {
           fixedLeftArray.push(item);
         } else {
-          fixedRightArray.push(item)
+          fixedRightArray.push(item);
         }
       } else {
-        noFixedArray.push(item)
+        noFixedArray.push(item);
       }
     });
     this.currentTableComponent.tableConfig.headers = [...fixedLeftArray, ...noFixedArray, ...fixedRightArray];
     this.tableChangeDectction();
   }
 
-  dropTableConfig(event: CdkDragDrop<string[]>) {
+  dropTableConfig(event: CdkDragDrop<string[]>): void {
     moveItemInArray(this.tableHeaders, event.previousIndex, event.currentIndex);
     this.changeTableConfigShow();
   }
@@ -117,7 +106,7 @@ export class CardTableWrapComponent implements OnInit, AfterContentInit {
   }
 
   // 使子列表变更检测
-  tableChangeDectction() {
+  tableChangeDectction(): void {
     this.currentTableComponent.tableChangeDectction();
   }
 
@@ -132,15 +121,13 @@ export class CardTableWrapComponent implements OnInit, AfterContentInit {
   reset(): void {
     this.tableHeaders = [];
     this.copyHeader.forEach(item => {
-      this.tableHeaders.push({...item});
-    })
+      this.tableHeaders.push({ ...item });
+    });
     this.currentTableComponent.tableConfig.headers = [...this.tableHeaders];
     this.tableChangeDectction();
   }
 
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   ngAfterContentInit(): void {
     this.currentTableComponent = this.antTableComponent || this.antTreeTableComponent;
@@ -151,13 +138,12 @@ export class CardTableWrapComponent implements OnInit, AfterContentInit {
         if (item.show === undefined) {
           item.show = true;
         }
-      })
+      });
       this.copyHeader.length = 0;
       this.tableHeaders.forEach(item => {
-        this.copyHeader.push({...item});
-      })
+        this.copyHeader.push({ ...item });
+      });
       this.judgeAllChecked();
     }
   }
-
 }

@@ -1,7 +1,8 @@
-import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy} from '@angular/core';
-import {PageHeaderType} from "@shared/components/page-header/page-header.component";
-import {webSocket} from "rxjs/webSocket";
-import {ip, port} from "@env/environment.prod";
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
+
+import { ip, port } from '@env/environment.prod';
+import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { webSocket } from 'rxjs/webSocket';
 
 @Component({
   selector: 'app-websocket',
@@ -16,13 +17,11 @@ export class WebsocketComponent implements OnInit, OnDestroy {
     title: 'websocket',
     breadcrumb: ['首页', '功能', 'websocket']
   };
-  subject = webSocket(`ws://${ip}:8003/webSocket`)
+  subject = webSocket(`ws://${ip}:8003/webSocket`);
   result: string[] = [];
   msg = '';
 
-  constructor(private cdr: ChangeDetectorRef) {
-
-  }
+  constructor(private cdr: ChangeDetectorRef) {}
 
   send(): void {
     this.subject.next(this.msg);
@@ -34,21 +33,18 @@ export class WebsocketComponent implements OnInit, OnDestroy {
     this.concate = false;
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
-    this.subject.subscribe((res) => {
+    this.subject.subscribe(res => {
       // @ts-ignore
       this.result.push(res.message);
       this.result = [...this.result];
       this.cdr.markForCheck();
-    })
+    });
   }
 
   ngOnDestroy(): void {
     this.subject.complete();
   }
-
 }

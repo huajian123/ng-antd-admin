@@ -1,10 +1,11 @@
-import {Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {fnCheckForm} from '@utils/tools';
-import {NzUploadChangeParam} from 'ng-zorro-antd/upload';
-import {NzMessageService} from 'ng-zorro-antd/message';
-import {ValidatorsService} from '@core/services/validators/validators.service';
-import {BreakpointObserver} from '@angular/cdk/layout';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { ValidatorsService } from '@core/services/validators/validators.service';
+import { fnCheckForm } from '@utils/tools';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
 
 @Component({
   selector: 'app-base',
@@ -25,12 +26,7 @@ export class BaseComponent implements OnInit {
     Jiangsu: ['Nanjing', 'Suzhou', 'Zhenjiang']
   };
 
-
-  constructor(private fb: FormBuilder, private msg: NzMessageService,
-              private validatorsService: ValidatorsService,
-              private breakpointObserver: BreakpointObserver,
-              private cdr: ChangeDetectorRef) {
-  }
+  constructor(private fb: FormBuilder, private msg: NzMessageService, private validatorsService: ValidatorsService, private breakpointObserver: BreakpointObserver, private cdr: ChangeDetectorRef) {}
 
   provinceChange(value: string): void {
     this.selectedCity = this.cityData[value][0];
@@ -48,7 +44,7 @@ export class BaseComponent implements OnInit {
       province: [null, [Validators.required]],
       mobile: [null, [Validators.required, this.validatorsService.mobileValidator()]],
       telephone: [null, [Validators.required, this.validatorsService.telephoneValidator()]],
-      street: [null, [Validators.required]],
+      street: [null, [Validators.required]]
     });
   }
 
@@ -86,5 +82,4 @@ export class BaseComponent implements OnInit {
     this.initForm();
     this.obBreakPoint();
   }
-
 }

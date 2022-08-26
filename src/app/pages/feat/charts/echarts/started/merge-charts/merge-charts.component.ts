@@ -1,15 +1,12 @@
-import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-merge-charts',
-  template: `
-    <div echarts [options]="options" [merge]="updateOptions" class="demo-chart"></div>
-  `,
+  template: ` <div echarts [options]="options" [merge]="updateOptions" class="demo-chart"></div> `,
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MergeChartsComponent implements OnInit {
-
+export class MergeChartsComponent implements OnInit, OnDestroy {
   options: any;
   updateOptions: any;
 
@@ -19,8 +16,7 @@ export class MergeChartsComponent implements OnInit {
   private data: any[] = [];
   private timer: any;
 
-  constructor(private cdr: ChangeDetectorRef) {
-  }
+  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     // generate some random testing data:
@@ -44,7 +40,7 @@ export class MergeChartsComponent implements OnInit {
           // @ts-ignore
           const date = new Date(params.name);
           // @ts-ignore
-          return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' : ' + params.value[1];
+          return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} : ${params.value[1]}`;
         },
         axisPointer: {
           animation: false
@@ -63,13 +59,15 @@ export class MergeChartsComponent implements OnInit {
           show: false
         }
       },
-      series: [{
-        name: 'Mocking Data',
-        type: 'line',
-        showSymbol: false,
-        hoverAnimation: false,
-        data: this.data
-      }]
+      series: [
+        {
+          name: 'Mocking Data',
+          type: 'line',
+          showSymbol: false,
+          hoverAnimation: false,
+          data: this.data
+        }
+      ]
     };
 
     // Mock dynamic data:
@@ -81,29 +79,28 @@ export class MergeChartsComponent implements OnInit {
 
       // update series data:
       this.updateOptions = {
-        series: [{
-          data: this.data
-        }]
+        series: [
+          {
+            data: this.data
+          }
+        ]
       };
       this.cdr.detectChanges();
     }, 1000);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     clearInterval(this.timer);
   }
 
-  randomData() {
+  randomData(): { name: string; value: Array<string | number> } {
     // @ts-ignore
     this.now = new Date(this.now.getTime() + this.oneDay);
     // @ts-ignore
     this.value = this.value + Math.random() * 21 - 10;
     return {
       name: this.now.toString(),
-      value: [
-        [this.now.getFullYear(), this.now.getMonth() + 1, this.now.getDate()].join('/'),
-        Math.round(this.value)
-      ]
+      value: [[this.now.getFullYear(), this.now.getMonth() + 1, this.now.getDate()].join('/'), Math.round(this.value)]
     };
   }
 }

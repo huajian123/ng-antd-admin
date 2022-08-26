@@ -1,6 +1,6 @@
-import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-form',
@@ -9,11 +9,9 @@ import {Router} from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RegisterFormComponent implements OnInit {
-
   validateForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) {
-  }
+  constructor(private fb: FormBuilder, private router: Router) {}
 
   // checkPassword: [null, [Validators.required, this.confirmationValidator]],
 
@@ -25,7 +23,6 @@ export class RegisterFormComponent implements OnInit {
       }
       return {};
     };*/
-
 
   submitForm(): void {
     this.router.navigateByUrl('main');
@@ -46,8 +43,7 @@ export class RegisterFormComponent implements OnInit {
     this.validateForm = this.fb.group({
       name: [null, [Validators.required]],
       password: [null, [Validators.required]],
-      remember: [null],
+      remember: [null]
     });
   }
-
 }

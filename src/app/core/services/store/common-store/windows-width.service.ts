@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from "rxjs";
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 export enum EquipmentWidth {
   xs,
@@ -13,11 +13,10 @@ export enum EquipmentWidth {
 @Injectable({
   providedIn: 'root'
 })
-export class WindowsWidthService  {
+export class WindowsWidthService {
   private windowWidth$ = new BehaviorSubject<EquipmentWidth>(EquipmentWidth.xxl);
 
-  constructor() {
-  }
+  constructor() {}
   setWindowWidthStore(store: EquipmentWidth): void {
     this.windowWidth$.next(store);
   }

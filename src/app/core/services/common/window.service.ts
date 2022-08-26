@@ -1,8 +1,8 @@
-import {Inject, Injectable, InjectionToken, PLATFORM_ID} from '@angular/core';
-import {isPlatformBrowser} from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
+import { Inject, Injectable, InjectionToken, PLATFORM_ID } from '@angular/core';
 
 const WINDOW_TOKEN = new InjectionToken<Window>('A reference to the window object', {
-  factory: () => window,
+  factory: () => window
 });
 
 /*window对象封装服务*/
@@ -53,7 +53,6 @@ export class WindowService {
       localStorage.clear();
     }
   }
-
 
   setSessionStorage(key: string, value: string): void {
     if (this.isBrowser) {

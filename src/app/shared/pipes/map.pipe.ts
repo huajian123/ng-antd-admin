@@ -3,14 +3,15 @@
 accidentTypeOptions: OptionsInterface[];
 this.accidentTypeOptions = [...MapPipe.transformMapToArray(MapSet.accidentType)];*/
 
-import {Pipe, PipeTransform} from '@angular/core';
-import {DatePipe} from '@angular/common';
-import {NzSafeAny} from "ng-zorro-antd/core/types";
+import { DatePipe } from '@angular/common';
+import { Pipe, PipeTransform } from '@angular/core';
+
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 export const enum DateFormat {
   Date = 'yyyy-MM-dd',
   DateHour = 'yyyy-MM-dd HH',
-  DateTime = 'yyyy-MM-dd HH:mm',
+  DateTime = 'yyyy-MM-dd HH:mm'
 }
 
 export const enum MapKeyType {
@@ -22,12 +23,12 @@ export const enum MapKeyType {
 export const MapSet = {
   sex: {
     0: '女',
-    1: '男',
+    1: '男'
   },
   available: {
     true: '可用',
     false: '禁用'
-  } ,
+  },
   isOrNot: {
     true: '是',
     false: '否'
@@ -44,7 +45,7 @@ export interface MapItem {
 }
 
 @Pipe({
-  name: 'map',
+  name: 'map'
 })
 export class MapPipe implements PipeTransform {
   private datePipe: DatePipe = new DatePipe('en-US');
@@ -65,7 +66,7 @@ export class MapPipe implements PipeTransform {
           value = key;
           break;
       }
-      return {value, label: data[key]};
+      return { value, label: data[key] };
     });
   }
 
@@ -86,7 +87,7 @@ export class MapPipe implements PipeTransform {
         return this.datePipe.transform(value, param);
       default:
         // @ts-ignore
-        return (this.mapObj[type] ? this.mapObj[type][value] : '');
+        return this.mapObj[type] ? this.mapObj[type][value] : '';
     }
   }
 }

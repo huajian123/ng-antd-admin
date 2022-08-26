@@ -1,22 +1,22 @@
-import {Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef} from '@angular/core';
-import {NzSafeAny} from "ng-zorro-antd/core/types";
-import {MyTableConfig} from "@shared/components/ant-table/ant-table.component";
-import {PageHeaderType} from "@shared/components/page-header/page-header.component";
-import {FormBuilder} from "@angular/forms";
-import {NzModalService} from "ng-zorro-antd/modal";
-import {NzMessageService} from "ng-zorro-antd/message";
-import {Router} from "@angular/router";
-import {NzTableQueryParams} from "ng-zorro-antd/table";
-import {OptionsInterface, SearchCommonVO} from "@core/services/types";
-import {MenuListObj, MenusService} from "@services/system/menus.service";
-import {finalize} from "rxjs/operators";
-import {fnFlatDataHasParentToTree, fnFlattenTreeDataByDataList} from "@utils/treeTableTools";
-import {TreeNodeInterface} from "@shared/components/tree-table/tree-table.component";
-import {MenuModalService} from "@widget/biz-widget/system/menu-modal/menu-modal.service";
-import {ModalBtnStatus} from "@widget/base-modal";
-import {MapKeyType, MapPipe, MapSet} from "@shared/pipes/map.pipe";
-import { ActionCode } from '@app/config/actionCode';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
 
+import { ActionCode } from '@app/config/actionCode';
+import { OptionsInterface, SearchCommonVO } from '@core/services/types';
+import { MenuListObj, MenusService } from '@services/system/menus.service';
+import { MyTableConfig } from '@shared/components/ant-table/ant-table.component';
+import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { TreeNodeInterface } from '@shared/components/tree-table/tree-table.component';
+import { MapKeyType, MapPipe, MapSet } from '@shared/pipes/map.pipe';
+import { fnFlatDataHasParentToTree, fnFlattenTreeDataByDataList } from '@utils/treeTableTools';
+import { ModalBtnStatus } from '@widget/base-modal';
+import { MenuModalService } from '@widget/biz-widget/system/menu-modal/menu-modal.service';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzTableQueryParams } from 'ng-zorro-antd/table';
 
 interface SearchParam {
   menuName: number;
@@ -30,12 +30,11 @@ interface SearchParam {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MenuComponent implements OnInit {
-
-  @ViewChild('zorroIconTpl', {static: true}) zorroIconTpl!: TemplateRef<NzSafeAny>;
-  @ViewChild('aliIconTpl', {static: true}) aliIconTpl!: TemplateRef<NzSafeAny>;
-  @ViewChild('operationTpl', {static: true}) operationTpl!: TemplateRef<NzSafeAny>;
-  @ViewChild('visibleTpl', {static: true}) visibleTpl!: TemplateRef<NzSafeAny>;
-  @ViewChild('newLinkFlag', {static: true}) newLinkFlag!: TemplateRef<NzSafeAny>;
+  @ViewChild('zorroIconTpl', { static: true }) zorroIconTpl!: TemplateRef<NzSafeAny>;
+  @ViewChild('aliIconTpl', { static: true }) aliIconTpl!: TemplateRef<NzSafeAny>;
+  @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<NzSafeAny>;
+  @ViewChild('visibleTpl', { static: true }) visibleTpl!: TemplateRef<NzSafeAny>;
+  @ViewChild('newLinkFlag', { static: true }) newLinkFlag!: TemplateRef<NzSafeAny>;
 
   ActionCode = ActionCode;
   searchParam: Partial<SearchParam> = {};
@@ -48,17 +47,18 @@ export class MenuComponent implements OnInit {
   dataList: TreeNodeInterface[] = [];
   visibleOptions: OptionsInterface[] = [];
 
-
-  constructor(private fb: FormBuilder,
-              private menuModalService: MenuModalService,
-              private dataService: MenusService,
-              private modalSrv: NzModalService,
-              public message: NzMessageService,
-              private router: Router, private cdr: ChangeDetectorRef) {
-  }
+  constructor(
+    private fb: FormBuilder,
+    private menuModalService: MenuModalService,
+    private dataService: MenusService,
+    private modalSrv: NzModalService,
+    public message: NzMessageService,
+    private router: Router,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   reloadTable(): void {
-    this.message.info('已经刷新了')
+    this.message.info('已经刷新了');
     this.getDataList();
   }
 
@@ -82,13 +82,18 @@ export class MenuComponent implements OnInit {
       pageNum: 0,
       filters: this.searchParam
     };
-    this.dataService.getMenuList(params).pipe(finalize(() => {
-      this.tableLoading(false);
-    })).subscribe((menuList => {
-      const target = fnFlatDataHasParentToTree(menuList.list,"fatherId");
-      this.dataList = fnFlattenTreeDataByDataList(target);
-      this.tableLoading(false);
-    }));
+    this.dataService
+      .getMenuList(params)
+      .pipe(
+        finalize(() => {
+          this.tableLoading(false);
+        })
+      )
+      .subscribe(menuList => {
+        const target = fnFlatDataHasParentToTree(menuList.list, 'fatherId');
+        this.dataList = fnFlattenTreeDataByDataList(target);
+        this.tableLoading(false);
+      });
   }
 
   /*重置*/
@@ -98,23 +103,30 @@ export class MenuComponent implements OnInit {
   }
 
   add(fatherId: number): void {
-    this.menuModalService.show({nzTitle: '新增'}).subscribe((res) => {
-      if (!res || res.status === ModalBtnStatus.Cancel) {
-        return;
-      }
-      const param = {...res.modalValue};
-      param.fatherId = fatherId;
-      this.tableLoading(true);
-      this.addEditData(param, 'addMenus');
-    }, error => this.tableLoading(false));
+    this.menuModalService.show({ nzTitle: '新增' }).subscribe(
+      res => {
+        if (!res || res.status === ModalBtnStatus.Cancel) {
+          return;
+        }
+        const param = { ...res.modalValue };
+        param.fatherId = fatherId;
+        this.tableLoading(true);
+        this.addEditData(param, 'addMenus');
+      },
+      error => this.tableLoading(false)
+    );
   }
 
   addEditData(param: MenuListObj, methodName: 'editMenus' | 'addMenus'): void {
-    this.dataService[methodName](param).pipe(finalize(() => {
-      this.tableLoading(false);
-    })).subscribe(() => {
-      this.getDataList();
-    });
+    this.dataService[methodName](param)
+      .pipe(
+        finalize(() => {
+          this.tableLoading(false);
+        })
+      )
+      .subscribe(() => {
+        this.getDataList();
+      });
   }
 
   del(id: number): void {
@@ -123,12 +135,15 @@ export class MenuComponent implements OnInit {
       nzContent: '删除后不可恢复',
       nzOnOk: () => {
         this.tableLoading(true);
-        this.dataService.delMenus(id).subscribe(() => {
-          if (this.dataList.length === 1) {
-            this.tableConfig.pageIndex--;
-          }
-          this.getDataList();
-        }, error => this.tableLoading(false));
+        this.dataService.delMenus(id).subscribe(
+          () => {
+            if (this.dataList.length === 1) {
+              this.tableConfig.pageIndex--;
+            }
+            this.getDataList();
+          },
+          error => this.tableLoading(false)
+        );
       }
     });
   }
@@ -136,15 +151,18 @@ export class MenuComponent implements OnInit {
   // 修改
   edit(id: number, fatherId: number): void {
     this.dataService.getMenuDetail(id).subscribe(res => {
-      this.menuModalService.show({nzTitle: '编辑'}, res).subscribe(({modalValue, status}) => {
-        if (status === ModalBtnStatus.Cancel) {
-          return;
-        }
-        modalValue.id = id;
-        modalValue.fatherId = fatherId;
-        this.tableLoading(true);
-        this.addEditData(modalValue, 'editMenus');
-      }, error => this.tableLoading(false));
+      this.menuModalService.show({ nzTitle: '编辑' }, res).subscribe(
+        ({ modalValue, status }) => {
+          if (status === ModalBtnStatus.Cancel) {
+            return;
+          }
+          modalValue.id = id;
+          modalValue.fatherId = fatherId;
+          this.tableLoading(true);
+          this.addEditData(modalValue, 'editMenus');
+        },
+        error => this.tableLoading(false)
+      );
     });
   }
 
@@ -159,74 +177,74 @@ export class MenuComponent implements OnInit {
         {
           title: '菜单名称',
           width: 230,
-          field: 'menuName',
+          field: 'menuName'
         },
         {
           title: 'zorro图标',
           field: 'icon',
           width: 100,
-          tdTemplate: this.zorroIconTpl,
+          tdTemplate: this.zorroIconTpl
         },
         {
           title: '阿里图标',
           field: 'alIcon',
           width: 100,
-          tdTemplate: this.aliIconTpl,
+          tdTemplate: this.aliIconTpl
         },
         {
           title: '权限码',
           field: 'code',
-          width: 300,
+          width: 300
         },
         {
           title: '路由地址',
           field: 'path',
-          width:300
+          width: 300
         },
         {
           title: '排序',
           field: 'orderNum',
-          width: 80,
+          width: 80
         },
         {
           title: '状态',
           field: 'status',
           pipe: 'available',
-          width: 100,
+          width: 100
         },
         {
           title: '展示',
           field: 'visible',
           pipe: 'isOrNot',
-          tdTemplate:this.visibleTpl,
-          width: 100,
+          tdTemplate: this.visibleTpl,
+          width: 100
         },
         {
           title: '外链',
           field: 'newLinkFlag',
           pipe: 'isOrNot',
-          tdTemplate:this.newLinkFlag,
-          width: 100,
+          tdTemplate: this.newLinkFlag,
+          width: 100
         },
         {
           title: '创建时间',
           field: 'createTime',
           pipe: 'date:yyyy-MM-dd HH:mm',
-          width: 180,
+          width: 180
         },
         {
           title: '操作',
           tdTemplate: this.operationTpl,
           width: 180,
           fixed: true,
-          fixedDir: "right"
+          fixedDir: 'right'
         }
       ],
       total: 0,
       showCheckbox: false,
       loading: false,
       pageSize: 10,
-      pageIndex: 1,
+      pageIndex: 1
     };
   }
 

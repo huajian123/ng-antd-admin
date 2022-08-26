@@ -2,20 +2,12 @@
   <nz-avatar [nzSize]="70" [nzSrc]="'assets/imgs/default_face.png'"></nz-avatar>
   <p class="sp-16 m-t-8">Serati Ma</p>
 
-  <form autocomplete="off" class="m-t-30 full-with p-l-25 p-r-24 m-b-20"
-        nz-form [formGroup]="validateForm" [nzLayout]="'vertical'">
+  <form autocomplete="off" class="m-t-30 full-with p-l-25 p-r-24 m-b-20" nz-form [formGroup]="validateForm" [nzLayout]="'vertical'">
     <nz-form-item>
       <nz-form-label nzRequired>锁屏密码</nz-form-label>
       <nz-form-control nzErrorTip="请输入锁屏密码">
         <nz-input-group [nzSuffix]="suffixTemplate">
-          <input
-            autocomplete="off"
-            formControlName="password"
-            [type]="passwordVisible ? 'text' : 'password'"
-            nz-input
-            name="password"
-            placeholder="请输入"
-          />
+          <input autocomplete="off" formControlName="password" [type]="passwordVisible ? 'text' : 'password'" nz-input name="password" placeholder="请输入" />
         </nz-input-group>
         <ng-template #suffixTemplate>
           <i nz-icon [nzType]="!passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>

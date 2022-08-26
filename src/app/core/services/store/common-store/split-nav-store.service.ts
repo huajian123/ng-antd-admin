@@ -1,6 +1,7 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {Menu} from '../../types';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+
+import { Menu } from '../../types';
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +9,7 @@ import {Menu} from '../../types';
 export class SplitNavStoreService {
   private splitLeftNavArray$ = new BehaviorSubject<Menu[]>([]);
 
-  constructor() {
-  }
+  constructor() {}
 
   setSplitLeftNavArrayStore(menu: Menu[]): void {
     this.splitLeftNavArray$.next(menu);
@@ -18,5 +18,4 @@ export class SplitNavStoreService {
   getSplitLeftNavArrayStore(): Observable<Menu[]> {
     return this.splitLeftNavArray$.asObservable();
   }
-
 }

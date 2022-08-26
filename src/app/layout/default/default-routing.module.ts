@@ -1,12 +1,16 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {DefaultComponent} from "./default.component";
-import {JudgLoginGuard} from "@core/services/common/guard/judgLogin.guard";
-import {JudgAuthGuard} from "@core/services/common/guard/judgAuth.guard";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+import { JudgAuthGuard } from '@core/services/common/guard/judgAuth.guard';
+import { JudgLoginGuard } from '@core/services/common/guard/judgLogin.guard';
+
+import { DefaultComponent } from './default.component';
 
 const routes: Routes = [
   {
-    path: '', component: DefaultComponent, data: {shouldDetach: 'no'},
+    path: '',
+    component: DefaultComponent,
+    data: { shouldDetach: 'no' },
     canActivateChild: [JudgLoginGuard, JudgAuthGuard],
     children: [
       {
@@ -37,7 +41,7 @@ const routes: Routes = [
         path: 'system',
         loadChildren: () => import('../../pages/system/system.module').then(m => m.SystemModule)
       },
-      {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   }
 ];
@@ -46,5 +50,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class DefaultRoutingModule {
-}
+export class DefaultRoutingModule {}

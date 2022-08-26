@@ -1,15 +1,13 @@
-import {Inject, Injectable} from '@angular/core';
-import {DOCUMENT} from '@angular/common';
+import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable } from '@angular/core';
 /*
-* 顶部滚动pre服务
-* */
+ * 顶部滚动pre服务
+ * */
 @Injectable({
   providedIn: 'root'
 })
 export class PreloaderService {
-
-  constructor(@Inject(DOCUMENT) private doc: Document) {
-  }
+  constructor(@Inject(DOCUMENT) private doc: Document) {}
 
   removePreLoader(): void {
     const el = this.doc.getElementById('globalLoader');

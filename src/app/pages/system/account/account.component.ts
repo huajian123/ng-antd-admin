@@ -1,19 +1,20 @@
-import {Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef} from '@angular/core';
-import {PageHeaderType} from "@shared/components/page-header/page-header.component";
-import {MyTableConfig} from "@shared/components/ant-table/ant-table.component";
-import {OptionsInterface, SearchCommonVO} from "@core/services/types";
-import {NzModalService} from "ng-zorro-antd/modal";
-import {MessageService} from "@core/services/common/message.service";
-import {Router} from "@angular/router";
-import {NzMessageService} from "ng-zorro-antd/message";
-import {NzTableQueryParams} from "ng-zorro-antd/table";
-import {finalize} from "rxjs/operators";
-import {ModalBtnStatus} from "@widget/base-modal";
-import {ActionCode} from '@app/config/actionCode';
-import {AccountService, User} from "@services/system/account.service";
-import {AccountModalService} from "@widget/biz-widget/system/account-modal/account-modal.service";
-import {NzSafeAny} from "ng-zorro-antd/core/types";
-import {MapKeyType, MapPipe, MapSet} from "@shared/pipes/map.pipe";
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef } from '@angular/core';
+import { Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
+
+import { ActionCode } from '@app/config/actionCode';
+import { MessageService } from '@core/services/common/message.service';
+import { OptionsInterface, SearchCommonVO } from '@core/services/types';
+import { AccountService, User } from '@services/system/account.service';
+import { MyTableConfig } from '@shared/components/ant-table/ant-table.component';
+import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { MapKeyType, MapPipe, MapSet } from '@shared/pipes/map.pipe';
+import { ModalBtnStatus } from '@widget/base-modal';
+import { AccountModalService } from '@widget/biz-widget/system/account-modal/account-modal.service';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzTableQueryParams } from 'ng-zorro-antd/table';
 
 interface SearchParam {
   userName: string;
@@ -29,8 +30,8 @@ interface SearchParam {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AccountComponent implements OnInit {
-  @ViewChild('operationTpl', {static: true}) operationTpl!: TemplateRef<any>;
-  @ViewChild('availableFlag', {static: true}) availableFlag!: TemplateRef<NzSafeAny>;
+  @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<any>;
+  @ViewChild('availableFlag', { static: true }) availableFlag!: TemplateRef<NzSafeAny>;
   searchParam: Partial<SearchParam> = {};
   tableConfig!: MyTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
@@ -43,10 +44,15 @@ export class AccountComponent implements OnInit {
   isCollapse = true;
   availableOptions: OptionsInterface[] = [];
 
-  constructor(private dataService: AccountService, private modalSrv: NzModalService, private cdr: ChangeDetectorRef,
-              private messageService: MessageService, private modalService: AccountModalService,
-              private router: Router, public message: NzMessageService) {
-  }
+  constructor(
+    private dataService: AccountService,
+    private modalSrv: NzModalService,
+    private cdr: ChangeDetectorRef,
+    private messageService: MessageService,
+    private modalService: AccountModalService,
+    private router: Router,
+    public message: NzMessageService
+  ) {}
 
   selectedChecked(e: User[]): void {
     this.checkedCashArray = [...e];
@@ -64,21 +70,26 @@ export class AccountComponent implements OnInit {
       pageNum: e?.pageIndex || this.tableConfig.pageIndex!,
       filters: this.searchParam
     };
-    this.dataService.getAccount(params).pipe(finalize(() => {
-      this.tableLoading(false);
-    })).subscribe((data => {
-      const {list, total, pageNum} = data;
-      this.dataList = [...list];
-      this.tableConfig.total = total!;
-      this.tableConfig.pageIndex = pageNum!;
-      this.tableLoading(false);
-      this.checkedCashArray = [...this.checkedCashArray];
-    }));
+    this.dataService
+      .getAccount(params)
+      .pipe(
+        finalize(() => {
+          this.tableLoading(false);
+        })
+      )
+      .subscribe(data => {
+        const { list, total, pageNum } = data;
+        this.dataList = [...list];
+        this.tableConfig.total = total!;
+        this.tableConfig.pageIndex = pageNum!;
+        this.tableLoading(false);
+        this.checkedCashArray = [...this.checkedCashArray];
+      });
   }
 
   // 设置权限
   setRole(id: number): void {
-    this.router.navigate(['/default/system/role-manager/set-role'], {queryParams: {id: id}});
+    this.router.navigate(['/default/system/role-manager/set-role'], { queryParams: { id: id } });
   }
 
   // 触发表格变更检测
@@ -93,26 +104,28 @@ export class AccountComponent implements OnInit {
     this.tableChangeDectction();
   }
 
-
   add(): void {
-    this.modalService.show({nzTitle: '新增'}).subscribe((res) => {
-      if (!res || res.status === ModalBtnStatus.Cancel) {
-        return;
-      }
-      this.tableLoading(true);
-      this.addEditData(res.modalValue, 'addAccount');
-    }, error => this.tableLoading(false));
+    this.modalService.show({ nzTitle: '新增' }).subscribe(
+      res => {
+        if (!res || res.status === ModalBtnStatus.Cancel) {
+          return;
+        }
+        this.tableLoading(true);
+        this.addEditData(res.modalValue, 'addAccount');
+      },
+      error => this.tableLoading(false)
+    );
   }
 
   reloadTable(): void {
-    this.message.info('刷新成功')
+    this.message.info('刷新成功');
     this.getDataList();
   }
 
   // 修改
   edit(id: number): void {
     this.dataService.getAccountDetail(id).subscribe(res => {
-      this.modalService.show({nzTitle: '编辑'}, res).subscribe(({modalValue, status}) => {
+      this.modalService.show({ nzTitle: '编辑' }, res).subscribe(({ modalValue, status }) => {
         if (status === ModalBtnStatus.Cancel) {
           return;
         }
@@ -124,11 +137,15 @@ export class AccountComponent implements OnInit {
   }
 
   addEditData(param: User, methodName: 'editAccount' | 'addAccount'): void {
-    this.dataService[methodName](param).pipe(finalize(() => {
-      this.tableLoading(false);
-    })).subscribe(() => {
-      this.getDataList();
-    });
+    this.dataService[methodName](param)
+      .pipe(
+        finalize(() => {
+          this.tableLoading(false);
+        })
+      )
+      .subscribe(() => {
+        this.getDataList();
+      });
   }
 
   changeStatus(e: boolean, id: number): void {
@@ -137,11 +154,16 @@ export class AccountComponent implements OnInit {
       id,
       available: !e
     };
-    this.dataService.editAccount(people as User).pipe(finalize(() => {
-      this.tableLoading(false);
-    })).subscribe(res => {
-      this.getDataList();
-    });
+    this.dataService
+      .editAccount(people as User)
+      .pipe(
+        finalize(() => {
+          this.tableLoading(false);
+        })
+      )
+      .subscribe(res => {
+        this.getDataList();
+      });
   }
 
   allDel(): void {
@@ -151,20 +173,27 @@ export class AccountComponent implements OnInit {
         nzTitle: '确定要删除吗？',
         nzContent: '删除后不可恢复',
         nzOnOk: () => {
-          this.checkedCashArray.forEach((item) => {
+          this.checkedCashArray.forEach(item => {
             tempArrays.push(item.id);
           });
           this.tableLoading(true);
-          this.dataService.delAccount(tempArrays).pipe(finalize(() => {
-            this.tableLoading(false);
-          })).subscribe(() => {
-            if (this.dataList.length === 1) {
-              this.tableConfig.pageIndex--;
-            }
-            this.getDataList();
-            this.checkedCashArray = [];
-          }, error => this.tableLoading(false));
-
+          this.dataService
+            .delAccount(tempArrays)
+            .pipe(
+              finalize(() => {
+                this.tableLoading(false);
+              })
+            )
+            .subscribe(
+              () => {
+                if (this.dataList.length === 1) {
+                  this.tableConfig.pageIndex--;
+                }
+                this.getDataList();
+                this.checkedCashArray = [];
+              },
+              error => this.tableLoading(false)
+            );
         }
       });
     } else {
@@ -180,12 +209,15 @@ export class AccountComponent implements OnInit {
       nzContent: '删除后不可恢复',
       nzOnOk: () => {
         this.tableLoading(true);
-        this.dataService.delAccount(ids).subscribe(() => {
-          if (this.dataList.length === 1) {
-            this.tableConfig.pageIndex--;
-          }
-          this.getDataList();
-        }, error => this.tableLoading(false));
+        this.dataService.delAccount(ids).subscribe(
+          () => {
+            if (this.dataList.length === 1) {
+              this.tableConfig.pageIndex--;
+            }
+            this.getDataList();
+          },
+          error => this.tableLoading(false)
+        );
       }
     });
   }
@@ -196,9 +228,9 @@ export class AccountComponent implements OnInit {
     this.tableConfig.pageSize = e;
   }
 
-  searchDeptIdUser(departmentId: number) {
+  searchDeptIdUser(departmentId: number): void {
     this.searchParam.departmentId = departmentId;
-    this.getDataList()
+    this.getDataList();
   }
 
   /*展开*/
@@ -218,7 +250,7 @@ export class AccountComponent implements OnInit {
         {
           title: '用户名称',
           field: 'userName',
-          width: 100,
+          width: 100
         },
         {
           title: '是否可用',
@@ -230,39 +262,39 @@ export class AccountComponent implements OnInit {
           title: '性别',
           width: 70,
           field: 'sex',
-          pipe:'sex'
+          pipe: 'sex'
         },
         {
           title: '手机',
           width: 100,
-          field: 'mobile',
+          field: 'mobile'
         },
         {
           title: '邮箱',
           width: 100,
-          field: 'email',
+          field: 'email'
         },
         {
           title: '最后登录时间',
           width: 120,
           field: 'lastLoginTime',
-          pipe: 'date:yyyy-MM-dd HH:mm',
+          pipe: 'date:yyyy-MM-dd HH:mm'
         },
         {
           title: '创建时间',
           width: 100,
           field: 'createTime',
-          pipe: 'date:yyyy-MM-dd HH:mm',
+          pipe: 'date:yyyy-MM-dd HH:mm'
         },
         {
           title: '电话',
           width: 100,
-          field: 'telephone',
+          field: 'telephone'
         },
         {
           title: '所属部门',
           width: 100,
-          field: 'departmentName',
+          field: 'departmentName'
         },
         {
           title: '操作',
@@ -274,7 +306,7 @@ export class AccountComponent implements OnInit {
       total: 0,
       loading: true,
       pageSize: 10,
-      pageIndex: 1,
+      pageIndex: 1
     };
   }
 }

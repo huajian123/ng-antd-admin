@@ -1,21 +1,16 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  ViewChild,
-  ElementRef,
-} from '@angular/core';
-import {AdDirective} from '@shared/directives/ad.directive';
-import {ArticleComponent} from './article/article.component';
-import {ApplicationComponent} from './application/application.component';
-import {ProjectsComponent} from './projects/projects.component';
-import {AdComponent, DynamicComponent} from '@core/services/types';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
+
+import { AdComponent, DynamicComponent } from '@core/services/types';
+import { AdDirective } from '@shared/directives/ad.directive';
+
+import { ApplicationComponent } from './application/application.component';
+import { ArticleComponent } from './article/article.component';
+import { ProjectsComponent } from './projects/projects.component';
 
 interface TabInterface {
   label: string;
   component: DynamicComponent;
 }
-
 
 @Component({
   selector: 'app-personal-center',
@@ -26,15 +21,15 @@ interface TabInterface {
 export class PersonalCenterComponent implements OnInit {
   tagArray: string[] = ['很有想法的', '专注设计', '大长腿', '川妹子', '海纳百川'];
   inputVisible = false;
-  @ViewChild('inputElement', {static: false}) inputElement?: ElementRef;
+  @ViewChild('inputElement', { static: false }) inputElement?: ElementRef;
   inputValue = '';
   tabData: TabInterface[] = [
-    {label: '文章(8)', component: new DynamicComponent(ArticleComponent, {})},
-    {label: '应用(8)', component: new DynamicComponent(ApplicationComponent, {})},
-    {label: '项目(8)', component: new DynamicComponent(ProjectsComponent, {})},
+    { label: '文章(8)', component: new DynamicComponent(ArticleComponent, {}) },
+    { label: '应用(8)', component: new DynamicComponent(ApplicationComponent, {}) },
+    { label: '项目(8)', component: new DynamicComponent(ProjectsComponent, {}) }
   ];
 
-  @ViewChild(AdDirective, {static: true}) adHost!: AdDirective;
+  @ViewChild(AdDirective, { static: true }) adHost!: AdDirective;
 
   constructor() {}
 
@@ -63,5 +58,4 @@ export class PersonalCenterComponent implements OnInit {
   ngOnInit(): void {
     this.to(this.tabData[0]);
   }
-
 }

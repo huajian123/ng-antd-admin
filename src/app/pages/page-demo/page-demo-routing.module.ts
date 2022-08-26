@@ -30,11 +30,11 @@ const routes: Routes = [
   {
     path: 'flow',
     loadChildren: () => import('./flow/flow.module').then(m => m.FlowModule)
-  },
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class PageDemoRoutingModule { }
+export class PageDemoRoutingModule {}

@@ -1,9 +1,9 @@
-import {Component, ChangeDetectionStrategy,} from '@angular/core';
-import {PageHeaderType} from "@shared/components/page-header/page-header.component";
-import {DestroyService} from "@core/services/common/destory.service";
-import {MatIconRegistry} from "@angular/material/icon";
-import {DomSanitizer} from "@angular/platform-browser";
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 
+import { DestroyService } from '@core/services/common/destory.service';
+import { PageHeaderType } from '@shared/components/page-header/page-header.component';
 
 const THUMBUP_ICON =
   `
@@ -31,13 +31,10 @@ export class IconsComponent {
   seletedIcon = '';
   visible = false;
 
-  constructor( iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
     // Note that we provide the icon here as a string literal here due to a limitation in
     // Stackblitz. If you want to provide the icon from a URL, you can use:
     // `iconRegistry.addSvgIcon('thumbs-up', sanitizer.bypassSecurityTrustResourceUrl('icon.svg'));`
     iconRegistry.addSvgIconLiteral('thumbs-up', sanitizer.bypassSecurityTrustHtml(THUMBUP_ICON));
-
   }
-
-
 }

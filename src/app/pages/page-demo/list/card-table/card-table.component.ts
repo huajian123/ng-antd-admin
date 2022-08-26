@@ -1,7 +1,8 @@
-import {Component, OnInit, ChangeDetectionStrategy, AfterViewInit, ViewChild, TemplateRef} from '@angular/core';
-import {PageHeaderType} from '@shared/components/page-header/page-header.component';
-import {ThemeService} from '@store/common-store/theme.service';
-import {NzSafeAny} from "ng-zorro-antd/core/types";
+import { Component, OnInit, ChangeDetectionStrategy, AfterViewInit, ViewChild, TemplateRef } from '@angular/core';
+
+import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { ThemeService } from '@store/common-store/theme.service';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 @Component({
   selector: 'app-card-table',
@@ -15,7 +16,7 @@ export class CardTableComponent implements OnInit, AfterViewInit {
     title: '',
     breadcrumb: [],
     extra: '',
-    desc: '',
+    desc: ''
   };
   list = [
     {
@@ -65,22 +66,19 @@ export class CardTableComponent implements OnInit, AfterViewInit {
       avatar: 'https://gw.alipayobjects.com/zos/rmsportal/nxkuOJlFJuAUhzlMTCEe.png',
       name: 'Webpack',
       desc: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。'
-    },
+    }
   ];
-  @ViewChild('headerContent', {static: false}) headerContent!: TemplateRef<NzSafeAny>;
+  @ViewChild('headerContent', { static: false }) headerContent!: TemplateRef<NzSafeAny>;
 
-  constructor( private themesService: ThemeService) {
-  }
+  constructor(private themesService: ThemeService) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     this.pageHeaderInfo = {
       title: '卡片列表',
       breadcrumb: ['首页', '列表页', '卡片列表'],
-      desc: this.headerContent,
+      desc: this.headerContent
     };
   }
-
 }

@@ -1,10 +1,11 @@
-import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {DestroyService} from "@core/services/common/destory.service";
-import {NzModalRef} from "ng-zorro-antd/modal";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Observable, of} from "rxjs";
-import {fnCheckForm} from "@utils/tools";
-import {MenuListObj} from "@services/system/menus.service";
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable, of } from 'rxjs';
+
+import { DestroyService } from '@core/services/common/destory.service';
+import { MenuListObj } from '@services/system/menus.service';
+import { fnCheckForm } from '@utils/tools';
+import { NzModalRef } from 'ng-zorro-antd/modal';
 
 // c:菜单，f按钮
 type menuType = 'C' | 'F';
@@ -19,12 +20,9 @@ export class MenuModalComponent implements OnInit {
   validateForm!: FormGroup;
   selIconVisible = false;
   params!: MenuListObj;
-  menuType: menuType = "C";
+  menuType: menuType = 'C';
 
-  constructor(private modalRef: NzModalRef,
-              private destroy$: DestroyService,
-              private fb: FormBuilder) {
-  }
+  constructor(private modalRef: NzModalRef, private destroy$: DestroyService, private fb: FormBuilder) {}
 
   // 返回false则不关闭对话框
   protected getCurrentValue(): Observable<any> {
@@ -33,7 +31,6 @@ export class MenuModalComponent implements OnInit {
     }
     return of(this.validateForm.value);
   }
-
 
   initForm(): void {
     this.validateForm = this.fb.group({
@@ -46,7 +43,7 @@ export class MenuModalComponent implements OnInit {
       status: [true],
       newLinkFlag: [false],
       icon: [null],
-      alIcon: [null],
+      alIcon: [null]
     });
   }
 
@@ -66,18 +63,17 @@ export class MenuModalComponent implements OnInit {
   changeMenuType(type: menuType): void {
     this.menuType = type;
     if (type === 'F') {
-      this.setFormStatusByType("disable");
+      this.setFormStatusByType('disable');
     } else {
-      this.setFormStatusByType("enable");
+      this.setFormStatusByType('enable');
     }
   }
 
   ngOnInit(): void {
     this.initForm();
     if (Object.keys(this.params).length > 0) {
-      this.changeMenuType(this.params.menuType)
+      this.changeMenuType(this.params.menuType);
       this.validateForm.patchValue(this.params);
     }
   }
-
 }

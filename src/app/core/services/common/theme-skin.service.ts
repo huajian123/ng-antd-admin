@@ -1,24 +1,24 @@
-import {Inject, Injectable} from '@angular/core';
-import {ThemeService} from "@store/common-store/theme.service";
-import {first} from "rxjs/operators";
-import {DOCUMENT} from "@angular/common";
-import {NzSafeAny} from "ng-zorro-antd/core/types";
+import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable } from '@angular/core';
+import { first } from 'rxjs/operators';
+
+import { ThemeService } from '@store/common-store/theme.service';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 const enum ThemeType {
   dark = 'dark',
-  default = 'default',
+  default = 'default'
 }
 /*
-* 切换主题服务
-* */
+ * 切换主题服务
+ * */
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ThemeSkinService {
   currentTheme!: ThemeType;
 
-  constructor(private themesService: ThemeService, @Inject(DOCUMENT) private doc: NzSafeAny) {
-  }
+  constructor(private themesService: ThemeService, @Inject(DOCUMENT) private doc: NzSafeAny) {}
 
   reverseTheme(theme: ThemeType): ThemeType {
     return theme === ThemeType.dark ? ThemeType.default : ThemeType.dark;
@@ -46,9 +46,12 @@ export class ThemeSkinService {
 
   public loadTheme(firstLoad = true): Promise<Event> {
     if (firstLoad) {
-      this.themesService.getIsNightTheme().pipe(first()).subscribe(res => {
-        this.currentTheme = res ? ThemeType.dark : ThemeType.default
-      })
+      this.themesService
+        .getIsNightTheme()
+        .pipe(first())
+        .subscribe(res => {
+          this.currentTheme = res ? ThemeType.dark : ThemeType.default;
+        });
     }
     const theme = this.currentTheme;
     if (firstLoad) {
@@ -56,14 +59,14 @@ export class ThemeSkinService {
     }
     return new Promise<Event>((resolve, reject) => {
       this.loadCss(`${theme}.css`, theme).then(
-        (e) => {
+        e => {
           if (!firstLoad) {
             this.doc.documentElement.classList.add(theme);
           }
           this.removeUnusedTheme(this.reverseTheme(theme));
           resolve(e);
         },
-        (e) => reject(e)
+        e => reject(e)
       );
     });
   }

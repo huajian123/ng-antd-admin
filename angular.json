@@ -1,8 +1,5 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "cli": {
-    "analytics": "74036156-c2bf-430d-affc-d66a108554ee"
-  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -28,11 +25,11 @@
         "@schematics/angular:pipe": {
           "skipTests": true
         },
-        "@schematics/angular:service": {
+        "@schematics/angular:resolver": {
           "skipTests": true
         },
-        "@schematics/angular:application": {
-          "strict": true
+        "@schematics/angular:service": {
+          "skipTests": true
         }
       },
       "root": "",
@@ -56,10 +53,10 @@
                 "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
                 "output": "/assets/"
               },
-              { 
-                "glob": "**/*", 
-                "input": "node_modules/monaco-editor", 
-                "output": "assets/monaco-editor" 
+              {
+                "glob": "**/*",
+                "input": "node_modules/monaco-editor",
+                "output": "assets/monaco-editor"
               }
             ],
             "styles": [
@@ -86,8 +83,19 @@
               "qs",
               "size-sensor",
               "pdfast",
+              "regl",
               "inversify",
+              "jquery",
               "lodash",
+              "qrious",
+              "driver.js",
+              "file-saver",
+              "fmin",
+              "eventemitter3",
+              "earcut",
+              "mousetrap",
+              "d3-regression",
+              "@amap/amap-jsapi-loader",
               "@mapbox/geojson-rewind",
               "@antv/l7-component",
               "inversify-inject-decorators"
@@ -168,6 +176,5 @@
         }
       }
     }
-  },
-  "defaultProject": "ng-ant-admin"
+  }
 }

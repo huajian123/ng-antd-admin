@@ -1,34 +1,35 @@
 <div id="chats" class="chat-wrap" [class.show]="show">
-  <nz-card [nzActions]="[inputTpl]" [nzTitle]="titleTemplate"
-           [nzBodyStyle]="{padding:0}" [nzExtra]="extraTemplate">
+  <nz-card [nzActions]="[inputTpl]" [nzTitle]="titleTemplate" [nzBodyStyle]="{ padding: 0 }" [nzExtra]="extraTemplate">
     <div #scrollMe class="flex chart-content">
       <span class="text-center sp-12 m-b-5" nz-typography nzType="secondary">2021-7-27</span>
       <div nz-row>
         <nz-avatar class="m-r-8" nz-col nzFlex="30px" nzIcon="user" nzSrc="assets/imgs/logo.svg"></nz-avatar>
         <div class="m-t-0 p-8" nz-result-content nz-col nzFlex="1">
-          请 <span nz-typography nzType="danger">一句话</span>描述您的问题，我们来帮您解决。😎
+          请
+          <span nz-typography nzType="danger">一句话</span>
+          描述您的问题，我们来帮您解决。😎
         </div>
         <div nz-col nzFlex="30px"></div>
       </div>
-      <ng-container *ngFor="let item of messageArray;let last = last;">
-
-        <div class="m-t-20" nz-row *ngIf="item.dir==='left'">
+      <ng-container *ngFor="let item of messageArray; let last = last">
+        <div class="m-t-20" nz-row *ngIf="item.dir === 'left'">
           <nz-avatar class="m-r-8" nz-col nzFlex="30px" nzIcon="user" nzSrc="assets/imgs/logo.svg"></nz-avatar>
           <div class="m-t-0 p-8" nz-result-content nz-col nzFlex="1">
-            {{item.msg}}
+            {{ item.msg }}
           </div>
           <div nz-col nzFlex="30px"></div>
-          {{last ? scrollToBottom() : ''}}
+          {{ last ? scrollToBottom() : '' }}
         </div>
 
-        <div nz-row class="m-t-20" *ngIf="item.dir==='right'">
+        <div nz-row class="m-t-20" *ngIf="item.dir === 'right'">
           <div nz-col nzFlex="30px"></div>
           <!--有未读的样式-->
           <div nz-col nzFlex="1" class="flex flex-coloum">
             <div class="m-t-0 p-8 text-break" nz-result-content>
-              <span nz-typography>{{item.msg}}</span>{{last ? scrollToBottom() : ''}}
+              <span nz-typography>{{ item.msg }}</span>
+              {{ last ? scrollToBottom() : '' }}
             </div>
-            <span class="sp-12 text-right m-t-5" nz-typography nzType="secondary">{{item.isReaded ? "已读" : '未读'}}</span>
+            <span class="sp-12 text-right m-t-5" nz-typography nzType="secondary">{{ item.isReaded ? '已读' : '未读' }}</span>
           </div>
 
           <!--没有未读的样式-->
@@ -37,32 +38,33 @@
            </div>-->
 
           <div nz-col nzFlex="8px"></div>
-          <nz-avatar nz-col nzFlex="30px" nzIcon="user"
-                     nzSrc="assets/imgs/default_face.png"></nz-avatar>
+          <nz-avatar nz-col nzFlex="30px" nzIcon="user" nzSrc="assets/imgs/default_face.png"></nz-avatar>
         </div>
       </ng-container>
-
-
     </div>
-
-
   </nz-card>
   <ng-template #extraTemplate>
-    <i *ngIf="!show" class="hand-model" (click)="show = !show;" nz-icon nzType="arrows-alt" nzTheme="outline"></i>
-    <i *ngIf="show" (click)="show = !show;" class="hand-model" nz-icon nzType="shrink" nzTheme="outline"></i>
+    <i *ngIf="!show" class="hand-model" (click)="show = !show" nz-icon nzType="arrows-alt" nzTheme="outline"></i>
+    <i *ngIf="show" (click)="show = !show" class="hand-model" nz-icon nzType="shrink" nzTheme="outline"></i>
     <i class="hand-model m-l-8" (click)="close()" nz-icon nzType="close" nzTheme="outline"></i>
   </ng-template>
   <ng-template #titleTemplate>
-    <span class="sp-14">{{isSending ? '对方正在输入中...' : '联系管理员'}}</span>
+    <span class="sp-14">{{ isSending ? '对方正在输入中...' : '联系管理员' }}</span>
   </ng-template>
   <ng-template #inputTpl>
     <form [formGroup]="validateForm">
-   <textarea #msgInput formControlName="question" (keydown.enter)="sendMessage(msgInput.value,$event);"
-             style="resize:none"
-             name="question" [nzBorderless]="true" rows="4" nz-input
-             id="remark"
-             placeholder="反馈些什么"></textarea>
+      <textarea
+        #msgInput
+        formControlName="question"
+        (keydown.enter)="sendMessage(msgInput.value, $event)"
+        style="resize: none"
+        name="question"
+        [nzBorderless]="true"
+        rows="4"
+        nz-input
+        id="remark"
+        placeholder="反馈些什么"
+      ></textarea>
     </form>
   </ng-template>
 </div>
-

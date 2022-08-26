@@ -1,9 +1,12 @@
 import { Directive, Host } from '@angular/core';
+
 import { NzModalComponent } from 'ng-zorro-antd/modal';
+
 import { ModalDragService } from './modal-drag.service';
 
 /**
  * 可拖动的对话框
+ *
  * @example
  * ``` html
  * <nz-modal nzxModalDrag ></nz-modal>

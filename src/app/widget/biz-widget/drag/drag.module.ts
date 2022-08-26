@@ -1,14 +1,13 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+
+import { ModalWrapService } from '@widget/base-modal';
+
 import { DragComponent } from './drag.component';
-import {ModalWrapService} from "@widget/base-modal";
+
 @NgModule({
-  declarations: [
-    DragComponent
-  ],
-  imports: [
-    CommonModule
-  ],
+  declarations: [DragComponent],
+  imports: [CommonModule],
   providers: [ModalWrapService]
 })
-export class DragModule { }
+export class DragModule {}

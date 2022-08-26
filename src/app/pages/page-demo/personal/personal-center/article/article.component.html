@@ -1,5 +1,5 @@
 <nz-list [nzItemLayout]="'vertical'">
-  <nz-list-item nzNoFlex *ngFor="let item of 8|numberLoop">
+  <nz-list-item nzNoFlex *ngFor="let item of 8 | numberLoop">
     <nz-list-item-meta>
       <nz-list-item-meta-title>
         <a>Alipay</a>
@@ -15,15 +15,25 @@
     <div class="m-t-15 info">
       <div nz-row>
         <nz-avatar class="m-r-8" [nzSize]="'small'" [nzSrc]="'assets/imgs/default_face.png'"></nz-avatar>
-        <a class="operate-text">付小小</a> <span class="m-r-8">发布在 </span> <a
-        class="m-r-8 operate-text">https://ant.design</a>
+        <a class="operate-text">付小小</a>
+        <span class="m-r-8">发布在</span>
+        <a class="m-r-8 operate-text">https://ant.design</a>
         <time nz-typography nzType="secondary">2021-02-19 14:21</time>
       </div>
     </div>
     <ul nz-list-item-actions>
-      <nz-list-item-action><i nz-icon nzType="star" class="m-r-8"></i> 156</nz-list-item-action>
-      <nz-list-item-action><i nz-icon nzType="like" class="m-r-8"></i> 156</nz-list-item-action>
-      <nz-list-item-action><i nz-icon nzType="message" class="m-r-8"></i> 2</nz-list-item-action>
+      <nz-list-item-action>
+        <i nz-icon nzType="star" class="m-r-8"></i>
+        156
+      </nz-list-item-action>
+      <nz-list-item-action>
+        <i nz-icon nzType="like" class="m-r-8"></i>
+        156
+      </nz-list-item-action>
+      <nz-list-item-action>
+        <i nz-icon nzType="message" class="m-r-8"></i>
+        2
+      </nz-list-item-action>
     </ul>
   </nz-list-item>
 </nz-list>

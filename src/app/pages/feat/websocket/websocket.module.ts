@@ -1,18 +1,12 @@
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
 
-import {WebsocketRoutingModule} from './websocket-routing.module';
-import {WebsocketComponent} from './websocket.component';
-import {SharedModule} from "@shared/shared.module";
+import { SharedModule } from '@shared/shared.module';
 
+import { WebsocketRoutingModule } from './websocket-routing.module';
+import { WebsocketComponent } from './websocket.component';
 
 @NgModule({
-  declarations: [
-    WebsocketComponent
-  ],
-  imports: [
-    SharedModule,
-    WebsocketRoutingModule
-  ]
+  declarations: [WebsocketComponent],
+  imports: [SharedModule, WebsocketRoutingModule]
 })
-export class WebsocketModule {
-}
+export class WebsocketModule {}

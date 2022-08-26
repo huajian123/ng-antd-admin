@@ -1,9 +1,8 @@
-import {AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, NgZone, OnInit} from '@angular/core';
-import {Pie, RingProgress, TinyColumn} from '@antv/g2plot';
-import {TinyArea} from '@antv/g2plot';
-import {Progress} from '@antv/g2plot';
-import {Chart} from '@antv/g2';
-import {inNextTick} from 'ng-zorro-antd/core/util';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
+
+import { Chart } from '@antv/g2';
+import { Pie, RingProgress, TinyColumn, TinyArea, Progress } from '@antv/g2plot';
+import { inNextTick } from 'ng-zorro-antd/core/util';
 
 interface DataItem {
   name: string;
@@ -16,35 +15,34 @@ interface DataItem {
   selector: 'app-analysis',
   templateUrl: './analysis.component.html',
   styleUrls: ['./analysis.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AnalysisComponent implements OnInit, AfterViewInit {
-  cardPadding = {padding: '20px 24px 8px'};
+  cardPadding = { padding: '20px 24px 8px' };
   miniBarData = [497, 666, 219, 269, 274, 337, 81, 497, 666, 219, 269];
   miniAreaData = [264, 274, 284, 294, 284, 274, 264, 264, 274, 264, 264, 264, 284, 264, 254, 264, 244, 340, 264, 243, 226, 192];
   histogramData = [
-    {type: '1月', value: 769},
-    {type: '2月', value: 769},
-    {type: '3月', value: 861},
-    {type: '4月', value: 442},
-    {type: '5月', value: 555},
-    {type: '6月', value: 439},
-    {type: '7月', value: 590},
-    {type: '8月', value: 434},
-    {type: '9月', value: 843},
-    {type: '10月', value: 840},
-    {type: '11月', value: 769},
-    {type: '12月', value: 769},
+    { type: '1月', value: 769 },
+    { type: '2月', value: 769 },
+    { type: '3月', value: 861 },
+    { type: '4月', value: 442 },
+    { type: '5月', value: 555 },
+    { type: '6月', value: 439 },
+    { type: '7月', value: 590 },
+    { type: '8月', value: 434 },
+    { type: '9月', value: 843 },
+    { type: '10月', value: 840 },
+    { type: '11月', value: 769 },
+    { type: '12月', value: 769 }
   ];
   ringData = [
-    {type: '分类一', value: 27},
-    {type: '分类二', value: 25},
-    {type: '分类三', value: 18},
-    {type: '分类四', value: 15},
-    {type: '分类五', value: 10},
-    {type: '其他', value: 5},
+    { type: '分类一', value: 27 },
+    { type: '分类二', value: 25 },
+    { type: '分类三', value: 18 },
+    { type: '分类四', value: 15 },
+    { type: '分类五', value: 10 },
+    { type: '其他', value: 5 }
   ];
-
 
   listOfColumn = [
     {
@@ -101,11 +99,9 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
     }
   ];
 
-  constructor(private cdr: ChangeDetectorRef, private ngZone: NgZone) {
-  }
+  constructor(private cdr: ChangeDetectorRef, private ngZone: NgZone) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   initMinibar(): void {
     const data = this.miniBarData;
@@ -113,7 +109,7 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
       autoFit: true,
       height: 14,
       width: 200,
-      data,
+      data
     });
 
     tinyColumn.render();
@@ -128,8 +124,8 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
       data,
       smooth: true,
       areaStyle: {
-        fill: '#d6e3fd',
-      },
+        fill: '#d6e3fd'
+      }
     });
 
     tinyArea.render();
@@ -141,38 +137,37 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
       width: 200,
       autoFit: true,
       percent: 0.7,
-      color: ['#5B8FF9', '#E8EDF3'],
+      color: ['#5B8FF9', '#E8EDF3']
     });
 
     progress.render();
   }
 
   initHistogram(): void {
-
     const chart = new Chart({
       container: 'histogram',
       autoFit: true,
       height: 295,
-      padding: [40, 40, 32, 72],
+      padding: [40, 40, 32, 72]
     });
     chart.data(this.histogramData);
     chart.scale('value', {
-      nice: true,
+      nice: true
     });
     chart.axis('type', {
-      tickLine: null,
+      tickLine: null
     });
 
     chart.axis('value', {
       label: {
-        formatter: (val) => {
+        formatter: val => {
           return +val;
-        },
-      },
+        }
+      }
     });
 
     chart.tooltip({
-      showMarkers: false,
+      showMarkers: false
     });
     chart.interaction('element-active');
 
@@ -180,14 +175,14 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
     chart
       .interval()
       .position('type*value')
-      .color('type', (val) => {
+      .color('type', val => {
         if (val === '10-30分' || val === '30+分') {
           return '#ff4d4f';
         }
         return '#2194ff';
       })
       .label('value', {
-        offset: 10,
+        offset: 10
       });
     chart.render();
   }
@@ -200,8 +195,8 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
       data,
       smooth: true,
       areaStyle: {
-        fill: '#d6e3fd',
-      },
+        fill: '#d6e3fd'
+      }
     });
     tinyArea.render();
   }
@@ -214,8 +209,8 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
       data,
       smooth: true,
       areaStyle: {
-        fill: '#d6e3fd',
-      },
+        fill: '#d6e3fd'
+      }
     });
     tinyArea.render();
   }
@@ -230,25 +225,24 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
       innerRadius: 0.64,
       meta: {
         value: {
-          formatter: (v) => `${v} ¥`,
-        },
+          formatter: v => `${v} ¥`
+        }
       },
       label: {
         type: 'inner',
         offset: '-50%',
         style: {
-          textAlign: 'center',
+          textAlign: 'center'
         },
         autoRotate: false,
-        content: '{value}',
+        content: '{value}'
       },
       statistic: {},
       // 添加 中心统计文本 交互
-      interactions: [{type: 'element-selected'}, {type: 'element-active'}, {type: 'pie-statistic-active'}],
+      interactions: [{ type: 'element-selected' }, { type: 'element-active' }, { type: 'pie-statistic-active' }]
     });
     tinyArea.render();
   }
-
 
   initMiniRing(): void {
     const ringProgress = new RingProgress('miniRing', {
@@ -256,7 +250,7 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
       width: 45,
       autoFit: false,
       percent: 0.7,
-      color: ['#5B8FF9', '#E8EDF3'],
+      color: ['#5B8FF9', '#E8EDF3']
     });
 
     ringProgress.render();
@@ -264,7 +258,6 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     inNextTick().subscribe(() => {
-
       this.ngZone.runOutsideAngular(() => {
         this.initMinibar();
         this.initMiniArea();
@@ -275,8 +268,6 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
         this.initRing();
         // this.initMiniRing();
       });
-
     });
   }
-
 }

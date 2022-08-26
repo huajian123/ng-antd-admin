@@ -1,17 +1,18 @@
-import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {DestroyService} from "@core/services/common/destory.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {NzModalRef} from "ng-zorro-antd/modal";
-import {Observable, of} from "rxjs";
-import {fnCheckForm} from "@utils/tools";
-import {OptionsInterface} from "@core/services/types";
-import {ValidatorsService} from "@core/services/validators/validators.service";
-import {RoleService} from "@services/system/role.service";
-import {NzSafeAny} from "ng-zorro-antd/core/types";
-import {DeptService} from "@services/system/dept.service";
-import {fnAddTreeDataGradeAndLeaf, fnFlatDataHasParentToTree} from "@utils/treeTableTools";
-import {NzTreeNodeOptions} from "ng-zorro-antd/core/tree";
-import {User} from "@services/system/account.service";
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable, of } from 'rxjs';
+
+import { DestroyService } from '@core/services/common/destory.service';
+import { OptionsInterface } from '@core/services/types';
+import { ValidatorsService } from '@core/services/validators/validators.service';
+import { User } from '@services/system/account.service';
+import { DeptService } from '@services/system/dept.service';
+import { RoleService } from '@services/system/role.service';
+import { fnCheckForm } from '@utils/tools';
+import { fnAddTreeDataGradeAndLeaf, fnFlatDataHasParentToTree } from '@utils/treeTableTools';
+import { NzTreeNodeOptions } from 'ng-zorro-antd/core/tree';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzModalRef } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-account-modal',
@@ -27,12 +28,7 @@ export class AccountModalComponent implements OnInit {
   value?: string;
   deptNodes: NzTreeNodeOptions[] = [];
 
-
-  constructor(private modalRef: NzModalRef, private fb: FormBuilder,
-              private validatorsService: ValidatorsService,
-              private roleService: RoleService, private deptService: DeptService) {
-  }
-
+  constructor(private modalRef: NzModalRef, private fb: FormBuilder, private validatorsService: ValidatorsService, private roleService: RoleService, private deptService: DeptService) {}
 
   // 此方法为如果有异步数据需要加载，则在该方法中添加
   protected getAsyncFnData(modalValue: NzSafeAny): Observable<NzSafeAny> {
@@ -47,15 +43,14 @@ export class AccountModalComponent implements OnInit {
     return of(this.addEditForm.value);
   }
 
-
   getRoleList(): Promise<void> {
     return new Promise<void>(resolve => {
-      this.roleService.getRoles({pageNum: 0, pageSize: 0}).subscribe(({list}) => {
+      this.roleService.getRoles({ pageNum: 0, pageSize: 0 }).subscribe(({ list }) => {
         this.roleOptions = [];
-        list.forEach(({id, roleName}) => {
+        list.forEach(({ id, roleName }) => {
           const obj: OptionsInterface = {
             label: roleName,
-            value: id!,
+            value: id!
           };
           this.roleOptions.push(obj);
         });
@@ -66,10 +61,10 @@ export class AccountModalComponent implements OnInit {
 
   getDeptList(): Promise<void> {
     return new Promise<void>(resolve => {
-      this.deptService.getDepts({pageNum: 0, pageSize: 0}).subscribe(({list}) => {
+      this.deptService.getDepts({ pageNum: 0, pageSize: 0 }).subscribe(({ list }) => {
         list.forEach(item => {
           // @ts-ignore
-          item.title = item.departmentName
+          item.title = item.departmentName;
           // @ts-ignore
           item.key = item.id;
         });
@@ -92,10 +87,9 @@ export class AccountModalComponent implements OnInit {
       email: [null, [this.validatorsService.emailValidator()]],
       roleId: [null, [Validators.required]],
       departmentId: [null, [Validators.required]],
-      departmentName: [null],
+      departmentName: [null]
     });
   }
-
 
   async ngOnInit(): Promise<void> {
     this.initForm();
@@ -106,6 +100,4 @@ export class AccountModalComponent implements OnInit {
       this.addEditForm.controls['password'].disable();
     }
   }
-
-
 }

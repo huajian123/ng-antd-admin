@@ -2,7 +2,7 @@ export interface TreeNode {
   departmentName: string;
   disabled?: boolean;
   children?: TreeNode[];
-  id:number,
+  id: number;
 }
 
 export class FilteredTreeResult {

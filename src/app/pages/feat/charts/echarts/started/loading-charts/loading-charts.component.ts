@@ -1,11 +1,12 @@
-import {Component, ChangeDetectionStrategy} from '@angular/core';
-import {EChartsOption} from "echarts/types/dist/echarts";
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+
+import { EChartsOption } from 'echarts/types/dist/echarts';
 
 @Component({
   selector: 'app-loading-charts',
   template: `
     <div class="button-groups">
-      <button (click)="isLoading=!isLoading" nz-button nzType="default">Toggle Loading</button>
+      <button (click)="isLoading = !isLoading" nz-button nzType="default">Toggle Loading</button>
     </div>
     <div echarts [options]="options" [loading]="isLoading" theme="macarons" class="demo-chart"></div>
   `,
@@ -13,7 +14,6 @@ import {EChartsOption} from "echarts/types/dist/echarts";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoadingChartsComponent {
-
   isLoading = false;
 
   options: EChartsOption = {
@@ -53,7 +53,7 @@ export class LoadingChartsComponent {
         type: 'line',
         stack: 'counts',
         // @ts-ignore
-        areaStyle: {normal: {}},
+        areaStyle: { normal: {} },
         data: [120, 132, 101, 134, 90, 230, 210]
       },
       {
@@ -61,7 +61,7 @@ export class LoadingChartsComponent {
         type: 'line',
         stack: 'counts',
         // @ts-ignore
-        areaStyle: {normal: {}},
+        areaStyle: { normal: {} },
         data: [220, 182, 191, 234, 290, 330, 310]
       },
       {
@@ -69,7 +69,7 @@ export class LoadingChartsComponent {
         type: 'line',
         stack: 'counts',
         // @ts-ignore
-        areaStyle: {normal: {}},
+        areaStyle: { normal: {} },
         data: [150, 232, 201, 154, 190, 330, 410]
       },
       {
@@ -77,7 +77,7 @@ export class LoadingChartsComponent {
         type: 'line',
         stack: 'counts',
         // @ts-ignore
-        areaStyle: {normal: {}},
+        areaStyle: { normal: {} },
         data: [320, 332, 301, 334, 390, 330, 320]
       },
       {
@@ -92,7 +92,7 @@ export class LoadingChartsComponent {
           }
         },
         // @ts-ignore
-        areaStyle: {normal: {}},
+        areaStyle: { normal: {} },
         data: [820, 932, 901, 934, 1290, 1330, 1320]
       }
     ]

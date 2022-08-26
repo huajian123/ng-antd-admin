@@ -1,6 +1,7 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from "rxjs";
-import {LoginType} from "@app/pages/other-login/login1/login1.component";
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+
+import { LoginType } from '@app/pages/other-login/login1/login1.component';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +10,7 @@ export class Login1StoreService {
   private loginType$ = new BehaviorSubject<LoginType>(LoginType.Normal);
   private isLogin1OverModel$ = new BehaviorSubject<boolean>(false);
 
-  constructor() {
-  }
+  constructor() {}
 
   setLoginTypeStore(type: LoginType): void {
     this.loginType$.next(type);

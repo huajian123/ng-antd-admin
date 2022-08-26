@@ -1,5 +1,4 @@
-import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, NgZone} from '@angular/core';
-
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, NgZone } from '@angular/core';
 
 @Component({
   selector: 'app-except403',
@@ -13,12 +12,7 @@ import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, NgZone} f
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Except403Component implements OnInit {
+  constructor(private cdr: ChangeDetectorRef, private ngZone: NgZone) {}
 
-  constructor(private cdr: ChangeDetectorRef, private ngZone: NgZone) {
-  }
-
-  ngOnInit(): void {
-  }
-
-
+  ngOnInit(): void {}
 }

@@ -1,6 +1,6 @@
 <div class="content-wrap">
-  <div nz-row [nzGutter]="[16,16]">
-    <div nz-col [nzXXl]="7" [nzXl]="7"  [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzXs]="24">
+  <div nz-row [nzGutter]="[16, 16]">
+    <div nz-col [nzXXl]="7" [nzXl]="7" [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzXs]="24">
       <nz-card>
         <div class="avatar-wrap">
           <div class="avatar">
@@ -9,15 +9,24 @@
             <span nz-typography>海纳百川，有容乃大</span>
           </div>
           <div class="avatar-detail m-t-25">
-            <p><i nz-icon nzType="contacts" nzTheme="outline"></i>交互专家</p>
-            <p><i nz-icon nzType="apartment" nzTheme="outline"></i>蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED</p>
-            <p><i nz-icon nzType="home" nzTheme="outline"></i>浙江省杭州市</p>
+            <p>
+              <i nz-icon nzType="contacts" nzTheme="outline"></i>
+              交互专家
+            </p>
+            <p>
+              <i nz-icon nzType="apartment" nzTheme="outline"></i>
+              蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED
+            </p>
+            <p>
+              <i nz-icon nzType="home" nzTheme="outline"></i>
+              浙江省杭州市
+            </p>
           </div>
         </div>
         <nz-divider nzDashed></nz-divider>
         <div class="tags">
           <h5 class="m-b-10">标签</h5>
-          <nz-tag class="m-b-5" *ngFor="let item of tagArray">{{item}}</nz-tag>
+          <nz-tag class="m-b-5" *ngFor="let item of tagArray">{{ item }}</nz-tag>
           <nz-tag *ngIf="!inputVisible" class="editable-tag" nzNoAnimation (click)="showInput()">
             <i nz-icon nzType="plus"></i>
             New Tag
@@ -29,7 +38,7 @@
             *ngIf="inputVisible"
             type="text"
             [(ngModel)]="inputValue"
-            style="width: 78px;"
+            style="width: 78px"
             (blur)="handleInputConfirm()"
             (keydown.enter)="handleInputConfirm()"
           />
@@ -38,10 +47,9 @@
         <div class="team">
           <h5 class="m-b-10">团队</h5>
           <div nz-row>
-            <div style="padding: 0 18px 0 0" nz-col nzSpan="12" *ngFor="let item of 5|numberLoop">
+            <div style="padding: 0 18px 0 0" nz-col nzSpan="12" *ngFor="let item of 5 | numberLoop">
               <a class="group">
-                <nz-avatar [nzSize]="24"
-                           [nzSrc]="'https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png'"></nz-avatar>
+                <nz-avatar [nzSize]="24" [nzSrc]="'https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png'"></nz-avatar>
                 <span class="m-l-10">全组都是吴彦祖</span>
               </a>
             </div>
@@ -49,16 +57,15 @@
         </div>
       </nz-card>
     </div>
-    <div nz-col [nzXXl]="17" [nzXl]="17"  [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzXs]="24">
+    <div nz-col [nzXXl]="17" [nzXl]="17" [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzXs]="24">
       <nz-card>
         <nz-card-tab>
           <nz-tabset nzSize="large">
-            <nz-tab (nzClick)="to(item)" [nzTitle]="item.label" *ngFor="let item of tabData;"></nz-tab>
+            <nz-tab (nzClick)="to(item)" [nzTitle]="item.label" *ngFor="let item of tabData"></nz-tab>
           </nz-tabset>
         </nz-card-tab>
         <ng-template appAd></ng-template>
       </nz-card>
-
     </div>
   </div>
 </div>

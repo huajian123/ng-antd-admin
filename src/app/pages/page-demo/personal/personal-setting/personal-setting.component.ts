@@ -1,12 +1,14 @@
-import {Component, OnInit, ChangeDetectionStrategy, ViewChild, ChangeDetectorRef} from '@angular/core';
-import {AdDirective} from '@shared/directives/ad.directive';
-import {AdComponent, DynamicComponent} from '@core/services/types';
-import {BaseComponent} from './base/base.component';
-import {SafeComponent} from './safe/safe.component';
-import {BindComponent} from './bind/bind.component';
-import {NoticeComponent} from './notice/notice.component';
-import {BreakpointObserver} from '@angular/cdk/layout';
-import {NzMenuModeType} from 'ng-zorro-antd/menu/menu.types';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ChangeDetectorRef } from '@angular/core';
+
+import { AdComponent, DynamicComponent } from '@core/services/types';
+import { AdDirective } from '@shared/directives/ad.directive';
+import { NzMenuModeType } from 'ng-zorro-antd/menu/menu.types';
+
+import { BaseComponent } from './base/base.component';
+import { BindComponent } from './bind/bind.component';
+import { NoticeComponent } from './notice/notice.component';
+import { SafeComponent } from './safe/safe.component';
 
 interface TabInterface {
   key: string;
@@ -20,42 +22,42 @@ interface TabInterface {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PersonalSettingComponent implements OnInit {
-  @ViewChild(AdDirective, {static: true}) adHost!: AdDirective;
+  @ViewChild(AdDirective, { static: true }) adHost!: AdDirective;
   tabModel: NzMenuModeType = 'inline';
   settingComponent: TabInterface[] = [
-    {key: 'base', component: new DynamicComponent(BaseComponent, {label: '基本设置'})},
-    {key: 'safe', component: new DynamicComponent(SafeComponent, {label: '安全设置'})},
-    {key: 'bind', component: new DynamicComponent(BindComponent, {label: '账号绑定'})},
-    {key: 'notice', component: new DynamicComponent(NoticeComponent, {label: '新消息通知'})},
+    { key: 'base', component: new DynamicComponent(BaseComponent, { label: '基本设置' }) },
+    { key: 'safe', component: new DynamicComponent(SafeComponent, { label: '安全设置' }) },
+    { key: 'bind', component: new DynamicComponent(BindComponent, { label: '账号绑定' }) },
+    { key: 'notice', component: new DynamicComponent(NoticeComponent, { label: '新消息通知' }) }
   ];
   menus: Array<{ key: string; title: string; selected?: boolean }> = [
     {
       key: 'base',
       title: '基本设置',
-      selected: true,
+      selected: true
     },
     {
       key: 'safe',
       title: '安全设置',
-      selected: false,
+      selected: false
     },
     {
       selected: false,
       key: 'bind',
-      title: '账号绑定',
+      title: '账号绑定'
     },
     {
       selected: false,
       key: 'notice',
-      title: '新消息通知',
-    },
+      title: '新消息通知'
+    }
   ];
   currentTitle: string = this.menus[0].title;
 
   constructor(private breakpointObserver: BreakpointObserver, private cdr: ChangeDetectorRef) {}
 
   to(item: { key: string; title: string; selected?: boolean }): void {
-    const selMenu = this.settingComponent.find(({key}) => {
+    const selMenu = this.settingComponent.find(({ key }) => {
       return key === item.key;
     });
     this.currentTitle = selMenu!.component.data.label;
@@ -76,5 +78,4 @@ export class PersonalSettingComponent implements OnInit {
     this.to(this.menus[0]);
     this.obBreakPoint();
   }
-
 }

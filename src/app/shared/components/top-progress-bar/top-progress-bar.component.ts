@@ -1,5 +1,5 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component} from '@angular/core';
-import {NavigationCancel, NavigationEnd, NavigationError, NavigationStart, RouteConfigLoadEnd, RouteConfigLoadStart, Router} from '@angular/router';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
 
 @Component({
   selector: 'app-top-progress-bar',
@@ -10,7 +10,7 @@ import {NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Route
 export class TopProgressBarComponent {
   isFetching = false;
 
-  constructor(private  router: Router, private cdr: ChangeDetectorRef) {
+  constructor(private router: Router, private cdr: ChangeDetectorRef) {
     this.router.events.subscribe(evt => {
       // 表示在惰性加载某个路由配置前触发的事件。
       if (!this.isFetching && evt instanceof RouteConfigLoadStart) {

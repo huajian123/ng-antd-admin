@@ -1,11 +1,9 @@
-import {NgModule} from '@angular/core';
-import {DashboardRoutingModule} from './dashboard-routing.module';
+import { NgModule } from '@angular/core';
+
+import { DashboardRoutingModule } from './dashboard-routing.module';
 
 @NgModule({
   declarations: [],
-  imports: [
-    DashboardRoutingModule
-  ]
+  imports: [DashboardRoutingModule]
 })
-export class DashboardModule {
-}
+export class DashboardModule {}

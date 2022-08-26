@@ -8,8 +8,7 @@
   <button nz-button class="m-r-8 m-b-8" (click)="showDailogSuccess()">创建可拖动的success（by山间之明月）</button>
   <button nz-button class="m-r-8 m-b-8" (click)="showDailogError()">创建可拖动的error（by山间之明月）</button>
   <button nz-button class="m-r-8 m-b-8" (click)="showDailogWarning()">创建可拖动的warning（by山间之明月）</button>
-  <button nz-button class="m-r-8 m-b-8" (click)="isVisibleByDir=true">指令创建（by山间之明月）</button>
-
+  <button nz-button class="m-r-8 m-b-8" (click)="isVisibleByDir = true">指令创建（by山间之明月）</button>
 </div>
 
 <nz-modal [(nzVisible)]="isVisible" [nzTitle]="dragTpl" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
@@ -32,6 +31,5 @@
 
 <!--可以将下列代码放开，放到modal的nzTitle中，也能达到拖动效果-->
 <ng-template #dragTpl>
-  <div class="hand-model-move" cdkDragHandle cdkDrag cdkDragBoundary="nz-modal-container"
-       cdkDragRootElement=".ant-modal-content">这是一个可拖动modal</div>
+  <div class="hand-model-move" cdkDragHandle cdkDrag cdkDragBoundary="nz-modal-container" cdkDragRootElement=".ant-modal-content">这是一个可拖动modal</div>
 </ng-template>

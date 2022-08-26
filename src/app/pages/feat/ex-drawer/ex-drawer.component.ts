@@ -1,7 +1,8 @@
-import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
-import {PageHeaderType} from "@shared/components/page-header/page-header.component";
-import {ExDrawerDrawerService} from "@app/drawer/biz-drawer/ex-drawer-drawer/ex-drawer-drawer.service";
-import {ModalBtnStatus} from "@widget/base-modal";
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+
+import { ExDrawerDrawerService } from '@app/drawer/biz-drawer/ex-drawer-drawer/ex-drawer-drawer.service';
+import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { ModalBtnStatus } from '@widget/base-modal';
 
 @Component({
   selector: 'app-ex-drawer',
@@ -18,21 +19,17 @@ export class ExDrawerComponent implements OnInit {
   data = '';
   dataFromDrawer = '';
 
-  constructor(private drawerService: ExDrawerDrawerService, private cdr: ChangeDetectorRef) {
-  }
+  constructor(private drawerService: ExDrawerDrawerService, private cdr: ChangeDetectorRef) {}
 
   showDrawer(): void {
-    this.drawerService.show({nzTitle: '服务创建'}, {name: this.data}).subscribe(({modalValue, status}) => {
+    this.drawerService.show({ nzTitle: '服务创建' }, { name: this.data }).subscribe(({ modalValue, status }) => {
       if (status === ModalBtnStatus.Cancel) {
         return;
       }
-      this.dataFromDrawer = modalValue.password
+      this.dataFromDrawer = modalValue.password;
       this.cdr.markForCheck();
-    })
+    });
   }
 
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

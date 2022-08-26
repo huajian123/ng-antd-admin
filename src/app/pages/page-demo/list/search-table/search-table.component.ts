@@ -1,14 +1,14 @@
-import {Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef} from '@angular/core';
-import {FormBuilder} from '@angular/forms';
-import {MyTableConfig, SortFile} from '@shared/components/ant-table/ant-table.component';
-import {PageHeaderType} from '@shared/components/page-header/page-header.component';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 
-import {NzTableQueryParams} from 'ng-zorro-antd/table';
-import {SearchCommonVO} from '@core/services/types';
-import {Router} from '@angular/router';
-import {NzMessageService} from "ng-zorro-antd/message";
-import {NzSafeAny} from "ng-zorro-antd/core/types";
-import {NzModalService} from "ng-zorro-antd/modal";
+import { SearchCommonVO } from '@core/services/types';
+import { MyTableConfig, SortFile } from '@shared/components/ant-table/ant-table.component';
+import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzTableQueryParams } from 'ng-zorro-antd/table';
 
 interface SearchParam {
   ruleName: number;
@@ -23,8 +23,8 @@ interface SearchParam {
 })
 export class SearchTableComponent implements OnInit {
   searchParam: Partial<SearchParam> = {};
-  @ViewChild('highLightTpl', {static: true}) highLightTpl!: TemplateRef<NzSafeAny>;
-  @ViewChild('operationTpl', {static: true}) operationTpl!: TemplateRef<NzSafeAny>;
+  @ViewChild('highLightTpl', { static: true }) highLightTpl!: TemplateRef<NzSafeAny>;
+  @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<NzSafeAny>;
   isCollapse = true;
   tableConfig!: MyTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
@@ -40,7 +40,7 @@ export class SearchTableComponent implements OnInit {
       newline: '没有省略号没有省略号没有省略号没有省略号没有省略号没有省略号没有省略号没有省略号',
       addStyle: '加样式',
       name: '自定义模板',
-      obj: {a: {b: '点出来的值1'}},
+      obj: { a: { b: '点出来的值1' } }
     },
     {
       id: '2',
@@ -49,18 +49,12 @@ export class SearchTableComponent implements OnInit {
       newline: 'string',
       name: '自定义模板',
       addStyle: '加样式',
-      obj: {a: {b: '点出来的值1'}},
-    },
+      obj: { a: { b: '点出来的值1' } }
+    }
   ]; // 需修改为对应业务的数据类型
   dataList: NzSafeAny[] = []; // 需修改为对应业务的数据类型
 
-
-  constructor(private fb: FormBuilder,
-              private modalSrv: NzModalService,
-              public message: NzMessageService,
-              private router: Router, private cdr: ChangeDetectorRef) {
-  }
-
+  constructor(private fb: FormBuilder, private modalSrv: NzModalService, public message: NzMessageService, private router: Router, private cdr: ChangeDetectorRef) {}
 
   // 最左侧复选框选中触发
   selectedChecked(e: any): void {
@@ -69,7 +63,7 @@ export class SearchTableComponent implements OnInit {
 
   // 刷新页面
   reloadTable(): void {
-    this.message.info('已经刷新了')
+    this.message.info('已经刷新了');
     this.getDataList();
   }
 
@@ -84,7 +78,6 @@ export class SearchTableComponent implements OnInit {
     this.tableConfig.loading = isLoading;
     this.tableChangeDectction();
   }
-
 
   getDataList(e?: NzTableQueryParams): void {
     this.tableConfig.loading = true;
@@ -102,7 +95,7 @@ export class SearchTableComponent implements OnInit {
           newline: '没有省略号没有省略号没有省略号没有省略号没有省略号没有省略号没有省略号没有省略号',
           addStyle: '加样式',
           name: '自定义模板',
-          obj: {a: {b: '点出来的值1'}},
+          obj: { a: { b: '点出来的值1' } }
         },
         {
           id: '2',
@@ -111,7 +104,7 @@ export class SearchTableComponent implements OnInit {
           newline: 'string',
           name: '自定义模板',
           addStyle: '加样式',
-          obj: {a: {b: '点出来的值1'}},
+          obj: { a: { b: '点出来的值1' } }
         },
         {
           id: '3',
@@ -120,7 +113,7 @@ export class SearchTableComponent implements OnInit {
           newline: 'string',
           name: '自定义模板',
           addStyle: '加样式',
-          obj: {a: {b: '点出来的值1'}},
+          obj: { a: { b: '点出来的值1' } }
         },
         {
           id: '4',
@@ -129,7 +122,7 @@ export class SearchTableComponent implements OnInit {
           newline: 'string',
           name: '自定义模板',
           addStyle: '加样式',
-          obj: {a: {b: '点出来的值1'}},
+          obj: { a: { b: '点出来的值1' } }
         },
         {
           id: '5',
@@ -138,7 +131,7 @@ export class SearchTableComponent implements OnInit {
           newline: 'string',
           name: '自定义模板',
           addStyle: '加样式',
-          obj: {a: {b: '点出来的值1'}},
+          obj: { a: { b: '点出来的值1' } }
         },
         {
           id: '6',
@@ -147,14 +140,14 @@ export class SearchTableComponent implements OnInit {
           newline: 'string',
           name: '自定义模板',
           addStyle: '加样式',
-          obj: {a: {b: '点出来的值1'}},
-        },
+          obj: { a: { b: '点出来的值1' } }
+        }
       ];
       this.tableConfig.total = 13;
       this.tableConfig.pageIndex = 1;
       this.checkedCashArray = [...this.checkedCashArray];
       this.tableLoading(false);
-    })
+    });
 
     /*-----实际业务请求http接口如下------*/
     // this.tableConfig.loading = true;
@@ -175,13 +168,11 @@ export class SearchTableComponent implements OnInit {
     // }));
   }
 
-
   /*重置*/
   resetForm(): void {
     this.searchParam = {};
     this.getDataList();
   }
-
 
   /*展开*/
   toggleCollapse(): void {
@@ -192,11 +183,10 @@ export class SearchTableComponent implements OnInit {
   check(name: string): void {
     // skipLocationChange导航时不要把新状态记入历史时设置为true
     this.router.navigate(['default/page-demo/list/search-table/search-table-detail'], {
-      queryParams: {name},
+      queryParams: { name }
       // skipLocationChange: true
     });
   }
-
 
   add(): void {
     // this.modalService.show({nzTitle: '新增'}).subscribe((res) => {
@@ -244,11 +234,14 @@ export class SearchTableComponent implements OnInit {
         // }, error => this.tableLoading(false));
 
         setTimeout(() => {
-          this.message.info('id数组(支持分页保存):' + JSON.stringify(id))
+          this.message.info(`id数组(支持分页保存):${JSON.stringify(id)}`);
           this.getDataList();
-          this.checkedCashArray.splice(this.checkedCashArray.findIndex(item => item.id === id), 1);
+          this.checkedCashArray.splice(
+            this.checkedCashArray.findIndex(item => item.id === id),
+            1
+          );
           this.tableLoading(false);
-        }, 3000)
+        }, 3000);
       }
     });
   }
@@ -260,7 +253,7 @@ export class SearchTableComponent implements OnInit {
         nzContent: '删除后不可恢复',
         nzOnOk: () => {
           const tempArrays: number[] = [];
-          this.checkedCashArray.forEach((item) => {
+          this.checkedCashArray.forEach(item => {
             tempArrays.push(item.id);
           });
           this.tableLoading(true);
@@ -273,11 +266,11 @@ export class SearchTableComponent implements OnInit {
           //   this.checkedCashArray = [];
           // }, error => this.tableLoading(false));
           setTimeout(() => {
-            this.message.info('id数组(支持分页保存):' + JSON.stringify(tempArrays))
+            this.message.info(`id数组(支持分页保存):${JSON.stringify(tempArrays)}`);
             this.getDataList();
             this.checkedCashArray = [];
             this.tableLoading(false);
-          }, 1000)
+          }, 1000);
         }
       });
     } else {
@@ -297,22 +290,22 @@ export class SearchTableComponent implements OnInit {
 
   private initTable(): void {
     /*
-    * 注意，这里需要留一列不要设置width，让列表自适应宽度
-    *
-    * */
+     * 注意，这里需要留一列不要设置width，让列表自适应宽度
+     *
+     * */
     this.tableConfig = {
       headers: [
         {
           title: '默认不显示',
           width: 130,
           field: 'noShow',
-          show: false,
+          show: false
         },
         {
           title: '文字很长',
           width: 130,
           field: 'longText',
-          showSort: true,
+          showSort: true
         },
         {
           title: '换行',
@@ -320,36 +313,37 @@ export class SearchTableComponent implements OnInit {
           field: 'newline',
           notNeedEllipsis: true,
           showSort: true,
-          tdClassList: ['text-wrap'],
-        }, {
+          tdClassList: ['text-wrap']
+        },
+        {
           title: '加样式',
           width: 100,
           field: 'addStyle',
-          tdClassList: ['operate-text'],
+          tdClassList: ['operate-text']
         },
         {
           title: '自定义模板',
           field: 'name',
           tdTemplate: this.highLightTpl,
-          width: 140,
+          width: 140
         },
         {
           title: '对象点出来（obj.a.b）',
-          field: 'obj.a.b',
+          field: 'obj.a.b'
         },
         {
           title: '操作',
           tdTemplate: this.operationTpl,
           width: 120,
           fixed: true,
-          fixedDir: "right"
+          fixedDir: 'right'
         }
       ],
       total: 0,
       showCheckbox: true,
       loading: false,
       pageSize: 10,
-      pageIndex: 1,
+      pageIndex: 1
     };
   }
 

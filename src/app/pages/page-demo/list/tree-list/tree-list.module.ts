@@ -1,17 +1,12 @@
-import {NgModule} from '@angular/core';
-import {TreeListRoutingModule} from './tree-list-routing.module';
-import {TreeListComponent} from './tree-list.component';
-import {SharedModule} from "@shared/shared.module";
+import { NgModule } from '@angular/core';
 
+import { SharedModule } from '@shared/shared.module';
+
+import { TreeListRoutingModule } from './tree-list-routing.module';
+import { TreeListComponent } from './tree-list.component';
 
 @NgModule({
-  declarations: [
-    TreeListComponent
-  ],
-  imports: [
-    SharedModule,
-    TreeListRoutingModule
-  ]
+  declarations: [TreeListComponent],
+  imports: [SharedModule, TreeListRoutingModule]
 })
-export class TreeListModule {
-}
+export class TreeListModule {}

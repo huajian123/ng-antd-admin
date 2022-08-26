@@ -1,16 +1,17 @@
-import {Injectable} from '@angular/core';
-import {NzSafeAny} from "ng-zorro-antd/core/types";
-import {SearchRouteComponent} from "./search-route.component";
-import {ModalOptions} from "ng-zorro-antd/modal";
-import {Observable} from "rxjs";
-import {ModalWrapService} from "@widget/base-modal";
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+
+import { ModalWrapService } from '@widget/base-modal';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { ModalOptions } from 'ng-zorro-antd/modal';
+
+import { SearchRouteComponent } from './search-route.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SearchRouteService {
-  constructor(private modalWrapService: ModalWrapService) {
-  }
+  constructor(private modalWrapService: ModalWrapService) {}
 
   protected getContentComponent(): NzSafeAny {
     return SearchRouteComponent;
@@ -20,4 +21,3 @@ export class SearchRouteService {
     return this.modalWrapService.show(this.getContentComponent(), modalOptions, params);
   }
 }
-

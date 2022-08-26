@@ -1,14 +1,10 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
 import { LevelRoutingModule } from './level-routing.module';
 
-
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-    LevelRoutingModule
-  ]
+  imports: [CommonModule, LevelRoutingModule]
 })
-export class LevelModule { }
+export class LevelModule {}

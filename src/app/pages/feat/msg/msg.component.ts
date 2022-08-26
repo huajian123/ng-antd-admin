@@ -1,14 +1,10 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef, TemplateRef
-} from '@angular/core';
-import {PageHeaderType} from "@shared/components/page-header/page-header.component";
-import {DestroyService} from "@core/services/common/destory.service";
-import {NzMessageService} from "ng-zorro-antd/message";
-import {NzModalService} from "ng-zorro-antd/modal";
-import {NzNotificationService} from "ng-zorro-antd/notification";
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, TemplateRef } from '@angular/core';
+
+import { DestroyService } from '@core/services/common/destory.service';
+import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 type msgType = 'info' | 'success' | 'warning' | 'loading' | 'error';
 type confirmType = 'confirm' | 'info' | 'success' | 'warning' | 'error';
@@ -20,16 +16,14 @@ type confirmType = 'confirm' | 'info' | 'success' | 'warning' | 'error';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [DestroyService]
 })
-
-
 export class MsgComponent implements OnInit {
   map = {
-    'info': 'exclamation-circle',
-    'warning': 'exclamation-circle',
-    'success': 'check',
-    'error': 'close',
-    'confirm': 'confirm'
-  }
+    info: 'exclamation-circle',
+    warning: 'exclamation-circle',
+    success: 'check',
+    error: 'close',
+    confirm: 'confirm'
+  };
 
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '消息提示',
@@ -37,31 +31,25 @@ export class MsgComponent implements OnInit {
     desc: '这个是好心人pr的功能'
   };
 
-  constructor(private cdr: ChangeDetectorRef, private destroy$: DestroyService, private message: NzMessageService,
-              private modal: NzModalService, private notification: NzNotificationService) {
-  }
-
+  constructor(private cdr: ChangeDetectorRef, private destroy$: DestroyService, private message: NzMessageService, private modal: NzModalService, private notification: NzNotificationService) {}
 
   msg(type: msgType) {
-    this.message[type](`${type} message`)
+    this.message[type](`${type} message`);
   }
 
   modalShow(confirm: confirmType, modal: confirmType) {
     this.modal[confirm]({
-        nzTitle: `This is a ${modal} message`,
-        nzContent: `<p>${modal} messages</p>`,
-        nzOnOk: () => console.log('Info OK'),
-        nzOnCancel: () => console.log('Info cancel'),
-        nzIconType: this.map[modal],
-      }
-    );
+      nzTitle: `This is a ${modal} message`,
+      nzContent: `<p>${modal} messages</p>`,
+      nzOnOk: () => console.log('Info OK'),
+      nzOnCancel: () => console.log('Info cancel'),
+      nzIconType: this.map[modal]
+    });
   }
 
   createBasicNotification(template: TemplateRef<{}>): void {
     this.notification.template(template);
   }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

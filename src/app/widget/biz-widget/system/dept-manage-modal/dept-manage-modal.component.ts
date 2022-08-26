@@ -1,9 +1,10 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {NzModalRef} from "ng-zorro-antd/modal";
-import {NzSafeAny} from "ng-zorro-antd/core/types";
-import {Observable, of} from "rxjs";
-import {fnCheckForm} from "@utils/tools";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable, of } from 'rxjs';
+
+import { fnCheckForm } from '@utils/tools';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzModalRef } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-dept-manage-modal',
@@ -12,7 +13,6 @@ import {fnCheckForm} from "@utils/tools";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DeptManageModalComponent implements OnInit {
-
   addEditForm!: FormGroup;
   params: object;
 
@@ -24,7 +24,7 @@ export class DeptManageModalComponent implements OnInit {
     this.addEditForm = this.fb.group({
       departmentName: [null, [Validators.required]],
       state: [true],
-      orderNum: [0],
+      orderNum: [0]
     });
   }
 
@@ -46,6 +46,4 @@ export class DeptManageModalComponent implements OnInit {
       this.addEditForm.patchValue(this.params);
     }
   }
-
-
 }

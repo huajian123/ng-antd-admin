@@ -1,5 +1,5 @@
-import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
-import {BreakpointObserver} from '@angular/cdk/layout';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-success',
@@ -10,9 +10,7 @@ import {BreakpointObserver} from '@angular/cdk/layout';
 export class SuccessComponent implements OnInit {
   stepDirection: 'horizontal' | 'vertical' = 'horizontal';
 
-  constructor(private breakpointObserver: BreakpointObserver,
-              private cdr: ChangeDetectorRef) {
-  }
+  constructor(private breakpointObserver: BreakpointObserver, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.breakpointObserver.observe(['(max-width: 770px)']).subscribe(result => {
@@ -28,5 +26,4 @@ export class SuccessComponent implements OnInit {
       }
     });
   }
-
 }

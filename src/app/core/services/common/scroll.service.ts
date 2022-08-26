@@ -44,7 +44,7 @@ export class ScrollService {
     if (!this.platform.isBrowser) {
       return;
     }
-    (element || this._getWin()).scrollTo(position[0], position[1],);
+    (element || this._getWin()).scrollTo(position[0], position[1]);
   }
 
   /**

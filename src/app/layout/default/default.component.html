@@ -1,8 +1,7 @@
 <app-def-layout-content>
-
   <!--sider模式sider-->
   <ng-container sider>
-    <app-side-nav *ngIf="isOverMode||(themeOptions$|async)!.mode==='side'"></app-side-nav>
+    <app-side-nav *ngIf="isOverMode || (themeOptions$ | async)!.mode === 'side'"></app-side-nav>
   </ng-container>
 
   <!--sider模式header-->
@@ -17,14 +16,13 @@
 
   <ng-template #headerTpl>
     <app-tool-bar>
-      <ng-container left *ngIf="isOverMode||(themeOptions$|async)!.mode==='side';else topHeadTpl">
-        <i id="trigger" class="trigger" nz-icon [nzType]="(isCollapsed$|async) ? 'menu-unfold' : 'menu-fold'"
-           (click)="changeCollapsed()"></i>
+      <ng-container left *ngIf="isOverMode || (themeOptions$ | async)!.mode === 'side'; else topHeadTpl">
+        <i id="trigger" class="trigger" nz-icon [nzType]="(isCollapsed$ | async) ? 'menu-unfold' : 'menu-fold'" (click)="changeCollapsed()"></i>
       </ng-container>
       <ng-template #topHeadTpl>
         <div class="left-start-center flex-1" style="z-index: 100">
-          <ng-container *ngIf="(themeOptions$|async)!.hasNavHeadArea">
-            <img class="m-l-10" style="max-height: 32px;max-width: 54px;" src="assets/imgs/logo.svg" alt="">
+          <ng-container *ngIf="(themeOptions$ | async)!.hasNavHeadArea">
+            <img class="m-l-10" style="max-height: 32px; max-width: 54px" src="assets/imgs/logo.svg" alt="" />
             <span class="sp-18 m-r-8">Ant Design</span>
           </ng-container>
           <div class="flex-1">
@@ -42,16 +40,15 @@
   <ng-container mixheader>
     <app-tool-bar>
       <ng-container left *ngIf="isOverMode">
-        <i class="trigger" nz-icon [nzType]="(isCollapsed$|async) ? 'menu-unfold' : 'menu-fold'"
-           (click)="changeCollapsed()"></i>
+        <i class="trigger" nz-icon [nzType]="(isCollapsed$ | async) ? 'menu-unfold' : 'menu-fold'" (click)="changeCollapsed()"></i>
       </ng-container>
 
       <ng-container left *ngIf="!isOverMode">
         <div class="left-start-center flex-1" style="z-index: 100">
-          <img class="m-l-10" style="max-height: 32px;max-width: 54px;" src="assets/imgs/logo.svg" alt="">
+          <img class="m-l-10" style="max-height: 32px; max-width: 54px" src="assets/imgs/logo.svg" alt="" />
           <span class="sp-18 m-r-25">Ant Design Pro</span>
           <div class="flex-1">
-            <app-nav-bar *ngIf="(themeOptions$|async)!.splitNav" [isMixiHead]="true"></app-nav-bar>
+            <app-nav-bar *ngIf="(themeOptions$ | async)!.splitNav" [isMixiHead]="true"></app-nav-bar>
           </div>
         </div>
       </ng-container>
@@ -63,10 +60,7 @@
 
   <!--混合模式sider-->
   <ng-container mixsider>
-    <div class="screen-full-height" style="overflow:hidden auto;">
-      <app-nav-bar [isMixiLeft]="(themeOptions$|async)!.splitNav"></app-nav-bar>
-    </div>>
-
+    <div class="screen-full-height" style="overflow: hidden auto"> <app-nav-bar [isMixiLeft]="(themeOptions$ | async)!.splitNav"></app-nav-bar> </div>>
   </ng-container>
 
   <ng-container content>
