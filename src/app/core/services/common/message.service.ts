@@ -28,14 +28,12 @@ export class MessageService {
   modalCtrl: NzModalRef[] = [];
 
   constructor(private nzModalService: NzModalService, private router: Router, private toastService: NzMessageService) {
-    this.router.events
-      .pipe(filter((event: NzSafeAny) => event instanceof NavigationEnd))
-      .subscribe((event: NzSafeAny) => {
-        for (let i = 0, len = this.modalCtrl.length; i < len; i++) {
-          this.modalCtrl[i].destroy(MessageCallback.Cancel);
-        }
-        this.modalCtrl = [];
-      });
+    this.router.events.pipe(filter((event: NzSafeAny) => event instanceof NavigationEnd)).subscribe((event: NzSafeAny) => {
+      for (let i = 0, len = this.modalCtrl.length; i < len; i++) {
+        this.modalCtrl[i].destroy(MessageCallback.Cancel);
+      }
+      this.modalCtrl = [];
+    });
   }
 
   public showAlertMessage(title: string, message: string, type: MessageType = MessageType.Info): void {

@@ -1,5 +1,6 @@
 import { FormArray, FormGroup } from '@angular/forms';
 
+import { LockScreenFlag } from '@store/common-store/lock-screen-store.service';
 import CryptoJS from 'crypto-js';
 import { endOfDay, startOfDay } from 'date-fns';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -7,7 +8,7 @@ import { silentEvent } from 'ng-zorro-antd/core/util';
 import { v4 as uuidv4 } from 'uuid';
 
 /*获取1到100之间的随机整数 this.randomNum(1,101)*/
-const fnGetRandomNum = function getRandomNum(m: number, n: number) {
+const fnGetRandomNum = function getRandomNum(m: number, n: number): number {
   let num = Math.floor(Math.random() * (m - n) + n);
   return num;
 };
@@ -44,7 +45,7 @@ const fnCheckForm = function checkForm(form: FormGroup): boolean {
 };
 
 // 清空formArray
-const fnClearFormArray = function clearFormArray(formArray: FormArray) {
+const fnClearFormArray = function clearFormArray(formArray: FormArray): void {
   while (formArray.length !== 0) {
     formArray.removeAt(0);
   }
@@ -102,22 +103,22 @@ const fnGetBase64 = function getBase64(file: File): Promise<string | ArrayBuffer
 };
 
 // 加密
-const fnEncrypt = function encrypt(word: NzSafeAny, keyStr: string) {
+const fnEncrypt = function encrypt(word: NzSafeAny, keyStr: string): string {
   return CryptoJS.AES.encrypt(JSON.stringify(word), keyStr).toString();
 };
 
 // 解密
-const fnDecrypt = function decrypt(word: NzSafeAny, keyStr: string) {
+const fnDecrypt = function decrypt(word: NzSafeAny, keyStr: string): LockScreenFlag {
   const bytes = CryptoJS.AES.decrypt(word, keyStr);
   return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
 };
 
 /*import {endOfDay, startOfDay} from 'date-fns';*/
-const fnStartOfDay = function StartOfDay(time: number) {
+const fnStartOfDay = function StartOfDay(time: number): number {
   return startOfDay(time).getTime();
 };
 
-const fnEndOfDay = function EndOfDay(time: number) {
+const fnEndOfDay = function EndOfDay(time: number): number {
   return endOfDay(time).getTime();
 };
 

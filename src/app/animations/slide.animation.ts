@@ -1,13 +1,4 @@
-import {
-  animate,
-  animateChild,
-  AnimationQueryOptions,
-  group,
-  query,
-  style,
-  transition,
-  trigger
-} from '@angular/animations';
+import { animate, animateChild, AnimationQueryOptions, group, query, style, transition, trigger } from '@angular/animations';
 
 const options: AnimationQueryOptions = {
   optional: true
@@ -33,10 +24,7 @@ export const horizontalSlideInRouteAnimation = trigger('horizontalSlideInRouteAn
 
     query(':enter', [style({ transform: 'translate3d(100%,0,0)' })], options),
 
-    group([
-      query(':leave', [animate('.3s ease-out', style({ transform: 'translate3d(-100%,0,0)' }))], options),
-      query(':enter', [animate('.3s ease-out', style({ transform: 'none' }))], options)
-    ])
+    group([query(':leave', [animate('.3s ease-out', style({ transform: 'translate3d(-100%,0,0)' }))], options), query(':enter', [animate('.3s ease-out', style({ transform: 'none' }))], options)])
   ]),
 
   transition(':decrement', [
@@ -57,10 +45,7 @@ export const horizontalSlideInRouteAnimation = trigger('horizontalSlideInRouteAn
 
     query(':enter', [style({ transform: 'translate3d(-100%,0,0)' })], options),
 
-    group([
-      query(':leave', [animate('.3s ease-out', style({ transform: 'translate3d(100%,0,0)' }))], options),
-      query(':enter', [animate('.3s ease-out', style({ transform: 'none' }))], options)
-    ])
+    group([query(':leave', [animate('.3s ease-out', style({ transform: 'translate3d(100%,0,0)' }))], options), query(':enter', [animate('.3s ease-out', style({ transform: 'none' }))], options)])
   ])
 ]);
 
