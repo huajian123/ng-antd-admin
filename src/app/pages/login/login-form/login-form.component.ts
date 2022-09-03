@@ -41,7 +41,7 @@ export class LoginFormComponent implements OnInit {
     // 获取表单的值
     const param = this.validateForm.getRawValue();
     // 调用登录接口
-    // 登录后台返回统一模式为,如果code不为0，会自动被拦截，如果需要修改，请在src/app/core/services/http/base-http.service.ts中进行修改
+    // todo 登录后台返回统一模式为,如果code不为0，会自动被拦截，如果需要修改，请在src/app/core/services/http/base-http.service.ts中进行修改
     // {
     //   code:number,
     //   data:any,
@@ -50,11 +50,13 @@ export class LoginFormComponent implements OnInit {
     this.dataService
       .login(param)
       .pipe(
+        // 无论如何设置全局loading为false
         finalize(() => {
           this.spinService.setCurrentGlobalSpinStore(false);
         })
       )
       .subscribe(userToken => {
+        // 这里后台登录成功以后，只会返回一套由jwt加密的token，下面需要对token进行解析
         this.loginInOutService
           .loginIn(userToken)
           .then(() => {

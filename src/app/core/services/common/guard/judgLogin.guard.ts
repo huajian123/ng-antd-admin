@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router, CanActivateChild } from '@angular/router';
-import { Observable } from 'rxjs';
 
 import { TokenKey } from '@config/constant';
 

@@ -33,7 +33,7 @@ export class TabService {
     this.tabArray$.next(tabArray);
   }
 
-  setTabsSourceData() {
+  setTabsSourceData(): void {
     this.setTabArray$(this.tabArray);
   }
 

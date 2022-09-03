@@ -20,11 +20,7 @@ export class SubWindowWithService {
     '(min-width: 1600px)': [EquipmentWidth.xxl, [1600, 9999]]
   };
 
-  constructor(
-    private winWidthService: WindowsWidthService,
-    private breakpointObserver: BreakpointObserver,
-    private themesService: ThemeService
-  ) {}
+  constructor(private winWidthService: WindowsWidthService, private breakpointObserver: BreakpointObserver, private themesService: ThemeService) {}
 
   // 监听主题（是top，还是side），确定over模式最小宽度
   subWidthForTheme(): void {
@@ -74,7 +70,7 @@ export class SubWindowWithService {
     });
   }
 
-  subWindowWidth() {
+  subWindowWidth(): void {
     this.subWidthForTheme();
     this.subWidthForStore();
     // 初始化的时候就设置当前节点

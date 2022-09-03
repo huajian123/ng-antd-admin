@@ -47,9 +47,7 @@ export class InitThemeService {
         if (hasCash) {
           this.themesService[item.setMethodName](JSON.parse(hasCash));
         } else {
-          (this.themesService[item.getMethodName]() as Observable<NzSafeAny>)
-            .pipe(first())
-            .subscribe(res => this.windowServe.setStorage(item.storageKey, JSON.stringify(res)));
+          (this.themesService[item.getMethodName]() as Observable<NzSafeAny>).pipe(first()).subscribe(res => this.windowServe.setStorage(item.storageKey, JSON.stringify(res)));
         }
       });
       return resolve();

@@ -104,15 +104,13 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
     const scrollFutureKey = this.getKey(future);
     if (SimpleReuseStrategy.scrollHandlers[scrollFutureKey]) {
       if (scrollFutureKey) {
-        SimpleReuseStrategy.scrollHandlers[scrollFutureKey].scroll.forEach(
-          (elOptionItem: { [key: string]: [number, number] }) => {
-            Object.keys(elOptionItem).forEach(element => {
-              setTimeout(() => {
-                this.scrollService.scrollToPosition(this.doc.querySelector(element), elOptionItem[element]);
-              }, 1);
-            });
-          }
-        );
+        SimpleReuseStrategy.scrollHandlers[scrollFutureKey].scroll.forEach((elOptionItem: { [key: string]: [number, number] }) => {
+          Object.keys(elOptionItem).forEach(element => {
+            setTimeout(() => {
+              this.scrollService.scrollToPosition(this.doc.querySelector(element), elOptionItem[element]);
+            }, 1);
+          });
+        });
       }
     }
     return result;

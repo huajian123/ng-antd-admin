@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanDeactivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
 
 import { LockScreenFlag, LockScreenStoreService } from '@store/common-store/lock-screen-store.service';
 
@@ -17,12 +16,7 @@ export class LockLeaveGuard implements CanDeactivate<unknown> {
     });
   }
 
-  canDeactivate(
-    component: unknown,
-    currentRoute: ActivatedRouteSnapshot,
-    currentState: RouterStateSnapshot,
-    nextState?: RouterStateSnapshot
-  ): boolean {
+  canDeactivate(component: unknown, currentRoute: ActivatedRouteSnapshot, currentState: RouterStateSnapshot, nextState?: RouterStateSnapshot): boolean {
     return !this.routeStatus.locked;
   }
 }

@@ -39,13 +39,17 @@ export class LoginInOutService {
 
   loginIn(token: string): Promise<void> {
     return new Promise(resolve => {
+      // 将 token 持久化缓存，请注意，如果没有缓存，则会在路由首位中被拦截，不让路由跳转
+      // 这个路由守卫src/app/core/services/common/guard/judgLogin.guard.ts
       this.windowServe.setSessionStorage(TokenKey, TokenPre + token);
+      // 解析token ，然后获取用户信息
       const userInfo: UserInfo = this.userInfoService.parsToken(TokenPre + token);
       // todo  这里是手动添加静态页面标签页操作中，打开详情的按钮的权限，实际操作中可以删除下面2行
       userInfo.authCode.push(ActionCode.TabsDetail);
       userInfo.authCode.push(ActionCode.SearchTableDetail);
-
+      // 将用户信息缓存到全局service中
       this.userInfoService.setUserInfo(userInfo);
+      // 通过用户id来获取这个用户所拥有的menu
       this.getMenuByUserId(userInfo.userId)
         .pipe(
           finalize(() => {
@@ -59,6 +63,7 @@ export class LoginInOutService {
             return item.menuType === 'C';
           });
           const temp = fnFlatDataHasParentToTree(menus);
+          // 存储menu
           this.menuService.setMenuArrayStore(temp);
           resolve();
         });
