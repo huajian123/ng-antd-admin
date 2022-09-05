@@ -10,6 +10,6 @@ export class TableFiledPipe implements PipeTransform {
   constructor() {}
 
   transform(value: NzSafeAny, args?: string): NzSafeAny {
-    return _.get(value, args!, value);
+    return _.get(value, args!, '');
   }
 }
