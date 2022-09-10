@@ -6,6 +6,7 @@ const routes: Routes = [
   { path: 'except404', loadChildren: () => import('./except404/except404.module').then(m => m.Except404Module) },
   { path: 'except500', loadChildren: () => import('./except500/except500.module').then(m => m.Except500Module) },
   { path: 'network-error', loadChildren: () => import('./network-error/network-error.module').then(m => m.NetworkErrorModule) },
+  { path: 'no-data', loadChildren: () => import('./no-data/no-data.module').then(m => m.NoDataModule) },
   { path: '', redirectTo: 'except403', pathMatch: 'full' }
 ];
 
