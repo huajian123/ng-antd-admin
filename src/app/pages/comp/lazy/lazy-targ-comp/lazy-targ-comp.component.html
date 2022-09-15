@@ -2,9 +2,7 @@
   <nz-card-meta nzTitle="点击选择你喜欢谁？" nzDescription="选择你喜欢谁，默认选中的会作为参数传给下一个" [nzAvatar]="avatarTemplate"></nz-card-meta>
 </nz-card>
 <ng-template #avatarTemplate>
-  <nz-avatar
-    nzSrc="http://https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fp0.itc.cn%2Fimages01%2F20211012%2Fbd7b3c856106482693b008ec4b2bf50f.jpeg&refer=http%3A%2F%2Fp0.itc.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1663854369&t=4545717439bec2b85dcd33238426f373"
-  ></nz-avatar>
+  <nz-avatar [nzSrc]="'assets/imgs/default_face.png'"></nz-avatar>
 </ng-template>
 <ng-template #coverTemplate>
   <img
@@ -13,8 +11,8 @@
   />
 </ng-template>
 <ng-template #actionSetting>
-  <button [disabled]="!disabled" nz-button nzType="default" [nzDanger]="purChoosePeople === lazySelPeopleEnum.Yanzu" (click)="choosePeople(lazySelPeopleEnum.Yanzu)" class="m-r-8">彦祖 </button>
-  <button [disabled]="!disabled" nz-button nzType="default" [nzDanger]="purChoosePeople === lazySelPeopleEnum.Dehua" (click)="choosePeople(lazySelPeopleEnum.Dehua)" class="m-r-8">德华 </button>
-  <button [disabled]="!disabled" nz-button nzType="default" [nzDanger]="purChoosePeople === lazySelPeopleEnum.YiLin" (click)="choosePeople(lazySelPeopleEnum.YiLin)" class="m-r-8">依林 </button>
-  <button [disabled]="!disabled" nz-button nzType="default" [nzDanger]="purChoosePeople === lazySelPeopleEnum.Jielun" (click)="choosePeople(lazySelPeopleEnum.Jielun)" class="m-r-8">杰伦 </button>
+  <button [disabled]="!disabled" nz-button nzType="default" [nzDanger]="purChoosePeople === lazySelPeopleEnum.Yanzu" (click)="choosePeople(lazySelPeopleEnum.Yanzu)" class="m-r-8">彦祖</button>
+  <button [disabled]="!disabled" nz-button nzType="default" [nzDanger]="purChoosePeople === lazySelPeopleEnum.Dehua" (click)="choosePeople(lazySelPeopleEnum.Dehua)" class="m-r-8">德华</button>
+  <button [disabled]="!disabled" nz-button nzType="default" [nzDanger]="purChoosePeople === lazySelPeopleEnum.YiLin" (click)="choosePeople(lazySelPeopleEnum.YiLin)" class="m-r-8">依林</button>
+  <button [disabled]="!disabled" nz-button nzType="default" [nzDanger]="purChoosePeople === lazySelPeopleEnum.Jielun" (click)="choosePeople(lazySelPeopleEnum.Jielun)" class="m-r-8">杰伦</button>
 </ng-template>

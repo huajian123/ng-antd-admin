@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, NgModule, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, NgModule, Input, Output, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
 
 import { DestroyService } from '@core/services/common/destory.service';
 import { SharedModule } from '@shared/shared.module';
@@ -17,7 +17,7 @@ export enum LazySelPeopleEnum {
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [DestroyService]
 })
-export class LazyTargCompComponent implements OnInit {
+export class LazyTargCompComponent implements OnInit, OnChanges {
   @Input() purChoosePeople: LazySelPeopleEnum = LazySelPeopleEnum.YiLin;
   @Output() readonly currentPeople = new EventEmitter<LazySelPeopleEnum>();
   lazySelPeopleEnum = LazySelPeopleEnum;
@@ -33,6 +33,8 @@ export class LazyTargCompComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  ngOnChanges(changes: SimpleChanges): void {}
 }
 
 @NgModule({
