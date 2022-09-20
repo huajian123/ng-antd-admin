@@ -39,8 +39,8 @@ import { fadeRouteAnimation } from './animations/fade.animation';
 
     <ng-template #drawerFootDefaultTpl>
       <div class="end-start-center">
-        <button nzType="default" class="m-r-8" (click)="drawerWrapService.cancel()" nz-button>取消</button>
-        <button nzType="primary" (click)="drawerWrapService.sure()" nz-button>确定</button>
+        <button nzType="default" class="m-r-8" (click)="drawerWrapService.cancel()" nz-button>Hủy</button>
+        <button nzType="primary" (click)="drawerWrapService.sure()" nz-button>Submit</button>
       </div>
     </ng-template>
   `,

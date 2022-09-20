@@ -1,60 +1,60 @@
 <div class="login-form-wrap">
   <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
     <nz-tabset [nzAnimated]="false">
-      <nz-tab nzTitle="账户密码登录">
+      <nz-tab nzTitle="Login Account">
         <nz-form-item>
-          <nz-form-control nzErrorTip="账号名：admin">
+          <nz-form-control nzErrorTip="User Name：admin">
             <nz-input-group [nzSize]="'large'" nzPrefixIcon="user">
-              <input [placeholder]="'账号名：admin'" type="text" nz-input formControlName="userName" placeholder="用户名" />
+              <input [placeholder]="'User Name：admin'" type="text" nz-input formControlName="userName" placeholder="Username" />
             </nz-input-group>
           </nz-form-control>
         </nz-form-item>
         <nz-form-item>
-          <nz-form-control nzErrorTip="密码：123456">
+          <nz-form-control nzErrorTip="Mật Khẩu：123456">
             <nz-input-group [nzSize]="'large'" nzPrefixIcon="lock">
-              <input autocomplete="on" [placeholder]="'密码：123456'" type="password" nz-input formControlName="password" placeholder="密码" />
+              <input autocomplete="on" [placeholder]="'Mật Khẩu：123456'" type="password" nz-input formControlName="password" placeholder="Mật Khẩu" />
             </nz-input-group>
           </nz-form-control>
         </nz-form-item>
       </nz-tab>
 
-      <nz-tab nzTitle="手机号登录">
+      <nz-tab nzTitle="Đăng nhập số điện thoại">
         <nz-form-item>
-          <nz-form-control nzErrorTip="请输入用户名!">
+          <nz-form-control nzErrorTip="Vui lòng nhập tên của bạn !">
             <nz-input-group [nzSize]="'large'" nzPrefixIcon="mobile">
-              <input autocomplete="on" type="text" nz-input formControlName="userName" placeholder="手机号" />
+              <input autocomplete="on" type="text" nz-input formControlName="userName" placeholder="Số điện thoại" />
             </nz-input-group>
           </nz-form-control>
         </nz-form-item>
         <nz-form-item nz-row nzJustify="space-between">
-          <nz-form-control class="flex-1" style="max-width: 65%" nz-col [nzXs]="15" [nzSm]="16" nzErrorTip="请输入验证码!">
+          <nz-form-control class="flex-1" style="max-width: 65%" nz-col [nzXs]="15" [nzSm]="16" nzErrorTip="Vui lòng nhập mã xác nhận !">
             <nz-input-group [nzSize]="'large'" nzPrefixIcon="mail">
-              <input type="password" nz-input formControlName="password" placeholder="密码" />
+              <input type="password" nz-input formControlName="password" placeholder="Mật khẩu mỡ khóa" />
             </nz-input-group>
           </nz-form-control>
-          <button class="p-0" nz-button nz-col [nzXs]="7" [nzSm]="7" [nzSize]="'large'" nzType="default">获取验证码</button>
+          <button class="p-0" nz-button nz-col [nzXs]="7" [nzSm]="7" [nzSize]="'large'" nzType="default">Lấy mã xác minh</button>
         </nz-form-item>
       </nz-tab>
     </nz-tabset>
     <div nz-row class="login-form-margin">
       <div nz-col [nzSpan]="12">
         <label nz-checkbox formControlName="remember">
-          <span>自动登录</span>
+          <span>Đăng nhập tự động</span>
         </label>
       </div>
       <div nz-col [nzSpan]="12">
-        <a class="login-form-forgot">忘记密码</a>
+        <a class="login-form-forgot">Quên mật khẩu</a>
       </div>
     </div>
-    <button nz-button nzSize="large" class="login-form-button login-form-margin" [nzType]="'primary'">登 录</button>
+    <button nz-button nzSize="large" class="login-form-button login-form-margin" [nzType]="'primary'">Đăng Nhập</button>
     <div class="other-way">
       <div class="other-login">
-        <span>其他方式登陆</span>
+        <span>Đăng nhập bằng cách khác</span>
         <i nz-icon nzType="alipay-circle" nzTheme="fill"></i>
         <i nz-icon nzType="taobao-circle" nzTheme="fill"></i>
         <i nz-icon nzType="weibo-circle" nzTheme="fill"></i>
       </div>
-      <a routerLink="/login/register-form">注册用户</a>
+      <a routerLink="/login/register-form">Đăng ký</a>
     </div>
   </form>
 </div>

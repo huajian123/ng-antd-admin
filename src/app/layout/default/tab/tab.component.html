@@ -4,11 +4,11 @@
     <nz-tab (nzClick)="goPage(tab)" nzClosable (nzContextmenu)="contextMenu($event, menu)" [nzTitle]="tab.title" *ngFor="let tab of tabsSourceData$ | async; let i = index; trackBy: trackByTab">
       <nz-dropdown-menu #menu="nzDropdownMenu">
         <ul nz-menu>
-          <li nz-menu-item [nzDisabled]="router.url !== tab.path" (click)="refresh()">刷新</li>
-          <li nz-menu-item [nzDisabled]="tabsSourceData.length - 1 === 0" (click)="closeTab(tab, $event, i)">关闭标签</li>
-          <li nz-menu-item [nzDisabled]="tabsSourceData.length - 1 === 0" (click)="closeOtherTab(tab, $event, i)">关闭其他标签</li>
-          <li nz-menu-item [nzDisabled]="tabsSourceData.length - 1 === i" (click)="closeRithTab(tab, $event, i)">关闭右侧标签</li>
-          <li nz-menu-item [nzDisabled]="i === 0" (click)="closeLeftTab(tab, $event, i)">关闭左侧标签</li>
+          <li nz-menu-item [nzDisabled]="router.url !== tab.path" (click)="refresh()">Làm tươi</li>
+          <li nz-menu-item [nzDisabled]="tabsSourceData.length - 1 === 0" (click)="closeTab(tab, $event, i)">Đóng tab</li>
+          <li nz-menu-item [nzDisabled]="tabsSourceData.length - 1 === 0" (click)="closeOtherTab(tab, $event, i)">Đóng các tab khác</li>
+          <li nz-menu-item [nzDisabled]="tabsSourceData.length - 1 === i" (click)="closeRithTab(tab, $event, i)">Đóng tab bên phải</li>
+          <li nz-menu-item [nzDisabled]="i === 0" (click)="closeLeftTab(tab, $event, i)">Dóng tab bên trái</li>
         </ul>
       </nz-dropdown-menu>
     </nz-tab>
@@ -41,11 +41,11 @@
         </ng-template>
         <nz-dropdown-menu #menu="nzDropdownMenu">
           <ul nz-menu>
-            <li nz-menu-item [nzDisabled]="router.url !== tab.path" (click)="refresh()">刷新</li>
-            <li nz-menu-item [nzDisabled]="tabsSourceData.length - 1 === 0" (click)="closeTab(tab, $event, i)">关闭标签</li>
-            <li nz-menu-item [nzDisabled]="tabsSourceData.length - 1 === 0" (click)="closeOtherTab(tab, $event, i)">关闭其他标签</li>
-            <li nz-menu-item [nzDisabled]="tabsSourceData.length - 1 === i" (click)="closeRithTab(tab, $event, i)">关闭右侧标签</li>
-            <li nz-menu-item [nzDisabled]="i === 0" (click)="closeLeftTab(tab, $event, i)">关闭左侧标签</li>
+            <li nz-menu-item [nzDisabled]="router.url !== tab.path" (click)="refresh()">Làm tươi</li>
+            <li nz-menu-item [nzDisabled]="tabsSourceData.length - 1 === 0" (click)="closeTab(tab, $event, i)">Đóng tab</li>
+            <li nz-menu-item [nzDisabled]="tabsSourceData.length - 1 === 0" (click)="closeOtherTab(tab, $event, i)">Đóng các tab khác</li>
+            <li nz-menu-item [nzDisabled]="tabsSourceData.length - 1 === i" (click)="closeRithTab(tab, $event, i)">Đóng tab bên phải</li>
+            <li nz-menu-item [nzDisabled]="i === 0" (click)="closeLeftTab(tab, $event, i)">Đóng tab bên trái</li>
           </ul>
         </nz-dropdown-menu>
       </nz-tab>

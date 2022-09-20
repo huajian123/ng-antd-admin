@@ -22,46 +22,46 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
   miniBarData = [497, 666, 219, 269, 274, 337, 81, 497, 666, 219, 269];
   miniAreaData = [264, 274, 284, 294, 284, 274, 264, 264, 274, 264, 264, 264, 284, 264, 254, 264, 244, 340, 264, 243, 226, 192];
   histogramData = [
-    { type: '1月', value: 769 },
-    { type: '2月', value: 769 },
-    { type: '3月', value: 861 },
-    { type: '4月', value: 442 },
-    { type: '5月', value: 555 },
-    { type: '6月', value: 439 },
-    { type: '7月', value: 590 },
-    { type: '8月', value: 434 },
-    { type: '9月', value: 843 },
-    { type: '10月', value: 840 },
-    { type: '11月', value: 769 },
-    { type: '12月', value: 769 }
+    { type: 'Tháng 1', value: 769 },
+    { type: 'Tháng 2', value: 769 },
+    { type: 'Tháng 3', value: 861 },
+    { type: 'Tháng 4', value: 442 },
+    { type: 'Tháng 5', value: 555 },
+    { type: 'Tháng 6', value: 439 },
+    { type: 'Tháng 7', value: 590 },
+    { type: 'Tháng 8', value: 434 },
+    { type: 'Tháng 9', value: 843 },
+    { type: 'Tháng 10', value: 840 },
+    { type: 'Tháng 11', value: 769 },
+    { type: 'Tháng 12', value: 769 }
   ];
   ringData = [
-    { type: '分类一', value: 27 },
-    { type: '分类二', value: 25 },
-    { type: '分类三', value: 18 },
-    { type: '分类四', value: 15 },
-    { type: '分类五', value: 10 },
-    { type: '其他', value: 5 }
+    { type: 'Loại 1', value: 27 },
+    { type: 'Loại 2', value: 25 },
+    { type: 'Loại 3', value: 18 },
+    { type: 'Loại 4', value: 15 },
+    { type: 'Loại 5', value: 10 },
+    { type: 'Loại Khác', value: 5 }
   ];
 
   listOfColumn = [
     {
-      title: '排名',
+      title: 'Thứ háng',
       compare: null,
       priority: false
     },
     {
-      title: '搜索关键词',
+      title: 'tìm từ khóa',
       compare: (a: DataItem, b: DataItem) => a.chinese - b.chinese,
       priority: 3
     },
     {
-      title: '用户数',
+      title: 'Số người dùng',
       compare: (a: DataItem, b: DataItem) => a.math - b.math,
       priority: 2
     },
     {
-      title: '周涨幅',
+      title: 'tăng hàng tuần',
       compare: (a: DataItem, b: DataItem) => a.english - b.english,
       priority: 1
     }
@@ -238,7 +238,7 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
         content: '{value}'
       },
       statistic: {},
-      // 添加 中心统计文本 交互
+      // Thêm tương tác văn bản thống kê trung tâm
       interactions: [{ type: 'element-selected' }, { type: 'element-active' }, { type: 'pie-statistic-active' }]
     });
     tinyArea.render();
