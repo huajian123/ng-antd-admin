@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Component, OnInit, ChangeDetectionStrategy, Input, TemplateRef, Renderer2, ElementRef } from '@angular/core';
 import { merge } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';

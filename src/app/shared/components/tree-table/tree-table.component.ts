@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, ChangeDetectorRef, OnChanges, SimpleChanges } from '@angular/core';
 
 import { MyTableConfig, SortFile, TableHeader } from '@shared/components/ant-table/ant-table.component';
@@ -37,12 +38,12 @@ export class TreeTableComponent implements OnInit, OnChanges {
   // 从业务组件中传入的缓存的已经选中的checkbox数据数组,相当于缓存的tableData
   @Input() cashArray: NzSafeAny[] = [];
   checkedCashArrayFromComment: NzSafeAny[] = [];
-  @Output() sortFn: EventEmitter<SortFile> = new EventEmitter<SortFile>();
-  @Output() changePageNum = new EventEmitter<NzTableQueryParams>();
-  @Output() changePageSize = new EventEmitter<number>();
+  @Output() readonly sortFn: EventEmitter<SortFile> = new EventEmitter<SortFile>();
+  @Output() readonly changePageNum = new EventEmitter<NzTableQueryParams>();
+  @Output() readonly changePageSize = new EventEmitter<number>();
   mapOfExpandedData: { [key: string]: TreeNodeInterface[] } = {};
   @Input() tableConfig!: MyTableConfig;
-  @Output() selectedChange: EventEmitter<NzSafeAny[]> = new EventEmitter<NzSafeAny[]>();
+  @Output() readonly selectedChange: EventEmitter<NzSafeAny[]> = new EventEmitter<NzSafeAny[]>();
   cashExpandIdArray: Array<number | string> = []; // 缓存已经展开的节点的id
 
   @Input()
