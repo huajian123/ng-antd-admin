@@ -5,9 +5,9 @@
       <div nz-row>
         <nz-avatar class="m-r-8" nz-col nzFlex="30px" nzIcon="user" nzSrc="assets/imgs/logo.svg"></nz-avatar>
         <div class="m-t-0 p-8" nz-result-content nz-col nzFlex="1">
-          请
-          <span nz-typography nzType="danger">一句话</span>
-          描述您的问题，我们来帮您解决。😎
+          Xin vui lòng
+          <span nz-typography nzType="danger">một câu</span>
+          Mô tả vấn đề của bạn và chúng tôi sẽ giúp bạn giải quyết nó 😎
         </div>
         <div nz-col nzFlex="30px"></div>
       </div>
@@ -49,7 +49,7 @@
     <i class="hand-model m-l-8" (click)="close()" nz-icon nzType="close" nzTheme="outline"></i>
   </ng-template>
   <ng-template #titleTemplate>
-    <span class="sp-14">{{ isSending ? '对方正在输入中...' : '联系管理员' }}</span>
+    <span class="sp-14">{{ isSending ? 'đang gõ...' : 'Liên hệ với quản trị viên' }}</span>
   </ng-template>
   <ng-template #inputTpl>
     <form [formGroup]="validateForm">
@@ -63,7 +63,7 @@
         rows="4"
         nz-input
         id="remark"
-        placeholder="反馈些什么"
+        placeholder="Trả lại cái gì"
       ></textarea>
     </form>
   </ng-template>

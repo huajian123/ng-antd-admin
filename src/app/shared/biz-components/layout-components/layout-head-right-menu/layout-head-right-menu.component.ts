@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -40,7 +41,7 @@ export class LayoutHeadRightMenuComponent implements OnInit {
   lockScreen(): void {
     this.lockWidgetService
       .show({
-        nzTitle: '锁定屏幕',
+        nzTitle: 'Màn hình khóa',
         nzStyle: { top: '25px' },
         nzWidth: '520px',
         nzFooter: null,
@@ -51,7 +52,7 @@ export class LayoutHeadRightMenuComponent implements OnInit {
 
   // 修改密码
   changePassWorld(): void {
-    this.changePasswordModalService.show({ nzTitle: '修改密码' }).subscribe(({ modalValue, status }) => {
+    this.changePasswordModalService.show({ nzTitle: 'Đổi mật khẩu' }).subscribe(({ modalValue, status }) => {
       if (status === ModalBtnStatus.Cancel) {
         return;
       }
@@ -64,7 +65,7 @@ export class LayoutHeadRightMenuComponent implements OnInit {
       });
       this.accountService.editAccountPsd(this.user).subscribe(() => {
         this.loginOutService.loginOut().then();
-        this.message.success('修改成功，请重新登录');
+        this.message.success('Sửa đổi thành công, vui lòng đăng nhập lại');
       });
     });
   }
@@ -88,11 +89,11 @@ export class LayoutHeadRightMenuComponent implements OnInit {
     this.windowServe.clearStorage();
     this.windowServe.clearSessionStorage();
     this.loginOutService.loginOut().then();
-    this.message.success('清除成功，请重新登录');
+    this.message.success('Đã xóa thành công, vui lòng đăng nhập lại');
   }
 
   showMessage(): void {
-    this.message.info('切换成功');
+    this.message.info('Chưa Thiết Lập');
   }
 
   goPage(path: string): void {

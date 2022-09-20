@@ -45,38 +45,38 @@
         <li nz-menu-item (click)="goPage('personal-center')">
           <a>
             <i nz-icon nzType="user" nzTheme="outline" class="m-r-8"></i>
-            <span>个人中心</span>
+            <span>Thông tin cá nhân</span>
           </a>
         </li>
         <li nz-menu-item (click)="goPage('personal-setting')">
           <a>
             <i nz-icon nzType="setting" nzTheme="outline" class="m-r-8"></i>
-            <span>个人设置</span>
+            <span>Thiết lập tài khoản</span>
           </a>
         </li>
         <li nz-menu-item (click)="changePassWorld()">
           <a>
             <i nz-icon nzType="lock" nzTheme="outline" class="m-r-8"></i>
-            <span>修改密码</span>
+            <span>Đổi mật khẩu</span>
           </a>
         </li>
         <li nz-menu-divider></li>
         <li nz-menu-item (click)="clean()">
           <a>
             <i nz-icon nzType="clear" nzTheme="outline" class="m-r-8"></i>
-            <span>清除缓存</span>
+            <span>Xóa bộ nhớ cache</span>
           </a>
         </li>
         <li nz-menu-item (click)="lockScreen()">
           <a>
             <i nz-icon nzType="lock" nzTheme="outline" class="m-r-8"></i>
-            <span>锁定屏幕</span>
+            <span>Màn hình khóa</span>
           </a>
         </li>
         <li nz-menu-item>
           <a (click)="goLogin()">
             <i nz-icon nzType="logout" nzTheme="outline" class="m-r-8"></i>
-            <span>退出登录</span>
+            <span>Đăng xuất</span>
           </a>
         </li>
       </ul>
@@ -88,11 +88,8 @@
     <nz-dropdown-menu #language="nzDropdownMenu">
       <ul nz-menu nzSelectable>
         <li nz-menu-item (click)="showMessage()">English</li>
-        <li nz-menu-item (click)="showMessage()">Bahasa Indonesia</li>
-        <li nz-menu-item (click)="showMessage()">日本語</li>
-        <li nz-menu-item (click)="showMessage()">Português</li>
-        <li nz-menu-item (click)="showMessage()" nzSelected>简体中文</li>
-        <li nz-menu-item (click)="showMessage()">繁體中文</li>
+        <li nz-menu-item (click)="showMessage()">Tiếng Nhật</li>
+        <li nz-menu-item (click)="showMessage()">Tiếng Việt</li>
       </ul>
     </nz-dropdown-menu>
   </div>
