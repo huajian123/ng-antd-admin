@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /*配置权限码*/
 export const ActionCode = {
   /*标签页操作打开详情*/

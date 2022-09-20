@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 
 import { isDecimal, isIdCard, isInt, isMobile, isNum, isUrl } from './validate';

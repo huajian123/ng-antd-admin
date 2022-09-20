@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { TreeNodeInterface } from '@shared/components/tree-table/tree-table.component';
 
 function convertTreeToList(root: TreeNodeInterface): TreeNodeInterface[] {

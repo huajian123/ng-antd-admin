@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { DOCUMENT, registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import { NgModule, Optional, SkipSelf } from '@angular/core';

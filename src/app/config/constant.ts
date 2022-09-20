@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /*定义常量*/
 
 // 请求头token的前缀

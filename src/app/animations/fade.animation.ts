@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { animate, AnimationQueryOptions, style, transition, trigger } from '@angular/animations';
 
 const options: AnimationQueryOptions = {

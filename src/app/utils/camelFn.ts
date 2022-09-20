@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 function camelCase(value: string): string {
   return value.replace(/-\w/g, (_r, i) => value.charAt(i + 1).toUpperCase());
 }

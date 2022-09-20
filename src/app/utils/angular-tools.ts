@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { ChangeDetectorRef, inject, ViewRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OperatorFunction, Subject } from 'rxjs';

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { DOCUMENT } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Input, Inject } from '@angular/core';
 import { Title } from '@angular/platform-browser';

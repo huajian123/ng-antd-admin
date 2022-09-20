@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /** 是否为数字 */
 export function isNum(value: string | number): boolean {
   return /^((-?\d+\.\d+)|(-?\d+)|(-?\.\d+))$/.test(value.toString());

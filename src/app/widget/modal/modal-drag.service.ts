@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { DragDrop, DragRef } from '@angular/cdk/drag-drop';
 import { Injectable } from '@angular/core';
 

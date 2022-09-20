@@ -1,4 +1,5 @@
-export const ip = '1.117.181.242';
+/* eslint-disable prettier/prettier */
+export const ip = 'localhost';
 export const port = '80';
 export const localUrl = `http://${ip}:${port}/api`;
 

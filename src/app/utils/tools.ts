@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { FormArray, FormGroup } from '@angular/forms';
 
 import { LockScreenFlag } from '@store/common-store/lock-screen-store.service';

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Inject, Injectable } from '@angular/core';
 import { delay, Observable, of } from 'rxjs';
 

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { isPlatformBrowser } from '@angular/common';
 import { Inject, Injectable, InjectionToken, PLATFORM_ID } from '@angular/core';
 
