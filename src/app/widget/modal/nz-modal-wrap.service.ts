@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
@@ -71,7 +72,7 @@ export class NzModalWrapService {
   protected createModalConfig<T, R = NzSafeAny>(config: ModalOptions<T, R>, wrapCls: string): ModalOptions<T, R> {
     const defaultConfig: ModalOptions = {
       nzMaskClosable: false,
-      nzTitle: '提示'
+      nzTitle: 'Dấu'
     };
     const maskStyle = config.nzMask === false ? { nzMaskStyle: { display: 'none' } } : {};
     const newConfig = Object.assign(defaultConfig, config, maskStyle);

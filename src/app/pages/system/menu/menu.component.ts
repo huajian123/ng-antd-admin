@@ -42,8 +42,8 @@ export class MenuComponent implements OnInit {
 
   tableConfig!: MyTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
-    title: '菜单管理(数据库每10分钟从备份恢复一次),新增完菜单记得给对应角色添加刚刚新增的菜单权限，不然无法展示',
-    breadcrumb: ['首页', '系统管理', '菜单管理']
+    title: 'Quản lý menu (cơ sở dữ liệu được khôi phục từ bản sao lưu sau mỗi 10 phút), sau khi thêm menu mới, nhớ thêm quyền menu mới thêm vào vai trò tương ứng, nếu không sẽ không hiển thị',
+    breadcrumb: ['Trang chủ', 'Quản lý hệ thống', 'Quản lý menu']
   };
   dataList: TreeNodeInterface[] = [];
   visibleOptions: OptionsInterface[] = [];
@@ -59,7 +59,7 @@ export class MenuComponent implements OnInit {
   ) {}
 
   reloadTable(): void {
-    this.message.info('已经刷新了');
+    this.message.info('Đã được làm mới');
     this.getDataList();
   }
 
@@ -104,7 +104,7 @@ export class MenuComponent implements OnInit {
   }
 
   add(fatherId: number): void {
-    this.menuModalService.show({ nzTitle: '新增' }).subscribe(
+    this.menuModalService.show({ nzTitle: 'Thêm Mới' }).subscribe(
       res => {
         if (!res || res.status === ModalBtnStatus.Cancel) {
           return;
@@ -132,8 +132,8 @@ export class MenuComponent implements OnInit {
 
   del(id: number): void {
     this.modalSrv.confirm({
-      nzTitle: '确定要删除吗？',
-      nzContent: '删除后不可恢复',
+      nzTitle: 'Bạn chắc chắn bạn muốn xóa nó？',
+      nzContent: 'Không thể phục hồi sau khi xóa',
       nzOnOk: () => {
         this.tableLoading(true);
         this.dataService.delMenus(id).subscribe(
@@ -152,7 +152,7 @@ export class MenuComponent implements OnInit {
   // 修改
   edit(id: number, fatherId: number): void {
     this.dataService.getMenuDetail(id).subscribe(res => {
-      this.menuModalService.show({ nzTitle: '编辑' }, res).subscribe(
+      this.menuModalService.show({ nzTitle: 'Chỉnh sửa' }, res).subscribe(
         ({ modalValue, status }) => {
           if (status === ModalBtnStatus.Cancel) {
             return;
@@ -176,67 +176,67 @@ export class MenuComponent implements OnInit {
     this.tableConfig = {
       headers: [
         {
-          title: '菜单名称',
+          title: 'Tên menu',
           width: 230,
           field: 'menuName'
         },
         {
-          title: 'zorro图标',
+          title: 'Icon zorro',
           field: 'icon',
           width: 100,
           tdTemplate: this.zorroIconTpl
         },
         {
-          title: '阿里图标',
+          title: 'Icon Ali',
           field: 'alIcon',
           width: 100,
           tdTemplate: this.aliIconTpl
         },
         {
-          title: '权限码',
+          title: 'Code',
           field: 'code',
           width: 300
         },
         {
-          title: '路由地址',
+          title: 'Định tuyến',
           field: 'path',
           width: 300
         },
         {
-          title: '排序',
+          title: 'Loại',
           field: 'orderNum',
           width: 80
         },
         {
-          title: '状态',
+          title: 'tiểu bang',
           field: 'status',
           pipe: 'available',
           width: 100
         },
         {
-          title: '展示',
+          title: 'triển lãm',
           field: 'visible',
           pipe: 'isOrNot',
           tdTemplate: this.visibleTpl,
           width: 100
         },
         {
-          title: '外链',
+          title: 'Liên kết',
           field: 'newLinkFlag',
           pipe: 'isOrNot',
           tdTemplate: this.newLinkFlag,
           width: 100
         },
         {
-          title: '创建时间',
+          title: 'Thời gian',
           field: 'createTime',
           pipe: 'date:yyyy-MM-dd HH:mm',
           width: 180
         },
         {
-          title: '操作',
+          title: 'Vận Hành',
           tdTemplate: this.operationTpl,
-          width: 180,
+          width: 250,
           fixed: true,
           fixedDir: 'right'
         }

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Component, OnInit, ChangeDetectionStrategy, TemplateRef, ViewChild } from '@angular/core';
 
 import { PageHeaderType } from '@shared/components/page-header/page-header.component';
@@ -15,8 +16,8 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 export class ExModalComponent implements OnInit {
   @ViewChild('dragTpl', { static: true }) dragTpl!: TemplateRef<NzSafeAny>;
   pageHeaderInfo: Partial<PageHeaderType> = {
-    title: '拖动Modal，树挪死，人挪活',
-    breadcrumb: ['首页', '拖拽modal']
+    title: 'Kéo Modal, cây cối chuyển sang chết, con người chuyển đến sống',
+    breadcrumb: ['Home', 'Modal']
   };
   isVisible = false;
   isVisibleByDir = false;
@@ -42,30 +43,30 @@ export class ExModalComponent implements OnInit {
   showDailogConfirm(): void {
     this.modalDragService.confirm({
       nzTitle: 'Confirm',
-      nzContent: '提示一下的内容',
+      nzContent: 'Gợi ý gì',
       nzOnOk: () => {
-        console.log('确定');
+        console.log('Chắc chắn rồi');
       },
       nzOnCancel: () => {
-        console.log('取消');
+        console.log('Hủy bỏ');
       }
     });
   }
 
   showDailogInfo(): void {
-    this.modalDragService.info({ nzTitle: 'Info', nzContent: '提示一下的内容' });
+    this.modalDragService.info({ nzTitle: 'Info', nzContent: 'Gợi ý gì' });
   }
 
   showDailogSuccess(): void {
-    this.modalDragService.success({ nzTitle: 'Success', nzContent: '提示一下的内容' });
+    this.modalDragService.success({ nzTitle: 'Success', nzContent: 'Gợi ý gì' });
   }
 
   showDailogError(): void {
-    this.modalDragService.error({ nzTitle: 'Error', nzContent: '提示一下的内容' });
+    this.modalDragService.error({ nzTitle: 'Error', nzContent: 'Gợi ý gì' });
   }
 
   showDailogWarning(): void {
-    this.modalDragService.warning({ nzTitle: 'Warning', nzContent: '提示一下的内容' });
+    this.modalDragService.warning({ nzTitle: 'Warning', nzContent: 'Gợi ý gì' });
   }
 
   showDailog(): void {
@@ -73,7 +74,7 @@ export class ExModalComponent implements OnInit {
     // this.dragService.show({nzTitle: this.dragTpl, nzMask: false,nzMaskStyle:{display:'none'},nzWrapClassName:"pointer-events-none"}).subscribe(res=>console.log(res))
     this.dragService
       .show({
-        nzTitle: '拖动的title',
+        nzTitle: 'title',
         nzMask: false,
         nzMaskStyle: { display: 'none' },
         nzWrapClassName: 'pointer-events-none'

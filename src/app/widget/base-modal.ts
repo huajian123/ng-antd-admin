@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { DragDrop, DragRef } from '@angular/cdk/drag-drop';
 import { Injectable, Injector, Renderer2, RendererFactory2, TemplateRef, Type } from '@angular/core';
 import { Observable, of } from 'rxjs';
@@ -148,13 +149,13 @@ export class ModalWrapService {
       nzMaskClosable: false,
       nzFooter: [
         {
-          label: '确认',
+          label: 'Xác nhận',
           type: 'primary',
           show: true,
           onClick: this.confirmCallback.bind(this)
         },
         {
-          label: '取消',
+          label: 'Hủy bỏ',
           type: 'default',
           show: true,
           onClick: this.cancelCallback.bind(this)

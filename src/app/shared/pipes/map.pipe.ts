@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /*
 使用方法：
 accidentTypeOptions: OptionsInterface[];
@@ -22,20 +23,20 @@ export const enum MapKeyType {
 
 export const MapSet = {
   sex: {
-    0: '女',
-    1: '男'
+    0: 'Nữ',
+    1: 'Nam'
   },
   available: {
-    true: '可用',
-    false: '禁用'
+    true: 'có sẵn',
+    false: 'Vô Hiệu Hóa'
   },
   isOrNot: {
-    true: '是',
-    false: '否'
+    true: 'Đúng',
+    false: 'Sai'
   },
   visible: {
-    true: '展示',
-    false: '隐藏'
+    true: 'Triễn Lãm',
+    false: 'ẩn giấu'
   }
 };
 

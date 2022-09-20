@@ -1,30 +1,30 @@
 <form nz-form [formGroup]="addEditForm">
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="departmentName">部门名称</nz-form-label>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="departmentName">Tên bộ phận</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="combineTpl">
-      <input nz-input formControlName="departmentName" name="departmentName" placeholder="请输入部门名称" id="departmentName" />
+      <input nz-input formControlName="departmentName" name="departmentName" placeholder="Vui lòng nhập tên bộ phận" id="departmentName" />
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="state">部门状态</nz-form-label>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="state">Tình trạng bộ phận</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="combineTpl">
       <nz-radio-group formControlName="state">
-        <label nz-radio [nzValue]="false">禁用</label>
-        <label nz-radio [nzValue]="true">可用</label>
+        <label nz-radio [nzValue]="false">Vô hiệu hóa</label>
+        <label nz-radio [nzValue]="true">có sẵn</label>
       </nz-radio-group>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="orderNum">排序</nz-form-label>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="orderNum">Loại</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="combineTpl">
-      <input nz-input formControlName="orderNum" name="orderNum" placeholder="排序" id="orderNum" />
+      <input nz-input formControlName="orderNum" name="orderNum" placeholder="Loại" id="orderNum" />
     </nz-form-control>
   </nz-form-item>
 </form>
 
 <ng-template #combineTpl let-control>
   <ng-container *ngIf="control.hasError('message')">{{ control.errors.message }}</ng-container>
-  <ng-container *ngIf="control.hasError('required')">必填项</ng-container>
+  <ng-container *ngIf="control.hasError('required')">Phần bắt buộc</ng-container>
 </ng-template>

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { NgModule } from '@angular/core';
 
 import { NzModalModule } from 'ng-zorro-antd/modal';

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Injectable, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 
