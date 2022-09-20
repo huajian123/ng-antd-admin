@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef } from '@angular/core';
 
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
