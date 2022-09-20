@@ -36,7 +36,7 @@ export class DefLayoutContentComponent implements OnInit {
   isFixedLeftNav = false;
   isOverMode$: Observable<boolean> = this.themesService.getIsOverMode();
   isCollapsed$: Observable<boolean> = this.themesService.getIsCollapsed();
-  // 混合模式下，判断顶部菜单是否有子菜单，如果没有子菜单，要隐藏左侧菜单
+
   mixiModeHasLeftNav = this.splitNavStoreService.getSplitLeftNavArrayStore();
   contentMarginTop = '48px';
 
