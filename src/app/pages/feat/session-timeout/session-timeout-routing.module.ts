@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { SessionTimeoutComponent } from '@app/pages/feat/session-timeout/session-timeout.component';
 
-const routes: Routes = [{ path: '', component: SessionTimeoutComponent, data: { title: '登录过期', key: 'session-timeout' } }];
+const routes: Routes = [{ path: '', component: SessionTimeoutComponent, data: { title: 'Đăng nhập đã hết hạn', key: 'session-timeout' } }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

@@ -42,16 +42,16 @@ export class HttpInterceptorService implements HttpInterceptor {
     const status = error.status;
     let errMsg = '';
     if (status === 0) {
-      errMsg = '网络出现未知的错误，请检查您的网络。';
+      errMsg = 'Đã xảy ra lỗi mạng không xác định, vui lòng kiểm tra mạng của bạn.';
     }
     if (status >= 300 && status < 400) {
-      errMsg = `请求被服务器重定向，状态码为${status}`;
+      errMsg = `Yêu cầu đã được chuyển hướng bởi máy chủ với mã trạng thái${status}`;
     }
     if (status >= 400 && status < 500) {
-      errMsg = `客户端出错，可能是发送的数据有误，状态码为${status}`;
+      errMsg = `Máy khách bị lỗi, có thể dữ liệu gửi sai, mã trạng thái${status}`;
     }
     if (status >= 500) {
-      errMsg = `服务器发生错误，状态码为${status}`;
+      errMsg = `Đã xảy ra lỗi máy chủ với mã trạng thái${status}`;
     }
     return throwError({
       code: status,

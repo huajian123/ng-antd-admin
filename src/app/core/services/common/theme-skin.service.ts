@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
 import { first } from 'rxjs/operators';

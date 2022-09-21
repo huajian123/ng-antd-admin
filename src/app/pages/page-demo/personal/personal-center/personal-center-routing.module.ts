@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: '',
     component: PersonalCenterComponent,
-    data: { title: '个人中心', key: 'personal-center' }
+    data: { title: 'Thông Tin cá nhân', key: 'personal-center' }
   }
 ];
 

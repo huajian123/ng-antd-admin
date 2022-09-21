@@ -79,7 +79,7 @@ export class BaseHttpService {
 
   post<T>(path: string, param?: NzSafeAny, config?: MyHttpConfig): Observable<NzSafeAny> {
     config = config || { needSuccessInfo: false };
-    this.uri = "http://1.117.181.242:8003/api";
+    this.uri = "http://localhost:3000/user";
     let reqPath = this.uri + path;
     if (config.otherUrl) {
       reqPath = path;
@@ -134,7 +134,7 @@ export class BaseHttpService {
     if (item.code !== 0) {
       this.message.error(item.msg);
     } else if (needSuccessInfo) {
-      this.message.success('操作成功');
+      this.message.success('Thực hiện thành công !');
     }
     return true;
     // return item.code === 0;

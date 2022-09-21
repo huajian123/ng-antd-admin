@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -45,12 +46,7 @@ export class NormalLoginComponent implements OnInit {
     this.windowServe.setSessionStorage(TokenKey, 'TokenPre + token');
     const userInfo = this.userInfoService.parsToken(TokenPre);
     this.userInfoService.setUserInfo(userInfo);
-    // if (!fnCheckForm(this.validateForm)) {
-    //   return;
-    // }
     setTimeout(() => {
-      // 请查看src/app/pages/login/login-form/login-form.component.ts文件中的登录逻辑
-      // 这里的登录逻辑只是做个展示示例
       this.dataService.getMenuByUserId(-1).subscribe(menus => {
         this.menuService.setMenuArrayStore(menus);
         this.router.navigateByUrl('default/dashboard/analysis').then(() => {

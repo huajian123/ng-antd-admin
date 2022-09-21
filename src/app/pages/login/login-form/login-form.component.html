@@ -3,16 +3,16 @@
     <nz-tabset [nzAnimated]="false">
       <nz-tab nzTitle="Login Account">
         <nz-form-item>
-          <nz-form-control nzErrorTip="User Name：admin">
+          <nz-form-control nzErrorTip="Email">
             <nz-input-group [nzSize]="'large'" nzPrefixIcon="user">
-              <input [placeholder]="'User Name：admin'" type="text" nz-input formControlName="userName" placeholder="Username" />
+              <input [placeholder]="'Email'" type="text" nz-input formControlName="email" placeholder="email" />
             </nz-input-group>
           </nz-form-control>
         </nz-form-item>
         <nz-form-item>
-          <nz-form-control nzErrorTip="Mật Khẩu：123456">
+          <nz-form-control nzErrorTip="Mật Khẩu">
             <nz-input-group [nzSize]="'large'" nzPrefixIcon="lock">
-              <input autocomplete="on" [placeholder]="'Mật Khẩu：123456'" type="password" nz-input formControlName="password" placeholder="Mật Khẩu" />
+              <input autocomplete="on" [placeholder]="'Mật Khẩu'" type="password" nz-input formControlName="password" placeholder="Mật Khẩu" />
             </nz-input-group>
           </nz-form-control>
         </nz-form-item>
@@ -22,7 +22,7 @@
         <nz-form-item>
           <nz-form-control nzErrorTip="Vui lòng nhập tên của bạn !">
             <nz-input-group [nzSize]="'large'" nzPrefixIcon="mobile">
-              <input autocomplete="on" type="text" nz-input formControlName="userName" placeholder="Số điện thoại" />
+              <input autocomplete="on" type="text" nz-input formControlName="email" placeholder="Số điện thoại" />
             </nz-input-group>
           </nz-form-control>
         </nz-form-item>

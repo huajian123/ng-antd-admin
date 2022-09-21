@@ -1,9 +1,9 @@
+/* eslint-disable prettier/prettier */
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
 
 import { Chart } from '@antv/g2';
 import { Pie, RingProgress, TinyColumn, TinyArea, Progress } from '@antv/g2plot';
 import { inNextTick } from 'ng-zorro-antd/core/util';
-
 interface DataItem {
   name: string;
   chinese: number;
@@ -98,6 +98,16 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
       english: 89
     }
   ];
+
+  date = null;
+
+  onChange(result: Date[]): void {
+    console.log('onChange: ', result);
+  }
+
+  getWeek(result: Date[]): void {
+    console.log('week: ', result);
+  }
 
   constructor(private cdr: ChangeDetectorRef, private ngZone: NgZone) {}
 

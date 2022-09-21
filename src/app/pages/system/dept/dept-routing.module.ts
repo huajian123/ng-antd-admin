@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: '',
     component: DeptComponent,
-    data: { title: '部门管理', key: 'dept' }
+    data: { title: 'Quản lý bộ phận', key: 'dept' }
   }
 ];
 

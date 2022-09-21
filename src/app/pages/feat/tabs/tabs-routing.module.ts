@@ -6,8 +6,8 @@ import { TabsComponent } from '@app/pages/feat/tabs/tabs.component';
 import { ActionCode } from '@config/actionCode';
 
 const routes: Routes = [
-  { path: '', component: TabsComponent, data: { title: '标签页操作', key: 'tabs' } },
-  { path: 'example-detail', component: DetailComponent, data: { newTab: 'true', authCode: ActionCode.TabsDetail, title: '演示详情', key: 'example-detail' } }
+  { path: '', component: TabsComponent, data: { title: 'Tác vụ tab', key: 'tabs' } },
+  { path: 'example-detail', component: DetailComponent, data: { newTab: 'true', authCode: ActionCode.TabsDetail, title: 'Chi tiết demo', key: 'example-detail' } }
 ];
 
 @NgModule({

@@ -41,17 +41,17 @@
 
   <app-card-table-wrap [tableTitle]="'Danh sách menu'" (reload)="reloadTable()" [btnTpl]="tableBtns">
     <app-tree-table [tableConfig]="tableConfig" (changePageSize)="changePageSize($event)" (changePageNum)="getDataList($event)" [tableData]="dataList"></app-tree-table>
-    <ng-template #operationTpl let-id="id" let-menuType="menuType" let-fatherId="fatherId">
+    <ng-template #operationTpl let-_id="_id" let-menuType="menuType" let-fatherId="fatherId">
       <span *appAuth="ActionCode.MenuEdit" class="operate-text">
-         <button nz-button nzType="primary" nzShape="circle" (click)="edit(id, fatherId)">Edit</button>
+         <button nz-button nzType="primary" nzShape="circle" (click)="edit(_id, fatherId)">Edit</button>
       </span>
       <ng-container *appAuth="ActionCode.MenuAddLowLevel">
         <span class="operate-text" *ngIf="menuType === 'C'">
-          <button nz-button nzType="primary" nzShape="circle" (click)="add(id)">Add</button>
+          <button nz-button nzType="primary" nzShape="circle" (click)="add(_id)">Add</button>
         </span>
       </ng-container>
       <span *appAuth="ActionCode.MenuDel" class="operate-text">
-        <button nz-button nzType="primary" nzShape="circle" (click)="del(id)">Delete</button>
+        <button nz-button nzType="primary" nzShape="circle" (click)="del(_id)">Delete</button>
       </span>
     </ng-template>
   </app-card-table-wrap>

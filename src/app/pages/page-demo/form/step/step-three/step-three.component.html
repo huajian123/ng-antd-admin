@@ -1,16 +1,16 @@
-<nz-result nzStatus="success" nzTitle="操作成功" nzSubTitle="预计两小时内到账">
+<nz-result nzStatus="success" nzTitle="Thực Hiện Thành công " nzSubTitle="Dự kiến ​​sẽ đến trong vòng hai giờ">
   <div nz-result-extra>
-    <button (click)="next.emit()" nz-button nzType="primary">在转一笔</button>
-    <button nz-button>查看账单</button>
+    <button (click)="next.emit()" nz-button nzType="primary">đến lượt</button>
+    <button nz-button>Xem hóa đơn</button>
   </div>
 </nz-result>
 <div nz-result-content class="desc-bg center" [class.p-l-16]="stepDirection === 'vertical'">
   <div class="determine-wrap p-b-0">
     <nz-descriptions class="m-t-20 p-0">
-      <nz-descriptions-item nzTitle="付款账户">ant-design@alipay.com</nz-descriptions-item>
-      <nz-descriptions-item nzTitle="收款账户">test@example.com</nz-descriptions-item>
-      <nz-descriptions-item nzTitle="收款人姓名">Alex</nz-descriptions-item>
-      <nz-descriptions-item nzTitle="转账金额">500元</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Tài khoản thanh toán">ant-design@alipay.com</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Những tài khoản có thể nhận được">nampham@example.com</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Tên người nhận">Nam Pham</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Số tiền chuyển khoản">$500</nz-descriptions-item>
     </nz-descriptions>
   </div>
 </div>

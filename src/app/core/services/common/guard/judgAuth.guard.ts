@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router, CanActivateChild } from '@angular/router';
 
@@ -49,7 +50,7 @@ export class JudgAuthGuard implements CanActivateChild {
     if (authCodeArray.includes(code)) {
       return true;
     } else {
-      this.message.error('您没有权限登录该模块');
+      this.message.error('Bạn không có quyền đăng nhập vào mô-đun này');
       this.loginOutService.loginOut();
       return this.router.parseUrl('/login');
     }

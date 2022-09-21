@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { FlowChatComponent } from './flow-chat.component';
 
-const routes: Routes = [{ path: '', component: FlowChatComponent, data: { title: '流程图', key: 'flow-chat' } }];
+const routes: Routes = [{ path: '', component: FlowChatComponent, data: { title: 'sơ đồ', key: 'flow-chat' } }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

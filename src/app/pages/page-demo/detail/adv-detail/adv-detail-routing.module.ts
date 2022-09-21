@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AdvDetailComponent } from './adv-detail.component';
 
-const routes: Routes = [{ path: '', component: AdvDetailComponent, data: { title: '高级详情页', key: 'adv-detail' } }];
+const routes: Routes = [{ path: '', component: AdvDetailComponent, data: { title: 'Trang chi tiết nâng cao', key: 'adv-detail' } }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

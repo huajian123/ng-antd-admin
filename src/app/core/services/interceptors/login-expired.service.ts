@@ -84,7 +84,7 @@ export class LoginExpiredService implements HttpInterceptor {
       this.refresher = new Observable(observer => {
         // setTimeout为了解决刷新页面的时候，由于zorro样式未加载，登录对话框会闪屏
         setTimeout(() => {
-          this.loginModalService.show({ nzTitle: '登录信息过期，重新登录' }).subscribe(({ modalValue, status }) => {
+          this.loginModalService.show({ nzTitle: 'Thông tin đăng nhập đã hết hạn, vui lòng đăng nhập lại' }).subscribe(({ modalValue, status }) => {
             if (status === ModalBtnStatus.Cancel) {
               // 这么做是为了登录状态下token过期，刷新页面，登录窗口点击取消，需要在startUp中的获取menu的接口完成掉,
               // 不然进不去angular应用，路由不跳转
@@ -92,7 +92,7 @@ export class LoginExpiredService implements HttpInterceptor {
                 new HttpResponse({
                   body: {
                     code: 3013,
-                    msg: '取消后请重新登录',
+                    msg: 'Vui lòng đăng nhập lại sau khi hủy',
                     data: null
                   }
                 })
@@ -110,7 +110,7 @@ export class LoginExpiredService implements HttpInterceptor {
               error => {
                 // 如果先用admin登录超时弹框，登录的却是normal账号，对目标模块没有权限，则返回登录页
                 // 这里靠后端判断新的token没有权限，请求报错403
-                this.message.error('您没有权限登录该模块');
+                this.message.error('Bạn không có quyền đăng nhập vào mô-đun này');
                 this.loginOut();
               }
             );

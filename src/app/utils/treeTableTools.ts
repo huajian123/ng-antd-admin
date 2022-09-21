@@ -55,7 +55,7 @@ const fnFlatDataHasParentToTree = function translateDataToTree(data: any[], fath
       //遍历子节点数据
       children.forEach((current, index) => {
         //此时找到父节点对应的一个子节点
-        if (current[fatherId] === parent.id) {
+        if (current[fatherId] === parent._id) {
           //对子节点数据进行深复制，这里只支持部分类型的数据深复制，对深复制不了解的童靴可以先去了解下深复制
           let temp = JSON.parse(JSON.stringify(children));
           //让当前子节点从temp中移除，temp作为新的子节点数据，这里是为了让递归时，子节点的遍历次数更少，如果父子关系的层级越多，越有利

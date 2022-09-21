@@ -1,29 +1,29 @@
 <app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
 <div class="normal-table-wrap">
-  <nz-card nzTitle="在下面输入框输入文本，切换后回来内容会保存">
-    <nz-alert class="m-b-8" nzType="warning" nzMessage="该操作不会影响页面标题，仅修改Tab标题"></nz-alert>
+  <nz-card nzTitle="Nhập văn bản vào ô nhập liệu bên dưới, nội dung sẽ được lưu sau khi chuyển về">
+    <nz-alert class="m-b-8" nzType="warning" nzMessage="Thao tác này không ảnh hưởng đến tiêu đề trang, chỉ sửa đổi tiêu đề tab"></nz-alert>
 
     <nz-input-group nzSearch [nzAddOnAfter]="suffixButton">
       <input type="text" #tabTitleInput nz-input placeholder="input search text" />
     </nz-input-group>
     <ng-template #suffixButton>
-      <button nz-button (click)="changeTabTitle(tabTitleInput.value)" nzType="primary" nzSearch>设置tab标题</button>
+      <button nz-button (click)="changeTabTitle(tabTitleInput.value)" nzType="primary" nzSearch>đặt tiêu đề tab</button>
     </ng-template>
   </nz-card>
 
-  <nz-card nzTitle="标签页操作" class="m-t-10">
-    <button nz-button class="m-r-8 m-b-8" (click)="closeRight()" nzType="primary" nzSearch>关闭右侧</button>
-    <button nz-button class="m-r-8 m-b-8" (click)="closeLeft()" nzType="primary" nzSearch>关闭左侧</button>
-    <button nz-button class="m-r-8 m-b-8" (click)="closeOther()" nzType="primary" nzSearch>关闭其他</button>
-    <button nz-button class="m-r-8 m-b-8" (click)="closeCurrent()" nzType="primary" nzSearch>关闭当前</button>
-    <button nz-button class="m-r-8 m-b-8" (click)="refresh()" nzType="primary" nzSearch>刷新</button>
+  <nz-card nzTitle="Tác vụ tab" class="m-t-10">
+    <button nz-button class="m-r-8 m-b-8" (click)="closeRight()" nzType="primary" nzSearch>đóng bên phải</button>
+    <button nz-button class="m-r-8 m-b-8" (click)="closeLeft()" nzType="primary" nzSearch>đóng bên trái</button>
+    <button nz-button class="m-r-8 m-b-8" (click)="closeOther()" nzType="primary" nzSearch>đóng khác</button>
+    <button nz-button class="m-r-8 m-b-8" (click)="closeCurrent()" nzType="primary" nzSearch>đóng hiện tại</button>
+    <button nz-button class="m-r-8 m-b-8" (click)="refresh()" nzType="primary" nzSearch>Làm tươi</button>
   </nz-card>
 
-  <nz-card nzTitle="打开详情操作" class="m-t-10">
-    <button nz-button class="m-r-8 m-b-8" (click)="openDetailPage(1)" nzType="primary" nzSearch>打开详情操作1</button>
-    <button nz-button class="m-r-8 m-b-8" (click)="openDetailPage(2)" nzType="primary" nzSearch>打开详情操作2</button>
-    <button nz-button class="m-r-8 m-b-8" (click)="openDetailPage(3)" nzType="primary" nzSearch>打开详情操作3</button>
-    <button nz-button class="m-r-8 m-b-8" (click)="openDetailPage(4)" nzType="primary" nzSearch>打开详情操作4</button>
-    <button nz-button class="m-r-8 m-b-8" (click)="openDetailPage(5)" nzType="primary" nzSearch>打开详情操作5</button>
+  <nz-card nzTitle="Mở chi tiết hoạt động" class="m-t-10">
+    <button nz-button class="m-r-8 m-b-8" (click)="openDetailPage(1)" nzType="primary" nzSearch>Mở chi tiết hoạt động1</button>
+    <button nz-button class="m-r-8 m-b-8" (click)="openDetailPage(2)" nzType="primary" nzSearch>Mở chi tiết hoạt động2</button>
+    <button nz-button class="m-r-8 m-b-8" (click)="openDetailPage(3)" nzType="primary" nzSearch>Mở chi tiết hoạt động3</button>
+    <button nz-button class="m-r-8 m-b-8" (click)="openDetailPage(4)" nzType="primary" nzSearch>Mở chi tiết hoạt động4</button>
+    <button nz-button class="m-r-8 m-b-8" (click)="openDetailPage(5)" nzType="primary" nzSearch>Mở chi tiết hoạt động5</button>
   </nz-card>
 </div>

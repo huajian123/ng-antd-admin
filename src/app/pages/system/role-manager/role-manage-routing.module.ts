@@ -11,7 +11,7 @@ const routes: Routes = [
     path: 'set-role',
     component: SetRoleComponent,
     data: {
-      title: '角色管理',
+      title: 'Quản lý vai trò',
       key: 'set-role',
       authCode: ActionCode.RoleManagerSetRole,
       relatedLink: ['role-manage', 'set-role']
@@ -20,7 +20,7 @@ const routes: Routes = [
   {
     path: '',
     component: RoleManageComponent,
-    data: { title: '角色管理', key: 'role-manage', relatedLink: ['role-manage', 'set-role'] }
+    data: { title: 'Quản lý vai trò', key: 'role-manage', relatedLink: ['role-manage', 'set-role'] }
   }
 ];
 

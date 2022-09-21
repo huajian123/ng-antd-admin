@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { SetupComponent } from '@app/pages/feat/setup/setup.component';
 
-const routes: Routes = [{ path: '', component: SetupComponent, data: { title: '引导页', key: 'setup' } }];
+const routes: Routes = [{ path: '', component: SetupComponent, data: { title: 'Trang hướng dẫn', key: 'setup' } }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: '',
     component: AccountComponent,
-    data: { title: '账号管理', key: 'account' }
+    data: { title: 'Quản lý tài khoản', key: 'account' }
   }
 ];
 

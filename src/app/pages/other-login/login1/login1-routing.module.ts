@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: '',
     component: Login1Component,
-    data: { title: '第一种登录', key: 'login1' }
+    data: { title: 'lần đăng nhập đầu tiên', key: 'login1' }
   }
 ];
 

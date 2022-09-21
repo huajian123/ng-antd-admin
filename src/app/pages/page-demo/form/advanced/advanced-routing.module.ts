@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AdvancedComponent } from './advanced.component';
 
-const routes: Routes = [{ path: '', component: AdvancedComponent, data: { title: '高级表单', key: 'advanced-form' } }];
+const routes: Routes = [{ path: '', component: AdvancedComponent, data: { title: 'Biểu mẫu nâng cao', key: 'advanced-form' } }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

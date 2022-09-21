@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: '',
     component: MenuComponent,
-    data: { title: '菜单管理', key: 'menu' }
+    data: { title: 'Quản lý menu', key: 'menu' }
   }
 ];
 

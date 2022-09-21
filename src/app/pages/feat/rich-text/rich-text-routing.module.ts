@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { RichTextComponent } from '@app/pages/feat/rich-text/rich-text.component';
 
-const routes: Routes = [{ path: '', component: RichTextComponent, data: { title: '富文本', key: 'rich-text' } }];
+const routes: Routes = [{ path: '', component: RichTextComponent, data: { title: 'văn bản đa dạng thức', key: 'rich-text' } }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

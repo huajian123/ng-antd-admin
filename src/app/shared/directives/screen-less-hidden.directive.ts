@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 
