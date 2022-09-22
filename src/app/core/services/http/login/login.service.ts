@@ -23,12 +23,12 @@ export class LoginService {
   ) {}
 
   public login(params: UserLogin): Observable<string> {
-    return this.http.post('/login', params, { needSuccessInfo: false });
+    return this.http.post('user/login', params, { needSuccessInfo: false });
   }
 
   public getMenuByUserId(userId: number): Observable<Menu[]> {
     // 延迟两秒发送，模拟从接口获取
     // return of(this.menus).pipe(delay(1));
-    return this.http.get("menu");//`/sysPermission/menu/${userId}`
+    return this.http.get("user/menu");//`/sysPermission/menu/${userId}`
   }
 }

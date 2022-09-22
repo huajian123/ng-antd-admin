@@ -1,6 +1,6 @@
 {
   "/site": {
-    "target": "http://1.117.181.242:8003/",
+    "target": "http://localhost:3000/",
     "secure": false,
     "changeOrigin": true,
     "pathRewrite": {

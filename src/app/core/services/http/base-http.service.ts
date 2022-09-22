@@ -27,15 +27,14 @@ export interface ActionResult<T> {
   providedIn: 'root'
 })
 export class BaseHttpService {
-  uri: string;
+  uri = "http://localhost:3000/";
 
   protected constructor(public http: HttpClient, public message: NzMessageService) {
-    this.uri = "http://localhost:3000/user/";//environment.production ? localUrl : '/site/api';
+    this.uri = environment.production ? localUrl : '/site/api';
   }
 
   get<T>(path: string, param?: NzSafeAny, config?: MyHttpConfig): Observable<NzSafeAny> {
     config = config || { needSuccessInfo: false };
-    this.uri = "http://localhost:3000/user/";
     let reqPath = this.uri + path;
     if (config.otherUrl) {
       reqPath = path;
@@ -79,7 +78,6 @@ export class BaseHttpService {
 
   post<T>(path: string, param?: NzSafeAny, config?: MyHttpConfig): Observable<NzSafeAny> {
     config = config || { needSuccessInfo: false };
-    this.uri = "http://localhost:3000/user";
     let reqPath = this.uri + path;
     if (config.otherUrl) {
       reqPath = path;

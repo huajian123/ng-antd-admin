@@ -25,7 +25,7 @@ export class MenusService {
   constructor(public http: BaseHttpService) {}
 
   public getMenuList(param: SearchCommonVO<any>): Observable<PageInfo<Menu>> {
-    return this.http.post('/listmenu', param);
+    return this.http.post('user/listmenu', param);
   }
 
   public addMenus(param: MenuListObj): Observable<void> {
@@ -36,11 +36,11 @@ export class MenusService {
     return this.http.put('/sysPermission', param, { needSuccessInfo: true });
   }
 
-  public delMenus(id: number): Observable<void> {
+  public delMenus(id: any): Observable<void> {
     return this.http.post('/sysPermission/del', { ids: [id] }, { needSuccessInfo: true });
   }
 
-  public getMenuDetail(id: number): Observable<MenuListObj> {
-    return this.http.post(`/detailmenu`,{menuId:id},{ needSuccessInfo: true });
+  public getMenuDetail(id: any): Observable<MenuListObj> {
+    return this.http.post(`user/detailmenu`,{menuId:id},{ needSuccessInfo: true });
   }
 }
