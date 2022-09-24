@@ -51,7 +51,7 @@ export class DeptTreeSearchService {
   filterTreeData(data: TreeNode[], value: string): FilteredTreeResult {
     const needsToExpanded = new Set<TreeNode>();
     const _filter = (node: TreeNode, result: TreeNode[]): TreeNode[] => {
-      if (node.departmentName.search(value) !== -1) {
+      if (node.tenphongban.search(value) !== -1) {
         result.push(node);
         return result;
       }

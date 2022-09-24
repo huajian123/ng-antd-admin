@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
@@ -35,8 +36,8 @@ export class AccountComponent implements OnInit {
   searchParam: Partial<SearchParam> = {};
   tableConfig!: MyTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
-    title: '账号管理(数据库每10分钟从备份恢复一次)',
-    breadcrumb: ['首页', '用户管理', '账号管理']
+    title: 'Quản lý tài khoản',
+    breadcrumb: ['Home', 'Quản lý người dùng', 'Quản lý tài khoản']
   };
   dataList: User[] = [];
   checkedCashArray: User[] = [];
@@ -105,7 +106,7 @@ export class AccountComponent implements OnInit {
   }
 
   add(): void {
-    this.modalService.show({ nzTitle: '新增' }).subscribe(
+    this.modalService.show({ nzTitle: 'Thêm Mới' }).subscribe(
       res => {
         if (!res || res.status === ModalBtnStatus.Cancel) {
           return;
@@ -118,14 +119,14 @@ export class AccountComponent implements OnInit {
   }
 
   reloadTable(): void {
-    this.message.info('刷新成功');
+    this.message.info('Làm mới thành công');
     this.getDataList();
   }
 
   // 修改
   edit(id: number): void {
     this.dataService.getAccountDetail(id).subscribe(res => {
-      this.modalService.show({ nzTitle: '编辑' }, res).subscribe(({ modalValue, status }) => {
+      this.modalService.show({ nzTitle: 'Cập nhật' }, res).subscribe(({ modalValue, status }) => {
         if (status === ModalBtnStatus.Cancel) {
           return;
         }
@@ -170,8 +171,8 @@ export class AccountComponent implements OnInit {
     if (this.checkedCashArray.length > 0) {
       const tempArrays: number[] = [];
       this.modalSrv.confirm({
-        nzTitle: '确定要删除吗？',
-        nzContent: '删除后不可恢复',
+        nzTitle: 'Bạn có chắc chắn muốn xóa nó không?',
+        nzContent: 'Không thể phục hồi sau khi xóa',
         nzOnOk: () => {
           this.checkedCashArray.forEach(item => {
             tempArrays.push(item.id);
@@ -197,7 +198,7 @@ export class AccountComponent implements OnInit {
         }
       });
     } else {
-      this.message.error('请勾选数据');
+      this.message.error('Vui lòng đánh dấu vào dữ liệu');
       return;
     }
   }
@@ -205,8 +206,8 @@ export class AccountComponent implements OnInit {
   del(id: number): void {
     const ids: number[] = [id];
     this.modalSrv.confirm({
-      nzTitle: '确定要删除吗？',
-      nzContent: '删除后不可恢复',
+      nzTitle: 'Bạn có chắc chắn muốn xóa nó không?',
+      nzContent: 'Không thể phục hồi sau khi xóa',
       nzOnOk: () => {
         this.tableLoading(true);
         this.dataService.delAccount(ids).subscribe(
@@ -248,58 +249,58 @@ export class AccountComponent implements OnInit {
       showCheckbox: true,
       headers: [
         {
-          title: '用户名称',
-          field: 'userName',
-          width: 100
+          title: 'Tên tài khoản',
+          field: 'name',
+          width: 120
         },
         {
-          title: '是否可用',
-          width: 100,
+          title: 'Trạng thái',
+          width: 150,
           field: 'available',
           tdTemplate: this.availableFlag
         },
         {
-          title: '性别',
-          width: 70,
+          title: 'Giới Tính',
+          width: 120,
           field: 'sex',
           pipe: 'sex'
         },
         {
-          title: '手机',
-          width: 100,
-          field: 'mobile'
+          title: 'Điện Thoại',
+          width: 150,
+          field: 'dienthoai'
         },
         {
-          title: '邮箱',
-          width: 100,
+          title: 'Email',
+          width: 180,
           field: 'email'
         },
         {
-          title: '最后登录时间',
-          width: 120,
+          title: 'Lần đăng nhập cuối cùng',
+          width: 200,
           field: 'lastLoginTime',
           pipe: 'date:yyyy-MM-dd HH:mm'
         },
         {
-          title: '创建时间',
-          width: 100,
-          field: 'createTime',
+          title: 'Ngày khởi tạo',
+          width: 150,
+          field: 'createdAt',
           pipe: 'date:yyyy-MM-dd HH:mm'
         },
         {
-          title: '电话',
+          title: 'Zalo',
           width: 100,
-          field: 'telephone'
+          field: 'zalo'
         },
         {
-          title: '所属部门',
-          width: 100,
-          field: 'departmentName'
+          title: 'Bộ phận',
+          width: 120,
+          field: 'phongban_id'
         },
         {
-          title: '操作',
+          title: 'Cập nhật',
           tdTemplate: this.operationTpl,
-          width: 150,
+          width: 250,
           fixed: true
         }
       ],

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 import { PageInfo, SearchCommonVO } from '../../types';
 import { BaseHttpService } from '../base-http.service';
+import * as Const from "src/app/common/const"
 
 /*
  *  部门列表
@@ -23,7 +24,7 @@ export class DeptService {
   constructor(public http: BaseHttpService) {}
 
   public getDepts(param: SearchCommonVO<Dept>): Observable<PageInfo<Dept>> {
-    return this.http.post('/department/list/', param);
+    return this.http.post(Const.Ant100getAllPhongban, param);
   }
 
   public getDeptsDetail(id: number): Observable<Dept> {
@@ -31,7 +32,7 @@ export class DeptService {
   }
 
   public addDepts(param: Dept): Observable<void> {
-    return this.http.post('/department/', param);
+    return this.http.post(Const.Ant100addPhongban, param);
   }
 
   public delDepts(ids: number[]): Observable<void> {

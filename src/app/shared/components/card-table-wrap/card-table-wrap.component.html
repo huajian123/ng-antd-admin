@@ -26,7 +26,7 @@
         ></i>
         <i class="hand-model" (click)="reloadClick()" nz-icon *nzSpaceItem nzType="reload" nzTheme="outline" nz-tooltip nzTooltipTitle="Làm tươi"></i>
         <ng-container *appScreenLessHidden="'393'">
-          <i class="hand-model" nzTrigger="click" nz-dropdown [nzDropdownMenu]="tableSizeMenu" nz-icon *nzSpaceItem nzType="column-height" nzTheme="outline" nz-tooltip nzTooltipTitle="密度"></i>
+          <i class="hand-model" nzTrigger="click" nz-dropdown [nzDropdownMenu]="tableSizeMenu" nz-icon *nzSpaceItem nzType="column-height" nzTheme="outline" nz-tooltip nzTooltipTitle="Tỉ trọng"></i>
         </ng-container>
       </nz-space>
     </div>
@@ -52,7 +52,7 @@
           (click)="fixedTableHead('left', item)"
           [ngStyle]="{ color: item.fixedDir === 'left' && item.fixed ? '#409eff' : '' }"
           nz-tooltip
-          nzTooltipTitle="固定到左侧"
+          nzTooltipTitle="Cố định bên trái"
           nz-icon
           nzType="vertical-right"
           nzTheme="outline"
@@ -63,7 +63,7 @@
           (click)="fixedTableHead('right', item)"
           [ngStyle]="{ color: item.fixedDir === 'right' && item.fixed ? '#409eff' : '' }"
           nz-tooltip
-          nzTooltipTitle="固定到右侧"
+          nzTooltipTitle="Cố định ở bên phải"
           nz-icon
           nzType="vertical-left"
           nzTheme="outline"
@@ -75,9 +75,9 @@
 <ng-template #popoverTitle>
   <div class="space-between">
     <span>
-      <label nz-checkbox (nzCheckedChange)="changeTableCheckBoxShow($event)" [(nzChecked)]="currentTableComponent.tableConfig.showCheckbox">勾选列</label>
-      <label nz-checkbox (nzCheckedChange)="changeAllTableTableConfigShow($event)" [nzIndeterminate]="allTableFieldIndeterminate" [(nzChecked)]="allTableFieldChecked">列展示</label>
+      <label nz-checkbox (nzCheckedChange)="changeTableCheckBoxShow($event)" [(nzChecked)]="currentTableComponent.tableConfig.showCheckbox">Cột kiểm tra</label>
+      <label nz-checkbox (nzCheckedChange)="changeAllTableTableConfigShow($event)" [nzIndeterminate]="allTableFieldIndeterminate" [(nzChecked)]="allTableFieldChecked">Cột hiển thị</label>
     </span>
-    <button (click)="reset()" class="operate-text" nz-button nzType="text">重置</button>
+    <button (click)="reset()" class="operate-text" nz-button nzType="text">Cài lại</button>
   </div>
 </ng-template>

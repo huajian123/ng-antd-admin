@@ -101,13 +101,19 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
 
   date = null;
 
-  onChange(result: Date[]): void {
-    console.log('onChange: ', result);
+  
+  onChange(result: Date): void {
+    console.log('Selected Time: ', result);
   }
 
-  getWeek(result: Date[]): void {
-    console.log('week: ', result);
+  onOk(result: Date | Date[] | null): void {
+    console.log('onOk', result);
   }
+
+  onCalendarChange(result: Array<Date | null>): void {
+    console.log('onCalendarChange', result);
+  }
+
 
   constructor(private cdr: ChangeDetectorRef, private ngZone: NgZone) {}
 
@@ -280,4 +286,5 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
       });
     });
   }
+
 }

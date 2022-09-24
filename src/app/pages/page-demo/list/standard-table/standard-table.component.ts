@@ -62,7 +62,7 @@ export class StandardTableComponent implements OnInit {
     },
     {
       id: 4,
-      name: 'Ant Design Pro',
+      name: 'Ant Nam Pham',
       desc: '城镇中有那么多的酒馆，她却偏偏走进了我的酒馆',
       avatar: 'https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png',
       owner: '周星星',

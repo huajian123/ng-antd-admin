@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { AfterContentInit, ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
 
@@ -27,9 +28,9 @@ export class CardTableWrapComponent implements OnInit, AfterContentInit {
   @ContentChild(AntTreeTableComponentToken) antTreeTableComponent!: AntTreeTableComponentToken;
   tableConfigVisible = false;
   tableSizeOptions: TableSizeItem[] = [
-    { sizeName: '默认', selected: true, value: 'default' },
-    { sizeName: '中等', selected: false, value: 'middle' },
-    { sizeName: '紧凑', selected: false, value: 'small' }
+    { sizeName: 'Mặc định', selected: true, value: 'default' },
+    { sizeName: 'Vừa phải', selected: false, value: 'middle' },
+    { sizeName: 'Nhỏ', selected: false, value: 'small' }
   ];
   tableHeaders: TableHeader[] = [];
   currentTableComponent!: AntTableComponentToken | AntTreeTableComponentToken;

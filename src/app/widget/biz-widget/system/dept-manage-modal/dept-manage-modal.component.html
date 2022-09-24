@@ -1,8 +1,8 @@
 <form nz-form [formGroup]="addEditForm">
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="departmentName">Tên bộ phận</nz-form-label>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="tenphongban">Tên bộ phận</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="combineTpl">
-      <input nz-input formControlName="departmentName" name="departmentName" placeholder="Vui lòng nhập tên bộ phận" id="departmentName" />
+      <input nz-input formControlName="tenphongban" name="tenphongban" placeholder="Vui lòng nhập tên phòng ban" id="departmentName" />
     </nz-form-control>
   </nz-form-item>
 
@@ -11,7 +11,7 @@
     <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="combineTpl">
       <nz-radio-group formControlName="state">
         <label nz-radio [nzValue]="false">Vô hiệu hóa</label>
-        <label nz-radio [nzValue]="true">có sẵn</label>
+        <label nz-radio [nzValue]="true">Cho phép</label>
       </nz-radio-group>
     </nz-form-control>
   </nz-form-item>

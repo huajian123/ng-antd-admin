@@ -39,8 +39,8 @@ export class DeptComponent implements OnInit {
 
   tableConfig!: MyTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
-    title: '部门管理(数据库每10分钟从备份恢复一次)',
-    breadcrumb: ['首页', '系统管理', '部门管理']
+    title: 'Quản lý bộ phận',
+    breadcrumb: ['Home', 'Quản ly hệ thống', 'Quản lý bộ phận']
   };
   dataList: TreeNodeInterface[] = [];
   stateOptions: OptionsInterface[] = [];
@@ -56,7 +56,7 @@ export class DeptComponent implements OnInit {
   ) {}
 
   reloadTable(): void {
-    this.message.info('已经刷新了');
+    this.message.info('Đã được làm mới');
     this.getDataList();
   }
 
@@ -105,7 +105,7 @@ export class DeptComponent implements OnInit {
   }
 
   add(fatherId: number): void {
-    this.deptModalService.show({ nzTitle: '新增' }).subscribe(
+    this.deptModalService.show({ nzTitle: 'Thêm mới' }).subscribe(
       res => {
         if (!res || res.status === ModalBtnStatus.Cancel) {
           return;
@@ -134,8 +134,8 @@ export class DeptComponent implements OnInit {
   del(id: number): void {
     const ids: number[] = [id];
     this.modalSrv.confirm({
-      nzTitle: '确定要删除吗？',
-      nzContent: '删除后不可恢复',
+      nzTitle: 'Bạn có chắc chắn muốn xóa không？',
+      nzContent: 'Không thể khôi phúc khi xóa',
       nzOnOk: () => {
         this.tableLoading(true);
         this.dataService.delDepts(ids).subscribe(
@@ -154,7 +154,7 @@ export class DeptComponent implements OnInit {
   // 修改
   edit(id: number, fatherId: number): void {
     this.dataService.getDeptsDetail(id).subscribe(res => {
-      this.deptModalService.show({ nzTitle: '编辑' }, res).subscribe(
+      this.deptModalService.show({ nzTitle: 'Edit' }, res).subscribe(
         ({ modalValue, status }) => {
           if (status === ModalBtnStatus.Cancel) {
             return;
@@ -178,32 +178,32 @@ export class DeptComponent implements OnInit {
     this.tableConfig = {
       headers: [
         {
-          title: '部门名称',
-          width: 230,
-          field: 'departmentName'
+          title: 'Tên bộ phận',
+          width: 180,
+          field: 'tenphongban'
         },
         {
-          title: '部门状态',
+          title: 'Trạng thái',
           field: 'state',
           tdTemplate: this.state,
           width: 100
         },
         {
-          title: '排序',
+          title: 'Loại',
           field: 'orderNum',
           width: 100
         },
         {
-          title: '创建时间',
-          field: 'createTime',
+          title: 'Ngày tạo',
+          field: 'createdAt',
           pipe: 'date:yyyy-MM-dd HH:mm',
           width: 180
         },
         {
-          title: '操作',
+          title: 'Vận hành',
           tdTemplate: this.operationTpl,
-          width: 180,
-          fixed: false,
+          width: 250,
+          fixed: true,
           fixedDir: 'right'
         }
       ],

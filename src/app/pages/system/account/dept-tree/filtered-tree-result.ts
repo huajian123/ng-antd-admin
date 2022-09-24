@@ -1,5 +1,6 @@
+/* eslint-disable prettier/prettier */
 export interface TreeNode {
-  departmentName: string;
+  tenphongban: string;
   disabled?: boolean;
   children?: TreeNode[];
   id: number;

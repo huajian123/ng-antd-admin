@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { SelectionModel } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { ChangeDetectorRef, Injectable, OnInit } from '@angular/core';
@@ -10,7 +11,7 @@ import { NzTreeFlatDataSource, NzTreeFlattener } from 'ng-zorro-antd/tree-view';
 
 interface TreeNode {
   id: number;
-  departmentName: string;
+  tenphongban: string;
   disabled?: boolean;
   children?: TreeNode[];
 }
@@ -29,7 +30,7 @@ export class DeptTreeService {
   currentSelNode: FlatNode | null = null;
   private transformer = (node: TreeNode, level: number): FlatNode => ({
     expandable: !!node.children && node.children.length > 0,
-    departmentName: node.departmentName,
+    departmentName: node.tenphongban,
     level,
     id: node.id,
     disabled: !!node.disabled

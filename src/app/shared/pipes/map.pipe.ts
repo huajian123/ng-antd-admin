@@ -27,7 +27,7 @@ export const MapSet = {
     1: 'Nam'
   },
   available: {
-    true: 'có sẵn',
+    true: 'Cho phép',
     false: 'Vô Hiệu Hóa'
   },
   isOrNot: {
@@ -35,8 +35,8 @@ export const MapSet = {
     false: 'Sai'
   },
   visible: {
-    true: 'Triễn Lãm',
-    false: 'ẩn giấu'
+    true: 'Hiện',
+    false: 'Ẩn'
   }
 };
 

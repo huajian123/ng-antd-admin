@@ -4,14 +4,14 @@
       <nz-tab nzTitle="Login Account">
         <nz-form-item>
           <nz-form-control nzErrorTip="Email">
-            <nz-input-group [nzSize]="'large'" nzPrefixIcon="user">
+            <nz-input-group class="example-input" [nzSize]="'large'" nzPrefixIcon="user">
               <input [placeholder]="'Email'" type="text" nz-input formControlName="email" placeholder="email" />
             </nz-input-group>
           </nz-form-control>
         </nz-form-item>
         <nz-form-item>
           <nz-form-control nzErrorTip="Mật Khẩu">
-            <nz-input-group [nzSize]="'large'" nzPrefixIcon="lock">
+            <nz-input-group class="example-input" [nzSize]="'large'" nzPrefixIcon="lock">
               <input autocomplete="on" [placeholder]="'Mật Khẩu'" type="password" nz-input formControlName="password" placeholder="Mật Khẩu" />
             </nz-input-group>
           </nz-form-control>
@@ -22,7 +22,7 @@
         <nz-form-item>
           <nz-form-control nzErrorTip="Vui lòng nhập tên của bạn !">
             <nz-input-group [nzSize]="'large'" nzPrefixIcon="mobile">
-              <input autocomplete="on" type="text" nz-input formControlName="email" placeholder="Số điện thoại" />
+              <input autocomplete="on" type="text" nz-input formControlName="sodienthoai" placeholder="Số điện thoại" />
             </nz-input-group>
           </nz-form-control>
         </nz-form-item>
@@ -32,7 +32,7 @@
               <input type="password" nz-input formControlName="password" placeholder="Mật khẩu mỡ khóa" />
             </nz-input-group>
           </nz-form-control>
-          <button class="p-0" nz-button nz-col [nzXs]="7" [nzSm]="7" [nzSize]="'large'" nzType="default">Lấy mã xác minh</button>
+          <button class="p-0" nz-button nz-col [nzXs]="8" [nzSm]="8" [nzSize]="'large'" nzType="default">Lấy mã</button>
         </nz-form-item>
       </nz-tab>
     </nz-tabset>
@@ -49,10 +49,6 @@
     <button nz-button nzSize="large" class="login-form-button login-form-margin" [nzType]="'primary'">Đăng Nhập</button>
     <div class="other-way">
       <div class="other-login">
-        <span>Đăng nhập bằng cách khác</span>
-        <i nz-icon nzType="alipay-circle" nzTheme="fill"></i>
-        <i nz-icon nzType="taobao-circle" nzTheme="fill"></i>
-        <i nz-icon nzType="weibo-circle" nzTheme="fill"></i>
       </div>
       <a routerLink="/login/register-form">Đăng ký</a>
     </div>

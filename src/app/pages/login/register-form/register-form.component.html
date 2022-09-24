@@ -33,7 +33,6 @@
       <ng-template #addOnBeforeTemplate>
         <nz-select [ngModel]="'84'" [ngModelOptions]="{ standalone: true }">
           <nz-option nzLabel="+84" nzValue="84"></nz-option>
-          <nz-option nzLabel="+84" nzValue="84"></nz-option>
         </nz-select>
       </ng-template>
     </nz-form-item>
@@ -44,7 +43,7 @@
           <input type="password" nz-input formControlName="password" placeholder="mã xác nhận" />
         </nz-input-group>
       </nz-form-control>
-      <button class="p-0" nz-button nz-col [nzXs]="7" [nzSm]="7" [nzSize]="'large'" nzType="default">lấy mã xác minh</button>
+      <button class="p-0" nz-button nz-col [nzXs]="8" [nzSm]="8" [nzSize]="'large'" nzType="default">Lấy mã</button>
     </nz-form-item>
 
     <div nz-row class="login-form-margin" nzAlign="middle" nzJustify="space-between">
@@ -52,7 +51,7 @@
         <button nz-button nzSize="large" class="login-form-button login-form-margin" [nzType]="'primary'">Đăng Ký</button>
       </div>
       <div class="text-right" nz-col [nzSpan]="9">
-        <a class="password-login" routerLink="/login/login-form">Đăng nhập bằng tài khoản hiện có</a>
+        <a class="password-login" routerLink="/login/login-form">Đăng nhập</a>
       </div>
     </div>
   </form>

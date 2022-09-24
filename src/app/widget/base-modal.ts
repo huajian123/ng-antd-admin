@@ -155,7 +155,7 @@ export class ModalWrapService {
           onClick: this.confirmCallback.bind(this)
         },
         {
-          label: 'Hủy bỏ',
+          label: 'Hủy',
           type: 'default',
           show: true,
           onClick: this.cancelCallback.bind(this)

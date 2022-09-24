@@ -26,7 +26,7 @@ export class ValidatorsService {
   }
 
   // 电话号码校验
-  public telephoneValidator(): ValidatorFn {
+  public zaloValidator(): ValidatorFn {
     return this.commonUtil(this.vrService.telPhoneRule);
   }
 

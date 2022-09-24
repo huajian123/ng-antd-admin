@@ -43,7 +43,7 @@ export class BaseComponent implements OnInit {
       city: [null, [Validators.required]],
       province: [null, [Validators.required]],
       mobile: [null, [Validators.required, this.validatorsService.mobileValidator()]],
-      telephone: [null, [Validators.required, this.validatorsService.telephoneValidator()]],
+      zalo: [null, [Validators.required, this.validatorsService.zaloValidator()]],
       street: [null, [Validators.required]]
     });
   }

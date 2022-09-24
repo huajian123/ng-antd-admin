@@ -1,9 +1,11 @@
 <nz-card [nzBordered]="false" [nzBodyStyle]="{ padding: '10px 24px' }">
   <div class="left-start-center">
-    <nz-breadcrumb>
-      <nz-breadcrumb-item> Home </nz-breadcrumb-item>
-      <nz-breadcrumb-item> Dashboard </nz-breadcrumb-item>
-      <nz-breadcrumb-item> Trang phân tích </nz-breadcrumb-item>
+    <nz-breadcrumb nzSeparator=">">
+      <nz-breadcrumb-item>Home</nz-breadcrumb-item>
+      <nz-breadcrumb-item>
+        <a>Dashboard</a>
+      </nz-breadcrumb-item>
+      <nz-breadcrumb-item>Trang phân tích</nz-breadcrumb-item>
     </nz-breadcrumb>
   </div>
 </nz-card>
@@ -116,8 +118,8 @@
         <label nz-radio-button nzValue="C">Tháng này</label>
         <label nz-radio-button nzValue="D">Hàng năm</label>
       </nz-radio-group>
-      <!-- <nz-range-picker class="m-l-20"></nz-range-picker> -->
-      <nz-range-picker [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-range-picker>
+      <nz-range-picker class="m-l-20"></nz-range-picker>
+
     </ng-template>
   </section>
 

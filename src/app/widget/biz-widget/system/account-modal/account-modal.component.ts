@@ -13,6 +13,8 @@ import { fnAddTreeDataGradeAndLeaf, fnFlatDataHasParentToTree } from '@utils/tre
 import { NzTreeNodeOptions } from 'ng-zorro-antd/core/tree';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzModalRef } from 'ng-zorro-antd/modal';
+import * as Const from "src/app/common/const";
+import { WebserviceService } from 'src/app/core/services/common/webservice.service';
 
 @Component({
   selector: 'app-account-modal',
@@ -28,7 +30,16 @@ export class AccountModalComponent implements OnInit {
   value?: string;
   deptNodes: NzTreeNodeOptions[] = [];
 
-  constructor(private modalRef: NzModalRef, private fb: FormBuilder, private validatorsService: ValidatorsService, private roleService: RoleService, private deptService: DeptService) {}
+  listDept: any = [];
+  listRole: any = [];
+  constructor(
+    private modalRef: NzModalRef,
+    private fb: FormBuilder,
+    private validatorsService: ValidatorsService,
+    private roleService: RoleService,
+    private deptService: DeptService,
+    private webService: WebserviceService
+    ) {}
 
   // 此方法为如果有异步数据需要加载，则在该方法中添加
   protected getAsyncFnData(modalValue: NzSafeAny): Observable<NzSafeAny> {
@@ -43,58 +54,58 @@ export class AccountModalComponent implements OnInit {
     return of(this.addEditForm.value);
   }
 
-  getRoleList(): Promise<void> {
-    return new Promise<void>(resolve => {
-      this.roleService.getRoles({ pageNum: 0, pageSize: 0 }).subscribe(({ list }) => {
-        this.roleOptions = [];
-        list.forEach(({ id, roleName }) => {
-          const obj: OptionsInterface = {
-            label: roleName,
-            value: id!
-          };
-          this.roleOptions.push(obj);
-        });
-        resolve();
-      });
-    });
+  // get list role
+  getListRole() {
+    this.webService.GetCallWs(Const.Ant100SearchAllRole, (response) => {
+      this.roleOptions = [];
+      this.listRole = response;
+      for(let lst of this.listRole) {
+        const obj: OptionsInterface = {
+          label: lst.rolename,
+          value: lst.id
+        };
+        this.roleOptions.push(obj);
+      }
+      console.log(this.roleOptions);
+    })
   }
 
-  getDeptList(): Promise<void> {
-    return new Promise<void>(resolve => {
-      this.deptService.getDepts({ pageNum: 0, pageSize: 0 }).subscribe(({ list }) => {
-        list.forEach(item => {
-          // @ts-ignore
-          item.title = item.departmentName;
-          // @ts-ignore
-          item.key = item.id;
-        });
-
-        const target = fnAddTreeDataGradeAndLeaf(fnFlatDataHasParentToTree(list));
-        this.deptNodes = target;
-        resolve();
-      });
-    });
+  getListDept() {
+    let request = {
+      pageNum: 0,
+      pageSize: 0
+    }
+    this.webService.PostCallWs(Const.Ant100getAllPhongban, request,(response) => {
+      this.listDept = response.list;
+      for(let lst of this.listDept) {
+          lst.title = lst.tenphongban;
+          lst.key = lst.id;
+      }
+      const target = fnAddTreeDataGradeAndLeaf(fnFlatDataHasParentToTree(this.listDept));
+      this.deptNodes = target;
+    })
   }
 
   initForm(): void {
     this.addEditForm = this.fb.group({
-      userName: [null, [Validators.required]],
+      name: [null, [Validators.required]],
       password: ['a123456', [Validators.required, this.validatorsService.passwordValidator()]],
       sex: [1],
       available: [true],
-      telephone: [null, [this.validatorsService.telephoneValidator()]],
-      mobile: [null, [this.validatorsService.mobileValidator()]],
+      zalo: [null, [this.validatorsService.zaloValidator()]],
+      dienthoai: [null, [this.validatorsService.mobileValidator()]],
       email: [null, [this.validatorsService.emailValidator()]],
-      roleId: [null, [Validators.required]],
-      departmentId: [null, [Validators.required]],
+      roler_id: [null, [Validators.required]],
+      phongban_id: [null, [Validators.required]],
       departmentName: [null]
     });
   }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(){
     this.initForm();
+    this.getListRole();
+    this.getListDept();
     this.isEdit = Object.keys(this.params).length > 0;
-    await Promise.all([this.getRoleList(), this.getDeptList()]);
     if (this.isEdit) {
       this.addEditForm.patchValue(this.params);
       this.addEditForm.controls['password'].disable();

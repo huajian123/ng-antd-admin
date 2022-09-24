@@ -30,7 +30,7 @@ export class BaseHttpService {
   uri = "http://localhost:3000/";
 
   protected constructor(public http: HttpClient, public message: NzMessageService) {
-    this.uri = environment.production ? localUrl : '/site/api';
+    this.uri = environment.production ? localUrl : '/site/api/';
   }
 
   get<T>(path: string, param?: NzSafeAny, config?: MyHttpConfig): Observable<NzSafeAny> {

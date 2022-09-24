@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 import { PageInfo, SearchCommonVO } from '../../types';
 import { BaseHttpService } from '../base-http.service';
+import * as Const from "src/app/common/const"
 
 /*
  * 用户管理
@@ -41,11 +42,11 @@ export class AccountService {
   constructor(public http: BaseHttpService) {}
 
   public getAccount(param: SearchCommonVO<User>): Observable<PageInfo<User>> {
-    return this.http.post('/user/list/', param);
+    return this.http.post(Const.Ant100findAllUser, param);
   }
 
   public getAccountDetail(id: number): Observable<User> {
-    return this.http.get(`/user/${id}/`);
+    return this.http.get(`${Const.Ant100GetDetailUser}/${id}/`);
   }
 
   public addAccount(param: User): Observable<void> {
@@ -57,7 +58,7 @@ export class AccountService {
   }
 
   public editAccount(param: User): Observable<void> {
-    return this.http.put('/user/', param);
+    return this.http.put(Const.Ant100EditDetailUser, param);
   }
 
   public editAccountPsd(param: UserPsd): Observable<void> {
