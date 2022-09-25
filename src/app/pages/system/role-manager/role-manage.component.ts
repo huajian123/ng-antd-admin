@@ -16,7 +16,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 
 interface SearchParam {
-  roleName: string;
+  rolename: string;
 }
 
 @Component({
@@ -30,8 +30,8 @@ export class RoleManageComponent implements OnInit {
   searchParam: Partial<SearchParam> = {};
   tableConfig!: MyTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
-    title: '角色管理(数据库每10分钟从备份恢复一次)',
-    breadcrumb: ['首页', '用户管理', '角色管理']
+    title: 'Quản lý vai trò',
+    breadcrumb: ['Home', 'Quản lý người dùng', 'Quản lý vai trò']
   };
   dataList: Role[] = [];
   checkedCashArray = [];
@@ -99,7 +99,7 @@ export class RoleManageComponent implements OnInit {
   }
 
   add(): void {
-    this.modalService.show({ nzTitle: '新增' }).subscribe(
+    this.modalService.show({ nzTitle: 'Thêm mới' }).subscribe(
       res => {
         if (!res || res.status === ModalBtnStatus.Cancel) {
           return;
@@ -113,14 +113,14 @@ export class RoleManageComponent implements OnInit {
   }
 
   reloadTable(): void {
-    this.message.info('刷新成功');
+    this.message.info('Làm mới thành công');
     this.getDataList();
   }
 
   // 修改
-  edit(id: number): void {
+  edit(id: string): void {
     this.dataService.getRolesDetail(id).subscribe(res => {
-      this.modalService.show({ nzTitle: '编辑' }, res).subscribe(
+      this.modalService.show({ nzTitle: 'Cập nhật' }, res).subscribe(
         ({ modalValue, status }) => {
           if (status === ModalBtnStatus.Cancel) {
             return;
@@ -143,8 +143,8 @@ export class RoleManageComponent implements OnInit {
   del(id: number): void {
     const ids: number[] = [id];
     this.modalSrv.confirm({
-      nzTitle: '确定要删除吗？',
-      nzContent: '删除后不可恢复',
+      nzTitle: 'Bạn chắc chắn muốn xóa không？',
+      nzContent: 'Không khôi phục được khi dữ liệu bị xóa !',
       nzOnOk: () => {
         this.tableLoading(true);
         this.dataService.delRoles(ids).subscribe(
@@ -174,17 +174,17 @@ export class RoleManageComponent implements OnInit {
       showCheckbox: false,
       headers: [
         {
-          title: '角色名称',
-          field: 'roleName',
+          title: 'Tên vai trò',
+          field: 'rolename',
           width: 100
         },
         {
-          title: '备注',
+          title: 'Mô tả',
           width: 100,
-          field: 'roleDesc'
+          field: 'mota'
         },
         {
-          title: '操作',
+          title: 'Vận hàng',
           tdTemplate: this.operationTpl,
           width: 150,
           fixed: true

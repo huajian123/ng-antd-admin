@@ -1,10 +1,24 @@
 <form nz-form [formGroup]="addEditForm">
-  <nz-form-item>
-    <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="name">Tên tài khoản</nz-form-label>
-    <nz-form-control [nzSm]="18" [nzXs]="24" [nzErrorTip]="combineTpl">
-      <input nz-input formControlName="name" id="name" placeholder="Tên tài khoản" />
-    </nz-form-control>
-  </nz-form-item>
+  <!-- Nếu mỡ form edit thì không sử dùng check name -->
+  <ng-container *ngIf="isEdit; else elseBlock1;">
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="name">Tên tài khoản</nz-form-label>
+      <nz-form-control [nzSm]="18" [nzXs]="24" [nzErrorTip]="combineTpl">
+        <input nz-input formControlName="name" id="name" placeholder="Tên tài khoản" />
+      </nz-form-control>
+    </nz-form-item>
+  </ng-container>
+
+  <ng-template #elseBlock1>
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="name">Tên tài khoản</nz-form-label>
+      <nz-form-control [nzSm]="18" [nzXs]="24" [nzErrorTip]="combineTpl">
+        <input nz-input formControlName="name" id="name" placeholder="Tên tài khoản" (blur)="checkName(addEditForm.value.name)" />
+      </nz-form-control>
+    </nz-form-item>
+  </ng-template>
+  <!-- ket thuc lệch if -->
+
   <nz-form-item *ngIf="!isEdit">
     <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="password">Mật khẩu</nz-form-label>
     <nz-form-control nzExtra="Mật khẩu ban đầu của người dùng mới là: a123456" [nzSm]="18" [nzXs]="24" [nzErrorTip]="combineTpl">
@@ -38,16 +52,29 @@
   <nz-form-item>
     <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="mobile">Số điện thoại</nz-form-label>
     <nz-form-control [nzSm]="18" [nzXs]="24" [nzErrorTip]="combineTpl">
-      <input nz-input formControlName="mobile" maxlength="11" id="mobile" placeholder="Số điện thoại" />
+      <input nz-input formControlName="dienthoai" maxlength="11" id="mobile" placeholder="Số điện thoại" />
     </nz-form-control>
   </nz-form-item>
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="email">Email</nz-form-label>
-    <nz-form-control [nzSm]="18" [nzXs]="24" [nzErrorTip]="combineTpl">
-      <input nz-input formControlName="email" id="email" placeholder="email"/>
-    </nz-form-control>
-  </nz-form-item>
+ <!-- Nếu mỡ form edit thì không sử dùng check emal -->
+  <ng-container *ngIf="isEdit; else elseBlock;">
+    <nz-form-item #elseBlock>
+      <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="email">Email</nz-form-label>
+      <nz-form-control [nzSm]="18" [nzXs]="24" [nzErrorTip]="combineTpl">
+        <input nz-input formControlName="email" id="email" placeholder="email" [readonly]="isReadonly"/>
+      </nz-form-control>
+    </nz-form-item>
+  </ng-container>
+
+  <ng-template #elseBlock>
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="email">Email</nz-form-label>
+      <nz-form-control [nzSm]="18" [nzXs]="24" [nzErrorTip]="combineTpl">
+        <input nz-input formControlName="email" id="email" placeholder="email" (blur)="checkEmail(addEditForm.value.email)" [readonly]="isReadonly"/>
+      </nz-form-control>
+    </nz-form-item>
+  </ng-template>
+  <!-- ket thuc if -->
 
   <nz-form-item>
     <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="phongban_id">Phòng ban</nz-form-label>

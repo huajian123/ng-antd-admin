@@ -21,7 +21,7 @@ export function isIdCard(value: string): boolean {
 
 /** 是否为手机号 */
 export function isMobile(value: string): boolean {
-  return /^(0|\+?86|17951)?(13[0-9]|15[0-9]|17[0678]|18[0-9]|14[57])[0-9]{8}$/.test(value);
+  return /^(0|\+?84|17951)?(13[0-9]|15[0-9]|17[0678]|18[0-9]|14[57])[0-9]{8}$/.test(value);
 }
 
 /** 是否为电话号码 */

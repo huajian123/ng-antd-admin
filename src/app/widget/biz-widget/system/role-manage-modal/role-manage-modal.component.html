@@ -1,15 +1,15 @@
 <form nz-form [formGroup]="addEditForm">
   <nz-form-item>
-    <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="roleName">tên nhân vật</nz-form-label>
+    <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="rolename">Tên vai trò</nz-form-label>
     <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="Vui lòng nhập tên nhân vật">
-      <input nz-input formControlName="roleName" name="roleName" placeholder="Vui lòng nhập tên nhân vật" id="roleName" />
+      <input nz-input formControlName="rolename" name="rolename" placeholder="Vui lòng nhập tên vai trò" id="rolename" />
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label [nzSm]="4" [nzXs]="24" nzFor="roleDesc">Mô tả</nz-form-label>
+    <nz-form-label [nzSm]="4" [nzXs]="24" nzFor="mota">Mô tả</nz-form-label>
     <nz-form-control [nzSm]="18" [nzXs]="24">
-      <input nz-input formControlName="roleDesc" name="roleDesc" placeholder="Vui lòng nhập mô tả" id="roleDesc" />
+      <input nz-input formControlName="mota" name="mota" placeholder="Vui lòng nhập mô tả" id="mota" />
     </nz-form-control>
   </nz-form-item>
 </form>

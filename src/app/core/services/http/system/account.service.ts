@@ -50,7 +50,7 @@ export class AccountService {
   }
 
   public addAccount(param: User): Observable<void> {
-    return this.http.post('/user/', param);
+    return this.http.post(Const.Ant100AddDetailUser, param);
   }
 
   public delAccount(ids: number[]): Observable<void> {

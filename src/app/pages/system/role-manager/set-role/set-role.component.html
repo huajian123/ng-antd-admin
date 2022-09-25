@@ -1,6 +1,6 @@
 <!--头部版块-->
 <app-page-header [backTpl]="backTpl" [backUrl]="'/default/system/role-manager'" [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
-<ng-template #backTpl>返回</ng-template>
+<ng-template #backTpl>Quay lại</ng-template>
 <div class="normal-table-wrap">
   <nz-card>
     <ul>
@@ -9,7 +9,7 @@
           <label [(ngModel)]="permission.checked" nz-checkbox>{{ permission.menuName }}</label>
           <span *ngIf="permission.children && permission.children.length > 0" (click)="permission.isOpen = !permission.isOpen" class="hand-model">
             <i nz-icon [nzType]="permission.isOpen ? 'down' : 'right'" nzTheme="outline"></i>
-            <span class="operate-text">{{ permission.isOpen ? '收起' : '展开' }}</span>
+            <span class="operate-text">{{ permission.isOpen ? 'Ẩn' : 'Mở rộng' }}</span>
           </span>
         </div>
         <nz-divider class="m-0"></nz-divider>
@@ -24,7 +24,7 @@
                   <label [(ngModel)]="childPermission.checked" nz-checkbox>{{ childPermission.menuName }}</label>
                   <span *ngIf="childPermission.children && childPermission.children.length > 0" (click)="childPermission.isOpen = !childPermission.isOpen" class="hand-model">
                     <i nz-icon [nzType]="childPermission.isOpen ? 'down' : 'right'" nzTheme="outline"></i>
-                    <span class="operate-text">{{ childPermission.isOpen ? '收起' : '展开' }}</span>
+                    <span class="operate-text">{{ childPermission.isOpen ? 'Ẩn' : 'Mỡ rộng' }}</span>
                   </span>
                 </div>
               </ng-container>
@@ -46,6 +46,6 @@
   </nz-card>
 </div>
 <app-footer-submit>
-  <button class="right" (click)="submit()" nz-button nzType="primary">提交</button>
-  <button class="right m-l-20" nzGhost (click)="back()" nz-button nzType="primary">返回</button>
+  <button class="right" (click)="submit()" nz-button nzType="primary">Thiết lập</button>
+  <button class="right m-l-20" nzGhost (click)="back()" nz-button nzType="primary">Quay lại</button>
 </app-footer-submit>

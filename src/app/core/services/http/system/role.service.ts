@@ -7,6 +7,8 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { PageInfo, SearchCommonVO } from '../../types';
 import { BaseHttpService } from '../base-http.service';
 
+import * as Const from 'src/app/common/const'
+
 /*
  *  权限
  * */
@@ -44,30 +46,30 @@ export class RoleService {
   constructor(public http: BaseHttpService) {}
 
   public getRoles(param: SearchCommonVO<Role>): Observable<PageInfo<Role>> {
-    return this.http.post('/role/list/', param);
+    return this.http.post(Const.Ant100SearchAllRole, param);
   }
 
-  public getRolesDetail(id: number): Observable<Role> {
-    return this.http.get(`/role/${id}/`);
+  public getRolesDetail(id: string): Observable<Role> {
+    return this.http.get(`${Const.Ant100GetDetailRole}/${id}/`);
   }
 
   public addRoles(param: Role): Observable<void> {
-    return this.http.post('/role/', param);
+    return this.http.post(Const.Ant100AddDetailRole, param);
   }
 
   public delRoles(ids: number[]): Observable<void> {
-    return this.http.post('/role/del/', { ids });
+    return this.http.post(Const.Ant100DelDetailRole, { ids });
   }
 
   public editRoles(param: Role): Observable<void> {
-    return this.http.put('/role/', param);
+    return this.http.put(Const.Ant100EditDetailRole, param);
   }
 
-  public getPermissionById(id: number): Observable<string[]> {
-    return this.http.get(`/permission/${id}/`);
+  public getPermissionById(id: string): Observable<string[]> {
+    return this.http.get(`${Const.Ant100GetPermissionRole}/${id}/`);
   }
 
   public updatePermission(param: PutPermissionParam): Observable<NzSafeAny> {
-    return this.http.put('/permission/', param);
+    return this.http.put(Const.Ant100PutPermissionRole, param);
   }
 }

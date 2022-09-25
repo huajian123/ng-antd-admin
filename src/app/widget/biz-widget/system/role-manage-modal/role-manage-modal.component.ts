@@ -22,17 +22,15 @@ export class RoleManageModalComponent implements OnInit {
 
   initForm(): void {
     this.addEditForm = this.fb.group({
-      roleName: [null, [Validators.required]],
-      roleDesc: [null]
+      rolename: [null, [Validators.required]],
+      mota: [null]
     });
   }
 
-  // 此方法为如果有异步数据需要加载，则在该方法中添加
   protected getAsyncFnData(modalValue: NzSafeAny): Observable<NzSafeAny> {
     return of(modalValue);
   }
 
-  // 返回false则不关闭对话框
   protected getCurrentValue(): Observable<NzSafeAny> {
     if (!fnCheckForm(this.addEditForm)) {
       return of(false);

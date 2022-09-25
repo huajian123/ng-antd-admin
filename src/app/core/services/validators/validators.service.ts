@@ -17,7 +17,7 @@ export class ValidatorsService {
 
   // 手机号码校验
   public mobileValidator(): ValidatorFn | null {
-    return this.commonUtil(this.vrService.mobileRule);
+    return this.commonUtil(this.vrService.telPhoneRule);
   }
 
   // 密码校验

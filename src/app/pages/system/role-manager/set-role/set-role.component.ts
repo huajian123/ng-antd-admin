@@ -18,13 +18,13 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 })
 export class SetRoleComponent implements OnInit {
   pageHeaderInfo: Partial<PageHeaderType> = {
-    title: '设置权限',
-    desc: '当前角色：',
-    breadcrumb: ['首页', '用户管理', '角色管理', '设置权限']
+    title: 'Đặt quyền',
+    desc: 'Vai trò hiện tại:',
+    breadcrumb: ['Home', 'Quản lý người dùng', 'Quản lý vai trò', 'Đặt quyền']
   };
   authCodeArr: string[] = [];
   permissionList: Array<Menu & { isOpen?: boolean; checked?: boolean }> = [];
-  id!: number;
+  id!: string;
   roleName!: string;
 
   constructor(
@@ -62,7 +62,7 @@ export class SetRoleComponent implements OnInit {
 
   getRoleName(): void {
     this.dataService.getRolesDetail(this.id).subscribe(({ roleName }) => {
-      this.pageHeaderInfo = { ...this.pageHeaderInfo, ...{ desc: `当前角色：${roleName}` } };
+      this.pageHeaderInfo = { ...this.pageHeaderInfo, ...{ desc: `Vai trò hiện tại: ${roleName}` } };
       this.cdr.markForCheck();
     });
   }
@@ -85,7 +85,7 @@ export class SetRoleComponent implements OnInit {
       roleId: +this.id
     };
     this.dataService.updatePermission(param).subscribe(() => {
-      this.message.success('设置成功，重新登录后生效');
+      this.message.success('Cài đặt thành công và nó sẽ có hiệu lực sau khi đăng nhập lại');
     });
   }
 

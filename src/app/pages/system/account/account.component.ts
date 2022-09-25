@@ -18,9 +18,9 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 
 interface SearchParam {
-  userName: string;
-  departmentId: number;
-  mobile: number;
+  name: string;
+  phongban_id: number;
+  dienthoai: number;
   available: boolean;
 }
 
@@ -230,7 +230,7 @@ export class AccountComponent implements OnInit {
   }
 
   searchDeptIdUser(departmentId: number): void {
-    this.searchParam.departmentId = departmentId;
+    this.searchParam.phongban_id = departmentId;
     this.getDataList();
   }
 
@@ -272,11 +272,11 @@ export class AccountComponent implements OnInit {
         },
         {
           title: 'Email',
-          width: 180,
+          width: 200,
           field: 'email'
         },
         {
-          title: 'Lần đăng nhập cuối cùng',
+          title: 'Đăng nhập lần cuối',
           width: 200,
           field: 'lastLoginTime',
           pipe: 'date:yyyy-MM-dd HH:mm'
@@ -289,19 +289,15 @@ export class AccountComponent implements OnInit {
         },
         {
           title: 'Zalo',
-          width: 100,
+          width: 150,
           field: 'zalo'
-        },
-        {
-          title: 'Bộ phận',
-          width: 120,
-          field: 'phongban_id'
         },
         {
           title: 'Cập nhật',
           tdTemplate: this.operationTpl,
-          width: 250,
-          fixed: true
+          width: 200,
+          fixed: true,
+          fixedDir: 'right'
         }
       ],
       total: 0,
