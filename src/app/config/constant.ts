@@ -23,4 +23,4 @@ export const tokenErrorCode = 1010;
 // 左侧菜单变成over模式最大的宽度
 export const SideCollapsedMaxWidth = 700;
 // 顶部菜单变成over模式最大的宽度
-export const TopCollapsedMaxWidth = 1130;
+export const TopCollapsedMaxWidth = 1244;

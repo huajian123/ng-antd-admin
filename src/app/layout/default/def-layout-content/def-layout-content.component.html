@@ -61,7 +61,7 @@
     <!--混合模式sider固定时占位-->
     <nz-sider
       nzNoAnimation
-      *ngIf="isFixedLeftNav && isMixiMode && themesOptions.hasNavArea && (isOverMode$ | async) === false && (!!(mixiModeHasLeftNav | async) || !themesOptions.splitNav)"
+      *ngIf="isFixedLeftNav && isMixiMode && themesOptions.hasNavArea && (isOverMode$ | async) === false && ((mixiModeLeftNav | async)!.length > 0 || !themesOptions.splitNav)"
       [nzWidth]="208"
       [nzTheme]="(isNightTheme$ | async) ? 'dark' : 'light'"
       [nzCollapsedWidth]="48"
@@ -82,7 +82,7 @@
       [nzCollapsed]="isCollapsed$ | async"
       (nzCollapsedChange)="changeCollapsed($event)"
       [nzTrigger]="trigger"
-      *ngIf="isMixiMode && themesOptions.hasNavArea && (isOverMode$ | async) === false && (!!(mixiModeHasLeftNav | async) || !themesOptions.splitNav)"
+      *ngIf="isMixiMode && themesOptions.hasNavArea && (isOverMode$ | async) === false && ((mixiModeLeftNav | async)!.length > 0 || !themesOptions.splitNav)"
     >
       <ng-content select="ng-container[mixsider]"></ng-content>
     </nz-sider>

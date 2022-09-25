@@ -148,7 +148,7 @@ export class NavBarComponent implements OnInit {
   setMixModeLeftMenu(): void {
     this.menus.forEach(item => {
       if (item.selected) {
-        this.splitNavStoreService.setSplitLeftNavArrayStore(item.children!);
+        this.splitNavStoreService.setSplitLeftNavArrayStore(item.children || []);
       }
     });
   }
@@ -178,19 +178,22 @@ export class NavBarComponent implements OnInit {
   changTopNav(index: number): void {
     // 当前选中的第一级菜单对象
     const currentTopNav = this.menus[index];
-    if (currentTopNav.children && currentTopNav.children.length > 0) {
+    let currentLeftNavArray = currentTopNav.children || [];
+    // 如果一级菜单下有二级菜单
+    if (currentLeftNavArray.length > 0) {
       // 当前左侧导航数组
       /*添加了权限版*/
-      let currentLeftNavArray = currentTopNav.children;
+      // 获取有权限的二级菜单集合（在左侧展示的）
       currentLeftNavArray = currentLeftNavArray.filter(item => {
         return this.authCodeArray.includes(item.code!);
       });
+      // 如果第一个二级菜单，没有三级菜单
       if (currentLeftNavArray.length > 0 && !currentLeftNavArray[0].children) {
         this.router.navigateByUrl(currentLeftNavArray[0].path!);
       } else if (currentLeftNavArray.length > 0 && currentLeftNavArray[0].children) {
+        // 如果有三级菜单，则跳转到第一个三级菜单
         this.router.navigateByUrl(currentLeftNavArray[0].children[0].path!);
       }
-      this.splitNavStoreService.setSplitLeftNavArrayStore(currentLeftNavArray);
       /*添加了权限版结束*/
       /*注释的是没有权限版*/
       // const currentLeftNavArray = currentTopNav.children;
@@ -202,6 +205,7 @@ export class NavBarComponent implements OnInit {
       //   this.splitNavStoreService.setSplitLeftNavArrayStore(currentLeftNavArray);
       // }
     }
+    this.splitNavStoreService.setSplitLeftNavArrayStore(currentLeftNavArray);
   }
 
   flatMenu(menus: Menu[], routePath: string): void {
