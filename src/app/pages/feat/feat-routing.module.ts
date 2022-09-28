@@ -33,7 +33,6 @@ const routes: Routes = [
   { path: 'copy', loadChildren: () => import('./copy/copy.module').then(m => m.CopyModule) },
   { path: 'setup', loadChildren: () => import('./setup/setup.module').then(m => m.SetupModule) },
   { path: 'download', loadChildren: () => import('./download/download.module').then(m => m.DownloadModule) },
-  { path: 'editor', loadChildren: () => import('./editor/editor.module').then(m => m.EditorModule) },
   { path: '', redirectTo: 'ex-modal', pathMatch: 'full' }
 ];
 
