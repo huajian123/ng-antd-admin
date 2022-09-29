@@ -7,6 +7,7 @@ export interface LockScreenFlag {
   beforeLockPath: string;
 }
 
+// 锁屏状态service
 @Injectable({
   providedIn: 'root'
 })

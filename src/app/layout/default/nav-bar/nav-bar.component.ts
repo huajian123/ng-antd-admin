@@ -21,8 +21,7 @@ import { fnStopMouseEvent } from '@utils/tools';
   providers: [DestroyService]
 })
 export class NavBarComponent implements OnInit {
-  // 是混合模式顶部导航
-  @Input() isMixiHead = false;
+  @Input() isMixiHead = false; // 是混合模式顶部导航
   @Input() isMixiLeft = false;
   routerPath = this.router.url;
   themesMode: 'side' | 'top' | 'mixi' = 'side';

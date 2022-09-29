@@ -5,8 +5,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CoreModule } from '@core/core.module';
 import { InitThemeService } from '@core/services/common/init-theme.service';
-import {LoadAliIconCdnService} from "@core/services/common/load-ali-icon-cdn.service";
-import {SubLockedStatusService} from "@core/services/common/sub-locked-status.service";
+import { LoadAliIconCdnService } from '@core/services/common/load-ali-icon-cdn.service';
+import { SubLockedStatusService } from '@core/services/common/sub-locked-status.service';
 import { SubWindowWithService } from '@core/services/common/sub-window-with.service';
 import { ThemeSkinService } from '@core/services/common/theme-skin.service';
 import { StartupService } from '@core/startup/startup.service';

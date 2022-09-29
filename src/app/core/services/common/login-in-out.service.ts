@@ -18,7 +18,6 @@ import { fnFlatDataHasParentToTree } from '@utils/treeTableTools';
 /*
  * 退出登录
  * */
-
 @Injectable({
   providedIn: 'root'
 })
@@ -33,6 +32,7 @@ export class LoginInOutService {
     private windowServe: WindowService
   ) {}
 
+  // 通过用户Id来获取菜单数组
   getMenuByUserId(userId: number): Observable<Menu[]> {
     return this.loginService.getMenuByUserId(userId);
   }

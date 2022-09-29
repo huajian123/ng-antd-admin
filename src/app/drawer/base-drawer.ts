@@ -27,11 +27,7 @@ export class DrawerWrapService {
     );
   }
 
-  createDrawerConfig(
-    component: Type<NzSafeAny>,
-    drawerOptions: NzDrawerOptions = {},
-    params: object = {}
-  ): NzDrawerOptions {
+  createDrawerConfig(component: Type<NzSafeAny>, drawerOptions: NzDrawerOptions = {}, params: object = {}): NzDrawerOptions {
     const defaultOptions: NzDrawerOptions = {
       nzContent: component,
       nzClosable: false,

@@ -10,7 +10,7 @@ export interface LazyResult {
   status: 'ok' | 'error' | 'loading';
   error?: NzSafeAny;
 }
-
+// 使用方式：
 // this.lazy.load(["https://unpkg.com/driver.js/dist/driver.min.js", "https://unpkg.com/driver.js/dist/driver.min.css"]).then(() => {
 
 /**

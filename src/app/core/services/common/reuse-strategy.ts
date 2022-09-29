@@ -75,7 +75,7 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
     }
   }
 
-  //  是否允许还原路由
+  // 是否允许还原路由
   shouldAttach(route: ActivatedRouteSnapshot): boolean {
     const key = this.getKey(route);
     return !!key && !!SimpleReuseStrategy.handlers[key];

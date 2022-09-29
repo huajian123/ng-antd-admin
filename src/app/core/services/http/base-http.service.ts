@@ -9,7 +9,7 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import * as qs from 'qs';
 
-export interface MyHttpConfig {
+export interface HttpCustomConfig {
   needIntercept?: boolean; // 是否需要被拦截
   needSuccessInfo?: boolean; // 是否需要"操作成功"提示
   showLoading?: boolean; // 是否需要loading
@@ -32,7 +32,7 @@ export class BaseHttpService {
     this.uri = environment.production ? localUrl : '/site/api';
   }
 
-  get<T>(path: string, param?: NzSafeAny, config?: MyHttpConfig): Observable<NzSafeAny> {
+  get<T>(path: string, param?: NzSafeAny, config?: HttpCustomConfig): Observable<NzSafeAny> {
     config = config || { needSuccessInfo: false };
     let reqPath = this.uri + path;
     if (config.otherUrl) {
@@ -53,7 +53,7 @@ export class BaseHttpService {
     );
   }
 
-  delete<T>(path: string, param?: NzSafeAny, config?: MyHttpConfig): Observable<NzSafeAny> {
+  delete<T>(path: string, param?: NzSafeAny, config?: HttpCustomConfig): Observable<NzSafeAny> {
     config = config || { needSuccessInfo: false };
     let reqPath = this.uri + path;
     if (config.otherUrl) {
@@ -74,7 +74,7 @@ export class BaseHttpService {
     );
   }
 
-  post<T>(path: string, param?: NzSafeAny, config?: MyHttpConfig): Observable<NzSafeAny> {
+  post<T>(path: string, param?: NzSafeAny, config?: HttpCustomConfig): Observable<NzSafeAny> {
     config = config || { needSuccessInfo: false };
     let reqPath = this.uri + path;
     if (config.otherUrl) {
@@ -94,7 +94,7 @@ export class BaseHttpService {
     );
   }
 
-  put<T>(path: string, param?: NzSafeAny, config?: MyHttpConfig): Observable<NzSafeAny> {
+  put<T>(path: string, param?: NzSafeAny, config?: HttpCustomConfig): Observable<NzSafeAny> {
     config = config || { needSuccessInfo: false };
     let reqPath = this.uri + path;
     if (config.otherUrl) {
@@ -114,7 +114,7 @@ export class BaseHttpService {
     );
   }
 
-  downZip(path: string, param?: NzSafeAny, config?: MyHttpConfig): Observable<NzSafeAny> {
+  downZip(path: string, param?: NzSafeAny, config?: HttpCustomConfig): Observable<NzSafeAny> {
     config = config || { needSuccessInfo: false };
     let reqPath = this.uri + path;
     if (config.otherUrl) {

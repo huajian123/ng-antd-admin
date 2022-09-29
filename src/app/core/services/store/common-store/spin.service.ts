@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
+// spin service
 @Injectable({
   providedIn: 'root'
 })

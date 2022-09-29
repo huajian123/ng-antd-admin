@@ -2,6 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 
 /* observe destroy服务*/
+/* 使用方式：*/
 /*
       @Component({
         selector: 'app-search-route',

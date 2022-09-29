@@ -32,6 +32,7 @@ export class JudgAuthGuard implements CanActivateChild {
     });
   }
 
+  // 保存当前的menu到this.selMenu
   getMenu(menu: Menu[], url: string): void {
     for (let i = 0; i < menu.length; i++) {
       if (url === menu[i].path) {

@@ -10,11 +10,7 @@ import { WindowService } from '../services/common/window.service';
   providedIn: 'root'
 })
 export class StartupService {
-  constructor(
-    private userInfoService: UserInfoService,
-    private loginInOutService: LoginInOutService,
-    private windowSer: WindowService
-  ) {}
+  constructor(private userInfoService: UserInfoService, private loginInOutService: LoginInOutService, private windowSer: WindowService) {}
 
   load(): Promise<void> {
     const token = this.windowSer.getSessionStorage(TokenKey);
