@@ -1,11 +1,11 @@
-/* eslint-disable prettier/prettier */
+
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 export interface UserInfo {
-  userId: number;
+  userId: any;
   authCode: string[];
 }
 

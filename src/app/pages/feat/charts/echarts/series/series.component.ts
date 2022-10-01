@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { ComponentPortal, ComponentType, Portal } from '@angular/cdk/portal';
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';

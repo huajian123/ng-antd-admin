@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
@@ -88,14 +87,11 @@ export class AccountComponent implements OnInit {
       });
   }
 
-  // 设置权限
   setRole(id: number): void {
     this.router.navigate(['/default/system/role-manager/set-role'], { queryParams: { id: id } });
   }
 
-  // 触发表格变更检测
   tableChangeDectction(): void {
-    // 改变引用触发变更检测。
     this.dataList = [...this.dataList];
     this.cdr.detectChanges();
   }

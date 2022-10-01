@@ -8,7 +8,8 @@ import { NzResizeEvent } from 'ng-zorro-antd/resizable';
 import { NzTableQueryParams, NzTableSize } from 'ng-zorro-antd/table';
 
 export interface TreeNodeInterface {
-  id: string | number;
+  id: string;
+  _id:string,
   level?: number;
   expand?: boolean;
   children?: TreeNodeInterface[];

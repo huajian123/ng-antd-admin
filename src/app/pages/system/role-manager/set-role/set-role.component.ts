@@ -36,20 +36,16 @@ export class SetRoleComponent implements OnInit {
     public message: NzMessageService
   ) {}
 
-  // 初始化数据
   initPermission(): void {
-    // 通过角色id获取这个角色拥有的权限码
     this.dataService
       .getPermissionById(this.id)
       .pipe(
         concatMap(authCodeArr => {
           this.authCodeArr = authCodeArr;
-          // 获取所有菜单
           return this.menusService.getMenuList({ pageNum: 0, pageSize: 0 });
         })
       )
       .subscribe(response => {
-        // isOpen表示 节点是否展开
         const menuArray: Array<Menu & { isOpen?: boolean; checked?: boolean }> = response.list;
         menuArray.forEach(item => {
           item.isOpen = false;
@@ -61,8 +57,8 @@ export class SetRoleComponent implements OnInit {
   }
 
   getRoleName(): void {
-    this.dataService.getRolesDetail(this.id).subscribe(({ roleName }) => {
-      this.pageHeaderInfo = { ...this.pageHeaderInfo, ...{ desc: `Vai trò hiện tại: ${roleName}` } };
+    this.dataService.getRolesDetail(this.id).subscribe(res => {
+      this.pageHeaderInfo = { ...this.pageHeaderInfo, ...{ desc: `Vai trò hiện tại: ${res.rolename}` } };
       this.cdr.markForCheck();
     });
   }
@@ -74,15 +70,15 @@ export class SetRoleComponent implements OnInit {
   submit(): void {
     const temp = [...this.permissionList];
     const flatArray = fnFlattenTreeDataByDataList(temp);
-    const seledAuthArray: number[] = [];
+    const seledAuthArray: string[] = [];
     flatArray.forEach(item => {
       if (item['checked']) {
-        seledAuthArray.push(+item.id);
+        seledAuthArray.push(item['id']);
       }
     });
     const param: PutPermissionParam = {
       permissionIds: seledAuthArray,
-      roleId: +this.id
+      roleId: this.id
     };
     this.dataService.updatePermission(param).subscribe(() => {
       this.message.success('Cài đặt thành công và nó sẽ có hiệu lực sau khi đăng nhập lại');

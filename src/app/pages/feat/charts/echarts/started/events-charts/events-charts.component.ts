@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import LinearGradient from 'zrender/lib/graphic/LinearGradient';

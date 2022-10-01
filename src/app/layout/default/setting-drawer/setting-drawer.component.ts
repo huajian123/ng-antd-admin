@@ -60,13 +60,13 @@ export class SettingDrawerComponent implements OnInit {
     {
       key: 'dark',
       image: '/assets/imgs/theme-dark.svg',
-      title: '暗色菜单风格',
+      title: 'Menu tối',
       isChecked: true
     },
     {
       key: 'light',
       image: '/assets/imgs/theme-light.svg',
-      title: '亮色菜单风格',
+      title: 'Menu sáng',
       isChecked: false
     }
   ];
@@ -74,49 +74,49 @@ export class SettingDrawerComponent implements OnInit {
     {
       key: 'dust',
       color: '#F5222D',
-      title: '薄暮',
+      title: 'Hoàng hôn',
       isChecked: false
     },
     {
       key: 'volcano',
       color: '#FA541C',
-      title: '火山',
+      title: 'Núi lửa',
       isChecked: false
     },
     {
       key: 'sunset',
       color: '#FAAD14',
-      title: '日暮',
+      title: 'Hoàng hôn',
       isChecked: false
     },
     {
       key: 'cyan',
       color: '#13C2C2',
-      title: '明青',
+      title: 'Mingqing',
       isChecked: false
     },
     {
       key: 'green',
       color: '#52C41A',
-      title: '极光绿',
+      title: 'Green',
       isChecked: false
     },
     {
       key: 'daybreak',
       color: '#1890FF',
-      title: '拂晓蓝（默认）',
+      title: 'màu xanh(mặc định)',
       isChecked: true
     },
     {
       key: 'geekblue',
       color: '#2F54EB',
-      title: '极客蓝',
+      title: 'Geek Blue',
       isChecked: false
     },
     {
       key: 'purple',
       color: '#722ED1',
-      title: '酱紫',
+      title: 'Màu tím',
       isChecked: false
     }
   ];
@@ -124,19 +124,19 @@ export class SettingDrawerComponent implements OnInit {
     {
       key: 'side',
       image: '/assets/imgs/menu-side.svg',
-      title: '侧边菜单布局',
+      title: 'Bố cục Menu bên',
       isChecked: true
     },
     {
       key: 'top',
       image: '/assets/imgs/menu-top.svg',
-      title: '顶部菜单布局',
+      title: 'Bố cục menu trên cùng',
       isChecked: false
     },
     {
       key: 'mixi',
       image: '/assets/imgs/menu-top.svg',
-      title: '混合菜单布局',
+      title: 'Bố cục menu kết hợp',
       isChecked: false
     }
   ];

@@ -1,4 +1,4 @@
-/* eslint-disable prettier/prettier */
+
 /*
  * 只有在菜单静态加载时候，可以把以下注释打开
  * */

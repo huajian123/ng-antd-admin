@@ -1,4 +1,4 @@
-/* eslint-disable prettier/prettier */
+
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -26,17 +26,17 @@ export interface Permission {
 
 // 更新权限参数接口
 export interface PutPermissionParam {
-  permissionIds: number[];
-  roleId: number;
+  permissionIds: string[];
+  roleId: string;
 }
 
 /*
  * 角色
  * */
 export interface Role {
-  id?: number;
-  roleName: string;
-  roleDesc?: string;
+  id?: string;
+  rolename: string;
+  mota?: string;
 }
 
 @Injectable({

@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
@@ -14,6 +13,8 @@ import { RoleManageModalService } from '@widget/biz-widget/system/role-manage-mo
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
+
+import { RolemanagerService} from './server/rolemanager.service'
 
 interface SearchParam {
   rolename: string;
@@ -44,7 +45,8 @@ export class RoleManageComponent implements OnInit {
     private messageService: MessageService,
     private modalService: RoleManageModalService,
     private router: Router,
-    public message: NzMessageService
+    public message: NzMessageService,
+    private roleservice: RolemanagerService
   ) {}
 
   selectedChecked(e: any): void {
@@ -82,7 +84,7 @@ export class RoleManageComponent implements OnInit {
   }
 
   // 设置权限
-  setRole(id: number): void {
+  setRole(id: any): void {
     this.router.navigate(['/default/system/role-manager/set-role'], { queryParams: { id: id } });
   }
 
@@ -180,14 +182,15 @@ export class RoleManageComponent implements OnInit {
         },
         {
           title: 'Mô tả',
-          width: 100,
+          width: 400,
           field: 'mota'
         },
         {
-          title: 'Vận hàng',
+          title: 'Vận hành',
           tdTemplate: this.operationTpl,
-          width: 150,
-          fixed: true
+          width: 280,
+          fixed: true,
+          fixedDir: 'right'
         }
       ],
       total: 0,

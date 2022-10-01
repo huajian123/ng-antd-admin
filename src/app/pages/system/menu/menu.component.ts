@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -42,7 +41,7 @@ export class MenuComponent implements OnInit {
 
   tableConfig!: MyTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
-    title: 'Quản lý menu (cơ sở dữ liệu được khôi phục từ bản sao lưu sau mỗi 10 phút), sau khi thêm menu mới, nhớ thêm quyền menu mới thêm vào vai trò tương ứng, nếu không sẽ không hiển thị',
+    title: 'Quản lý menu',
     breadcrumb: ['Trang chủ', 'Quản lý hệ thống', 'Quản lý menu']
   };
   dataList: TreeNodeInterface[] = [];

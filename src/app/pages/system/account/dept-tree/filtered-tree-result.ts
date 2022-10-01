@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 export interface TreeNode {
   tenphongban: string;
   disabled?: boolean;

@@ -1,28 +1,16 @@
 <ng-container *ngTemplateOutlet="headRight"></ng-container>
 <ng-template #headRight>
   <div class="bst-header-wrap" id="tools">
-    <!--      <span *appScreenLessHidden="'375'" (click)="lockScreen()" class="bst-header-icon" nz-tooltip nzTooltipTitle="锁屏"
-            nzTooltipPlacement="bottom">
-         <i nz-icon nzType="lock"
-            nzTheme="outline"></i>
-        </span>-->
-
-    <span (click)="showSearchModal()" *appScreenLessHidden="'320'" class="bst-header-icon" nz-tooltip nzTooltipTitle="搜索" nzTooltipPlacement="bottom">
+    <span (click)="showSearchModal()" *appScreenLessHidden="'320'" class="bst-header-icon" nz-tooltip nzTooltipTitle="Tìm kiếm" nzTooltipPlacement="bottom">
       <i nz-icon nzType="search" nzTheme="outline"></i>
     </span>
-    <!--注释的是一个弹出外连接的按钮-->
-    <!-- <span *appScreenLessHidden="'375'" class="bst-header-icon" nz-tooltip nzTooltipTitle="OnChat的帮助文档"
-           nzTooltipPlacement="bottom">
-             <a href="https://docs.chat.hypergo.net/docs/intro/" target="_blank"><i nz-icon nzType="question-circle"
-                                                                                    nzTheme="outline"></i></a>
-           </span>-->
     <span
       *appScreenLessHidden="'393'"
       class="bst-header-icon"
       appToggleFullscreen
       #toogleFullScreenDir="appToggleFullscreen"
       nz-tooltip
-      [nzTooltipTitle]="toogleFullScreenDir.isFullscreenFlag ? '全屏' : '退出全屏'"
+      [nzTooltipTitle]="toogleFullScreenDir.isFullscreenFlag ? 'toàn màn hình': 'Thoát chế độ toàn màn hình' "
       nzTooltipPlacement="bottom"
     >
       <i nz-icon *ngIf="toogleFullScreenDir.isFullscreenFlag; else exitFullTpl" nzType="fullscreen" nzTheme="outline"></i>

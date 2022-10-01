@@ -6,6 +6,7 @@ const routes: Routes = [
   { path: 'account', loadChildren: () => import('./account/account.module').then(m => m.AccountModule) },
   { path: 'dept', loadChildren: () => import('./dept/dept.module').then(m => m.DeptModule) },
   { path: 'role-manager', loadChildren: () => import('./role-manager/role-manage.module').then(m => m.RoleManageModule) },
+  { path: 'datasc', loadChildren: () => import('./datasc/datasc.module').then(m => m.DatascModule)},
   { path: '', redirectTo: 'dept', pathMatch: 'full' }
 ];
 

@@ -67,7 +67,7 @@ export class AccountModalComponent implements OnInit {
 
   // get list role
   getListRole() {
-    this.webService.GetCallWs(Const.Ant100SearchAllRole, (response) => {
+    this.webService.GetCallWs(Const.Ant100GetSearchAllRole, (response) => {
       this.roleOptions = [];
       this.listRole = response;
       for(let lst of this.listRole) {

@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { SelectionModel } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { ChangeDetectorRef, Injectable, OnInit } from '@angular/core';

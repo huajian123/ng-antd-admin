@@ -1,0 +1,28 @@
+<nz-card nzHoverable [nzBodyStyle]="{ padding: 0 }">
+    <div class="p-8">
+      <nz-input-group nzSize="small" [nzSuffix]="suffixIcon">
+        <input nzSize="small" type="text" nz-input placeholder="Search" ngModel (ngModelChange)="changeSearch($event)" />
+      </nz-input-group>
+      <ng-template #suffixIcon>
+        <i nz-icon nzType="search"></i>
+      </ng-template>
+    </div>
+  
+    <nz-tree-view [nzBlockNode]="true" [nzTreeControl]="treeControl" [nzDataSource]="menutreeService.dataSource">
+      <nz-tree-node *nzTreeNodeDef="let node" nzTreeNodePadding>
+        <nz-tree-node-toggle nzTreeNodeNoopToggle></nz-tree-node-toggle>
+        <nz-tree-node-option [nzDisabled]="node.disabled" [nzSelected]="selectListSelection.isSelected(node)" (nzClick)="clickNode(node)">
+          <span [innerHTML]="node.menuName | nzHighlight: menutreesearchService.searchValue:'i':'highlight'"></span>
+        </nz-tree-node-option>
+      </nz-tree-node>
+  
+      <nz-tree-node *nzTreeNodeDef="let node; when: menutreeService.hasChild" nzTreeNodePadding>
+        <nz-tree-node-toggle>
+          <i nz-icon nzType="caret-down" nzTreeNodeToggleRotateIcon></i>
+        </nz-tree-node-toggle>
+        <nz-tree-node-option [nzDisabled]="node.disabled" [nzSelected]="selectListSelection.isSelected(node)" (nzClick)="clickNode(node)">
+          <span [innerHTML]="node.menuName | nzHighlight: menutreesearchService.searchValue:'i':'highlight'"></span>
+        </nz-tree-node-option>
+      </nz-tree-node>
+    </nz-tree-view>
+  </nz-card>

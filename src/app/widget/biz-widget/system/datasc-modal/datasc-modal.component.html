@@ -1,0 +1,38 @@
+<form nz-form [formGroup]="addEditForm">
+    <!-- tiêu dề 1 -->
+      <nz-form-item>
+        <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="tieude1">Tiêu đề 1</nz-form-label>
+        <nz-form-control [nzSm]="18" [nzXs]="24" [nzErrorTip]="combineTpl">
+          <input nz-input formControlName="tieude1" id="tieude1" placeholder="Nhập tiêu đề 1" />
+        </nz-form-control>
+      </nz-form-item>
+  
+      <nz-form-item>
+        <nz-form-label [nzSm]="4" [nzXs]="24" nzFor="tieude2">Tiều đề 2</nz-form-label>
+        <nz-form-control [nzSm]="18" [nzXs]="24" [nzErrorTip]="combineTpl">
+          <input nz-input formControlName="tieude2" id="tieude2" placeholder="Nhập tiêu đề 2"/>
+        </nz-form-control>
+      </nz-form-item>
+  
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="lang">Ngôn ngữ</nz-form-label>
+      <nz-form-control [nzSm]="18" [nzXs]="24" [nzErrorTip]="combineTpl">
+        <nz-select nzShowSearch nzAllowClear  formControlName="lang" nzPlaceHolder="Ngôn ngữ">
+          <nz-option *ngFor="let option of lang" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+  
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="status">Status</nz-form-label>
+      <nz-form-control [nzSm]="18" [nzXs]="24" [nzErrorTip]="combineTpl">
+        <nz-switch formControlName="status" nzCheckedChildren="Cho phép" nzUnCheckedChildren="Vô hiệu hóa"></nz-switch>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+  
+  
+  <ng-template #combineTpl let-control>
+      <ng-container *ngIf="control.hasError('message')">{{ control.errors.message }}</ng-container>
+      <ng-container *ngIf="control.hasError('required')">Phần bắt buộc</ng-container>
+  </ng-template>

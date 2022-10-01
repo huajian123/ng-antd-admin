@@ -1,4 +1,4 @@
-/* eslint-disable prettier/prettier */
+
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -34,7 +34,7 @@ export class LoginInOutService {
     private windowServe: WindowService
   ) {}
 
-  getMenuByUserId(userId: number): Observable<Menu[]> {
+  getMenuByUserId(userId: string): Observable<Menu[]> {
     return this.loginService.getMenuByUserId(userId);
   }
 

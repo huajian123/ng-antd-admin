@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { PageHeaderType } from '@shared/components/page-header/page-header.component';

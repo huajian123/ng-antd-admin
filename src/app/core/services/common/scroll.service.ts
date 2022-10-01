@@ -1,4 +1,4 @@
-/* eslint-disable prettier/prettier */
+
 import { Platform } from '@angular/cdk/platform';
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';

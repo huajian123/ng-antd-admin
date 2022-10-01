@@ -1,4 +1,4 @@
-/* eslint-disable prettier/prettier */
+
 import { DOCUMENT } from '@angular/common';
 import { Inject } from '@angular/core';
 import { ActivatedRouteSnapshot, DetachedRouteHandle, RouteReuseStrategy } from '@angular/router';

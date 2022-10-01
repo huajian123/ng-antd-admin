@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
 
 import { Chart } from '@antv/g2';

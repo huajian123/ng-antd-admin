@@ -1,4 +1,4 @@
-/* eslint-disable prettier/prettier */
+
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router, CanActivateChild } from '@angular/router';
 
@@ -62,6 +62,7 @@ export class JudgAuthGuard implements CanActivateChild {
     while (route.firstChild) {
       route = route.firstChild;
     }
+    console.log(route.data['authCode']);
     if (!!route.data['authCode']) {
       return this.getResult(route.data['authCode'], this.authCodeArray);
     }

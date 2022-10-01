@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { DOCUMENT } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, Inject } from '@angular/core';
 

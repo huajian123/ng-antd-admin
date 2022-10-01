@@ -1,6 +1,5 @@
-<!--头部版块-->
 <app-page-header [backTpl]="backTpl" [backUrl]="'/default/system/role-manager'" [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
-<ng-template #backTpl>Quay lại</ng-template>
+<ng-template #backTpl><span nz-icon nzType="arrow-left" nzTheme="outline"></span> Quay lại</ng-template>
 <div class="normal-table-wrap">
   <nz-card>
     <ul>
@@ -31,7 +30,7 @@
               <ng-template #operateTpl>
                 <ng-container *ngIf="first">
                   <div class="operate-line li-height m-0 p-0 p-l-35">
-                    <span>操作权限：</span>
+                    <span>Quyền hoạt động：</span>
                     <label *ngFor="let operate of childPermissionArray" [(ngModel)]="operate.checked" nz-checkbox>{{ operate.menuName }}</label>
                     <nz-divider class="m-0"></nz-divider>
                   </div>

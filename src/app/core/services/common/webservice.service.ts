@@ -1,4 +1,4 @@
-/* eslint-disable prettier/prettier */
+
 
 import { BaseHttpService } from '@services/base-http.service';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';

@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -47,7 +46,7 @@ export class NormalLoginComponent implements OnInit {
     const userInfo = this.userInfoService.parsToken(TokenPre);
     this.userInfoService.setUserInfo(userInfo);
     setTimeout(() => {
-      this.dataService.getMenuByUserId(-1).subscribe(menus => {
+      this.dataService.getMenuByUserId("-1").subscribe(menus => {
         this.menuService.setMenuArrayStore(menus);
         this.router.navigateByUrl('default/dashboard/analysis').then(() => {
           this.spinService.setCurrentGlobalSpinStore(false);

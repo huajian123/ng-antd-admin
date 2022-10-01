@@ -1,4 +1,4 @@
-/* eslint-disable prettier/prettier */
+
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';

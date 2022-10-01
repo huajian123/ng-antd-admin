@@ -1,4 +1,4 @@
-/* eslint-disable prettier/prettier */
+
 import { HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -19,6 +19,7 @@ import { QuicklinkModule } from 'ngx-quicklink';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import interceptors from './core/services/interceptors';
+
 
 export function StartupServiceFactory(startupService: StartupService) {
   return () => startupService.load();

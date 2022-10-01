@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { AfterViewInit, ChangeDetectionStrategy, Component, NgZone, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 

@@ -1,4 +1,4 @@
-/* eslint-disable prettier/prettier */
+
 /*
  * 通用interface
  * */

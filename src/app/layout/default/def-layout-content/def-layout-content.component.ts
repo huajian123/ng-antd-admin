@@ -1,4 +1,4 @@
-/* eslint-disable prettier/prettier */
+
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';

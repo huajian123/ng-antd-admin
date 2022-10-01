@@ -2,41 +2,41 @@
 
 <div class="normal-table-wrap bg-color-no p-b-50">
   <nz-card [nzBordered]="true" class="m-b-20">
-    <nz-descriptions [nzSize]="'small'" nzTitle="项目信息" nzBordered [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }">
-      <nz-descriptions-item nzTitle="版本"><nz-tag [nzColor]="'cyan'">1.0.0</nz-tag></nz-descriptions-item>
-      <nz-descriptions-item nzTitle="最后编译时间"
+    <nz-descriptions [nzSize]="'small'" nzTitle="Thông tin dự án" nzBordered [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }">
+      <nz-descriptions-item nzTitle="Phiên bản"><nz-tag [nzColor]="'cyan'">1.0.0</nz-tag></nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Thời gian biên dịch cuối cùng"
         ><nz-tag [nzColor]="'cyan'">{{ data | date: dateFormat }}</nz-tag></nz-descriptions-item
       >
-      <nz-descriptions-item nzTitle="文档地址">正在策划中...</nz-descriptions-item>
-      <nz-descriptions-item nzTitle="预览地址"><a class="operate-text" href="http://124.71.128.53:8081/">预览地址</a></nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Địa chỉ tài liệu">Kế hoạch là...</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Địa chỉ xem trước"><a class="operate-text" href="http://124.71.128.53:8081/">Demo</a></nz-descriptions-item>
       <nz-descriptions-item nzTitle="Github"><a class="operate-text" href="https://github.com/huajian123/ng-ant-admin">Github</a></nz-descriptions-item>
-      <nz-descriptions-item nzTitle="码云"><a class="operate-text" href="https://gitee.com/hjxiaoqianduan/ng-ant-admin">码云</a></nz-descriptions-item>
-      <nz-descriptions-item nzTitle="纯净版项目地址"><a class="operate-text" href="https://gitee.com/hjxiaoqianduan/ng-ant-admin-pure">纯净版项目地址</a></nz-descriptions-item>
-      <nz-descriptions-item nzTitle="在线文档"><a class="operate-text" href="http://1.117.181.242:8081/">在线文档</a></nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Đám mây mã"><a class="operate-text" href="https://gitee.com/hjxiaoqianduan/ng-ant-admin">Đám mây mã</a></nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Địa chỉ dự án phiên bản thuần túy"><a class="operate-text" href="https://gitee.com/hjxiaoqianduan/ng-ant-admin-pure">Địa chỉ dự án phiên bản thuần túy</a></nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Tài liệu trực tuyến"><a class="operate-text" href="http://1.117.181.242:8081/">Tài liệu trực tuyến</a></nz-descriptions-item>
     </nz-descriptions>
   </nz-card>
 
   <nz-card [nzBordered]="true" class="m-b-20">
-    <nz-descriptions [nzSize]="'small'" nzTitle="package.json中使用到的第三方包" nzBordered [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }">
-      <nz-descriptions-item nzTitle="@amap/amap-jsapi-loader">高德地图</nz-descriptions-item>
-      <nz-descriptions-item nzTitle="@antv/g2plot">g2图表</nz-descriptions-item>
-      <nz-descriptions-item nzTitle="@antv/l7">antv l7地图</nz-descriptions-item>
-      <nz-descriptions-item nzTitle="@antv/x6">x6流程图</nz-descriptions-item>
-      <nz-descriptions-item nzTitle="@auth0/angular-jwt">jwt解析</nz-descriptions-item>
-      <nz-descriptions-item nzTitle="@tinymce/tinymce-angular">富文本</nz-descriptions-item>
-      <nz-descriptions-item nzTitle="angular-password-strength-meter">密码强度</nz-descriptions-item>
-      <nz-descriptions-item nzTitle="zxcvbn3">上一个密码强度同时要安装这个</nz-descriptions-item>
-      <nz-descriptions-item nzTitle="crypto-js">做锁屏时加密解密用的</nz-descriptions-item>
-      <nz-descriptions-item nzTitle="angular2-qrcode">二维码</nz-descriptions-item>
-      <nz-descriptions-item nzTitle="driver.js">第一次加载时引导页</nz-descriptions-item>
+    <nz-descriptions [nzSize]="'small'" nzTitle="package.json Các gói của bên thứ ba được sử dụng trong" nzBordered [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }">
+      <nz-descriptions-item nzTitle="@amap/amap-jsapi-loader">Google map</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="@antv/g2plot">biểu đồ g2</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="@antv/l7">bản đồ antv l7</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="@antv/x6">lưu đồ x6</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="@auth0/angular-jwt">phân tích jwt</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="@tinymce/tinymce-angular">văn bản đa dạng thức</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="angular-password-strength-meter">mật khẩu mạnh</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="zxcvbn3">Độ mạnh mật khẩu trước đó cũng cài đặt này</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="crypto-js">Mật khẩu mạnh trước đó cũng cài đặt</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="angular2-qrcode">mã QR</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="driver.js">Trang Bootstrap trong lần tải đầu tiên</nz-descriptions-item>
       <nz-descriptions-item nzTitle="ng-zorro-antd">zorro</nz-descriptions-item>
-      <nz-descriptions-item nzTitle="ngx-quicklink">预加载策略</nz-descriptions-item>
-      <nz-descriptions-item nzTitle="screenfull">全屏</nz-descriptions-item>
-      <nz-descriptions-item nzTitle="uuid">唯一id</nz-descriptions-item>
-      <nz-descriptions-item nzTitle="ngx-color-picker">颜色选择器</nz-descriptions-item>
-      <nz-descriptions-item nzTitle="file-saver">文件下载</nz-descriptions-item>
-      <nz-descriptions-item nzTitle="ngx-echarts">图表</nz-descriptions-item>
-      <nz-descriptions-item nzTitle="echarts">也是图表</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="ngx-quicklink">chiến lược tải trước</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="screenfull">Phóng to</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="uuid">Id duy nhất</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="ngx-color-picker">Công cụ chọn màu</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="file-saver">Tập tin tải về</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="ngx-echarts">Đồ thị</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="echarts">Cũng là một đồ thị</nz-descriptions-item>
     </nz-descriptions>
   </nz-card>
 </div>

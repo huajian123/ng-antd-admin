@@ -1,4 +1,4 @@
-/* eslint-disable prettier/prettier */
+
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Observable } from 'rxjs';
