@@ -4,7 +4,7 @@
     <form nz-form class="login-form-wrap" [formGroup]="validateForm" (ngSubmit)="submitForm()">
       <nz-form-item>
         <nz-form-control class="p-24">
-          <qr-code class="center" [size]="500" [value]="'https://github.com/huajian123/ng-ant-admin'"></qr-code>
+          <qrcode class="center" [margin]="0" [width]="250" [errorCorrectionLevel]="'M'" [qrdata]="'https://github.com/huajian123/ng-ant-admin'"></qrcode>
           <span class="center sp-14 desc" nz-typography nzType="secondary">扫码后点击"确认"，即可完成登录</span>
         </nz-form-control>
       </nz-form-item>

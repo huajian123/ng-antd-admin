@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { SharedModule } from '@shared/shared.module';
 import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
-import { QRCodeModule } from 'angular2-qrcode';
+import { QRCodeModule } from 'angularx-qrcode';
 
 import { Login1RoutingModule } from './login1-routing.module';
 import { Login1Component } from './login1.component';

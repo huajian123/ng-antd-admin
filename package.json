@@ -32,7 +32,7 @@
     "@zxcvbn-ts/language-en": "^2.0.1",
     "angular-animations": "^0.11.0",
     "angular-password-strength-meter": "^5.0.1",
-    "angular2-qrcode": "^2.0.3",
+    "angularx-qrcode": "^14.0.0",
     "crypto-js": "^4.1.1",
     "driver.js": "^0.9.8",
     "echarts": "^5.3.3",
