@@ -15,7 +15,8 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { DatascService, DataScObj} from '@services/system/datasc.service'
 import { DatascModalService } from '@app/widget/biz-widget/system/datasc-modal/datasc-modal.service';
-
+import { WebserviceService } from '../../../core/services/common/webservice.service';
+import * as Const from 'src/app/common/const';
 interface SearchParam {
   title1: string;
   idmenu: string;
@@ -38,6 +39,7 @@ export class DatascComponent implements OnInit {
     breadcrumb: ['Home', 'Quản lý hệ thống', 'Quản lý dữ liệu màn hình']
   };
   idmenu = "";
+  menuName = "";
 
   ActionCode = ActionCode;
 
@@ -48,7 +50,8 @@ export class DatascComponent implements OnInit {
     private router: Router,
     public message: NzMessageService,
     private dataService: DatascService,
-    private modalService : DatascModalService
+    private modalService : DatascModalService,
+    private webService: WebserviceService
   ) { }
 
   ngOnInit(): void {
@@ -56,9 +59,11 @@ export class DatascComponent implements OnInit {
   }
 
   searchMenutDatasc(idmenu: any) {
-     this.searchParam.idmenu = idmenu;
      this.idmenu = idmenu;
+     this.searchParam.idmenu = idmenu;
      this.getDataList();
+     this.getNameMenu(this.idmenu);
+
   }
 
   getDataList(e?: NzTableQueryParams) {
@@ -113,11 +118,18 @@ export class DatascComponent implements OnInit {
   edit(id:any) {}
   del(id:any) {}
 
+  getNameMenu(id: string) {
+    this.webService.PostCallWs(Const.Ant100PostDetailMenu, {menuId: id}, (response) => {
+       this.menuName = response.menuName;
+       this.message.info("Bạn vừa chọn Menu: " + response.menuName);
+    })
+  }
+
   add(idmenu: string){
      if(idmenu === "") {
        this.message.warning("Bạn chưa chọn menu nào để thêm dữ liệu !")
      }else {
-      this.modalService.show({ nzTitle: 'Thêm Mới' }).subscribe(
+      this.modalService.show({ nzTitle: `Thêm Mới dữ liệu cho Menu: ${this.menuName}`},{idmenu:idmenu}).subscribe(
         res => {
           if (!res || res.status === ModalBtnStatus.Cancel) {
             return;
@@ -134,6 +146,7 @@ export class DatascComponent implements OnInit {
   allDel(){}
 
   addEditData(param: DataScObj, methodName: 'editDatasc' | 'addDatasc'): void {
+    console.log(param);
     this.dataService[methodName](param)
       .pipe(
         finalize(() => {

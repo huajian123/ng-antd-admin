@@ -24,8 +24,8 @@ export class DatascService {
     return this.http.post(Const.Ant100findAllDatasc, param);
   }
 
-  public addDatasc(param: DataScObj): Observable<void> {
-    return this.http.post(Const.Ant100AddDetailUser, param);
+  public addDatasc(param: any): Observable<void> {
+    return this.http.post(Const.Ant100AddListDatasc, param);
   }
 
   public delDatasc(ids: number[]): Observable<void> {

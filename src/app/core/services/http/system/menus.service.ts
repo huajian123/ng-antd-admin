@@ -46,6 +46,11 @@ export class MenusService {
   }
 
   public getMenuDetail(id: any): Observable<MenuListObj> {
-    return this.http.post(Const.Ant100GetDetailMenu,{menuId:id},{ needSuccessInfo: true });
+    return this.http.post(Const.Ant100PostDetailMenu,{menuId:id},{ needSuccessInfo: true });
   }
+
+  public getMenuDetailFromUrl(url: any): Observable<MenuListObj> {
+    return this.http.post(Const.Ant100PostUrlParams,{url:url},{ needSuccessInfo: true });
+  }
+
 }

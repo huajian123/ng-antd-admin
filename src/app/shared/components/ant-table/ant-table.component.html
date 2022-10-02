@@ -4,7 +4,6 @@
   [nzFrontPagination]="false"
   [nzSize]="tableSize"
   [nzOuterBordered]="true"
-  nzShowSizeChanger
   [nzBordered]="true"
   [nzVirtualForTrackBy]="trackById"
   [nzData]="_dataList"
@@ -15,10 +14,10 @@
   (nzQueryParams)="onQueryParamsChange($event)"
   (nzPageSizeChange)="onPageSizeChange($event)"
   [nzLoading]="_tableConfig.loading"
-  nzShowQuickJumper
   [nzShowTotal]="rangeTemplate"
+  [nzNoResult] = "templateEmpty"
 >
-  <ng-template #rangeTemplate let-range="range" let-total>{{ range[0] }}-{{ range[1] }} Tổng Row: {{ total }} </ng-template>
+  <ng-template #rangeTemplate let-range="range" let-total> Total row: {{ total }} </ng-template>
   <thead>
     <tr>
       <th
@@ -88,3 +87,9 @@
     </tr>
   </tbody>
 </nz-table>
+<ng-template #templateEmpty>
+  <nz-empty 
+  [nzNotFoundContent] = "nodata"
+  nzNotFoundImage="simple"
+  ></nz-empty>
+</ng-template>

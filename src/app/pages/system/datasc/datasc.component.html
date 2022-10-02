@@ -30,6 +30,7 @@
                     </div>
                   </form>
             </nz-card>
+           
             <app-card-table-wrap [tableTitle]="'Danh sách tiêu đề'" (reload)="reloadTable()" [btnTpl]="tableBtns">
                 <app-ant-table
                   (selectedChange)="selectedChecked($event)"

@@ -60,7 +60,7 @@ export class AntTableComponent implements OnInit, OnChanges {
   _dataList!: NzSafeAny[];
   _tableConfig!: MyTableConfig;
   _scrollConfig: { x: string; y: string } | {} = {};
-  // 从业务组件中传入的缓存的已经选中的checkbox数据数组
+  nodata= "Không có dữ liệu";
   @Input() checkedCashArrayFromComment: NzSafeAny[] = [];
 
   @Input()

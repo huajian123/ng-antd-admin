@@ -29,9 +29,8 @@
         <nz-switch formControlName="status" nzCheckedChildren="Cho phép" nzUnCheckedChildren="Vô hiệu hóa"></nz-switch>
       </nz-form-control>
     </nz-form-item>
+    <button nz-button (click)="addList()" nzType="primary">Add List</button><span>&nbsp;&nbsp;Tổng tiêu dề: {{listdatasc.length}}</span>
   </form>
-  
-  
   <ng-template #combineTpl let-control>
       <ng-container *ngIf="control.hasError('message')">{{ control.errors.message }}</ng-container>
       <ng-container *ngIf="control.hasError('required')">Phần bắt buộc</ng-container>

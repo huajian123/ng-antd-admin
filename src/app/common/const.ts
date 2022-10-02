@@ -14,9 +14,10 @@ export const Ant100SearchFatherMenu = "menu/ant100SearchFatherMenu";
 export const Ant100AddMenu = "menu/ant100AddMenu";
 export const Ant100EditMenu = "menu/ant100EditMenu";
 export const Ant100DelMenu = "menu/ant100DelMenu"; 
-export const Ant100GetDetailMenu = "menu/ant100GetDetailMenu";
+export const Ant100PostDetailMenu = "menu/ant100PostDetailMenu";
 export const Ant100ListMenu = "menu/ant100ListMenu";
 export const Ant100ListMenuParams = "menu/ant100ListMenuParams";
+export const Ant100PostUrlParams = "menu/ant100PostUrlParams";
 
 
 
@@ -37,9 +38,9 @@ export const Ant100CheckNameUser = "user/ant100CheckNameUser";
 
 // data SC
 export const Ant100findAllDatasc = "screenpc/ant100SearchAllDatasc";
-export const Ant100AddDatasc = "screenpc/ant100AddDatasc";
+export const Ant100AddListDatasc = "screenpc/ant100AddListDatasc";
 export const Ant100DelDatasc = "screenpc/ant100DelDatasc";
-export const Ant100EdieDatasc = "screenpc/ant100EditDatasc";
+export const Ant100EditDatasc = "screenpc/ant100EditDatasc";
 
 
 

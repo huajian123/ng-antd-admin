@@ -13,6 +13,7 @@ import { WebserviceService } from 'src/app/core/services/common/webservice.servi
 import { ValidationFormService } from "src/app/core/services/common/message-errors.service";
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { LangService } from '@core/services/common/lang.service';
+import * as Const from 'src/app/common/const';
 
 @Component({
   selector: 'app-datasc-modal',
@@ -31,13 +32,17 @@ export class DatascModalComponent implements OnInit {
   isReadonly = false;
   messageErrors: any = [];
   lang : OptionsInterface[] = [];
+  menuName = "";
+  listdatasc : DataScObj[] = [];
+  tieudeNew = "";
 
   constructor(
     private modalRef: NzModalRef,
     private fb: FormBuilder,
     public vf: ValidationFormService,
     public message: NzMessageService,
-    private langService : LangService
+    private langService : LangService,
+    private webService : WebserviceService
   ) { }
 
   protected getAsyncFnData(modalValue: NzSafeAny): Observable<NzSafeAny> {
@@ -45,9 +50,7 @@ export class DatascModalComponent implements OnInit {
   }
 
   protected getCurrentValue(): Observable<NzSafeAny> {
-    if (!fnCheckForm(this.addEditForm)) {
-      return of(false);
-    }
+    this.addEditForm.value.list = this.listdatasc;
     return of(this.addEditForm.value);
   }
 
@@ -58,6 +61,23 @@ export class DatascModalComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     this.getLang();
+  }
+
+  addList() {
+    if (!fnCheckForm(this.addEditForm)) {
+      return of(false);
+    }
+    let obj : DataScObj = {
+      idmenu: this.params.idmenu,
+      title1: this.addEditForm.value.tieude1,
+      title2:  this.addEditForm.value.tieude2,
+      lang: this.addEditForm.value.lang,
+      status:  this.addEditForm.value.status
+    }
+    this.listdatasc.push(obj);
+    this.tieudeNew = obj.title1;
+    this.addEditForm.reset({status: true});
+    return "";
   }
 
   getLang(){
@@ -73,9 +93,10 @@ export class DatascModalComponent implements OnInit {
   initForm(): void {
     this.addEditForm = this.fb.group({
       tieude1: [null, [Validators.required]],
-      tieude2: [null,[Validators.required]],
+      tieude2: [null],
       status: [true],
       lang: [null, [Validators.required]],
+      list: this.listdatasc
     });
   }
 }
