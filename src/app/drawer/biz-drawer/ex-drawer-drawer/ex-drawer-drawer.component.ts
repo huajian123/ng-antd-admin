@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
 import { fnCheckForm } from '@utils/tools';
@@ -11,9 +11,11 @@ import { fnCheckForm } from '@utils/tools';
 })
 export class ExDrawerDrawerComponent implements OnInit {
   params: { name: string } = { name: '' };
-  validateForm!: FormGroup;
+  validateForm = this.fb.group({
+    password: ['', [Validators.required]]
+  });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: NonNullableFormBuilder) {}
 
   getCurrentValue(): Observable<any> {
     if (!fnCheckForm(this.validateForm)) {
@@ -22,13 +24,5 @@ export class ExDrawerDrawerComponent implements OnInit {
     return of(this.validateForm.value);
   }
 
-  initForm(): void {
-    this.validateForm = this.fb.group({
-      password: [null, [Validators.required]]
-    });
-  }
-
-  ngOnInit(): void {
-    this.initForm();
-  }
+  ngOnInit(): void {}
 }

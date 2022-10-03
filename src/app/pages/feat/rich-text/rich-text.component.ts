@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NonNullableFormBuilder, Validators } from '@angular/forms';
 
 import { environment } from '@env/environment';
 import { PageHeaderType } from '@shared/components/page-header/page-header.component';
@@ -17,7 +17,9 @@ export class RichTextComponent implements OnInit {
   };
   localUrl = 'http://139.9.225.248:8088';
   uploadRichFileUrl = environment.production ? `${this.localUrl}/rich-upload` : '/site/rich-upload';
-  validateForm!: FormGroup;
+  validateForm = this.fb.group({
+    detail: ['', [Validators.required]]
+  });
 
   // 所有配置
   // http://tinymce.ax-z.cn/configure/editor-appearance.php
@@ -45,15 +47,8 @@ export class RichTextComponent implements OnInit {
     // image_advtab: true,
     // imagetools_toolbar: 'rotateleft rotateright | flipv fliph | editimage imageoptions',
   };
-  constructor(private fb: FormBuilder) {}
 
-  initForm(): void {
-    this.validateForm = this.fb.group({
-      detail: ['', [Validators.required]]
-    });
-  }
+  constructor(private fb: NonNullableFormBuilder) {}
 
-  ngOnInit(): void {
-    this.initForm();
-  }
+  ngOnInit(): void {}
 }

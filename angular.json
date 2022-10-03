@@ -87,11 +87,18 @@
               "file-saver",
               "fmin",
               "eventemitter3",
+              "@cordobo/qrcode",
+              "pbf",
+              "polygon-clipping",
+              "supercluster/dist/supercluster",
+              "l7regl",
               "earcut",
               "mousetrap",
               "d3-regression",
+              "mapbox-gl",
               "@amap/amap-jsapi-loader",
               "@mapbox/geojson-rewind",
+              "@babel/runtime/regenerator",
               "@antv/l7-component",
               "inversify-inject-decorators"
             ]

@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, NgModule } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 
@@ -18,7 +18,9 @@ import { NzModalRef } from 'ng-zorro-antd/modal';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LockWidgetComponent extends BasicConfirmModalComponent implements OnInit {
-  validateForm!: FormGroup;
+  validateForm = this.fb.group({
+    password: ['', [Validators.required]]
+  });
   passwordVisible = false;
 
   constructor(
@@ -26,16 +28,10 @@ export class LockWidgetComponent extends BasicConfirmModalComponent implements O
     private router: Router,
     private lockScreenStoreService: LockScreenStoreService,
     protected override modalRef: NzModalRef,
-    private fb: FormBuilder,
+    private fb: NonNullableFormBuilder,
     private windowSrv: WindowService
   ) {
     super(modalRef);
-  }
-
-  initForm(): void {
-    this.validateForm = this.fb.group({
-      password: [null, [Validators.required]]
-    });
   }
 
   submitForm(): void {
@@ -44,7 +40,7 @@ export class LockWidgetComponent extends BasicConfirmModalComponent implements O
     }
     const lockedState: LockScreenFlag = {
       locked: true,
-      password: this.validateForm.value['password'],
+      password: this.validateForm.value.password!,
       // @ts-ignore
       beforeLockPath: this.activatedRoute.snapshot['_routerState'].url
     };
@@ -54,9 +50,7 @@ export class LockWidgetComponent extends BasicConfirmModalComponent implements O
     this.router.navigateByUrl(`/blank/empty-for-lock`);
   }
 
-  ngOnInit(): void {
-    this.initForm();
-  }
+  ngOnInit(): void {}
 
   protected getCurrentValue(): NzSafeAny {
     return of(true);
