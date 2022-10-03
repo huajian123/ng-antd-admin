@@ -1,12 +1,4 @@
-import {
-  HttpClient,
-  HttpEvent,
-  HttpEventType,
-  HttpHandler,
-  HttpInterceptor,
-  HttpRequest,
-  HttpResponse
-} from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpEventType, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
@@ -107,7 +99,7 @@ export class LoginExpiredService implements HttpInterceptor {
                 observer.next(data);
               },
               error => {
-                // 如果先用admin登录超时弹框，登录的却是normal账号，对目标模块没有权限，则返回登录页
+                // 如果先用admin登录系统，token超时弹登录框，此时登录的却是normal账号，对目标页面没有权限，则返回登录页
                 // 这里靠后端判断新的token没有权限，请求报错403
                 this.message.error('您没有权限登录该模块');
                 this.loginOut();

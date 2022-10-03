@@ -7,7 +7,6 @@ import { BaseHttpService } from '../base-http.service';
 /*
  * 用户管理
  * */
-
 export interface User {
   id: number;
   password: string;

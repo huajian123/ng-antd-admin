@@ -20,7 +20,6 @@ interface InitThemeOption {
 /*
  * 初始化theme
  * */
-
 @Injectable({
   providedIn: 'root'
 })

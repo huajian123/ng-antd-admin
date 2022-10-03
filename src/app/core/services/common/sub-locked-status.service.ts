@@ -14,6 +14,7 @@ export class SubLockedStatusService {
   constructor(private windowSer: WindowService, private lockScreenStoreService: LockScreenStoreService) {}
 
   initLockedStatus(): void {
+    // 判断是否有缓存
     const hasCash = this.windowSer.getSessionStorage(LockedKey);
     if (hasCash) {
       this.lockScreenStoreService.setLockScreenStore(fnDecrypt(hasCash, salt));
