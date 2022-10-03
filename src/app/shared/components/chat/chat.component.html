@@ -44,8 +44,12 @@
     </div>
   </nz-card>
   <ng-template #extraTemplate>
-    <i *ngIf="!show" class="hand-model" (click)="show = !show" nz-icon nzType="arrows-alt" nzTheme="outline"></i>
-    <i *ngIf="show" (click)="show = !show" class="hand-model" nz-icon nzType="shrink" nzTheme="outline"></i>
+    <ng-template [ngIf]="show" [ngIfElse]="notShow">
+      <i (click)="show = !show" class="hand-model" nz-icon nzType="shrink" nzTheme="outline"></i>
+    </ng-template>
+    <ng-template #notShow>
+      <i class="hand-model" (click)="show = !show" nz-icon nzType="arrows-alt" nzTheme="outline"></i>
+    </ng-template>
     <i class="hand-model m-l-8" (click)="close()" nz-icon nzType="close" nzTheme="outline"></i>
   </ng-template>
   <ng-template #titleTemplate>

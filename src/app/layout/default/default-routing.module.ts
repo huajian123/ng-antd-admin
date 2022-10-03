@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { JudgAuthGuard } from '@core/services/common/guard/judgAuth.guard';
-import { JudgLoginGuard } from '@core/services/common/guard/judgLogin.guard';
+import { JudgeAuthGuard } from '@core/services/common/guard/judgeAuth.guard';
+import { JudgeLoginGuard } from '@core/services/common/guard/judgeLogin.guard';
 
 import { DefaultComponent } from './default.component';
 
@@ -11,7 +11,7 @@ const routes: Routes = [
     path: '',
     component: DefaultComponent,
     data: { shouldDetach: 'no' },
-    canActivateChild: [JudgLoginGuard, JudgAuthGuard],
+    canActivateChild: [JudgeLoginGuard, JudgeAuthGuard],
     children: [
       {
         path: 'dashboard',

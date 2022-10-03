@@ -14,7 +14,7 @@ import { WindowService } from '../window.service';
 @Injectable({
   providedIn: 'root'
 })
-export class JudgAuthGuard implements CanActivateChild {
+export class JudgeAuthGuard implements CanActivateChild {
   authCodeArray: string[] = [];
   selMenu!: Menu | null;
   menuNavList: Menu[] = [];
