@@ -152,21 +152,18 @@ export class TabService {
 
   // 右键tab选择“移除其他tab”
   delOtharTab(path: string, index: number): void {
-    for (let i = 0; i < this.tabArray.length; i++) {
-      if (this.tabArray[i].path !== path) {
-        this.tabArray.splice(i, 1);
-        i--;
-      }
-    }
+    // 要删除的tab
+    const beDelTabArray = this.tabArray.filter((item, tabindex) => {
+      return tabindex !== index;
+    });
 
-    // 获取当前鼠标选中的tab，所缓存的key
-    const seletedTabKey = this.getPathKey(path);
-    for (const key in SimpleReuseStrategy.handlers) {
-      // 删除所有 其它 key的缓存
-      if (key !== seletedTabKey) {
-        SimpleReuseStrategy.deleteRouteSnapshot(key);
-      }
-    }
+    // 处理应当展示的tab
+    this.tabArray = [this.tabArray[index]];
+    // 移除要删除的tab的缓存
+    beDelTabArray.forEach(({ snapshotArray }) => {
+      this.delReuseStrategy(snapshotArray);
+    });
+
     // 如果鼠标选中的tab的索引，不是当前打开的页面的tab的索引，则要将当前页面的key作为waitDelete防止这个当前tab展示的组件移除后仍然被缓存
     if (index !== this.currSelectedIndexTab) {
       // @ts-ignore
@@ -178,7 +175,7 @@ export class TabService {
 
   // 点击tab标签上x图标删除tab的动作,或者右键 点击“删除当前tab”动作
   delTab(tab: TabModel, index: number): void {
-    // 移除当前选中的tab
+    // 移除当前正在展示的tab
     if (index === this.currSelectedIndexTab) {
       const seletedTabKey = this.getPathKey(tab.path);
       this.tabArray.splice(index, 1);
@@ -198,6 +195,7 @@ export class TabService {
     }
     // 此操作为了解决例如列表页中有详情页，列表页和详情页两个页面的状态保存问题，解决了只能移除
     // 当前页面关闭的tab中状态的bug
+    // 删除选中的tab所缓存的快照
     this.delReuseStrategy(tab.snapshotArray);
     this.setTabsSourceData();
   }
