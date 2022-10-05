@@ -76,16 +76,6 @@ const routes: Routes = [
 ];
 ```
 
-# 模块中有类似详情页面需要跳转，必须设置参数如下
-relatedLink数组中保存相关联的两个路由，值为每个路由地址最后的/后的字符串
-```typescript
-const routes: Routes = [
-  {path: 'set-role', component: SetRoleComponent, data: {title: '角色管理', key: 'set-role', relatedLink: ['role', 'set-role']}},
-  {path: '', component: RoleManageComponent, data: {title: '角色管理', key: 'role', relatedLink: ['role', 'set-role']}},
-];
-
-```
-
 # 模块中打开新tab页来展示详情，必须设置参数如下
 在data中设置newTab
 ```typescript
@@ -103,7 +93,7 @@ const routes: Routes = [
 ```
 
 # 切换tab调用的临时声明周期如下
-relatedLink数组中保存相关联的两个路由，值为每个路由地址最后的/后的字符串
+
 ```typescript
 _onReuseInit: () => void;
 _onReuseDestroy: () => void;

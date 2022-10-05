@@ -14,6 +14,8 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
   // 缓存每个页面的scroll位置,为啥不放在handlers里面呢,因为路由离开时路由复用导致以当前页为key为null了
   static scrollHandlers: { [key: string]: NzSafeAny } = {};
 
+  // 这个参数的目的是，在当前页签中点击删除按钮，虽然页签关闭了，但是在路由离开的时候，还是会将已经关闭的页签的组件缓存，
+  // 用这个参数来记录，是否需要缓存当前路由
   public static waitDelete: string | null;
 
   public static deleteRouteSnapshot(key: string): void {
@@ -28,8 +30,12 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
 
   constructor(@Inject(DOCUMENT) private doc: Document, private scrollService: ScrollService) {}
 
+  // 获取key，为key+param的形式：login{name:xxx}
   getKey(route: ActivatedRouteSnapshot): string {
-    return route.data['newTab'] === 'true' ? route.data['key'] + JSON.stringify(route.queryParams) : route.data['key'];
+    if (!route.data['key']) {
+      return '';
+    }
+    return route.data['key'] + JSON.stringify(route.queryParams);
   }
 
   // 是否允许复用路由
@@ -43,8 +49,8 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
       return;
     }
     const key = this.getKey(route);
+    // 如果待删除的是当前路由则不存储快照
     if (SimpleReuseStrategy.waitDelete === key) {
-      // 如果待删除是当前路由则不存储快照
       this.runHook('_onReuseDestroy', handle.componentRef);
       handle.componentRef.destroy();
       SimpleReuseStrategy.waitDelete = null;
@@ -87,14 +93,14 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
     return !key ? null : SimpleReuseStrategy.handlers[key];
   }
 
-  // 进入路由触发，是否同一路由时复用路由
+  // 进入路由触发，是同一路由时复用路由
   shouldReuseRoute(future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot): boolean {
     const futureKey = this.getKey(future);
     const currKey = this.getKey(curr);
     if (!!futureKey && SimpleReuseStrategy.handlers[futureKey]) {
       this.runHook('_onReuseInit', SimpleReuseStrategy.handlers[futureKey].componentRef);
     }
-    // 在这里记住是否复用路由的结果，因为下面要改变future的路由
+
     const result = futureKey === currKey;
     // 懒加载读取不到data，通过此方法下钻到最下一级路由
     while (future.firstChild) {
@@ -102,16 +108,14 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
     }
     // 重新获取是因为future在上面while循环中已经变了
     const scrollFutureKey = this.getKey(future);
-    if (SimpleReuseStrategy.scrollHandlers[scrollFutureKey]) {
-      if (scrollFutureKey) {
-        SimpleReuseStrategy.scrollHandlers[scrollFutureKey].scroll.forEach((elOptionItem: { [key: string]: [number, number] }) => {
-          Object.keys(elOptionItem).forEach(element => {
-            setTimeout(() => {
-              this.scrollService.scrollToPosition(this.doc.querySelector(element), elOptionItem[element]);
-            }, 1);
-          });
+    if (!!scrollFutureKey && SimpleReuseStrategy.scrollHandlers[scrollFutureKey]) {
+      SimpleReuseStrategy.scrollHandlers[scrollFutureKey].scroll.forEach((elOptionItem: { [key: string]: [number, number] }) => {
+        Object.keys(elOptionItem).forEach(element => {
+          setTimeout(() => {
+            this.scrollService.scrollToPosition(this.doc.querySelector(element), elOptionItem[element]);
+          }, 1);
         });
-      }
+      });
     }
     return result;
   }

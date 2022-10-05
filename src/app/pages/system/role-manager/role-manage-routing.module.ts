@@ -13,14 +13,13 @@ const routes: Routes = [
     data: {
       title: '角色管理',
       key: 'set-role',
-      authCode: ActionCode.RoleManagerSetRole,
-      relatedLink: ['role-manage', 'set-role']
+      authCode: ActionCode.RoleManagerSetRole
     }
   },
   {
     path: '',
     component: RoleManageComponent,
-    data: { title: '角色管理', key: 'role-manage', relatedLink: ['role-manage', 'set-role'] }
+    data: { title: '角色管理', key: 'role-manage' }
   }
 ];
 

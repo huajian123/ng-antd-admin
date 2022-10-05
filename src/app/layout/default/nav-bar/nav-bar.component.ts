@@ -115,11 +115,17 @@ export class NavBarComponent implements OnInit {
       .subscribe(routeData => {
         // 详情页是否是打开新tab页签形式
         let isNewTabDetailPage = routeData['newTab'] === 'true';
+
+        let route = this.activatedRoute;
+        while (route.firstChild) {
+          route = route.firstChild;
+        }
+
         this.tabService.addTab(
           {
+            snapshotArray: [route.snapshot],
             title: routeData['title'],
-            path: this.routerPath,
-            relatedLink: routeData['relatedLink'] ? routeData['relatedLink'] : []
+            path: this.routerPath
           },
           isNewTabDetailPage
         );

@@ -10,7 +10,7 @@ const routes: Routes = [
   {
     path: '',
     component: SearchTableComponent,
-    data: { title: '查询表格', key: 'search-table', relatedLink: ['search-table', 'search-table-detail'] }
+    data: { title: '查询表格', key: 'search-table' }
   },
   {
     path: 'search-table-detail',
@@ -18,8 +18,7 @@ const routes: Routes = [
     data: {
       title: '查询表格',
       authCode: ActionCode.SearchTableDetail,
-      key: 'search-table-detail',
-      relatedLink: ['search-table', 'search-table-detail']
+      key: 'search-table-detail'
     }
   }
 ];
