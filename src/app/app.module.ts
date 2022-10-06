@@ -13,7 +13,6 @@ import { StartupService } from '@core/startup/startup.service';
 import { SharedModule } from '@shared/shared.module';
 import { LoginModalModule } from '@widget/biz-widget/login/login-modal.module';
 import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
-import { QuicklinkModule } from 'ngx-quicklink';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -89,7 +88,7 @@ const APPINIT_PROVIDES = [
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, BrowserAnimationsModule, HttpClientModule, CoreModule, SharedModule, LoginModalModule, PasswordStrengthMeterModule.forRoot(), QuicklinkModule, AppRoutingModule],
+  imports: [BrowserModule, BrowserAnimationsModule, HttpClientModule, CoreModule, SharedModule, LoginModalModule, PasswordStrengthMeterModule.forRoot(), AppRoutingModule],
   providers: [...interceptors, ...APPINIT_PROVIDES],
   bootstrap: [AppComponent]
 })

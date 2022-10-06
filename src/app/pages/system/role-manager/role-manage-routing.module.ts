@@ -8,6 +8,11 @@ import { SetRoleComponent } from './set-role/set-role.component';
 
 const routes: Routes = [
   {
+    path: '',
+    component: RoleManageComponent,
+    data: { title: '角色管理', key: 'role-manage' }
+  },
+  {
     path: 'set-role',
     component: SetRoleComponent,
     data: {
@@ -15,11 +20,6 @@ const routes: Routes = [
       key: 'set-role',
       authCode: ActionCode.RoleManagerSetRole
     }
-  },
-  {
-    path: '',
-    component: RoleManageComponent,
-    data: { title: '角色管理', key: 'role-manage' }
   }
 ];
 

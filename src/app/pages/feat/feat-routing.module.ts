@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'ex-modal', pathMatch: 'full' },
   { path: 'msg', loadChildren: () => import('./msg/msg.module').then(m => m.MsgModule) },
   { path: 'ex-modal', loadChildren: () => import('./ex-modal/ex-modal.module').then(m => m.ExModalModule) },
   { path: 'ex-drawer', loadChildren: () => import('./ex-drawer/ex-drawer.module').then(m => m.ExDrawerModule) },
@@ -32,8 +33,7 @@ const routes: Routes = [
   { path: 'ripple', loadChildren: () => import('./ripple/ripple.module').then(m => m.RippleModule) },
   { path: 'copy', loadChildren: () => import('./copy/copy.module').then(m => m.CopyModule) },
   { path: 'setup', loadChildren: () => import('./setup/setup.module').then(m => m.SetupModule) },
-  { path: 'download', loadChildren: () => import('./download/download.module').then(m => m.DownloadModule) },
-  { path: '', redirectTo: 'ex-modal', pathMatch: 'full' }
+  { path: 'download', loadChildren: () => import('./download/download.module').then(m => m.DownloadModule) }
 ];
 
 @NgModule({

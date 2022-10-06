@@ -9,15 +9,16 @@ const routes: Routes = [
     component: LoginComponent,
     data: { key: 'login', shouldDetach: 'no' },
     children: [
+      { path: '', redirectTo: '/login/login-form', pathMatch: 'full' },
       {
         path: 'login-form',
+        data: { preload: true },
         loadChildren: () => import('./login-form/login-form.module').then(m => m.LoginFormModule)
       },
       {
         path: 'register-form',
         loadChildren: () => import('./register-form/register-form.module').then(m => m.RegisterFormModule)
-      },
-      { path: '', redirectTo: '/login/login-form', pathMatch: 'full' }
+      }
     ]
   }
 ];

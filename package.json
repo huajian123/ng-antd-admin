@@ -40,7 +40,6 @@
     "ng-zorro-antd": "^14.0.0",
     "ngx-color-picker": "^12.0.1",
     "ngx-echarts": "^14.0.0",
-    "ngx-quicklink": "^0.3.0",
     "rxjs": "~7.5.0",
     "screenfull": "^6.0.2",
     "tslib": "^2.3.0",

@@ -10,11 +10,13 @@ const routes: Routes = [
   {
     path: '',
     component: DefaultComponent,
-    data: { shouldDetach: 'no' },
+    data: { shouldDetach: 'no', preload: true },
     canActivateChild: [JudgeLoginGuard, JudgeAuthGuard],
     children: [
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       {
         path: 'dashboard',
+        data: { preload: true },
         loadChildren: () => import('../../pages/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
       {
@@ -40,8 +42,7 @@ const routes: Routes = [
       {
         path: 'system',
         loadChildren: () => import('../../pages/system/system.module').then(m => m.SystemModule)
-      },
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
+      }
     ]
   }
 ];
