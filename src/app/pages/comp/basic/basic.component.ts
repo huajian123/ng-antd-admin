@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import {PageHeaderType} from "@shared/components/page-header/page-header.component";
+
+import { PageHeaderType } from '@shared/components/page-header/page-header.component';
 
 @Component({
   selector: 'app-basic',
@@ -8,17 +9,13 @@ import {PageHeaderType} from "@shared/components/page-header/page-header.compone
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BasicComponent implements OnInit {
-
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '基础组件',
     breadcrumb: ['首页', '组件', '基础组件'],
     desc: '一系列基础组件'
   };
 
-  constructor() { }
-  cardPadding = {padding: '20px 24px 8px'};
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
