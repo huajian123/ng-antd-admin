@@ -26,7 +26,7 @@
     "@antv/g2plot": "^2.4.20",
     "@antv/l7": "^2.9.27",
     "@antv/x6": "^1.33.1",
-    "@auth0/angular-jwt": "^5.0.2",
+    "@auth0/angular-jwt": "^5.1.0",
     "@tinymce/tinymce-angular": "^7.0.0",
     "@zxcvbn-ts/core": "^2.0.4",
     "@zxcvbn-ts/language-en": "^2.0.1",
