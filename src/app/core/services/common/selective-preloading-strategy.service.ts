@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { PreloadingStrategy, Route } from '@angular/router';
 import { Observable, of } from 'rxjs';
 
+/*
+ * 模块预加载service
+ * */
 @Injectable({
   providedIn: 'root'
 })
