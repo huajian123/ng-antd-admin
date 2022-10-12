@@ -40,7 +40,7 @@ export class LoginInOutService {
   loginIn(token: string): Promise<void> {
     return new Promise(resolve => {
       // 将 token 持久化缓存，请注意，如果没有缓存，则会在路由守卫中被拦截，不让路由跳转
-      // 这个路由守卫在src/app/core/services/common/guard/judgLogin.guard.ts
+      // 这个路由守卫在src/app/core/services/common/guard/judgeLogin.guard.ts
       this.windowServe.setSessionStorage(TokenKey, TokenPre + token);
       // 解析token ，然后获取用户信息
       const userInfo: UserInfo = this.userInfoService.parsToken(TokenPre + token);

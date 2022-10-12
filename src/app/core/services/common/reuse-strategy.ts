@@ -59,7 +59,7 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
     }
 
     // 离开路由的时候缓存当前页面的scroll位置
-    // 默认都需要keepScroll，如果不需要keepScroll才添加noNeedKeepScroll:no属性
+    // 默认都需要keepScroll，如果不需要keepScroll才添加needKeepScroll:no属性
     const innerScrollContainer = [];
     if (route.data['needKeepScroll'] !== 'no') {
       const scrollContain = route.data['scrollContain'] ?? [];
