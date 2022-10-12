@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, ChangeDetectorRef, OnChanges, SimpleChanges } from '@angular/core';
 
-import { MyTableConfig, SortFile, TableHeader } from '@shared/components/ant-table/ant-table.component';
+import { AntTableConfig, SortFile, TableHeader } from '@shared/components/ant-table/ant-table.component';
 import { fnGetFlattenTreeDataByMap, fnTreeDataToMap } from '@utils/treeTableTools';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzResizeEvent } from 'ng-zorro-antd/resizable';
@@ -18,7 +18,7 @@ export interface TreeNodeInterface {
 
 export abstract class AntTreeTableComponentToken {
   tableSize!: NzTableSize;
-  tableConfig!: MyTableConfig;
+  tableConfig!: AntTableConfig;
 
   abstract tableChangeDectction(): void;
 }
@@ -41,7 +41,7 @@ export class TreeTableComponent implements OnInit, OnChanges {
   @Output() changePageNum = new EventEmitter<NzTableQueryParams>();
   @Output() changePageSize = new EventEmitter<number>();
   mapOfExpandedData: { [key: string]: TreeNodeInterface[] } = {};
-  @Input() tableConfig!: MyTableConfig;
+  @Input() tableConfig!: AntTableConfig;
   @Output() selectedChange: EventEmitter<NzSafeAny[]> = new EventEmitter<NzSafeAny[]>();
   cashExpandIdArray: Array<number | string> = []; // 缓存已经展开的节点的id
 

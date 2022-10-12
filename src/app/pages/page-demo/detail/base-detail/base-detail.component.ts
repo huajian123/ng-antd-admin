@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, TemplateRef, ViewChild } from '@angular/core';
 
-import { MyTableConfig } from '@shared/components/ant-table/ant-table.component';
+import { AntTableConfig } from '@shared/components/ant-table/ant-table.component';
 import { PageHeaderType } from '@shared/components/page-header/page-header.component';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
@@ -25,8 +25,8 @@ export class BaseDetailComponent implements OnInit {
     title: '基础详情页',
     breadcrumb: ['首页', '详情页', '基础详情页']
   };
-  returnTableConfig!: MyTableConfig;
-  returnTableConfig2!: MyTableConfig;
+  returnTableConfig!: AntTableConfig;
+  returnTableConfig2!: AntTableConfig;
   returnDataList: ReturnObj[] = [
     {
       num: '1234561',

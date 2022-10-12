@@ -1,7 +1,7 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 
-import { MyTableConfig } from '@shared/components/ant-table/ant-table.component';
+import { AntTableConfig } from '@shared/components/ant-table/ant-table.component';
 import { PageHeaderType } from '@shared/components/page-header/page-header.component';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
@@ -31,7 +31,7 @@ export class AdvDetailComponent implements OnInit, AfterViewInit {
   @ViewChild('headerFooter', { static: false }) headerFooter!: TemplateRef<NzSafeAny>;
   @ViewChild('highLightTpl', { static: true }) highLightTpl!: TemplateRef<NzSafeAny>;
   stepDirection: 'horizontal' | 'vertical' = 'horizontal';
-  returnTableConfig!: MyTableConfig;
+  returnTableConfig!: AntTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '',
     breadcrumb: [],

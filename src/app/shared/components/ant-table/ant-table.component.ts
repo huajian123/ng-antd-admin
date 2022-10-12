@@ -23,7 +23,7 @@ export interface TableHeader {
   thClassFn?: (data: any) => string[];
 }
 
-export interface MyTableConfig {
+export interface AntTableConfig {
   needNoScroll?: boolean; //列表是否需要滚动条
   xScroll?: number; //列表横向滚动条
   yScroll?: number; //列表纵向滚动条
@@ -38,7 +38,7 @@ export interface MyTableConfig {
 
 export abstract class AntTableComponentToken {
   tableSize!: NzTableSize;
-  tableConfig!: MyTableConfig;
+  tableConfig!: AntTableConfig;
 
   abstract tableChangeDectction(): void;
 }
@@ -57,7 +57,7 @@ export interface SortFile {
 })
 export class AntTableComponent implements OnInit, OnChanges {
   _dataList!: NzSafeAny[];
-  _tableConfig!: MyTableConfig;
+  _tableConfig!: AntTableConfig;
   _scrollConfig: { x: string; y: string } | {} = {};
   // 从业务组件中传入的缓存的已经选中的checkbox数据数组
   @Input() checkedCashArrayFromComment: NzSafeAny[] = [];
@@ -87,12 +87,12 @@ export class AntTableComponent implements OnInit, OnChanges {
   }
 
   @Input()
-  set tableConfig(value: MyTableConfig) {
+  set tableConfig(value: AntTableConfig) {
     this._tableConfig = value;
     this.setScrollConfig(value);
   }
 
-  get tableConfig(): MyTableConfig {
+  get tableConfig(): AntTableConfig {
     return this._tableConfig;
   }
 
@@ -105,7 +105,7 @@ export class AntTableComponent implements OnInit, OnChanges {
 
   constructor(private cdr: ChangeDetectorRef) {}
 
-  setScrollConfig(value: MyTableConfig): void {
+  setScrollConfig(value: AntTableConfig): void {
     if (value && !value.needNoScroll) {
       // 默认x：100
       this._scrollConfig = { x: '100px' };

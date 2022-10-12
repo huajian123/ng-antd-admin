@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { SearchCommonVO } from '@core/services/types';
-import { MyTableConfig, SortFile } from '@shared/components/ant-table/ant-table.component';
+import { AntTableConfig, SortFile } from '@shared/components/ant-table/ant-table.component';
 import { PageHeaderType } from '@shared/components/page-header/page-header.component';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -26,7 +26,7 @@ export class SearchTableComponent implements OnInit {
   @ViewChild('highLightTpl', { static: true }) highLightTpl!: TemplateRef<NzSafeAny>;
   @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<NzSafeAny>;
   isCollapse = true;
-  tableConfig!: MyTableConfig;
+  tableConfig!: AntTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '查询表格（表头可拖动，点击列表的"查看"按钮，演示在当前tab打开详情操作，如果需要新开tab展示详情，请跳转到"功能>页签操作"中查看演示效果）',
     // desc: '表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。',

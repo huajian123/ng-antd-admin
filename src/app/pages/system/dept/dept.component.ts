@@ -6,19 +6,17 @@ import { finalize } from 'rxjs/operators';
 import { ActionCode } from '@app/config/actionCode';
 import { OptionsInterface, SearchCommonVO } from '@core/services/types';
 import { Dept, DeptService } from '@services/system/dept.service';
-import { MyTableConfig } from '@shared/components/ant-table/ant-table.component';
+import { AntTableConfig } from '@shared/components/ant-table/ant-table.component';
 import { PageHeaderType } from '@shared/components/page-header/page-header.component';
 import { TreeNodeInterface } from '@shared/components/tree-table/tree-table.component';
 import { MapKeyType, MapPipe, MapSet } from '@shared/pipes/map.pipe';
 import { fnFlatDataHasParentToTree, fnFlattenTreeDataByDataList } from '@utils/treeTableTools';
-import {NzSafeAny} from "ng-zorro-antd/core/types";
-
-
+import { ModalBtnStatus } from '@widget/base-modal';
+import { DeptManageModalService } from '@widget/biz-widget/system/dept-manage-modal/dept-manage-modal.service';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
-import { ModalBtnStatus } from '@widget/base-modal';
-import { DeptManageModalService } from '@widget/biz-widget/system/dept-manage-modal/dept-manage-modal.service';
 
 interface SearchParam {
   departmentName: string;
@@ -37,7 +35,7 @@ export class DeptComponent implements OnInit {
   ActionCode = ActionCode;
   searchParam: Partial<SearchParam> = {};
 
-  tableConfig!: MyTableConfig;
+  tableConfig!: AntTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '部门管理(数据库每10分钟从备份恢复一次)',
     breadcrumb: ['首页', '系统管理', '部门管理']

@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { SearchCommonVO } from '@core/services/types';
-import { MyTableConfig, SortFile } from '@shared/components/ant-table/ant-table.component';
+import { AntTableConfig, SortFile } from '@shared/components/ant-table/ant-table.component';
 import { PageHeaderType } from '@shared/components/page-header/page-header.component';
 import { fnFlattenTreeDataByDataList } from '@utils/treeTableTools';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -28,7 +28,7 @@ export class TreeListComponent implements OnInit {
   searchParam: Partial<SearchParam> = {};
 
   isCollapse = true;
-  tableConfig!: MyTableConfig;
+  tableConfig!: AntTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '树状表格（演示默认值的情况，删除或者查看，可以打印选中行的id）',
     // desc: '表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。',

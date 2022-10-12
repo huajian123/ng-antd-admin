@@ -6,7 +6,7 @@ import { ActionCode } from '@app/config/actionCode';
 import { MessageService } from '@core/services/common/message.service';
 import { SearchCommonVO } from '@core/services/types';
 import { Role, RoleService } from '@services/system/role.service';
-import { MyTableConfig } from '@shared/components/ant-table/ant-table.component';
+import { AntTableConfig } from '@shared/components/ant-table/ant-table.component';
 import { PageHeaderType } from '@shared/components/page-header/page-header.component';
 import { ModalBtnStatus } from '@widget/base-modal';
 import { RoleManageModalService } from '@widget/biz-widget/system/role-manage-modal/role-manage-modal.service';
@@ -27,7 +27,7 @@ interface SearchParam {
 export class RoleManageComponent implements OnInit {
   @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<any>;
   searchParam: Partial<SearchParam> = {};
-  tableConfig!: MyTableConfig;
+  tableConfig!: AntTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '角色管理(数据库每10分钟从备份恢复一次)',
     breadcrumb: ['首页', '用户管理', '角色管理']

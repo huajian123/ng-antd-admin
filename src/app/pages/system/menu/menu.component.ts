@@ -6,7 +6,7 @@ import { finalize } from 'rxjs/operators';
 import { ActionCode } from '@app/config/actionCode';
 import { OptionsInterface, SearchCommonVO } from '@core/services/types';
 import { MenuListObj, MenusService } from '@services/system/menus.service';
-import { MyTableConfig } from '@shared/components/ant-table/ant-table.component';
+import { AntTableConfig } from '@shared/components/ant-table/ant-table.component';
 import { PageHeaderType } from '@shared/components/page-header/page-header.component';
 import { TreeNodeInterface } from '@shared/components/tree-table/tree-table.component';
 import { MapKeyType, MapPipe, MapSet } from '@shared/pipes/map.pipe';
@@ -39,7 +39,7 @@ export class MenuComponent implements OnInit {
   ActionCode = ActionCode;
   searchParam: Partial<SearchParam> = {};
 
-  tableConfig!: MyTableConfig;
+  tableConfig!: AntTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '菜单管理(数据库每10分钟从备份恢复一次),新增完菜单记得给对应角色添加刚刚新增的菜单权限，不然无法展示',
     breadcrumb: ['首页', '系统管理', '菜单管理']
