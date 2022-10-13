@@ -1,38 +1,35 @@
-import {Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef} from '@angular/core';
-import {SearchCommonVO,} from "@core/services/types";
-import {AntTableConfig, SortFile} from "@shared/components/ant-table/ant-table.component";
-import {PageHeaderType} from "@shared/components/page-header/page-header.component";
-import {NzModalService} from "ng-zorro-antd/modal";
-import {NzMessageService} from "ng-zorro-antd/message";
-import {Router} from "@angular/router";
-import {NzTableQueryParams} from "ng-zorro-antd/table";
-import {finalize, takeUntil} from "rxjs/operators";
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef } from '@angular/core';
+import { Router } from '@angular/router';
+import { finalize, takeUntil } from 'rxjs/operators';
 
+import { SearchCommonVO } from '@core/services/types';
+import { AntTableConfig, SortFile } from '@shared/components/ant-table/ant-table.component';
+import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzTableQueryParams } from 'ng-zorro-antd/table';
   <% if(mName==name){%>
-import {<%= classify(name) %>Obj,<%= classify(name) %>Service} from "@services/<%= dasherize(name) %>/<%= dasherize(name) %>.service";
+import { <%= classify(name) %>Obj, <%= classify(name) %>Service } from '@services/<%= dasherize(name) %>/<%= dasherize(name) %>.service';
   <%}else{%>
-import {<%= classify(name) %>Obj,<%= classify(name) %>Service} from "@services/<%= dasherize(mName) %>/<%= dasherize(name) %>.service";
+import { <%= classify(name) %>Obj, <%= classify(name) %>Service } from '@services/<%= dasherize(mName) %>/<%= dasherize(name) %>.service';
   <%}%>
-
-import {DestroyService} from "@core/services/common/destory.service";
+import { DestroyService } from '@core/services/common/destory.service';
   <% if(needAddModal){%>
-import {ModalBtnStatus} from "@widget/base-modal";
+import { ModalBtnStatus } from '@widget/base-modal';
   <%}else{%>
   <%}%>
 <% if(needAddModal){%>
   <% if(mName==name){%>
-import {<%=classify(name)%>ModalService} from "@widget/biz-widget/<%= dasherize(name) %>-modal/<%= dasherize(name) %>-modal.service";
+import { <%=classify(name)%>ModalService } from "@widget/biz-widget/<%= dasherize(name) %>-modal/<%= dasherize(name) %>-modal.service";
   <%}else{%>
-import {<%=classify(name)%>ModalService} from "@widget/biz-widget/<%= dasherize(mName) %>/<%= dasherize(name) %>-modal/<%= dasherize(name) %>-modal.service";
+import { <%=classify(name)%>ModalService } from "@widget/biz-widget/<%= dasherize(mName) %>/<%= dasherize(name) %>-modal/<%= dasherize(name) %>-modal.service";
   <%}%>
 
     <%}else{%>
 
     <%}%>
-
 interface SearchParam {
-  personId: number;
-  title: string;
+  desc: string;
 }
 
 @Component({
@@ -43,33 +40,38 @@ interface SearchParam {
   providers: [DestroyService]
 })
 export class <%= classify(name) %>Component implements OnInit {
-  @ViewChild('highLightTpl', {static: true}) highLightTpl!: TemplateRef<any>;
-  @ViewChild('operationTpl', {static: true}) operationTpl!: TemplateRef<any>;
+  @ViewChild('highLightTpl', { static: true }) highLightTpl!: TemplateRef<any>;
+  @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<any>;
   isCollapse = true;
   tableConfig!: AntTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '查询表格（表头可拖动）',
-    // desc: '表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。',
+    desc: '表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。',
     breadcrumb: ['首页', '列表页', '查询表格']
   };
-  checkedCashArray: <%= classify(name) %>Obj[] = [];
+  checkedCashArray: <%= classify(name) %>Obj[] = []; // 表格checkBox缓存的数组，如果不需要，可以将这个属性相关的内容删除
   dataList: <%= classify(name) %>Obj[] = [];
   searchParam: Partial<SearchParam> = {};
 
   constructor(private dataService: <%= classify(name) %>Service,
   <% if(needAddModal){%>
   private modalService: <%= classify(name) %>ModalService,
-  <%}else{%>
-  <%}%>
+  <%}else{%><%}%>
               private modalSrv: NzModalService,
               private destroy$: DestroyService,
               public message: NzMessageService,
-              private router: Router, private cdr: ChangeDetectorRef) {
+              private router: Router,
+              private cdr: ChangeDetectorRef) {
   }
 
   reloadTable(): void {
     this.message.info('刷新成功')
     this.getDataList();
+  }
+
+  // 最左侧复选框选中触发
+  selectedChecked(e: any): void {
+    this.checkedCashArray = [...e];
   }
 
   // 触发表格变更检测
@@ -123,8 +125,14 @@ export class <%= classify(name) %>Component implements OnInit {
              return;
            }
            this.addEditData(modalValue, 'add<%= classify(name) %>');
-         })
+         },
+          error => this.tableLoading(false)
+         )
       <%}else{%>
+       this.tableLoading(true);
+          // todo 这里需要你自己根据业务修改addParam
+          const addParam: CeshiObj = { id: 0 };
+          this.addEditData(addParam, 'add<%= classify(name) %>');
       <%}%>
   }
 
@@ -141,16 +149,25 @@ export class <%= classify(name) %>Component implements OnInit {
               this.addEditData(modalValue, 'edit<%= classify(name) %>');
             }, error => this.tableLoading(false));
       <%}else{%>
-
+        // res为先根据id获取的详情对象
+        res.id = id;
+        this.tableLoading(true);
+        this.addEditData(res, 'editCeshi');
       <%}%>
     });
   }
 
 
   addEditData(param: <%= classify(name) %>Obj, methodName: 'edit<%= classify(name) %>' | 'add<%= classify(name) %>'): void {
-    this.dataService[methodName](param).subscribe(() => {
-      this.getDataList();
-    });
+   this.dataService[methodName](param)
+      .pipe(
+        finalize(() => {
+          this.tableLoading(false);
+        })
+      )
+      .subscribe(() => {
+        this.getDataList();
+      });
   }
 
   del(id: number): void {

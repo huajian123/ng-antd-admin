@@ -10,6 +10,7 @@ npm link ng-ant-sch
 ng g ng-ant-sch:g-m
 
 # 如果是二级菜单，需要执行生成模块命令，选择二级菜单后，单独执行生成组件命令
+# 注意：生成一级菜单后，再生成二级菜单，要把一级菜单中的路由模块  {path: 'demo', loadChildren: () => import('./demo/demo.module').then(m => m.DemoModule)},删除，同时redirectTo: 'demo' 中的demo改成你自己的二级模块
 # 生成组件
 ng g ng-ant-sch:b-c
 

@@ -2,19 +2,20 @@
  * 只有在菜单静态加载时候，可以把以下注释打开
  * */
 
-/*
-import {Menu} from '@core/services/types';
-import {InjectionToken} from "@angular/core";
+/*import { InjectionToken } from '@angular/core';
+
+import { ActionCode } from '@config/actionCode';
+import { Menu } from '@core/services/types';
 
 /!*定义菜单*!/
 export const MENU_TOKEN = new InjectionToken<Menu[]>('menu-token', {
-  providedIn: 'root', factory(): Menu[] {
+  providedIn: 'root',
+  factory(): Menu[] {
     return menuNav;
   }
-})
+});
 
 const menuNav: Menu[] = [
-
   {
     menuName: 'Dashboard',
     id: 1,
@@ -24,41 +25,41 @@ const menuNav: Menu[] = [
     selected: false,
     menuType: 'C',
     path: '/default/dashboard',
-    code: '',
+    code: ActionCode.TabsDetail,
     children: [
       {
         id: 1,
         fatherId: 0,
         menuName: '分析页',
         open: false,
-        icon: "fund",
+        icon: 'fund',
         selected: false,
         menuType: 'C',
-        code: '',
-        path: '/default/dashboard/analysis',
+        code: ActionCode.TabsDetail,
+        path: '/default/dashboard/analysis'
       },
       {
         id: 1,
         fatherId: 0,
         menuName: '监控页',
         open: false,
-        icon: "fund",
+        icon: 'fund',
         selected: false,
         menuType: 'C',
-        code: '',
-        path: '/default/dashboard/monitor',
+        code: ActionCode.TabsDetail,
+        path: '/default/dashboard/monitor'
       },
       {
         id: 1,
         fatherId: 0,
         menuName: '工作台',
         open: false,
-        icon: "appstore",
+        icon: 'appstore',
         selected: false,
         menuType: 'C',
-        code: '',
-        path: '/default/dashboard/workbench',
-      },
+        code: ActionCode.TabsDetail,
+        path: '/default/dashboard/workbench'
+      }
     ]
   },
   {
@@ -67,7 +68,7 @@ const menuNav: Menu[] = [
     open: false,
     id: 1,
     fatherId: 0,
-    code: '',
+    code: ActionCode.TabsDetail,
     selected: false,
     menuType: 'C',
     path: '/default/page-demo',
@@ -80,7 +81,7 @@ const menuNav: Menu[] = [
         open: false,
         selected: false,
         menuType: 'C',
-        code: '',
+        code: ActionCode.TabsDetail,
         path: '/default/page-demo/form',
         children: [
           {
@@ -91,8 +92,8 @@ const menuNav: Menu[] = [
             selected: false,
             menuType: 'C',
             icon: 'form',
-            code: '',
-            path: '/default/page-demo/form/base-form',
+            code: ActionCode.TabsDetail,
+            path: '/default/page-demo/form/base-form'
           },
           {
             id: 1,
@@ -101,9 +102,9 @@ const menuNav: Menu[] = [
             open: false,
             selected: false,
             menuType: 'C',
-            code: '',
+            code: ActionCode.TabsDetail,
             icon: 'form',
-            path: '/default/page-demo/form/step-form',
+            path: '/default/page-demo/form/step-form'
           },
           {
             id: 1,
@@ -112,10 +113,10 @@ const menuNav: Menu[] = [
             open: false,
             selected: false,
             menuType: 'C',
-            code: '',
+            code: ActionCode.TabsDetail,
             icon: 'form',
-            path: '/default/page-demo/form/advanced-form',
-          },
+            path: '/default/page-demo/form/advanced-form'
+          }
         ]
       },
       {
@@ -124,7 +125,7 @@ const menuNav: Menu[] = [
         open: false,
         selected: false,
         menuType: 'C',
-        code: '',
+        code: ActionCode.TabsDetail,
         id: 1,
         fatherId: 0,
         path: '/default/page-demo/list',
@@ -136,7 +137,7 @@ const menuNav: Menu[] = [
             open: false,
             selected: false,
             menuType: 'C',
-            code: '',
+            code: ActionCode.TabsDetail,
             icon: 'table',
             path: '/default/page-demo/list/search-list',
             children: [
@@ -148,8 +149,8 @@ const menuNav: Menu[] = [
                 selected: false,
                 menuType: 'C',
                 icon: 'table',
-                code: '',
-                path: '/default/page-demo/list/search-list/article',
+                code: ActionCode.TabsDetail,
+                path: '/default/page-demo/list/search-list/article'
               },
               {
                 id: 1,
@@ -159,8 +160,8 @@ const menuNav: Menu[] = [
                 selected: false,
                 menuType: 'C',
                 icon: 'table',
-                code: '',
-                path: '/default/page-demo/list/search-list/project',
+                code: ActionCode.TabsDetail,
+                path: '/default/page-demo/list/search-list/project'
               },
               {
                 id: 1,
@@ -170,9 +171,9 @@ const menuNav: Menu[] = [
                 selected: false,
                 menuType: 'C',
                 icon: 'table',
-                code: '',
-                path: '/default/page-demo/list/search-list/application',
-              },
+                code: ActionCode.TabsDetail,
+                path: '/default/page-demo/list/search-list/application'
+              }
             ]
           },
           {
@@ -183,8 +184,8 @@ const menuNav: Menu[] = [
             selected: false,
             menuType: 'C',
             icon: 'table',
-            code: '',
-            path: '/default/page-demo/list/search-table',
+            code: ActionCode.TabsDetail,
+            path: '/default/page-demo/list/search-table'
           },
           {
             id: 1,
@@ -194,8 +195,8 @@ const menuNav: Menu[] = [
             selected: false,
             menuType: 'C',
             icon: 'table',
-            code: '',
-            path: '/default/page-demo/list/tree-list',
+            code: ActionCode.TabsDetail,
+            path: '/default/page-demo/list/tree-list'
           },
           {
             id: 1,
@@ -205,8 +206,8 @@ const menuNav: Menu[] = [
             selected: false,
             menuType: 'C',
             icon: 'table',
-            code: '',
-            path: '/default/page-demo/list/standard-table',
+            code: ActionCode.TabsDetail,
+            path: '/default/page-demo/list/standard-table'
           },
           {
             id: 1,
@@ -216,9 +217,9 @@ const menuNav: Menu[] = [
             selected: false,
             menuType: 'C',
             icon: 'table',
-            code: '',
-            path: '/default/page-demo/list/card-table',
-          },
+            code: ActionCode.TabsDetail,
+            path: '/default/page-demo/list/card-table'
+          }
         ]
       },
       {
@@ -229,7 +230,7 @@ const menuNav: Menu[] = [
         open: false,
         selected: false,
         menuType: 'C',
-        code: '',
+        code: ActionCode.TabsDetail,
         path: '/default/page-demo/detail',
         children: [
           {
@@ -239,9 +240,9 @@ const menuNav: Menu[] = [
             open: false,
             selected: false,
             menuType: 'C',
-            code: '',
+            code: ActionCode.TabsDetail,
             icon: 'profile',
-            path: '/default/page-demo/detail/base-detail',
+            path: '/default/page-demo/detail/base-detail'
           },
           {
             id: 1,
@@ -250,10 +251,10 @@ const menuNav: Menu[] = [
             open: false,
             selected: false,
             menuType: 'C',
-            code: '',
+            code: ActionCode.TabsDetail,
             icon: 'profile',
-            path: '/default/page-demo/detail/adv-detail',
-          },
+            path: '/default/page-demo/detail/adv-detail'
+          }
         ]
       },
       {
@@ -264,7 +265,7 @@ const menuNav: Menu[] = [
         open: false,
         selected: false,
         menuType: 'C',
-        code: '',
+        code: ActionCode.TabsDetail,
         path: '/default/page-demo/result',
         children: [
           {
@@ -275,8 +276,8 @@ const menuNav: Menu[] = [
             selected: false,
             menuType: 'C',
             icon: 'check-circle',
-            code: '',
-            path: '/default/page-demo/result/success',
+            code: ActionCode.TabsDetail,
+            path: '/default/page-demo/result/success'
           },
           {
             id: 1,
@@ -285,10 +286,10 @@ const menuNav: Menu[] = [
             open: false,
             selected: false,
             menuType: 'C',
-            code: '',
+            code: ActionCode.TabsDetail,
             icon: 'check-circle',
-            path: '/default/page-demo/result/fail',
-          },
+            path: '/default/page-demo/result/fail'
+          }
         ]
       },
       {
@@ -299,7 +300,7 @@ const menuNav: Menu[] = [
         open: false,
         selected: false,
         menuType: 'C',
-        code: '',
+        code: ActionCode.TabsDetail,
         path: '/default/page-demo/except',
         children: [
           {
@@ -307,11 +308,11 @@ const menuNav: Menu[] = [
             fatherId: 0,
             menuName: '403',
             open: false,
-            code: '',
+            code: ActionCode.TabsDetail,
             selected: false,
             menuType: 'C',
             icon: 'warning',
-            path: '/default/page-demo/except/except403',
+            path: '/default/page-demo/except/except403'
           },
           {
             id: 1,
@@ -321,8 +322,8 @@ const menuNav: Menu[] = [
             selected: false,
             menuType: 'C',
             icon: 'warning',
-            code: '',
-            path: '/default/page-demo/except/except404',
+            code: ActionCode.TabsDetail,
+            path: '/default/page-demo/except/except404'
           },
           {
             id: 1,
@@ -331,10 +332,10 @@ const menuNav: Menu[] = [
             open: false,
             selected: false,
             menuType: 'C',
-            code: '',
+            code: ActionCode.TabsDetail,
             icon: 'warning',
-            path: '/default/page-demo/except/except500',
-          },
+            path: '/default/page-demo/except/except500'
+          }
         ]
       },
       {
@@ -345,7 +346,7 @@ const menuNav: Menu[] = [
         open: false,
         selected: false,
         menuType: 'C',
-        code: '',
+        code: ActionCode.TabsDetail,
         path: '/default/page-demo/personal',
         children: [
           {
@@ -356,20 +357,20 @@ const menuNav: Menu[] = [
             selected: false,
             menuType: 'C',
             icon: 'user',
-            code: '',
-            path: '/default/page-demo/personal/personal-center',
+            code: ActionCode.TabsDetail,
+            path: '/default/page-demo/personal/personal-center'
           },
           {
             id: 1,
             fatherId: 0,
             menuName: '个人设置',
             open: false,
-            code: '',
+            code: ActionCode.TabsDetail,
             selected: false,
             menuType: 'C',
             icon: 'user',
-            path: '/default/page-demo/personal/personal-setting',
-          },
+            path: '/default/page-demo/personal/personal-setting'
+          }
         ]
       },
       {
@@ -379,7 +380,7 @@ const menuNav: Menu[] = [
         icon: '',
         alIcon: 'icon-mel-help',
         open: false,
-        code: '',
+        code: ActionCode.TabsDetail,
         selected: false,
         menuType: 'C',
         path: '/default/page-demo/flow',
@@ -393,10 +394,10 @@ const menuNav: Menu[] = [
             menuType: 'C',
             icon: 'highlight',
             path: '/default/page-demo/flow/flow-chat',
-            code: '',
-          },
+            code: ActionCode.TabsDetail
+          }
         ]
-      },
+      }
     ]
   },
   {
@@ -405,7 +406,7 @@ const menuNav: Menu[] = [
     menuName: '功能',
     icon: 'star',
     open: false,
-    code: '',
+    code: ActionCode.TabsDetail,
     selected: false,
     menuType: 'C',
     path: '/default/feat',
@@ -416,10 +417,10 @@ const menuNav: Menu[] = [
         menuName: '消息提示',
         icon: 'dashboard',
         open: false,
-        code: '',
+        code: ActionCode.TabsDetail,
         selected: false,
         menuType: 'C',
-        path: '/default/feat/msg',
+        path: '/default/feat/msg'
       },
       {
         id: 1,
@@ -427,10 +428,10 @@ const menuNav: Menu[] = [
         menuName: '文件下载',
         icon: 'dashboard',
         open: false,
-        code: '',
+        code: ActionCode.TabsDetail,
         selected: false,
         menuType: 'C',
-        path: '/default/feat/download',
+        path: '/default/feat/download'
       },
       {
         id: 1,
@@ -438,10 +439,10 @@ const menuNav: Menu[] = [
         menuName: '图标',
         icon: 'dashboard',
         open: false,
-        code: '',
+        code: ActionCode.TabsDetail,
         selected: false,
         menuType: 'C',
-        path: '/default/feat/icons',
+        path: '/default/feat/icons'
       },
       {
         id: 1,
@@ -449,10 +450,10 @@ const menuNav: Menu[] = [
         menuName: '右键菜单',
         icon: 'dashboard',
         open: false,
-        code: '',
+        code: ActionCode.TabsDetail,
         selected: false,
         menuType: 'C',
-        path: '/default/feat/context-menu',
+        path: '/default/feat/context-menu'
       },
       {
         id: 1,
@@ -460,10 +461,10 @@ const menuNav: Menu[] = [
         menuName: '图片预览',
         icon: 'dashboard',
         open: false,
-        code: '',
+        code: ActionCode.TabsDetail,
         selected: false,
         menuType: 'C',
-        path: '/default/feat/img-preview',
+        path: '/default/feat/img-preview'
       },
       {
         id: 1,
@@ -471,10 +472,10 @@ const menuNav: Menu[] = [
         menuName: '全屏',
         icon: 'dashboard',
         open: false,
-        code: '',
+        code: ActionCode.TabsDetail,
         selected: false,
         menuType: 'C',
-        path: '/default/feat/full-screen',
+        path: '/default/feat/full-screen'
       },
       {
         id: 1,
@@ -482,10 +483,10 @@ const menuNav: Menu[] = [
         menuName: '标签页操作',
         icon: 'dashboard',
         open: false,
-        code: '',
+        code: ActionCode.TabsDetail,
         selected: false,
         menuType: 'C',
-        path: '/default/feat/tabs',
+        path: '/default/feat/tabs'
       },
       {
         id: 1,
@@ -493,10 +494,10 @@ const menuNav: Menu[] = [
         menuName: '拖拽modal',
         icon: 'dashboard',
         open: false,
-        code: '',
+        code: ActionCode.TabsDetail,
         selected: false,
         menuType: 'C',
-        path: '/default/feat/ex-modal',
+        path: '/default/feat/ex-modal'
       },
       {
         id: 1,
@@ -504,10 +505,10 @@ const menuNav: Menu[] = [
         menuName: '封装抽屉',
         icon: 'dashboard',
         open: false,
-        code: '',
+        code: ActionCode.TabsDetail,
         selected: false,
         menuType: 'C',
-        path: '/default/feat/ex-drawer',
+        path: '/default/feat/ex-drawer'
       },
       {
         id: 1,
@@ -515,10 +516,10 @@ const menuNav: Menu[] = [
         menuName: '富文本',
         icon: 'dashboard',
         open: false,
-        code: '',
+        code: ActionCode.TabsDetail,
         selected: false,
         menuType: 'C',
-        path: '/default/feat/rich-text',
+        path: '/default/feat/rich-text'
       },
       {
         id: 1,
@@ -526,10 +527,10 @@ const menuNav: Menu[] = [
         menuName: 'clickOutSide',
         icon: 'dashboard',
         open: false,
-        code: '',
+        code: ActionCode.TabsDetail,
         selected: false,
         menuType: 'C',
-        path: '/default/feat/click-out-side',
+        path: '/default/feat/click-out-side'
       },
       {
         id: 1,
@@ -537,7 +538,7 @@ const menuNav: Menu[] = [
         menuName: '外部文档',
         icon: 'dashboard',
         open: false,
-        code: '',
+        code: ActionCode.TabsDetail,
         selected: false,
         menuType: 'C',
         path: '/default/feat/frame',
@@ -548,10 +549,10 @@ const menuNav: Menu[] = [
             menuName: 'zorro文档',
             icon: 'dashboard',
             open: false,
-            code: '',
-             selected: false,
+            code: ActionCode.TabsDetail,
+            selected: false,
             menuType: 'C',
-            path: '/default/feat/frame/zorro-doc',
+            path: '/default/feat/frame/zorro-doc'
           },
           {
             id: 1,
@@ -559,12 +560,12 @@ const menuNav: Menu[] = [
             menuName: '外部链接',
             icon: 'usergroup-delete',
             open: false,
-            code: '',
+            code: ActionCode.TabsDetail,
             selected: false,
             menuType: 'C',
             path: 'https://github.com/huajian123/ng-ant-admin',
             newLinkFlag: 1
-          },
+          }
         ]
       },
       {
@@ -573,7 +574,7 @@ const menuNav: Menu[] = [
         menuName: '滚动条',
         icon: 'dashboard',
         open: false,
-        code: '',
+        code: ActionCode.TabsDetail,
         selected: false,
         menuType: 'C',
         path: '/default/feat/scroll',
@@ -584,10 +585,10 @@ const menuNav: Menu[] = [
             menuName: '缓存滚动条',
             icon: 'dashboard',
             open: false,
-            code: '',
+            code: ActionCode.TabsDetail,
             selected: false,
             menuType: 'C',
-            path: '/default/feat/scroll/keep-scroll-page',
+            path: '/default/feat/scroll/keep-scroll-page'
           },
           {
             id: 1,
@@ -595,10 +596,10 @@ const menuNav: Menu[] = [
             menuName: '玩弄滚动条',
             icon: 'dashboard',
             open: false,
-            code: '',
+            code: ActionCode.TabsDetail,
             selected: false,
             menuType: 'C',
-            path: '/default/feat/scroll/play-scroll',
+            path: '/default/feat/scroll/play-scroll'
           }
         ]
       },
@@ -608,7 +609,7 @@ const menuNav: Menu[] = [
         menuName: '图表',
         icon: 'dashboard',
         open: false,
-        code: '',
+        code: ActionCode.TabsDetail,
         selected: false,
         menuType: 'C',
         path: '/default/feat/charts',
@@ -622,7 +623,7 @@ const menuNav: Menu[] = [
             menuType: 'C',
             icon: 'highlight',
             path: '/default/feat/charts/gaode-map',
-            code: '',
+            code: ActionCode.TabsDetail
           },
           {
             id: 1,
@@ -633,7 +634,7 @@ const menuNav: Menu[] = [
             menuType: 'C',
             icon: 'highlight',
             path: '/default/feat/charts/baidu-map',
-            code: '',
+            code: ActionCode.TabsDetail
           },
           {
             id: 1,
@@ -644,8 +645,8 @@ const menuNav: Menu[] = [
             menuType: 'C',
             icon: 'highlight',
             path: '/default/feat/charts/echarts',
-            code: '',
-          },
+            code: ActionCode.TabsDetail
+          }
         ]
       },
       {
@@ -654,7 +655,7 @@ const menuNav: Menu[] = [
         menuName: '其他登录方式',
         icon: 'dashboard',
         open: false,
-        code: '',
+        code: ActionCode.TabsDetail,
         selected: false,
         menuType: 'C',
         path: '/blank/other-login',
@@ -668,8 +669,8 @@ const menuNav: Menu[] = [
             menuType: 'C',
             icon: 'highlight',
             path: '/blank/other-login/login1',
-            code: '',
-          },
+            code: ActionCode.TabsDetail
+          }
         ]
       },
 
@@ -678,55 +679,55 @@ const menuNav: Menu[] = [
         fatherId: 0,
         menuName: '颜色选择器',
         icon: 'usergroup-delete',
-        code: '',
+        code: ActionCode.TabsDetail,
         open: false,
         selected: false,
         menuType: 'C',
-        path: '/default/feat/color-sel',
+        path: '/default/feat/color-sel'
       },
       {
         id: 1,
         fatherId: 0,
         menuName: '登录超时',
         icon: 'usergroup-delete',
-        code: '',
+        code: ActionCode.TabsDetail,
         open: false,
         selected: false,
         menuType: 'C',
-        path: '/default/feat/session-timeout',
+        path: '/default/feat/session-timeout'
       },
       {
         id: 1,
         fatherId: 0,
         menuName: '水波纹',
         icon: 'usergroup-delete',
-        code: '',
+        code: ActionCode.TabsDetail,
         open: false,
         selected: false,
         menuType: 'C',
-        path: '/default/feat/ripple',
+        path: '/default/feat/ripple'
       },
       {
         id: 1,
         fatherId: 0,
         menuName: '剪切板',
         icon: 'usergroup-delete',
-        code: '',
+        code: ActionCode.TabsDetail,
         open: false,
         selected: false,
         menuType: 'C',
-        path: '/default/feat/copy',
+        path: '/default/feat/copy'
       },
       {
         id: 1,
         fatherId: 0,
         menuName: '空白页',
         icon: 'usergroup-delete',
-        code: '',
+        code: ActionCode.TabsDetail,
         open: false,
         selected: false,
         menuType: 'C',
-        path: '/blank/empty-page',
+        path: '/blank/empty-page'
       },
 
       {
@@ -735,10 +736,10 @@ const menuNav: Menu[] = [
         menuName: '代码编辑器',
         alIcon: 'icon-medium',
         open: false,
-        code: '',
+        code: ActionCode.TabsDetail,
         selected: false,
         menuType: 'C',
-        path: '/default/feat/editor',
+        path: '/default/feat/editor'
       },
 
       {
@@ -747,11 +748,11 @@ const menuNav: Menu[] = [
         menuName: '引导页',
         alIcon: 'icon-medium',
         open: false,
-        code: '',
+        code: ActionCode.TabsDetail,
         selected: false,
         menuType: 'C',
-        path: '/default/feat/setup',
-      },
+        path: '/default/feat/setup'
+      }
     ]
   },
   {
@@ -760,7 +761,7 @@ const menuNav: Menu[] = [
     menuName: '组件',
     icon: 'star',
     open: false,
-    code: '',
+    code: ActionCode.TabsDetail,
     selected: false,
     menuType: 'C',
     path: '/default/comp',
@@ -771,10 +772,10 @@ const menuNav: Menu[] = [
         menuName: '基础组件',
         icon: 'dashboard',
         open: false,
-        code: '',
+        code: ActionCode.TabsDetail,
         selected: false,
         menuType: 'C',
-        path: '/default/comp/basic',
+        path: '/default/comp/basic'
       },
       {
         id: 1,
@@ -782,10 +783,10 @@ const menuNav: Menu[] = [
         menuName: '动画组件',
         icon: 'dashboard',
         open: false,
-        code: '',
+        code: ActionCode.TabsDetail,
         selected: false,
         menuType: 'C',
-        path: '/default/comp/transition',
+        path: '/default/comp/transition'
       },
       {
         id: 1,
@@ -793,10 +794,10 @@ const menuNav: Menu[] = [
         menuName: '在线excel',
         icon: 'dashboard',
         open: false,
-        code: '',
+        code: ActionCode.TabsDetail,
         selected: false,
         menuType: 'C',
-        path: '/default/comp/luckysheet',
+        path: '/default/comp/luckysheet'
       },
       {
         id: 1,
@@ -804,7 +805,7 @@ const menuNav: Menu[] = [
         menuName: '组件懒加载',
         icon: 'dashboard',
         open: false,
-        code: '',
+        code: ActionCode.TabsDetail,
         selected: false,
         menuType: 'C',
         path: '/default/comp/lazy',
@@ -815,10 +816,10 @@ const menuNav: Menu[] = [
             menuName: '基础懒加载组件',
             icon: 'dashboard',
             open: false,
-            code: '',
+            code: ActionCode.TabsDetail,
             selected: false,
             menuType: 'C',
-            path: '/default/comp/lazy/lazy-basic',
+            path: '/default/comp/lazy/lazy-basic'
           },
           {
             id: 1,
@@ -826,10 +827,10 @@ const menuNav: Menu[] = [
             menuName: '滚动懒加载',
             icon: 'dashboard',
             open: false,
-            code: '',
+            code: ActionCode.TabsDetail,
             selected: false,
             menuType: 'C',
-            path: '/default/comp/lazy/lazy-scroll',
+            path: '/default/comp/lazy/lazy-scroll'
           }
         ]
       },
@@ -839,10 +840,10 @@ const menuNav: Menu[] = [
         menuName: '详情组件',
         icon: 'dashboard',
         open: false,
-        code: '',
+        code: ActionCode.TabsDetail,
         selected: false,
         menuType: 'C',
-        path: '/default/comp/desc',
+        path: '/default/comp/desc'
       },
       {
         id: 1,
@@ -850,14 +851,13 @@ const menuNav: Menu[] = [
         menuName: '密码强度校验组件',
         icon: 'dashboard',
         open: false,
-        code: '',
+        code: ActionCode.TabsDetail,
         selected: false,
         menuType: 'C',
-        path: '/default/comp/strength-meter',
-      },
+        path: '/default/comp/strength-meter'
+      }
     ]
   },
-
 
   {
     id: 1,
@@ -867,7 +867,7 @@ const menuNav: Menu[] = [
     open: false,
     selected: false,
     menuType: 'C',
-    code: '',
+    code: ActionCode.TabsDetail,
     path: '/default/level',
     children: [
       {
@@ -878,7 +878,7 @@ const menuNav: Menu[] = [
         open: false,
         selected: false,
         menuType: 'C',
-        code: '',
+        code: ActionCode.TabsDetail,
         path: '/default/level/menu1',
         children: [
           {
@@ -889,7 +889,7 @@ const menuNav: Menu[] = [
             open: false,
             selected: false,
             menuType: 'C',
-            code: '',
+            code: ActionCode.TabsDetail,
             path: '/default/level/menu1/menu1-1',
             children: [
               {
@@ -900,8 +900,8 @@ const menuNav: Menu[] = [
                 open: false,
                 selected: false,
                 menuType: 'C',
-                code: '',
-                path: '/default/level/menu1/menu1-1/menu1-1-1',
+                code: ActionCode.TabsDetail,
+                path: '/default/level/menu1/menu1-1/menu1-1-1'
               },
               {
                 id: 1,
@@ -911,9 +911,9 @@ const menuNav: Menu[] = [
                 open: false,
                 selected: false,
                 menuType: 'C',
-                code: '',
-                path: '/default/level/menu1/menu1-1/menu1-1-2',
-              },
+                code: ActionCode.TabsDetail,
+                path: '/default/level/menu1/menu1-1/menu1-1-2'
+              }
             ]
           },
           {
@@ -924,8 +924,8 @@ const menuNav: Menu[] = [
             open: false,
             selected: false,
             menuType: 'C',
-            code: '',
-            path: '/default/level/menu1/menu1-2',
+            code: ActionCode.TabsDetail,
+            path: '/default/level/menu1/menu1-2'
           }
         ]
       },
@@ -937,12 +937,11 @@ const menuNav: Menu[] = [
         open: false,
         selected: false,
         menuType: 'C',
-        code: '',
-        path: '/default/level/menu2',
-      },
+        code: ActionCode.TabsDetail,
+        path: '/default/level/menu2'
+      }
     ]
   },
-
 
   {
     id: 1,
@@ -951,7 +950,7 @@ const menuNav: Menu[] = [
     icon: '',
     alIcon: 'icon-mel-help',
     open: false,
-    code: '',
+    code: ActionCode.TabsDetail,
     selected: false,
     menuType: 'C',
     path: '/default/system',
@@ -963,10 +962,10 @@ const menuNav: Menu[] = [
         icon: '',
         alIcon: 'icon-mel-help',
         open: false,
-        code: '',
+        code: ActionCode.TabsDetail,
         selected: false,
         menuType: 'C',
-        path: '/default/system/account',
+        path: '/default/system/account'
       },
       {
         id: 1,
@@ -975,10 +974,10 @@ const menuNav: Menu[] = [
         icon: '',
         alIcon: 'icon-mel-help',
         open: false,
-        code: '',
+        code: ActionCode.TabsDetail,
         selected: false,
         menuType: 'C',
-        path: '/default/system/role-manager',
+        path: '/default/system/role-manager'
       },
       {
         id: 1,
@@ -987,10 +986,10 @@ const menuNav: Menu[] = [
         icon: '',
         alIcon: 'icon-mel-help',
         open: false,
-        code: '',
+        code: ActionCode.TabsDetail,
         selected: false,
         menuType: 'C',
-        path: '/default/system/menu',
+        path: '/default/system/menu'
       },
       {
         id: 1,
@@ -999,11 +998,11 @@ const menuNav: Menu[] = [
         icon: '',
         alIcon: 'icon-mel-help',
         open: false,
-        code: '',
+        code: ActionCode.TabsDetail,
         selected: false,
         menuType: 'C',
-        path: '/default/system/dept',
-      },
+        path: '/default/system/dept'
+      }
     ]
   },
   {
@@ -1012,10 +1011,9 @@ const menuNav: Menu[] = [
     menuName: '关于',
     alIcon: 'icon-medium',
     open: false,
-    code: '',
+    code: ActionCode.TabsDetail,
     selected: false,
     menuType: 'C',
-    path: '/default/about',
-  },
-];
-*/
+    path: '/default/about'
+  }
+];*/
