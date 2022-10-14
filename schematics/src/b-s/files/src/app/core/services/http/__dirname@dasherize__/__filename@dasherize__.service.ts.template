@@ -31,6 +31,6 @@ export class <%= classify(filename) %>Service {
   }
 
   del<%= classify(filename) %>(ids: number[]): Observable<void> {
-    return this.http.delete(`/<%= filename %>/del`, { ids }, {needSuccessInfo: true})
+    return this.http.delete(`/<%= filename %>/del`, { ids }, { needSuccessInfo: true });
   }
 }

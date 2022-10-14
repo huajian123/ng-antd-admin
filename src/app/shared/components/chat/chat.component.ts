@@ -11,7 +11,7 @@ import { fnGetRandomNum } from '@app/utils/tools';
 })
 export class ChatComponent implements OnInit, OnDestroy {
   @ViewChild('scrollMe') private myScrollContainer!: ElementRef;
-  @Output() changeShows = new EventEmitter<boolean>();
+  @Output() readonly changeShows = new EventEmitter<boolean>();
   validateForm!: FormGroup;
   messageArray: Array<{ msg: string; dir: 'left' | 'right'; isReaded: boolean }> = [];
   isSending = false;

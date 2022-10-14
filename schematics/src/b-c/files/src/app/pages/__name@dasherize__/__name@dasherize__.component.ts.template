@@ -131,7 +131,7 @@ export class <%= classify(name) %>Component implements OnInit {
       <%}else{%>
        this.tableLoading(true);
           // todo 这里需要你自己根据业务修改addParam
-          const addParam: CeshiObj = { id: 0 };
+          const addParam: <%= classify(name) %>Obj = { id: 0 };
           this.addEditData(addParam, 'add<%= classify(name) %>');
       <%}%>
   }
@@ -152,7 +152,7 @@ export class <%= classify(name) %>Component implements OnInit {
         // res为先根据id获取的详情对象
         res.id = id;
         this.tableLoading(true);
-        this.addEditData(res, 'editCeshi');
+        this.addEditData(res, 'edit<%= classify(name) %>');
       <%}%>
     });
   }
