@@ -12,7 +12,7 @@ import { Menu } from '@core/services/types';
 import { LoginService } from '@services/login/login.service';
 import { MenuStoreService } from '@store/common-store/menu-store.service';
 import { UserInfo, UserInfoService } from '@store/common-store/userInfo.service';
-import { fnFormatePath } from '@utils/tools';
+import { getDeepReuseStrategyKeyFn } from '@utils/tools';
 import { fnFlatDataHasParentToTree } from '@utils/treeTableTools';
 
 /*
@@ -78,8 +78,7 @@ export class LoginInOutService {
       SimpleReuseStrategy.handlers = {};
       SimpleReuseStrategy.scrollHandlers = {};
       this.menuService.setMenuArrayStore([]);
-      // @ts-ignore
-      SimpleReuseStrategy.waitDelete = fnFormatePath(this.activatedRoute.snapshot['_routerState'].url);
+      SimpleReuseStrategy.waitDelete = getDeepReuseStrategyKeyFn(this.activatedRoute.snapshot);
       this.router.navigate(['/login/login-form']).then(() => {
         resolve();
       });

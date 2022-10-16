@@ -3,6 +3,7 @@ import { Inject } from '@angular/core';
 import { ActivatedRouteSnapshot, DetachedRouteHandle, RouteReuseStrategy } from '@angular/router';
 
 import { ScrollService } from '@core/services/common/scroll.service';
+import { fnGetReuseStrategyKeyFn } from '@utils/tools';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 /*路由复用*/
@@ -30,14 +31,6 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
 
   constructor(@Inject(DOCUMENT) private doc: Document, private scrollService: ScrollService) {}
 
-  // 获取key，为key+param的形式：login{name:xxx}
-  getKey(route: ActivatedRouteSnapshot): string {
-    if (!route.data['key']) {
-      return '';
-    }
-    return route.data['key'] + JSON.stringify(route.queryParams);
-  }
-
   // 是否允许复用路由
   shouldDetach(route: ActivatedRouteSnapshot): boolean {
     return route.data['shouldDetach'] !== 'no';
@@ -48,7 +41,7 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
     if (route.data['shouldDetach'] === 'no') {
       return;
     }
-    const key = this.getKey(route);
+    const key = fnGetReuseStrategyKeyFn(route);
     // 如果待删除的是当前路由则不存储快照
     if (SimpleReuseStrategy.waitDelete === key) {
       this.runHook('_onReuseDestroy', handle.componentRef);
@@ -83,20 +76,20 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
 
   // 是否允许还原路由
   shouldAttach(route: ActivatedRouteSnapshot): boolean {
-    const key = this.getKey(route);
+    const key = fnGetReuseStrategyKeyFn(route);
     return !!key && !!SimpleReuseStrategy.handlers[key];
   }
 
   // 获取存储路由
   retrieve(route: ActivatedRouteSnapshot): DetachedRouteHandle {
-    const key = this.getKey(route);
+    const key = fnGetReuseStrategyKeyFn(route);
     return !key ? null : SimpleReuseStrategy.handlers[key];
   }
 
   // 进入路由触发，是同一路由时复用路由
   shouldReuseRoute(future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot): boolean {
-    const futureKey = this.getKey(future);
-    const currKey = this.getKey(curr);
+    const futureKey = fnGetReuseStrategyKeyFn(future);
+    const currKey = fnGetReuseStrategyKeyFn(curr);
     if (!!futureKey && SimpleReuseStrategy.handlers[futureKey]) {
       this.runHook('_onReuseInit', SimpleReuseStrategy.handlers[futureKey].componentRef);
     }
@@ -107,7 +100,7 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
       future = future.firstChild;
     }
     // 重新获取是因为future在上面while循环中已经变了
-    const scrollFutureKey = this.getKey(future);
+    const scrollFutureKey = fnGetReuseStrategyKeyFn(future);
     if (!!scrollFutureKey && SimpleReuseStrategy.scrollHandlers[scrollFutureKey]) {
       SimpleReuseStrategy.scrollHandlers[scrollFutureKey].scroll.forEach((elOptionItem: { [key: string]: [number, number] }) => {
         Object.keys(elOptionItem).forEach(element => {

@@ -13,7 +13,7 @@ const routes: Routes = [
     data: { title: '查询表格', key: 'search-table' }
   },
   {
-    path: 'search-table-detail',
+    path: 'search-table-detail/:name/:age',
     component: SearchTableDetailComponent,
     data: {
       title: '查询表格',

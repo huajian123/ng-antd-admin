@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
@@ -10,7 +10,7 @@ import { fnCheckForm } from '@utils/tools';
   templateUrl: './search-table-detail.component.html',
   styleUrls: ['./search-table-detail.component.less']
 })
-export class SearchTableDetailComponent implements OnInit {
+export class SearchTableDetailComponent implements OnInit, OnDestroy {
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '详情',
     // desc: '表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。',
@@ -35,14 +35,18 @@ export class SearchTableDetailComponent implements OnInit {
   }
 
   _onReuseDestroy(): void {
-    console.log('销毁了');
+    console.log('tab销毁了，调用_OnReuseDestroy');
   }
 
   ngOnInit(): void {
     this.initForm();
-    this.routeParam.queryParams.subscribe(params => {
-      this.name = params['name'];
+    this.routeParam.params.subscribe(res => {
+      this.name = res['name'];
       this.validateForm.get('userName')?.setValue(this.name);
     });
+  }
+
+  ngOnDestroy(): void {
+    console.log('组件实力销毁，调用ngOnDestroy');
   }
 }

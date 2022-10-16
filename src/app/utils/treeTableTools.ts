@@ -41,6 +41,7 @@ const fnTreeDataToMap = function tableToTreeData(dataList: any[]): { [key: strin
  * 返回一个树形结构的数组
  */
 const fnFlatDataHasParentToTree = function translateDataToTree(data: any[], fatherId = 'fatherId'): any {
+  // 我们认为，fatherId=0的数据，为一级数据
   //没有父节点的数据
   let parents = data.filter(value => value[fatherId] === 0);
 

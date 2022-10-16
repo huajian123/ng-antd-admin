@@ -1,4 +1,5 @@
 import { FormArray, FormGroup } from '@angular/forms';
+import { ActivatedRouteSnapshot } from '@angular/router';
 
 import { LockScreenFlag } from '@store/common-store/lock-screen-store.service';
 import CryptoJS from 'crypto-js';
@@ -67,15 +68,30 @@ const fnRemoveDouble = function removeDouble<T>(list: NzSafeAny[], col: NzSafeAn
   }, []);
 };
 
-// 获取路由最后一个/后面的字符串
-const fnFormatePath = function formatePath(path: string): string {
-  const newpath = path.replace(/\/[0-9]+/g, '');
-  const paramIndex = newpath.substring(newpath.lastIndexOf('/') + 1).indexOf('?');
-  if (paramIndex > -1) {
-    const tempPath = newpath.substring(newpath.lastIndexOf('/') + 1);
-    return tempPath.substring(0, paramIndex);
+// 获取路由复用缓存的key，为key+param的形式：login{name:xxx}
+const getDeepReuseStrategyKeyFn = function (route: ActivatedRouteSnapshot): string {
+  let temp = route;
+  while (temp.firstChild) {
+    temp = temp.firstChild;
+  }
+  return fnGetReuseStrategyKeyFn(temp);
+};
+
+// 获取key，为key+param的形式：login{name:xxx}
+const fnGetReuseStrategyKeyFn = function getKey(route: ActivatedRouteSnapshot): string {
+  const configKey = route.data['key'];
+  if (!configKey) {
+    return '';
+  }
+  // 是query传参,并且有参数
+  if (Object.keys(route.queryParams).length > 0) {
+    return configKey + JSON.stringify(route.queryParams);
+  } else if (Object.keys(route.params).length > 0) {
+    // 是路径传参，并且有参数
+    return configKey + JSON.stringify(route.params);
   } else {
-    return newpath.substring(newpath.lastIndexOf('/') + 1);
+    // 没有路由参数
+    return `${configKey}{}`;
   }
 };
 
@@ -123,6 +139,7 @@ const fnEndOfDay = function EndOfDay(time: number): number {
 };
 
 export {
+  fnGetReuseStrategyKeyFn,
   fnDecrypt,
   fnEncrypt,
   fnGetBase64,
@@ -131,7 +148,7 @@ export {
   fnClearFormArray,
   fnCheckForm,
   fnStopMouseEvent,
-  fnFormatePath,
+  getDeepReuseStrategyKeyFn,
   fnRemoveDouble,
   fnGetRandomNum,
   fnStartOfDay,

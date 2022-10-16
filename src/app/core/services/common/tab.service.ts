@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, Params, Router, UrlSegment } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import { fnFormatePath, fnGetPathWithoutParam } from '@utils/tools';
+import { getDeepReuseStrategyKeyFn, fnGetPathWithoutParam } from '@utils/tools';
 import _ from 'lodash';
 
 import { SimpleReuseStrategy } from './reuse-strategy';
@@ -72,14 +72,6 @@ export class TabService {
     this.setTabArray$(this.tabArray);
   }
 
-  // 根据path，获取路由复用中缓存的key
-  getPathKey(path: string): string {
-    const tempPath = fnFormatePath(path);
-    const pathParam = this.router.parseUrl(path).queryParams;
-    let pathParamString = JSON.stringify(pathParam);
-    return tempPath + pathParamString;
-  }
-
   // 通过key来删除路由复用中SimpleReuseStrategy.handlers这个里面的缓存
   delReuseStrategy(snapshotArray: ActivatedRouteSnapshot[]): void {
     const beDeleteKeysArray = this.getSnapshotArrayKey(snapshotArray);
@@ -93,10 +85,8 @@ export class TabService {
   getSnapshotArrayKey(activatedArray: ActivatedRouteSnapshot[]): string[] {
     const temp: string[] = [];
     activatedArray.forEach(item => {
-      const params = JSON.stringify(item.queryParams);
-      // @ts-ignore  获取路由最后一个/后面的字符串
-      const url = fnFormatePath(item['_routerState'].url);
-      temp.push(url + params);
+      const key = getDeepReuseStrategyKeyFn(item);
+      temp.push(key);
     });
     return temp;
   }
@@ -114,8 +104,7 @@ export class TabService {
     });
     // 如果鼠标右键选中的tab索引小于当前展示的tab的索引，就要连同正在打开的tab也要被删除
     if (index < this.currSelectedIndexTab) {
-      // @ts-ignore
-      SimpleReuseStrategy.waitDelete = this.getPathKey(this.activatedRoute['_routerState'].snapshot.url);
+      SimpleReuseStrategy.waitDelete = getDeepReuseStrategyKeyFn(this.activatedRoute.snapshot);
       this.router.navigateByUrl(this.tabArray[index].path);
     }
     this.setTabsSourceData();
@@ -136,7 +125,7 @@ export class TabService {
       this.currSelectedIndexTab = 0;
     } else if (this.currSelectedIndexTab < index) {
       // 如果鼠标点击的tab索引大于当前索引，需要将当前页的path放到waitDelete中
-      SimpleReuseStrategy.waitDelete = this.getPathKey(this.tabArray[this.currSelectedIndexTab].path);
+      SimpleReuseStrategy.waitDelete = getDeepReuseStrategyKeyFn(this.activatedRoute.snapshot);
       this.currSelectedIndexTab = 0;
     } else if (this.currSelectedIndexTab > index) {
       this.currSelectedIndexTab = this.currSelectedIndexTab - beDelTabArray.length;
@@ -166,8 +155,7 @@ export class TabService {
 
     // 如果鼠标选中的tab的索引，不是当前打开的页面的tab的索引，则要将当前页面的key作为waitDelete防止这个当前tab展示的组件移除后仍然被缓存
     if (index !== this.currSelectedIndexTab) {
-      // @ts-ignore
-      SimpleReuseStrategy.waitDelete = this.getPathKey(this.activatedRoute['_routerState'].snapshot.url);
+      SimpleReuseStrategy.waitDelete = getDeepReuseStrategyKeyFn(this.activatedRoute.snapshot);
     }
     this.router.navigateByUrl(path);
     this.setTabsSourceData();
@@ -177,7 +165,7 @@ export class TabService {
   delTab(tab: TabModel, index: number): void {
     // 移除当前正在展示的tab
     if (index === this.currSelectedIndexTab) {
-      const seletedTabKey = this.getPathKey(tab.path);
+      const seletedTabKey = getDeepReuseStrategyKeyFn(this.activatedRoute.snapshot);
       this.tabArray.splice(index, 1);
       // 处理索引关系
       this.currSelectedIndexTab = index - 1 < 0 ? 0 : index - 1;
@@ -208,17 +196,49 @@ export class TabService {
     return current;
   }
 
+  getCurrentPathWithoutParam(urlSegmentArray: UrlSegment[], queryParam: { [key: string]: any }): string {
+    const temp: string[] = [];
+    // 获取所有参数的value
+    const queryParamValuesArray = Object.values(queryParam);
+    urlSegmentArray.forEach(urlSeqment => {
+      // 把表示参数的url片段剔除
+      if (!queryParamValuesArray.includes(urlSeqment.path)) {
+        temp.push(urlSeqment.path);
+      }
+    });
+    return `${temp.join('/')}`;
+  }
+
   // 刷新
   refresh(): void {
-    const sourceUrl = this.router.url;
-    // 获取没有参数的路由
-    const currentRoute = fnGetPathWithoutParam(sourceUrl);
-    // 获取路由参数
-    const queryParams = this.router.parseUrl(sourceUrl).queryParams;
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      SimpleReuseStrategy.deleteRouteSnapshot(this.getPathKey(sourceUrl));
-      this.router.navigate([currentRoute], { queryParams });
-    });
+    // 获取当前的路由快照
+    let snapshot = this.activatedRoute.snapshot;
+    const key = getDeepReuseStrategyKeyFn(snapshot);
+    while (snapshot.firstChild) {
+      snapshot = snapshot.firstChild;
+    }
+    let params: Params;
+    let urlWithOutParam = ''; // 这是没有参数的url
+    // 是路径传参的路由，并且有参数
+    if (Object.keys(snapshot.params).length > 0) {
+      params = snapshot.params;
+      // @ts-ignore
+      urlWithOutParam = this.getCurrentPathWithoutParam(snapshot['_urlSegment'].segments, params);
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        SimpleReuseStrategy.deleteRouteSnapshot(key);
+        this.router.navigate([urlWithOutParam, ...Object.values(params)]);
+      });
+    } else {
+      // 是query传参的路由,或者是没有参数的路由
+      params = snapshot.queryParams;
+      const sourceUrl = this.router.url;
+      const currentRoute = fnGetPathWithoutParam(sourceUrl);
+      // 是query传参
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        SimpleReuseStrategy.deleteRouteSnapshot(key);
+        this.router.navigate([currentRoute], { queryParams: params });
+      });
+    }
   }
 
   getCurrentTabIndex(): number {
