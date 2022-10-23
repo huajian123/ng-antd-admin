@@ -10,6 +10,7 @@ export interface LazyResult {
   status: 'ok' | 'error' | 'loading';
   error?: NzSafeAny;
 }
+/*https://netbasal.com/loading-external-libraries-on-demand-in-angular-9dad45701801*/
 // 使用方式：
 // this.lazy.load(["https://unpkg.com/driver.js/dist/driver.min.js", "https://unpkg.com/driver.js/dist/driver.min.css"]).then(() => {
 
