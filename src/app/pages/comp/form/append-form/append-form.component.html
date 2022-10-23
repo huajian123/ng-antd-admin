@@ -1,0 +1,130 @@
+<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+<div class="normal-table-wrap">
+  <nz-card class="m-b-10" nzTitle="Message">
+    <div class="task-head" nz-row nzAlign="middle" nzJustify="space-between">
+      <div class="text-center" nz-col nzSpan="7">
+        <div class="task-head-title m-b-5" nz-typography nzType="secondary">我的待办</div>
+        <p>2个任务</p>
+      </div>
+      <div>
+        <nz-divider class="divider" nzType="vertical"></nz-divider>
+      </div>
+      <div class="text-center" nz-col nzSpan="7">
+        <div class="m-b-5" nz-typography nzType="secondary">已逾期任务数</div>
+        <p>1个任务</p>
+      </div>
+      <div class="center">
+        <nz-divider class="divider" nzType="vertical"></nz-divider>
+      </div>
+      <div class="text-center" nz-col nzSpan="7">
+        <div class="m-b-5" nz-typography nzType="secondary">进行中任务数</div>
+        <p>1个任务</p>
+      </div>
+    </div>
+    <nz-divider></nz-divider>
+    <div class="space-between">
+      <h3 class="sp-18">任务列表</h3>
+      <div>
+        <nz-radio-group class="m-r-15" [ngModel]="taskState">
+          <label nz-radio-button [nzValue]="taskStateSearchEnum.All">
+            <span>全部</span>
+          </label>
+          <label nz-radio-button [nzValue]="taskStateSearchEnum.NoStarted">
+            <span>未开始</span>
+          </label>
+          <label nz-radio-button [nzValue]="taskStateSearchEnum.Processing">
+            <span>进行中</span>
+          </label>
+          <label nz-radio-button [nzValue]="taskStateSearchEnum.Complete">
+            <span>已完成</span>
+          </label>
+          <label nz-radio-button [nzValue]="taskStateSearchEnum.Overdue">
+            <span>已逾期</span>
+          </label>
+        </nz-radio-group>
+        <nz-radio-group class="m-r-15" [ngModel]="taskCheckPeriodState">
+          <label nz-radio-button [nzValue]="taskCheckPeriodStateEnum.All">
+            <span>全部</span>
+          </label>
+          <label nz-radio-button [nzValue]="taskCheckPeriodStateEnum.DayCheck">
+            <span>日检</span>
+          </label>
+          <label nz-radio-button [nzValue]="taskCheckPeriodStateEnum.MonthCheck">
+            <span>月检</span>
+          </label>
+          <label nz-radio-button [nzValue]="taskCheckPeriodStateEnum.QuarterlyCheck">
+            <span>季检</span>
+          </label>
+          <label nz-radio-button [nzValue]="taskCheckPeriodStateEnum.YearCheck">
+            <span>年检</span>
+          </label>
+        </nz-radio-group>
+        <nz-input-group nzSuffixIcon="search" style="width: 200px">
+          <input type="text" nz-input placeholder="请输入" name="q" />
+        </nz-input-group>
+      </div>
+    </div>
+
+    <button (click)="add()" nz-button [nzType]="'dashed'" nzBlock class="m-b-8 m-t-20">
+      <i nz-icon nzType="plus"></i>
+      <span>添加</span>
+    </button>
+
+    <nz-list [nzDataSource]="showTaskList" [nzLoading]="loading" [nzRenderItem]="item" [nzPagination]="pagination">
+      <ng-template #item let-item>
+        <nz-list-item [nzContent]="nzContent" [nzActions]="[edit, op]">
+          <ng-template #edit>
+            <a nz-typography class="operate-text">完成</a>
+          </ng-template>
+          <ng-template #op>
+            <a nz-typography class="ant-dropdown-link operate-text" nz-dropdown [nzDropdownMenu]="opMenu">
+              更多
+              <i nz-icon nzType="down"></i>
+            </a>
+            <nz-dropdown-menu #opMenu="nzDropdownMenu">
+              <ul nz-menu>
+                <li nz-menu-item>编辑</li>
+                <li nz-menu-item>删除</li>
+              </ul>
+            </nz-dropdown-menu>
+          </ng-template>
+          <nz-list-item-meta [nzTitle]="nzTitle" [nzDescription]="item.taskDesc">
+            <ng-template #nzTitle>
+              <a class="sp-18 m-r-8" href="{{ item.href }}" target="_blank">{{ item.taskName }}</a>
+              <nz-tag [nzColor]="'blue'">标记</nz-tag>
+            </ng-template>
+          </nz-list-item-meta>
+          <ng-template #nzContent>
+            <div style="width: 280px">
+              <div style="display: flex; color: #8c8c8c">
+                <div style="flex: 1">
+                  执行人
+                  <p nz-typography nzEllipsis nzExpandable [attr.title]="item.userName" [nzEllipsisRows]="1" (nzOnEllipsis)="onEllipsisChange($event)">
+                    {{ item.userName }}
+                  </p>
+                </div>
+                <div class="text-right">
+                  截止时间
+                  <p>{{ item.endTime | date: 'yyyy-MM-dd' }}</p>
+                </div>
+              </div>
+              <nz-progress [nzPercent]="item.finishRate" [nzStatus]="item.taskStateName" [nzStrokeWidth]="6"></nz-progress>
+            </div>
+          </ng-template>
+        </nz-list-item>
+      </ng-template>
+      <ng-template #pagination>
+        <nz-pagination
+          [nzPageSizeOptions]="[3, 5, 10, 20]"
+          (nzPageSizeChange)="pageSizeChange($event)"
+          nzShowQuickJumper
+          nzShowSizeChanger
+          [nzTotal]="showAllTaskList.length"
+          [nzPageSize]="pageObj.pageSize"
+          [(nzPageIndex)]="pageObj.pageNum"
+          (nzPageIndexChange)="getData($event)"
+        ></nz-pagination>
+      </ng-template>
+    </nz-list>
+  </nz-card>
+</div>

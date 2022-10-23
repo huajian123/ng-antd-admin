@@ -34,6 +34,7 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzResizableModule } from 'ng-zorro-antd/resizable';
 import { NzResultModule } from 'ng-zorro-antd/result';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzSliderModule } from 'ng-zorro-antd/slider';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzStatisticModule } from 'ng-zorro-antd/statistic';
@@ -87,6 +88,7 @@ export const SHARED_ZORRO_MODULES = [
   NzBreadCrumbModule,
   NzDrawerModule,
   NzListModule,
+  NzSliderModule,
   NzTableModule,
   NzDescriptionsModule,
   NzStepsModule,
