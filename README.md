@@ -22,6 +22,8 @@ online demo地址 [demo](http://1.117.181.242/)<br>
 pure project address [pure](https://gitee.com/hjxiaoqianduan/ng-ant-admin-pure/)<br>
 服务端源码地址 [serviceApi](https://github.com/huajian123/ng-ant-admin-api)<br>
 serviceApi address [serviceApi](https://github.com/huajian123/ng-ant-admin-api)<br>
+线上swagger地址 [swagger](http://1.117.181.242:8003/swagger-ui.html#/)<br>
+
 
 # 路由的key
 key需要设置成路由地址最后一个'/'后的字符串，并且要唯一
