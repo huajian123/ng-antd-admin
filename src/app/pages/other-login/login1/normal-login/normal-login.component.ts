@@ -51,11 +51,8 @@ export class NormalLoginComponent implements OnInit {
     setTimeout(() => {
       // 请查看src/app/pages/login/login-form/login-form.component.ts文件中的登录逻辑
       // 这里的登录逻辑只是做个展示示例
-      this.dataService.getMenuByUserId(-1).subscribe(menus => {
-        this.menuService.setMenuArrayStore(menus);
-        this.router.navigateByUrl('default/dashboard/analysis').then(() => {
-          this.spinService.setCurrentGlobalSpinStore(false);
-        });
+      this.router.navigateByUrl('default/dashboard/analysis').then(() => {
+        this.spinService.setCurrentGlobalSpinStore(false);
       });
     }, 100);
   }

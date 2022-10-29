@@ -73,6 +73,8 @@ export class Login1Component implements OnInit {
     viewContainerRef.clear();
     const componentRef = viewContainerRef.createComponent<AdComponent>(adItem.component.component);
     componentRef.instance.data = adItem.component.data;
+    // ngZoneEventCoalescing，ngZoneRunCoalescing例子
+    this.cdr.detectChanges();
   }
 
   changeNight(isNight: boolean): void {

@@ -13,7 +13,7 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 export class StepOneComponent implements OnInit {
   @Input('stepDirection') stepDirection: 'horizontal' | 'vertical' = 'horizontal';
   validateForm!: FormGroup;
-  @Output() next = new EventEmitter<NzSafeAny>();
+  @Output() readonly next = new EventEmitter<NzSafeAny>();
 
   constructor(private fb: FormBuilder) {}
 

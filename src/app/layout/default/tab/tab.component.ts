@@ -95,6 +95,8 @@ export class TabComponent implements OnInit {
       return;
     }
     this.tabService.delTab(tab, index);
+    // ngZoneEventCoalescing，ngZoneRunCoalescing例子,请查看main.ts
+    this.cdr.detectChanges();
   }
 
   refresh(): void {

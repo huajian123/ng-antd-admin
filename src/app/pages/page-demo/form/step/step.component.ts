@@ -41,6 +41,8 @@ export class StepComponent implements OnInit, AfterViewInit {
     this.currentStep = currentStepNum;
     ref!.destroy();
     this.goStep(step);
+    // ngZoneEventCoalescing，ngZoneRunCoalescing例子,请查看main.ts
+    this.cdr.detectChanges();
   }
 
   // 这么做完全是为了演示CDK portal的简单用法
