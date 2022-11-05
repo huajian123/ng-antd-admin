@@ -13,6 +13,6 @@ export class DownloadService {
   constructor(public http: BaseHttpService) {}
 
   public fileStreamDownload(downloadDto: DownLoadObj): Observable<string> {
-    return this.http.downZip('/file/download/document', downloadDto, { needSuccessInfo: false });
+    return this.http.downLoadWithBlob('/file/download/document', downloadDto, { needSuccessInfo: false });
   }
 }

@@ -32,107 +32,70 @@ export class BaseHttpService {
     this.uri = environment.production ? localUrl : '/site/api';
   }
 
-  get<T>(path: string, param?: NzSafeAny, config?: HttpCustomConfig): Observable<NzSafeAny> {
+  get<T>(path: string, param?: NzSafeAny, config?: HttpCustomConfig): Observable<T> {
     config = config || { needSuccessInfo: false };
-    let reqPath = this.uri + path;
-    if (config.otherUrl) {
-      reqPath = path;
-    }
+    let reqPath = this.getUrl(path, config);
     const params = new HttpParams({ fromString: qs.stringify(param) });
-    return this.http.get<ActionResult<T>>(reqPath, { params }).pipe(
-      filter(item => {
-        return this.handleFilter(item, !!config?.needSuccessInfo);
-      }),
-      map(item => {
-        if (item.code !== 0) {
-          throw new Error(item.msg);
-        }
-        return item;
-      }),
-      map(item => item.data)
-    );
+    return this.http.get<ActionResult<T>>(reqPath, { params }).pipe(this.resultHandle(config));
   }
 
-  delete<T>(path: string, param?: NzSafeAny, config?: HttpCustomConfig): Observable<NzSafeAny> {
+  delete<T>(path: string, param?: NzSafeAny, config?: HttpCustomConfig): Observable<T> {
     config = config || { needSuccessInfo: false };
-    let reqPath = this.uri + path;
-    if (config.otherUrl) {
-      reqPath = path;
-    }
+    let reqPath = this.getUrl(path, config);
     const params = new HttpParams({ fromString: qs.stringify(param) });
-    return this.http.delete<ActionResult<T>>(reqPath, { params }).pipe(
-      filter(item => {
-        return this.handleFilter(item, !!config?.needSuccessInfo);
-      }),
-      map(item => {
-        if (item.code !== 0) {
-          throw new Error(item.msg);
-        }
-        return item;
-      }),
-      map(item => item.data)
-    );
+    return this.http.delete<ActionResult<T>>(reqPath, { params }).pipe(this.resultHandle(config));
   }
 
-  post<T>(path: string, param?: NzSafeAny, config?: HttpCustomConfig): Observable<NzSafeAny> {
+  post<T>(path: string, param?: NzSafeAny, config?: HttpCustomConfig): Observable<T> {
     config = config || { needSuccessInfo: false };
-    let reqPath = this.uri + path;
-    if (config.otherUrl) {
-      reqPath = path;
-    }
-    return this.http.post<ActionResult<T>>(reqPath, param).pipe(
-      filter(item => {
-        return this.handleFilter(item, !!config?.needSuccessInfo);
-      }),
-      map(item => {
-        if (item.code !== 0) {
-          throw new Error(item.msg);
-        }
-        return item;
-      }),
-      map(item => item.data)
-    );
+    let reqPath = this.getUrl(path, config);
+    return this.http.post<ActionResult<T>>(reqPath, param).pipe(this.resultHandle(config));
   }
 
-  put<T>(path: string, param?: NzSafeAny, config?: HttpCustomConfig): Observable<NzSafeAny> {
+  put<T>(path: string, param?: NzSafeAny, config?: HttpCustomConfig): Observable<T> {
     config = config || { needSuccessInfo: false };
-    let reqPath = this.uri + path;
-    if (config.otherUrl) {
-      reqPath = path;
-    }
-    return this.http.put<ActionResult<T>>(reqPath, param).pipe(
-      filter(item => {
-        return this.handleFilter(item, !!config?.needSuccessInfo);
-      }),
-      map(item => {
-        if (item.code !== 0) {
-          throw new Error(item.msg);
-        }
-        return item;
-      }),
-      map(item => item.data)
-    );
+    let reqPath = this.getUrl(path, config);
+    return this.http.put<ActionResult<T>>(reqPath, param).pipe(this.resultHandle(config));
   }
 
-  downZip(path: string, param?: NzSafeAny, config?: HttpCustomConfig): Observable<NzSafeAny> {
+  downLoadWithBlob(path: string, param?: NzSafeAny, config?: HttpCustomConfig): Observable<NzSafeAny> {
     config = config || { needSuccessInfo: false };
-    let reqPath = this.uri + path;
-    if (config.otherUrl) {
-      reqPath = path;
-    }
+    let reqPath = this.getUrl(path, config);
     return this.http.post(reqPath, param, {
       responseType: 'blob',
       headers: new HttpHeaders().append('Content-Type', 'application/json')
     });
   }
+  getUrl(path: string, config: HttpCustomConfig): string {
+    let reqPath = this.uri + path;
+    if (config.otherUrl) {
+      reqPath = path;
+    }
+    return reqPath;
+  }
 
-  handleFilter(item: ActionResult<NzSafeAny>, needSuccessInfo: boolean): boolean {
+  resultHandle<T>(config: HttpCustomConfig): (observable: Observable<ActionResult<T>>) => Observable<T> {
+    return (observable: Observable<ActionResult<T>>) => {
+      return observable.pipe(
+        filter(item => {
+          return this.handleFilter(item, !!config?.needSuccessInfo);
+        }),
+        map(item => {
+          if (item.code !== 0) {
+            throw new Error(item.msg);
+          }
+          return item.data;
+        })
+      );
+    };
+  }
+
+  handleFilter<T>(item: ActionResult<T>, needSuccessInfo: boolean): boolean {
     if (item.code !== 0) {
       this.message.error(item.msg);
     } else if (needSuccessInfo) {
       this.message.success('操作成功');
     }
     return true;
-    // return item.code === 0;
   }
 }
