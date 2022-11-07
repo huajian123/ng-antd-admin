@@ -10,7 +10,6 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import * as qs from 'qs';
 
 export interface HttpCustomConfig {
-  needIntercept?: boolean; // 是否需要被拦截
   needSuccessInfo?: boolean; // 是否需要"操作成功"提示
   showLoading?: boolean; // 是否需要loading
   otherUrl?: boolean; // 是否是第三方接口
@@ -36,26 +35,26 @@ export class BaseHttpService {
     config = config || { needSuccessInfo: false };
     let reqPath = this.getUrl(path, config);
     const params = new HttpParams({ fromString: qs.stringify(param) });
-    return this.http.get<ActionResult<T>>(reqPath, { params }).pipe(this.resultHandle(config));
+    return this.http.get<ActionResult<T>>(reqPath, { params }).pipe(this.resultHandle<T>(config));
   }
 
   delete<T>(path: string, param?: NzSafeAny, config?: HttpCustomConfig): Observable<T> {
     config = config || { needSuccessInfo: false };
     let reqPath = this.getUrl(path, config);
     const params = new HttpParams({ fromString: qs.stringify(param) });
-    return this.http.delete<ActionResult<T>>(reqPath, { params }).pipe(this.resultHandle(config));
+    return this.http.delete<ActionResult<T>>(reqPath, { params }).pipe(this.resultHandle<T>(config));
   }
 
   post<T>(path: string, param?: NzSafeAny, config?: HttpCustomConfig): Observable<T> {
     config = config || { needSuccessInfo: false };
     let reqPath = this.getUrl(path, config);
-    return this.http.post<ActionResult<T>>(reqPath, param).pipe(this.resultHandle(config));
+    return this.http.post<ActionResult<T>>(reqPath, param).pipe(this.resultHandle<T>(config));
   }
 
   put<T>(path: string, param?: NzSafeAny, config?: HttpCustomConfig): Observable<T> {
     config = config || { needSuccessInfo: false };
     let reqPath = this.getUrl(path, config);
-    return this.http.put<ActionResult<T>>(reqPath, param).pipe(this.resultHandle(config));
+    return this.http.put<ActionResult<T>>(reqPath, param).pipe(this.resultHandle<T>(config));
   }
 
   downLoadWithBlob(path: string, param?: NzSafeAny, config?: HttpCustomConfig): Observable<NzSafeAny> {
@@ -66,6 +65,7 @@ export class BaseHttpService {
       headers: new HttpHeaders().append('Content-Type', 'application/json')
     });
   }
+
   getUrl(path: string, config: HttpCustomConfig): string {
     let reqPath = this.uri + path;
     if (config.otherUrl) {
@@ -78,7 +78,7 @@ export class BaseHttpService {
     return (observable: Observable<ActionResult<T>>) => {
       return observable.pipe(
         filter(item => {
-          return this.handleFilter(item, !!config?.needSuccessInfo);
+          return this.handleFilter(item, !!config.needSuccessInfo);
         }),
         map(item => {
           if (item.code !== 0) {

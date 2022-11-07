@@ -16,7 +16,7 @@ import { WindowService } from '../window.service';
 })
 export class JudgeAuthGuard implements CanActivateChild {
   authCodeArray: string[] = [];
-  selMenu!: Menu | null;
+  selMenu: Menu | null = null;
   menuNavList: Menu[] = [];
 
   constructor(

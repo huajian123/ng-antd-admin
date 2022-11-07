@@ -1,5 +1,6 @@
 /*
  * 只有在菜单静态加载时候，可以把以下注释打开
+ * 并且需要将src/app/core/services/http/login/login.service.ts文件中的注释放开
  * */
 
 /*import { InjectionToken } from '@angular/core';
