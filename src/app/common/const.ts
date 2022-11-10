@@ -42,6 +42,16 @@ export const Ant100AddListDatasc = "screenpc/ant100AddListDatasc";
 export const Ant100DelDatasc = "screenpc/ant100DelDatasc";
 export const Ant100EditDatasc = "screenpc/ant100EditDatasc";
 
+// quan ly xe
+
+export const XeAnt100GetAll = 'xe/xeAnt100getAll';
+export const XeAnt100Get = 'xe/xeAnt100get';
+export const XeAnt100Update = 'xe/xeAnt100update';
+export const XeAnt100Create = 'xe/xeAnt100create';
+export const XeAnt100Delete = 'xe/xeAnt100delete';
+export const XeAnt100DeleteAll = 'xe/xeAnt100deleteAll';
+
+
 
 
 

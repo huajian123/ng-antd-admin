@@ -33,5 +33,10 @@ export const ActionCode = {
   DataScAdd: 'default:system:datasc:add',
   DataScEdit: 'default:system:datasc:edit',
   DataScDel: 'default:system:datasc:del',
-  DataScDelAll: 'default:system:datasc:del'
+  DataScDelAll: 'default:system:datasc:del',
+
+  /* ActionCode ql Xe*/
+  XeAdd: 'default:system:quanlyxe:add',
+  XeEdit: 'default:system:quanlyxe:update',
+  XeDel: 'default:system:quanlyxe:del',
 };

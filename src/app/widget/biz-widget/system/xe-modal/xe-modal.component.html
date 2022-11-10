@@ -1,0 +1,22 @@
+<form nz-form [formGroup]="addEditForm">
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="biensoxe">Biển số xe</nz-form-label>
+      <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="Vui lòng nhập Biển số xe">
+        <input nz-input formControlName="biensoxe" name="biensoxe" placeholder="Vui lòng nhập biển số xe" id="biensoxe" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="tenxegoinho">Tên gợi nhớ</nz-form-label>
+        <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="Vui lòng nhập Tên gợi nhớ">
+          <input nz-input formControlName="tenxegoinho" name="tenxegoinho" placeholder="Vui lòng nhập tên gợi nhớ" id="tenxegoinho" />
+        </nz-form-control>
+    </nz-form-item>
+  
+    <nz-form-item>
+        <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="trongtai">Trọng tải</nz-form-label>
+        <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="Vui lòng nhập Trọng tải xe (vd: 8 Tấn)">
+          <input nz-input formControlName="trongtai" name="trongtai" placeholder="Vui lòng nhập trọng tải" id="trongtai"/>
+        </nz-form-control>
+    </nz-form-item>
+  </form>

@@ -27,7 +27,6 @@ export class LoginService {
   }
 
   public getMenuByUserId(userId: string): Observable<Menu[]> {
-    // 延迟两秒发送，模拟从接口获取
     // return of(this.menus).pipe(delay(1));
     return this.http.get("user/menu");//`/sysPermission/menu/${userId}`
   }

@@ -204,7 +204,6 @@ export class AccountComponent implements OnInit {
     this.modalSrv.confirm({
       nzTitle: 'Bạn có chắc chắn muốn xóa nó không?',
       nzContent: 'Không thể phục hồi sau khi xóa',
-      nzFooter: "hi",
       nzOnOk: () => {
         this.tableLoading(true);
         this.dataService.delAccount(ids).subscribe(

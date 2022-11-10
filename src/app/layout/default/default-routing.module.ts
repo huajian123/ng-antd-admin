@@ -41,6 +41,14 @@ const routes: Routes = [
         path: 'system',
         loadChildren: () => import('../../pages/system/system.module').then(m => m.SystemModule)
       },
+      {
+        path: 'chuyen',
+        loadChildren: () => import('../../pages/chuyen/chuyen.module').then(m => m.ChuyenModule)
+      },
+      {
+        path: 'khachhang',
+        loadChildren: () => import('../../pages/khachhang/khachhang.module').then(m => m.KhachhangModule)
+      },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   }

@@ -19,6 +19,10 @@ import { QuicklinkModule } from 'ngx-quicklink';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import interceptors from './core/services/interceptors';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
 
 
 export function StartupServiceFactory(startupService: StartupService) {
@@ -91,7 +95,7 @@ const APPINIT_PROVIDES = [
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, BrowserAnimationsModule, HttpClientModule, CoreModule, SharedModule, LoginModalModule, PasswordStrengthMeterModule.forRoot(), QuicklinkModule, AppRoutingModule],
+  imports: [BrowserModule, BrowserAnimationsModule, HttpClientModule, CoreModule, SharedModule, LoginModalModule, PasswordStrengthMeterModule.forRoot(), QuicklinkModule, AppRoutingModule, StoreModule.forRoot({}, {}), StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }), EffectsModule.forRoot([])],
   providers: [...interceptors, ...APPINIT_PROVIDES],
   bootstrap: [AppComponent]
 })
