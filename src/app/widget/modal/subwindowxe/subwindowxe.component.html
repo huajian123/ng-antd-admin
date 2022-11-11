@@ -1,0 +1,4 @@
+<p>subwindowxe works!</p>
+<app-card-table-wrap [tableTitle]="'Danh sách Xe Tải'" (reload)="reloadTable()">
+    <app-ant-table [tableConfig]="tableConfig" (changePageSize)="changePageSize($event)" (changePageNum)="getDataList($event)" [tableData]="dataList"></app-ant-table>
+</app-card-table-wrap>

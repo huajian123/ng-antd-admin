@@ -3,8 +3,7 @@ import { BaseComponent } from 'src/app/pages/system/base/base.component';
 import { WebserviceService } from 'src/app/core/services/common/webservice.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import {  getXes } from '../../../core/store/xe/xe.action';
-
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-demo',
@@ -18,9 +17,10 @@ export class DemoComponent extends BaseComponent {
     protected override webService: WebserviceService,
     protected override router: Router,
     protected override cdf :  ChangeDetectorRef,
+    protected override  datePipe : DatePipe,
     private store: Store
   ){
-    super(webService,router,cdf);
+    super(webService,router,cdf,datePipe);
   }
 
   fnInit(){

@@ -1,3 +1,4 @@
+export const  dateFormat= 'dd/MM/yyyy';
 
 //role
 export const Ant100SearchAllRole = "role/ant100SearchAllRole";

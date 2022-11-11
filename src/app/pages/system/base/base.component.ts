@@ -6,11 +6,12 @@ import { WebserviceService,ObjectDataSC ,Product} from 'src/app/core/services/co
 import { $timeout } from 'src/app/common/Time';
 import * as Const from 'src/app/common/const';
 import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
     selector: 'app-base',
     templateUrl: './base.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    providers: [DatePipe]
   })
 export abstract class BaseComponent implements OnInit, OnDestroy {
 
@@ -20,7 +21,8 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
     constructor(
         protected webService: WebserviceService,
         protected router:Router,
-        protected  cdf :  ChangeDetectorRef
+        protected  cdf :  ChangeDetectorRef,
+        protected datePipe: DatePipe
     ) { }
     ngOnDestroy(): void {
         this.destroy();
@@ -38,6 +40,19 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
             });
             this.fnInit();
         });
+    }
+
+    getDate() {
+        let date = this.datePipe.transform(new Date(), 'dd/MM/yyyy') + "";
+        return date;
+    }
+
+    formatDate(d: any) {
+        if(d == null || d == '') {
+            return '';
+        }
+        let date = this.datePipe.transform(d, 'dd/MM/yyyy') + "";
+        return date;
     }
 
     abstract fnInit(): any;

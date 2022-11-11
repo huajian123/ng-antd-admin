@@ -10,11 +10,14 @@ import * as Const from "src/app/common/const"
  *  部门列表
  * */
 export interface Dept {
-  id?: number;
-  departmentName: string;
-  fatherId: number;
+  id?: string;
+  tenphongban: string;
+  fatherId: string;
   state: 1 | 0;
   orderNum: number;
+  title?: string;
+  key?:string;
+  value?:string;
 }
 
 @Injectable({

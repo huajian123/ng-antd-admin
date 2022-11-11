@@ -14,6 +14,7 @@ import { finalize } from 'rxjs';
 import { XeService } from '@app/core/services/http/xe/xe.service';
 import { OptionsInterface, SearchCommonVO } from '@app/core/services/types';
 import { MapKeyType, MapPipe, MapSet } from '@app/shared/pipes/map.pipe';
+import { DatePipe } from '@angular/common';
 
 interface SearchParam {
   biensoxe: string;
@@ -39,10 +40,11 @@ export class XeComponent extends BaseComponent implements OnInit { //extends Bas
     protected override  webService: WebserviceService,
     protected override  router: Router,
     protected override  cdf : ChangeDetectorRef,
+    protected override  datePipe : DatePipe,
     private modalService: XeModalService,
-    private dataService: XeService
+    private dataService: XeService,
   ){
-    super(webService,router,cdf);
+    super(webService,router,cdf,datePipe);
     this.pageHeaderInfo = {
       title: this.formItemNm[1],
       breadcrumb: ['Home','Quản lý hệ thống',  'Quản lý xe'],

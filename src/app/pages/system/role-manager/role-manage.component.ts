@@ -88,9 +88,7 @@ export class RoleManageComponent implements OnInit {
     this.router.navigate(['/default/system/role-manager/set-role'], { queryParams: { id: id } });
   }
 
-  // 触发表格变更检测
   tableChangeDectction(): void {
-    // 改变引用触发变更检测。
     this.dataList = [...this.dataList];
     this.cdr.detectChanges();
   }

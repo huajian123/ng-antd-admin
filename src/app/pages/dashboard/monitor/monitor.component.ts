@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, NgZone, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { WebserviceService } from '@app/core/services/common/webservice.service';
@@ -22,9 +23,10 @@ export class MonitorComponent extends BaseComponent{
  constructor(
     protected override webService: WebserviceService,
     protected override router: Router,
-    protected override cdf :  ChangeDetectorRef
+    protected override cdf :  ChangeDetectorRef,
+    protected override  datePipe : DatePipe,
   ){
-    super(webService,router,cdf);
+    super(webService,router,cdf,datePipe);
   }
 
   @ViewChild('pageHeaderContent', { static: false }) pageHeaderContent!: TemplateRef<NzSafeAny>;

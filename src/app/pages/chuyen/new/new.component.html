@@ -1,1 +1,91 @@
-<p>new Chuyến!</p>
+<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+<div class="normal-table-wrap">
+    <nz-card nzHoverable [nzBodyStyle]="{ 'padding-bottom': 0 }" class="m-b-10">
+        <form nz-form>
+            <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24 }">
+                <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+                    <nz-form-item>
+                        <nz-form-label [nzXXl]="9" [nzXl]="9" [nzLg]="9" [nzMd]="12" [nzSm]="24" [nzXs]="24" [nzFor]="" nzRequired>Ngày bắt đầu</nz-form-label>
+                        <nz-form-control [nzXXl]="12" [nzXl]="12" [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+                            <nz-date-picker
+                            name="ngaybatdau"
+                            [nzDisabledDate]="disabledStartSoplnDate" 
+                            [nzFormat]="dateFormat" 
+                            [(ngModel)]="searchParam.ngaybatdau" 
+                            [nzPlaceHolder]="dateFormat"
+                            (nzOnOpenChange)="handleStartOpenSoplnChange($event)">
+                        </nz-date-picker>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+                    <nz-form-item>
+                        <nz-form-label [nzXXl]="9" [nzXl]="9" [nzLg]="9" [nzMd]="12" [nzSm]="24" [nzXs]="24" [nzFor]="">Ngày kết thúc</nz-form-label>
+                        <nz-form-control [nzXXl]="12" [nzXl]="12" [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+                            <nz-date-picker
+                            name="ngayketthuc"
+                            #endSoplnDate
+                            [nzDisabledDate]="disabledEndSoplnDate" 
+                            [nzFormat]="dateFormat" 
+                            [(ngModel)]="searchParam.ngayketthuc" 
+                            [nzPlaceHolder]="dateFormat"
+                            (nzOnOpenChange)="handleEndOpenSoplnChange($event)">
+                        </nz-date-picker>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24"  class="text-right p-0 m-b-10">
+                    <button (click)="getDataList()" nz-button [nzType]="'primary'">
+                        <i nz-icon nzType="search"></i>
+                        Tìm kiếm
+                      </button>
+                      <button nz-button class="m-l-15" (click)="resetForm()">
+                        <i nz-icon nzType="close-circle" nzTheme="outline"></i>
+                        Làm mới
+                      </button>
+                </div>
+            </div>
+            <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24 }">
+                <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+                    <nz-form-item>
+                        <!-- Tài chính -->
+                        <nz-form-label  [nzXXl]="9" [nzXl]="9" [nzLg]="9" [nzMd]="12" [nzSm]="24" [nzXs]="24">Tài Chính</nz-form-label>
+                        <nz-form-control  [nzXXl]="12" [nzXl]="12" [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+                            <nz-select name="idtai" nzShowSearch nzAllowClear [(ngModel)]="searchParam.idtai">
+                                <nz-option *ngFor="let lst of listTaiXe" nzLabel="{{lst['id']}}" nzValue="{{lst['tentaixe']}}"></nz-option>
+                            </nz-select>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+                    <nz-form-item>
+                        <!-- Tài phụ -->
+                        <nz-form-label  [nzXXl]="9" [nzXl]="9" [nzLg]="9" [nzMd]="12" [nzSm]="24" [nzXs]="24">Tài Phụ</nz-form-label>
+                        <nz-form-control  [nzXXl]="12" [nzXl]="12" [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+                            <nz-select name="idphu" nzShowSearch nzAllowClear [(ngModel)]="searchParam.idphu">
+                                <nz-option *ngFor="let lst of listTaiXe" nzLabel="{{lst['id']}}" nzValue="{{lst['tentaixe']}}"></nz-option>
+                            </nz-select>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+            </div>
+            <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24 }">
+                <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24" class="inputIcon">
+                    <nz-form-item>
+                        <!-- Biến số xe -->
+                        <nz-form-label  [nzXXl]="9" [nzXl]="9" [nzLg]="9" [nzMd]="12" [nzSm]="24" [nzXs]="24">Biển số xe</nz-form-label>
+                        <nz-form-control  [nzXXl]="14" [nzXl]="14" [nzLg]="14" [nzMd]="14" [nzSm]="24" [nzXs]="24">
+                            <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButtonBiensoxe">
+                                <input type="text" nz-input [(ngModel)]="searchParam.biensoxe" placeholder="" (blur)="fnFocusOutBiensoxe()"/>
+                            </nz-input-group>
+                            <ng-template #suffixIconButtonBiensoxe>
+                                <button nz-button class="bg-icon" (click)="searchBiensoxeClick()"><span nz-icon nzType="search"></span></button>
+                            </ng-template>
+                            <nz-form-label [nzNoColon]="true" nzFor="" class="fix-inputIcon"><span><u>{{biensoxenm}}</u></span></nz-form-label>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+            </div>
+        </form>
+    </nz-card>
+</div>

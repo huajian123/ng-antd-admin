@@ -7,6 +7,7 @@ import { SearchCommonVO } from '@core/services/types';
 import { DeptService } from '@services/system/dept.service';
 import { fnFlatDataHasParentToTree, fnFlattenTreeDataByDataList } from '@utils/treeTableTools';
 import { NzTreeFlatDataSource, NzTreeFlattener } from 'ng-zorro-antd/tree-view';
+import { NzTreeNodeOptions } from 'ng-zorro-antd/tree';
 
 interface TreeNode {
   id: number;
@@ -49,6 +50,8 @@ export class DeptTreeService {
     node => node.children
   );
 
+  datas: NzTreeNodeOptions[] = []
+
   dataSource = new NzTreeFlatDataSource(this.treeControl, this.treeFlattener);
   hasChild = (_: number, node: FlatNode): boolean => node.expandable;
 
@@ -73,7 +76,15 @@ export class DeptTreeService {
       pageNum: 0
     };
     this.dataService.getDepts(params).subscribe(deptList => {
+     
+      for(let element of deptList.list) {
+        element.title = element.tenphongban;
+        element.key = element.id;
+        element.value = element.id;
+      }
+      console.log(deptList);
       this.TREE_DATA$.next(fnFlatDataHasParentToTree(deptList.list));
+      console.log(this.TREE_DATA$);
     });
   }
 }
