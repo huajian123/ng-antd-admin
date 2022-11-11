@@ -31,7 +31,7 @@ export class TabsComponent implements OnInit {
   }
 
   closeOther(): void {
-    this.tabService.delOtharTab(this.router.url, this.tabService.getCurrentTabIndex());
+    this.tabService.delOtherTab(this.router.url, this.tabService.getCurrentTabIndex());
   }
 
   closeCurrent(): void {

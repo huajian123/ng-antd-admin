@@ -44,8 +44,8 @@ export class ThemeSkinService {
     });
   }
 
-  public loadTheme(firstLoad = true): Promise<Event> {
-    if (firstLoad) {
+  public loadTheme(isFirstLoad = true): Promise<Event> {
+    if (isFirstLoad) {
       this.themesService
         .getIsNightTheme()
         .pipe(first())
@@ -54,13 +54,13 @@ export class ThemeSkinService {
         });
     }
     const theme = this.currentTheme;
-    if (firstLoad) {
+    if (isFirstLoad) {
       this.doc.documentElement.classList.add(theme);
     }
     return new Promise<Event>((resolve, reject) => {
       this.loadCss(`${theme}.css`, theme).then(
         e => {
-          if (!firstLoad) {
+          if (!isFirstLoad) {
             this.doc.documentElement.classList.add(theme);
           }
           this.removeUnusedTheme(this.reverseTheme(theme));

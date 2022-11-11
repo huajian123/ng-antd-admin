@@ -140,7 +140,7 @@ export class TabService {
   }
 
   // 右键tab选择“移除其他tab”
-  delOtharTab(path: string, index: number): void {
+  delOtherTab(path: string, index: number): void {
     // 要删除的tab
     const beDelTabArray = this.tabArray.filter((item, tabindex) => {
       return tabindex !== index;

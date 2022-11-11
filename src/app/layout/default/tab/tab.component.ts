@@ -75,7 +75,7 @@ export class TabComponent implements OnInit {
   // 关闭其他tab
   closeOtherTab(tab: TabModel, e: MouseEvent, index: number): void {
     fnStopMouseEvent(e);
-    this.tabService.delOtharTab(tab.path, index);
+    this.tabService.delOtherTab(tab.path, index);
   }
 
   // 右键关闭当前Tab
