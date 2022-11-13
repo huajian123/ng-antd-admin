@@ -142,6 +142,14 @@ export class ModalWrapService {
 
   // 创建对话框的配置项
   createModalConfig(component: Type<NzSafeAny>, modalOptions: ModalOptions = {}, params: object = {}, wrapCls: string): ModalOptions {
+    let str=JSON.stringify(params);
+    let obj = JSON.parse(str);
+    let showCf = false;
+    if(obj['showcomfirm'] != undefined){
+      showCf = obj['showcomfirm'];
+    } else {
+      showCf = true;
+    }
     const defaultOptions: ModalOptions = {
       nzTitle: '',
       nzContent: component,
@@ -151,7 +159,7 @@ export class ModalWrapService {
         {
           label: 'Xác nhận',
           type: 'primary',
-          show: true,
+          show: showCf,
           onClick: this.confirmCallback.bind(this)
         },
         {
@@ -172,6 +180,7 @@ export class ModalWrapService {
         params
       } // 参数中的属性将传入nzContent实例中
     };
+
     const newOptions = _.merge(defaultOptions, modalOptions);
     newOptions.nzWrapClassName = `${newOptions.nzWrapClassName || ''} ${wrapCls}`;
     return newOptions;

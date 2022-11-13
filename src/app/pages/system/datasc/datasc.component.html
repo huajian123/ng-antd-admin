@@ -48,7 +48,7 @@
                     <button nz-button nzType="primary" nzGhost (click)="del(id)">Xóa</button>
                   </span>
                 </ng-template>
-              </app-card-table-wrap>
+            </app-card-table-wrap>
         </div>
     </div>
     <ng-template #tableBtns>
@@ -60,7 +60,7 @@
           <i nz-icon nzType="delete"></i>
           Xóa tất cả
         </button>
-      </ng-template>
+    </ng-template>
     
       <ng-template #availableFlag let-available="available" let-id="id">
         <nz-switch [nzControl]="true" [ngModel]="available" [nzDisabled]="true" nzCheckedChildren="Cho phép" nzUnCheckedChildren="Vô hiệu hóa"></nz-switch>

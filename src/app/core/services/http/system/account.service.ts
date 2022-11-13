@@ -41,7 +41,7 @@ export interface UserPsd {
 export class AccountService {
   constructor(public http: BaseHttpService) {}
 
-  public getAccount(param: SearchCommonVO<User>): Observable<PageInfo<User>> {
+  public getAccount(param: SearchCommonVO<User>): Observable<any> {
     return this.http.post(Const.Ant100findAllUser, param);
   }
 

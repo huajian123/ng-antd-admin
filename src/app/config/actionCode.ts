@@ -39,4 +39,16 @@ export const ActionCode = {
   XeAdd: 'default:system:quanlyxe:add',
   XeEdit: 'default:system:quanlyxe:update',
   XeDel: 'default:system:quanlyxe:del',
+
+   /* Actioncode ql Chuyen*/
+  ChuyenAdd: 'default:chuyen:new:add',
+  ChuyenEdit: 'default:chuyen:new:edit',
+  ChuyenDel: 'default:chuyen:new:del',
+
+  // kê hoạch bọc hang
+  AddProduct: 'default:chuyen:quanlychuyen:add',
+  DelAllProduct: 'default:chuyen:quanlychuyen:delall',
+  DelProduct: 'default:chuyen:quanlychuyen:del',
+  EditProduct: 'default:chuyen:quanlychuyen:edit',
+  Confirm: 'default:chuyen:quanlychuyen:comfirm',
 };

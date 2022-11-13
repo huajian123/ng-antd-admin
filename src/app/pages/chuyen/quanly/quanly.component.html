@@ -1,1 +1,74 @@
-<p>quanly works!</p>
+<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+<div class="normal-table-wrap">
+    <nz-card nzHoverable [nzBodyStyle]="{ 'padding-bottom': 0 }" class="m-b-10">
+        <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24 }">
+            <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+                <nz-form-item>
+                    <nz-form-label [nzXXl]="9" [nzXl]="9" [nzLg]="9" [nzMd]="12" [nzSm]="24" [nzXs]="24" [nzFor]="" nzRequired>Mã Chuyến hàng</nz-form-label>
+                    <nz-form-control [nzXXl]="12" [nzXl]="12" [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+                        
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+                <nz-form-item>
+                    <nz-form-label [nzXXl]="9" [nzXl]="9" [nzLg]="9" [nzMd]="12" [nzSm]="24" [nzXs]="24" [nzFor]="" nzRequired>Biển số xe</nz-form-label>
+                    <nz-form-control [nzXXl]="12" [nzXl]="12" [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+                        
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+        <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24 }">
+            <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+                <nz-form-item>
+                    <nz-form-label [nzXXl]="9" [nzXl]="9" [nzLg]="9" [nzMd]="12" [nzSm]="24" [nzXs]="24" [nzFor]="" nzRequired>Tài chính</nz-form-label>
+                    <nz-form-control [nzXXl]="12" [nzXl]="12" [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+                        
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+                <nz-form-item>
+                    <nz-form-label [nzXXl]="9" [nzXl]="9" [nzLg]="9" [nzMd]="12" [nzSm]="24" [nzXs]="24" [nzFor]="" nzRequired>Tài phụ</nz-form-label>
+                    <nz-form-control [nzXXl]="12" [nzXl]="12" [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+                        
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+    </nz-card>
+    <app-card-table-wrap [tableTitle]="'Danh sách mặt hàng'" (reload)="reloadTable()" [btnTpl]="tableBtns" [btnConfirm]="tableConfirm">
+        <app-ant-table
+        (selectedChange)="selectedChecked($event)"
+        [checkedCashArrayFromComment]="checkedCashArray"
+        (changePageNum)="getDataList()"
+        [tableConfig]="tableConfig"
+        [tableData]="dataList"
+      ></app-ant-table>
+      <ng-template #operationTpl let-stt="stt">
+        <span *appAuth="ActionCode.EditProduct" class="operate-text">
+          <button nz-button nzType="primary" nzGhost (click)="edit(stt)">Cập nhật</button>
+        </span>
+        <span *appAuth="ActionCode.DelProduct" class="operate-text">
+          <button nz-button nzType="primary" nzGhost (click)="del(stt)">Xóa</button>
+        </span>
+      </ng-template>
+    </app-card-table-wrap>
+    <ng-template #tableConfirm>
+        <button *appAuth="ActionCode.Confirm" (click)="Confirm()" nz-button nzType="primary" class="m-r-8">
+            <i nz-icon nzType="caret-right"></i>
+              Hoàn thành kế hoạch nhập
+          </button>
+    </ng-template>
+    <ng-template #tableBtns>
+        <button *appAuth="ActionCode.AddProduct" (click)="add()" nz-button nzType="primary" class="m-r-8">
+          <i nz-icon nzType="plus"></i>
+          Thêm mới
+        </button>
+        <button *appAuth="ActionCode.DelAllProduct" (click)="allDel()" nz-button nzType="default">
+          <i nz-icon nzType="delete"></i>
+          Xóa tất cả
+        </button>
+    </ng-template>
+</div>

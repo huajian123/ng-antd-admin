@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators,AbstractControl } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
@@ -45,15 +45,14 @@ export class AccountModalComponent implements OnInit {
     private deptService: DeptService,
     private webService: WebserviceService,
     public vf: ValidationFormService,
-    public message: NzMessageService
+    public message: NzMessageService,
+    private cdf: ChangeDetectorRef
     ) {}
 
-  // 此方法为如果有异步数据需要加载，则在该方法中添加
   protected getAsyncFnData(modalValue: NzSafeAny): Observable<NzSafeAny> {
     return of(modalValue);
   }
 
-  // 返回false则不关闭对话框
   protected getCurrentValue(): Observable<NzSafeAny> {
     if (!fnCheckForm(this.addEditForm)) {
       return of(false);
@@ -77,6 +76,7 @@ export class AccountModalComponent implements OnInit {
         };
         this.roleOptions.push(obj);
       }
+      this.cdf.markForCheck();
     })
   }
 
@@ -93,6 +93,7 @@ export class AccountModalComponent implements OnInit {
       }
       const target = fnAddTreeDataGradeAndLeaf(fnFlatDataHasParentToTree(this.listDept));
       this.deptNodes = target;
+      this.cdf.markForCheck();
     })
   }
 

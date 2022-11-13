@@ -8,10 +8,12 @@ import { XeService } from '@app/core/services/http/xe/xe.service';
 import { OptionsInterface, SearchCommonVO } from '@app/core/services/types';
 import { ValidatorsService } from '@app/core/services/validators/validators.service';
 import { MyTableConfig } from '@app/shared/components/ant-table/ant-table.component';
+import { ModalBtnStatus } from '@app/widget/base-modal';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { ModalButtonOptions, NzModalRef } from 'ng-zorro-antd/modal';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
-import { finalize } from 'rxjs';
+import { finalize, Observable, of, tap } from 'rxjs';
 interface SearchParam {
   biensoxe: string;
   tenxegoinho: string;
@@ -21,17 +23,25 @@ interface SearchParam {
   selector: 'app-subwindowxe',
   templateUrl: './subwindowxe.component.html',
   styleUrls: ['./subwindowxe.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DestroyService]
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SubwindowxeComponent implements OnInit {
   addEditForm!: FormGroup;
-  params!: any;
+  params!: Object;
   roleOptions: OptionsInterface[] = [];
   isEdit = false;
   value?: string;
   tableConfig!: MyTableConfig;
   dataList: Xe[] = [];
+  biensoxe = "hahah";
+  dataResponse: Xe = {
+    id: "",
+    tenxegoinho: "",
+    biensoxe: "",
+    trongtai: "",
+    trangthai: false,
+  }
+
 
   isReadonly = false;
   messageErrors: any = [];
@@ -44,10 +54,20 @@ export class SubwindowxeComponent implements OnInit {
     public message: NzMessageService,
     private cdr: ChangeDetectorRef,
     private dataService: XeService,
+    private modalRef: NzModalRef,
+    
   ) { }
 
   @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<NzSafeAny>;
   @ViewChild('state', { static: true }) state!: TemplateRef<NzSafeAny>;
+
+  protected getAsyncFnData(modalValue: NzSafeAny): Observable<NzSafeAny> {
+    return of(modalValue);
+  }
+
+  protected getCurrentValue(): Observable<NzSafeAny> {
+    return of(this.dataResponse);
+  }
 
   ngOnInit(): void {
     this.initTable();
@@ -100,6 +120,18 @@ export class SubwindowxeComponent implements OnInit {
       });
   }
 
+  getItem(id:string, biensoxe:string, tenxegoinho:string, trongtai:string, trangthai:boolean) {
+     this.dataResponse = {
+       id: id,
+       biensoxe: biensoxe,
+       tenxegoinho: tenxegoinho,
+       trongtai: trongtai,
+       trangthai: trangthai
+     }
+     this.modalRef.destroy({ status: ModalBtnStatus.Ok, modalValue:this.dataResponse });
+  }
+
+
   private initTable(): void {
     this.tableConfig = {
       headers: [
@@ -107,6 +139,7 @@ export class SubwindowxeComponent implements OnInit {
           title: 'Biển số',
           field: 'biensoxe',
           width: 180,
+          tdTemplate: this.operationTpl
         },
         {
           title: 'Tên gợi nhớ',

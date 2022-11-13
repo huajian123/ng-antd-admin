@@ -1,0 +1,88 @@
+<form nz-form [formGroup]="addEditForm">
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="ngaydi">Ngày khởi hành</nz-form-label>
+      <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="Vui lòng nhập ngày khởi hành">
+        <nz-date-picker
+            name="ngaydi"
+            id="ngaydi"
+            [nzDisabledDate]="disabledStartSoplnDate" 
+            [nzFormat]="const.dateFormat" 
+            formControlName="ngaydi"
+            [nzPlaceHolder]="const.dateFormat"
+            (nzOnOpenChange)="handleStartOpenSoplnChange($event)">
+        </nz-date-picker>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="ngayve">Ngày về</nz-form-label>
+        <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="Vui lòng nhập ngày về">
+            <nz-date-picker
+                name="ngayve"
+                id="ngayve"
+                #endSoplnDate
+                [nzDisabledDate]="disabledEndSoplnDate" 
+                [nzFormat]="const.dateFormat" 
+                formControlName="ngayve" 
+                [nzPlaceHolder]="const.dateFormat"
+                (nzOnOpenChange)="handleEndOpenSoplnChange($event)">
+            </nz-date-picker>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="biensoxe">Biển số xe</nz-form-label>
+        <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="Vui lòng nhập biển số xe">
+            <nz-select
+            name="biensoxe"
+            id="biensoxe"
+            formControlName="biensoxe"
+            nzAllowSearch
+            nzShowSearch
+            nzPlaceHolder="Select"
+          >
+            <nz-option *ngFor="let option of listXetai" [nzValue]="option['id']" [nzLabel]="option['biensoxe']"></nz-option>
+          </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="trongtai">Tiền đưa trước</nz-form-label>
+        <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="Vui lòng nhập tiền đưa trước">
+            <nz-input-number name="tienxe" id="tienxe" formControlName="tienxe" [nzMin]="100" [nzMax]="50000" [nzStep]="100"></nz-input-number>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="idtai">Tài chính</nz-form-label>
+        <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="Vui lòng chọn Tài chính">
+            <nz-select
+            name="idtai"
+            id="idtai"
+            formControlName="idtai"
+            nzAllowSearch
+            nzShowSearch
+            nzPlaceHolder="Select"
+          >
+            <nz-option *ngFor="let option of listTaixe" [nzValue]="option['id']" [nzLabel]="option['name']"></nz-option>
+          </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="idphu">Tài phụ</nz-form-label>
+        <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="Vui lòng chọn Tài phụ">
+            <nz-select
+            name="idphu"
+            id="idphu"
+            formControlName="idphu"
+            nzAllowSearch
+            nzShowSearch
+            nzPlaceHolder="Select"
+          >
+            <nz-option *ngFor="let option of listTaixe" [nzValue]="option['id']" [nzLabel]="option['name']"></nz-option>
+          </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="trongtai">Điểm đi - điểm đến</nz-form-label>
+        <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="Vui lòng nhập Điểm đi - điểm đến">
+          <input nz-input formControlName="changduong" name="changduong" placeholder="Vui lòng nhập điểm đi - điểm đến" id="changduong"/>
+        </nz-form-control>
+    </nz-form-item>
+  </form>

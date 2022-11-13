@@ -1,0 +1,18 @@
+tree select
+<div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24 }">
+    <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24" class="inputIcon">
+        <nz-form-label  [nzXXl]="9" [nzXl]="9" [nzLg]="9" [nzMd]="12" [nzSm]="24" [nzXs]="24">Biển số xe</nz-form-label>
+        <nz-form-control  [nzXXl]="10" [nzXl]="10" [nzLg]="10" [nzMd]="10" [nzSm]="20" [nzXs]="24">
+            <nz-tree-select
+            name="value"
+            style="width: 250px"
+            [nzNodes]="deptTreeService.datas"
+            nzShowSearch
+            [nzExpandedKeys]="expandKeys"
+            [(ngModel)]="value"
+            nzPlaceHolder="Please select"
+            (ngModelChange)="onChange($event)"
+        ></nz-tree-select>
+        </nz-form-control>
+    </div>
+</div>

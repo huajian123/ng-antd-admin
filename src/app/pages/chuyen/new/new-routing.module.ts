@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NewComponent } from './new.component';
 
 const routes: Routes = [
-  { path: '', component: NewComponent, data: { title: 'Tạo Mơi', key: 'new' } }
+  { path: '', component: NewComponent, data: { title: 'Quản lý chuyến', key: 'new' } }
 ];
 
 @NgModule({

@@ -70,6 +70,8 @@ export class DeptTreeService {
     this.selectListSelection.select(node);
   }
 
+  
+
   initDate(): void {
     const params: SearchCommonVO<any> = {
       pageSize: 0,
@@ -82,9 +84,8 @@ export class DeptTreeService {
         element.key = element.id;
         element.value = element.id;
       }
-      console.log(deptList);
       this.TREE_DATA$.next(fnFlatDataHasParentToTree(deptList.list));
-      console.log(this.TREE_DATA$);
+      this.datas = this.TREE_DATA$.value;
     });
   }
 }

@@ -1,5 +1,8 @@
 <nz-card nzHoverable style="width: 100%" [nzBordered]="false" [nzTitle]="tableTitle" [nzExtra]="tableToolbar">
   <ng-content></ng-content>
+  <div *ngIf="btnConfirm" [ngStyle]="{'margin-top':'10px'}">
+    <ng-container *ngTemplateOutlet="btnConfirm"></ng-container>
+  </div>
 </nz-card>
 <ng-template #tableToolbar>
   <div class="ant-pro-table-toolbar">

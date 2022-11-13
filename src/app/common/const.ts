@@ -1,4 +1,5 @@
 export const  dateFormat= 'dd/MM/yyyy';
+export const  idTaixe = "636cf775974c56587047691e";
 
 //role
 export const Ant100SearchAllRole = "role/ant100SearchAllRole";
@@ -19,8 +20,6 @@ export const Ant100PostDetailMenu = "menu/ant100PostDetailMenu";
 export const Ant100ListMenu = "menu/ant100ListMenu";
 export const Ant100ListMenuParams = "menu/ant100ListMenuParams";
 export const Ant100PostUrlParams = "menu/ant100PostUrlParams";
-
-
 
 //phong ban
 export const Ant100addPhongban = "phongban/ant100addPhongban";
@@ -44,13 +43,21 @@ export const Ant100DelDatasc = "screenpc/ant100DelDatasc";
 export const Ant100EditDatasc = "screenpc/ant100EditDatasc";
 
 // quan ly xe
-
 export const XeAnt100GetAll = 'xe/xeAnt100getAll';
 export const XeAnt100Get = 'xe/xeAnt100get';
 export const XeAnt100Update = 'xe/xeAnt100update';
 export const XeAnt100Create = 'xe/xeAnt100create';
 export const XeAnt100Delete = 'xe/xeAnt100delete';
 export const XeAnt100DeleteAll = 'xe/xeAnt100deleteAll';
+
+// quan ly chuyen
+export const ChuyenAnt100GetAll = 'chuyen/chuyenAnt100getAll';
+export const ChuyenAnt100Get = 'chuyen/chuyenAnt100get';
+export const ChuyenAnt100Update = 'chuyen/chuyenAnt100update';
+export const ChuyenAnt100Create = 'chuyen/chuyenAnt100create';
+export const ChuyenAnt100Delete = 'chuyen/chuyenAnt100delete';
+export const ChuyenAnt100DeleteAll = 'chuyen/chuyenAnt100deleteAll';
+
 
 
 

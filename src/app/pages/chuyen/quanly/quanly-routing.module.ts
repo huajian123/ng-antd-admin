@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { QuanlyComponent } from './quanly.component';
 
 const routes: Routes = [
-  { path: '', component: QuanlyComponent, data: { title: 'Trang quản lý', key: 'quanly' } }
+  { path: '', component: QuanlyComponent, data: { title: 'Kế hoạch bóc hàng', key: 'quanly' } }
 ];
 
 @NgModule({

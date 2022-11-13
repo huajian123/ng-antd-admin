@@ -60,9 +60,7 @@ export class DeptComponent implements OnInit {
     this.getDataList();
   }
 
-  // 触发表格变更检测
   tableChangeDectction(): void {
-    // 改变引用触发变更检测。
     this.dataList = [...this.dataList];
     this.cdr.detectChanges();
   }
