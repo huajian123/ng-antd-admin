@@ -44,7 +44,7 @@ export class Spch00201Component extends BaseComponent implements OnInit {
     this.cdf.markForCheck();
   }
   destroy() {
-    // this.ChuyenDto.clear();
+    this.ChuyenDto.clear();
   }
 
   pageHeaderInfo: Partial<PageHeaderType> = {
@@ -59,6 +59,7 @@ export class Spch00201Component extends BaseComponent implements OnInit {
   checkedCashArray: any[] = [];
   ActionCode = ActionCode;
   showchuyen = true;
+  tongcuoc = 0;
   availableOptions: OptionsInterface[] = [];
 
   @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<NzSafeAny>;
@@ -81,30 +82,24 @@ export class Spch00201Component extends BaseComponent implements OnInit {
   override ngOnInit(): void {
 
     this.initTable();
+    this.getTongcuoc();
     if(this.ChuyenDto.id != "" && this.ChuyenDto.id.length == 24) {
       this.showchuyen = false;
-      this.showChuyen();
-      //this.tabService.refresh();
     }
-   
     this.availableOptions = [...MapPipe.transformMapToArray(MapSet.available, MapKeyType.Boolean)];
   }
 
   selectChuyen() {
-
+     this.router.navigate([Const.rootbase + 'chuyen/spch00101']);
   }
 
-  showChuyen() {
-     this.dataService.getChuyen(this.ChuyenDto.id).subscribe(res => {
-        this.ChuyenDto.biensoxe = res.biensoxe['biensoxe'];
-        this.ChuyenDto.changduong = res.changduong;
-        this.ChuyenDto.idphu = res.idphu['name'];
-        this.ChuyenDto.idtai = res.idtai['name'];
-        this.ChuyenDto.ngaydi = this.formatDate(res.ngaydi);
-        this.ChuyenDto.ngayve = this.formatDate(res.ngayve);
-        this.ChuyenDto.tienxe = res.tienxe;
-        this.cdf.markForCheck();
-     })
+  getTongcuoc() {
+    let tc = 0;
+    for(let element of this.dataList) {
+      tc = tc + element.tiencuoc;
+    }
+    this.tongcuoc = tc;
+    this.cdf.markForCheck();
   }
 
   Confirm() {
@@ -126,7 +121,13 @@ export class Spch00201Component extends BaseComponent implements OnInit {
   }
 
   save(stt:any) {
-
+    this.modalSrv.confirm({
+      nzTitle: 'Bạn có chắc chắn muốn lưu không?',
+      nzContent: 'Nhấn ok để tiệp tục',
+      nzOnOk: () => {
+         this.message.info("Luu thanh cong" + stt);
+      }
+    });
   }
 
   allDel() {
@@ -153,6 +154,7 @@ export class Spch00201Component extends BaseComponent implements OnInit {
         this.dataList.splice(this.getVitriItem(stt),1);
         this.initTable();
         this.getDataList();
+        this.getTongcuoc();
       }
     });
   }
@@ -186,9 +188,12 @@ export class Spch00201Component extends BaseComponent implements OnInit {
        }
        this.initTable();
        this.getDataList();
+      
      } else {
        this.dataList.push(param);
        this.getDataList();
+       this.getTongcuoc();
+       
      }
   }
 

@@ -13,7 +13,7 @@ import { SubwindowXeService } from '@app/widget/modal/subwindowxe/subwindow-xe.s
 import { SubwindowTaixeService } from "@app/widget/modal/subwindowtaixe/subwindow-taixe.service"
 import { NzDatePickerComponent } from 'ng-zorro-antd/date-picker';
 import * as Const from "src/app/common/const";
-import { DeptTreeService, FlatNode } from '@app/pages/system/account/dept-tree/dept-tree.service';
+import { DeptTreeService } from '@app/pages/system/account/dept-tree/dept-tree.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { ChuyenService } from "@services/chuyen/chuyen.service"
@@ -23,7 +23,7 @@ import { SubwindowChuyenService } from '@app/widget/modal/subwindowchuyen/subwin
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ChuyendtoService } from '@app/core/services/http/chuyen/chuyendto.service';
-import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
+
 interface SearchParam {
   ngaybatdau: string;
   ngayketthuc: string;
@@ -124,7 +124,6 @@ export class Spch00101Component extends BaseComponent implements OnInit {
 
   getDataList(e?: NzTableQueryParams) {
     this.tableConfig.loading = true;
-    this.cdf.markForCheck();
     const params: SearchCommonVO<any> = {
       pageSize: this.tableConfig.pageSize!,
       pageNum: e?.pageIndex || this.tableConfig.pageIndex!,
@@ -177,6 +176,7 @@ export class Spch00101Component extends BaseComponent implements OnInit {
       },
     );
   }
+
   // show modal tai xe
   searchTaixeClick(){
     this.modalTaixeService.show({ nzTitle: 'Danh Sách Tài Xế' },{showcomfirm:false}).subscribe(
@@ -221,6 +221,9 @@ export class Spch00101Component extends BaseComponent implements OnInit {
 
   edit(id:string) {
     this.dataService.getChuyen(id).subscribe(res => {
+      res.biensoxe = res.biensoxe['_id'];
+      res.idphu = res.idphu['_id'];
+      res.idtai = res.idtai['_id']
       this.modalChuyenService.show({ nzTitle: 'Cập nhật' }, res).subscribe(({ modalValue, status }) => {
         if (status === ModalBtnStatus.Cancel) {
           return;
@@ -231,6 +234,7 @@ export class Spch00101Component extends BaseComponent implements OnInit {
       });
     });
   }
+
   del(id:string) {
     this.modalSrv.confirm({
       nzTitle: 'Bạn có chắc chắn muốn xóa nó không?',
@@ -250,6 +254,7 @@ export class Spch00101Component extends BaseComponent implements OnInit {
       }
     });
   }
+
   add() {
     this.modalChuyenService.show({ nzTitle:'Thêm mới' }).subscribe( //  this.formItemNm[15]
       res => {
@@ -264,8 +269,15 @@ export class Spch00101Component extends BaseComponent implements OnInit {
   }
   allDel() {}
 
-  getItem(id:any) {
+  getItem(id:any,changduong: any,idtai: any,idphu: any,biensoxe: any,tienxe:any,ngaydi:any,ngayve:any) {
     this.chuyenDtoService.id = id;
+    this.chuyenDtoService.biensoxe = biensoxe;
+    this.chuyenDtoService.changduong = changduong;
+    this.chuyenDtoService.idphu = idphu;
+    this.chuyenDtoService.idtai = idtai;
+    this.chuyenDtoService.ngaydi = this.formatDate(ngaydi);
+    this.chuyenDtoService.ngayve = this.formatDate(ngayve);
+    this.chuyenDtoService.tienxe = tienxe;
     this.router.navigate([Const.rootbase + 'chuyen/spch00201']);
   }
 

@@ -72,6 +72,7 @@ export class SubwindowchuyenComponent implements OnInit {
     this.initForm();
     if (Object.keys(this.params).length > 0) {
       this.addEditForm.patchValue(this.params);
+      console.log(this.params);
     }
    
   }

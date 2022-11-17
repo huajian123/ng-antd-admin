@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ChuyenService } from './chuyen.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,9 @@ export class ChuyendtoService {
   idphu = "";
   changduong = "";
 
-  constructor() { }
+  constructor(
+    private dataService: ChuyenService,
+  ) { }
 
   clear() {
     this.id = "";
@@ -25,4 +28,5 @@ export class ChuyendtoService {
     this.idphu = "";
     this.changduong = "";
   }
+
 }
