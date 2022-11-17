@@ -1,5 +1,19 @@
 export const  dateFormat= 'dd/MM/yyyy';
 export const  idTaixe = "636cf775974c56587047691e";
+export const  idKhachhang = "632ebaf77e9ad9aeef4e3d27";
+
+export const  Hinhthucthanhtoan = [
+    {"1": "Thanh toán trực tiếp"},
+    {"2": "Ghi nợ"},
+    {"3": "Thanh toán khi nhận hàng"},
+];
+
+export const Lotrinh = [
+    {"0": "Hàng đi"},
+    {"1": "Hàng về"},
+]
+
+export const rootbase = '/default/';
 
 //role
 export const Ant100SearchAllRole = "role/ant100SearchAllRole";

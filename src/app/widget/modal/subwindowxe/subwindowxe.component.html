@@ -1,4 +1,4 @@
-<p>subwindowxe works!</p>
+
 <app-card-table-wrap [tableTitle]="'Danh sách Xe Tải'" (reload)="reloadTable()">
     <app-ant-table [tableConfig]="tableConfig" (changePageSize)="changePageSize($event)" (changePageNum)="getDataList($event)" [tableData]="dataList"></app-ant-table>
     <ng-template #operationTpl let-id="id" let-biensoxe="biensoxe" let-tenxegoinho="tenxegoinho" let-trongtai="trongtai" let-trangthai="trangthai">

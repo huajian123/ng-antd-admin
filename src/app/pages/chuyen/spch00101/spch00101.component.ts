@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActionCode } from '@app/config/actionCode';
 import { WebserviceService } from '@app/core/services/common/webservice.service';
@@ -23,6 +23,7 @@ import { SubwindowChuyenService } from '@app/widget/modal/subwindowchuyen/subwin
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ChuyendtoService } from '@app/core/services/http/chuyen/chuyendto.service';
+import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
 interface SearchParam {
   ngaybatdau: string;
   ngayketthuc: string;
@@ -32,19 +33,17 @@ interface SearchParam {
 }
 
 @Component({
-  selector: 'app-new',
-  templateUrl: './new.component.html',
-  styleUrls: ['./new.component.less'],
+  selector: 'app-spch00101',
+  templateUrl: './spch00101.component.html',
+  styleUrls: ['./spch00101.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [DeptTreeService]
 })
-export class NewComponent extends BaseComponent implements OnInit {
+export class Spch00101Component extends BaseComponent implements OnInit {
   fnInit() {
-     
+     this.cdf.markForCheck();
   }
-  destroy() {
-    
-  }
+  destroy() {}
 
   searchParam: Partial<SearchParam> = {};
   dateFormat = Const.dateFormat;
@@ -265,6 +264,11 @@ export class NewComponent extends BaseComponent implements OnInit {
   }
   allDel() {}
 
+  getItem(id:any) {
+    this.chuyenDtoService.id = id;
+    this.router.navigate([Const.rootbase + 'chuyen/spch00201']);
+  }
+
   addEditData(param: Chuyen, methodName: 'updateChuyen' | 'createChuyen'): void {
     this.dataService[methodName](param)
       .pipe(
@@ -305,7 +309,7 @@ export class NewComponent extends BaseComponent implements OnInit {
       showCheckbox: false,
       headers: [
         {
-          title: 'Ngày khởi hàng',
+          title: 'Ngày khởi hành',
           field: 'ngaydi',
           width: 180,
           pipe: "date: dd/MM/YYYY HH:mm"

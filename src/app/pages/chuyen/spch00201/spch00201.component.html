@@ -6,7 +6,12 @@
                 <nz-form-item>
                     <nz-form-label [nzXXl]="9" [nzXl]="9" [nzLg]="9" [nzMd]="12" [nzSm]="24" [nzXs]="24" [nzFor]="" nzRequired>Mã Chuyến hàng</nz-form-label>
                     <nz-form-control [nzXXl]="12" [nzXl]="12" [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24">
-                        
+                        <ng-container *ngIf="showchuyen; else showmachuyen">
+                            <button nz-button nzType="primary" nzGhost (click)="selectChuyen()">Chọn Chuyến</button>
+                        </ng-container>
+                        <ng-template #showmachuyen>
+                            <span>{{ChuyenDto.id}}</span>
+                        </ng-template>
                     </nz-form-control>
                 </nz-form-item>
             </div>
@@ -14,7 +19,15 @@
                 <nz-form-item>
                     <nz-form-label [nzXXl]="9" [nzXl]="9" [nzLg]="9" [nzMd]="12" [nzSm]="24" [nzXs]="24" [nzFor]="" nzRequired>Biển số xe</nz-form-label>
                     <nz-form-control [nzXXl]="12" [nzXl]="12" [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24">
-                        
+                        <span>{{ChuyenDto.biensoxe}}</span>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+                <nz-form-item>
+                    <nz-form-label [nzXXl]="9" [nzXl]="9" [nzLg]="9" [nzMd]="12" [nzSm]="24" [nzXs]="24" [nzFor]="" nzRequired>Tiền đưa trước</nz-form-label>
+                    <nz-form-control [nzXXl]="12" [nzXl]="12" [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+                        <span>{{ChuyenDto.tienxe}}</span>
                     </nz-form-control>
                 </nz-form-item>
             </div>
@@ -24,13 +37,47 @@
                 <nz-form-item>
                     <nz-form-label [nzXXl]="9" [nzXl]="9" [nzLg]="9" [nzMd]="12" [nzSm]="24" [nzXs]="24" [nzFor]="" nzRequired>Tài chính</nz-form-label>
                     <nz-form-control [nzXXl]="12" [nzXl]="12" [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24">
-                        
+                        <span>{{ChuyenDto.idtai}}</span>
                     </nz-form-control>
                 </nz-form-item>
             </div>
             <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
                 <nz-form-item>
                     <nz-form-label [nzXXl]="9" [nzXl]="9" [nzLg]="9" [nzMd]="12" [nzSm]="24" [nzXs]="24" [nzFor]="" nzRequired>Tài phụ</nz-form-label>
+                    <nz-form-control [nzXXl]="12" [nzXl]="12" [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+                        <span>{{ChuyenDto.idphu}}</span>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+                <nz-form-item>
+                    <nz-form-label [nzXXl]="9" [nzXl]="9" [nzLg]="9" [nzMd]="12" [nzSm]="24" [nzXs]="24" [nzFor]="" nzRequired>Điểm đi - điểm đến</nz-form-label>
+                    <nz-form-control [nzXXl]="12" [nzXl]="12" [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+                        <span>{{ChuyenDto.changduong}}</span>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+        <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24 }">
+            <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+                <nz-form-item>
+                    <nz-form-label [nzXXl]="9" [nzXl]="9" [nzLg]="9" [nzMd]="12" [nzSm]="24" [nzXs]="24" [nzFor]="" nzRequired>Ngày Khởi hành</nz-form-label>
+                    <nz-form-control [nzXXl]="12" [nzXl]="12" [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+                        <span>{{ChuyenDto.ngaydi}}</span>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+                <nz-form-item>
+                    <nz-form-label [nzXXl]="9" [nzXl]="9" [nzLg]="9" [nzMd]="12" [nzSm]="24" [nzXs]="24" [nzFor]="" nzRequired>Ngày về</nz-form-label>
+                    <nz-form-control [nzXXl]="12" [nzXl]="12" [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+                        <span>{{ChuyenDto.ngayve}}</span>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+                <nz-form-item>
+                    <nz-form-label [nzXXl]="9" [nzXl]="9" [nzLg]="9" [nzMd]="12" [nzSm]="24" [nzXs]="24" [nzFor]="" nzRequired>Tổng Cước</nz-form-label>
                     <nz-form-control [nzXXl]="12" [nzXl]="12" [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24">
                         
                     </nz-form-control>
@@ -53,6 +100,9 @@
         <span *appAuth="ActionCode.DelProduct" class="operate-text">
           <button nz-button nzType="primary" nzGhost (click)="del(stt)">Xóa</button>
         </span>
+        <span *appAuth="ActionCode.SaveProduct" class="operate-text">
+            <button nz-button nzType="primary" nzGhost (click)="save(stt)">Lưu</button>
+          </span>
       </ng-template>
     </app-card-table-wrap>
     <ng-template #tableConfirm>

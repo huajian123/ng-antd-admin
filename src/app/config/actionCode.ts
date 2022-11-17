@@ -41,14 +41,15 @@ export const ActionCode = {
   XeDel: 'default:system:quanlyxe:del',
 
    /* Actioncode ql Chuyen*/
-  ChuyenAdd: 'default:chuyen:new:add',
-  ChuyenEdit: 'default:chuyen:new:edit',
-  ChuyenDel: 'default:chuyen:new:del',
+  ChuyenAdd: 'default:chuyen:spch00101:add',
+  ChuyenEdit: 'default:chuyen:spch00101:edit',
+  ChuyenDel: 'default:chuyen:spch00101:del',
 
   // kê hoạch bọc hang
-  AddProduct: 'default:chuyen:quanlychuyen:add',
-  DelAllProduct: 'default:chuyen:quanlychuyen:delall',
-  DelProduct: 'default:chuyen:quanlychuyen:del',
-  EditProduct: 'default:chuyen:quanlychuyen:edit',
-  Confirm: 'default:chuyen:quanlychuyen:comfirm',
+  AddProduct: 'default:chuyen:spch00201:add',
+  DelAllProduct: 'default:chuyen:spch00201:delall',
+  DelProduct: 'default:chuyen:spch00201:del',
+  EditProduct: 'default:chuyen:spch00201:edit',
+  SaveProduct: 'default:chuyen:spch00201:save',
+  Confirm: 'default:chuyen:spch00201:comfirm',
 };

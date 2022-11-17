@@ -3,8 +3,8 @@ export interface Chuyen {
     ngaydi: Date;
     ngayve:Date;
     tienxe: number; // tiền đưa trước
-    biensoxe: string;
-    idtai: string;
-    idphu: string;
+    biensoxe: any;
+    idtai: any;
+    idphu: any;
     changduong: string; // điểm khởi hành và điểm kết thúc
 }
