@@ -24,7 +24,7 @@ export class DemoComponent extends BaseComponent {
   }
 
   fnInit(){
-    
+    console.log("nam pham")
     this.cdf.markForCheck();
   }
   destroy() {}

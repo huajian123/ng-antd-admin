@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NewComponent } from './new.component';
+import { Spch00101Component } from './spch00101.component';
 
 const routes: Routes = [
-  { path: '', component: NewComponent, data: { title: 'Quản lý chuyến', key: 'new' } }
+  { path: '', component: Spch00101Component, data: { title: 'Quản lý chuyến', key: 'spch00101' } }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class NewRoutingModule { }
+export class Spch00101RoutingModule { }

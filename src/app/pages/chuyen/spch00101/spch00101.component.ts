@@ -32,13 +32,13 @@ interface SearchParam {
 }
 
 @Component({
-  selector: 'app-new',
-  templateUrl: './new.component.html',
-  styleUrls: ['./new.component.less'],
+  selector: 'app-spch00101',
+  templateUrl: './spch00101.component.html',
+  styleUrls: ['./spch00101.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [DeptTreeService]
 })
-export class NewComponent extends BaseComponent implements OnInit {
+export class Spch00101Component extends BaseComponent implements OnInit {
   fnInit() {
      
   }

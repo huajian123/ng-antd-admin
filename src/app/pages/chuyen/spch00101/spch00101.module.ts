@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 
-import { NewRoutingModule } from './new-routing.module';
+import { Spch00101RoutingModule } from './spch00101-routing.module';
 import { SharedModule } from '@app/shared/shared.module';
-import { NewComponent } from './new.component';
+import { Spch00101Component } from './spch00101.component';
 import { SubwindowxeModule } from '@app/widget/modal/subwindowxe/subwindowxe.module';
 import { NzHighlightModule } from 'ng-zorro-antd/core/highlight';
 import { SubwindowtaixeModule } from '../../../widget/modal/subwindowtaixe/subwindowtaixe.module';
@@ -11,10 +11,10 @@ import { SubwindowchuyenModule } from '@app/widget/modal/subwindowchuyen/subwind
 
 @NgModule({
   declarations: [
-    NewComponent
+    Spch00101Component
   ],
   imports: [
-    NewRoutingModule,
+    Spch00101RoutingModule,
     SharedModule,
     SubwindowxeModule,
     SubwindowtaixeModule,
@@ -23,4 +23,4 @@ import { SubwindowchuyenModule } from '@app/widget/modal/subwindowchuyen/subwind
   ],
   
 })
-export class NewModule { }
+export class Spch00101Module { }

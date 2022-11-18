@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { NewRoutingModule } from './new-routing.module';
-import { NewComponent } from './new.component';
+import { NewkhRoutingModule } from './newkh-routing.module';
+import { NewkhComponent } from './newkh.component';
 import { SharedModule } from '@app/shared/shared.module';
 
 
 @NgModule({
   declarations: [
-    NewComponent
+    NewkhComponent
   ],
   imports: [
     CommonModule,
-    NewRoutingModule,
+    NewkhRoutingModule,
     SharedModule
   ]
 })
-export class NewModule { }
+export class NewkhModule { }

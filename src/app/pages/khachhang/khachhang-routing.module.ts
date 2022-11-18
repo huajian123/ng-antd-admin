@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: 'new', loadChildren: () => import('./new/new.module').then(m => m.NewModule)},
-  { path: '', redirectTo: 'new', pathMatch: 'full' }
+  { path: 'newkh', loadChildren: () => import('./newkh/newkh.module').then(m => m.NewkhModule)},
+  { path: '', redirectTo: 'newkh', pathMatch: 'full' }
 ];
 
 @NgModule({

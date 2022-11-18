@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { WebserviceService } from '@app/core/services/common/webservice.service';
 import { BaseComponent } from '@app/pages/system/base/base.component';
@@ -8,6 +8,7 @@ import * as Const from '@app/common/const';
 import { MyTableConfig } from '@app/shared/components/ant-table/ant-table.component';
 import { ActionCode } from '@app/config/actionCode';
 import { PageHeaderType } from '@app/shared/components/page-header/page-header.component';
+import { OptionsInterface } from '@app/core/services/types';
 
 export interface Product {
   stt: number;
@@ -21,18 +22,18 @@ export interface Product {
   ghichu:string;
 } 
 @Component({
-  selector: 'app-quanly',
-  templateUrl: './quanly.component.html',
-  styleUrls: ['./quanly.component.less']
+  selector: 'app-spch00201',
+  templateUrl: './spch00201.component.html',
+  styleUrls: ['./spch00201.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class QuanlyComponent extends BaseComponent implements OnInit {
+export class Spch00201Component extends BaseComponent implements OnInit {
 
   fnInit() {
-    throw new Error('Method not implemented.');
+    console.log("nam pham")
+    this.cdf.markForCheck();
   }
-  destroy() {
-    throw new Error('Method not implemented.');
-  }
+  destroy() {}
 
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: 'Kế hoạch bóc hàng',
@@ -45,6 +46,8 @@ export class QuanlyComponent extends BaseComponent implements OnInit {
   dataList: any[] = [];
   checkedCashArray: any[] = [];
   ActionCode = ActionCode;
+
+  availableOptions: OptionsInterface[] = [];
 
   constructor(
     protected override webService: WebserviceService,
