@@ -15,6 +15,7 @@ import { XeService } from '@app/core/services/http/xe/xe.service';
 import { OptionsInterface, SearchCommonVO } from '@app/core/services/types';
 import { MapKeyType, MapPipe, MapSet } from '@app/shared/pipes/map.pipe';
 import { DatePipe } from '@angular/common';
+import { UrlDisplayId } from '@app/common/UrlDisplay';
 
 interface SearchParam {
   biensoxe: string;
@@ -28,7 +29,8 @@ interface SearchParam {
   styleUrls: ['./xe.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class XeComponent extends BaseComponent implements OnInit { //extends BaseComponent
+export class XeComponent extends BaseComponent implements OnInit {
+  DisplayScreenID: UrlDisplayId = UrlDisplayId.spxe00101; //extends BaseComponent
 
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '',

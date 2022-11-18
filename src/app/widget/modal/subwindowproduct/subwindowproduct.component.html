@@ -1,0 +1,73 @@
+<form nz-form [formGroup]="addEditForm">
+    <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="trongtai">Số thứ tự</nz-form-label>
+        <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="Vui lòng nhập tiền đưa trước">
+            <nz-input-number name="stt" id="stt" formControlName="stt" [nzMin]="1" [nzMax]="100" [nzStep]="1" [nzReadOnly]="true"></nz-input-number>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="idphu">Id Khách hàng</nz-form-label>
+        <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="Vui lòng chọn Tài phụ">
+            <nz-select
+            name="idkhachhang"
+            id="idkhachhang"
+            formControlName="idkhachhang"
+            nzAllowClear
+            nzShowSearch
+            nzPlaceHolder="Select"
+            (ngModelChange)="changeKH($event)"
+          >
+            <nz-option *ngFor="let option of listKh" [nzValue]="option['id']" [nzLabel]="option['name']"></nz-option>
+          </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="trongtai">Nội dung đơn hàng</nz-form-label>
+        <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="Vui lòng nhập nội dung đơn hàng">
+          <input nz-input formControlName="noidungmathang" name="noidungmathang" placeholder="" id="noidungmathang"/>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="trongtai">Tiền cước</nz-form-label>
+        <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="Vui lòng nhập tiền cước">
+            <nz-input-number name="tiencuoc" id="tiencuoc" formControlName="tiencuoc" [nzMin]="100" [nzMax]="50000" [nzStep]="100"></nz-input-number>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="trongtai">Địa điểm bóc hàng</nz-form-label>
+        <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="Vui lòng nhập địa điểm bóc hàng">
+          <input nz-input formControlName="diadiembochang" name="diadiembochang" placeholder="" id="diadiembochang"/>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="trongtai">Hình thức thanh toán</nz-form-label>
+        <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="">
+            <nz-radio-group formControlName="hinhthucthanhtoan">
+                <label nz-radio nzValue="1">Trực tiếp</label>
+                <label nz-radio nzValue="2">Ghi nợ</label>
+                <label nz-radio nzValue="3">Khi nhận hàng</label>
+            </nz-radio-group>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="trongtai">Lộ trình</nz-form-label>
+        <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="">
+            <nz-radio-group formControlName="lotrinh">
+                <label nz-radio nzValue="0">Hàng đi</label>
+                <label nz-radio nzValue="1">Hàng về</label>
+            </nz-radio-group>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="ghichu">Ghi chú</nz-form-label>
+        <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="">
+            <textarea
+                nz-input
+                formControlName="ghichu"
+                placeholder="Mốt số ghi chú về thông tin đơn hàng."
+                [nzAutosize]="{ minRows: 2, maxRows: 6 }"
+            ></textarea>
+        </nz-form-control>
+    </nz-form-item>
+</form>
+

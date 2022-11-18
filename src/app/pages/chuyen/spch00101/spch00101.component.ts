@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActionCode } from '@app/config/actionCode';
 import { WebserviceService } from '@app/core/services/common/webservice.service';
@@ -13,7 +13,7 @@ import { SubwindowXeService } from '@app/widget/modal/subwindowxe/subwindow-xe.s
 import { SubwindowTaixeService } from "@app/widget/modal/subwindowtaixe/subwindow-taixe.service"
 import { NzDatePickerComponent } from 'ng-zorro-antd/date-picker';
 import * as Const from "src/app/common/const";
-import { DeptTreeService, FlatNode } from '@app/pages/system/account/dept-tree/dept-tree.service';
+import { DeptTreeService } from '@app/pages/system/account/dept-tree/dept-tree.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { ChuyenService } from "@services/chuyen/chuyen.service"
@@ -23,6 +23,8 @@ import { SubwindowChuyenService } from '@app/widget/modal/subwindowchuyen/subwin
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ChuyendtoService } from '@app/core/services/http/chuyen/chuyendto.service';
+import { UrlDisplayId } from '@app/common/UrlDisplay';
+
 interface SearchParam {
   ngaybatdau: string;
   ngayketthuc: string;
@@ -39,12 +41,13 @@ interface SearchParam {
   providers: [DeptTreeService]
 })
 export class Spch00101Component extends BaseComponent implements OnInit {
+  
+  DisplayScreenID: UrlDisplayId = UrlDisplayId.spch00101;
+
   fnInit() {
-     
+     this.cdf.markForCheck();
   }
-  destroy() {
-    
-  }
+  destroy() {}
 
   searchParam: Partial<SearchParam> = {};
   dateFormat = Const.dateFormat;
@@ -125,7 +128,6 @@ export class Spch00101Component extends BaseComponent implements OnInit {
 
   getDataList(e?: NzTableQueryParams) {
     this.tableConfig.loading = true;
-    this.cdf.markForCheck();
     const params: SearchCommonVO<any> = {
       pageSize: this.tableConfig.pageSize!,
       pageNum: e?.pageIndex || this.tableConfig.pageIndex!,
@@ -178,6 +180,7 @@ export class Spch00101Component extends BaseComponent implements OnInit {
       },
     );
   }
+
   // show modal tai xe
   searchTaixeClick(){
     this.modalTaixeService.show({ nzTitle: 'Danh Sách Tài Xế' },{showcomfirm:false}).subscribe(
@@ -222,6 +225,9 @@ export class Spch00101Component extends BaseComponent implements OnInit {
 
   edit(id:string) {
     this.dataService.getChuyen(id).subscribe(res => {
+      res.biensoxe = res.biensoxe['_id'];
+      res.idphu = res.idphu['_id'];
+      res.idtai = res.idtai['_id']
       this.modalChuyenService.show({ nzTitle: 'Cập nhật' }, res).subscribe(({ modalValue, status }) => {
         if (status === ModalBtnStatus.Cancel) {
           return;
@@ -232,6 +238,7 @@ export class Spch00101Component extends BaseComponent implements OnInit {
       });
     });
   }
+
   del(id:string) {
     this.modalSrv.confirm({
       nzTitle: 'Bạn có chắc chắn muốn xóa nó không?',
@@ -251,6 +258,7 @@ export class Spch00101Component extends BaseComponent implements OnInit {
       }
     });
   }
+
   add() {
     this.modalChuyenService.show({ nzTitle:'Thêm mới' }).subscribe( //  this.formItemNm[15]
       res => {
@@ -264,6 +272,19 @@ export class Spch00101Component extends BaseComponent implements OnInit {
     );
   }
   allDel() {}
+
+  getItem(id:any,changduong: any,idtai: any,idphu: any,biensoxe: any,tienxe:any,ngaydi:any,ngayve:any) {
+    this.chuyenDtoService.id = id;
+    this.chuyenDtoService.biensoxe = biensoxe;
+    this.chuyenDtoService.changduong = changduong;
+    this.chuyenDtoService.idphu = idphu;
+    this.chuyenDtoService.idtai = idtai;
+    this.chuyenDtoService.ngaydi = this.formatDate(ngaydi);
+    this.chuyenDtoService.ngayve = this.formatDate(ngayve);
+    this.chuyenDtoService.tienxe = tienxe;
+    //this.router.navigate([Const.rootbase + 'chuyen/spch00201']);
+    this.dataService.refresh(Const.rootbase + 'chuyen/spch00201');
+  }
 
   addEditData(param: Chuyen, methodName: 'updateChuyen' | 'createChuyen'): void {
     this.dataService[methodName](param)
@@ -305,7 +326,7 @@ export class Spch00101Component extends BaseComponent implements OnInit {
       showCheckbox: false,
       headers: [
         {
-          title: 'Ngày khởi hàng',
+          title: 'Ngày khởi hành',
           field: 'ngaydi',
           width: 180,
           pipe: "date: dd/MM/YYYY HH:mm"

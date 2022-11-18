@@ -7,6 +7,7 @@ import { $timeout } from 'src/app/common/Time';
 import * as Const from 'src/app/common/const';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { UrlDisplayId } from '@app/common/UrlDisplay';
 
 @Component({
     selector: 'app-base',
@@ -57,4 +58,5 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
 
     abstract fnInit(): any;
     abstract destroy(): any;
+    abstract DisplayScreenID: UrlDisplayId;
 }

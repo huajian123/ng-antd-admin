@@ -119,8 +119,10 @@
         <ng-template #Tltenphu let-idphu="idphu">
             <span>{{idphu['name']}}</span>
         </ng-template>
-        <ng-template #Tlbiensoxe let-biensoxe="biensoxe">
-            <span>{{biensoxe['biensoxe']}}</span>
+        <ng-template #Tlbiensoxe let-biensoxe="biensoxe" let-id="id" let-changduong="changduong" let-idtai="idtai['name']" let-idphu="idphu['name']" let-tienxe="tienxe" let-ngaydi="ngaydi" let-ngayve="ngayve">
+            <a nz-button nzType="link"  (click)="getItem(id,changduong,idtai,idphu,biensoxe['biensoxe'],tienxe,ngaydi,ngayve)"><span>{{biensoxe['biensoxe']}}</span></a>
+        </ng-template>
+        <ng-template #operationTpl let-id="id" let-name="name">
         </ng-template>
     </app-card-table-wrap>
 

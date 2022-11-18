@@ -1,5 +1,19 @@
 export const  dateFormat= 'dd/MM/yyyy';
 export const  idTaixe = "636cf775974c56587047691e";
+export const  idKhachhang = "632ebaf77e9ad9aeef4e3d27";
+
+export const  Hinhthucthanhtoan = [
+    {"1": "Thanh toán trực tiếp"},
+    {"2": "Ghi nợ"},
+    {"3": "Thanh toán khi nhận hàng"},
+];
+
+export const Lotrinh = [
+    {"0": "Hàng đi"},
+    {"1": "Hàng về"},
+]
+
+export const rootbase = '/default/';
 
 //role
 export const Ant100SearchAllRole = "role/ant100SearchAllRole";
@@ -57,6 +71,15 @@ export const ChuyenAnt100Update = 'chuyen/chuyenAnt100update';
 export const ChuyenAnt100Create = 'chuyen/chuyenAnt100create';
 export const ChuyenAnt100Delete = 'chuyen/chuyenAnt100delete';
 export const ChuyenAnt100DeleteAll = 'chuyen/chuyenAnt100deleteAll';
+
+// phieu nhap hang 
+
+export const PhieunhaphangAnt100GetAll = 'phieunhaphang/phieunhaphangAnt100getAll';
+export const PhieunhaphangAnt100Get = 'phieunhaphang/phieunhaphangAnt100get';
+export const PhieunhaphangAnt100Update = 'phieunhaphang/phieunhaphangAnt100update';
+export const PhieunhaphangAnt100Create = 'phieunhaphang/phieunhaphangAnt100create';
+export const PhieunhaphangAnt100Delete = 'phieunhaphang/phieunhaphangAnt100delete';
+export const PhieunhaphangAnt100DeleteAll = 'phieunhaphang/phieunhaphangAnt100deleteAll';
 
 
 

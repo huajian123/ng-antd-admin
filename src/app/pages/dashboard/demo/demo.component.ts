@@ -4,6 +4,7 @@ import { WebserviceService } from 'src/app/core/services/common/webservice.servi
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { DatePipe } from '@angular/common';
+import { UrlDisplayId } from '@app/common/UrlDisplay';
 
 @Component({
   selector: 'app-demo',
@@ -12,6 +13,7 @@ import { DatePipe } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DemoComponent extends BaseComponent {
+  DisplayScreenID: UrlDisplayId = UrlDisplayId.Demo;
 
   constructor(
     protected override webService: WebserviceService,

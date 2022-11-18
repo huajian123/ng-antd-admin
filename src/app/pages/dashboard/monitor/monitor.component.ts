@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, NgZone, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { UrlDisplayId } from '@app/common/UrlDisplay';
 import { WebserviceService } from '@app/core/services/common/webservice.service';
 import { PageHeaderType } from '@app/shared/components/page-header/page-header.component';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -12,6 +13,7 @@ import { BaseComponent } from '../../system/base/base.component';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MonitorComponent extends BaseComponent{
+  DisplayScreenID: UrlDisplayId = UrlDisplayId.Monitor;
 
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '',
