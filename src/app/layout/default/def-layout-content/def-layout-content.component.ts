@@ -22,7 +22,6 @@ export class DefLayoutContentComponent implements OnInit {
     theme: 'dark',
     color: '',
     mode: 'side',
-    fixedWidth: false,
     splitNav: false,
     fixedTab: false,
     colorWeak: false,

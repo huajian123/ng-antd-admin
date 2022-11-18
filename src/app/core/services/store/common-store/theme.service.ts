@@ -2,19 +2,18 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 export interface SettingInterface {
-  theme: 'dark' | 'light';
-  color: string;
-  mode: 'side' | 'top' | 'mixi';
-  fixedWidth: boolean;
-  colorWeak: boolean;
-  fixedHead: boolean;
-  splitNav: boolean;
-  fixedLeftNav: boolean;
-  fixedTab: boolean;
-  hasTopArea: boolean;
-  hasFooterArea: boolean;
-  hasNavArea: boolean;
-  hasNavHeadArea: boolean;
+  theme: 'dark' | 'light'; // 主题模式（暗黑模式，明亮模式）
+  color: string; // 主题色
+  mode: 'side' | 'top' | 'mixi'; // 菜单模式（侧边模式，顶部模式，混合模式）
+  colorWeak: boolean; // 色弱
+  fixedHead: boolean; // 固定头部
+  splitNav: boolean; // 是否分割菜单（在菜单模式为混合模式时才生效）
+  fixedLeftNav: boolean; // 固定左侧菜单
+  fixedTab: boolean; // 固定tab页签
+  hasTopArea: boolean; // 是否展示顶部区域
+  hasFooterArea: boolean; // 是否展示底部区域
+  hasNavArea: boolean; // 是否有菜单
+  hasNavHeadArea: boolean; // 菜单是否有菜单头
 }
 
 @Injectable({
@@ -27,7 +26,6 @@ export class ThemeService {
     theme: 'dark',
     color: '#1890FF',
     mode: 'side',
-    fixedWidth: true,
     colorWeak: false,
     splitNav: false,
     fixedTab: true,

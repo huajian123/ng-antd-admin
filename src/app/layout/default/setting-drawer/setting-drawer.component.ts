@@ -42,7 +42,6 @@ export class SettingDrawerComponent implements OnInit {
     theme: 'dark',
     color: '#1890FF',
     mode: 'side',
-    fixedWidth: false,
     fixedTab: false,
     splitNav: true,
     colorWeak: false,
