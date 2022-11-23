@@ -13,6 +13,7 @@ export class ChuyendtoService {
   idtai = "";
   idphu = "";
   changduong = "";
+  trangthai = 0;
 
   constructor(
     private dataService: ChuyenService,
@@ -27,6 +28,7 @@ export class ChuyendtoService {
     this.idtai = "";
     this.idphu = "";
     this.changduong = "";
+    this.trangthai = 0;
   }
 
 }

@@ -93,6 +93,17 @@
                         </nz-form-control>
                     </nz-form-item>
                 </div>
+                <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+                    <nz-form-item>
+                        <!-- Trang thái chuyến hàng -->
+                        <nz-form-label  [nzXXl]="9" [nzXl]="9" [nzLg]="9" [nzMd]="12" [nzSm]="24" [nzXs]="24">Trạng thái chuyến hàng</nz-form-label>
+                        <nz-form-control  [nzXXl]="10" [nzXl]="10" [nzLg]="10" [nzMd]="10" [nzSm]="20" [nzXs]="24">
+                            <nz-select name="trangthai" nzShowSearch nzAllowClear nzPlaceHolder="Select" [(ngModel)]="searchParam.trangthai">
+                                <nz-option *ngFor="let lst of listStatus" nzLabel="{{lst['lable']}}" nzValue="{{lst['value']}}"></nz-option>
+                            </nz-select>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
             </div>
         </form>
     </nz-card>
@@ -105,12 +116,18 @@
           [tableConfig]="tableConfig"
           [tableData]="dataList"
         ></app-ant-table>
-        <ng-template #operationTpl let-id="id">
+        <ng-template #operationTpl let-id="id" let-showBtn="showBtn">
           <span *appAuth="ActionCode.ChuyenEdit" class="operate-text">
-            <button nz-button nzType="primary" nzGhost (click)="edit(id)">Cập nhật</button>
+            <button *ngIf="showBtn['btnUpdate']" nz-button nzType="primary" nzGhost (click)="edit(id)">Cập nhật</button>
           </span>
           <span *appAuth="ActionCode.ChuyenDel" class="operate-text">
-            <button nz-button nzType="primary" nzGhost (click)="del(id)">Xóa</button>
+            <button *ngIf="showBtn['btnDelete']" nz-button nzType="primary" nzGhost (click)="del(id)">Xóa</button>
+          </span>
+          <span *appAuth="ActionCode.ChuyenConfirmbochang" class="operate-text">
+            <button *ngIf="showBtn['btnConfirmbochang']" nz-button nzType="primary" nzGhost (click)="confirmbochang(id)">Hoàn thành bóc hàng</button>
+          </span>
+          <span *appAuth="ActionCode.ChuyenConfirmtrahang" class="operate-text">
+            <button *ngIf="showBtn['btnConfirmtrahang']" nz-button nzType="primary" nzGhost (click)="confirmtrahang(id)">Hoàn thành trả hàng</button>
           </span>
         </ng-template>
         <ng-template #Tltentai let-idtai="idtai">
@@ -119,8 +136,8 @@
         <ng-template #Tltenphu let-idphu="idphu">
             <span>{{idphu['name']}}</span>
         </ng-template>
-        <ng-template #Tlbiensoxe let-biensoxe="biensoxe" let-id="id" let-changduong="changduong" let-idtai="idtai['name']" let-idphu="idphu['name']" let-tienxe="tienxe" let-ngaydi="ngaydi" let-ngayve="ngayve">
-            <a nz-button nzType="link"  (click)="getItem(id,changduong,idtai,idphu,biensoxe['biensoxe'],tienxe,ngaydi,ngayve)"><span>{{biensoxe['biensoxe']}}</span></a>
+        <ng-template #Tlbiensoxe let-biensoxe="biensoxe" let-id="id" let-changduong="changduong" let-idtai="idtai['name']" let-idphu="idphu['name']" let-tienxe="tienxe" let-ngaydi="ngaydi" let-ngayve="ngayve" let-trangthai="trangthai">
+            <a nz-button nzType="link"  (click)="getItem(id,changduong,idtai,idphu,biensoxe['biensoxe'],tienxe,ngaydi,ngayve,trangthai)"><span>{{biensoxe['biensoxe']}}</span></a>
         </ng-template>
         <ng-template #operationTpl let-id="id" let-name="name">
         </ng-template>
@@ -137,3 +154,4 @@
         </button>
     </ng-template>
 </div>
+

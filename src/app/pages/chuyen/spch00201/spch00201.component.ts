@@ -79,8 +79,13 @@ export class Spch00201Component extends BaseComponent implements OnInit {
   checkedCashArray: any[] = [];
   ActionCode = ActionCode;
   showchuyen = true;
+  showConfirm = false;
   tongcuoc = 0;
   availableOptions: OptionsInterface[] = [];
+
+  btnConfirm = false;
+  btnConfirmbochang = false;
+  btnConfirmtrahang = false;
 
   @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<NzSafeAny>;
 
@@ -106,10 +111,33 @@ export class Spch00201Component extends BaseComponent implements OnInit {
   override ngOnInit(): void {
     this.initTable();
     this.getTongcuoc();
+    this.fnshowConfirm(this.ChuyenDto.trangthai)
     if(this.ChuyenDto.id != "" && this.ChuyenDto.id.length == 24) {
       this.showchuyen = false;
+      this.showConfirm = true;
     }
     this.availableOptions = [...MapPipe.transformMapToArray(MapSet.available, MapKeyType.Boolean)];
+  }
+
+  fnshowConfirm(trangthai: number) {
+    switch(trangthai) {
+      case 0 : {
+        this.btnConfirm = true;
+        this.btnConfirmbochang = false;
+        this.btnConfirmtrahang = false;
+      }; break;
+      case 1 : {
+        this.btnConfirm = false;
+        this.btnConfirmbochang = true;
+        this.btnConfirmtrahang = false;
+      }; break;
+      case 2 : {
+        this.btnConfirm = false;
+        this.btnConfirmbochang = false;
+        this.btnConfirmtrahang = true;
+      }
+    }
+    this.cdf.markForCheck();
   }
 
   selectChuyen() {
@@ -125,8 +153,23 @@ export class Spch00201Component extends BaseComponent implements OnInit {
     this.cdf.markForCheck();
   }
 
-  Confirm() {
-
+  // update trang thai chuyen hang
+  Confirm(trangthai: number) {
+     if (this.ChuyenDto.id != '' && this.ChuyenDto.id.length == 24) {
+        let req = {
+          id: this.ChuyenDto.id,
+          trangthai: trangthai
+        }
+        this.dataService.updateTrangthai(req).pipe().subscribe(res => {
+           if (res == 1) {
+              this.message.success(" Thực hiện thành công !");
+              this.ChuyenDto.trangthai = trangthai;
+              this.fnshowConfirm(this.ChuyenDto.trangthai);
+           } else {
+              this.message.success(" Không thành công !");
+           }
+        })
+     }
   }
 
   // add product
@@ -223,9 +266,9 @@ export class Spch00201Component extends BaseComponent implements OnInit {
       let listProduct = this.listToProduct(list);
       this.dataList = [...listProduct];
       this.getTongcuoc();
-      if(this.dataList.length == 0) {
-        this.modalSrv.info({ nzContent: 'Không Có dữ liệu',});
-      }
+      // if(this.dataList.length == 0) {
+      //   this.modalSrv.info({ nzContent: 'Không Có dữ liệu',});
+      // }
       this.tableConfig.total = total!;
       this.tableConfig.pageIndex = pageNum!;
       this.tableLoading(false);

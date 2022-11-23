@@ -21,9 +21,13 @@ export class XeService {
   createXe(params: Xe): Observable<void>{
     return this.http.post(Const.XeAnt100Create, params,{ needSuccessInfo: false});
   }
+  UpdateTrangthaiXe(params: any): Observable<number>{
+    return this.http.post(Const.XeAnt100UpdateTrangthai, params,{ needSuccessInfo: false});
+  }
   updateXe(params: Xe): Observable<void>{
     return this.http.put(Const.XeAnt100Update, params);
   }
+  
   deleteXe(){}
   delateXes(){}
 }

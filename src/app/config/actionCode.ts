@@ -44,6 +44,8 @@ export const ActionCode = {
   ChuyenAdd: 'default:chuyen:spch00101:add',
   ChuyenEdit: 'default:chuyen:spch00101:edit',
   ChuyenDel: 'default:chuyen:spch00101:del',
+  ChuyenConfirmbochang: 'default:chuyen:spch00101:cbochang',
+  ChuyenConfirmtrahang: 'default:chuyen:spch00101:ctrahang',
 
   // kê hoạch bọc hang
   AddProduct: 'default:chuyen:spch00201:add',
@@ -51,5 +53,7 @@ export const ActionCode = {
   DelProduct: 'default:chuyen:spch00201:del',
   EditProduct: 'default:chuyen:spch00201:edit',
   SaveProduct: 'default:chuyen:spch00201:save',
-  Confirm: 'default:chuyen:spch00201:comfirm',
+  Confirm: 'default:chuyen:spch00201:confirm',
+  Confirmbochang: 'default:chuyen:spch00201:cbochang',
+  Confirmtrahang: 'default:chuyen:spch00201:ctrahang',
 };

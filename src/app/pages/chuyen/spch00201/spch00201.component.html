@@ -103,10 +103,26 @@
       </ng-template>
     </app-card-table-wrap>
     <ng-template #tableConfirm>
-        <button *appAuth="ActionCode.Confirm" (click)="Confirm()" nz-button nzType="primary" class="m-r-8">
-            <i nz-icon nzType="caret-right"></i>
-              Hoàn thành kế hoạch nhập
-          </button>
+        <ng-container *ngIf="showConfirm">
+            <span *appAuth="ActionCode.Confirm" class="operate-text">
+                <button [disabled]="!btnConfirm" (click)="Confirm(1)" nz-button nzType="primary" class="m-r-8">
+                    <i nz-icon nzType="caret-right"></i>
+                    Hoàn thành kế hoạch nhập
+                </button>
+            </span>
+            <span *appAuth="ActionCode.Confirm" class="operate-text">
+                <button [disabled]="!btnConfirmbochang" (click)="Confirm(2)" nz-button nzType="primary" class="m-r-8">
+                    <i nz-icon nzType="caret-right"></i>
+                    Hoàn thành bóc hàng
+                </button>
+            </span>
+            <span *appAuth="ActionCode.Confirm" class="operate-text">
+                <button [disabled]="!btnConfirmtrahang" (click)="Confirm(3)" nz-button nzType="primary" class="m-r-8">
+                    <i nz-icon nzType="caret-right"></i>
+                    Hoàn thành trả hàng
+                </button>
+            </span>
+        </ng-container>
     </ng-template>
     <ng-template #tableBtns>
         <button *appAuth="ActionCode.AddProduct" (click)="add()" nz-button nzType="primary" class="m-r-8">

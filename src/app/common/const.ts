@@ -13,6 +13,12 @@ export const Lotrinh = [
     {"1": "Hàng về"},
 ]
 
+export const listTrangthaichuyen = [
+    { "value": 0, "lable": "Lên kế hoạch bóc hàng"},
+    { "value": 1, "lable": "Hoàn thành bóc hàng"},
+    { "value": 2, "lable":"Hoàn thành trả hàng"}
+]
+
 export const rootbase = '/default/';
 
 //role
@@ -63,6 +69,7 @@ export const XeAnt100Update = 'xe/xeAnt100update';
 export const XeAnt100Create = 'xe/xeAnt100create';
 export const XeAnt100Delete = 'xe/xeAnt100delete';
 export const XeAnt100DeleteAll = 'xe/xeAnt100deleteAll';
+export const XeAnt100UpdateTrangthai = 'xe/xeAnt100updateTrangthai';
 
 // quan ly chuyen
 export const ChuyenAnt100GetAll = 'chuyen/chuyenAnt100getAll';
@@ -71,6 +78,7 @@ export const ChuyenAnt100Update = 'chuyen/chuyenAnt100update';
 export const ChuyenAnt100Create = 'chuyen/chuyenAnt100create';
 export const ChuyenAnt100Delete = 'chuyen/chuyenAnt100delete';
 export const ChuyenAnt100DeleteAll = 'chuyen/chuyenAnt100deleteAll';
+export const ChuyenAnt100UpdateTrangthai = 'chuyen/chuyenAnt100updateTrangthai';
 
 // phieu nhap hang 
 

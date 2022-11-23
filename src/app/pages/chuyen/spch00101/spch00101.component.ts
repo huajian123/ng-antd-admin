@@ -31,6 +31,14 @@ interface SearchParam {
   biensoxe: string;
   idtai : string;
   idphu : string;
+  trangthai: any;
+}
+
+class showBtn {
+  btnUpdate = false;
+  btnDelete = false;
+  btnConfirmbochang = false;
+  btnConfirmtrahang = false;
 }
 
 @Component({
@@ -67,7 +75,14 @@ export class Spch00101Component extends BaseComponent implements OnInit {
   phunm = "";
   stockphu = "";
   biensoxenm = "";
-  stockbsx = ""
+  stockbsx = "";
+  trangthaimode: any;
+  listStatus = Const.listTrangthaichuyen;
+
+  btnUpdate = false;
+  btnDelete = false;
+  btnConfirmbochang = false; // hoàn thành bóc hàng
+  btnConfirmtrahang = false; // hoàn thành trả hàng
 
   @ViewChild('Tlbiensoxe', { static: true }) Tlbiensoxe!: TemplateRef<NzSafeAny>;
   @ViewChild('Tltentai', { static: true }) Tltentai!: TemplateRef<NzSafeAny>;
@@ -127,7 +142,8 @@ export class Spch00101Component extends BaseComponent implements OnInit {
   }
 
   getDataList(e?: NzTableQueryParams) {
-    this.tableConfig.loading = true;
+    this.tableLoading(true);
+    // this.tableConfig.loading = true;
     const params: SearchCommonVO<any> = {
       pageSize: this.tableConfig.pageSize!,
       pageNum: e?.pageIndex || this.tableConfig.pageIndex!,
@@ -143,6 +159,10 @@ export class Spch00101Component extends BaseComponent implements OnInit {
       console.log(data);
       const { list, total, pageNum } = data;
       this.dataList = [...list];
+      for (let element of this.dataList) {
+          let showbtn = this.showBtnChuyen(element.trangthai);
+          element['showBtn'] = showbtn;
+      }
       if(this.dataList.length == 0) {
         this.modalSrv.info({ nzContent: 'Không Có dữ liệu',});
       }
@@ -153,11 +173,66 @@ export class Spch00101Component extends BaseComponent implements OnInit {
     });
   }
 
+  showBtnChuyen(trangthai: number): showBtn {
+    let showbtn = new showBtn();
+    switch(trangthai) {
+      case 0 : {
+        
+        showbtn.btnUpdate = true;
+        showbtn.btnDelete = true;
+        showbtn.btnConfirmbochang = false;
+        showbtn.btnConfirmtrahang = false;
+      }; break;
+      case 1 : {
+        showbtn.btnUpdate = true;
+        showbtn.btnDelete = false;
+        showbtn.btnConfirmbochang = true;
+        showbtn.btnConfirmtrahang = false;
+      }; break;
+      case 2 : {
+        showbtn.btnUpdate = false;
+        showbtn.btnDelete = false;
+        showbtn.btnConfirmbochang = false;
+        showbtn.btnConfirmtrahang = true;
+      }
+    }
+    return showbtn;
+  }
+
+  confirmbochang(id: string) {
+    let req = {
+      id: id,
+      trangthai: 1
+    }
+    this.dataService.updateTrangthai(req).pipe().subscribe(res => {
+      if (res == 1) {
+         this.message.success(" Thực hiện thành công !");
+      } else {
+         this.message.success(" Không thành công !");
+      }
+    })
+  }
+
+  confirmtrahang(id: string) {
+    let req = {
+      id: id,
+      trangthai: 2
+    }
+    this.dataService.updateTrangthai(req).pipe().subscribe(res => {
+      if (res == 1) {
+         this.message.success(" Thực hiện thành công !");
+      } else {
+         this.message.success(" Không thành công !");
+      }
+    })
+  }
+
   resetForm() {
      this.searchParam = {};
      this.biensoxenm = "";
      this.tainm = "";
      this.phunm = "";
+     this.trangthaimode = "";
   }
 
   fnFocusOutBiensoxe() {
@@ -273,7 +348,7 @@ export class Spch00101Component extends BaseComponent implements OnInit {
   }
   allDel() {}
 
-  getItem(id:any,changduong: any,idtai: any,idphu: any,biensoxe: any,tienxe:any,ngaydi:any,ngayve:any) {
+  getItem(id:any,changduong: any,idtai: any,idphu: any,biensoxe: any,tienxe:any,ngaydi:any,ngayve:any,trangthai:any) {
     this.chuyenDtoService.id = id;
     this.chuyenDtoService.biensoxe = biensoxe;
     this.chuyenDtoService.changduong = changduong;
@@ -282,6 +357,7 @@ export class Spch00101Component extends BaseComponent implements OnInit {
     this.chuyenDtoService.ngaydi = this.formatDate(ngaydi);
     this.chuyenDtoService.ngayve = this.formatDate(ngayve);
     this.chuyenDtoService.tienxe = tienxe;
+    this.chuyenDtoService.trangthai = trangthai;
     this.dataService.refresh(Const.rootbase + UrlDisplayId.spch00201);
   }
 
@@ -367,7 +443,7 @@ export class Spch00101Component extends BaseComponent implements OnInit {
         {
           title: 'Hành động',
           tdTemplate: this.operationTpl,
-          width: 200,
+          width: 250,
           fixed: true,
           fixedDir: 'right'
         }
