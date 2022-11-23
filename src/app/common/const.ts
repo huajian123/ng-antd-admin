@@ -70,6 +70,8 @@ export const XeAnt100Create = 'xe/xeAnt100create';
 export const XeAnt100Delete = 'xe/xeAnt100delete';
 export const XeAnt100DeleteAll = 'xe/xeAnt100deleteAll';
 export const XeAnt100UpdateTrangthai = 'xe/xeAnt100updateTrangthai';
+export const XeAnt100Getlistfree = 'xe/xeAnt100getlistfree';
+export const XeAnt100Getlistrun = 'xe/xeAnt100getlistrun';
 
 // quan ly chuyen
 export const ChuyenAnt100GetAll = 'chuyen/chuyenAnt100getAll';

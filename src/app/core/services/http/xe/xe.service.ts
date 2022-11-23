@@ -18,6 +18,12 @@ export class XeService {
   getXe(id: string): Observable<Xe>{
     return this.http.get(`${Const.XeAnt100Get}/${id}/`);
   }
+  getlistXefree(): Observable<Xe[]> {
+    return this.http.get(Const.XeAnt100Getlistfree);
+  }
+  getlistXerun(): Observable<Xe[]> {
+    return this.http.get(Const.XeAnt100Getlistrun);
+  }
   createXe(params: Xe): Observable<void>{
     return this.http.post(Const.XeAnt100Create, params,{ needSuccessInfo: false});
   }

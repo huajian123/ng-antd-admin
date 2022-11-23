@@ -194,6 +194,12 @@ export class Spch00101Component extends BaseComponent implements OnInit {
         showbtn.btnDelete = false;
         showbtn.btnConfirmbochang = false;
         showbtn.btnConfirmtrahang = true;
+      }; break;
+      case 3 : {
+        showbtn.btnUpdate = false;
+        showbtn.btnDelete = false;
+        showbtn.btnConfirmbochang = false;
+        showbtn.btnConfirmtrahang = false;
       }
     }
     return showbtn;
@@ -370,8 +376,11 @@ export class Spch00101Component extends BaseComponent implements OnInit {
       )
       .subscribe(() => {
         this.getDataList();
+
       });
   }
+
+
 
   reloadTable(): void {
     this.message.info('Đã được làm mới');

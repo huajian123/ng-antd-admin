@@ -83,6 +83,10 @@ export class Spch00201Component extends BaseComponent implements OnInit {
   tongcuoc = 0;
   availableOptions: OptionsInterface[] = [];
 
+  btnNew = false;
+  btnUpdate = false;
+  btnDelete = false;
+
   btnConfirm = false;
   btnConfirmbochang = false;
   btnConfirmtrahang = false;
@@ -135,6 +139,14 @@ export class Spch00201Component extends BaseComponent implements OnInit {
         this.btnConfirm = false;
         this.btnConfirmbochang = false;
         this.btnConfirmtrahang = true;
+      }; break;
+      case 3 : {
+        this.btnConfirm = false;
+        this.btnConfirmbochang = false;
+        this.btnConfirmtrahang = false;
+        this.btnNew = true;
+        this.btnUpdate = true;
+        this.btnDelete = true;
       }
     }
     this.cdf.markForCheck();
@@ -160,15 +172,20 @@ export class Spch00201Component extends BaseComponent implements OnInit {
           id: this.ChuyenDto.id,
           trangthai: trangthai
         }
-        this.dataService.updateTrangthai(req).pipe().subscribe(res => {
-           if (res == 1) {
-              this.message.success(" Thực hiện thành công !");
-              this.ChuyenDto.trangthai = trangthai;
-              this.fnshowConfirm(this.ChuyenDto.trangthai);
-           } else {
-              this.message.success(" Không thành công !");
-           }
-        })
+        if(this.dataList.length > 0) {
+          this.dataService.updateTrangthai(req).pipe().subscribe(res => {
+            if (res == 1) {
+               this.message.success(" Thực hiện thành công !");
+               this.ChuyenDto.trangthai = trangthai;
+               this.fnshowConfirm(this.ChuyenDto.trangthai);
+            } else {
+               this.message.success(" Không thành công !");
+            }
+         })
+        } else {
+          this.message.success(" Vui lòng thêm mặt hàng !");
+        }
+        
      }
   }
 

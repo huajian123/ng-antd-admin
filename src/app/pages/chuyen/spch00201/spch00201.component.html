@@ -95,10 +95,10 @@
       ></app-ant-table>
       <ng-template #operationTpl let-id="id">
         <span *appAuth="ActionCode.EditProduct" class="operate-text">
-          <button nz-button nzType="primary" nzGhost (click)="edit(id)">Cập nhật</button>
+          <button nz-button nzType="primary" nzGhost (click)="edit(id)" [disabled]="btnUpdate">Cập nhật</button>
         </span>
         <span *appAuth="ActionCode.DelProduct" class="operate-text">
-          <button nz-button nzType="primary" nzGhost (click)="del(id)">Xóa</button>
+          <button nz-button nzType="primary" nzGhost (click)="del(id)" [disabled]="btnDelete">Xóa</button>
         </span>
       </ng-template>
     </app-card-table-wrap>
@@ -125,11 +125,11 @@
         </ng-container>
     </ng-template>
     <ng-template #tableBtns>
-        <button *appAuth="ActionCode.AddProduct" (click)="add()" nz-button nzType="primary" class="m-r-8">
+        <button *appAuth="ActionCode.AddProduct" (click)="add()" nz-button nzType="primary" class="m-r-8" [disabled]="btnNew">
           <i nz-icon nzType="plus"></i>
           Thêm mới
         </button>
-        <button *appAuth="ActionCode.DelAllProduct" (click)="allDel()" nz-button nzType="default">
+        <button *appAuth="ActionCode.DelAllProduct" (click)="allDel()" nz-button nzType="default" [disabled]="true">
           <i nz-icon nzType="delete"></i>
           Xóa tất cả
         </button>

@@ -67,7 +67,7 @@ export class SubwindowchuyenComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getlistXetai();
+    this.getlistXetaifree();
     this.getListTaixe();
     this.initForm();
     if (Object.keys(this.params).length > 0) {
@@ -89,14 +89,9 @@ export class SubwindowchuyenComponent implements OnInit {
     });
   }
 
-  getlistXetai() {
-    const params: SearchCommonVO<any> = {
-      pageSize: 0,
-      pageNum: 0,
-      filters: {}
-    };
+  getlistXetaifree() {
     this.dataService
-      .getXes(params)
+      .getlistXefree()
       .pipe(
         finalize(() => {
         })
