@@ -282,8 +282,7 @@ export class Spch00101Component extends BaseComponent implements OnInit {
     this.chuyenDtoService.ngaydi = this.formatDate(ngaydi);
     this.chuyenDtoService.ngayve = this.formatDate(ngayve);
     this.chuyenDtoService.tienxe = tienxe;
-    //this.router.navigate([Const.rootbase + 'chuyen/spch00201']);
-    this.dataService.refresh(Const.rootbase + 'chuyen/spch00201');
+    this.dataService.refresh(Const.rootbase + UrlDisplayId.spch00201);
   }
 
   addEditData(param: Chuyen, methodName: 'updateChuyen' | 'createChuyen'): void {

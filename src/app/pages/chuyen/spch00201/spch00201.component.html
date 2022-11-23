@@ -93,17 +93,13 @@
         [tableConfig]="tableConfig"
         [tableData]="dataList"
       ></app-ant-table>
-      <ng-template #operationTpl let-stt="stt">
+      <ng-template #operationTpl let-id="id">
         <span *appAuth="ActionCode.EditProduct" class="operate-text">
-          <button nz-button nzType="primary" nzGhost (click)="edit(stt)">Cập nhật</button>
+          <button nz-button nzType="primary" nzGhost (click)="edit(id)">Cập nhật</button>
         </span>
         <span *appAuth="ActionCode.DelProduct" class="operate-text">
-          <button nz-button nzType="primary" nzGhost (click)="del(stt)">Xóa</button>
+          <button nz-button nzType="primary" nzGhost (click)="del(id)">Xóa</button>
         </span>
-
-        <span *appAuth="ActionCode.SaveProduct" class="operate-text">
-            <button nz-button nzType="primary" nzGhost (click)="save(stt)">Lưu</button>
-          </span>
       </ng-template>
     </app-card-table-wrap>
     <ng-template #tableConfirm>

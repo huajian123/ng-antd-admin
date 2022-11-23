@@ -17,6 +17,7 @@ export class SubwindowproductComponent implements OnInit {
 
   addEditForm!: FormGroup;
   params: object;
+  isEdit = false;
   const = Const;
   listKh : any[] = [];
   tenkhachhang = ""
@@ -34,6 +35,7 @@ export class SubwindowproductComponent implements OnInit {
     this.getListKh();
     this.initForm();
     if (Object.keys(this.params).length > 0) {
+      this.isEdit = true;
       this.addEditForm.patchValue(this.params);
     }
   }
@@ -52,9 +54,9 @@ export class SubwindowproductComponent implements OnInit {
 
   initForm(): void {
     this.addEditForm = this.fb.group({
-      stt : [null,[Validators.required]],
-      idkhachhang: [null, [Validators.required]],
-      noidungmathang: [null,[Validators.required]],
+      id : [null],
+      iduser: [null, [Validators.required]],
+      noidungdonhang: [null,[Validators.required]],
       tiencuoc: [0,[Validators.required]],
       diadiembochang:[null,[Validators.required]],
       hinhthucthanhtoan:["1",[Validators.required]],
@@ -64,7 +66,6 @@ export class SubwindowproductComponent implements OnInit {
   }
 
   changeKH($event: any) {
-    console.log($event)
     for(let e of this.listKh) {
       if(e['id'] == $event) {
          this.tenkhachhang = e['name'];

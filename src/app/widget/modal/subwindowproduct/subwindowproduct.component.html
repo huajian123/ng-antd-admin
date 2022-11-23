@@ -1,17 +1,20 @@
 <form nz-form [formGroup]="addEditForm">
+    <ng-container  *ngIf="isEdit">
+        <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="id">Mã Phiếu Nhập</nz-form-label>
+            <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="">
+                <input nz-input formControlName="id" name="id" placeholder="" id="id" [readonly]="true" [ngStyle]="{'background':'#555555'}"/>
+            </nz-form-control>
+        </nz-form-item>
+    </ng-container>
+
     <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="trongtai">Số thứ tự</nz-form-label>
-        <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="Vui lòng nhập tiền đưa trước">
-            <nz-input-number name="stt" id="stt" formControlName="stt" [nzMin]="1" [nzMax]="100" [nzStep]="1" [nzReadOnly]="true"></nz-input-number>
-        </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="idphu">Id Khách hàng</nz-form-label>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="iduser">Id Khách hàng</nz-form-label>
         <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="Vui lòng chọn Tài phụ">
             <nz-select
-            name="idkhachhang"
-            id="idkhachhang"
-            formControlName="idkhachhang"
+            name="iduser"
+            id="iduser"
+            formControlName="iduser"
             nzAllowClear
             nzShowSearch
             nzPlaceHolder="Select"
@@ -22,9 +25,9 @@
         </nz-form-control>
     </nz-form-item>
     <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="trongtai">Nội dung đơn hàng</nz-form-label>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="noidungdonhang">Nội dung đơn hàng</nz-form-label>
         <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="Vui lòng nhập nội dung đơn hàng">
-          <input nz-input formControlName="noidungmathang" name="noidungmathang" placeholder="" id="noidungmathang"/>
+          <input nz-input formControlName="noidungdonhang" name="noidungdonhang" placeholder="" id="noidungdonhang"/>
         </nz-form-control>
     </nz-form-item>
     <nz-form-item>

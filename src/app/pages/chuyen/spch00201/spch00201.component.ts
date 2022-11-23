@@ -17,7 +17,7 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ChuyendtoService } from '@app/core/services/http/chuyen/chuyendto.service';
 import { ChuyenService } from '@app/core/services/http/chuyen/chuyen.service';
-import { OptionsInterface } from '@app/core/services/types';
+import { OptionsInterface, SearchCommonVO } from '@app/core/services/types';
 import { MapKeyType, MapPipe, MapSet } from '@app/shared/pipes/map.pipe';
 
 import { TabService } from '@app/core/services/common/tab.service';
@@ -25,19 +25,26 @@ import { DestroyService } from '@app/core/services/common/destory.service';
 import { Phieunhaphang } from '@app/core/model/phieunhaphang.model';
 import { PhieunhaphangService } from '@app/core/services/http/phieunhaphang/phieunhaphang.service';
 import { UrlDisplayId } from '@app/common/UrlDisplay';
+import { NzTableQueryParams } from 'ng-zorro-antd/table';
+import { finalize } from 'rxjs';
 
 export interface Product {
-  stt: number;
-  idkhachhang: string;
-  tenkhachhang: string;
-  noidungmathang: string;
-  tiencuoc: number;
-  diadiembochang: string;
-  hinhthucthanhtoan: any;
-  lotrinh: any;
-  ghichu:string;
+  id?:string,
+  stt?: number;
+  idkhachhang?: string;
+  tenkhachhang?: string;
+  noidungmathang?: string;
+  tiencuoc?: number;
+  diadiembochang?: string;
+  hinhthucthanhtoan?: any;
+  lotrinh?: any;
+  ghichu?:string;
   trangthai?: number;
 } 
+
+interface SearchParam {
+  idchuyen : string;
+}
 @Component({
   selector: 'app-spch00201',
   templateUrl: './spch00201.component.html',
@@ -54,7 +61,6 @@ export class Spch00201Component extends BaseComponent implements OnInit {
   }
 
   destroy() {
-   // this.ChuyenDto.clear();
   }
 
   pageHeaderInfo: Partial<PageHeaderType> = {
@@ -62,6 +68,8 @@ export class Spch00201Component extends BaseComponent implements OnInit {
     breadcrumb: ["Home","Chuyến","Kế hoạch bóc hàng"],
     desc: ''
   };
+
+  searchParam: Partial<SearchParam> = {};
 
   dateFormat = Const.dateFormat;
   tableConfig!: MyTableConfig;
@@ -111,7 +119,7 @@ export class Spch00201Component extends BaseComponent implements OnInit {
   getTongcuoc() {
     let tc = 0;
     for(let element of this.dataList) {
-      tc = tc + element.tiencuoc;
+      tc = tc + element.tiencuoc!;
     }
     this.tongcuoc = tc;
     this.cdf.markForCheck();
@@ -121,56 +129,21 @@ export class Spch00201Component extends BaseComponent implements OnInit {
 
   }
 
+  // add product
   add() {
-    let stt = this.dataList.length + 1;
-    this.modashowProduct.show({ nzTitle:'Thêm mới' },{stt:stt}).subscribe( //  this.formItemNm[15]
+    this.modashowProduct.show({ nzTitle:'Thêm mới' }).subscribe( //  this.formItemNm[15]
       res => {
         if (!res || res.status === ModalBtnStatus.Cancel) {
           return;
         }
+        res.modalValue['trangthai'] = 0;
+        res.modalValue['biensoxe'] = this.ChuyenDto.biensoxe;
+        res.modalValue['idchuyen'] = this.ChuyenDto.id;
         this.tableLoading(true);
-        this.addEditData(res.modalValue, 'createProduct');
+        this.addEditData(res.modalValue, 'create');
       },
       error => this.tableLoading(false)
     );
-  }
-
-  save(stt:any) {
-    this.modalSrv.confirm({
-      nzTitle: 'Bạn có chắc chắn muốn lưu không?',
-      nzContent: 'Nhấn ok để tiệp tục',
-      nzOnOk: () => {
-       
-        if(this.ChuyenDto.id != '' && this.ChuyenDto.id.length ==24){
-          this.getIdphieunhaphang(stt)
-          this.phhService.create(this.reqPhieunhaphang).pipe().subscribe(res=> {
-              if(res){
-                this.message.success("Lưu thành công !");
-              }
-          })
-        } else {
-          this.message.info("Vui lòng chọn một chuyến hàng !");
-        } 
-      }
-    });
-  }
-
-  getIdphieunhaphang(stt: any) {
-    for(let element of this.dataList) {
-      if(element.stt == stt) {
-        this.reqPhieunhaphang.diadiembochang = element.diadiembochang;
-        this.reqPhieunhaphang.ghichu = element.ghichu;
-        this.reqPhieunhaphang.hinhthucthanhtoan = element.hinhthucthanhtoan;
-        this.reqPhieunhaphang.biensoxe = this.ChuyenDto.biensoxe;
-        this.reqPhieunhaphang.idchuyen = this.ChuyenDto.id;
-        this.reqPhieunhaphang.lotrinh = element.lotrinh;
-        this.reqPhieunhaphang.makh = element.idkhachhang;
-        this.reqPhieunhaphang.noidungdonhang = element.noidungmathang;
-        this.reqPhieunhaphang.tiencuoc = element.tiencuoc;
-        this.reqPhieunhaphang.trangthai = 0;
-      }
-      break;
-    }
   }
 
   allDel() {
@@ -178,73 +151,110 @@ export class Spch00201Component extends BaseComponent implements OnInit {
   }
 
 
-  edit(stt: any) {
-    this.modashowProduct.show({ nzTitle: 'Cập nhật' }, this.dataList[stt-1]).subscribe(({ modalValue, status }) => {
-      if (status === ModalBtnStatus.Cancel) {
-        return;
-      }
-      modalValue.stt = stt;
-      this.tableLoading(true);
-      this.addEditData(modalValue, 'updateProduct');
-    }, error => this.tableLoading(false));
+  edit(id: any) {
+    console.log(id);
+    this.phhService.getDetail(id).subscribe(res => {
+      console.log(res);
+      this.modashowProduct.show({ nzTitle: 'Cập nhật' }, res).subscribe(({ modalValue, status }) => {
+        if (status === ModalBtnStatus.Cancel) {
+          return;
+        }
+        modalValue.id = id;
+        this.tableLoading(true);
+        this.addEditData(modalValue, 'update');
+      }, error => this.tableLoading(false));
+    })
+
   }
 
-  del(stt: any) {
+  del(id: any) {
     this.modalSrv.confirm({
       nzTitle: 'Bạn có chắc chắn muốn xóa nó không?',
       nzContent: 'Không thể phục hồi sau khi xóa',
       nzOnOk: () => {
         this.tableLoading(true);
-        this.dataList.splice(this.getVitriItem(stt),1);
-        this.initTable();
-        this.getDataList();
-        this.getTongcuoc();
+        this.phhService.delete(id).subscribe(
+          () => {
+            if (this.dataList.length === 1) {
+              this.tableConfig.pageIndex--;
+            }
+            this.getDataList();
+            this.getTongcuoc();
+          },
+          error => this.tableLoading(false)
+        );
       }
     });
   }
 
-  getVitriItem(stt:any): number{
-    let i = 0;
-    for(let element of this.dataList) {
-      if(element.stt == stt) {
-          break;
-      }
-      i++;
+
+  addEditData(param: Product, methodName: 'update' | 'create'): void {
+    this.phhService[methodName](param)
+    .pipe(
+      finalize(() => {
+        this.tableLoading(false);
+      })
+    )
+    .subscribe(() => {
+      this.getDataList();
+      this.getTongcuoc();
+    }); 
+  }
+
+  getDataList(e?: NzTableQueryParams) {
+    this.tableConfig.loading = true;
+    if(this.ChuyenDto.id != '') {
+      this.searchParam.idchuyen = this.ChuyenDto.id;
     }
-    return i;
+    const params: SearchCommonVO<any> = {
+      pageSize: this.tableConfig.pageSize!,
+      pageNum: e?.pageIndex || this.tableConfig.pageIndex!,
+      filters: this.searchParam
+    };
+    this.phhService.getlists(params)
+    .pipe(
+      finalize(() => {
+        this.tableLoading(false);
+      })
+    )
+    .subscribe(data => {
+      console.log(data);
+      const { list, total, pageNum } = data;
+      let listProduct = this.listToProduct(list);
+      this.dataList = [...listProduct];
+      this.getTongcuoc();
+      if(this.dataList.length == 0) {
+        this.modalSrv.info({ nzContent: 'Không Có dữ liệu',});
+      }
+      this.tableConfig.total = total!;
+      this.tableConfig.pageIndex = pageNum!;
+      this.tableLoading(false);
+      this.checkedCashArray = [...this.checkedCashArray];
+    });
   }
 
-  addEditData(param: Product, methodName: 'updateProduct' | 'createProduct'): void {
-     if(methodName == 'updateProduct') {
-       for(let element of this.dataList){
-          if(element.stt == param.stt){
-            element.idkhachhang = param.idkhachhang;
-            if (param.tenkhachhang != '') {
-              element.tenkhachhang = param.tenkhachhang;
-            }
-            element.noidungmathang = param.noidungmathang;
-            element.tiencuoc = param.tiencuoc;
-            element.diadiembochang = param.diadiembochang;
-            element.hinhthucthanhtoan = param.hinhthucthanhtoan;
-            element.lotrinh = param.lotrinh;
-            element.ghichu = param.ghichu;
-          }
-       }
-       this.initTable();
-       this.getDataList();
-      
-     } else {
-       this.dataList.push(param);
-       this.getDataList();
-       this.getTongcuoc();
-       
-     }
-  }
-
-  getDataList() {
-    this.dataList = [...this.dataList];
-    this.cdf.detectChanges();
-    this.tableLoading(false);
+  listToProduct(list: any): Product[] {
+    let listP: Product[] = [];
+    if(list.length > 0) {
+      let i = 0;
+      for(let item of list) {
+          let itemProduc: Product = {}
+          itemProduc.id = item['id'];
+          itemProduc.stt = (i+1);
+          itemProduc.idkhachhang = item.iduser['_id'];
+          itemProduc.tenkhachhang = item.iduser['name'];
+          itemProduc.noidungmathang = item['noidungdonhang'];
+          itemProduc.lotrinh = item['lotrinh'];
+          itemProduc.diadiembochang = item['diadiembochang'];
+          itemProduc.hinhthucthanhtoan = item['hinhthucthanhtoan'];
+          itemProduc.tiencuoc = item['tiencuoc'];
+          itemProduc.trangthai = item['trangthai'];
+          itemProduc.ghichu = item['ghichu'];
+          i++;
+          listP.push(itemProduc);
+      }
+    }
+    return listP;
   }
 
   reloadTable(): void {
@@ -321,7 +331,7 @@ export class Spch00201Component extends BaseComponent implements OnInit {
         {
           title: 'Hành động',
           tdTemplate: this.operationTpl,
-          width: 300,
+          width: 200,
           fixed: true,
           fixedDir: 'right'
         }
