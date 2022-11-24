@@ -1,1 +1,44 @@
-<app-ant-table [tableConfig]="tableConfig" [tableData]="dataList"></app-ant-table>
+<form nz-form [formGroup]="addEditForm">
+    <nz-table 
+    [nzSize]="'small'"
+    [nzTemplateMode]="true"
+    >
+        <thead>
+          <tr>
+            <th [nzWidth]="'80px'">Tên Chí Phí</th>
+            <th [nzWidth]="'50px'">Số tiền</th>
+            <th [nzWidth]="'150px'">Ghi chú</th>
+          </tr>
+        </thead>
+        <tbody formArrayName="items">
+         <ng-container *ngFor="let item of getControls(); let i = index">
+            <tr [formGroupName]="i">
+                <td>
+                    <nz-form-item>
+                        <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="">
+                            <input nz-input id="tenchiphi" name="tenchiphi" formControlName="tenchiphi" readonly/>
+                        </nz-form-control>
+                    </nz-form-item>
+                </td>
+                <td>
+                    <nz-form-item>
+                        <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="Vui lòng nhập tiền đưa trước">
+                            <nz-input-number id="sotien" name="sotien" formControlName="sotien" [nzMin]="0" [nzMax]="10000" [nzStep]="100"></nz-input-number>
+                        </nz-form-control>
+                    </nz-form-item>
+                </td>
+                <td>
+                    <nz-form-item>
+                        <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="Vui lòng nhập tiền đưa trước">
+                            <textarea nz-input id="ghichu" name="ghichu" formControlName="ghichu" nzAutosize></textarea>
+                        </nz-form-control>
+                    </nz-form-item>
+                </td>
+              </tr>
+         </ng-container>
+        </tbody>
+    </nz-table>
+</form>
+
+
+

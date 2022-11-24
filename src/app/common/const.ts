@@ -20,13 +20,13 @@ export const listTrangthaichuyen = [
 ]
 
 export const lstchiphi = [
-   {"idchuyen": "", "tenchiphi": "Tiền ăn", "sotien": "", "ghichu": ""},
-   {"idchuyen": "", "tenchiphi": "Tiên bãi", "sotien": "", "ghichu": ""},
-   {"idchuyen": "", "tenchiphi": "Tiền dầu", "sotien": "", "ghichu": ""},
-   {"idchuyen": "", "tenchiphi": "Sữa chữa", "sotien": "", "ghichu": ""},
-   {"idchuyen": "", "tenchiphi": "Cầu đường", "sotien": "", "ghichu": ""},
-   {"idchuyen": "", "tenchiphi": "Công an", "sotien": "", "ghichu": ""},
-   {"idchuyen": "", "tenchiphi": "Chi phí khác", "sotien": "", "ghichu": ""}
+   {"idchuyen": "", "tenchiphi": "Tiền ăn", "sotien": 0, "ghichu": ""},
+   {"idchuyen": "", "tenchiphi": "Tiền bãi", "sotien": 0, "ghichu": ""},
+   {"idchuyen": "", "tenchiphi": "Tiền dầu", "sotien": 0, "ghichu": ""},
+   {"idchuyen": "", "tenchiphi": "Sữa chữa", "sotien": 0, "ghichu": ""},
+   {"idchuyen": "", "tenchiphi": "Cầu đường", "sotien": 0, "ghichu": ""},
+   {"idchuyen": "", "tenchiphi": "Công an", "sotien": 0, "ghichu": ""},
+   {"idchuyen": "", "tenchiphi": "Chi phí khác", "sotien": 0, "ghichu": ""}
 ]
 
 export const rootbase = '/default/';

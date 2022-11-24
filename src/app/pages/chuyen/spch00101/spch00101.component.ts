@@ -263,15 +263,16 @@ export class Spch00101Component extends BaseComponent implements OnInit {
       let req = {
         id: id,
         trangthai: 4,
-        lstchiphi: modalValue.lstchiphi
+        lstchiphi: modalValue
       }
-      this.dataService.updateTrangthai(req).pipe().subscribe(res => {
-        if (res == 1) {
-           this.message.success(" Thực hiện thành công !");
-        } else {
-           this.message.success(" Không thành công !");
-        }
-      })
+      console.log(req);
+      // this.dataService.updateTrangthai(req).pipe().subscribe(res => {
+      //   if (res == 1) {
+      //      this.message.success(" Thực hiện thành công !");
+      //   } else {
+      //      this.message.success(" Không thành công !");
+      //   }
+      // })
     });
   }
 
