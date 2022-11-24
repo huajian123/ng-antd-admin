@@ -7,6 +7,7 @@ import { SubwindowxeModule } from '@app/widget/modal/subwindowxe/subwindowxe.mod
 import { NzHighlightModule } from 'ng-zorro-antd/core/highlight';
 import { SubwindowtaixeModule } from '../../../widget/modal/subwindowtaixe/subwindowtaixe.module';
 import { SubwindowchuyenModule } from '@app/widget/modal/subwindowchuyen/subwindowchuyen.module';
+import { SubwindowchiphiModule } from '@app/widget/modal/subwindowchiphi/subwindowchiphi.module';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { SubwindowchuyenModule } from '@app/widget/modal/subwindowchuyen/subwind
     SubwindowxeModule,
     SubwindowtaixeModule,
     SubwindowchuyenModule,
+    SubwindowchiphiModule,
     NzHighlightModule
   ],
   

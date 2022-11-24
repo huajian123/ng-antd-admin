@@ -24,6 +24,7 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ChuyendtoService } from '@app/core/services/http/chuyen/chuyendto.service';
 import { UrlDisplayId } from '@app/common/UrlDisplay';
+import { SubwindowChiphiService } from '@app/widget/modal/subwindowchiphi/subwindow-chiphi.service';
 
 interface SearchParam {
   ngaybatdau: string;
@@ -39,6 +40,8 @@ class showBtn {
   btnDelete = false;
   btnConfirmbochang = false;
   btnConfirmtrahang = false;
+  btnConfirmchiphi = false;
+  btnConfirmend = false;
 }
 
 @Component({
@@ -98,6 +101,7 @@ export class Spch00101Component extends BaseComponent implements OnInit {
     private modalService: SubwindowXeService,
     private modalTaixeService: SubwindowTaixeService,
     private modalChuyenService: SubwindowChuyenService,
+    private modalChiphiService: SubwindowChiphiService,
     private modalSrv: NzModalService,
     public deptTreeService: DeptTreeService,
     private dataService: ChuyenService,
@@ -182,24 +186,40 @@ export class Spch00101Component extends BaseComponent implements OnInit {
         showbtn.btnDelete = true;
         showbtn.btnConfirmbochang = false;
         showbtn.btnConfirmtrahang = false;
+        showbtn.btnConfirmchiphi = false;
+        showbtn.btnConfirmend = false;
       }; break;
       case 1 : {
         showbtn.btnUpdate = true;
         showbtn.btnDelete = false;
         showbtn.btnConfirmbochang = true;
         showbtn.btnConfirmtrahang = false;
+        showbtn.btnConfirmchiphi = false;
+        showbtn.btnConfirmend = false;
       }; break;
       case 2 : {
         showbtn.btnUpdate = false;
         showbtn.btnDelete = false;
         showbtn.btnConfirmbochang = false;
         showbtn.btnConfirmtrahang = true;
+        showbtn.btnConfirmchiphi = false;
+        showbtn.btnConfirmend = false;
       }; break;
       case 3 : {
         showbtn.btnUpdate = false;
         showbtn.btnDelete = false;
         showbtn.btnConfirmbochang = false;
         showbtn.btnConfirmtrahang = false;
+        showbtn.btnConfirmchiphi = true;
+        showbtn.btnConfirmend = false;
+      }; break ;
+      case 4 : {
+        showbtn.btnUpdate = false;
+        showbtn.btnDelete = false;
+        showbtn.btnConfirmbochang = false;
+        showbtn.btnConfirmtrahang = false;
+        showbtn.btnConfirmchiphi = false;
+        showbtn.btnConfirmend = true;
       }
     }
     return showbtn;
@@ -208,7 +228,7 @@ export class Spch00101Component extends BaseComponent implements OnInit {
   confirmbochang(id: string) {
     let req = {
       id: id,
-      trangthai: 1
+      trangthai: 2
     }
     this.dataService.updateTrangthai(req).pipe().subscribe(res => {
       if (res == 1) {
@@ -222,7 +242,44 @@ export class Spch00101Component extends BaseComponent implements OnInit {
   confirmtrahang(id: string) {
     let req = {
       id: id,
-      trangthai: 2
+      trangthai: 3
+    }
+    this.dataService.updateTrangthai(req).pipe().subscribe(res => {
+      if (res == 1) {
+         this.message.success(" Thực hiện thành công !");
+      } else {
+         this.message.success(" Không thành công !");
+      }
+    })
+  }
+
+  // tinh chi phi chuyến hàng 
+  confirmchiphi(id: string) {
+    this.modalChiphiService.show({ nzTitle: 'Danh sách chi phí' }, {idchuyen:id}).subscribe(({ modalValue, status }) => {
+      if (status === ModalBtnStatus.Cancel) {
+        return;
+      }
+      modalValue.id = id;
+      let req = {
+        id: id,
+        trangthai: 4,
+        lstchiphi: modalValue.lstchiphi
+      }
+      this.dataService.updateTrangthai(req).pipe().subscribe(res => {
+        if (res == 1) {
+           this.message.success(" Thực hiện thành công !");
+        } else {
+           this.message.success(" Không thành công !");
+        }
+      })
+    });
+  }
+
+  // ket thuc chuyen hang
+  confirmend(id: string) {
+    let req = {
+      id: id,
+      trangthai: 5
     }
     this.dataService.updateTrangthai(req).pipe().subscribe(res => {
       if (res == 1) {

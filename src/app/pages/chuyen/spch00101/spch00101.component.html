@@ -129,6 +129,12 @@
           <span *appAuth="ActionCode.ChuyenConfirmtrahang" class="operate-text">
             <button *ngIf="showBtn['btnConfirmtrahang']" nz-button nzType="primary" nzGhost (click)="confirmtrahang(id)">Hoàn thành trả hàng</button>
           </span>
+          <span *appAuth="ActionCode.ChuyenConfirmchiphi" class="operate-text">
+            <button *ngIf="showBtn['btnConfirmchiphi']" nz-button nzType="primary" nzGhost (click)="confirmchiphi(id)">Tính chi phí</button>
+          </span>
+          <span *appAuth="ActionCode.ChuyenConfirmend" class="operate-text">
+            <button *ngIf="showBtn['btnConfirmend']" nz-button nzType="primary" nzGhost (click)="confirmend(id)">Kết thúc chuyến hàng</button>
+          </span>
         </ng-template>
         <ng-template #Tltentai let-idtai="idtai">
             <span>{{idtai['name']}}</span>

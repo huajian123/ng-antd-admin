@@ -27,6 +27,7 @@ import { PhieunhaphangService } from '@app/core/services/http/phieunhaphang/phie
 import { UrlDisplayId } from '@app/common/UrlDisplay';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { finalize } from 'rxjs';
+import { fnReload } from '@utils/tools';
 
 export interface Product {
   id?:string,
@@ -90,6 +91,8 @@ export class Spch00201Component extends BaseComponent implements OnInit {
   btnConfirm = false;
   btnConfirmbochang = false;
   btnConfirmtrahang = false;
+  btnConfirmchiphi = false;
+  btnConfirmend = false;
 
   @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<NzSafeAny>;
 
@@ -129,25 +132,53 @@ export class Spch00201Component extends BaseComponent implements OnInit {
         this.btnConfirm = true;
         this.btnConfirmbochang = false;
         this.btnConfirmtrahang = false;
+        this.btnConfirmchiphi = false;
+        this.btnConfirmend = false;
       }; break;
       case 1 : {
         this.btnConfirm = false;
         this.btnConfirmbochang = true;
         this.btnConfirmtrahang = false;
+        this.btnConfirmchiphi = false;
+        this.btnConfirmend = false;
       }; break;
       case 2 : {
         this.btnConfirm = false;
         this.btnConfirmbochang = false;
         this.btnConfirmtrahang = true;
+        this.btnConfirmchiphi = false;
+        this.btnConfirmend = false;
       }; break;
       case 3 : {
         this.btnConfirm = false;
         this.btnConfirmbochang = false;
         this.btnConfirmtrahang = false;
+        this.btnConfirmchiphi = true;
+        this.btnConfirmend = false;
         this.btnNew = true;
         this.btnUpdate = true;
         this.btnDelete = true;
-      }
+      }; break; 
+      case 4 : {
+        this.btnConfirm = false;
+        this.btnConfirmbochang = false;
+        this.btnConfirmtrahang = false;
+        this.btnConfirmchiphi = false;
+        this.btnConfirmend = true;
+        this.btnNew = true;
+        this.btnUpdate = true;
+        this.btnDelete = true;
+      }; break;
+      case 5 : {
+        this.btnConfirm = false;
+        this.btnConfirmbochang = false;
+        this.btnConfirmtrahang = false;
+        this.btnConfirmchiphi = false;
+        this.btnConfirmend = false;
+        this.btnNew = true;
+        this.btnUpdate = true;
+        this.btnDelete = true;
+      } 
     }
     this.cdf.markForCheck();
   }
@@ -167,17 +198,25 @@ export class Spch00201Component extends BaseComponent implements OnInit {
 
   // update trang thai chuyen hang
   Confirm(trangthai: number) {
+     
      if (this.ChuyenDto.id != '' && this.ChuyenDto.id.length == 24) {
+      let listKhachNo: Product[] = []
         let req = {
           id: this.ChuyenDto.id,
-          trangthai: trangthai
+          trangthai: trangthai,
+          listkhachno: listKhachNo
         }
         if(this.dataList.length > 0) {
+          listKhachNo = this.fnGetListKhachNo();
+          if(trangthai == 2) {
+            req['listkhachno'] = listKhachNo
+          }
           this.dataService.updateTrangthai(req).pipe().subscribe(res => {
             if (res == 1) {
                this.message.success(" Thực hiện thành công !");
                this.ChuyenDto.trangthai = trangthai;
                this.fnshowConfirm(this.ChuyenDto.trangthai);
+               fnReload(this.router, Const.rootbase + 'chuyen/spch00101');
             } else {
                this.message.success(" Không thành công !");
             }
@@ -187,6 +226,17 @@ export class Spch00201Component extends BaseComponent implements OnInit {
         }
         
      }
+  }
+
+  // fnGet list khach nợ
+  fnGetListKhachNo() {
+     let listKhachNo = [];
+     for(let element of this.dataList) {
+       if(element.hinhthucthanhtoan == 2) {
+          listKhachNo.push(element);
+       }
+     }
+     return listKhachNo;
   }
 
   // add product
@@ -224,7 +274,6 @@ export class Spch00201Component extends BaseComponent implements OnInit {
         this.addEditData(modalValue, 'update');
       }, error => this.tableLoading(false));
     })
-
   }
 
   del(id: any) {

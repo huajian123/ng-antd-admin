@@ -122,6 +122,18 @@
                     Hoàn thành trả hàng
                 </button>
             </span>
+            <span *appAuth="ActionCode.Confirm" class="operate-text">
+                <button [disabled]="!btnConfirmchiphi" (click)="Confirm(4)" nz-button nzType="primary" class="m-r-8">
+                    <i nz-icon nzType="caret-right"></i>
+                    Tính chi phí
+                </button>
+            </span>
+            <span *appAuth="ActionCode.Confirm" class="operate-text">
+                <button [disabled]="!btnConfirmend" (click)="Confirm(5)" nz-button nzType="primary" class="m-r-8">
+                    <i nz-icon nzType="caret-right"></i>
+                    Kết thúc chuyến hàng
+                </button>
+            </span>
         </ng-container>
     </ng-template>
     <ng-template #tableBtns>

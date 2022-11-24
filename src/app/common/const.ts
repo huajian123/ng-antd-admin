@@ -19,6 +19,16 @@ export const listTrangthaichuyen = [
     { "value": 2, "lable":"Hoàn thành trả hàng"}
 ]
 
+export const lstchiphi = [
+   {"idchuyen": "", "tenchiphi": "Tiền ăn", "sotien": "", "ghichu": ""},
+   {"idchuyen": "", "tenchiphi": "Tiên bãi", "sotien": "", "ghichu": ""},
+   {"idchuyen": "", "tenchiphi": "Tiền dầu", "sotien": "", "ghichu": ""},
+   {"idchuyen": "", "tenchiphi": "Sữa chữa", "sotien": "", "ghichu": ""},
+   {"idchuyen": "", "tenchiphi": "Cầu đường", "sotien": "", "ghichu": ""},
+   {"idchuyen": "", "tenchiphi": "Công an", "sotien": "", "ghichu": ""},
+   {"idchuyen": "", "tenchiphi": "Chi phí khác", "sotien": "", "ghichu": ""}
+]
+
 export const rootbase = '/default/';
 
 //role

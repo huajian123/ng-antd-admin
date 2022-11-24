@@ -1,12 +1,34 @@
 /* eslint-disable prettier/prettier */
 import { FormArray, FormGroup } from '@angular/forms';
-
+import { Router } from '@angular/router';
+import { SimpleReuseStrategy } from '@app/core/services/common/reuse-strategy';
 import { LockScreenFlag } from '@store/common-store/lock-screen-store.service';
 import CryptoJS from 'crypto-js';
 import { endOfDay, startOfDay } from 'date-fns';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { silentEvent } from 'ng-zorro-antd/core/util';
 import { v4 as uuidv4 } from 'uuid';
+
+const  fnReload = async function reload(router: Router, url: string) {
+  const sourceUrl = url;
+  // 只有当前页签会刷新，如果涉及到tab页内的详情的页面不会刷新
+  const currentRoute = fnGetPathWithoutParam(sourceUrl);
+  const queryParams = router.parseUrl(sourceUrl).queryParams;
+  router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+    SimpleReuseStrategy.deleteRouteSnapshot(fngetPathKey(router,sourceUrl));
+    router.navigate([currentRoute], { queryParams });
+  });
+}
+
+const fngetPathKey = function getPathKey(router: Router,path: string): string {
+  const tempPath = fnFormatePath(path);
+  const pathParam = router.parseUrl(path).queryParams;
+  let pathParamString = '';
+  if (Object.keys(pathParam).length > 0) {
+    pathParamString = JSON.stringify(router.parseUrl(path).queryParams);
+  }
+  return tempPath + pathParamString;
+}
 
 /*获取1到100之间的随机整数 this.randomNum(1,101)*/
 const fnGetRandomNum = function getRandomNum(m: number, n: number): number {
@@ -137,5 +159,6 @@ export {
   fnGetRandomNum,
   fnStartOfDay,
   fnEndOfDay,
-  fnGetUUID
+  fnGetUUID,
+  fnReload
 };
