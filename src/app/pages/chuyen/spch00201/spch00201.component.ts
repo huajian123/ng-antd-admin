@@ -28,7 +28,8 @@ import { UrlDisplayId } from '@app/common/UrlDisplay';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { finalize } from 'rxjs';
 import { fnReload } from '@utils/tools';
-
+import { ChiphichuyenService } from '@app/core/services/http/chiphichuyen/chiphichuyen.service';
+import { SubwindowChiphiService } from '@app/widget/modal/subwindowchiphi/subwindow-chiphi.service';
 export interface Product {
   id?:string,
   stt?: number;
@@ -78,6 +79,7 @@ export class Spch00201Component extends BaseComponent implements OnInit {
 
   dataList: Product[] = [];
   checkedCashArray: any[] = [];
+  listchiphi: any[] = [];
   ActionCode = ActionCode;
   showchuyen = true;
   showConfirm = false;
@@ -109,6 +111,8 @@ export class Spch00201Component extends BaseComponent implements OnInit {
     public ChuyenDto: ChuyendtoService,
     private dataService: ChuyenService,
     private phhService: PhieunhaphangService,
+    private cpcService: ChiphichuyenService,
+    private modalChiphiService: SubwindowChiphiService,
     public tabService: TabService,
 
   ) {
@@ -163,7 +167,7 @@ export class Spch00201Component extends BaseComponent implements OnInit {
         this.btnConfirm = false;
         this.btnConfirmbochang = false;
         this.btnConfirmtrahang = false;
-        this.btnConfirmchiphi = false;
+        this.btnConfirmchiphi = true;
         this.btnConfirmend = true;
         this.btnNew = true;
         this.btnUpdate = true;
@@ -194,6 +198,63 @@ export class Spch00201Component extends BaseComponent implements OnInit {
     }
     this.tongcuoc = tc;
     this.cdf.markForCheck();
+  }
+
+  Confirm4() {
+    // 1 check chuyến này có ai tinh chi phí chưa
+    // nếu chưa. thì show tính chi phí
+    // nếu có . thì update
+    this.fncheckchiphiChuyen();
+  }
+
+  fncheckchiphiChuyen() {
+    let req = {
+      id: this.ChuyenDto.id
+    }
+    this.cpcService.getlists(req).pipe().subscribe(res => {
+        this.listchiphi = res;
+        if (this.listchiphi.length > 0) {
+          // show modal update chi phí
+          console.log(this.listchiphi);
+          this.modalChiphiService.show({ nzTitle: 'Cập nhật danh sách chi phí' }, {listcp:this.listchiphi}).subscribe(({ modalValue, status }) => {
+            if (status === ModalBtnStatus.Cancel) {
+              return;
+            }
+            let req1 = {
+              id: req.id,
+              trangthai: 4,
+              lstchiphi: modalValue.items
+            }
+            this.cpcService.updateList(req1).pipe().subscribe(res => {
+                if(res == req1.lstchiphi.length) {
+                  this.message.info("Cập nhật thành công !");
+                } else {
+                  this.message.info("Cập nhật 1 phần !");
+                }
+            })
+          });
+        } else {
+          // show modal tính chi phí
+          this.modalChiphiService.show({ nzTitle: 'Danh sách chi phí' }, {idchuyen:req.id}).subscribe(({ modalValue, status }) => {
+            if (status === ModalBtnStatus.Cancel) {
+              return;
+            }
+            let req1 = {
+              id: req.id,
+              trangthai: 4,
+              lstchiphi: modalValue.items
+            }
+            console.log(req1);
+            this.dataService.updateTrangthai(req1).pipe().subscribe(res => {
+              if (res == 1) {
+                 this.message.success(" Thực hiện thành công !");
+              } else {
+                 this.message.success(" Không thành công !");
+              }
+            })
+          });
+        }
+    })
   }
 
   // update trang thai chuyen hang

@@ -135,6 +135,9 @@
           <span *appAuth="ActionCode.ChuyenConfirmend" class="operate-text">
             <button *ngIf="showBtn['btnConfirmend']" nz-button nzType="primary" nzGhost (click)="confirmend(id)">Kết thúc chuyến hàng</button>
           </span>
+          <span *ngIf="showBtn['labelShowInfo']">
+              Tổng cước: {{showBtn['tongcuoc']}} | Tổng chi phí: {{showBtn['tongchiphi']}}
+          </span>
         </ng-template>
         <ng-template #Tltentai let-idtai="idtai">
             <span>{{idtai['name']}}</span>

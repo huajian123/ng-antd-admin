@@ -42,6 +42,9 @@ class showBtn {
   btnConfirmtrahang = false;
   btnConfirmchiphi = false;
   btnConfirmend = false;
+  labelShowInfo = false; // show tong cươc , tong chi phí chuyến hàng
+  tongcuoc = 0;
+  tongchiphi = 0;
 }
 
 @Component({
@@ -86,6 +89,8 @@ export class Spch00101Component extends BaseComponent implements OnInit {
   btnDelete = false;
   btnConfirmbochang = false; // hoàn thành bóc hàng
   btnConfirmtrahang = false; // hoàn thành trả hàng
+
+
 
   @ViewChild('Tlbiensoxe', { static: true }) Tlbiensoxe!: TemplateRef<NzSafeAny>;
   @ViewChild('Tltentai', { static: true }) Tltentai!: TemplateRef<NzSafeAny>;
@@ -181,13 +186,13 @@ export class Spch00101Component extends BaseComponent implements OnInit {
     let showbtn = new showBtn();
     switch(trangthai) {
       case 0 : {
-        
         showbtn.btnUpdate = true;
         showbtn.btnDelete = true;
         showbtn.btnConfirmbochang = false;
         showbtn.btnConfirmtrahang = false;
         showbtn.btnConfirmchiphi = false;
         showbtn.btnConfirmend = false;
+        showbtn.labelShowInfo = false;
       }; break;
       case 1 : {
         showbtn.btnUpdate = true;
@@ -196,6 +201,7 @@ export class Spch00101Component extends BaseComponent implements OnInit {
         showbtn.btnConfirmtrahang = false;
         showbtn.btnConfirmchiphi = false;
         showbtn.btnConfirmend = false;
+        showbtn.labelShowInfo = false;
       }; break;
       case 2 : {
         showbtn.btnUpdate = false;
@@ -204,6 +210,7 @@ export class Spch00101Component extends BaseComponent implements OnInit {
         showbtn.btnConfirmtrahang = true;
         showbtn.btnConfirmchiphi = false;
         showbtn.btnConfirmend = false;
+        showbtn.labelShowInfo = false;
       }; break;
       case 3 : {
         showbtn.btnUpdate = false;
@@ -212,6 +219,7 @@ export class Spch00101Component extends BaseComponent implements OnInit {
         showbtn.btnConfirmtrahang = false;
         showbtn.btnConfirmchiphi = true;
         showbtn.btnConfirmend = false;
+        showbtn.labelShowInfo = false;
       }; break ;
       case 4 : {
         showbtn.btnUpdate = false;
@@ -220,6 +228,16 @@ export class Spch00101Component extends BaseComponent implements OnInit {
         showbtn.btnConfirmtrahang = false;
         showbtn.btnConfirmchiphi = false;
         showbtn.btnConfirmend = true;
+        showbtn.labelShowInfo = false;
+      }; break;
+      case 5: {
+        showbtn.btnUpdate = false;
+        showbtn.btnDelete = false;
+        showbtn.btnConfirmbochang = false;
+        showbtn.btnConfirmtrahang = false;
+        showbtn.btnConfirmchiphi = false;
+        showbtn.btnConfirmend = false;
+        showbtn.labelShowInfo = true;
       }
     }
     return showbtn;
@@ -259,20 +277,20 @@ export class Spch00101Component extends BaseComponent implements OnInit {
       if (status === ModalBtnStatus.Cancel) {
         return;
       }
-      modalValue.id = id;
       let req = {
         id: id,
         trangthai: 4,
-        lstchiphi: modalValue
+        lstchiphi: modalValue.items
       }
       console.log(req);
-      // this.dataService.updateTrangthai(req).pipe().subscribe(res => {
-      //   if (res == 1) {
-      //      this.message.success(" Thực hiện thành công !");
-      //   } else {
-      //      this.message.success(" Không thành công !");
-      //   }
-      // })
+      this.dataService.updateTrangthai(req).pipe().subscribe(res => {
+        if (res == 1) {
+           this.getDataList();
+           this.message.success(" Thực hiện thành công !");
+        } else {
+           this.message.success(" Không thành công !");
+        }
+      })
     });
   }
 
@@ -284,6 +302,7 @@ export class Spch00101Component extends BaseComponent implements OnInit {
     }
     this.dataService.updateTrangthai(req).pipe().subscribe(res => {
       if (res == 1) {
+         this.getDataList();
          this.message.success(" Thực hiện thành công !");
       } else {
          this.message.success(" Không thành công !");

@@ -16,7 +16,9 @@ export const Lotrinh = [
 export const listTrangthaichuyen = [
     { "value": 0, "lable": "Lên kế hoạch bóc hàng"},
     { "value": 1, "lable": "Hoàn thành bóc hàng"},
-    { "value": 2, "lable":"Hoàn thành trả hàng"}
+    { "value": 2, "lable":"Hoàn thành trả hàng"},
+    { "value": 3, "lable":"Tính chi phí"},
+    { "value": 4, "lable":"Kết thúc chuyến hàng"},
 ]
 
 export const lstchiphi = [
@@ -93,13 +95,22 @@ export const ChuyenAnt100DeleteAll = 'chuyen/chuyenAnt100deleteAll';
 export const ChuyenAnt100UpdateTrangthai = 'chuyen/chuyenAnt100updateTrangthai';
 
 // phieu nhap hang 
-
 export const PhieunhaphangAnt100GetAll = 'phieunhaphang/phieunhaphangAnt100getAll';
 export const PhieunhaphangAnt100Get = 'phieunhaphang/phieunhaphangAnt100get';
 export const PhieunhaphangAnt100Update = 'phieunhaphang/phieunhaphangAnt100update';
 export const PhieunhaphangAnt100Create = 'phieunhaphang/phieunhaphangAnt100create';
 export const PhieunhaphangAnt100Delete = 'phieunhaphang/phieunhaphangAnt100delete';
 export const PhieunhaphangAnt100DeleteAll = 'phieunhaphang/phieunhaphangAnt100deleteAll';
+
+// chi phi chuyen 
+export const ChiphichuyenAnt100GetAll = 'chiphichuyen/chiphichuyenAnt100getAll';
+export const ChiphichuyenAnt100Get = 'chiphichuyen/chiphichuyenAnt100get';
+export const ChiphichuyenAnt100Update = 'chiphichuyen/chiphichuyenAnt100update';
+export const ChiphichuyenAnt100UpdateList = 'chiphichuyen/chiphichuyenAnt100updateList';
+export const ChiphichuyenAnt100Create = 'chiphichuyen/chiphichuyenAnt100create';
+export const ChiphichuyenAnt100Delete = 'chiphichuyen/chiphichuyenAnt100delete';
+export const ChiphichuyenAnt100DeleteAll = 'chiphichuyen/chiphichuyenAnt100deleteAll';
+
 
 
 

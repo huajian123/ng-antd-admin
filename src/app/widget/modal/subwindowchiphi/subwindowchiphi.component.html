@@ -2,6 +2,8 @@
     <nz-table 
     [nzSize]="'small'"
     [nzTemplateMode]="true"
+    [nzFooter]="Tfooter"
+    [nzTitle]="Ttilte"
     >
         <thead>
           <tr>
@@ -23,7 +25,7 @@
                 <td>
                     <nz-form-item>
                         <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="Vui lòng nhập tiền đưa trước">
-                            <nz-input-number id="sotien" name="sotien" formControlName="sotien" [nzMin]="0" [nzMax]="10000" [nzStep]="100"></nz-input-number>
+                            <nz-input-number id="sotien" name="sotien" formControlName="sotien" [nzMin]="0" [nzMax]="10000" [nzStep]="100" (ngModelChange)="fnTongchiphi($event)"></nz-input-number>
                         </nz-form-control>
                     </nz-form-item>
                 </td>
@@ -38,6 +40,18 @@
          </ng-container>
         </tbody>
     </nz-table>
+    <ng-template #Tfooter>
+        <div>
+            Tổng chi phí: <span [ngStyle]="{'font-weight':'bold'}" >{{tongchiphi}}.000đ</span>
+        </div>
+
+    </ng-template>
+    <ng-template #Ttilte>
+        <div>
+            <span [ngStyle]="{'color':'red'}" ><i>Lưu ý: kiểm tra thông tin chính xác trước khi xác nhận. </i></span>
+            <span [ngStyle]="{'font-weight':'bold'}" > Tổng chi phí: {{tongchiphi}}.000đ</span>
+        </div>
+    </ng-template>
 </form>
 
 
