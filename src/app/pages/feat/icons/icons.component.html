@@ -2,7 +2,7 @@
 
 <div class="normal-table-wrap">
   <nz-card nzTitle="图标选择器">
-    <button nz-button nzType="primary" class="m-b-8" (click)="visible = true">打开图标选择器</button>
+    <button nz-button nzType="primary" class="m-b-8" (click)="visible = !visible">打开图标选择器</button>
     <nz-input-group [nzAddOnAfter]="selIcon">
       <input nz-input [placeholder]="'点击右侧图标选择图标，这句话有点绕'" disabled [(ngModel)]="seletedIcon" />
     </nz-input-group>
@@ -63,7 +63,11 @@
             fill="#6B676E"
             p-id="1147"
           />
-          <path d="M512.002 726.622c-30.06 0-115.614 5.668-115.614 33.032 0 49.638 105.484 85.24 115.614 82.58 10.128 2.66 115.614-32.944 115.614-82.58-0.002-27.366-85.556-33.032-115.614-33.032z" fill="#464655" p-id="1148" />
+          <path
+            d="M512.002 726.622c-30.06 0-115.614 5.668-115.614 33.032 0 49.638 105.484 85.24 115.614 82.58 10.128 2.66 115.614-32.944 115.614-82.58-0.002-27.366-85.556-33.032-115.614-33.032z"
+            fill="#464655"
+            p-id="1148"
+          />
           <path d="M330.324 495.484m-33.032 0a33.032 33.032 0 1 0 66.064 0 33.032 33.032 0 1 0-66.064 0Z" fill="#464655" p-id="1149" />
           <path d="M693.678 495.484m-33.032 0a33.032 33.032 0 1 0 66.064 0 33.032 33.032 0 1 0-66.064 0Z" fill="#464655" p-id="1150" />
         </svg>
