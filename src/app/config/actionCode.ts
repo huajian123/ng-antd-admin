@@ -59,4 +59,8 @@ export const ActionCode = {
   Confirmbochang: 'default:chuyen:spch00201:cbochang',
   Confirmtrahang: 'default:chuyen:spch00201:ctrahang',
 
+  // khach hang
+  KhachhangEdit: 'default:khachhang:spkh00101:edit',
+  KhachhangTattoan: 'default:khachhang:spkh00101:tattoan',
+
 };

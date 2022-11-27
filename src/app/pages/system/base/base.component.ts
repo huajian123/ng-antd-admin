@@ -44,7 +44,7 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
     }
 
     getDate() {
-        let date = this.datePipe.transform(new Date(), 'dd/MM/yyyy') + "";
+        let date = this.datePipe.transform(new Date(), 'dd/MM/yyyy')+"";
         return date;
     }
 

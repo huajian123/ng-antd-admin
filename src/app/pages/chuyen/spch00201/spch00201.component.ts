@@ -177,7 +177,7 @@ export class Spch00201Component extends BaseComponent implements OnInit {
         this.btnConfirm = false;
         this.btnConfirmbochang = false;
         this.btnConfirmtrahang = false;
-        this.btnConfirmchiphi = false;
+        this.btnConfirmchiphi = true;
         this.btnConfirmend = false;
         this.btnNew = true;
         this.btnUpdate = true;
@@ -201,10 +201,24 @@ export class Spch00201Component extends BaseComponent implements OnInit {
   }
 
   Confirm4() {
+    if(this.ChuyenDto.trangthai == 5) {
+      // show chi phi chuyen 
+      let req = {
+        id: this.ChuyenDto.id
+      }
+      this.cpcService.getlists(req).pipe().subscribe(res => {
+        this.modalChiphiService.show({ nzTitle: 'Danh sách chi phí' }, {listcp:res,status:5,showcomfirm:false}).subscribe(({ modalValue, status }) => {
+          if (status === ModalBtnStatus.Cancel) {
+            return;
+          }
+        });
+      })
+    } else {
+      this.fncheckchiphiChuyen();
+    }
     // 1 check chuyến này có ai tinh chi phí chưa
     // nếu chưa. thì show tính chi phí
     // nếu có . thì update
-    this.fncheckchiphiChuyen();
   }
 
   fncheckchiphiChuyen() {
@@ -228,6 +242,8 @@ export class Spch00201Component extends BaseComponent implements OnInit {
             this.cpcService.updateList(req1).pipe().subscribe(res => {
                 if(res == req1.lstchiphi.length) {
                   this.message.info("Cập nhật thành công !");
+                  this.ChuyenDto.trangthai=4;
+                  this.fnshowConfirm(4);
                 } else {
                   this.message.info("Cập nhật 1 phần !");
                 }
@@ -248,6 +264,8 @@ export class Spch00201Component extends BaseComponent implements OnInit {
             this.dataService.updateTrangthai(req1).pipe().subscribe(res => {
               if (res == 1) {
                  this.message.success(" Thực hiện thành công !");
+                 this.ChuyenDto.trangthai=4;
+                 this.fnshowConfirm(4);
               } else {
                  this.message.success(" Không thành công !");
               }

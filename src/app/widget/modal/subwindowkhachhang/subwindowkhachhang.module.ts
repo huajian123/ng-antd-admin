@@ -1,19 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { NewkhRoutingModule } from './newkh-routing.module';
-import { NewkhComponent } from './newkh.component';
+import { SubwindowkhachhangComponent } from './subwindowkhachhang.component';
 import { SharedModule } from '@app/shared/shared.module';
+
 
 
 @NgModule({
   declarations: [
-    NewkhComponent
+    SubwindowkhachhangComponent
   ],
   imports: [
-    CommonModule,
-    NewkhRoutingModule,
     SharedModule
   ]
 })
-export class NewkhModule { }
+export class SubwindowkhachhangModule { }

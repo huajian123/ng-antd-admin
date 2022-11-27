@@ -1,0 +1,30 @@
+<form nz-form [formGroup]="addEditForm">
+    <nz-form-item>
+        <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="name">Tên tài khoản</nz-form-label>
+        <nz-form-control [nzSm]="18" [nzXs]="24" [nzErrorTip]="combineTpl">
+          <input nz-input formControlName="name" id="name" placeholder="Tên tài khoản" />
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="mobile">Số điện thoại</nz-form-label>
+        <nz-form-control [nzSm]="18" [nzXs]="24" [nzErrorTip]="combineTpl">
+          <input nz-input formControlName="dienthoai" maxlength="11" id="mobile" placeholder="Số điện thoại" />
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="mobile">Địa chỉ</nz-form-label>
+        <nz-form-control [nzSm]="18" [nzXs]="24" [nzErrorTip]="combineTpl">
+          <input nz-input formControlName="diachi" maxlength="11" id="diachi" placeholder="Địa chỉ" />
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="groupid">Group Id</nz-form-label>
+        <nz-form-control [nzSm]="18" [nzXs]="24" [nzErrorTip]="combineTpl">
+          <input nz-input formControlName="groupid" maxlength="11" id="groupid" placeholder="Group id" />
+        </nz-form-control>
+    </nz-form-item>
+</form>
+<ng-template #combineTpl let-control>
+    <ng-container *ngIf="control.hasError('message')">{{ control.errors.message }}</ng-container>
+    <ng-container *ngIf="control.hasError('required')">Phần bắt buộc</ng-container>
+  </ng-template>

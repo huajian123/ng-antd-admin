@@ -152,7 +152,6 @@ export class Spch00101Component extends BaseComponent implements OnInit {
 
   getDataList(e?: NzTableQueryParams) {
     this.tableLoading(true);
-    // this.tableConfig.loading = true;
     const params: SearchCommonVO<any> = {
       pageSize: this.tableConfig.pageSize!,
       pageNum: e?.pageIndex || this.tableConfig.pageIndex!,
@@ -251,6 +250,7 @@ export class Spch00101Component extends BaseComponent implements OnInit {
     this.dataService.updateTrangthai(req).pipe().subscribe(res => {
       if (res == 1) {
          this.message.success(" Thực hiện thành công !");
+         this.getDataList();
       } else {
          this.message.success(" Không thành công !");
       }
@@ -265,6 +265,7 @@ export class Spch00101Component extends BaseComponent implements OnInit {
     this.dataService.updateTrangthai(req).pipe().subscribe(res => {
       if (res == 1) {
          this.message.success(" Thực hiện thành công !");
+         this.getDataList();
       } else {
          this.message.success(" Không thành công !");
       }
@@ -529,7 +530,7 @@ export class Spch00101Component extends BaseComponent implements OnInit {
         {
           title: 'Hành động',
           tdTemplate: this.operationTpl,
-          width: 250,
+          width: 300,
           fixed: true,
           fixedDir: 'right'
         }

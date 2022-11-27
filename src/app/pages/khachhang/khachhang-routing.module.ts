@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: 'newkh', loadChildren: () => import('./newkh/newkh.module').then(m => m.NewkhModule)},
-  { path: '', redirectTo: 'newkh', pathMatch: 'full' }
+  { path: 'spkh00101', loadChildren: () => import('./spkh00101/spkh00101.module').then(m => m.Spkh00101Module)},
+  { path: 'spkh00201', loadChildren: () => import('./spkh00201/spkh00201.module').then(m => m.Spkh00201Module)},
+  { path: '', redirectTo: 'spkh00101', pathMatch: 'full' }
 ];
 
 @NgModule({

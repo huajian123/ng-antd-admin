@@ -25,14 +25,14 @@
                 <td>
                     <nz-form-item>
                         <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="Vui lòng nhập tiền đưa trước">
-                            <nz-input-number id="sotien" name="sotien" formControlName="sotien" [nzMin]="0" [nzMax]="10000" [nzStep]="100" (ngModelChange)="fnTongchiphi($event)"></nz-input-number>
+                            <nz-input-number id="sotien" name="sotien" formControlName="sotien" [nzMin]="0" [nzMax]="10000" [nzStep]="100" (ngModelChange)="fnTongchiphi($event)" [nzDisabled]="showInfo"></nz-input-number>
                         </nz-form-control>
                     </nz-form-item>
                 </td>
                 <td>
                     <nz-form-item>
                         <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="Vui lòng nhập tiền đưa trước">
-                            <textarea nz-input id="ghichu" name="ghichu" formControlName="ghichu" nzAutosize></textarea>
+                            <textarea nz-input id="ghichu" name="ghichu" formControlName="ghichu" nzAutosize  [disabled]="showInfo"></textarea>
                         </nz-form-control>
                     </nz-form-item>
                 </td>

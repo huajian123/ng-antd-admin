@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NewkhComponent } from './newkh.component';
+import { Spkh00101Component } from './spkh00101.component';
 
 const routes: Routes = [
-  {path: '', component: NewkhComponent,data: { title: 'Tạo Mới KH', key: 'newkh' }}
+  {path: '', component: Spkh00101Component,data: { title: 'Công nợ khách hàng', key: 'spkh00101' }}
 
 ];
 
@@ -12,5 +12,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 
-export class NewkhRoutingModule { }
+export class Spkh00101RoutingModule { }
 

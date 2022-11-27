@@ -23,6 +23,8 @@ export class SubwindowchiphiComponent implements OnInit {
   const = Const;
   lstchiphi = Const.lstchiphi;
   tongchiphi = 0;
+  showInfo = false;
+
   @ViewChild('Tlsotien', { static: true }) Tlsotien!: TemplateRef<any>;
   @ViewChild('Tlghichu', { static: true }) Tlghichu!: TemplateRef<any>;
   @ViewChild('Tfooter', { static: true }) Tfooter!: TemplateRef<any>;
@@ -68,6 +70,9 @@ export class SubwindowchiphiComponent implements OnInit {
   ngOnInit(): void {
     if(this.params.listcp != undefined && this.params.listcp.length > 0) {
        this.lstchiphi = this.params.listcp;
+    }
+    if(this.params.status != undefined && this.params.status ==5) {
+       this.showInfo = true;
     }
     this.addEditForm = this.fb.group({
       items: this.fb.array([]),

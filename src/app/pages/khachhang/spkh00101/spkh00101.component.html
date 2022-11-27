@@ -1,0 +1,42 @@
+<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+<div class="normal-table-wrap">
+    <nz-card nzHoverable [nzBodyStyle]="{ 'padding-bottom': 0 }" class="m-b-10">
+        <form nz-form>
+            <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24 }">
+                <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+                    <nz-form-item>
+                        <nz-form-label [nzFor]="">Tên khách hàng</nz-form-label>
+                        <nz-form-control>
+                          <input nz-input name="text" [(ngModel)]="searchParam.name" placeholder="search name" (keyup.enter)="searchName($event)"/>
+                        </nz-form-control>
+                      </nz-form-item>
+                </div>
+                <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24"></div>
+                <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24"  class="text-right p-0 m-b-10">
+                    <button (click)="getDataList()" nz-button [nzType]="'primary'"> <i nz-icon nzType="search"></i>Tìm kiếm</button>
+                    <button nz-button class="m-l-15" (click)="resetForm()"><i nz-icon nzType="close-circle" nzTheme="outline"></i>Làm mới</button>
+                </div>
+            </div>
+        </form>
+    </nz-card>
+    <app-card-table-wrap [tableTitle]="'Kết quả tìm kiếm'" (reload)="reloadTable()">
+        <app-ant-table
+          (selectedChange)="selectedChecked($event)"
+          [checkedCashArrayFromComment]="checkedCashArray"
+          (changePageSize)="changePageSize($event)"
+          (changePageNum)="getDataList($event)"
+          [tableConfig]="tableConfig"
+          [tableData]="dataList"
+        ></app-ant-table>
+        <ng-template #operationTpl let-id="id" let-sotienno="sotienno">
+            <span *appAuth="ActionCode.KhachhangEdit" class="operate-text">
+                <button nz-button nzType="primary" nzGhost (click)="edit(id)">Cập nhật</button>
+            </span>
+            <span *appAuth="ActionCode.KhachhangTattoan" class="operate-text">
+                <button nz-button nzType="primary" nzGhost (click)="tattoan(id,sotienno)">Tất toán</button>
+            </span>
+        </ng-template>
+    </app-card-table-wrap>
+
+</div>
+

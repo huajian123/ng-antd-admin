@@ -116,7 +116,7 @@
           [tableConfig]="tableConfig"
           [tableData]="dataList"
         ></app-ant-table>
-        <ng-template #operationTpl let-id="id" let-showBtn="showBtn">
+        <ng-template #operationTpl let-id="id" let-showBtn="showBtn" let-tongcuoc="tongcuoc" let-tongchiphi="tongchiphi">
           <span *appAuth="ActionCode.ChuyenEdit" class="operate-text">
             <button *ngIf="showBtn['btnUpdate']" nz-button nzType="primary" nzGhost (click)="edit(id)">Cập nhật</button>
           </span>
@@ -136,7 +136,7 @@
             <button *ngIf="showBtn['btnConfirmend']" nz-button nzType="primary" nzGhost (click)="confirmend(id)">Kết thúc chuyến hàng</button>
           </span>
           <span *ngIf="showBtn['labelShowInfo']">
-              Tổng cước: {{showBtn['tongcuoc']}} | Tổng chi phí: {{showBtn['tongchiphi']}}
+              TC: {{tongcuoc}} | CP: {{tongchiphi}}
           </span>
         </ng-template>
         <ng-template #Tltentai let-idtai="idtai">

@@ -19,6 +19,7 @@ export const listTrangthaichuyen = [
     { "value": 2, "lable":"Hoàn thành trả hàng"},
     { "value": 3, "lable":"Tính chi phí"},
     { "value": 4, "lable":"Kết thúc chuyến hàng"},
+    { "value": 5, "lable":"Hoàn thành chuyến hàng"},
 ]
 
 export const lstchiphi = [
@@ -110,6 +111,15 @@ export const ChiphichuyenAnt100UpdateList = 'chiphichuyen/chiphichuyenAnt100upda
 export const ChiphichuyenAnt100Create = 'chiphichuyen/chiphichuyenAnt100create';
 export const ChiphichuyenAnt100Delete = 'chiphichuyen/chiphichuyenAnt100delete';
 export const ChiphichuyenAnt100DeleteAll = 'chiphichuyen/chiphichuyenAnt100deleteAll';
+
+// khach hàng
+export const KhachhangAnt100GetAll = 'khachhang/khachhangAnt100getAll';
+export const KhachhangAnt100SearchParams = 'khachhang/khachhangAnt100searchParams';
+export const KhachhangAnt100Update = 'khachhang/khachhangAnt100update';
+export const KhachhangAnt100GetDetail = 'khachhang/khachhangAnt100getDetail';
+
+// nhatkykh
+export const NhatkykhAnt100GetAll = 'nhatkykh/nhatkykhAnt100getAll';
 
 
 
