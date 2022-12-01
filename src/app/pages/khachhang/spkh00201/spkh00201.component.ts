@@ -5,19 +5,24 @@ import { UrlDisplayId } from '@app/common/UrlDisplay';
 import { ActionCode } from '@app/config/actionCode';
 import { WebserviceService } from '@app/core/services/common/webservice.service';
 import { KhachhangDtoService } from '@app/core/services/http/khachhang/khachhang-dto.service';
-import { OptionsInterface } from '@app/core/services/types';
+import { NhatkykhService } from '@app/core/services/http/nhatkykh/nhatkykh.service';
+import { OptionsInterface, SearchCommonVO } from '@app/core/services/types';
 import { BaseComponent } from '@app/pages/system/base/base.component';
 import { MyTableConfig } from '@app/shared/components/ant-table/ant-table.component';
 import { PageHeaderType } from '@app/shared/components/page-header/page-header.component';
+import _ from 'lodash';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzDatePickerComponent } from 'ng-zorro-antd/date-picker';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
+import { finalize } from 'rxjs';
 import * as Const from "src/app/common/const";
 interface SearchParam {
+  iduser?: string;
   ngaybatdau: string | null;
   ngayketthuc: string | null;
+  trangthai : any; // 0 la no , 1  là trả
 }
 
 @Component({
@@ -56,7 +61,8 @@ export class Spkh00201Component extends BaseComponent implements OnInit {
     protected override  datePipe : DatePipe,
     public message: NzMessageService,
     private modalSrv: NzModalService,
-    private khdtoService: KhachhangDtoService
+    private khdtoService: KhachhangDtoService,
+    private dataService: NhatkykhService
   ) {
     super(webService,router,cdf,datePipe);
   }
@@ -67,6 +73,7 @@ export class Spkh00201Component extends BaseComponent implements OnInit {
   sotienno = 0;
   ngaybatdau : any;
   ngayketthuc : any;
+  status = '0';
   @ViewChild('endSoplnDate') endSoplnDate!: NzDatePickerComponent;
   disabledStartSoplnDate = (startValue: Date): boolean => {
     if (!startValue || !this.ngayketthuc) {
@@ -103,11 +110,13 @@ export class Spkh00201Component extends BaseComponent implements OnInit {
        this.idkhachhang = "";
        this.tenkhachhang = "";
        this.sotienno = 0;
+       this.status = '0'
     } else {
       this.btnshowmodalkh = true;
       this.idkhachhang = this.khdtoService.id;
       this.tenkhachhang = this.khdtoService.name;
       this.sotienno = this.khdtoService.sotienno;
+      this.status = '0';
     }
 
     // lay ngay giơ mặc chua
@@ -115,7 +124,38 @@ export class Spkh00201Component extends BaseComponent implements OnInit {
     this.cdf.markForCheck();
   }
 
-  getDataList(e?: NzTableQueryParams) {}
+  getDataList(e?: NzTableQueryParams) {
+    if (this.khdtoService.kbnflg === false) {
+      this.dataList = [];
+      this.tableLoading(false);
+    } else {
+      this.tableLoading(true);
+      this.searchParam.ngaybatdau = this.ngaybatdau;
+      this.searchParam.ngayketthuc = this.ngayketthuc;
+      this.searchParam.iduser = this.idkhachhang;
+      this.searchParam.trangthai =_.toNumber(this.status);
+      const params: SearchCommonVO<any> = {
+        pageSize: this.tableConfig.pageSize!,
+        pageNum: e?.pageIndex || this.tableConfig.pageIndex!,
+        filters: this.searchParam
+      };
+      this.dataService.getlists(params)
+      .pipe(
+        finalize(() => {
+          this.tableLoading(false);
+        })
+      )
+      .subscribe(data => {
+        console.log(data);
+        const { list, total, pageNum } = data;
+        this.dataList = [...list];
+        this.tableConfig.total = total!;
+        this.tableConfig.pageIndex = pageNum!;
+        this.tableLoading(false);
+        this.checkedCashArray = [...this.checkedCashArray];
+      })
+    }
+  }
   resetForm() {}
   fnFocusOutKhachhang() {}
   searchKhachhangClick() {}

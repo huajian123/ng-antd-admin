@@ -20,6 +20,8 @@ import { ModalBtnStatus } from '@app/widget/base-modal';
 import { MapPipe, MapSet, MapKeyType } from '@app/shared/pipes/map.pipe';
 import { DestroyService } from '@app/core/services/common/destory.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { KhachhangDtoService } from '@app/core/services/http/khachhang/khachhang-dto.service'
+import { Ultility } from '@core/services/common/Ultility.service'
 interface SearchParam {
   phongban_id: string;
   name: string;
@@ -55,6 +57,7 @@ export class Spkh00101Component extends BaseComponent implements OnInit {
   };
 
   @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<NzSafeAny>;
+  @ViewChild('linkidTpl', { static: true }) linkidTpl!: TemplateRef<NzSafeAny>;
 
   constructor(
     protected override webService: WebserviceService,
@@ -65,6 +68,8 @@ export class Spkh00101Component extends BaseComponent implements OnInit {
     private dataService: KhachhangService,
     private modalService: SubwindowKhachhangService,
     private modalSrv: NzModalService,
+    private dtoKhService: KhachhangDtoService,
+    private ultilityService: Ultility
   ) {
     super(webService,router,cdf,datePipe);
   }
@@ -195,6 +200,14 @@ export class Spkh00101Component extends BaseComponent implements OnInit {
     console.log("id: "+ id + "," +sotienno);
   }
 
+  getItem(id: string, sotienno: number,name: string) {
+      this.dtoKhService.kbnflg = true;
+      this.dtoKhService.id = id;
+      this.dtoKhService.sotienno = sotienno;
+      this.dtoKhService.name = name
+      this.ultilityService.refresh(Const.rootbase + UrlDisplayId.spkh00201)
+  }
+
   private initTable(): void {
     this.tableConfig = {
       showCheckbox: false,
@@ -203,6 +216,7 @@ export class Spkh00101Component extends BaseComponent implements OnInit {
           title: 'Mã khach hàng',
           field: 'id',
           width: 180,
+          tdTemplate: this.linkidTpl
         },
         {
           title: 'Tên khách hàng',

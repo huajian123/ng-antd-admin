@@ -36,6 +36,9 @@
                 <button nz-button nzType="primary" nzGhost (click)="tattoan(id,sotienno)">Tất toán</button>
             </span>
         </ng-template>
+        <ng-template #linkidTpl let-id="id" let-sotienno="sotienno" let-name="name">
+            <a nz-button nzType="link"  (click)="getItem(id,sotienno,name)"><span>{{id}}</span></a>
+        </ng-template>
     </app-card-table-wrap>
 
 </div>

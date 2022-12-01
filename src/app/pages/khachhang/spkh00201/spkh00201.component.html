@@ -71,6 +71,20 @@
                     </nz-form-item>
                 </div>
             </div>
+            <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24 }">
+                <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+                    <nz-form-item>
+                        <!-- status -->
+                        <nz-form-label [nzXXl]="9" [nzXl]="9" [nzLg]="9" [nzMd]="12" [nzSm]="24" [nzXs]="24">Trạng thái</nz-form-label>
+                        <nz-form-control [nzXXl]="12" [nzXl]="12" [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+                            <nz-radio-group id="status" name="status" [(ngModel)]="status">
+                                <label nz-radio nzValue="0"> Đơn hàng nợ </label>
+                                <label nz-radio nzValue="1"> Đơn hàng trả</label>
+                            </nz-radio-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+            </div>
         </form>
     </nz-card>
     <app-card-table-wrap [tableTitle]="'Kết quả tìm kiếm'" (reload)="reloadTable()">
