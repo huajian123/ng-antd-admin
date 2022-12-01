@@ -138,7 +138,14 @@ const fnEndOfDay = function EndOfDay(time: number): number {
   return endOfDay(time).getTime();
 };
 
+// weak-theme 转换为 weakTheme
+// https://blog.csdn.net/weixin_39238200/article/details/125665052
+const fnFormatToHump = function formatToHump(value: string): string {
+  return value.replace(/\-(\w)/g, (_, letter) => letter.toUpperCase());
+};
+
 export {
+  fnFormatToHump,
   fnGetReuseStrategyKeyFn,
   fnDecrypt,
   fnEncrypt,

@@ -6,6 +6,7 @@ import { IsNightKey, ThemeOptionsKey } from '@config/constant';
 import { ThemeSkinService } from '@core/services/common/theme-skin.service';
 import { WindowService } from '@core/services/common/window.service';
 import { SettingInterface, ThemeService } from '@store/common-store/theme.service';
+import { fnFormatToHump } from '@utils/tools';
 import { NzConfigService } from 'ng-zorro-antd/core/config';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
@@ -18,6 +19,9 @@ interface NormalModel {
 interface Theme extends NormalModel {
   key: 'dark' | 'light';
 }
+
+type SpecialTheme = 'color-weak' | 'grey-theme';
+type SpecialThemeHump = 'colorWeak' | 'greyTheme';
 
 interface Color extends NormalModel {
   key: string;
@@ -44,6 +48,7 @@ export class SettingDrawerComponent implements OnInit {
     mode: 'side',
     fixedTab: false,
     splitNav: true,
+    greyTheme: false,
     colorWeak: false,
     fixedLeftNav: true,
     fixedHead: true,
@@ -208,15 +213,16 @@ export class SettingDrawerComponent implements OnInit {
     this.setThemeOptions();
   }
 
-  // 修改色弱模式
-  changeWeakMode(e: boolean): void {
+  // 修改特殊主题，色弱主题，灰色主题
+  changeSpecialTheme(e: boolean, themeType: SpecialTheme): void {
     const name = this.doc.getElementsByTagName('html');
+    const theme = fnFormatToHump(themeType);
     if (e) {
-      this.rd2.addClass(name[0], 'color-weak');
+      this.rd2.addClass(name[0], themeType);
     } else {
-      this.rd2.removeClass(name[0], 'color-weak');
+      this.rd2.removeClass(name[0], themeType);
     }
-    this._themesOptions.colorWeak = e;
+    this._themesOptions[theme as SpecialThemeHump] = e;
     this.setThemeOptions();
   }
 
@@ -225,7 +231,13 @@ export class SettingDrawerComponent implements OnInit {
     this.themesOptions$.pipe(first()).subscribe(res => {
       this._themesOptions = res;
     });
-    this.changeWeakMode(this._themesOptions.colorWeak);
+
+    // 特殊模式主题变换（色弱模式，灰色模式）
+    (['grey-theme', 'color-weak'] as SpecialTheme[]).forEach(item => {
+      const specialTheme = fnFormatToHump(item);
+      this.changeSpecialTheme(this._themesOptions[specialTheme as SpecialThemeHump], item);
+    });
+
     this.modes.forEach(item => {
       item.isChecked = item.key === this._themesOptions.mode;
     });

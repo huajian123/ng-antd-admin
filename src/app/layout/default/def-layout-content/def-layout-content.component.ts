@@ -25,6 +25,7 @@ export class DefLayoutContentComponent implements OnInit {
     splitNav: false,
     fixedTab: false,
     colorWeak: false,
+    greyTheme: false,
     fixedHead: false,
     fixedLeftNav: false,
     hasTopArea: true,

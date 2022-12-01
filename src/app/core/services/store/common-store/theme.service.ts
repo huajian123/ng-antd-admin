@@ -6,6 +6,7 @@ export interface SettingInterface {
   color: string; // 主题色
   mode: 'side' | 'top' | 'mixi'; // 菜单模式（侧边模式，顶部模式，混合模式）
   colorWeak: boolean; // 色弱
+  greyTheme: boolean; // 灰色模式
   fixedHead: boolean; // 固定头部
   splitNav: boolean; // 是否分割菜单（在菜单模式为混合模式时才生效）
   fixedLeftNav: boolean; // 固定左侧菜单
@@ -27,6 +28,7 @@ export class ThemeService {
     color: '#1890FF',
     mode: 'side',
     colorWeak: false,
+    greyTheme: false,
     splitNav: false,
     fixedTab: true,
     fixedHead: true,

@@ -101,10 +101,18 @@ h1, h2, h3, h4, h5, h6 {
   visibility: hidden;
 }
 
+.grey-theme{
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  -ms-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+  filter: grayscale(100%);
+  filter: progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);
+}
+
 .color-weak {
   filter: invert(80%) !important;
 }
-
 
 .wrap {
   width: 980px;
