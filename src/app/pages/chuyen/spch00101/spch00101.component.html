@@ -11,7 +11,7 @@
                                 name="ngaybatdau"
                                 [nzDisabledDate]="disabledStartSoplnDate" 
                                 [nzFormat]="dateFormat" 
-                                [(ngModel)]="searchParam.ngaybatdau" 
+                                [(ngModel)]="ngaybatdau" 
                                 [nzPlaceHolder]="dateFormat"
                                 (nzOnOpenChange)="handleStartOpenSoplnChange($event)">
                             </nz-date-picker>
@@ -27,7 +27,7 @@
                                 #endSoplnDate
                                 [nzDisabledDate]="disabledEndSoplnDate" 
                                 [nzFormat]="dateFormat" 
-                                [(ngModel)]="searchParam.ngayketthuc" 
+                                [(ngModel)]="ngayketthuc" 
                                 [nzPlaceHolder]="dateFormat"
                                 (nzOnOpenChange)="handleEndOpenSoplnChange($event)">
                             </nz-date-picker>

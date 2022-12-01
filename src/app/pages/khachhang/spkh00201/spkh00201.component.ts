@@ -65,8 +65,8 @@ export class Spkh00201Component extends BaseComponent implements OnInit {
   idkhachhang = "";
   tenkhachhang = "";
   sotienno = 0;
-  ngaybatdau: string | null = null;
-  ngayketthuc: string | null = null;
+  ngaybatdau : any;
+  ngayketthuc : any;
   @ViewChild('endSoplnDate') endSoplnDate!: NzDatePickerComponent;
   disabledStartSoplnDate = (startValue: Date): boolean => {
     if (!startValue || !this.ngayketthuc) {
@@ -97,6 +97,8 @@ export class Spkh00201Component extends BaseComponent implements OnInit {
     // search chu ký nợ = 1. những nợ đã tất toán.
     // search có ghi chú là tất toán.
     if(this.khdtoService.kbnflg === false) {
+       this.ngaybatdau = this.getDate();
+       this.ngayketthuc = this.getDate();
        this.btnshowmodalkh = false;
        this.idkhachhang = "";
        this.tenkhachhang = "";

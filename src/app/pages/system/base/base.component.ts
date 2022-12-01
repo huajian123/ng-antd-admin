@@ -44,7 +44,7 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
     }
 
     getDate() {
-        let date = this.datePipe.transform(new Date(), 'dd/MM/yyyy')+"";
+        let date = this.datePipe.transform(new Date(), 'yyyy/MM/dd')+"";
         return date;
     }
 
@@ -52,7 +52,7 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
         if(d == null || d == '') {
             return '';
         }
-        let date = this.datePipe.transform(d, 'dd/MM/yyyy') + "";
+        let date = this.datePipe.transform(d, 'yyyy/MM/dd') + "";
         return date;
     }
 

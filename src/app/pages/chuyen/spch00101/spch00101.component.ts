@@ -27,8 +27,8 @@ import { UrlDisplayId } from '@app/common/UrlDisplay';
 import { SubwindowChiphiService } from '@app/widget/modal/subwindowchiphi/subwindow-chiphi.service';
 
 interface SearchParam {
-  ngaybatdau: string;
-  ngayketthuc: string;
+  ngaybatdau: string | null;
+  ngayketthuc: string | null;
   biensoxe: string;
   idtai : string;
   idphu : string;
@@ -152,6 +152,8 @@ export class Spch00101Component extends BaseComponent implements OnInit {
 
   getDataList(e?: NzTableQueryParams) {
     this.tableLoading(true);
+    this.searchParam.ngaybatdau = this.ngaybatdau;
+    this.searchParam.ngayketthuc = this.ngayketthuc;
     const params: SearchCommonVO<any> = {
       pageSize: this.tableConfig.pageSize!,
       pageNum: e?.pageIndex || this.tableConfig.pageIndex!,
