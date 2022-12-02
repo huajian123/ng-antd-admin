@@ -87,7 +87,7 @@
             </div>
         </form>
     </nz-card>
-    <app-card-table-wrap [tableTitle]="'Kết quả tìm kiếm'" (reload)="reloadTable()">
+    <app-card-table-wrap [tableTitle]="'Kết quả tìm kiếm'" (reload)="reloadTable()" [btnTpl]="tableBtns">
         <app-ant-table
           (selectedChange)="selectedChecked($event)"
           [checkedCashArrayFromComment]="checkedCashArray"
@@ -96,8 +96,28 @@
           [tableConfig]="tableConfig"
           [tableData]="dataList"
         ></app-ant-table>
-        <ng-template #operationTpl let-id="id" let-sotienno="sotienno">
-           
+        <ng-template #operationTpl let-id="id" let-showBtn="showBtn">
+            <span *appAuth="ActionCode.CtcnThanhtoan" class="operate-text">
+                <button *ngIf="!showBtn['btnthanhtoan']" nz-button nzType="primary" nzGhost (click)="thanhtoan(id)" [disabled]="showBtn['disabledBtnthanhtoan']">Thanh toán</button>
+            </span>
+            <span *appAuth="ActionCode.CtcnDuyetThanhtoan" class="operate-text">
+                <button *ngIf="!showBtn['btnduyet']" nz-button nzType="primary" nzGhost (click)="duyetthanhtoan(id)">Duyệt</button>
+            </span>
+        </ng-template>
+        <ng-template #noidungdonhangTpl let-idphieunhaphang="idphieunhaphang">
+            <ng-container *ngIf="idphieunhaphang">
+                <span>{{idphieunhaphang['noidungdonhang']}}</span>
+            </ng-container>
         </ng-template>
     </app-card-table-wrap>
+    <ng-template #tableBtns>
+        <button *appAuth="ActionCode.CtcnTattoan" (click)="tattoan()" nz-button nzType="primary" class="m-r-8" [disabled]="btntattoan">
+          <i nz-icon nzType="money-collect" nzTheme="twotone"></i>
+          Tất toán
+        </button>
+        <button *appAuth="ActionCode.CtcnThantoanmotphan" (click)="thanhtoanmotphan()" nz-button nzType="default" [disabled]="btnthanhtoanmotphan">
+          <i nz-icon nzType="money-collect" nzTheme="twotone"></i>
+          Thanh toán một phần
+        </button>
+    </ng-template>
 </div>

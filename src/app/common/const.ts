@@ -120,6 +120,9 @@ export const KhachhangAnt100GetDetail = 'khachhang/khachhangAnt100getDetail';
 
 // nhatkykh
 export const NhatkykhAnt100GetAll = 'nhatkykh/nhatkykhAnt100getAll';
+export const NhatkykhAnt100PostTattoan = 'nhatkykh/nhatkykhAnt100postTattoan';
+export const NhatkykhAnt100PostThanhtoanmotphan = 'nhatkykh/nhatkykhAnt100postThanhtoanmotphan';
+export const NhatkykhAnt100PostThanhtoan = 'nhatkykh/nhatkykhAnt100postThanhtoan';
 
 
 

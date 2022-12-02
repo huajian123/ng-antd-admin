@@ -18,11 +18,18 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { finalize } from 'rxjs';
 import * as Const from "src/app/common/const";
+
 interface SearchParam {
   iduser?: string;
   ngaybatdau: string | null;
   ngayketthuc: string | null;
   trangthai : any; // 0 la no , 1  là trả
+}
+
+class showbtnTable {
+   btnthanhtoan = false;
+   btnduyet = false;
+   disabledBtnthanhtoan = false;
 }
 
 @Component({
@@ -40,6 +47,7 @@ export class Spkh00201Component extends BaseComponent implements OnInit {
   checkedCashArray: any[] = [];
   ActionCode = ActionCode;
   @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<NzSafeAny>;
+  @ViewChild('noidungdonhangTpl', { static: true }) noidungdonhangTpl!: TemplateRef<NzSafeAny>;
 
   fnInit() {
     this.cdf.markForCheck();
@@ -68,6 +76,8 @@ export class Spkh00201Component extends BaseComponent implements OnInit {
   }
 
   btnshowmodalkh = false;
+  btntattoan = false;
+  btnthanhtoanmotphan = false;
   idkhachhang = "";
   tenkhachhang = "";
   sotienno = 0;
@@ -149,13 +159,91 @@ export class Spkh00201Component extends BaseComponent implements OnInit {
         console.log(data);
         const { list, total, pageNum } = data;
         this.dataList = [...list];
+        for (let element of this.dataList) {
+          let showbtn = this.showBtnTable(element.trangthai);
+          element['showBtn'] = showbtn;
+          if(element.ghichu == 'Đã thanh toán') {
+              element['showBtn'].disabledBtnthanhtoan = true;
+          }
+        }
         this.tableConfig.total = total!;
         this.tableConfig.pageIndex = pageNum!;
         this.tableLoading(false);
         this.checkedCashArray = [...this.checkedCashArray];
+        this.showbtn();
       })
     }
   }
+
+  // 
+  showbtn() {
+    if(this.dataList.length > 0 && this.khdtoService.sotienno > 0) {
+      this.btntattoan = false;
+      this.btnthanhtoanmotphan = false;
+    } else {
+      this.btntattoan = true;
+      this.btnthanhtoanmotphan = true;
+    }
+  }
+
+  // show btn table
+  showBtnTable(trangthai: number): showbtnTable {
+    let btn = new showbtnTable();
+    switch(trangthai) {
+      case 0 : {
+        btn.btnthanhtoan = false;
+        btn.btnduyet = true;
+      }; break;
+      case 1 : {
+        btn.btnthanhtoan = true;
+        btn.btnduyet = false;
+      }; break;
+      case 2 : {
+        btn.btnduyet = true;
+        btn.btnthanhtoan = true;
+      }
+    }
+    return btn;
+  }
+
+  // thanh toán một đơn hàng
+  thanhtoan(id: string) {
+
+  }
+
+  // duyet thanh toán
+  duyetthanhtoan(id: string) {
+
+  }
+
+  // tất toán tất cả các đơn hàng
+  tattoan() {
+    this.modalSrv.confirm({
+      nzTitle: 'Bạn có chắc chắn muốn Tất toán?',
+      nzContent: 'Nhấn OK để hoàn thành',
+      nzOnOk: () => {
+        this.tableLoading(true);
+        let req = {
+          iduser: this.khdtoService.id,
+          sotientra: this.khdtoService.sotienno
+        }
+        this.dataService.tatToan(req).pipe().subscribe(
+          () => {
+            this.khdtoService.sotienno = 0;
+            this.getDataList();
+            this.resetForm();
+          },
+          error => this.tableLoading(false)
+        );
+      }
+    })
+  }
+
+  // thanh toán các đơn hàng được chọn
+  thanhtoanmotphan() {
+
+  }
+
   resetForm() {}
   fnFocusOutKhachhang() {}
   searchKhachhangClick() {}
@@ -185,7 +273,7 @@ export class Spkh00201Component extends BaseComponent implements OnInit {
 
   private initTable(): void {
     this.tableConfig = {
-      showCheckbox: false,
+      showCheckbox: true,
       headers: [
         {
           title: 'Ngày',
@@ -202,6 +290,12 @@ export class Spkh00201Component extends BaseComponent implements OnInit {
           title: 'Số tiền',
           width: 120,
           field: 'sotien',
+        },
+        {
+          title: 'Nội dung đơn hàng',
+          width: 450,
+          field: 'idphieunhaphang',
+          tdTemplate: this.noidungdonhangTpl
         },
         {
           title: 'Hình thức thánh toán',
