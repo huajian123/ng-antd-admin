@@ -24,6 +24,7 @@ interface SearchParam {
   ngaybatdau: string | null;
   ngayketthuc: string | null;
   trangthai : any; // 0 la no , 1  là trả
+  ghichu: string;
 }
 
 class showbtnTable {
@@ -84,6 +85,7 @@ export class Spkh00201Component extends BaseComponent implements OnInit {
   ngaybatdau : any;
   ngayketthuc : any;
   status = '0';
+  phanloai = 'Nợ'; // 1 Nợ, 2 đã thanh toán, 3 tất toán
   @ViewChild('endSoplnDate') endSoplnDate!: NzDatePickerComponent;
   disabledStartSoplnDate = (startValue: Date): boolean => {
     if (!startValue || !this.ngayketthuc) {
@@ -144,6 +146,7 @@ export class Spkh00201Component extends BaseComponent implements OnInit {
       this.searchParam.ngayketthuc = this.ngayketthuc;
       this.searchParam.iduser = this.idkhachhang;
       this.searchParam.trangthai =_.toNumber(this.status);
+      this.searchParam.ghichu = this.phanloai;
       const params: SearchCommonVO<any> = {
         pageSize: this.tableConfig.pageSize!,
         pageNum: e?.pageIndex || this.tableConfig.pageIndex!,

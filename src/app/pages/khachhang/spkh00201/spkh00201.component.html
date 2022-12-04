@@ -84,6 +84,19 @@
                         </nz-form-control>
                     </nz-form-item>
                 </div>
+                <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+                    <nz-form-item>
+                        <!-- status -->
+                        <nz-form-label [nzXXl]="9" [nzXl]="9" [nzLg]="9" [nzMd]="12" [nzSm]="24" [nzXs]="24">Phân loại</nz-form-label>
+                        <nz-form-control [nzXXl]="15" [nzXl]="15" [nzLg]="15" [nzMd]="15" [nzSm]="24" [nzXs]="24">
+                            <nz-radio-group id="phanloai" name="phanloai" [(ngModel)]="phanloai">
+                                <label nz-radio nzValue="Nợ">Nợ </label>
+                                <label nz-radio nzValue="Đã thanh toán">Đã thanh toán</label>
+                                <label nz-radio nzValue="Tất toán">Tất toán</label>
+                            </nz-radio-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
             </div>
         </form>
     </nz-card>
