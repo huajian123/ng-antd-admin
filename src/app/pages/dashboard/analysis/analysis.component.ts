@@ -1,8 +1,16 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, NgZone, OnInit, TemplateRef, ViewChild } from '@angular/core';
 
 import { Chart } from '@antv/g2';
 import { Pie, RingProgress, TinyColumn, TinyArea, Progress } from '@antv/g2plot';
+import { Xe } from '@app/core/model/xe.model';
+import { XeService } from '@app/core/services/http/xe/xe.service';
+import { SearchCommonVO } from '@app/core/services/types';
+import { MyTableConfig } from '@app/shared/components/ant-table/ant-table.component';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { inNextTick } from 'ng-zorro-antd/core/util';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzTableQueryParams } from 'ng-zorro-antd/table';
+import { finalize } from 'rxjs';
 interface DataItem {
   name: string;
   chinese: number;
@@ -44,26 +52,12 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
   ];
 
   listOfColumn = [
-    {
-      title: 'Thứ háng',
-      compare: null,
-      priority: false
-    },
-    {
-      title: 'tìm từ khóa',
-      compare: (a: DataItem, b: DataItem) => a.chinese - b.chinese,
-      priority: 3
-    },
-    {
-      title: 'Số người dùng',
-      compare: (a: DataItem, b: DataItem) => a.math - b.math,
-      priority: 2
-    },
-    {
-      title: 'tăng hàng tuần',
-      compare: (a: DataItem, b: DataItem) => a.english - b.english,
-      priority: 1
-    }
+    {title: 'STT'},
+    {title: 'Avatar'},
+    {title: 'Biển số xe'},
+    {title: 'Trọng tải'},
+    {title: "Trạng thái"},
+    {title: "Vị trí hiện tại"},
   ];
   listOfData: DataItem[] = [
     {
@@ -100,7 +94,11 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
 
   date = null;
 
-  
+  @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<NzSafeAny>;
+  tableConfig!: MyTableConfig;
+  dataList: any[] = [];
+  checkedCashArray: any[] = [];
+
   onChange(result: Date): void {
     console.log('Selected Time: ', result);
   }
@@ -114,9 +112,18 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
   }
 
 
-  constructor(private cdr: ChangeDetectorRef, private ngZone: NgZone) {}
 
-  ngOnInit(): void {}
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private ngZone: NgZone,
+    public message: NzMessageService,
+    private xeService: XeService,
+    
+    ) {}
+
+  ngOnInit(): void {
+    this.getAllxe();
+  }
 
   initMinibar(): void {
     const data = this.miniBarData;
@@ -240,7 +247,7 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
       innerRadius: 0.64,
       meta: {
         value: {
-          formatter: v => `${v} ¥`
+          formatter: v => `${v} đ`
         }
       },
       label: {
@@ -283,6 +290,21 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
         this.initRing();
         // this.initMiniRing();
       });
+    });
+  }
+
+  getAllxe() {
+    const params: SearchCommonVO<any> = {
+      pageSize: 10,
+      pageNum: 1,
+      filters: {}
+    };
+    this.xeService
+    .getXes(params)
+    .pipe()
+    .subscribe(data => {
+      const { list } = data;
+      this.dataList = [...list];
     });
   }
 

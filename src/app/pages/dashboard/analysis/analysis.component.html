@@ -29,7 +29,7 @@
             </div>
           </div>
           <nz-divider class="m-0"></nz-divider>
-          <div class="card-footer"> doanh thu hàng ngày 12.423.000.000đ </div>
+          <div class="card-footer">doanh thu thàng 12.423.000.000đ </div>
         </nz-card>
       </div>
     </div>
@@ -37,7 +37,7 @@
       <div class="card-wrap">
         <nz-card [nzBodyStyle]="cardPadding" [nzBordered]="false">
           <div class="card-top">
-            <div class="title">Lượt xem</div>
+            <div class="title">Chuyến hàng</div>
             <div class="number">8.846</div>
             <i nz-icon nzType="info-circle" nzTheme="outline" nz-tooltip nzTooltipTitle="Mô tả chỉ số"></i>
           </div>
@@ -45,7 +45,7 @@
             <div id="miniArea"></div>
           </div>
           <nz-divider class="m-0"></nz-divider>
-          <div class="card-footer">Lượt ghé thăm hằng ngày 1,234 </div>
+          <div class="card-footer">Trung bình 100 chuyến/tháng </div>
         </nz-card>
       </div>
     </div>
@@ -53,8 +53,8 @@
       <div class="card-wrap">
         <nz-card [nzBodyStyle]="cardPadding" [nzBordered]="false">
           <div class="card-top">
-            <div class="title">Số lượng thanh toán</div>
-            <div class="number">6,560</div>
+            <div class="title">Khách hàng nợ hiện tại</div>
+            <div class="number">1.000.000.000đ</div>
             <i nz-icon nzType="info-circle" nzTheme="outline" nz-tooltip nzTooltipTitle="Mô tả chỉ số
             "></i>
           </div>
@@ -78,7 +78,7 @@
             <div id="progress"></div>
           </div>
           <nz-divider class="m-0"></nz-divider>
-          <div class="card-footer"> doanh thu hàng ngày 12,423đ </div>
+          <div class="card-footer"> Doanh thu hàng ngày 12,423đ </div>
         </nz-card>
       </div>
     </div>
@@ -87,14 +87,14 @@
   <section class="flow-wrap m-t-20">
     <nz-card [nzBordered]="true" [nzBodyStyle]="{ padding: 0 }">
       <nz-tabset [nzTabBarStyle]="{ padding: '0 10px', fontSize: '16px' }" [nzAnimated]="false" [nzTabBarExtraContent]="extraTemplate">
-        <nz-tab nzTitle="Bán hàng">
+        <nz-tab nzTitle="Biểu đồ doanh thu">
           <div nz-row>
             <div nz-col [nzXl]="17" [nzLg]="12" [nzMd]="13" [nzSm]="24" [nzXs]="24">
-              <h3 class="p-l-35">Xu hướng bán hàng</h3>
+              <h3 class="p-l-35">Xu hướng </h3>
               <div id="histogram"></div>
             </div>
             <div nz-col [nzXl]="7" [nzLg]="12" [nzMd]="11" [nzSm]="24" [nzXs]="24">
-              <h3 class="p-l-35 m-b-20">Xu hướng bán hàng</h3>
+              <h3 class="p-l-35 m-b-20">Xu hướng </h3>
               <div title="工专路 {{ i }} 号店" class="rank-list" *ngFor="let item of 7 | numberLoop; let i = index">
                 <div class="center">
                   <nz-badge [nzStyle]="{ background: i < 4 ? '#314659' : '#fafafa', color: i < 4 ? '#fff' : 'black' }" [nzCount]="i + 1"></nz-badge>
@@ -113,9 +113,8 @@
 
     <ng-template #extraTemplate>
       <nz-radio-group nzSize="small">
-        <label nz-radio-button nzValue="A">Hôm nay</label>
-        <label nz-radio-button nzValue="B">Tuần này</label>
         <label nz-radio-button nzValue="C">Tháng này</label>
+        <label nz-radio-button nzValue="A">Năm này</label>
         <label nz-radio-button nzValue="D">Hàng năm</label>
       </nz-radio-group>
       <nz-range-picker class="m-l-20"></nz-range-picker>
@@ -125,12 +124,12 @@
 
   <section class="hot-search-pipe-wrap m-t-20" nz-row [nzGutter]="[16, 0]">
     <div class="hot-search-wrap" nz-col nzSpan="12" [nzXl]="12" [nzXXl]="12" [nzLg]="12" [nzMd]="24" [nzSm]="24" [nzXs]="24">
-      <nz-card [nzBodyStyle]="{ height: '500px' }" [nzExtra]="hotExtra" [nzTitle]="'Các tìm kiếm phổ biến trực tuyến'">
+      <nz-card [nzBodyStyle]="{ height: '500px' }" [nzExtra]="hotExtra" [nzTitle]="'Danh sách trạng thái xe tải'">
         <div class="search-wrap" nz-row>
           <div class="search-block" nz-col [nzXl]="12" [nzXXl]="12" [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24">
             <div>
               <div>
-                <span nz-typography nzType="secondary">Tìm kiếm người dùng <i nz-icon nzType="info-circle" nzTheme="outline" nz-tooltip nzTooltipTitle="Mô tả chỉ số"></i></span>
+                <span nz-typography nzType="secondary">Xe hoạt động nhiều nhất <i nz-icon nzType="info-circle" nzTheme="outline" nz-tooltip nzTooltipTitle="Mô tả chỉ số"></i></span>
               </div>
               <div
                 ><h3 class="d-i-b m-r-30" nz-typography>12,321</h3><span>17.1 <i nz-icon nzType="caret-up" style="color: red; font-size: 12px" nzTheme="outline"></i></span
@@ -141,7 +140,7 @@
           <div class="search-block" nz-col [nzXl]="12" [nzXXl]="12" [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24">
             <div>
               <div>
-                <span nz-typography nzType="secondary"> Số lượng tìm kiếm trên đầu người <i nz-icon nzType="info-circle" nzTheme="outline" nz-tooltip nzTooltipTitle="Mô tả chỉ số"></i> </span>
+                <span nz-typography nzType="secondary"> Xe doanh số cao nhất <i nz-icon nzType="info-circle" nzTheme="outline" nz-tooltip nzTooltipTitle="Mô tả chỉ số"></i> </span>
               </div>
               <div
                 ><h3 class="d-i-b m-r-30" nz-typography>12,321</h3><span>17.1 <i nz-icon nzType="caret-up" style="color: red; font-size: 12px" nzTheme="outline"></i></span
@@ -152,15 +151,24 @@
           <nz-table class="m-t-25" nzSize="small" #sortTable [nzData]="listOfData" nzTableLayout="fixed">
             <thead>
               <tr>
-                <th *ngFor="let column of listOfColumn" [nzSortFn]="column.compare" [nzSortPriority]="column.priority">{{ column.title }}</th>
+                <th *ngFor="let column of listOfColumn">{{ column.title }}</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let data of sortTable.data">
-                <td>{{ data.name }}</td>
-                <td>{{ data.chinese }}</td>
-                <td>{{ data.math }}</td>
-                <td>{{ data.english }}</td>
+              <tr *ngFor="let data of dataList; let i = index">
+                <td>{{ (i+1) }}</td>
+                <td>
+                  <nz-avatar nzIcon="car" nzSrc="{{data.anhdaidien}}"></nz-avatar>
+                </td>
+                <td>{{ data.biensoxe }}</td>
+                <td>{{ data.trongtai }}</td> 
+                <td>
+                  <span *ngIf="data.trangthai; else free">Hoạt động</span>
+                  <ng-template #free>
+                      <span>Free</span>
+                  </ng-template>
+                </td> 
+                <td>{{ data.vitrihientai }}</td> 
               </tr>
             </tbody>
           </nz-table>

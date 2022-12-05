@@ -33,7 +33,7 @@
                 <button nz-button nzType="primary" nzGhost (click)="edit(id)">Cập nhật</button>
             </span>
             <span *appAuth="ActionCode.KhachhangTattoan" class="operate-text">
-                <button nz-button nzType="primary" nzGhost (click)="tattoan(id,sotienno)">Tất toán</button>
+                <button *ngIf="sotienno > 0" nz-button nzType="primary" nzGhost (click)="tattoan(id,sotienno)">Tất toán</button>
             </span>
         </ng-template>
         <ng-template #linkidTpl let-id="id" let-sotienno="sotienno" let-name="name">

@@ -79,6 +79,7 @@ export class Spkh00201Component extends BaseComponent implements OnInit {
   btnshowmodalkh = false;
   btntattoan = false;
   btnthanhtoanmotphan = false;
+  btnsearch = false;
   idkhachhang = "";
   tenkhachhang = "";
   sotienno = 0;
@@ -117,18 +118,24 @@ export class Spkh00201Component extends BaseComponent implements OnInit {
     // search có ghi chú là tất toán.
     if(this.khdtoService.kbnflg === false) {
        this.ngaybatdau = this.getDate();
-       this.ngayketthuc = this.getDate();
+       this.ngayketthuc = null;
        this.btnshowmodalkh = false;
        this.idkhachhang = "";
        this.tenkhachhang = "";
        this.sotienno = 0;
        this.status = '0'
+       this.btntattoan = true;
+       this.btnthanhtoanmotphan = true;
+       this.btnsearch = true;
     } else {
       this.btnshowmodalkh = true;
       this.idkhachhang = this.khdtoService.id;
       this.tenkhachhang = this.khdtoService.name;
       this.sotienno = this.khdtoService.sotienno;
       this.status = '0';
+      this.btntattoan = false;
+      this.btnthanhtoanmotphan = false;
+      this.btnsearch = false;
     }
 
     // lay ngay giơ mặc chua
@@ -142,8 +149,8 @@ export class Spkh00201Component extends BaseComponent implements OnInit {
       this.tableLoading(false);
     } else {
       this.tableLoading(true);
-      this.searchParam.ngaybatdau = this.ngaybatdau;
-      this.searchParam.ngayketthuc = this.ngayketthuc;
+      this.searchParam.ngaybatdau = this.formatDate(this.ngaybatdau);
+      this.searchParam.ngayketthuc = this.formatDate(this.ngayketthuc);
       this.searchParam.iduser = this.idkhachhang;
       this.searchParam.trangthai =_.toNumber(this.status);
       this.searchParam.ghichu = this.phanloai;
@@ -210,8 +217,26 @@ export class Spkh00201Component extends BaseComponent implements OnInit {
   }
 
   // thanh toán một đơn hàng
-  thanhtoan(id: string) {
-
+  thanhtoan(pnh: any) {
+     let req = {
+       "iduser": this.khdtoService.id,
+       "idphieunhaphang": pnh['_id']
+     }
+     this.tableConfig.loading = true;
+     this.dataService.thanhtoan(req).pipe(
+        finalize(() => {
+          this.tableLoading(false);
+        })
+     )
+     .subscribe(res => {
+        if (res == 1) {
+          this.message.info("Thanh Toán thành công !");
+        } else {
+          this.message.info(" Phát sinh lỗi trong quá trình thanh toán");
+        }
+        this.getDataList();
+        this.tableLoading(false);
+     })
   }
 
   // duyet thanh toán
@@ -244,7 +269,35 @@ export class Spkh00201Component extends BaseComponent implements OnInit {
 
   // thanh toán các đơn hàng được chọn
   thanhtoanmotphan() {
-
+    let listIdPN = [];
+    for(let element of this.dataList) {
+      if(element['_checked'] == true) {
+        listIdPN.push(element['idphieunhaphang']['_id']);
+      }
+    }
+    if(listIdPN.length == 0) {
+      this.message.info(" Vùi lòng chọn ít nhất một đơn hàng để thanh toán");
+      return;
+    }
+    let req = {
+      "iduser": this.khdtoService.id,
+      "listidpn": listIdPN
+    }
+    this.tableLoading(true);
+    this.dataService.thanhtoanmotphan(req).pipe(
+      finalize(() => {
+        this.tableLoading(false);
+      })
+    )
+    .subscribe(res => {
+      if(res == 1) {
+        this.message.info("Thực hiện thành công !");
+      } else {
+        this.message.info("không thể thanh toán !");
+      }
+      this.getDataList();
+      this.tableLoading(false);
+    })
   }
 
   resetForm() {}

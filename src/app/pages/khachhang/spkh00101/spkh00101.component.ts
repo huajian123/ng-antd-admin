@@ -22,6 +22,7 @@ import { DestroyService } from '@app/core/services/common/destory.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { KhachhangDtoService } from '@app/core/services/http/khachhang/khachhang-dto.service'
 import { Ultility } from '@core/services/common/Ultility.service'
+import { NhatkykhService } from '@app/core/services/http/nhatkykh/nhatkykh.service';
 interface SearchParam {
   phongban_id: string;
   name: string;
@@ -69,7 +70,8 @@ export class Spkh00101Component extends BaseComponent implements OnInit {
     private modalService: SubwindowKhachhangService,
     private modalSrv: NzModalService,
     private dtoKhService: KhachhangDtoService,
-    private ultilityService: Ultility
+    private ultilityService: Ultility,
+    private nhatkykhService: NhatkykhService
   ) {
     super(webService,router,cdf,datePipe);
   }
@@ -184,20 +186,23 @@ export class Spkh00101Component extends BaseComponent implements OnInit {
       nzTitle: 'Bạn có chắc chắn muốn tất toán không?',
       nzContent: 'Nhấn OK để hoàn thành việc tất toán',
       nzOnOk: () => {
-       // this.tableLoading(true);
-        // this.dataService.deleteChuyen(id).subscribe(
-        //   () => {
-        //     if (this.dataList.length === 1) {
-        //       this.tableConfig.pageIndex--;
-        //     }
-        //     this.getDataList();
-        //     this.resetForm();
-        //   },
-        //   error => this.tableLoading(false)
-        // );
+        this.tableLoading(true);
+        let req = {
+          iduser: id,
+          sotientra: sotienno
+        }
+        this.nhatkykhService.tatToan(req).subscribe(
+          () => {
+            if (this.dataList.length === 1) {
+              this.tableConfig.pageIndex--;
+            }
+            this.getDataList();
+            this.resetForm();
+          },
+          error => this.tableLoading(false)
+        );
       }
     });
-    console.log("id: "+ id + "," +sotienno);
   }
 
   getItem(id: string, sotienno: number,name: string) {
@@ -213,7 +218,7 @@ export class Spkh00101Component extends BaseComponent implements OnInit {
       showCheckbox: false,
       headers: [
         {
-          title: 'Mã khach hàng',
+          title: 'Mã khách hàng',
           field: 'id',
           width: 180,
           tdTemplate: this.linkidTpl

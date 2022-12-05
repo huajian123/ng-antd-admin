@@ -152,8 +152,8 @@ export class Spch00101Component extends BaseComponent implements OnInit {
 
   getDataList(e?: NzTableQueryParams) {
     this.tableLoading(true);
-    this.searchParam.ngaybatdau = this.ngaybatdau;
-    this.searchParam.ngayketthuc = this.ngayketthuc;
+    this.searchParam.ngaybatdau = this.formatDate(this.ngaybatdau);
+    this.searchParam.ngayketthuc = this.formatDate(this.ngayketthuc);
     const params: SearchCommonVO<any> = {
       pageSize: this.tableConfig.pageSize!,
       pageNum: e?.pageIndex || this.tableConfig.pageIndex!,
