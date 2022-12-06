@@ -8,7 +8,11 @@
 
   <div class="m-t-15">
     <ng-template #noResult>
-      <nz-empty nzNotFoundImage="simple"></nz-empty>
+      <nz-empty [nzNotFoundContent]="contentTpl">
+        <ng-template #contentTpl>
+          <span>请输入菜单名称进行搜索</span>
+        </ng-template>
+      </nz-empty>
     </ng-template>
     <ul *ngIf="resultListShow.length > 0; else noResult">
       <li
