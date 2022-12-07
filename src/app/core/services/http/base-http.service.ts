@@ -27,7 +27,7 @@ export interface ActionResult<T> {
   providedIn: 'root'
 })
 export class BaseHttpService {
-  uri = "http://localhost:3000/";
+  uri = "http://45.76.180.157:3000/";
 
   protected constructor(public http: HttpClient, public message: NzMessageService) {
     this.uri = environment.production ? localUrl : '/site/api/';
