@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { Chart } from '@antv/g2';
 import { Pie, RingProgress, TinyColumn, TinyArea, Progress } from '@antv/g2plot';
 import { UrlDisplayId } from '@app/common/UrlDisplay';
-import { Xe } from '@app/core/model/xe.model';
 import { WebserviceService } from '@app/core/services/common/webservice.service';
 import { CommonService } from '@app/core/services/http/common/common.service';
 import { XeService } from '@app/core/services/http/xe/xe.service';
@@ -16,8 +15,6 @@ import _ from 'lodash';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { inNextTick } from 'ng-zorro-antd/core/util';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { NzTableQueryParams } from 'ng-zorro-antd/table';
-import { finalize } from 'rxjs';
 
 interface DataItem {
   name: string;
@@ -140,7 +137,7 @@ export class AnalysisComponent extends BaseComponent implements OnInit, AfterVie
   constructor(
     protected override webService: WebserviceService,
     protected override router: Router,
-    protected cdr :  ChangeDetectorRef,
+    protected  cdr :  ChangeDetectorRef,
     protected override  datePipe : DatePipe,
     private ngZone: NgZone,
     public message: NzMessageService,
@@ -240,6 +237,95 @@ export class AnalysisComponent extends BaseComponent implements OnInit, AfterVie
     chart.render();
   }
 
+  initChiphi(): void {
+    const chart = new Chart({
+      container: 'chiphi',
+      autoFit: true,
+      height: 350,
+      padding: [40, 40, 32, 72]
+    });
+    chart.data(this.lstdatachiphi);
+    chart.scale('value', {
+      nice: true
+    });
+    chart.axis('type', {
+      tickLine: null
+    });
+
+    chart.axis('value', {
+      label: {
+        formatter: val => {
+          return +val;
+        }
+      }
+    });
+
+    chart.tooltip({
+      showMarkers: false
+    });
+    chart.interaction('element-active');
+
+    chart.legend(false);
+    chart
+      .interval()
+      .position('type*value')
+      .color('type', val => {
+        if (val === '10-30分' || val === '30+分') {
+          return '#ff4d4f';
+        }
+        return '#2194ff';
+      })
+      .label('value', {
+        offset: 10
+      });
+    chart.render();
+  }
+
+  initLoinhuan(): void {
+    const chart = new Chart({
+      container: 'loinhuan',
+      autoFit: true,
+      height: 350,
+      padding: [40, 40, 32, 72]
+    });
+    chart.data(this.lstdataloinhuan);
+    chart.scale('value', {
+      nice: true
+    });
+    chart.axis('type', {
+      tickLine: null
+    });
+
+    chart.axis('value', {
+      label: {
+        formatter: val => {
+          return +val;
+        }
+      }
+    });
+
+    chart.tooltip({
+      showMarkers: false
+    });
+    chart.interaction('element-active');
+
+    chart.legend(false);
+    chart
+      .interval()
+      .position('type*value')
+      .color('type', val => {
+        if (val === '10-30分' || val === '30+分') {
+          return '#ff4d4f';
+        }
+        return '#2194ff';
+      })
+      .label('value', {
+        offset: 10
+      });
+    chart.render();
+    
+  }
+
   initSearchArea(): void {
     const data = this.miniAreaData;
     const tinyArea = new TinyArea('searchUserChart', {
@@ -315,7 +401,6 @@ export class AnalysisComponent extends BaseComponent implements OnInit, AfterVie
         this.initMinibar();
         this.initMiniArea();
         this.initProgress();
-        
         this.initSearchArea();
         this.initSearchAvgArea();
         this.initRing();
@@ -367,9 +452,13 @@ export class AnalysisComponent extends BaseComponent implements OnInit, AfterVie
            type : element['Thang'],
            value: element['loinhuan']
          }
-         this.lstdatachiphi.push(this.itemObjloinhuan);
+         this.lstdataloinhuan.push(this.itemObjloinhuan);
        }
+       this.initChiphi();
+       this.initLoinhuan();
        this.initDoanhthu();
+
+       this.cdr.markForCheck();
      })
   }
 
