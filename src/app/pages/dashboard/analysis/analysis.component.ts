@@ -1,21 +1,34 @@
+import { DatePipe } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, NgZone, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Chart } from '@antv/g2';
 import { Pie, RingProgress, TinyColumn, TinyArea, Progress } from '@antv/g2plot';
+import { UrlDisplayId } from '@app/common/UrlDisplay';
 import { Xe } from '@app/core/model/xe.model';
+import { WebserviceService } from '@app/core/services/common/webservice.service';
+import { CommonService } from '@app/core/services/http/common/common.service';
 import { XeService } from '@app/core/services/http/xe/xe.service';
 import { SearchCommonVO } from '@app/core/services/types';
+import { BaseComponent } from '@app/pages/system/base/base.component';
 import { MyTableConfig } from '@app/shared/components/ant-table/ant-table.component';
+import _ from 'lodash';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { inNextTick } from 'ng-zorro-antd/core/util';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { finalize } from 'rxjs';
+
 interface DataItem {
   name: string;
   chinese: number;
   math: number;
   english: number;
+}
+
+interface OjbChart {
+  type: string;
+  value: number;
 }
 
 @Component({
@@ -24,13 +37,26 @@ interface DataItem {
   styleUrls: ['./analysis.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AnalysisComponent implements OnInit, AfterViewInit {
+export class AnalysisComponent extends BaseComponent implements OnInit, AfterViewInit {
+  lstdatadoanhthu: OjbChart[] = [];
+  lstdatachiphi: OjbChart[] = [];
+  lstdataloinhuan: OjbChart[] = [];
+  itemObjdoanhthu!: OjbChart;
+  itemObjchiphi!: OjbChart;
+  itemObjloinhuan!: OjbChart;
+  fnInit() {
+    this.cdr.markForCheck();
+  }
+  destroy() {
+
+  }
+  DisplayScreenID: UrlDisplayId = UrlDisplayId.Analysis;
   cardPadding = { padding: '20px 24px 8px' };
   miniBarData = [497, 666, 219, 269, 274, 337, 81, 497, 666, 219, 269];
   miniAreaData = [264, 274, 284, 294, 284, 274, 264, 264, 274, 264, 264, 264, 284, 264, 254, 264, 244, 340, 264, 243, 226, 192];
   histogramData = [
-    { type: 'Tháng 1', value: 769 },
-    { type: 'Tháng 2', value: 769 },
+    { type: 'Tháng 1', value: -7069 },
+    { type: 'Tháng 2', value: 7069 },
     { type: 'Tháng 3', value: 861 },
     { type: 'Tháng 4', value: 442 },
     { type: 'Tháng 5', value: 555 },
@@ -111,18 +137,23 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
     console.log('onCalendarChange', result);
   }
 
-
-
   constructor(
-    private cdr: ChangeDetectorRef,
+    protected override webService: WebserviceService,
+    protected override router: Router,
+    protected cdr :  ChangeDetectorRef,
+    protected override  datePipe : DatePipe,
     private ngZone: NgZone,
     public message: NzMessageService,
     private xeService: XeService,
+    private commonService: CommonService,
     
-    ) {}
+    ) {
+      super(webService,router,cdr,datePipe);
+    }
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
     this.getAllxe();
+    this.getListthongketaichinh();
   }
 
   initMinibar(): void {
@@ -165,14 +196,14 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
     progress.render();
   }
 
-  initHistogram(): void {
+  initDoanhthu(): void {
     const chart = new Chart({
-      container: 'histogram',
+      container: 'doanhthu',
       autoFit: true,
-      height: 295,
+      height: 350,
       padding: [40, 40, 32, 72]
     });
-    chart.data(this.histogramData);
+    chart.data(this.lstdatadoanhthu);
     chart.scale('value', {
       nice: true
     });
@@ -284,11 +315,12 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
         this.initMinibar();
         this.initMiniArea();
         this.initProgress();
-        this.initHistogram();
+        
         this.initSearchArea();
         this.initSearchAvgArea();
         this.initRing();
         // this.initMiniRing();
+        
       });
     });
   }
@@ -307,5 +339,40 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
       this.dataList = [...list];
     });
   }
+
+  getListthongketaichinh(nam?: number) {
+     let date =new Date();
+     let namhientai = date.getFullYear();
+     let n = nam || namhientai;
+     let req = {
+       nam : n
+     }
+     this.commonService
+     .listtaichinh(req)
+     .pipe()
+     .subscribe(data => {
+       console.log(data);
+       for(let element of data) {
+         this.itemObjdoanhthu = {
+           type : element['Thang'],
+           value: element['tongdoanhthu']
+         }
+         this.lstdatadoanhthu.push(this.itemObjdoanhthu)
+         this.itemObjchiphi = {
+           type : element['Thang'],
+           value: element['tongchiphi']
+         }
+         this.lstdatachiphi.push(this.itemObjchiphi)
+         this.itemObjloinhuan = {
+           type : element['Thang'],
+           value: element['loinhuan']
+         }
+         this.lstdatachiphi.push(this.itemObjloinhuan);
+       }
+       this.initDoanhthu();
+     })
+  }
+
+
 
 }

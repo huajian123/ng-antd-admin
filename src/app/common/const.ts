@@ -34,6 +34,9 @@ export const lstchiphi = [
 
 export const rootbase = '/default/';
 
+//common
+export const CommonAnt100Listtaichinh = "common/commonAnt100Listloinhanthang";
+
 //role
 export const Ant100SearchAllRole = "role/ant100SearchAllRole";
 export const Ant100GetSearchAllRole = "role/ant100GetSearchAllRole";
