@@ -1,5 +1,5 @@
-import { DatePipe } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, NgZone, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { DatePipe, DOCUMENT } from '@angular/common';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, NgZone, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Chart } from '@antv/g2';
@@ -51,19 +51,20 @@ export class AnalysisComponent extends BaseComponent implements OnInit, AfterVie
   cardPadding = { padding: '20px 24px 8px' };
   miniBarData = [497, 666, 219, 269, 274, 337, 81, 497, 666, 219, 269];
   miniAreaData = [264, 274, 284, 294, 284, 274, 264, 264, 274, 264, 264, 264, 284, 264, 254, 264, 244, 340, 264, 243, 226, 192];
+  
   histogramData = [
-    { type: 'Tháng 1', value: -7069 },
-    { type: 'Tháng 2', value: 7069 },
-    { type: 'Tháng 3', value: 861 },
-    { type: 'Tháng 4', value: 442 },
-    { type: 'Tháng 5', value: 555 },
-    { type: 'Tháng 6', value: 439 },
-    { type: 'Tháng 7', value: 590 },
-    { type: 'Tháng 8', value: 434 },
-    { type: 'Tháng 9', value: 843 },
-    { type: 'Tháng 10', value: 840 },
-    { type: 'Tháng 11', value: 769 },
-    { type: 'Tháng 12', value: 769 }
+    { type: 'Tháng 1', value: 0 },
+    { type: 'Tháng 2', value: 0 },
+    { type: 'Tháng 3', value: 0 },
+    { type: 'Tháng 4', value: 0 },
+    { type: 'Tháng 5', value: 0 },
+    { type: 'Tháng 6', value: 0 },
+    { type: 'Tháng 7', value: 0 },
+    { type: 'Tháng 8', value: 0 },
+    { type: 'Tháng 9', value: 0 },
+    { type: 'Tháng 10', value: 0 },
+    { type: 'Tháng 11', value: 0 },
+    { type: 'Tháng 12', value: 0 }
   ];
   ringData = [
     { type: 'Loại 1', value: 27 },
@@ -82,38 +83,6 @@ export class AnalysisComponent extends BaseComponent implements OnInit, AfterVie
     {title: "Trạng thái"},
     {title: "Vị trí hiện tại"},
   ];
-  listOfData: DataItem[] = [
-    {
-      name: 'John Brown',
-      chinese: 98,
-      math: 60,
-      english: 70
-    },
-    {
-      name: 'John Brown',
-      chinese: 98,
-      math: 60,
-      english: 70
-    },
-    {
-      name: 'Jim Green',
-      chinese: 98,
-      math: 66,
-      english: 89
-    },
-    {
-      name: 'Joe Black',
-      chinese: 98,
-      math: 90,
-      english: 70
-    },
-    {
-      name: 'Jim Red',
-      chinese: 88,
-      math: 99,
-      english: 89
-    }
-  ];
 
   date = null;
 
@@ -121,6 +90,7 @@ export class AnalysisComponent extends BaseComponent implements OnInit, AfterVie
   tableConfig!: MyTableConfig;
   dataList: any[] = [];
   checkedCashArray: any[] = [];
+  radioBieudo = "1";
 
   onChange(result: Date): void {
     console.log('Selected Time: ', result);
@@ -143,7 +113,7 @@ export class AnalysisComponent extends BaseComponent implements OnInit, AfterVie
     public message: NzMessageService,
     private xeService: XeService,
     private commonService: CommonService,
-    
+    @Inject(DOCUMENT) private document: any
     ) {
       super(webService,router,cdr,datePipe);
     }
@@ -193,14 +163,16 @@ export class AnalysisComponent extends BaseComponent implements OnInit, AfterVie
     progress.render();
   }
 
-  initDoanhthu(): void {
+  initDoanhthu(lst:any): void {
+    
     const chart = new Chart({
       container: 'doanhthu',
       autoFit: true,
       height: 350,
       padding: [40, 40, 32, 72]
     });
-    chart.data(this.lstdatadoanhthu);
+
+    chart.data(lst);
     chart.scale('value', {
       nice: true
     });
@@ -237,93 +209,13 @@ export class AnalysisComponent extends BaseComponent implements OnInit, AfterVie
     chart.render();
   }
 
-  initChiphi(): void {
-    const chart = new Chart({
-      container: 'chiphi',
-      autoFit: true,
-      height: 350,
-      padding: [40, 40, 32, 72]
-    });
-    chart.data(this.lstdatachiphi);
-    chart.scale('value', {
-      nice: true
-    });
-    chart.axis('type', {
-      tickLine: null
-    });
-
-    chart.axis('value', {
-      label: {
-        formatter: val => {
-          return +val;
-        }
-      }
-    });
-
-    chart.tooltip({
-      showMarkers: false
-    });
-    chart.interaction('element-active');
-
-    chart.legend(false);
-    chart
-      .interval()
-      .position('type*value')
-      .color('type', val => {
-        if (val === '10-30分' || val === '30+分') {
-          return '#ff4d4f';
-        }
-        return '#2194ff';
-      })
-      .label('value', {
-        offset: 10
-      });
-    chart.render();
-  }
-
-  initLoinhuan(): void {
-    const chart = new Chart({
-      container: 'loinhuan',
-      autoFit: true,
-      height: 350,
-      padding: [40, 40, 32, 72]
-    });
-    chart.data(this.lstdataloinhuan);
-    chart.scale('value', {
-      nice: true
-    });
-    chart.axis('type', {
-      tickLine: null
-    });
-
-    chart.axis('value', {
-      label: {
-        formatter: val => {
-          return +val;
-        }
-      }
-    });
-
-    chart.tooltip({
-      showMarkers: false
-    });
-    chart.interaction('element-active');
-
-    chart.legend(false);
-    chart
-      .interval()
-      .position('type*value')
-      .color('type', val => {
-        if (val === '10-30分' || val === '30+分') {
-          return '#ff4d4f';
-        }
-        return '#2194ff';
-      })
-      .label('value', {
-        offset: 10
-      });
-    chart.render();
-    
+  changeBieudo($event:any) {
+    this.document.getElementById("doanhthu").innerHTML = "";
+    switch($event) {
+      case "1" : this.initDoanhthu(this.lstdatadoanhthu);break;
+      case "2" : this.initDoanhthu(this.lstdatachiphi);break;
+      case "3" : this.initDoanhthu(this.lstdataloinhuan);
+    }
   }
 
   initSearchArea(): void {
@@ -454,10 +346,7 @@ export class AnalysisComponent extends BaseComponent implements OnInit, AfterVie
          }
          this.lstdataloinhuan.push(this.itemObjloinhuan);
        }
-       this.initChiphi();
-       this.initLoinhuan();
-       this.initDoanhthu();
-
+       this.initDoanhthu(this.lstdatadoanhthu);
        this.cdr.markForCheck();
      })
   }

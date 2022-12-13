@@ -88,7 +88,7 @@
     <nz-card [nzBordered]="true" [nzBodyStyle]="{ padding: 0 }">
       <nz-tabset [nzTabBarStyle]="{ padding: '0 10px', fontSize: '16px' }" [nzAnimated]="false" [nzTabBarExtraContent]="extraTemplate">
         
-        <nz-tab nzTitle="Biểu đồ doanh thu">
+        <nz-tab nzTitle="Biểu đồ">
           <div nz-row>
             <div nz-col [nzXl]="17" [nzLg]="12" [nzMd]="13" [nzSm]="24" [nzXs]="24">
               <h3 class="p-l-35">Xu hướng</h3>
@@ -106,52 +106,14 @@
             </div>
           </div>
         </nz-tab>
-
-        <nz-tab nzTitle="Biểu đồ chi phí">
-          <div nz-row>
-            <div nz-col [nzXl]="17" [nzLg]="12" [nzMd]="13" [nzSm]="24" [nzXs]="24">
-              <h3 class="p-l-35">Xu hướng </h3>
-              <div id="chiphi"></div>
-            </div>
-            <div nz-col [nzXl]="7" [nzLg]="12" [nzMd]="11" [nzSm]="24" [nzXs]="24">
-              <h3 class="p-l-35 m-b-20">Xu hướng chi phí </h3>
-              <div title="工专路 {{ i }} 号店" class="rank-list" *ngFor="let item of 7 | numberLoop; let i = index">
-                <div class="center">
-                  <nz-badge [nzStyle]="{ background: i < 4 ? '#314659' : '#fafafa', color: i < 4 ? '#fff' : 'black' }" [nzCount]="i + 1"></nz-badge>
-                  <span class="m-l-5">Đường công nghiệp {{ i }} </span>
-                </div>
-                <div>323,234</div>
-              </div>
-            </div>
-          </div>
-        </nz-tab>
-
-        <nz-tab nzTitle="Biểu đồ lợi nhuận">
-          <div nz-row>
-            <div nz-col [nzXl]="17" [nzLg]="12" [nzMd]="13" [nzSm]="24" [nzXs]="24">
-              <h3 class="p-l-35">Xu hướng </h3>
-              <div id="loinhuan"></div>
-            </div>
-            <div nz-col [nzXl]="7" [nzLg]="12" [nzMd]="11" [nzSm]="24" [nzXs]="24">
-              <h3 class="p-l-35 m-b-20">Xu hướng lợi nhuận</h3>
-              <div title="工专路 {{ i }} 号店" class="rank-list" *ngFor="let item of 7 | numberLoop; let i = index">
-                <div class="center">
-                  <nz-badge [nzStyle]="{ background: i < 4 ? '#314659' : '#fafafa', color: i < 4 ? '#fff' : 'black' }" [nzCount]="i + 1"></nz-badge>
-                  <span class="m-l-5">Đường công nghiệp {{ i }} </span>
-                </div>
-                <div>323,234</div>
-              </div>
-            </div>
-          </div> 
-        </nz-tab>
       </nz-tabset>
     </nz-card>
 
     <ng-template #extraTemplate>
-      <nz-radio-group nzSize="small">
-        <label nz-radio-button nzValue="C">Tháng này</label>
-        <label nz-radio-button nzValue="A">Năm này</label>
-        <label nz-radio-button nzValue="D">Hàng năm</label>
+      <nz-radio-group nzSize="default"  [(ngModel)]="radioBieudo" nzButtonStyle="solid" (ngModelChange)="changeBieudo($event)">
+        <label nz-radio-button nzValue="1">Doanh Thu</label>
+        <label nz-radio-button nzValue="2">Chi phí</label>
+        <label nz-radio-button nzValue="3">Lợi Nhuận</label>
       </nz-radio-group>
       <nz-range-picker class="m-l-20"></nz-range-picker>
 
@@ -184,7 +146,7 @@
             </div>
             <div id="searchUserAvgChart"></div>
           </div>
-          <nz-table class="m-t-25" nzSize="small" #sortTable [nzData]="listOfData" nzTableLayout="fixed">
+          <nz-table class="m-t-25" nzSize="small" #sortTable [nzData]="dataList" nzTableLayout="fixed">
             <thead>
               <tr>
                 <th *ngFor="let column of listOfColumn">{{ column.title }}</th>
@@ -194,7 +156,7 @@
               <tr *ngFor="let data of dataList; let i = index">
                 <td>{{ (i+1) }}</td>
                 <td>
-                  <nz-avatar nzIcon="car" nzSrc="{{data.anhdaidien}}"></nz-avatar>
+                  <nz-avatar nzIcon="car"></nz-avatar>
                 </td>
                 <td>{{ data.biensoxe }}</td>
                 <td>{{ data.trongtai }}</td> 
