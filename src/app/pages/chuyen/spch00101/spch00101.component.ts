@@ -96,6 +96,7 @@ export class Spch00101Component extends BaseComponent implements OnInit {
   @ViewChild('Tltentai', { static: true }) Tltentai!: TemplateRef<NzSafeAny>;
   @ViewChild('Tltenphu', { static: true }) Tltenphu!: TemplateRef<NzSafeAny>;
   @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<NzSafeAny>;
+  @ViewChild('tienduatruocTpl', { static: true }) tienduatruocTpl!: TemplateRef<NzSafeAny>;
   
   constructor(
     protected override webService: WebserviceService,
@@ -523,6 +524,7 @@ export class Spch00101Component extends BaseComponent implements OnInit {
           title: 'Tiền đưa trước',
           width: 200,
           field: 'tienxe',
+          tdTemplate: this.tienduatruocTpl
         },
         {
           title: 'Điểm đi - điểm đến',

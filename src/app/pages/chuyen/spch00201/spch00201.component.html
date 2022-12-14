@@ -27,7 +27,7 @@
                 <nz-form-item>
                     <nz-form-label [nzXXl]="9" [nzXl]="9" [nzLg]="9" [nzMd]="12" [nzSm]="24" [nzXs]="24" [nzFor]="" nzRequired>Tiền đưa trước</nz-form-label>
                     <nz-form-control [nzXXl]="12" [nzXl]="12" [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24">
-                        <span [ngStyle]="{'color':'#177ddc'}">{{ChuyenDto.tienxe}}</span>
+                        <span [ngStyle]="{'color':'#177ddc'}">{{ChuyenDto.tienxe*1000 | currency : "VND" : ''}}</span>
                     </nz-form-control>
                 </nz-form-item>
             </div>
@@ -79,7 +79,7 @@
                 <nz-form-item>
                     <nz-form-label [nzXXl]="9" [nzXl]="9" [nzLg]="9" [nzMd]="12" [nzSm]="24" [nzXs]="24" [nzFor]="" nzRequired>Tổng Cước</nz-form-label>
                     <nz-form-control [nzXXl]="12" [nzXl]="12" [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24">
-                        <span [ngStyle]="{'color':'#177ddc'}">{{tongcuoc}}</span>
+                        <span [ngStyle]="{'color':'#177ddc'}">{{tongcuoc*1000 | currency:'VND':''}}</span>
                     </nz-form-control>
                 </nz-form-item>
             </div>
@@ -100,6 +100,9 @@
         <span *appAuth="ActionCode.DelProduct" class="operate-text">
           <button nz-button nzType="primary" nzGhost (click)="del(id)" [disabled]="btnDelete">Xóa</button>
         </span>
+      </ng-template>
+      <ng-template #tiencuocTpl let-tiencuoc="tiencuoc">
+          <span>{{tiencuoc*1000 | currency : "VND" : ''}}</span>
       </ng-template>
     </app-card-table-wrap>
     <ng-template #tableConfirm>

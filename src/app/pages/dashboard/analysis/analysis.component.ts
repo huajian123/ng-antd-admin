@@ -15,6 +15,7 @@ import _ from 'lodash';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { inNextTick } from 'ng-zorro-antd/core/util';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import * as Const from '@app/common/const'
 
 interface DataItem {
   name: string;
@@ -41,6 +42,14 @@ export class AnalysisComponent extends BaseComponent implements OnInit, AfterVie
   itemObjdoanhthu!: OjbChart;
   itemObjchiphi!: OjbChart;
   itemObjloinhuan!: OjbChart;
+
+  loinhuanMode = 0;
+  chiphiMode = 0;
+  doanhthuMode = 0;
+
+  tongchuyenhangMode = 0;
+  tongnoallMode = 0;
+
   fnInit() {
     this.cdr.markForCheck();
   }
@@ -121,6 +130,9 @@ export class AnalysisComponent extends BaseComponent implements OnInit, AfterVie
   override ngOnInit(): void {
     this.getAllxe();
     this.getListthongketaichinh();
+    this.getThongketaichinhnam();
+    this.getTongchuyenhangtrongnam();
+    this.getTongnoall();
   }
 
   initMinibar(): void {
@@ -318,9 +330,14 @@ export class AnalysisComponent extends BaseComponent implements OnInit, AfterVie
   }
 
   getListthongketaichinh(nam?: number) {
-     let date =new Date();
-     let namhientai = date.getFullYear();
-     let n = nam || namhientai;
+     let n = 0;
+     if(nam == undefined) {
+       let date =new Date();
+       let namhientai = date.getFullYear();
+       n = namhientai;
+     } else {
+       n = nam;
+     }
      let req = {
        nam : n
      }
@@ -328,7 +345,6 @@ export class AnalysisComponent extends BaseComponent implements OnInit, AfterVie
      .listtaichinh(req)
      .pipe()
      .subscribe(data => {
-       console.log(data);
        for(let element of data) {
          this.itemObjdoanhthu = {
            type : element['Thang'],
@@ -351,6 +367,56 @@ export class AnalysisComponent extends BaseComponent implements OnInit, AfterVie
      })
   }
 
+  getThongketaichinhnam(nam?: number) {
+    let n = 0;
+    if(nam == undefined) {
+     let date =new Date();
+     let namhientai = date.getFullYear();
+     n= namhientai;
+    } else {
+      n = nam;
+    }
+    let req = {
+      nam : n
+    }
+    this.commonService.thongketaichinhnam(req)
+    .pipe()
+    .subscribe(res => {
+       this.loinhuanMode = res.loinhuan;
+       this.doanhthuMode = res.tongdoanhthu;
+       this.chiphiMode = res.tongchiphi;
+    })
+  }
 
+  getTongchuyenhangtrongnam(nam?: number) {
+    let n = 0;
+    if(nam == undefined) {
+     let date =new Date();
+     let namhientai = date.getFullYear();
+     n= namhientai;
+    } else {
+      n = nam;
+    }
+    let req = {
+      nam : n
+    }
+    this.commonService.tongchuyenhangtrongnam(req)
+    .pipe()
+    .subscribe(res => {
+       this.tongchuyenhangMode = res
+    })
+  }
+
+  getTongnoall() {
+
+    let req = {
+      idKhachhang : Const.idKhachhang
+    }
+    this.commonService.tongnoAll(req)
+    .pipe()
+    .subscribe(res => {
+       this.tongnoallMode = res
+    })
+  }
 
 }

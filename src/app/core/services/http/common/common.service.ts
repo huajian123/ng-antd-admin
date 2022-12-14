@@ -15,5 +15,19 @@ export class CommonService {
   listtaichinh(params: any) : Observable<any> {
     return this.http.post(Const.CommonAnt100Listtaichinh, params, { needSuccessInfo: false});
   }
-  
+
+  // thông kê tài chinh năm bao gồi lợi nhuận . chi phí và doanh số trong năm
+  thongketaichinhnam(params : any) : Observable<any> {
+    return this.http.post(Const.CommonAnt100Thongketaichinhnam, params, { needSuccessInfo: false});
+  }
+
+  // get tổng chuyến hàng trong năm // params năm cần get
+  tongchuyenhangtrongnam(params: any) : Observable<any> {
+    return this.http.post(Const.CommonAnt100Tongchuyenhangtrongnam, params, { needSuccessInfo: false});
+  }
+
+  // tính tống nợ tất cả khách hàng
+  tongnoAll(params: any) : Observable<any> {
+    return this.http.post(Const.CommonAnt100Tongnoall, params, { needSuccessInfo: false});
+  }
 }

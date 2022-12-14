@@ -42,14 +42,14 @@
     </nz-table>
     <ng-template #Tfooter>
         <div>
-            Tổng chi phí: <span [ngStyle]="{'font-weight':'bold'}" >{{tongchiphi}}.000đ</span>
+            Tổng chi phí: <span [ngStyle]="{'font-weight':'bold'}" >{{tongchiphi*1000 | currency : "VND" : ''}}</span>
         </div>
 
     </ng-template>
     <ng-template #Ttilte>
         <div>
             <span [ngStyle]="{'color':'red'}" ><i>Lưu ý: kiểm tra thông tin chính xác trước khi xác nhận. </i></span>
-            <span [ngStyle]="{'font-weight':'bold'}" > Tổng chi phí: {{tongchiphi}}.000đ</span>
+            <span [ngStyle]="{'font-weight':'bold'}" > Tổng chi phí: {{tongchiphi*1000 | currency : "VND" : ''}}</span>
         </div>
     </ng-template>
 </form>

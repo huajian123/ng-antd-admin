@@ -150,6 +150,9 @@
         </ng-template>
         <ng-template #operationTpl let-id="id" let-name="name">
         </ng-template>
+        <ng-template #tienduatruocTpl let-tienxe="tienxe">
+            <span>{{tienxe*1000 | currency : "VND" : ""}}</span>
+        </ng-template>
     </app-card-table-wrap>
 
     <ng-template #tableBtns>

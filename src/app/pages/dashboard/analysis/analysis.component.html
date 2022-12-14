@@ -16,20 +16,20 @@
       <div class="card-wrap">
         <nz-card [nzBodyStyle]="cardPadding" [nzBordered]="false">
           <div class="card-top">
-            <div class="title">Tổng doanh số</div>
-            <div class="number">126.560.000.000đ</div>
+            <div class="title">Thông kê doanh số trong năm</div>
+            <div class="number">Lợi Nhuận: {{loinhuanMode*1000 | currency:'VND':''}}</div>
             <i nz-icon nzType="info-circle" nzTheme="outline" nz-tooltip nzTooltipTitle="Mô tả chỉ số"></i>
           </div>
           <div class="card-mid">
             <div class="mid-text">
-              <span>11% trên ngày <i nz-icon nzType="caret-down" style="color: green; font-size: 12px" nzTheme="outline"></i></span>
+              <span>Chi phí: {{chiphiMode*1000 | currency:'VND':''}} <i nz-icon nzType="caret-down" style="color: green; font-size: 12px" nzTheme="outline"></i></span>
             </div>
             <div class="mid-text">
-              <span>12% trên tuần <i nz-icon nzType="caret-up" style="color: red; font-size: 12px" nzTheme="outline"></i></span>
+              <span>Doanh số: {{doanhthuMode*1000 | currency:'VND':''}}<i nz-icon nzType="caret-up" style="color: red; font-size: 12px" nzTheme="outline"></i></span>
             </div>
           </div>
           <nz-divider class="m-0"></nz-divider>
-          <div class="card-footer">doanh thu thàng 12.423.000.000đ </div>
+          <div class="card-footer">Đánh giá chỉ số </div>
         </nz-card>
       </div>
     </div>
@@ -37,15 +37,15 @@
       <div class="card-wrap">
         <nz-card [nzBodyStyle]="cardPadding" [nzBordered]="false">
           <div class="card-top">
-            <div class="title">Chuyến hàng</div>
-            <div class="number">8.846</div>
+            <div class="title">Chuyến hàng đã hoàn thành trong năm</div>
+            <div class="number">{{tongchuyenhangMode}}</div>
             <i nz-icon nzType="info-circle" nzTheme="outline" nz-tooltip nzTooltipTitle="Mô tả chỉ số"></i>
           </div>
           <div class="card-mid">
             <div id="miniArea"></div>
           </div>
           <nz-divider class="m-0"></nz-divider>
-          <div class="card-footer">Trung bình 100 chuyến/tháng </div>
+          <div class="card-footer">Đánh giá chỉ số </div>
         </nz-card>
       </div>
     </div>
@@ -54,7 +54,7 @@
         <nz-card [nzBodyStyle]="cardPadding" [nzBordered]="false">
           <div class="card-top">
             <div class="title">Khách hàng nợ hiện tại</div>
-            <div class="number">1.000.000.000đ</div>
+            <div class="number">{{tongnoallMode*1000 | currency: "VND" : ''}}</div>
             <i nz-icon nzType="info-circle" nzTheme="outline" nz-tooltip nzTooltipTitle="Mô tả chỉ số
             "></i>
           </div>
@@ -62,7 +62,7 @@
             <div id="miniBar"></div>
           </div>
           <nz-divider class="m-0"></nz-divider>
-          <div class="card-footer"> Tỷ lệ chuyển đổi 60% </div>
+          <div class="card-footer"> Đánh giá chỉ số </div>
         </nz-card>
       </div>
     </div>
@@ -78,7 +78,7 @@
             <div id="progress"></div>
           </div>
           <nz-divider class="m-0"></nz-divider>
-          <div class="card-footer"> Doanh thu hàng ngày 12,423đ </div>
+          <div class="card-footer"> Đánh giá chỉ số </div>
         </nz-card>
       </div>
     </div>

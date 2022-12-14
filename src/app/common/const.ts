@@ -36,6 +36,9 @@ export const rootbase = '/default/';
 
 //common
 export const CommonAnt100Listtaichinh = "common/commonAnt100Listloinhanthang";
+export const CommonAnt100Thongketaichinhnam = "common/commonAnt100Thongketaichinhnam";
+export const CommonAnt100Tongchuyenhangtrongnam = "common/commonAnt100Tongchuyenhangtrongnam";
+export const CommonAnt100Tongnoall = "common/commonAnt100Tongnoall";
 
 //role
 export const Ant100SearchAllRole = "role/ant100SearchAllRole";

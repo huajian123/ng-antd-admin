@@ -97,6 +97,7 @@ export class Spch00201Component extends BaseComponent implements OnInit {
   btnConfirmend = false;
 
   @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<NzSafeAny>;
+  @ViewChild('tiencuocTpl', { static: true }) tiencuocTpl!: TemplateRef<NzSafeAny>;
 
 
   constructor(
@@ -488,13 +489,13 @@ export class Spch00201Component extends BaseComponent implements OnInit {
           title: 'Nội dung bóc hàng',
           width: 450,
           field: 'noidungmathang',
-          //tdTemplate: this.Tltenphu
+          //tdTemplate: this.tiencuocTpl
         },
         {
           title: 'Tiền cước',
           width: 100,
           field: 'tiencuoc',
-          //tdTemplate: this.Tlbiensoxe
+          tdTemplate: this.tiencuocTpl
         },
         {
           title: 'Địa điểm bóc hàng',
