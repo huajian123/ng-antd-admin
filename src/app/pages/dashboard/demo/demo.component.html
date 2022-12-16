@@ -6,3 +6,8 @@
     </ul> -->
 </div>
 <div> Title: {{title}}</div>
+
+<app-input-currency [Amount]="amountMode" (changeAmount)="changeAmount($event)"></app-input-currency>
+{{amountMode}}
+<app-input-number [Number]="numberMode" (changeNumber)="changeNumber($event)"></app-input-number>
+{{numberMode}}

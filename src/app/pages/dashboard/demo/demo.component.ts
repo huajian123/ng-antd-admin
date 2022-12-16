@@ -15,6 +15,9 @@ import { UrlDisplayId } from '@app/common/UrlDisplay';
 export class DemoComponent extends BaseComponent {
   DisplayScreenID: UrlDisplayId = UrlDisplayId.Demo;
 
+  amountMode = 0;
+  numberMode = 0;
+
   constructor(
     protected override webService: WebserviceService,
     protected override router: Router,
@@ -24,6 +27,9 @@ export class DemoComponent extends BaseComponent {
   ){
     super(webService,router,cdf,datePipe);
   }
+
+  changeAmount($event: any) {this.amountMode = $event; }
+  changeNumber($event: any) {this.numberMode = $event; }
 
   fnInit(){
     console.log("nam pham")

@@ -137,7 +137,6 @@ export class AntTableComponent implements OnInit, OnChanges {
   }
 
   tableChangeDectction(): void {
-    // 改变引用触发变更检测。
     this._dataList = [...this._dataList];
     this.cdr.markForCheck();
   }

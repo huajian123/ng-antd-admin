@@ -1,0 +1,8 @@
+<input nz-input
+    type="text" 
+    class="form-control"
+    [(ngModel)]="_number" 
+    autocomplete="off" 
+    numberInput maxDigits="9"  
+    (blur)="onQueryParamsChange($event)"
+>

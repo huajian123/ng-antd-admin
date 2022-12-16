@@ -6,11 +6,13 @@ import { TreeTableModule } from '@shared/components/tree-table/tree-table.module
 import { AntTableModule } from './ant-table/ant-table.module';
 import { ChatModule } from './chat/chat.module';
 import { FooterSubmitModule } from './footer-submit/footer-submit.module';
+import { InputCurrencyModule } from './input-currency/input-currency.module';
+import { InputNumberModule } from './input-number/input-number.module';
 import { PageHeaderModule } from './page-header/page-header.module';
 import { TopProgressBarModule } from './top-progress-bar/top-progress-bar.module';
 import { WaterMarkModule } from './water-mark/water-mark.module';
 
-const MODULES = [LockScreenModule, TreeTableModule, FooterSubmitModule, ChatModule, PageHeaderModule, AntTableModule, TopProgressBarModule, WaterMarkModule];
+const MODULES = [LockScreenModule, TreeTableModule, FooterSubmitModule, ChatModule, PageHeaderModule, AntTableModule, TopProgressBarModule, WaterMarkModule, InputNumberModule, InputCurrencyModule];
 
 @NgModule({
   declarations: [],
