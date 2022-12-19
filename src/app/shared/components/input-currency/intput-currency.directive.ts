@@ -36,14 +36,14 @@ export class CurrencyInputDirective implements OnInit {
   @HostListener("focus", ["$event.target.value"])
   onFocus(value: any) {
     // on focus remove number formatting
-    this.el.value = value.replace(/[^0-9.]+/g, '')
+    this.el.value = (value.replace(/[^0-9.]+/g, '')/1000)+"";
     this.el.select();
   }
 
   @HostListener("blur", ["$event.target.value"])
   onBlur(value:any) {
     // on blur, add number formatting
-    this.el.value = this.currencyPipe.transform(value,"VND")!;
+    this.el.value = this.currencyPipe.transform(value*1000,"VND")!;
   }
 
   @HostListener("keydown.control.z", ["$event.target.value"])

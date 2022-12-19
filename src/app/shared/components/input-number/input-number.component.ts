@@ -9,7 +9,7 @@ export abstract class InputComponentToken {
 @Component({
   selector: 'app-input-number',
   templateUrl: './input-number.component.html',
-  styleUrls: ['./input-number.component.css'],
+  styleUrls: ['./input-number.component.less'],
   providers: [{ provide: InputComponentToken, useExisting: InputNumberComponent }],
 })
 export class InputNumberComponent implements OnInit {

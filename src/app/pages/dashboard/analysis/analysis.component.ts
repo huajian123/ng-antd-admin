@@ -37,6 +37,9 @@ interface OjbChart {
 })
 export class AnalysisComponent extends BaseComponent implements OnInit, AfterViewInit {
   lstdatadoanhthu: OjbChart[] = [];
+  ishowxuhuongdoanhthu = true;
+  ishowxuhuongchiphi = false;
+  ishowxuhuongloinhuan = false;
   lstdatachiphi: OjbChart[] = [];
   lstdataloinhuan: OjbChart[] = [];
   itemObjdoanhthu!: OjbChart;
@@ -49,6 +52,9 @@ export class AnalysisComponent extends BaseComponent implements OnInit, AfterVie
 
   tongchuyenhangMode = 0;
   tongnoallMode = 0;
+
+  //list top 10 khách hàng có doanh thu cao
+  listtopkh = [];
 
   fnInit() {
     this.cdr.markForCheck();
@@ -133,6 +139,8 @@ export class AnalysisComponent extends BaseComponent implements OnInit, AfterVie
     this.getThongketaichinhnam();
     this.getTongchuyenhangtrongnam();
     this.getTongnoall();
+    this.getListtopdoanhthu();
+    
   }
 
   initMinibar(): void {
@@ -176,7 +184,7 @@ export class AnalysisComponent extends BaseComponent implements OnInit, AfterVie
   }
 
   initDoanhthu(lst:any): void {
-    
+
     const chart = new Chart({
       container: 'doanhthu',
       autoFit: true,
@@ -224,9 +232,20 @@ export class AnalysisComponent extends BaseComponent implements OnInit, AfterVie
   changeBieudo($event:any) {
     this.document.getElementById("doanhthu").innerHTML = "";
     switch($event) {
-      case "1" : this.initDoanhthu(this.lstdatadoanhthu);break;
-      case "2" : this.initDoanhthu(this.lstdatachiphi);break;
-      case "3" : this.initDoanhthu(this.lstdataloinhuan);
+      case "1" :  this.initDoanhthu(this.lstdatadoanhthu);
+                  this.ishowxuhuongdoanhthu = true;
+                  this.ishowxuhuongchiphi = false;
+                  this.ishowxuhuongloinhuan = false;
+                  break;
+      case "2" :  this.initDoanhthu(this.lstdatachiphi);
+                  this.ishowxuhuongdoanhthu = false;
+                  this.ishowxuhuongchiphi = true;
+                  this.ishowxuhuongloinhuan = false;
+                  break;
+      case "3" :  this.initDoanhthu(this.lstdataloinhuan);
+                  this.ishowxuhuongdoanhthu = false;
+                  this.ishowxuhuongchiphi = false;
+                  this.ishowxuhuongloinhuan = true;
     }
   }
 
@@ -408,7 +427,6 @@ export class AnalysisComponent extends BaseComponent implements OnInit, AfterVie
   }
 
   getTongnoall() {
-
     let req = {
       idKhachhang : Const.idKhachhang
     }
@@ -416,6 +434,28 @@ export class AnalysisComponent extends BaseComponent implements OnInit, AfterVie
     .pipe()
     .subscribe(res => {
        this.tongnoallMode = res
+    })
+  }
+
+  // list top 10 doanh thu
+  getListtopdoanhthu(nam?: number) {
+    let n = 0;
+    if(nam == undefined) {
+     let date = new Date();
+     let namhientai = date.getFullYear();
+     n= namhientai;
+    } else {
+      n = nam;
+    }
+    let req = {
+      nam : n
+    }
+
+    this.commonService.listtopdoanhthu(req)
+    .pipe()
+    .subscribe(res => {
+       console.log(res);
+       this.listtopkh = res;
     })
   }
 
