@@ -12,6 +12,7 @@ import { LockScreenFlag, LockScreenStoreService } from '@store/common-store/lock
 import { fnCheckForm, fnEncrypt } from '@utils/tools';
 import { getDay } from 'date-fns';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { UserInfoService } from '@app/core/services/store/common-store/userInfo.service';
 
 @Component({
   selector: 'app-lock-screen',
@@ -21,7 +22,9 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
   providers: [DestroyService]
 })
 export class LockScreenComponent implements OnInit {
+  userDetail: any;
   public showUnlock = false;
+
   public time$: Observable<Date> = timer(0, 1000).pipe(
     map(() => new Date()),
     takeUntil(this.destroy$)
@@ -40,7 +43,8 @@ export class LockScreenComponent implements OnInit {
     private loginOutService: LoginInOutService,
     private lockScreenStoreService: LockScreenStoreService,
     private fb: FormBuilder,
-    private windowSrv: WindowService
+    private windowSrv: WindowService,
+    private userInfoService: UserInfoService,
   ) {}
 
   // 返回登录页面则解锁
@@ -98,6 +102,13 @@ export class LockScreenComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.userInfoService.getUserInfo().subscribe(res => {
+      this.userDetail = {
+        userId: res.userId,
+        username: res.username,
+        email: res.email
+      };
+    });
     this.subLockedState();
     this.initForm();
   }

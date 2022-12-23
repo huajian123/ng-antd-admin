@@ -33,7 +33,7 @@ export class ChangePasswordComponent implements OnInit {
     if (!control.value) {
       return { required: true };
     } else if (control.value !== this.validateForm.controls['newPassword'].value) {
-      return { message: '两次输入密码不一致', error: true };
+      return { message: 'Mật khẩu nhập hai lần không nhất quán', error: true };
     }
     return {};
   };

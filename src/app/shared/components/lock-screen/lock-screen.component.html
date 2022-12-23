@@ -1,7 +1,7 @@
 <div class="full-screen screen-full-width flex flex-coloum">
   <div (click)="unlockBtn()" class="flex flex-coloum center title clock hand-model">
     <i nz-icon nzType="lock" nzTheme="outline"></i>
-    <span>点击解锁</span>
+    <span>Click để mở khóa</span>
   </div>
   <div nz-row nzJustify="space-around" class="flex-auto" style="align-items: center">
     <div nz-col [nzXXl]="10" [nzXl]="10" [nzLg]="10" [nzMd]="10" [nzSm]="10" [nzXs]="10" class="hour center" style="flex: auto">
@@ -14,13 +14,13 @@
   <div class="lock-page-entry center" *ngIf="showUnlock">
     <div class="flex center flex-coloum form">
       <nz-avatar [nzSize]="70" [nzSrc]="'assets/imgs/default_face.png'"></nz-avatar>
-      <p class="sp-16 m-t-8 name">Nam Phạm</p>
+      <p class="sp-16 m-t-8 name">{{userDetail.username}}</p>
 
       <form autocomplete="off" class="full-with m-b-20" nz-form [formGroup]="validateForm" [nzLayout]="'vertical'">
         <nz-form-item>
           <nz-form-control [nzErrorTip]="combineTpl">
             <nz-input-group [nzSuffix]="suffixTemplate">
-              <input autocomplete="off" formControlName="password" [type]="passwordVisible ? 'text' : 'password'" nz-input name="password" placeholder="请输入" />
+              <input autocomplete="off" formControlName="password" [type]="passwordVisible ? 'text' : 'password'" nz-input name="password" placeholder="Vùi long nhập" />
             </nz-input-group>
             <ng-template #suffixTemplate>
               <i nz-icon [nzType]="!passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
@@ -28,9 +28,9 @@
           </nz-form-control>
         </nz-form-item>
         <div class="full-with space-between">
-          <span (click)="showUnlock = false" class="operate-text">返回</span>
-          <span (click)="loginOut()" class="operate-text">返回登录</span>
-          <span (click)="intoSys()" class="operate-text">进入系统</span>
+          <span (click)="showUnlock = false" class="operate-text">Trở lại</span>
+          <span (click)="loginOut()" class="operate-text">Đăng nhập lại</span>
+          <span (click)="intoSys()" class="operate-text">Vào hệ thống</span>
         </div>
       </form>
     </div>
@@ -39,11 +39,11 @@
     <span style="user-select: none">{{ time$ | async | date: 'HH:mm a' }}</span>
   </div>
   <div class="flex flex-coloum center title bottom-date">
-    <span style="user-select: none">{{ time$ | async | date: 'yyyy-MM-dd' }}星期{{ getDays(time$ | async) | changNumberToChinese }}</span>
+    <span style="user-select: none">{{ time$ | async | date: 'yyyy-MM-dd' }} Tuần {{ getDays(time$ | async) | changNumberToChinese }}</span>
   </div>
 </div>
 
 <ng-template #combineTpl let-control>
-  <ng-container *ngIf="control.hasError('required')">请填写锁屏密码</ng-container>
-  <ng-container *ngIf="control.hasError('notRight')">锁屏密码不正确</ng-container>
+  <ng-container *ngIf="control.hasError('required')">Vui lòng điền mật khẩu màn hình khóa</ng-container>
+  <ng-container *ngIf="control.hasError('notRight')">Mật khẩu màn hình khóa không chính xác</ng-container>
 </ng-template>

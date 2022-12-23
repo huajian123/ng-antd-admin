@@ -21,6 +21,7 @@ import { ModalOptions } from 'ng-zorro-antd/modal';
 })
 export class LayoutHeadRightMenuComponent implements OnInit {
   user!: UserPsd;
+  userDetail: any;
 
   constructor(
     private router: Router,
@@ -45,7 +46,7 @@ export class LayoutHeadRightMenuComponent implements OnInit {
         nzWidth: '520px',
         nzFooter: null,
         nzMaskClosable: true
-      })
+      },{username: this.userDetail.username})
       .subscribe();
   }
 
@@ -99,5 +100,13 @@ export class LayoutHeadRightMenuComponent implements OnInit {
     this.router.navigateByUrl(`/default/page-demo/personal/${path}`);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userInfoService.getUserInfo().subscribe(res => {
+      this.userDetail = {
+        userId: res.userId,
+        username: res.username,
+        email: res.email
+      };
+    });
+  }
 }

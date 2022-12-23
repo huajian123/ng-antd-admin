@@ -109,12 +109,12 @@
             <ng-container *ngIf="ishowxuhuongchiphi">
               <div nz-col [nzXl]="7" [nzLg]="12" [nzMd]="11" [nzSm]="24" [nzXs]="24">
                 <h3 class="p-l-35 m-b-20">Xu hướng chi phí</h3>
-                <div title=" đầu tiên {{ i }} kết thúc" class="rank-list" *ngFor="let item of listtopkh; let i = index">
+                <div title=" đầu tiên {{ i }} kết thúc" class="rank-list" *ngFor="let item of listtopchiphi; let i = index">
                   <div class="center">
                     <nz-badge [nzStyle]="{ background: i < 4 ? '#314659' : '#fafafa', color: i < 4 ? '#fff' : 'black' }" [nzCount]="i + 1"></nz-badge>
-                    <span class="m-l-5">Khách hàng: {{ item['name'] }} </span>
+                    <span class="m-l-5">{{ item['_id'] }} </span>
                   </div>
-                  <div>{{item['tongdoanhthu']*1000 | currency : "VND"}}</div>
+                  <div>{{item['total']*1000 | currency : "VND"}}</div>
                 </div>
               </div>
             </ng-container>
@@ -141,7 +141,7 @@
         <label nz-radio-button nzValue="2">Chi phí</label>
         <label nz-radio-button nzValue="3">Lợi Nhuận</label>
       </nz-radio-group>
-      <nz-range-picker class="m-l-20"></nz-range-picker>
+      <nz-range-picker class="m-l-20" [nzDisabled]="true"></nz-range-picker>
 
     </ng-template>
   </section>
@@ -203,8 +203,8 @@
       </ng-template>
     </div>
     <div class="pipe-wrap" nz-col nzSpan="12" [nzXl]="12" [nzXXl]="12" [nzLg]="12" [nzMd]="24" [nzSm]="24" [nzXs]="24">
-      <nz-card [nzBodyStyle]="{ height: '500px' }" [nzTitle]="'Chia sẻ danh mục bán hàng'">
-        <h4>Bán hàng</h4>
+      <nz-card [nzBodyStyle]="{ height: '500px' }" [nzTitle]="'Biêu đồ so sánh doanh thu của từng xe tải'">
+        <h4>Hiểu quả hoạt động của từng xe tải</h4>
         <div id="ringPie"></div>
       </nz-card>
     </div>

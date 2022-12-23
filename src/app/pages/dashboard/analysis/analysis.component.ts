@@ -1,4 +1,4 @@
-import { DatePipe, DOCUMENT } from '@angular/common';
+import { CurrencyPipe, DatePipe, DOCUMENT } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, NgZone, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -55,6 +55,12 @@ export class AnalysisComponent extends BaseComponent implements OnInit, AfterVie
 
   //list top 10 khách hàng có doanh thu cao
   listtopkh = [];
+
+  // list top chi phí
+  listtopchiphi = [];
+
+  // list tong cuoc tung xe
+  listtongcuoctungxe = [];
 
   fnInit() {
     this.cdr.markForCheck();
@@ -128,6 +134,7 @@ export class AnalysisComponent extends BaseComponent implements OnInit, AfterVie
     public message: NzMessageService,
     private xeService: XeService,
     private commonService: CommonService,
+    private currencyPipe: CurrencyPipe,
     @Inject(DOCUMENT) private document: any
     ) {
       super(webService,router,cdr,datePipe);
@@ -140,6 +147,8 @@ export class AnalysisComponent extends BaseComponent implements OnInit, AfterVie
     this.getTongchuyenhangtrongnam();
     this.getTongnoall();
     this.getListtopdoanhthu();
+    this.getListtopchiphi();
+    this.getListtongcuoctungxe();
     
   }
 
@@ -277,17 +286,17 @@ export class AnalysisComponent extends BaseComponent implements OnInit, AfterVie
     tinyArea.render();
   }
 
-  initRing(): void {
+  initRing(lst: any): void {
     const tinyArea = new Pie('ringPie', {
       appendPadding: 10,
-      data: this.ringData,
+      data: lst,
       angleField: 'value',
       colorField: 'type',
       radius: 1,
       innerRadius: 0.64,
       meta: {
         value: {
-          formatter: v => `${v} đ`
+          formatter: v => `${this.currencyPipe.transform(v*1000,"VND")}`
         }
       },
       label: {
@@ -326,7 +335,7 @@ export class AnalysisComponent extends BaseComponent implements OnInit, AfterVie
         this.initProgress();
         this.initSearchArea();
         this.initSearchAvgArea();
-        this.initRing();
+        //this.initRing();
         // this.initMiniRing();
         
       });
@@ -454,8 +463,51 @@ export class AnalysisComponent extends BaseComponent implements OnInit, AfterVie
     this.commonService.listtopdoanhthu(req)
     .pipe()
     .subscribe(res => {
-       console.log(res);
        this.listtopkh = res;
+    })
+  }
+
+  // list top chi phi
+  getListtopchiphi(nam?: number) {
+    let n = 0;
+    if(nam == undefined) {
+     let date = new Date();
+     let namhientai = date.getFullYear();
+     n= namhientai;
+    } else {
+      n = nam;
+    }
+    let req = {
+      nam : n
+    }
+
+    this.commonService.listtopchiphi(req)
+    .pipe()
+    .subscribe(res => {
+       this.listtopchiphi = res;
+    })
+  }
+
+  // list top doanh thu của tưng xe
+  getListtongcuoctungxe(nam?: number) {
+    let n = 0;
+    if(nam == undefined) {
+     let date = new Date();
+     let namhientai = date.getFullYear();
+     n= namhientai;
+    } else {
+      n = nam;
+    }
+    let req = {
+      nam : n
+    }
+
+    this.commonService.listtoptongcuoctungxe(req)
+    .pipe()
+    .subscribe(res => {
+       //console.log(res);
+       this.listtongcuoctungxe = res;
+       this.initRing(this.listtongcuoctungxe);
     })
   }
 
