@@ -42,7 +42,9 @@
             "outputPath": "dist/ng-ant-admin",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "zone.js"
+            ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "less",
             "assets": [
@@ -78,29 +80,26 @@
               "qs",
               "size-sensor",
               "pdfast",
-              "regl",
-              "inversify",
-              "jquery",
-              "lodash",
-              "qrious",
-              "driver.js",
-              "file-saver",
+              "d3-regression",
               "fmin",
               "eventemitter3",
-              "@cordobo/qrcode",
-              "pbf",
-              "polygon-clipping",
-              "supercluster/dist/supercluster",
+              "inversify-inject-decorators",
+              "@babel/runtime/regenerator",
+              "inversify",
+              "@amap/amap-jsapi-loader",
+              "mapbox-gl",
               "l7regl",
+              "@mapbox/geojson-rewind",
+              "pbf",
+              "supercluster/dist/supercluster",
               "earcut",
               "mousetrap",
-              "d3-regression",
-              "mapbox-gl",
-              "@amap/amap-jsapi-loader",
-              "@mapbox/geojson-rewind",
-              "@babel/runtime/regenerator",
-              "@antv/l7-component",
-              "inversify-inject-decorators"
+              "jquery",
+              "polygon-clipping",
+              "qrcode",
+              "driver.js",
+              "file-saver",
+              "lodash"
             ]
           },
           "configurations": {
@@ -161,10 +160,11 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
             "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
             "inlineStyleLanguage": "less",
             "assets": [
               "src/favicon.ico",

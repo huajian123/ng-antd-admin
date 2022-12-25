@@ -10,9 +10,9 @@ import { SubLockedStatusService } from '@core/services/common/sub-locked-status.
 import { SubWindowWithService } from '@core/services/common/sub-window-with.service';
 import { ThemeSkinService } from '@core/services/common/theme-skin.service';
 import { StartupService } from '@core/startup/startup.service';
+import { PasswordStrengthMeterModule } from '@shared/biz-components/password-strength-meter/password-strength-meter.module';
 import { SharedModule } from '@shared/shared.module';
 import { LoginModalModule } from '@widget/biz-widget/login/login-modal.module';
-import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
