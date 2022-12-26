@@ -60,6 +60,8 @@ export class Spkh00101Component extends BaseComponent implements OnInit {
   @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<NzSafeAny>;
   @ViewChild('linkidTpl', { static: true }) linkidTpl!: TemplateRef<NzSafeAny>;
 
+  @ViewChild('sotienno', { static: true }) sotienno!: TemplateRef<NzSafeAny>;
+
   constructor(
     protected override webService: WebserviceService,
     protected override router: Router,
@@ -206,11 +208,15 @@ export class Spkh00101Component extends BaseComponent implements OnInit {
   }
 
   getItem(id: string, sotienno: number,name: string) {
-      this.dtoKhService.kbnflg = true;
-      this.dtoKhService.id = id;
-      this.dtoKhService.sotienno = sotienno;
-      this.dtoKhService.name = name
-      this.ultilityService.refresh(Const.rootbase + UrlDisplayId.spkh00201)
+      this.dataService.getDetail(id)
+      .pipe()
+      .subscribe(res => {
+        this.dtoKhService.kbnflg = true;
+        this.dtoKhService.id = id;
+        this.dtoKhService.sotienno = res.sotienno;
+        this.dtoKhService.name = name
+        this.ultilityService.refresh(Const.rootbase + UrlDisplayId.spkh00201)
+      })
   }
 
   private initTable(): void {
@@ -247,6 +253,7 @@ export class Spkh00101Component extends BaseComponent implements OnInit {
           title: 'Số tiền nợ',
           width: 100,
           field: 'sotienno',
+          tdTemplate: this.sotienno
         },
         {
           title: 'Hành động',

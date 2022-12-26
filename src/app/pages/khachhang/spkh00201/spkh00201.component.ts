@@ -5,6 +5,7 @@ import { UrlDisplayId } from '@app/common/UrlDisplay';
 import { ActionCode } from '@app/config/actionCode';
 import { WebserviceService } from '@app/core/services/common/webservice.service';
 import { KhachhangDtoService } from '@app/core/services/http/khachhang/khachhang-dto.service';
+import { KhachhangService } from '@app/core/services/http/khachhang/khachhang.service';
 import { NhatkykhService } from '@app/core/services/http/nhatkykh/nhatkykh.service';
 import { OptionsInterface, SearchCommonVO } from '@app/core/services/types';
 import { BaseComponent } from '@app/pages/system/base/base.component';
@@ -49,6 +50,7 @@ export class Spkh00201Component extends BaseComponent implements OnInit {
   ActionCode = ActionCode;
   @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<NzSafeAny>;
   @ViewChild('noidungdonhangTpl', { static: true }) noidungdonhangTpl!: TemplateRef<NzSafeAny>;
+  @ViewChild('sotienTpl', { static: true }) sotienTpl!: TemplateRef<NzSafeAny>;
 
   fnInit() {
     this.cdf.markForCheck();
@@ -71,7 +73,8 @@ export class Spkh00201Component extends BaseComponent implements OnInit {
     public message: NzMessageService,
     private modalSrv: NzModalService,
     private khdtoService: KhachhangDtoService,
-    private dataService: NhatkykhService
+    private dataService: NhatkykhService,
+    private khachhangService : KhachhangService
   ) {
     super(webService,router,cdf,datePipe);
   }
@@ -83,6 +86,7 @@ export class Spkh00201Component extends BaseComponent implements OnInit {
   idkhachhang = "";
   tenkhachhang = "";
   sotienno = 0;
+  changeSotienno($event: any) {this.sotienno = $event; }
   ngaybatdau : any;
   ngayketthuc : any;
   status = '0';
@@ -218,25 +222,33 @@ export class Spkh00201Component extends BaseComponent implements OnInit {
 
   // thanh toán một đơn hàng
   thanhtoan(pnh: any) {
-     let req = {
-       "iduser": this.khdtoService.id,
-       "idphieunhaphang": pnh['_id']
-     }
-     this.tableConfig.loading = true;
-     this.dataService.thanhtoan(req).pipe(
-        finalize(() => {
-          this.tableLoading(false);
-        })
-     )
-     .subscribe(res => {
-        if (res == 1) {
-          this.message.info("Thanh Toán thành công !");
-        } else {
-          this.message.info(" Phát sinh lỗi trong quá trình thanh toán");
+    this.modalSrv.confirm({
+      nzTitle: 'Bạn có chắc chắn muốn thanh toán đơn hàng này?',
+      nzContent: 'Nhấn OK để hoàn thành',
+      nzOnOk: () => {
+        let req = {
+          "iduser": this.khdtoService.id,
+          "idphieunhaphang": pnh['_id']
         }
-        this.getDataList();
-        this.tableLoading(false);
-     })
+        this.tableConfig.loading = true;
+        this.dataService.thanhtoan(req).pipe(
+            finalize(() => {
+              this.tableLoading(false);
+            })
+         )
+        .subscribe(res => {
+            if (res == 1) {
+              this.message.info("Thanh Toán thành công !");
+              // get detail khach hang
+              this.getDetailKhachhang();
+            } else {
+              this.message.info(" Phát sinh lỗi trong quá trình thanh toán");
+            }
+            this.getDataList();
+            this.tableLoading(false);
+        })
+      }
+    })
   }
 
   // duyet thanh toán
@@ -257,7 +269,7 @@ export class Spkh00201Component extends BaseComponent implements OnInit {
         }
         this.dataService.tatToan(req).pipe().subscribe(
           () => {
-            this.khdtoService.sotienno = 0;
+            this.getDetailKhachhang();
             this.getDataList();
             this.resetForm();
           },
@@ -267,37 +279,58 @@ export class Spkh00201Component extends BaseComponent implements OnInit {
     })
   }
 
+  // get detail khach hang
+  getDetailKhachhang() {
+      // get detail khach hang
+      this.khachhangService.getDetail(this.khdtoService.id)
+      .pipe()
+      .subscribe(res => {
+        console.log(res);
+        this.sotienno = res.sotienno;
+        this.khdtoService.sotienno = res.sotienno;
+      })
+  }
+
   // thanh toán các đơn hàng được chọn
   thanhtoanmotphan() {
-    let listIdPN = [];
+    let listIdPN: NzSafeAny[] = [];
     for(let element of this.dataList) {
       if(element['_checked'] == true) {
         listIdPN.push(element['idphieunhaphang']['_id']);
       }
     }
-    if(listIdPN.length == 0) {
+    if (listIdPN.length == 0) {
       this.message.info(" Vùi lòng chọn ít nhất một đơn hàng để thanh toán");
       return;
-    }
-    let req = {
-      "iduser": this.khdtoService.id,
-      "listidpn": listIdPN
-    }
-    this.tableLoading(true);
-    this.dataService.thanhtoanmotphan(req).pipe(
-      finalize(() => {
-        this.tableLoading(false);
+    } else {
+      this.modalSrv.confirm({
+        nzTitle: 'Bạn có chắc chắn muốn thanh toán không ?',
+        nzContent: 'Nhấn OK để hoàn thành việc thanh toán',
+        nzOnOk: () => {
+          let req = {
+            "iduser": this.khdtoService.id,
+            "listidpn": listIdPN
+          }
+          this.tableLoading(true);
+          this.dataService.thanhtoanmotphan(req).pipe(
+            finalize(() => {
+              this.tableLoading(false);
+            })
+          )
+          .subscribe(res => {
+            if(res == 1) {
+              this.message.info("Thực hiện thành công !");
+              // get detail khach hang
+              this.getDetailKhachhang();
+            } else {
+              this.message.info("không thể thanh toán !");
+            }
+            this.getDataList();
+            this.tableLoading(false);
+          })
+        }
       })
-    )
-    .subscribe(res => {
-      if(res == 1) {
-        this.message.info("Thực hiện thành công !");
-      } else {
-        this.message.info("không thể thanh toán !");
-      }
-      this.getDataList();
-      this.tableLoading(false);
-    })
+    }
   }
 
   resetForm() {}
@@ -346,6 +379,7 @@ export class Spkh00201Component extends BaseComponent implements OnInit {
           title: 'Số tiền',
           width: 120,
           field: 'sotien',
+          tdTemplate: this.sotienTpl
         },
         {
           title: 'Nội dung đơn hàng',

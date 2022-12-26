@@ -15,8 +15,8 @@ import { UrlDisplayId } from '@app/common/UrlDisplay';
 export class DemoComponent extends BaseComponent {
   DisplayScreenID: UrlDisplayId = UrlDisplayId.Demo;
 
-  amountMode = 0;
-  numberMode = 0;
+  amountMode = 1000;
+  numberMode = 1000;
 
   constructor(
     protected override webService: WebserviceService,

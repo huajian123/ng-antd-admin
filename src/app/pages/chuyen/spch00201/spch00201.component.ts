@@ -288,7 +288,7 @@ export class Spch00201Component extends BaseComponent implements OnInit {
         }
         if(this.dataList.length > 0) {
           listKhachNo = this.fnGetListKhachNo();
-          if(trangthai == 2) {
+          if(trangthai == 3) {
             req['listkhachno'] = listKhachNo
           }
           this.dataService.updateTrangthai(req).pipe().subscribe(res => {
@@ -344,8 +344,23 @@ export class Spch00201Component extends BaseComponent implements OnInit {
   edit(id: any) {
     console.log(id);
     this.phhService.getDetail(id).subscribe(res => {
-      console.log(res);
-      this.modashowProduct.show({ nzTitle: 'Cập nhật' }, res).subscribe(({ modalValue, status }) => {
+      let req = {
+        "idchuyen": res.idchuyen,
+        "biensoxe": res.biensoxe,
+        "iduser": res.iduser,
+        "tiencuoc": res.tiencuoc,
+        "lotrinh": res.lotrinh,
+        "ngaynhap": res.ngaynhap,
+        "noidungdonhang": res.noidungdonhang,
+        "diadiembochang": res.diadiembochang,
+        "hinhthucthanhtoan": res.hinhthucthanhtoan + "",
+        "ghichu": null,
+        "trangthai": res.trangthai,
+        "id": res.id
+      }
+      console.log(req);
+
+      this.modashowProduct.show({ nzTitle: 'Cập nhật' }, req).subscribe(({ modalValue, status }) => {
         if (status === ModalBtnStatus.Cancel) {
           return;
         }

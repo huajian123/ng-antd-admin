@@ -1,3 +1,4 @@
+import { DecimalPipe } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
@@ -13,12 +14,12 @@ export abstract class InputComponentToken {
   providers: [{ provide: InputComponentToken, useExisting: InputNumberComponent }],
 })
 export class InputNumberComponent implements OnInit {
-  _number = 0;
+  _number: NzSafeAny;
   amt!: boolean;
 
   @Input()
   set Number(value: NzSafeAny) {
-    this._number = value;
+    this._number = this.decimalPipe.transform(value,"1.0-0");;
   }
 
   get Number(): NzSafeAny {
@@ -33,15 +34,15 @@ export class InputNumberComponent implements OnInit {
   }
 
   constructor(
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private decimalPipe: DecimalPipe
     ) {}
 
   ngOnInit() {}
 
 
   onQueryParamsChange($event:any): void {
-    this._number = $event.target.value;
-    this.changeNumber.emit(this._number);
+    this.changeNumber.emit($event.target.value.replace(/[^0-9.]+/g, ''));
   }
 
 }

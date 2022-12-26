@@ -17,7 +17,7 @@
         <nz-card [nzBodyStyle]="cardPadding" [nzBordered]="false">
           <div class="card-top">
             <div class="title">Thông kê doanh số trong năm</div>
-            <div class="number">Lợi Nhuận: {{loinhuanMode*1000 | currency:'VND':''}}</div>
+            <div class="number">LN: {{loinhuanMode*1000 | currency:'VND':''}}</div>
             <i nz-icon nzType="info-circle" nzTheme="outline" nz-tooltip nzTooltipTitle="Mô tả chỉ số"></i>
           </div>
           <div class="card-mid">
@@ -155,22 +155,22 @@
               <div>
                 <span nz-typography nzType="secondary">Xe hoạt động nhiều nhất <i nz-icon nzType="info-circle" nzTheme="outline" nz-tooltip nzTooltipTitle="Mô tả chỉ số"></i></span>
               </div>
-              <div
-                ><h3 class="d-i-b m-r-30" nz-typography>12,321</h3><span>17.1 <i nz-icon nzType="caret-up" style="color: red; font-size: 12px" nzTheme="outline"></i></span
-              ></div>
+              <div>
+                <!-- <h3 class="d-i-b m-r-30" nz-typography>12,321</h3><span>17.1 <i nz-icon nzType="caret-up" style="color: red; font-size: 12px" nzTheme="outline"></i></span> -->
+              </div>
             </div>
-            <div id="searchUserChart"></div>
+            <!-- <div id="searchUserChart"></div> -->
           </div>
           <div class="search-block" nz-col [nzXl]="12" [nzXXl]="12" [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24">
             <div>
               <div>
                 <span nz-typography nzType="secondary"> Xe doanh số cao nhất <i nz-icon nzType="info-circle" nzTheme="outline" nz-tooltip nzTooltipTitle="Mô tả chỉ số"></i> </span>
               </div>
-              <div
-                ><h3 class="d-i-b m-r-30" nz-typography>12,321</h3><span>17.1 <i nz-icon nzType="caret-up" style="color: red; font-size: 12px" nzTheme="outline"></i></span
-              ></div>
+              <div>
+                <!-- <h3 class="d-i-b m-r-30" nz-typography>12,321</h3><span>17.1 <i nz-icon nzType="caret-up" style="color: red; font-size: 12px" nzTheme="outline"></i></span> -->
+              </div>
             </div>
-            <div id="searchUserAvgChart"></div>
+            <!-- <div id="searchUserAvgChart"></div> -->
           </div>
           <nz-table class="m-t-25" nzSize="small" #sortTable [nzData]="dataList" nzTableLayout="fixed">
             <thead>

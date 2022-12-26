@@ -1,4 +1,5 @@
 export interface Phieunhaphang {
+    id?: string;
     idchuyen?: string;
     makh?: string;
     biensoxe?:string;
@@ -7,7 +8,9 @@ export interface Phieunhaphang {
     lotrinh?: number;
     noidungdonhang?: string;
     diadiembochang?: string;
-    hinhthucthanhtoan?: number; // hinh thuc thanh toan
+    hinhthucthanhtoan?: string; // hinh thuc thanh toan
     ghichu?: string;
     trangthai?: number;
+    iduser?: string
+    
 }

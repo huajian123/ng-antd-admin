@@ -20,10 +20,11 @@
                 </div>
                 <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
                     <nz-form-item>
-                        <!-- mã khách hàng -->
+                        <!-- số tiền nợ -->
                         <nz-form-label [nzXXl]="9" [nzXl]="9" [nzLg]="9" [nzMd]="12" [nzSm]="24" [nzXs]="24" [nzFor]="">Số tiền nợ</nz-form-label>
                         <nz-form-control [nzXXl]="10" [nzXl]="10" [nzLg]="10" [nzMd]="10" [nzSm]="20" [nzXs]="24">
-                          <input nz-input name="sotienno" [(ngModel)]="sotienno" placeholder="số tiền nợ" readonly/>
+                          <!-- <input nz-input name="sotienno" [(ngModel)]="sotienno" placeholder="số tiền nợ" readonly/> -->
+                          <app-input-currency [Amount]="sotienno" (changeAmount)="changeSotienno($event)" [Disable]="true"></app-input-currency>
                         </nz-form-control>
                       </nz-form-item>
                 </div>
@@ -121,6 +122,9 @@
             <ng-container *ngIf="idphieunhaphang">
                 <span>{{idphieunhaphang['noidungdonhang']}}</span>
             </ng-container>
+        </ng-template>
+        <ng-template #sotienTpl let-sotien="sotien">
+            <span>{{sotien*1000 | currency : "VND"}}</span>
         </ng-template>
     </app-card-table-wrap>
     <ng-template #tableBtns>
