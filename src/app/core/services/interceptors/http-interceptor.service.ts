@@ -16,7 +16,7 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 import { WindowService } from '../common/window.service';
-
+import * as Const from '@app/common/const';
 interface CustomHttpConfig {
   headers?: HttpHeaders;
 }
@@ -32,6 +32,9 @@ export class HttpInterceptorService implements HttpInterceptor {
       httpConfig = { headers: req.headers.set(TokenKey, token) };
     }
     const copyReq = req.clone(httpConfig);
+    if(copyReq.url == Const.tinhthanhApi) {
+      return next.handle(req);
+    } 
     return next.handle(copyReq).pipe(
       filter(e => e.type !== 0),
       catchError(error => this.handleError(error))
@@ -43,15 +46,19 @@ export class HttpInterceptorService implements HttpInterceptor {
     let errMsg = '';
     if (status === 0) {
       errMsg = 'Đã xảy ra lỗi mạng không xác định, vui lòng kiểm tra mạng của bạn.';
+      this.message.info('Đã xảy ra lỗi mạng không xác định, vui lòng kiểm tra mạng của bạn.');
     }
     if (status >= 300 && status < 400) {
-      errMsg = `Yêu cầu đã được chuyển hướng bởi máy chủ với mã trạng thái${status}`;
+      errMsg = `Yêu cầu đã được chuyển hướng bởi máy chủ với mã trạng thái ${status}`;
+      this.message.info(`Yêu cầu đã được chuyển hướng bởi máy chủ với mã trạng thái ${status}`);
     }
     if (status >= 400 && status < 500) {
-      errMsg = `Máy khách bị lỗi, có thể dữ liệu gửi sai, mã trạng thái${status}`;
+      errMsg = `Máy khách bị lỗi, có thể dữ liệu gửi sai, mã trạng thái ${status}`;
+      this.message.info(`Máy khách bị lỗi, có thể dữ liệu gửi sai, mã trạng thái ${status}`);
     }
     if (status >= 500) {
-      errMsg = `Đã xảy ra lỗi máy chủ với mã trạng thái${status}`;
+      errMsg = `Đã xảy ra lỗi máy chủ với mã trạng thái ${status}`;
+      this.message.info(`Đã xảy ra lỗi máy chủ với mã trạng thái ${status}`);
     }
     return throwError({
       code: status,

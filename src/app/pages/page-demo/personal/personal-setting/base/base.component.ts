@@ -1,6 +1,7 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { WebserviceService } from '@app/core/services/common/webservice.service';
 
 import { ValidatorsService } from '@core/services/validators/validators.service';
 import { fnCheckForm } from '@utils/tools';
@@ -16,22 +17,37 @@ import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
 export class BaseComponent implements OnInit {
   @Input() data!: { label: string };
   validateForm!: FormGroup;
-  selectedProvince = 'Zhejiang';
-  selectedCity = 'Hangzhou';
-  provinceData = ['Zhejiang', 'Jiangsu'];
+  selectedProvince = 1;
+  selectedCity = 1;
+  provinceData: any[] = [];
   formOrder = 1;
   avatarOrder = 0;
-  cityData: { [place: string]: string[] } = {
-    Zhejiang: ['Hangzhou', 'Ningbo', 'Wenzhou'],
-    Jiangsu: ['Nanjing', 'Suzhou', 'Zhenjiang']
-  };
+  cityData: any[] = [];
 
-  constructor(private fb: FormBuilder, private msg: NzMessageService, private validatorsService: ValidatorsService, private breakpointObserver: BreakpointObserver, private cdr: ChangeDetectorRef) {}
+  constructor(
+    private fb: FormBuilder, 
+    private msg: NzMessageService, 
+    private validatorsService: ValidatorsService, 
+    private breakpointObserver: BreakpointObserver, 
+    private cdr: ChangeDetectorRef,
+    private webService : WebserviceService
+    ) {}
 
-  provinceChange(value: string): void {
-    this.selectedCity = this.cityData[value][0];
-    this.selectedProvince = value;
-    this.validateForm.get('city')?.setValue(this.selectedCity);
+  provinceChange(code: number): void {
+    this.cityData = this.getCity(code);
+    this.selectedProvince = code;
+    this.validateForm.get('city')?.setValue(this.cityData);
+  }
+
+  getCity(code: any) {
+    let lst : any;
+    for(let element of this.provinceData) {
+       if(element['code'] == code) {
+          lst = element['districts'];
+          break;
+       }
+    }
+    return lst;
   }
 
   initForm(): void {
@@ -79,6 +95,12 @@ export class BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    // get webservice các tỉnh thành
+    this.webService.GetCallProvinces(response=>{
+        console.log(response);
+        this.provinceData = response;
+    })
     this.initForm();
     this.obBreakPoint();
   }

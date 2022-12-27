@@ -8,14 +8,14 @@
       </nz-card-meta>
       <div class="card-info">
         <div>
-          <p nz-typography nzType="secondary">活跃用户</p>
+          <p nz-typography nzType="secondary">người dùng đang hoạt động</p>
           <p>
             12
-            <span class="wan">万</span>
+            <span class="wan">nghìn</span>
           </p>
         </div>
         <div>
-          <p nz-typography nzType="secondary">新增用户</p>
+          <p nz-typography nzType="secondary">Những người dùng mới</p>
           <p>{{ 1962 | number: '3.' }}</p>
         </div>
       </div>
@@ -24,13 +24,13 @@
 </div>
 
 <ng-template #op1>
-  <i nz-tooltip nzTooltipTitle="下载" nz-icon nzType="download"></i>
+  <i nz-tooltip nzTooltipTitle="Tải xuống" nz-icon nzType="download"></i>
 </ng-template>
 <ng-template #op2>
-  <i nz-tooltip nzTooltipTitle="编辑" nz-icon nzType="edit"></i>
+  <i nz-tooltip nzTooltipTitle="Chỉnh sửa" nz-icon nzType="edit"></i>
 </ng-template>
 <ng-template #op3>
-  <i nz-tooltip nzTooltipTitle="分享" nz-icon nzType="share-alt"></i>
+  <i nz-tooltip nzTooltipTitle="Chia sẻ" nz-icon nzType="share-alt"></i>
 </ng-template>
 <ng-template #op4>
   <i nz-dropdown [nzDropdownMenu]="op4Menu" nzPlacement="bottomLeft" nz-icon nzType="ellipsis"></i>

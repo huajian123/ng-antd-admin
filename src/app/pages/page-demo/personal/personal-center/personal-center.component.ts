@@ -19,14 +19,14 @@ interface TabInterface {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PersonalCenterComponent implements OnInit {
-  tagArray: string[] = ['很有想法的', '专注设计', '大长腿', '川妹子', '海纳百川'];
+  tagArray: string[] = ['Rất chu đáo', 'Tập trung vào thiết kết', 'Đôi chân dài', 'Xuyên mỹ tử', 'Bao gồm tất cả các con sông'];
   inputVisible = false;
   @ViewChild('inputElement', { static: false }) inputElement?: ElementRef;
   inputValue = '';
   tabData: TabInterface[] = [
-    { label: '文章(8)', component: new DynamicComponent(ArticleComponent, {}) },
-    { label: '应用(8)', component: new DynamicComponent(ApplicationComponent, {}) },
-    { label: '项目(8)', component: new DynamicComponent(ProjectsComponent, {}) }
+    { label: 'Private(8)', component: new DynamicComponent(ArticleComponent, {}) }, // thông báo riêng tư
+    { label: 'Public(8)', component: new DynamicComponent(ApplicationComponent, {}) }, // thông báo chung
+    { label: 'Đề Xuất(8)', component: new DynamicComponent(ProjectsComponent, {}) } // đề xuất của bạn
   ];
 
   @ViewChild(AdDirective, { static: true }) adHost!: AdDirective;

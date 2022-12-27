@@ -4,6 +4,7 @@ import { BaseHttpService } from '@services/base-http.service';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import * as Const from '@app/common/const';
 export interface Product {
   id: number;
   title: string;
@@ -23,6 +24,7 @@ export interface  ObjectDataSC{
 })
 export class WebserviceService {
   urlApi = 'https://fakestoreapi.com/';
+  provincesApi = Const.tinhthanhApi;
   constructor(
     public http: BaseHttpService,
     private httpt: HttpClient
@@ -35,6 +37,30 @@ export class WebserviceService {
       'Content-Type': 'application/json',
     }),
   };
+
+
+
+  async GetCallProvinces(
+    fncSuccess?: ((data: any) => void),
+    fncError?: (() => void)): Promise<Observable<HttpResponse<any>>> {
+   let promise =  this.httpt.get<any>(this.provincesApi);
+   promise.subscribe({
+     next: (res: any) => {
+       if(fncSuccess != null){
+          fncSuccess(res);
+       }
+       return true;
+     },
+     error: (err: any) => {
+        if(fncError != null){
+          fncError();
+        }
+        return false;
+     },
+     complete: ()=> {}
+   })
+   return promise;
+ }
 
   async GetCallCommonWs(serviceName: string,
     fncSuccess?: ((data: any) => void),

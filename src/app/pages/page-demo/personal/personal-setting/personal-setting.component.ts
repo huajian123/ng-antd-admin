@@ -25,31 +25,31 @@ export class PersonalSettingComponent implements OnInit {
   @ViewChild(AdDirective, { static: true }) adHost!: AdDirective;
   tabModel: NzMenuModeType = 'inline';
   settingComponent: TabInterface[] = [
-    { key: 'base', component: new DynamicComponent(BaseComponent, { label: '基本设置' }) },
-    { key: 'safe', component: new DynamicComponent(SafeComponent, { label: '安全设置' }) },
-    { key: 'bind', component: new DynamicComponent(BindComponent, { label: '账号绑定' }) },
-    { key: 'notice', component: new DynamicComponent(NoticeComponent, { label: '新消息通知' }) }
+    { key: 'base', component: new DynamicComponent(BaseComponent, { label: 'Cài đặt cơ bản' }) },
+    { key: 'safe', component: new DynamicComponent(SafeComponent, { label: 'Cài đặt hệ thống bảo vệ' }) },
+    { key: 'bind', component: new DynamicComponent(BindComponent, { label: 'Ràng buộc tài khoản' }) },
+    { key: 'notice', component: new DynamicComponent(NoticeComponent, { label: 'Thông báo tin tức mới' }) }
   ];
   menus: Array<{ key: string; title: string; selected?: boolean }> = [
     {
       key: 'base',
-      title: '基本设置',
+      title: 'Cài đặt cơ bản',
       selected: true
     },
     {
       key: 'safe',
-      title: '安全设置',
+      title: 'Cài đặt hệ thống bảo vệ',
       selected: false
     },
     {
       selected: false,
       key: 'bind',
-      title: '账号绑定'
+      title: 'Ràng buộc tài khoản'
     },
     {
       selected: false,
       key: 'notice',
-      title: '新消息通知'
+      title: 'Thông báo tin tức mới'
     }
   ];
   currentTitle: string = this.menus[0].title;

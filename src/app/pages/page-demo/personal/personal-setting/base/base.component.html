@@ -2,82 +2,82 @@
   <div nz-col [nzOrder]="formOrder" [nzXXl]="12" [nzXl]="12" [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzXs]="24">
     <form [nzLayout]="'vertical'" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
       <nz-form-item>
-        <nz-form-label nzSpan="24" nzRequired nzFor="email">邮箱</nz-form-label>
-        <nz-form-control nzSpan="24" nzErrorTip="请输入邮箱">
-          <input nz-input formControlName="email" id="email" placeholder="邮箱" />
+        <nz-form-label nzSpan="24" nzRequired nzFor="email">Email</nz-form-label>
+        <nz-form-control nzSpan="24" nzErrorTip="Vui lòng nhập Email">
+          <input nz-input formControlName="email" id="email" placeholder="Email" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label nzSpan="24" nzFor="password">昵称</nz-form-label>
-        <nz-form-control nzSpan="24" nzErrorTip="昵称">
-          <input nz-input formControlName="nickName" id="nickName" placeholder="昵称" />
+        <nz-form-label nzSpan="24" nzFor="password">Tên tài khoản</nz-form-label>
+        <nz-form-control nzSpan="24" nzErrorTip="Tên tài khoản">
+          <input nz-input formControlName="nickName" id="nickName" placeholder="Tên tài khoản" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label nzSpan="24" nzRequired nzFor="desc">个人简介</nz-form-label>
-        <nz-form-control nzSpan="24" nzErrorTip="请输入个人简介">
-          <textarea rows="4" formControlName="desc" nz-input id="desc" placeholder="请输入个人简介"></textarea>
+        <nz-form-label nzSpan="24" nzRequired nzFor="desc"> Thông tin cá nhân</nz-form-label>
+        <nz-form-control nzSpan="24" nzErrorTip="Vui lòng nhập Thông tin cá nhân">
+          <textarea rows="4" formControlName="desc" nz-input id="desc" placeholder="Vui lòng nhập Thông tin cá nhân"></textarea>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label nzSpan="24" nzFor="password" nzRequired>国家/地区</nz-form-label>
-        <nz-form-control nzSpan="24" nzErrorTip="昵称">
+        <nz-form-label nzSpan="24" nzFor="password" nzRequired>Quốc gia/khu vực</nz-form-label>
+        <nz-form-control nzSpan="24" nzErrorTip="Tên tài khoản">
           <nz-select formControlName="area">
-            <nz-option nzValue="jack" nzLabel="中国"></nz-option>
+            <nz-option nzValue="jack" nzLabel="Việt Nam"></nz-option>
           </nz-select>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label nzSpan="24" nzFor="password" nzRequired>所在省市</nz-form-label>
-        <nz-form-control nzSpan="24" nzErrorTip="昵称">
+        <nz-form-label nzSpan="24" nzFor="password" nzRequired>Tỉnh và thành phố</nz-form-label>
+        <nz-form-control nzSpan="24" nzErrorTip="Tên tài khoản">
           <div nz-row [nzGutter]="[16, 16]">
             <div nz-col nzSpan="12">
-              <nz-select formControlName="province" (ngModelChange)="provinceChange($event)">
-                <nz-option *ngFor="let p of provinceData" [nzValue]="p" [nzLabel]="p"></nz-option>
+              <nz-select nzShowSearch nzAllowClear formControlName="province" (ngModelChange)="provinceChange($event)" >
+                <nz-option *ngFor="let p of provinceData" [nzValue]="p['code']" [nzLabel]="p['name']"></nz-option>
               </nz-select>
             </div>
             <div nz-col nzSpan="12">
-              <nz-select formControlName="city">
-                <nz-option *ngFor="let c of cityData[selectedProvince]" [nzValue]="c" [nzLabel]="c"></nz-option>
+              <nz-select nzAllowClear formControlName="city">
+                <nz-option *ngFor="let c of cityData" [nzValue]="c['code']" [nzLabel]="c['name']"></nz-option>
               </nz-select>
             </div>
           </div>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label nzSpan="24" nzFor="street" nzRequired>街道地址</nz-form-label>
-        <nz-form-control nzSpan="24" nzErrorTip="街道地址">
-          <input nz-input formControlName="street" id="street" placeholder="街道地址" />
+        <nz-form-label nzSpan="24" nzFor="street" nzRequired>Địa chỉ</nz-form-label>
+        <nz-form-control nzSpan="24" nzErrorTip="Địa chỉ">
+          <input nz-input formControlName="street" id="street" placeholder="Địa chỉ" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label nzSpan="24" nzRequired nzFor="zalo">联系电话</nz-form-label>
+        <nz-form-label nzSpan="24" nzRequired nzFor="zalo">Zalo</nz-form-label>
         <nz-form-control nzSpan="24" [nzErrorTip]="combineTpl">
-          <input nz-input formControlName="zalo" id="zalo" placeholder="联系电话" />
+          <input nz-input formControlName="zalo" id="zalo" placeholder="Zalo" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label nzSpan="24" nzRequired nzFor="mobile">手机号</nz-form-label>
+        <nz-form-label nzSpan="24" nzRequired nzFor="mobile">Số điện thoại</nz-form-label>
         <nz-form-control nzSpan="24" [nzErrorTip]="combineTpl">
-          <input nz-input formControlName="mobile" maxlength="11" id="mobile" placeholder="手机号" />
+          <input nz-input formControlName="mobile" maxlength="11" id="mobile" placeholder="Số điện thoại" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item nz-row>
         <nz-form-control [nzSpan]="14">
-          <button nz-button nzType="primary">更新基本信息</button>
+          <button nz-button nzType="primary">Cập nhật thông tin </button>
         </nz-form-control>
       </nz-form-item>
     </form>
   </div>
   <div [nzOrder]="avatarOrder" class="avatar" [ngClass]="{ 'is-full': formOrder === 1 }" nz-col [nzXXl]="12" [nzXl]="12" [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzXs]="24">
-    <div *ngIf="formOrder === 0" class="m-b-8">头像</div>
+    <div *ngIf="formOrder === 0" class="m-b-8">Ảnh đại diện</div>
     <div class="avatar-wrap">
       <nz-avatar class="m-b-8" [nzSize]="144" [nzSrc]="'assets/imgs/default_face.png'"></nz-avatar>
       <div class="upload">
         <nz-upload nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76" [nzHeaders]="{ authorization: 'authorization-text' }" (nzChange)="handleChange($event)">
           <button nz-button>
             <i nz-icon nzType="upload"></i>
-            更换头像
+            Thay đổi hình đại diện
           </button>
         </nz-upload>
       </div>
@@ -86,5 +86,5 @@
 </div>
 <ng-template #combineTpl let-control>
   <ng-container *ngIf="control.hasError('message')">{{ control.errors.message }}</ng-container>
-  <ng-container *ngIf="control.hasError('required')">必填项</ng-container>
+  <ng-container *ngIf="control.hasError('required')">Phần bắt buộc</ng-container>
 </ng-template>
