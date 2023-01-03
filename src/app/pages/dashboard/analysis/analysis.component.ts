@@ -105,7 +105,7 @@ export class AnalysisComponent extends BaseComponent implements OnInit, AfterVie
     {title: "Vị trí hiện tại"},
   ];
 
-  date = null;
+  date = new Date();
 
   @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<NzSafeAny>;
   tableConfig!: MyTableConfig;
@@ -150,6 +150,18 @@ export class AnalysisComponent extends BaseComponent implements OnInit, AfterVie
     this.getListtopchiphi();
     this.getListtongcuoctungxe();
     
+  }
+
+  onChangeYear(result:Date) {
+    this.document.getElementById("doanhthu").innerHTML = "";
+    this.document.getElementById("ringPie").innerHTML = "";
+    let year = result.getFullYear();
+    this.getListthongketaichinh(year);
+    this.getThongketaichinhnam(year);
+    this.getTongchuyenhangtrongnam(year);
+    this.getListtopdoanhthu(year);
+    this.getListtopchiphi(year);
+    this.getListtongcuoctungxe(year);
   }
 
   initMinibar(): void {
@@ -342,6 +354,12 @@ export class AnalysisComponent extends BaseComponent implements OnInit, AfterVie
     });
   }
 
+  fnlistinit() {
+    this.lstdatadoanhthu = [];
+    this.lstdatachiphi = [];
+    this.lstdataloinhuan = [];
+  }
+
   getAllxe() {
     const params: SearchCommonVO<any> = {
       pageSize: 10,
@@ -373,6 +391,7 @@ export class AnalysisComponent extends BaseComponent implements OnInit, AfterVie
      .listtaichinh(req)
      .pipe()
      .subscribe(data => {
+       this.fnlistinit()
        for(let element of data) {
          this.itemObjdoanhthu = {
            type : element['Thang'],

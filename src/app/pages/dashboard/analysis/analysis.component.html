@@ -141,8 +141,8 @@
         <label nz-radio-button nzValue="2">Chi phí</label>
         <label nz-radio-button nzValue="3">Lợi Nhuận</label>
       </nz-radio-group>
-      <nz-range-picker class="m-l-20" [nzDisabled]="true"></nz-range-picker>
-
+      <!-- <nz-range-picker class="m-l-20" [nzDisabled]="true"></nz-range-picker> -->
+      <nz-date-picker class="m-l-20" nzMode="year" [(ngModel)]="date" (ngModelChange)="onChangeYear($event)"></nz-date-picker>
     </ng-template>
   </section>
 
