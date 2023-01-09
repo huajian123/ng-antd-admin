@@ -2,9 +2,9 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, NgZone, OnInit } fro
 import { FormBuilder } from '@angular/forms';
 
 import { Gauge, Liquid, RingProgress, TinyArea, WordCloud } from '@antv/g2plot';
-import { Scene } from '@antv/l7';
-import { GaodeMap } from '@antv/l7-maps';
+
 import { inNextTick } from 'ng-zorro-antd/core/util';
+import AMapLoader from '@amap/amap-jsapi-loader';
 
 @Component({
   selector: 'app-monitor',
@@ -14,7 +14,7 @@ import { inNextTick } from 'ng-zorro-antd/core/util';
 })
 export class MonitorComponent implements OnInit, AfterViewInit {
   deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30;
-  scene!: Scene;
+
   miniAreaData = [264, 274, 284, 294, 300, 310, 320, 330, 340, 350, 360, 370, 380, 390, 400, 410, 420, 430, 440, 450, 460, 470];
   wordCloudData = [
     {
@@ -562,17 +562,31 @@ export class MonitorComponent implements OnInit, AfterViewInit {
 
         this.wordCloud();
         // 地图
-        const scene = new Scene({
-          id: 'map',
-          logoPosition: 'bottomright',
-          antialias: false,
-          map: new GaodeMap({
-            pitch: 0,
-            style: 'dark',
-            center: [112, 23.69],
-            zoom: 2.5
+        // api地址
+        // https://lbs.amap.com/demo/javascript-api/example/map-lifecycle/map-show
+        // 自己去申请一个key，别用我这个Key，多谢
+        // 申请地址 https://console.amap.com/dev/key/app
+        AMapLoader.load({
+          key: '1c1b77fae2e59c25eb26ced9a0801103', //首次load必填
+          version: '1.4.15',
+          AMapUI: {
+            version: '1.1',
+            plugins: ['overlay/SimpleMarker']
+          }
+        })
+          .then(AMap => {
+            let map = new AMap.Map('map', {
+              resizeEnable: true,
+              zoom: 2,
+              center: [116.397428, 39.90923]
+            });
+            const styleName = "amap://styles/darkblue";
+            map.setMapStyle(styleName);
           })
-        });
+          .catch(e => {
+            console.error(e);
+          });
+
       });
     });
   }
