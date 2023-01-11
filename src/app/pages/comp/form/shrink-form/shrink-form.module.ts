@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { ShrinkFormRoutingModule } from './shrink-form-routing.module';
 import { ShrinkFormComponent } from './shrink-form.component';
+import {SharedModule} from "@shared/shared.module";
 
 
 @NgModule({
@@ -10,7 +10,7 @@ import { ShrinkFormComponent } from './shrink-form.component';
     ShrinkFormComponent
   ],
   imports: [
-    CommonModule,
+    SharedModule,
     ShrinkFormRoutingModule
   ]
 })

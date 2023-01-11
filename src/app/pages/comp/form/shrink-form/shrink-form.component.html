@@ -1,1 +1,163 @@
-正在紧张开发中。。。
+<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+
+
+<div class="normal-table-wrap">
+  <nz-card [nzBodyStyle]="{ 'padding-bottom': 0 }" class="m-b-10">
+    <form nz-form>
+      <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24 }">
+        <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+          <nz-form-item>
+            <nz-form-label [nzFor]="">菜单名称</nz-form-label>
+            <nz-form-control>
+              <input nz-input placeholder="请输入菜单名称" name="menuName" [(ngModel)]="searchParam.ruleName" />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+          <nz-form-item>
+            <nz-form-label [nzFor]="">描述</nz-form-label>
+            <nz-form-control>
+              <input nz-input placeholder="请输入" name="desc" [(ngModel)]="searchParam.desc" />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24" class="text-right p-0 m-b-10">
+          <button nz-button [nzType]="'primary'">
+            <i nz-icon nzType="search"></i>
+            搜索
+          </button>
+          <button nz-button class="m-l-15" (click)="resetForm()">
+            <i nz-icon nzType="close-circle" nzTheme="outline"></i>
+            重置
+          </button>
+        </div>
+      </div>
+    </form>
+  </nz-card>
+
+
+  <nz-card [nzBodyStyle]="{ 'padding-bottom': 0 }" class="m-b-10">
+    <form nz-form>
+      <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24 }">
+        <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+          <nz-form-item>
+            <nz-form-label [nzFor]="">规则名称</nz-form-label>
+            <nz-form-control>
+              <input nz-input placeholder="请输入" name="ruleName" [(ngModel)]="searchParam.ruleName" />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+          <nz-form-item>
+            <nz-form-label [nzFor]="">描述</nz-form-label>
+            <nz-form-control>
+              <input nz-input placeholder="请输入" name="desc" [(ngModel)]="searchParam.desc" />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <ng-container *ngIf="!isCollapse">
+          <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+            <nz-form-item>
+              <nz-form-label [nzFor]="">服务调用次数</nz-form-label>
+              <nz-form-control>
+                <input nz-input placeholder="请输入" name="desc" [(ngModel)]="searchParam.desc" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+            <nz-form-item>
+              <nz-form-label [nzFor]="">状态</nz-form-label>
+              <nz-form-control>
+                <input nz-input placeholder="请输入" name="desc" [(ngModel)]="searchParam.desc" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+          </div>
+        </ng-container>
+
+        <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24" class="m-b-8 text-right p-0">
+          <button nz-button [nzType]="'primary'">
+            <i nz-icon nzType="search"></i>
+            搜索
+          </button>
+          <button nz-button class="m-l-15" (click)="resetForm()">
+            <i nz-icon nzType="close-circle" nzTheme="outline"></i>
+            重置
+          </button>
+          <a class="collapse operate-text" (click)="toggleCollapse()">
+            <span *ngIf="isCollapse">展开</span>
+            <span *ngIf="!isCollapse">收起</span>
+            <i nz-icon [nzType]="isCollapse ? 'down' : 'up'"></i>
+          </a>
+        </div>
+      </div>
+    </form>
+  </nz-card>
+
+  <nz-card [nzBodyStyle]="{ 'padding-bottom': 0 }" class="m-b-10">
+    <form nz-form>
+      <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24 }">
+        <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+          <nz-form-item>
+            <nz-form-label [nzFor]="">规则名称</nz-form-label>
+            <nz-form-control>
+              <input nz-input placeholder="请输入" name="ruleName" [(ngModel)]="searchParam.ruleName" />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+          <nz-form-item>
+            <nz-form-label [nzFor]="">描述</nz-form-label>
+            <nz-form-control>
+              <input nz-input placeholder="请输入" name="desc" [(ngModel)]="searchParam.desc" />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <ng-container *ngIf="!isCollapse">
+          <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+            <nz-form-item>
+              <nz-form-label [nzFor]="">服务调用次数</nz-form-label>
+              <nz-form-control>
+                <input nz-input placeholder="请输入" name="desc" [(ngModel)]="searchParam.desc" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+            <nz-form-item>
+              <nz-form-label [nzFor]="">状态</nz-form-label>
+              <nz-form-control>
+                <input nz-input placeholder="请输入" name="desc" [(ngModel)]="searchParam.desc" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+            <nz-form-item>
+              <nz-form-label [nzFor]="">上次调度时间</nz-form-label>
+              <nz-form-control>
+                <input nz-input placeholder="请输入" name="desc" [(ngModel)]="searchParam.desc" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </ng-container>
+
+        <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24" class="m-b-8 text-right p-0">
+          <button nz-button [nzType]="'primary'">
+            <i nz-icon nzType="search"></i>
+            搜索
+          </button>
+          <button nz-button class="m-l-15" (click)="resetForm()">
+            <i nz-icon nzType="close-circle" nzTheme="outline"></i>
+            重置
+          </button>
+          <a class="collapse operate-text" (click)="toggleCollapse()">
+            <span *ngIf="isCollapse">展开</span>
+            <span *ngIf="!isCollapse">收起</span>
+            <i nz-icon [nzType]="isCollapse ? 'down' : 'up'"></i>
+          </a>
+        </div>
+      </div>
+    </form>
+  </nz-card>
+</div>
