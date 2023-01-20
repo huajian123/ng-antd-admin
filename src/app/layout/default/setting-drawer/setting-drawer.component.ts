@@ -16,7 +16,7 @@ interface NormalModel {
   isChecked: boolean;
 }
 
-interface Theme extends NormalModel {
+export interface Theme extends NormalModel {
   key: 'dark' | 'light';
 }
 
@@ -28,7 +28,7 @@ interface Color extends NormalModel {
   color: string;
 }
 
-interface Mode extends NormalModel {
+export interface ThemeMode extends NormalModel {
   key: 'side' | 'top' | 'mixi';
 }
 
@@ -124,7 +124,7 @@ export class SettingDrawerComponent implements OnInit {
       isChecked: false
     }
   ];
-  modes: Mode[] = [
+  modes: ThemeMode[] = [
     {
       key: 'side',
       image: '/assets/imgs/menu-side.svg',
@@ -183,7 +183,7 @@ export class SettingDrawerComponent implements OnInit {
     item.isChecked = true;
   }
 
-  changeMode(mode: Mode): void {
+  changeMode(mode: ThemeMode): void {
     this.selOne(mode, this.modes);
     this.themesService.setIsCollapsed(false);
     this._themesOptions.mode = mode.key;

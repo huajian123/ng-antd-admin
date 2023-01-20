@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
+import { Theme, ThemeMode } from '@app/layout/default/setting-drawer/setting-drawer.component';
+
 export interface SettingInterface {
-  theme: 'dark' | 'light'; // 主题模式（暗黑模式，明亮模式）
+  theme: Theme['key']; // 主题模式（暗黑模式，明亮模式）
   color: string; // 主题色
-  mode: 'side' | 'top' | 'mixi'; // 菜单模式（侧边模式，顶部模式，混合模式）
+  mode: ThemeMode['key']; // 菜单模式（侧边模式，顶部模式，混合模式）
   colorWeak: boolean; // 色弱
   greyTheme: boolean; // 灰色模式
   fixedHead: boolean; // 固定头部

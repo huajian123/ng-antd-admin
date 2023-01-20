@@ -5,6 +5,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, map, mergeMap, share, switchMap, takeUntil, tap } from 'rxjs/operators';
 
+import { ThemeMode } from '@app/layout/default/setting-drawer/setting-drawer.component';
 import { DestroyService } from '@core/services/common/destory.service';
 import { TabService } from '@core/services/common/tab.service';
 import { Menu } from '@core/services/types';
@@ -24,7 +25,7 @@ export class NavBarComponent implements OnInit {
   @Input() isMixiHead = false; // 是混合模式顶部导航
   @Input() isMixiLeft = false;
   routerPath = this.router.url;
-  themesMode: 'side' | 'top' | 'mixi' = 'side';
+  themesMode: ThemeMode['key'] = 'side';
   themesOptions$ = this.themesService.getThemesMode();
   isNightTheme$ = this.themesService.getIsNightTheme();
   isCollapsed$ = this.themesService.getIsCollapsed();
