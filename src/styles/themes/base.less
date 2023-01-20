@@ -668,6 +668,34 @@ input[nz-input] {
   .animate-bg-0;
 }
 
+// https://github.com/angular/angular/pull/42608
+@keyframes progress-bar-load-third {
+  0% {
+    transform: translateX(-33.3vw);
+  }
+  100% {
+    transform: translateX(100vw);
+  }
+}
+
+@keyframes progress-bar-grad-colours {
+  0% {
+    background: linear-gradient(90deg, rgba(232, 128, 152, 0) 0%, #e88098 30%, #e88098 50%, #e88098 70%, rgba(232, 128, 152, 0) 100%);
+  }
+  20% {
+    background: linear-gradient(90deg, rgba(132, 190, 190, 0) 0%, #84bebe 30%, #84bebe 50%, #84bebe 70%, rgba(132, 190, 190, 0) 100%);
+  }
+  40% {
+    background: linear-gradient(90deg, rgba(233, 135, 36, 0) 0%, #e98724 30%, #e98724 50%, #e98724 70%, rgba(233, 135, 36, 0) 100%);
+  }
+  60% {
+    background: linear-gradient(90deg, rgba(175, 201, 78, 0) 0%, #afc94e 30%, #afc94e 50%, #afc94e 70%, rgba(175, 201, 78, 0) 100%);
+  }
+  80% {
+    background: linear-gradient(90deg, rgba(98, 151, 164, 0) 0%, #6297a4 30%, #6297a4 50%, #6297a4 70%, rgba(98, 151, 164, 0) 100%);
+  }
+}
+
 //
 //.overflow-dots {
 //  overflow: hidden;
