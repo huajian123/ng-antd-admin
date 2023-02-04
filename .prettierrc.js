@@ -9,5 +9,22 @@ module.exports = {
   bracketSpacing: true,
   proseWrap: 'preserve',
   trailingComma: 'none',
-  endOfLine: 'lf'
+  endOfLine: 'lf',
+  // attributeGroups: ["^class$", "^(id|name)$", "$DEFAULT", "^aria-"]
+  "attributeGroups": [
+    "$ANGULAR_STRUCTURAL_DIRECTIVE",
+    "$ANGULAR_ELEMENT_REF",
+    "$ID",
+    "$CLASS",
+    "$TYPE",
+    "$FOR",
+    "$NAME",
+    "$DEFAULT",
+    "$ANGULAR_ANIMATION",
+    "$ANGULAR_ANIMATION_INPUT",
+    "$ANGULAR_INPUT",
+    "$ANGULAR_TWO_WAY_BINDING",
+    "$ANGULAR_OUTPUT"
+  ],
+  "attributeSort": "ASC"
 };
