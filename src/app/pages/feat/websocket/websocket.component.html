@@ -2,9 +2,9 @@
 <div class="normal-table-wrap">
   <div nz-row [nzGutter]="[16, 16]">
     <div nz-col nzFlex="300px">
-      <textarea class="m-b-8" [(ngModel)]="msg" nz-input placeholder="发送的内容服务端会返回" [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
-      <button (click)="send()" nz-button nzType="primary">发送</button>
-      <button (click)="end()" nz-button class="m-l-8" nzType="default">断开连接</button>
+      <textarea class="m-b-8" nz-input placeholder="发送的内容服务端会返回" [nzAutosize]="{ minRows: 3, maxRows: 5 }" [(ngModel)]="msg"></textarea>
+      <button nz-button nzType="primary" (click)="send()">发送</button>
+      <button class="m-l-8" nz-button nzType="default" (click)="end()">断开连接</button>
       <span>链接状态：{{ concate }}</span>
     </div>
     <div nz-col nzFlex="auto">

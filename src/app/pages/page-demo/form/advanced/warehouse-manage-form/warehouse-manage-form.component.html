@@ -1,40 +1,40 @@
 <ng-container [formGroup]="validateForm">
   <div nz-row>
-    <nz-form-item nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
-      <nz-form-label nzRequired nzSpan="24" nzFor="warehouseName">仓库名</nz-form-label>
-      <nz-form-control [nzXl]="18" [nzXXl]="18" [nzLg]="18" [nzMd]="24" [nzSm]="24" [nzErrorTip]="combineTpl">
-        <input nz-input formControlName="warehouseName" id="warehouseName" />
+    <nz-form-item nz-col [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXl]="8" [nzXs]="24" [nzXXl]="8">
+      <nz-form-label nzFor="warehouseName" nzRequired nzSpan="24">仓库名</nz-form-label>
+      <nz-form-control [nzErrorTip]="combineTpl" [nzLg]="18" [nzMd]="24" [nzSm]="24" [nzXl]="18" [nzXXl]="18">
+        <input id="warehouseName" formControlName="warehouseName" nz-input />
       </nz-form-control>
     </nz-form-item>
-    <nz-form-item nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
-      <nz-form-label nzRequired nzSpan="24" nzFor="warehouseDomainName">仓库域名</nz-form-label>
-      <nz-form-control [nzXl]="18" [nzXXl]="18" [nzLg]="18" [nzMd]="24" [nzSm]="24" [nzErrorTip]="combineTpl">
-        <input nz-input formControlName="warehouseDomainName" id="warehouseDomainName" />
+    <nz-form-item nz-col [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXl]="8" [nzXs]="24" [nzXXl]="8">
+      <nz-form-label nzFor="warehouseDomainName" nzRequired nzSpan="24">仓库域名</nz-form-label>
+      <nz-form-control [nzErrorTip]="combineTpl" [nzLg]="18" [nzMd]="24" [nzSm]="24" [nzXl]="18" [nzXXl]="18">
+        <input id="warehouseDomainName" formControlName="warehouseDomainName" nz-input />
       </nz-form-control>
     </nz-form-item>
-    <nz-form-item nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="24" [nzSm]="24" [nzXs]="24">
-      <nz-form-label nzRequired nzSpan="24" nzRequired nzFor="warehouseManager">仓库管理员</nz-form-label>
-      <nz-form-control [nzXl]="24" [nzXXl]="24" [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzErrorTip]="combineTpl">
-        <input nz-input formControlName="warehouseManager" id="warehouseManager" />
+    <nz-form-item nz-col [nzLg]="8" [nzMd]="24" [nzSm]="24" [nzXl]="8" [nzXs]="24" [nzXXl]="8">
+      <nz-form-label nzFor="warehouseManager" nzRequired nzRequired nzSpan="24">仓库管理员</nz-form-label>
+      <nz-form-control [nzErrorTip]="combineTpl" [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzXl]="24" [nzXXl]="24">
+        <input id="warehouseManager" formControlName="warehouseManager" nz-input />
       </nz-form-control>
     </nz-form-item>
 
-    <nz-form-item nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
-      <nz-form-label nzRequired nzSpan="24" nzFor="approver">审批人</nz-form-label>
-      <nz-form-control [nzXl]="18" [nzXXl]="18" [nzLg]="18" [nzMd]="24" [nzSm]="24" [nzErrorTip]="combineTpl">
-        <input nz-input formControlName="approver" id="approver" />
+    <nz-form-item nz-col [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXl]="8" [nzXs]="24" [nzXXl]="8">
+      <nz-form-label nzFor="approver" nzRequired nzSpan="24">审批人</nz-form-label>
+      <nz-form-control [nzErrorTip]="combineTpl" [nzLg]="18" [nzMd]="24" [nzSm]="24" [nzXl]="18" [nzXXl]="18">
+        <input id="approver" formControlName="approver" nz-input />
       </nz-form-control>
     </nz-form-item>
-    <nz-form-item nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
-      <nz-form-label nzRequired nzSpan="24" nzFor="effectiveTime">生效日期</nz-form-label>
-      <nz-form-control [nzLg]="18" [nzXl]="18" [nzXXl]="18" [nzMd]="24" [nzSm]="24" [nzErrorTip]="combineTpl">
-        <input nz-input formControlName="effectiveTime" id="effectiveTime" />
+    <nz-form-item nz-col [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXl]="8" [nzXs]="24" [nzXXl]="8">
+      <nz-form-label nzFor="effectiveTime" nzRequired nzSpan="24">生效日期</nz-form-label>
+      <nz-form-control [nzErrorTip]="combineTpl" [nzLg]="18" [nzMd]="24" [nzSm]="24" [nzXl]="18" [nzXXl]="18">
+        <input id="effectiveTime" formControlName="effectiveTime" nz-input />
       </nz-form-control>
     </nz-form-item>
-    <nz-form-item nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="24" [nzSm]="24" [nzXs]="24">
-      <nz-form-label nzSpan="24" nzRequired nzFor="warehouseType">仓库类型</nz-form-label>
-      <nz-form-control [nzXl]="24" [nzXXl]="24" [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzErrorTip]="combineTpl">
-        <input nz-input formControlName="warehouseType" id="warehouseType" />
+    <nz-form-item nz-col [nzLg]="8" [nzMd]="24" [nzSm]="24" [nzXl]="8" [nzXs]="24" [nzXXl]="8">
+      <nz-form-label nzFor="warehouseType" nzRequired nzSpan="24">仓库类型</nz-form-label>
+      <nz-form-control [nzErrorTip]="combineTpl" [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzXl]="24" [nzXXl]="24">
+        <input id="warehouseType" formControlName="warehouseType" nz-input />
       </nz-form-control>
     </nz-form-item>
   </div>

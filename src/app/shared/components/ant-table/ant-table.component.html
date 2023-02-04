@@ -1,56 +1,56 @@
 <nz-table
   nzShowPagination
-  nzTableLayout="fixed"
-  [nzFrontPagination]="false"
-  [nzSize]="tableSize"
-  [nzOuterBordered]="true"
-  nzShowSizeChanger
-  [nzBordered]="true"
-  [nzVirtualForTrackBy]="trackById"
-  [nzData]="_dataList"
-  [nzTotal]="_tableConfig!.total"
-  [nzPageIndex]="_tableConfig.pageIndex"
-  [nzScroll]="_scrollConfig"
-  [nzPageSize]="_tableConfig.pageSize"
-  (nzQueryParams)="onQueryParamsChange($event)"
-  (nzPageSizeChange)="onPageSizeChange($event)"
-  [nzLoading]="_tableConfig.loading"
   nzShowQuickJumper
+  nzShowSizeChanger
+  nzTableLayout="fixed"
+  [nzBordered]="true"
+  [nzData]="_dataList"
+  [nzFrontPagination]="false"
+  [nzLoading]="_tableConfig.loading"
+  [nzOuterBordered]="true"
+  [nzPageIndex]="_tableConfig.pageIndex"
+  [nzPageSize]="_tableConfig.pageSize"
+  [nzScroll]="_scrollConfig"
   [nzShowTotal]="rangeTemplate"
+  [nzSize]="tableSize"
+  [nzTotal]="_tableConfig!.total"
+  [nzVirtualForTrackBy]="trackById"
+  (nzPageSizeChange)="onPageSizeChange($event)"
+  (nzQueryParams)="onQueryParamsChange($event)"
 >
   <ng-template #rangeTemplate let-range="range" let-total>{{ range[0] }}-{{ range[1] }} 共 {{ total }} 条</ng-template>
   <thead>
     <tr>
       <th
-        class="animate-bg-0"
-        [nzLeft]="true"
-        [nzIndeterminate]="indeterminate"
         *ngIf="_tableConfig.showCheckbox"
-        (nzCheckedChange)="onAllChecked($event)"
-        [nzWidth]="'40px'"
+        class="animate-bg-0"
         [nzChecked]="allChecked"
+        [nzIndeterminate]="indeterminate"
+        [nzLeft]="true"
+        [nzWidth]="'40px'"
+        (nzCheckedChange)="onAllChecked($event)"
       ></th>
       <ng-container *ngFor="let head of _tableConfig.headers; let headIndex = index; let last = last; let first = first">
         <th
+          *ngIf="head.show === undefined || head.show === true"
           class="animate-bg-0"
-          [ngClass]="[head.thClassList ? head.thClassList : [], head.thClassFn ? head.thClassFn(head) : ''].flat()"
-          [nzWidth]="head.width + 'px'"
           nz-resizable
-          nzPreview
           nzBounds="parent"
+          nzPreview
+          [ngClass]="[head.thClassList ? head.thClassList : [], head.thClassFn ? head.thClassFn(head) : ''].flat()"
+          [nzLeft]="!!head.fixed && head.fixedDir === 'left'"
           [nzMaxWidth]="1200"
           [nzMinWidth]="1"
-          (nzResizeEnd)="onResize($event, head.title)"
           [nzRight]="!!head.fixed && head.fixedDir === 'right'"
-          [nzLeft]="!!head.fixed && head.fixedDir === 'left'"
-          *ngIf="head.show === undefined || head.show === true"
+          [nzWidth]="head.width + 'px'"
+          (nzResizeEnd)="onResize($event, head.title)"
         >
           <nz-resize-handle *ngIf="!last && (_tableConfig.showCheckbox ? true : !last)" nzDirection="right">
             <div class="resize-trigger"></div>
           </nz-resize-handle>
           <div>
             {{ head.title }}
-            <div class="sort-wrap m-l-8 hand-model" (click)="changeSort(head)" *ngIf="head.showSort">
+            <div *ngIf="head.showSort" class="sort-wrap m-l-8 hand-model" (click)="changeSort(head)">
               <i class="sort-caret ascending" [class.sort-caret-sel-asc]="head.sortDir === 'asc'"></i>
               <i class="sort-caret descending" [class.sort-caret-sel-desc]="head.sortDir === 'desc'"></i>
             </div>
@@ -61,7 +61,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let row of _dataList; let rowIndex = index; trackBy: trackByTableBody">
-      <td class="animate-bg-0" nzEllipsis *ngIf="_tableConfig.showCheckbox" [nzLeft]="true" (nzCheckedChange)="checkRowSingle($event, rowIndex)" [nzChecked]="row['_checked']"></td>
+      <td *ngIf="_tableConfig.showCheckbox" class="animate-bg-0" nzEllipsis [nzChecked]="row['_checked']" [nzLeft]="true" (nzCheckedChange)="checkRowSingle($event, rowIndex)"></td>
       <ng-container *ngFor="let head of _tableConfig.headers">
         <td
           *ngIf="head.show === undefined || head.show === true"
@@ -75,11 +75,11 @@
           </ng-container>
           <ng-template #rowTpl>
             <ng-container *ngIf="head.pipe; else noPipe">
-              <span [title]="row | tableFiledPipe: head.field | map: head.pipe">{{ row | tableFiledPipe: head.field | map: head.pipe }}</span>
+              <span [title]="row | tableFiledPipe : head.field | map : head.pipe">{{ row | tableFiledPipe : head.field | map : head.pipe }}</span>
             </ng-container>
             <ng-template #noPipe>
               <ng-container>
-                <span [title]="row | tableFiledPipe: head.field">{{ row | tableFiledPipe: head.field }}</span>
+                <span [title]="row | tableFiledPipe : head.field">{{ row | tableFiledPipe : head.field }}</span>
               </ng-container>
             </ng-template>
           </ng-template>

@@ -1,23 +1,23 @@
 <i
-  nz-popover
-  [(nzPopoverVisible)]="visible"
-  [nzPopoverTitle]="searchTitle"
-  nzPopoverTrigger="click"
-  [nzPopoverContent]="contentTemplate"
   class="input-after-icon hand-model"
   nz-icon
-  [nzType]="seletedIcon || 'appstore'"
+  nz-popover
+  nzPopoverTrigger="click"
   nzTheme="outline"
+  [nzPopoverContent]="contentTemplate"
+  [nzPopoverTitle]="searchTitle"
+  [nzType]="seletedIcon || 'appstore'"
+  [(nzPopoverVisible)]="visible"
 ></i>
 <ng-template #searchTitle>
-  <input nz-input (input)="searchIcon($event)" [placeholder]="'搜索图标的type'" />
+  <input nz-input [placeholder]="'搜索图标的type'" (input)="searchIcon($event)" />
 </ng-template>
 <ng-template #contentTemplate>
   <nz-card style="width: 300px; max-height: 220px; overflow: auto" [nzBodyStyle]="{ padding: '0' }" [nzBorderless]="true">
     <nz-card *ngIf="iconsStrShowArray && iconsStrShowArray.length > 0; else noResult">
       <ng-container *ngFor="let item of iconsStrShowArray">
-        <div (click)="selIconFn(item)" class="center" nz-card-grid [ngStyle]="gridStyle">
-          <i [ngStyle]="{ color: item.isChecked ? '#409eff' : '' }" nz-icon class="sp-18" [nzType]="item.icon" nzTheme="outline"></i>
+        <div class="center" nz-card-grid [ngStyle]="gridStyle" (click)="selIconFn(item)">
+          <i class="sp-18" nz-icon nzTheme="outline" [ngStyle]="{ color: item.isChecked ? '#409eff' : '' }" [nzType]="item.icon"></i>
         </div>
       </ng-container>
     </nz-card>
@@ -26,15 +26,15 @@
     </ng-template>
   </nz-card>
   <nz-pagination
-    [nzPageSizeOptions]="[20, 50]"
-    style="max-width: 300px"
     class="m-t-10"
-    (nzPageSizeChange)="pageSizeChange($event)"
     nzShowSizeChanger
-    [nzSize]="'small'"
+    style="max-width: 300px"
     [nzPageSize]="pageObj.pageSize"
-    (nzPageIndexChange)="getData($event)"
-    [(nzPageIndex)]="pageObj.pageNum"
+    [nzPageSizeOptions]="[20, 50]"
+    [nzSize]="'small'"
     [nzTotal]="iconsStrAllArray.length"
+    [(nzPageIndex)]="pageObj.pageNum"
+    (nzPageIndexChange)="getData($event)"
+    (nzPageSizeChange)="pageSizeChange($event)"
   ></nz-pagination>
 </ng-template>

@@ -20,25 +20,25 @@
       </div>
     </div>
     <div *ngIf="!(isOverMode$ | async)" nz-col nzFlex="230px">
-      <img style="width: 155px; margin-top: -20px" src="https://gw.alipayobjects.com/zos/rmsportal/RzwpdLnhmvDJToTdfDPe.png" />
+      <img src="https://gw.alipayobjects.com/zos/rmsportal/RzwpdLnhmvDJToTdfDPe.png" style="width: 155px; margin-top: -20px" />
     </div>
   </div>
 </ng-template>
 <div class="normal-table-wrap m-t-0">
   <div nz-row [nzGutter]="16">
-    <div nz-col class="flex" [nzXXl]="6" [nzXl]="8" [nzLg]="12" [nzMd]="12" [nzSm]="12" [nzXs]="24">
+    <div class="flex" nz-col [nzLg]="12" [nzMd]="12" [nzSm]="12" [nzXl]="8" [nzXs]="24" [nzXXl]="6">
       <app-water-mark></app-water-mark>
       <nz-card class="m-t-20 flex-1" [nzBodyStyle]="{ padding: 0, height: '100%', display: 'flex', justifyContent: 'center', minHeight: '160px' }">
         <div class="center new-btn">
-          <i class="m-r-8" nz-icon nzType="plus" nzTheme="outline"></i>
+          <i class="m-r-8" nz-icon nzTheme="outline" nzType="plus"></i>
           <span>新增产品</span>
         </div>
       </nz-card>
     </div>
-    <div nz-col [nzXXl]="6" [nzXl]="8" [nzLg]="12" [nzMd]="12" [nzSm]="12" [nzXs]="24" *ngFor="let item of list">
+    <div *ngFor="let item of list" nz-col [nzLg]="12" [nzMd]="12" [nzSm]="12" [nzXl]="8" [nzXs]="24" [nzXXl]="6">
       <app-water-mark></app-water-mark>
-      <nz-card nzHoverable class="m-t-20" [nzActions]="[actionSetting, actionEdit]">
-        <nz-card-meta [nzAvatar]="avatarTemplate" [nzTitle]="item.name" [nzDescription]="item.desc"></nz-card-meta>
+      <nz-card class="m-t-20" nzHoverable [nzActions]="[actionSetting, actionEdit]">
+        <nz-card-meta [nzAvatar]="avatarTemplate" [nzDescription]="item.desc" [nzTitle]="item.name"></nz-card-meta>
       </nz-card>
       <ng-template #avatarTemplate>
         <nz-avatar [nzSrc]="item.avatar"></nz-avatar>

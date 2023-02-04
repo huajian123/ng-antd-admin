@@ -1,14 +1,14 @@
 <ng-container *ngTemplateOutlet="headRight"></ng-container>
 <ng-template #headRight>
-  <div class="bst-header-wrap" id="tools">
+  <div id="tools" class="bst-header-wrap">
     <!--      <span *appScreenLessHidden="'375'" (click)="lockScreen()" class="bst-header-icon" nz-tooltip nzTooltipTitle="锁屏"
             nzTooltipPlacement="bottom">
          <i nz-icon nzType="lock"
             nzTheme="outline"></i>
         </span>-->
 
-    <span (click)="showSearchModal()" *appScreenLessHidden="'320'" class="bst-header-icon" nz-tooltip nzTooltipTitle="搜索" nzTooltipPlacement="bottom">
-      <i nz-icon nzType="search" nzTheme="outline"></i>
+    <span *appScreenLessHidden="'320'" class="bst-header-icon" nz-tooltip nzTooltipPlacement="bottom" nzTooltipTitle="搜索" (click)="showSearchModal()">
+      <i nz-icon nzTheme="outline" nzType="search"></i>
     </span>
     <!--注释的是一个弹出外连接的按钮-->
     <!-- <span *appScreenLessHidden="'375'" class="bst-header-icon" nz-tooltip nzTooltipTitle="OnChat的帮助文档"
@@ -18,64 +18,64 @@
            </span>-->
     <span
       *appScreenLessHidden="'393'"
+      #toogleFullScreenDir="appToggleFullscreen"
       class="bst-header-icon"
       appToggleFullscreen
-      #toogleFullScreenDir="appToggleFullscreen"
       nz-tooltip
-      [nzTooltipTitle]="toogleFullScreenDir.isFullscreenFlag ? '全屏' : '退出全屏'"
       nzTooltipPlacement="bottom"
+      [nzTooltipTitle]="toogleFullScreenDir.isFullscreenFlag ? '全屏' : '退出全屏'"
     >
-      <i nz-icon *ngIf="toogleFullScreenDir.isFullscreenFlag; else exitFullTpl" nzType="fullscreen" nzTheme="outline"></i>
+      <i *ngIf="toogleFullScreenDir.isFullscreenFlag; else exitFullTpl" nz-icon nzTheme="outline" nzType="fullscreen"></i>
       <ng-template #exitFullTpl>
-        <i nz-icon nzType="fullscreen-exit" nzTheme="outline"></i>
+        <i nz-icon nzTheme="outline" nzType="fullscreen-exit"></i>
       </ng-template>
     </span>
 
-    <span class="bst-header-icon" nz-dropdown [nzDropdownMenu]="noticeMenu" nzTrigger="click" nzPlacement="bottomRight">
-      <nz-badge [nzCount]="11" class="bst-badge">
-        <i nz-icon nzType="bell" nzTheme="outline"></i>
+    <span class="bst-header-icon" nz-dropdown nzPlacement="bottomRight" nzTrigger="click" [nzDropdownMenu]="noticeMenu">
+      <nz-badge class="bst-badge" [nzCount]="11">
+        <i nz-icon nzTheme="outline" nzType="bell"></i>
       </nz-badge>
     </span>
     <span class="bst-header-icon" nz-dropdown [nzDropdownMenu]="userSettingMenu">
-      <img class="avatar" src="assets/imgs/default_face.png" alt="" />
+      <img class="avatar" alt="" src="assets/imgs/default_face.png" />
       <span class="base-font-size">Serati Ma</span>
     </span>
     <nz-dropdown-menu #userSettingMenu>
       <ul nz-menu>
         <li nz-menu-item (click)="goPage('personal-center')">
           <a>
-            <i nz-icon nzType="user" nzTheme="outline" class="m-r-8"></i>
+            <i class="m-r-8" nz-icon nzTheme="outline" nzType="user"></i>
             <span>个人中心</span>
           </a>
         </li>
         <li nz-menu-item (click)="goPage('personal-setting')">
           <a>
-            <i nz-icon nzType="setting" nzTheme="outline" class="m-r-8"></i>
+            <i class="m-r-8" nz-icon nzTheme="outline" nzType="setting"></i>
             <span>个人设置</span>
           </a>
         </li>
         <li nz-menu-item (click)="changePassWorld()">
           <a>
-            <i nz-icon nzType="lock" nzTheme="outline" class="m-r-8"></i>
+            <i class="m-r-8" nz-icon nzTheme="outline" nzType="lock"></i>
             <span>修改密码</span>
           </a>
         </li>
         <li nz-menu-divider></li>
         <li nz-menu-item (click)="clean()">
           <a>
-            <i nz-icon nzType="clear" nzTheme="outline" class="m-r-8"></i>
+            <i class="m-r-8" nz-icon nzTheme="outline" nzType="clear"></i>
             <span>清除缓存</span>
           </a>
         </li>
         <li nz-menu-item (click)="lockScreen()">
           <a>
-            <i nz-icon nzType="lock" nzTheme="outline" class="m-r-8"></i>
+            <i class="m-r-8" nz-icon nzTheme="outline" nzType="lock"></i>
             <span>锁定屏幕</span>
           </a>
         </li>
         <li nz-menu-item>
           <a (click)="goLogin()">
-            <i nz-icon nzType="logout" nzTheme="outline" class="m-r-8"></i>
+            <i class="m-r-8" nz-icon nzTheme="outline" nzType="logout"></i>
             <span>退出登录</span>
           </a>
         </li>
@@ -83,7 +83,7 @@
     </nz-dropdown-menu>
 
     <span class="bst-header-icon" nz-dropdown [nzDropdownMenu]="language">
-      <i nz-icon nzType="font-size" nzTheme="outline"></i>
+      <i nz-icon nzTheme="outline" nzType="font-size"></i>
     </span>
     <nz-dropdown-menu #language="nzDropdownMenu">
       <ul nz-menu nzSelectable>
@@ -91,7 +91,7 @@
         <li nz-menu-item (click)="showMessage()">Bahasa Indonesia</li>
         <li nz-menu-item (click)="showMessage()">日本語</li>
         <li nz-menu-item (click)="showMessage()">Português</li>
-        <li nz-menu-item (click)="showMessage()" nzSelected>简体中文</li>
+        <li nz-menu-item nzSelected (click)="showMessage()">简体中文</li>
         <li nz-menu-item (click)="showMessage()">繁體中文</li>
       </ul>
     </nz-dropdown-menu>

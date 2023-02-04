@@ -5,22 +5,22 @@
   <nz-card>
     <app-water-mark></app-water-mark>
     <div nz-row>
-      <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="8" [nzSm]="8" [nzXs]="24" class="center">
-        <nz-statistic [nzValue]="'8个任务'" [nzTitle]="'我的待办'"></nz-statistic>
+      <div class="center" nz-col [nzLg]="8" [nzMd]="8" [nzSm]="8" [nzXl]="8" [nzXs]="24" [nzXXl]="8">
+        <nz-statistic [nzTitle]="'我的待办'" [nzValue]="'8个任务'"></nz-statistic>
       </div>
-      <div nz-col nz-row [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="8" [nzSm]="8" [nzXs]="24" class="center">
+      <div class="center" nz-col nz-row [nzLg]="8" [nzMd]="8" [nzSm]="8" [nzXl]="8" [nzXs]="24" [nzXXl]="8">
         <nz-divider nzType="vertical"></nz-divider>
         <div nz-col nzFlex="1">
-          <nz-statistic [nzValue]="'32分钟'" [nzTitle]="'本周任务平均处理时间'"></nz-statistic>
+          <nz-statistic [nzTitle]="'本周任务平均处理时间'" [nzValue]="'32分钟'"></nz-statistic>
         </div>
         <nz-divider nzType="vertical"></nz-divider>
       </div>
-      <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="8" [nzSm]="8" [nzXs]="24" class="center">
-        <nz-statistic [nzValue]="'24个任务'" [nzTitle]="'本周完成任务数'"></nz-statistic>
+      <div class="center" nz-col [nzLg]="8" [nzMd]="8" [nzSm]="8" [nzXl]="8" [nzXs]="24" [nzXXl]="8">
+        <nz-statistic [nzTitle]="'本周完成任务数'" [nzValue]="'24个任务'"></nz-statistic>
       </div>
     </div>
   </nz-card>
-  <nz-card nzTitle="基本列表" [nzExtra]="extraTpl" class="m-t-20">
+  <nz-card class="m-t-20" nzTitle="基本列表" [nzExtra]="extraTpl">
     <app-water-mark></app-water-mark>
     <ng-template #extraTpl>
       <div>
@@ -29,7 +29,7 @@
           <label nz-radio-button nzValue="ongoing">进行中</label>
           <label nz-radio-button nzValue="stay">等待中</label>
         </nz-radio-group>
-        <nz-input-group style="width: 270px" nzSearch [nzAddOnAfter]="suffixIconButton">
+        <nz-input-group nzSearch style="width: 270px" [nzAddOnAfter]="suffixIconButton">
           <input type="text" nz-input placeholder="请输入" />
         </nz-input-group>
         <ng-template #suffixIconButton>
@@ -37,8 +37,8 @@
         </ng-template>
       </div>
     </ng-template>
-    <button nzBlock nz-button nzType="dashed">
-      <i nz-icon nzType="plus" nzTheme="outline"></i>
+    <button nz-button nzBlock nzType="dashed">
+      <i nz-icon nzTheme="outline" nzType="plus"></i>
       <span>添加</span>
     </button>
     <nz-list [nzLoading]="isSpinning">
@@ -72,7 +72,7 @@
           <nz-list-item-action>
             <a nz-dropdown [nzDropdownMenu]="menu">
               更多
-              <i nz-icon nzType="down" nzTheme="outline"></i>
+              <i nz-icon nzTheme="outline" nzType="down"></i>
             </a>
             <nz-dropdown-menu #menu="nzDropdownMenu">
               <ul nz-menu>
@@ -84,7 +84,7 @@
         </ul>
       </nz-list-item>
       <nz-list-pagination>
-        <nz-pagination [nzPageIndex]="1" [nzPageSize]="5" [nzTotal]="50" nzShowQuickJumper nzShowSizeChanger></nz-pagination>
+        <nz-pagination nzShowQuickJumper nzShowSizeChanger [nzPageIndex]="1" [nzPageSize]="5" [nzTotal]="50"></nz-pagination>
       </nz-list-pagination>
     </nz-list>
   </nz-card>

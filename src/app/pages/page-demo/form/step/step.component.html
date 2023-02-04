@@ -6,7 +6,7 @@
     <section class="page-wrap" [class.p-0]="stepDirection === 'vertical'">
       <app-water-mark></app-water-mark>
       <section class="step-wrap">
-        <nz-steps [nzDirection]="stepDirection" [nzCurrent]="currentStep - 1">
+        <nz-steps [nzCurrent]="currentStep - 1" [nzDirection]="stepDirection">
           <nz-step nzTitle="填写转账信息"></nz-step>
           <nz-step nzTitle="确认转账信息"></nz-step>
           <nz-step nzTitle="完成"></nz-step>
@@ -14,7 +14,7 @@
       </section>
 
       <section>
-        <ng-template (attached)="initComponent($event)" [cdkPortalOutlet]="selectedPortal"></ng-template>
+        <ng-template [cdkPortalOutlet]="selectedPortal" (attached)="initComponent($event)"></ng-template>
         <!--  <ng-container *ngIf="currentStep===1">
             <app-step-one (next)="currentStep=currentStep+1" [stepDirection]="stepDirection"></app-step-one>
           </ng-container>

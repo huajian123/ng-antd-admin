@@ -1,24 +1,24 @@
 <div class="register-form-wrap">
   <h3 class="title">注册</h3>
-  <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+  <form class="login-form" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
     <nz-form-item>
       <nz-form-control nzErrorTip="请输入邮箱地址！">
         <nz-input-group [nzSize]="'large'">
-          <input type="text" nz-input formControlName="name" placeholder="邮箱" />
+          <input type="text" formControlName="name" nz-input placeholder="邮箱" />
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-control nzErrorTip="请输入密码!">
         <nz-input-group [nzSize]="'large'">
-          <input type="password" nz-input formControlName="password" placeholder="至少6位密码，区分大小写" />
+          <input type="password" formControlName="password" nz-input placeholder="至少6位密码，区分大小写" />
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-control nzErrorTip="请确认密码!">
         <nz-input-group [nzSize]="'large'">
-          <input type="text" nz-input formControlName="name" placeholder="确认密码" />
+          <input type="text" formControlName="name" nz-input placeholder="确认密码" />
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
@@ -26,7 +26,7 @@
     <nz-form-item>
       <nz-form-control nzErrorTip="请输入手机号!">
         <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate" [nzSize]="'large'">
-          <input type="text" nz-input formControlName="name" placeholder="手机号" />
+          <input type="text" formControlName="name" nz-input placeholder="手机号" />
         </nz-input-group>
       </nz-form-control>
 
@@ -39,17 +39,17 @@
     </nz-form-item>
 
     <nz-form-item nz-row nzJustify="space-between">
-      <nz-form-control class="flex-1" style="max-width: 65%" nz-col [nzXs]="15" [nzSm]="16" nzErrorTip="请输入验证码!">
+      <nz-form-control class="flex-1" nz-col nzErrorTip="请输入验证码!" style="max-width: 65%" [nzSm]="16" [nzXs]="15">
         <nz-input-group [nzSize]="'large'">
-          <input type="password" nz-input formControlName="password" placeholder="验证码" />
+          <input type="password" formControlName="password" nz-input placeholder="验证码" />
         </nz-input-group>
       </nz-form-control>
-      <button class="p-0" nz-button nz-col [nzXs]="7" [nzSm]="7" [nzSize]="'large'" nzType="default">获取验证码</button>
+      <button class="p-0" nz-button nz-col nzType="default" [nzSize]="'large'" [nzSm]="7" [nzXs]="7">获取验证码</button>
     </nz-form-item>
 
-    <div nz-row class="login-form-margin" nzAlign="middle" nzJustify="space-between">
+    <div class="login-form-margin" nz-row nzAlign="middle" nzJustify="space-between">
       <div nz-col [nzSpan]="12">
-        <button nz-button nzSize="large" class="login-form-button login-form-margin" [nzType]="'primary'">注 册</button>
+        <button class="login-form-button login-form-margin" nz-button nzSize="large" [nzType]="'primary'">注 册</button>
       </div>
       <div class="text-right" nz-col [nzSpan]="9">
         <a class="password-login" routerLink="/login/login-form">使用已有帐号登陆</a>

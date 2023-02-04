@@ -16,13 +16,13 @@
 
   <ng-template #headerTpl>
     <app-tool-bar>
-      <ng-container left *ngIf="isOverMode || (themeOptions$ | async)!.mode === 'side'; else topHeadTpl">
+      <ng-container *ngIf="isOverMode || (themeOptions$ | async)!.mode === 'side'; else topHeadTpl" left>
         <i id="trigger" class="trigger" nz-icon [nzType]="(isCollapsed$ | async) ? 'menu-unfold' : 'menu-fold'" (click)="changeCollapsed()"></i>
       </ng-container>
       <ng-template #topHeadTpl>
         <div class="left-start-center flex-1" style="z-index: 100">
           <ng-container *ngIf="(themeOptions$ | async)!.hasNavHeadArea">
-            <img class="m-l-10" style="max-height: 32px; max-width: 54px" src="assets/imgs/logo.svg" alt="" />
+            <img class="m-l-10" alt="" src="assets/imgs/logo.svg" style="max-height: 32px; max-width: 54px" />
             <span class="sp-18 m-r-8">Ant Design</span>
           </ng-container>
           <div class="flex-1">
@@ -39,13 +39,13 @@
   <!--混合模式header-->
   <ng-container mixheader>
     <app-tool-bar>
-      <ng-container left *ngIf="isOverMode">
+      <ng-container *ngIf="isOverMode" left>
         <i class="trigger" nz-icon [nzType]="(isCollapsed$ | async) ? 'menu-unfold' : 'menu-fold'" (click)="changeCollapsed()"></i>
       </ng-container>
 
-      <ng-container left *ngIf="!isOverMode">
+      <ng-container *ngIf="!isOverMode" left>
         <div class="left-start-center flex-1" style="z-index: 100">
-          <img class="m-l-10" style="max-height: 32px; max-width: 54px" src="assets/imgs/logo.svg" alt="" />
+          <img class="m-l-10" alt="" src="assets/imgs/logo.svg" style="max-height: 32px; max-width: 54px" />
           <span class="sp-18 m-r-25">Ant Design Pro</span>
           <div class="flex-1">
             <app-nav-bar *ngIf="(themeOptions$ | async)!.splitNav" [isMixiHead]="true"></app-nav-bar>

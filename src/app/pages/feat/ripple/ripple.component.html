@@ -6,19 +6,19 @@
       <label nz-checkbox [(ngModel)]="centered">centered</label>
       <label nz-checkbox [(ngModel)]="disabled">disabled</label>
       <label nz-checkbox [(ngModel)]="unbounded">unbounded</label>
-      <nz-input-number [(ngModel)]="radius" [nzMin]="0"></nz-input-number>
-      <input class="m-t-8" [style.background]="color" [colorPicker]="color" (colorPickerChange)="color = $event" />
+      <nz-input-number [nzMin]="0" [(ngModel)]="radius"></nz-input-number>
+      <input class="m-t-8" [colorPicker]="color" [style.background]="color" (colorPickerChange)="color = $event" />
     </div>
 
     <div
       class="center m-t-10 hand-model"
-      style="height: 400px; box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2)"
       matRipple
+      style="height: 400px; box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2)"
       [matRippleCentered]="centered"
-      [matRippleDisabled]="disabled"
-      [matRippleUnbounded]="unbounded"
-      [matRippleRadius]="radius"
       [matRippleColor]="color"
+      [matRippleDisabled]="disabled"
+      [matRippleRadius]="radius"
+      [matRippleUnbounded]="unbounded"
     >
       <span class="sp-28">点击</span>
     </div>

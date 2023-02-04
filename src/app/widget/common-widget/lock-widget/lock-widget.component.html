@@ -2,18 +2,18 @@
   <nz-avatar [nzSize]="70" [nzSrc]="'assets/imgs/default_face.png'"></nz-avatar>
   <p class="sp-16 m-t-8">Serati Ma</p>
 
-  <form autocomplete="off" class="m-t-30 full-with p-l-25 p-r-24 m-b-20" nz-form [formGroup]="validateForm" [nzLayout]="'vertical'">
+  <form class="m-t-30 full-with p-l-25 p-r-24 m-b-20" autocomplete="off" nz-form [formGroup]="validateForm" [nzLayout]="'vertical'">
     <nz-form-item>
       <nz-form-label nzRequired>锁屏密码</nz-form-label>
       <nz-form-control nzErrorTip="请输入锁屏密码">
         <nz-input-group [nzSuffix]="suffixTemplate">
-          <input autocomplete="off" formControlName="password" [type]="passwordVisible ? 'text' : 'password'" nz-input name="password" placeholder="请输入" />
+          <input name="password" autocomplete="off" formControlName="password" nz-input placeholder="请输入" [type]="passwordVisible ? 'text' : 'password'" />
         </nz-input-group>
         <ng-template #suffixTemplate>
           <i nz-icon [nzType]="!passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
         </ng-template>
       </nz-form-control>
     </nz-form-item>
-    <button (click)="submitForm()" nz-button nzSize="large" class="login-form-button full-with" [nzType]="'primary'">锁 定</button>
+    <button class="login-form-button full-with" nz-button nzSize="large" [nzType]="'primary'" (click)="submitForm()">锁 定</button>
   </form>
 </div>

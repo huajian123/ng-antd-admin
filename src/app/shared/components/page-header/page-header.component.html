@@ -1,4 +1,4 @@
-<nz-page-header (nzBack)="back()" [nzTitle]="pageHeaderInfo.title" [nzBackIcon]="backTpl ? backTpl : null" [nzGhost]="false" class="site-page-header">
+<nz-page-header class="site-page-header" [nzBackIcon]="backTpl ? backTpl : null" [nzGhost]="false" [nzTitle]="pageHeaderInfo.title" (nzBack)="back()">
   <nz-breadcrumb nz-page-header-breadcrumb>
     <nz-breadcrumb-item *ngFor="let breadcrumb of pageHeaderInfo.breadcrumb">
       <a>{{ breadcrumb }}</a>

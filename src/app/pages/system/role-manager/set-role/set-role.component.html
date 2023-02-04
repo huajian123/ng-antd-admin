@@ -6,9 +6,9 @@
     <ul>
       <li *ngFor="let permission of permissionList">
         <div class="first-menu">
-          <label [(ngModel)]="permission.checked" nz-checkbox>{{ permission.menuName }}</label>
-          <span *ngIf="permission.children && permission.children.length > 0" (click)="permission.isOpen = !permission.isOpen" class="hand-model">
-            <i nz-icon [nzType]="permission.isOpen ? 'down' : 'right'" nzTheme="outline"></i>
+          <label nz-checkbox [(ngModel)]="permission.checked">{{ permission.menuName }}</label>
+          <span *ngIf="permission.children && permission.children.length > 0" class="hand-model" (click)="permission.isOpen = !permission.isOpen">
+            <i nz-icon nzTheme="outline" [nzType]="permission.isOpen ? 'down' : 'right'"></i>
             <span class="operate-text">{{ permission.isOpen ? '收起' : '展开' }}</span>
           </span>
         </div>
@@ -21,9 +21,9 @@
             <ng-container *ngFor="let childPermission of childPermissionArray; let first = first">
               <ng-container *ngIf="childPermission.menuType === 'C'; else operateTpl">
                 <div class="first-menu" [ngStyle]="{ paddingLeft: childPermission.level * 16 + 'px' }">
-                  <label [(ngModel)]="childPermission.checked" nz-checkbox>{{ childPermission.menuName }}</label>
-                  <span *ngIf="childPermission.children && childPermission.children.length > 0" (click)="childPermission.isOpen = !childPermission.isOpen" class="hand-model">
-                    <i nz-icon [nzType]="childPermission.isOpen ? 'down' : 'right'" nzTheme="outline"></i>
+                  <label nz-checkbox [(ngModel)]="childPermission.checked">{{ childPermission.menuName }}</label>
+                  <span *ngIf="childPermission.children && childPermission.children.length > 0" class="hand-model" (click)="childPermission.isOpen = !childPermission.isOpen">
+                    <i nz-icon nzTheme="outline" [nzType]="childPermission.isOpen ? 'down' : 'right'"></i>
                     <span class="operate-text">{{ childPermission.isOpen ? '收起' : '展开' }}</span>
                   </span>
                 </div>
@@ -32,7 +32,7 @@
                 <ng-container *ngIf="first">
                   <div class="operate-line li-height m-0 p-0 p-l-35">
                     <span>操作权限：</span>
-                    <label *ngFor="let operate of childPermissionArray" [(ngModel)]="operate.checked" nz-checkbox>{{ operate.menuName }}</label>
+                    <label *ngFor="let operate of childPermissionArray" nz-checkbox [(ngModel)]="operate.checked">{{ operate.menuName }}</label>
                     <nz-divider class="m-0"></nz-divider>
                   </div>
                 </ng-container>
@@ -46,6 +46,6 @@
   </nz-card>
 </div>
 <app-footer-submit>
-  <button class="right" (click)="submit()" nz-button nzType="primary">提交</button>
-  <button class="right m-l-20" nzGhost (click)="back()" nz-button nzType="primary">返回</button>
+  <button class="right" nz-button nzType="primary" (click)="submit()">提交</button>
+  <button class="right m-l-20" nz-button nzGhost nzType="primary" (click)="back()">返回</button>
 </app-footer-submit>

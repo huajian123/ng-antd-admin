@@ -1,7 +1,7 @@
 <!--非固定tab模式-->
 <nz-card *ngIf="!(themesOptions$ | async)?.fixedTab; else fixTabTpl" id="multi-tab" class="m-t-10" style="height: 35px" [nzBodyStyle]="{ padding: 0 }" [nzBordered]="false">
-  <nz-tabset (nzClose)="clickCloseIcon($event)" [nzSelectedIndex]="currentIndex" [nzTabBarStyle]="{ height: '35px' }" [nzTabPosition]="'top'" [nzType]="'editable-card'" [nzHideAdd]="true">
-    <nz-tab (nzClick)="goPage(tab)" nzClosable (nzContextmenu)="contextMenu($event, menu)" [nzTitle]="tab.title" *ngFor="let tab of tabsSourceData$ | async; let i = index; trackBy: trackByTab">
+  <nz-tabset [nzHideAdd]="true" [nzSelectedIndex]="currentIndex" [nzTabBarStyle]="{ height: '35px' }" [nzTabPosition]="'top'" [nzType]="'editable-card'" (nzClose)="clickCloseIcon($event)">
+    <nz-tab *ngFor="let tab of tabsSourceData$ | async; let i = index; trackBy: trackByTab" nzClosable [nzTitle]="tab.title" (nzClick)="goPage(tab)" (nzContextmenu)="contextMenu($event, menu)">
       <nz-dropdown-menu #menu="nzDropdownMenu">
         <ul nz-menu>
           <li nz-menu-item [nzDisabled]="router.url !== tab.path" (click)="refresh()">刷新</li>
@@ -17,6 +17,7 @@
 <!--固定tab模式-->
 <ng-template #fixTabTpl>
   <nz-card
+    id="multi-tab2"
     class="fixed-tab"
     [ngClass]="{
       'fixed-collapsed': (isCollapsed$ | async),
@@ -27,16 +28,15 @@
         ((themesOptions$ | async)?.mode === 'mixi' && (leftMenuArray$ | async)!.length === 0 && (themesOptions$ | async)?.splitNav)
     }"
     [ngStyle]="{ top: (themesOptions$ | async)!.hasTopArea ? '48px' : '0', left: !(themesOptions$ | async)!.hasNavArea ? '0' : '' }"
-    id="multi-tab2"
     [nzBodyStyle]="{ padding: 0 }"
     [nzBordered]="true"
   >
     <nz-tabset [nzAnimated]="false" [nzSelectedIndex]="currentIndex" [nzTabPosition]="'top'">
-      <nz-tab (nzClick)="goPage(tab)" nzClosable (nzContextmenu)="contextMenu($event, menu)" [nzTitle]="titleTemplate" *ngFor="let tab of tabsSourceData$ | async; let i = index; trackBy: trackByTab">
+      <nz-tab *ngFor="let tab of tabsSourceData$ | async; let i = index; trackBy: trackByTab" nzClosable [nzTitle]="titleTemplate" (nzClick)="goPage(tab)" (nzContextmenu)="contextMenu($event, menu)">
         <ng-template #titleTemplate>
           <span class="text-center p-l-16 p-r-16 relative d-i-b" appMouseHoverShow style="min-width: 60px">
             {{ tab.title }}
-            <i class="m-0 none" (click)="clickCloseIcon({ index: i })" nz-icon [nzType]="'close'"></i>
+            <i class="m-0 none" nz-icon [nzType]="'close'" (click)="clickCloseIcon({ index: i })"></i>
           </span>
         </ng-template>
         <nz-dropdown-menu #menu="nzDropdownMenu">

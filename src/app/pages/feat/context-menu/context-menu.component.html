@@ -1,7 +1,7 @@
 <app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
 <div class="normal-table-wrap">
   <nz-card nzTitle="Simple">
-    <button nzType="primary" nz-button (contextmenu)="contextMenu($event, menu)">Right Click on here</button>
+    <button nz-button nzType="primary" (contextmenu)="contextMenu($event, menu)">Right Click on here</button>
     <nz-dropdown-menu #menu="nzDropdownMenu">
       <ul nz-menu>
         <li nz-menu-item>1st menu item</li>

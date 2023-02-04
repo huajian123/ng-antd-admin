@@ -1,24 +1,24 @@
 <form nz-form [formGroup]="validateForm">
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="menuName">名称</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="combineTpl">
-      <input nz-input formControlName="menuName" id="menuName" placeholder="名称" />
+    <nz-form-label nzFor="menuName" nzRequired [nzSm]="6" [nzXs]="24">名称</nz-form-label>
+    <nz-form-control [nzErrorTip]="combineTpl" [nzSm]="14" [nzXs]="24">
+      <input id="menuName" formControlName="menuName" nz-input placeholder="名称" />
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="menuType">类型</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="combineTpl">
-      <nz-radio-group (ngModelChange)="changeMenuType($event)" formControlName="menuType">
+    <nz-form-label nzFor="menuType" nzRequired [nzSm]="6" [nzXs]="24">类型</nz-form-label>
+    <nz-form-control [nzErrorTip]="combineTpl" [nzSm]="14" [nzXs]="24">
+      <nz-radio-group formControlName="menuType" (ngModelChange)="changeMenuType($event)">
         <label nz-radio [nzValue]="'C'">菜单</label>
         <label nz-radio [nzValue]="'F'">按钮</label>
       </nz-radio-group>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item *ngIf="menuType === 'C'">
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="icon">zorro图标</nz-form-label>
+    <nz-form-label nzFor="icon" [nzSm]="6" [nzXs]="24">zorro图标</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <nz-input-group [nzAddOnAfter]="selIcon">
-        <input nz-input formControlName="icon" />
+        <input formControlName="icon" nz-input />
       </nz-input-group>
       <ng-template #selIcon>
         <app-icon-sel [visible]="selIconVisible" (selIcon)="seledIcon($event)"></app-icon-sel>
@@ -26,33 +26,33 @@
     </nz-form-control>
   </nz-form-item>
   <nz-form-item *ngIf="menuType === 'C'">
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="alIcon">阿里图标</nz-form-label>
+    <nz-form-label nzFor="alIcon" [nzSm]="6" [nzXs]="24">阿里图标</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="alIcon" id="alIcon" placeholder="阿里图标" />
+      <input id="alIcon" formControlName="alIcon" nz-input placeholder="阿里图标" />
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="code">权限码</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="combineTpl">
-      <input nz-input formControlName="code" id="code" placeholder="权限码" />
+    <nz-form-label nzFor="code" nzRequired [nzSm]="6" [nzXs]="24">权限码</nz-form-label>
+    <nz-form-control [nzErrorTip]="combineTpl" [nzSm]="14" [nzXs]="24">
+      <input id="code" formControlName="code" nz-input placeholder="权限码" />
     </nz-form-control>
   </nz-form-item>
   <nz-form-item *ngIf="menuType === 'C'">
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="path">路由地址</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="combineTpl">
-      <input nz-input formControlName="path" id="path" placeholder="路由地址" />
+    <nz-form-label nzFor="path" nzRequired [nzSm]="6" [nzXs]="24">路由地址</nz-form-label>
+    <nz-form-control [nzErrorTip]="combineTpl" [nzSm]="14" [nzXs]="24">
+      <input id="path" formControlName="path" nz-input placeholder="路由地址" />
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="orderNum">排序</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="combineTpl">
+    <nz-form-label nzFor="orderNum" nzRequired [nzSm]="6" [nzXs]="24">排序</nz-form-label>
+    <nz-form-control [nzErrorTip]="combineTpl" [nzSm]="14" [nzXs]="24">
       <nz-input-number formControlName="orderNum" [nzMin]="1" [nzStep]="1"></nz-input-number>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item *ngIf="menuType === 'C'">
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="visible">展示</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="combineTpl">
+    <nz-form-label nzFor="visible" nzRequired [nzSm]="6" [nzXs]="24">展示</nz-form-label>
+    <nz-form-control [nzErrorTip]="combineTpl" [nzSm]="14" [nzXs]="24">
       <nz-radio-group formControlName="visible">
         <label nz-radio [nzValue]="true">是</label>
         <label nz-radio [nzValue]="false">否</label>
@@ -60,13 +60,13 @@
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="status">状态</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="combineTpl">
+    <nz-form-label nzFor="status" nzRequired [nzSm]="6" [nzXs]="24">状态</nz-form-label>
+    <nz-form-control [nzErrorTip]="combineTpl" [nzSm]="14" [nzXs]="24">
       <nz-switch formControlName="status" nzCheckedChildren="可用" nzUnCheckedChildren="禁用"></nz-switch>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item *ngIf="menuType === 'C'">
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="newLinkFlag">外链</nz-form-label>
+    <nz-form-label nzFor="newLinkFlag" [nzSm]="6" [nzXs]="24">外链</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <nz-radio-group formControlName="newLinkFlag">
         <label nz-radio [nzValue]="true">是</label>

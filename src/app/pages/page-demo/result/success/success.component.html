@@ -1,43 +1,43 @@
 <nz-card [nzBordered]="false">
   <nz-result
     nzStatus="success"
-    nzTitle="提交成功"
     nzSubTitle="提交结果页用于反馈一系列操作任务的处理结果， 如果仅是简单操作，使用 Message 全局提示反馈即可。 本文字区域可以展示简单的补充说明，如果有类似展示 “单据”的需求，下面这个灰色区域可以呈现比较复杂的内容。"
+    nzTitle="提交成功"
   >
     <div nz-result-content>
       <h5 nz-typography>项目名称</h5>
-      <div nz-row [nzGutter]="16" class="m-b-20">
-        <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="12" [nzXl]="6">
+      <div class="m-b-20" nz-row [nzGutter]="16">
+        <div nz-col [nzLg]="12" [nzMd]="12" [nzSm]="12" [nzXl]="6" [nzXs]="24">
           <span>项目 ID：</span>
           23421
         </div>
-        <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="12" [nzXl]="6">
+        <div nz-col [nzLg]="12" [nzMd]="12" [nzSm]="12" [nzXl]="6" [nzXs]="24">
           <span>负责人：</span>
           曲丽丽
         </div>
-        <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24" [nzXl]="12">
+        <div nz-col [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzXl]="12" [nzXs]="24">
           <span>生效时间：</span>
           2016-12-12 ~ 2017-12-12
         </div>
       </div>
-      <nz-steps [nzDirection]="stepDirection" [nzCurrent]="1" nzProgressDot>
-        <nz-step [nzTitle]="'创建项目'" [nzDescription]="createDesc">
+      <nz-steps nzProgressDot [nzCurrent]="1" [nzDirection]="stepDirection">
+        <nz-step [nzDescription]="createDesc" [nzTitle]="'创建项目'">
           <ng-template #createDesc>
             <div class="sp-14 relative">
               <div class="m-t-8 m-b-4">
                 曲丽丽
-                <i nz-icon nzType="dingding" class="m-l-8"></i>
+                <i class="m-l-8" nz-icon nzType="dingding"></i>
               </div>
               <div class="m-t-8 m-b-4">2016-12-12 12:32</div>
             </div>
           </ng-template>
         </nz-step>
-        <nz-step [nzTitle]="'部门初审'" [nzDescription]="checkedDesc">
+        <nz-step [nzDescription]="checkedDesc" [nzTitle]="'部门初审'">
           <ng-template #checkedDesc>
             <div class="sp-14 relative">
               <div class="m-t-8 m-b-4">
                 周毛毛
-                <i nz-icon nzType="dingding" class="m-l-8"></i>
+                <i class="m-l-8" nz-icon nzType="dingding"></i>
               </div>
               <div class="m-t-8 m-b-4">
                 <a class="operate-text">催一下</a>
@@ -51,8 +51,8 @@
     </div>
     <div nz-result-extra>
       <div nz-row nzJustify="center">
-        <button nz-button class="m-r-8" nzType="primary">返回列表</button>
-        <button nz-button class="m-r-8">查看项目</button>
+        <button class="m-r-8" nz-button nzType="primary">返回列表</button>
+        <button class="m-r-8" nz-button>查看项目</button>
         <button nz-button>打 印</button>
       </div>
     </div>

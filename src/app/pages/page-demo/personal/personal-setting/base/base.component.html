@@ -1,65 +1,65 @@
 <div nz-row>
-  <div nz-col [nzOrder]="formOrder" [nzXXl]="12" [nzXl]="12" [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzXs]="24">
-    <form [nzLayout]="'vertical'" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+  <div nz-col [nzLg]="24" [nzMd]="24" [nzOrder]="formOrder" [nzSm]="24" [nzXl]="12" [nzXs]="24" [nzXXl]="12">
+    <form nz-form [formGroup]="validateForm" [nzLayout]="'vertical'" (ngSubmit)="submitForm()">
       <nz-form-item>
-        <nz-form-label nzSpan="24" nzRequired nzFor="email">邮箱</nz-form-label>
-        <nz-form-control nzSpan="24" nzErrorTip="请输入邮箱">
-          <input nz-input formControlName="email" id="email" placeholder="邮箱" />
+        <nz-form-label nzFor="email" nzRequired nzSpan="24">邮箱</nz-form-label>
+        <nz-form-control nzErrorTip="请输入邮箱" nzSpan="24">
+          <input id="email" formControlName="email" nz-input placeholder="邮箱" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label nzSpan="24" nzFor="password">昵称</nz-form-label>
-        <nz-form-control nzSpan="24" nzErrorTip="昵称">
-          <input nz-input formControlName="nickName" id="nickName" placeholder="昵称" />
+        <nz-form-label nzFor="password" nzSpan="24">昵称</nz-form-label>
+        <nz-form-control nzErrorTip="昵称" nzSpan="24">
+          <input id="nickName" formControlName="nickName" nz-input placeholder="昵称" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label nzSpan="24" nzRequired nzFor="desc">个人简介</nz-form-label>
-        <nz-form-control nzSpan="24" nzErrorTip="请输入个人简介">
-          <textarea rows="4" formControlName="desc" nz-input id="desc" placeholder="请输入个人简介"></textarea>
+        <nz-form-label nzFor="desc" nzRequired nzSpan="24">个人简介</nz-form-label>
+        <nz-form-control nzErrorTip="请输入个人简介" nzSpan="24">
+          <textarea id="desc" formControlName="desc" nz-input placeholder="请输入个人简介" rows="4"></textarea>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label nzSpan="24" nzFor="password" nzRequired>国家/地区</nz-form-label>
-        <nz-form-control nzSpan="24" nzErrorTip="昵称">
+        <nz-form-label nzFor="password" nzRequired nzSpan="24">国家/地区</nz-form-label>
+        <nz-form-control nzErrorTip="昵称" nzSpan="24">
           <nz-select formControlName="area">
-            <nz-option nzValue="jack" nzLabel="中国"></nz-option>
+            <nz-option nzLabel="中国" nzValue="jack"></nz-option>
           </nz-select>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label nzSpan="24" nzFor="password" nzRequired>所在省市</nz-form-label>
-        <nz-form-control nzSpan="24" nzErrorTip="昵称">
+        <nz-form-label nzFor="password" nzRequired nzSpan="24">所在省市</nz-form-label>
+        <nz-form-control nzErrorTip="昵称" nzSpan="24">
           <div nz-row [nzGutter]="[16, 16]">
             <div nz-col nzSpan="12">
               <nz-select formControlName="province" (ngModelChange)="provinceChange($event)">
-                <nz-option *ngFor="let p of provinceData" [nzValue]="p" [nzLabel]="p"></nz-option>
+                <nz-option *ngFor="let p of provinceData" [nzLabel]="p" [nzValue]="p"></nz-option>
               </nz-select>
             </div>
             <div nz-col nzSpan="12">
               <nz-select formControlName="city">
-                <nz-option *ngFor="let c of cityData[selectedProvince]" [nzValue]="c" [nzLabel]="c"></nz-option>
+                <nz-option *ngFor="let c of cityData[selectedProvince]" [nzLabel]="c" [nzValue]="c"></nz-option>
               </nz-select>
             </div>
           </div>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label nzSpan="24" nzFor="street" nzRequired>街道地址</nz-form-label>
-        <nz-form-control nzSpan="24" nzErrorTip="街道地址">
-          <input nz-input formControlName="street" id="street" placeholder="街道地址" />
+        <nz-form-label nzFor="street" nzRequired nzSpan="24">街道地址</nz-form-label>
+        <nz-form-control nzErrorTip="街道地址" nzSpan="24">
+          <input id="street" formControlName="street" nz-input placeholder="街道地址" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label nzSpan="24" nzRequired nzFor="telephone">联系电话</nz-form-label>
+        <nz-form-label nzFor="telephone" nzRequired nzSpan="24">联系电话</nz-form-label>
         <nz-form-control nzSpan="24" [nzErrorTip]="combineTpl">
-          <input nz-input formControlName="telephone" id="telephone" placeholder="联系电话" />
+          <input id="telephone" formControlName="telephone" nz-input placeholder="联系电话" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label nzSpan="24" nzRequired nzFor="mobile">手机号</nz-form-label>
+        <nz-form-label nzFor="mobile" nzRequired nzSpan="24">手机号</nz-form-label>
         <nz-form-control nzSpan="24" [nzErrorTip]="combineTpl">
-          <input nz-input formControlName="mobile" maxlength="11" id="mobile" placeholder="手机号" />
+          <input id="mobile" formControlName="mobile" maxlength="11" nz-input placeholder="手机号" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item nz-row>
@@ -69,7 +69,7 @@
       </nz-form-item>
     </form>
   </div>
-  <div [nzOrder]="avatarOrder" class="avatar" [ngClass]="{ 'is-full': formOrder === 1 }" nz-col [nzXXl]="12" [nzXl]="12" [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzXs]="24">
+  <div class="avatar" nz-col [ngClass]="{ 'is-full': formOrder === 1 }" [nzLg]="24" [nzMd]="24" [nzOrder]="avatarOrder" [nzSm]="24" [nzXl]="12" [nzXs]="24" [nzXXl]="12">
     <div *ngIf="formOrder === 0" class="m-b-8">头像</div>
     <div class="avatar-wrap">
       <nz-avatar class="m-b-8" [nzSize]="144" [nzSrc]="'assets/imgs/default_face.png'"></nz-avatar>

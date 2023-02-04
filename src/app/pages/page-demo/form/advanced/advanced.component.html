@@ -3,17 +3,17 @@
 
 <div class="normal-table-wrap bg-color-no p-b-50">
   <form nz-form nzLayout="vertical" [formGroup]="validateForm">
-    <nz-card [nzBordered]="true" class="m-b-20" nzTitle="仓库管理">
+    <nz-card class="m-b-20" nzTitle="仓库管理" [nzBordered]="true">
       <app-water-mark></app-water-mark>
       <app-warehouse-manage-form #warehouseManageComponent formControlName="warehouseManage"></app-warehouse-manage-form>
     </nz-card>
 
-    <nz-card [nzBordered]="true" class="m-b-20" nzTitle="任务管理">
+    <nz-card class="m-b-20" nzTitle="任务管理" [nzBordered]="true">
       <app-water-mark></app-water-mark>
       <app-task-manage-form #taskManageComponent formControlName="taskManage"></app-task-manage-form>
     </nz-card>
 
-    <nz-card [nzBordered]="false" nzTitle="成员管理">
+    <nz-card nzTitle="成员管理" [nzBordered]="false">
       <app-water-mark></app-water-mark>
       <app-user-member-manage></app-user-member-manage>
     </nz-card>
@@ -21,5 +21,5 @@
 </div>
 
 <app-footer-submit>
-  <button class="right" (click)="submit()" nz-button nzType="primary">提交</button>
+  <button class="right" nz-button nzType="primary" (click)="submit()">提交</button>
 </app-footer-submit>

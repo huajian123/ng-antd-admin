@@ -1,14 +1,14 @@
 <form nz-form [formGroup]="addEditForm">
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="departmentName">部门名称</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="combineTpl">
-      <input nz-input formControlName="departmentName" name="departmentName" placeholder="请输入部门名称" id="departmentName" />
+    <nz-form-label nzFor="departmentName" nzRequired [nzSm]="6" [nzXs]="24">部门名称</nz-form-label>
+    <nz-form-control [nzErrorTip]="combineTpl" [nzSm]="14" [nzXs]="24">
+      <input id="departmentName" name="departmentName" formControlName="departmentName" nz-input placeholder="请输入部门名称" />
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="state">部门状态</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="combineTpl">
+    <nz-form-label nzFor="state" nzRequired [nzSm]="6" [nzXs]="24">部门状态</nz-form-label>
+    <nz-form-control [nzErrorTip]="combineTpl" [nzSm]="14" [nzXs]="24">
       <nz-radio-group formControlName="state">
         <label nz-radio [nzValue]="false">禁用</label>
         <label nz-radio [nzValue]="true">可用</label>
@@ -17,9 +17,9 @@
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="orderNum">排序</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="combineTpl">
-      <input nz-input formControlName="orderNum" name="orderNum" placeholder="排序" id="orderNum" />
+    <nz-form-label nzFor="orderNum" nzRequired [nzSm]="6" [nzXs]="24">排序</nz-form-label>
+    <nz-form-control [nzErrorTip]="combineTpl" [nzSm]="14" [nzXs]="24">
+      <input id="orderNum" name="orderNum" formControlName="orderNum" nz-input placeholder="排序" />
     </nz-form-control>
   </nz-form-item>
 </form>

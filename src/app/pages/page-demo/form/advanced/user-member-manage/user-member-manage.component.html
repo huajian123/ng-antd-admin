@@ -1,4 +1,4 @@
-<nz-table [nzFrontPagination]="false" #editRowTable [nzData]="listOfData">
+<nz-table #editRowTable [nzData]="listOfData" [nzFrontPagination]="false">
   <thead>
     <tr>
       <th nzWidth="25%">成员姓名</th>
@@ -20,7 +20,7 @@
         <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.age" /></td>
         <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.address" /></td>
         <td>
-          <a (click)="saveEdit(data.id)" class="save">Save</a>
+          <a class="save" (click)="saveEdit(data.id)">Save</a>
           <a nz-popconfirm nzTitle="Sure to cancel?" (nzOnConfirm)="cancelEdit(data.id)">Cancel</a>
         </td>
       </ng-template>

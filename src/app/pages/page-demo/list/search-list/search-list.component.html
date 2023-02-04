@@ -8,7 +8,7 @@
         <input type="text" nz-input placeholder="请输入" />
       </nz-input-group>
       <ng-template #suffixButton>
-        <button nz-button nzType="primary" nzSize="large" nzSearch>搜索</button>
+        <button nz-button nzSearch nzSize="large" nzType="primary">搜索</button>
       </ng-template>
     </div>
   </div>
@@ -16,7 +16,7 @@
 
 <ng-template #headerFooter>
   <nz-tabset [(nzSelectedIndex)]="currentSelTab">
-    <nz-tab [nzTitle]="item.label" (nzClick)="to(item)" *ngFor="let item of tabData"></nz-tab>
+    <nz-tab *ngFor="let item of tabData" [nzTitle]="item.label" (nzClick)="to(item)"></nz-tab>
   </nz-tabset>
 </ng-template>
 <div class="normal-table-wrap" [@fadeRouteAnimation]="prepareRoute(searchOutlet)">

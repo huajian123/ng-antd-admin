@@ -1,7 +1,7 @@
 <div class="container">
-  <h1 [@enter1] class="center sp-28"> Angular Animations 有点骚气啊 </h1>
+  <h1 class="center sp-28" [@enter1]>Angular Animations 有点骚气啊</h1>
 
-  <div [ngSwitch]="animation" [@enter2] class="center">
+  <div class="center" [@enter2] [ngSwitch]="animation">
     <div class="angular-img-wrapper">
       <!-- Attention seekers -->
       <app-angular-img *ngSwitchCase="'bounce'" [@bounce]="animationState"></app-angular-img>
@@ -107,10 +107,10 @@
     <div *ngSwitchDefault>选择动画</div>
   </div>
 
-  <div [@enter3] class="center" (@enter3.done)="animationState = !animationState">
-    <nz-select class="m-r-8" style="width: 200px" [(ngModel)]="animation" (ngModelChange)="animate()" nzAllowClear nzPlaceHolder="Choose" nzShowSearch>
+  <div class="center" [@enter3] (@enter3.done)="animationState = !animationState">
+    <nz-select class="m-r-8" nzAllowClear nzPlaceHolder="Choose" nzShowSearch style="width: 200px" [(ngModel)]="animation" (ngModelChange)="animate()">
       <nz-option-group *ngFor="let option of options" [nzLabel]="option.label">
-        <nz-option *ngFor="let animation of option.animations" [nzValue]="animation" [nzLabel]="animation"></nz-option>
+        <nz-option *ngFor="let animation of option.animations" [nzLabel]="animation" [nzValue]="animation"></nz-option>
       </nz-option-group>
     </nz-select>
 
@@ -118,6 +118,6 @@
   </div>
 
   <div [@enter3]>
-    <div class="center"> 鼠标悬停这个按钮，颜色会渐变 </div>
+    <div class="center">鼠标悬停这个按钮，颜色会渐变</div>
   </div>
 </div>

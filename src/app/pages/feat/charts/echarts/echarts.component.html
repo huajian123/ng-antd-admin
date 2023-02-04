@@ -4,8 +4,8 @@
 </div>
 <ng-template #headerFooter>
   <nz-tabset [(nzSelectedIndex)]="currentSelTab">
-    <nz-tab (nzClick)="to(tabEnum.Started)" nzTitle="开始"></nz-tab>
-    <nz-tab (nzClick)="to(tabEnum.Advanced)" nzTitle="高级"></nz-tab>
-    <nz-tab (nzClick)="to(tabEnum.Series)" nzTitle="系列"></nz-tab>
+    <nz-tab nzTitle="开始" (nzClick)="to(tabEnum.Started)"></nz-tab>
+    <nz-tab nzTitle="高级" (nzClick)="to(tabEnum.Advanced)"></nz-tab>
+    <nz-tab nzTitle="系列" (nzClick)="to(tabEnum.Series)"></nz-tab>
   </nz-tabset>
 </ng-template>

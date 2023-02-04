@@ -1,16 +1,16 @@
 <div>
   <h2 class="m-b-8" [class.is-over-model]="isOverModel">登 录</h2>
   <div class="full-with">
-    <form nz-form class="login-form-wrap" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+    <form class="login-form-wrap" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
       <nz-form-item>
         <nz-form-control nzErrorTip="请输入用户名!">
-          <input nzSize="large" [placeholder]="'没有账号密码直接登陆'" type="text" nz-input formControlName="userName" placeholder="用户名" />
+          <input type="text" formControlName="userName" nz-input nzSize="large" placeholder="用户名" [placeholder]="'没有账号密码直接登陆'" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-control nzErrorTip="请输入密码!">
           <nz-input-group [nzSize]="'large'" [nzSuffix]="suffixTemplate">
-            <input autocomplete="on" [placeholder]="'no username and password,just login'" [type]="passwordVisible ? 'text' : 'password'" nz-input formControlName="password" placeholder="密码" />
+            <input autocomplete="on" formControlName="password" nz-input placeholder="密码" [placeholder]="'no username and password,just login'" [type]="passwordVisible ? 'text' : 'password'" />
           </nz-input-group>
           <ng-template #suffixTemplate>
             <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
@@ -19,7 +19,7 @@
       </nz-form-item>
       <div nz-row nzJustify="space-between">
         <div nz-col>
-          <label nz-checkbox formControlName="remember">
+          <label formControlName="remember" nz-checkbox>
             <span>记住密码</span>
           </label>
         </div>
@@ -27,19 +27,19 @@
           <a class="operate-text">忘记密码?</a>
         </div>
       </div>
-      <button nz-button nzSize="large" class="full-with m-t-15 btn" [nzType]="'primary'">登 录</button>
-      <div nz-row nzJustify="space-between" class="m-t-15">
-        <button class="m-b-8" (click)="goOtherWay(typeEnum.Phone)" nz-col [nzSm]="7" [nzXs]="24" nz-button nzType="default">手机登录</button>
-        <button class="m-b-8" (click)="goOtherWay(typeEnum.Qr)" nz-col [nzSm]="7" [nzXs]="24" nz-button nzType="default">二维码登录</button>
-        <button class="m-b-8" (click)="goOtherWay(typeEnum.Register)" nz-col [nzSm]="7" [nzXs]="24" nz-button nzType="default">注 册</button>
+      <button class="full-with m-t-15 btn" nz-button nzSize="large" [nzType]="'primary'">登 录</button>
+      <div class="m-t-15" nz-row nzJustify="space-between">
+        <button class="m-b-8" nz-button nz-col nzType="default" [nzSm]="7" [nzXs]="24" (click)="goOtherWay(typeEnum.Phone)">手机登录</button>
+        <button class="m-b-8" nz-button nz-col nzType="default" [nzSm]="7" [nzXs]="24" (click)="goOtherWay(typeEnum.Qr)">二维码登录</button>
+        <button class="m-b-8" nz-button nz-col nzType="default" [nzSm]="7" [nzXs]="24" (click)="goOtherWay(typeEnum.Register)">注 册</button>
       </div>
       <nz-divider nzPlain nzText="其他登录方式"></nz-divider>
       <div nz-row nzJustify="space-around">
-        <i nz-col nz-icon nzType="alipay-circle" nzTheme="fill"></i>
-        <i nz-col nz-icon nzType="taobao-circle" nzTheme="fill"></i>
-        <i nz-col nz-icon nzType="weibo-circle" nzTheme="fill"></i>
-        <i nz-col nz-icon nzType="qq-circle" nzTheme="fill"></i>
-        <i nz-col nz-icon nzType="google-circle" nzTheme="fill"></i>
+        <i nz-col nz-icon nzTheme="fill" nzType="alipay-circle"></i>
+        <i nz-col nz-icon nzTheme="fill" nzType="taobao-circle"></i>
+        <i nz-col nz-icon nzTheme="fill" nzType="weibo-circle"></i>
+        <i nz-col nz-icon nzTheme="fill" nzType="qq-circle"></i>
+        <i nz-col nz-icon nzTheme="fill" nzType="google-circle"></i>
       </div>
     </form>
   </div>

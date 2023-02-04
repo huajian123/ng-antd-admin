@@ -1,24 +1,24 @@
-<h1 class="center sp-28" [@enter1]="{ value: '', params: { delay: 0 } }"> 动态参数 </h1>
+<h1 class="center sp-28" [@enter1]="{ value: '', params: { delay: 0 } }">动态参数</h1>
 
-<form nz-form nzLayout="vertical" class="center" [@enter1]="{ value: '', params: { delay: 0 } }" #f="ngForm">
+<form #f="ngForm" class="center" nz-form nzLayout="vertical" [@enter1]="{ value: '', params: { delay: 0 } }">
   <nz-form-item>
-    <nz-form-label nzRequired nzFor="duration">过度时间（ms）</nz-form-label>
+    <nz-form-label nzFor="duration" nzRequired>过度时间（ms）</nz-form-label>
     <nz-form-control>
-      <nz-input-number id="duration" name="duration" [(ngModel)]="duration" [nzMin]="1" [nzStep]="1"></nz-input-number>
+      <nz-input-number id="duration" name="duration" [nzMin]="1" [nzStep]="1" [(ngModel)]="duration"></nz-input-number>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label nzRequired nzFor="delay">延迟时间（ms）</nz-form-label>
+    <nz-form-label nzFor="delay" nzRequired>延迟时间（ms）</nz-form-label>
     <nz-form-control>
-      <nz-input-number id="delay" name="delay" [(ngModel)]="delay" [nzMin]="1" [nzStep]="1"></nz-input-number>
+      <nz-input-number id="delay" name="delay" [nzMin]="1" [nzStep]="1" [(ngModel)]="delay"></nz-input-number>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item *ngIf="animation === 'pulse'">
-    <nz-form-label nzRequired nzFor="scale">放大缩小倍数</nz-form-label>
+    <nz-form-label nzFor="scale" nzRequired>放大缩小倍数</nz-form-label>
     <nz-form-control>
-      <nz-input-number id="scale" name="scale" [(ngModel)]="scale" [nzMin]="0" [nzStep]="0.01"></nz-input-number>
+      <nz-input-number id="scale" name="scale" [nzMin]="0" [nzStep]="0.01" [(ngModel)]="scale"></nz-input-number>
     </nz-form-control>
   </nz-form-item>
 
@@ -65,9 +65,9 @@
       ].includes(animation)
     "
   >
-    <nz-form-label nzRequired nzFor="delay">Translate (px, %, rem, em, vw, vh):</nz-form-label>
+    <nz-form-label nzFor="delay" nzRequired>Translate (px, %, rem, em, vw, vh):</nz-form-label>
     <nz-form-control>
-      <input nz-input id="translate" name="translate" [(ngModel)]="translate" pattern="-?([0-9])?\.?[0-9]+(px|%|rem|em|vw|vh|vmin|vmax)" />
+      <input id="translate" name="translate" nz-input pattern="-?([0-9])?\.?[0-9]+(px|%|rem|em|vw|vh|vmin|vmax)" [(ngModel)]="translate" />
     </nz-form-control>
   </nz-form-item>
 
@@ -94,14 +94,14 @@
       ].includes(animation)
     "
   >
-    <nz-form-label nzRequired nzFor="degrees">旋转度数</nz-form-label>
+    <nz-form-label nzFor="degrees" nzRequired>旋转度数</nz-form-label>
     <nz-form-control>
-      <nz-input-number id="degrees" name="degrees" [(ngModel)]="degrees" [nzMin]="0" [nzStep]="0.01"></nz-input-number>
+      <nz-input-number id="degrees" name="degrees" [nzMin]="0" [nzStep]="0.01" [(ngModel)]="degrees"></nz-input-number>
     </nz-form-control>
   </nz-form-item>
 </form>
 
-<div [ngSwitch]="animation" [@enter2] class="center">
+<div class="center" [@enter2] [ngSwitch]="animation">
   <div class="center">
     <!-- Attention seekers -->
     <app-angular-img *ngSwitchCase="'bounce'" [@bounce]="{ value: animationState, params: { duration: duration, delay: delay } }"></app-angular-img>
@@ -203,10 +203,10 @@
   <div *ngSwitchDefault>选择动画</div>
 </div>
 
-<div [@enter3]="{ value: '', params: { delay: 1200, duration: 1000 } }" class="center">
-  <nz-select class="m-r-8" style="width: 200px" [(ngModel)]="animation" (ngModelChange)="animationChanged()" nzAllowClear nzPlaceHolder="Choose" nzShowSearch>
+<div class="center" [@enter3]="{ value: '', params: { delay: 1200, duration: 1000 } }">
+  <nz-select class="m-r-8" nzAllowClear nzPlaceHolder="Choose" nzShowSearch style="width: 200px" [(ngModel)]="animation" (ngModelChange)="animationChanged()">
     <nz-option-group *ngFor="let option of options" [nzLabel]="option.label">
-      <nz-option *ngFor="let animation of option.animations" [nzValue]="animation" [nzLabel]="animation"></nz-option>
+      <nz-option *ngFor="let animation of option.animations" [nzLabel]="animation" [nzValue]="animation"></nz-option>
     </nz-option-group>
   </nz-select>
 

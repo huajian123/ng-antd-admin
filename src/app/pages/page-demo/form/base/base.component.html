@@ -6,53 +6,53 @@
     <app-water-mark></app-water-mark>
     <form class="form-wrap" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
       <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="title">标题</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入标题">
-          <input nz-input formControlName="title" id="title" placeholder="给目标起个名字" />
+        <nz-form-label nzFor="title" nzRequired [nzSm]="6" [nzXs]="24">标题</nz-form-label>
+        <nz-form-control nzErrorTip="请输入标题" [nzSm]="14" [nzXs]="24">
+          <input id="title" formControlName="title" nz-input placeholder="给目标起个名字" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="date" nzRequired>起止日期</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请选择起止日期">
-          <nz-range-picker formControlName="date" class="with-full"></nz-range-picker>
+        <nz-form-label nzFor="date" nzRequired [nzSm]="6" [nzXs]="24">起止日期</nz-form-label>
+        <nz-form-control nzErrorTip="请选择起止日期" [nzSm]="14" [nzXs]="24">
+          <nz-range-picker class="with-full" formControlName="date"></nz-range-picker>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="desc">目标描述</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入目标描述">
-          <textarea rows="4" formControlName="desc" nz-input id="desc" placeholder="请输入你的阶段性工作目标"></textarea>
+        <nz-form-label nzFor="desc" nzRequired [nzSm]="6" [nzXs]="24">目标描述</nz-form-label>
+        <nz-form-control nzErrorTip="请输入目标描述" [nzSm]="14" [nzXs]="24">
+          <textarea id="desc" formControlName="desc" nz-input placeholder="请输入你的阶段性工作目标" rows="4"></textarea>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="standard">衡量标准</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入衡量标准">
-          <textarea rows="4" formControlName="standard" nz-input id="standard" placeholder="请输入衡量标准"></textarea>
+        <nz-form-label nzFor="standard" nzRequired [nzSm]="6" [nzXs]="24">衡量标准</nz-form-label>
+        <nz-form-control nzErrorTip="请输入衡量标准" [nzSm]="14" [nzXs]="24">
+          <textarea id="standard" formControlName="standard" nz-input placeholder="请输入衡量标准" rows="4"></textarea>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="client" nzTooltipTitle="目标的服务对象">客户</nz-form-label>
+        <nz-form-label nzFor="client" nzTooltipTitle="目标的服务对象" [nzSm]="6" [nzXs]="24">客户</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
-          <input nz-input formControlName="client" id="client" placeholder="请描述你服务的客户，内部客户直接@姓名/工号" />
+          <input id="client" formControlName="client" nz-input placeholder="请描述你服务的客户，内部客户直接@姓名/工号" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="invitedCommenter">邀评人</nz-form-label>
+        <nz-form-label nzFor="invitedCommenter" [nzSm]="6" [nzXs]="24">邀评人</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
-          <input nz-input formControlName="invitedCommenter" id="invitedCommenter" placeholder="请直接@姓名/工号，最多可邀请5人" />
+          <input id="invitedCommenter" formControlName="invitedCommenter" nz-input placeholder="请直接@姓名/工号，最多可邀请5人" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="weights">权重</nz-form-label>
+        <nz-form-label nzFor="weights" [nzSm]="6" [nzXs]="24">权重</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
-          <nz-input-number formControlName="weights" [nzStep]="1" id="weights" [nzPlaceHolder]="'请输入'"></nz-input-number>
+          <nz-input-number id="weights" formControlName="weights" [nzPlaceHolder]="'请输入'" [nzStep]="1"></nz-input-number>
           %
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="public">目标公开</nz-form-label>
+        <nz-form-label nzFor="public" [nzSm]="6" [nzXs]="24">目标公开</nz-form-label>
         <nz-form-control nz-row nzExtra="客户、邀评人默认被分享" [nzSm]="14" [nzXs]="24">
-          <nz-radio-group formControlName="isPublic" id="public">
+          <nz-radio-group id="public" formControlName="isPublic">
             <label nz-radio nzValue="1">公开</label>
             <label nz-radio nzValue="2">部分公开</label>
             <label nz-radio nzValue="3">不公开</label>
@@ -63,7 +63,7 @@
         </nz-form-control>
       </nz-form-item>
       <nz-form-item nz-row>
-        <nz-form-control [nzSpan]="14" [nzOffset]="6">
+        <nz-form-control [nzOffset]="6" [nzSpan]="14">
           <button nz-button nzType="primary">提交</button>
           <button class="m-l-10" nz-button nzType="default">保存</button>
         </nz-form-control>

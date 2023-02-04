@@ -2,9 +2,9 @@
 
 <div class="normal-table-wrap">
   <nz-card nzTitle="图标选择器">
-    <button nz-button nzType="primary" class="m-b-8" (click)="visible = !visible">打开图标选择器</button>
+    <button class="m-b-8" nz-button nzType="primary" (click)="visible = !visible">打开图标选择器</button>
     <nz-input-group [nzAddOnAfter]="selIcon">
-      <input nz-input [placeholder]="'点击右侧图标选择图标，这句话有点绕'" disabled [(ngModel)]="seletedIcon" />
+      <input disabled nz-input [placeholder]="'点击右侧图标选择图标，这句话有点绕'" [(ngModel)]="seletedIcon" />
     </nz-input-group>
     <ng-template #selIcon>
       <app-icon-sel [visible]="visible" (selIcon)="seletedIcon = $event"></app-icon-sel>
@@ -13,38 +13,38 @@
 
   <nz-card nzTitle="zorro官网直接用">
     <div class="space-between">
-      <i nz-icon class="example" nzType="google" nzTheme="outline"></i>
-      <i nz-icon class="example" nzType="qq" nzTheme="outline"></i>
-      <i nz-icon class="example" nzType="gitlab" nzTheme="outline"></i>
-      <i nz-icon class="example" nzType="alipay-circle" nzTheme="outline"></i>
+      <i class="example" nz-icon nzTheme="outline" nzType="google"></i>
+      <i class="example" nz-icon nzTheme="outline" nzType="qq"></i>
+      <i class="example" nz-icon nzTheme="outline" nzType="gitlab"></i>
+      <i class="example" nz-icon nzTheme="outline" nzType="alipay-circle"></i>
     </div>
   </nz-card>
 
   <nz-card nzTitle="使用material图标（第一个是基本图标，第二个是svg图标）">
     <div class="space-between">
       <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
-      <mat-icon svgIcon="thumbs-up" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon>
+      <mat-icon aria-hidden="false" aria-label="Example thumbs up SVG icon" svgIcon="thumbs-up"></mat-icon>
     </div>
   </nz-card>
 
   <nz-card nzTitle="彩色图标">
     <div class="space-around">
-      <i nz-icon class="example" [nzType]="'smile'" [nzTheme]="'twotone'"></i>
-      <i nz-icon class="example" [nzType]="'heart'" [nzTheme]="'twotone'" [nzTwotoneColor]="'#eb2f96'"></i>
-      <i nz-icon class="example" [nzType]="'check-circle'" [nzTheme]="'twotone'" [nzTwotoneColor]="'#52c41a'"></i>
+      <i class="example" nz-icon [nzTheme]="'twotone'" [nzType]="'smile'"></i>
+      <i class="example" nz-icon [nzTheme]="'twotone'" [nzTwotoneColor]="'#eb2f96'" [nzType]="'heart'"></i>
+      <i class="example" nz-icon [nzTheme]="'twotone'" [nzTwotoneColor]="'#52c41a'" [nzType]="'check-circle'"></i>
     </div>
   </nz-card>
 
   <nz-card nzTitle="自定义图标，我是zorro官网搬运工">
     <div class="space-around">
-      <i nz-icon class="example" style="color: hotpink">
+      <i class="example" nz-icon style="color: hotpink">
         <svg>
           <path
             d="M923 283.6c-13.4-31.1-32.6-58.9-56.9-82.8-24.3-23.8-52.5-42.4-84-55.5-32.5-13.5-66.9-20.3-102.4-20.3-49.3 0-97.4 13.5-139.2 39-10 6.1-19.5 12.8-28.5 20.1-9-7.3-18.5-14-28.5-20.1-41.8-25.5-89.9-39-139.2-39-35.5 0-69.9 6.8-102.4 20.3-31.4 13-59.7 31.7-84 55.5-24.4 23.9-43.5 51.7-56.9 82.8-13.9 32.3-21 66.6-21 101.9 0 33.3 6.8 68 20.3 103.3 11.3 29.5 27.5 60.1 48.2 91 32.8 48.9 77.9 99.9 133.9 151.6 92.8 85.7 184.7 144.9 188.6 147.3l23.7 15.2c10.5 6.7 24 6.7 34.5 0l23.7-15.2c3.9-2.5 95.7-61.6 188.6-147.3 56-51.7 101.1-102.7 133.9-151.6 20.7-30.9 37-61.5 48.2-91 13.5-35.3 20.3-70 20.3-103.3 0.1-35.3-7-69.6-20.9-101.9z"
           />
         </svg>
       </i>
-      <i nz-icon class="example" style="font-size: 32px">
+      <i class="example" nz-icon style="font-size: 32px">
         <svg>
           <path
             d="M99.096 315.634s-82.58-64.032-82.58-132.13c0-66.064 33.032-165.162 148.646-148.646 83.37 11.91 99.096 165.162 99.096 165.162l-165.162 115.614zM924.906 315.634s82.58-64.032 82.58-132.13c0-66.064-33.032-165.162-148.646-148.646-83.37 11.91-99.096 165.162-99.096 165.162l165.162 115.614z"
@@ -77,8 +77,8 @@
 
   <nz-card nzTitle="引入阿里图标库的图标,在这里需要先从图标库网站生成对应js,引入load-ali-icon-cdn.service.ts">
     <div class="space-around">
-      <i nz-icon class="example" [nzIconfont]="'icon-medium'"></i>
-      <i nz-icon class="example" [nzIconfont]="'icon-mel-help'"></i>
+      <i class="example" nz-icon [nzIconfont]="'icon-medium'"></i>
+      <i class="example" nz-icon [nzIconfont]="'icon-mel-help'"></i>
     </div>
   </nz-card>
 </div>

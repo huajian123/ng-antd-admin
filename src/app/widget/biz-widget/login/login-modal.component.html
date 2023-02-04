@@ -1,14 +1,14 @@
 <form nz-form [formGroup]="loginModalForm">
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="userName">用户名</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="combineTpl">
-      <input nz-input formControlName="userName" id="userName" placeholder="用户名" />
+    <nz-form-label nzFor="userName" nzRequired [nzSm]="6" [nzXs]="24">用户名</nz-form-label>
+    <nz-form-control [nzErrorTip]="combineTpl" [nzSm]="14" [nzXs]="24">
+      <input id="userName" formControlName="userName" nz-input placeholder="用户名" />
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="password">密码</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="combineTpl">
-      <input nz-input formControlName="password" name="password" placeholder="请输入密码" id="password" />
+    <nz-form-label nzFor="password" nzRequired [nzSm]="6" [nzXs]="24">密码</nz-form-label>
+    <nz-form-control [nzErrorTip]="combineTpl" [nzSm]="14" [nzXs]="24">
+      <input id="password" name="password" formControlName="password" nz-input placeholder="请输入密码" />
     </nz-form-control>
   </nz-form-item>
 </form>

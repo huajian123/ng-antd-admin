@@ -1,22 +1,22 @@
 <div>
   <h2 class="m-b-8" [class.is-over-model]="isOverModel">注册</h2>
   <div class="full-with">
-    <form nz-form class="login-form-wrap" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+    <form class="login-form-wrap" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
       <nz-form-item>
         <nz-form-control nzErrorTip="账号!">
-          <input nzSize="large" [placeholder]="'账号'" type="text" nz-input formControlName="userName" placeholder="账号" />
+          <input type="text" formControlName="userName" nz-input nzSize="large" placeholder="账号" [placeholder]="'账号'" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-control nzErrorTip="手机号码!">
-          <input nzSize="large" [placeholder]="'手机号码'" type="text" nz-input formControlName="userName" placeholder="手机号码" />
+          <input type="text" formControlName="userName" nz-input nzSize="large" placeholder="手机号码" [placeholder]="'手机号码'" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item nz-row nzJustify="space-between">
-        <nz-form-control class="flex-1" style="max-width: 65%" nz-col [nzXs]="15" [nzSm]="16" nzErrorTip="短信验证码!">
-          <input nzSize="large" [placeholder]="'短信验证码'" type="text" nz-input formControlName="userName" placeholder="短信验证码" />
+        <nz-form-control class="flex-1" nz-col nzErrorTip="短信验证码!" style="max-width: 65%" [nzSm]="16" [nzXs]="15">
+          <input type="text" formControlName="userName" nz-input nzSize="large" placeholder="短信验证码" [placeholder]="'短信验证码'" />
         </nz-form-control>
-        <button class="p-0" nz-button nz-col [nzXs]="7" [nzSm]="7" [nzSize]="'large'" nzType="default">
+        <button class="p-0" nz-button nz-col nzType="default" [nzSize]="'large'" [nzSm]="7" [nzXs]="7">
           <span [ngStyle]="{ 'font-size': currentEquipmentWidth === equipmentWidthEnum.xs ? '0.8rem' : '1rem' }">获取验证码</span>
         </button>
       </nz-form-item>
@@ -25,12 +25,12 @@
           <nz-input-group [nzSize]="'large'" [nzSuffix]="suffixTemplate1">
             <input
               autocomplete="on"
-              [placeholder]="'这里做一个确认密码的校验示例'"
-              (ngModelChange)="updateConfirmValidator()"
-              [type]="passwordVisible ? 'text' : 'password'"
-              nz-input
               formControlName="password"
+              nz-input
               placeholder="密码"
+              [placeholder]="'这里做一个确认密码的校验示例'"
+              [type]="passwordVisible ? 'text' : 'password'"
+              (ngModelChange)="updateConfirmValidator()"
             />
           </nz-input-group>
           <password-strength-meter [password]="password!.value"></password-strength-meter>
@@ -44,11 +44,11 @@
           <nz-input-group [nzSize]="'large'" [nzSuffix]="suffixTemplate">
             <input
               autocomplete="on"
+              formControlName="checkPassword"
+              nz-input
+              placeholder="请确认密码"
               [placeholder]="'这里做一个确认密码的校验示例'"
               [type]="compirePasswordVisible ? 'text' : 'password'"
-              nz-input
-              formControlName="checkPassword"
-              placeholder="请确认密码"
             />
             <ng-template #errorTpl let-control>
               <ng-container *ngIf="control.hasError('required')">Please confirm your password!</ng-container>
@@ -63,13 +63,13 @@
 
       <div nz-row>
         <div nz-col [nzSpan]="24">
-          <label nz-checkbox formControlName="remember">
+          <label formControlName="remember" nz-checkbox>
             <span>我同意xxx隐私政策</span>
           </label>
         </div>
       </div>
-      <button nz-button nzSize="large" class="full-with m-t-15 btn" [nzType]="'primary'">注 册</button>
-      <button (click)="goOtherWay(typeEnum.Normal)" nz-button nzSize="large" class="full-with m-t-15" [nzType]="'default'">返 回</button>
+      <button class="full-with m-t-15 btn" nz-button nzSize="large" [nzType]="'primary'">注 册</button>
+      <button class="full-with m-t-15" nz-button nzSize="large" [nzType]="'default'" (click)="goOtherWay(typeEnum.Normal)">返 回</button>
     </form>
   </div>
 </div>

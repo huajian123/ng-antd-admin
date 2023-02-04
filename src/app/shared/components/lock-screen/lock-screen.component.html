@@ -1,26 +1,26 @@
 <div class="full-screen screen-full-width flex flex-coloum">
-  <div (click)="unlockBtn()" class="flex flex-coloum center title clock hand-model">
-    <i nz-icon nzType="lock" nzTheme="outline"></i>
+  <div class="flex flex-coloum center title clock hand-model" (click)="unlockBtn()">
+    <i nz-icon nzTheme="outline" nzType="lock"></i>
     <span>点击解锁</span>
   </div>
-  <div nz-row nzJustify="space-around" class="flex-auto" style="align-items: center">
-    <div nz-col [nzXXl]="10" [nzXl]="10" [nzLg]="10" [nzMd]="10" [nzSm]="10" [nzXs]="10" class="hour center" style="flex: auto">
-      <span>{{ time$ | async | date: 'hh' }}</span>
+  <div class="flex-auto" nz-row nzJustify="space-around" style="align-items: center">
+    <div class="hour center" nz-col style="flex: auto" [nzLg]="10" [nzMd]="10" [nzSm]="10" [nzXl]="10" [nzXs]="10" [nzXXl]="10">
+      <span>{{ time$ | async | date : 'hh' }}</span>
     </div>
-    <div nz-col [nzXXl]="10" [nzXl]="10" [nzLg]="10" [nzMd]="10" [nzSm]="10" [nzXs]="10" class="hour center" style="flex: auto">
-      <span>{{ time$ | async | date: 'mm' }}</span>
+    <div class="hour center" nz-col style="flex: auto" [nzLg]="10" [nzMd]="10" [nzSm]="10" [nzXl]="10" [nzXs]="10" [nzXXl]="10">
+      <span>{{ time$ | async | date : 'mm' }}</span>
     </div>
   </div>
-  <div class="lock-page-entry center" *ngIf="showUnlock">
+  <div *ngIf="showUnlock" class="lock-page-entry center">
     <div class="flex center flex-coloum form">
       <nz-avatar [nzSize]="70" [nzSrc]="'assets/imgs/default_face.png'"></nz-avatar>
       <p class="sp-16 m-t-8 name">Serati Ma</p>
 
-      <form autocomplete="off" class="full-with m-b-20" nz-form [formGroup]="validateForm" [nzLayout]="'vertical'">
+      <form class="full-with m-b-20" autocomplete="off" nz-form [formGroup]="validateForm" [nzLayout]="'vertical'">
         <nz-form-item>
           <nz-form-control [nzErrorTip]="combineTpl">
             <nz-input-group [nzSuffix]="suffixTemplate">
-              <input autocomplete="off" formControlName="password" [type]="passwordVisible ? 'text' : 'password'" nz-input name="password" placeholder="请输入" />
+              <input name="password" autocomplete="off" formControlName="password" nz-input placeholder="请输入" [type]="passwordVisible ? 'text' : 'password'" />
             </nz-input-group>
             <ng-template #suffixTemplate>
               <i nz-icon [nzType]="!passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
@@ -28,18 +28,18 @@
           </nz-form-control>
         </nz-form-item>
         <div class="full-with space-between">
-          <span (click)="showUnlock = false" class="operate-text">返回</span>
-          <span (click)="loginOut()" class="operate-text">返回登录</span>
-          <span (click)="intoSys()" class="operate-text">进入系统</span>
+          <span class="operate-text" (click)="showUnlock = false">返回</span>
+          <span class="operate-text" (click)="loginOut()">返回登录</span>
+          <span class="operate-text" (click)="intoSys()">进入系统</span>
         </div>
       </form>
     </div>
   </div>
   <div *ngIf="showUnlock" class="flex flex-coloum center title bottom-time">
-    <span style="user-select: none">{{ time$ | async | date: 'HH:mm a' }}</span>
+    <span style="user-select: none">{{ time$ | async | date : 'HH:mm a' }}</span>
   </div>
   <div class="flex flex-coloum center title bottom-date">
-    <span style="user-select: none">{{ time$ | async | date: 'yyyy-MM-dd' }}星期{{ getDays(time$ | async) | changNumberToChinese }}</span>
+    <span style="user-select: none">{{ time$ | async | date : 'yyyy-MM-dd' }}星期{{ getDays(time$ | async) | changNumberToChinese }}</span>
   </div>
 </div>
 

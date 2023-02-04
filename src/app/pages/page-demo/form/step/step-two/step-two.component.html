@@ -1,5 +1,5 @@
 <div class="determine-wrap p-b-0">
-  <nz-alert nzType="info" nzCloseable nzMessage="确认转账后，资金将直接打入对方账户，无法退回。"></nz-alert>
+  <nz-alert nzCloseable nzMessage="确认转账后，资金将直接打入对方账户，无法退回。" nzType="info"></nz-alert>
   <nz-descriptions class="m-t-20">
     <nz-descriptions-item nzTitle="付款账户">ant-design@alipay.com</nz-descriptions-item>
     <nz-descriptions-item nzTitle="收款账户">test@example.com</nz-descriptions-item>
@@ -9,17 +9,17 @@
   <nz-divider></nz-divider>
   <form [formGroup]="validateForm">
     <nz-form-item>
-      <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzFor="password">支付密码</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="支付密码">
+      <nz-form-label nzFor="password" nzRequired [nzSm]="6" [nzXs]="24">支付密码</nz-form-label>
+      <nz-form-control nzErrorTip="支付密码" [nzSm]="14" [nzXs]="24">
         <nz-input-group>
           <input type="password" formControlName="password" nz-input />
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item nz-row>
-      <nz-form-control [nzSpan]="14" [nzOffset]="6">
+      <nz-form-control [nzOffset]="6" [nzSpan]="14">
         <button nz-button nzType="primary" (click)="submit()">提交</button>
-        <button class="m-l-10" (click)="previous.emit()" nz-button nzType="default">上一步</button>
+        <button class="m-l-10" nz-button nzType="default" (click)="previous.emit()">上一步</button>
       </nz-form-control>
     </nz-form-item>
   </form>

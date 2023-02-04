@@ -14,7 +14,7 @@
   <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
     <nz-form-item>
       <nz-form-control nzErrorTip="请输入用户名!">
-        <input type="text" nz-input formControlName="userName" placeholder="用户名" />
+        <input type="text" formControlName="userName" nz-input placeholder="用户名" />
       </nz-form-control>
     </nz-form-item>
   </form>

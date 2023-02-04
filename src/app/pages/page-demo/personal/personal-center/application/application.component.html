@@ -1,7 +1,7 @@
 <div nz-row [nzGutter]="[16, 16]">
-  <div nz-col [nzXXl]="12" [nzXl]="12" [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24" *ngFor="let item of 8 | numberLoop">
+  <div *ngFor="let item of 8 | numberLoop" nz-col [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXl]="12" [nzXs]="24" [nzXXl]="12">
     <nz-card nzHoverable [nzActions]="[op1, op2, op3, op4]">
-      <nz-card-meta [nzTitle]="'Alipay'" [nzAvatar]="nzAvatar">
+      <nz-card-meta [nzAvatar]="nzAvatar" [nzTitle]="'Alipay'">
         <ng-template #nzAvatar>
           <nz-avatar nzSize="small" [nzSrc]="'assets/imgs/default_face.png'"></nz-avatar>
         </ng-template>
@@ -16,7 +16,7 @@
         </div>
         <div>
           <p nz-typography nzType="secondary">新增用户</p>
-          <p>{{ 1962 | number: '3.' }}</p>
+          <p>{{ 1962 | number : '3.' }}</p>
         </div>
       </div>
     </nz-card>
@@ -24,16 +24,16 @@
 </div>
 
 <ng-template #op1>
-  <i nz-tooltip nzTooltipTitle="下载" nz-icon nzType="download"></i>
+  <i nz-icon nz-tooltip nzTooltipTitle="下载" nzType="download"></i>
 </ng-template>
 <ng-template #op2>
-  <i nz-tooltip nzTooltipTitle="编辑" nz-icon nzType="edit"></i>
+  <i nz-icon nz-tooltip nzTooltipTitle="编辑" nzType="edit"></i>
 </ng-template>
 <ng-template #op3>
-  <i nz-tooltip nzTooltipTitle="分享" nz-icon nzType="share-alt"></i>
+  <i nz-icon nz-tooltip nzTooltipTitle="分享" nzType="share-alt"></i>
 </ng-template>
 <ng-template #op4>
-  <i nz-dropdown [nzDropdownMenu]="op4Menu" nzPlacement="bottomLeft" nz-icon nzType="ellipsis"></i>
+  <i nz-dropdown nz-icon nzPlacement="bottomLeft" nzType="ellipsis" [nzDropdownMenu]="op4Menu"></i>
   <nz-dropdown-menu #op4Menu="nzDropdownMenu">
     <ul nz-menu>
       <li nz-menu-item>1st menu item</li>

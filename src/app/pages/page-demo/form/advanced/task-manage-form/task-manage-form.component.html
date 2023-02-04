@@ -1,40 +1,40 @@
 <ng-container [formGroup]="validateForm">
   <div nz-row>
-    <nz-form-item nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
-      <nz-form-label nzRequired nzSpan="24" nzFor="taskName">任务名</nz-form-label>
-      <nz-form-control [nzXl]="18" [nzXXl]="18" [nzLg]="18" [nzMd]="24" [nzSm]="24" [nzErrorTip]="combineTpl">
-        <input nz-input formControlName="taskName" id="taskName" />
+    <nz-form-item nz-col [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXl]="8" [nzXs]="24" [nzXXl]="8">
+      <nz-form-label nzFor="taskName" nzRequired nzSpan="24">任务名</nz-form-label>
+      <nz-form-control [nzErrorTip]="combineTpl" [nzLg]="18" [nzMd]="24" [nzSm]="24" [nzXl]="18" [nzXXl]="18">
+        <input id="taskName" formControlName="taskName" nz-input />
       </nz-form-control>
     </nz-form-item>
-    <nz-form-item nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
-      <nz-form-label nzRequired nzSpan="24" nzFor="taskDesc">任务描述</nz-form-label>
-      <nz-form-control [nzXl]="18" [nzXXl]="18" [nzLg]="18" [nzMd]="24" [nzSm]="24" [nzErrorTip]="combineTpl">
-        <input nz-input formControlName="taskDesc" id="taskDesc" />
+    <nz-form-item nz-col [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXl]="8" [nzXs]="24" [nzXXl]="8">
+      <nz-form-label nzFor="taskDesc" nzRequired nzSpan="24">任务描述</nz-form-label>
+      <nz-form-control [nzErrorTip]="combineTpl" [nzLg]="18" [nzMd]="24" [nzSm]="24" [nzXl]="18" [nzXXl]="18">
+        <input id="taskDesc" formControlName="taskDesc" nz-input />
       </nz-form-control>
     </nz-form-item>
-    <nz-form-item nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="24" [nzSm]="24" [nzXs]="24">
-      <nz-form-label nzSpan="24" nzRequired nzFor="executor">执行人</nz-form-label>
-      <nz-form-control [nzXl]="24" [nzXXl]="24" [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzErrorTip]="combineTpl">
-        <input nz-input formControlName="executor" id="executor" />
+    <nz-form-item nz-col [nzLg]="8" [nzMd]="24" [nzSm]="24" [nzXl]="8" [nzXs]="24" [nzXXl]="8">
+      <nz-form-label nzFor="executor" nzRequired nzSpan="24">执行人</nz-form-label>
+      <nz-form-control [nzErrorTip]="combineTpl" [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzXl]="24" [nzXXl]="24">
+        <input id="executor" formControlName="executor" nz-input />
       </nz-form-control>
     </nz-form-item>
 
-    <nz-form-item nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
-      <nz-form-label nzRequired nzSpan="24" nzFor="responsible">责任人</nz-form-label>
-      <nz-form-control [nzXl]="18" [nzXXl]="18" [nzLg]="18" [nzMd]="24" [nzSm]="24" [nzErrorTip]="combineTpl">
-        <input nz-input formControlName="responsible" id="responsible" />
+    <nz-form-item nz-col [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXl]="8" [nzXs]="24" [nzXXl]="8">
+      <nz-form-label nzFor="responsible" nzRequired nzSpan="24">责任人</nz-form-label>
+      <nz-form-control [nzErrorTip]="combineTpl" [nzLg]="18" [nzMd]="24" [nzSm]="24" [nzXl]="18" [nzXXl]="18">
+        <input id="responsible" formControlName="responsible" nz-input />
       </nz-form-control>
     </nz-form-item>
-    <nz-form-item nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXs]="24">
-      <nz-form-label nzRequired nzSpan="24" nzFor="effectiveTime">生效日期</nz-form-label>
-      <nz-form-control [nzLg]="18" [nzXl]="18" [nzXXl]="18" [nzMd]="24" [nzSm]="24" [nzErrorTip]="combineTpl">
-        <input nz-input formControlName="effectiveTime" id="effectiveTime" />
+    <nz-form-item nz-col [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXl]="8" [nzXs]="24" [nzXXl]="8">
+      <nz-form-label nzFor="effectiveTime" nzRequired nzSpan="24">生效日期</nz-form-label>
+      <nz-form-control [nzErrorTip]="combineTpl" [nzLg]="18" [nzMd]="24" [nzSm]="24" [nzXl]="18" [nzXXl]="18">
+        <input id="effectiveTime" formControlName="effectiveTime" nz-input />
       </nz-form-control>
     </nz-form-item>
-    <nz-form-item nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="24" [nzSm]="24" [nzXs]="24">
-      <nz-form-label nzSpan="24" nzRequired nzFor="taskType">任务类型</nz-form-label>
-      <nz-form-control [nzXl]="24" [nzXXl]="24" [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzErrorTip]="combineTpl">
-        <input nz-input formControlName="taskType" id="taskType" />
+    <nz-form-item nz-col [nzLg]="8" [nzMd]="24" [nzSm]="24" [nzXl]="8" [nzXs]="24" [nzXXl]="8">
+      <nz-form-label nzFor="taskType" nzRequired nzSpan="24">任务类型</nz-form-label>
+      <nz-form-control [nzErrorTip]="combineTpl" [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzXl]="24" [nzXXl]="24">
+        <input id="taskType" formControlName="taskType" nz-input />
       </nz-form-control>
     </nz-form-item>
   </div>

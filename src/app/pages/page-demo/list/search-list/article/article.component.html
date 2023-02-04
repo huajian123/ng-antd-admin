@@ -2,8 +2,8 @@
   <app-water-mark></app-water-mark>
   <div nz-row>
     <div nz-col nzFlex="94px">所属类目:</div>
-    <div nz-col nzFlex="1" class="tag-wrap" [ngStyle]="{ maxHeight: expanded ? '58px' : '33px' }">
-      <nz-tag (click)="allSel()" class="m-r-25 m-b-10" nzMode="checkable">
+    <div class="tag-wrap" nz-col nzFlex="1" [ngStyle]="{ maxHeight: expanded ? '58px' : '33px' }">
+      <nz-tag class="m-r-25 m-b-10" nzMode="checkable" (click)="allSel()">
         <span class="sp-14">全部</span>
       </nz-tag>
       <ng-container *ngFor="let tag of tagArray">
@@ -13,48 +13,48 @@
       </ng-container>
     </div>
     <div nz-col nzFlex="51px">
-      <a class="operate-text" *ngIf="!expanded" (click)="expanded = true">
+      <a *ngIf="!expanded" class="operate-text" (click)="expanded = true">
         展开
-        <i nz-icon nzType="down" nzTheme="outline"></i>
+        <i nz-icon nzTheme="outline" nzType="down"></i>
       </a>
-      <a class="operate-text" *ngIf="expanded" (click)="expanded = false">
+      <a *ngIf="expanded" class="operate-text" (click)="expanded = false">
         收起
-        <i nz-icon nzType="up" nzTheme="outline"></i>
+        <i nz-icon nzTheme="outline" nzType="up"></i>
       </a>
     </div>
   </div>
   <nz-divider class="m-0" nzDashed></nz-divider>
-  <div nz-row class="m-t-20 m-b-20">
+  <div class="m-t-20 m-b-20" nz-row>
     <div nz-col nzFlex="94px">owner:</div>
-    <div nz-col class="flex-1">
-      <div nz-row class="left-start-center">
-        <nz-select nzMode="multiple" [(ngModel)]="searchInfo.owner" [nzPlaceHolder]="'不限'">
-          <nz-option nzValue="1" nzLabel="我自己"></nz-option>
-          <nz-option nzValue="2" nzLabel="吴家豪"></nz-option>
-          <nz-option nzValue="3" nzLabel="周星星"></nz-option>
-          <nz-option nzValue="4" nzLabel="赵丽颖"></nz-option>
-          <nz-option nzValue="5" nzLabel="姚明"></nz-option>
+    <div class="flex-1" nz-col>
+      <div class="left-start-center" nz-row>
+        <nz-select nzMode="multiple" [nzPlaceHolder]="'不限'" [(ngModel)]="searchInfo.owner">
+          <nz-option nzLabel="我自己" nzValue="1"></nz-option>
+          <nz-option nzLabel="吴家豪" nzValue="2"></nz-option>
+          <nz-option nzLabel="周星星" nzValue="3"></nz-option>
+          <nz-option nzLabel="赵丽颖" nzValue="4"></nz-option>
+          <nz-option nzLabel="姚明" nzValue="5"></nz-option>
         </nz-select>
         <a class="operate-text m-l-7">只看自己的</a>
       </div>
     </div>
   </div>
   <nz-divider class="m-0" nzDashed></nz-divider>
-  <div nz-row class="m-t-20 m-b-20" [nzAlign]="'middle'">
+  <div class="m-t-20 m-b-20" nz-row [nzAlign]="'middle'">
     <div nz-col nzFlex="94px">其他选项:</div>
     <div nz-col nzFlex="1">
       <div nz-row>
-        <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="12" [nzXs]="12">
+        <div nz-col [nzLg]="8" [nzMd]="12" [nzSm]="12" [nzXl]="8" [nzXs]="12" [nzXXl]="8">
           活跃用户：
-          <nz-select [(ngModel)]="searchInfo.author" [nzPlaceHolder]="'不限'" class="max-width">
-            <nz-option nzValue="1" nzLabel="李三"></nz-option>
+          <nz-select class="max-width" [nzPlaceHolder]="'不限'" [(ngModel)]="searchInfo.author">
+            <nz-option nzLabel="李三" nzValue="1"></nz-option>
           </nz-select>
         </div>
-        <div nz-col [nzXXl]="8" [nzXl]="8" [nzLg]="8" [nzMd]="12" [nzSm]="12" [nzXs]="12">
+        <div nz-col [nzLg]="8" [nzMd]="12" [nzSm]="12" [nzXl]="8" [nzXs]="12" [nzXXl]="8">
           好评度：
-          <nz-select [(ngModel)]="searchInfo.like" [nzPlaceHolder]="'不限'" class="max-width">
-            <nz-option nzValue="1" nzLabel="优秀"></nz-option>
-            <nz-option nzValue="2" nzLabel="普通"></nz-option>
+          <nz-select class="max-width" [nzPlaceHolder]="'不限'" [(ngModel)]="searchInfo.like">
+            <nz-option nzLabel="优秀" nzValue="1"></nz-option>
+            <nz-option nzLabel="普通" nzValue="2"></nz-option>
           </nz-select>
         </div>
       </div>
@@ -64,7 +64,7 @@
 <nz-card class="m-t-20">
   <app-water-mark></app-water-mark>
   <nz-list [nzItemLayout]="'vertical'">
-    <nz-list-item nzNoFlex *ngFor="let item of 8 | numberLoop">
+    <nz-list-item *ngFor="let item of 8 | numberLoop" nzNoFlex>
       <nz-list-item-meta>
         <nz-list-item-meta-title>
           <a>Alipay</a>
@@ -88,15 +88,15 @@
       </div>
       <ul nz-list-item-actions>
         <nz-list-item-action>
-          <i nz-icon nzType="star" class="m-r-8"></i>
+          <i class="m-r-8" nz-icon nzType="star"></i>
           156
         </nz-list-item-action>
         <nz-list-item-action>
-          <i nz-icon nzType="like" class="m-r-8"></i>
+          <i class="m-r-8" nz-icon nzType="like"></i>
           156
         </nz-list-item-action>
         <nz-list-item-action>
-          <i nz-icon nzType="message" class="m-r-8"></i>
+          <i class="m-r-8" nz-icon nzType="message"></i>
           2
         </nz-list-item-action>
       </ul>

@@ -2,10 +2,10 @@
 <div class="normal-table-wrap">
   <nz-card nzTitle="复制示例">
     <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
-      <input type="text" nz-input [(ngModel)]="value" placeholder="input search text" />
+      <input type="text" nz-input placeholder="input search text" [(ngModel)]="value" />
     </nz-input-group>
     <ng-template #suffixButton>
-      <button nz-button nzType="primary" (click)="info()" [cdkCopyToClipboard]="value" nzSize="large" nzSearch>copy</button>
+      <button nz-button nzSearch nzSize="large" nzType="primary" [cdkCopyToClipboard]="value" (click)="info()">copy</button>
     </ng-template>
   </nz-card>
 </div>
