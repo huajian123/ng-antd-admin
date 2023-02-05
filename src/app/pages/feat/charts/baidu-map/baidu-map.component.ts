@@ -7,7 +7,6 @@ declare var BMap: any;
 @Component({
   selector: 'app-baidu-map',
   templateUrl: './baidu-map.component.html',
-  styleUrls: ['./baidu-map.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BaiduMapComponent implements OnInit {

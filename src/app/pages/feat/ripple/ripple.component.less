@@ -1,7 +1,7 @@
 :host ::ng-deep {
   .mat-ripple {
-    overflow: hidden;
-    position: relative
+    position: relative;
+    overflow: hidden
   }
 
   .mat-ripple:not(:empty) {
@@ -15,34 +15,31 @@
   .mat-ripple-element {
     position: absolute;
     border-radius: 50%;
-    pointer-events: none;
+    transform: scale(0);
     transition: opacity, transform 0ms cubic-bezier(0, 0, 0.2, 1);
-    transform: scale(0)
+    pointer-events: none;
+    background-color: rgb(0 0 0 / 10%)
   }
 
   .cdk-high-contrast-active .mat-ripple-element {
     display: none
   }
 
-  .mat-ripple-element {
-    background-color: rgba(0, 0, 0, .1)
-  }
-
   .mat-button .mat-ripple-element, .mat-icon-button .mat-ripple-element, .mat-stroked-button .mat-ripple-element {
-    opacity: .1;
-    background-color: currentColor
+    background-color: currentcolor;
+    opacity: .1
   }
 
   .mat-flat-button.mat-primary .mat-ripple-element, .mat-raised-button.mat-primary .mat-ripple-element, .mat-fab.mat-primary .mat-ripple-element, .mat-mini-fab.mat-primary .mat-ripple-element {
-    background-color: rgba(255, 255, 255, .1)
+    background-color: rgb(255 255 255 / 10%)
   }
 
   .mat-flat-button.mat-accent .mat-ripple-element, .mat-raised-button.mat-accent .mat-ripple-element, .mat-fab.mat-accent .mat-ripple-element, .mat-mini-fab.mat-accent .mat-ripple-element {
-    background-color: rgba(255, 255, 255, .1)
+    background-color: rgb(255 255 255 / 10%)
   }
 
   .mat-flat-button.mat-warn .mat-ripple-element, .mat-raised-button.mat-warn .mat-ripple-element, .mat-fab.mat-warn .mat-ripple-element, .mat-mini-fab.mat-warn .mat-ripple-element {
-    background-color: rgba(255, 255, 255, .1)
+    background-color: rgb(255 255 255 / 10%)
   }
 
   .mat-checkbox .mat-ripple-element {
@@ -62,18 +59,19 @@
   }
 
   .mat-chip.mat-standard-chip.mat-chip-selected.mat-primary .mat-ripple-element {
-    background-color: rgba(255, 255, 255, .1)
+    background-color: rgb(255 255 255 / 10%)
   }
+
   .mat-chip.mat-standard-chip.mat-chip-selected.mat-warn .mat-ripple-element {
-    background-color: rgba(255, 255, 255, .1)
+    background-color: rgb(255 255 255 / 10%)
   }
 
   .mat-chip.mat-standard-chip.mat-chip-selected.mat-accent .mat-ripple-element {
-    background-color: rgba(255, 255, 255, .1)
+    background-color: rgb(255 255 255 / 10%)
   }
 
   .mat-form-field-ripple {
-    background-color: rgba(0, 0, 0, .87)
+    background-color: rgb(0 0 0 / 87%)
   }
 
   .mat-form-field.mat-focused .mat-form-field-ripple {
@@ -105,7 +103,7 @@
   }
 
   .mat-radio-button.mat-radio-disabled .mat-radio-ripple .mat-ripple-element, .mat-radio-button.mat-radio-disabled .mat-radio-inner-circle {
-    background-color: rgba(0, 0, 0, .38)
+    background-color: rgb(0 0 0 / 38%)
   }
 
   .mat-radio-button .mat-ripple-element {
@@ -144,7 +142,7 @@
   }
 
   .mat-toolbar .mat-form-field-underline, .mat-toolbar .mat-form-field-ripple, .mat-toolbar .mat-focused .mat-form-field-ripple {
-    background-color: currentColor
+    background-color: currentcolor
   }
 
 }

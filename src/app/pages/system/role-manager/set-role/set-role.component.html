@@ -13,7 +13,7 @@
           </span>
         </div>
         <nz-divider class="m-0"></nz-divider>
-        <div class="menu-content m-0 p-0" nz-result-content>
+        <div class="m-0 p-0" nz-result-content>
           <ng-container *ngTemplateOutlet="permissionTpl; context: { $implicit: permission.children, isOpen: permission.isOpen }"></ng-container>
         </div>
         <ng-template #permissionTpl let-childPermissionArray let-isOpen="isOpen">

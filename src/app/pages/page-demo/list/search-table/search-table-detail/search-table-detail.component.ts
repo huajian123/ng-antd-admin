@@ -7,8 +7,7 @@ import { fnCheckForm } from '@utils/tools';
 
 @Component({
   selector: 'app-search-table-detail',
-  templateUrl: './search-table-detail.component.html',
-  styleUrls: ['./search-table-detail.component.less']
+  templateUrl: './search-table-detail.component.html'
 })
 export class SearchTableDetailComponent implements OnInit, OnDestroy {
   pageHeaderInfo: Partial<PageHeaderType> = {

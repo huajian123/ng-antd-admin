@@ -6,7 +6,6 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 @Component({
   selector: 'app-copy',
   templateUrl: './copy.component.html',
-  styleUrls: ['./copy.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CopyComponent implements OnInit {

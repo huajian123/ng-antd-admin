@@ -12,7 +12,6 @@ type targetComp = SimpleGraphComponent | FromLeftToRightComponent | RadialTreeCo
 @Component({
   selector: 'app-series',
   templateUrl: './series.component.html',
-  styleUrls: ['./series.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SeriesComponent implements OnInit {

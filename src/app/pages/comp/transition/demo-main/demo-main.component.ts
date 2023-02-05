@@ -90,7 +90,6 @@ import {
 @Component({
   selector: 'app-demo-main',
   templateUrl: './demo-main.component.html',
-  styleUrls: ['./demo-main.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     bounceInUpOnEnterAnimation({ anchor: 'enter1' }),

@@ -16,7 +16,6 @@ interface ReturnObj {
 @Component({
   selector: 'app-base-detail',
   templateUrl: './base-detail.component.html',
-  styleUrls: ['./base-detail.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BaseDetailComponent implements OnInit {

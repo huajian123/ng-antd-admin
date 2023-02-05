@@ -9,7 +9,6 @@ import { NzModalRef } from 'ng-zorro-antd/modal';
 @Component({
   selector: 'app-dept-manage-modal',
   templateUrl: './dept-manage-modal.component.html',
-  styleUrls: ['./dept-manage-modal.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DeptManageModalComponent implements OnInit {

@@ -10,7 +10,6 @@ import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',
-  styleUrls: ['./upload.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UploadComponent implements OnInit {

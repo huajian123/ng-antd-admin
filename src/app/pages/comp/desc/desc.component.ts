@@ -5,7 +5,6 @@ import { PageHeaderType } from '@shared/components/page-header/page-header.compo
 @Component({
   selector: 'app-desc',
   templateUrl: './desc.component.html',
-  styleUrls: ['./desc.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DescComponent implements OnInit {

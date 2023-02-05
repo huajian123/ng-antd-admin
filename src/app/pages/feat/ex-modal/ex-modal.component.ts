@@ -9,7 +9,6 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 @Component({
   selector: 'app-ex-modal',
   templateUrl: './ex-modal.component.html',
-  styleUrls: ['./ex-modal.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExModalComponent implements OnInit {

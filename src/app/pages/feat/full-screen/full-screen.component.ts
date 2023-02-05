@@ -6,7 +6,6 @@ import screenfull from 'screenfull';
 @Component({
   selector: 'app-full-screen',
   templateUrl: './full-screen.component.html',
-  styleUrls: ['./full-screen.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FullScreenComponent implements OnInit {

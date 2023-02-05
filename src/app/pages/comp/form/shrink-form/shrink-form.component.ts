@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import {PageHeaderType} from "@shared/components/page-header/page-header.component";
+
+import { PageHeaderType } from '@shared/components/page-header/page-header.component';
 
 interface SearchParam {
   ruleName: number;
@@ -9,7 +10,6 @@ interface SearchParam {
 @Component({
   selector: 'app-shrink-form',
   templateUrl: './shrink-form.component.html',
-  styleUrls: ['./shrink-form.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShrinkFormComponent implements OnInit {

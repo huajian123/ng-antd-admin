@@ -8,7 +8,6 @@ import { NzModalRef } from 'ng-zorro-antd/modal';
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
-  styleUrls: ['./change-password.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChangePasswordComponent implements OnInit {

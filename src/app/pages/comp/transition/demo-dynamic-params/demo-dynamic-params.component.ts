@@ -90,7 +90,6 @@ import {
 @Component({
   selector: 'app-demo-dynamic-params',
   templateUrl: './demo-dynamic-params.component.html',
-  styleUrls: ['./demo-dynamic-params.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     fadeInRightOnEnterAnimation({ anchor: 'enter1', translate: '100%' }),

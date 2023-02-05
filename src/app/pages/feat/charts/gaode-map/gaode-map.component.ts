@@ -6,7 +6,6 @@ import { PageHeaderType } from '@shared/components/page-header/page-header.compo
 @Component({
   selector: 'app-gaode-map',
   templateUrl: './gaode-map.component.html',
-  styleUrls: ['./gaode-map.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GaodeMapComponent implements OnInit, AfterViewInit {

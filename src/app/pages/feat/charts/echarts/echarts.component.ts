@@ -18,7 +18,6 @@ type targetComp = StartedComponent | AdvancedComponent | SeriesComponent;
 @Component({
   selector: 'app-echarts',
   templateUrl: './echarts.component.html',
-  styleUrls: ['./echarts.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EchartsComponent implements OnInit, AfterViewInit {

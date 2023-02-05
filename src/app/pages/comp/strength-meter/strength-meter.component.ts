@@ -5,7 +5,6 @@ import { PageHeaderType } from '@shared/components/page-header/page-header.compo
 @Component({
   selector: 'app-strength-meter',
   templateUrl: './strength-meter.component.html',
-  styleUrls: ['./strength-meter.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StrengthMeterComponent implements OnInit {

@@ -1,5 +1,5 @@
 .container {
-  &:before {
+  &::before {
     position: absolute;
     top: 0;
     left: 0;
@@ -7,17 +7,17 @@
     height: 100%;
     margin-left: -48%;
     background-image: url('../../../../assets/imgs/login1/login1-bg.svg');
-    background-position: 100%;
     background-repeat: no-repeat;
+    background-position: 100%;
     background-size: auto 100%;
     content: "";
   }
 
-  &.is-night:before {
+  &.is-night::before {
     background-image: url('../../../../assets/imgs/login1/login1-bg-dark.svg');
   }
 
-  &.over-modal:before {
+  &.over-modal::before {
     background-image: none;
   }
 
@@ -30,23 +30,22 @@
     }
 
     span {
-      font-size: 24px;
-      color: white;
       margin-left: 8px;
+      color: white;
+      font-size: 24px;
     }
   }
 
   .desc {
     margin-top: 55px;
-    font-weight: 500;
     color: white;
+    font-weight: 500;
     font-size: 32px;
   }
 
   .sub-desc {
     margin-top: 8px;
-
-    color: white;
+    color: #fff;
     font-size: 16px;
   }
 }

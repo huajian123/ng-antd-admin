@@ -6,7 +6,6 @@ import { fadeInOnEnterAnimation, fadeOutOnLeaveAnimation, collapseAnimation, rub
 @Component({
   selector: 'app-transition',
   templateUrl: './transition.component.html',
-  styleUrls: ['./transition.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInOnEnterAnimation(), fadeOutOnLeaveAnimation(), rubberBandAnimation(), collapseAnimation()]
 })

@@ -4,7 +4,6 @@ import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@
 @Component({
   selector: 'app-success',
   templateUrl: './success.component.html',
-  styleUrls: ['./success.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SuccessComponent implements OnInit {

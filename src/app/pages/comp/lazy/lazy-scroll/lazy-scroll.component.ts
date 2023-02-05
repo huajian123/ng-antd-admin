@@ -13,7 +13,6 @@ const passiveEventListenerOptions = normalizePassiveListenerOptions({ passive: t
 @Component({
   selector: 'app-lazy-scroll',
   templateUrl: './lazy-scroll.component.html',
-  styleUrls: ['./lazy-scroll.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [LazyServiceService, DestroyService]
 })

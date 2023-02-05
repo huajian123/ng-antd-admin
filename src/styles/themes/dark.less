@@ -4,9 +4,11 @@
 @layout-sider-background-light: @component-background;
 @layout-trigger-background-light: @component-background;
 @menu-item-vertical-margin: 0;
+
 .operate-text {
   color: @primary-color;
 }
+
 .ant-menu-horizontal {
   border: none;
 }
@@ -16,29 +18,28 @@
 @layout-sider-background-light:@menu-bg;
 
 
-::-webkit-scrollbar { /*滚动条整体样式*/
+::-webkit-scrollbar { /* 滚动条整体样式 */
   width: 6px;
   height: 6px;
   background: #263848;
 }
 
-::-webkit-scrollbar-thumb { /*滚动条里面小方块*/
+::-webkit-scrollbar-thumb { /* 滚动条里面小方块 */
   background: #53616E !important;
   border-radius: 4px;
 }
 
-/*定义滚动条轨道 内阴影+圆角*/
+/* 定义滚动条轨道 内阴影+圆角 */
 
 ::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
+  box-shadow: inset 0 0 5px rgb(0 0 0 / 20%);
 }
 
-/*定义滑块 内阴影+圆角*/
+/* 定义滑块 内阴影+圆角 */
 
 ::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, .1);
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .1);
   background-color: #c8c8c8;
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgb(0 0 0 / 10%);
 }

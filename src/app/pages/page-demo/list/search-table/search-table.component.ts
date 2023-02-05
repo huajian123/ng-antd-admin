@@ -18,7 +18,6 @@ interface SearchParam {
 @Component({
   selector: 'app-search-table',
   templateUrl: './search-table.component.html',
-  styleUrls: ['./search-table.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchTableComponent implements OnInit {

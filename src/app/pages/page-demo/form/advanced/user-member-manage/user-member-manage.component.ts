@@ -9,7 +9,6 @@ interface ItemData {
 @Component({
   selector: 'app-user-member-manage',
   templateUrl: './user-member-manage.component.html',
-  styleUrls: ['./user-member-manage.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserMemberManageComponent implements OnInit {

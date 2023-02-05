@@ -5,7 +5,6 @@ import { PageHeaderType } from '@shared/components/page-header/page-header.compo
 @Component({
   selector: 'app-color-sel',
   templateUrl: './color-sel.component.html',
-  styleUrls: ['./color-sel.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ColorSelComponent implements OnInit {

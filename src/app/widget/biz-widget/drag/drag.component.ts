@@ -8,7 +8,6 @@ import { NzModalRef } from 'ng-zorro-antd/modal';
 @Component({
   selector: 'app-drag',
   templateUrl: './drag.component.html',
-  styleUrls: ['./drag.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DragComponent extends BasicConfirmModalComponent implements OnInit {

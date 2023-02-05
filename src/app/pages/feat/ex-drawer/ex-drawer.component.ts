@@ -7,7 +7,6 @@ import { ModalBtnStatus } from '@widget/base-modal';
 @Component({
   selector: 'app-ex-drawer',
   templateUrl: './ex-drawer.component.html',
-  styleUrls: ['./ex-drawer.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExDrawerComponent implements OnInit {

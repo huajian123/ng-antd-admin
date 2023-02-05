@@ -14,7 +14,6 @@ interface IconItem {
 @Component({
   selector: 'app-icon-sel',
   templateUrl: './icon-sel.component.html',
-  styleUrls: ['./icon-sel.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [DestroyService]
 })

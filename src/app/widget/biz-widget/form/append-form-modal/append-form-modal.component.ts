@@ -12,7 +12,6 @@ import { NzModalRef } from 'ng-zorro-antd/modal';
 @Component({
   selector: 'app-append-form-modal',
   templateUrl: './append-form-modal.component.html',
-  styleUrls: ['./append-form-modal.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppendFormModalComponent implements OnInit {

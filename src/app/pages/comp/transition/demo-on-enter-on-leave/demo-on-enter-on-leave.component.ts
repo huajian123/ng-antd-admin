@@ -89,7 +89,6 @@ import {
 @Component({
   selector: 'app-demo-on-enter-on-leave',
   templateUrl: './demo-on-enter-on-leave.component.html',
-  styleUrls: ['./demo-on-enter-on-leave.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     bounceInRightOnEnterAnimation({ anchor: 'enter1' }),
@@ -189,7 +188,17 @@ export class DemoOnEnterOnLeaveComponent {
     },
     {
       label: 'Fading',
-      animations: ['fadeInOut', 'fadeInUpOutUp', 'fadeInDownOutDown', 'fadeInLeftOutRight', 'fadeInRightOutLeft', 'fadeInUpBigOutUpBig', 'fadeInDownBigOutDownBig', 'fadeInLeftBigOutRightBig', 'fadeInRightBigOutLeftBig']
+      animations: [
+        'fadeInOut',
+        'fadeInUpOutUp',
+        'fadeInDownOutDown',
+        'fadeInLeftOutRight',
+        'fadeInRightOutLeft',
+        'fadeInUpBigOutUpBig',
+        'fadeInDownBigOutDownBig',
+        'fadeInLeftBigOutRightBig',
+        'fadeInRightBigOutLeftBig'
+      ]
     },
     {
       label: 'Flippers',

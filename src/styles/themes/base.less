@@ -93,21 +93,21 @@ h1, h2, h3, h4, h5, h6 {
 //  word-wrap: normal;
 //}
 
-.clearfix:after {
-  clear: both;
-  content: '.';
+.clearfix::after {
   display: block;
+  clear: both;
   height: 0;
   visibility: hidden;
+  content: '.';
 }
 
 .grey-theme{
-  -webkit-filter: grayscale(100%);
-  -moz-filter: grayscale(100%);
-  -ms-filter: grayscale(100%);
-  -o-filter: grayscale(100%);
   filter: grayscale(100%);
-  filter: progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);
+  filter: grayscale(100%);
+  filter: grayscale(100%);
+  filter: grayscale(100%);
+  filter: grayscale(100%);
+  filter: progid:dximagetransform.microsoft.basicimage(grayscale=1);
 }
 
 .color-weak {
@@ -203,6 +203,7 @@ h1, h2, h3, h4, h5, h6 {
 .m-10 {
   margin: 10px !important;
 }
+
 .m-b-4 {
   margin-bottom: 4px !important;
 }
@@ -458,15 +459,15 @@ h1, h2, h3, h4, h5, h6 {
   transition: all .3s;
 }
 
-.clear-fix:after {
-  content: '';
-  clear: both;
+.clear-fix::after {
   display: block;
+  clear: both;
+  content: '';
 }
 
 
 .default-theme {
-  background: #ffffff;
+  background: #fff;
 }
 
 .night-theme {
@@ -511,6 +512,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .operate-text {
   .hand-model;
+
   margin-right: 5px;
 }
 
@@ -520,8 +522,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .center-fn(@col:center,@row:center) {
   display: flex;
-  justify-content: @col;
   align-items: @row;
+  justify-content: @col;
 }
 
 .center {
@@ -580,7 +582,7 @@ h1, h2, h3, h4, h5, h6 {
 .normal-table-wrap {
   margin: 27px 27px 0;
 
-  /*列表顶部样式*/
+  /* 列表顶部样式 */
 
   .ant-pro-table-toolbar {
     display: flex;
@@ -591,8 +593,8 @@ h1, h2, h3, h4, h5, h6 {
       flex: 1 1;
       font-size: 16px;
       line-height: 24px;
-      will-change: transform;
       opacity: .85;
+      will-change: transform;
     }
 
     .ant-pro-table-toolbar-option {
@@ -615,12 +617,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-/*覆盖zorro样式*/
+/* 覆盖zorro样式 */
 
 // 对话框增加滚动条
 .ant-modal-body {
-  overflow: auto;
   max-height: 600px;
+  overflow: auto;
 }
 
 .ant-modal-close-x {
@@ -639,8 +641,8 @@ h1, h2, h3, h4, h5, h6 {
     bottom: 0 !important;
     left: 0 !important;
     width: 100% !important;
-    height: 100%;
     max-width: initial;
+    height: 100%;
     padding: 0;
     transform: translate3d(0, 0, 0) !important;
 
@@ -649,8 +651,8 @@ h1, h2, h3, h4, h5, h6 {
       transform: translate3d(0, 0, 0) !important;
 
       .ant-modal-body {
-        max-height: none;
         height: calc(100% - 55px - 53px);
+        max-height: none;
       }
     }
   }
@@ -673,6 +675,7 @@ input[nz-input] {
   0% {
     transform: translateX(-33.3vw);
   }
+
   100% {
     transform: translateX(100vw);
   }
@@ -680,19 +683,23 @@ input[nz-input] {
 
 @keyframes progress-bar-grad-colours {
   0% {
-    background: linear-gradient(90deg, rgba(232, 128, 152, 0) 0%, #e88098 30%, #e88098 50%, #e88098 70%, rgba(232, 128, 152, 0) 100%);
+    background: linear-gradient(90deg, rgb(232 128 152 / 0%) 0%, #e88098 30%, #e88098 50%, #e88098 70%, rgb(232 128 152 / 0%) 100%);
   }
+
   20% {
-    background: linear-gradient(90deg, rgba(132, 190, 190, 0) 0%, #84bebe 30%, #84bebe 50%, #84bebe 70%, rgba(132, 190, 190, 0) 100%);
+    background: linear-gradient(90deg, rgb(132 190 190 / 0%) 0%, #84bebe 30%, #84bebe 50%, #84bebe 70%, rgb(132 190 190 / 0%) 100%);
   }
+
   40% {
-    background: linear-gradient(90deg, rgba(233, 135, 36, 0) 0%, #e98724 30%, #e98724 50%, #e98724 70%, rgba(233, 135, 36, 0) 100%);
+    background: linear-gradient(90deg, rgb(233 135 36 / 0%) 0%, #e98724 30%, #e98724 50%, #e98724 70%, rgb(233 135 36 / 0%) 100%);
   }
+
   60% {
-    background: linear-gradient(90deg, rgba(175, 201, 78, 0) 0%, #afc94e 30%, #afc94e 50%, #afc94e 70%, rgba(175, 201, 78, 0) 100%);
+    background: linear-gradient(90deg, rgb(175 201 78 / 0%) 0%, #afc94e 30%, #afc94e 50%, #afc94e 70%, rgb(175 201 78 / 0%) 100%);
   }
+
   80% {
-    background: linear-gradient(90deg, rgba(98, 151, 164, 0) 0%, #6297a4 30%, #6297a4 50%, #6297a4 70%, rgba(98, 151, 164, 0) 100%);
+    background: linear-gradient(90deg, rgb(98 151 164 / 0%) 0%, #6297a4 30%, #6297a4 50%, #6297a4 70%, rgb(98 151 164 / 0%) 100%);
   }
 }
 

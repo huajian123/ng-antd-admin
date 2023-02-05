@@ -22,7 +22,6 @@ enum TabEnum {
 @Component({
   selector: 'app-adv-detail',
   templateUrl: './adv-detail.component.html',
-  styleUrls: ['./adv-detail.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AdvDetailComponent implements OnInit, AfterViewInit {

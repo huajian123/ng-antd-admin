@@ -7,7 +7,6 @@ import { webSocket } from 'rxjs/webSocket';
 @Component({
   selector: 'app-websocket',
   templateUrl: './websocket.component.html',
-  styleUrls: ['./websocket.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WebsocketComponent implements OnInit, OnDestroy {

@@ -7,7 +7,6 @@ import { PageHeaderType } from '@shared/components/page-header/page-header.compo
 @Component({
   selector: 'app-rich-text',
   templateUrl: './rich-text.component.html',
-  styleUrls: ['./rich-text.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RichTextComponent implements OnInit {

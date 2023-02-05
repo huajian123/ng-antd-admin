@@ -9,7 +9,6 @@ import { NzModalRef } from 'ng-zorro-antd/modal';
 @Component({
   selector: 'app-role-manage-modal',
   templateUrl: './role-manage-modal.component.html',
-  styleUrls: ['./role-manage-modal.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RoleManageModalComponent implements OnInit {

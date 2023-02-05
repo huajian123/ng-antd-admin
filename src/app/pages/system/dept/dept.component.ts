@@ -26,7 +26,6 @@ interface SearchParam {
 @Component({
   selector: 'app-dept',
   templateUrl: './dept.component.html',
-  styleUrls: ['./dept.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DeptComponent implements OnInit {

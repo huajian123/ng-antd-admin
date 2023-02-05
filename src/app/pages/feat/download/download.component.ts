@@ -10,7 +10,6 @@ import FileSaver from 'file-saver';
 @Component({
   selector: 'app-download',
   templateUrl: './download.component.html',
-  styleUrls: ['./download.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DownloadComponent implements OnInit {

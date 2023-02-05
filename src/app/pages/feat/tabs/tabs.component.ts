@@ -7,7 +7,6 @@ import { PageHeaderType } from '@shared/components/page-header/page-header.compo
 @Component({
   selector: 'app-tabs',
   templateUrl: './tabs.component.html',
-  styleUrls: ['./tabs.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TabsComponent implements OnInit {
