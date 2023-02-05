@@ -12,6 +12,7 @@ export interface SettingInterface {
   fixedHead: boolean; // 固定头部
   splitNav: boolean; // 是否分割菜单（在菜单模式为混合模式时才生效）
   fixedLeftNav: boolean; // 固定左侧菜单
+  isShowTab: boolean; // 是否展示多页签
   fixedTab: boolean; // 固定tab页签
   hasTopArea: boolean; // 是否展示顶部区域
   hasFooterArea: boolean; // 是否展示底部区域
@@ -29,6 +30,7 @@ export class ThemeService {
     theme: 'dark',
     color: '#1890FF',
     mode: 'side',
+    isShowTab: true,
     colorWeak: false,
     greyTheme: false,
     splitNav: false,

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 
 import { PageHeaderType } from '@shared/components/page-header/page-header.component';
 import { DateFormat } from '@shared/pipes/map.pipe';
@@ -8,7 +8,10 @@ import { DateFormat } from '@shared/pipes/map.pipe';
   templateUrl: './about.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AboutComponent implements OnInit {
+export class AboutComponent implements OnInit, OnDestroy {
+  ngOnDestroy(): void {
+    console.log('123');
+  }
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '关于',
     breadcrumb: ['首页', '拓展功能', '关于'],

@@ -47,6 +47,7 @@ export class SettingDrawerComponent implements OnInit {
     color: '#1890FF',
     mode: 'side',
     fixedTab: false,
+    isShowTab: true,
     splitNav: true,
     greyTheme: false,
     colorWeak: false,
@@ -204,7 +205,7 @@ export class SettingDrawerComponent implements OnInit {
   }
 
   // 修改固定头部
-  changeFixed(isFixed: boolean, type: 'splitNav' | 'fixedTab' | 'fixedLeftNav' | 'fixedHead' | 'hasTopArea' | 'hasFooterArea' | 'hasNavArea' | 'hasNavHeadArea'): void {
+  changeFixed(isFixed: boolean, type: 'isShowTab' | 'splitNav' | 'fixedTab' | 'fixedLeftNav' | 'fixedHead' | 'hasTopArea' | 'hasFooterArea' | 'hasNavArea' | 'hasNavHeadArea'): void {
     // 非固定头部时，设置标签也不固定
     if (type === 'fixedHead' && !isFixed) {
       this._themesOptions['fixedTab'] = false;

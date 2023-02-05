@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { PageHeaderType } from '@shared/components/page-header/page-header.component';
@@ -11,7 +11,7 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
   styleUrls: ['./base.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BaseComponent implements OnInit {
+export class BaseComponent implements OnInit, OnDestroy {
   @ViewChild('dragTpl', { static: true }) dragTpl!: TemplateRef<NzSafeAny>;
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '基础表单',
@@ -50,5 +50,9 @@ export class BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+  }
+
+  ngOnDestroy(): void {
+    console.log('jichu');
   }
 }

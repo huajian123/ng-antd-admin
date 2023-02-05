@@ -64,6 +64,13 @@
     </nz-list>
 
     <nz-list [nzSplit]="false">
+      <nz-list-item [nzActions]="[isShowTabTpl]">是否展示多页签</nz-list-item>
+      <ng-template #isShowTabTpl>
+        <nz-switch nzSize="small" [ngModel]="_themesOptions.isShowTab" (ngModelChange)="changeFixed($event, 'isShowTab')"></nz-switch>
+      </ng-template>
+    </nz-list>
+
+    <nz-list [nzSplit]="false">
       <nz-list-item [nzActions]="[splitNavAction]">自动分割菜单</nz-list-item>
       <ng-template #splitNavAction>
         <nz-switch nzSize="small" [ngModel]="_themesOptions.splitNav" (ngModelChange)="changeFixed($event, 'splitNav')"></nz-switch>

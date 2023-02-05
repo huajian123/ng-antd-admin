@@ -23,6 +23,7 @@ export class DefLayoutContentComponent implements OnInit {
     color: '',
     mode: 'side',
     splitNav: false,
+    isShowTab: true,
     fixedTab: false,
     colorWeak: false,
     greyTheme: false,
@@ -53,9 +54,9 @@ export class DefLayoutContentComponent implements OnInit {
       this.isFixedLeftNav = this.themesOptions.fixedLeftNav;
 
       if (this.themesOptions.fixedHead && !this.isMixiMode && this.themesOptions.hasTopArea) {
-        this.contentMarginTop = this.themesOptions.fixedTab ? '96px' : '48px';
+        this.contentMarginTop = this.themesOptions.isShowTab ? (this.themesOptions.fixedTab ? '96px' : '48px') : '48px';
       } else {
-        this.contentMarginTop = this.themesOptions.fixedTab ? '48px' : '0px';
+        this.contentMarginTop = this.themesOptions.isShowTab ? (this.themesOptions.fixedTab ? '48px' : '0px') : '0px';
       }
     });
   }

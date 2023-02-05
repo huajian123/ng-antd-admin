@@ -1,9 +1,10 @@
 import { DOCUMENT } from '@angular/common';
-import { Inject } from '@angular/core';
-import { ActivatedRouteSnapshot, DetachedRouteHandle, RouteReuseStrategy } from '@angular/router';
+import { inject, Inject } from '@angular/core';
+import { ActivatedRoute, ActivatedRouteSnapshot, DetachedRouteHandle, RouteReuseStrategy } from '@angular/router';
 
 import { ScrollService } from '@core/services/common/scroll.service';
-import { fnGetReuseStrategyKeyFn } from '@utils/tools';
+import { ThemeService } from '@store/common-store/theme.service';
+import { fnGetReuseStrategyKeyFn, getDeepReuseStrategyKeyFn } from '@utils/tools';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 /*路由复用*/
@@ -19,6 +20,10 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
   // 用这个参数来记录，是否需要缓存当前路由
   public static waitDelete: string | null;
 
+  // 是否有多页签，没有多页签则不做路由缓存
+  isShowTab$ = inject(ThemeService).getThemesMode();
+
+  static #activatedRoute: ActivatedRoute;
   public static deleteRouteSnapshot(key: string): void {
     if (SimpleReuseStrategy.handlers[key]) {
       if (SimpleReuseStrategy.handlers[key].componentRef) {
@@ -29,10 +34,32 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
     }
   }
 
-  constructor(@Inject(DOCUMENT) private doc: Document, private scrollService: ScrollService) {}
+  // 删除全部的缓存，在退出登录，不使用多标签 等操作中需要用到
+  public static deleteAllRouteSnapshot(): Promise<void> {
+    return new Promise(resolve => {
+      Object.keys(SimpleReuseStrategy.handlers).forEach(key => {
+        SimpleReuseStrategy.deleteRouteSnapshot(key);
+      });
+      SimpleReuseStrategy.waitDelete = getDeepReuseStrategyKeyFn(this.#activatedRoute.snapshot);
+      resolve();
+    });
+  }
+
+  constructor(@Inject(DOCUMENT) private doc: Document, private scrollService: ScrollService, private activatedRoute: ActivatedRoute) {}
 
   // 是否允许复用路由
   shouldDetach(route: ActivatedRouteSnapshot): boolean {
+    let isShowTab: boolean;
+    this.isShowTab$.subscribe(res => {
+      isShowTab = res.isShowTab;
+      // 不展示tab
+      if (!res.isShowTab) {
+        SimpleReuseStrategy.#activatedRoute = this.activatedRoute;
+        // 不展示tab则将所有路由缓存删除，并且组件实例也要销毁
+        SimpleReuseStrategy.deleteAllRouteSnapshot().then();
+        return;
+      }
+    });
     return route.data['shouldDetach'] !== 'no';
   }
 

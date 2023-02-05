@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { TaskManageFormComponent } from '@app/pages/page-demo/form/advanced/task-manage-form/task-manage-form.component';
@@ -15,7 +15,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
   styleUrls: ['./advanced.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AdvancedComponent implements OnInit {
+export class AdvancedComponent implements OnInit, OnDestroy {
   @ViewChild('warehouseManageComponent') warehouseManageComponent!: WarehouseManageFormComponent;
   @ViewChild('taskManageComponent') taskManageComponent!: TaskManageFormComponent;
   pageHeaderInfo: Partial<PageHeaderType> = {
@@ -41,5 +41,9 @@ export class AdvancedComponent implements OnInit {
       warehouseManage: [null, [Validators.required]],
       taskManage: [null, [Validators.required]]
     });
+  }
+
+  ngOnDestroy(): void {
+    console.log('GAOJI');
   }
 }

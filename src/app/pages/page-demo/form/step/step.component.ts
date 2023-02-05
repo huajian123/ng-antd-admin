@@ -1,6 +1,6 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { ComponentPortal, CdkPortalOutletAttachedRef, Portal, ComponentType } from '@angular/cdk/portal';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ComponentRef, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ComponentRef, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
 import { StepThreeComponent } from '@app/pages/page-demo/form/step/step-three/step-three.component';
@@ -23,7 +23,7 @@ enum StepEnum {
   styleUrls: ['./step.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StepComponent implements OnInit, AfterViewInit {
+export class StepComponent implements OnInit, AfterViewInit, OnDestroy {
   selectedPortal!: Portal<any>;
   stepDirection: 'horizontal' | 'vertical' = 'horizontal';
   pageHeaderInfo: Partial<PageHeaderType> = {
@@ -88,5 +88,9 @@ export class StepComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.goStep(StepEnum.One);
+  }
+
+  ngOnDestroy(): void {
+    console.log('fenbu');
   }
 }

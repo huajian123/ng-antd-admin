@@ -70,18 +70,32 @@ export class LoginInOutService {
     });
   }
 
-  loginOut(): Promise<void> {
-    return new Promise(resolve => {
-      // 清空tab
-      this.tabService.clearTabs();
-      this.windowServe.removeSessionStorage(TokenKey);
-      SimpleReuseStrategy.handlers = {};
-      SimpleReuseStrategy.scrollHandlers = {};
-      this.menuService.setMenuArrayStore([]);
-      SimpleReuseStrategy.waitDelete = getDeepReuseStrategyKeyFn(this.activatedRoute.snapshot);
-      this.router.navigate(['/login/login-form']).then(() => {
+  // 清除Tab缓存,是与路由复用相关的东西
+  clearTabCash(): Promise<void> {
+    return SimpleReuseStrategy.deleteAllRouteSnapshot().then(() => {
+      return new Promise(resolve => {
+        // 清空tab
+        this.tabService.clearTabs();
         resolve();
       });
     });
+  }
+
+  clearSessionCash(): Promise<void> {
+    return new Promise(resolve => {
+      this.windowServe.removeSessionStorage(TokenKey);
+      this.menuService.setMenuArrayStore([]);
+      resolve();
+    });
+  }
+
+  loginOut(): Promise<void> {
+    return this.clearTabCash()
+      .then(() => {
+        return this.clearSessionCash();
+      })
+      .then(() => {
+        this.router.navigate(['/login/login-form']);
+      });
   }
 }
