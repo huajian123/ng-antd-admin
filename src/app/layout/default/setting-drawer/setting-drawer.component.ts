@@ -1,8 +1,12 @@
 import { DOCUMENT } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject, OnInit, Renderer2 } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 
 import { IsNightKey, ThemeOptionsKey } from '@config/constant';
+import { LoginInOutService } from '@core/services/common/login-in-out.service';
+import { SimpleReuseStrategy } from '@core/services/common/reuse-strategy';
+import { TabService } from '@core/services/common/tab.service';
 import { ThemeSkinService } from '@core/services/common/theme-skin.service';
 import { WindowService } from '@core/services/common/window.service';
 import { SettingInterface, ThemeService } from '@store/common-store/theme.service';
@@ -148,6 +152,9 @@ export class SettingDrawerComponent implements OnInit {
 
   constructor(
     private themesService: ThemeService,
+    private loginInOutService: LoginInOutService,
+    private tabService: TabService,
+    private activatedRoute: ActivatedRoute,
     @Inject(DOCUMENT) private doc: Document,
     public message: NzMessageService,
     private nzConfigService: NzConfigService,
@@ -212,6 +219,13 @@ export class SettingDrawerComponent implements OnInit {
     }
     this._themesOptions[type] = isFixed;
     this.setThemeOptions();
+
+    // 如果不展示多标签，则要清空tab,以及已经被缓存的所有组件
+    if (type === 'isShowTab') {
+      if (!isFixed) {
+        SimpleReuseStrategy.deleteAllRouteSnapshot(this.activatedRoute.snapshot).then();
+      }
+    }
   }
 
   // 修改特殊主题，色弱主题，灰色主题

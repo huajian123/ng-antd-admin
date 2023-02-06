@@ -35,12 +35,12 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
   }
 
   // 删除全部的缓存，在退出登录，不使用多标签 等操作中需要用到
-  public static deleteAllRouteSnapshot(): Promise<void> {
+  public static deleteAllRouteSnapshot(route: ActivatedRouteSnapshot): Promise<void> {
     return new Promise(resolve => {
       Object.keys(SimpleReuseStrategy.handlers).forEach(key => {
         SimpleReuseStrategy.deleteRouteSnapshot(key);
       });
-      SimpleReuseStrategy.waitDelete = getDeepReuseStrategyKeyFn(this.#activatedRoute.snapshot);
+      SimpleReuseStrategy.waitDelete = getDeepReuseStrategyKeyFn(route);
       resolve();
     });
   }
@@ -49,18 +49,12 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
 
   // 是否允许复用路由
   shouldDetach(route: ActivatedRouteSnapshot): boolean {
-    let isShowTab: boolean;
+    // 是否展示多页签，如果不展示多页签，则不做路由复用
+    let isShowTab = false;
     this.isShowTab$.subscribe(res => {
       isShowTab = res.isShowTab;
-      // 不展示tab
-      if (!res.isShowTab) {
-        SimpleReuseStrategy.#activatedRoute = this.activatedRoute;
-        // 不展示tab则将所有路由缓存删除，并且组件实例也要销毁
-        SimpleReuseStrategy.deleteAllRouteSnapshot().then();
-        return;
-      }
     });
-    return route.data['shouldDetach'] !== 'no';
+    return route.data['shouldDetach'] !== 'no' && isShowTab;
   }
 
   // 当路由离开时会触发，存储路由

@@ -64,7 +64,7 @@
     </nz-list>
 
     <nz-list [nzSplit]="false">
-      <nz-list-item [nzActions]="[isShowTabTpl]">是否展示多页签</nz-list-item>
+      <nz-list-item [nzActions]="[isShowTabTpl]">多页签</nz-list-item>
       <ng-template #isShowTabTpl>
         <nz-switch nzSize="small" [ngModel]="_themesOptions.isShowTab" (ngModelChange)="changeFixed($event, 'isShowTab')"></nz-switch>
       </ng-template>

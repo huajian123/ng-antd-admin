@@ -72,7 +72,7 @@ export class LoginInOutService {
 
   // 清除Tab缓存,是与路由复用相关的东西
   clearTabCash(): Promise<void> {
-    return SimpleReuseStrategy.deleteAllRouteSnapshot().then(() => {
+    return SimpleReuseStrategy.deleteAllRouteSnapshot(this.activatedRoute.snapshot).then(() => {
       return new Promise(resolve => {
         // 清空tab
         this.tabService.clearTabs();
