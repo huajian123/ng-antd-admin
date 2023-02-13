@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject, OnInit, Renderer2 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouteReuseStrategy } from '@angular/router';
 import { first } from 'rxjs/operators';
 
 import { IsNightKey, ThemeOptionsKey } from '@config/constant';
@@ -212,18 +212,22 @@ export class SettingDrawerComponent implements OnInit {
   }
 
   // 修改固定头部
-  changeFixed(isFixed: boolean, type: 'isShowTab' | 'splitNav' | 'fixedTab' | 'fixedLeftNav' | 'fixedHead' | 'hasTopArea' | 'hasFooterArea' | 'hasNavArea' | 'hasNavHeadArea'): void {
+  changeFixed(isTrue: boolean, type: 'isShowTab' | 'splitNav' | 'fixedTab' | 'fixedLeftNav' | 'fixedHead' | 'hasTopArea' | 'hasFooterArea' | 'hasNavArea' | 'hasNavHeadArea'): void {
     // 非固定头部时，设置标签也不固定
-    if (type === 'fixedHead' && !isFixed) {
+    if (type === 'fixedHead' && !isTrue) {
       this._themesOptions['fixedTab'] = false;
     }
-    this._themesOptions[type] = isFixed;
+    this._themesOptions[type] = isTrue;
     this.setThemeOptions();
 
     // 如果不展示多标签，则要清空tab,以及已经被缓存的所有组件
     if (type === 'isShowTab') {
-      if (!isFixed) {
-        SimpleReuseStrategy.deleteAllRouteSnapshot(this.activatedRoute.snapshot).then();
+      if (!isTrue) {
+        SimpleReuseStrategy.deleteAllRouteSnapshot(this.activatedRoute.snapshot).then(() => {
+          this.tabService.clearTabs();
+        });
+      } else {
+        this.tabService.refresh();
       }
     }
   }
