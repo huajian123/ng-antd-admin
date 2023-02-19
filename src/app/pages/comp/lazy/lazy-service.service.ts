@@ -25,14 +25,15 @@ export class LazyServiceService {
   async lazyLoadCard(selPerson: LazySelPeopleEnum = LazySelPeopleEnum.YiLin): Promise<void> {
     const viewContainerRef = this._adHost.viewContainerRef;
     const { LazyTargCompComponent } = await import('./lazy-targ-comp/lazy-targ-comp.component');
-    const { instance } = viewContainerRef.createComponent(LazyTargCompComponent);
-    instance.purChoosePeople = selPerson;
-    instance.currentPeople.pipe(takeUntil(instance.destroy$)).subscribe(() => {
-      this.create(instance.purChoosePeople);
+    const componentRef = viewContainerRef.createComponent(LazyTargCompComponent);
+    // 使用setInput api可以被onchange钩子管理
+    componentRef.setInput('purChoosePeople', selPerson);
+    componentRef.instance.currentPeople.pipe(takeUntil(componentRef.instance.destroy$)).subscribe(() => {
+      this.create(componentRef.instance.purChoosePeople);
     });
     // 实现OnChange钩子
-    (instance as any).ngOnChanges({
-      purChoosePeople: new SimpleChange(null, instance.purChoosePeople, true)
-    });
+    // (instance as any).ngOnChanges({
+    //   purChoosePeople: new SimpleChange(null, instance.purChoosePeople, true)
+    // });
   }
 }

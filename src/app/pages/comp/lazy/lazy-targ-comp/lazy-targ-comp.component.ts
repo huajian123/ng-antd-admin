@@ -34,7 +34,9 @@ export class LazyTargCompComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {}
 
-  ngOnChanges(changes: SimpleChanges): void {}
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+  }
 }
 
 @NgModule({
