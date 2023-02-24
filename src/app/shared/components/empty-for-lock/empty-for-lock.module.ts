@@ -5,7 +5,6 @@ import { EmptyForLockRoutingModule } from './empty-for-lock-routing.module';
 import { EmptyForLockComponent } from './empty-for-lock.component';
 
 @NgModule({
-  declarations: [EmptyForLockComponent],
-  imports: [CommonModule, EmptyForLockRoutingModule]
+    imports: [CommonModule, EmptyForLockRoutingModule, EmptyForLockComponent]
 })
 export class EmptyForLockModule {}

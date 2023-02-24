@@ -15,6 +15,22 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { AuthDirective } from '../../../shared/directives/auth.directive';
+import { AntTableComponent } from '../../../shared/components/ant-table/ant-table.component';
+import { CardTableWrapComponent } from '../../../shared/components/card-table-wrap/card-table-wrap.component';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NgIf, NgFor } from '@angular/common';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { FormsModule } from '@angular/forms';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { DeptTreeComponent } from './dept-tree/dept-tree.component';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { PageHeaderComponent } from '../../../shared/components/page-header/page-header.component';
 
 interface SearchParam {
   userName: string;
@@ -24,9 +40,11 @@ interface SearchParam {
 }
 
 @Component({
-  selector: 'app-account',
-  templateUrl: './account.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-account',
+    templateUrl: './account.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [PageHeaderComponent, NzGridModule, DeptTreeComponent, NzCardModule, FormsModule, NzFormModule, NzInputModule, NgIf, NzSelectModule, NgFor, NzButtonModule, NzWaveModule, NzIconModule, CardTableWrapComponent, AntTableComponent, AuthDirective, NzSwitchModule]
 })
 export class AccountComponent implements OnInit {
   @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<any>;

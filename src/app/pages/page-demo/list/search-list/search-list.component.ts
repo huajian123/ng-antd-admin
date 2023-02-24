@@ -7,6 +7,13 @@ import { DestroyService } from '@core/services/common/destory.service';
 import { PageHeaderType } from '@shared/components/page-header/page-header.component';
 import { SearchListStoreService } from '@store/biz-store-service/search-list/search-list-store.service';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NgFor } from '@angular/common';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { WaterMarkComponent } from '../../../../shared/components/water-mark/water-mark.component';
+import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header.component';
 
 interface TabInterface {
   label: string;
@@ -14,11 +21,13 @@ interface TabInterface {
 }
 
 @Component({
-  selector: 'app-search-list',
-  templateUrl: './search-list.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [fadeRouteAnimation],
-  providers: [DestroyService]
+    selector: 'app-search-list',
+    templateUrl: './search-list.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [fadeRouteAnimation],
+    providers: [DestroyService],
+    standalone: true,
+    imports: [PageHeaderComponent, WaterMarkComponent, NzButtonModule, NzInputModule, NzWaveModule, NzTabsModule, NgFor, RouterOutlet]
 })
 export class SearchListComponent implements OnInit {
   @ViewChild('headerContent', { static: true }) headerContent!: TemplateRef<NzSafeAny>;

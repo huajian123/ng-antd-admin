@@ -6,7 +6,6 @@ import { BaseRoutingModule } from './base-routing.module';
 import { BaseComponent } from './base.component';
 
 @NgModule({
-  declarations: [BaseComponent],
-  imports: [SharedModule, BaseRoutingModule]
+    imports: [SharedModule, BaseRoutingModule, BaseComponent]
 })
 export class BaseModule {}

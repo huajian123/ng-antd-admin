@@ -12,7 +12,8 @@ const routes: Routes = [
   { path: 'upload', loadChildren: () => import('./upload/upload.module').then(m => m.UploadModule) },
   {
     path: 'context-menu',
-    loadChildren: () => import('./context-menu/context-menu.module').then(m => m.ContextMenuModule)
+    data: { title: '右键菜单', key: 'context-menu' },
+    loadComponent: () => import('./context-menu/context-menu.component').then(m => m.ContextMenuComponent)
   },
   {
     path: 'session-timeout',
@@ -20,9 +21,10 @@ const routes: Routes = [
   },
   {
     path: 'click-out-side',
-    loadChildren: () => import('./click-out-side/click-out-side.module').then(m => m.ClickOutSideModule)
+    data: { title: 'clickOutSide', key: 'click-out-side' },
+    loadComponent: () => import('./click-out-side/click-out-side.component').then(m => m.ClickOutSideComponent)
   },
-  { path: 'color-sel', loadChildren: () => import('./color-sel/color-sel.module').then(m => m.ColorSelModule) },
+  { path: 'color-sel', data: { title: '颜色选择器', key: 'color-sel' }, loadComponent: () => import('./color-sel/color-sel.component').then(m => m.ColorSelComponent) },
   { path: 'scroll', loadChildren: () => import('./scroll/scroll.module').then(m => m.ScrollModule) },
   { path: 'img-preview', loadChildren: () => import('./img-preview/img-preview.module').then(m => m.ImgPreviewModule) },
   { path: 'tabs', loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsModule) },
@@ -31,7 +33,7 @@ const routes: Routes = [
   { path: 'icons', loadChildren: () => import('./icons/icons.module').then(m => m.IconsModule) },
   { path: 'charts', loadChildren: () => import('./charts/charts.module').then(m => m.ChartsModule) },
   { path: 'ripple', loadChildren: () => import('./ripple/ripple.module').then(m => m.RippleModule) },
-  { path: 'copy', loadChildren: () => import('./copy/copy.module').then(m => m.CopyModule) },
+  { path: 'copy', data: { title: '剪切板', key: 'copy' }, loadComponent: () => import('./copy/copy.component').then(m => m.CopyComponent) },
   { path: 'setup', loadChildren: () => import('./setup/setup.module').then(m => m.SetupModule) },
   { path: 'download', loadChildren: () => import('./download/download.module').then(m => m.DownloadModule) }
 ];

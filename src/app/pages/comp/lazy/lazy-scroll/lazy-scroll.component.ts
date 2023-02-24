@@ -5,8 +5,10 @@ import { debounceTime, filter, takeUntil } from 'rxjs/operators';
 
 import { LazyServiceService } from '@app/pages/comp/lazy/lazy-service.service';
 import { DestroyService } from '@core/services/common/destory.service';
-import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { AdDirective } from '@shared/directives/ad.directive';
+
+import { AdDirective as AdDirective_1 } from '../../../../shared/directives/ad.directive';
 
 const passiveEventListenerOptions = normalizePassiveListenerOptions({ passive: true });
 
@@ -14,7 +16,9 @@ const passiveEventListenerOptions = normalizePassiveListenerOptions({ passive: t
   selector: 'app-lazy-scroll',
   templateUrl: './lazy-scroll.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [LazyServiceService, DestroyService]
+  providers: [LazyServiceService, DestroyService],
+  standalone: true,
+  imports: [PageHeaderComponent, AdDirective_1]
 })
 export class LazyScrollComponent implements OnInit, AfterViewInit {
   pageHeaderInfo: Partial<PageHeaderType> = {

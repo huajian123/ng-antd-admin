@@ -3,11 +3,19 @@ import { Router } from '@angular/router';
 
 import { TabService } from '@core/services/common/tab.service';
 import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { PageHeaderComponent } from '../../../shared/components/page-header/page-header.component';
 
 @Component({
-  selector: 'app-tabs',
-  templateUrl: './tabs.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-tabs',
+    templateUrl: './tabs.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [PageHeaderComponent, NzCardModule, NzAlertModule, NzButtonModule, NzInputModule, NzWaveModule]
 })
 export class TabsComponent implements OnInit {
   pageHeaderInfo: Partial<PageHeaderType> = {

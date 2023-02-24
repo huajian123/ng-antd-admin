@@ -6,7 +6,6 @@ import { BaseDetailRoutingModule } from './base-detail-routing.module';
 import { BaseDetailComponent } from './base-detail.component';
 
 @NgModule({
-  declarations: [BaseDetailComponent],
-  imports: [SharedModule, BaseDetailRoutingModule]
+    imports: [SharedModule, BaseDetailRoutingModule, BaseDetailComponent]
 })
 export class BaseDetailModule {}

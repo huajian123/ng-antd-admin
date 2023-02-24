@@ -8,7 +8,8 @@ import { Directive, Host, Input, Optional } from '@angular/core';
  * */
 
 @Directive({
-  selector: '[ngForTrackByProperty]'
+    selector: '[ngForTrackByProperty]',
+    standalone: true
 })
 export class TrackByPropertyDirective {
   private _propertyName: string = '';

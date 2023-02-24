@@ -6,7 +6,6 @@ import { UploadRoutingModule } from './upload-routing.module';
 import { UploadComponent } from './upload.component';
 
 @NgModule({
-  declarations: [UploadComponent],
-  imports: [SharedModule, UploadRoutingModule]
+    imports: [SharedModule, UploadRoutingModule, UploadComponent]
 })
 export class UploadModule {}

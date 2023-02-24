@@ -10,14 +10,23 @@ import { SplitNavStoreService } from '@store/common-store/split-nav-store.servic
 import { ThemeService } from '@store/common-store/theme.service';
 import { fnStopMouseEvent } from '@utils/tools';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { NzContextMenuService, NzDropdownMenuComponent } from 'ng-zorro-antd/dropdown';
+import { NzContextMenuService, NzDropdownMenuComponent, NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { MouseHoverShowDirective } from '../../../shared/directives/mouse-hover-show.directive';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NgIf, NgFor, NgClass, NgStyle, AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-tab',
-  templateUrl: './tab.component.html',
-  styleUrls: ['./tab.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DestroyService]
+    selector: 'app-tab',
+    templateUrl: './tab.component.html',
+    styleUrls: ['./tab.component.less'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [DestroyService],
+    standalone: true,
+    imports: [NgIf, NzCardModule, NzTabsModule, NgFor, NzDropDownModule, NzMenuModule, NzButtonModule, NgClass, NgStyle, MouseHoverShowDirective, NzIconModule, AsyncPipe]
 })
 export class TabComponent implements OnInit {
   tabsSourceData: TabModel[] = [];

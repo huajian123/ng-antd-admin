@@ -6,7 +6,6 @@ import { SharedModule } from '@shared/shared.module';
 import { AccountModalComponent } from './account-modal.component';
 
 @NgModule({
-  declarations: [AccountModalComponent],
-  imports: [SharedModule]
+    imports: [SharedModule, AccountModalComponent]
 })
 export class AccountModalModule {}

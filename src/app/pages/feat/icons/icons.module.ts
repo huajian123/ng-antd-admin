@@ -8,7 +8,6 @@ import { IconsRoutingModule } from './icons-routing.module';
 import { IconsComponent } from './icons.component';
 
 @NgModule({
-  declarations: [IconsComponent],
-  imports: [IconSelModule, SharedModule, IconsRoutingModule, MatIconModule]
+    imports: [IconSelModule, SharedModule, IconsRoutingModule, MatIconModule, IconsComponent]
 })
 export class IconsModule {}

@@ -9,7 +9,6 @@ import { UserMemberManageComponent } from './user-member-manage/user-member-mana
 import { WarehouseManageFormComponent } from './warehouse-manage-form/warehouse-manage-form.component';
 
 @NgModule({
-  declarations: [AdvancedComponent, WarehouseManageFormComponent, TaskManageFormComponent, UserMemberManageComponent],
-  imports: [SharedModule, AdvancedRoutingModule]
+    imports: [SharedModule, AdvancedRoutingModule, AdvancedComponent, WarehouseManageFormComponent, TaskManageFormComponent, UserMemberManageComponent]
 })
 export class AdvancedModule {}

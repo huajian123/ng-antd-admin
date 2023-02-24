@@ -2,6 +2,10 @@ import { Component, OnInit, ChangeDetectionStrategy, NgModule, Input, Output, Ev
 
 import { DestroyService } from '@core/services/common/destory.service';
 import { SharedModule } from '@shared/shared.module';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 
 export enum LazySelPeopleEnum {
   'Yanzu',
@@ -15,7 +19,9 @@ export enum LazySelPeopleEnum {
   templateUrl: './lazy-targ-comp.component.html',
   styleUrls: ['./lazy-targ-comp.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DestroyService]
+  providers: [DestroyService],
+  standalone: true,
+  imports: [NzCardModule, NzAvatarModule, NzButtonModule, NzWaveModule]
 })
 export class LazyTargCompComponent implements OnInit, OnChanges {
   @Input() purChoosePeople: LazySelPeopleEnum = LazySelPeopleEnum.YiLin;
@@ -40,7 +46,6 @@ export class LazyTargCompComponent implements OnInit, OnChanges {
 }
 
 @NgModule({
-  declarations: [LazyTargCompComponent],
-  imports: [SharedModule]
+  imports: [SharedModule, LazyTargCompComponent]
 })
 class LazyTargCompModule {}

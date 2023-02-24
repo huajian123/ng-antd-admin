@@ -6,7 +6,6 @@ import { TreeListRoutingModule } from './tree-list-routing.module';
 import { TreeListComponent } from './tree-list.component';
 
 @NgModule({
-  declarations: [TreeListComponent],
-  imports: [SharedModule, TreeListRoutingModule]
+    imports: [SharedModule, TreeListRoutingModule, TreeListComponent]
 })
 export class TreeListModule {}

@@ -6,8 +6,7 @@ import { SharedModule } from '@shared/shared.module';
 import { SettingDrawerComponent } from './setting-drawer.component';
 
 @NgModule({
-  declarations: [SettingDrawerComponent],
-  imports: [SharedModule, DragDropModule],
-  exports: [SettingDrawerComponent]
+    imports: [SharedModule, DragDropModule, SettingDrawerComponent],
+    exports: [SettingDrawerComponent]
 })
 export class SettingDrawerModule {}

@@ -6,9 +6,10 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 
 @Component({
-  selector: 'app-drag',
-  templateUrl: './drag.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-drag',
+    templateUrl: './drag.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class DragComponent extends BasicConfirmModalComponent implements OnInit {
   override params: object;

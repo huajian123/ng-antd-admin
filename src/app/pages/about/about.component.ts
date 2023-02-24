@@ -1,12 +1,20 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 
 import { PageHeaderType } from '@shared/components/page-header/page-header.component';
 import { DateFormat } from '@shared/pipes/map.pipe';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
+import { NzTagModule } from 'ng-zorro-antd/tag';
+
+import { PageHeaderComponent } from '../../shared/components/page-header/page-header.component';
 
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [PageHeaderComponent, NzCardModule, NzDescriptionsModule, NzTagModule, DatePipe]
 })
 export class AboutComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {

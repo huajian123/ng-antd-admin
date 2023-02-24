@@ -1,11 +1,15 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
-import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 @Component({
   selector: 'app-color-sel',
   templateUrl: './color-sel.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [PageHeaderComponent, NzCardModule, ColorPickerModule]
 })
 export class ColorSelComponent implements OnInit {
   public color: string = '#2889e9';

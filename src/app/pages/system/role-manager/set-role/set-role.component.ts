@@ -8,13 +8,26 @@ import { PutPermissionParam, RoleService } from '@services/system/role.service';
 import { PageHeaderType } from '@shared/components/page-header/page-header.component';
 import { fnAddTreeDataGradeAndLeaf, fnFlatDataHasParentToTree, fnFlattenTreeDataByDataList } from '@utils/treeTableTools';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { FooterSubmitComponent } from '../../../../shared/components/footer-submit/footer-submit.component';
+import { NzResultModule } from 'ng-zorro-antd/result';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { FormsModule } from '@angular/forms';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NgFor, NgIf, NgTemplateOutlet, NgStyle } from '@angular/common';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header.component';
 
 @Component({
-  selector: 'app-set-role',
-  templateUrl: './set-role.component.html',
-  styleUrls: ['./set-role.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None
+    selector: 'app-set-role',
+    templateUrl: './set-role.component.html',
+    styleUrls: ['./set-role.component.less'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [PageHeaderComponent, NzCardModule, NgFor, NzCheckboxModule, FormsModule, NgIf, NzIconModule, NzButtonModule, NzDividerModule, NzResultModule, NgTemplateOutlet, NgStyle, FooterSubmitComponent, NzWaveModule]
 })
 export class SetRoleComponent implements OnInit {
   pageHeaderInfo: Partial<PageHeaderType> = {

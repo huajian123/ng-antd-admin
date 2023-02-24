@@ -3,12 +3,31 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { PageHeaderType } from '@shared/components/page-header/page-header.component';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzProgressStatusType } from 'ng-zorro-antd/progress/typings';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzProgressModule } from 'ng-zorro-antd/progress';
+import { NgFor } from '@angular/common';
+import { NzListModule } from 'ng-zorro-antd/list';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzStatisticModule } from 'ng-zorro-antd/statistic';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { WaterMarkComponent } from '../../../../shared/components/water-mark/water-mark.component';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header.component';
 
 @Component({
-  selector: 'app-standard-table',
-  templateUrl: './standard-table.component.html',
-  styleUrls: ['./standard-table.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-standard-table',
+    templateUrl: './standard-table.component.html',
+    styleUrls: ['./standard-table.component.less'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [PageHeaderComponent, NzCardModule, WaterMarkComponent, NzGridModule, NzStatisticModule, NzDividerModule, NzRadioModule, NzButtonModule, NzInputModule, NzWaveModule, NzIconModule, NzListModule, NgFor, NzProgressModule, NzDropDownModule, NzMenuModule, NzPaginationModule]
 })
 export class StandardTableComponent implements OnInit {
   pageHeaderInfo: Partial<PageHeaderType> = {

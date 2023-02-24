@@ -3,6 +3,12 @@ import { Component, OnInit, ChangeDetectionStrategy, TemplateRef, ViewChild } fr
 import { AntTableConfig } from '@shared/components/ant-table/ant-table.component';
 import { PageHeaderType } from '@shared/components/page-header/page-header.component';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { AntTableComponent } from '../../../../shared/components/ant-table/ant-table.component';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
+import { WaterMarkComponent } from '../../../../shared/components/water-mark/water-mark.component';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header.component';
 
 interface ReturnObj {
   num: string;
@@ -14,9 +20,11 @@ interface ReturnObj {
 }
 
 @Component({
-  selector: 'app-base-detail',
-  templateUrl: './base-detail.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-base-detail',
+    templateUrl: './base-detail.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [PageHeaderComponent, NzCardModule, WaterMarkComponent, NzDescriptionsModule, NzDividerModule, AntTableComponent]
 })
 export class BaseDetailComponent implements OnInit {
   @ViewChild('returnProductTpl', { static: true }) returnProductTpl!: TemplateRef<NzSafeAny>;

@@ -6,7 +6,6 @@ import { RegisterFormRoutingModule } from './register-form-routing.module';
 import { RegisterFormComponent } from './register-form.component';
 
 @NgModule({
-  declarations: [RegisterFormComponent],
-  imports: [SharedModule, RegisterFormRoutingModule]
+    imports: [SharedModule, RegisterFormRoutingModule, RegisterFormComponent]
 })
 export class RegisterFormModule {}

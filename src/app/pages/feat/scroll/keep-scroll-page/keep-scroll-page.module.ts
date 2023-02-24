@@ -6,7 +6,6 @@ import { KeepScrollPageRoutingModule } from './keep-scroll-page-routing.module';
 import { KeepScrollPageComponent } from './keep-scroll-page.component';
 
 @NgModule({
-  declarations: [KeepScrollPageComponent],
-  imports: [SharedModule, KeepScrollPageRoutingModule]
+    imports: [SharedModule, KeepScrollPageRoutingModule, KeepScrollPageComponent]
 })
 export class KeepScrollPageModule {}

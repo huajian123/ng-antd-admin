@@ -6,7 +6,6 @@ import { LoginFormRoutingModule } from './login-form-routing.module';
 import { LoginFormComponent } from './login-form.component';
 
 @NgModule({
-  declarations: [LoginFormComponent],
-  imports: [SharedModule, LoginFormRoutingModule]
+    imports: [SharedModule, LoginFormRoutingModule, LoginFormComponent]
 })
 export class LoginFormModule {}

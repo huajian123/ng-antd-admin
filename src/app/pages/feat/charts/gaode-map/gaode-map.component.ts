@@ -1,12 +1,18 @@
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import AMapLoader from '@amap/amap-jsapi-loader';
-import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
+import { WaterMarkComponent } from '@shared/components/water-mark/water-mark.component';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzInputModule } from 'ng-zorro-antd/input';
 
 @Component({
   selector: 'app-gaode-map',
   templateUrl: './gaode-map.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [PageHeaderComponent, NzCardModule, WaterMarkComponent, NzInputModule, FormsModule]
 })
 export class GaodeMapComponent implements OnInit, AfterViewInit {
   pageHeaderInfo: Partial<PageHeaderType> = {

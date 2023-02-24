@@ -10,7 +10,6 @@ import { StepTwoComponent } from './step-two/step-two.component';
 import { StepComponent } from './step.component';
 
 @NgModule({
-  declarations: [StepComponent, StepOneComponent, StepTwoComponent, StepThreeComponent],
-  imports: [SharedModule, StepRoutingModule, PortalModule]
+    imports: [SharedModule, StepRoutingModule, PortalModule, StepComponent, StepOneComponent, StepTwoComponent, StepThreeComponent]
 })
 export class StepModule {}

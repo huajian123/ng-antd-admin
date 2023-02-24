@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
 import { ValidatorsService } from '@core/services/validators/validators.service';
@@ -8,11 +8,19 @@ import { RoleService } from '@services/system/role.service';
 import { fnCheckForm } from '@utils/tools';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzModalRef } from 'ng-zorro-antd/modal';
+import { NgIf } from '@angular/common';
+import { NzSliderModule } from 'ng-zorro-antd/slider';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzFormModule } from 'ng-zorro-antd/form';
 
 @Component({
-  selector: 'app-append-form-modal',
-  templateUrl: './append-form-modal.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-append-form-modal',
+    templateUrl: './append-form-modal.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzDatePickerModule, NzSliderModule, NgIf]
 })
 export class AppendFormModalComponent implements OnInit {
   addEditForm!: FormGroup;

@@ -25,8 +25,7 @@ const DIRECTIVES = [
 ];
 
 @NgModule({
-  declarations: [...DIRECTIVES],
-  imports: [CommonModule],
-  exports: [...DIRECTIVES]
+    imports: [CommonModule, ...DIRECTIVES],
+    exports: [...DIRECTIVES]
 })
 export class DirectivesModule {}

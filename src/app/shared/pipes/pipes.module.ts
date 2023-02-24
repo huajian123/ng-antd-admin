@@ -9,8 +9,7 @@ import { TableFiledPipe } from './table-filed.pipe';
 const PIPES = [ChangNumberToChinesePipe, NumberLoopPipe, HtmlPipe, MapPipe, TableFiledPipe];
 
 @NgModule({
-  declarations: [...PIPES],
-  imports: [],
-  exports: [...PIPES]
+    imports: [...PIPES],
+    exports: [...PIPES]
 })
 export class PipesModule {}

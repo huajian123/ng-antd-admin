@@ -4,7 +4,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   selector: 'app-angular-img',
   templateUrl: './angular-img.component.html',
   styleUrls: ['./angular-img.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true
 })
 export class AngularImgComponent implements OnInit {
   constructor() {}

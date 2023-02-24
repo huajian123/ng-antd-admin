@@ -6,6 +6,21 @@ import { AdDirective } from '@shared/directives/ad.directive';
 import { ApplicationComponent } from './application/application.component';
 import { ArticleComponent } from './article/article.component';
 import { ProjectsComponent } from './projects/projects.component';
+import { NumberLoopPipe } from '../../../../shared/pipes/number-loop.pipe';
+import { AdDirective as AdDirective_1 } from '../../../../shared/directives/ad.directive';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { FormsModule } from '@angular/forms';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzNoAnimationModule } from 'ng-zorro-antd/core/no-animation';
+import { NzTagModule } from 'ng-zorro-antd/tag';
+import { NgFor, NgIf } from '@angular/common';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzGridModule } from 'ng-zorro-antd/grid';
 
 interface TabInterface {
   label: string;
@@ -13,10 +28,12 @@ interface TabInterface {
 }
 
 @Component({
-  selector: 'app-personal-center',
-  templateUrl: './personal-center.component.html',
-  styleUrls: ['./personal-center.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-personal-center',
+    templateUrl: './personal-center.component.html',
+    styleUrls: ['./personal-center.component.less'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NzGridModule, NzCardModule, NzAvatarModule, NzTypographyModule, NzIconModule, NzButtonModule, NzDividerModule, NgFor, NzTagModule, NgIf, NzNoAnimationModule, NzInputModule, FormsModule, NzTabsModule, AdDirective_1, NumberLoopPipe]
 })
 export class PersonalCenterComponent implements OnInit {
   tagArray: string[] = ['很有想法的', '专注设计', '大长腿', '川妹子', '海纳百川'];

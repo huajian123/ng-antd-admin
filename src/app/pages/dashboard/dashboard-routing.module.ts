@@ -5,11 +5,11 @@ const routes: Routes = [
   { path: '', redirectTo: 'analysis', pathMatch: 'full' },
   {
     path: 'analysis',
-    data: { preload: true },
-    loadChildren: () => import('./analysis/analysis.module').then(m => m.AnalysisModule)
+    data: { preload: true, title: '分析页', key: 'analysis' },
+    loadComponent: () => import('./analysis/analysis.component').then(m => m.AnalysisComponent)
   },
-  { path: 'monitor', loadChildren: () => import('./monitor/monitor.module').then(m => m.MonitorModule) },
-  { path: 'workbench', loadChildren: () => import('./workbench/workbench.module').then(m => m.WorkbenchModule) }
+  { path: 'monitor', data: { title: '监控页', key: 'monitor' }, loadComponent: () => import('./monitor/monitor.component').then(m => m.MonitorComponent) },
+  { path: 'workbench', data: { title: '工作台', key: 'workbench' }, loadComponent: () => import('./workbench/workbench.component').then(m => m.WorkbenchComponent) }
 ];
 
 @NgModule({

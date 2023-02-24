@@ -2,11 +2,16 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { DriverService } from '@core/services/common/driver.service';
 import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { PageHeaderComponent } from '../../../shared/components/page-header/page-header.component';
 
 @Component({
-  selector: 'app-setup',
-  templateUrl: './setup.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-setup',
+    templateUrl: './setup.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [PageHeaderComponent, NzButtonModule, NzWaveModule]
 })
 export class SetupComponent implements OnInit {
   pageHeaderInfo: Partial<PageHeaderType> = {

@@ -3,10 +3,11 @@ import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, Afte
 import { WaterMarkService } from '@core/services/common/water-mark.service';
 
 @Component({
-  selector: 'app-water-mark',
-  templateUrl: './water-mark.component.html',
-  styleUrls: ['./water-mark.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-water-mark',
+    templateUrl: './water-mark.component.html',
+    styleUrls: ['./water-mark.component.less'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class WaterMarkComponent implements OnInit, AfterViewInit {
   @ViewChild('watermark', { static: false }) watermark!: ElementRef;

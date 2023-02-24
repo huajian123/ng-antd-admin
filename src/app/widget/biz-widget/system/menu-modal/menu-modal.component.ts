@@ -1,20 +1,31 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
 import { DestroyService } from '@core/services/common/destory.service';
 import { MenuListObj } from '@services/system/menus.service';
 import { fnCheckForm } from '@utils/tools';
 import { NzModalRef } from 'ng-zorro-antd/modal';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { IconSelComponent } from '../../../../shared/biz-components/icon-sel/icon-sel.component';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NgIf } from '@angular/common';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzFormModule } from 'ng-zorro-antd/form';
 
 // c:菜单，f按钮
 type menuType = 'C' | 'F';
 
 @Component({
-  selector: 'app-menu-modal',
-  templateUrl: './menu-modal.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DestroyService]
+    selector: 'app-menu-modal',
+    templateUrl: './menu-modal.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [DestroyService],
+    standalone: true,
+    imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzRadioModule, NgIf, NzButtonModule, IconSelComponent, NzInputNumberModule, NzSwitchModule]
 })
 export class MenuModalComponent implements OnInit {
   validateForm!: FormGroup;

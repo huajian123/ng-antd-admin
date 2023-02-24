@@ -11,7 +11,6 @@ import { PersonalCenterComponent } from './personal-center.component';
 import { ProjectsComponent } from './projects/projects.component';
 
 @NgModule({
-  declarations: [PersonalCenterComponent, ArticleComponent, ApplicationComponent, ProjectsComponent],
-  imports: [CommonModule, SharedModule, PersonalCenterRoutingModule, NzNoAnimationModule]
+    imports: [CommonModule, SharedModule, PersonalCenterRoutingModule, NzNoAnimationModule, PersonalCenterComponent, ArticleComponent, ApplicationComponent, ProjectsComponent]
 })
 export class PersonalCenterModule {}

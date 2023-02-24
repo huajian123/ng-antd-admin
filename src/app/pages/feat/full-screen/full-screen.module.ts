@@ -6,7 +6,6 @@ import { FullScreenRoutingModule } from './full-screen-routing.module';
 import { FullScreenComponent } from './full-screen.component';
 
 @NgModule({
-  declarations: [FullScreenComponent],
-  imports: [SharedModule, FullScreenRoutingModule]
+    imports: [SharedModule, FullScreenRoutingModule, FullScreenComponent]
 })
 export class FullScreenModule {}

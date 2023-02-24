@@ -1,16 +1,23 @@
+import { DecimalPipe, PercentPipe } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
-import { Gauge, Liquid, RingProgress, TinyArea, WordCloud } from '@antv/g2plot';
-
-import { inNextTick } from 'ng-zorro-antd/core/util';
 import AMapLoader from '@amap/amap-jsapi-loader';
+import { Gauge, Liquid, RingProgress, TinyArea, WordCloud } from '@antv/g2plot';
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { inNextTick } from 'ng-zorro-antd/core/util';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzStatisticModule } from 'ng-zorro-antd/statistic';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
 
 @Component({
   selector: 'app-monitor',
   templateUrl: './monitor.component.html',
   styleUrls: ['./monitor.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NzCardModule, NzBreadCrumbModule, NzGridModule, NzStatisticModule, NzTypographyModule, DecimalPipe, PercentPipe]
 })
 export class MonitorComponent implements OnInit, AfterViewInit {
   deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30;
@@ -580,13 +587,12 @@ export class MonitorComponent implements OnInit, AfterViewInit {
               zoom: 2,
               center: [116.397428, 39.90923]
             });
-            const styleName = "amap://styles/darkblue";
+            const styleName = 'amap://styles/darkblue';
             map.setMapStyle(styleName);
           })
           .catch(e => {
             console.error(e);
           });
-
       });
     });
   }

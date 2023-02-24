@@ -7,8 +7,7 @@ import { SettingDrawerModule } from '../setting-drawer/setting-drawer.module';
 import { DefLayoutContentComponent } from './def-layout-content.component';
 
 @NgModule({
-  declarations: [DefLayoutContentComponent],
-  imports: [SharedModule, SettingDrawerModule, NzNoAnimationModule],
-  exports: [DefLayoutContentComponent]
+    imports: [SharedModule, SettingDrawerModule, NzNoAnimationModule, DefLayoutContentComponent],
+    exports: [DefLayoutContentComponent]
 })
 export class DefLayoutContentModule {}

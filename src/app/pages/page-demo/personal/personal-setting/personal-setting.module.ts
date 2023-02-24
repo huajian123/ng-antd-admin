@@ -11,7 +11,6 @@ import { PersonalSettingComponent } from './personal-setting.component';
 import { SafeComponent } from './safe/safe.component';
 
 @NgModule({
-  declarations: [PersonalSettingComponent, BaseComponent, SafeComponent, BindComponent, NoticeComponent],
-  imports: [CommonModule, SharedModule, PersonalSettingRoutingModule]
+    imports: [CommonModule, SharedModule, PersonalSettingRoutingModule, PersonalSettingComponent, BaseComponent, SafeComponent, BindComponent, NoticeComponent]
 })
 export class PersonalSettingModule {}

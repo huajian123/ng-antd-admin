@@ -8,7 +8,6 @@ import { RippleRoutingModule } from './ripple-routing.module';
 import { RippleComponent } from './ripple.component';
 
 @NgModule({
-  declarations: [RippleComponent],
-  imports: [SharedModule, MatRippleModule, ColorPickerModule, RippleRoutingModule]
+    imports: [SharedModule, MatRippleModule, ColorPickerModule, RippleRoutingModule, RippleComponent]
 })
 export class RippleModule {}

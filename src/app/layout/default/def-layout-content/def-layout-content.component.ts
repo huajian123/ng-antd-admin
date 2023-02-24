@@ -5,13 +5,24 @@ import { takeUntil } from 'rxjs/operators';
 import { DestroyService } from '@core/services/common/destory.service';
 import { SplitNavStoreService } from '@store/common-store/split-nav-store.service';
 import { SettingInterface, ThemeService } from '@store/common-store/theme.service';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { ChatComponent } from '../../../shared/components/chat/chat.component';
+import { SettingDrawerComponent } from '../setting-drawer/setting-drawer.component';
+import { NzNoAnimationModule } from 'ng-zorro-antd/core/no-animation';
+import { NgIf, NgClass, NgStyle, AsyncPipe } from '@angular/common';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { TopProgressBarComponent } from '../../../shared/components/top-progress-bar/top-progress-bar.component';
 
 @Component({
-  selector: 'app-def-layout-content',
-  templateUrl: './def-layout-content.component.html',
-  styleUrls: ['./def-layout-content.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DestroyService]
+    selector: 'app-def-layout-content',
+    templateUrl: './def-layout-content.component.html',
+    styleUrls: ['./def-layout-content.component.less'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [DestroyService],
+    standalone: true,
+    imports: [TopProgressBarComponent, NzLayoutModule, NgIf, NgClass, NzNoAnimationModule, NgStyle, SettingDrawerComponent, ChatComponent, NzMenuModule, NzButtonModule, NzIconModule, AsyncPipe]
 })
 export class DefLayoutContentComponent implements OnInit {
   showChats = true;

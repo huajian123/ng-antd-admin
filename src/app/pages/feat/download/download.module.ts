@@ -6,7 +6,6 @@ import { DownloadRoutingModule } from './download-routing.module';
 import { DownloadComponent } from './download.component';
 
 @NgModule({
-  declarations: [DownloadComponent],
-  imports: [SharedModule, DownloadRoutingModule]
+    imports: [SharedModule, DownloadRoutingModule, DownloadComponent]
 })
 export class DownloadModule {}

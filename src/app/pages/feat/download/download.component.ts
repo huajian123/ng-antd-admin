@@ -6,11 +6,17 @@ import { ip } from '@env/environment.prod';
 import { DownloadService } from '@services/download/download.service';
 import { PageHeaderType } from '@shared/components/page-header/page-header.component';
 import FileSaver from 'file-saver';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { PageHeaderComponent } from '../../../shared/components/page-header/page-header.component';
 
 @Component({
-  selector: 'app-download',
-  templateUrl: './download.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-download',
+    templateUrl: './download.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [PageHeaderComponent, NzCardModule, NzButtonModule, NzWaveModule]
 })
 export class DownloadComponent implements OnInit {
   pageHeaderInfo: Partial<PageHeaderType> = {

@@ -9,6 +9,13 @@ import { BaseComponent } from './base/base.component';
 import { BindComponent } from './bind/bind.component';
 import { NoticeComponent } from './notice/notice.component';
 import { SafeComponent } from './safe/safe.component';
+import { AdDirective as AdDirective_1 } from '../../../../shared/directives/ad.directive';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NgClass, NgFor } from '@angular/common';
+import { NzCardModule } from 'ng-zorro-antd/card';
 
 interface TabInterface {
   key: string;
@@ -16,10 +23,12 @@ interface TabInterface {
 }
 
 @Component({
-  selector: 'app-personal-setting',
-  templateUrl: './personal-setting.component.html',
-  styleUrls: ['./personal-setting.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-personal-setting',
+    templateUrl: './personal-setting.component.html',
+    styleUrls: ['./personal-setting.component.less'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NzCardModule, NgClass, NzMenuModule, NgFor, NzButtonModule, NzGridModule, NzTypographyModule, AdDirective_1]
 })
 export class PersonalSettingComponent implements OnInit {
   @ViewChild(AdDirective, { static: true }) adHost!: AdDirective;

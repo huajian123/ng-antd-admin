@@ -4,6 +4,27 @@ import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, Aft
 import { AntTableConfig } from '@shared/components/ant-table/ant-table.component';
 import { PageHeaderType } from '@shared/components/page-header/page-header.component';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { AntTableComponent } from '../../../../shared/components/ant-table/ant-table.component';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { NgTemplateOutlet } from '@angular/common';
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
+import { NzStepsModule } from 'ng-zorro-antd/steps';
+import { WaterMarkComponent } from '../../../../shared/components/water-mark/water-mark.component';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzStatisticModule } from 'ng-zorro-antd/statistic';
+import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header.component';
 
 interface ReturnObj {
   num: string;
@@ -20,9 +41,11 @@ enum TabEnum {
 }
 
 @Component({
-  selector: 'app-adv-detail',
-  templateUrl: './adv-detail.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-adv-detail',
+    templateUrl: './adv-detail.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [PageHeaderComponent, NzRadioModule, NzDropDownModule, NzIconModule, NzButtonModule, NzMenuModule, NzWaveModule, NzGridModule, NzDescriptionsModule, NzStatisticModule, NzTabsModule, NzCardModule, WaterMarkComponent, NzStepsModule, NzPopoverModule, NgTemplateOutlet, NzBadgeModule, NzToolTipModule, NzDividerModule, NzEmptyModule, AntTableComponent]
 })
 export class AdvDetailComponent implements OnInit, AfterViewInit {
   @ViewChild('headerExtra', { static: false }) headerExtra!: TemplateRef<NzSafeAny>;

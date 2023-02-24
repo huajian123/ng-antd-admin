@@ -3,8 +3,11 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 import { AntTableConfig, SortFile, TableHeader } from '@shared/components/ant-table/ant-table.component';
 import { fnGetFlattenTreeDataByMap, fnTreeDataToMap } from '@utils/treeTableTools';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { NzResizeEvent } from 'ng-zorro-antd/resizable';
-import { NzTableQueryParams, NzTableSize } from 'ng-zorro-antd/table';
+import { NzResizeEvent, NzResizableModule } from 'ng-zorro-antd/resizable';
+import { NzTableQueryParams, NzTableSize, NzTableModule } from 'ng-zorro-antd/table';
+import { TableFiledPipe } from '../../pipes/table-filed.pipe';
+import { MapPipe } from '../../pipes/map.pipe';
+import { NgIf, NgFor, NgClass, NgTemplateOutlet } from '@angular/common';
 
 export interface TreeNodeInterface {
   id: string | number;
@@ -24,11 +27,13 @@ export abstract class AntTreeTableComponentToken {
 }
 
 @Component({
-  selector: 'app-tree-table',
-  templateUrl: './tree-table.component.html',
-  styleUrls: ['./tree-table.component.less'],
-  providers: [{ provide: AntTreeTableComponentToken, useExisting: TreeTableComponent }],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-tree-table',
+    templateUrl: './tree-table.component.html',
+    styleUrls: ['./tree-table.component.less'],
+    providers: [{ provide: AntTreeTableComponentToken, useExisting: TreeTableComponent }],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NzTableModule, NgIf, NgFor, NzResizableModule, NgClass, NgTemplateOutlet, MapPipe, TableFiledPipe]
 })
 export class TreeTableComponent implements OnInit, OnChanges {
   _dataList!: TreeNodeInterface[];

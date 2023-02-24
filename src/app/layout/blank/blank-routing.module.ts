@@ -13,7 +13,8 @@ const routes: Routes = [
     children: [
       {
         path: 'empty-page',
-        loadChildren: () => import('../../pages/empty/empty.module').then(m => m.EmptyModule)
+        data: { title: '空页面', key: 'empty-page', shouldDetach: 'no' },
+        loadComponent: () => import('../../pages/empty/empty.component').then(m => m.EmptyComponent)
       },
       {
         canDeactivate: [LockLeaveGuard],

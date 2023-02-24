@@ -7,8 +7,7 @@ import { SHARED_ZORRO_MODULES } from '@shared/shared-zorro.module';
 import { TreeTableComponent } from './tree-table.component';
 
 @NgModule({
-  declarations: [TreeTableComponent],
-  imports: [CommonModule, SHARED_ZORRO_MODULES, PipesModule],
-  exports: [TreeTableComponent]
+    imports: [CommonModule, SHARED_ZORRO_MODULES, PipesModule, TreeTableComponent],
+    exports: [TreeTableComponent]
 })
 export class TreeTableModule {}

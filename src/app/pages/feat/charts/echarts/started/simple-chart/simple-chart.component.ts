@@ -1,10 +1,16 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 
+import { NgxEchartsModule } from 'ngx-echarts';
+
 @Component({
   selector: 'app-simple-chart',
-  template: ` <div echarts [options]="options" class="demo-chart"></div> `,
+  template: `
+    <div class="demo-chart" echarts [options]="options"></div>
+  `,
   styles: [],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NgxEchartsModule]
 })
 export class SimpleChartComponent implements OnInit {
   options: any;

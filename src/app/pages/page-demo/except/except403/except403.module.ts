@@ -7,7 +7,6 @@ import { Except403RoutingModule } from './except403-routing.module';
 import { Except403Component } from './except403.component';
 
 @NgModule({
-  declarations: [Except403Component],
-  imports: [CommonModule, SharedModule, Except403RoutingModule]
+    imports: [CommonModule, SharedModule, Except403RoutingModule, Except403Component]
 })
 export class Except403Module {}

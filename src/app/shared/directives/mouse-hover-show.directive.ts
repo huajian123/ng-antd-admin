@@ -1,7 +1,8 @@
 import { Directive, ElementRef, HostListener, Renderer2 } from '@angular/core';
 
 @Directive({
-  selector: '[appMouseHoverShow]'
+    selector: '[appMouseHoverShow]',
+    standalone: true
 })
 export class MouseHoverShowDirective {
   @HostListener('mouseover')

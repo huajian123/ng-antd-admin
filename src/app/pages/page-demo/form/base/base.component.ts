@@ -1,15 +1,30 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { PageHeaderType } from '@shared/components/page-header/page-header.component';
 import { fnCheckForm } from '@utils/tools';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NgIf, NgFor } from '@angular/common';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { WaterMarkComponent } from '../../../../shared/components/water-mark/water-mark.component';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header.component';
 
 @Component({
-  selector: 'app-base',
-  templateUrl: './base.component.html',
-  styleUrls: ['./base.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-base',
+    templateUrl: './base.component.html',
+    styleUrls: ['./base.component.less'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [PageHeaderComponent, NzCardModule, WaterMarkComponent, FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzDatePickerModule, NzInputNumberModule, NzRadioModule, NgIf, NzSelectModule, NgFor, NzButtonModule, NzWaveModule]
 })
 export class BaseComponent implements OnInit, OnDestroy {
   @ViewChild('dragTpl', { static: true }) dragTpl!: TemplateRef<NzSafeAny>;

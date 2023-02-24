@@ -6,7 +6,6 @@ import { ImgPreviewRoutingModule } from './img-preview-routing.module';
 import { ImgPreviewComponent } from './img-preview.component';
 
 @NgModule({
-  declarations: [ImgPreviewComponent],
-  imports: [SharedModule, ImgPreviewRoutingModule]
+    imports: [SharedModule, ImgPreviewRoutingModule, ImgPreviewComponent]
 })
 export class ImgPreviewModule {}

@@ -3,14 +3,16 @@ import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Inject, 
 import { fromEvent, merge, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { fnStopMouseEvent } from '@utils/tools';
 
 @Component({
   selector: 'app-click-out-side',
   templateUrl: './click-out-side.component.html',
   styleUrls: ['./click-out-side.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [PageHeaderComponent]
 })
 export class ClickOutSideComponent implements OnInit, AfterViewInit {
   pageHeaderInfo: Partial<PageHeaderType> = {

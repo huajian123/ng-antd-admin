@@ -1,4 +1,6 @@
+import { NgFor, NgSwitch, NgSwitchCase, NgIf, NgSwitchDefault } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import {
   bounceOnEnterAnimation,
@@ -86,6 +88,11 @@ import {
   fadeInExpandRightOnEnterAnimation,
   fadeOutCollapseLeftOnLeaveAnimation
 } from 'angular-animations';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+
+import { AngularImgComponent } from '../angular-img/angular-img.component';
 @Component({
   selector: 'app-demo-on-enter-on-leave',
   templateUrl: './demo-on-enter-on-leave.component.html',
@@ -178,7 +185,9 @@ import {
     collapseLeftOnLeaveAnimation({ duration: 400 }),
     fadeInExpandRightOnEnterAnimation({ duration: 400 }),
     fadeOutCollapseLeftOnLeaveAnimation({ duration: 400 })
-  ]
+  ],
+  standalone: true,
+  imports: [NzSelectModule, FormsModule, NgFor, NzButtonModule, NzWaveModule, NgSwitch, NgSwitchCase, NgIf, AngularImgComponent, NgSwitchDefault]
 })
 export class DemoOnEnterOnLeaveComponent {
   options = [

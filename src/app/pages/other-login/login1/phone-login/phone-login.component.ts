@@ -1,18 +1,26 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { takeUntil } from 'rxjs/operators';
 
 import { LoginType } from '@app/pages/other-login/login1/login1.component';
 import { DestroyService } from '@core/services/common/destory.service';
 import { Login1StoreService } from '@store/biz-store-service/other-login/login1-store.service';
 import { EquipmentWidth, WindowsWidthService } from '@store/common-store/windows-width.service';
+import { NgStyle } from '@angular/common';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzFormModule } from 'ng-zorro-antd/form';
 
 @Component({
-  selector: 'app-phone-login',
-  templateUrl: './phone-login.component.html',
-  styleUrls: ['./phone-login.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DestroyService]
+    selector: 'app-phone-login',
+    templateUrl: './phone-login.component.html',
+    styleUrls: ['./phone-login.component.less'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [DestroyService],
+    standalone: true,
+    imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzButtonModule, NzWaveModule, NgStyle]
 })
 export class PhoneLoginComponent implements OnInit {
   validateForm!: FormGroup;

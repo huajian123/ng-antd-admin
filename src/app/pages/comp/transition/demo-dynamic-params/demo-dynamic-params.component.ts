@@ -1,4 +1,6 @@
+import { NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault, NgFor } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import {
   bounceAnimation,
@@ -86,6 +88,15 @@ import {
   fadeInRightOnEnterAnimation,
   rotateInUpLeftOnEnterAnimation
 } from 'angular-animations';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+
+import { AngularImgComponent } from '../angular-img/angular-img.component';
 
 @Component({
   selector: 'app-demo-dynamic-params',
@@ -178,6 +189,23 @@ import {
     rotateAnimation({ anchor: 'rotate90', degrees: 90 }),
     hueRotateAnimation(),
     hueRotateAnimation({ anchor: 'hueButton', duration: 20000 })
+  ],
+  standalone: true,
+  imports: [
+    FormsModule,
+    NzFormModule,
+    NzGridModule,
+    NzInputNumberModule,
+    NgIf,
+    NzInputModule,
+    NgSwitch,
+    NgSwitchCase,
+    AngularImgComponent,
+    NgSwitchDefault,
+    NzSelectModule,
+    NgFor,
+    NzButtonModule,
+    NzWaveModule
   ]
 })
 export class DemoDynamicParamsComponent implements OnInit {

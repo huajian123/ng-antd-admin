@@ -3,11 +3,23 @@ import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestro
 import { ip, port } from '@env/environment.prod';
 import { PageHeaderType } from '@shared/components/page-header/page-header.component';
 import { webSocket } from 'rxjs/webSocket';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
+import { NzResultModule } from 'ng-zorro-antd/result';
+import { NgFor } from '@angular/common';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { FormsModule } from '@angular/forms';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { PageHeaderComponent } from '../../../shared/components/page-header/page-header.component';
 
 @Component({
-  selector: 'app-websocket',
-  templateUrl: './websocket.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-websocket',
+    templateUrl: './websocket.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [PageHeaderComponent, NzGridModule, NzInputModule, FormsModule, NzButtonModule, NzWaveModule, NzCardModule, NgFor, NzResultModule, NzTypographyModule]
 })
 export class WebsocketComponent implements OnInit, OnDestroy {
   concate = true;

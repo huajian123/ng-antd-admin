@@ -1,22 +1,27 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { EChartsOption } from 'echarts/types/dist/echarts';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 @Component({
   selector: 'app-instance-opts-charts',
   template: `
     <div class="m-b-20">
-      <button class="m-r-8 m-b-8" (click)="callMethod('getWidth')" nz-button nzType="default">getWidth()</button>
-      <button class="m-r-8 m-b-8" (click)="callMethod('getHeight')" nz-button nzType="default">getHeight()</button>
-      <button class="m-r-8 m-b-8" (click)="callMethod('getDom')" nz-button nzType="default">getDom()</button>
-      <button class="m-r-8 m-b-8" (click)="callMethod('getOption')" nz-button nzType="default">getOption()</button>
-      <button class="m-r-8 m-b-8" (click)="callMethod('clear')" nz-button nzType="default">clear()</button>
+      <button class="m-r-8 m-b-8" nz-button nzType="default" (click)="callMethod('getWidth')">getWidth()</button>
+      <button class="m-r-8 m-b-8" nz-button nzType="default" (click)="callMethod('getHeight')">getHeight()</button>
+      <button class="m-r-8 m-b-8" nz-button nzType="default" (click)="callMethod('getDom')">getDom()</button>
+      <button class="m-r-8 m-b-8" nz-button nzType="default" (click)="callMethod('getOption')">getOption()</button>
+      <button class="m-r-8 m-b-8" nz-button nzType="default" (click)="callMethod('clear')">clear()</button>
     </div>
-    <div echarts (chartInit)="onChartInit($event)" [options]="options" class="demo-chart"></div>
+    <div class="demo-chart" echarts [options]="options" (chartInit)="onChartInit($event)"></div>
   `,
   styles: [],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NzButtonModule, NzWaveModule, NgxEchartsModule]
 })
 export class InstanceOptsChartsComponent {
   chartInstance: any;

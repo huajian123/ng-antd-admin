@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 
@@ -17,6 +17,20 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
+import { NzTagModule } from 'ng-zorro-antd/tag';
+import { AuthDirective } from '../../../shared/directives/auth.directive';
+import { TreeTableComponent } from '../../../shared/components/tree-table/tree-table.component';
+import { CardTableWrapComponent } from '../../../shared/components/card-table-wrap/card-table-wrap.component';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NgFor, NgTemplateOutlet } from '@angular/common';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { PageHeaderComponent } from '../../../shared/components/page-header/page-header.component';
 
 interface SearchParam {
   departmentName: string;
@@ -24,9 +38,11 @@ interface SearchParam {
 }
 
 @Component({
-  selector: 'app-dept',
-  templateUrl: './dept.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-dept',
+    templateUrl: './dept.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [PageHeaderComponent, NzCardModule, FormsModule, NzFormModule, NzGridModule, NzInputModule, NzSelectModule, NgFor, NzButtonModule, NzWaveModule, NzIconModule, CardTableWrapComponent, TreeTableComponent, AuthDirective, NgTemplateOutlet, NzTagModule]
 })
 export class DeptComponent implements OnInit {
   @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<NzSafeAny>;

@@ -3,12 +3,22 @@ import { Component, OnInit, ChangeDetectionStrategy, AfterViewInit, ViewChild, T
 import { PageHeaderType } from '@shared/components/page-header/page-header.component';
 import { ThemeService } from '@store/common-store/theme.service';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { WaterMarkComponent } from '../../../../shared/components/water-mark/water-mark.component';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header.component';
 
 @Component({
-  selector: 'app-card-table',
-  templateUrl: './card-table.component.html',
-  styleUrls: ['./card-table.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-card-table',
+    templateUrl: './card-table.component.html',
+    styleUrls: ['./card-table.component.less'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [PageHeaderComponent, NzGridModule, NgIf, WaterMarkComponent, NzCardModule, NzIconModule, NzButtonModule, NgFor, NzAvatarModule, AsyncPipe]
 })
 export class CardTableComponent implements OnInit, AfterViewInit {
   isOverMode$ = this.themesService.getIsOverMode();

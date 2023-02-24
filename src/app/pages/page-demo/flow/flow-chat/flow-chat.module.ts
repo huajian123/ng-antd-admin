@@ -6,7 +6,6 @@ import { FlowChatRoutingModule } from './flow-chat-routing.module';
 import { FlowChatComponent } from './flow-chat.component';
 
 @NgModule({
-  declarations: [FlowChatComponent],
-  imports: [SharedModule, FlowChatRoutingModule]
+    imports: [SharedModule, FlowChatRoutingModule, FlowChatComponent]
 })
 export class FlowChatModule {}

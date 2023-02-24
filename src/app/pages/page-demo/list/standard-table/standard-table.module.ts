@@ -6,7 +6,6 @@ import { StandardTableRoutingModule } from './standard-table-routing.module';
 import { StandardTableComponent } from './standard-table.component';
 
 @NgModule({
-  declarations: [StandardTableComponent],
-  imports: [SharedModule, StandardTableRoutingModule]
+    imports: [SharedModule, StandardTableRoutingModule, StandardTableComponent]
 })
 export class StandardTableModule {}

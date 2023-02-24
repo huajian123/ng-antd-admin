@@ -1,3 +1,4 @@
+import { NgIf, AsyncPipe } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs/operators';
@@ -8,9 +9,15 @@ import { LockScreenStoreService } from '@store/common-store/lock-screen-store.se
 import { SpinService } from '@store/common-store/spin.service';
 import { fnStopMouseEvent } from '@utils/tools';
 import { ModalWrapService } from '@widget/base-modal';
+import { NzBackTopModule } from 'ng-zorro-antd/back-top';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 import { fadeRouteAnimation } from './animations/fade.animation';
+import { LockScreenComponent } from './shared/components/lock-screen/lock-screen.component';
 
 @Component({
   selector: 'app-root',
@@ -29,23 +36,25 @@ import { fadeRouteAnimation } from './animations/fade.animation';
     <ng-template #modalBtnTpl>
       <div class="center">
         <span class="hover-blue full-height flex-auto text-right d-i-b" (click)="fullScreenIconClick($event)">
-          <i class="m-r-8" nz-icon [nzType]="!modalFullScreenFlag ? 'fullscreen' : 'fullscreen-exit'" nzTheme="outline"></i>
+          <i class="m-r-8" nz-icon nzTheme="outline" [nzType]="!modalFullScreenFlag ? 'fullscreen' : 'fullscreen-exit'"></i>
         </span>
-        <span (click)="modalFullScreenFlag = false" class="hover-red full-height flex-auto d-i-b">
-          <i nz-icon nzType="close" nzTheme="outline"></i>
+        <span class="hover-red full-height flex-auto d-i-b" (click)="modalFullScreenFlag = false">
+          <i nz-icon nzTheme="outline" nzType="close"></i>
         </span>
       </div>
     </ng-template>
 
     <ng-template #drawerFootDefaultTpl>
       <div class="end-start-center">
-        <button nzType="default" class="m-r-8" (click)="drawerWrapService.cancel()" nz-button>取消</button>
-        <button nzType="primary" (click)="drawerWrapService.sure()" nz-button>确定</button>
+        <button class="m-r-8" nz-button nzType="default" (click)="drawerWrapService.cancel()">取消</button>
+        <button nz-button nzType="primary" (click)="drawerWrapService.sure()">确定</button>
       </div>
     </ng-template>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [fadeRouteAnimation]
+  animations: [fadeRouteAnimation],
+  standalone: true,
+  imports: [NgIf, LockScreenComponent, NzBackTopModule, RouterOutlet, NzSpinModule, NzIconModule, NzButtonModule, NzWaveModule, AsyncPipe]
 })
 export class AppComponent implements OnInit, AfterViewInit {
   loading$ = this.spinService.getCurrentGlobalSpinStore();

@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
 import { DestroyService } from '@core/services/common/destory.service';
@@ -13,12 +13,22 @@ import { fnAddTreeDataGradeAndLeaf, fnFlatDataHasParentToTree } from '@utils/tre
 import { NzTreeNodeOptions } from 'ng-zorro-antd/core/tree';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzModalRef } from 'ng-zorro-antd/modal';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { NgIf, NgFor } from '@angular/common';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzFormModule } from 'ng-zorro-antd/form';
 
 @Component({
-  selector: 'app-account-modal',
-  templateUrl: './account-modal.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DestroyService]
+    selector: 'app-account-modal',
+    templateUrl: './account-modal.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [DestroyService],
+    standalone: true,
+    imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NgIf, NzRadioModule, NzSwitchModule, NzTreeSelectModule, NzSelectModule, NgFor]
 })
 export class AccountModalComponent implements OnInit {
   addEditForm!: FormGroup;

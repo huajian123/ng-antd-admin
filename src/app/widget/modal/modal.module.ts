@@ -7,8 +7,7 @@ import { ModalDragService } from './modal-drag.service';
 import { NzModalWrapService } from './nz-modal-wrap.service';
 
 @NgModule({
-  declarations: [ModalDragDirective],
-  imports: [NzModalModule],
+  imports: [NzModalModule, ModalDragDirective],
   exports: [ModalDragDirective],
   providers: [NzModalWrapService, ModalDragService]
 })

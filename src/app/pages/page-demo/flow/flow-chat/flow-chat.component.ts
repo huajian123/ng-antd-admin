@@ -2,12 +2,21 @@ import { Component, OnInit, ChangeDetectionStrategy, AfterViewInit, ViewChild, E
 
 import { Addon, Graph } from '@antv/x6';
 import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzResultModule } from 'ng-zorro-antd/result';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header.component';
 
 @Component({
-  selector: 'app-flow-chat',
-  templateUrl: './flow-chat.component.html',
-  styleUrls: ['./flow-chat.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-flow-chat',
+    templateUrl: './flow-chat.component.html',
+    styleUrls: ['./flow-chat.component.less'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [PageHeaderComponent, NzCardModule, NzResultModule, NzGridModule, NzButtonModule, NzToolTipModule, NzIconModule]
 })
 export class FlowChatComponent implements OnInit, AfterViewInit {
   pageHeaderInfo: Partial<PageHeaderType> = {

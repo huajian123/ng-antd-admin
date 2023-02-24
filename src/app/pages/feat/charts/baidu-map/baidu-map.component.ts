@@ -1,13 +1,16 @@
 import { Component, OnInit, ChangeDetectionStrategy, AfterViewInit } from '@angular/core';
 
 import { LazyService } from '@core/services/common/lazy.service';
-import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
+import { NzCardModule } from 'ng-zorro-antd/card';
 
 declare var BMap: any;
 @Component({
   selector: 'app-baidu-map',
   templateUrl: './baidu-map.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [PageHeaderComponent, NzCardModule]
 })
 export class BaiduMapComponent implements OnInit {
   pageHeaderInfo: Partial<PageHeaderType> = {

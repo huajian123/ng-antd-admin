@@ -8,8 +8,7 @@ import { SHARED_ZORRO_MODULES } from '@shared/shared-zorro.module';
 import { CardTableWrapComponent } from './card-table-wrap.component';
 
 @NgModule({
-  declarations: [CardTableWrapComponent],
-  imports: [CommonModule, ...SHARED_ZORRO_MODULES, DirectivesModule, DragDropModule],
-  exports: [CardTableWrapComponent]
+    imports: [CommonModule, ...SHARED_ZORRO_MODULES, DirectivesModule, DragDropModule, CardTableWrapComponent],
+    exports: [CardTableWrapComponent]
 })
 export class CardTableWrapModule {}

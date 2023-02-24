@@ -6,7 +6,6 @@ import { WebsocketRoutingModule } from './websocket-routing.module';
 import { WebsocketComponent } from './websocket.component';
 
 @NgModule({
-  declarations: [WebsocketComponent],
-  imports: [SharedModule, WebsocketRoutingModule]
+    imports: [SharedModule, WebsocketRoutingModule, WebsocketComponent]
 })
 export class WebsocketModule {}

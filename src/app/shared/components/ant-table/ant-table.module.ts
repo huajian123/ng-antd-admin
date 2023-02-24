@@ -7,8 +7,7 @@ import { SHARED_ZORRO_MODULES } from '@shared/shared-zorro.module';
 import { AntTableComponent } from './ant-table.component';
 
 @NgModule({
-  declarations: [AntTableComponent],
-  imports: [CommonModule, SHARED_ZORRO_MODULES, PipesModule],
-  exports: [AntTableComponent]
+    imports: [CommonModule, SHARED_ZORRO_MODULES, PipesModule, AntTableComponent],
+    exports: [AntTableComponent]
 })
 export class AntTableModule {}

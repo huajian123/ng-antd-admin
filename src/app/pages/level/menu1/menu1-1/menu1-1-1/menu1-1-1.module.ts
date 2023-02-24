@@ -6,7 +6,6 @@ import { SharedModule } from '@shared/shared.module';
 import { Menu111RoutingModule } from './menu1-1-1-routing.module';
 
 @NgModule({
-  declarations: [Menu111Component],
-  imports: [SharedModule, Menu111RoutingModule]
+    imports: [SharedModule, Menu111RoutingModule, Menu111Component]
 })
 export class Menu111Module {}

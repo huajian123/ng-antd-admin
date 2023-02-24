@@ -1,15 +1,21 @@
+import { AsyncPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+import { NgxEchartsModule } from 'ngx-echarts';
 import * as util from 'zrender/lib/core/util';
 
 @Component({
   selector: 'app-from-left-to-right',
-  template: ` <div echarts [options]="options | async" class="demo-chart"></div> `,
+  template: `
+    <div class="demo-chart" echarts [options]="options | async"></div>
+  `,
   styles: [],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NgxEchartsModule, AsyncPipe]
 })
 export class FromLeftToRightComponent implements OnInit {
   // @ts-ignore

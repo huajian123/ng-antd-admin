@@ -10,7 +10,6 @@ import { ExModalRoutingModule } from './ex-modal-routing.module';
 import { ExModalComponent } from './ex-modal.component';
 
 @NgModule({
-  declarations: [ExModalComponent],
-  imports: [SharedModule, DragDropModule, DragModule, NzxModalModule, ExModalRoutingModule]
+    imports: [SharedModule, DragDropModule, DragModule, NzxModalModule, ExModalRoutingModule, ExModalComponent]
 })
 export class ExModalModule {}

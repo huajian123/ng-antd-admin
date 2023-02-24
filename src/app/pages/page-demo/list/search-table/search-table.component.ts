@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { SearchCommonVO } from '@core/services/types';
@@ -9,6 +9,19 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { AntTableComponent } from '../../../../shared/components/ant-table/ant-table.component';
+import { CardTableWrapComponent } from '../../../../shared/components/card-table-wrap/card-table-wrap.component';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NgIf } from '@angular/common';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { WaterMarkComponent } from '../../../../shared/components/water-mark/water-mark.component';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header.component';
 
 interface SearchParam {
   ruleName: number;
@@ -16,9 +29,11 @@ interface SearchParam {
 }
 
 @Component({
-  selector: 'app-search-table',
-  templateUrl: './search-table.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-search-table',
+    templateUrl: './search-table.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [PageHeaderComponent, NzCardModule, WaterMarkComponent, FormsModule, NzFormModule, NzGridModule, NzInputModule, NgIf, NzButtonModule, NzWaveModule, NzIconModule, CardTableWrapComponent, AntTableComponent, NzBadgeModule]
 })
 export class SearchTableComponent implements OnInit {
   searchParam: Partial<SearchParam> = {};

@@ -7,7 +7,6 @@ import { RichTextRoutingModule } from './rich-text-routing.module';
 import { RichTextComponent } from './rich-text.component';
 
 @NgModule({
-  declarations: [RichTextComponent],
-  imports: [SharedModule, EditorModule, RichTextRoutingModule]
+    imports: [SharedModule, EditorModule, RichTextRoutingModule, RichTextComponent]
 })
 export class RichTextModule {}

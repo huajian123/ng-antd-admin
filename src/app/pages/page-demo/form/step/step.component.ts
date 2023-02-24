@@ -1,5 +1,5 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { ComponentPortal, CdkPortalOutletAttachedRef, Portal, ComponentType } from '@angular/cdk/portal';
+import { ComponentPortal, CdkPortalOutletAttachedRef, Portal, ComponentType, PortalModule } from '@angular/cdk/portal';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ComponentRef, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
@@ -8,6 +8,10 @@ import { PageHeaderType } from '@shared/components/page-header/page-header.compo
 
 import { StepOneComponent } from './step-one/step-one.component';
 import { StepTwoComponent } from './step-two/step-two.component';
+import { NzStepsModule } from 'ng-zorro-antd/steps';
+import { WaterMarkComponent } from '../../../../shared/components/water-mark/water-mark.component';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header.component';
 
 type comp = StepOneComponent | StepTwoComponent | StepThreeComponent;
 
@@ -18,10 +22,12 @@ enum StepEnum {
 }
 
 @Component({
-  selector: 'app-step',
-  templateUrl: './step.component.html',
-  styleUrls: ['./step.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-step',
+    templateUrl: './step.component.html',
+    styleUrls: ['./step.component.less'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [PageHeaderComponent, NzCardModule, WaterMarkComponent, NzStepsModule, PortalModule]
 })
 export class StepComponent implements OnInit, AfterViewInit, OnDestroy {
   selectedPortal!: Portal<any>;

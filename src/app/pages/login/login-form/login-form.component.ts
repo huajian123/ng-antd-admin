@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 
 import { LoginInOutService } from '@core/services/common/login-in-out.service';
@@ -10,12 +10,22 @@ import { MenuStoreService } from '@store/common-store/menu-store.service';
 import { SpinService } from '@store/common-store/spin.service';
 import { UserInfoService } from '@store/common-store/userInfo.service';
 import { fnCheckForm } from '@utils/tools';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzFormModule } from 'ng-zorro-antd/form';
 
 @Component({
-  selector: 'app-login-form',
-  templateUrl: './login-form.component.html',
-  styleUrls: ['./login-form.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-login-form',
+    templateUrl: './login-form.component.html',
+    styleUrls: ['./login-form.component.less'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzTabsModule, NzGridModule, NzButtonModule, NzInputModule, NzWaveModule, NzCheckboxModule, NzIconModule, RouterLink]
 })
 export class LoginFormComponent implements OnInit {
   validateForm!: FormGroup;

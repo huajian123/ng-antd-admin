@@ -8,7 +8,6 @@ import { SHARED_ZORRO_MODULES } from '@shared/shared-zorro.module';
 import { ChangePasswordComponent } from './change-password.component';
 
 @NgModule({
-  declarations: [ChangePasswordComponent],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, SHARED_ZORRO_MODULES, PasswordStrengthMeterModule.forChild()]
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, SHARED_ZORRO_MODULES, PasswordStrengthMeterModule.forChild(), ChangePasswordComponent]
 })
 export class ChangePasswordModule {}

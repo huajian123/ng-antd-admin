@@ -1,4 +1,4 @@
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, NgIf, NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject, OnInit, Renderer2 } from '@angular/core';
 import { ActivatedRoute, RouteReuseStrategy } from '@angular/router';
 import { first } from 'rxjs/operators';
@@ -13,6 +13,15 @@ import { SettingInterface, ThemeService } from '@store/common-store/theme.servic
 import { fnFormatToHump } from '@utils/tools';
 import { NzConfigService } from 'ng-zorro-antd/core/config';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { FormsModule } from '@angular/forms';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { NzListModule } from 'ng-zorro-antd/list';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { CdkDrag } from '@angular/cdk/drag-drop';
 
 interface NormalModel {
   image?: string;
@@ -37,10 +46,12 @@ export interface ThemeMode extends NormalModel {
 }
 
 @Component({
-  selector: 'app-setting-drawer',
-  templateUrl: './setting-drawer.component.html',
-  styleUrls: ['./setting-drawer.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-setting-drawer',
+    templateUrl: './setting-drawer.component.html',
+    styleUrls: ['./setting-drawer.component.less'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [CdkDrag, NgIf, NzIconModule, NzButtonModule, NzDrawerModule, NgFor, NzToolTipModule, NzDividerModule, NzListModule, NzSwitchModule, FormsModule]
 })
 export class SettingDrawerComponent implements OnInit {
   themesOptions$ = this.themesService.getThemesMode();

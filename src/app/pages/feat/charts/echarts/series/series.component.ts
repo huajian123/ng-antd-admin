@@ -1,10 +1,13 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { ComponentPortal, ComponentType, Portal } from '@angular/cdk/portal';
+import { ComponentPortal, ComponentType, Portal, PortalModule } from '@angular/cdk/portal';
+import { NgFor } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 
 import { FromLeftToRightComponent } from '@app/pages/feat/charts/echarts/series/from-left-to-right/from-left-to-right.component';
 import { RadialTreeComponent } from '@app/pages/feat/charts/echarts/series/radial-tree/radial-tree.component';
 import { SimpleGraphComponent } from '@app/pages/feat/charts/echarts/series/simple-graph/simple-graph.component';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzTabPosition } from 'ng-zorro-antd/tabs/interfaces';
 
 type targetComp = SimpleGraphComponent | FromLeftToRightComponent | RadialTreeComponent;
@@ -12,7 +15,9 @@ type targetComp = SimpleGraphComponent | FromLeftToRightComponent | RadialTreeCo
 @Component({
   selector: 'app-series',
   templateUrl: './series.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NzCardModule, NzTabsModule, NgFor, PortalModule]
 })
 export class SeriesComponent implements OnInit {
   componentPortal?: ComponentPortal<targetComp>;

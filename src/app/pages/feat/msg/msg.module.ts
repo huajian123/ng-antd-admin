@@ -7,7 +7,6 @@ import { MsgRoutingModule } from './msg-routing.module';
 import { MsgComponent } from './msg.component';
 
 @NgModule({
-  declarations: [MsgComponent],
-  imports: [SharedModule, MsgRoutingModule, MatIconModule]
+    imports: [SharedModule, MsgRoutingModule, MatIconModule, MsgComponent]
 })
 export class MsgModule {}

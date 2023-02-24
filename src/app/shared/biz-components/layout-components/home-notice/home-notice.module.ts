@@ -7,8 +7,7 @@ import { SHARED_ZORRO_MODULES } from '@shared/shared-zorro.module';
 import { HomeNoticeComponent } from './home-notice.component';
 
 @NgModule({
-  declarations: [HomeNoticeComponent],
-  imports: [CommonModule, SHARED_ZORRO_MODULES, PipesModule],
-  exports: [HomeNoticeComponent]
+    imports: [CommonModule, SHARED_ZORRO_MODULES, PipesModule, HomeNoticeComponent],
+    exports: [HomeNoticeComponent]
 })
 export class HomeNoticeModule {}

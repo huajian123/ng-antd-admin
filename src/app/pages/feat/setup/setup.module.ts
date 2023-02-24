@@ -6,7 +6,6 @@ import { SetupRoutingModule } from './setup-routing.module';
 import { SetupComponent } from './setup.component';
 
 @NgModule({
-  declarations: [SetupComponent],
-  imports: [SharedModule, SetupRoutingModule]
+    imports: [SharedModule, SetupRoutingModule, SetupComponent]
 })
 export class SetupModule {}

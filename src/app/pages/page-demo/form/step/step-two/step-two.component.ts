@@ -1,14 +1,24 @@
 import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { fnCheckForm } from '@utils/tools';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
 
 @Component({
-  selector: 'app-step-two',
-  templateUrl: './step-two.component.html',
-  styleUrls: ['./step-two.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-step-two',
+    templateUrl: './step-two.component.html',
+    styleUrls: ['./step-two.component.less'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NzAlertModule, NzDescriptionsModule, NzDividerModule, FormsModule, ReactiveFormsModule, NzGridModule, NzFormModule, NzButtonModule, NzInputModule, NzWaveModule]
 })
 export class StepTwoComponent implements OnInit {
   @Output() next = new EventEmitter<NzSafeAny>();

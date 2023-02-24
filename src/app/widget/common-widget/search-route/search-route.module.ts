@@ -7,8 +7,7 @@ import { ModalWrapService } from '@widget/base-modal';
 
 import { SearchRouteComponent } from './search-route.component';
 @NgModule({
-  declarations: [SearchRouteComponent],
-  imports: [CommonModule, SHARED_ZORRO_MODULES, FormsModule],
-  providers: [ModalWrapService]
+    imports: [CommonModule, SHARED_ZORRO_MODULES, FormsModule, SearchRouteComponent],
+    providers: [ModalWrapService]
 })
 export class SearchRouteModule {}

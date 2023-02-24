@@ -1,7 +1,8 @@
 import { Directive, HostBinding, HostListener, Input } from '@angular/core';
 
 @Directive({
-  selector: '[appEnable]'
+    selector: '[appEnable]',
+    standalone: true
 })
 export class DisabledDirective {
   @Input('appEnable')

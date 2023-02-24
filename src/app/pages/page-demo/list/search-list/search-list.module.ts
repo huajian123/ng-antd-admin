@@ -10,7 +10,6 @@ import { SearchListRoutingModule } from './search-list-routing.module';
 import { SearchListComponent } from './search-list.component';
 
 @NgModule({
-  declarations: [SearchListComponent, ArticleComponent, ProjectComponent, ApplicationComponent],
-  imports: [SharedModule, SearchListRoutingModule]
+    imports: [SharedModule, SearchListRoutingModule, SearchListComponent, ArticleComponent, ProjectComponent, ApplicationComponent]
 })
 export class SearchListModule {}

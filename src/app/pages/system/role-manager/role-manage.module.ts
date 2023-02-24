@@ -8,7 +8,6 @@ import { RoleManageComponent } from './role-manage.component';
 import { SetRoleComponent } from './set-role/set-role.component';
 
 @NgModule({
-  declarations: [RoleManageComponent, SetRoleComponent],
-  imports: [SharedModule, RoleManageModalModule, RoleManageRoutingModule]
+    imports: [SharedModule, RoleManageModalModule, RoleManageRoutingModule, RoleManageComponent, SetRoleComponent]
 })
 export class RoleManageModule {}

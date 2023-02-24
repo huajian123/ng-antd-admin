@@ -6,7 +6,6 @@ import { SharedModule } from '@shared/shared.module';
 import { MenuModalComponent } from './menu-modal.component';
 
 @NgModule({
-  declarations: [MenuModalComponent],
-  imports: [IconSelModule, SharedModule]
+    imports: [IconSelModule, SharedModule, MenuModalComponent]
 })
 export class MenuModalModule {}

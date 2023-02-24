@@ -13,7 +13,6 @@ import { TabComponent } from './tab/tab.component';
 import { ToolBarComponent } from './tool-bar/tool-bar.component';
 
 @NgModule({
-  declarations: [DefaultComponent, TabComponent, SideNavComponent, NavBarComponent, ToolBarComponent, NavDrawerComponent],
-  imports: [SharedModule, DefLayoutContentModule, DefaultRoutingModule, NzNoAnimationModule]
+    imports: [SharedModule, DefLayoutContentModule, DefaultRoutingModule, NzNoAnimationModule, DefaultComponent, TabComponent, SideNavComponent, NavBarComponent, ToolBarComponent, NavDrawerComponent]
 })
 export class DefaultModule {}

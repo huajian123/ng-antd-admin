@@ -1,9 +1,17 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { MatIconRegistry } from '@angular/material/icon';
+import { MatIconRegistry, MatIconModule } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { DestroyService } from '@core/services/common/destory.service';
 import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { IconSelComponent } from '../../../shared/biz-components/icon-sel/icon-sel.component';
+import { FormsModule } from '@angular/forms';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { PageHeaderComponent } from '../../../shared/components/page-header/page-header.component';
 
 const THUMBUP_ICON =
   `
@@ -16,11 +24,13 @@ const THUMBUP_ICON =
 `;
 
 @Component({
-  selector: 'app-icons',
-  templateUrl: './icons.component.html',
-  styleUrls: ['./icons.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DestroyService]
+    selector: 'app-icons',
+    templateUrl: './icons.component.html',
+    styleUrls: ['./icons.component.less'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [DestroyService],
+    standalone: true,
+    imports: [PageHeaderComponent, NzCardModule, NzButtonModule, NzWaveModule, NzInputModule, FormsModule, IconSelComponent, NzIconModule, MatIconModule]
 })
 export class IconsComponent {
   pageHeaderInfo: Partial<PageHeaderType> = {

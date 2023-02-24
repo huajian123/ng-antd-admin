@@ -6,7 +6,6 @@ import { SessionTimeoutRoutingModule } from './session-timeout-routing.module';
 import { SessionTimeoutComponent } from './session-timeout.component';
 
 @NgModule({
-  declarations: [SessionTimeoutComponent],
-  imports: [SharedModule, SessionTimeoutRoutingModule]
+    imports: [SharedModule, SessionTimeoutRoutingModule, SessionTimeoutComponent]
 })
 export class SessionTimeoutModule {}

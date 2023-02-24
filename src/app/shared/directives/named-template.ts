@@ -26,7 +26,8 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
  * ```
  */
 @Directive({
-  selector: 'ng-template[named]'
+    selector: 'ng-template[named]',
+    standalone: true
 })
 export class NamedTemplate<T> implements OnInit {
   /**

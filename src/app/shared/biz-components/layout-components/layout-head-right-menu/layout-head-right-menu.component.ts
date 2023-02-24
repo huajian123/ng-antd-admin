@@ -12,12 +12,24 @@ import { LockWidgetService } from '@widget/common-widget/lock-widget/lock-widget
 import { SearchRouteService } from '@widget/common-widget/search-route/search-route.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { ModalOptions } from 'ng-zorro-antd/modal';
+import { HomeNoticeComponent } from '../home-notice/home-notice.component';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { ToggleFullscreenDirective } from '../../../directives/toggle-fullscreen.directive';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { ScreenLessHiddenDirective } from '../../../directives/screen-less-hidden.directive';
+import { NgTemplateOutlet, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-layout-head-right-menu',
-  templateUrl: './layout-head-right-menu.component.html',
-  styleUrls: ['./layout-head-right-menu.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-layout-head-right-menu',
+    templateUrl: './layout-head-right-menu.component.html',
+    styleUrls: ['./layout-head-right-menu.component.less'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgTemplateOutlet, ScreenLessHiddenDirective, NzToolTipModule, NzIconModule, NzButtonModule, ToggleFullscreenDirective, NgIf, NzDropDownModule, NzBadgeModule, NzMenuModule, HomeNoticeComponent]
 })
 export class LayoutHeadRightMenuComponent implements OnInit {
   user!: UserPsd;

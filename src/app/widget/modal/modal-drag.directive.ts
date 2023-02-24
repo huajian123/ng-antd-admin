@@ -13,7 +13,8 @@ import { ModalDragService } from './modal-drag.service';
  ```
  */
 @Directive({
-  selector: 'nz-modal[nzxModalDrag]'
+    selector: 'nz-modal[nzxModalDrag]',
+    standalone: true
 })
 export class ModalDragDirective {
   constructor(@Host() protected modal: NzModalComponent, public modalDragService: ModalDragService) {

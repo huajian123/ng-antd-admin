@@ -5,7 +5,6 @@ import { BlankRoutingModule } from './blank-routing.module';
 import { BlankComponent } from './blank.component';
 
 @NgModule({
-  declarations: [BlankComponent],
-  imports: [CommonModule, BlankRoutingModule]
+    imports: [CommonModule, BlankRoutingModule, BlankComponent]
 })
 export class BlankModule {}

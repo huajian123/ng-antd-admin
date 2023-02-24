@@ -1,3 +1,4 @@
+import { NgFor } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 
 import {
@@ -12,6 +13,10 @@ import {
   fadeInOnEnterAnimation,
   rubberBandOnEnterAnimation
 } from 'angular-animations';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+
+import { AngularImgComponent } from '../angular-img/angular-img.component';
 
 @Component({
   selector: 'app-experiments',
@@ -30,7 +35,9 @@ import {
     flashAnimation({ anchor: 'flash' }),
     rubberBandOnEnterAnimation({ anchor: 'btnEnter', delay: 12500 }),
     fadeInOnEnterAnimation({ anchor: 'btnEnterFadeIn', delay: 12500, duration: 500 })
-  ]
+  ],
+  standalone: true,
+  imports: [NgFor, AngularImgComponent, NzButtonModule, NzWaveModule]
 })
 export class ExperimentsComponent implements OnInit {
   text1 = '少林功夫好，真的好，少林功夫棒，真的棒...'.split('');

@@ -1,14 +1,19 @@
+import { AsyncPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import * as echarts from 'echarts';
+import { NgxEchartsModule } from 'ngx-echarts';
 @Component({
   selector: 'app-radial-tree',
-  template: ` <div echarts [options]="options | async" class="demo-chart"></div> `,
+  template: `
+    <div class="demo-chart" echarts [options]="options | async"></div>
+  `,
   styles: [],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NgxEchartsModule, AsyncPipe]
 })
 export class RadialTreeComponent implements OnInit {
   // @ts-ignore

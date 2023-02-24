@@ -5,16 +5,23 @@ import { PageHeaderType } from '@shared/components/page-header/page-header.compo
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { PageHeaderComponent } from '../../../shared/components/page-header/page-header.component';
 
 type msgType = 'info' | 'success' | 'warning' | 'loading' | 'error';
 type confirmType = 'confirm' | 'info' | 'success' | 'warning' | 'error';
 
 @Component({
-  selector: 'app-button',
-  templateUrl: './msg.component.html',
-  styleUrls: ['./msg.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DestroyService]
+    selector: 'app-button',
+    templateUrl: './msg.component.html',
+    styleUrls: ['./msg.component.less'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [DestroyService],
+    standalone: true,
+    imports: [PageHeaderComponent, NzCardModule, NzButtonModule, NzWaveModule, NzIconModule]
 })
 export class MsgComponent implements OnInit {
   map = {

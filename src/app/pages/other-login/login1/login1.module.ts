@@ -12,7 +12,6 @@ import { QrLoginComponent } from './qr-login/qr-login.component';
 import { RegistLoginComponent } from './regist-login/regist-login.component';
 
 @NgModule({
-  declarations: [Login1Component, NormalLoginComponent, QrLoginComponent, RegistLoginComponent, PhoneLoginComponent],
-  imports: [SharedModule, PasswordStrengthMeterModule.forChild(), QRCodeModule, Login1RoutingModule]
+    imports: [SharedModule, PasswordStrengthMeterModule.forChild(), QRCodeModule, Login1RoutingModule, Login1Component, NormalLoginComponent, QrLoginComponent, RegistLoginComponent, PhoneLoginComponent]
 })
 export class Login1Module {}

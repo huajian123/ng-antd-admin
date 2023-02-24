@@ -1,6 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 
 import { EChartsOption } from 'echarts/types/dist/echarts';
+import { NgxEchartsModule } from 'ngx-echarts';
 import * as util from 'zrender/lib/core/util';
 
 const SymbolSize = 20;
@@ -14,9 +15,13 @@ const Data = [
 
 @Component({
   selector: 'app-draggable-charts',
-  template: ` <div echarts (chartInit)="onChartReady($event)" [options]="options" style="height: 600px;"></div> `,
+  template: `
+    <div echarts style="height: 600px;" [options]="options" (chartInit)="onChartReady($event)"></div>
+  `,
   styles: [],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NgxEchartsModule]
 })
 export class DraggableChartsComponent implements OnDestroy {
   updatePosition: (() => void) | undefined;

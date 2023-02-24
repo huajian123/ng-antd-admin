@@ -14,6 +14,16 @@ import { AdComponent, DynamicComponent } from '@core/services/types';
 import { AdDirective } from '@shared/directives/ad.directive';
 import { Login1StoreService } from '@store/biz-store-service/other-login/login1-store.service';
 import { ThemeService } from '@store/common-store/theme.service';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { FormsModule } from '@angular/forms';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { AdDirective as AdDirective_1 } from '../../../shared/directives/ad.directive';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzGridModule } from 'ng-zorro-antd/grid';
 
 export enum LoginType {
   Normal,
@@ -28,11 +38,13 @@ interface LoginFormComponentInterface {
 }
 
 @Component({
-  selector: 'app-login1',
-  templateUrl: './login1.component.html',
-  styleUrls: ['./login1.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DestroyService]
+    selector: 'app-login1',
+    templateUrl: './login1.component.html',
+    styleUrls: ['./login1.component.less'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [DestroyService],
+    standalone: true,
+    imports: [NzGridModule, NzCardModule, AdDirective_1, NgIf, NzSwitchModule, FormsModule, NzDropDownModule, NzIconModule, NzButtonModule, NzMenuModule, AsyncPipe]
 })
 export class Login1Component implements OnInit {
   private adHost!: AdDirective;

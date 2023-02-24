@@ -6,7 +6,6 @@ import { PasswordStrengthMeterModule } from '@app/shared/biz-components/password
 import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
-  declarations: [StrengthMeterComponent],
-  imports: [StrengthMeterRoutingModule, SharedModule, PasswordStrengthMeterModule.forChild()]
+    imports: [StrengthMeterRoutingModule, SharedModule, PasswordStrengthMeterModule.forChild(), StrengthMeterComponent]
 })
 export class StrengthMeterModule {}

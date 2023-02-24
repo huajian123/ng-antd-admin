@@ -9,7 +9,6 @@ import { AccountComponent } from './account.component';
 import { DeptTreeComponent } from './dept-tree/dept-tree.component';
 
 @NgModule({
-  declarations: [AccountComponent, DeptTreeComponent],
-  imports: [AccountModalModule, SharedModule, AccountRoutingModule, NzHighlightModule]
+    imports: [AccountModalModule, SharedModule, AccountRoutingModule, NzHighlightModule, AccountComponent, DeptTreeComponent]
 })
 export class AccountModule {}

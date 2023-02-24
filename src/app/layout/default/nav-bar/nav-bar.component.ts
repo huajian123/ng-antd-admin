@@ -1,7 +1,7 @@
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, NgIf, NgTemplateOutlet, NgFor, AsyncPipe } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Input, Inject } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, map, mergeMap, share, switchMap, takeUntil, tap } from 'rxjs/operators';
 
@@ -14,12 +14,20 @@ import { SplitNavStoreService } from '@store/common-store/split-nav-store.servic
 import { ThemeService } from '@store/common-store/theme.service';
 import { UserInfoService } from '@store/common-store/userInfo.service';
 import { fnStopMouseEvent } from '@utils/tools';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { AuthDirective } from '../../../shared/directives/auth.directive';
+import { TrackByPropertyDirective } from '../../../shared/directives/track-by-property.directive';
+import { NzNoAnimationModule } from 'ng-zorro-antd/core/no-animation';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
 
 @Component({
-  selector: 'app-nav-bar',
-  templateUrl: './nav-bar.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DestroyService]
+    selector: 'app-nav-bar',
+    templateUrl: './nav-bar.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [DestroyService],
+    standalone: true,
+    imports: [NgIf, NzMenuModule, NzNoAnimationModule, NgTemplateOutlet, NgFor, TrackByPropertyDirective, AuthDirective, NzButtonModule, NzIconModule, RouterLink, AsyncPipe]
 })
 export class NavBarComponent implements OnInit {
   @Input() isMixiHead = false; // 是混合模式顶部导航

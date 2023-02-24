@@ -6,8 +6,7 @@ import { ModalWrapService } from '@widget/base-modal';
 import { DragComponent } from './drag.component';
 
 @NgModule({
-  declarations: [DragComponent],
-  imports: [CommonModule],
-  providers: [ModalWrapService]
+    imports: [CommonModule, DragComponent],
+    providers: [ModalWrapService]
 })
 export class DragModule {}

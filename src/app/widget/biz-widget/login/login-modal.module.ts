@@ -6,9 +6,8 @@ import { ModalWrapService } from '@widget/base-modal';
 import { LoginModalComponent } from './login-modal.component';
 
 @NgModule({
-  declarations: [LoginModalComponent],
-  imports: [SharedModule],
-  exports: [LoginModalComponent],
-  providers: [ModalWrapService]
+    imports: [SharedModule, LoginModalComponent],
+    exports: [LoginModalComponent],
+    providers: [ModalWrapService]
 })
 export class LoginModalModule {}

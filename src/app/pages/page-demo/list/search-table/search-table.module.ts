@@ -8,7 +8,6 @@ import { SearchTableRoutingModule } from './search-table-routing.module';
 import { SearchTableComponent } from './search-table.component';
 
 @NgModule({
-  declarations: [SearchTableComponent, SearchTableDetailComponent],
-  imports: [CommonModule, SharedModule, SearchTableRoutingModule]
+    imports: [CommonModule, SharedModule, SearchTableRoutingModule, SearchTableComponent, SearchTableDetailComponent]
 })
 export class SearchTableModule {}

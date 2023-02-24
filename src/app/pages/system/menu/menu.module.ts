@@ -7,7 +7,6 @@ import { MenuRoutingModule } from './menu-routing.module';
 import { MenuComponent } from './menu.component';
 
 @NgModule({
-  declarations: [MenuComponent],
-  imports: [SharedModule, MenuModalModule, MenuRoutingModule]
+    imports: [SharedModule, MenuModalModule, MenuRoutingModule, MenuComponent]
 })
 export class MenuModule {}

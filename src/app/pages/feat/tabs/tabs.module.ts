@@ -7,7 +7,6 @@ import { TabsRoutingModule } from './tabs-routing.module';
 import { TabsComponent } from './tabs.component';
 
 @NgModule({
-  declarations: [TabsComponent, DetailComponent],
-  imports: [SharedModule, TabsRoutingModule]
+    imports: [SharedModule, TabsRoutingModule, TabsComponent, DetailComponent]
 })
 export class TabsModule {}

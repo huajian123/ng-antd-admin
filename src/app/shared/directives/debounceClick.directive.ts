@@ -5,7 +5,8 @@ import { debounceTime } from 'rxjs/operators';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 @Directive({
-  selector: '[appDebounceClick]'
+    selector: '[appDebounceClick]',
+    standalone: true
 })
 export class DebounceClickDirective implements OnInit, OnDestroy {
   @Input() debounceTime = 500;

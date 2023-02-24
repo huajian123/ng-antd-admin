@@ -6,7 +6,6 @@ import { PlayScrollRoutingModule } from './play-scroll-routing.module';
 import { PlayScrollComponent } from './play-scroll.component';
 
 @NgModule({
-  declarations: [PlayScrollComponent],
-  imports: [SharedModule, PlayScrollRoutingModule]
+    imports: [SharedModule, PlayScrollRoutingModule, PlayScrollComponent]
 })
 export class PlayScrollModule {}

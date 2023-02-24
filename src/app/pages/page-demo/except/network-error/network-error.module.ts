@@ -6,7 +6,6 @@ import { NetworkErrorRoutingModule } from './network-error-routing.module';
 import { NetworkErrorComponent } from './network-error.component';
 
 @NgModule({
-  declarations: [NetworkErrorComponent],
-  imports: [SharedModule, NetworkErrorRoutingModule]
+    imports: [SharedModule, NetworkErrorRoutingModule, NetworkErrorComponent]
 })
 export class NetworkErrorModule {}

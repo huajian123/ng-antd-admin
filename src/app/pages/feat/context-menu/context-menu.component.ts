@@ -1,12 +1,18 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
-import { PageHeaderType } from '@shared/components/page-header/page-header.component';
-import { NzContextMenuService, NzDropdownMenuComponent } from 'ng-zorro-antd/dropdown';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzContextMenuService, NzDropdownMenuComponent, NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
 
 @Component({
   selector: 'app-context-menu',
   templateUrl: './context-menu.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [PageHeaderComponent, NzCardModule, NzButtonModule, NzWaveModule, NzDropDownModule, NzMenuModule]
 })
 export class ContextMenuComponent implements OnInit {
   pageHeaderInfo: Partial<PageHeaderType> = {

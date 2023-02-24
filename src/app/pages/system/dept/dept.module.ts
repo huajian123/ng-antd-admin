@@ -7,7 +7,6 @@ import { DeptRoutingModule } from './dept-routing.module';
 import { DeptComponent } from './dept.component';
 
 @NgModule({
-  declarations: [DeptComponent],
-  imports: [SharedModule, DeptManageModalModule, DeptRoutingModule]
+    imports: [SharedModule, DeptManageModalModule, DeptRoutingModule, DeptComponent]
 })
 export class DeptModule {}

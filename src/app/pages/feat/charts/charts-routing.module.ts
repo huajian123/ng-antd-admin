@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: 'gaode-map', loadChildren: () => import('./gaode-map/gaode-map.module').then(m => m.GaodeMapModule) },
-  { path: 'baidu-map', loadChildren: () => import('./baidu-map/baidu-map.module').then(m => m.BaiduMapPageModule) },
-  { path: 'echarts', loadChildren: () => import('./echarts/echarts.module').then(m => m.EchartsModule) },
+  { path: 'gaode-map', data: { title: '高德', key: 'gaode-map' }, loadComponent: () => import('./gaode-map/gaode-map.component').then(m => m.GaodeMapComponent) },
+  { path: 'baidu-map', data: { title: '百度', key: 'baidu-map' }, loadComponent: () => import('./baidu-map/baidu-map.component').then(m => m.BaiduMapComponent) },
+  { path: 'echarts', data: { title: 'Echarts', key: 'echarts' }, loadComponent: () => import('./echarts/echarts.component').then(m => m.EchartsComponent) },
   { path: '', redirectTo: 'gaode-map', pathMatch: 'full' }
 ];
 

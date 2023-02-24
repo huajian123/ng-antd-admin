@@ -1,4 +1,4 @@
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray, CdkDropList, CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
 import { AfterContentInit, ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
 
 import { AntTreeTableComponentToken } from '@shared/components/tree-table/tree-table.component';
@@ -6,6 +6,18 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzTableSize } from 'ng-zorro-antd/table';
 
 import { AntTableComponentToken, TableHeader } from '../ant-table/ant-table.component';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { ScreenLessHiddenDirective } from '../../directives/screen-less-hidden.directive';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzSpaceModule } from 'ng-zorro-antd/space';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NgIf, NgTemplateOutlet, NgFor, NgStyle } from '@angular/common';
+import { NzCardModule } from 'ng-zorro-antd/card';
 
 interface TableSizeItem {
   sizeName: string;
@@ -14,9 +26,11 @@ interface TableSizeItem {
 }
 
 @Component({
-  selector: 'app-card-table-wrap',
-  templateUrl: './card-table-wrap.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-card-table-wrap',
+    templateUrl: './card-table-wrap.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NzCardModule, NgIf, NgTemplateOutlet, NzDividerModule, NzSpaceModule, NzIconModule, NzButtonModule, NzPopoverModule, NzToolTipModule, ScreenLessHiddenDirective, NzDropDownModule, NzMenuModule, NgFor, CdkDropList, CdkDrag, CdkDragHandle, NzCheckboxModule, NgStyle]
 })
 export class CardTableWrapComponent implements OnInit, AfterContentInit {
   @Input() tableTitle: string | TemplateRef<NzSafeAny> | undefined;

@@ -1,15 +1,22 @@
+import { NgIf } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, AfterViewInit } from '@angular/core';
 
 import { LazyServiceService } from '@app/pages/comp/lazy/lazy-service.service';
-import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { AdDirective } from '@shared/directives/ad.directive';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+
+import { AdDirective as AdDirective_1 } from '../../../../shared/directives/ad.directive';
 
 @Component({
   selector: 'app-lazy-basic',
   templateUrl: './lazy-basic.component.html',
   styleUrls: ['./lazy-basic.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [LazyServiceService]
+  providers: [LazyServiceService],
+  standalone: true,
+  imports: [PageHeaderComponent, NgIf, NzButtonModule, NzWaveModule, AdDirective_1]
 })
 export class LazyBasicComponent implements OnInit, AfterViewInit {
   pageHeaderInfo: Partial<PageHeaderType> = {

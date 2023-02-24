@@ -6,7 +6,6 @@ import { NoDataRoutingModule } from './no-data-routing.module';
 import { NoDataComponent } from './no-data.component';
 
 @NgModule({
-  declarations: [NoDataComponent],
-  imports: [SharedModule, NoDataRoutingModule]
+    imports: [SharedModule, NoDataRoutingModule, NoDataComponent]
 })
 export class NoDataModule {}

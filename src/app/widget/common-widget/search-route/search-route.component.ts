@@ -11,6 +11,14 @@ import { ThemeService } from '@store/common-store/theme.service';
 import { BasicConfirmModalComponent } from '@widget/base-modal';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzModalRef } from 'ng-zorro-antd/modal';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NgIf, NgFor } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 interface ResultItem {
   selItem: boolean;
@@ -23,11 +31,13 @@ interface ResultItem {
 const passiveEventListenerOptions = <AddEventListenerOptions>normalizePassiveListenerOptions({ passive: true });
 
 @Component({
-  selector: 'app-search-route',
-  templateUrl: './search-route.component.html',
-  styleUrls: ['./search-route.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DestroyService]
+    selector: 'app-search-route',
+    templateUrl: './search-route.component.html',
+    styleUrls: ['./search-route.component.less'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [DestroyService],
+    standalone: true,
+    imports: [NzButtonModule, NzInputModule, FormsModule, NgIf, NzIconModule, NzEmptyModule, NgFor, NzGridModule, NzDividerModule]
 })
 export class SearchRouteComponent extends BasicConfirmModalComponent implements OnInit, AfterViewInit {
   isNightTheme$ = this.themesService.getIsNightTheme();

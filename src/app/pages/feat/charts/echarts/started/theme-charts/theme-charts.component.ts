@@ -1,7 +1,9 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { EChartsOption } from 'echarts/types/dist/echarts';
-import { ThemeOption } from 'ngx-echarts';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { ThemeOption, NgxEchartsModule } from 'ngx-echarts';
 
 import { CoolTheme } from './data';
 
@@ -9,14 +11,16 @@ import { CoolTheme } from './data';
   selector: 'app-theme-charts',
   template: `
     <div class="m-b-20">
-      <button class="m-r-8 m-b-8" (click)="theme = 'dark'" nz-button nzType="default">dark主题</button>
-      <button class="m-r-8 m-b-8" (click)="theme = 'macarons'" nz-button nzType="default">macarons主题</button>
-      <button class="m-r-8 m-b-8" (click)="theme = coolTheme" nz-button nzType="default">自定义主题</button>
+      <button class="m-r-8 m-b-8" nz-button nzType="default" (click)="theme = 'dark'">dark主题</button>
+      <button class="m-r-8 m-b-8" nz-button nzType="default" (click)="theme = 'macarons'">macarons主题</button>
+      <button class="m-r-8 m-b-8" nz-button nzType="default" (click)="theme = coolTheme">自定义主题</button>
     </div>
-    <div echarts [options]="options" [theme]="theme" class="demo-chart"></div>
+    <div class="demo-chart" echarts [options]="options" [theme]="theme"></div>
   `,
   styles: [],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NzButtonModule, NzWaveModule, NgxEchartsModule]
 })
 export class ThemeChartsComponent {
   theme: string | ThemeOption = 'dark';

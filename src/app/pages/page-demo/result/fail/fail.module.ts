@@ -7,7 +7,6 @@ import { FailRoutingModule } from './fail-routing.module';
 import { FailComponent } from './fail.component';
 
 @NgModule({
-  declarations: [FailComponent],
-  imports: [CommonModule, SharedModule, FailRoutingModule]
+    imports: [CommonModule, SharedModule, FailRoutingModule, FailComponent]
 })
 export class FailModule {}

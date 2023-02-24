@@ -8,8 +8,7 @@ import { SHARED_ZORRO_MODULES } from '@shared/shared-zorro.module';
 import { LockScreenComponent } from './lock-screen.component';
 
 @NgModule({
-  declarations: [LockScreenComponent],
-  exports: [LockScreenComponent],
-  imports: [FormsModule, ReactiveFormsModule, PipesModule, SHARED_ZORRO_MODULES, CommonModule]
+    exports: [LockScreenComponent],
+    imports: [FormsModule, ReactiveFormsModule, PipesModule, SHARED_ZORRO_MODULES, CommonModule, LockScreenComponent]
 })
 export class LockScreenModule {}

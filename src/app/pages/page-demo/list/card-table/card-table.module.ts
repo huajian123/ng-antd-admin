@@ -6,7 +6,6 @@ import { CardTableRoutingModule } from './card-table-routing.module';
 import { CardTableComponent } from './card-table.component';
 
 @NgModule({
-  declarations: [CardTableComponent],
-  imports: [SharedModule, CardTableRoutingModule]
+    imports: [SharedModule, CardTableRoutingModule, CardTableComponent]
 })
 export class CardTableModule {}

@@ -37,7 +37,8 @@ const routes: Routes = [
       },
       {
         path: 'about',
-        loadChildren: () => import('../../pages/about/about.module').then(m => m.AboutModule)
+        data: { title: '关于', key: 'about' },
+        loadComponent: () => import('../../pages/about/about.component').then(m => m.AboutComponent)
       },
       {
         path: 'system',
