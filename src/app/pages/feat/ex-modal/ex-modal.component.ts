@@ -1,23 +1,22 @@
+import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
 import { Component, OnInit, ChangeDetectionStrategy, TemplateRef, ViewChild } from '@angular/core';
 
-import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { ModalBtnStatus } from '@widget/base-modal';
 import { DragService } from '@widget/biz-widget/drag/drag.service';
+import { ModalDragDirective } from '@widget/modal/modal-drag.directive';
 import { NzModalWrapService } from '@widget/modal/nz-modal-wrap.service';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
-import { ModalDragDirective } from '../../../widget/modal/modal-drag.directive';
-import { NzModalModule } from 'ng-zorro-antd/modal';
-import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { PageHeaderComponent } from '../../../shared/components/page-header/page-header.component';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 @Component({
-    selector: 'app-ex-modal',
-    templateUrl: './ex-modal.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [PageHeaderComponent, NzButtonModule, NzWaveModule, NzModalModule, ModalDragDirective, CdkDrag, CdkDragHandle]
+  selector: 'app-ex-modal',
+  templateUrl: './ex-modal.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [PageHeaderComponent, NzButtonModule, NzWaveModule, NzModalModule, ModalDragDirective, CdkDrag, CdkDragHandle]
 })
 export class ExModalComponent implements OnInit {
   @ViewChild('dragTpl', { static: true }) dragTpl!: TemplateRef<NzSafeAny>;

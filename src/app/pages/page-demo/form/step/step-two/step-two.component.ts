@@ -2,27 +2,27 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { fnCheckForm } from '@utils/tools';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';
-import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
-import { NzDividerModule } from 'ng-zorro-antd/divider';
-import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
-import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { NzInputModule } from 'ng-zorro-antd/input';
 
 @Component({
-    selector: 'app-step-two',
-    templateUrl: './step-two.component.html',
-    styleUrls: ['./step-two.component.less'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [NzAlertModule, NzDescriptionsModule, NzDividerModule, FormsModule, ReactiveFormsModule, NzGridModule, NzFormModule, NzButtonModule, NzInputModule, NzWaveModule]
+  selector: 'app-step-two',
+  templateUrl: './step-two.component.html',
+  styleUrls: ['./step-two.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NzAlertModule, NzDescriptionsModule, NzDividerModule, FormsModule, ReactiveFormsModule, NzGridModule, NzFormModule, NzButtonModule, NzInputModule, NzWaveModule]
 })
 export class StepTwoComponent implements OnInit {
-  @Output() next = new EventEmitter<NzSafeAny>();
-  @Output() previous = new EventEmitter<NzSafeAny>();
+  @Output() readonly next = new EventEmitter<NzSafeAny>();
+  @Output() readonly previous = new EventEmitter<NzSafeAny>();
   validateForm!: FormGroup;
 
   constructor(private fb: FormBuilder) {}

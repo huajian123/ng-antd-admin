@@ -1,25 +1,25 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { DeptTreeSearchService } from '@app/pages/system/account/dept-tree/dept-tree-search.service';
 import { DeptTreeService, FlatNode } from '@app/pages/system/account/dept-tree/dept-tree.service';
-import { NzHighlightModule } from 'ng-zorro-antd/core/highlight';
-import { NzTreeViewModule } from 'ng-zorro-antd/tree-view';
-import { NzIconModule } from 'ng-zorro-antd/icon';
-import { FormsModule } from '@angular/forms';
-import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzHighlightModule } from 'ng-zorro-antd/core/highlight';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzTreeViewModule } from 'ng-zorro-antd/tree-view';
 
 @Component({
-    selector: 'app-dept-tree',
-    templateUrl: './dept-tree.component.html',
-    styleUrls: ['./dept-tree.component.less'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [DeptTreeService, DeptTreeSearchService],
-    standalone: true,
-    imports: [NzCardModule, NzButtonModule, NzInputModule, FormsModule, NzIconModule, NzTreeViewModule, NzHighlightModule]
+  selector: 'app-dept-tree',
+  templateUrl: './dept-tree.component.html',
+  styleUrls: ['./dept-tree.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [DeptTreeService, DeptTreeSearchService],
+  standalone: true,
+  imports: [NzCardModule, NzButtonModule, NzInputModule, FormsModule, NzIconModule, NzTreeViewModule, NzHighlightModule]
 })
 export class DeptTreeComponent implements OnInit {
   selectListSelection: SelectionModel<FlatNode>;

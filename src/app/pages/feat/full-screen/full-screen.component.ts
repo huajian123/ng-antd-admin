@@ -1,19 +1,18 @@
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 
-import { PageHeaderType } from '@shared/components/page-header/page-header.component';
-import screenfull from 'screenfull';
-import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { PageHeaderComponent } from '../../../shared/components/page-header/page-header.component';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzSpaceModule } from 'ng-zorro-antd/space';
+import screenfull from 'screenfull';
 
 @Component({
-    selector: 'app-full-screen',
-    templateUrl: './full-screen.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [PageHeaderComponent, NzCardModule, NzSpaceModule, NzButtonModule, NzWaveModule]
+  selector: 'app-full-screen',
+  templateUrl: './full-screen.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [PageHeaderComponent, NzCardModule, NzSpaceModule, NzButtonModule, NzWaveModule]
 })
 export class FullScreenComponent implements OnInit {
   pageHeaderInfo: Partial<PageHeaderType> = {

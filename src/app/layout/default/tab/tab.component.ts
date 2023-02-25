@@ -1,3 +1,4 @@
+import { NgIf, NgFor, NgClass, NgStyle, AsyncPipe } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -6,27 +7,26 @@ import { filter, takeUntil } from 'rxjs/operators';
 import { DestroyService } from '@core/services/common/destory.service';
 import { TabModel, TabService } from '@core/services/common/tab.service';
 import { Menu } from '@core/services/types';
+import { MouseHoverShowDirective } from '@shared/directives/mouse-hover-show.directive';
 import { SplitNavStoreService } from '@store/common-store/split-nav-store.service';
 import { ThemeService } from '@store/common-store/theme.service';
 import { fnStopMouseEvent } from '@utils/tools';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzContextMenuService, NzDropdownMenuComponent, NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { MouseHoverShowDirective } from '../../../shared/directives/mouse-hover-show.directive';
-import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
-import { NzCardModule } from 'ng-zorro-antd/card';
-import { NgIf, NgFor, NgClass, NgStyle, AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-tab',
-    templateUrl: './tab.component.html',
-    styleUrls: ['./tab.component.less'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [DestroyService],
-    standalone: true,
-    imports: [NgIf, NzCardModule, NzTabsModule, NgFor, NzDropDownModule, NzMenuModule, NzButtonModule, NgClass, NgStyle, MouseHoverShowDirective, NzIconModule, AsyncPipe]
+  selector: 'app-tab',
+  templateUrl: './tab.component.html',
+  styleUrls: ['./tab.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [DestroyService],
+  standalone: true,
+  imports: [NgIf, NzCardModule, NzTabsModule, NgFor, NzDropDownModule, NzMenuModule, NzButtonModule, NgClass, NgStyle, MouseHoverShowDirective, NzIconModule, AsyncPipe]
 })
 export class TabComponent implements OnInit {
   tabsSourceData: TabModel[] = [];

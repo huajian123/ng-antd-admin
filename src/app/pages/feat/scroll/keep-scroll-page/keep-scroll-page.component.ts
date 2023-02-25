@@ -1,17 +1,16 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
-import { PageHeaderType } from '@shared/components/page-header/page-header.component';
-import { NzGridModule } from 'ng-zorro-antd/grid';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header.component';
+import { NzGridModule } from 'ng-zorro-antd/grid';
 
 @Component({
-    selector: 'app-keep-scroll-page',
-    templateUrl: './keep-scroll-page.component.html',
-    styleUrls: ['./keep-scroll-page.component.less'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [PageHeaderComponent, NzCardModule, NzGridModule]
+  selector: 'app-keep-scroll-page',
+  templateUrl: './keep-scroll-page.component.html',
+  styleUrls: ['./keep-scroll-page.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [PageHeaderComponent, NzCardModule, NzGridModule]
 })
 export class KeepScrollPageComponent implements OnInit {
   pageHeaderInfo: Partial<PageHeaderType> = {

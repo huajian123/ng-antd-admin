@@ -44,8 +44,3 @@ export class LazyTargCompComponent implements OnInit, OnChanges {
     console.log(changes);
   }
 }
-
-@NgModule({
-  imports: [SharedModule, LazyTargCompComponent]
-})
-class LazyTargCompModule {}

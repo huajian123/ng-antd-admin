@@ -9,25 +9,25 @@ import { ThemeMode } from '@app/layout/default/setting-drawer/setting-drawer.com
 import { DestroyService } from '@core/services/common/destory.service';
 import { TabService } from '@core/services/common/tab.service';
 import { Menu } from '@core/services/types';
+import { AuthDirective } from '@shared/directives/auth.directive';
+import { TrackByPropertyDirective } from '@shared/directives/track-by-property.directive';
 import { MenuStoreService } from '@store/common-store/menu-store.service';
 import { SplitNavStoreService } from '@store/common-store/split-nav-store.service';
 import { ThemeService } from '@store/common-store/theme.service';
 import { UserInfoService } from '@store/common-store/userInfo.service';
 import { fnStopMouseEvent } from '@utils/tools';
-import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { AuthDirective } from '../../../shared/directives/auth.directive';
-import { TrackByPropertyDirective } from '../../../shared/directives/track-by-property.directive';
 import { NzNoAnimationModule } from 'ng-zorro-antd/core/no-animation';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 
 @Component({
-    selector: 'app-nav-bar',
-    templateUrl: './nav-bar.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [DestroyService],
-    standalone: true,
-    imports: [NgIf, NzMenuModule, NzNoAnimationModule, NgTemplateOutlet, NgFor, TrackByPropertyDirective, AuthDirective, NzButtonModule, NzIconModule, RouterLink, AsyncPipe]
+  selector: 'app-nav-bar',
+  templateUrl: './nav-bar.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [DestroyService],
+  standalone: true,
+  imports: [NgIf, NzMenuModule, NzNoAnimationModule, NgTemplateOutlet, NgFor, TrackByPropertyDirective, AuthDirective, NzButtonModule, NzIconModule, RouterLink, AsyncPipe]
 })
 export class NavBarComponent implements OnInit {
   @Input() isMixiHead = false; // 是混合模式顶部导航

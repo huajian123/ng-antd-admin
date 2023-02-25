@@ -1,35 +1,48 @@
+import { NgTemplateOutlet, NgIf } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { LoginInOutService } from '@core/services/common/login-in-out.service';
 import { WindowService } from '@core/services/common/window.service';
 import { AccountService, UserPsd } from '@services/system/account.service';
+import { ScreenLessHiddenDirective } from '@shared/directives/screen-less-hidden.directive';
+import { ToggleFullscreenDirective } from '@shared/directives/toggle-fullscreen.directive';
 import { SpinService } from '@store/common-store/spin.service';
 import { UserInfoService } from '@store/common-store/userInfo.service';
 import { ModalBtnStatus } from '@widget/base-modal';
 import { ChangePasswordService } from '@widget/biz-widget/change-password/change-password.service';
 import { LockWidgetService } from '@widget/common-widget/lock-widget/lock-widget.service';
 import { SearchRouteService } from '@widget/common-widget/search-route/search-route.service';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { ModalOptions } from 'ng-zorro-antd/modal';
-import { HomeNoticeComponent } from '../home-notice/home-notice.component';
-import { NzMenuModule } from 'ng-zorro-antd/menu';
-import { NzBadgeModule } from 'ng-zorro-antd/badge';
-import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
-import { ToggleFullscreenDirective } from '../../../directives/toggle-fullscreen.directive';
-import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
-import { ScreenLessHiddenDirective } from '../../../directives/screen-less-hidden.directive';
-import { NgTemplateOutlet, NgIf } from '@angular/common';
+
+import { HomeNoticeComponent } from '../home-notice/home-notice.component';
 
 @Component({
-    selector: 'app-layout-head-right-menu',
-    templateUrl: './layout-head-right-menu.component.html',
-    styleUrls: ['./layout-head-right-menu.component.less'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [NgTemplateOutlet, ScreenLessHiddenDirective, NzToolTipModule, NzIconModule, NzButtonModule, ToggleFullscreenDirective, NgIf, NzDropDownModule, NzBadgeModule, NzMenuModule, HomeNoticeComponent]
+  selector: 'app-layout-head-right-menu',
+  templateUrl: './layout-head-right-menu.component.html',
+  styleUrls: ['./layout-head-right-menu.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    NgTemplateOutlet,
+    ScreenLessHiddenDirective,
+    NzToolTipModule,
+    NzIconModule,
+    NzButtonModule,
+    ToggleFullscreenDirective,
+    NgIf,
+    NzDropDownModule,
+    NzBadgeModule,
+    NzMenuModule,
+    HomeNoticeComponent
+  ]
 })
 export class LayoutHeadRightMenuComponent implements OnInit {
   user!: UserPsd;

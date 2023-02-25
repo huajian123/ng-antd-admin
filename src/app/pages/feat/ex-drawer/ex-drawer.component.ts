@@ -1,20 +1,19 @@
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { ExDrawerDrawerService } from '@app/drawer/biz-drawer/ex-drawer-drawer/ex-drawer-drawer.service';
-import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { ModalBtnStatus } from '@widget/base-modal';
-import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { FormsModule } from '@angular/forms';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import { PageHeaderComponent } from '../../../shared/components/page-header/page-header.component';
 
 @Component({
-    selector: 'app-ex-drawer',
-    templateUrl: './ex-drawer.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [PageHeaderComponent, NzInputModule, FormsModule, NzButtonModule, NzWaveModule]
+  selector: 'app-ex-drawer',
+  templateUrl: './ex-drawer.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [PageHeaderComponent, NzInputModule, FormsModule, NzButtonModule, NzWaveModule]
 })
 export class ExDrawerComponent implements OnInit {
   pageHeaderInfo: Partial<PageHeaderType> = {

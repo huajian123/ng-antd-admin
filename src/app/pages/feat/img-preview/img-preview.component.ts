@@ -1,19 +1,18 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
-import { PageHeaderType } from '@shared/components/page-header/page-header.component';
-import { NzImageService, NzImageModule } from 'ng-zorro-antd/image';
-import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzImageService, NzImageModule } from 'ng-zorro-antd/image';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
-import { PageHeaderComponent } from '../../../shared/components/page-header/page-header.component';
 
 @Component({
-    selector: 'app-img-preview',
-    templateUrl: './img-preview.component.html',
-    styleUrls: ['./img-preview.component.less'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [PageHeaderComponent, NzImageModule, NzSpaceModule, NzButtonModule, NzWaveModule]
+  selector: 'app-img-preview',
+  templateUrl: './img-preview.component.html',
+  styleUrls: ['./img-preview.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [PageHeaderComponent, NzImageModule, NzSpaceModule, NzButtonModule, NzWaveModule]
 })
 export class ImgPreviewComponent implements OnInit {
   pageHeaderInfo: Partial<PageHeaderType> = {

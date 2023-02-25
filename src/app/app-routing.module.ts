@@ -5,9 +5,9 @@ import { SelectivePreloadingStrategyService } from '@core/services/common/select
 
 const routes: Routes = [
   { path: '', redirectTo: '/login/login-form', pathMatch: 'full' },
-  { path: 'blank', loadChildren: () => import('./layout/blank/blank.module').then(m => m.BlankModule) },
-  { path: 'login', data: { preload: true }, loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule) },
-  { path: 'default', data: { preload: true }, loadChildren: () => import('./layout/default/default.module').then(m => m.DefaultModule) },
+  { path: 'blank', loadChildren: () => import('./layout/blank/blank-routing') },
+  { path: 'login', data: { preload: true }, loadChildren: () => import('./pages/login/login-routing') },
+  { path: 'default', data: { preload: true }, loadChildren: () => import('./layout/default/default-routing') },
   { path: '**', redirectTo: '/login/login-form' }
 ];
 

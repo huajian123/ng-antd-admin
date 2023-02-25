@@ -1,13 +1,13 @@
+import { NgIf } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, forwardRef } from '@angular/core';
 import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 import { fnCheckForm } from '@utils/tools';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { NgIf } from '@angular/common';
-import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzInputModule } from 'ng-zorro-antd/input';
 
 interface TaskManageObj {
   taskName: string;
@@ -25,13 +25,13 @@ const EXE_COUNTER_VALUE_ACCESSOR = {
 };
 
 @Component({
-    selector: 'app-task-manage-form',
-    templateUrl: './task-manage-form.component.html',
-    styleUrls: ['./task-manage-form.component.less'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [EXE_COUNTER_VALUE_ACCESSOR],
-    standalone: true,
-    imports: [FormsModule, ReactiveFormsModule, NzGridModule, NzFormModule, NzInputModule, NgIf]
+  selector: 'app-task-manage-form',
+  templateUrl: './task-manage-form.component.html',
+  styleUrls: ['./task-manage-form.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [EXE_COUNTER_VALUE_ACCESSOR],
+  standalone: true,
+  imports: [FormsModule, ReactiveFormsModule, NzGridModule, NzFormModule, NzInputModule, NgIf]
 })
 export class TaskManageFormComponent implements OnInit, ControlValueAccessor {
   validateForm!: FormGroup;

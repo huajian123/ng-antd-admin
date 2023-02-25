@@ -3,6 +3,8 @@ import { enableProdMode, APP_INITIALIZER, importProvidersFrom } from '@angular/c
 import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 
+import { AppRoutingModule } from '@app/app-routing.module';
+import { AppComponent } from '@app/app.component';
 import interceptors from '@app/core/services/interceptors';
 import { CoreModule } from '@core/core.module';
 import { InitThemeService } from '@core/services/common/init-theme.service';
@@ -15,9 +17,6 @@ import { environment } from '@env/environment';
 import { PasswordStrengthMeterModule } from '@shared/biz-components/password-strength-meter/password-strength-meter.module';
 import { SharedModule } from '@shared/shared.module';
 import { LoginModalModule } from '@widget/biz-widget/login/login-modal.module';
-
-import { AppRoutingModule } from './app/app-routing.module';
-import { AppComponent } from './app/app.component';
 
 export function StartupServiceFactory(startupService: StartupService) {
   return () => startupService.load();

@@ -597,5 +597,5 @@ export class MonitorComponent implements OnInit, AfterViewInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 }

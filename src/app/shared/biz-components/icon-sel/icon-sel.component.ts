@@ -1,3 +1,4 @@
+import { NgIf, NgFor, NgStyle } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
@@ -5,14 +6,13 @@ import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { DestroyService } from '@core/services/common/destory.service';
 import { zorroIcons } from '@shared/biz-components/icon-sel/zorro-icons';
 import { fnKebabCase } from '@utils/camelFn';
-import { NzPaginationModule } from 'ng-zorro-antd/pagination';
-import { NzEmptyModule } from 'ng-zorro-antd/empty';
-import { NgIf, NgFor, NgStyle } from '@angular/common';
-import { NzCardModule } from 'ng-zorro-antd/card';
-import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
 
 interface IconItem {
   icon: string;
@@ -20,12 +20,12 @@ interface IconItem {
 }
 
 @Component({
-    selector: 'app-icon-sel',
-    templateUrl: './icon-sel.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [DestroyService],
-    standalone: true,
-    imports: [NzIconModule, NzButtonModule, NzPopoverModule, NzInputModule, NzCardModule, NgIf, NgFor, NgStyle, NzEmptyModule, NzPaginationModule]
+  selector: 'app-icon-sel',
+  templateUrl: './icon-sel.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [DestroyService],
+  standalone: true,
+  imports: [NzIconModule, NzButtonModule, NzPopoverModule, NzInputModule, NzCardModule, NgIf, NgFor, NgStyle, NzEmptyModule, NzPaginationModule]
 })
 export class IconSelComponent implements OnInit, AfterViewInit {
   @Input() visible = false;

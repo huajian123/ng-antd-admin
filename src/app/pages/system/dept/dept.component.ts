@@ -1,3 +1,4 @@
+import { NgFor, NgTemplateOutlet } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -7,29 +8,28 @@ import { ActionCode } from '@app/config/actionCode';
 import { OptionsInterface, SearchCommonVO } from '@core/services/types';
 import { Dept, DeptService } from '@services/system/dept.service';
 import { AntTableConfig } from '@shared/components/ant-table/ant-table.component';
+import { CardTableWrapComponent } from '@shared/components/card-table-wrap/card-table-wrap.component';
 import { PageHeaderType } from '@shared/components/page-header/page-header.component';
-import { TreeNodeInterface } from '@shared/components/tree-table/tree-table.component';
+import { TreeNodeInterface, TreeTableComponent } from '@shared/components/tree-table/tree-table.component';
+import { AuthDirective } from '@shared/directives/auth.directive';
 import { MapKeyType, MapPipe, MapSet } from '@shared/pipes/map.pipe';
 import { fnFlatDataHasParentToTree, fnFlattenTreeDataByDataList } from '@utils/treeTableTools';
 import { ModalBtnStatus } from '@widget/base-modal';
 import { DeptManageModalService } from '@widget/biz-widget/system/dept-manage-modal/dept-manage-modal.service';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { NzTagModule } from 'ng-zorro-antd/tag';
-import { AuthDirective } from '../../../shared/directives/auth.directive';
-import { TreeTableComponent } from '../../../shared/components/tree-table/tree-table.component';
-import { CardTableWrapComponent } from '../../../shared/components/card-table-wrap/card-table-wrap.component';
-import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzWaveModule } from 'ng-zorro-antd/core/wave';
-import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NgFor, NgTemplateOutlet } from '@angular/common';
-import { NzSelectModule } from 'ng-zorro-antd/select';
-import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzGridModule } from 'ng-zorro-antd/grid';
-import { NzFormModule } from 'ng-zorro-antd/form';
-import { NzCardModule } from 'ng-zorro-antd/card';
+
 import { PageHeaderComponent } from '../../../shared/components/page-header/page-header.component';
 
 interface SearchParam {
@@ -38,11 +38,28 @@ interface SearchParam {
 }
 
 @Component({
-    selector: 'app-dept',
-    templateUrl: './dept.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [PageHeaderComponent, NzCardModule, FormsModule, NzFormModule, NzGridModule, NzInputModule, NzSelectModule, NgFor, NzButtonModule, NzWaveModule, NzIconModule, CardTableWrapComponent, TreeTableComponent, AuthDirective, NgTemplateOutlet, NzTagModule]
+  selector: 'app-dept',
+  templateUrl: './dept.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    PageHeaderComponent,
+    NzCardModule,
+    FormsModule,
+    NzFormModule,
+    NzGridModule,
+    NzInputModule,
+    NzSelectModule,
+    NgFor,
+    NzButtonModule,
+    NzWaveModule,
+    NzIconModule,
+    CardTableWrapComponent,
+    TreeTableComponent,
+    AuthDirective,
+    NgTemplateOutlet,
+    NzTagModule
+  ]
 })
 export class DeptComponent implements OnInit {
   @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<NzSafeAny>;

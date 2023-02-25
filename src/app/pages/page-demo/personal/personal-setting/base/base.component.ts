@@ -1,28 +1,43 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { NgFor, NgClass, NgIf } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ValidatorsService } from '@core/services/validators/validators.service';
 import { fnCheckForm } from '@utils/tools';
-import { NzMessageService } from 'ng-zorro-antd/message';
-import { NzUploadChangeParam, NzUploadModule } from 'ng-zorro-antd/upload';
-import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
-import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NgFor, NgClass, NgIf } from '@angular/common';
-import { NzSelectModule } from 'ng-zorro-antd/select';
-import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzUploadChangeParam, NzUploadModule } from 'ng-zorro-antd/upload';
 
 @Component({
-    selector: 'app-base',
-    templateUrl: './base.component.html',
-    styleUrls: ['./base.component.less'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [NzGridModule, FormsModule, NzFormModule, ReactiveFormsModule, NzInputModule, NzSelectModule, NgFor, NzButtonModule, NzWaveModule, NgClass, NgIf, NzAvatarModule, NzUploadModule, NzIconModule]
+  selector: 'app-base',
+  templateUrl: './base.component.html',
+  styleUrls: ['./base.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    NzGridModule,
+    FormsModule,
+    NzFormModule,
+    ReactiveFormsModule,
+    NzInputModule,
+    NzSelectModule,
+    NgFor,
+    NzButtonModule,
+    NzWaveModule,
+    NgClass,
+    NgIf,
+    NzAvatarModule,
+    NzUploadModule,
+    NzIconModule
+  ]
 })
 export class BaseComponent implements OnInit {
   @Input() data!: { label: string };

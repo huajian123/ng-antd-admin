@@ -2,19 +2,18 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
-import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { fnCheckForm } from '@utils/tools';
-import { NzGridModule } from 'ng-zorro-antd/grid';
-import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import { PageHeaderComponent } from '../../../../../shared/components/page-header/page-header.component';
 
 @Component({
-    selector: 'app-search-table-detail',
-    templateUrl: './search-table-detail.component.html',
-    standalone: true,
-    imports: [PageHeaderComponent, NzInputModule, FormsModule, NzDividerModule, NzFormModule, ReactiveFormsModule, NzGridModule]
+  selector: 'app-search-table-detail',
+  templateUrl: './search-table-detail.component.html',
+  standalone: true,
+  imports: [PageHeaderComponent, NzInputModule, FormsModule, NzDividerModule, NzFormModule, ReactiveFormsModule, NzGridModule]
 })
 export class SearchTableDetailComponent implements OnInit, OnDestroy {
   pageHeaderInfo: Partial<PageHeaderType> = {

@@ -1,30 +1,50 @@
+import { NgStyle, NgFor, NgIf, DecimalPipe } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
+import { WaterMarkComponent } from '@shared/components/water-mark/water-mark.component';
+import { NumberLoopPipe } from '@shared/pipes/number-loop.pipe';
 import { SearchListStoreService } from '@store/biz-store-service/search-list/search-list-store.service';
-import { NumberLoopPipe } from '../../../../../shared/pipes/number-loop.pipe';
-import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
-import { NzAvatarModule } from 'ng-zorro-antd/avatar';
-import { FormsModule } from '@angular/forms';
-import { NzSelectModule } from 'ng-zorro-antd/select';
-import { NzDividerModule } from 'ng-zorro-antd/divider';
-import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzTagModule } from 'ng-zorro-antd/tag';
-import { NgStyle, NgFor, NgIf, DecimalPipe } from '@angular/common';
-import { NzGridModule } from 'ng-zorro-antd/grid';
-import { WaterMarkComponent } from '../../../../../shared/components/water-mark/water-mark.component';
-import { NzCardModule } from 'ng-zorro-antd/card';
 
 @Component({
-    selector: 'app-application',
-    templateUrl: './application.component.html',
-    styleUrls: ['./application.component.less'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [NzCardModule, WaterMarkComponent, NzGridModule, NgStyle, NzTagModule, NgFor, NgIf, NzIconModule, NzButtonModule, NzDividerModule, NzSelectModule, FormsModule, NzAvatarModule, NzTypographyModule, NzToolTipModule, NzDropDownModule, NzMenuModule, DecimalPipe, NumberLoopPipe]
+  selector: 'app-application',
+  templateUrl: './application.component.html',
+  styleUrls: ['./application.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    NzCardModule,
+    WaterMarkComponent,
+    NzGridModule,
+    NgStyle,
+    NzTagModule,
+    NgFor,
+    NgIf,
+    NzIconModule,
+    NzButtonModule,
+    NzDividerModule,
+    NzSelectModule,
+    FormsModule,
+    NzAvatarModule,
+    NzTypographyModule,
+    NzToolTipModule,
+    NzDropDownModule,
+    NzMenuModule,
+    DecimalPipe,
+    NumberLoopPipe
+  ]
 })
 export class ApplicationComponent implements OnInit {
   expanded = false;

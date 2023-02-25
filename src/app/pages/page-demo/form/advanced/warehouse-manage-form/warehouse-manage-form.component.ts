@@ -1,13 +1,13 @@
+import { NgIf } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, forwardRef } from '@angular/core';
 import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 import { fnCheckForm } from '@utils/tools';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { NgIf } from '@angular/common';
-import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzInputModule } from 'ng-zorro-antd/input';
 
 // 不要在这里定义，这里只是写个例子
 interface WareHouseManageObj {
@@ -26,13 +26,13 @@ const EXE_COUNTER_VALUE_ACCESSOR = {
 };
 
 @Component({
-    selector: 'app-warehouse-manage-form',
-    templateUrl: './warehouse-manage-form.component.html',
-    styleUrls: ['./warehouse-manage-form.component.less'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [EXE_COUNTER_VALUE_ACCESSOR],
-    standalone: true,
-    imports: [FormsModule, ReactiveFormsModule, NzGridModule, NzFormModule, NzInputModule, NgIf]
+  selector: 'app-warehouse-manage-form',
+  templateUrl: './warehouse-manage-form.component.html',
+  styleUrls: ['./warehouse-manage-form.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [EXE_COUNTER_VALUE_ACCESSOR],
+  standalone: true,
+  imports: [FormsModule, ReactiveFormsModule, NzGridModule, NzFormModule, NzInputModule, NgIf]
 })
 export class WarehouseManageFormComponent implements OnInit, ControlValueAccessor {
   validateForm!: FormGroup;

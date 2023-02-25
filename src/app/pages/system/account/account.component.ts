@@ -1,4 +1,6 @@
+import { NgIf, NgFor } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 
@@ -6,31 +8,29 @@ import { ActionCode } from '@app/config/actionCode';
 import { MessageService } from '@core/services/common/message.service';
 import { OptionsInterface, SearchCommonVO } from '@core/services/types';
 import { AccountService, User } from '@services/system/account.service';
-import { AntTableConfig } from '@shared/components/ant-table/ant-table.component';
+import { AntTableConfig, AntTableComponent } from '@shared/components/ant-table/ant-table.component';
+import { CardTableWrapComponent } from '@shared/components/card-table-wrap/card-table-wrap.component';
 import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { AuthDirective } from '@shared/directives/auth.directive';
 import { MapKeyType, MapPipe, MapSet } from '@shared/pipes/map.pipe';
 import { ModalBtnStatus } from '@widget/base-modal';
 import { AccountModalService } from '@widget/biz-widget/system/account-modal/account-modal.service';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { NzTableQueryParams } from 'ng-zorro-antd/table';
-import { NzSwitchModule } from 'ng-zorro-antd/switch';
-import { AuthDirective } from '../../../shared/directives/auth.directive';
-import { AntTableComponent } from '../../../shared/components/ant-table/ant-table.component';
-import { CardTableWrapComponent } from '../../../shared/components/card-table-wrap/card-table-wrap.component';
-import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzWaveModule } from 'ng-zorro-antd/core/wave';
-import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-import { NgIf, NgFor } from '@angular/common';
-import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzFormModule } from 'ng-zorro-antd/form';
-import { FormsModule } from '@angular/forms';
-import { NzCardModule } from 'ng-zorro-antd/card';
-import { DeptTreeComponent } from './dept-tree/dept-tree.component';
-import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { NzTableQueryParams } from 'ng-zorro-antd/table';
+
 import { PageHeaderComponent } from '../../../shared/components/page-header/page-header.component';
+import { DeptTreeComponent } from './dept-tree/dept-tree.component';
 
 interface SearchParam {
   userName: string;
@@ -40,11 +40,29 @@ interface SearchParam {
 }
 
 @Component({
-    selector: 'app-account',
-    templateUrl: './account.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [PageHeaderComponent, NzGridModule, DeptTreeComponent, NzCardModule, FormsModule, NzFormModule, NzInputModule, NgIf, NzSelectModule, NgFor, NzButtonModule, NzWaveModule, NzIconModule, CardTableWrapComponent, AntTableComponent, AuthDirective, NzSwitchModule]
+  selector: 'app-account',
+  templateUrl: './account.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    PageHeaderComponent,
+    NzGridModule,
+    DeptTreeComponent,
+    NzCardModule,
+    FormsModule,
+    NzFormModule,
+    NzInputModule,
+    NgIf,
+    NzSelectModule,
+    NgFor,
+    NzButtonModule,
+    NzWaveModule,
+    NzIconModule,
+    CardTableWrapComponent,
+    AntTableComponent,
+    AuthDirective,
+    NzSwitchModule
+  ]
 })
 export class AccountComponent implements OnInit {
   @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<any>;

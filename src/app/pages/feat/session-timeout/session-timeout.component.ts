@@ -1,17 +1,16 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { ExampleService } from '@services/example/example.service';
-import { PageHeaderType } from '@shared/components/page-header/page-header.component';
-import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { PageHeaderComponent } from '../../../shared/components/page-header/page-header.component';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 
 @Component({
-    selector: 'app-session-timeout',
-    templateUrl: './session-timeout.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [PageHeaderComponent, NzButtonModule, NzWaveModule]
+  selector: 'app-session-timeout',
+  templateUrl: './session-timeout.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [PageHeaderComponent, NzButtonModule, NzWaveModule]
 })
 export class SessionTimeoutComponent implements OnInit {
   pageHeaderInfo: Partial<PageHeaderType> = {

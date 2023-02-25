@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 
@@ -6,36 +7,46 @@ import { ActionCode } from '@app/config/actionCode';
 import { MessageService } from '@core/services/common/message.service';
 import { SearchCommonVO } from '@core/services/types';
 import { Role, RoleService } from '@services/system/role.service';
-import { AntTableConfig } from '@shared/components/ant-table/ant-table.component';
-import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { AntTableConfig, AntTableComponent } from '@shared/components/ant-table/ant-table.component';
+import { CardTableWrapComponent } from '@shared/components/card-table-wrap/card-table-wrap.component';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
+import { AuthDirective } from '@shared/directives/auth.directive';
 import { ModalBtnStatus } from '@widget/base-modal';
 import { RoleManageModalService } from '@widget/biz-widget/system/role-manage-modal/role-manage-modal.service';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
-import { AuthDirective } from '../../../shared/directives/auth.directive';
-import { AntTableComponent } from '../../../shared/components/ant-table/ant-table.component';
-import { CardTableWrapComponent } from '../../../shared/components/card-table-wrap/card-table-wrap.component';
-import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzWaveModule } from 'ng-zorro-antd/core/wave';
-import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzGridModule } from 'ng-zorro-antd/grid';
-import { NzFormModule } from 'ng-zorro-antd/form';
-import { FormsModule } from '@angular/forms';
-import { NzCardModule } from 'ng-zorro-antd/card';
-import { PageHeaderComponent } from '../../../shared/components/page-header/page-header.component';
 
 interface SearchParam {
   roleName: string;
 }
 
 @Component({
-    selector: 'app-role-manage',
-    templateUrl: './role-manage.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [PageHeaderComponent, NzCardModule, FormsModule, NzFormModule, NzGridModule, NzInputModule, NzButtonModule, NzWaveModule, NzIconModule, CardTableWrapComponent, AntTableComponent, AuthDirective]
+  selector: 'app-role-manage',
+  templateUrl: './role-manage.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    PageHeaderComponent,
+    NzCardModule,
+    FormsModule,
+    NzFormModule,
+    NzGridModule,
+    NzInputModule,
+    NzButtonModule,
+    NzWaveModule,
+    NzIconModule,
+    CardTableWrapComponent,
+    AntTableComponent,
+    AuthDirective
+  ]
 })
 export class RoleManageComponent implements OnInit {
   @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<any>;

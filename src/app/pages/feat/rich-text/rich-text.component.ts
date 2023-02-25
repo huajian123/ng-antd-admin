@@ -1,22 +1,21 @@
+import { NgIf } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { NonNullableFormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { environment } from '@env/environment';
-import { PageHeaderType } from '@shared/components/page-header/page-header.component';
-import { NgIf } from '@angular/common';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
+import { WaterMarkComponent } from '@shared/components/water-mark/water-mark.component';
 import { EditorComponent } from '@tinymce/tinymce-angular';
-import { NzGridModule } from 'ng-zorro-antd/grid';
-import { NzFormModule } from 'ng-zorro-antd/form';
-import { WaterMarkComponent } from '../../../shared/components/water-mark/water-mark.component';
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { PageHeaderComponent } from '../../../shared/components/page-header/page-header.component';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzGridModule } from 'ng-zorro-antd/grid';
 
 @Component({
-    selector: 'app-rich-text',
-    templateUrl: './rich-text.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [PageHeaderComponent, NzCardModule, WaterMarkComponent, FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, EditorComponent, NgIf]
+  selector: 'app-rich-text',
+  templateUrl: './rich-text.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [PageHeaderComponent, NzCardModule, WaterMarkComponent, FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, EditorComponent, NgIf]
 })
 export class RichTextComponent implements OnInit {
   pageHeaderInfo: Partial<PageHeaderType> = {

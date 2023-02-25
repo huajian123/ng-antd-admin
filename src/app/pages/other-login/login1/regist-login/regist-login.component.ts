@@ -1,30 +1,30 @@
-import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgStyle, NgIf } from '@angular/common';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule, AbstractControl } from '@angular/forms';
 import { takeUntil } from 'rxjs/operators';
 
 import { LoginType } from '@app/pages/other-login/login1/login1.component';
 import { DestroyService } from '@core/services/common/destory.service';
+import { PasswordStrengthMeterComponent } from '@shared/biz-components/password-strength-meter/password-strength-meter.component';
 import { Login1StoreService } from '@store/biz-store-service/other-login/login1-store.service';
 import { EquipmentWidth, WindowsWidthService } from '@store/common-store/windows-width.service';
-import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
-import { NzIconModule } from 'ng-zorro-antd/icon';
-import { PasswordStrengthMeterComponent } from '../../../../shared/biz-components/password-strength-meter/password-strength-meter.component';
-import { NgStyle, NgIf } from '@angular/common';
-import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
 
 /*https://www.npmjs.com/package/angular-password-strength-meter*/
 @Component({
-    selector: 'app-regist-login',
-    templateUrl: './regist-login.component.html',
-    styleUrls: ['./regist-login.component.less'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [DestroyService],
-    standalone: true,
-    imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzButtonModule, NzWaveModule, NgStyle, PasswordStrengthMeterComponent, NzIconModule, NgIf, NzCheckboxModule]
+  selector: 'app-regist-login',
+  templateUrl: './regist-login.component.html',
+  styleUrls: ['./regist-login.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [DestroyService],
+  standalone: true,
+  imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzButtonModule, NzWaveModule, NgStyle, PasswordStrengthMeterComponent, NzIconModule, NgIf, NzCheckboxModule]
 })
 export class RegistLoginComponent implements OnInit {
   validateForm!: FormGroup;
@@ -35,7 +35,7 @@ export class RegistLoginComponent implements OnInit {
   isOverModel = false;
   equipmentWidthEnum = EquipmentWidth;
   currentEquipmentWidth: EquipmentWidth = EquipmentWidth.md;
-  get password() {
+  get password(): AbstractControl | null {
     return this.validateForm.get('password');
   }
 
