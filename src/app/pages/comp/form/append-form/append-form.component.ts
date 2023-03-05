@@ -1,6 +1,6 @@
-import { DatePipe } from '@angular/common';
+import { DatePipe, NgForOf } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { ModalBtnStatus } from '@widget/base-modal';
@@ -10,6 +10,7 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -87,7 +88,10 @@ export enum TaskStateSearchCheckPeriodEnum {
     NzTagModule,
     NzProgressModule,
     NzPaginationModule,
-    DatePipe
+    DatePipe,
+    NzFormModule,
+    ReactiveFormsModule,
+    NgForOf
   ]
 })
 export class AppendFormComponent implements OnInit {
@@ -188,7 +192,28 @@ export class AppendFormComponent implements OnInit {
   ];
   taskCheckPeriodStateEnum = TaskStateSearchCheckPeriodEnum;
   loading = false;
-  constructor(private modalService: AppendFormModalService, private cdr: ChangeDetectorRef) {}
+
+  validateForm = this.fb.group({
+    formArray: this.fb.array([this.creatForm()])
+  });
+
+  get valuesArray(): FormArray {
+    return this.validateForm.controls['formArray'] as FormArray;
+  }
+  constructor(private modalService: AppendFormModalService, private cdr: ChangeDetectorRef, private fb: FormBuilder) {}
+
+  creatForm(): FormGroup {
+    return this.fb.group({
+      detail: [null]
+    });
+  }
+
+  del(groupIndex: number): void {
+    this.valuesArray.removeAt(groupIndex);
+  }
+  addForm(): void {
+    this.valuesArray.push(this.creatForm());
+  }
 
   pageSizeChange(event: number): void {
     this.pageObj = { ...this.pageObj, pageSize: event };
