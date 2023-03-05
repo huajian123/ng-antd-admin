@@ -1,4 +1,4 @@
-import { DatePipe, NgForOf } from '@angular/common';
+import { DatePipe, NgForOf, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -91,7 +91,8 @@ export enum TaskStateSearchCheckPeriodEnum {
     DatePipe,
     NzFormModule,
     ReactiveFormsModule,
-    NgForOf
+    NgForOf,
+    NgIf
   ]
 })
 export class AppendFormComponent implements OnInit {
