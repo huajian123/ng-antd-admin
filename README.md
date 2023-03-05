@@ -7,6 +7,8 @@
 
 # 项目介绍
 Ng-Ant-Admin 4.0发布（独立组件版本，如果需要module版本，请看github地址上的release v15.0,那是最后一个支持module的release版本）<br>
+The latest version is a Standalone components style, without any modules, please see v15.0 for the last version that supports module style
+<br>
 自费服务器，在线示例网速比较慢，抱歉<br>
 如果本项目对您有用，麻烦帮我点个star，谢谢啊<br>
 if help you, if you want ,please give me a star ,thank you<br>
