@@ -1,20 +1,21 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzStepsModule } from 'ng-zorro-antd/steps';
-import { NzGridModule } from 'ng-zorro-antd/grid';
-import { NzTypographyModule } from 'ng-zorro-antd/typography';
-import { NzResultModule } from 'ng-zorro-antd/result';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzResultModule } from 'ng-zorro-antd/result';
+import { NzStepsModule } from 'ng-zorro-antd/steps';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
 
 @Component({
-    selector: 'app-success',
-    templateUrl: './success.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [NzCardModule, NzResultModule, NzTypographyModule, NzGridModule, NzStepsModule, NzIconModule, NzButtonModule, NzWaveModule]
+  selector: 'app-success',
+  templateUrl: './success.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NzCardModule, NzResultModule, NzTypographyModule, NzGridModule, NzStepsModule, NzIconModule, NzButtonModule, NzWaveModule]
 })
 export class SuccessComponent implements OnInit {
   stepDirection: 'horizontal' | 'vertical' = 'horizontal';

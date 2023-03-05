@@ -3,7 +3,8 @@
 <div class="normal-table-wrap">
   <input class="m-b-20" nz-input [placeholder]="'传入到抽屉的值'" [(ngModel)]="data" />
 
-  {{ '这是从抽屉中返回的值:' + dataFromDrawer }}
+  这是从抽屉中返回的值:
+  <span class="sp-28 text-error">{{ dataFromDrawer }}</span>
   <br />
 
   <button nz-button (click)="showDrawer()">服务的方式创建</button>

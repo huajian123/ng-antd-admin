@@ -1,24 +1,17 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  SimpleChanges,
-  Output,
-  EventEmitter,
-  HostBinding,
-} from '@angular/core';
-
-import { IPasswordStrengthMeterService } from './password-strength-meter.service';
 import { NgIf, NgFor } from '@angular/common';
+import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter, HostBinding } from '@angular/core';
+
+import { PasswordStrengthMeterService } from './password-strength-meter.service';
 import { PSMProgressBarDirective } from './psm-progress-bar.directive';
 
 @Component({
-    // eslint-disable-next-line @angular-eslint/component-selector
-    selector: 'password-strength-meter',
-    templateUrl: './password-strength-meter.component.html',
-    styleUrls: ['./password-strength-meter.component.less'],
-    standalone: true,
-    imports: [PSMProgressBarDirective, NgIf, NgFor]
+  // eslint-disable-next-line @angular-eslint/component-selector
+  selector: 'password-strength-meter',
+  templateUrl: './password-strength-meter.component.html',
+  styleUrls: ['./password-strength-meter.component.less'],
+  standalone: true,
+  providers: [PasswordStrengthMeterService],
+  imports: [PSMProgressBarDirective, NgIf, NgFor]
 })
 export class PasswordStrengthMeterComponent implements OnChanges {
   @Input() password: string | undefined;
@@ -31,27 +24,25 @@ export class PasswordStrengthMeterComponent implements OnChanges {
 
   @Input() numberOfProgressBarItems = 5;
 
-  @Output() strengthChange = new EventEmitter<number>();
+  @Output() readonly strengthChange = new EventEmitter<number>();
 
   @HostBinding('class') baseClass = 'psm';
 
   passwordStrength: number | null = null;
 
-  feedback: { suggestions: string[]; warning: string } |null= null;
+  feedback: { suggestions: string[]; warning: string } | null = null;
 
-  private prevPasswordStrength:number|null = null;
+  private prevPasswordStrength: number | null = null;
 
-  constructor(
-    private passwordStrengthMeterService: IPasswordStrengthMeterService
-  ) {}
+  constructor(private passwordStrengthMeterService: PasswordStrengthMeterService) {}
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     if (changes['password']) {
       this.calculatePasswordStrength();
     }
   }
 
-  private calculatePasswordStrength() {
+  private calculatePasswordStrength(): void {
     // TODO validation logic optimization
     if (!this.password) {
       this.passwordStrength = null;
@@ -61,15 +52,11 @@ export class PasswordStrengthMeterComponent implements OnChanges {
       this.feedback = null;
     } else {
       if (this.enableFeedback) {
-        const result = this.passwordStrengthMeterService.scoreWithFeedback(
-          this.password
-        );
+        const result = this.passwordStrengthMeterService.scoreWithFeedback(this.password);
         this.passwordStrength = result.score;
         this.feedback = result.feedback;
       } else {
-        this.passwordStrength = this.passwordStrengthMeterService.score(
-          this.password
-        );
+        this.passwordStrength = this.passwordStrengthMeterService.score(this.password);
         this.feedback = null;
       }
     }

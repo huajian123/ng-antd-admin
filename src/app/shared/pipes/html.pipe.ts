@@ -4,8 +4,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 @Pipe({
-    name: 'htmlPipe',
-    standalone: true
+  name: 'htmlPipe',
+  standalone: true
 })
 export class HtmlPipe implements PipeTransform {
   constructor(private domSanitizer: DomSanitizer) {}

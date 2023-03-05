@@ -1,8 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-    name: 'numberLoop',
-    standalone: true
+  name: 'numberLoop',
+  standalone: true
 })
 export class NumberLoopPipe implements PipeTransform {
   transform(value: number): number[] {

@@ -7,7 +7,9 @@ import { ModalTypes, NzModalService } from 'ng-zorro-antd/modal';
 /**
  * 对话框拖动服务
  */
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ModalDragService {
   static readonly DRAG_CLS_PREFIX = 'NZ-MODAL-WRAP-CLS-';
   constructor(public modal: NzModalService, public dragDrop: DragDrop) {}

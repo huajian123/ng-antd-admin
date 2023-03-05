@@ -1,11 +1,11 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { ChangeDetectorRef, Injectable, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 import { SearchCommonVO } from '@core/services/types';
 import { DeptService } from '@services/system/dept.service';
-import { fnFlatDataHasParentToTree, fnFlattenTreeDataByDataList } from '@utils/treeTableTools';
+import { fnFlatDataHasParentToTree } from '@utils/treeTableTools';
 import { NzTreeFlatDataSource, NzTreeFlattener } from 'ng-zorro-antd/tree-view';
 
 interface TreeNode {

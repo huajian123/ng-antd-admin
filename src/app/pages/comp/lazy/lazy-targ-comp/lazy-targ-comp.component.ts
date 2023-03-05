@@ -1,7 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy, NgModule, Input, Output, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
 
 import { DestroyService } from '@core/services/common/destory.service';
-import { SharedModule } from '@shared/shared.module';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';

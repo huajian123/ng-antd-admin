@@ -17,8 +17,9 @@ export default [
       },
       {
         canDeactivate: [LockLeaveGuard],
+        data: { title: '空页面', key: 'empty-for-lock', shouldDetach: 'no' },
         path: 'empty-for-lock',
-        loadChildren: () => import('../../shared/components/empty-for-lock/empty-for-lock.module').then(m => m.EmptyForLockModule)
+        loadComponent: () => import('../../shared/components/empty-for-lock/empty-for-lock.component').then(m => m.EmptyForLockComponent)
       },
       {
         path: 'other-login',

@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --o",
+    "start": "ng serve --o --port 4201",
     "ng-high-memory-start": "node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",

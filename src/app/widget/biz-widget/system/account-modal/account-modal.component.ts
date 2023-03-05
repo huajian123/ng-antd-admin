@@ -1,3 +1,4 @@
+import { NgIf, NgFor } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Observable, of } from 'rxjs';
@@ -12,23 +13,22 @@ import { fnCheckForm } from '@utils/tools';
 import { fnAddTreeDataGradeAndLeaf, fnFlatDataHasParentToTree } from '@utils/treeTableTools';
 import { NzTreeNodeOptions } from 'ng-zorro-antd/core/tree';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { NzModalRef } from 'ng-zorro-antd/modal';
-import { NzSelectModule } from 'ng-zorro-antd/select';
-import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
-import { NzSwitchModule } from 'ng-zorro-antd/switch';
-import { NzRadioModule } from 'ng-zorro-antd/radio';
-import { NgIf, NgFor } from '@angular/common';
-import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzModalRef } from 'ng-zorro-antd/modal';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 
 @Component({
-    selector: 'app-account-modal',
-    templateUrl: './account-modal.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [DestroyService],
-    standalone: true,
-    imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NgIf, NzRadioModule, NzSwitchModule, NzTreeSelectModule, NzSelectModule, NgFor]
+  selector: 'app-account-modal',
+  templateUrl: './account-modal.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [DestroyService],
+  standalone: true,
+  imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NgIf, NzRadioModule, NzSwitchModule, NzTreeSelectModule, NzSelectModule, NgFor]
 })
 export class AccountModalComponent implements OnInit {
   addEditForm!: FormGroup;

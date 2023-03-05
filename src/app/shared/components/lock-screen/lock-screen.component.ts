@@ -1,3 +1,4 @@
+import { NgIf, AsyncPipe, DatePipe } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -11,24 +12,24 @@ import { WindowService } from '@core/services/common/window.service';
 import { LockScreenFlag, LockScreenStoreService } from '@store/common-store/lock-screen-store.service';
 import { fnCheckForm, fnEncrypt } from '@utils/tools';
 import { getDay } from 'date-fns';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { ChangNumberToChinesePipe } from '../../pipes/chang-number-to-chinese.pipe';
-import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
-import { NgIf, AsyncPipe, DatePipe } from '@angular/common';
-import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
+
+import { ChangNumberToChinesePipe } from '../../pipes/chang-number-to-chinese.pipe';
 
 @Component({
-    selector: 'app-lock-screen',
-    templateUrl: './lock-screen.component.html',
-    styleUrls: ['./lock-screen.component.less'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [DestroyService],
-    standalone: true,
-    imports: [NzIconModule, NzButtonModule, NzGridModule, NgIf, NzAvatarModule, FormsModule, NzFormModule, ReactiveFormsModule, NzInputModule, ChangNumberToChinesePipe, AsyncPipe, DatePipe]
+  selector: 'app-lock-screen',
+  templateUrl: './lock-screen.component.html',
+  styleUrls: ['./lock-screen.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [DestroyService],
+  standalone: true,
+  imports: [NzIconModule, NzButtonModule, NzGridModule, NgIf, NzAvatarModule, FormsModule, NzFormModule, ReactiveFormsModule, NzInputModule, ChangNumberToChinesePipe, AsyncPipe, DatePipe]
 })
 export class LockScreenComponent implements OnInit {
   public showUnlock = false;

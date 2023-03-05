@@ -1,5 +1,7 @@
 import { normalizePassiveListenerOptions } from '@angular/cdk/platform';
+import { NgIf, NgFor } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef, HostListener, NgZone } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { fromEvent, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, switchMap, takeUntil } from 'rxjs/operators';
@@ -9,16 +11,14 @@ import { Menu } from '@core/services/types';
 import { MenuStoreService } from '@store/common-store/menu-store.service';
 import { ThemeService } from '@store/common-store/theme.service';
 import { BasicConfirmModalComponent } from '@widget/base-modal';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { NzModalRef } from 'ng-zorro-antd/modal';
-import { NzDividerModule } from 'ng-zorro-antd/divider';
-import { NzGridModule } from 'ng-zorro-antd/grid';
-import { NzEmptyModule } from 'ng-zorro-antd/empty';
-import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NgIf, NgFor } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzModalRef } from 'ng-zorro-antd/modal';
 
 interface ResultItem {
   selItem: boolean;
@@ -31,13 +31,13 @@ interface ResultItem {
 const passiveEventListenerOptions = <AddEventListenerOptions>normalizePassiveListenerOptions({ passive: true });
 
 @Component({
-    selector: 'app-search-route',
-    templateUrl: './search-route.component.html',
-    styleUrls: ['./search-route.component.less'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [DestroyService],
-    standalone: true,
-    imports: [NzButtonModule, NzInputModule, FormsModule, NgIf, NzIconModule, NzEmptyModule, NgFor, NzGridModule, NzDividerModule]
+  selector: 'app-search-route',
+  templateUrl: './search-route.component.html',
+  styleUrls: ['./search-route.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [DestroyService],
+  standalone: true,
+  imports: [NzButtonModule, NzInputModule, FormsModule, NgIf, NzIconModule, NzEmptyModule, NgFor, NzGridModule, NzDividerModule]
 })
 export class SearchRouteComponent extends BasicConfirmModalComponent implements OnInit, AfterViewInit {
   isNightTheme$ = this.themesService.getIsNightTheme();
@@ -82,7 +82,7 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
   }
 
   @HostListener('window:keyup.enter')
-  onEnterUp() {
+  onEnterUp(): void {
     const index = this.resultListShow.findIndex(item => item.selItem);
     if (index > -1) {
       this.resultClick(this.resultListShow[index]);
@@ -90,7 +90,7 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
   }
 
   @HostListener('window:keyup.arrowUp')
-  onArrowUp() {
+  onArrowUp(): void {
     const index = this.changeSelAnswerIndex('up');
     if (index !== null) {
       this.mouseOverItem(this.resultListShow[index]);
@@ -98,7 +98,7 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
   }
 
   @HostListener('window:keyup.arrowDown')
-  onArrowDown() {
+  onArrowDown(): void {
     const index = this.changeSelAnswerIndex('down');
     if (index !== null) {
       this.mouseOverItem(this.resultListShow[index]);

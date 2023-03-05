@@ -2,7 +2,7 @@ import { Route } from '@angular/router';
 
 export default [
   { path: '', redirectTo: 'ex-modal', pathMatch: 'full' },
-  { path: 'ex-modal', data: { title: '拖拽modal', key: 'ex-modal' }, loadChildren: () => import('./ex-modal/ex-modal.component').then(m => m.ExModalComponent) },
+  { path: 'ex-modal', data: { title: '拖拽modal', key: 'ex-modal' }, loadComponent: () => import('./ex-modal/ex-modal.component').then(m => m.ExModalComponent) },
   { path: 'ex-drawer', data: { title: '封装抽屉', key: 'ex-drawer' }, loadComponent: () => import('./ex-drawer/ex-drawer.component').then(m => m.ExDrawerComponent) },
   { path: 'msg', data: { title: '消息提示', key: 'msg' }, loadComponent: () => import('./msg/msg.component').then(m => m.MsgComponent) },
   { path: 'frame', loadChildren: () => import('./frame/frame-routing') },

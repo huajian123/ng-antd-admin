@@ -8,8 +8,6 @@ import { DestroyService } from '@core/services/common/destory.service';
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { AdDirective } from '@shared/directives/ad.directive';
 
-import { AdDirective as AdDirective_1 } from '../../../../shared/directives/ad.directive';
-
 const passiveEventListenerOptions = normalizePassiveListenerOptions({ passive: true });
 
 @Component({
@@ -18,7 +16,7 @@ const passiveEventListenerOptions = normalizePassiveListenerOptions({ passive: t
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [LazyServiceService, DestroyService],
   standalone: true,
-  imports: [PageHeaderComponent, AdDirective_1]
+  imports: [PageHeaderComponent, AdDirective]
 })
 export class LazyScrollComponent implements OnInit, AfterViewInit {
   pageHeaderInfo: Partial<PageHeaderType> = {

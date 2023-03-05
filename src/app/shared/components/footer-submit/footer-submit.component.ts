@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, Input, TemplateRef, Renderer2, ElementRef } from '@angular/core';
 import { merge } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
@@ -6,18 +7,17 @@ import { DestroyService } from '@core/services/common/destory.service';
 import { Menu } from '@core/services/types';
 import { SplitNavStoreService } from '@store/common-store/split-nav-store.service';
 import { ThemeService } from '@store/common-store/theme.service';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { NgTemplateOutlet } from '@angular/common';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 @Component({
-    selector: 'app-footer-submit',
-    templateUrl: './footer-submit.component.html',
-    styleUrls: ['./footer-submit.component.less'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [DestroyService],
-    standalone: true,
-    imports: [NzCardModule, NgTemplateOutlet]
+  selector: 'app-footer-submit',
+  templateUrl: './footer-submit.component.html',
+  styleUrls: ['./footer-submit.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [DestroyService],
+  standalone: true,
+  imports: [NzCardModule, NgTemplateOutlet]
 })
 export class FooterSubmitComponent implements OnInit {
   @Input() leftTpl!: TemplateRef<NzSafeAny>;

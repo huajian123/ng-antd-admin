@@ -8,7 +8,7 @@ import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { NzNotificationService, NzNotificationServiceModule } from 'ng-zorro-antd/notification';
 
 type common = 'info' | 'success' | 'warning' | 'error';
 type msgType = common | 'loading';
@@ -21,7 +21,7 @@ type confirmType = common | 'info' | 'confirm';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [DestroyService],
   standalone: true,
-  imports: [PageHeaderComponent, NzCardModule, NzButtonModule, NzWaveModule, NzIconModule]
+  imports: [PageHeaderComponent, NzCardModule, NzButtonModule, NzWaveModule, NzIconModule, NzNotificationServiceModule]
 })
 export class MsgComponent implements OnInit {
   map = {

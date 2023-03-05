@@ -17,7 +17,6 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 
-import { AdDirective as AdDirective_1 } from '../../../../shared/directives/ad.directive';
 import { ApplicationComponent } from './application/application.component';
 import { ArticleComponent } from './article/article.component';
 import { ProjectsComponent } from './projects/projects.component';
@@ -48,7 +47,7 @@ interface TabInterface {
     NzInputModule,
     FormsModule,
     NzTabsModule,
-    AdDirective_1,
+    AdDirective,
     NumberLoopPipe
   ]
 })

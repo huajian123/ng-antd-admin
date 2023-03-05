@@ -8,11 +8,11 @@ import { Directive, Host, Input, Optional } from '@angular/core';
  * */
 
 @Directive({
-    selector: '[ngForTrackByProperty]',
-    standalone: true
+  selector: '[ngForTrackByProperty]',
+  standalone: true
 })
 export class TrackByPropertyDirective {
-  private _propertyName: string = '';
+  private _propertyName = '';
 
   public constructor(@Host() @Optional() private readonly _ngFor: NgForOf<any>, @Host() @Optional() private readonly _cdkFor: CdkVirtualForOf<any>) {
     if (this._ngFor) {

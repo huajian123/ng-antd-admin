@@ -7,6 +7,6 @@ export default [
   { path: 'lazy', loadChildren: () => import('./lazy/lazy-routing') },
   { path: 'luckysheet', data: { title: '在线excel', key: 'luckysheet' }, loadComponent: () => import('./luckysheet/luckysheet.component').then(m => m.LuckysheetComponent) },
   { path: 'desc', data: { title: '详情组件', key: 'desc' }, loadComponent: () => import('./desc/desc.component').then(m => m.DescComponent) },
-  { path: 'strength-meter', loadChildren: () => import('./strength-meter/strength-meter.module').then(m => m.StrengthMeterModule) },
+  { path: 'strength-meter', data: { title: '密码强度组件', key: 'strength-meter' }, loadComponent: () => import('./strength-meter/strength-meter.component').then(m => m.StrengthMeterComponent) },
   { path: 'form', loadChildren: () => import('./form/form-routing') }
 ] as Route[];

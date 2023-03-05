@@ -5,6 +5,7 @@ import { filter } from 'rxjs/operators';
 
 import { DrawerWrapService } from '@app/drawer/base-drawer';
 import { PreloaderService } from '@core/services/common/preloader.service';
+import { LockScreenComponent } from '@shared/components/lock-screen/lock-screen.component';
 import { LockScreenStoreService } from '@store/common-store/lock-screen-store.service';
 import { SpinService } from '@store/common-store/spin.service';
 import { fnStopMouseEvent } from '@utils/tools';
@@ -17,7 +18,6 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 import { fadeRouteAnimation } from './animations/fade.animation';
-import { LockScreenComponent } from './shared/components/lock-screen/lock-screen.component';
 
 @Component({
   selector: 'app-root',

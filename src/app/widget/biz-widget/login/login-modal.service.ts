@@ -1,4 +1,4 @@
-import { Injectable, Injector } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { ModalWrapService } from '@widget/base-modal';

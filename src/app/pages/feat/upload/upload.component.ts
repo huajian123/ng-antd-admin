@@ -1,6 +1,6 @@
 import { NgIf } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { environment } from '@env/environment';
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';

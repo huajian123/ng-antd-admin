@@ -1,22 +1,34 @@
+import { DOCUMENT, registerLocaleData } from '@angular/common';
 import { withInterceptorsFromDi, provideHttpClient } from '@angular/common/http';
+import zh from '@angular/common/locales/zh';
 import { enableProdMode, APP_INITIALIZER, importProvidersFrom } from '@angular/core';
-import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
+import { bootstrapApplication } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideRouter, RouteReuseStrategy, withHashLocation, withInMemoryScrolling, withPreloading, withRouterConfig } from '@angular/router';
 
-import { AppRoutingModule } from '@app/app-routing.module';
+import { MenuFoldOutline, MenuUnfoldOutline, FormOutline, DashboardOutline } from '@ant-design/icons-angular/icons';
+import { appRoutes } from '@app/app-routing';
 import { AppComponent } from '@app/app.component';
 import interceptors from '@app/core/services/interceptors';
-import { CoreModule } from '@core/core.module';
 import { InitThemeService } from '@core/services/common/init-theme.service';
 import { LoadAliIconCdnService } from '@core/services/common/load-ali-icon-cdn.service';
+import { SimpleReuseStrategy } from '@core/services/common/reuse-strategy';
+import { ScrollService } from '@core/services/common/scroll.service';
+import { SelectivePreloadingStrategyService } from '@core/services/common/selective-preloading-strategy.service';
 import { SubLockedStatusService } from '@core/services/common/sub-locked-status.service';
 import { SubWindowWithService } from '@core/services/common/sub-window-with.service';
 import { ThemeSkinService } from '@core/services/common/theme-skin.service';
 import { StartupService } from '@core/startup/startup.service';
 import { environment } from '@env/environment';
-import { PasswordStrengthMeterModule } from '@shared/biz-components/password-strength-meter/password-strength-meter.module';
-import { SharedModule } from '@shared/shared.module';
-import { LoginModalModule } from '@widget/biz-widget/login/login-modal.module';
+import { NzDrawerServiceModule } from 'ng-zorro-antd/drawer';
+import { NZ_I18N, zh_CN } from 'ng-zorro-antd/i18n';
+import { NZ_ICONS } from 'ng-zorro-antd/icon';
+import { NzMessageServiceModule } from 'ng-zorro-antd/message';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+
+const icons = [MenuFoldOutline, MenuUnfoldOutline, DashboardOutline, FormOutline];
+
+registerLocaleData(zh);
 
 export function StartupServiceFactory(startupService: StartupService) {
   return () => startupService.load();
@@ -88,19 +100,21 @@ const APPINIT_PROVIDES = [
 if (environment.production) {
   enableProdMode();
 }
-/*
- * https://netbasal.com/reduce-change-detection-cycles-with-event-coalescing-in-angular-c4037199859f
- * ngZoneEventCoalescing: true，ngZoneRunCoalescing: true
- * 第一个表示事件冒泡的变更检测合并，第二个表示事件循环的变更检测合并,可以提高性能，
- * 目前我观察到涉及到动态组件切换，或者一些关于视图销毁到操作，会让路由后面加个？，例如：localhost:4200/?#/blank/other-login/login1
- * 解决方法是 手动触发一次变更检测。项目内全文搜索"ngZoneEventCoalescing，ngZoneRunCoalescing例子,请查看main.ts"，我会将因为这个导致的变更检测问题，全部标记这个注释。
- * 如果你把握不住，可以删除{ ngZoneEventCoalescing: true, ngZoneRunCoalescing: true }，也无所谓
- * 如果你发现任何运行结果与你想象中的结果不一样时，请尝试使用this.cdr.detectChanges();手动触发一次变更检测,典型例子在"分步表单"中，点击"下一步"切换组件会有体现
- *
- * */
+
 bootstrapApplication(AppComponent, {
   providers: [
-    importProvidersFrom(BrowserModule, CoreModule, SharedModule, LoginModalModule, PasswordStrengthMeterModule.forRoot(), AppRoutingModule),
+    { provide: RouteReuseStrategy, useClass: SimpleReuseStrategy, deps: [DOCUMENT, ScrollService] },
+    { provide: NZ_I18N, useValue: zh_CN },
+    { provide: NZ_ICONS, useValue: icons },
+    provideRouter(
+      appRoutes,
+      withPreloading(SelectivePreloadingStrategyService),
+      withInMemoryScrolling({
+        scrollPositionRestoration: 'top'
+      }),
+      withHashLocation()
+    ),
+    importProvidersFrom(NzMessageServiceModule, NzDrawerServiceModule, NzModalModule),
     ...interceptors,
     ...APPINIT_PROVIDES,
     provideAnimations(),

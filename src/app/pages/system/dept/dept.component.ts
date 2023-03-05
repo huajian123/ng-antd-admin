@@ -9,7 +9,7 @@ import { OptionsInterface, SearchCommonVO } from '@core/services/types';
 import { Dept, DeptService } from '@services/system/dept.service';
 import { AntTableConfig } from '@shared/components/ant-table/ant-table.component';
 import { CardTableWrapComponent } from '@shared/components/card-table-wrap/card-table-wrap.component';
-import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { TreeNodeInterface, TreeTableComponent } from '@shared/components/tree-table/tree-table.component';
 import { AuthDirective } from '@shared/directives/auth.directive';
 import { MapKeyType, MapPipe, MapSet } from '@shared/pipes/map.pipe';
@@ -29,8 +29,6 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { NzTagModule } from 'ng-zorro-antd/tag';
-
-import { PageHeaderComponent } from '../../../shared/components/page-header/page-header.component';
 
 interface SearchParam {
   departmentName: string;

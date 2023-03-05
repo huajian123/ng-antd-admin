@@ -4,17 +4,17 @@ import { Observable, of } from 'rxjs';
 
 import { fnCheckForm } from '@utils/tools';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { NzModalRef } from 'ng-zorro-antd/modal';
-import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzModalRef } from 'ng-zorro-antd/modal';
 
 @Component({
-    selector: 'app-role-manage-modal',
-    templateUrl: './role-manage-modal.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule]
+  selector: 'app-role-manage-modal',
+  templateUrl: './role-manage-modal.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule]
 })
 export class RoleManageModalComponent implements OnInit {
   addEditForm!: FormGroup;

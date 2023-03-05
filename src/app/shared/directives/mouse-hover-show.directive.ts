@@ -1,8 +1,8 @@
 import { Directive, ElementRef, HostListener, Renderer2 } from '@angular/core';
 
 @Directive({
-    selector: '[appMouseHoverShow]',
-    standalone: true
+  selector: '[appMouseHoverShow]',
+  standalone: true
 })
 export class MouseHoverShowDirective {
   @HostListener('mouseover')
@@ -17,7 +17,7 @@ export class MouseHoverShowDirective {
 
   constructor(private el: ElementRef, private renderer: Renderer2) {}
 
-  private mouse(dis: string) {
+  private mouse(dis: string): void {
     this.renderer.setStyle(this.el.nativeElement.lastChild, 'display', dis);
   }
 }

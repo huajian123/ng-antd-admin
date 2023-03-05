@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, AfterViewInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, AfterViewInit } from '@angular/core';
 
 import { getInstanceByDom, connect } from 'echarts';
 import { EChartsOption } from 'echarts/types/dist/echarts';

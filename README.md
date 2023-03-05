@@ -4,10 +4,9 @@
 # 在线文档
 [doc](http://1.117.181.242:8081/)
 
-# 注意，在main.ts中添加了{ ngZoneEventCoalescing: true, ngZoneRunCoalescing: true }，用于提升性能，如果你把握不住，请删除这两个属性
 
 # 项目介绍
-Ng-Ant-Admin 3.0发布(添加服务端真实接口)<br>
+Ng-Ant-Admin 4.0发布（独立组件版本，如果需要module版本，请看github地址上的release v15.0,那是最后一个支持module的release版本）<br>
 自费服务器，在线示例网速比较慢，抱歉<br>
 如果本项目对您有用，麻烦帮我点个star，谢谢啊<br>
 if help you, if you want ,please give me a star ,thank you<br>

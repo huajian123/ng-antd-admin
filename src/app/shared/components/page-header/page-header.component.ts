@@ -1,11 +1,11 @@
+import { NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ThemeService } from '@store/common-store/theme.service';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
-import { NgFor, NgIf } from '@angular/common';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 
 export interface PageHeaderType {
@@ -17,12 +17,12 @@ export interface PageHeaderType {
 }
 
 @Component({
-    selector: 'app-page-header',
-    templateUrl: './page-header.component.html',
-    styleUrls: ['./page-header.component.less'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [NzPageHeaderModule, NzBreadCrumbModule, NgFor, NzOutletModule, NgIf]
+  selector: 'app-page-header',
+  templateUrl: './page-header.component.html',
+  styleUrls: ['./page-header.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NzPageHeaderModule, NzBreadCrumbModule, NgFor, NzOutletModule, NgIf]
 })
 export class PageHeaderComponent implements OnInit {
   @Input() backTpl!: TemplateRef<NzSafeAny> | null;

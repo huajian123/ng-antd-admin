@@ -5,8 +5,8 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 /*屏幕宽度小于某个宽度时不显示的组件*/
 @Directive({
-    selector: '[appScreenLessHidden]',
-    standalone: true
+  selector: '[appScreenLessHidden]',
+  standalone: true
 })
 export class ScreenLessHiddenDirective {
   @Input('appScreenLessHidden')

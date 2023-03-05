@@ -3,9 +3,9 @@ import { ChangeDetectorRef, Directive, HostListener, OnInit } from '@angular/cor
 import screenfull from 'screenfull';
 
 @Directive({
-    selector: '[appToggleFullscreen]',
-    exportAs: 'appToggleFullscreen',
-    standalone: true
+  selector: '[appToggleFullscreen]',
+  exportAs: 'appToggleFullscreen',
+  standalone: true
 })
 export class ToggleFullscreenDirective implements OnInit {
   isFullscreenFlag = true;
@@ -19,7 +19,7 @@ export class ToggleFullscreenDirective implements OnInit {
     });
   }
 
-  @HostListener('click') onClick() {
+  @HostListener('click') onClick(): void {
     if (screenfull.isEnabled) {
       screenfull.toggle();
     }

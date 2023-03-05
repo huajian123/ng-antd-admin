@@ -26,7 +26,9 @@ export abstract class BasicConfirmModalComponent {
   protected abstract getCurrentValue(): NzSafeAny;
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ModalWrapService {
   protected bsModalService: NzModalService;
   private btnTpl!: TemplateRef<any>;

@@ -7,8 +7,6 @@ import { AdDirective } from '@shared/directives/ad.directive';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 
-import { AdDirective as AdDirective_1 } from '../../../../shared/directives/ad.directive';
-
 @Component({
   selector: 'app-lazy-basic',
   templateUrl: './lazy-basic.component.html',
@@ -16,7 +14,7 @@ import { AdDirective as AdDirective_1 } from '../../../../shared/directives/ad.d
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [LazyServiceService],
   standalone: true,
-  imports: [PageHeaderComponent, NgIf, NzButtonModule, NzWaveModule, AdDirective_1]
+  imports: [PageHeaderComponent, NgIf, NzButtonModule, NzWaveModule, AdDirective]
 })
 export class LazyBasicComponent implements OnInit, AfterViewInit {
   pageHeaderInfo: Partial<PageHeaderType> = {

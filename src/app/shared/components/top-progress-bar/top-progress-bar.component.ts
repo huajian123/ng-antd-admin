@@ -1,14 +1,14 @@
+import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
-import { NgIf } from '@angular/common';
 
 @Component({
-    selector: 'app-top-progress-bar',
-    templateUrl: './top-progress-bar.component.html',
-    styleUrls: ['./top-progress-bar.component.less'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [NgIf]
+  selector: 'app-top-progress-bar',
+  templateUrl: './top-progress-bar.component.html',
+  styleUrls: ['./top-progress-bar.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NgIf]
 })
 export class TopProgressBarComponent {
   isFetching = false;

@@ -7,7 +7,7 @@ export default [
   },
   {
     path: 'list',
-    loadChildren: () => import('./list/list.module').then(m => m.ListModule)
+    loadChildren: () => import('./list/list-routing.module')
   },
   {
     path: 'detail',
@@ -16,7 +16,7 @@ export default [
 
   {
     path: 'personal',
-    loadChildren: () => import('./personal/personal.module').then(m => m.PersonalModule)
+    loadChildren: () => import('./personal/personal-routing')
   },
   {
     path: 'except',
@@ -28,7 +28,6 @@ export default [
   },
   {
     path: 'flow',
-    data: { title: '流程图', key: 'flow-chat' },
-    loadComponent: () => import('./flow/flow-chat/flow-chat.component').then(m => m.FlowChatComponent)
+    loadChildren: () => import('./flow/flow-routing')
   }
 ] as Route[];

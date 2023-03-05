@@ -1,5 +1,5 @@
 import { NgSwitch, NgSwitchCase, NgSwitchDefault, NgFor } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import {
