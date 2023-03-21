@@ -1,19 +1,30 @@
 # ng-ant-admin
 [![CodeFactor](https://www.codefactor.io/repository/github/huajian123/ng-ant-admin/badge)](https://www.codefactor.io/repository/github/huajian123/ng-ant-admin)
+![License](https://img.shields.io/badge/License-MIT-blue.svg)
+[![Angular](https://img.shields.io/badge/Build%20with-Angular%20CLI-red?logo=angular)](https://www.github.com/angular/angular)
 
-# 在线文档
-[doc](http://1.117.181.242:8081/)
+
+## ✨特性
+
+- 支持最新angular版本
+- Support the latest angular version
+- 所有组件onPush,性能卓越
+- All components onPush, excellent performance
+- 代码示例丰富，有完整服务端后台，前后端分离示例
+- Rich code examples, complete server background, front-end and back-end separation examples
+- 常用工具类，服务， 指令，管道，封装了表格，抽屉，对话框等常用功能
+- Common tools, services, instructions, pipelines。Encapsulates common functions such as tables, drawers, and dialog boxes
+- 独立组件（如果需要module版本，请看github地址上的release v15.0,那是最后一个支持module的release版本）
+- Standalone components（The latest version is a Standalone components style, without any modules, please see v15.0 for the last version that supports module style）
+
+
+## 文档
+
+有关文档与示例，请访问 [doc](http://1.117.181.242:8081/)
+
 
 
 # 项目介绍
-Ng-Ant-Admin 4.0发布（独立组件版本，如果需要module版本，请看github地址上的release v15.0,那是最后一个支持module的release版本）<br>
-The latest version is a Standalone components style, without any modules, please see v15.0 for the last version that supports module style<br>
-<br>
-自费服务器，在线示例网速比较慢，抱歉<br>
-<br>
-如果本项目对您有用，麻烦帮我点个star，谢谢啊<br>
-<br>
-if help you, if you want ,please give me a star ,thank you<br>
 账号admin，密码123456 ,数据库每10分钟从备份恢复一次<br>
 默认登录超时时间为1h，上传，下载，websocket，系统管理模块均为真实接口调用展示。<br>
 完成最常用的权限控制，人员账号管理，角色管理，菜单管理，登录超时等。添加了大量业务示例，开箱即用。<br>
@@ -111,6 +122,12 @@ _onReuseDestroy: () => void;
 ## 系统截图
 ![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/11.png)
 
+## 👍支持
+如果本项目对您有用，麻烦帮我点个⭐，谢谢啊<br>
+<br>
+if help you, if you want ,please give me a ⭐ ,thank you<br>
+
+
 ## 捐赠
 如果本项目对您有用，正巧您如果也想请我喝一杯咖啡，请扫下面的码，哈哈<br>
 If this project is useful to you, and you happen to want to invite me for a cup of coffee, please scan Alipay or WeChat<br>
@@ -119,6 +136,6 @@ If this project is useful to you, and you happen to want to invite me for a cup 
 
 
 
-### License
+### 🏴授权协议License
 
 MIT 
