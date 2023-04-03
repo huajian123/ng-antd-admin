@@ -14,8 +14,8 @@
 - Rich code examples, complete server background, front-end and back-end separation examples
 - 常用工具类，服务， 指令，管道，封装了表格，抽屉，对话框等常用功能
 - Common tools, services, instructions, pipelines。Encapsulates common functions such as tables, drawers, and dialog boxes
-- 独立组件（如果需要module版本，请看github地址上的release v15.0,那是最后一个支持module的release版本）
-- Standalone components（The latest version is a Standalone components style, without any modules, please see v15.0 for the last version that supports module style）
+- <font color=red size=6>全部组件均为独立组件，文件量减少（如果需要module版本，请看[这里](https://github.com/huajian123/ng-ant-admin/releases/tag/v15.0)）</font>
+- <font color=red size=6>Standalone Components（module style is [here](https://github.com/huajian123/ng-ant-admin/releases/tag/v15.0)）</font>
 
 
 ## 文档
