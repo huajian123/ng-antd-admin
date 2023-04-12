@@ -30,7 +30,7 @@
     "@tinymce/tinymce-angular": "^7.0.0",
     "@zxcvbn-ts/core": "^2.1.0",
     "@zxcvbn-ts/language-en": "^2.1.0",
-    "angular-animations": "^0.11.0",
+    "angular-animations": "^0.15.0-beta.0",
     "angularx-qrcode": "^15.0.1",
     "crypto-js": "^4.1.1",
     "driver.js": "^0.9.8",
