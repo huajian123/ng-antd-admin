@@ -122,10 +122,10 @@ _onReuseDestroy: () => void;
 ## 系统截图
 ![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/11.png)
 
-## 👍支持
-如果本项目对您有用，麻烦帮我点个⭐，谢谢啊<br>
+## star支持
+我是自费服务器搭建后端服务接口,所以如果本项目对您有用，如果您也愿意的话，麻烦举起您性感的小手帮我点个免费的star以资鼓励，谢谢啊<br>
 <br>
-if help you, if you want ,please give me a ⭐ ,thank you<br>
+if help you, if you want ,please give me a star ,thank you<br>
 
 
 ## 捐赠
