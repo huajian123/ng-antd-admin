@@ -25,18 +25,26 @@
 
 
 # 项目介绍
-如果您用我的项目进行学习或者参考，请先确定您使用的是angular哪个版本，因为angular15后写法有部分不一样，所以我的建议是，您正在使用angular什么版本，则下载对应版本的ng-ant-admin,最新版本直接从master分支下载即可，历史版本在这个链接进行下载[这里](https://github.com/huajian123/ng-ant-admin/releases)。<br>
-If you use my project for study or reference, please first determine which version of angular you are using, because some of the writing methods are different after angular15, so my suggestion is, what version of angular are you using, then download the corresponding version of ng -ant-admin, the latest version can be downloaded directly from the master branch, and the historical version can be downloaded from this link [here](https://github.com/huajian123/ng-ant-admin/releases)。<br>
-账号admin，密码123456 ,系统管理菜单下都为真是api接口调用示例，数据库每10分钟从备份恢复一次<br>
-Account admin, password 123456, under the system management menu are real api interface call examples, the database is restored from backup every 10 minutes<br>
-默认登录超时时间为1h，上传，下载，websocket，系统管理模块均为真实接口调用展示。<br>
-The default login timeout is 1h, upload, download, websocket, and system management modules are all real interface call display。<br>
-完成最常用的权限控制，人员账号管理，角色管理，菜单管理，登录超时等。添加了大量业务示例，开箱即用。<br>
-Complete the most commonly used permission control, personnel account management, role management, menu management, login timeout, etc. Added a lot of business examples, out of the box。<br>
-使用本项目遇到问题，可以加入376065816 qq群号与我沟通。<br>
-If you encounter problems using this project, you can join the 376065816 qq group number to communicate with me。<br>
-
-
+1.如果您用我的项目进行学习或者参考，请先确定您使用的是angular哪个版本，因为angular15后写法有部分不一样，所以我的建议是，您正在使用angular什么版本，则下载对应版本的ng-ant-admin,最新版本直接从master分支下载即可，历史版本在这个链接进行下载[这里](https://github.com/huajian123/ng-ant-admin/releases)。<br>
+1.If you use my project for study or reference, please first determine which version of angular you are using, because some of the writing methods are different after angular15, so my suggestion is, what version of angular are you using, then download the corresponding version of ng -ant-admin, the latest version can be downloaded directly from the master branch, and the historical version can be downloaded from this link [here](https://github.com/huajian123/ng-ant-admin/releases)。<br>
+<br>
+<br>
+2.账号admin，密码123456 ,系统管理菜单下都为真是api接口调用示例，数据库每10分钟从备份恢复一次<br>
+2.Account admin, password 123456, under the system management menu are real api interface call examples, the database is restored from backup every 10 minutes<br>
+<br>
+<br>
+3.默认登录超时时间为1h，上传，下载，websocket，系统管理模块均为真实接口调用展示。<br>
+3.The default login timeout is 1h, upload, download, websocket, and system management modules are all real interface call display。<br>
+<br>
+<br>
+4.完成最常用的权限控制，人员账号管理，角色管理，菜单管理，登录超时等。添加了大量业务示例，开箱即用。<br>
+4.Complete the most commonly used permission control, personnel account management, role management, menu management, login timeout, etc. Added a lot of business examples, out of the box。<br>
+<br>
+<br>
+5.使用本项目遇到问题，可以加入376065816 qq群号与我沟通。<br>
+5.If you encounter problems using this project, you can join the 376065816 qq group number to communicate with me。<br>
+<br>
+<br>
 快速二开使用详解 [快速二开使用详解](https://www.bilibili.com/video/BV1gF411x7rN/)<br>
 项目搭建简易教程 [项目搭建简易教程](https://www.bilibili.com/video/BV1EM4y1w7zd/)<br>
 online demo地址 [demo](http://1.117.181.242/)<br>
