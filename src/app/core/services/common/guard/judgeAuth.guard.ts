@@ -1,5 +1,7 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router, CanActivateChild } from '@angular/router';
+import { DestroyRef, inject, Injectable } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router, CanActivateChild, CanActivateChildFn } from '@angular/router';
+import { Observable } from 'rxjs';
 
 import { LoginInOutService } from '@core/services/common/login-in-out.service';
 import { MenuStoreService } from '@store/common-store/menu-store.service';
@@ -10,14 +12,17 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { Menu } from '../../types';
 import { WindowService } from '../window.service';
 
+// 有兴趣的可以看看class与fn的争议https://github.com/angular/angular/pull/47924
+// 我这里提供了跟judgeLogin.guard.ts的不同写法，供大家参考,也可以去官网查找mapToCanActivate 这个api，
 // 用于切换路由时判断该用户是否有权限进入该业务页面，如果没有权限则跳转到登录页
 @Injectable({
   providedIn: 'root'
 })
-export class JudgeAuthGuard implements CanActivateChild {
+export class JudgeAuthGuardService {
   authCodeArray: string[] = [];
   selMenu: Menu | null = null;
   menuNavList: Menu[] = [];
+  destroyRef = inject(DestroyRef);
 
   constructor(
     private windowSrc: WindowService,
@@ -27,9 +32,12 @@ export class JudgeAuthGuard implements CanActivateChild {
     private menuStoreService: MenuStoreService,
     private message: NzMessageService
   ) {
-    this.menuStoreService.getMenuArrayStore().subscribe(res => {
-      this.menuNavList = res;
-    });
+    this.menuStoreService
+      .getMenuArrayStore()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(res => {
+        this.menuNavList = res;
+      });
   }
 
   // 保存当前的menu到this.selMenu
@@ -56,8 +64,11 @@ export class JudgeAuthGuard implements CanActivateChild {
     }
   }
 
-  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree {
-    this.userInfoService.getUserInfo().subscribe(res => (this.authCodeArray = res.authCode));
+  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    this.userInfoService
+      .getUserInfo()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(res => (this.authCodeArray = res.authCode));
     while (route.firstChild) {
       route = route.firstChild;
     }
@@ -78,3 +89,7 @@ export class JudgeAuthGuard implements CanActivateChild {
     return this.getResult(selMenuCode!, this.authCodeArray);
   }
 }
+
+export const JudgeAuthGuard: CanActivateChildFn = (childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+  return inject(JudgeAuthGuardService).canActivateChild(childRoute, state);
+};
