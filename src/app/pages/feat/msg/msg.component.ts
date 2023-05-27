@@ -1,6 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, TemplateRef } from '@angular/core';
 
-import { DestroyService } from '@core/services/common/destory.service';
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
@@ -19,7 +18,6 @@ type confirmType = common | 'info' | 'confirm';
   templateUrl: './msg.component.html',
   styleUrls: ['./msg.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DestroyService],
   standalone: true,
   imports: [PageHeaderComponent, NzCardModule, NzButtonModule, NzWaveModule, NzIconModule, NzNotificationServiceModule]
 })
@@ -38,7 +36,7 @@ export class MsgComponent implements OnInit {
     desc: '这个是好心人pr的功能'
   };
 
-  constructor(private cdr: ChangeDetectorRef, private destroy$: DestroyService, private message: NzMessageService, private modal: NzModalService, private notification: NzNotificationService) {}
+  constructor(private cdr: ChangeDetectorRef, private message: NzMessageService, private modal: NzModalService, private notification: NzNotificationService) {}
 
   msg(type: msgType): void {
     this.message[type](`${type} message`);

@@ -1,5 +1,6 @@
 import { NgIf, NgFor } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
@@ -77,6 +78,7 @@ export class AccountComponent implements OnInit {
   ActionCode = ActionCode;
   isCollapse = true;
   availableOptions: OptionsInterface[] = [];
+  destroyRef = inject(DestroyRef);
 
   constructor(
     private dataService: AccountService,
@@ -109,7 +111,8 @@ export class AccountComponent implements OnInit {
       .pipe(
         finalize(() => {
           this.tableLoading(false);
-        })
+        }),
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe(data => {
         const { list, total, pageNum } = data;
@@ -139,16 +142,19 @@ export class AccountComponent implements OnInit {
   }
 
   add(): void {
-    this.modalService.show({ nzTitle: '新增' }).subscribe(
-      res => {
-        if (!res || res.status === ModalBtnStatus.Cancel) {
-          return;
-        }
-        this.tableLoading(true);
-        this.addEditData(res.modalValue, 'addAccount');
-      },
-      error => this.tableLoading(false)
-    );
+    this.modalService
+      .show({ nzTitle: '新增' })
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(
+        res => {
+          if (!res || res.status === ModalBtnStatus.Cancel) {
+            return;
+          }
+          this.tableLoading(true);
+          this.addEditData(res.modalValue, 'addAccount');
+        },
+        error => this.tableLoading(false)
+      );
   }
 
   reloadTable(): void {
@@ -158,16 +164,22 @@ export class AccountComponent implements OnInit {
 
   // 修改
   edit(id: number): void {
-    this.dataService.getAccountDetail(id).subscribe(res => {
-      this.modalService.show({ nzTitle: '编辑' }, res).subscribe(({ modalValue, status }) => {
-        if (status === ModalBtnStatus.Cancel) {
-          return;
-        }
-        modalValue.id = id;
-        this.tableLoading(true);
-        this.addEditData(modalValue, 'editAccount');
+    this.dataService
+      .getAccountDetail(id)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(res => {
+        this.modalService
+          .show({ nzTitle: '编辑' }, res)
+          .pipe(takeUntilDestroyed(this.destroyRef))
+          .subscribe(({ modalValue, status }) => {
+            if (status === ModalBtnStatus.Cancel) {
+              return;
+            }
+            modalValue.id = id;
+            this.tableLoading(true);
+            this.addEditData(modalValue, 'editAccount');
+          });
       });
-    });
   }
 
   addEditData(param: User, methodName: 'editAccount' | 'addAccount'): void {
@@ -175,7 +187,8 @@ export class AccountComponent implements OnInit {
       .pipe(
         finalize(() => {
           this.tableLoading(false);
-        })
+        }),
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe(() => {
         this.getDataList();
@@ -193,7 +206,8 @@ export class AccountComponent implements OnInit {
       .pipe(
         finalize(() => {
           this.tableLoading(false);
-        })
+        }),
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe(res => {
         this.getDataList();
@@ -216,7 +230,8 @@ export class AccountComponent implements OnInit {
             .pipe(
               finalize(() => {
                 this.tableLoading(false);
-              })
+              }),
+              takeUntilDestroyed(this.destroyRef)
             )
             .subscribe(
               () => {
@@ -243,15 +258,18 @@ export class AccountComponent implements OnInit {
       nzContent: '删除后不可恢复',
       nzOnOk: () => {
         this.tableLoading(true);
-        this.dataService.delAccount(ids).subscribe(
-          () => {
-            if (this.dataList.length === 1) {
-              this.tableConfig.pageIndex--;
-            }
-            this.getDataList();
-          },
-          error => this.tableLoading(false)
-        );
+        this.dataService
+          .delAccount(ids)
+          .pipe(takeUntilDestroyed(this.destroyRef))
+          .subscribe(
+            () => {
+              if (this.dataList.length === 1) {
+                this.tableConfig.pageIndex--;
+              }
+              this.getDataList();
+            },
+            error => this.tableLoading(false)
+          );
       }
     });
   }

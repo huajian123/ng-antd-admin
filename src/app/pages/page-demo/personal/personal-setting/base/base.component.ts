@@ -1,6 +1,7 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { NgFor, NgClass, NgIf } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ValidatorsService } from '@core/services/validators/validators.service';
@@ -51,6 +52,7 @@ export class BaseComponent implements OnInit {
     Zhejiang: ['Hangzhou', 'Ningbo', 'Wenzhou'],
     Jiangsu: ['Nanjing', 'Suzhou', 'Zhenjiang']
   };
+  destroyRef = inject(DestroyRef);
 
   constructor(private fb: FormBuilder, private msg: NzMessageService, private validatorsService: ValidatorsService, private breakpointObserver: BreakpointObserver, private cdr: ChangeDetectorRef) {}
 
@@ -92,16 +94,19 @@ export class BaseComponent implements OnInit {
   }
 
   obBreakPoint(): void {
-    this.breakpointObserver.observe(['(max-width: 1200px)']).subscribe(result => {
-      if (result.matches) {
-        this.formOrder = 1;
-        this.avatarOrder = 0;
-      } else {
-        this.formOrder = 0;
-        this.avatarOrder = 1;
-      }
-      this.cdr.markForCheck();
-    });
+    this.breakpointObserver
+      .observe(['(max-width: 1200px)'])
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(result => {
+        if (result.matches) {
+          this.formOrder = 1;
+          this.avatarOrder = 0;
+        } else {
+          this.formOrder = 0;
+          this.avatarOrder = 1;
+        }
+        this.cdr.markForCheck();
+      });
   }
 
   ngOnInit(): void {

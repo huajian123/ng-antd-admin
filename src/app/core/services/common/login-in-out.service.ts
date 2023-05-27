@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { DestroyRef, inject, Injectable } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
@@ -22,6 +23,8 @@ import { fnFlatDataHasParentToTree } from '@utils/treeTableTools';
   providedIn: 'root'
 })
 export class LoginInOutService {
+  destroyRef = inject(DestroyRef);
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private tabService: TabService,
@@ -54,7 +57,8 @@ export class LoginInOutService {
         .pipe(
           finalize(() => {
             resolve();
-          })
+          }),
+          takeUntilDestroyed(this.destroyRef)
         )
         .subscribe(menus => {
           menus = menus.filter(item => {

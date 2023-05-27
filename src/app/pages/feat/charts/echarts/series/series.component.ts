@@ -1,7 +1,8 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { ComponentPortal, ComponentType, Portal, PortalModule } from '@angular/cdk/portal';
 import { NgFor } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { FromLeftToRightComponent } from '@app/pages/feat/charts/echarts/series/from-left-to-right/from-left-to-right.component';
 import { RadialTreeComponent } from '@app/pages/feat/charts/echarts/series/radial-tree/radial-tree.component';
@@ -20,6 +21,7 @@ type targetComp = SimpleGraphComponent | FromLeftToRightComponent | RadialTreeCo
   imports: [NzCardModule, NzTabsModule, NgFor, PortalModule]
 })
 export class SeriesComponent implements OnInit {
+  destroyRef = inject(DestroyRef);
   componentPortal?: ComponentPortal<targetComp>;
   selectedPortal!: Portal<any>;
   tabArray: Array<{ label: string; value: ComponentType<targetComp> }> = [
@@ -37,9 +39,12 @@ export class SeriesComponent implements OnInit {
 
   ngOnInit(): void {
     this.to(0);
-    this.breakpointObserver.observe(['(max-width: 767px)']).subscribe(result => {
-      this.tabPosition = result.matches ? 'top' : 'left';
-      this.cdr.markForCheck();
-    });
+    this.breakpointObserver
+      .observe(['(max-width: 767px)'])
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(result => {
+        this.tabPosition = result.matches ? 'top' : 'left';
+        this.cdr.markForCheck();
+      });
   }
 }

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BehaviorSubject, combineLatest } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
@@ -23,7 +24,7 @@ export class DeptTreeSearchService {
   ]).pipe(map(([data, value]) => (value ? this.filterTreeData(data as TreeNode[], value) : new FilteredTreeResult(data as TreeNode[]))));
 
   constructor(public deptTreeService: DeptTreeService) {
-    this.filteredData$.subscribe(result => {
+    this.filteredData$.pipe(takeUntilDestroyed()).subscribe(result => {
       this.deptTreeService.dataSource.setData(result.treeData);
 
       const hasSearchValue = !!this.searchValue;

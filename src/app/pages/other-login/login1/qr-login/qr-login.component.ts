@@ -1,9 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { takeUntil } from 'rxjs/operators';
 
 import { LoginType } from '@app/pages/other-login/login1/login1.component';
-import { DestroyService } from '@core/services/common/destory.service';
 import { Login1StoreService } from '@store/biz-store-service/other-login/login1-store.service';
 import { QRCodeModule } from 'angularx-qrcode';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -17,7 +16,6 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
   templateUrl: './qr-login.component.html',
   styleUrls: ['./qr-login.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DestroyService],
   standalone: true,
   imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, QRCodeModule, NzTypographyModule, NzButtonModule, NzWaveModule]
 })
@@ -26,7 +24,8 @@ export class QrLoginComponent implements OnInit {
   password?: string;
   typeEnum = LoginType;
   isOverModel = false;
-  constructor(private destroy$: DestroyService, private cdr: ChangeDetectorRef, private fb: FormBuilder, private login1StoreService: Login1StoreService) {}
+  destroyRef = inject(DestroyRef);
+  constructor(private cdr: ChangeDetectorRef, private fb: FormBuilder, private login1StoreService: Login1StoreService) {}
 
   submitForm(): void {}
 
@@ -37,7 +36,7 @@ export class QrLoginComponent implements OnInit {
   ngOnInit(): void {
     this.login1StoreService
       .getIsLogin1OverModelStore()
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(res => {
         this.isOverModel = res;
         this.cdr.markForCheck();

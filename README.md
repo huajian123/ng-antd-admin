@@ -25,10 +25,16 @@
 
 
 # 项目介绍
-账号admin，密码123456 ,数据库每10分钟从备份恢复一次<br>
+如果您用我的项目进行学习或者参考，请先确定您使用的是angular哪个版本，因为angular15后写法有部分不一样，所以我的建议是，您正在使用angular什么版本，则下载对应版本的ng-ant-admin,最新版本直接从master分支下载即可，历史版本在这个链接进行下载[这里](https://github.com/huajian123/ng-ant-admin/releases)。<br>
+If you use my project for study or reference, please first determine which version of angular you are using, because some of the writing methods are different after angular15, so my suggestion is, what version of angular are you using, then download the corresponding version of ng -ant-admin, the latest version can be downloaded directly from the master branch, and the historical version can be downloaded from this link [here](https://github.com/huajian123/ng-ant-admin/releases)。<br>
+账号admin，密码123456 ,系统管理菜单下都为真是api接口调用示例，数据库每10分钟从备份恢复一次<br>
+Account admin, password 123456, under the system management menu are real api interface call examples, the database is restored from backup every 10 minutes<br>
 默认登录超时时间为1h，上传，下载，websocket，系统管理模块均为真实接口调用展示。<br>
+The default login timeout is 1h, upload, download, websocket, and system management modules are all real interface call display。<br>
 完成最常用的权限控制，人员账号管理，角色管理，菜单管理，登录超时等。添加了大量业务示例，开箱即用。<br>
+Complete the most commonly used permission control, personnel account management, role management, menu management, login timeout, etc. Added a lot of business examples, out of the box。<br>
 使用本项目遇到问题，可以加入376065816 qq群号与我沟通。<br>
+If you encounter problems using this project, you can join the 376065816 qq group number to communicate with me。<br>
 
 
 快速二开使用详解 [快速二开使用详解](https://www.bilibili.com/video/BV1gF411x7rN/)<br>
@@ -41,14 +47,15 @@ serviceApi address [serviceApi](https://github.com/huajian123/ng-ant-admin-api)<
 线上swagger地址 [swagger](http://1.117.181.242:8003/swagger-ui.html#/)<br>
 
 
-# 路由的key
-key需要设置成路由地址最后一个'/'后的字符串，并且要唯一
+# 路由的key(routing key)
+key需要设置成路由地址最后一个'/'后的字符串，并且要唯一<br>
+The key needs to be set to the string after the last '/' of the routing address, and it must be unique<br>
 ```typescript
 const routes: Routes = [
   {path: '', data: {key: 'login', shouldDetach: 'no'}, component: LoginFormComponent}
 ];
 ```
-# 栅格系统监听
+# 栅格系统监听(grid system monitoring) 
 ```angular2html
 enum EquipmentWidth {
   xs,  // (max-width: 575.98px)
@@ -59,7 +66,7 @@ enum EquipmentWidth {
   xxl  // (min-width: 1600px)
 }
 ```
-使用方式
+使用方式(How to use)
 ```
   constructor(private windowsWidthService: WindowsWidthService) {
   }
@@ -71,7 +78,7 @@ enum EquipmentWidth {
 ```
 
 
-# 模块不需要预加载
+# 模块不需要预加载(Modules do not need to be preloaded)
 
 ```typescript
 export const routes: Routes = [
@@ -86,7 +93,7 @@ export const routes: Routes = [
 ```
 
 
-# 模块不需要保存状态
+# 模块不需要保存状态(Modules don't need to save state)
 
 ```typescript
 const routes: Routes = [
@@ -94,8 +101,8 @@ const routes: Routes = [
 ];
 ```
 
-# 模块中打开新tab页来展示详情，必须设置参数如下
-在data中设置newTab
+# 模块中打开新tab页来展示详情，必须设置参数如下(Open a new tab page in the module to display the details, and the parameters must be set as follows)
+在data中设置(newTab Set newTab in data)
 ```typescript
 const routes: Routes = [
   {path: '', component: TabsComponent, data: {title: '标签页操作', key: 'tabs'}},
@@ -103,23 +110,24 @@ const routes: Routes = [
 ];
 ```
 
-# 缓存页面中指定容器的滚动条
-在data中设置scrollContain 为元素选择器
+# 缓存页面中指定容器的滚动条(The scroll bar of the specified container in the cache page)
+在data中设置scrollContain 为元素选择器 (Set scrollContain as element selector in data)
 ```typescript
   {path: '', component: KeepScrollPageComponent, data: {title: '缓存滚动条', key: 'keep-scroll-page',scrollContain:['#div-scroll1','#div-scroll2']}}
 
 ```
 
-# 切换tab调用的临时声明周期如下
+# 路由复用下切换tab调用的临时声明周期如下(The temporary statement cycle of switching tab calls is as follows)
 
 ```typescript
 _onReuseInit: () => void;
 _onReuseDestroy: () => void;
 
 ```
-直接在目标组件中写出方法名为_onReuseInit或者_onReuseDestroy的方法即可实现
+直接在目标组件中写出方法名为_onReuseInit或者_onReuseDestroy的方法即可实现<br>
+It can be realized by directly writing the method named _onReuseInit or _onReuseDestroy in the target component<br>
 
-## 系统截图
+## 系统截图(System screenshot)
 ![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/11.png)
 
 ## star支持

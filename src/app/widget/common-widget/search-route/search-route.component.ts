@@ -1,12 +1,12 @@
 import { normalizePassiveListenerOptions } from '@angular/cdk/platform';
 import { NgIf, NgFor } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef, HostListener, NgZone } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef, HostListener, NgZone, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { fromEvent, of } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map, switchMap, takeUntil } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
 
-import { DestroyService } from '@core/services/common/destory.service';
 import { Menu } from '@core/services/types';
 import { MenuStoreService } from '@store/common-store/menu-store.service';
 import { ThemeService } from '@store/common-store/theme.service';
@@ -35,7 +35,6 @@ const passiveEventListenerOptions = <AddEventListenerOptions>normalizePassiveLis
   templateUrl: './search-route.component.html',
   styleUrls: ['./search-route.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DestroyService],
   standalone: true,
   imports: [NzButtonModule, NzInputModule, FormsModule, NgIf, NzIconModule, NzEmptyModule, NgFor, NzGridModule, NzDividerModule]
 })
@@ -46,12 +45,11 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
   @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
   inputValue: string | null = null;
   menuNavList: Menu[] = [];
-
+  destroyRef = inject(DestroyRef);
   constructor(
     private themesService: ThemeService,
     private cdr: ChangeDetectorRef,
     private ngZone: NgZone,
-    private destroy$: DestroyService,
     private menuStoreService: MenuStoreService,
     private router: Router,
     protected override modalRef: NzModalRef
@@ -154,7 +152,7 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
           switchMap(item => {
             return of(item);
           }),
-          takeUntil(this.destroy$)
+          takeUntilDestroyed(this.destroyRef)
         )
         .subscribe(res => {
           this.resultListShow = [];
@@ -192,7 +190,7 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
   getMenus(): void {
     this.menuStoreService
       .getMenuArrayStore()
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(menus => {
         this.menuNavList = menus;
       });

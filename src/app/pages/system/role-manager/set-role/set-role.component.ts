@@ -1,5 +1,6 @@
 import { NgFor, NgIf, NgTemplateOutlet, NgStyle } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, OnInit, ViewEncapsulation } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { concatMap } from 'rxjs/operators';
@@ -53,6 +54,7 @@ export class SetRoleComponent implements OnInit {
   permissionList: Array<Menu & { isOpen?: boolean; checked?: boolean }> = [];
   id!: number;
   roleName!: string;
+  destroyRef = inject(DestroyRef);
 
   constructor(
     private dataService: RoleService,
@@ -73,7 +75,8 @@ export class SetRoleComponent implements OnInit {
           this.authCodeArr = authCodeArr;
           // 获取所有菜单
           return this.menusService.getMenuList({ pageNum: 0, pageSize: 0 });
-        })
+        }),
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe(response => {
         // isOpen表示 节点是否展开
@@ -88,10 +91,13 @@ export class SetRoleComponent implements OnInit {
   }
 
   getRoleName(): void {
-    this.dataService.getRolesDetail(this.id).subscribe(({ roleName }) => {
-      this.pageHeaderInfo = { ...this.pageHeaderInfo, ...{ desc: `当前角色：${roleName}` } };
-      this.cdr.markForCheck();
-    });
+    this.dataService
+      .getRolesDetail(this.id)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(({ roleName }) => {
+        this.pageHeaderInfo = { ...this.pageHeaderInfo, ...{ desc: `当前角色：${roleName}` } };
+        this.cdr.markForCheck();
+      });
   }
 
   back(): void {
@@ -111,9 +117,12 @@ export class SetRoleComponent implements OnInit {
       permissionIds: seledAuthArray,
       roleId: +this.id
     };
-    this.dataService.updatePermission(param).subscribe(() => {
-      this.message.success('设置成功，重新登录后生效');
-    });
+    this.dataService
+      .updatePermission(param)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        this.message.success('设置成功，重新登录后生效');
+      });
   }
 
   _onReuseInit(): void {
@@ -121,7 +130,7 @@ export class SetRoleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.routeInfo.queryParams.subscribe(res => {
+    this.routeInfo.queryParams.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => {
       this.id = res['id'];
       this.getRoleName();
       this.initPermission();

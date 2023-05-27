@@ -1,5 +1,6 @@
 import { NgIf, AsyncPipe } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
@@ -62,7 +63,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild('modalBtnTpl') modalBtnTpl!: TemplateRef<any>;
   @ViewChild('drawerFootDefaultTpl') drawerFootDefaultTpl!: TemplateRef<any>;
   modalFullScreenFlag = false;
-
+  destroyRef = inject(DestroyRef);
   constructor(
     public drawerWrapService: DrawerWrapService,
     private modalWrapService: ModalWrapService,
@@ -84,9 +85,14 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.router.events.pipe(filter((event: NzSafeAny) => event instanceof NavigationEnd)).subscribe((event: NzSafeAny) => {
-      this.spinService.setCurrentGlobalSpinStore(false);
-    });
+    this.router.events
+      .pipe(
+        filter((event: NzSafeAny) => event instanceof NavigationEnd),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe((event: NzSafeAny) => {
+        this.spinService.setCurrentGlobalSpinStore(false);
+      });
   }
 
   ngAfterViewInit(): void {

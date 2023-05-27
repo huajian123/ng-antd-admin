@@ -1,9 +1,9 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, Input, TemplateRef, Renderer2, ElementRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, TemplateRef, Renderer2, ElementRef, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { merge } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
-import { DestroyService } from '@core/services/common/destory.service';
 import { Menu } from '@core/services/types';
 import { SplitNavStoreService } from '@store/common-store/split-nav-store.service';
 import { ThemeService } from '@store/common-store/theme.service';
@@ -15,7 +15,6 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
   templateUrl: './footer-submit.component.html',
   styleUrls: ['./footer-submit.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DestroyService],
   standalone: true,
   imports: [NzCardModule, NgTemplateOutlet]
 })
@@ -32,8 +31,9 @@ export class FooterSubmitComponent implements OnInit {
   isTopMode = false;
   leftMenuArray: Menu[] = [];
   isMixMode = false;
+  destroyRef = inject(DestroyRef);
 
-  constructor(private destroy$: DestroyService, private splitNavStoreService: SplitNavStoreService, private themesService: ThemeService, private rd2: Renderer2, private el: ElementRef) {}
+  constructor(private splitNavStoreService: SplitNavStoreService, private themesService: ThemeService, private rd2: Renderer2, private el: ElementRef) {}
 
   setWidth(width: number): void {
     const dom = this.el.nativeElement.querySelector('.ant-pro-footer-bar');
@@ -64,7 +64,7 @@ export class FooterSubmitComponent implements OnInit {
       })
     );
     merge(sub1$, sub2$, sub3$, sub4$)
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {
         if (this.isOverMode || this.isTopMode || (this.isMixMode && !this.leftMenuArray)) {
           this.setWidth(0);

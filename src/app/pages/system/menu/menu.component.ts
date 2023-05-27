@@ -1,5 +1,6 @@
 import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
@@ -9,8 +10,9 @@ import { OptionsInterface, SearchCommonVO } from '@core/services/types';
 import { MenuListObj, MenusService } from '@services/system/menus.service';
 import { AntTableConfig } from '@shared/components/ant-table/ant-table.component';
 import { CardTableWrapComponent } from '@shared/components/card-table-wrap/card-table-wrap.component';
-import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { TreeNodeInterface, TreeTableComponent } from '@shared/components/tree-table/tree-table.component';
+import { WaterMarkComponent } from '@shared/components/water-mark/water-mark.component';
 import { AuthDirective } from '@shared/directives/auth.directive';
 import { MapKeyType, MapPipe, MapSet } from '@shared/pipes/map.pipe';
 import { fnFlatDataHasParentToTree, fnFlattenTreeDataByDataList } from '@utils/treeTableTools';
@@ -29,9 +31,6 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { NzTagModule } from 'ng-zorro-antd/tag';
-
-import { PageHeaderComponent } from '../../../shared/components/page-header/page-header.component';
-import { WaterMarkComponent } from '../../../shared/components/water-mark/water-mark.component';
 
 interface SearchParam {
   menuName: number;
@@ -73,7 +72,7 @@ export class MenuComponent implements OnInit {
 
   ActionCode = ActionCode;
   searchParam: Partial<SearchParam> = {};
-
+  destroyRef = inject(DestroyRef);
   tableConfig!: AntTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '菜单管理(数据库每10分钟从备份恢复一次),新增完菜单记得给对应角色添加刚刚新增的菜单权限，不然无法展示',
@@ -122,7 +121,8 @@ export class MenuComponent implements OnInit {
       .pipe(
         finalize(() => {
           this.tableLoading(false);
-        })
+        }),
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe(menuList => {
         const target = fnFlatDataHasParentToTree(menuList.list, 'fatherId');
@@ -138,18 +138,21 @@ export class MenuComponent implements OnInit {
   }
 
   add(fatherId: number): void {
-    this.menuModalService.show({ nzTitle: '新增' }).subscribe(
-      res => {
-        if (!res || res.status === ModalBtnStatus.Cancel) {
-          return;
-        }
-        const param = { ...res.modalValue };
-        param.fatherId = fatherId;
-        this.tableLoading(true);
-        this.addEditData(param, 'addMenus');
-      },
-      error => this.tableLoading(false)
-    );
+    this.menuModalService
+      .show({ nzTitle: '新增' })
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(
+        res => {
+          if (!res || res.status === ModalBtnStatus.Cancel) {
+            return;
+          }
+          const param = { ...res.modalValue };
+          param.fatherId = fatherId;
+          this.tableLoading(true);
+          this.addEditData(param, 'addMenus');
+        },
+        error => this.tableLoading(false)
+      );
   }
 
   addEditData(param: MenuListObj, methodName: 'editMenus' | 'addMenus'): void {
@@ -157,7 +160,8 @@ export class MenuComponent implements OnInit {
       .pipe(
         finalize(() => {
           this.tableLoading(false);
-        })
+        }),
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe(() => {
         this.getDataList();
@@ -170,35 +174,44 @@ export class MenuComponent implements OnInit {
       nzContent: '删除后不可恢复',
       nzOnOk: () => {
         this.tableLoading(true);
-        this.dataService.delMenus(id).subscribe(
-          () => {
-            if (this.dataList.length === 1) {
-              this.tableConfig.pageIndex--;
-            }
-            this.getDataList();
-          },
-          error => this.tableLoading(false)
-        );
+        this.dataService
+          .delMenus(id)
+          .pipe(takeUntilDestroyed(this.destroyRef))
+          .subscribe(
+            () => {
+              if (this.dataList.length === 1) {
+                this.tableConfig.pageIndex--;
+              }
+              this.getDataList();
+            },
+            error => this.tableLoading(false)
+          );
       }
     });
   }
 
   // 修改
   edit(id: number, fatherId: number): void {
-    this.dataService.getMenuDetail(id).subscribe(res => {
-      this.menuModalService.show({ nzTitle: '编辑' }, res).subscribe(
-        ({ modalValue, status }) => {
-          if (status === ModalBtnStatus.Cancel) {
-            return;
-          }
-          modalValue.id = id;
-          modalValue.fatherId = fatherId;
-          this.tableLoading(true);
-          this.addEditData(modalValue, 'editMenus');
-        },
-        error => this.tableLoading(false)
-      );
-    });
+    this.dataService
+      .getMenuDetail(id)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(res => {
+        this.menuModalService
+          .show({ nzTitle: '编辑' }, res)
+          .pipe(takeUntilDestroyed(this.destroyRef))
+          .subscribe(
+            ({ modalValue, status }) => {
+              if (status === ModalBtnStatus.Cancel) {
+                return;
+              }
+              modalValue.id = id;
+              modalValue.fatherId = fatherId;
+              this.tableLoading(true);
+              this.addEditData(modalValue, 'editMenus');
+            },
+            error => this.tableLoading(false)
+          );
+      });
   }
 
   // 修改一页几条

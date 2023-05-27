@@ -1,7 +1,8 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { ComponentPortal, ComponentType, Portal, PortalModule } from '@angular/cdk/portal';
 import { NgFor } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { ConnectChartsComponent } from '@app/pages/feat/charts/echarts/advanced/connect-charts/connect-charts.component';
 import { DraggableChartsComponent } from '@app/pages/feat/charts/echarts/advanced/draggable-charts/draggable-charts.component';
@@ -25,7 +26,7 @@ export class AdvancedComponent implements OnInit {
     { label: 'Connect Charts', value: ConnectChartsComponent },
     { label: 'Draggable Chart', value: DraggableChartsComponent }
   ];
-
+  destroyRef = inject(DestroyRef);
   tabPosition: NzTabPosition = 'left';
 
   constructor(private cdr: ChangeDetectorRef, private breakpointObserver: BreakpointObserver) {}
@@ -37,9 +38,12 @@ export class AdvancedComponent implements OnInit {
 
   ngOnInit(): void {
     this.to(0);
-    this.breakpointObserver.observe(['(max-width: 767px)']).subscribe(result => {
-      this.tabPosition = result.matches ? 'top' : 'left';
-      this.cdr.markForCheck();
-    });
+    this.breakpointObserver
+      .observe(['(max-width: 767px)'])
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(result => {
+        this.tabPosition = result.matches ? 'top' : 'left';
+        this.cdr.markForCheck();
+      });
   }
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { finalize } from 'rxjs/operators';
@@ -29,7 +30,7 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
 })
 export class LoginFormComponent implements OnInit {
   validateForm!: FormGroup;
-
+  destroyRef = inject(DestroyRef);
   constructor(
     private fb: FormBuilder,
     private loginInOutService: LoginInOutService,
@@ -63,7 +64,8 @@ export class LoginFormComponent implements OnInit {
         // 无论如何设置全局loading为false
         finalize(() => {
           this.spinService.setCurrentGlobalSpinStore(false);
-        })
+        }),
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe(userToken => {
         // 这里后台登录成功以后，只会返回一套由jwt加密的token，下面需要对token进行解析

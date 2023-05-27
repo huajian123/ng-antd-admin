@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Injectable, SimpleChange } from '@angular/core';
-import { takeUntil } from 'rxjs/operators';
+import { ChangeDetectorRef, Injectable } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { LazySelPeopleEnum } from '@app/pages/comp/lazy/lazy-targ-comp/lazy-targ-comp.component';
 import { AdDirective } from '@shared/directives/ad.directive';
@@ -28,7 +28,8 @@ export class LazyServiceService {
     const componentRef = viewContainerRef.createComponent(LazyTargCompComponent);
     // 使用setInput api可以被onchange钩子管理
     componentRef.setInput('purChoosePeople', selPerson);
-    componentRef.instance.currentPeople.pipe(takeUntil(componentRef.instance.destroy$)).subscribe(() => {
+    // 传递destroy引用
+    componentRef.instance.currentPeople.pipe(takeUntilDestroyed(componentRef.instance.destroyRef)).subscribe(() => {
       this.create(componentRef.instance.purChoosePeople);
     });
     // 实现OnChange钩子

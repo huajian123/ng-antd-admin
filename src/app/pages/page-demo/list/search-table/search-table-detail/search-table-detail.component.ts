@@ -1,4 +1,5 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, DestroyRef, inject, OnDestroy, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
@@ -24,6 +25,7 @@ export class SearchTableDetailComponent implements OnInit, OnDestroy {
   validateForm!: FormGroup;
   name = '';
   backUrl = '/default/page-demo/list/search-table';
+  destroyRef = inject(DestroyRef);
 
   constructor(private routeParam: ActivatedRoute, public cdr: ChangeDetectorRef, private fb: FormBuilder) {}
 
@@ -45,7 +47,7 @@ export class SearchTableDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initForm();
-    this.routeParam.params.subscribe(res => {
+    this.routeParam.params.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => {
       this.name = res['name'];
       this.validateForm.get('userName')?.setValue(this.name);
     });

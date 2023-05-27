@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 
 import { ExDrawerDrawerService } from '@app/drawer/biz-drawer/ex-drawer-drawer/ex-drawer-drawer.service';
@@ -23,17 +24,20 @@ export class ExDrawerComponent implements OnInit {
   };
   data = '';
   dataFromDrawer = '';
-
+  destroyRef = inject(DestroyRef);
   constructor(private drawerService: ExDrawerDrawerService, private cdr: ChangeDetectorRef) {}
 
   showDrawer(): void {
-    this.drawerService.show({ nzTitle: '服务创建' }, { name: this.data }).subscribe(({ modalValue, status }) => {
-      if (status === ModalBtnStatus.Cancel) {
-        return;
-      }
-      this.dataFromDrawer = modalValue.password;
-      this.cdr.markForCheck();
-    });
+    this.drawerService
+      .show({ nzTitle: '服务创建' }, { name: this.data })
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(({ modalValue, status }) => {
+        if (status === ModalBtnStatus.Cancel) {
+          return;
+        }
+        this.dataFromDrawer = modalValue.password;
+        this.cdr.markForCheck();
+      });
   }
 
   ngOnInit(): void {}

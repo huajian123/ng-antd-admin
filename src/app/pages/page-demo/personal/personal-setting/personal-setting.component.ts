@@ -1,6 +1,7 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { NgClass, NgFor } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { AdComponent, DynamicComponent } from '@core/services/types';
 import { AdDirective } from '@shared/directives/ad.directive';
@@ -11,11 +12,11 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzMenuModeType } from 'ng-zorro-antd/menu/menu.types';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 
-import { AdDirective as AdDirective_1 } from '../../../../shared/directives/ad.directive';
 import { BaseComponent } from './base/base.component';
 import { BindComponent } from './bind/bind.component';
 import { NoticeComponent } from './notice/notice.component';
 import { SafeComponent } from './safe/safe.component';
+import { AdDirective as AdDirective_1 } from '../../../../shared/directives/ad.directive';
 
 interface TabInterface {
   key: string;
@@ -39,6 +40,7 @@ export class PersonalSettingComponent implements OnInit {
     { key: 'bind', component: new DynamicComponent(BindComponent, { label: '账号绑定' }) },
     { key: 'notice', component: new DynamicComponent(NoticeComponent, { label: '新消息通知' }) }
   ];
+  destroyRef = inject(DestroyRef);
   menus: Array<{ key: string; title: string; selected?: boolean }> = [
     {
       key: 'base',
@@ -77,10 +79,13 @@ export class PersonalSettingComponent implements OnInit {
   }
 
   obBreakPoint(): void {
-    this.breakpointObserver.observe(['(max-width: 767px)']).subscribe(result => {
-      this.tabModel = result.matches ? 'horizontal' : 'inline';
-      this.cdr.markForCheck();
-    });
+    this.breakpointObserver
+      .observe(['(max-width: 767px)'])
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(result => {
+        this.tabModel = result.matches ? 'horizontal' : 'inline';
+        this.cdr.markForCheck();
+      });
   }
 
   ngOnInit(): void {

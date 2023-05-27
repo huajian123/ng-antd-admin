@@ -1,5 +1,6 @@
 import { NgFor, NgTemplateOutlet } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
@@ -64,7 +65,7 @@ export class DeptComponent implements OnInit {
   @ViewChild('state', { static: true }) state!: TemplateRef<NzSafeAny>;
   ActionCode = ActionCode;
   searchParam: Partial<SearchParam> = {};
-
+  destroyRef = inject(DestroyRef);
   tableConfig!: AntTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '部门管理(数据库每10分钟从备份恢复一次)',
@@ -112,7 +113,8 @@ export class DeptComponent implements OnInit {
       .pipe(
         finalize(() => {
           this.tableLoading(false);
-        })
+        }),
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe(deptList => {
         const target = fnFlatDataHasParentToTree(deptList.list);
@@ -133,18 +135,21 @@ export class DeptComponent implements OnInit {
   }
 
   add(fatherId: number): void {
-    this.deptModalService.show({ nzTitle: '新增' }).subscribe(
-      res => {
-        if (!res || res.status === ModalBtnStatus.Cancel) {
-          return;
-        }
-        const param = { ...res.modalValue };
-        param.fatherId = fatherId;
-        this.tableLoading(true);
-        this.addEditData(param, 'addDepts');
-      },
-      error => this.tableLoading(false)
-    );
+    this.deptModalService
+      .show({ nzTitle: '新增' })
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(
+        res => {
+          if (!res || res.status === ModalBtnStatus.Cancel) {
+            return;
+          }
+          const param = { ...res.modalValue };
+          param.fatherId = fatherId;
+          this.tableLoading(true);
+          this.addEditData(param, 'addDepts');
+        },
+        error => this.tableLoading(false)
+      );
   }
 
   addEditData(param: Dept, methodName: 'editDepts' | 'addDepts'): void {
@@ -152,7 +157,8 @@ export class DeptComponent implements OnInit {
       .pipe(
         finalize(() => {
           this.tableLoading(false);
-        })
+        }),
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe(() => {
         this.getDataList();
@@ -166,35 +172,44 @@ export class DeptComponent implements OnInit {
       nzContent: '删除后不可恢复',
       nzOnOk: () => {
         this.tableLoading(true);
-        this.dataService.delDepts(ids).subscribe(
-          () => {
-            if (this.dataList.length === 1) {
-              this.tableConfig.pageIndex--;
-            }
-            this.getDataList();
-          },
-          error => this.tableLoading(false)
-        );
+        this.dataService
+          .delDepts(ids)
+          .pipe(takeUntilDestroyed(this.destroyRef))
+          .subscribe(
+            () => {
+              if (this.dataList.length === 1) {
+                this.tableConfig.pageIndex--;
+              }
+              this.getDataList();
+            },
+            error => this.tableLoading(false)
+          );
       }
     });
   }
 
   // 修改
   edit(id: number, fatherId: number): void {
-    this.dataService.getDeptsDetail(id).subscribe(res => {
-      this.deptModalService.show({ nzTitle: '编辑' }, res).subscribe(
-        ({ modalValue, status }) => {
-          if (status === ModalBtnStatus.Cancel) {
-            return;
-          }
-          modalValue.id = id;
-          modalValue.fatherId = fatherId;
-          this.tableLoading(true);
-          this.addEditData(modalValue, 'editDepts');
-        },
-        error => this.tableLoading(false)
-      );
-    });
+    this.dataService
+      .getDeptsDetail(id)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(res => {
+        this.deptModalService
+          .show({ nzTitle: '编辑' }, res)
+          .pipe(takeUntilDestroyed(this.destroyRef))
+          .subscribe(
+            ({ modalValue, status }) => {
+              if (status === ModalBtnStatus.Cancel) {
+                return;
+              }
+              modalValue.id = id;
+              modalValue.fatherId = fatherId;
+              this.tableLoading(true);
+              this.addEditData(modalValue, 'editDepts');
+            },
+            error => this.tableLoading(false)
+          );
+      });
   }
 
   // 修改一页几条

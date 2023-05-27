@@ -24,7 +24,7 @@ module.exports = {
       rules: {
         'prettier/prettier': ['error', prettierConfig],
         "@angular-eslint/no-empty-lifecycle-method": ["off"],
-        'jsdoc/newline-after-description': 1,
+        'jsdoc/newline-after-description': 'off',
         '@angular-eslint/component-class-suffix': [
           'error',
           {

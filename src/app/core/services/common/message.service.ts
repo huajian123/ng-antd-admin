@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import {DestroyRef, inject, Injectable} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
@@ -26,14 +27,19 @@ export const enum MessageCallback {
 })
 export class MessageService {
   modalCtrl: NzModalRef[] = [];
-
+  destroyRef = inject(DestroyRef);
   constructor(private nzModalService: NzModalService, private router: Router, private toastService: NzMessageService) {
-    this.router.events.pipe(filter((event: NzSafeAny) => event instanceof NavigationEnd)).subscribe((event: NzSafeAny) => {
-      for (let i = 0, len = this.modalCtrl.length; i < len; i++) {
-        this.modalCtrl[i].destroy(MessageCallback.Cancel);
-      }
-      this.modalCtrl = [];
-    });
+    this.router.events
+      .pipe(
+        filter((event: NzSafeAny) => event instanceof NavigationEnd),
+        takeUntilDestroyed()
+      )
+      .subscribe((event: NzSafeAny) => {
+        for (let i = 0, len = this.modalCtrl.length; i < len; i++) {
+          this.modalCtrl[i].destroy(MessageCallback.Cancel);
+        }
+        this.modalCtrl = [];
+      });
   }
 
   public showAlertMessage(title: string, message: string, type: MessageType = MessageType.Info): void {
@@ -65,7 +71,7 @@ export class MessageService {
       modalRef = this.nzModalService.confirm(options);
     }
     this.modalCtrl.push(modalRef!);
-    modalRef!.afterClose.subscribe(() => {
+    modalRef!.afterClose.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
       for (let i = 0, len = this.modalCtrl.length; i < len; i++) {
         if (this.modalCtrl[i] === modalRef) {
           this.modalCtrl.splice(i, 1);

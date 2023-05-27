@@ -1,5 +1,6 @@
 import { NgFor } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy, AfterViewInit, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 
 import { ip } from '@env/environment.prod';
@@ -22,6 +23,7 @@ import { webSocket } from 'rxjs/webSocket';
 })
 export class WebsocketComponent implements OnInit, OnDestroy, AfterViewInit {
   concate = true;
+  destroyRef = inject(DestroyRef);
   // https://github.com/ReactiveX/rxjs/issues/4166
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: 'websocket',
@@ -46,7 +48,7 @@ export class WebsocketComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit(): void {}
 
   ngAfterViewInit(): void {
-    this.subject.subscribe(res => {
+    this.subject.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => {
       // @ts-ignore
       this.result.push(res.message);
       this.result = [...this.result];

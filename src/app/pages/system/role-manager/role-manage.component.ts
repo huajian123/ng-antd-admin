@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
@@ -59,6 +60,7 @@ export class RoleManageComponent implements OnInit {
   dataList: Role[] = [];
   checkedCashArray = [];
   ActionCode = ActionCode;
+  destroyRef = inject(DestroyRef);
 
   constructor(
     private dataService: RoleService,
@@ -92,7 +94,8 @@ export class RoleManageComponent implements OnInit {
       .pipe(
         finalize(() => {
           this.tableLoading(false);
-        })
+        }),
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe(data => {
         const { list, total, pageNum } = data;
@@ -122,17 +125,20 @@ export class RoleManageComponent implements OnInit {
   }
 
   add(): void {
-    this.modalService.show({ nzTitle: '新增' }).subscribe(
-      res => {
-        if (!res || res.status === ModalBtnStatus.Cancel) {
-          return;
-        }
-        const param = { ...res.modalValue };
-        this.tableLoading(true);
-        this.addEditData(param, 'addRoles');
-      },
-      error => this.tableLoading(false)
-    );
+    this.modalService
+      .show({ nzTitle: '新增' })
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(
+        res => {
+          if (!res || res.status === ModalBtnStatus.Cancel) {
+            return;
+          }
+          const param = { ...res.modalValue };
+          this.tableLoading(true);
+          this.addEditData(param, 'addRoles');
+        },
+        error => this.tableLoading(false)
+      );
   }
 
   reloadTable(): void {
@@ -142,25 +148,33 @@ export class RoleManageComponent implements OnInit {
 
   // 修改
   edit(id: number): void {
-    this.dataService.getRolesDetail(id).subscribe(res => {
-      this.modalService.show({ nzTitle: '编辑' }, res).subscribe(
-        ({ modalValue, status }) => {
-          if (status === ModalBtnStatus.Cancel) {
-            return;
-          }
-          modalValue.id = id;
-          this.tableLoading(true);
-          this.addEditData(modalValue, 'editRoles');
-        },
-        error => this.tableLoading(false)
-      );
-    });
+    this.dataService
+      .getRolesDetail(id)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(res => {
+        this.modalService
+          .show({ nzTitle: '编辑' }, res)
+          .pipe(takeUntilDestroyed(this.destroyRef))
+          .subscribe(
+            ({ modalValue, status }) => {
+              if (status === ModalBtnStatus.Cancel) {
+                return;
+              }
+              modalValue.id = id;
+              this.tableLoading(true);
+              this.addEditData(modalValue, 'editRoles');
+            },
+            error => this.tableLoading(false)
+          );
+      });
   }
 
   addEditData(param: Role, methodName: 'editRoles' | 'addRoles'): void {
-    this.dataService[methodName](param).subscribe(() => {
-      this.getDataList();
-    });
+    this.dataService[methodName](param)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        this.getDataList();
+      });
   }
 
   del(id: number): void {
@@ -170,15 +184,18 @@ export class RoleManageComponent implements OnInit {
       nzContent: '删除后不可恢复',
       nzOnOk: () => {
         this.tableLoading(true);
-        this.dataService.delRoles(ids).subscribe(
-          () => {
-            if (this.dataList.length === 1) {
-              this.tableConfig.pageIndex--;
-            }
-            this.getDataList();
-          },
-          error => this.tableLoading(false)
-        );
+        this.dataService
+          .delRoles(ids)
+          .pipe(takeUntilDestroyed(this.destroyRef))
+          .subscribe(
+            () => {
+              if (this.dataList.length === 1) {
+                this.tableConfig.pageIndex--;
+              }
+              this.getDataList();
+            },
+            error => this.tableLoading(false)
+          );
       }
     });
   }

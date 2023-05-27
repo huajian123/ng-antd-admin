@@ -1,10 +1,10 @@
 import { NgIf, NgFor, NgClass, NgStyle, AsyncPipe } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 
-import { DestroyService } from '@core/services/common/destory.service';
 import { TabModel, TabService } from '@core/services/common/tab.service';
 import { Menu } from '@core/services/types';
 import { MouseHoverShowDirective } from '@shared/directives/mouse-hover-show.directive';
@@ -24,7 +24,6 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
   templateUrl: './tab.component.html',
   styleUrls: ['./tab.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DestroyService],
   standalone: true,
   imports: [NgIf, NzCardModule, NzTabsModule, NgFor, NzDropDownModule, NzMenuModule, NzButtonModule, NgClass, NgStyle, MouseHoverShowDirective, NzIconModule, AsyncPipe]
 })
@@ -38,19 +37,22 @@ export class TabComponent implements OnInit {
   isOverMode = false;
   isCollapsed$ = this.themesService.getIsCollapsed();
   isCollapsed = false;
+  destroyRef = inject(DestroyRef);
 
   constructor(
     public tabService: TabService,
     private nzContextMenuService: NzContextMenuService,
     private splitNavStoreService: SplitNavStoreService,
     private themesService: ThemeService,
-    private destroy$: DestroyService,
     public router: Router,
     public cdr: ChangeDetectorRef
   ) {
-    this.router.events.pipe(filter((event: NzSafeAny) => event instanceof NavigationEnd)).subscribe((event: NzSafeAny) => {
-      this.cdr.markForCheck();
-    });
+    this.router.events
+      .pipe(filter((event: NzSafeAny) => event instanceof NavigationEnd))
+      .pipe(takeUntilDestroyed())
+      .subscribe((event: NzSafeAny) => {
+        this.cdr.markForCheck();
+      });
   }
 
   get currentIndex(): number {
@@ -121,7 +123,7 @@ export class TabComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.tabsSourceData$.pipe(takeUntil(this.destroy$)).subscribe(res => {
+    this.tabsSourceData$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => {
       this.tabsSourceData = res;
     });
   }

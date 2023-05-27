@@ -1,5 +1,6 @@
 import { DatePipe, NgForOf, NgIf } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
@@ -96,6 +97,7 @@ export enum TaskStateSearchCheckPeriodEnum {
   ]
 })
 export class AppendFormComponent implements OnInit {
+  destroyRef = inject(DestroyRef);
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '表单增删示例',
     breadcrumb: ['首页', '组件', 'Form', '表单增删'],
@@ -232,14 +234,17 @@ export class AppendFormComponent implements OnInit {
   }
 
   add(): void {
-    this.modalService.show({ nzTitle: '新增' }).subscribe(({ modalValue, status }) => {
-      if (status === ModalBtnStatus.Cancel) {
-        return;
-      }
-      this.showAllTaskList.push(modalValue);
-      this.getData(1);
-      console.log(modalValue);
-    });
+    this.modalService
+      .show({ nzTitle: '新增' })
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(({ modalValue, status }) => {
+        if (status === ModalBtnStatus.Cancel) {
+          return;
+        }
+        this.showAllTaskList.push(modalValue);
+        this.getData(1);
+        console.log(modalValue);
+      });
   }
 
   onEllipsisChange(ellipsis: boolean): void {

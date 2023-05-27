@@ -1,9 +1,9 @@
 import { NgIf, NgFor, NgStyle } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Input, Output, EventEmitter, AfterViewInit, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
-import { DestroyService } from '@core/services/common/destory.service';
 import { zorroIcons } from '@shared/biz-components/icon-sel/zorro-icons';
 import { fnKebabCase } from '@utils/camelFn';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -23,7 +23,6 @@ interface IconItem {
   selector: 'app-icon-sel',
   templateUrl: './icon-sel.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DestroyService],
   standalone: true,
   imports: [NzIconModule, NzButtonModule, NzPopoverModule, NzInputModule, NzCardModule, NgIf, NgFor, NgStyle, NzEmptyModule, NzPaginationModule]
 })
@@ -45,8 +44,9 @@ export class IconSelComponent implements OnInit, AfterViewInit {
   gridStyle = {
     width: '20%'
   };
+  destroyRef = inject(DestroyRef);
 
-  constructor(private cdr: ChangeDetectorRef, private destroy$: DestroyService) {
+  constructor(private cdr: ChangeDetectorRef) {
     zorroIcons.forEach(item => {
       this.sourceIconsArray.push({ icon: fnKebabCase(item), isChecked: false });
     });
@@ -84,7 +84,7 @@ export class IconSelComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.searchText$.pipe(debounceTime(200), distinctUntilChanged(), takeUntil(this.destroy$)).subscribe(res => {
+    this.searchText$.pipe(debounceTime(200), distinctUntilChanged(), takeUntilDestroyed(this.destroyRef)).subscribe(res => {
       this.iconsStrAllArray = this.sourceIconsArray.filter(item => item.icon.includes(res));
       this.getData();
       this.cdr.markForCheck();

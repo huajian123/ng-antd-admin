@@ -1,11 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { takeUntil } from 'rxjs/operators';
 
 import { LoginType } from '@app/pages/other-login/login1/login1.component';
 import { TokenKey, TokenPre } from '@config/constant';
-import { DestroyService } from '@core/services/common/destory.service';
 import { WindowService } from '@core/services/common/window.service';
 import { LoginService } from '@services/login/login.service';
 import { Login1StoreService } from '@store/biz-store-service/other-login/login1-store.service';
@@ -26,7 +25,6 @@ import { NzInputModule } from 'ng-zorro-antd/input';
   templateUrl: './normal-login.component.html',
   styleUrls: ['./normal-login.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DestroyService],
   standalone: true,
   imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzButtonModule, NzIconModule, NzCheckboxModule, NzWaveModule, NzDividerModule]
 })
@@ -36,9 +34,8 @@ export class NormalLoginComponent implements OnInit {
   password?: string;
   typeEnum = LoginType;
   isOverModel = false;
-
+  destroyRef = inject(DestroyRef);
   constructor(
-    private destroy$: DestroyService,
     private userInfoService: UserInfoService,
     private router: Router,
     private menuService: MenuStoreService,
@@ -74,7 +71,7 @@ export class NormalLoginComponent implements OnInit {
   ngOnInit(): void {
     this.login1StoreService
       .getIsLogin1OverModelStore()
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(res => {
         this.isOverModel = res;
         this.cdr.markForCheck();

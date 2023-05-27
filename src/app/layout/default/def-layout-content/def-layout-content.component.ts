@@ -1,9 +1,8 @@
 import { NgIf, NgClass, NgStyle, AsyncPipe } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Observable } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
-import { DestroyService } from '@core/services/common/destory.service';
 import { ChatComponent } from '@shared/components/chat/chat.component';
 import { TopProgressBarComponent } from '@shared/components/top-progress-bar/top-progress-bar.component';
 import { SplitNavStoreService } from '@store/common-store/split-nav-store.service';
@@ -21,7 +20,6 @@ import { SettingDrawerComponent } from '../setting-drawer/setting-drawer.compone
   templateUrl: './def-layout-content.component.html',
   styleUrls: ['./def-layout-content.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DestroyService],
   standalone: true,
   imports: [TopProgressBarComponent, NzLayoutModule, NgIf, NgClass, NzNoAnimationModule, NgStyle, SettingDrawerComponent, ChatComponent, NzMenuModule, NzButtonModule, NzIconModule, AsyncPipe]
 })
@@ -52,15 +50,15 @@ export class DefLayoutContentComponent implements OnInit {
   // 混合模式下，判断顶部菜单是否有子菜单，如果没有子菜单，要隐藏左侧菜单
   mixiModeLeftNav = this.splitNavStoreService.getSplitLeftNavArrayStore();
   contentMarginTop = '48px';
-
-  constructor(private destroy$: DestroyService, private themesService: ThemeService, private splitNavStoreService: SplitNavStoreService) {}
+  destroyRef = inject(DestroyRef);
+  constructor(private themesService: ThemeService, private splitNavStoreService: SplitNavStoreService) {}
 
   changeCollapsed(isCollapsed: boolean): void {
     this.themesService.setIsCollapsed(isCollapsed);
   }
 
   getThemeOptions(): void {
-    this.themesOptions$.pipe(takeUntil(this.destroy$)).subscribe(res => {
+    this.themesOptions$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => {
       this.themesOptions = res;
       this.isMixiMode = res.mode === 'mixi';
       this.isFixedLeftNav = this.themesOptions.fixedLeftNav;

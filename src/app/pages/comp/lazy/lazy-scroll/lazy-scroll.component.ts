@@ -1,10 +1,10 @@
 import { normalizePassiveListenerOptions } from '@angular/cdk/platform';
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ChangeDetectorRef, AfterViewInit, NgZone } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ChangeDetectorRef, AfterViewInit, NgZone, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { fromEvent, take } from 'rxjs';
-import { debounceTime, filter, takeUntil } from 'rxjs/operators';
+import { debounceTime, filter } from 'rxjs/operators';
 
 import { LazyServiceService } from '@app/pages/comp/lazy/lazy-service.service';
-import { DestroyService } from '@core/services/common/destory.service';
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { AdDirective } from '@shared/directives/ad.directive';
 
@@ -14,7 +14,7 @@ const passiveEventListenerOptions = normalizePassiveListenerOptions({ passive: t
   selector: 'app-lazy-scroll',
   templateUrl: './lazy-scroll.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [LazyServiceService, DestroyService],
+  providers: [LazyServiceService],
   standalone: true,
   imports: [PageHeaderComponent, AdDirective]
 })
@@ -25,8 +25,8 @@ export class LazyScrollComponent implements OnInit, AfterViewInit {
     desc: '滚动页面，加载组件'
   };
   @ViewChild(AdDirective, { static: true }) adHost!: AdDirective;
-
-  constructor(private lazyServiceService: LazyServiceService, private zone: NgZone, private cdr: ChangeDetectorRef, private destroyService$: DestroyService) {}
+  destroyRef = inject(DestroyRef);
+  constructor(private lazyServiceService: LazyServiceService, private zone: NgZone, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {}
 
@@ -40,7 +40,7 @@ export class LazyScrollComponent implements OnInit, AfterViewInit {
             return window.scrollY >= 200;
           }),
           take(1),
-          takeUntil(this.destroyService$)
+          takeUntilDestroyed(this.destroyRef)
         )
         .subscribe(() => {
           this.lazyServiceService.create().then(() => {

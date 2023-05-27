@@ -3,7 +3,6 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
-import { DestroyService } from '@core/services/common/destory.service';
 import { MenuListObj } from '@services/system/menus.service';
 import { IconSelComponent } from '@shared/biz-components/icon-sel/icon-sel.component';
 import { fnCheckForm } from '@utils/tools';
@@ -23,7 +22,6 @@ type menuType = 'C' | 'F';
   selector: 'app-menu-modal',
   templateUrl: './menu-modal.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DestroyService],
   standalone: true,
   imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzRadioModule, NgIf, NzButtonModule, IconSelComponent, NzInputNumberModule, NzSwitchModule]
 })
@@ -33,7 +31,7 @@ export class MenuModalComponent implements OnInit {
   params!: MenuListObj;
   menuType: menuType = 'C';
 
-  constructor(private modalRef: NzModalRef, private destroy$: DestroyService, private fb: FormBuilder) {}
+  constructor(private modalRef: NzModalRef, private fb: FormBuilder) {}
 
   // 返回false则不关闭对话框
   protected getCurrentValue(): Observable<any> {

@@ -1,6 +1,7 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { ComponentPortal, CdkPortalOutletAttachedRef, Portal, ComponentType, PortalModule } from '@angular/cdk/portal';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ComponentRef, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ComponentRef, DestroyRef, inject, OnDestroy, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder } from '@angular/forms';
 
 import { StepThreeComponent } from '@app/pages/page-demo/form/step/step-three/step-three.component';
@@ -39,7 +40,7 @@ export class StepComponent implements OnInit, AfterViewInit, OnDestroy {
   currentStep = 1;
   stepComponentArray: Array<ComponentType<comp>> = [StepOneComponent, StepTwoComponent, StepThreeComponent];
   componentPortal?: ComponentPortal<comp>;
-
+  destroyRef = inject(DestroyRef);
   constructor(private fb: FormBuilder, private breakpointObserver: BreakpointObserver, private cdr: ChangeDetectorRef) {}
 
   go(step: StepEnum, ref: CdkPortalOutletAttachedRef, currentStepNum: number): void {
@@ -55,21 +56,21 @@ export class StepComponent implements OnInit, AfterViewInit, OnDestroy {
     if (ref instanceof ComponentRef) {
       if (ref.instance instanceof StepOneComponent) {
         ref.instance.stepDirection = this.stepDirection;
-        ref.instance.next.subscribe(() => {
+        ref.instance.next.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
           this.go(StepEnum.Two, ref, this.currentStep + 1);
         });
       }
       if (ref.instance instanceof StepTwoComponent) {
-        ref.instance.previous.subscribe(() => {
+        ref.instance.previous.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
           this.go(StepEnum.One, ref, this.currentStep - 1);
         });
-        ref.instance.next.subscribe(() => {
+        ref.instance.next.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
           this.go(StepEnum.Three, ref, this.currentStep + 1);
         });
       }
       if (ref.instance instanceof StepThreeComponent) {
         ref.instance.stepDirection = this.stepDirection;
-        ref.instance.next.subscribe(() => {
+        ref.instance.next.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
           this.go(StepEnum.One, ref, 1);
         });
       }
@@ -77,13 +78,16 @@ export class StepComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.breakpointObserver.observe(['(max-width: 770px)']).subscribe(result => {
-      let tempDir: 'vertical' | 'horizontal' = result.matches ? 'vertical' : 'horizontal';
-      if (tempDir !== this.stepDirection) {
-        this.stepDirection = tempDir;
-        this.cdr.markForCheck();
-      }
-    });
+    this.breakpointObserver
+      .observe(['(max-width: 770px)'])
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(result => {
+        let tempDir: 'vertical' | 'horizontal' = result.matches ? 'vertical' : 'horizontal';
+        if (tempDir !== this.stepDirection) {
+          this.stepDirection = tempDir;
+          this.cdr.markForCheck();
+        }
+      });
   }
 
   goStep(step: number): void {

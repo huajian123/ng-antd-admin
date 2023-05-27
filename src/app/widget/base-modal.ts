@@ -1,5 +1,6 @@
 import { DragDrop, DragRef } from '@angular/cdk/drag-drop';
-import { Injectable, Injector, Renderer2, RendererFactory2, TemplateRef, Type } from '@angular/core';
+import { DestroyRef, inject, Injectable, Injector, Renderer2, RendererFactory2, TemplateRef, Type } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Observable, of } from 'rxjs';
 import { first, tap } from 'rxjs/operators';
 
@@ -34,6 +35,7 @@ export class ModalWrapService {
   private btnTpl!: TemplateRef<any>;
   fullScreenFlag = false;
   private renderer: Renderer2;
+  destroyRef = inject(DestroyRef);
 
   constructor(private baseInjector: Injector, public dragDrop: DragDrop, rendererFactory: RendererFactory2) {
     this.bsModalService = this.baseInjector.get(NzModalService);
@@ -55,7 +57,7 @@ export class ModalWrapService {
     this.btnTpl = btnTpl;
   }
 
-  protected getRandomCls() {
+  protected getRandomCls(): string {
     return `NZ-MODAL-WRAP-CLS-${fnGetUUID()}`;
   }
 
@@ -73,7 +75,8 @@ export class ModalWrapService {
           } else {
             return modalButtonOptions['modalRef'].destroy({ status: ModalBtnStatus.Ok, modalValue });
           }
-        })
+        }),
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe();
   }

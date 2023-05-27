@@ -1,5 +1,6 @@
 import { DOCUMENT } from '@angular/common';
-import { inject, Inject } from '@angular/core';
+import { DestroyRef, inject, Inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, ActivatedRouteSnapshot, DetachedRouteHandle, RouteReuseStrategy } from '@angular/router';
 
 import { ScrollService } from '@core/services/common/scroll.service';
@@ -11,6 +12,7 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 // 参考https://zhuanlan.zhihu.com/p/29823560
 // https://blog.csdn.net/weixin_30561425/article/details/96985967?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control
 export class SimpleReuseStrategy implements RouteReuseStrategy {
+  destroyRef = inject(DestroyRef);
   // 缓存每个component的map
   static handlers: { [key: string]: NzSafeAny } = {};
   // 缓存每个页面的scroll位置,为啥不放在handlers里面呢,因为路由离开时路由复用导致以当前页为key为null了
@@ -51,7 +53,7 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
   shouldDetach(route: ActivatedRouteSnapshot): boolean {
     // 是否展示多页签，如果不展示多页签，则不做路由复用
     let isShowTab = false;
-    this.isShowTab$.subscribe(res => {
+    this.isShowTab$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => {
       isShowTab = res.isShowTab;
     });
     return route.data['shouldDetach'] !== 'no' && isShowTab;

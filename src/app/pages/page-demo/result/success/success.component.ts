@@ -1,5 +1,6 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
@@ -19,21 +20,24 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
 })
 export class SuccessComponent implements OnInit {
   stepDirection: 'horizontal' | 'vertical' = 'horizontal';
-
+  destroyRef = inject(DestroyRef);
   constructor(private breakpointObserver: BreakpointObserver, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    this.breakpointObserver.observe(['(max-width: 770px)']).subscribe(result => {
-      let tempDir: 'vertical' | 'horizontal' = 'vertical';
-      if (result.matches) {
-        tempDir = 'vertical';
-      } else {
-        tempDir = 'horizontal';
-      }
-      if (tempDir !== this.stepDirection) {
-        this.stepDirection = tempDir;
-        this.cdr.markForCheck();
-      }
-    });
+    this.breakpointObserver
+      .observe(['(max-width: 770px)'])
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(result => {
+        let tempDir: 'vertical' | 'horizontal' = 'vertical';
+        if (result.matches) {
+          tempDir = 'vertical';
+        } else {
+          tempDir = 'horizontal';
+        }
+        if (tempDir !== this.stepDirection) {
+          this.stepDirection = tempDir;
+          this.cdr.markForCheck();
+        }
+      });
   }
 }

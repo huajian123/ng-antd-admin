@@ -1,4 +1,5 @@
-import { Injectable, Injector, TemplateRef, Type } from '@angular/core';
+import { DestroyRef, inject, Injectable, Injector, TemplateRef, Type } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Observable, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
@@ -12,6 +13,7 @@ export class DrawerWrapService {
   protected bsDrawerService: NzDrawerService;
   private btnTpl!: TemplateRef<any>;
   drawerRef!: NzDrawerRef;
+  destroyRef = inject(DestroyRef);
 
   constructor(private baseInjector: Injector) {
     this.bsDrawerService = this.baseInjector.get(NzDrawerService);
@@ -54,7 +56,8 @@ export class DrawerWrapService {
           } else {
             return this.drawerRef.close({ status: ModalBtnStatus.Ok, modalValue });
           }
-        })
+        }),
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe();
   }

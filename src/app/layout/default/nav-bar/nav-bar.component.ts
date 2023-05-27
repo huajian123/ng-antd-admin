@@ -1,12 +1,12 @@
 import { DOCUMENT, NgIf, NgTemplateOutlet, NgFor, AsyncPipe } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Input, Inject } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Input, Inject, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
-import { filter, map, mergeMap, share, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { filter, map, mergeMap, share, switchMap, tap } from 'rxjs/operators';
 
 import { ThemeMode } from '@app/layout/default/setting-drawer/setting-drawer.component';
-import { DestroyService } from '@core/services/common/destory.service';
 import { TabService } from '@core/services/common/tab.service';
 import { Menu } from '@core/services/types';
 import { AuthDirective } from '@shared/directives/auth.directive';
@@ -25,7 +25,6 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DestroyService],
   standalone: true,
   imports: [NgIf, NzMenuModule, NzNoAnimationModule, NgTemplateOutlet, NgFor, TrackByPropertyDirective, AuthDirective, NzButtonModule, NzIconModule, RouterLink, AsyncPipe]
 })
@@ -47,10 +46,9 @@ export class NavBarComponent implements OnInit {
   copyMenus: Menu[] = [];
   authCodeArray: string[] = [];
   subTheme$: Observable<any>;
-
+  destroyRef = inject(DestroyRef);
   constructor(
     private router: Router,
-    private destroy$: DestroyService,
     private userInfoService: UserInfoService,
     private menuServices: MenuStoreService,
     private splitNavStoreService: SplitNavStoreService,
@@ -73,7 +71,7 @@ export class NavBarComponent implements OnInit {
         this.isMixiMode = this.themesMode === 'mixi';
       }),
       share(),
-      takeUntil(this.destroy$)
+      takeUntilDestroyed(this.destroyRef)
     );
 
     // 监听混合模式下左侧菜单数据源
@@ -85,7 +83,7 @@ export class NavBarComponent implements OnInit {
       .pipe(
         filter(event => event instanceof NavigationEnd),
         tap(() => {
-          this.subTheme$.subscribe(() => {
+          this.subTheme$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
             // 主题切换为混合模式下，设置左侧菜单数据源
             // 如果放在ngInit监听里面，会在混合模式下，刷新完页面切换路由，runOutSideAngular
             if (this.isMixiMode) {
@@ -119,7 +117,7 @@ export class NavBarComponent implements OnInit {
         mergeMap(route => {
           return route.data;
         }),
-        takeUntil(this.destroy$)
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe(routeData => {
         // 详情页是否是打开新tab页签形式
@@ -148,7 +146,7 @@ export class NavBarComponent implements OnInit {
   initMenus(): void {
     this.menuServices
       .getMenuArrayStore()
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(menusArray => {
         this.menus = menusArray;
         this.copyMenus = this.cloneMenuArray(this.menus);
@@ -276,7 +274,7 @@ export class NavBarComponent implements OnInit {
 
   // 监听折叠菜单事件
   subIsCollapsed(): void {
-    this.isCollapsed$.subscribe(isCollapsed => {
+    this.isCollapsed$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(isCollapsed => {
       this.isCollapsed = isCollapsed;
       // 菜单展开
       if (!this.isCollapsed) {
@@ -304,20 +302,20 @@ export class NavBarComponent implements OnInit {
   subAuth(): void {
     this.userInfoService
       .getUserInfo()
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(res => (this.authCodeArray = res.authCode));
   }
 
   // 监听混合模式下左侧菜单数据源
   private subMixiModeSideMenu(): void {
-    this.leftMenuArray$.pipe(takeUntil(this.destroy$)).subscribe(res => {
+    this.leftMenuArray$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => {
       this.leftMenuArray = res;
     });
   }
 
   ngOnInit(): void {
     // 顶部模式时要关闭menu的open状态
-    this.subTheme$.subscribe(options => {
+    this.subTheme$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(options => {
       if (options.mode === 'top' && !this.isOverMode) {
         this.closeMenu();
       }

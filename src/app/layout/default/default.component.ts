@@ -1,11 +1,10 @@
 import { NgIf, NgTemplateOutlet, AsyncPipe } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, AfterViewInit, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterOutlet } from '@angular/router';
-import { takeUntil } from 'rxjs/operators';
 
 import { fadeRouteAnimation } from '@app/animations/fade.animation';
 import { IsFirstLogin } from '@config/constant';
-import { DestroyService } from '@core/services/common/destory.service';
 import { DriverService } from '@core/services/common/driver.service';
 import { WindowService } from '@core/services/common/window.service';
 import { LayoutHeadRightMenuComponent } from '@shared/biz-components/layout-components/layout-head-right-menu/layout-head-right-menu.component';
@@ -26,7 +25,6 @@ import { ToolBarComponent } from './tool-bar/tool-bar.component';
   styleUrls: ['./default.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeRouteAnimation],
-  providers: [DestroyService],
   standalone: true,
   imports: [
     DefLayoutContentComponent,
@@ -50,8 +48,8 @@ export class DefaultComponent implements OnInit, AfterViewInit {
   isCollapsed = false;
   isOverMode = false; // 窗口变窄时，导航栏是否变成抽屉模式
   @ViewChild('navDrawer') navDrawer!: NavDrawerComponent;
-
-  constructor(private destroy$: DestroyService, private themesService: ThemeService, private driverService: DriverService, private windowService: WindowService) {}
+  destroyRef = inject(DestroyRef);
+  constructor(private themesService: ThemeService, private driverService: DriverService, private windowService: WindowService) {}
 
   changeCollapsed(): void {
     if (this.isOverMode) {
@@ -66,11 +64,11 @@ export class DefaultComponent implements OnInit, AfterViewInit {
   subTheme(): void {
     this.themesService
       .getIsCollapsed()
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(res => (this.isCollapsed = res));
     this.themesService
       .getIsOverMode()
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(res => (this.isOverMode = res));
   }
 

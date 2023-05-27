@@ -1,5 +1,6 @@
 import { NgIf } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, forwardRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, forwardRef, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
@@ -38,7 +39,7 @@ export class WarehouseManageFormComponent implements OnInit, ControlValueAccesso
   validateForm!: FormGroup;
   onChange: (value: string) => void = () => null;
   onTouched: () => void = () => null;
-
+  destroyRef = inject(DestroyRef);
   constructor(private fb: FormBuilder) {}
 
   initForm(): void {
@@ -54,7 +55,7 @@ export class WarehouseManageFormComponent implements OnInit, ControlValueAccesso
 
   ngOnInit(): void {
     this.initForm();
-    this.validateForm.valueChanges.pipe(debounceTime(500), distinctUntilChanged()).subscribe(res => {
+    this.validateForm.valueChanges.pipe(debounceTime(500), distinctUntilChanged(), takeUntilDestroyed(this.destroyRef)).subscribe(res => {
       this.onChange(res);
     });
   }

@@ -1,5 +1,6 @@
 import { NgFor, DecimalPipe } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, NgZone, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, inject, NgZone, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder } from '@angular/forms';
 
 import { Radar } from '@antv/g2plot';
@@ -44,6 +45,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
 })
 export class WorkbenchComponent implements OnInit, AfterViewInit {
   @ViewChild('pageHeaderContent', { static: false }) pageHeaderContent!: TemplateRef<NzSafeAny>;
+  destroyRef = inject(DestroyRef);
   radarData = [
     { item: 'Design', user: 'a', score: 70 },
     { item: 'Design', user: 'b', score: 30 },
@@ -82,9 +84,11 @@ export class WorkbenchComponent implements OnInit, AfterViewInit {
       breadcrumb: ['首页', 'Dashboard', '工作台'],
       desc: this.pageHeaderContent
     };
-    inNextTick().subscribe(() => {
-      this.initRadar();
-    });
+    inNextTick()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        this.initRadar();
+      });
   }
 
   private initRadar(): void {

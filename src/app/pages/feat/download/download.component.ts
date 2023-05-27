@@ -1,7 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { takeUntil } from 'rxjs/operators';
 
-import { DestroyService } from '@core/services/common/destory.service';
 import { ip } from '@env/environment.prod';
 import { DownloadService } from '@services/download/download.service';
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
@@ -23,8 +23,9 @@ export class DownloadComponent implements OnInit {
     breadcrumb: ['首页', '功能', '文件下载'],
     desc: '各种文件下载'
   };
+  destroyRef = inject(DestroyRef);
 
-  constructor(private downloadService: DownloadService, private destroy$: DestroyService) {}
+  constructor(private downloadService: DownloadService) {}
 
   ngOnInit(): void {}
 
@@ -34,7 +35,7 @@ export class DownloadComponent implements OnInit {
     };
     this.downloadService
       .fileStreamDownload(downloadDto)
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(res => {
         const blob = new Blob([res], { type: 'text/plain;charset=utf-8' });
         FileSaver.saveAs(blob, '材料库导入模板.xlsx');

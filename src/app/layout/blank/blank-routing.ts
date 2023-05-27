@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
 
-import { LockLeaveGuard } from '@core/services/common/guard/lock-leave.guard';
+import { EmptyForLockComponent } from '@shared/components/empty-for-lock/empty-for-lock.component';
 
 import { BlankComponent } from './blank.component';
 
@@ -16,7 +16,7 @@ export default [
         loadComponent: () => import('../../pages/empty/empty.component').then(m => m.EmptyComponent)
       },
       {
-        canDeactivate: [LockLeaveGuard],
+        canDeactivate: [(component: EmptyForLockComponent) => !component.routeStatus.locked],
         data: { title: '空页面', key: 'empty-for-lock', shouldDetach: 'no' },
         path: 'empty-for-lock',
         loadComponent: () => import('../../shared/components/empty-for-lock/empty-for-lock.component').then(m => m.EmptyForLockComponent)

@@ -3,7 +3,6 @@ import { FormsModule } from '@angular/forms';
 import { MatIconRegistry, MatIconModule } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 
-import { DestroyService } from '@core/services/common/destory.service';
 import { IconSelComponent } from '@shared/biz-components/icon-sel/icon-sel.component';
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -27,7 +26,6 @@ const THUMBUP_ICON =
   templateUrl: './icons.component.html',
   styleUrls: ['./icons.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DestroyService],
   standalone: true,
   imports: [PageHeaderComponent, NzCardModule, NzButtonModule, NzWaveModule, NzInputModule, FormsModule, IconSelComponent, NzIconModule, MatIconModule]
 })

@@ -1,5 +1,6 @@
 import { NgFor } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, NgZone, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { Chart } from '@antv/g2';
 import { Pie, RingProgress, TinyColumn, TinyArea, Progress } from '@antv/g2plot';
@@ -51,6 +52,7 @@ interface DataItem {
   ]
 })
 export class AnalysisComponent implements OnInit, AfterViewInit {
+  destroyRef = inject(DestroyRef);
   cardPadding = { padding: '20px 24px 8px' };
   miniBarData = [497, 666, 219, 269, 274, 337, 81, 497, 666, 219, 269];
   miniAreaData = [264, 274, 284, 294, 284, 274, 264, 264, 274, 264, 264, 264, 284, 264, 254, 264, 244, 340, 264, 243, 226, 192];
@@ -290,17 +292,19 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    inNextTick().subscribe(() => {
-      this.ngZone.runOutsideAngular(() => {
-        this.initMinibar();
-        this.initMiniArea();
-        this.initProgress();
-        this.initHistogram();
-        this.initSearchArea();
-        this.initSearchAvgArea();
-        this.initRing();
-        // this.initMiniRing();
+    inNextTick()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        this.ngZone.runOutsideAngular(() => {
+          this.initMinibar();
+          this.initMiniArea();
+          this.initProgress();
+          this.initHistogram();
+          this.initSearchArea();
+          this.initSearchAvgArea();
+          this.initRing();
+          // this.initMiniRing();
+        });
       });
-    });
   }
 }

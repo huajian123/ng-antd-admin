@@ -1,6 +1,7 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { ChangeDetectorRef, Injectable } from '@angular/core';
+import { ChangeDetectorRef, DestroyRef, inject, Injectable } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BehaviorSubject } from 'rxjs';
 
 import { SearchCommonVO } from '@core/services/types';
@@ -27,6 +28,7 @@ export interface FlatNode {
 export class DeptTreeService {
   TREE_DATA$ = new BehaviorSubject<any[]>([]);
   currentSelNode: FlatNode | null = null;
+  destroyRef = inject(DestroyRef);
   private transformer = (node: TreeNode, level: number): FlatNode => ({
     expandable: !!node.children && node.children.length > 0,
     departmentName: node.departmentName,
@@ -72,8 +74,11 @@ export class DeptTreeService {
       pageSize: 0,
       pageNum: 0
     };
-    this.dataService.getDepts(params).subscribe(deptList => {
-      this.TREE_DATA$.next(fnFlatDataHasParentToTree(deptList.list));
-    });
+    this.dataService
+      .getDepts(params)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(deptList => {
+        this.TREE_DATA$.next(fnFlatDataHasParentToTree(deptList.list));
+      });
   }
 }

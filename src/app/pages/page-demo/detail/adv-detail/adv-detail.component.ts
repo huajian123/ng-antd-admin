@@ -1,6 +1,7 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, AfterViewInit, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { AntTableConfig, AntTableComponent } from '@shared/components/ant-table/ant-table.component';
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
@@ -83,6 +84,7 @@ export class AdvDetailComponent implements OnInit, AfterViewInit {
   };
   tabEnum = TabEnum;
   currentSelTab: number = this.tabEnum.Detail;
+  destroyRef = inject(DestroyRef);
 
   returnDataList: ReturnObj[] = [
     {
@@ -175,13 +177,16 @@ export class AdvDetailComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.breakpointObserver.observe(['(max-width: 770px)']).subscribe(result => {
-      if (result.matches) {
-        this.stepDirection = 'vertical';
-      } else {
-        this.stepDirection = 'horizontal';
-      }
-    });
+    this.breakpointObserver
+      .observe(['(max-width: 770px)'])
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(result => {
+        if (result.matches) {
+          this.stepDirection = 'vertical';
+        } else {
+          this.stepDirection = 'horizontal';
+        }
+      });
     this.initReturnTable();
   }
 

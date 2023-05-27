@@ -1,5 +1,6 @@
 import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
-import { Component, OnInit, ChangeDetectionStrategy, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, TemplateRef, ViewChild, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { ModalBtnStatus } from '@widget/base-modal';
@@ -24,6 +25,7 @@ export class ExModalComponent implements OnInit {
     title: '拖动Modal，树挪死，人挪活',
     breadcrumb: ['首页', '拖拽modal']
   };
+  destroyRef = inject(DestroyRef);
   isVisible = false;
   isVisibleByDir = false;
 
@@ -84,6 +86,7 @@ export class ExModalComponent implements OnInit {
         nzMaskStyle: { display: 'none' },
         nzWrapClassName: 'pointer-events-none'
       })
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(({ modalValue, status }) => {
         if (status === ModalBtnStatus.Cancel) {
           return;
