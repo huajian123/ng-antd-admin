@@ -7,7 +7,9 @@ export interface LockScreenFlag {
   beforeLockPath: string;
 }
 
-// 锁屏状态service的store
+/**
+ * 锁屏状态service的store
+ */
 @Injectable({
   providedIn: 'root'
 })

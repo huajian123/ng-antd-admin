@@ -1,9 +1,9 @@
 <!--头部版块-->
-<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+<app-page-header [pageHeaderInfo]="pageHeaderInfo" />
 
 <div class="normal-table-wrap">
   <nz-card>
-    <app-water-mark></app-water-mark>
+    <app-water-mark />
     <form class="form-wrap" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
       <nz-form-item>
         <nz-form-label nzFor="title" nzRequired [nzSm]="6" [nzXs]="24">标题</nz-form-label>

@@ -63,7 +63,6 @@ export interface CascaderOption {
 /*
  * 菜单
  * */
-
 export interface Menu {
   id: number | string;
   fatherId: number | string;

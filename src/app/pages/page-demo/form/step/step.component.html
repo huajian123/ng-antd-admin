@@ -1,10 +1,10 @@
 <!--头部版块-->
-<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+<app-page-header [pageHeaderInfo]="pageHeaderInfo" />
 
 <div class="normal-table-wrap">
   <nz-card>
     <section class="page-wrap" [class.p-0]="stepDirection === 'vertical'">
-      <app-water-mark></app-water-mark>
+      <app-water-mark />
       <section class="step-wrap">
         <nz-steps [nzCurrent]="currentStep - 1" [nzDirection]="stepDirection">
           <nz-step nzTitle="填写转账信息"></nz-step>

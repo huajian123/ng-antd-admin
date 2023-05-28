@@ -3,7 +3,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 import { Menu } from '../../types';
 
-// 自动分割菜单时，左侧菜单的store
+/**
+ * 自动分割菜单时，左侧菜单的store
+ */
 @Injectable({
   providedIn: 'root'
 })

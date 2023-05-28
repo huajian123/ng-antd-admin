@@ -1,5 +1,5 @@
 <nz-card>
-  <app-water-mark></app-water-mark>
+  <app-water-mark />
   <div nz-row>
     <div nz-col nzFlex="94px">所属类目:</div>
     <div class="tag-wrap" nz-col nzFlex="1" [ngStyle]="{ maxHeight: expanded ? '58px' : '33px' }">
@@ -46,7 +46,7 @@
   </div>
 </nz-card>
 <nz-card class="m-t-20">
-  <app-water-mark></app-water-mark>
+  <app-water-mark />
   <div nz-row [nzGutter]="[16, 16]">
     <div *ngFor="let item of 8 | numberLoop" nz-col [nzLg]="6" [nzMd]="12" [nzSm]="24" [nzXl]="6" [nzXs]="24" [nzXXl]="6">
       <nz-card nzHoverable [nzActions]="[op1, op2, op3, op4]">

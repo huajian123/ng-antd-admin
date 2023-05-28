@@ -1,5 +1,5 @@
 <!--头部版块-->
-<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+<app-page-header [pageHeaderInfo]="pageHeaderInfo" />
 
 <div class="normal-table-wrap">
   <nz-card [nzBodyStyle]="{ 'padding-bottom': 0 }" class="m-b-10">

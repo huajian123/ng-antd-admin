@@ -30,7 +30,7 @@
       </div>
     </div>
 
-    <nz-divider></nz-divider>
+    <nz-divider />
 
     <div class="m-b-24">
       <h3 class="title">导航模式</h3>
@@ -46,68 +46,68 @@
     <nz-list [nzSplit]="false">
       <nz-list-item [nzActions]="[fixedTabAction]">固定页签</nz-list-item>
       <ng-template #fixedTabAction>
-        <nz-switch nzSize="small" [ngModel]="_themesOptions.fixedTab" [nzDisabled]="!_themesOptions.fixedHead" (ngModelChange)="changeFixed($event, 'fixedTab')"></nz-switch>
+        <nz-switch nzSize="small" [ngModel]="_themesOptions.fixedTab" [nzDisabled]="!_themesOptions.fixedHead" (ngModelChange)="changeFixed($event, 'fixedTab')" />
       </ng-template>
     </nz-list>
     <nz-list [nzSplit]="false">
       <nz-list-item [nzActions]="[fixedHeadAction]">固定头部</nz-list-item>
       <ng-template #fixedHeadAction>
-        <nz-switch nzSize="small" [ngModel]="_themesOptions.fixedHead" (ngModelChange)="changeFixed($event, 'fixedHead')"></nz-switch>
+        <nz-switch nzSize="small" [ngModel]="_themesOptions.fixedHead" (ngModelChange)="changeFixed($event, 'fixedHead')" />
       </ng-template>
     </nz-list>
 
     <nz-list [nzSplit]="false">
       <nz-list-item [nzActions]="[fixedLeftNavAction]">固定侧边栏</nz-list-item>
       <ng-template #fixedLeftNavAction>
-        <nz-switch nzSize="small" [ngModel]="_themesOptions.fixedLeftNav" (ngModelChange)="changeFixed($event, 'fixedLeftNav')"></nz-switch>
+        <nz-switch nzSize="small" [ngModel]="_themesOptions.fixedLeftNav" (ngModelChange)="changeFixed($event, 'fixedLeftNav')" />
       </ng-template>
     </nz-list>
 
     <nz-list [nzSplit]="false">
       <nz-list-item [nzActions]="[isShowTabTpl]">多页签</nz-list-item>
       <ng-template #isShowTabTpl>
-        <nz-switch nzSize="small" [ngModel]="_themesOptions.isShowTab" (ngModelChange)="changeFixed($event, 'isShowTab')"></nz-switch>
+        <nz-switch nzSize="small" [ngModel]="_themesOptions.isShowTab" (ngModelChange)="changeFixed($event, 'isShowTab')" />
       </ng-template>
     </nz-list>
 
     <nz-list [nzSplit]="false">
       <nz-list-item [nzActions]="[splitNavAction]">自动分割菜单</nz-list-item>
       <ng-template #splitNavAction>
-        <nz-switch nzSize="small" [ngModel]="_themesOptions.splitNav" (ngModelChange)="changeFixed($event, 'splitNav')"></nz-switch>
+        <nz-switch nzSize="small" [ngModel]="_themesOptions.splitNav" (ngModelChange)="changeFixed($event, 'splitNav')" />
       </ng-template>
     </nz-list>
 
-    <nz-divider></nz-divider>
+    <nz-divider />
 
     <div class="m-b-24">
       <h3 class="title">内容区域</h3>
       <nz-list [nzSplit]="false">
         <nz-list-item [nzActions]="[topAreaAction]">顶栏</nz-list-item>
         <ng-template #topAreaAction>
-          <nz-switch nzSize="small" [ngModel]="_themesOptions.hasTopArea" (ngModelChange)="changeFixed($event, 'hasTopArea')"></nz-switch>
+          <nz-switch nzSize="small" [ngModel]="_themesOptions.hasTopArea" (ngModelChange)="changeFixed($event, 'hasTopArea')" />
         </ng-template>
       </nz-list>
       <nz-list [nzSplit]="false">
         <nz-list-item [nzActions]="[footerAreaAction]">页脚</nz-list-item>
         <ng-template #footerAreaAction>
-          <nz-switch nzSize="small" [ngModel]="_themesOptions.hasFooterArea" (ngModelChange)="changeFixed($event, 'hasFooterArea')"></nz-switch>
+          <nz-switch nzSize="small" [ngModel]="_themesOptions.hasFooterArea" (ngModelChange)="changeFixed($event, 'hasFooterArea')" />
         </ng-template>
       </nz-list>
       <nz-list [nzSplit]="false">
         <nz-list-item [nzActions]="[navAreaAction]">菜单</nz-list-item>
         <ng-template #navAreaAction>
-          <nz-switch nzSize="small" [ngModel]="_themesOptions.hasNavArea" (ngModelChange)="changeFixed($event, 'hasNavArea')"></nz-switch>
+          <nz-switch nzSize="small" [ngModel]="_themesOptions.hasNavArea" (ngModelChange)="changeFixed($event, 'hasNavArea')" />
         </ng-template>
       </nz-list>
       <nz-list [nzSplit]="false">
         <nz-list-item [nzActions]="[navHeadAreaAction]">菜单头</nz-list-item>
         <ng-template #navHeadAreaAction>
-          <nz-switch nzSize="small" [ngModel]="_themesOptions.hasNavHeadArea" (ngModelChange)="changeFixed($event, 'hasNavHeadArea')"></nz-switch>
+          <nz-switch nzSize="small" [ngModel]="_themesOptions.hasNavHeadArea" (ngModelChange)="changeFixed($event, 'hasNavHeadArea')" />
         </ng-template>
       </nz-list>
     </div>
 
-    <nz-divider></nz-divider>
+    <nz-divider />
 
     <div class="m-b-24">
       <h3 class="title">其他设置</h3>
@@ -120,13 +120,13 @@
       <nz-list [nzSplit]="false">
         <nz-list-item [nzActions]="[otherAction]">色弱模式</nz-list-item>
         <ng-template #otherAction>
-          <nz-switch nzSize="small" [ngModel]="_themesOptions.colorWeak" (ngModelChange)="changeSpecialTheme($event, 'color-weak')"></nz-switch>
+          <nz-switch nzSize="small" [ngModel]="_themesOptions.colorWeak" (ngModelChange)="changeSpecialTheme($event, 'color-weak')" />
         </ng-template>
       </nz-list>
       <nz-list [nzSplit]="false">
         <nz-list-item [nzActions]="[greyAction]">灰色模式</nz-list-item>
         <ng-template #greyAction>
-          <nz-switch nzSize="small" [ngModel]="_themesOptions.greyTheme" (ngModelChange)="changeSpecialTheme($event, 'grey-theme')"></nz-switch>
+          <nz-switch nzSize="small" [ngModel]="_themesOptions.greyTheme" (ngModelChange)="changeSpecialTheme($event, 'grey-theme')" />
         </ng-template>
       </nz-list>
     </div>

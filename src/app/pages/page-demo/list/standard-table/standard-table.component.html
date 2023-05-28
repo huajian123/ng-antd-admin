@@ -1,9 +1,9 @@
 <!--头部版块-->
-<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+<app-page-header [pageHeaderInfo]="pageHeaderInfo" />
 
 <div class="normal-table-wrap">
   <nz-card>
-    <app-water-mark></app-water-mark>
+    <app-water-mark />
     <div nz-row>
       <div class="center" nz-col [nzLg]="8" [nzMd]="8" [nzSm]="8" [nzXl]="8" [nzXs]="24" [nzXXl]="8">
         <nz-statistic [nzTitle]="'我的待办'" [nzValue]="'8个任务'"></nz-statistic>
@@ -21,7 +21,7 @@
     </div>
   </nz-card>
   <nz-card class="m-t-20" nzTitle="基本列表" [nzExtra]="extraTpl">
-    <app-water-mark></app-water-mark>
+    <app-water-mark />
     <ng-template #extraTpl>
       <div>
         <nz-radio-group class="m-r-8 m-b-8">

@@ -1,4 +1,4 @@
-<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+<app-page-header [pageHeaderInfo]="pageHeaderInfo" />
 <div class="normal-table-wrap">
   <nz-card nzTitle="简单实例，服务器返回的文件地址统一，演示功能不会保存上传的文件">
     <nz-upload [nzAction]="uploadUrl" [nzFileList]="fileList" [nzLimit]="1" [nzName]="'document'" [nzShowButton]="true" [nzSize]="1024 * 5" (nzChange)="handleChange($event)">

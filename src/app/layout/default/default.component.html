@@ -1,17 +1,17 @@
 <app-def-layout-content>
   <!--sider模式sider-->
   <ng-container sider>
-    <app-side-nav *ngIf="isOverMode || (themeOptions$ | async)!.mode === 'side'"></app-side-nav>
+    <app-side-nav *ngIf="isOverMode || (themeOptions$ | async)!.mode === 'side'" />
   </ng-container>
 
   <!--sider模式header-->
   <ng-container sider-header>
-    <ng-container *ngTemplateOutlet="headerTpl"></ng-container>
+    <ng-container *ngTemplateOutlet="headerTpl" />
   </ng-container>
 
   <!--top模式header-->
   <ng-container top-header>
-    <ng-container *ngTemplateOutlet="headerTpl"></ng-container>
+    <ng-container *ngTemplateOutlet="headerTpl" />
   </ng-container>
 
   <ng-template #headerTpl>
@@ -26,12 +26,12 @@
             <span class="sp-18 m-r-8">Ant Design</span>
           </ng-container>
           <div class="flex-1">
-            <app-nav-bar></app-nav-bar>
+            <app-nav-bar />
           </div>
         </div>
       </ng-template>
       <ng-container right>
-        <app-layout-head-right-menu></app-layout-head-right-menu>
+        <app-layout-head-right-menu />
       </ng-container>
     </app-tool-bar>
   </ng-template>
@@ -48,19 +48,19 @@
           <img class="m-l-10" alt="" src="assets/imgs/logo.svg" style="max-height: 32px; max-width: 54px" />
           <span class="sp-18 m-r-25">Ant Design Pro</span>
           <div class="flex-1">
-            <app-nav-bar *ngIf="(themeOptions$ | async)!.splitNav" [isMixiHead]="true"></app-nav-bar>
+            <app-nav-bar *ngIf="(themeOptions$ | async)!.splitNav" [isMixiHead]="true" />
           </div>
         </div>
       </ng-container>
       <ng-container right>
-        <app-layout-head-right-menu></app-layout-head-right-menu>
+        <app-layout-head-right-menu />
       </ng-container>
     </app-tool-bar>
   </ng-container>
 
   <!--混合模式sider-->
   <ng-container mixsider>
-    <div class="mix-sider-height" style="overflow: hidden auto"><app-nav-bar [isMixiLeft]="(themeOptions$ | async)!.splitNav"></app-nav-bar></div>
+    <div class="mix-sider-height" style="overflow: hidden auto"><app-nav-bar [isMixiLeft]="(themeOptions$ | async)!.splitNav" /></div>
   </ng-container>
 
   <ng-container content>
@@ -72,4 +72,4 @@
     </div>
   </ng-container>
 </app-def-layout-content>
-<app-nav-drawer #navDrawer></app-nav-drawer>
+<app-nav-drawer #navDrawer />
