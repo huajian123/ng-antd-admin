@@ -4,7 +4,7 @@ import zh from '@angular/common/locales/zh';
 import { enableProdMode, APP_INITIALIZER, importProvidersFrom } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideRouter, RouteReuseStrategy, withHashLocation, withInMemoryScrolling, withPreloading, withRouterConfig } from '@angular/router';
+import { provideRouter, RouteReuseStrategy, withComponentInputBinding, withHashLocation, withInMemoryScrolling, withPreloading, withRouterConfig } from '@angular/router';
 
 import { MenuFoldOutline, MenuUnfoldOutline, FormOutline, DashboardOutline } from '@ant-design/icons-angular/icons';
 import { appRoutes } from '@app/app-routing';
@@ -112,7 +112,8 @@ bootstrapApplication(AppComponent, {
       withInMemoryScrolling({
         scrollPositionRestoration: 'top'
       }),
-      withHashLocation()
+      withHashLocation(),
+      withComponentInputBinding() // 开启路由参数绑定到组件的输入属性,ng16新增特性
     ),
     importProvidersFrom(NzMessageServiceModule, NzDrawerServiceModule, NzModalModule),
     ...interceptors,

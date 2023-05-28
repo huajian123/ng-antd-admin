@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, DestroyRef, inject, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, DestroyRef, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -23,7 +23,7 @@ export class SearchTableDetailComponent implements OnInit, OnDestroy {
     breadcrumb: ['首页', '列表页', '查询表格', '详情']
   };
   validateForm!: FormGroup;
-  name = '';
+  @Input({ required: true }) name!: string; // 从路由中获取的参数，ng16支持的新特性
   backUrl = '/default/page-demo/list/search-table';
   destroyRef = inject(DestroyRef);
 
@@ -47,10 +47,8 @@ export class SearchTableDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initForm();
-    this.routeParam.params.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => {
-      this.name = res['name'];
-      this.validateForm.get('userName')?.setValue(this.name);
-    });
+    console.log(this.name);
+    this.validateForm.get('userName')?.setValue(this.name);
   }
 
   ngOnDestroy(): void {

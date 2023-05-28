@@ -1,5 +1,5 @@
 import { NgFor, NgIf, NgTemplateOutlet, NgStyle } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -52,9 +52,9 @@ export class SetRoleComponent implements OnInit {
   };
   authCodeArr: string[] = [];
   permissionList: Array<Menu & { isOpen?: boolean; checked?: boolean }> = [];
-  id!: number;
   roleName!: string;
   destroyRef = inject(DestroyRef);
+  @Input({ required: true }) id!: string; // 从路由中获取的角色id，ng16支持的新特性
 
   constructor(
     private dataService: RoleService,
@@ -92,7 +92,7 @@ export class SetRoleComponent implements OnInit {
 
   getRoleName(): void {
     this.dataService
-      .getRolesDetail(this.id)
+      .getRolesDetail(+this.id)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(({ roleName }) => {
         this.pageHeaderInfo = { ...this.pageHeaderInfo, ...{ desc: `当前角色：${roleName}` } };
@@ -107,10 +107,10 @@ export class SetRoleComponent implements OnInit {
   submit(): void {
     const temp = [...this.permissionList];
     const flatArray = fnFlattenTreeDataByDataList(temp);
-    const seledAuthArray: number[] = [];
+    const seledAuthArray: string[] = [];
     flatArray.forEach(item => {
       if (item['checked']) {
-        seledAuthArray.push(+item.id);
+        seledAuthArray.push(`${item.id}`);
       }
     });
     const param: PutPermissionParam = {
@@ -130,10 +130,7 @@ export class SetRoleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.routeInfo.queryParams.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => {
-      this.id = res['id'];
-      this.getRoleName();
-      this.initPermission();
-    });
+    this.getRoleName();
+    this.initPermission();
   }
 }
