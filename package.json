@@ -10,7 +10,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "lint:style": "npx stylelint 'src/**/*.less'"
+    "lint:style": "npx stylelint \"src/**/*.less\" --fix"
   },
   "private": true,
   "dependencies": {
