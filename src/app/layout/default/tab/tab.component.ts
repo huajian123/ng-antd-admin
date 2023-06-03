@@ -34,9 +34,7 @@ export class TabComponent implements OnInit {
   isNightTheme$ = this.themesService.getIsNightTheme();
   leftMenuArray$: Observable<Menu[]> = this.splitNavStoreService.getSplitLeftNavArrayStore();
   isOverMode$ = this.themesService.getIsOverMode();
-  isOverMode = false;
   isCollapsed$ = this.themesService.getIsCollapsed();
-  isCollapsed = false;
   destroyRef = inject(DestroyRef);
 
   constructor(
@@ -50,7 +48,7 @@ export class TabComponent implements OnInit {
     this.router.events
       .pipe(filter((event: NzSafeAny) => event instanceof NavigationEnd))
       .pipe(takeUntilDestroyed())
-      .subscribe((event: NzSafeAny) => {
+      .subscribe(() => {
         this.cdr.markForCheck();
       });
   }

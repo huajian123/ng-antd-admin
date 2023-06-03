@@ -31,13 +31,15 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 export class NavBarComponent implements OnInit {
   @Input() isMixiHead = false; // 是混合模式顶部导航
   @Input() isMixiLeft = false;
-  routerPath = this.router.url;
-  themesMode: ThemeMode['key'] = 'side';
+
   themesOptions$ = this.themesService.getThemesMode();
   isNightTheme$ = this.themesService.getIsNightTheme();
   isCollapsed$ = this.themesService.getIsCollapsed();
   isOverMode$ = this.themesService.getIsOverMode();
   leftMenuArray$ = this.splitNavStoreService.getSplitLeftNavArrayStore();
+
+  routerPath = this.router.url;
+  themesMode: ThemeMode['key'] = 'side';
   isOverMode = false;
   isCollapsed = false;
   isMixiMode = false;
@@ -47,6 +49,7 @@ export class NavBarComponent implements OnInit {
   authCodeArray: string[] = [];
   subTheme$: Observable<any>;
   destroyRef = inject(DestroyRef);
+
   constructor(
     private router: Router,
     private userInfoService: UserInfoService,
@@ -92,6 +95,7 @@ export class NavBarComponent implements OnInit {
           });
           // @ts-ignore
           this.routerPath = this.activatedRoute.snapshot['_routerState'].url;
+          // 做一个copyMenus来记录当前menu状态，因为顶部模式时是不展示子menu的，然而主题由顶部模式切换成侧边栏模式，要把当前顶部模式中菜单的状态体现于侧边栏模式的菜单中
           this.clickMenuItem(this.menus);
           this.clickMenuItem(this.copyMenus);
           // 是折叠的菜单并且不是over菜单,解决折叠左侧菜单时，切换tab会有悬浮框菜单的bug
@@ -137,6 +141,7 @@ export class NavBarComponent implements OnInit {
           isNewTabDetailPage
         );
         this.tabService.findIndex(this.routerPath);
+        // angular16以后可以在路由中直接设置title了
         this.titleServe.setTitle(`${routeData['title']} - Ant Design`);
         // 混合模式时，切换tab，让左侧菜单也相应变化
         this.setMixModeLeftMenu();

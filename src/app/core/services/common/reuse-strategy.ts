@@ -1,12 +1,23 @@
 import { DOCUMENT } from '@angular/common';
 import { DestroyRef, inject, Inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, ActivatedRouteSnapshot, DetachedRouteHandle, RouteReuseStrategy } from '@angular/router';
+import { ActivatedRouteSnapshot, DetachedRouteHandle, RouteReuseStrategy } from '@angular/router';
 
 import { ScrollService } from '@core/services/common/scroll.service';
 import { ThemeService } from '@store/common-store/theme.service';
 import { fnGetReuseStrategyKeyFn, getDeepReuseStrategyKeyFn } from '@utils/tools';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
+export type ReuseHookTypes = '_onReuseInit' | '_onReuseDestroy';
+
+export interface ReuseComponentInstance {
+  _onReuseInit: () => void;
+  _onReuseDestroy: () => void;
+}
+
+export interface ReuseComponentRef {
+  instance: ReuseComponentInstance;
+}
 
 /*路由复用*/
 // 参考https://zhuanlan.zhihu.com/p/29823560
@@ -25,7 +36,6 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
   // 是否有多页签，没有多页签则不做路由缓存
   isShowTab$ = inject(ThemeService).getThemesMode();
 
-  static #activatedRoute: ActivatedRoute;
   public static deleteRouteSnapshot(key: string): void {
     if (SimpleReuseStrategy.handlers[key]) {
       if (SimpleReuseStrategy.handlers[key].componentRef) {
@@ -47,7 +57,7 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
     });
   }
 
-  constructor(@Inject(DOCUMENT) private doc: Document, private scrollService: ScrollService, private activatedRoute: ActivatedRoute) {}
+  constructor(@Inject(DOCUMENT) private doc: Document, private scrollService: ScrollService) {}
 
   // 是否允许复用路由
   shouldDetach(route: ActivatedRouteSnapshot): boolean {
@@ -82,8 +92,8 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
       scrollContain.forEach((item: string) => {
         const el = this.doc.querySelector(item)!;
         if (el) {
-          const postion = this.scrollService.getScrollPosition(el);
-          innerScrollContainer.push({ [item]: postion });
+          const position = this.scrollService.getScrollPosition(el);
+          innerScrollContainer.push({ [item]: position });
         }
       });
       innerScrollContainer.push({ window: this.scrollService.getScrollPosition() });
@@ -147,15 +157,4 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
     }
     (fn as () => void).call(compThis);
   }
-}
-
-export type ReuseHookTypes = '_onReuseInit' | '_onReuseDestroy';
-
-export interface ReuseComponentInstance {
-  _onReuseInit: () => void;
-  _onReuseDestroy: () => void;
-}
-
-export interface ReuseComponentRef {
-  instance: ReuseComponentInstance;
 }
