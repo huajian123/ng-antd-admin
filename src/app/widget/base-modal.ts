@@ -1,9 +1,11 @@
 import { DragDrop, DragRef } from '@angular/cdk/drag-drop';
-import { DestroyRef, inject, Injectable, Injector, Renderer2, RendererFactory2, TemplateRef, Type } from '@angular/core';
+import { ComponentRef, DestroyRef, Inject, inject, Injectable, Injector, Renderer2, RendererFactory2, TemplateRef, Type } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Observable, of } from 'rxjs';
 import { first, tap } from 'rxjs/operators';
 
+import { GLOBAL_TPL_MODAL_ACTION_TOKEN } from '@app/tpl/global-modal-btn-tpl/global-modal-btn-tpl-token';
+import { GlobalModalBtnTplComponentToken } from '@app/tpl/global-modal-btn-tpl/global-modal-btn-tpl.component';
 import { fnGetUUID } from '@utils/tools';
 import * as _ from 'lodash';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -37,13 +39,22 @@ export class ModalWrapService {
   private renderer: Renderer2;
   destroyRef = inject(DestroyRef);
 
-  constructor(private baseInjector: Injector, public dragDrop: DragDrop, rendererFactory: RendererFactory2) {
+  constructor(
+    private baseInjector: Injector,
+    public dragDrop: DragDrop,
+    rendererFactory: RendererFactory2,
+    @Inject(GLOBAL_TPL_MODAL_ACTION_TOKEN) private btnComponentRef: ComponentRef<GlobalModalBtnTplComponentToken>
+  ) {
     this.bsModalService = this.baseInjector.get(NzModalService);
     this.renderer = rendererFactory.createRenderer(null, null);
+    this.btnTpl = this.btnComponentRef.instance.componentTpl;
+    this.btnComponentRef.instance.togleFullStatusEmitter.pipe(takeUntilDestroyed()).subscribe(fullStatus => {
+      this.fullScreenIconClick(fullStatus);
+    });
   }
 
-  fullScreenIconClick(): void {
-    this.fullScreenFlag = !this.fullScreenFlag;
+  fullScreenIconClick(fullStatus: boolean): void {
+    this.fullScreenFlag = fullStatus;
     this.bsModalService.openModals.forEach(modal => {
       if (this.fullScreenFlag) {
         this.renderer.addClass(modal.containerInstance['host'].nativeElement, 'fullscreen-modal');
@@ -51,10 +62,6 @@ export class ModalWrapService {
         this.renderer.removeClass(modal.containerInstance['host'].nativeElement, 'fullscreen-modal');
       }
     });
-  }
-
-  setTemplate(btnTpl: TemplateRef<any>): void {
-    this.btnTpl = btnTpl;
   }
 
   protected getRandomCls(): string {
@@ -149,7 +156,7 @@ export class ModalWrapService {
     const defaultOptions: ModalOptions = {
       nzTitle: '',
       nzContent: component,
-      nzCloseIcon: this.btnTpl,
+      nzCloseIcon: modalOptions.nzCloseIcon || this.btnTpl,
       nzMaskClosable: false,
       nzFooter: [
         {

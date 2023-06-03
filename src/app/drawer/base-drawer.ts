@@ -1,8 +1,10 @@
-import { DestroyRef, inject, Injectable, Injector, TemplateRef, Type } from '@angular/core';
+import { ComponentRef, DestroyRef, Inject, inject, Injectable, Injector, TemplateRef, Type } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Observable, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
+import { GLOBAL_DRAWER_FOOT_TPL_TOKEN } from '@app/tpl/global-drawer-foot-tpl/global-drawer-foot-tpl-token';
+import { GlobalDrawerFootTplComponentToken } from '@app/tpl/global-drawer-foot-tpl/global-drawer-foot-tpl.component';
 import { ModalBtnStatus } from '@widget/base-modal';
 import * as _ from 'lodash';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -15,8 +17,11 @@ export class DrawerWrapService {
   drawerRef!: NzDrawerRef;
   destroyRef = inject(DestroyRef);
 
-  constructor(private baseInjector: Injector) {
+  constructor(private baseInjector: Injector, @Inject(GLOBAL_DRAWER_FOOT_TPL_TOKEN) private btnComponentRef: ComponentRef<GlobalDrawerFootTplComponentToken>) {
     this.bsDrawerService = this.baseInjector.get(NzDrawerService);
+    this.btnTpl = this.btnComponentRef.instance.componentTpl;
+    this.btnComponentRef.instance.sureEmitter.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => this.sure());
+    this.btnComponentRef.instance.cancelEmitter.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => this.cancel());
   }
 
   show(component: Type<NzSafeAny>, drawerOptions: NzDrawerOptions = {}, params: object = {}): Observable<NzSafeAny> {
@@ -36,13 +41,9 @@ export class DrawerWrapService {
       nzContentParams: {
         params
       },
-      nzFooter: this.btnTpl
+      nzFooter: drawerOptions.nzFooter || this.btnTpl
     };
     return _.merge(defaultOptions, drawerOptions);
-  }
-
-  setTemplate(btnTpl: TemplateRef<any>): void {
-    this.btnTpl = btnTpl;
   }
 
   sure(): void {
