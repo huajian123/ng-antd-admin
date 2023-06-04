@@ -5,6 +5,9 @@ import { ApplicationRef, ComponentRef, createComponent, EnvironmentInjector, inj
 import { GlobalDrawerFootTplComponent } from '@app/tpl/global-drawer-foot-tpl/global-drawer-foot-tpl.component';
 import { GlobalModalBtnTplComponent } from '@app/tpl/global-modal-btn-tpl/global-modal-btn-tpl.component';
 
+/**
+ * 全局抽屉的footer模板，也就是确定，取消按钮啦
+ */
 export const GLOBAL_DRAWER_FOOT_TPL_TOKEN = new InjectionToken<ComponentRef<GlobalDrawerFootTplComponent>>('drawer action btn token', {
   providedIn: 'root',
   factory: () => {

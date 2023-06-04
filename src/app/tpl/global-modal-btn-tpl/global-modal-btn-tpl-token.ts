@@ -4,6 +4,9 @@ import { ApplicationRef, ComponentRef, createComponent, EnvironmentInjector, inj
 
 import { GlobalModalBtnTplComponent } from '@app/tpl/global-modal-btn-tpl/global-modal-btn-tpl.component';
 
+/**
+ * 全局对话框右上角，拓展最大化功能模板
+ */
 export const GLOBAL_TPL_MODAL_ACTION_TOKEN = new InjectionToken<ComponentRef<GlobalModalBtnTplComponent>>('modal action btn token', {
   providedIn: 'root',
   factory: () => {

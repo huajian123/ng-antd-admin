@@ -6,6 +6,7 @@ import { first, tap } from 'rxjs/operators';
 
 import { GLOBAL_TPL_MODAL_ACTION_TOKEN } from '@app/tpl/global-modal-btn-tpl/global-modal-btn-tpl-token';
 import { GlobalModalBtnTplComponentToken } from '@app/tpl/global-modal-btn-tpl/global-modal-btn-tpl.component';
+import { ModalFullStatusStoreService } from '@store/common-store/modal-full-status-store.service';
 import { fnGetUUID } from '@utils/tools';
 import * as _ from 'lodash';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -35,12 +36,12 @@ export abstract class BasicConfirmModalComponent {
 export class ModalWrapService {
   protected bsModalService: NzModalService;
   private btnTpl!: TemplateRef<any>;
-  fullScreenFlag = false;
   private renderer: Renderer2;
   destroyRef = inject(DestroyRef);
 
   constructor(
     private baseInjector: Injector,
+    private modalFullStatusStoreService: ModalFullStatusStoreService,
     public dragDrop: DragDrop,
     rendererFactory: RendererFactory2,
     @Inject(GLOBAL_TPL_MODAL_ACTION_TOKEN) private btnComponentRef: ComponentRef<GlobalModalBtnTplComponentToken>
@@ -48,15 +49,17 @@ export class ModalWrapService {
     this.bsModalService = this.baseInjector.get(NzModalService);
     this.renderer = rendererFactory.createRenderer(null, null);
     this.btnTpl = this.btnComponentRef.instance.componentTpl;
-    this.btnComponentRef.instance.togleFullStatusEmitter.pipe(takeUntilDestroyed()).subscribe(fullStatus => {
-      this.fullScreenIconClick(fullStatus);
-    });
+    this.modalFullStatusStoreService
+      .getModalFullStatusStore()
+      .pipe(takeUntilDestroyed())
+      .subscribe(fullStatus => {
+        this.fullScreenIconClick(fullStatus);
+      });
   }
 
   fullScreenIconClick(fullStatus: boolean): void {
-    this.fullScreenFlag = fullStatus;
     this.bsModalService.openModals.forEach(modal => {
-      if (this.fullScreenFlag) {
+      if (fullStatus) {
         this.renderer.addClass(modal.containerInstance['host'].nativeElement, 'fullscreen-modal');
       } else {
         this.renderer.removeClass(modal.containerInstance['host'].nativeElement, 'fullscreen-modal');
@@ -69,6 +72,7 @@ export class ModalWrapService {
   }
 
   private cancelCallback(modalButtonOptions: ModalButtonOptions): void {
+    this.modalFullStatusStoreService.setModalFullStatusStore(false);
     return modalButtonOptions['modalRef'].destroy({ status: ModalBtnStatus.Cancel, value: null });
   }
 
@@ -77,6 +81,7 @@ export class ModalWrapService {
       .getCurrentValue()
       .pipe(
         tap(modalValue => {
+          this.modalFullStatusStoreService.setModalFullStatusStore(false);
           if (!modalValue) {
             return of(false);
           } else {
@@ -201,7 +206,7 @@ export class ModalWrapService {
       tap(() => {
         drag!.dispose();
         drag = null;
-        this.fullScreenFlag = false;
+        this.modalFullStatusStoreService.setModalFullStatusStore(false);
       })
     );
   }
