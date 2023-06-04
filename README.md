@@ -21,8 +21,9 @@
 ## 文档
 
 有关文档与示例，请访问 [doc](http://1.117.181.242:8081/)
-
-
+<br>
+<br>
+angular这1年来的更新，比以往几年来更新都多，api有不少写法不一致，所以未及时更新schematic，现在single只是开发者预览版，为了保证生产，我在ng16版本也没有使用，我想等api写法稳定后再更新schematic，如果你想用我提供的schematic，目前只能适配ng15版本的，采用module而不是独立组件的版本。
 
 # 项目介绍
 1.如果您用我的项目进行学习或者参考，请先确定您使用的是angular哪个版本，因为angular15后写法有部分不一样，所以我的建议是，您正在使用angular什么版本，则下载对应版本的ng-ant-admin,最新版本直接从master分支下载即可，历史版本在这个链接进行下载[这里](https://github.com/huajian123/ng-ant-admin/releases)。<br>
