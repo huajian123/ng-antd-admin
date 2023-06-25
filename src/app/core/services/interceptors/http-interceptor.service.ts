@@ -45,9 +45,12 @@ export class HttpInterceptorService implements HttpInterceptor {
     if (status >= 500) {
       errMsg = `服务器发生错误，状态码为${status}`;
     }
-    return throwError({
-      code: status,
-      message: errMsg
+
+    return throwError(() => {
+      return {
+        code: status,
+        message: errMsg
+      };
     });
   }
 }

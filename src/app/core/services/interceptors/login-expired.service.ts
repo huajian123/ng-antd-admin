@@ -100,18 +100,18 @@ export class LoginExpiredService implements HttpInterceptor {
               this.http
                 .request(req)
                 .pipe(takeUntilDestroyed(this.destroyRef))
-                .subscribe(
-                  (data: NzSafeAny) => {
+                .subscribe({
+                  next: (data: NzSafeAny) => {
                     this.refresher = null;
                     observer.next(data);
                   },
-                  error => {
+                  error: () => {
                     // 如果先用admin登录系统，token超时弹登录框，此时登录的却是normal账号，对目标页面没有权限，则返回登录页
                     // 这里靠后端判断新的token没有权限，请求报错403
                     this.message.error('您没有权限登录该模块');
                     this.loginOut();
                   }
-                );
+                });
             });
         }, 100);
       }).pipe(
