@@ -127,18 +127,20 @@ export class RoleManageComponent implements OnInit {
   add(): void {
     this.modalService
       .show({ nzTitle: '新增' })
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(
-        res => {
-          if (!res || res.status === ModalBtnStatus.Cancel) {
-            return;
-          }
-          const param = { ...res.modalValue };
-          this.tableLoading(true);
-          this.addEditData(param, 'addRoles');
-        },
-        error => this.tableLoading(false)
-      );
+      .pipe(
+        finalize(() => {
+          this.tableLoading(false);
+        }),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe(res => {
+        if (!res || res.status === ModalBtnStatus.Cancel) {
+          return;
+        }
+        const param = { ...res.modalValue };
+        this.tableLoading(true);
+        this.addEditData(param, 'addRoles');
+      });
   }
 
   reloadTable(): void {
@@ -154,18 +156,20 @@ export class RoleManageComponent implements OnInit {
       .subscribe(res => {
         this.modalService
           .show({ nzTitle: '编辑' }, res)
-          .pipe(takeUntilDestroyed(this.destroyRef))
-          .subscribe(
-            ({ modalValue, status }) => {
-              if (status === ModalBtnStatus.Cancel) {
-                return;
-              }
-              modalValue.id = id;
-              this.tableLoading(true);
-              this.addEditData(modalValue, 'editRoles');
-            },
-            error => this.tableLoading(false)
-          );
+          .pipe(
+            finalize(() => {
+              this.tableLoading(false);
+            }),
+            takeUntilDestroyed(this.destroyRef)
+          )
+          .subscribe(({ modalValue, status }) => {
+            if (status === ModalBtnStatus.Cancel) {
+              return;
+            }
+            modalValue.id = id;
+            this.tableLoading(true);
+            this.addEditData(modalValue, 'editRoles');
+          });
       });
   }
 
@@ -186,16 +190,18 @@ export class RoleManageComponent implements OnInit {
         this.tableLoading(true);
         this.dataService
           .delRoles(ids)
-          .pipe(takeUntilDestroyed(this.destroyRef))
-          .subscribe(
-            () => {
-              if (this.dataList.length === 1) {
-                this.tableConfig.pageIndex--;
-              }
-              this.getDataList();
-            },
-            error => this.tableLoading(false)
-          );
+          .pipe(
+            finalize(() => {
+              this.tableLoading(false);
+            }),
+            takeUntilDestroyed(this.destroyRef)
+          )
+          .subscribe(() => {
+            if (this.dataList.length === 1) {
+              this.tableConfig.pageIndex--;
+            }
+            this.getDataList();
+          });
       }
     });
   }

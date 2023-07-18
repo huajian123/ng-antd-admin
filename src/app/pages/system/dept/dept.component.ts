@@ -137,19 +137,21 @@ export class DeptComponent implements OnInit {
   add(fatherId: number): void {
     this.deptModalService
       .show({ nzTitle: '新增' })
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(
-        res => {
-          if (!res || res.status === ModalBtnStatus.Cancel) {
-            return;
-          }
-          const param = { ...res.modalValue };
-          param.fatherId = fatherId;
-          this.tableLoading(true);
-          this.addEditData(param, 'addDepts');
-        },
-        error => this.tableLoading(false)
-      );
+      .pipe(
+        finalize(() => {
+          this.tableLoading(false);
+        }),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe(res => {
+        if (!res || res.status === ModalBtnStatus.Cancel) {
+          return;
+        }
+        const param = { ...res.modalValue };
+        param.fatherId = fatherId;
+        this.tableLoading(true);
+        this.addEditData(param, 'addDepts');
+      });
   }
 
   addEditData(param: Dept, methodName: 'editDepts' | 'addDepts'): void {
@@ -174,16 +176,18 @@ export class DeptComponent implements OnInit {
         this.tableLoading(true);
         this.dataService
           .delDepts(ids)
-          .pipe(takeUntilDestroyed(this.destroyRef))
-          .subscribe(
-            () => {
-              if (this.dataList.length === 1) {
-                this.tableConfig.pageIndex--;
-              }
-              this.getDataList();
-            },
-            error => this.tableLoading(false)
-          );
+          .pipe(
+            finalize(() => {
+              this.tableLoading(false);
+            }),
+            takeUntilDestroyed(this.destroyRef)
+          )
+          .subscribe(() => {
+            if (this.dataList.length === 1) {
+              this.tableConfig.pageIndex--;
+            }
+            this.getDataList();
+          });
       }
     });
   }
@@ -196,19 +200,21 @@ export class DeptComponent implements OnInit {
       .subscribe(res => {
         this.deptModalService
           .show({ nzTitle: '编辑' }, res)
-          .pipe(takeUntilDestroyed(this.destroyRef))
-          .subscribe(
-            ({ modalValue, status }) => {
-              if (status === ModalBtnStatus.Cancel) {
-                return;
-              }
-              modalValue.id = id;
-              modalValue.fatherId = fatherId;
-              this.tableLoading(true);
-              this.addEditData(modalValue, 'editDepts');
-            },
-            error => this.tableLoading(false)
-          );
+          .pipe(
+            finalize(() => {
+              this.tableLoading(false);
+            }),
+            takeUntilDestroyed(this.destroyRef)
+          )
+          .subscribe(({ modalValue, status }) => {
+            if (status === ModalBtnStatus.Cancel) {
+              return;
+            }
+            modalValue.id = id;
+            modalValue.fatherId = fatherId;
+            this.tableLoading(true);
+            this.addEditData(modalValue, 'editDepts');
+          });
       });
   }
 

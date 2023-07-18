@@ -144,17 +144,19 @@ export class AccountComponent implements OnInit {
   add(): void {
     this.modalService
       .show({ nzTitle: '新增' })
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(
-        res => {
-          if (!res || res.status === ModalBtnStatus.Cancel) {
-            return;
-          }
-          this.tableLoading(true);
-          this.addEditData(res.modalValue, 'addAccount');
-        },
-        error => this.tableLoading(false)
-      );
+      .pipe(
+        finalize(() => {
+          this.tableLoading(false);
+        }),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe(res => {
+        if (!res || res.status === ModalBtnStatus.Cancel) {
+          return;
+        }
+        this.tableLoading(true);
+        this.addEditData(res.modalValue, 'addAccount');
+      });
   }
 
   reloadTable(): void {
@@ -170,7 +172,12 @@ export class AccountComponent implements OnInit {
       .subscribe(res => {
         this.modalService
           .show({ nzTitle: '编辑' }, res)
-          .pipe(takeUntilDestroyed(this.destroyRef))
+          .pipe(
+            finalize(() => {
+              this.tableLoading(false);
+            }),
+            takeUntilDestroyed(this.destroyRef)
+          )
           .subscribe(({ modalValue, status }) => {
             if (status === ModalBtnStatus.Cancel) {
               return;
@@ -233,16 +240,13 @@ export class AccountComponent implements OnInit {
               }),
               takeUntilDestroyed(this.destroyRef)
             )
-            .subscribe(
-              () => {
-                if (this.dataList.length === 1) {
-                  this.tableConfig.pageIndex--;
-                }
-                this.getDataList();
-                this.checkedCashArray = [];
-              },
-              error => this.tableLoading(false)
-            );
+            .subscribe(() => {
+              if (this.dataList.length === 1) {
+                this.tableConfig.pageIndex--;
+              }
+              this.getDataList();
+              this.checkedCashArray = [];
+            });
         }
       });
     } else {
@@ -260,22 +264,23 @@ export class AccountComponent implements OnInit {
         this.tableLoading(true);
         this.dataService
           .delAccount(ids)
-          .pipe(takeUntilDestroyed(this.destroyRef))
-          .subscribe(
-            () => {
-              if (this.dataList.length === 1) {
-                this.tableConfig.pageIndex--;
-              }
-              this.getDataList();
-            },
-            error => this.tableLoading(false)
-          );
+          .pipe(
+            finalize(() => {
+              this.tableLoading(false);
+            }),
+            takeUntilDestroyed(this.destroyRef)
+          )
+          .subscribe(() => {
+            if (this.dataList.length === 1) {
+              this.tableConfig.pageIndex--;
+            }
+            this.getDataList();
+          });
       }
     });
   }
 
   // 修改一页几条
-
   changePageSize(e: number): void {
     this.tableConfig.pageSize = e;
   }

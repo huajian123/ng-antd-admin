@@ -80,12 +80,15 @@ export class ExModalComponent implements OnInit {
     // 两种方式
     // this.dragService.show({nzTitle: this.dragTpl, nzMask: false,nzMaskStyle:{display:'none'},nzWrapClassName:"pointer-events-none"}).subscribe(res=>console.log(res))
     this.dragService
-      .show({
-        nzTitle: '拖动的title',
-        nzMask: false,
-        nzMaskStyle: { display: 'none' },
-        nzWrapClassName: 'pointer-events-none'
-      })
+      .show(
+        {
+          nzTitle: '拖动的title',
+          nzMask: false,
+          nzMaskStyle: { display: 'none' },
+          nzWrapClassName: 'pointer-events-none'
+        },
+        { title: '我是从外部传入到对话框的参数' }
+      )
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(({ modalValue, status }) => {
         if (status === ModalBtnStatus.Cancel) {
