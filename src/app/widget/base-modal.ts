@@ -24,7 +24,6 @@ export const enum ModalBtnStatus {
 
 // 组件实例需要继承此类
 export abstract class BasicConfirmModalComponent {
-  protected params: NzSafeAny; // service传给component instance的参数
   protected constructor(protected modalRef: NzModalRef) {}
 
   protected abstract getCurrentValue(): NzSafeAny;
@@ -157,7 +156,7 @@ export class ModalWrapService {
   }
 
   // 创建对话框的配置项
-  createModalConfig(component: Type<NzSafeAny>, modalOptions: ModalOptions = {}, params: object = {}, wrapCls: string): ModalOptions {
+  createModalConfig<T>(component: Type<NzSafeAny>, modalOptions: ModalOptions = {}, params: T, wrapCls: string): ModalOptions {
     const defaultOptions: ModalOptions = {
       nzTitle: '',
       nzContent: component,
@@ -184,16 +183,14 @@ export class ModalWrapService {
       },
       nzClosable: true,
       nzWidth: 720,
-      nzComponentParams: {
-        params
-      } // 参数中的属性将传入nzContent实例中
+      nzData: params // 参数中的属性将传入nzContent实例中
     };
     const newOptions = _.merge(defaultOptions, modalOptions);
     newOptions.nzWrapClassName = `${newOptions.nzWrapClassName || ''} ${wrapCls}`;
     return newOptions;
   }
 
-  show(component: Type<NzSafeAny>, modalOptions: ModalOptions = {}, params: object = {}): Observable<NzSafeAny> {
+  show<T>(component: Type<NzSafeAny>, modalOptions: ModalOptions = {}, params?: T): Observable<NzSafeAny> {
     const wrapCls = this.getRandomCls();
     const newOptions = this.createModalConfig(component, modalOptions, params, wrapCls);
     const modalRef = this.bsModalService.create(newOptions);

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+import { Dept } from '@services/system/dept.service';
 import { ModalWrapService } from '@widget/base-modal';
 import { DeptManageModalComponent } from '@widget/biz-widget/system/dept-manage-modal/dept-manage-modal.component';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -15,7 +16,7 @@ export class DeptManageModalService {
     return DeptManageModalComponent;
   }
 
-  public show(modalOptions: ModalOptions = {}, params?: object): Observable<NzSafeAny> {
-    return this.modalWrapService.show(this.getContentComponent(), modalOptions, params);
+  public show(modalOptions: ModalOptions = {}, modalData?: Dept): Observable<NzSafeAny> {
+    return this.modalWrapService.show<Dept>(this.getContentComponent(), modalOptions, modalData);
   }
 }

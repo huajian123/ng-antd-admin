@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
@@ -11,7 +11,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
-import { NzModalRef } from 'ng-zorro-antd/modal';
+import { NZ_MODAL_DATA, NzModalRef } from 'ng-zorro-antd/modal';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 
@@ -28,7 +28,7 @@ type menuType = 'C' | 'F';
 export class MenuModalComponent implements OnInit {
   validateForm!: FormGroup;
   selIconVisible = false;
-  params!: MenuListObj;
+  readonly nzModalData: MenuListObj = inject(NZ_MODAL_DATA);
   menuType: menuType = 'C';
 
   constructor(private modalRef: NzModalRef, private fb: FormBuilder) {}
@@ -80,9 +80,9 @@ export class MenuModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    if (Object.keys(this.params).length > 0) {
-      this.changeMenuType(this.params.menuType);
-      this.validateForm.patchValue(this.params);
+    if (!!this.nzModalData) {
+      this.changeMenuType(this.nzModalData.menuType);
+      this.validateForm.patchValue(this.nzModalData);
     }
   }
 }

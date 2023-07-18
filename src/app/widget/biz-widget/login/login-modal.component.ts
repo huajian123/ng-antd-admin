@@ -23,11 +23,9 @@ import { BasicConfirmModalComponent } from '../../base-modal';
 })
 export class LoginModalComponent extends BasicConfirmModalComponent implements OnInit {
   loginModalForm!: FormGroup;
-  override params: object;
 
   constructor(protected override modalRef: NzModalRef, private fb: FormBuilder, private loginService: LoginService) {
     super(modalRef);
-    this.params = {};
   }
 
   // 返回false则不关闭对话框

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+import { Role } from '@services/system/role.service';
 import { ModalWrapService } from '@widget/base-modal';
 import { RoleManageModalComponent } from '@widget/biz-widget/system/role-manage-modal/role-manage-modal.component';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -15,7 +16,7 @@ export class RoleManageModalService {
     return RoleManageModalComponent;
   }
 
-  public show(modalOptions: ModalOptions = {}, params?: object): Observable<NzSafeAny> {
-    return this.modalWrapService.show(this.getContentComponent(), modalOptions, params);
+  public show(modalOptions: ModalOptions = {}, modalData?: Role): Observable<NzSafeAny> {
+    return this.modalWrapService.show(this.getContentComponent(), modalOptions, modalData);
   }
 }
