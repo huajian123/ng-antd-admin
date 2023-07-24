@@ -41,7 +41,7 @@ import { NzUploadChangeParam, NzUploadModule } from 'ng-zorro-antd/upload';
   ]
 })
 export class BaseComponent implements OnInit {
-  @Input() data!: { label: string };
+  @Input({ required: true }) data!: { label: string };
   validateForm!: FormGroup;
   selectedProvince = 'Zhejiang';
   selectedCity = 'Hangzhou';

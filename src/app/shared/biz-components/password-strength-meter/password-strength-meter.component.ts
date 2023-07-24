@@ -1,5 +1,5 @@
 import { NgIf, NgFor } from '@angular/common';
-import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter, HostBinding } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter, HostBinding, booleanAttribute, numberAttribute } from '@angular/core';
 
 import { PasswordStrengthMeterService } from './password-strength-meter.service';
 import { PSMProgressBarDirective } from './psm-progress-bar.directive';
@@ -16,13 +16,13 @@ import { PSMProgressBarDirective } from './psm-progress-bar.directive';
 export class PasswordStrengthMeterComponent implements OnChanges {
   @Input() password: string | undefined;
 
-  @Input() minPasswordLength = 8;
+  @Input({ transform: numberAttribute }) minPasswordLength = 8;
 
-  @Input() enableFeedback = false;
+  @Input({ transform: booleanAttribute }) enableFeedback = false;
 
   @Input() colors: string[] = [];
 
-  @Input() numberOfProgressBarItems = 5;
+  @Input({ transform: numberAttribute }) numberOfProgressBarItems = 5;
 
   @Output() readonly strengthChange = new EventEmitter<number>();
 

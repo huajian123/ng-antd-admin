@@ -33,7 +33,7 @@ export class NamedTemplate<T> implements OnInit {
   /**
    * 模板名称
    */
-  @Input() named!: string;
+  @Input({ required: true }) named!: string;
   constructor(public template: TemplateRef<T>) {}
 
   ngOnInit(): void {

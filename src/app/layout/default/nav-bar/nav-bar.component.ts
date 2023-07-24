@@ -1,5 +1,5 @@
 import { DOCUMENT, NgIf, NgTemplateOutlet, NgFor, AsyncPipe } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Input, Inject, inject, DestroyRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Input, Inject, inject, DestroyRef, booleanAttribute } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
@@ -29,8 +29,10 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
   imports: [NgIf, NzMenuModule, NzNoAnimationModule, NgTemplateOutlet, NgFor, TrackByPropertyDirective, AuthDirective, NzButtonModule, NzIconModule, RouterLink, AsyncPipe]
 })
 export class NavBarComponent implements OnInit {
-  @Input() isMixiHead = false; // 是混合模式顶部导航
-  @Input() isMixiLeft = false;
+  @Input({ transform: booleanAttribute })
+  isMixiHead = false; // 是混合模式顶部导航
+  @Input({ transform: booleanAttribute })
+  isMixiLeft = false;
 
   themesOptions$ = this.themesService.getThemesMode();
   isNightTheme$ = this.themesService.getIsNightTheme();

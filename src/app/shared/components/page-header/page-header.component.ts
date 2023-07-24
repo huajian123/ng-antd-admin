@@ -25,7 +25,7 @@ export interface PageHeaderType {
   imports: [NzPageHeaderModule, NzBreadCrumbModule, NgFor, NzOutletModule, NgIf]
 })
 export class PageHeaderComponent implements OnInit {
-  @Input() backTpl!: TemplateRef<NzSafeAny> | null;
+  @Input() backTpl: TemplateRef<NzSafeAny> | undefined;
   @Input() pageHeaderInfo: Partial<PageHeaderType> = {};
   @Input() backUrl = '';
   themesOptions$ = this.themesService.getThemesMode();

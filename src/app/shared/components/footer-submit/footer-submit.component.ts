@@ -19,7 +19,7 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
   imports: [NzCardModule, NgTemplateOutlet]
 })
 export class FooterSubmitComponent implements OnInit {
-  @Input() leftTpl!: TemplateRef<NzSafeAny>;
+  @Input() leftTpl: TemplateRef<NzSafeAny> | undefined;
   themesOptions$ = this.themesService.getThemesMode();
   isNightTheme$ = this.themesService.getIsNightTheme();
   isCollapsed$ = this.themesService.getIsCollapsed();

@@ -1,6 +1,6 @@
 import { CdkDragDrop, moveItemInArray, CdkDropList, CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
 import { NgIf, NgTemplateOutlet, NgFor, NgStyle } from '@angular/common';
-import { AfterContentInit, ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
+import { AfterContentInit, booleanAttribute, ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
 
 import { AntTreeTableComponentToken } from '@shared/components/tree-table/tree-table.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -54,7 +54,8 @@ interface TableSizeItem {
 export class CardTableWrapComponent implements OnInit, AfterContentInit {
   @Input() tableTitle: string | TemplateRef<NzSafeAny> | undefined;
   @Input() btnTpl: TemplateRef<NzSafeAny> | undefined;
-  @Input() isNormalTable = true; // 如果只是需要card-table-wrap的样式，这里设置为false
+  @Input({ transform: booleanAttribute })
+  isNormalTable = true; // 如果只是需要card-table-wrap的样式，这里设置为false
   @Output() readonly reload = new EventEmitter<NzSafeAny>();
   @ContentChild(AntTableComponentToken) antTableComponent!: AntTableComponentToken;
   @ContentChild(AntTreeTableComponentToken) antTreeTableComponent!: AntTreeTableComponentToken;

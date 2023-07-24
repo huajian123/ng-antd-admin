@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostBinding, Input, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
+import { Directive, ElementRef, HostBinding, Input, numberAttribute, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
 
 @Directive({
   // eslint-disable-next-line
@@ -6,10 +6,10 @@ import { Directive, ElementRef, HostBinding, Input, OnChanges, Renderer2, Simple
   standalone: true
 })
 export class PSMProgressBarDirective implements OnChanges {
-  @Input()
+  @Input({ transform: numberAttribute })
   numberOfProgressBarItems: number | undefined;
 
-  @Input()
+  @Input({ transform: numberAttribute })
   passwordStrength: number | undefined;
 
   @Input()

@@ -47,7 +47,7 @@ export class TreeTableComponent implements OnInit, OnChanges {
   @Output() readonly changePageNum = new EventEmitter<NzTableQueryParams>();
   @Output() readonly changePageSize = new EventEmitter<number>();
   mapOfExpandedData: { [key: string]: TreeNodeInterface[] } = {};
-  @Input() tableConfig!: AntTableConfig;
+  @Input({ required: true }) tableConfig!: AntTableConfig;
   @Output() readonly selectedChange: EventEmitter<NzSafeAny[]> = new EventEmitter<NzSafeAny[]>();
   cashExpandIdArray: Array<number | string> = []; // 缓存已经展开的节点的id
 

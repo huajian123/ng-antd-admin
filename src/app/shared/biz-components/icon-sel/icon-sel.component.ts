@@ -1,5 +1,5 @@
 import { NgIf, NgFor, NgStyle } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Input, Output, EventEmitter, AfterViewInit, inject, DestroyRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Input, Output, EventEmitter, AfterViewInit, inject, DestroyRef, booleanAttribute } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
@@ -27,7 +27,7 @@ interface IconItem {
   imports: [NzIconModule, NzButtonModule, NzPopoverModule, NzInputModule, NzCardModule, NgIf, NgFor, NgStyle, NzEmptyModule, NzPaginationModule]
 })
 export class IconSelComponent implements OnInit, AfterViewInit {
-  @Input() visible = false;
+  @Input({ transform: booleanAttribute }) visible = false;
   // 做图标搜索防抖
   private searchText$ = new Subject<string>();
   seletedIcon = '';

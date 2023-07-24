@@ -10,7 +10,7 @@ import { NzListModule } from 'ng-zorro-antd/list';
   imports: [NzListModule]
 })
 export class SafeComponent implements OnInit {
-  @Input() data!: { label: string };
+  @Input({ required: true }) data!: { label: string };
   constructor() {}
 
   ngOnInit(): void {
