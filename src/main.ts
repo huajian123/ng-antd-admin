@@ -23,7 +23,6 @@ import { environment } from '@env/environment';
 import { NzDrawerServiceModule } from 'ng-zorro-antd/drawer';
 import { NZ_I18N, zh_CN } from 'ng-zorro-antd/i18n';
 import { NZ_ICONS } from 'ng-zorro-antd/icon';
-import { NzMessageServiceModule } from 'ng-zorro-antd/message';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 
 const icons = [MenuFoldOutline, MenuUnfoldOutline, DashboardOutline, FormOutline];
@@ -115,7 +114,7 @@ bootstrapApplication(AppComponent, {
       withHashLocation(),
       withComponentInputBinding() // 开启路由参数绑定到组件的输入属性,ng16新增特性
     ),
-    importProvidersFrom(NzMessageServiceModule, NzDrawerServiceModule, NzModalModule),
+    importProvidersFrom( NzDrawerServiceModule, NzModalModule),
     ...interceptors,
     ...APPINIT_PROVIDES,
     provideAnimations(),
