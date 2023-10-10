@@ -34,5 +34,7 @@ export default [
   { path: 'ripple', data: { title: '水波纹', key: 'ripple' }, loadComponent: () => import('./ripple/ripple.component').then(m => m.RippleComponent) },
   { path: 'copy', data: { title: '剪切板', key: 'copy' }, loadComponent: () => import('./copy/copy.component').then(m => m.CopyComponent) },
   { path: 'setup', data: { title: '引导页', key: 'setup' }, loadComponent: () => import('./setup/setup.component').then(m => m.SetupComponent) },
-  { path: 'download', data: { title: '文件下载', key: 'download' }, loadComponent: () => import('./download/download.component').then(m => m.DownloadComponent) }
+  { path: 'download', data: { title: '文件下载', key: 'download' }, loadComponent: () => import('./download/download.component').then(m => m.DownloadComponent) },
+  { path: 'qrcode', data: { title: '二维码', key: 'qrcode' }, loadComponent: () => import('./qrcode/qrcode.component').then(m => m.QrcodeComponent) },
+  { path: 'water-mark', data: { title: '水印', key: 'water-mark' }, loadComponent: () => import('./water-mark/water-mark.component').then(m => m.WaterMarkComponent) }
 ] as Route[];

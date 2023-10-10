@@ -29,5 +29,10 @@ export default [
   {
     path: 'flow',
     loadChildren: () => import('./flow/flow-routing')
+  },
+  {
+    path: 'task',
+    data: { title: '任务', key: 'task' },
+    loadComponent: () => import('./task/task.component').then(m => m.TaskComponent)
   }
 ] as Route[];
