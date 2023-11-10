@@ -1,10 +1,10 @@
 <div>
-  <h2 class="m-b-8" [class.is-over-model]="isOverModel">二维码登录</h2>
+  <h2 [class.is-over-model]="isOverModel">二维码登录</h2>
   <div class="full-with">
     <form class="login-form-wrap" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
       <nz-form-item>
         <nz-form-control class="p-24">
-          <qrcode class="center" [errorCorrectionLevel]="'M'" [margin]="0" [qrdata]="'https://github.com/huajian123/ng-ant-admin'" [width]="250"></qrcode>
+          <nz-qrcode class="center p-8" nzValue="https://github.com/huajian123/ng-ant-admin" [nzBordered]="false" [nzPadding]="0" [nzSize]="250"></nz-qrcode>
           <span class="center sp-14 desc" nz-typography nzType="secondary">扫码后点击"确认"，即可完成登录</span>
         </nz-form-control>
       </nz-form-item>

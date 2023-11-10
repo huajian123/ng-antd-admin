@@ -4,11 +4,11 @@ import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } 
 
 import { LoginType } from '@app/pages/other-login/login1/login1.component';
 import { Login1StoreService } from '@store/biz-store-service/other-login/login1-store.service';
-import { QRCodeModule } from 'angularx-qrcode';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzQRCodeModule } from 'ng-zorro-antd/qr-code';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 
 @Component({
@@ -17,7 +17,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
   styleUrls: ['./qr-login.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, QRCodeModule, NzTypographyModule, NzButtonModule, NzWaveModule]
+  imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzTypographyModule, NzButtonModule, NzWaveModule, NzQRCodeModule]
 })
 export class QrLoginComponent implements OnInit {
   validateForm!: FormGroup;

@@ -16,6 +16,6 @@ export class QrcodeComponent {
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '二维码',
     breadcrumb: ['首页', '功能', '二维码'],
-    desc: '不要扫陌生人的二维码，防诈从我做起'
+    desc: '不要扫陌生人的二维码，防诈从我做起。可以考虑使用https://github.com/cordobo/angularx-qrcode本项目ng16之前的版本有安装使用'
   };
 }
