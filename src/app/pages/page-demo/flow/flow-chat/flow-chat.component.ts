@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 
-import { Addon, Graph } from '@antv/x6';
+import { Graph } from '@antv/x6';
+import { Dnd } from '@antv/x6-plugin-dnd';
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
@@ -54,7 +55,7 @@ export class FlowChatComponent implements OnInit, AfterViewInit {
     const target = event.currentTarget as HTMLElement;
     const shap = target.getAttribute('shap')!;
 
-    const dnd = new Addon.Dnd({
+    const dnd = new Dnd({
       target: this.graph
     });
 
