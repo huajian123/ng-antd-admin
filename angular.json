@@ -57,7 +57,7 @@
               }
             ],
             "styles": [
-              "node_modules/driver.js/dist/driver.min.css",
+              "node_modules/driver.js/dist/driver.css",
               {
                 "input": "src/styles/default.less",
                 "bundleName": "default",
@@ -73,7 +73,7 @@
               "includePaths": ["src/styles/themes"]
             },
             "scripts": [
-              "node_modules/driver.js/dist/driver.min.js"
+              "node_modules/driver.js/dist/driver.js.iife.js"
             ],
             "allowedCommonJsDependencies": [
               "crypto-js",

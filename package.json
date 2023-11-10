@@ -33,7 +33,7 @@
     "@zxcvbn-ts/language-en": "^2.1.0",
     "angular-animations": "^0.11.0",
     "crypto-js": "^4.1.1",
-    "driver.js": "^0.9.8",
+    "driver.js": "^1.3.0",
     "echarts": "^5.4.2",
     "file-saver": "^2.0.5",
     "ng-zorro-antd": "^16.2.2",
