@@ -20,7 +20,7 @@ import { SubWindowWithService } from '@core/services/common/sub-window-with.serv
 import { ThemeSkinService } from '@core/services/common/theme-skin.service';
 import { StartupService } from '@core/startup/startup.service';
 import { environment } from '@env/environment';
-import { NzDrawerServiceModule } from 'ng-zorro-antd/drawer';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NZ_I18N, zh_CN } from 'ng-zorro-antd/i18n';
 import { NZ_ICONS } from 'ng-zorro-antd/icon';
 import { NzModalModule } from 'ng-zorro-antd/modal';
@@ -114,7 +114,7 @@ bootstrapApplication(AppComponent, {
       withHashLocation(),
       withComponentInputBinding() // 开启路由参数绑定到组件的输入属性,ng16新增特性
     ),
-    importProvidersFrom( NzDrawerServiceModule, NzModalModule),
+    importProvidersFrom(NzDrawerModule, NzModalModule),
     ...interceptors,
     ...APPINIT_PROVIDES,
     provideAnimations(),
