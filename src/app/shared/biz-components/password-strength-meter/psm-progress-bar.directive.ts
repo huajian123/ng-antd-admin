@@ -31,7 +31,7 @@ export class PSMProgressBarDirective implements OnChanges {
     this.progressBar = this.el.nativeElement;
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     if (changes['numberOfProgressBarItems']) {
       this.setProgressBarItems();
     }
@@ -39,7 +39,7 @@ export class PSMProgressBarDirective implements OnChanges {
     this.setProgressBar();
   }
 
-  setProgressBarItems() {
+  setProgressBarItems(): void {
     const progressBarItemContainer = this.progressBar.querySelector('.psm__progress-bar-items');
     const width = 100 / this.numberOfProgressBarItems!;
 
@@ -57,7 +57,7 @@ export class PSMProgressBarDirective implements OnChanges {
       });
   }
 
-  setProgressBar() {
+  setProgressBar(): void {
     const progressBarOverlayWidth = this.getFillMeterWidth(this.passwordStrength as number);
     const progressBarOverlayWidthInPx = `${progressBarOverlayWidth}%`;
 
@@ -87,7 +87,7 @@ export class PSMProgressBarDirective implements OnChanges {
     return roundedStrengthInPercentage;
   }
 
-  getMeterFillColor(progressLevel: number) {
+  getMeterFillColor(progressLevel: number): string {
     if (!progressLevel || progressLevel <= 0 || (progressLevel > this.colors.length && progressLevel > this.defaultColors.length)) {
       return this.colors[0] ? this.colors[0] : this.defaultColors[0];
     }

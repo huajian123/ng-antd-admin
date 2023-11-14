@@ -30,7 +30,7 @@ export class IconSelComponent implements OnInit, AfterViewInit {
   @Input({ transform: booleanAttribute }) visible = false;
   // 做图标搜索防抖
   private searchText$ = new Subject<string>();
-  seletedIcon = '';
+  selectedIcon = '';
   @Output() readonly selIcon = new EventEmitter<string>();
   // 分页信息
   pageObj = {
@@ -58,11 +58,10 @@ export class IconSelComponent implements OnInit, AfterViewInit {
   }
 
   selIconFn(item: IconItem): void {
-    this.seletedIcon = item.icon;
-    this.sourceIconsArray.forEach(icon => (icon.isChecked = false));
-    this.iconsStrShowArray.forEach(icon => (icon.isChecked = false));
-    this.iconsStrAllArray.forEach(icon => (icon.isChecked = false));
-
+    this.selectedIcon = item.icon;
+    [this.sourceIconsArray, this.iconsStrShowArray, this.iconsStrAllArray].forEach(item => {
+      item.forEach(icon => (icon.isChecked = false));
+    });
     item.isChecked = true;
     this.selIcon.emit(item.icon);
   }
