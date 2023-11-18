@@ -138,15 +138,15 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ng-ant-admin:build",
-            "proxyConfig": "proxy.conf.json"
+            "proxyConfig": "proxy.conf.json",
+            "buildTarget": "ng-ant-admin:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ng-ant-admin:build:production"
+              "buildTarget": "ng-ant-admin:build:production"
             },
             "development": {
-              "browserTarget": "ng-ant-admin:build:development"
+              "buildTarget": "ng-ant-admin:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -154,7 +154,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ng-ant-admin:build"
+            "buildTarget": "ng-ant-admin:build"
           }
         },
         "test": {
