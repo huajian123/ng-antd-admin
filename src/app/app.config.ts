@@ -35,13 +35,15 @@ export function LoadAliIconCdnFactory(loadAliIconCdnService: LoadAliIconCdnServi
 }
 
 export function InitThemeServiceFactory(initThemeService: InitThemeService) {
-  return async () => await initThemeService.initTheme();
+  return async (): Promise<void> => await initThemeService.initTheme();
 }
 
+// 监听锁屏状态
 export function InitLockedStatusServiceFactory(subLockedStatusService: SubLockedStatusService) {
   return () => subLockedStatusService.initLockedStatus();
 }
 
+// 开启监听屏幕宽度
 export function SubWindowWithServiceFactory(subWindowWithService: SubWindowWithService) {
   return () => subWindowWithService.subWindowWidth();
 }
@@ -95,21 +97,21 @@ const APPINIT_PROVIDES = [
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    { provide: RouteReuseStrategy, useClass: SimpleReuseStrategy, deps: [DOCUMENT, ScrollService] },
-    { provide: NZ_I18N, useValue: zh_CN },
-    { provide: NZ_ICONS, useValue: icons },
+    { provide: RouteReuseStrategy, useClass: SimpleReuseStrategy, deps: [DOCUMENT, ScrollService] }, // 路由复用
+    { provide: NZ_I18N, useValue: zh_CN }, // zorro国际化
+    { provide: NZ_ICONS, useValue: icons }, // zorro图标
     provideRouter(
-      appRoutes,
-      withPreloading(SelectivePreloadingStrategyService),
+      appRoutes, // 路由
+      withPreloading(SelectivePreloadingStrategyService), // 开启路由预加载
       withInMemoryScrolling({
         scrollPositionRestoration: 'top'
       }),
-      withHashLocation(),
+      withHashLocation(), // 使用哈希路由
       withComponentInputBinding() // 开启路由参数绑定到组件的输入属性,ng16新增特性
     ),
     importProvidersFrom(NzDrawerModule, NzModalModule),
-    ...interceptors,
-    ...APPINIT_PROVIDES,
+    ...interceptors, // http拦截器
+    ...APPINIT_PROVIDES, // 项目启动之前，需要调用的一系列方法
     provideAnimationsAsync(), // 开启延迟加载动画，ng17新增特性，如果想要项目启动时就加载动画，可以使用provideAnimations()
     provideHttpClient(withInterceptorsFromDi())
   ]
