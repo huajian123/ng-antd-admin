@@ -4,7 +4,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, NavigationEnd, Router, RouterEvent, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
-import { fadeRouteAnimation } from '@app/animations/fade.animation';
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { WaterMarkComponent } from '@shared/components/water-mark/water-mark.component';
 import { SearchListStoreService } from '@store/biz-store-service/search-list/search-list-store.service';
@@ -23,7 +22,6 @@ interface TabInterface {
   selector: 'app-search-list',
   templateUrl: './search-list.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [fadeRouteAnimation],
   standalone: true,
   imports: [PageHeaderComponent, WaterMarkComponent, NzButtonModule, NzInputModule, NzWaveModule, NzTabsModule, NgFor, RouterOutlet]
 })
@@ -69,10 +67,6 @@ export class SearchListComponent implements OnInit {
           });
         }
       });
-  }
-
-  prepareRoute(outlet: RouterOutlet): string {
-    return outlet?.activatedRouteData?.['key'];
   }
 
   to(item: TabInterface): void {

@@ -3,7 +3,7 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import zh from '@angular/common/locales/zh';
 import { APP_INITIALIZER, ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideRouter, RouteReuseStrategy, withComponentInputBinding, withHashLocation, withInMemoryScrolling, withPreloading } from '@angular/router';
+import { provideRouter, RouteReuseStrategy, withComponentInputBinding, withHashLocation, withInMemoryScrolling, withPreloading, withViewTransitions } from '@angular/router';
 
 import { DashboardOutline, FormOutline, MenuFoldOutline, MenuUnfoldOutline } from '@ant-design/icons-angular/icons';
 import { appRoutes } from '@app/app-routing';
@@ -102,7 +102,8 @@ export const appConfig: ApplicationConfig = {
     { provide: NZ_ICONS, useValue: icons }, // zorro图标
     provideRouter(
       appRoutes, // 路由
-      withPreloading(SelectivePreloadingStrategyService), // 开启路由预加载
+      withPreloading(SelectivePreloadingStrategyService), // 自定义模块预加载
+      withViewTransitions(), // 路由切换动画，ng17新增特性。旧版本请看我的github v16tag以下版本代码 参考https://netbasal.com/angular-v17s-view-transitions-navigate-in-elegance-f2d48fd8ceda
       withInMemoryScrolling({
         scrollPositionRestoration: 'top'
       }),
