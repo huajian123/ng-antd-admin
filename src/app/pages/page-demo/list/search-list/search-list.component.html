@@ -19,6 +19,6 @@
     <nz-tab *ngFor="let item of tabData" [nzTitle]="item.label" (nzClick)="to(item)"></nz-tab>
   </nz-tabset>
 </ng-template>
-<div class="normal-table-wrap">
-  <router-outlet></router-outlet>
+<div class="normal-table-wrap" [@fadeRouteAnimation]="prepareRoute(searchOutlet)">
+  <router-outlet #searchOutlet="outlet"></router-outlet>
 </div>

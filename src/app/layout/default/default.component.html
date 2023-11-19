@@ -66,8 +66,8 @@
   <ng-container content>
     <div>
       <app-tab *ngIf="(themeOptions$ | async)?.isShowTab"></app-tab>
-      <div>
-        <router-outlet></router-outlet>
+      <div [@fadeRouteAnimation]="prepareRoute(outlet)">
+        <router-outlet #outlet="outlet"></router-outlet>
       </div>
     </div>
   </ng-container>

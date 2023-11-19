@@ -3,6 +3,7 @@ import { Component, OnInit, ChangeDetectionStrategy, ViewChild, AfterViewInit, i
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterOutlet } from '@angular/router';
 
+import { fadeRouteAnimation } from '@app/animations/fade.animation';
 import { IsFirstLogin } from '@config/constant';
 import { DriverService } from '@core/services/common/driver.service';
 import { WindowService } from '@core/services/common/window.service';
@@ -23,6 +24,7 @@ import { ToolBarComponent } from './tool-bar/tool-bar.component';
   templateUrl: './default.component.html',
   styleUrls: ['./default.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [fadeRouteAnimation],
   standalone: true,
   imports: [
     DefLayoutContentComponent,
@@ -68,6 +70,10 @@ export class DefaultComponent implements OnInit, AfterViewInit {
       .getIsOverMode()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(res => (this.isOverMode = res));
+  }
+
+  prepareRoute(outlet: RouterOutlet): string {
+    return outlet?.activatedRouteData?.['key'];
   }
 
   ngAfterViewInit(): void {

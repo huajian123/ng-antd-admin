@@ -3,17 +3,7 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import zh from '@angular/common/locales/zh';
 import { APP_INITIALIZER, ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import {
-  provideRouter,
-  RouteReuseStrategy,
-  TitleStrategy,
-  ViewTransitionInfo,
-  withComponentInputBinding,
-  withHashLocation,
-  withInMemoryScrolling,
-  withPreloading,
-  withViewTransitions
-} from '@angular/router';
+import { provideRouter, RouteReuseStrategy, TitleStrategy, withComponentInputBinding, withHashLocation, withInMemoryScrolling, withPreloading } from '@angular/router';
 
 import { DashboardOutline, FormOutline, MenuFoldOutline, MenuUnfoldOutline } from '@ant-design/icons-angular/icons';
 import { appRoutes } from '@app/app-routing';
@@ -118,9 +108,9 @@ export const appConfig: ApplicationConfig = {
     provideRouter(
       appRoutes, // 路由
       withPreloading(SelectivePreloadingStrategyService), // 自定义模块预加载
-      withViewTransitions({
-        skipInitialTransition: true
-      }), // 路由切换过渡，ng17新增特性参考资料https://netbasal.com/angular-v17s-view-transitions-navigate-in-elegance-f2d48fd8ceda。旧版本路由切换动画请看我的github v16及以下版本代码
+      // withViewTransitions({
+      //   skipInitialTransition: true
+      // }), // 路由切换过渡，ng17新增实验性特性参考资料https://netbasal.com/angular-v17s-view-transitions-navigate-in-elegance-f2d48fd8ceda
       withInMemoryScrolling({
         scrollPositionRestoration: 'top'
       }),

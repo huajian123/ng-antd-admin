@@ -12,13 +12,15 @@ import { NzBackTopModule } from 'ng-zorro-antd/back-top';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 
+import { fadeRouteAnimation } from './animations/fade.animation';
+
 @Component({
   selector: 'app-root',
   template: `
     <app-lock-screen *ngIf="(lockedState$ | async)!.locked"></app-lock-screen>
     <nz-back-top></nz-back-top>
-    <div class="full-height">
-      <router-outlet></router-outlet>
+    <div class="full-height" [@fadeRouteAnimation]="prepareRoute(outlet)">
+      <router-outlet #outlet="outlet"></router-outlet>
     </div>
     <div *ngIf="loading$ | async" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:1001;background:rgba(24,144,255,0.1);">
       <div style="position:absolute;top: 50%;left:50%;margin:-16px 0 0 -16px;">
@@ -27,6 +29,7 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [fadeRouteAnimation],
   standalone: true,
   imports: [NgIf, LockScreenComponent, NzBackTopModule, RouterOutlet, NzSpinModule, AsyncPipe]
 })
@@ -36,6 +39,10 @@ export class AppComponent implements OnInit, AfterViewInit {
   destroyRef = inject(DestroyRef);
 
   constructor(private lockScreenStoreService: LockScreenStoreService, private preloader: PreloaderService, private spinService: SpinService, public router: Router) {}
+
+  prepareRoute(outlet: RouterOutlet): string {
+    return outlet?.activatedRouteData?.['key'];
+  }
 
   ngOnInit(): void {
     this.router.events
