@@ -3,11 +3,22 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import zh from '@angular/common/locales/zh';
 import { APP_INITIALIZER, ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideRouter, RouteReuseStrategy, withComponentInputBinding, withHashLocation, withInMemoryScrolling, withPreloading, withViewTransitions } from '@angular/router';
+import {
+  provideRouter,
+  RouteReuseStrategy,
+  TitleStrategy,
+  ViewTransitionInfo,
+  withComponentInputBinding,
+  withHashLocation,
+  withInMemoryScrolling,
+  withPreloading,
+  withViewTransitions
+} from '@angular/router';
 
 import { DashboardOutline, FormOutline, MenuFoldOutline, MenuUnfoldOutline } from '@ant-design/icons-angular/icons';
 import { appRoutes } from '@app/app-routing';
 import interceptors from '@app/core/services/interceptors';
+import { CustomPageTitleResolverService } from '@core/services/common/custom-page-title-resolver.service';
 import { InitThemeService } from '@core/services/common/init-theme.service';
 import { LoadAliIconCdnService } from '@core/services/common/load-ali-icon-cdn.service';
 import { SimpleReuseStrategy } from '@core/services/common/reuse-strategy';
@@ -98,12 +109,21 @@ const APPINIT_PROVIDES = [
 export const appConfig: ApplicationConfig = {
   providers: [
     { provide: RouteReuseStrategy, useClass: SimpleReuseStrategy, deps: [DOCUMENT, ScrollService] }, // 路由复用
+    {
+      provide: TitleStrategy, // 相关资料：https://dev.to/brandontroberts/setting-page-titles-natively-with-the-angular-router-393j
+      useClass: CustomPageTitleResolverService // 自定义路由切换时，浏览器title的显示，在ng14以上支持。旧版本使用方式请看我的github v16tag以下版本代码
+    },
     { provide: NZ_I18N, useValue: zh_CN }, // zorro国际化
     { provide: NZ_ICONS, useValue: icons }, // zorro图标
     provideRouter(
       appRoutes, // 路由
       withPreloading(SelectivePreloadingStrategyService), // 自定义模块预加载
-      withViewTransitions(), // 路由切换动画，ng17新增特性。旧版本请看我的github v16tag以下版本代码 参考https://netbasal.com/angular-v17s-view-transitions-navigate-in-elegance-f2d48fd8ceda
+      withViewTransitions({
+        skipInitialTransition: true,
+        onViewTransitionCreated: (transitionInfo: ViewTransitionInfo) => {
+          console.log(transitionInfo);
+        }
+      }), // 路由切换动画，ng17新增特性。旧版本请看我的github v16tag以下版本代码 参考https://netbasal.com/angular-v17s-view-transitions-navigate-in-elegance-f2d48fd8ceda
       withInMemoryScrolling({
         scrollPositionRestoration: 'top'
       }),

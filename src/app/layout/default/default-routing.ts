@@ -36,7 +36,8 @@ export default [
       },
       {
         path: 'about',
-        data: { title: '关于', key: 'about' },
+        title: '关于',
+        data: { key: 'about' },
         loadComponent: () => import('../../pages/about/about.component').then(m => m.AboutComponent)
       },
       {

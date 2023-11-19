@@ -6,6 +6,7 @@ export default [
   {
     path: '',
     component: LoginComponent,
+    title: 'NgAntAdmin', // angular14版本以上支持，修改浏览器title
     data: { key: 'login', shouldDetach: 'no' },
     children: [
       { path: '', redirectTo: '/login/login-form', pathMatch: 'full' },

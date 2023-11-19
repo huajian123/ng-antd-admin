@@ -134,17 +134,20 @@ export class NavBarComponent implements OnInit {
           route = route.firstChild;
         }
 
+        let title = 'Ant Design';
+        if (typeof route.routeConfig?.title === 'string') {
+          title = route.routeConfig?.title;
+        }
+
         this.tabService.addTab(
           {
             snapshotArray: [route.snapshot],
-            title: routeData['title'],
+            title,
             path: this.routerPath
           },
           isNewTabDetailPage
         );
         this.tabService.findIndex(this.routerPath);
-        // angular16以后可以在路由中直接设置title了
-        this.titleServe.setTitle(`${routeData['title']} - Ant Design`);
         // 混合模式时，切换tab，让左侧菜单也相应变化
         this.setMixModeLeftMenu();
       });

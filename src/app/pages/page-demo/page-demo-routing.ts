@@ -32,7 +32,8 @@ export default [
   },
   {
     path: 'task',
-    data: { title: '任务', key: 'task' },
+    title: '任务',
+    data: { key: 'task' },
     loadComponent: () => import('./task/task.component').then(m => m.TaskComponent)
   }
 ] as Route[];

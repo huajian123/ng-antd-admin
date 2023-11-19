@@ -59,7 +59,7 @@ export class LoginExpiredService implements HttpInterceptor {
     this.router.navigateByUrl('/login/login-form');
   }
 
-  // 登录过期拦截
+  // 登录超时拦截
   private loginExpiredFn(req: HttpRequest<string>, next: HttpHandler): NzSafeAny {
     return switchMap((event: HttpResponse<NzSafeAny>): NzSafeAny => {
       if (event.type !== HttpEventType.Response || event.body.code !== loginTimeOutCode) {
