@@ -119,11 +119,8 @@ export const appConfig: ApplicationConfig = {
       appRoutes, // 路由
       withPreloading(SelectivePreloadingStrategyService), // 自定义模块预加载
       withViewTransitions({
-        skipInitialTransition: true,
-        onViewTransitionCreated: (transitionInfo: ViewTransitionInfo) => {
-          console.log(transitionInfo);
-        }
-      }), // 路由切换动画，ng17新增特性。旧版本请看我的github v16tag以下版本代码 参考https://netbasal.com/angular-v17s-view-transitions-navigate-in-elegance-f2d48fd8ceda
+        skipInitialTransition: true
+      }), // 路由切换过渡，ng17新增特性参考资料https://netbasal.com/angular-v17s-view-transitions-navigate-in-elegance-f2d48fd8ceda。旧版本路由切换动画请看我的github v16及以下版本代码
       withInMemoryScrolling({
         scrollPositionRestoration: 'top'
       }),

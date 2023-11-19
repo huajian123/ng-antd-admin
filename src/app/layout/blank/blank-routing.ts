@@ -24,6 +24,12 @@ export default [
         loadComponent: () => import('../../shared/components/empty-for-lock/empty-for-lock.component').then(m => m.EmptyForLockComponent)
       },
       {
+        path: 'global-loading',
+        title: 'loading',
+        data: { key: 'global-loading', shouldDetach: 'no' },
+        loadComponent: () => import('../../shared/components/global-loading/global-loading.component').then(m => m.GlobalLoadingComponent)
+      },
+      {
         path: 'other-login',
         loadChildren: () => import('../../pages/other-login/other-login-routing')
       }
