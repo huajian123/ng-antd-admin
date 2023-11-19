@@ -686,9 +686,23 @@ input[nz-input] {
   }
 }
 
-//
-//.overflow-dots {
-//  overflow: hidden;
-//  white-space: nowrap;
-//  text-overflow: ellipsis;
-//}
+.ng17color{
+  background: linear-gradient(to right, #8514f5, #f637e3, #fa2c05);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes textGradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  33% {
+    background-position: 100% 50%;
+  }
+  66% {
+    background-position: 200% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

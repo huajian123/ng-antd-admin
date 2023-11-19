@@ -23,7 +23,7 @@
         <div class="left-start-center flex-1" style="z-index: 100">
           <ng-container *ngIf="(themeOptions$ | async)!.hasNavHeadArea">
             <img class="m-l-10" alt="" src="assets/imgs/logo.svg" style="max-height: 32px; max-width: 54px" />
-            <span class="sp-18 m-r-8">Ant Design</span>
+            <span class="sp-18 m-r-8 ng17color">Ant Design</span>
           </ng-container>
           <div class="flex-1">
             <app-nav-bar />
@@ -46,7 +46,7 @@
       <ng-container *ngIf="!isOverMode" left>
         <div class="left-start-center flex-1" style="z-index: 100">
           <img class="m-l-10" alt="" src="assets/imgs/logo.svg" style="max-height: 32px; max-width: 54px" />
-          <span class="sp-18 m-r-25">Ant Design Pro</span>
+          <span class="sp-18 m-r-25 ng17color">Ant Design Pro</span>
           <div class="flex-1">
             <app-nav-bar *ngIf="(themeOptions$ | async)!.splitNav" [isMixiHead]="true" />
           </div>
