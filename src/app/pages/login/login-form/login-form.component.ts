@@ -80,9 +80,7 @@ export class LoginFormComponent implements OnInit {
             this.spinService.setCurrentGlobalSpinStore(false);
             this.notification.blank(
               '温馨提示',
-              `在“系统管理”菜单下做了真实的增删改查示例。数据每10分钟重置一次，可以放心操作。
-                <br>
-                我是每年自费服务器搭建，如果本项目对您有用，请帮忙点个免费的github star以资鼓励，十分感谢！
+              `
                 源码地址：<a href="https://github.com/huajian123/ng-ant-admin">在这里</a>
             `,
               {
