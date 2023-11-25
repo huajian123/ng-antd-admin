@@ -128,28 +128,7 @@ export class NavBarComponent implements OnInit {
       .subscribe(routeData => {
         // 详情页是否是打开新tab页签形式
         let isNewTabDetailPage = routeData['newTab'] === 'true';
-
-        let route = this.activatedRoute;
-        while (route.firstChild) {
-          route = route.firstChild;
-        }
-
-        let title = 'Ant Design';
-        if (typeof route.routeConfig?.title === 'string') {
-          title = route.routeConfig?.title;
-        }
-
-        this.tabService.addTab(
-          {
-            snapshotArray: [route.snapshot],
-            title,
-            path: this.routerPath
-          },
-          isNewTabDetailPage
-        );
-        this.tabService.findIndex(this.routerPath);
-        // 混合模式时，切换tab，让左侧菜单也相应变化
-        this.setMixModeLeftMenu();
+        this.routeEndAction(isNewTabDetailPage);
       });
   }
 
@@ -323,6 +302,30 @@ export class NavBarComponent implements OnInit {
     });
   }
 
+  routeEndAction(isNewTabDetailPage = false): void {
+    let route = this.activatedRoute;
+    while (route.firstChild) {
+      route = route.firstChild;
+    }
+
+    let title = 'Ant Design';
+    if (typeof route.routeConfig?.title === 'string') {
+      title = route.routeConfig?.title;
+    }
+
+    this.tabService.addTab(
+      {
+        snapshotArray: [route.snapshot],
+        title,
+        path: this.routerPath
+      },
+      isNewTabDetailPage
+    );
+    this.tabService.findIndex(this.routerPath);
+    // 混合模式时，切换tab，让左侧菜单也相应变化
+    this.setMixModeLeftMenu();
+  }
+
   ngOnInit(): void {
     // 顶部模式时要关闭menu的open状态
     this.subTheme$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(options => {
@@ -330,5 +333,6 @@ export class NavBarComponent implements OnInit {
         this.closeMenu();
       }
     });
+    this.routeEndAction();
   }
 }

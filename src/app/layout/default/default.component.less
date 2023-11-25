@@ -1,4 +1,16 @@
+@import "mixin";
 @import "base";
+
+.app-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0;
+  box-shadow: 0 1px 4px rgb(0 21 41 / 8%);
+}
+
 
 .trigger {
   z-index: 10;
@@ -13,15 +25,81 @@
   color: #1890ff;
 }
 
+//
+//.fixed {
+//  position: fixed;
+//  top: 0;
+//  right: 0;
+//  left: 0;
+//  z-index: 999;
+//}
+//
+.mix-sider-height {
+  height: calc(100vh - @layout-header-height - @layout-trigger-height);
+}
+
+
+
+.themeMixin({
+  :host {
+    .menu-sidebar {
+      min-height: 100vh;
+      box-shadow: 2px 0 6px #00152959;
+      z-index: 10;
+    }
+
+    .dark-top-nav-bg {
+      background: @menu-dark-bg;
+      color: @white;
+
+      ::ng-deep .ant-badge {
+        color: @white;
+      }
+    }
+  }
+});
+
+.trigger-top-border {
+  border-top: 1px solid;
+}
+
+
+.mixi-left-nav-fixed {
+  position: fixed;
+  top: 48px;
+  left: 0;
+}
+
+.left-nav-fixed {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+
 
 .fixed {
   position: fixed;
   top: 0;
   right: 0;
-  left: 0;
   z-index: 999;
+  flex: auto;
+  width: calc(100% - 208px);
 }
 
-.mix-sider-height {
-  height: calc(100vh - @layout-header-height - @layout-trigger-height);
+.top-fixed {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 999;
+  flex: auto;
+}
+
+.fixed-collapsed {
+  width: calc(100% - 48px);
+}
+
+.fixed-over-mode {
+  width: 100%;
 }
