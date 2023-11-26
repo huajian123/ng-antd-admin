@@ -40,7 +40,7 @@
           <img class="m-l-10" alt="" src="assets/imgs/logo.svg" style="max-height: 32px; max-width: 54px" />
           <span class="sp-18 m-r-25 ng17color">Ant Design Pro</span>
           <div class="flex-1">
-            <app-nav-bar *ngIf="isSplitNav" [isMixiHead]="true" />
+            <app-nav-bar *ngIf="isSplitNav" [isMixinHead]="true" />
           </div>
         </div>
       </ng-container>
@@ -101,7 +101,7 @@
       [nzWidth]="SideNavWidth"
       (nzCollapsedChange)="changeCollapsed($event)"
     >
-      <div class="mix-sider-height" style="overflow: hidden auto"><app-nav-bar [isMixiLeft]="isSplitNav" /></div>
+      <div class="mix-sider-height" style="overflow: hidden auto"><app-nav-bar [isMixinLeft]="isSplitNav" /></div>
     </nz-sider>
 
     <nz-layout>
@@ -158,4 +158,4 @@
     </ng-container>
   </app-tool-bar>
 </ng-template>
-<app-nav-drawer #navDrawer />
+<app-nav-drawer *ngIf="isOverMode" #navDrawer />

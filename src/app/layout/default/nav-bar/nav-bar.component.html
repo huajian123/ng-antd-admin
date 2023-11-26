@@ -1,14 +1,14 @@
 <!--如果只有side模式时，可以考虑使用zorro的menu递归-->
 <!--https://github.com/NG-ZORRO/ng-zorro-antd/issues/6306-->
 <ul
-  *ngIf="!isMixiHead; else mixiHeadTpl"
+  *ngIf="!isMixinHead; else mixinHeadTpl"
   nz-menu
   [nzInlineCollapsed]="isCollapsed$ | async"
   [nzMode]="(themesOptions$ | async)!.mode === 'side' || (themesOptions$ | async)!.mode === 'mixin' || (isOverMode$ | async) ? 'inline' : 'horizontal'"
   [nzNoAnimation]="(themesOptions$ | async)!.mode === 'top' && !isOverMode"
   [nzTheme]="isMixinMode && !(isOverMode$ | async) && !(isNightTheme$ | async) ? 'light' : isMixinMode && (isNightTheme$ | async) ? 'dark' : (themesOptions$ | async)!.theme"
 >
-  <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: isMixiLeft ? leftMenuArray : menus }"></ng-container>
+  <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: isMixinLeft ? leftMenuArray : menus }"></ng-container>
   <ng-template #menuTpl let-menus>
     <ng-container *ngFor="let menu of menus; trackByProperty: 'id'">
       <!--权限1-->
@@ -116,7 +116,7 @@
   </ng-template>
 </ul>
 
-<ng-template #mixiHeadTpl>
+<ng-template #mixinHeadTpl>
   <ul nz-menu nzMode="horizontal" nzTheme="dark">
     <ng-container *ngFor="let menu of menus; trackByProperty: 'id'; let i = index">
       <!--权限1（不需要时删除此ng-container节点）-->

@@ -1,10 +1,9 @@
-import { DOCUMENT, NgIf, NgTemplateOutlet, NgFor, AsyncPipe } from '@angular/common';
+import { NgIf, NgTemplateOutlet, NgFor, AsyncPipe } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Input, Inject, inject, DestroyRef, booleanAttribute } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
-import { filter, map, mergeMap, share, switchMap, tap } from 'rxjs/operators';
+import { filter, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 
 import { ThemeMode } from '@app/layout/default/setting-drawer/setting-drawer.component';
 import { TabService } from '@core/services/common/tab.service';
@@ -30,26 +29,28 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 })
 export class NavBarComponent implements OnInit {
   @Input({ transform: booleanAttribute })
-  isMixiHead = false; // 是混合模式顶部导航
+  isMixinHead = false; // 是混合模式顶部导航
   @Input({ transform: booleanAttribute })
-  isMixiLeft = false;
+  isMixinLeft = false;
+
+  routerPath = this.router.url;
+  menus: Menu[] = [];
+  copyMenus: Menu[] = [];
+  authCodeArray: string[] = [];
 
   themesOptions$ = this.themesService.getThemesMode();
   isNightTheme$ = this.themesService.getIsNightTheme();
   isCollapsed$ = this.themesService.getIsCollapsed();
   isOverMode$ = this.themesService.getIsOverMode();
   leftMenuArray$ = this.splitNavStoreService.getSplitLeftNavArrayStore();
+  subTheme$: Observable<any>;
 
-  routerPath = this.router.url;
   themesMode: ThemeMode['key'] = 'side';
   isOverMode = false;
   isCollapsed = false;
   isMixinMode = false;
   leftMenuArray: Menu[] = [];
-  menus: Menu[] = [];
-  copyMenus: Menu[] = [];
-  authCodeArray: string[] = [];
-  subTheme$: Observable<any>;
+
   destroyRef = inject(DestroyRef);
 
   constructor(
@@ -60,9 +61,7 @@ export class NavBarComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private tabService: TabService,
     private cdr: ChangeDetectorRef,
-    private themesService: ThemeService,
-    private titleServe: Title,
-    @Inject(DOCUMENT) private doc: Document
+    private themesService: ThemeService
   ) {
     this.initMenus();
 
@@ -75,7 +74,6 @@ export class NavBarComponent implements OnInit {
         this.themesMode = options.mode;
         this.isMixinMode = this.themesMode === 'mixin';
       }),
-      share(),
       takeUntilDestroyed(this.destroyRef)
     );
 
