@@ -2,6 +2,7 @@ import { AsyncPipe } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
+import { SideNavWidth } from '@app/config/constant';
 import { ThemeService } from '@store/common-store/theme.service';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
@@ -20,6 +21,7 @@ export class NavDrawerComponent implements OnInit {
   isShowModal = false;
   themesOptions$ = this.themesService.getThemesMode();
   destroyRef = inject(DestroyRef);
+  SideNavWidth = SideNavWidth;
   constructor(private cdr: ChangeDetectorRef, private themesService: ThemeService) {}
 
   subTheme(): void {

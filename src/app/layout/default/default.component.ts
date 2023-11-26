@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 
 import { fadeRouteAnimation } from '@app/animations/fade.animation';
 import { SettingDrawerComponent, Theme } from '@app/layout/default/setting-drawer/setting-drawer.component';
-import { IsFirstLogin } from '@config/constant';
+import { CollapsedNavWidth, IsFirstLogin, SideNavWidth } from '@config/constant';
 import { DriverService } from '@core/services/common/driver.service';
 import { WindowService } from '@core/services/common/window.service';
 import { Menu } from '@core/services/types';
@@ -65,6 +65,8 @@ import { ToolBarComponent } from './tool-bar/tool-bar.component';
 })
 export class DefaultComponent implements OnInit, AfterViewInit {
   @ViewChild('navDrawer') navDrawer!: NavDrawerComponent;
+  SideNavWidth = SideNavWidth;
+  CollapsedNavWidth = CollapsedNavWidth;
 
   destroyRef = inject(DestroyRef); // 用于销毁订阅
   windowService = inject(WindowService); // 用于获取window对象

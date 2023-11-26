@@ -5,9 +5,9 @@
     *ngIf="!isMixinMode && isSideMode && !isOverMode && isHasNavArea && isFixedLeftNav"
     nzBreakpoint="lg"
     [nzCollapsed]="isCollapsed"
-    [nzCollapsedWidth]="48"
+    [nzCollapsedWidth]="CollapsedNavWidth"
     [nzTheme]="theme"
-    [nzWidth]="208"
+    [nzWidth]="SideNavWidth"
   />
 
   <!--非混合模式侧边栏-->
@@ -18,11 +18,11 @@
     nzBreakpoint="lg"
     [class.left-nav-fixed]="isFixedLeftNav"
     [nzCollapsed]="isCollapsed"
-    [nzCollapsedWidth]="48"
+    [nzCollapsedWidth]="CollapsedNavWidth"
     [nzCollapsible]="true"
     [nzTheme]="theme"
     [nzTrigger]="trigger"
-    [nzWidth]="208"
+    [nzWidth]="SideNavWidth"
     (nzCollapsedChange)="changeCollapsed($event)"
   >
     <app-side-nav />
@@ -81,9 +81,9 @@
       nzBreakpoint="lg"
       nzNoAnimation
       [nzCollapsed]="isCollapsed"
-      [nzCollapsedWidth]="48"
+      [nzCollapsedWidth]="CollapsedNavWidth"
       [nzTheme]="isNightTheme ? 'dark' : 'light'"
-      [nzWidth]="208"
+      [nzWidth]="SideNavWidth"
     />
     <!--混合模式sider-->
     <nz-sider
@@ -94,11 +94,11 @@
       [class.mixin-left-nav-fixed]="isFixedLeftNav"
       [class.t-0]="!isHasTopArea"
       [nzCollapsed]="isCollapsed"
-      [nzCollapsedWidth]="48"
+      [nzCollapsedWidth]="CollapsedNavWidth"
       [nzCollapsible]="true"
       [nzTheme]="isNightTheme ? 'dark' : 'light'"
       [nzTrigger]="trigger"
-      [nzWidth]="208"
+      [nzWidth]="SideNavWidth"
       (nzCollapsedChange)="changeCollapsed($event)"
     >
       <div class="mix-sider-height" style="overflow: hidden auto"><app-nav-bar [isMixiLeft]="isSplitNav" /></div>
