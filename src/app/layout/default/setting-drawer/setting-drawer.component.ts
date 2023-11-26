@@ -42,7 +42,7 @@ interface Color extends NormalModel {
 }
 
 export interface ThemeMode extends NormalModel {
-  key: 'side' | 'top' | 'mixi';
+  key: 'side' | 'top' | 'mixin';
 }
 
 @Component({
@@ -154,7 +154,7 @@ export class SettingDrawerComponent implements OnInit {
       isChecked: false
     },
     {
-      key: 'mixi',
+      key: 'mixin',
       image: '/assets/imgs/menu-top.svg',
       title: '混合菜单布局',
       isChecked: false

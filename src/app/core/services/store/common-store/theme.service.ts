@@ -45,8 +45,6 @@ export class ThemeService {
 
   private isCollapsed$ = new BehaviorSubject<boolean>(false);
 
-  constructor() {}
-
   // 获取主题参数
   setThemesMode(mode: SettingInterface): void {
     this.themesMode$.next(mode);

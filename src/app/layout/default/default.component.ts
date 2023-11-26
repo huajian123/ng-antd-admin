@@ -1,14 +1,15 @@
-import { NgIf, NgTemplateOutlet, AsyncPipe, NgClass, NgStyle } from '@angular/common';
+import { NgIf, NgTemplateOutlet, AsyncPipe, NgClass, NgStyle, NgOptimizedImage } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, AfterViewInit, inject, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterOutlet } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { fadeRouteAnimation } from '@app/animations/fade.animation';
-import { SettingDrawerComponent } from '@app/layout/default/setting-drawer/setting-drawer.component';
+import { SettingDrawerComponent, Theme } from '@app/layout/default/setting-drawer/setting-drawer.component';
 import { IsFirstLogin } from '@config/constant';
 import { DriverService } from '@core/services/common/driver.service';
 import { WindowService } from '@core/services/common/window.service';
+import { Menu } from '@core/services/types';
 import { LayoutHeadRightMenuComponent } from '@shared/biz-components/layout-components/layout-head-right-menu/layout-head-right-menu.component';
 import { ChatComponent } from '@shared/components/chat/chat.component';
 import { TopProgressBarComponent } from '@shared/components/top-progress-bar/top-progress-bar.component';
@@ -58,80 +59,99 @@ import { ToolBarComponent } from './tool-bar/tool-bar.component';
     RouterOutlet,
     NavDrawerComponent,
     AsyncPipe,
-    ChatComponent
+    ChatComponent,
+    NgOptimizedImage
   ]
 })
 export class DefaultComponent implements OnInit, AfterViewInit {
-  showChats = true;
-  isMixiMode = false;
-  themesOptions: SettingInterface = {
-    theme: 'dark',
-    color: '',
-    mode: 'side',
-    splitNav: false,
-    isShowTab: true,
-    fixedTab: false,
-    colorWeak: false,
-    greyTheme: false,
-    fixedHead: false,
-    fixedLeftNav: false,
-    hasTopArea: true,
-    hasFooterArea: true,
-    hasNavArea: true,
-    hasNavHeadArea: true
-  };
-  isFixedLeftNav = false;
+  @ViewChild('navDrawer') navDrawer!: NavDrawerComponent;
+
+  destroyRef = inject(DestroyRef); // 用于销毁订阅
+  windowService = inject(WindowService); // 用于获取window对象
+  driverService = inject(DriverService); // 用于引导用户
+  themesService = inject(ThemeService); // 用于获取主题
+  splitNavStoreService = inject(SplitNavStoreService); // 用于获取分割菜单的store
+
   isNightTheme$ = this.themesService.getIsNightTheme();
   themesOptions$ = this.themesService.getThemesMode();
   isOverMode$: Observable<boolean> = this.themesService.getIsOverMode();
   isCollapsed$: Observable<boolean> = this.themesService.getIsCollapsed();
-  themeOptions$ = this.themesService.getThemesMode();
-  isCollapsed = false;
+  mixinModeLeftNav$ = this.splitNavStoreService.getSplitLeftNavArrayStore();
+
+  showChats = true; // 是否显示聊天窗口
+  isMixinMode = false; // 是否是混合模式
+  isNightTheme = false; // 是否是暗色主题
+  isFixedLeftNav = false; // 是否固定左侧菜单
+  isSplitNav = false; // 是否分割菜单
+  isCollapsed = false; // 是否折叠左侧菜单
   isOverMode = false; // 窗口变窄时，导航栏是否变成抽屉模式
-  // 混合模式下，判断顶部菜单是否有子菜单，如果没有子菜单，要隐藏左侧菜单
-  mixiModeLeftNav = this.splitNavStoreService.getSplitLeftNavArrayStore();
+  isShowTab = false; // 是否显示页签
+  isFixedTab = false; // 是否固定页签
+  isHasNavArea = false; // 是否有菜单区域
+  isHasNavHeadArea = false; // 是否有菜单头部区域
+  isHasFooterArea = false; // 是否有底部区域
+  isHasTopArea = false; // 是否有顶部区域
+
+  isFixedHead = false; // 是否固定头部
+  isSideMode = false; // 是否是侧边模式
+  isTopMode = false; // 是否是顶部模式
+  theme: Theme['key'] = 'dark'; // 主题模式
+
+  themesOptions!: SettingInterface;
+  mixinModeLeftNav: Menu[] = []; // 混合模式下的左侧菜单
   contentMarginTop = '48px';
-  @ViewChild('navDrawer') navDrawer!: NavDrawerComponent;
-  destroyRef = inject(DestroyRef);
-  constructor(private themesService: ThemeService, private splitNavStoreService: SplitNavStoreService, private driverService: DriverService, private windowService: WindowService) {}
 
   changeCollapsed(isCollapsed: boolean): void {
+    // 如果是over模式，点击左侧菜单，显示抽屉菜单
     if (this.isOverMode) {
       this.navDrawer.showDraw();
       return;
     }
     this.isCollapsed = isCollapsed;
+    // 设置左侧菜单是否折叠的状态
     this.themesService.setIsCollapsed(this.isCollapsed);
   }
 
-  // 监听各种流
-  subTheme(): void {
-    this.themesService
-      .getIsCollapsed()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(res => (this.isCollapsed = res));
-    this.themesService
-      .getIsOverMode()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(res => (this.isOverMode = res));
-  }
-
+  // 路由动画
   prepareRoute(outlet: RouterOutlet): string {
     return outlet?.activatedRouteData?.['key'];
+  }
+
+  judgeMarginTop(): string {
+    if (this.isFixedHead && !this.isMixinMode && this.isHasTopArea) {
+      return this.isShowTab ? (this.isFixedTab ? '96px' : '48px') : '48px';
+    } else {
+      return this.isShowTab ? (this.isFixedTab ? '48px' : '0px') : '0px';
+    }
   }
 
   getThemeOptions(): void {
     this.themesOptions$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => {
       this.themesOptions = res;
-      this.isMixiMode = res.mode === 'mixi';
-      this.isFixedLeftNav = this.themesOptions.fixedLeftNav;
 
-      if (this.themesOptions.fixedHead && !this.isMixiMode && this.themesOptions.hasTopArea) {
-        this.contentMarginTop = this.themesOptions.isShowTab ? (this.themesOptions.fixedTab ? '96px' : '48px') : '48px';
-      } else {
-        this.contentMarginTop = this.themesOptions.isShowTab ? (this.themesOptions.fixedTab ? '48px' : '0px') : '0px';
-      }
+      const { fixedTab, fixedHead, hasFooterArea, mode, fixedLeftNav, hasNavArea, hasTopArea, hasNavHeadArea, isShowTab, splitNav, theme } = this.themesOptions;
+
+      this.isMixinMode = mode === 'mixin';
+      this.isSideMode = mode === 'side';
+      this.isTopMode = mode === 'top';
+      this.isFixedLeftNav = fixedLeftNav;
+      this.isHasNavArea = hasNavArea;
+      this.isHasTopArea = hasTopArea;
+      this.isHasNavHeadArea = hasNavHeadArea;
+      this.isShowTab = isShowTab;
+      this.isSplitNav = splitNav;
+      this.theme = theme;
+      this.isFixedHead = fixedHead;
+      this.isHasFooterArea = hasFooterArea;
+      this.isFixedTab = fixedTab;
+
+      this.contentMarginTop = this.judgeMarginTop();
     });
+
+    this.isCollapsed$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => (this.isCollapsed = res));
+    this.isOverMode$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => (this.isOverMode = res));
+    this.isNightTheme$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => (this.isNightTheme = res));
+    this.mixinModeLeftNav$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => (this.mixinModeLeftNav = res));
   }
 
   ngAfterViewInit(): void {
@@ -143,7 +163,6 @@ export class DefaultComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.subTheme();
     this.getThemeOptions();
   }
 }

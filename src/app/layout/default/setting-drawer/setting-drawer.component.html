@@ -9,7 +9,7 @@
 </div>
 <nz-drawer [nzClosable]="false" [nzWidth]="300" [(nzVisible)]="isCollapsed" (nzOnClose)="isCollapsed = !isCollapsed">
   <ng-container *nzDrawerContent>
-    <div *ngIf="_themesOptions.mode !== 'mixi'" class="m-b-24">
+    <div *ngIf="_themesOptions.mode !== 'mixin'" class="m-b-24">
       <h3 class="title">整体风格设置</h3>
       <div class="block-checkbox">
         <div *ngFor="let theme of themes" class="item" nz-tooltip [nzTooltipTitle]="theme.title" (click)="changeTheme(theme)">
@@ -21,7 +21,7 @@
       </div>
     </div>
 
-    <div class="m-b-24 theme-color" [class.m-t-25]="_themesOptions.mode !== 'mixi'">
+    <div class="m-b-24 theme-color" [class.m-t-25]="_themesOptions.mode !== 'mixin'">
       <h3 class="title">主题色</h3>
       <div class="content">
         <div *ngFor="let color of colors" class="color-block" nz-tooltip [nzTooltipTitle]="color.title" [style.background]="color.color" (click)="changePrimaryColor(color)">

@@ -4,9 +4,9 @@
   *ngIf="!isMixiHead; else mixiHeadTpl"
   nz-menu
   [nzInlineCollapsed]="isCollapsed$ | async"
-  [nzMode]="(themesOptions$ | async)!.mode === 'side' || (themesOptions$ | async)!.mode === 'mixi' || (isOverMode$ | async) ? 'inline' : 'horizontal'"
+  [nzMode]="(themesOptions$ | async)!.mode === 'side' || (themesOptions$ | async)!.mode === 'mixin' || (isOverMode$ | async) ? 'inline' : 'horizontal'"
   [nzNoAnimation]="(themesOptions$ | async)!.mode === 'top' && !isOverMode"
-  [nzTheme]="isMixiMode && !(isOverMode$ | async) && !(isNightTheme$ | async) ? 'light' : isMixiMode && (isNightTheme$ | async) ? 'dark' : (themesOptions$ | async)!.theme"
+  [nzTheme]="isMixinMode && !(isOverMode$ | async) && !(isNightTheme$ | async) ? 'light' : isMixinMode && (isNightTheme$ | async) ? 'dark' : (themesOptions$ | async)!.theme"
 >
   <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: isMixiLeft ? leftMenuArray : menus }"></ng-container>
   <ng-template #menuTpl let-menus>

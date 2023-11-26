@@ -44,7 +44,7 @@ export class NavBarComponent implements OnInit {
   themesMode: ThemeMode['key'] = 'side';
   isOverMode = false;
   isCollapsed = false;
-  isMixiMode = false;
+  isMixinMode = false;
   leftMenuArray: Menu[] = [];
   menus: Menu[] = [];
   copyMenus: Menu[] = [];
@@ -73,14 +73,14 @@ export class NavBarComponent implements OnInit {
       }),
       tap(options => {
         this.themesMode = options.mode;
-        this.isMixiMode = this.themesMode === 'mixi';
+        this.isMixinMode = this.themesMode === 'mixin';
       }),
       share(),
       takeUntilDestroyed(this.destroyRef)
     );
 
     // 监听混合模式下左侧菜单数据源
-    this.subMixiModeSideMenu();
+    this.subMixinModeSideMenu();
     // 监听折叠菜单事件
     this.subIsCollapsed();
     this.subAuth();
@@ -91,7 +91,7 @@ export class NavBarComponent implements OnInit {
           this.subTheme$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
             // 主题切换为混合模式下，设置左侧菜单数据源
             // 如果放在ngInit监听里面，会在混合模式下，刷新完页面切换路由，runOutSideAngular
-            if (this.isMixiMode) {
+            if (this.isMixinMode) {
               this.setMixModeLeftMenu();
             }
           });
@@ -270,7 +270,7 @@ export class NavBarComponent implements OnInit {
         this.menus = this.cloneMenuArray(this.copyMenus);
         this.clickMenuItem(this.menus);
         // 混合模式下要在点击一下左侧菜单数据源,不然有二级菜单的菜单在折叠状态变为展开时，不open
-        if (this.themesMode === 'mixi') {
+        if (this.themesMode === 'mixin') {
           this.clickMenuItem(this.leftMenuArray);
         }
       } else {
@@ -296,7 +296,7 @@ export class NavBarComponent implements OnInit {
   }
 
   // 监听混合模式下左侧菜单数据源
-  private subMixiModeSideMenu(): void {
+  private subMixinModeSideMenu(): void {
     this.leftMenuArray$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => {
       this.leftMenuArray = res;
     });

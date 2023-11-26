@@ -1,17 +1,6 @@
 @import "mixin";
 @import "base";
 
-.app-header {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 100%;
-  padding: 0;
-  box-shadow: 0 1px 4px rgb(0 21 41 / 8%);
-}
-
-
 .trigger {
   z-index: 10;
   padding: 0 24px;
@@ -25,15 +14,6 @@
   color: #1890ff;
 }
 
-//
-//.fixed {
-//  position: fixed;
-//  top: 0;
-//  right: 0;
-//  left: 0;
-//  z-index: 999;
-//}
-//
 .mix-sider-height {
   height: calc(100vh - @layout-header-height - @layout-trigger-height);
 }
@@ -64,7 +44,7 @@
 }
 
 
-.mixi-left-nav-fixed {
+.mixin-left-nav-fixed {
   position: fixed;
   top: 48px;
   left: 0;

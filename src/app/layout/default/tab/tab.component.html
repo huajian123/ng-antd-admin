@@ -25,7 +25,7 @@
         (isOverMode$ | async) ||
         !(themesOptions$ | async)!.hasNavArea ||
         (themesOptions$ | async)?.mode === 'top' ||
-        ((themesOptions$ | async)?.mode === 'mixi' && (leftMenuArray$ | async)!.length === 0 && (themesOptions$ | async)?.splitNav)
+        ((themesOptions$ | async)?.mode === 'mixin' && (leftMenuArray$ | async)!.length === 0 && (themesOptions$ | async)?.splitNav)
     }"
     [ngStyle]="{ top: (themesOptions$ | async)!.hasTopArea ? '48px' : '0', left: !(themesOptions$ | async)!.hasNavArea ? '0' : '' }"
     [nzBodyStyle]="{ padding: 0 }"

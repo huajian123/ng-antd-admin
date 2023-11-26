@@ -45,7 +45,7 @@ export class FooterSubmitComponent implements OnInit {
       tap(themesOptions => {
         this.hasLeftNav = themesOptions.hasNavArea;
         this.isTopMode = themesOptions.mode === 'top';
-        this.isMixMode = themesOptions.mode === 'mixi';
+        this.isMixMode = themesOptions.mode === 'mixin';
       })
     );
     const sub2$ = this.isCollapsed$.pipe(
