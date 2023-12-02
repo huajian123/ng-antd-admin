@@ -54,7 +54,8 @@ export class DeptTreeService {
   dataSource = new NzTreeFlatDataSource(this.treeControl, this.treeFlattener);
   hasChild = (_: number, node: FlatNode): boolean => node.expandable;
 
-  constructor(private dataService: DeptService, private cdr: ChangeDetectorRef) {}
+  private dataService = inject(DeptService);
+  private cdr = inject(ChangeDetectorRef);
 
   resetTree(): void {
     if (this.currentSelNode) {

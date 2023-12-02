@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, TemplateRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, TemplateRef, inject } from '@angular/core';
 
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -21,7 +21,7 @@ type confirmType = common | 'info' | 'confirm';
   standalone: true,
   imports: [PageHeaderComponent, NzCardModule, NzButtonModule, NzWaveModule, NzIconModule, NzNotificationServiceModule]
 })
-export class MsgComponent implements OnInit {
+export class MsgComponent {
   map = {
     info: 'exclamation-circle',
     warning: 'exclamation-circle',
@@ -35,8 +35,9 @@ export class MsgComponent implements OnInit {
     breadcrumb: ['首页', '功能', '消息提示'],
     desc: '这个是好心人pr的功能'
   };
-
-  constructor(private cdr: ChangeDetectorRef, private message: NzMessageService, private modal: NzModalService, private notification: NzNotificationService) {}
+  private message = inject(NzMessageService);
+  private modal = inject(NzModalService);
+  private notification = inject(NzNotificationService);
 
   msg(type: msgType): void {
     this.message[type](`${type} message`);
@@ -55,6 +56,4 @@ export class MsgComponent implements OnInit {
   createBasicNotification(template: TemplateRef<{}>): void {
     this.notification.template(template);
   }
-
-  ngOnInit(): void {}
 }

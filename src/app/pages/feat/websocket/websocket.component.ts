@@ -21,7 +21,7 @@ import { webSocket } from 'rxjs/webSocket';
   standalone: true,
   imports: [PageHeaderComponent, NzGridModule, NzInputModule, FormsModule, NzButtonModule, NzWaveModule, NzCardModule, NgFor, NzResultModule, NzTypographyModule]
 })
-export class WebsocketComponent implements OnInit, OnDestroy, AfterViewInit {
+export class WebsocketComponent implements OnDestroy, AfterViewInit {
   concate = true;
   destroyRef = inject(DestroyRef);
   // https://github.com/ReactiveX/rxjs/issues/4166
@@ -33,7 +33,7 @@ export class WebsocketComponent implements OnInit, OnDestroy, AfterViewInit {
   result: string[] = [];
   msg = '';
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  private cdr = inject(ChangeDetectorRef);
 
   send(): void {
     this.subject.next(this.msg);
@@ -44,8 +44,6 @@ export class WebsocketComponent implements OnInit, OnDestroy, AfterViewInit {
     this.subject.complete();
     this.concate = false;
   }
-
-  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     this.subject.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => {

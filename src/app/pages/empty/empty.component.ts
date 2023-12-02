@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-empty',
@@ -6,8 +6,4 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true
 })
-export class EmptyComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
-}
+export class EmptyComponent {}

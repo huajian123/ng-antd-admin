@@ -14,8 +14,6 @@ export interface UserInfo {
 export class UserInfoService {
   private userInfo$ = new BehaviorSubject<UserInfo>({ userId: -1, authCode: [] });
 
-  constructor() {}
-
   parsToken(token: string): UserInfo {
     const helper = new JwtHelperService();
     try {

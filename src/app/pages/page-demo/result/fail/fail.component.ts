@@ -14,8 +14,4 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
   standalone: true,
   imports: [NzCardModule, NzResultModule, NzTypographyModule, NzIconModule, NzButtonModule, NzWaveModule]
 })
-export class FailComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
-}
+export class FailComponent {}

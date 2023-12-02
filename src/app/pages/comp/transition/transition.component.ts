@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { fadeInOnEnterAnimation, fadeOutOnLeaveAnimation, collapseAnimation, rubberBandAnimation } from 'angular-animations';
@@ -20,15 +20,11 @@ import { ExperimentsComponent } from './experiments/experiments.component';
   standalone: true,
   imports: [PageHeaderComponent, NzButtonModule, NzWaveModule, NzCardModule, NgIf, DemoMainComponent, DemoOnEnterOnLeaveComponent, DemoDynamicParamsComponent, ExperimentsComponent]
 })
-export class TransitionComponent implements OnInit {
+export class TransitionComponent {
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '动画组件示例',
     desc: '动起来！',
     breadcrumb: ['首页', '组件', '动画组件']
   };
   currentComp = 'home';
-
-  constructor() {}
-
-  ngOnInit(): void {}
 }

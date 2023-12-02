@@ -33,6 +33,15 @@ export class NavBarComponent implements OnInit {
   @Input({ transform: booleanAttribute })
   isMixinLeft = false;
 
+  private router = inject(Router);
+  private userInfoService = inject(UserInfoService);
+  private menuServices = inject(MenuStoreService);
+  private splitNavStoreService = inject(SplitNavStoreService);
+  private activatedRoute = inject(ActivatedRoute);
+  private tabService = inject(TabService);
+  private cdr = inject(ChangeDetectorRef);
+  private themesService = inject(ThemeService);
+
   routerPath = this.router.url;
   menus: Menu[] = [];
   copyMenus: Menu[] = [];
@@ -53,16 +62,7 @@ export class NavBarComponent implements OnInit {
 
   destroyRef = inject(DestroyRef);
 
-  constructor(
-    private router: Router,
-    private userInfoService: UserInfoService,
-    private menuServices: MenuStoreService,
-    private splitNavStoreService: SplitNavStoreService,
-    private activatedRoute: ActivatedRoute,
-    private tabService: TabService,
-    private cdr: ChangeDetectorRef,
-    private themesService: ThemeService
-  ) {
+  constructor() {
     this.initMenus();
 
     this.subTheme$ = this.isOverMode$.pipe(

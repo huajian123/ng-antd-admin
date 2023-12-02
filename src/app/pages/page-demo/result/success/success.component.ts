@@ -21,7 +21,8 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
 export class SuccessComponent implements OnInit {
   stepDirection: 'horizontal' | 'vertical' = 'horizontal';
   destroyRef = inject(DestroyRef);
-  constructor(private breakpointObserver: BreakpointObserver, private cdr: ChangeDetectorRef) {}
+  private breakpointObserver = inject(BreakpointObserver);
+  private cdr = inject(ChangeDetectorRef);
 
   ngOnInit(): void {
     this.breakpointObserver

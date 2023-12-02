@@ -22,8 +22,9 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
 export class DeptManageModalComponent implements OnInit {
   addEditForm!: FormGroup;
   readonly nzModalData: Dept = inject(NZ_MODAL_DATA);
+  private fb = inject(FormBuilder);
 
-  constructor(private modalRef: NzModalRef, private fb: FormBuilder) {}
+  constructor(private modalRef: NzModalRef) {}
 
   initForm(): void {
     this.addEditForm = this.fb.group({

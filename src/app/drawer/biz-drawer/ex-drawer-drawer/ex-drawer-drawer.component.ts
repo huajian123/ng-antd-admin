@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
 import { NonNullableFormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
@@ -15,12 +15,11 @@ import { NzInputModule } from 'ng-zorro-antd/input';
   imports: [FormsModule, ReactiveFormsModule, NzGridModule, NzFormModule, NzInputModule]
 })
 export class ExDrawerDrawerComponent implements OnInit {
+  private fb = inject(NonNullableFormBuilder);
   params: { name: string } = { name: '' };
   validateForm = this.fb.group({
     password: ['', [Validators.required]]
   });
-
-  constructor(private fb: NonNullableFormBuilder) {}
 
   getCurrentValue(): Observable<any> {
     if (!fnCheckForm(this.validateForm)) {

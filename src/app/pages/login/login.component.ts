@@ -12,8 +12,4 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
   standalone: true,
   imports: [NzIconModule, NzButtonModule, RouterOutlet]
 })
-export class LoginComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
-}
+export class LoginComponent {}

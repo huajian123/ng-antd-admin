@@ -29,7 +29,8 @@ export class AdvancedComponent implements OnInit {
   destroyRef = inject(DestroyRef);
   tabPosition: NzTabPosition = 'left';
 
-  constructor(private cdr: ChangeDetectorRef, private breakpointObserver: BreakpointObserver) {}
+  private cdr = inject(ChangeDetectorRef);
+  private breakpointObserver = inject(BreakpointObserver);
 
   to(tabIndex: number): void {
     this.componentPortal = new ComponentPortal(this.tabArray[tabIndex].value);

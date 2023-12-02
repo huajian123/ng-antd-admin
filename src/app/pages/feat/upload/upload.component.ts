@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { environment } from '@env/environment';
@@ -31,8 +31,8 @@ export class UploadComponent implements OnInit {
   fileList: NzUploadFile[] = [];
   fileFormList: NzUploadFile[] = [];
   validateForm!: FormGroup;
-
-  constructor(public message: NzMessageService, private fb: FormBuilder) {}
+  private message = inject(NzMessageService);
+  private fb = inject(FormBuilder);
 
   handleChange(info: NzUploadChangeParam): void {
     if (info.type === 'success') {

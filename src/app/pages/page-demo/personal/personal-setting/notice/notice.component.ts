@@ -21,8 +21,9 @@ export class NoticeComponent implements OnInit {
     messages: true,
     todo: true
   };
+  @Input({ required: true }) data!: { label: string };
 
-  constructor() {}
-
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.data);
+  }
 }

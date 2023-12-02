@@ -27,7 +27,7 @@ interface TabInterface {
   standalone: true,
   imports: [PageHeaderComponent, WaterMarkComponent, NzButtonModule, NzInputModule, NzWaveModule, NzTabsModule, NgFor, RouterOutlet]
 })
-export class SearchListComponent implements OnInit {
+export class SearchListComponent {
   @ViewChild('headerContent', { static: true }) headerContent!: TemplateRef<NzSafeAny>;
   @ViewChild('headerFooter', { static: true }) headerFooter!: TemplateRef<NzSafeAny>;
   pageHeaderInfo: Partial<PageHeaderType> = {
@@ -43,8 +43,11 @@ export class SearchListComponent implements OnInit {
     { label: '项目', url: '/default/page-demo/list/search-list/project' },
     { label: '应用', url: '/default/page-demo/list/search-list/application' }
   ];
+  private cdr = inject(ChangeDetectorRef);
+  private searchListService = inject(SearchListStoreService);
+  private router = inject(Router);
 
-  constructor(private searchListService: SearchListStoreService, private activatedRoute: ActivatedRoute, private router: Router, private cdr: ChangeDetectorRef) {
+  constructor() {
     this.searchListService
       .getCurrentSearchListComponentStore()
       .pipe(takeUntilDestroyed(this.destroyRef))
@@ -78,6 +81,4 @@ export class SearchListComponent implements OnInit {
   to(item: TabInterface): void {
     this.router.navigateByUrl(item.url);
   }
-
-  ngOnInit(): void {}
 }

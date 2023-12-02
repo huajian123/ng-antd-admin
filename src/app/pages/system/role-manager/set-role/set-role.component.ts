@@ -2,7 +2,7 @@ import { NgFor, NgIf, NgTemplateOutlet, NgStyle } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { concatMap } from 'rxjs/operators';
 
 import { Menu } from '@core/services/types';
@@ -56,14 +56,11 @@ export class SetRoleComponent implements OnInit {
   destroyRef = inject(DestroyRef);
   @Input({ required: true }) id!: string; // 从路由中获取的角色id，ng16支持的新特性
 
-  constructor(
-    private dataService: RoleService,
-    private cdr: ChangeDetectorRef,
-    private menusService: MenusService,
-    private routeInfo: ActivatedRoute,
-    private router: Router,
-    public message: NzMessageService
-  ) {}
+  private dataService = inject(RoleService);
+  private menusService = inject(MenusService);
+  private router = inject(Router);
+  private message = inject(NzMessageService);
+  private cdr = inject(ChangeDetectorRef);
 
   // 初始化数据
   initPermission(): void {

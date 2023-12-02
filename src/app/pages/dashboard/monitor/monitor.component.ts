@@ -1,7 +1,6 @@
 import { DecimalPipe, PercentPipe } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, inject, NgZone, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, inject, NgZone } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormBuilder } from '@angular/forms';
 
 import AMapLoader from '@amap/amap-jsapi-loader';
 import { Gauge, Liquid, RingProgress, TinyArea, WordCloud } from '@antv/g2plot';
@@ -20,7 +19,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
   standalone: true,
   imports: [NzCardModule, NzBreadCrumbModule, NzGridModule, NzStatisticModule, NzTypographyModule, DecimalPipe, PercentPipe]
 })
-export class MonitorComponent implements OnInit, AfterViewInit {
+export class MonitorComponent implements AfterViewInit {
   deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30;
   destroyRef = inject(DestroyRef);
   miniAreaData = [264, 274, 284, 294, 300, 310, 320, 330, 340, 350, 360, 370, 380, 390, 400, 410, 420, 430, 440, 450, 460, 470];
@@ -411,8 +410,7 @@ export class MonitorComponent implements OnInit, AfterViewInit {
       category: 'europe'
     }
   ];
-
-  constructor(private fb: FormBuilder, private ngZone: NgZone) {}
+  private ngZone = inject(NgZone);
 
   initDashBoard(): void {
     const gauge = new Gauge('dashBoard', {
@@ -601,6 +599,4 @@ export class MonitorComponent implements OnInit, AfterViewInit {
         });
       });
   }
-
-  ngOnInit(): void {}
 }

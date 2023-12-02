@@ -30,8 +30,6 @@ import LinearGradient from 'zrender/lib/graphic/LinearGradient';
 export class EventsChartsComponent implements OnInit {
   options: any;
 
-  constructor() {}
-
   ngOnInit(): void {
     const dataAxis = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'];
     const data = [220, 182, 191, 234, 290, 330, 310, 123, 442, 321, 90, 149, 210, 122, 133, 334, 198, 123, 125, 220];

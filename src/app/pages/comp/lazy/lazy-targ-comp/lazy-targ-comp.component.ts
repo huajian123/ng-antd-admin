@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, SimpleChanges, OnChanges, inject, DestroyRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, SimpleChanges, OnChanges, inject, DestroyRef } from '@angular/core';
 
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -20,13 +20,12 @@ export enum LazySelPeopleEnum {
   standalone: true,
   imports: [NzCardModule, NzAvatarModule, NzButtonModule, NzWaveModule]
 })
-export class LazyTargCompComponent implements OnInit, OnChanges {
+export class LazyTargCompComponent implements OnChanges {
   @Input() purChoosePeople: LazySelPeopleEnum = LazySelPeopleEnum.YiLin;
   @Output() readonly currentPeople = new EventEmitter<LazySelPeopleEnum>();
   lazySelPeopleEnum = LazySelPeopleEnum;
   disabled = true;
   destroyRef = inject(DestroyRef);
-  constructor() {}
 
   // 选择明星
   choosePeople(people: LazySelPeopleEnum): void {
@@ -34,8 +33,6 @@ export class LazyTargCompComponent implements OnInit, OnChanges {
     this.currentPeople.next(people);
     this.disabled = false;
   }
-
-  ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes);

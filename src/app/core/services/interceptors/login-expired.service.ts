@@ -18,16 +18,12 @@ import { WindowService } from '../common/window.service';
 export class LoginExpiredService implements HttpInterceptor {
   private refresher: Observable<NzSafeAny> | null = null;
   destroyRef = inject(DestroyRef);
-
-  constructor(
-    private loginModalService: LoginModalService,
-    private router: Router,
-    private loginInOutService: LoginInOutService,
-    private zone: NgZone,
-    private message: NzMessageService,
-    private windowServe: WindowService,
-    private http: HttpClient
-  ) {}
+  loginModalService = inject(LoginModalService);
+  router = inject(Router);
+  loginInOutService = inject(LoginInOutService);
+  message = inject(NzMessageService);
+  windowServe = inject(WindowService);
+  http = inject(HttpClient);
 
   intercept(req: HttpRequest<string>, next: HttpHandler): Observable<HttpEvent<NzSafeAny>> {
     const newReq = req.clone();

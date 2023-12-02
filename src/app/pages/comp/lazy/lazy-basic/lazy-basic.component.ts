@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewChild, AfterViewInit, inject } from '@angular/core';
 
 import { LazyServiceService } from '@app/pages/comp/lazy/lazy-service.service';
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
@@ -16,7 +16,8 @@ import { NzWaveModule } from 'ng-zorro-antd/core/wave';
   standalone: true,
   imports: [PageHeaderComponent, NgIf, NzButtonModule, NzWaveModule, AdDirective]
 })
-export class LazyBasicComponent implements OnInit, AfterViewInit {
+export class LazyBasicComponent implements AfterViewInit {
+  lazyServiceService = inject(LazyServiceService);
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '懒加载组件示例',
     breadcrumb: ['首页', '组件', '懒加载组件'],
@@ -25,11 +26,7 @@ export class LazyBasicComponent implements OnInit, AfterViewInit {
   @ViewChild(AdDirective, { static: true }) adHost!: AdDirective;
   isStarted = false;
 
-  constructor(public lazyServiceService: LazyServiceService) {}
-
   ngAfterViewInit(): void {
     this.lazyServiceService.adHost = this.adHost;
   }
-
-  ngOnInit(): void {}
 }

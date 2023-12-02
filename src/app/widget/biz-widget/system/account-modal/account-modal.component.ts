@@ -36,7 +36,12 @@ export class AccountModalComponent implements OnInit {
   value?: string;
   deptNodes: NzTreeNodeOptions[] = [];
 
-  constructor(private modalRef: NzModalRef, private fb: FormBuilder, private validatorsService: ValidatorsService, private roleService: RoleService, private deptService: DeptService) {}
+  private fb = inject(FormBuilder);
+  private validatorsService = inject(ValidatorsService);
+  private roleService = inject(RoleService);
+  private deptService = inject(DeptService);
+
+  constructor(private modalRef: NzModalRef) {}
 
   // 此方法为如果有异步数据需要加载，则在该方法中添加
   protected getAsyncFnData(modalValue: NzSafeAny): Observable<NzSafeAny> {

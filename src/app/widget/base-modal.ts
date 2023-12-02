@@ -38,15 +38,15 @@ export class ModalWrapService {
   private renderer: Renderer2;
   destroyRef = inject(DestroyRef);
 
-  constructor(
-    private baseInjector: Injector,
-    private modalFullStatusStoreService: ModalFullStatusStoreService,
-    public dragDrop: DragDrop,
-    rendererFactory: RendererFactory2,
-    @Inject(GLOBAL_TPL_MODAL_ACTION_TOKEN) private btnComponentRef: ComponentRef<GlobalModalBtnTplComponentToken>
-  ) {
+  private baseInjector = inject(Injector);
+  private modalFullStatusStoreService = inject(ModalFullStatusStoreService);
+  dragDrop = inject(DragDrop);
+  rendererFactory = inject(RendererFactory2);
+  private btnComponentRef: ComponentRef<GlobalModalBtnTplComponentToken> = inject(GLOBAL_TPL_MODAL_ACTION_TOKEN);
+
+  constructor() {
     this.bsModalService = this.baseInjector.get(NzModalService);
-    this.renderer = rendererFactory.createRenderer(null, null);
+    this.renderer = this.rendererFactory.createRenderer(null, null);
     this.btnTpl = this.btnComponentRef.instance.componentTpl;
     this.modalFullStatusStoreService
       .getModalFullStatusStore()

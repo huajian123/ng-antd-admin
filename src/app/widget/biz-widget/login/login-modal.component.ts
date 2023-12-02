@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -24,7 +24,10 @@ import { BasicConfirmModalComponent } from '../../base-modal';
 export class LoginModalComponent extends BasicConfirmModalComponent implements OnInit {
   loginModalForm!: FormGroup;
 
-  constructor(protected override modalRef: NzModalRef, private fb: FormBuilder, private loginService: LoginService) {
+  private fb = inject(FormBuilder);
+  private loginService = inject(LoginService);
+
+  constructor(protected override modalRef: NzModalRef) {
     super(modalRef);
   }
 

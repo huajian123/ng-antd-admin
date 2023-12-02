@@ -1,5 +1,5 @@
 import { NgSwitch, NgSwitchCase, NgSwitchDefault, NgFor } from '@angular/common';
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import {
@@ -259,7 +259,7 @@ export class DemoMainComponent {
   animationWithState = false;
   hueBtnState = false;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  private cdr = inject(ChangeDetectorRef);
 
   animate(): void {
     this.animationState = false;

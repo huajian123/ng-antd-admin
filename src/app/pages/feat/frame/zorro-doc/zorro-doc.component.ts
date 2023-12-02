@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-zorro-doc',
@@ -7,8 +7,4 @@ import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef } fro
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true
 })
-export class ZorroDocComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
-}
+export class ZorroDocComponent {}

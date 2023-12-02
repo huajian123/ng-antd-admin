@@ -25,7 +25,10 @@ export class QrLoginComponent implements OnInit {
   typeEnum = LoginType;
   isOverModel = false;
   destroyRef = inject(DestroyRef);
-  constructor(private cdr: ChangeDetectorRef, private fb: FormBuilder, private login1StoreService: Login1StoreService) {}
+
+  private fb = inject(FormBuilder);
+  private login1StoreService = inject(Login1StoreService);
+  private cdr = inject(ChangeDetectorRef);
 
   submitForm(): void {}
 

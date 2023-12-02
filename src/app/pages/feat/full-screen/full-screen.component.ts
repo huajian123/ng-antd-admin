@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject } from '@angular/core';
 
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -22,7 +22,7 @@ export class FullScreenComponent implements OnInit {
 
   isFullscreenFlag = true;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  private cdr = inject(ChangeDetectorRef);
 
   toggle(): void {
     if (screenfull.isEnabled) {

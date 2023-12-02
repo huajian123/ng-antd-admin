@@ -38,7 +38,10 @@ export class RegistLoginComponent implements OnInit {
   }
   destroyRef = inject(DestroyRef);
 
-  constructor(private windowsWidthService: WindowsWidthService, private cdr: ChangeDetectorRef, private fb: FormBuilder, private login1StoreService: Login1StoreService) {}
+  private fb = inject(FormBuilder);
+  private login1StoreService = inject(Login1StoreService);
+  private windowsWidthService = inject(WindowsWidthService);
+  private cdr = inject(ChangeDetectorRef);
 
   subScreenWidth(): void {
     this.windowsWidthService.getWindowWidthStore().subscribe(res => {

@@ -31,7 +31,9 @@ export class SeriesComponent implements OnInit {
   ];
   tabPosition: NzTabPosition = 'left';
 
-  constructor(private cdr: ChangeDetectorRef, private breakpointObserver: BreakpointObserver) {}
+  private cdr = inject(ChangeDetectorRef);
+  private breakpointObserver = inject(BreakpointObserver);
+
   to(tabIndex: number): void {
     this.componentPortal = new ComponentPortal(this.tabArray[tabIndex].value);
     this.selectedPortal = this.componentPortal;

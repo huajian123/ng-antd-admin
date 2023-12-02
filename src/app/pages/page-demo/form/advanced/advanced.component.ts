@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { TaskManageFormComponent } from '@app/pages/page-demo/form/advanced/task-manage-form/task-manage-form.component';
@@ -40,7 +40,7 @@ import { WarehouseManageFormComponent as WarehouseManageFormComponent_1 } from '
     NzWaveModule
   ]
 })
-export class AdvancedComponent implements OnInit, OnDestroy {
+export class AdvancedComponent implements OnInit {
   @ViewChild('warehouseManageComponent') warehouseManageComponent!: WarehouseManageFormComponent;
   @ViewChild('taskManageComponent') taskManageComponent!: TaskManageFormComponent;
   pageHeaderInfo: Partial<PageHeaderType> = {
@@ -50,7 +50,8 @@ export class AdvancedComponent implements OnInit, OnDestroy {
   };
   validateForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, public message: NzMessageService) {}
+  private fb = inject(FormBuilder);
+  private message = inject(NzMessageService);
 
   submit(): void {
     // @ts-ignore
@@ -66,9 +67,5 @@ export class AdvancedComponent implements OnInit, OnDestroy {
       warehouseManage: [null, [Validators.required]],
       taskManage: [null, [Validators.required]]
     });
-  }
-
-  ngOnDestroy(): void {
-    console.log('GAOJI');
   }
 }

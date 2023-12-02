@@ -15,8 +15,6 @@ import { NgxEchartsModule } from 'ngx-echarts';
 export class SimpleChartComponent implements OnInit {
   options: any;
 
-  constructor() {}
-
   ngOnInit(): void {
     const xAxisData = [];
     const data1 = [];

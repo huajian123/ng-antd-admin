@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 
@@ -20,7 +20,8 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 export class RegisterFormComponent implements OnInit {
   validateForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  private fb = inject(FormBuilder);
+  private router = inject(Router);
 
   // checkPassword: [null, [Validators.required, this.confirmationValidator]],
 

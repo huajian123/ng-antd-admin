@@ -1,8 +1,7 @@
 import { NgFor, NgTemplateOutlet } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormBuilder, FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
 
 import { ActionCode } from '@app/config/actionCode';
@@ -74,15 +73,11 @@ export class DeptComponent implements OnInit {
   dataList: TreeNodeInterface[] = [];
   stateOptions: OptionsInterface[] = [];
 
-  constructor(
-    private fb: FormBuilder,
-    private deptModalService: DeptManageModalService,
-    private dataService: DeptService,
-    private modalSrv: NzModalService,
-    public message: NzMessageService,
-    private router: Router,
-    private cdr: ChangeDetectorRef
-  ) {}
+  private deptModalService = inject(DeptManageModalService);
+  private dataService = inject(DeptService);
+  private modalSrv = inject(NzModalService);
+  private message = inject(NzMessageService);
+  private cdr = inject(ChangeDetectorRef);
 
   reloadTable(): void {
     this.message.info('已经刷新了');

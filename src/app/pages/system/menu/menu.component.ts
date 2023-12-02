@@ -1,8 +1,7 @@
 import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormBuilder, FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
 
 import { ActionCode } from '@app/config/actionCode';
@@ -81,15 +80,11 @@ export class MenuComponent implements OnInit {
   dataList: TreeNodeInterface[] = [];
   visibleOptions: OptionsInterface[] = [];
 
-  constructor(
-    private fb: FormBuilder,
-    private menuModalService: MenuModalService,
-    private dataService: MenusService,
-    private modalSrv: NzModalService,
-    public message: NzMessageService,
-    private router: Router,
-    private cdr: ChangeDetectorRef
-  ) {}
+  private menuModalService = inject(MenuModalService);
+  private dataService = inject(MenusService);
+  private modalSrv = inject(NzModalService);
+  private message = inject(NzMessageService);
+  private cdr = inject(ChangeDetectorRef);
 
   reloadTable(): void {
     this.message.info('已经刷新了');

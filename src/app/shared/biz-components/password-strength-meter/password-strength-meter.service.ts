@@ -1,4 +1,4 @@
-import { Inject, Injectable, Optional } from '@angular/core';
+import { inject, Inject, Injectable, Optional } from '@angular/core';
 
 import { zxcvbn, zxcvbnOptions } from '@zxcvbn-ts/core';
 import zxcvbnEnPackage from '@zxcvbn-ts/language-en';
@@ -11,13 +11,11 @@ export const DEFAULT_CONFIG: PSMOptions = {
 
 @Injectable({ providedIn: 'root' })
 export class PasswordStrengthMeterService {
-  constructor(
-    @Optional()
-    @Inject(PSM_CONFIG)
-    options: PSMOptions
-  ) {
-    if (options) {
-      zxcvbnOptions.setOptions(options);
+  private options = inject(PSM_CONFIG, { optional: true });
+
+  constructor() {
+    if (this.options) {
+      zxcvbnOptions.setOptions(this.options);
     } else {
       zxcvbnOptions.setOptions(DEFAULT_CONFIG);
     }

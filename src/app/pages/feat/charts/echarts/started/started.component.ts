@@ -37,9 +37,9 @@ export class StartedComponent implements OnInit {
     { label: '[initOpts]', value: InitOptsChartsComponent },
     { label: 'ECharts Instance', value: InstanceOptsChartsComponent }
   ];
-  destroyRef = inject(DestroyRef);
-
-  constructor(private cdr: ChangeDetectorRef, private breakpointObserver: BreakpointObserver) {}
+  private destroyRef = inject(DestroyRef);
+  private cdr = inject(ChangeDetectorRef);
+  private breakpointObserver = inject(BreakpointObserver);
 
   to(tabIndex: number): void {
     this.componentPortal = new ComponentPortal(this.tabArray[tabIndex].value);

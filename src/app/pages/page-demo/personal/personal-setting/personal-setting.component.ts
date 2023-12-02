@@ -65,7 +65,8 @@ export class PersonalSettingComponent implements OnInit {
   ];
   currentTitle: string = this.menus[0].title;
 
-  constructor(private breakpointObserver: BreakpointObserver, private cdr: ChangeDetectorRef) {}
+  private breakpointObserver = inject(BreakpointObserver);
+  private cdr = inject(ChangeDetectorRef);
 
   to(item: { key: string; title: string; selected?: boolean }): void {
     const selMenu = this.settingComponent.find(({ key }) => {

@@ -1,5 +1,5 @@
 import { NgFor, NgIf } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, OnDestroy, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, OnDestroy, Output, EventEmitter, ChangeDetectorRef, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { fnGetRandomNum } from '@app/utils/tools';
@@ -99,7 +99,8 @@ export class ChatComponent implements OnInit, OnDestroy {
     '闭关修炼中'
   ];
 
-  constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef) {}
+  private fb = inject(FormBuilder);
+  private cdr = inject(ChangeDetectorRef);
 
   ngOnDestroy(): void {
     console.log('客服功能销毁了');

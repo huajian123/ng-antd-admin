@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy, inject } from '@angular/core';
 
 import { NgxEchartsModule } from 'ngx-echarts';
 
@@ -22,7 +22,7 @@ export class MergeChartsComponent implements OnInit, OnDestroy {
   private data: any[] = [];
   private timer: any;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  private cdr = inject(ChangeDetectorRef);
 
   ngOnInit(): void {
     // generate some random testing data:

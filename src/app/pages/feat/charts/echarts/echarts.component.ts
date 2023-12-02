@@ -1,5 +1,5 @@
 import { ComponentPortal, ComponentType, Portal, PortalModule } from '@angular/cdk/portal';
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit, ViewChild, TemplateRef, inject } from '@angular/core';
 
 import { AdvancedComponent } from '@app/pages/feat/charts/echarts/advanced/advanced.component';
 import { SeriesComponent } from '@app/pages/feat/charts/echarts/series/series.component';
@@ -44,7 +44,7 @@ export class EchartsComponent implements OnInit, AfterViewInit {
   componentPortal?: ComponentPortal<targetComp>;
   selectedPortal!: Portal<any>;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  private cdr = inject(ChangeDetectorRef);
 
   to(tabIndex: TabEnum): void {
     this.currentSelTab = tabIndex;

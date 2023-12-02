@@ -16,8 +16,4 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
   standalone: true,
   imports: [NzGridModule, NgFor, NzCardModule, NzTypographyModule, NzAvatarModule, NzToolTipModule, NumberLoopPipe]
 })
-export class ProjectsComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
-}
+export class ProjectsComponent {}

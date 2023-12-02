@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, AfterViewInit, inject } from '@angular/core';
 
 import { WaterMarkService } from '@core/services/common/water-mark.service';
 
@@ -12,7 +12,7 @@ import { WaterMarkService } from '@core/services/common/water-mark.service';
 export class WaterMarkComponent implements OnInit, AfterViewInit {
   @ViewChild('watermark', { static: false }) watermark!: ElementRef;
 
-  constructor(private waterMarkService: WaterMarkService) {}
+  private waterMarkService = inject(WaterMarkService);
 
   ngOnInit(): void {}
 

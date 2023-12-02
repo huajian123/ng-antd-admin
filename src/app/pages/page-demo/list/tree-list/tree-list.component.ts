@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef, inject } from '@angular/core';
 import { FormBuilder, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -65,7 +65,9 @@ export class TreeListComponent implements OnInit {
   checkedCashArray: any[] = [];
   dataList: NzSafeAny[] = [];
 
-  constructor(private fb: FormBuilder, private modalSrv: NzModalService, public message: NzMessageService, private router: Router, private cdr: ChangeDetectorRef) {}
+  private modalSrv = inject(NzModalService);
+  private message = inject(NzMessageService);
+  private cdr = inject(ChangeDetectorRef);
 
   reloadTable(): void {
     this.message.info('已经刷新了');

@@ -1,4 +1,18 @@
-import { ComponentRef, Directive, Input, ChangeDetectorRef, EmbeddedViewRef, OnChanges, SimpleChanges, Type, ViewContainerRef, TemplateRef, KeyValueDiffer, KeyValueDiffers } from '@angular/core';
+import {
+  ComponentRef,
+  Directive,
+  Input,
+  ChangeDetectorRef,
+  EmbeddedViewRef,
+  OnChanges,
+  SimpleChanges,
+  Type,
+  ViewContainerRef,
+  TemplateRef,
+  KeyValueDiffer,
+  KeyValueDiffers,
+  inject
+} from '@angular/core';
 
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
@@ -34,8 +48,8 @@ export class ViewOutletDirective implements OnChanges {
   @Input() viewOutletContext?: NzSafeAny;
 
   private keyValueDiffer!: KeyValueDiffer<NzSafeAny, NzSafeAny>;
-
-  constructor(private viewContainerRef: ViewContainerRef, private keyValueDiffers: KeyValueDiffers) {}
+  private viewContainerRef = inject(ViewContainerRef);
+  private keyValueDiffers = inject(KeyValueDiffers);
 
   ngOnChanges(changes: SimpleChanges): void {
     const { viewContainerRef: viewContainerRef } = this;

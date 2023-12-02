@@ -14,7 +14,6 @@ import { NzListModule } from 'ng-zorro-antd/list';
 })
 export class BindComponent implements OnInit {
   @Input({ required: true }) data!: { label: string };
-  constructor() {}
 
   ngOnInit(): void {
     console.log(this.data);

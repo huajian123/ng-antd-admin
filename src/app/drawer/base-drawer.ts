@@ -12,14 +12,13 @@ import { NzDrawerOptions, NzDrawerRef, NzDrawerService } from 'ng-zorro-antd/dra
 
 @Injectable({ providedIn: 'root' })
 export class DrawerWrapService {
-  protected bsDrawerService: NzDrawerService;
-  private btnTpl!: TemplateRef<any>;
   drawerRef!: NzDrawerRef;
-  destroyRef = inject(DestroyRef);
-
-  constructor(private baseInjector: Injector, @Inject(GLOBAL_DRAWER_FOOT_TPL_TOKEN) private btnComponentRef: ComponentRef<GlobalDrawerFootTplComponentToken>) {
-    this.bsDrawerService = this.baseInjector.get(NzDrawerService);
-    this.btnTpl = this.btnComponentRef.instance.componentTpl;
+  private destroyRef = inject(DestroyRef);
+  private baseInjector = inject(Injector);
+  private btnComponentRef: ComponentRef<GlobalDrawerFootTplComponentToken> = inject(GLOBAL_DRAWER_FOOT_TPL_TOKEN);
+  protected bsDrawerService: NzDrawerService = this.baseInjector.get(NzDrawerService);
+  private btnTpl: TemplateRef<any> = this.btnComponentRef.instance.componentTpl;
+  constructor() {
     this.btnComponentRef.instance.sureEmitter.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => this.sure());
     this.btnComponentRef.instance.cancelEmitter.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => this.cancel());
   }

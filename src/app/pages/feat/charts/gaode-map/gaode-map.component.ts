@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import AMapLoader from '@amap/amap-jsapi-loader';
@@ -22,7 +22,7 @@ export class GaodeMapComponent implements OnInit, AfterViewInit {
   marker: [number, number] = [116.437253, 39.935033];
   markerPosition: string = this.marker.join(',');
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  private cdr = inject(ChangeDetectorRef);
 
   ngAfterViewInit(): void {
     // api地址

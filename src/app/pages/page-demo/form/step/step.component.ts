@@ -29,7 +29,7 @@ enum StepEnum {
   standalone: true,
   imports: [PageHeaderComponent, NzCardModule, WaterMarkComponent, NzStepsModule, PortalModule]
 })
-export class StepComponent implements OnInit, AfterViewInit, OnDestroy {
+export class StepComponent implements OnInit, AfterViewInit {
   selectedPortal!: Portal<any>;
   stepDirection: 'horizontal' | 'vertical' = 'horizontal';
   pageHeaderInfo: Partial<PageHeaderType> = {
@@ -41,7 +41,8 @@ export class StepComponent implements OnInit, AfterViewInit, OnDestroy {
   stepComponentArray: Array<ComponentType<comp>> = [StepOneComponent, StepTwoComponent, StepThreeComponent];
   componentPortal?: ComponentPortal<comp>;
   destroyRef = inject(DestroyRef);
-  constructor(private fb: FormBuilder, private breakpointObserver: BreakpointObserver, private cdr: ChangeDetectorRef) {}
+  private cdr = inject(ChangeDetectorRef);
+  private breakpointObserver = inject(BreakpointObserver);
 
   go(step: StepEnum, ref: CdkPortalOutletAttachedRef, currentStepNum: number): void {
     this.currentStep = currentStepNum;
@@ -97,9 +98,5 @@ export class StepComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.goStep(StepEnum.One);
-  }
-
-  ngOnDestroy(): void {
-    console.log('fenbu');
   }
 }

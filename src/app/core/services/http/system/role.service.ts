@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -40,7 +40,7 @@ export interface Role {
   providedIn: 'root'
 })
 export class RoleService {
-  constructor(public http: BaseHttpService) {}
+  http = inject(BaseHttpService);
 
   public getRoles(param: SearchCommonVO<Role>): Observable<PageInfo<Role>> {
     return this.http.post('/role/list/', param);

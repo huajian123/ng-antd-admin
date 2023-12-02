@@ -1,5 +1,5 @@
 import { NgFor, NgIf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, OnInit, Output, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ThemeService } from '@store/common-store/theme.service';
@@ -25,12 +25,13 @@ export interface PageHeaderType {
   imports: [NzPageHeaderModule, NzBreadCrumbModule, NgFor, NzOutletModule, NgIf]
 })
 export class PageHeaderComponent implements OnInit {
+  private themesService = inject(ThemeService);
+  private router = inject(Router);
+
   @Input() backTpl: TemplateRef<NzSafeAny> | undefined;
   @Input() pageHeaderInfo: Partial<PageHeaderType> = {};
   @Input() backUrl = '';
   themesOptions$ = this.themesService.getThemesMode();
-
-  constructor(private themesService: ThemeService, private router: Router) {}
 
   back(): void {
     this.router.navigateByUrl(this.backUrl);

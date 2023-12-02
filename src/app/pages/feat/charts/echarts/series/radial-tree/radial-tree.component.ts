@@ -1,6 +1,6 @@
 import { AsyncPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -18,7 +18,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
 export class RadialTreeComponent implements OnInit {
   // @ts-ignore
   options: Observable<any>;
-  constructor(private http: HttpClient) {}
+  private http = inject(HttpClient);
 
   ngOnInit(): void {
     this.options = this.http.get<any>('assets/data/flare.json', { responseType: 'json' }).pipe(

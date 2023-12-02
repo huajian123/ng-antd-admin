@@ -1,5 +1,5 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, filter } from 'rxjs/operators';
 
@@ -15,7 +15,8 @@ interface CustomHttpConfig {
 
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor {
-  constructor(private windowServe: WindowService, public message: NzMessageService) {}
+  windowServe = inject(WindowService);
+  message = inject(NzMessageService);
 
   intercept(req: HttpRequest<NzSafeAny>, next: HttpHandler): Observable<HttpEvent<NzSafeAny>> {
     const token = this.windowServe.getSessionStorage(TokenKey);

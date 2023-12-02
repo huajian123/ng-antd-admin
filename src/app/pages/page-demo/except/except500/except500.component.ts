@@ -17,8 +17,4 @@ import { NzResultModule } from 'ng-zorro-antd/result';
   standalone: true,
   imports: [NzResultModule, NzButtonModule, NzWaveModule]
 })
-export class Except500Component implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
-}
+export class Except500Component {}

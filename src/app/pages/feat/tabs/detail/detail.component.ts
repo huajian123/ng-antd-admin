@@ -16,7 +16,8 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 export class DetailComponent implements OnInit {
   id = 0;
   destroyRef = inject(DestroyRef);
-  constructor(private routeParam: ActivatedRoute, public cdr: ChangeDetectorRef) {}
+  private cdr = inject(ChangeDetectorRef);
+  private routeParam = inject(ActivatedRoute);
 
   ngOnInit(): void {
     this.routeParam.queryParams.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(params => {

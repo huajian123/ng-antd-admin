@@ -21,8 +21,9 @@ export class RoleManageModalComponent implements OnInit {
   addEditForm!: FormGroup;
 
   readonly nzModalData: Role = inject(NZ_MODAL_DATA);
+  private fb = inject(FormBuilder);
 
-  constructor(private modalRef: NzModalRef, private fb: FormBuilder) {}
+  constructor(private modalRef: NzModalRef) {}
 
   initForm(): void {
     this.addEditForm = this.fb.group({

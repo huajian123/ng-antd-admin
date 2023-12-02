@@ -7,8 +7,6 @@ import { isEmail, isMobile, isPasswordPass, isTelPhone } from '@utils/validate/v
   providedIn: 'root'
 })
 export class ValidatorsRuleService {
-  constructor() {}
-
   mobileRule(value: string): ValidationErrors | null {
     if (!value) {
       return null;

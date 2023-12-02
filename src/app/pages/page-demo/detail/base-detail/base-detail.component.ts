@@ -75,8 +75,6 @@ export class BaseDetailComponent implements OnInit {
     }
   ];
 
-  constructor() {}
-
   private initReturnTable(): void {
     this.returnTableConfig = {
       showCheckbox: false,

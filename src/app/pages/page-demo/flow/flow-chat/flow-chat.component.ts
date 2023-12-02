@@ -18,7 +18,7 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
   standalone: true,
   imports: [PageHeaderComponent, NzCardModule, NzResultModule, NzGridModule, NzButtonModule, NzToolTipModule, NzIconModule]
 })
-export class FlowChatComponent implements OnInit, AfterViewInit {
+export class FlowChatComponent implements AfterViewInit {
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '流程编辑器，有了流程图，我就该知道未来该做什么了',
     breadcrumb: ['首页', '扩展功能', '图形编辑器', '流程图'],
@@ -46,10 +46,6 @@ export class FlowChatComponent implements OnInit, AfterViewInit {
       connectionPoint: 'boundary'
     }
   };
-
-  constructor() {}
-
-  ngOnInit(): void {}
 
   drag(event: MouseEvent): void {
     const target = event.currentTarget as HTMLElement;

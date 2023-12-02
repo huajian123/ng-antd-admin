@@ -54,7 +54,11 @@ export class BaseComponent implements OnInit {
   };
   destroyRef = inject(DestroyRef);
 
-  constructor(private fb: FormBuilder, private msg: NzMessageService, private validatorsService: ValidatorsService, private breakpointObserver: BreakpointObserver, private cdr: ChangeDetectorRef) {}
+  private fb = inject(FormBuilder);
+  private msg = inject(NzMessageService);
+  private validatorsService = inject(ValidatorsService);
+  private breakpointObserver = inject(BreakpointObserver);
+  private cdr = inject(ChangeDetectorRef);
 
   provinceChange(value: string): void {
     this.selectedCity = this.cityData[value][0];

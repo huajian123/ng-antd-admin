@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatRippleModule } from '@angular/material/core';
 
@@ -16,7 +16,7 @@ import { ColorPickerModule } from 'ngx-color-picker';
   standalone: true,
   imports: [PageHeaderComponent, NzCardModule, NzCheckboxModule, FormsModule, NzInputNumberModule, ColorPickerModule, MatRippleModule]
 })
-export class RippleComponent implements OnInit {
+export class RippleComponent {
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '水波纹',
     breadcrumb: ['首页', '功能', '水波纹']
@@ -26,8 +26,4 @@ export class RippleComponent implements OnInit {
   unbounded = false;
   radius: number = 0;
   color: string = 'red';
-
-  constructor() {}
-
-  ngOnInit(): void {}
 }

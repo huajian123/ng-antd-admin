@@ -1,5 +1,5 @@
 import { NgIf, NgFor } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
@@ -42,7 +42,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
     NzWaveModule
   ]
 })
-export class BaseComponent implements OnInit, OnDestroy {
+export class BaseComponent implements OnInit {
   @ViewChild('dragTpl', { static: true }) dragTpl!: TemplateRef<NzSafeAny>;
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '基础表单',
@@ -61,10 +61,8 @@ export class BaseComponent implements OnInit, OnDestroy {
     if (!fnCheckForm(this.validateForm)) {
       return;
     }
-    console.log(this.validateForm.value);
   }
-
-  constructor(private fb: FormBuilder) {}
+  private fb = inject(FormBuilder);
 
   initForm(): void {
     this.validateForm = this.fb.group({
@@ -81,9 +79,5 @@ export class BaseComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initForm();
-  }
-
-  ngOnDestroy(): void {
-    console.log('jichu');
   }
 }

@@ -12,8 +12,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class ModalFullStatusStoreService {
   private modalFullStatusStore$ = new BehaviorSubject<boolean>(false);
 
-  constructor() {}
-
   setModalFullStatusStore(store: boolean): void {
     this.modalFullStatusStore$.next(store);
   }

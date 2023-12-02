@@ -8,8 +8,6 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
   standalone: true
 })
 export class TableFiledPipe implements PipeTransform {
-  constructor() {}
-
   transform(value: NzSafeAny, args?: string): NzSafeAny {
     return _.get(value, args!, '');
   }

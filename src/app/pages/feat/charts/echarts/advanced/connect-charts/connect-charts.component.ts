@@ -62,7 +62,6 @@ export class ConnectChartsComponent implements AfterViewInit {
       }
     ]
   };
-  constructor() {}
 
   ngAfterViewInit(): void {
     setTimeout(() => {

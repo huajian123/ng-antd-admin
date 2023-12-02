@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Injectable } from '@angular/core';
+import { ChangeDetectorRef, inject, Injectable } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { LazySelPeopleEnum } from '@app/pages/comp/lazy/lazy-targ-comp/lazy-targ-comp.component';
@@ -15,7 +15,7 @@ export class LazyServiceService {
     this._adHost = value;
   }
 
-  constructor(public cdr: ChangeDetectorRef) {}
+  cdr = inject(ChangeDetectorRef);
 
   async create(selPerson: LazySelPeopleEnum = LazySelPeopleEnum.YiLin): Promise<void> {
     await this.lazyLoadCard(selPerson);

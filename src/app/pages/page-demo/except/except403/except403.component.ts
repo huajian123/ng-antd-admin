@@ -17,8 +17,4 @@ import { NzResultModule } from 'ng-zorro-antd/result';
   standalone: true,
   imports: [NzResultModule, NzButtonModule, NzWaveModule]
 })
-export class Except403Component implements OnInit {
-  constructor(private cdr: ChangeDetectorRef, private ngZone: NgZone) {}
-
-  ngOnInit(): void {}
-}
+export class Except403Component {}

@@ -14,7 +14,7 @@ import { driver, DriveStep } from 'driver.js';
 export class DriverService {
   themesService = inject(ThemeService);
   destroyRef = inject(DestroyRef);
-  constructor(@Inject(DOCUMENT) private doc: Document) {}
+  private readonly doc = inject(DOCUMENT);
 
   load(): void {
     // 是否是固定页签

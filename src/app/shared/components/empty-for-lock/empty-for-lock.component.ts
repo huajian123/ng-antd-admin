@@ -16,8 +16,9 @@ export class EmptyForLockComponent {
   // 路由的锁屏状态
   routeStatus!: LockScreenFlag;
   destroyRef = inject(DestroyRef);
+  private lockScreenStoreService = inject(LockScreenStoreService);
 
-  constructor(private router: Router, private lockScreenStoreService: LockScreenStoreService) {
+  constructor() {
     this.lockScreenStoreService
       .getLockScreenStore()
       .pipe(takeUntilDestroyed(this.destroyRef))

@@ -1,6 +1,6 @@
 import { CdkDragDrop, moveItemInArray, CdkDropList, CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
 import { NgIf, NgTemplateOutlet, NgFor, NgStyle } from '@angular/common';
-import { AfterContentInit, booleanAttribute, ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
+import { AfterContentInit, booleanAttribute, ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 
 import { AntTreeTableComponentToken } from '@shared/components/tree-table/tree-table.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -51,7 +51,7 @@ interface TableSizeItem {
     NgStyle
   ]
 })
-export class CardTableWrapComponent implements OnInit, AfterContentInit {
+export class CardTableWrapComponent implements AfterContentInit {
   @Input() tableTitle: string | TemplateRef<NzSafeAny> | undefined;
   @Input() btnTpl: TemplateRef<NzSafeAny> | undefined;
   @Input({ transform: booleanAttribute })
@@ -70,8 +70,6 @@ export class CardTableWrapComponent implements OnInit, AfterContentInit {
   allTableFieldChecked = false; // 设置里面全选列
   allTableFieldIndeterminate = false; // 设置里面全选列的半选状态
   copyHeader: TableHeader[] = []; // 缓存默认配置
-
-  constructor() {}
 
   // 是否展示复选框
   changeTableCheckBoxShow(e: boolean): void {
@@ -160,8 +158,6 @@ export class CardTableWrapComponent implements OnInit, AfterContentInit {
     this.currentTableComponent.tableConfig.headers = [...this.tableHeaders];
     this.tableChangeDectction();
   }
-
-  ngOnInit(): void {}
 
   ngAfterContentInit(): void {
     this.currentTableComponent = this.antTableComponent || this.antTreeTableComponent;

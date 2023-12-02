@@ -1,5 +1,5 @@
 import { NgIf, NgFor, AsyncPipe } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, AfterViewInit, ViewChild, TemplateRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, AfterViewInit, ViewChild, TemplateRef, inject } from '@angular/core';
 
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { WaterMarkComponent } from '@shared/components/water-mark/water-mark.component';
@@ -19,7 +19,8 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
   standalone: true,
   imports: [PageHeaderComponent, NzGridModule, NgIf, WaterMarkComponent, NzCardModule, NzIconModule, NzButtonModule, NgFor, NzAvatarModule, AsyncPipe]
 })
-export class CardTableComponent implements OnInit, AfterViewInit {
+export class CardTableComponent implements AfterViewInit {
+  private themesService = inject(ThemeService);
   isOverMode$ = this.themesService.getIsOverMode();
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '',
@@ -78,10 +79,6 @@ export class CardTableComponent implements OnInit, AfterViewInit {
     }
   ];
   @ViewChild('headerContent', { static: false }) headerContent!: TemplateRef<NzSafeAny>;
-
-  constructor(private themesService: ThemeService) {}
-
-  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     this.pageHeaderInfo = {

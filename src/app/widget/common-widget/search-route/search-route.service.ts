@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { ModalWrapService } from '@widget/base-modal';
@@ -11,7 +11,7 @@ import { SearchRouteComponent } from './search-route.component';
   providedIn: 'root'
 })
 export class SearchRouteService {
-  constructor(private modalWrapService: ModalWrapService) {}
+  private modalWrapService = inject(ModalWrapService);
 
   protected getContentComponent(): NzSafeAny {
     return SearchRouteComponent;

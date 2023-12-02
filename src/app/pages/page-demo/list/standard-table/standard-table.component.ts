@@ -1,5 +1,5 @@
 import { NgFor } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { WaterMarkComponent } from '@shared/components/water-mark/water-mark.component';
@@ -46,7 +46,7 @@ import { NzStatisticModule } from 'ng-zorro-antd/statistic';
     NzPaginationModule
   ]
 })
-export class StandardTableComponent implements OnInit {
+export class StandardTableComponent {
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '标准列表',
     breadcrumb: ['首页', '列表页面', '标准列表']
@@ -120,11 +120,7 @@ export class StandardTableComponent implements OnInit {
     }
   ];
 
-  constructor() {}
-
   edit(item: NzSafeAny): void {}
 
   deleteItem(item: NzSafeAny): void {}
-
-  ngOnInit(): void {}
 }

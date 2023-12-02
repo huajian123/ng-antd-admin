@@ -30,8 +30,9 @@ export class MenuModalComponent implements OnInit {
   selIconVisible = false;
   readonly nzModalData: MenuListObj = inject(NZ_MODAL_DATA);
   menuType: menuType = 'C';
+  private fb = inject(FormBuilder);
 
-  constructor(private modalRef: NzModalRef, private fb: FormBuilder) {}
+  constructor(private modalRef: NzModalRef) {}
 
   // 返回false则不关闭对话框
   protected getCurrentValue(): Observable<any> {

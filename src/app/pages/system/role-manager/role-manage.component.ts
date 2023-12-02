@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 
 import { ActionCode } from '@app/config/actionCode';
-import { MessageService } from '@core/services/common/message.service';
 import { SearchCommonVO } from '@core/services/types';
 import { Role, RoleService } from '@services/system/role.service';
 import { AntTableConfig, AntTableComponent } from '@shared/components/ant-table/ant-table.component';
@@ -62,15 +61,12 @@ export class RoleManageComponent implements OnInit {
   ActionCode = ActionCode;
   destroyRef = inject(DestroyRef);
 
-  constructor(
-    private dataService: RoleService,
-    private modalSrv: NzModalService,
-    private cdr: ChangeDetectorRef,
-    private messageService: MessageService,
-    private modalService: RoleManageModalService,
-    private router: Router,
-    public message: NzMessageService
-  ) {}
+  private dataService = inject(RoleService);
+  private modalSrv = inject(NzModalService);
+  private cdr = inject(ChangeDetectorRef);
+  private modalService = inject(RoleManageModalService);
+  private router = inject(Router);
+  private message = inject(NzMessageService);
 
   selectedChecked(e: any): void {
     // @ts-ignore

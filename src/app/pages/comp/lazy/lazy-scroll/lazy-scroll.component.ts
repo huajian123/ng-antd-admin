@@ -1,5 +1,5 @@
 import { normalizePassiveListenerOptions } from '@angular/cdk/platform';
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ChangeDetectorRef, AfterViewInit, NgZone, inject, DestroyRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewChild, ChangeDetectorRef, AfterViewInit, NgZone, inject, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { fromEvent, take } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
@@ -18,7 +18,10 @@ const passiveEventListenerOptions = normalizePassiveListenerOptions({ passive: t
   standalone: true,
   imports: [PageHeaderComponent, AdDirective]
 })
-export class LazyScrollComponent implements OnInit, AfterViewInit {
+export class LazyScrollComponent implements AfterViewInit {
+  private lazyServiceService = inject(LazyServiceService);
+  private zone = inject(NgZone);
+  private cdr = inject(ChangeDetectorRef);
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '滚动懒加载组件示例',
     breadcrumb: ['首页', '组件', '滚动懒加载'],
@@ -26,9 +29,6 @@ export class LazyScrollComponent implements OnInit, AfterViewInit {
   };
   @ViewChild(AdDirective, { static: true }) adHost!: AdDirective;
   destroyRef = inject(DestroyRef);
-  constructor(private lazyServiceService: LazyServiceService, private zone: NgZone, private cdr: ChangeDetectorRef) {}
-
-  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     this.lazyServiceService.adHost = this.adHost;

@@ -1,6 +1,6 @@
 import { NgIf } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef } from '@angular/core';
-import { FormBuilder, FormsModule } from '@angular/forms';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { SearchCommonVO } from '@core/services/types';
@@ -81,7 +81,10 @@ export class SearchTableComponent implements OnInit {
   ]; // 需修改为对应业务的数据类型
   dataList: NzSafeAny[] = []; // 需修改为对应业务的数据类型
 
-  constructor(private fb: FormBuilder, private modalSrv: NzModalService, public message: NzMessageService, private router: Router, private cdr: ChangeDetectorRef) {}
+  private modalSrv = inject(NzModalService);
+  private message = inject(NzMessageService);
+  private router = inject(Router);
+  private cdr = inject(ChangeDetectorRef);
 
   // 最左侧复选框选中触发
   selectedChecked(e: any): void {

@@ -39,6 +39,12 @@ const passiveEventListenerOptions = <AddEventListenerOptions>normalizePassiveLis
   imports: [NzButtonModule, NzInputModule, FormsModule, NgIf, NzIconModule, NzEmptyModule, NgFor, NzGridModule, NzDividerModule]
 })
 export class SearchRouteComponent extends BasicConfirmModalComponent implements OnInit, AfterViewInit {
+  private cdr = inject(ChangeDetectorRef);
+  private ngZone = inject(NgZone);
+  private menuStoreService = inject(MenuStoreService);
+  private router = inject(Router);
+  private themesService = inject(ThemeService);
+
   isNightTheme$ = this.themesService.getIsNightTheme();
   resultListShow: ResultItem[] = [];
   resultList: ResultItem[] = [];
@@ -46,14 +52,8 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
   inputValue: string | null = null;
   menuNavList: Menu[] = [];
   destroyRef = inject(DestroyRef);
-  constructor(
-    private themesService: ThemeService,
-    private cdr: ChangeDetectorRef,
-    private ngZone: NgZone,
-    private menuStoreService: MenuStoreService,
-    private router: Router,
-    protected override modalRef: NzModalRef
-  ) {
+
+  constructor(protected override modalRef: NzModalRef) {
     super(modalRef);
   }
 

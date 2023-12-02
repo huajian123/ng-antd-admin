@@ -36,7 +36,7 @@ export abstract class AntTreeTableComponentToken {
   standalone: true,
   imports: [NzTableModule, NgIf, NgFor, NzResizableModule, NgClass, NgTemplateOutlet, MapPipe, TableFiledPipe]
 })
-export class TreeTableComponent implements OnInit, OnChanges {
+export class TreeTableComponent implements OnChanges {
   _dataList!: TreeNodeInterface[];
   allChecked: boolean = false;
   indeterminate = false;
@@ -217,6 +217,4 @@ export class TreeTableComponent implements OnInit, OnChanges {
       this.refreshStatus();
     }
   }
-
-  ngOnInit(): void {}
 }

@@ -24,6 +24,9 @@ export interface ReuseComponentRef {
 // https://blog.csdn.net/weixin_30561425/article/details/96985967?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control
 export class SimpleReuseStrategy implements RouteReuseStrategy {
   destroyRef = inject(DestroyRef);
+  private readonly doc = inject(DOCUMENT);
+  private readonly scrollService = inject(ScrollService);
+
   // 缓存每个component的map
   static handlers: { [key: string]: NzSafeAny } = {};
   // 缓存每个页面的scroll位置,为啥不放在handlers里面呢,因为路由离开时路由复用导致以当前页为key为null了
@@ -56,8 +59,6 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
       resolve();
     });
   }
-
-  constructor(@Inject(DOCUMENT) private doc: Document, private scrollService: ScrollService) {}
 
   // 是否允许复用路由
   shouldDetach(route: ActivatedRouteSnapshot): boolean {

@@ -5,11 +5,8 @@ import { Router, RouterLink } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 
 import { LoginInOutService } from '@core/services/common/login-in-out.service';
-import { WindowService } from '@core/services/common/window.service';
 import { LoginService } from '@core/services/http/login/login.service';
-import { MenuStoreService } from '@store/common-store/menu-store.service';
 import { SpinService } from '@store/common-store/spin.service';
-import { UserInfoService } from '@store/common-store/userInfo.service';
 import { fnCheckForm } from '@utils/tools';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
@@ -32,17 +29,13 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
 export class LoginFormComponent implements OnInit {
   validateForm!: FormGroup;
   destroyRef = inject(DestroyRef);
-  constructor(
-    private fb: FormBuilder,
-    private loginInOutService: LoginInOutService,
-    private menuService: MenuStoreService,
-    private dataService: LoginService,
-    private spinService: SpinService,
-    private windowServe: WindowService,
-    private userInfoService: UserInfoService,
-    private notification: NzNotificationService,
-    private router: Router
-  ) {}
+
+  private fb = inject(FormBuilder);
+  private notification = inject(NzNotificationService);
+  private router = inject(Router);
+  private spinService = inject(SpinService);
+  private dataService = inject(LoginService);
+  private loginInOutService = inject(LoginInOutService);
 
   submitForm(): void {
     // 校验表单

@@ -16,8 +16,4 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
   standalone: true,
   imports: [NzCardModule, NzTabsModule, NgTemplateOutlet, NzListModule, NgFor, NzTypographyModule, NzTagModule, NumberLoopPipe]
 })
-export class HomeNoticeComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
-}
+export class HomeNoticeComponent {}

@@ -22,17 +22,14 @@ import { fnFlatDataHasParentToTree } from '@utils/treeTableTools';
   providedIn: 'root'
 })
 export class LoginInOutService {
-  destroyRef = inject(DestroyRef);
-
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private tabService: TabService,
-    private loginService: LoginService,
-    private router: Router,
-    private userInfoService: UserInfoService,
-    private menuService: MenuStoreService,
-    private windowServe: WindowService
-  ) {}
+  private destroyRef = inject(DestroyRef);
+  private activatedRoute = inject(ActivatedRoute);
+  private tabService = inject(TabService);
+  private loginService = inject(LoginService);
+  private router = inject(Router);
+  private userInfoService = inject(UserInfoService);
+  private menuService = inject(MenuStoreService);
+  private windowServe = inject(WindowService);
 
   // 通过用户Id来获取菜单数组
   getMenuByUserId(userId: number): Observable<Menu[]> {

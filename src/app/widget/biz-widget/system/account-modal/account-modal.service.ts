@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { User } from '@services/system/account.service';
@@ -11,7 +11,8 @@ import { ModalOptions } from 'ng-zorro-antd/modal';
   providedIn: 'root'
 })
 export class AccountModalService {
-  constructor(private modalWrapService: ModalWrapService) {}
+  private modalWrapService = inject(ModalWrapService);
+
   protected getContentComponent(): NzSafeAny {
     return AccountModalComponent;
   }

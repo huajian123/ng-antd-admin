@@ -14,8 +14,6 @@ export class DebounceClickDirective implements OnInit, OnDestroy {
   private clicks = new Subject<NzSafeAny>();
   private subscription!: Subscription;
 
-  constructor() {}
-
   @HostListener('click', ['$event'])
   clickEvent(event: MouseEvent): void {
     event.preventDefault();

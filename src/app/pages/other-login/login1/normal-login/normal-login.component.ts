@@ -6,9 +6,7 @@ import { Router } from '@angular/router';
 import { LoginType } from '@app/pages/other-login/login1/login1.component';
 import { TokenKey, TokenPre } from '@config/constant';
 import { WindowService } from '@core/services/common/window.service';
-import { LoginService } from '@services/login/login.service';
 import { Login1StoreService } from '@store/biz-store-service/other-login/login1-store.service';
-import { MenuStoreService } from '@store/common-store/menu-store.service';
 import { SpinService } from '@store/common-store/spin.service';
 import { UserInfoService } from '@store/common-store/userInfo.service';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -35,17 +33,13 @@ export class NormalLoginComponent implements OnInit {
   typeEnum = LoginType;
   isOverModel = false;
   destroyRef = inject(DestroyRef);
-  constructor(
-    private userInfoService: UserInfoService,
-    private router: Router,
-    private menuService: MenuStoreService,
-    private dataService: LoginService,
-    private windowServe: WindowService,
-    private spinService: SpinService,
-    private cdr: ChangeDetectorRef,
-    private fb: FormBuilder,
-    private login1StoreService: Login1StoreService
-  ) {}
+  private fb = inject(FormBuilder);
+  private router = inject(Router);
+  private spinService = inject(SpinService);
+  private login1StoreService = inject(Login1StoreService);
+  private userInfoService = inject(UserInfoService);
+  private cdr = inject(ChangeDetectorRef);
+  private windowServe = inject(WindowService);
 
   submitForm(): void {
     this.spinService.setCurrentGlobalSpinStore(true);

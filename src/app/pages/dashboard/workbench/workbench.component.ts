@@ -1,7 +1,6 @@
 import { NgFor, DecimalPipe } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, inject, NgZone, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormBuilder } from '@angular/forms';
 
 import { Radar } from '@antv/g2plot';
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
@@ -73,8 +72,8 @@ export class WorkbenchComponent implements OnInit, AfterViewInit {
     breadcrumb: [],
     desc: ''
   };
-
-  constructor(private fb: FormBuilder, public msg: NzMessageService, private ngZone: NgZone) {}
+  private ngZone = inject(NgZone);
+  msg = inject(NzMessageService);
 
   ngOnInit(): void {}
 

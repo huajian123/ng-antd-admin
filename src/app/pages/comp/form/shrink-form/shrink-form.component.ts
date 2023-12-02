@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
@@ -23,7 +23,7 @@ interface SearchParam {
   standalone: true,
   imports: [PageHeaderComponent, NzCardModule, FormsModule, NzFormModule, NzGridModule, NzInputModule, NzButtonModule, NzWaveModule, NzIconModule, NgIf]
 })
-export class ShrinkFormComponent implements OnInit {
+export class ShrinkFormComponent {
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '可折叠表单示例',
     breadcrumb: ['首页', '组件', 'Form', '可折叠表单'],
@@ -43,8 +43,4 @@ export class ShrinkFormComponent implements OnInit {
   toggleCollapse(): void {
     this.isCollapse = !this.isCollapse;
   }
-
-  constructor() {}
-
-  ngOnInit(): void {}
 }

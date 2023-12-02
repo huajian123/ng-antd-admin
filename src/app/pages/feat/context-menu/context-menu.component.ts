@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -14,16 +14,15 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
   standalone: true,
   imports: [PageHeaderComponent, NzCardModule, NzButtonModule, NzWaveModule, NzDropDownModule, NzMenuModule]
 })
-export class ContextMenuComponent implements OnInit {
+export class ContextMenuComponent {
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '右键菜单示例',
     breadcrumb: ['首页', '功能', '右键菜单'],
     desc: '没什么，搬运的zorro官网示例'
   };
-  constructor(private nzContextMenuService: NzContextMenuService) {}
+  private nzContextMenuService = inject(NzContextMenuService);
 
   contextMenu($event: MouseEvent, menu: NzDropdownMenuComponent): void {
     this.nzContextMenuService.create($event, menu);
   }
-  ngOnInit(): void {}
 }

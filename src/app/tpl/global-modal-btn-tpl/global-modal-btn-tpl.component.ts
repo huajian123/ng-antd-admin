@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, TemplateRef, ViewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { ModalFullStatusStoreService } from '@store/common-store/modal-full-status-store.service';
@@ -23,10 +23,11 @@ export abstract class GlobalModalBtnTplComponentToken {
 export class GlobalModalBtnTplComponent implements GlobalModalBtnTplComponentToken {
   @ViewChild('componentTpl', { static: true }) componentTpl!: TemplateRef<any>;
   modalFullScreenFlag = false;
+  private modalFullStatus = inject(ModalFullStatusStoreService);
 
   modalFullStatus$ = this.modalFullStatus.getModalFullStatusStore();
 
-  constructor(private modalFullStatus: ModalFullStatusStoreService) {
+  constructor() {
     this.modalFullStatus$.pipe(takeUntilDestroyed()).subscribe(res => (this.modalFullScreenFlag = res));
   }
 

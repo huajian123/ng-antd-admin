@@ -128,8 +128,8 @@ export class AdvDetailComponent implements OnInit, AfterViewInit {
       price: '2.00'
     }
   ];
-
-  constructor(private cdr: ChangeDetectorRef, private breakpointObserver: BreakpointObserver) {}
+  private cdr = inject(ChangeDetectorRef);
+  private breakpointObserver = inject(BreakpointObserver);
 
   to(tabIndex: TabEnum): void {
     this.currentSelTab = tabIndex;

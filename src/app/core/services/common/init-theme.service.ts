@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 
@@ -24,6 +24,9 @@ interface InitThemeOption {
   providedIn: 'root'
 })
 export class InitThemeService {
+  private themesService = inject(ThemeService);
+  private windowServe = inject(WindowService);
+
   themeInitOption: InitThemeOption[] = [
     {
       storageKey: IsNightKey,
@@ -36,8 +39,6 @@ export class InitThemeService {
       getMethodName: 'getThemesMode'
     }
   ];
-
-  constructor(private themesService: ThemeService, private windowServe: WindowService) {}
 
   initTheme(): Promise<void> {
     return new Promise(resolve => {

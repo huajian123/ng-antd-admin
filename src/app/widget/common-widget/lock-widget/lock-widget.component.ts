@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
 import { NonNullableFormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
@@ -27,19 +27,18 @@ import { NzModalRef } from 'ng-zorro-antd/modal';
   imports: [NzAvatarModule, FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzButtonModule, NzInputModule, NzIconModule, NzWaveModule]
 })
 export class LockWidgetComponent extends BasicConfirmModalComponent implements OnInit {
+  private fb = inject(NonNullableFormBuilder);
+  private windowSrv = inject(WindowService);
+  private lockScreenStoreService = inject(LockScreenStoreService);
+  private activatedRoute = inject(ActivatedRoute);
+  private router = inject(Router);
+
   validateForm = this.fb.group({
     password: ['', [Validators.required]]
   });
   passwordVisible = false;
 
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private router: Router,
-    private lockScreenStoreService: LockScreenStoreService,
-    protected override modalRef: NzModalRef,
-    private fb: NonNullableFormBuilder,
-    private windowSrv: WindowService
-  ) {
+  constructor(protected override modalRef: NzModalRef) {
     super(modalRef);
   }
 

@@ -46,6 +46,13 @@ interface LoginFormComponentInterface {
   imports: [NzGridModule, NzCardModule, AdDirective_1, NgIf, NzSwitchModule, FormsModule, NzDropDownModule, NzIconModule, NzButtonModule, NzMenuModule, AsyncPipe]
 })
 export class Login1Component implements OnInit {
+  private themesService = inject(ThemeService);
+  private themeSkinService = inject(ThemeSkinService);
+  private windowServe = inject(WindowService);
+  private cdr = inject(ChangeDetectorRef);
+  private login1StoreService = inject(Login1StoreService);
+  private breakpointObserver = inject(BreakpointObserver);
+
   private adHost!: AdDirective;
   isOverModel = true;
   isNightTheme$ = this.themesService.getIsNightTheme();
@@ -64,15 +71,6 @@ export class Login1Component implements OnInit {
     { type: LoginType.Qr, component: new DynamicComponent(QrLoginComponent, {}) },
     { type: LoginType.Register, component: new DynamicComponent(RegistLoginComponent, {}) }
   ];
-
-  constructor(
-    private themeSkinService: ThemeSkinService,
-    private windowServe: WindowService,
-    private cdr: ChangeDetectorRef,
-    private login1StoreService: Login1StoreService,
-    private breakpointObserver: BreakpointObserver,
-    private themesService: ThemeService
-  ) {}
 
   getCurrentComponent(type: LoginType): LoginFormComponentInterface {
     return this.formData.find(item => item.type === type)!;

@@ -11,8 +11,4 @@ import { NzInputModule } from 'ng-zorro-antd/input';
   standalone: true,
   imports: [NzInputModule, NgFor, NumberLoopPipe]
 })
-export class Menu111Component implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
-}
+export class Menu111Component {}

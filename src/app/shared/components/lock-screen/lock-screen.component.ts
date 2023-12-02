@@ -45,7 +45,11 @@ export class LockScreenComponent implements OnInit {
   };
   destroyRef = inject(DestroyRef);
 
-  constructor(private router: Router, private loginOutService: LoginInOutService, private lockScreenStoreService: LockScreenStoreService, private fb: FormBuilder, private windowSrv: WindowService) {}
+  private lockScreenStoreService = inject(LockScreenStoreService);
+  private router = inject(Router);
+  private loginOutService = inject(LoginInOutService);
+  private fb = inject(FormBuilder);
+  private windowSrv = inject(WindowService);
 
   // 返回登录页面则解锁
   loginOut(): void {

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { fnCheckForm } from '@utils/tools';
@@ -25,7 +25,7 @@ export class StepOneComponent implements OnInit {
   validateForm!: FormGroup;
   @Output() readonly next = new EventEmitter<NzSafeAny>();
 
-  constructor(private fb: FormBuilder) {}
+  private fb = inject(FormBuilder);
 
   // 下一步
   goNext(): void {

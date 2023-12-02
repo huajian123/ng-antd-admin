@@ -34,11 +34,14 @@ import { fadeRouteAnimation } from './animations/fade.animation';
   imports: [NgIf, LockScreenComponent, NzBackTopModule, RouterOutlet, NzSpinModule, AsyncPipe]
 })
 export class AppComponent implements OnInit, AfterViewInit {
+  private preloader = inject(PreloaderService);
+  private lockScreenStoreService = inject(LockScreenStoreService);
+  private spinService = inject(SpinService);
+  private router = inject(Router);
+
   loading$ = this.spinService.getCurrentGlobalSpinStore();
   lockedState$ = this.lockScreenStoreService.getLockScreenStore();
   destroyRef = inject(DestroyRef);
-
-  constructor(private lockScreenStoreService: LockScreenStoreService, private preloader: PreloaderService, private spinService: SpinService, public router: Router) {}
 
   prepareRoute(outlet: RouterOutlet): string {
     return outlet?.activatedRouteData?.['key'];

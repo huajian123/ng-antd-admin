@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, inject, DestroyRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { ExampleService } from '@services/example/example.service';
@@ -13,7 +13,7 @@ import { NzWaveModule } from 'ng-zorro-antd/core/wave';
   standalone: true,
   imports: [PageHeaderComponent, NzButtonModule, NzWaveModule]
 })
-export class SessionTimeoutComponent implements OnInit {
+export class SessionTimeoutComponent {
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '登录超时',
     breadcrumb: ['首页', '功能', '登录超时'],
@@ -21,11 +21,9 @@ export class SessionTimeoutComponent implements OnInit {
   };
   destroyRef = inject(DestroyRef);
 
-  constructor(private dataService: ExampleService) {}
+  private dataService = inject(ExampleService);
 
   go(): void {
     this.dataService.sessionTimeOut().pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
   }
-
-  ngOnInit(): void {}
 }

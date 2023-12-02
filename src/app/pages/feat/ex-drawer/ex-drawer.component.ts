@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 
@@ -16,7 +16,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
   standalone: true,
   imports: [PageHeaderComponent, NzInputModule, FormsModule, NzButtonModule, NzWaveModule]
 })
-export class ExDrawerComponent implements OnInit {
+export class ExDrawerComponent {
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '抽屉封装',
     breadcrumb: ['首页', '抽屉封装'],
@@ -25,7 +25,8 @@ export class ExDrawerComponent implements OnInit {
   data = '';
   dataFromDrawer = '';
   destroyRef = inject(DestroyRef);
-  constructor(private drawerService: ExDrawerDrawerService, private cdr: ChangeDetectorRef) {}
+  private drawerService = inject(ExDrawerDrawerService);
+  private cdr = inject(ChangeDetectorRef);
 
   showDrawer(): void {
     this.drawerService
@@ -39,6 +40,4 @@ export class ExDrawerComponent implements OnInit {
         this.cdr.markForCheck();
       });
   }
-
-  ngOnInit(): void {}
 }

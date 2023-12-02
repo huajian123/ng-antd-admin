@@ -26,7 +26,8 @@ export class ClickOutSideComponent implements OnInit, AfterViewInit {
   @ViewChild('targetHtml') targetHtml!: ElementRef;
   targetHtmlClick$!: Observable<any>;
 
-  constructor(private cdr: ChangeDetectorRef, @Inject(DOCUMENT) private doc: Document) {}
+  private cdr = inject(ChangeDetectorRef);
+  private doc = inject(DOCUMENT);
 
   ngAfterViewInit(): void {
     this.targetHtmlClick$ = fromEvent(this.targetHtml.nativeElement, 'click').pipe(

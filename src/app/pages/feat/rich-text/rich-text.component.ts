@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
 import { NonNullableFormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { environment } from '@env/environment';
@@ -17,7 +17,9 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
   standalone: true,
   imports: [PageHeaderComponent, NzCardModule, WaterMarkComponent, FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, EditorComponent, NgIf]
 })
-export class RichTextComponent implements OnInit {
+export class RichTextComponent {
+  private fb = inject(NonNullableFormBuilder);
+
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '富文本，人们总是喜欢用花里胡哨的文字，表达自己空虚的情感',
     breadcrumb: ['首页', '扩展功能', '富文本']
@@ -54,8 +56,4 @@ export class RichTextComponent implements OnInit {
     // image_advtab: true,
     // imagetools_toolbar: 'rotateleft rotateright | flipv fliph | editimage imageoptions',
   };
-
-  constructor(private fb: NonNullableFormBuilder) {}
-
-  ngOnInit(): void {}
 }

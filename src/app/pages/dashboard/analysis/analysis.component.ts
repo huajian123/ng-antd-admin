@@ -1,5 +1,5 @@
 import { NgFor } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, NgZone, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, inject, NgZone, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { Chart } from '@antv/g2';
@@ -51,7 +51,7 @@ interface DataItem {
     NumberLoopPipe
   ]
 })
-export class AnalysisComponent implements OnInit, AfterViewInit {
+export class AnalysisComponent implements AfterViewInit {
   destroyRef = inject(DestroyRef);
   cardPadding = { padding: '20px 24px 8px' };
   miniBarData = [497, 666, 219, 269, 274, 337, 81, 497, 666, 219, 269];
@@ -133,10 +133,7 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
       english: 89
     }
   ];
-
-  constructor(private cdr: ChangeDetectorRef, private ngZone: NgZone) {}
-
-  ngOnInit(): void {}
+  private ngZone = inject(NgZone);
 
   initMinibar(): void {
     const data = this.miniBarData;

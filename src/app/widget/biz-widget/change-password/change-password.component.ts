@@ -19,7 +19,7 @@ import { NzModalRef } from 'ng-zorro-antd/modal';
   standalone: true,
   imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzButtonModule, PasswordStrengthMeterComponent, NzIconModule, NgIf]
 })
-export class ChangePasswordComponent implements OnInit {
+export class ChangePasswordComponent {
   passwordVisible = false;
   compirePasswordVisible = false;
 
@@ -53,6 +53,4 @@ export class ChangePasswordComponent implements OnInit {
   updateConfirmValidator(): void {
     Promise.resolve().then(() => this.validateForm.controls.sureNewPassword.updateValueAndValidity());
   }
-
-  ngOnInit(): void {}
 }

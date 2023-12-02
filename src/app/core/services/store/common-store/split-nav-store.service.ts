@@ -12,8 +12,6 @@ import { Menu } from '../../types';
 export class SplitNavStoreService {
   private splitLeftNavArray$ = new BehaviorSubject<Menu[]>([]);
 
-  constructor() {}
-
   setSplitLeftNavArrayStore(menu: Menu[]): void {
     this.splitLeftNavArray$.next(menu);
   }

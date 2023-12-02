@@ -1,12 +1,11 @@
 import { CdkDrag } from '@angular/cdk/drag-drop';
 import { DOCUMENT, NgIf, NgFor } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject, OnInit, Renderer2 } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, Renderer2 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 
 import { IsNightKey, ThemeOptionsKey } from '@config/constant';
-import { LoginInOutService } from '@core/services/common/login-in-out.service';
 import { SimpleReuseStrategy } from '@core/services/common/reuse-strategy';
 import { TabService } from '@core/services/common/tab.service';
 import { ThemeSkinService } from '@core/services/common/theme-skin.service';
@@ -54,6 +53,15 @@ export interface ThemeMode extends NormalModel {
   imports: [CdkDrag, NgIf, NzIconModule, NzButtonModule, NzDrawerModule, NgFor, NzToolTipModule, NzDividerModule, NzListModule, NzSwitchModule, FormsModule]
 })
 export class SettingDrawerComponent implements OnInit {
+  private themesService = inject(ThemeService);
+  private tabService = inject(TabService);
+  private activatedRoute = inject(ActivatedRoute);
+  private doc = inject(DOCUMENT);
+  private nzConfigService = inject(NzConfigService);
+  private themeSkinService = inject(ThemeSkinService);
+  private windowServe = inject(WindowService);
+  private rd2 = inject(Renderer2);
+
   themesOptions$ = this.themesService.getThemesMode();
   isNightTheme$ = this.themesService.getIsNightTheme();
   _isNightTheme = false;
@@ -160,19 +168,6 @@ export class SettingDrawerComponent implements OnInit {
       isChecked: false
     }
   ];
-
-  constructor(
-    private themesService: ThemeService,
-    private loginInOutService: LoginInOutService,
-    private tabService: TabService,
-    private activatedRoute: ActivatedRoute,
-    @Inject(DOCUMENT) private doc: Document,
-    public message: NzMessageService,
-    private nzConfigService: NzConfigService,
-    private themeSkinService: ThemeSkinService,
-    private windowServe: WindowService,
-    private rd2: Renderer2
-  ) {}
 
   changeCollapsed(): void {
     if (!this.dragging) {

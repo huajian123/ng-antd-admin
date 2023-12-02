@@ -1,6 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, inject, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { takeUntil } from 'rxjs/operators';
 
 import { ip } from '@env/environment.prod';
 import { DownloadService } from '@services/download/download.service';
@@ -25,7 +24,7 @@ export class DownloadComponent implements OnInit {
   };
   destroyRef = inject(DestroyRef);
 
-  constructor(private downloadService: DownloadService) {}
+  private downloadService = inject(DownloadService);
 
   ngOnInit(): void {}
 

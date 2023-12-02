@@ -16,8 +16,6 @@ export interface LockScreenFlag {
 export class LockScreenStoreService {
   private lockScreenStore$ = new BehaviorSubject<LockScreenFlag>({ locked: false, password: '', beforeLockPath: '' });
 
-  constructor() {}
-
   setLockScreenStore(store: LockScreenFlag): void {
     this.lockScreenStore$.next(store);
   }

@@ -1,5 +1,5 @@
 import { NgStyle, NgFor, NgIf, DecimalPipe } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { WaterMarkComponent } from '@shared/components/water-mark/water-mark.component';
@@ -46,7 +46,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
     NumberLoopPipe
   ]
 })
-export class ApplicationComponent implements OnInit {
+export class ApplicationComponent {
   expanded = false;
   searchInfo = {
     owner: ['2', '3'],
@@ -68,7 +68,9 @@ export class ApplicationComponent implements OnInit {
     { name: '类目十一', isChecked: false },
     { name: '类目十二', isChecked: false }
   ];
-  constructor(private searchListService: SearchListStoreService) {
+  private searchListService = inject(SearchListStoreService);
+
+  constructor() {
     this._onReuseInit();
   }
 
@@ -83,6 +85,4 @@ export class ApplicationComponent implements OnInit {
   _onReuseInit(): void {
     this.searchListService.setCurrentSearchListComponentStore('搜索列表（应用）');
   }
-
-  ngOnInit(): void {}
 }

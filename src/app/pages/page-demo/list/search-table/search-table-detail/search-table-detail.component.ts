@@ -1,7 +1,5 @@
-import { ChangeDetectorRef, Component, DestroyRef, inject, Input, OnDestroy, OnInit } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Component, DestroyRef, inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { fnCheckForm } from '@utils/tools';
@@ -16,7 +14,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
   standalone: true,
   imports: [PageHeaderComponent, NzInputModule, FormsModule, NzDividerModule, NzFormModule, ReactiveFormsModule, NzGridModule]
 })
-export class SearchTableDetailComponent implements OnInit, OnDestroy {
+export class SearchTableDetailComponent implements OnInit {
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '详情',
     // desc: '表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。',
@@ -27,7 +25,7 @@ export class SearchTableDetailComponent implements OnInit, OnDestroy {
   backUrl = '/default/page-demo/list/search-table';
   destroyRef = inject(DestroyRef);
 
-  constructor(private routeParam: ActivatedRoute, public cdr: ChangeDetectorRef, private fb: FormBuilder) {}
+  private fb = inject(FormBuilder);
 
   initForm(): void {
     this.validateForm = this.fb.group({
@@ -47,11 +45,6 @@ export class SearchTableDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initForm();
-    console.log(this.name);
     this.validateForm.get('userName')?.setValue(this.name);
-  }
-
-  ngOnDestroy(): void {
-    console.log('组件实力销毁，调用ngOnDestroy');
   }
 }

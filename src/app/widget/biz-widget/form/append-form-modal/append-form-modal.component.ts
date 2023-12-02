@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
@@ -24,8 +24,9 @@ import { NzSliderModule } from 'ng-zorro-antd/slider';
 })
 export class AppendFormModalComponent implements OnInit {
   addEditForm!: FormGroup;
+  private fb = inject(FormBuilder);
 
-  constructor(private modalRef: NzModalRef, private fb: FormBuilder, private validatorsService: ValidatorsService, private roleService: RoleService, private deptService: DeptService) {}
+  constructor(private modalRef: NzModalRef) {}
 
   // 返回false则不关闭对话框
   protected getCurrentValue(): Observable<NzSafeAny> {

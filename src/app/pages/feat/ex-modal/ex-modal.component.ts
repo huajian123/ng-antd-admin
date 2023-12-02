@@ -1,5 +1,5 @@
 import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
-import { Component, OnInit, ChangeDetectionStrategy, TemplateRef, ViewChild, inject, DestroyRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, TemplateRef, ViewChild, inject, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
@@ -19,7 +19,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
   standalone: true,
   imports: [PageHeaderComponent, NzButtonModule, NzWaveModule, NzModalModule, ModalDragDirective, CdkDrag, CdkDragHandle]
 })
-export class ExModalComponent implements OnInit {
+export class ExModalComponent {
   @ViewChild('dragTpl', { static: true }) dragTpl!: TemplateRef<NzSafeAny>;
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '拖动Modal，树挪死，人挪活',
@@ -29,7 +29,8 @@ export class ExModalComponent implements OnInit {
   isVisible = false;
   isVisibleByDir = false;
 
-  constructor(private dragService: DragService, private modalDragService: NzModalWrapService) {}
+  private dragService = inject(DragService);
+  private modalDragService = inject(NzModalWrapService);
 
   handleOk(): void {
     console.log('Button ok clicked!');
@@ -97,6 +98,4 @@ export class ExModalComponent implements OnInit {
         console.log(modalValue);
       });
   }
-
-  ngOnInit(): void {}
 }

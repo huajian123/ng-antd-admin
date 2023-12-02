@@ -4,7 +4,6 @@ import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { ModalOptions } from 'ng-zorro-antd/modal/modal-types';
 
@@ -27,8 +26,10 @@ export const enum MessageCallback {
 })
 export class MessageService {
   modalCtrl: NzModalRef[] = [];
-  destroyRef = inject(DestroyRef);
-  constructor(private nzModalService: NzModalService, private router: Router, private toastService: NzMessageService) {
+  private destroyRef = inject(DestroyRef);
+  private nzModalService = inject(NzModalService);
+  private router = inject(Router);
+  constructor() {
     this.router.events
       .pipe(
         filter((event: NzSafeAny) => event instanceof NavigationEnd),

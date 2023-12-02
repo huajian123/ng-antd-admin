@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 
 import { ActionCode } from '@app/config/actionCode';
-import { MessageService } from '@core/services/common/message.service';
 import { OptionsInterface, SearchCommonVO } from '@core/services/types';
 import { AccountService, User } from '@services/system/account.service';
 import { AntTableConfig, AntTableComponent } from '@shared/components/ant-table/ant-table.component';
@@ -80,15 +79,12 @@ export class AccountComponent implements OnInit {
   availableOptions: OptionsInterface[] = [];
   destroyRef = inject(DestroyRef);
 
-  constructor(
-    private dataService: AccountService,
-    private modalSrv: NzModalService,
-    private cdr: ChangeDetectorRef,
-    private messageService: MessageService,
-    private modalService: AccountModalService,
-    private router: Router,
-    public message: NzMessageService
-  ) {}
+  private dataService = inject(AccountService);
+  private modalSrv = inject(NzModalService);
+  private cdr = inject(ChangeDetectorRef);
+  private modalService = inject(AccountModalService);
+  private router = inject(Router);
+  private message = inject(NzMessageService);
 
   selectedChecked(e: User[]): void {
     this.checkedCashArray = [...e];

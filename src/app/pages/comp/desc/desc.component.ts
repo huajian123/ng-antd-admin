@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -15,14 +15,10 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
   standalone: true,
   imports: [PageHeaderComponent, NzGridModule, NzCardModule, NzDescriptionsModule, NzToolTipModule, NzIconModule, NzButtonModule]
 })
-export class DescComponent implements OnInit {
+export class DescComponent {
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '详情组件示例',
     breadcrumb: ['首页', '组件', '详情组件'],
     desc: '一系列详情组件'
   };
-
-  constructor() {}
-
-  ngOnInit(): void {}
 }

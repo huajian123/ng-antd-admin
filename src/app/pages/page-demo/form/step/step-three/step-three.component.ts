@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -14,11 +14,7 @@ import { NzResultModule } from 'ng-zorro-antd/result';
   standalone: true,
   imports: [NzResultModule, NzButtonModule, NzWaveModule, NzDescriptionsModule]
 })
-export class StepThreeComponent implements OnInit {
+export class StepThreeComponent {
   @Input('stepDirection') stepDirection: 'horizontal' | 'vertical' = 'horizontal';
   @Output() readonly next = new EventEmitter<NzSafeAny>();
-
-  constructor() {}
-
-  ngOnInit(): void {}
 }
