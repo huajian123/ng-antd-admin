@@ -654,6 +654,13 @@ input[nz-input] {
   .animate-bg-0;
 }
 
+// zorro更新日志中16.2.2版本的中内置 cdk-overlay 样式影响，删除这段样式会导致拖拽modal的示例demo，同时弹出2个对话框，点击不同的对话框，z-index不生效
+.cdk-global-overlay-wrapper{
+  z-index: unset;
+  position:unset;
+  display: unset;
+}
+
 // https://github.com/angular/angular/pull/42608
 @keyframes progress-bar-load-third {
   0% {
