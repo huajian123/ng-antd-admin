@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -22,7 +21,7 @@ export interface PageHeaderType {
   styleUrls: ['./page-header.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [NzPageHeaderModule, NzBreadCrumbModule, NgFor, NzOutletModule, NgIf]
+  imports: [NzPageHeaderModule, NzBreadCrumbModule, NzOutletModule]
 })
 export class PageHeaderComponent implements OnInit {
   private themesService = inject(ThemeService);

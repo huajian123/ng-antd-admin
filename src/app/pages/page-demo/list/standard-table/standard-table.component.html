@@ -42,47 +42,49 @@
       <span>添加</span>
     </button>
     <nz-list [nzLoading]="isSpinning">
-      <nz-list-item *ngFor="let item of list">
-        <nz-list-item-meta>
-          <nz-list-item-meta-avatar [nzSrc]="item.avatar"></nz-list-item-meta-avatar>
-          <nz-list-item-meta-title>
-            <a>{{ item.name }}</a>
-          </nz-list-item-meta-title>
-          <nz-list-item-meta-description>
-            {{ item.desc }}
-          </nz-list-item-meta-description>
-        </nz-list-item-meta>
-        <div>
-          <div class="list-content-item">
-            <div>Owner</div>
-            <div>{{ item.owner }}</div>
+      @for (item of list; track item) {
+        <nz-list-item>
+          <nz-list-item-meta>
+            <nz-list-item-meta-avatar [nzSrc]="item.avatar"></nz-list-item-meta-avatar>
+            <nz-list-item-meta-title>
+              <a>{{ item.name }}</a>
+            </nz-list-item-meta-title>
+            <nz-list-item-meta-description>
+              {{ item.desc }}
+            </nz-list-item-meta-description>
+          </nz-list-item-meta>
+          <div>
+            <div class="list-content-item">
+              <div>Owner</div>
+              <div>{{ item.owner }}</div>
+            </div>
+            <div class="list-content-item">
+              <div>开始时间</div>
+              <div>{{ item.time }}</div>
+            </div>
+            <div class="list-content-item">
+              <nz-progress [nzPercent]="item.progress" [nzStatus]="item.progress_status"></nz-progress>
+            </div>
           </div>
-          <div class="list-content-item">
-            <div>开始时间</div>
-            <div>{{ item.time }}</div>
-          </div>
-          <div class="list-content-item">
-            <nz-progress [nzPercent]="item.progress" [nzStatus]="item.progress_status"></nz-progress>
-          </div>
-        </div>
-        <ul nz-list-item-actions>
-          <nz-list-item-action>
-            <a (click)="edit(item)">编辑</a>
-          </nz-list-item-action>
-          <nz-list-item-action>
-            <a nz-dropdown [nzDropdownMenu]="menu">
-              更多
-              <i nz-icon nzTheme="outline" nzType="down"></i>
-            </a>
-            <nz-dropdown-menu #menu="nzDropdownMenu">
-              <ul nz-menu>
-                <li nz-menu-item (click)="edit(item)">编辑</li>
-                <li nz-menu-item (click)="deleteItem(item)">删除</li>
-              </ul>
-            </nz-dropdown-menu>
-          </nz-list-item-action>
-        </ul>
-      </nz-list-item>
+          <ul nz-list-item-actions>
+            <nz-list-item-action>
+              <a (click)="edit(item)">编辑</a>
+            </nz-list-item-action>
+            <nz-list-item-action>
+              <a nz-dropdown [nzDropdownMenu]="menu">
+                更多
+                <i nz-icon nzTheme="outline" nzType="down"></i>
+              </a>
+              <nz-dropdown-menu #menu="nzDropdownMenu">
+                <ul nz-menu>
+                  <li nz-menu-item (click)="edit(item)">编辑</li>
+                  <li nz-menu-item (click)="deleteItem(item)">删除</li>
+                </ul>
+              </nz-dropdown-menu>
+            </nz-list-item-action>
+          </ul>
+        </nz-list-item>
+      }
       <nz-list-pagination>
         <nz-pagination nzShowQuickJumper nzShowSizeChanger [nzPageIndex]="1" [nzPageSize]="5" [nzTotal]="50"></nz-pagination>
       </nz-list-pagination>

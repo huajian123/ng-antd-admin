@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
 import { NonNullableFormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -15,7 +14,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
   templateUrl: './rich-text.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [PageHeaderComponent, NzCardModule, WaterMarkComponent, FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, EditorComponent, NgIf]
+  imports: [PageHeaderComponent, NzCardModule, WaterMarkComponent, FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, EditorComponent]
 })
 export class RichTextComponent {
   private fb = inject(NonNullableFormBuilder);

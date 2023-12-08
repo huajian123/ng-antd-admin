@@ -57,9 +57,13 @@
             <label nz-radio nzValue="2">部分公开</label>
             <label nz-radio nzValue="3">不公开</label>
           </nz-radio-group>
-          <nz-select *ngIf="validateForm.get('isPublic')!.value === '2'" class="m-t-5" nzMode="tags" nzPlaceHolder="Please select">
-            <nz-option *ngFor="let option of listOfOption" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
-          </nz-select>
+          @if (validateForm.get('isPublic')!.value === '2') {
+            <nz-select class="m-t-5" nzMode="tags" nzPlaceHolder="Please select">
+              @for (option of listOfOption; track option) {
+                <nz-option [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+              }
+            </nz-select>
+          }
         </nz-form-control>
       </nz-form-item>
       <nz-form-item nz-row>

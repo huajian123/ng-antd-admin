@@ -10,6 +10,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
+    "lint:fix": "eslint --fix --cache . --ext .ts,.html",
     "lint:style": "npx stylelint \"src/**/*.less\" --fix"
   },
   "private": true,
@@ -75,7 +76,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
-    "prettier": "^2.8.8",
+    "prettier": "^3.1.0",
     "prettier-plugin-organize-attributes": "^0.0.5",
     "stylelint": "^14.6.0",
     "stylelint-config-prettier": "^9.0.3",

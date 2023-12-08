@@ -1,5 +1,5 @@
 import { CdkDrag } from '@angular/cdk/drag-drop';
-import { DOCUMENT, NgIf, NgFor } from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, OnInit, Renderer2 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -50,7 +50,7 @@ export interface ThemeMode extends NormalModel {
   styleUrls: ['./setting-drawer.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [CdkDrag, NgIf, NzIconModule, NzButtonModule, NzDrawerModule, NgFor, NzToolTipModule, NzDividerModule, NzListModule, NzSwitchModule, FormsModule]
+  imports: [CdkDrag, NzIconModule, NzButtonModule, NzDrawerModule, NzToolTipModule, NzDividerModule, NzListModule, NzSwitchModule, FormsModule]
 })
 export class SettingDrawerComponent implements OnInit {
   private themesService = inject(ThemeService);

@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, inject, NgZone, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -42,7 +41,6 @@ interface DataItem {
     NzToolTipModule,
     NzDividerModule,
     NzTabsModule,
-    NgFor,
     NzBadgeModule,
     NzRadioModule,
     NzDatePickerModule,

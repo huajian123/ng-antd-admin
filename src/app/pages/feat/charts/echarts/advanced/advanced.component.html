@@ -1,7 +1,9 @@
 <nz-card nzTitle="高级">
   <nz-tabset [nzTabPosition]="tabPosition">
-    <nz-tab *ngFor="let item of tabArray; let index = index" [nzTitle]="item.label" (nzClick)="to(index)">
-      <ng-template [cdkPortalOutlet]="selectedPortal"></ng-template>
-    </nz-tab>
+    @for (item of tabArray; track item; let index = $index) {
+      <nz-tab [nzTitle]="item.label" (nzClick)="to(index)">
+        <ng-template [cdkPortalOutlet]="selectedPortal"></ng-template>
+      </nz-tab>
+    }
   </nz-tabset>
 </nz-card>

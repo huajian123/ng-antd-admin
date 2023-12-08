@@ -1,15 +1,15 @@
 :host ::ng-deep {
   .mat-ripple {
     position: relative;
-    overflow: hidden
+    overflow: hidden;
   }
 
   .mat-ripple:not(:empty) {
-    transform: translateZ(0)
+    transform: translateZ(0);
   }
 
   .mat-ripple.mat-ripple-unbounded {
-    overflow: visible
+    overflow: visible;
   }
 
   .mat-ripple-element {
@@ -17,134 +17,177 @@
     background-color: rgb(0 0 0 / 10%);
     border-radius: 50%;
     transform: scale(0);
-    transition: opacity, transform 0ms cubic-bezier(0, 0, 0.2, 1);
-    pointer-events: none
+    transition:
+      opacity,
+      transform 0ms cubic-bezier(0, 0, 0.2, 1);
+    pointer-events: none;
   }
 
   .cdk-high-contrast-active .mat-ripple-element {
-    display: none
+    display: none;
   }
 
-  .mat-button .mat-ripple-element, .mat-icon-button .mat-ripple-element, .mat-stroked-button .mat-ripple-element {
+  .mat-button .mat-ripple-element,
+  .mat-icon-button .mat-ripple-element,
+  .mat-stroked-button .mat-ripple-element {
     background-color: currentcolor;
-    opacity: .1
+    opacity: 0.1;
   }
 
-  .mat-flat-button.mat-primary .mat-ripple-element, .mat-raised-button.mat-primary .mat-ripple-element, .mat-fab.mat-primary .mat-ripple-element, .mat-mini-fab.mat-primary .mat-ripple-element {
-    background-color: rgb(255 255 255 / 10%)
+  .mat-flat-button.mat-primary .mat-ripple-element,
+  .mat-raised-button.mat-primary .mat-ripple-element,
+  .mat-fab.mat-primary .mat-ripple-element,
+  .mat-mini-fab.mat-primary .mat-ripple-element {
+    background-color: rgb(255 255 255 / 10%);
   }
 
-  .mat-flat-button.mat-accent .mat-ripple-element, .mat-raised-button.mat-accent .mat-ripple-element, .mat-fab.mat-accent .mat-ripple-element, .mat-mini-fab.mat-accent .mat-ripple-element {
-    background-color: rgb(255 255 255 / 10%)
+  .mat-flat-button.mat-accent .mat-ripple-element,
+  .mat-raised-button.mat-accent .mat-ripple-element,
+  .mat-fab.mat-accent .mat-ripple-element,
+  .mat-mini-fab.mat-accent .mat-ripple-element {
+    background-color: rgb(255 255 255 / 10%);
   }
 
-  .mat-flat-button.mat-warn .mat-ripple-element, .mat-raised-button.mat-warn .mat-ripple-element, .mat-fab.mat-warn .mat-ripple-element, .mat-mini-fab.mat-warn .mat-ripple-element {
-    background-color: rgb(255 255 255 / 10%)
+  .mat-flat-button.mat-warn .mat-ripple-element,
+  .mat-raised-button.mat-warn .mat-ripple-element,
+  .mat-fab.mat-warn .mat-ripple-element,
+  .mat-mini-fab.mat-warn .mat-ripple-element {
+    background-color: rgb(255 255 255 / 10%);
   }
 
   .mat-checkbox .mat-ripple-element {
-    background-color: #000
+    background-color: #000;
   }
 
-  .mat-checkbox-checked:not(.mat-checkbox-disabled).mat-primary .mat-ripple-element, .mat-checkbox:active:not(.mat-checkbox-disabled).mat-primary .mat-ripple-element {
-    background: #3f51b5
+  .mat-checkbox-checked:not(.mat-checkbox-disabled).mat-primary .mat-ripple-element,
+  .mat-checkbox:active:not(.mat-checkbox-disabled).mat-primary .mat-ripple-element {
+    background: #3f51b5;
   }
 
-  .mat-checkbox-checked:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element, .mat-checkbox:active:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element {
-    background: #ff4081
+  .mat-checkbox-checked:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element,
+  .mat-checkbox:active:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element {
+    background: #ff4081;
   }
 
-  .mat-checkbox-checked:not(.mat-checkbox-disabled).mat-warn .mat-ripple-element, .mat-checkbox:active:not(.mat-checkbox-disabled).mat-warn .mat-ripple-element {
-    background: #f44336
+  .mat-checkbox-checked:not(.mat-checkbox-disabled).mat-warn .mat-ripple-element,
+  .mat-checkbox:active:not(.mat-checkbox-disabled).mat-warn .mat-ripple-element {
+    background: #f44336;
   }
 
   .mat-chip.mat-standard-chip.mat-chip-selected.mat-primary .mat-ripple-element {
-    background-color: rgb(255 255 255 / 10%)
+    background-color: rgb(255 255 255 / 10%);
   }
 
   .mat-chip.mat-standard-chip.mat-chip-selected.mat-warn .mat-ripple-element {
-    background-color: rgb(255 255 255 / 10%)
+    background-color: rgb(255 255 255 / 10%);
   }
 
   .mat-chip.mat-standard-chip.mat-chip-selected.mat-accent .mat-ripple-element {
-    background-color: rgb(255 255 255 / 10%)
+    background-color: rgb(255 255 255 / 10%);
   }
 
   .mat-form-field-ripple {
-    background-color: rgb(0 0 0 / 87%)
+    background-color: rgb(0 0 0 / 87%);
   }
 
   .mat-form-field.mat-focused .mat-form-field-ripple {
-    background-color: #3f51b5
+    background-color: #3f51b5;
   }
 
   .mat-form-field.mat-focused .mat-form-field-ripple.mat-accent {
-    background-color: #ff4081
+    background-color: #ff4081;
   }
 
   .mat-form-field.mat-focused .mat-form-field-ripple.mat-warn {
-    background-color: #f44336
+    background-color: #f44336;
   }
 
-  .mat-form-field.mat-form-field-invalid .mat-form-field-ripple, .mat-form-field.mat-form-field-invalid .mat-form-field-ripple.mat-accent {
-    background-color: #f44336
+  .mat-form-field.mat-form-field-invalid .mat-form-field-ripple,
+  .mat-form-field.mat-form-field-invalid .mat-form-field-ripple.mat-accent {
+    background-color: #f44336;
   }
 
-  .mat-radio-button.mat-primary .mat-radio-inner-circle, .mat-radio-button.mat-primary .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple), .mat-radio-button.mat-primary.mat-radio-checked .mat-radio-persistent-ripple, .mat-radio-button.mat-primary:active .mat-radio-persistent-ripple {
-    background-color: #3f51b5
+  .mat-radio-button.mat-primary .mat-radio-inner-circle,
+  .mat-radio-button.mat-primary .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple),
+  .mat-radio-button.mat-primary.mat-radio-checked .mat-radio-persistent-ripple,
+  .mat-radio-button.mat-primary:active .mat-radio-persistent-ripple {
+    background-color: #3f51b5;
   }
 
-  .mat-radio-button.mat-accent .mat-radio-inner-circle, .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple), .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple, .mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
-    background-color: #ff4081
+  .mat-radio-button.mat-accent .mat-radio-inner-circle,
+  .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple),
+  .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple,
+  .mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
+    background-color: #ff4081;
   }
 
-  .mat-radio-button.mat-warn .mat-radio-inner-circle, .mat-radio-button.mat-warn .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple), .mat-radio-button.mat-warn.mat-radio-checked .mat-radio-persistent-ripple, .mat-radio-button.mat-warn:active .mat-radio-persistent-ripple {
-    background-color: #f44336
+  .mat-radio-button.mat-warn .mat-radio-inner-circle,
+  .mat-radio-button.mat-warn .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple),
+  .mat-radio-button.mat-warn.mat-radio-checked .mat-radio-persistent-ripple,
+  .mat-radio-button.mat-warn:active .mat-radio-persistent-ripple {
+    background-color: #f44336;
   }
 
-  .mat-radio-button.mat-radio-disabled .mat-radio-ripple .mat-ripple-element, .mat-radio-button.mat-radio-disabled .mat-radio-inner-circle {
-    background-color: rgb(0 0 0 / 38%)
+  .mat-radio-button.mat-radio-disabled .mat-radio-ripple .mat-ripple-element,
+  .mat-radio-button.mat-radio-disabled .mat-radio-inner-circle {
+    background-color: rgb(0 0 0 / 38%);
   }
 
   .mat-radio-button .mat-ripple-element {
-    background-color: #000
+    background-color: #000;
   }
 
   .mat-slide-toggle.mat-checked .mat-ripple-element {
-    background-color: #ff4081
+    background-color: #ff4081;
   }
 
   .mat-slide-toggle.mat-primary.mat-checked .mat-ripple-element {
-    background-color: #3f51b5
+    background-color: #3f51b5;
   }
 
   .mat-slide-toggle.mat-warn.mat-checked .mat-ripple-element {
-    background-color: #f44336
+    background-color: #f44336;
   }
 
   .mat-slide-toggle:not(.mat-checked) .mat-ripple-element {
-    background-color: #000
+    background-color: #000;
   }
 
-  .mat-tab-group.mat-background-primary > .mat-tab-header .mat-ripple-element, .mat-tab-group.mat-background-primary > .mat-tab-link-container .mat-ripple-element, .mat-tab-group.mat-background-primary > .mat-tab-header-pagination .mat-ripple-element, .mat-tab-nav-bar.mat-background-primary > .mat-tab-header .mat-ripple-element, .mat-tab-nav-bar.mat-background-primary > .mat-tab-link-container .mat-ripple-element, .mat-tab-nav-bar.mat-background-primary > .mat-tab-header-pagination .mat-ripple-element {
+  .mat-tab-group.mat-background-primary > .mat-tab-header .mat-ripple-element,
+  .mat-tab-group.mat-background-primary > .mat-tab-link-container .mat-ripple-element,
+  .mat-tab-group.mat-background-primary > .mat-tab-header-pagination .mat-ripple-element,
+  .mat-tab-nav-bar.mat-background-primary > .mat-tab-header .mat-ripple-element,
+  .mat-tab-nav-bar.mat-background-primary > .mat-tab-link-container .mat-ripple-element,
+  .mat-tab-nav-bar.mat-background-primary > .mat-tab-header-pagination .mat-ripple-element {
     background-color: #fff;
-    opacity: .12
+    opacity: 0.12;
   }
 
-  .mat-tab-group.mat-background-accent > .mat-tab-header .mat-ripple-element, .mat-tab-group.mat-background-accent > .mat-tab-link-container .mat-ripple-element, .mat-tab-group.mat-background-accent > .mat-tab-header-pagination .mat-ripple-element, .mat-tab-nav-bar.mat-background-accent > .mat-tab-header .mat-ripple-element, .mat-tab-nav-bar.mat-background-accent > .mat-tab-link-container .mat-ripple-element, .mat-tab-nav-bar.mat-background-accent > .mat-tab-header-pagination .mat-ripple-element {
+  .mat-tab-group.mat-background-accent > .mat-tab-header .mat-ripple-element,
+  .mat-tab-group.mat-background-accent > .mat-tab-link-container .mat-ripple-element,
+  .mat-tab-group.mat-background-accent > .mat-tab-header-pagination .mat-ripple-element,
+  .mat-tab-nav-bar.mat-background-accent > .mat-tab-header .mat-ripple-element,
+  .mat-tab-nav-bar.mat-background-accent > .mat-tab-link-container .mat-ripple-element,
+  .mat-tab-nav-bar.mat-background-accent > .mat-tab-header-pagination .mat-ripple-element {
     background-color: #fff;
-    opacity: .12
+    opacity: 0.12;
   }
 
-  .mat-tab-group.mat-background-warn > .mat-tab-header .mat-ripple-element, .mat-tab-group.mat-background-warn > .mat-tab-link-container .mat-ripple-element, .mat-tab-group.mat-background-warn > .mat-tab-header-pagination .mat-ripple-element, .mat-tab-nav-bar.mat-background-warn > .mat-tab-header .mat-ripple-element, .mat-tab-nav-bar.mat-background-warn > .mat-tab-link-container .mat-ripple-element, .mat-tab-nav-bar.mat-background-warn > .mat-tab-header-pagination .mat-ripple-element {
+  .mat-tab-group.mat-background-warn > .mat-tab-header .mat-ripple-element,
+  .mat-tab-group.mat-background-warn > .mat-tab-link-container .mat-ripple-element,
+  .mat-tab-group.mat-background-warn > .mat-tab-header-pagination .mat-ripple-element,
+  .mat-tab-nav-bar.mat-background-warn > .mat-tab-header .mat-ripple-element,
+  .mat-tab-nav-bar.mat-background-warn > .mat-tab-link-container .mat-ripple-element,
+  .mat-tab-nav-bar.mat-background-warn > .mat-tab-header-pagination .mat-ripple-element {
     background-color: #fff;
-    opacity: .12
+    opacity: 0.12;
   }
 
-  .mat-toolbar .mat-form-field-underline, .mat-toolbar .mat-form-field-ripple, .mat-toolbar .mat-focused .mat-form-field-ripple {
-    background-color: currentcolor
+  .mat-toolbar .mat-form-field-underline,
+  .mat-toolbar .mat-form-field-ripple,
+  .mat-toolbar .mat-focused .mat-form-field-ripple {
+    background-color: currentcolor;
   }
-
 }
 
 /** Styles to make the demo look better. */

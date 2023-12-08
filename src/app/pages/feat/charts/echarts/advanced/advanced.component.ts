@@ -1,6 +1,6 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { ComponentPortal, ComponentType, Portal, PortalModule } from '@angular/cdk/portal';
-import { NgFor } from '@angular/common';
+
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -17,7 +17,7 @@ type targetComp = ConnectChartsComponent | DraggableChartsComponent;
   templateUrl: './advanced.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [NzCardModule, NzTabsModule, NgFor, PortalModule]
+  imports: [NzCardModule, NzTabsModule, PortalModule]
 })
 export class AdvancedComponent implements OnInit {
   componentPortal?: ComponentPortal<targetComp>;

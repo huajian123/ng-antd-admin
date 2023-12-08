@@ -1,4 +1,4 @@
-import { NgTemplateOutlet, NgFor } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { NumberLoopPipe } from '@shared/pipes/number-loop.pipe';
@@ -14,6 +14,6 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
   styleUrls: ['./home-notice.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [NzCardModule, NzTabsModule, NgTemplateOutlet, NzListModule, NgFor, NzTypographyModule, NzTagModule, NumberLoopPipe]
+  imports: [NzCardModule, NzTabsModule, NgTemplateOutlet, NzListModule, NzTypographyModule, NzTagModule, NumberLoopPipe]
 })
 export class HomeNoticeComponent {}

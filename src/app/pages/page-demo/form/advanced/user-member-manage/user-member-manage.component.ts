@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -20,7 +19,7 @@ interface ItemData {
   templateUrl: './user-member-manage.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [NzTableModule, NgFor, NgIf, NzInputModule, FormsModule, NzPopconfirmModule, NzButtonModule, NzWaveModule, NzIconModule]
+  imports: [NzTableModule, NzInputModule, FormsModule, NzPopconfirmModule, NzButtonModule, NzWaveModule, NzIconModule]
 })
 export class UserMemberManageComponent implements OnInit {
   // 表格

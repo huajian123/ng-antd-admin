@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild, TemplateRef, inject, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, NavigationEnd, Router, RouterEvent, RouterOutlet } from '@angular/router';
@@ -25,7 +24,7 @@ interface TabInterface {
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeRouteAnimation],
   standalone: true,
-  imports: [PageHeaderComponent, WaterMarkComponent, NzButtonModule, NzInputModule, NzWaveModule, NzTabsModule, NgFor, RouterOutlet]
+  imports: [PageHeaderComponent, WaterMarkComponent, NzButtonModule, NzInputModule, NzWaveModule, NzTabsModule, RouterOutlet]
 })
 export class SearchListComponent {
   @ViewChild('headerContent', { static: true }) headerContent!: TemplateRef<NzSafeAny>;

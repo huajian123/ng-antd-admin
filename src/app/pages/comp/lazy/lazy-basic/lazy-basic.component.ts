@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, ChangeDetectionStrategy, ViewChild, AfterViewInit, inject } from '@angular/core';
 
 import { LazyServiceService } from '@app/pages/comp/lazy/lazy-service.service';
@@ -14,7 +13,7 @@ import { NzWaveModule } from 'ng-zorro-antd/core/wave';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [LazyServiceService],
   standalone: true,
-  imports: [PageHeaderComponent, NgIf, NzButtonModule, NzWaveModule, AdDirective]
+  imports: [PageHeaderComponent, NzButtonModule, NzWaveModule, AdDirective]
 })
 export class LazyBasicComponent implements AfterViewInit {
   lazyServiceService = inject(LazyServiceService);

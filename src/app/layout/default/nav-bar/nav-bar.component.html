@@ -1,141 +1,178 @@
 <!--如果只有side模式时，可以考虑使用zorro的menu递归-->
 <!--https://github.com/NG-ZORRO/ng-zorro-antd/issues/6306-->
-<ul
-  *ngIf="!isMixinHead; else mixinHeadTpl"
-  nz-menu
-  [nzInlineCollapsed]="isCollapsed$ | async"
-  [nzMode]="(themesOptions$ | async)!.mode === 'side' || (themesOptions$ | async)!.mode === 'mixin' || (isOverMode$ | async) ? 'inline' : 'horizontal'"
-  [nzNoAnimation]="(themesOptions$ | async)!.mode === 'top' && !isOverMode"
-  [nzTheme]="isMixinMode && !(isOverMode$ | async) && !(isNightTheme$ | async) ? 'light' : isMixinMode && (isNightTheme$ | async) ? 'dark' : (themesOptions$ | async)!.theme"
->
-  <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: isMixinLeft ? leftMenuArray : menus }"></ng-container>
-  <ng-template #menuTpl let-menus>
-    <ng-container *ngFor="let menu of menus; trackByProperty: 'id'">
-      <!--权限1-->
-      <ng-container *appAuth="menu.code">
-        <!--一级菜单-->
-        <li *ngIf="!menu.children || menu.children.length === 0" nz-menu-item [nzPaddingLeft]="(themesMode !== 'top' || isOverMode) && !isCollapsed ? 16 : 0" [nzSelected]="menu.selected">
-          <a (click)="changeRoute($event, menu)">
-            <i *ngIf="menu.icon" nz-icon [nzType]="menu.icon"></i>
-            <i *ngIf="menu.alIcon" nz-icon [nzIconfont]="menu.alIcon"></i>
-            <span>{{ menu.menuName }}</span>
-          </a>
-        </li>
-        <!--二级菜单-->
-        <ng-container *ngIf="menu.children && menu.children.length > 0">
-          <!--*appAuth="menu.code"-->
-          <li nz-submenu [nzPaddingLeft]="(themesMode !== 'top' || isOverMode) && !isCollapsed ? 16 : 0" [nzTitle]="titleTpl" [(nzOpen)]="menu.open" (nzOpenChange)="changeOpen(menu, menus)">
-            <ng-template #titleTpl>
-              <i *ngIf="menu.icon" nz-icon [nzType]="menu.icon"></i>
-              <i *ngIf="menu.alIcon" nz-icon [nzIconfont]="menu.alIcon"></i>
-              <span>{{ menu.menuName }}</span>
-            </ng-template>
-            <ul>
-              <ng-container *ngFor="let menuSecond of menu.children; trackByProperty: 'id'">
-                <!--权限2-->
-                <ng-container *appAuth="menuSecond.code">
-                  <li
-                    *ngIf="!menuSecond.children || menuSecond.children.length === 0"
-                    nz-menu-item
-                    [nzPaddingLeft]="(themesMode !== 'top' || isOverMode) && !isCollapsed ? 32 : 0"
-                    [nzSelected]="menuSecond.selected"
-                  >
-                    <a (click)="changeRoute($event, menuSecond)">
-                      <i *ngIf="menuSecond.icon" nz-icon [nzType]="menuSecond.icon"></i>
-                      <i *ngIf="menuSecond.alIcon" nz-icon [nzIconfont]="menuSecond.alIcon"></i>
-                      <span>{{ menuSecond.menuName }}</span>
-                    </a>
-                  </li>
-                  <!--三级菜单-->
-                  <li
-                    *ngIf="menuSecond.children && menuSecond.children.length > 0"
-                    nz-submenu
-                    [nzPaddingLeft]="(themesMode !== 'top' || isOverMode) && !isCollapsed ? 32 : 0"
-                    [nzTitle]="titleTpl"
-                    [(nzOpen)]="menuSecond.open"
-                    (nzOpenChange)="changeOpen(menuSecond, menu.children)"
-                  >
-                    <ng-template #titleTpl>
-                      <i *ngIf="menuSecond.icon" nz-icon [nzType]="menuSecond.icon"></i>
-                      <i *ngIf="menuSecond.alIcon" nz-icon [nzIconfont]="menuSecond.alIcon"></i>
-                      <span>{{ menuSecond.menuName }}</span>
-                    </ng-template>
-                    <ul>
-                      <ng-container *ngFor="let menuThird of menuSecond.children; trackByProperty: 'id'">
-                        <ng-container *appAuth="menuThird.code">
-                          <li
-                            *ngIf="!menuThird.children || menuThird.children.length === 0"
-                            nz-menu-item
-                            [nzPaddingLeft]="(themesMode !== 'top' || isOverMode) && !isCollapsed ? 48 : 0"
-                            [nzSelected]="menuThird.selected"
-                          >
-                            <a (click)="changeRoute($event, menuThird)">
-                              <i *ngIf="menuThird.icon" nz-icon [nzType]="menuThird.icon"></i>
-                              <i *ngIf="menuThird.alIcon" nz-icon [nzIconfont]="menuThird.alIcon"></i>
-                              <span>{{ menuThird.menuName }}</span>
-                            </a>
-                          </li>
-                          <!--四级菜单-->
-                          <li
-                            *ngIf="menuThird.children && menuThird.children.length > 0"
-                            nz-submenu
-                            [nzPaddingLeft]="(themesMode !== 'top' || isOverMode) && !isCollapsed ? 48 : 0"
-                            [nzTitle]="menuThird.menuName"
-                            [(nzOpen)]="menuThird.open"
-                            (nzOpenChange)="changeOpen(menuThird, menuSecond.children)"
-                          >
-                            <i *ngIf="menuThird.icon" nz-icon [nzType]="menuThird.icon"></i>
-                            <i *ngIf="menuThird.alIcon" nz-icon [nzIconfont]="menuThird.alIcon"></i>
-                            <ul>
-                              <ng-container *ngFor="let forthThird of menuThird.children; trackByProperty: 'id'">
-                                <ng-container *appAuth="forthThird.code">
-                                  <li nz-menu-item [nzPaddingLeft]="(themesMode !== 'top' || isOverMode) && !isCollapsed ? 64 : 0" [nzSelected]="forthThird.selected">
-                                    <a (click)="changeRoute($event, forthThird)">
-                                      <i *ngIf="forthThird.icon" nz-icon [nzType]="forthThird.icon"></i>
-                                      <i *ngIf="forthThird.alIcon" nz-icon [nzIconfont]="forthThird.alIcon"></i>
-                                      <span>{{ forthThird.menuName }}</span>
-                                    </a>
-                                  </li>
-                                </ng-container>
-                              </ng-container>
-                            </ul>
-                          </li>
-                        </ng-container>
-                      </ng-container>
-                    </ul>
-                  </li>
-                </ng-container>
-                <!--权限2结束-->
-              </ng-container>
-            </ul>
-          </li>
+@if (!isMixinHead) {
+  <ul
+    nz-menu
+    [nzInlineCollapsed]="isCollapsed$ | async"
+    [nzMode]="(themesOptions$ | async)!.mode === 'side' || (themesOptions$ | async)!.mode === 'mixin' || (isOverMode$ | async) ? 'inline' : 'horizontal'"
+    [nzNoAnimation]="(themesOptions$ | async)!.mode === 'top' && !isOverMode"
+    [nzTheme]="isMixinMode && !(isOverMode$ | async) && !(isNightTheme$ | async) ? 'light' : isMixinMode && (isNightTheme$ | async) ? 'dark' : (themesOptions$ | async)!.theme"
+  >
+    <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: isMixinLeft ? leftMenuArray : menus }"></ng-container>
+    <ng-template #menuTpl let-menus>
+      @for (menu of menus; track menu) {
+        <!--权限1-->
+        <ng-container *appAuth="menu.code">
+          <!--一级菜单-->
+          @if (!menu.children || menu.children.length === 0) {
+            <li nz-menu-item [nzPaddingLeft]="(themesMode !== 'top' || isOverMode) && !isCollapsed ? 16 : 0" [nzSelected]="menu.selected">
+              <a (click)="changeRoute($event, menu)">
+                @if (menu.icon) {
+                  <i nz-icon [nzType]="menu.icon"></i>
+                }
+                @if (menu.alIcon) {
+                  <i nz-icon [nzIconfont]="menu.alIcon"></i>
+                }
+                <span>{{ menu.menuName }}</span>
+              </a>
+            </li>
+          }
+          <!--二级菜单-->
+          @if (menu.children && menu.children.length > 0) {
+            <!--*appAuth="menu.code"-->
+            <li nz-submenu [nzPaddingLeft]="(themesMode !== 'top' || isOverMode) && !isCollapsed ? 16 : 0" [nzTitle]="titleTpl" [(nzOpen)]="menu.open" (nzOpenChange)="changeOpen(menu, menus)">
+              <ng-template #titleTpl>
+                @if (menu.icon) {
+                  <i nz-icon [nzType]="menu.icon"></i>
+                }
+                @if (menu.alIcon) {
+                  <i nz-icon [nzIconfont]="menu.alIcon"></i>
+                }
+                <span>{{ menu.menuName }}</span>
+              </ng-template>
+              <ul>
+                @for (menuSecond of menu.children; track menuSecond) {
+                  <!--权限2-->
+                  <ng-container *appAuth="menuSecond.code">
+                    @if (!menuSecond.children || menuSecond.children.length === 0) {
+                      <li nz-menu-item [nzPaddingLeft]="(themesMode !== 'top' || isOverMode) && !isCollapsed ? 32 : 0" [nzSelected]="menuSecond.selected">
+                        <a (click)="changeRoute($event, menuSecond)">
+                          @if (menuSecond.icon) {
+                            <i nz-icon [nzType]="menuSecond.icon"></i>
+                          }
+                          @if (menuSecond.alIcon) {
+                            <i nz-icon [nzIconfont]="menuSecond.alIcon"></i>
+                          }
+                          <span>{{ menuSecond.menuName }}</span>
+                        </a>
+                      </li>
+                    }
+                    <!--三级菜单-->
+                    @if (menuSecond.children && menuSecond.children.length > 0) {
+                      <li
+                        nz-submenu
+                        [nzPaddingLeft]="(themesMode !== 'top' || isOverMode) && !isCollapsed ? 32 : 0"
+                        [nzTitle]="titleTpl"
+                        [(nzOpen)]="menuSecond.open"
+                        (nzOpenChange)="changeOpen(menuSecond, menu.children)"
+                      >
+                        <ng-template #titleTpl>
+                          @if (menuSecond.icon) {
+                            <i nz-icon [nzType]="menuSecond.icon"></i>
+                          }
+                          @if (menuSecond.alIcon) {
+                            <i nz-icon [nzIconfont]="menuSecond.alIcon"></i>
+                          }
+                          <span>{{ menuSecond.menuName }}</span>
+                        </ng-template>
+                        <ul>
+                          @for (menuThird of menuSecond.children; track menuThird) {
+                            <ng-container *appAuth="menuThird.code">
+                              @if (!menuThird.children || menuThird.children.length === 0) {
+                                <li nz-menu-item [nzPaddingLeft]="(themesMode !== 'top' || isOverMode) && !isCollapsed ? 48 : 0" [nzSelected]="menuThird.selected">
+                                  <a (click)="changeRoute($event, menuThird)">
+                                    @if (menuThird.icon) {
+                                      <i nz-icon [nzType]="menuThird.icon"></i>
+                                    }
+                                    @if (menuThird.alIcon) {
+                                      <i nz-icon [nzIconfont]="menuThird.alIcon"></i>
+                                    }
+                                    <span>{{ menuThird.menuName }}</span>
+                                  </a>
+                                </li>
+                              }
+                              <!--四级菜单-->
+                              @if (menuThird.children && menuThird.children.length > 0) {
+                                <li
+                                  nz-submenu
+                                  [nzPaddingLeft]="(themesMode !== 'top' || isOverMode) && !isCollapsed ? 48 : 0"
+                                  [nzTitle]="menuThird.menuName"
+                                  [(nzOpen)]="menuThird.open"
+                                  (nzOpenChange)="changeOpen(menuThird, menuSecond.children)"
+                                >
+                                  @if (menuThird.icon) {
+                                    <i nz-icon [nzType]="menuThird.icon"></i>
+                                  }
+                                  @if (menuThird.alIcon) {
+                                    <i nz-icon [nzIconfont]="menuThird.alIcon"></i>
+                                  }
+                                  <ul>
+                                    @for (forthThird of menuThird.children; track forthThird) {
+                                      <ng-container *appAuth="forthThird.code">
+                                        <li nz-menu-item [nzPaddingLeft]="(themesMode !== 'top' || isOverMode) && !isCollapsed ? 64 : 0" [nzSelected]="forthThird.selected">
+                                          <a (click)="changeRoute($event, forthThird)">
+                                            @if (forthThird.icon) {
+                                              <i nz-icon [nzType]="forthThird.icon"></i>
+                                            }
+                                            @if (forthThird.alIcon) {
+                                              <i nz-icon [nzIconfont]="forthThird.alIcon"></i>
+                                            }
+                                            <span>{{ forthThird.menuName }}</span>
+                                          </a>
+                                        </li>
+                                      </ng-container>
+                                    }
+                                  </ul>
+                                </li>
+                              }
+                            </ng-container>
+                          }
+                        </ul>
+                      </li>
+                    }
+                  </ng-container>
+                  <!--权限2结束-->
+                }
+              </ul>
+            </li>
+          }
         </ng-container>
-      </ng-container>
-      <!--权限1结束-->
-    </ng-container>
-  </ng-template>
-</ul>
-
-<ng-template #mixinHeadTpl>
+        <!--权限1结束-->
+      }
+    </ng-template>
+  </ul>
+} @else {
   <ul nz-menu nzMode="horizontal" nzTheme="dark">
-    <ng-container *ngFor="let menu of menus; trackByProperty: 'id'; let i = index">
+    @for (menu of menus; track menu; let i = $index) {
       <!--权限1（不需要时删除此ng-container节点）-->
       <ng-container *appAuth="menu.code">
-        <li *ngIf="!menu.children || menu.children.length === 0" nz-menu-item [nzSelected]="menu.selected">
-          <a [routerLink]="[menu.path]">
-            <i *ngIf="menu.icon" nz-icon [nzType]="menu.icon"></i>
-            <i *ngIf="menu.alIcon" nz-icon [nzIconfont]="menu.alIcon"></i>
-            <span>{{ menu.menuName }}</span>
-          </a>
-        </li>
+        @if (!menu.children || menu.children.length === 0) {
+          <li nz-menu-item [nzSelected]="menu.selected">
+            <a [routerLink]="[menu.path]">
+              @if (menu.icon) {
+                <i nz-icon [nzType]="menu.icon"></i>
+              }
+              @if (menu.alIcon) {
+                <i nz-icon [nzIconfont]="menu.alIcon"></i>
+              }
+              <span>{{ menu.menuName }}</span>
+            </a>
+          </li>
+        }
 
-        <li *ngIf="menu.children && menu.children.length > 0" nz-menu-item [nzSelected]="menu.selected" (click)="changTopNav(i)">
-          <i *ngIf="menu.icon" nz-icon [nzType]="menu.icon"></i>
-          <i *ngIf="menu.alIcon" nz-icon [nzIconfont]="menu.alIcon"></i>
-          <span>{{ menu.menuName }}</span>
-        </li>
+        @if (menu.children && menu.children.length > 0) {
+          <li nz-menu-item [nzSelected]="menu.selected" (click)="changTopNav(i)">
+            @if (menu.icon) {
+              <i nz-icon [nzType]="menu.icon"></i>
+            }
+            @if (menu.alIcon) {
+              <i nz-icon [nzIconfont]="menu.alIcon"></i>
+            }
+            <span>{{ menu.menuName }}</span>
+          </li>
+        }
       </ng-container>
       <!--权限1结束-->
-    </ng-container>
+    }
   </ul>
-</ng-template>
+}

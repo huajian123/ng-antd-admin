@@ -1,6 +1,6 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { ComponentPortal, ComponentType, Portal, PortalModule } from '@angular/cdk/portal';
-import { NgFor } from '@angular/common';
+
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -22,7 +22,7 @@ type targetComp = EventsChartsComponent | InitOptsChartsComponent | InstanceOpts
   templateUrl: './started.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [NzCardModule, NzTabsModule, NgFor, PortalModule]
+  imports: [NzCardModule, NzTabsModule, PortalModule]
 })
 export class StartedComponent implements OnInit {
   tabPosition: NzTabPosition = 'left';

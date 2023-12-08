@@ -16,7 +16,9 @@
 
 <ng-template #headerFooter>
   <nz-tabset [(nzSelectedIndex)]="currentSelTab">
-    <nz-tab *ngFor="let item of tabData" [nzTitle]="item.label" (nzClick)="to(item)"></nz-tab>
+    @for (item of tabData; track item) {
+      <nz-tab [nzTitle]="item.label" (nzClick)="to(item)"></nz-tab>
+    }
   </nz-tabset>
 </ng-template>
 <div class="normal-table-wrap" [@fadeRouteAnimation]="prepareRoute(searchOutlet)">

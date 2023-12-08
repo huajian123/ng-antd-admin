@@ -28,13 +28,15 @@
               </nz-form-item>
             </div>
 
-            <ng-container *ngIf="!isCollapse">
+            @if (!isCollapse) {
               <div nz-col [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXl]="8" [nzXs]="24" [nzXXl]="8">
                 <nz-form-item>
                   <nz-form-label [nzFor]="">是否启用</nz-form-label>
                   <nz-form-control>
                     <nz-select name="available" nzAllowClear nzPlaceHolder="下拉选择" [(ngModel)]="searchParam.available">
-                      <nz-option *ngFor="let item of availableOptions" [nzLabel]="item.label" [nzValue]="item.value"></nz-option>
+                      @for (item of availableOptions; track item) {
+                        <nz-option [nzLabel]="item.label" [nzValue]="item.value"></nz-option>
+                      }
                     </nz-select>
                   </nz-form-control>
                 </nz-form-item>
@@ -45,7 +47,7 @@
               <div nz-col [nzLg]="8" [nzMd]="12" [nzSm]="0" [nzXl]="8" [nzXs]="0" [nzXXl]="8">
                 <nz-form-item></nz-form-item>
               </div>
-            </ng-container>
+            }
 
             <div class="text-right p-0 m-b-10" nz-col [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXl]="8" [nzXs]="24" [nzXXl]="8">
               <button nz-button [nzType]="'primary'" (click)="getDataList()">
@@ -57,8 +59,12 @@
                 重置
               </button>
               <a class="collapse operate-text" (click)="toggleCollapse()">
-                <span *ngIf="isCollapse">展开</span>
-                <span *ngIf="!isCollapse">收起</span>
+                @if (isCollapse) {
+                  <span>展开</span>
+                }
+                @if (!isCollapse) {
+                  <span>收起</span>
+                }
                 <i nz-icon [nzType]="isCollapse ? 'down' : 'up'"></i>
               </a>
             </div>

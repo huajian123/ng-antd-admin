@@ -1,4 +1,4 @@
-import { NgFor, DecimalPipe } from '@angular/common';
+import { DecimalPipe } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { NumberLoopPipe } from '@shared/pipes/number-loop.pipe';
@@ -18,6 +18,6 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
   styleUrls: ['./application.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [NzGridModule, NgFor, NzCardModule, NzAvatarModule, NzTypographyModule, NzIconModule, NzButtonModule, NzToolTipModule, NzDropDownModule, NzMenuModule, DecimalPipe, NumberLoopPipe]
+  imports: [NzGridModule, NzCardModule, NzAvatarModule, NzTypographyModule, NzIconModule, NzButtonModule, NzToolTipModule, NzDropDownModule, NzMenuModule, DecimalPipe, NumberLoopPipe]
 })
 export class ApplicationComponent {}

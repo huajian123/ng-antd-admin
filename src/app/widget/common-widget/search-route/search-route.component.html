@@ -3,37 +3,37 @@
     <input #searchInput type="text" nz-input nzSize="large" placeholder="搜索" [(ngModel)]="inputValue" />
   </nz-input-group>
   <ng-template #inputClearTpl>
-    <i *ngIf="inputValue" class="ant-input-clear-icon" nz-icon nzTheme="fill" nzType="close-circle" (click)="clearInput()"></i>
+    @if (inputValue) {
+      <i class="ant-input-clear-icon" nz-icon nzTheme="fill" nzType="close-circle" (click)="clearInput()"></i>
+    }
   </ng-template>
 
   <div class="m-t-15">
-    <ng-template #noResult>
+    @if (resultListShow.length > 0) {
+      <ul>
+        @for (item of resultListShow; track item) {
+          <li class="result-item sp-16" nz-row [class.result-item-bg]="item.selItem" [style]="{ color: item.selItem ? 'white' : '' }" (click)="resultClick(item)" (mouseover)="mouseOverItem(item)">
+            <div nz-col nzFlex="auto">
+              @if (!item.isAliIcon) {
+                <i class="m-r-8" nz-icon nzTheme="outline" [nzType]="item.icon!"></i>
+              } @else {
+                <i class="m-r-8" nz-icon [nzIconfont]="item.icon!"></i>
+              }
+              <span>{{ item.title }}</span>
+            </div>
+            @if (item.selItem) {
+              <i class="sp-18 m-r-8" nz-col nz-icon nzFlex="30px" nzTheme="outline" nzType="enter" style="color: white"></i>
+            }
+          </li>
+        }
+      </ul>
+    } @else {
       <nz-empty [nzNotFoundContent]="contentTpl">
         <ng-template #contentTpl>
           <span>请输入菜单名称进行搜索</span>
         </ng-template>
       </nz-empty>
-    </ng-template>
-    <ul *ngIf="resultListShow.length > 0; else noResult">
-      <li
-        *ngFor="let item of resultListShow"
-        class="result-item sp-16"
-        nz-row
-        [class.result-item-bg]="item.selItem"
-        [style]="{ color: item.selItem ? 'white' : '' }"
-        (click)="resultClick(item)"
-        (mouseover)="mouseOverItem(item)"
-      >
-        <div nz-col nzFlex="auto">
-          <i *ngIf="!item.isAliIcon; else zorroIcon" class="m-r-8" nz-icon nzTheme="outline" [nzType]="item.icon!"></i>
-          <ng-template #zorroIcon>
-            <i class="m-r-8" nz-icon [nzIconfont]="item.icon!"></i>
-          </ng-template>
-          <span>{{ item.title }}</span>
-        </div>
-        <i *ngIf="item.selItem" class="sp-18 m-r-8" nz-col nz-icon nzFlex="30px" nzTheme="outline" nzType="enter" style="color: white"></i>
-      </li>
-    </ul>
+    }
   </div>
 </div>
 

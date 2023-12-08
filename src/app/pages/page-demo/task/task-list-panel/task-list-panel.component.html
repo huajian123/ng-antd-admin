@@ -1,8 +1,10 @@
 <nz-card [nzBodyStyle]="{ padding: 0 }">
   <nz-collapse nzGhost>
-    <nz-collapse-panel *ngFor="let panel of panels" [nzActive]="panel.active" [nzDisabled]="panel.disabled" [nzExtra]="extraTpl" [nzHeader]="panel.name">
-      <p style="margin: 0">我还在紧张开发中。。。嘻嘻</p>
-    </nz-collapse-panel>
+    @for (panel of panels; track panel) {
+      <nz-collapse-panel [nzActive]="panel.active" [nzDisabled]="panel.disabled" [nzExtra]="extraTpl" [nzHeader]="panel.name">
+        <p style="margin: 0">我还在紧张开发中。。。嘻嘻</p>
+      </nz-collapse-panel>
+    }
   </nz-collapse>
 </nz-card>
 <ng-template #extraTpl>

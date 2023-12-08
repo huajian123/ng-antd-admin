@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
@@ -11,7 +10,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
   templateUrl: './detail.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [NzInputModule, NgFor, NumberLoopPipe]
+  imports: [NzInputModule, NumberLoopPipe]
 })
 export class DetailComponent implements OnInit {
   id = 0;

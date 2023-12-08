@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
@@ -39,7 +38,6 @@ import { NzStatisticModule } from 'ng-zorro-antd/statistic';
     NzWaveModule,
     NzIconModule,
     NzListModule,
-    NgFor,
     NzProgressModule,
     NzDropDownModule,
     NzMenuModule,

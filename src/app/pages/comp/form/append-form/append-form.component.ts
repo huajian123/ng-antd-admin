@@ -1,4 +1,4 @@
-import { DatePipe, NgForOf, NgIf } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -91,9 +91,7 @@ export enum TaskStateSearchCheckPeriodEnum {
     NzPaginationModule,
     DatePipe,
     NzFormModule,
-    ReactiveFormsModule,
-    NgForOf,
-    NgIf
+    ReactiveFormsModule
   ]
 })
 export class AppendFormComponent implements OnInit {
@@ -203,7 +201,11 @@ export class AppendFormComponent implements OnInit {
   get valuesArray(): FormArray {
     return this.validateForm.controls['formArray'] as FormArray;
   }
-  constructor(private modalService: AppendFormModalService, private cdr: ChangeDetectorRef, private fb: FormBuilder) {}
+  constructor(
+    private modalService: AppendFormModalService,
+    private cdr: ChangeDetectorRef,
+    private fb: FormBuilder
+  ) {}
 
   creatForm(): FormGroup {
     return this.fb.group({

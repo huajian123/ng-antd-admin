@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -40,9 +39,7 @@ interface TabInterface {
     NzIconModule,
     NzButtonModule,
     NzDividerModule,
-    NgFor,
     NzTagModule,
-    NgIf,
     NzNoAnimationModule,
     NzInputModule,
     FormsModule,

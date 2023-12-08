@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
 
@@ -8,7 +7,7 @@ import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Rout
   styleUrls: ['./top-progress-bar.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [NgIf]
+  imports: []
 })
 export class TopProgressBarComponent {
   isFetching = false;

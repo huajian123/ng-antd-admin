@@ -1,4 +1,3 @@
-import { NgIf, NgFor } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
@@ -51,9 +50,7 @@ interface SearchParam {
     FormsModule,
     NzFormModule,
     NzInputModule,
-    NgIf,
     NzSelectModule,
-    NgFor,
     NzButtonModule,
     NzWaveModule,
     NzIconModule,

@@ -1,4 +1,3 @@
-import { NgIf, NgFor } from '@angular/common';
 import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter, HostBinding, booleanAttribute, numberAttribute, inject } from '@angular/core';
 
 import { PasswordStrengthMeterService } from './password-strength-meter.service';
@@ -11,7 +10,7 @@ import { PSMProgressBarDirective } from './psm-progress-bar.directive';
   styleUrls: ['./password-strength-meter.component.less'],
   standalone: true,
   providers: [PasswordStrengthMeterService],
-  imports: [PSMProgressBarDirective, NgIf, NgFor]
+  imports: [PSMProgressBarDirective]
 })
 export class PasswordStrengthMeterComponent implements OnChanges {
   @Input() password: string | undefined;

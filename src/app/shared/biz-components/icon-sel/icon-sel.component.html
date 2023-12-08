@@ -14,16 +14,17 @@
 </ng-template>
 <ng-template #contentTemplate>
   <nz-card style="width: 300px; max-height: 220px; overflow: auto" [nzBodyStyle]="{ padding: '0' }" [nzBorderless]="true">
-    <nz-card *ngIf="iconsStrShowArray && iconsStrShowArray.length > 0; else noResult">
-      <ng-container *ngFor="let item of iconsStrShowArray">
-        <div class="center" nz-card-grid [ngStyle]="gridStyle" (click)="selIconFn(item)">
-          <i class="sp-18" nz-icon nzTheme="outline" [ngStyle]="{ color: item.isChecked ? '#409eff' : '' }" [nzType]="item.icon"></i>
-        </div>
-      </ng-container>
-    </nz-card>
-    <ng-template #noResult>
+    @if (iconsStrShowArray && iconsStrShowArray.length > 0) {
+      <nz-card>
+        @for (item of iconsStrShowArray; track item) {
+          <div class="center" nz-card-grid [ngStyle]="gridStyle" (click)="selIconFn(item)">
+            <i class="sp-18" nz-icon nzTheme="outline" [ngStyle]="{ color: item.isChecked ? '#409eff' : '' }" [nzType]="item.icon"></i>
+          </div>
+        }
+      </nz-card>
+    } @else {
       <nz-empty></nz-empty>
-    </ng-template>
+    }
   </nz-card>
   <nz-pagination
     class="m-t-10"

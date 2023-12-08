@@ -1,4 +1,4 @@
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -12,7 +12,7 @@ import { NavBarComponent } from '../nav-bar/nav-bar.component';
   styleUrls: ['./side-nav.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [NgIf, NavBarComponent, AsyncPipe]
+  imports: [NavBarComponent, AsyncPipe]
 })
 export class SideNavComponent {
   private themesService = inject(ThemeService);

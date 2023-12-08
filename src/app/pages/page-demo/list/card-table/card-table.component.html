@@ -19,9 +19,11 @@
         </a>
       </div>
     </div>
-    <div *ngIf="!(isOverMode$ | async)" nz-col nzFlex="230px">
-      <img src="https://gw.alipayobjects.com/zos/rmsportal/RzwpdLnhmvDJToTdfDPe.png" style="width: 155px; margin-top: -20px" />
-    </div>
+    @if (!(isOverMode$ | async)) {
+      <div nz-col nzFlex="230px">
+        <img src="https://gw.alipayobjects.com/zos/rmsportal/RzwpdLnhmvDJToTdfDPe.png" style="width: 155px; margin-top: -20px" />
+      </div>
+    }
   </div>
 </ng-template>
 <div class="normal-table-wrap m-t-0">
@@ -35,16 +37,18 @@
         </div>
       </nz-card>
     </div>
-    <div *ngFor="let item of list" nz-col [nzLg]="12" [nzMd]="12" [nzSm]="12" [nzXl]="8" [nzXs]="24" [nzXXl]="6">
-      <app-water-mark />
-      <nz-card class="m-t-20" nzHoverable [nzActions]="[actionSetting, actionEdit]">
-        <nz-card-meta [nzAvatar]="avatarTemplate" [nzDescription]="item.desc" [nzTitle]="item.name"></nz-card-meta>
-      </nz-card>
-      <ng-template #avatarTemplate>
-        <nz-avatar [nzSrc]="item.avatar"></nz-avatar>
-      </ng-template>
-      <ng-template #actionSetting>操作一</ng-template>
-      <ng-template #actionEdit>操作二</ng-template>
-    </div>
+    @for (item of list; track item) {
+      <div nz-col [nzLg]="12" [nzMd]="12" [nzSm]="12" [nzXl]="8" [nzXs]="24" [nzXXl]="6">
+        <app-water-mark />
+        <nz-card class="m-t-20" nzHoverable [nzActions]="[actionSetting, actionEdit]">
+          <nz-card-meta [nzAvatar]="avatarTemplate" [nzDescription]="item.desc" [nzTitle]="item.name"></nz-card-meta>
+        </nz-card>
+        <ng-template #avatarTemplate>
+          <nz-avatar [nzSrc]="item.avatar"></nz-avatar>
+        </ng-template>
+        <ng-template #actionSetting>操作一</ng-template>
+        <ng-template #actionEdit>操作二</ng-template>
+      </div>
+    }
   </div>
 </div>

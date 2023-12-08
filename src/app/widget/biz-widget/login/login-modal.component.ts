@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Observable, of } from 'rxjs';
@@ -19,7 +18,7 @@ import { BasicConfirmModalComponent } from '../../base-modal';
   templateUrl: './login-modal.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NgIf]
+  imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule]
 })
 export class LoginModalComponent extends BasicConfirmModalComponent implements OnInit {
   loginModalForm!: FormGroup;

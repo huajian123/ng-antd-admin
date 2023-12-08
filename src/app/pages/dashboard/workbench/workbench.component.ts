@@ -1,4 +1,4 @@
-import { NgFor, DecimalPipe } from '@angular/common';
+import { DecimalPipe } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, inject, NgZone, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -30,7 +30,6 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
     NzGridModule,
     WaterMarkComponent,
     NzCardModule,
-    NgFor,
     NzTypographyModule,
     NzListModule,
     NzButtonModule,

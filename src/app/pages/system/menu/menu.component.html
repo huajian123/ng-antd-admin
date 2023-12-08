@@ -19,7 +19,9 @@
             <nz-form-label [nzFor]="">状态</nz-form-label>
             <nz-form-control>
               <nz-select name="visible" nzAllowClear nzPlaceHolder="下拉选择" [(ngModel)]="searchParam.visible">
-                <nz-option *ngFor="let item of visibleOptions" [nzLabel]="item.label" [nzValue]="item.value"></nz-option>
+                @for (item of visibleOptions; track item) {
+                  <nz-option [nzLabel]="item.label" [nzValue]="item.value"></nz-option>
+                }
               </nz-select>
             </nz-form-control>
           </nz-form-item>
@@ -44,7 +46,9 @@
     <ng-template #operationTpl let-fatherId="fatherId" let-id="id" let-menuType="menuType">
       <span *appAuth="ActionCode.MenuEdit" class="operate-text" (click)="edit(id, fatherId)">编辑</span>
       <ng-container *appAuth="ActionCode.MenuAddLowLevel">
-        <span *ngIf="menuType === 'C'" class="operate-text" (click)="add(id)">添加下级</span>
+        @if (menuType === 'C') {
+          <span class="operate-text" (click)="add(id)">添加下级</span>
+        }
       </ng-container>
       <span *appAuth="ActionCode.MenuDel" class="operate-text" (click)="del(id)">删除</span>
     </ng-template>
@@ -57,7 +61,9 @@
 </ng-template>
 <ng-template #aliIconTpl let-alIcon="alIcon">
   <div class="center">
-    <i *ngIf="alIcon" nz-icon [nzIconfont]="alIcon"></i>
+    @if (alIcon) {
+      <i nz-icon [nzIconfont]="alIcon"></i>
+    }
   </div>
 </ng-template>
 <ng-template #tableBtns>
@@ -67,14 +73,14 @@
   </button>
 </ng-template>
 <ng-template #visibleTpl let-menuType="menuType" let-visible="visible">
-  <ng-container *ngIf="menuType === 'C'">
+  @if (menuType === 'C') {
     <ng-container *ngTemplateOutlet="visible ? yesTpl : notTpl"></ng-container>
-  </ng-container>
+  }
 </ng-template>
 <ng-template #newLinkFlag let-menuType="menuType" let-newLinkFlag="newLinkFlag">
-  <ng-container *ngIf="menuType === 'C'">
+  @if (menuType === 'C') {
     <ng-container *ngTemplateOutlet="newLinkFlag ? yesTpl : notTpl"></ng-container>
-  </ng-container>
+  }
 </ng-template>
 <ng-template #yesTpl>
   <nz-tag [nzColor]="'green'">是</nz-tag>

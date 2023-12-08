@@ -1,5 +1,5 @@
 import { CdkDragDrop, moveItemInArray, CdkDropList, CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
-import { NgIf, NgTemplateOutlet, NgFor, NgStyle } from '@angular/common';
+import { NgTemplateOutlet, NgStyle } from '@angular/common';
 import { AfterContentInit, booleanAttribute, ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 
 import { AntTreeTableComponentToken } from '@shared/components/tree-table/tree-table.component';
@@ -32,7 +32,6 @@ interface TableSizeItem {
   standalone: true,
   imports: [
     NzCardModule,
-    NgIf,
     NgTemplateOutlet,
     NzDividerModule,
     NzSpaceModule,
@@ -43,7 +42,6 @@ interface TableSizeItem {
     ScreenLessHiddenDirective,
     NzDropDownModule,
     NzMenuModule,
-    NgFor,
     CdkDropList,
     CdkDrag,
     CdkDragHandle,

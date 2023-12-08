@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, forwardRef, inject, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -32,7 +31,7 @@ const EXE_COUNTER_VALUE_ACCESSOR = {
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [EXE_COUNTER_VALUE_ACCESSOR],
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, NzGridModule, NzFormModule, NzInputModule, NgIf]
+  imports: [FormsModule, ReactiveFormsModule, NzGridModule, NzFormModule, NzInputModule]
 })
 export class TaskManageFormComponent implements OnInit, ControlValueAccessor {
   validateForm!: FormGroup;

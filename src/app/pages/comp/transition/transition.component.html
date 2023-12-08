@@ -7,10 +7,18 @@
 
   <nz-card class="m-t-8">
     <div class="center">
-      <app-demo-main *ngIf="currentComp === 'home'" />
-      <app-demo-on-enter-on-leave *ngIf="currentComp === 'EnterLeave'" />
-      <app-demo-dynamic-params *ngIf="currentComp === 'Dynamic'" />
-      <app-experiments *ngIf="currentComp === 'Experiments'" />
+      @if (currentComp === 'home') {
+        <app-demo-main />
+      }
+      @if (currentComp === 'EnterLeave') {
+        <app-demo-on-enter-on-leave />
+      }
+      @if (currentComp === 'Dynamic') {
+        <app-demo-dynamic-params />
+      }
+      @if (currentComp === 'Experiments') {
+        <app-experiments />
+      }
     </div>
   </nz-card>
 </div>

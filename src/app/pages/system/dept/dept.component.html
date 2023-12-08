@@ -18,7 +18,9 @@
             <nz-form-label [nzFor]="">状态</nz-form-label>
             <nz-form-control>
               <nz-select name="state" nzAllowClear nzPlaceHolder="下拉选择" [(ngModel)]="searchParam.state">
-                <nz-option *ngFor="let item of stateOptions" [nzLabel]="item.label" [nzValue]="item.value"></nz-option>
+                @for (item of stateOptions; track item) {
+                  <nz-option [nzLabel]="item.label" [nzValue]="item.value"></nz-option>
+                }
               </nz-select>
             </nz-form-control>
           </nz-form-item>

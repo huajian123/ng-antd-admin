@@ -1,5 +1,5 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { NgFor, NgClass, NgIf } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -23,22 +23,7 @@ import { NzUploadChangeParam, NzUploadModule } from 'ng-zorro-antd/upload';
   styleUrls: ['./base.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [
-    NzGridModule,
-    FormsModule,
-    NzFormModule,
-    ReactiveFormsModule,
-    NzInputModule,
-    NzSelectModule,
-    NgFor,
-    NzButtonModule,
-    NzWaveModule,
-    NgClass,
-    NgIf,
-    NzAvatarModule,
-    NzUploadModule,
-    NzIconModule
-  ]
+  imports: [NzGridModule, FormsModule, NzFormModule, ReactiveFormsModule, NzInputModule, NzSelectModule, NzButtonModule, NzWaveModule, NgClass, NzAvatarModule, NzUploadModule, NzIconModule]
 })
 export class BaseComponent implements OnInit {
   @Input({ required: true }) data!: { label: string };

@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { NumberLoopPipe } from '@shared/pipes/number-loop.pipe';
@@ -9,6 +8,6 @@ import { NzInputModule } from 'ng-zorro-antd/input';
   templateUrl: './menu2.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [NzInputModule, NgFor, NumberLoopPipe]
+  imports: [NzInputModule, NumberLoopPipe]
 })
 export class Menu2Component {}

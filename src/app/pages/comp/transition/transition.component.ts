@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
@@ -18,7 +17,7 @@ import { ExperimentsComponent } from './experiments/experiments.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInOnEnterAnimation(), fadeOutOnLeaveAnimation(), rubberBandAnimation(), collapseAnimation()],
   standalone: true,
-  imports: [PageHeaderComponent, NzButtonModule, NzWaveModule, NzCardModule, NgIf, DemoMainComponent, DemoOnEnterOnLeaveComponent, DemoDynamicParamsComponent, ExperimentsComponent]
+  imports: [PageHeaderComponent, NzButtonModule, NzWaveModule, NzCardModule, DemoMainComponent, DemoOnEnterOnLeaveComponent, DemoDynamicParamsComponent, ExperimentsComponent]
 })
 export class TransitionComponent {
   pageHeaderInfo: Partial<PageHeaderType> = {

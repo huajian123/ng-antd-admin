@@ -1,18 +1,13 @@
 <app-top-progress-bar></app-top-progress-bar>
 <nz-layout class="min-screen-full-height">
   <!--非混合模式侧边栏固定时占位-->
-  <nz-sider
-    *ngIf="!isMixinMode && isSideMode && !isOverMode && isHasNavArea && isFixedLeftNav"
-    nzBreakpoint="lg"
-    [nzCollapsed]="isCollapsed"
-    [nzCollapsedWidth]="CollapsedNavWidth"
-    [nzTheme]="theme"
-    [nzWidth]="SideNavWidth"
-  />
+  @if (!isMixinMode && isSideMode && !isOverMode && isHasNavArea && isFixedLeftNav) {
+  <nz-sider nzBreakpoint="lg" [nzCollapsed]="isCollapsed" [nzCollapsedWidth]="CollapsedNavWidth" [nzTheme]="theme" [nzWidth]="SideNavWidth" />
+  }
 
   <!--非混合模式侧边栏-->
+  @if (!isMixinMode && isSideMode && !isOverMode && isHasNavArea) {
   <nz-sider
-    *ngIf="!isMixinMode && isSideMode && !isOverMode && isHasNavArea"
     id="menuNav"
     class="menu-sidebar"
     nzBreakpoint="lg"
@@ -27,33 +22,40 @@
   >
     <app-side-nav />
   </nz-sider>
+  }
 
   <!--混合模式顶部菜单header-->
-  <nz-header *ngIf="isMixinMode && isHasTopArea" class="animate-02 dark-top-nav-bg top-fixed screen-full-width">
+  @if (isMixinMode && isHasTopArea) {
+  <nz-header class="animate-02 dark-top-nav-bg top-fixed screen-full-width">
     <app-tool-bar>
-      <ng-container *ngIf="isOverMode" left>
+      @if (isOverMode) {
+      <ng-container left>
         <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="changeCollapsed(!isCollapsed)"></i>
       </ng-container>
-
-      <ng-container *ngIf="!isOverMode" left>
+      } @if (!isOverMode) {
+      <ng-container left>
         <div class="left-start-center flex-1" style="z-index: 100">
           <img class="m-l-10" alt="" src="assets/imgs/logo.svg" style="max-height: 32px; max-width: 54px" />
           <span class="sp-18 m-r-25 ng17color">Ant Design Pro</span>
           <div class="flex-1">
-            <app-nav-bar *ngIf="isSplitNav" [isMixinHead]="true" />
+            @if (isSplitNav) {
+            <app-nav-bar [isMixinHead]="true" />
+            }
           </div>
         </div>
       </ng-container>
+      }
       <ng-container right>
         <app-layout-head-right-menu />
       </ng-container>
     </app-tool-bar>
   </nz-header>
+  }
 
   <nz-layout [style]="{ marginTop: isMixinMode && isHasTopArea ? '48px' : 0 }">
     <!--sider模式的 header-->
+    @if (!isMixinMode && isHasTopArea && isSideMode) {
     <nz-header
-      *ngIf="!isMixinMode && isHasTopArea && isSideMode"
       style="transition: width 0.2s"
       [ngClass]="{
         'full-with': !isHasNavArea,
@@ -64,9 +66,10 @@
     >
       <ng-container *ngTemplateOutlet="headerTpl" />
     </nz-header>
+    }
     <!--top模式header-->
+    @if (!isMixinMode && isHasTopArea && isTopMode) {
     <nz-header
-      *ngIf="!isMixinMode && isHasTopArea && isTopMode"
       [ngClass]="{
         'dark-top-nav-bg': theme === 'dark',
         'top-fixed': isFixedHead
@@ -74,20 +77,15 @@
     >
       <ng-container *ngTemplateOutlet="headerTpl" />
     </nz-header>
+    }
 
     <!--混合模式sider固定时占位-->
-    <nz-sider
-      *ngIf="isFixedLeftNav && isMixinMode && isHasNavArea && !isOverMode && (mixinModeLeftNav.length > 0 || !isSplitNav)"
-      nzBreakpoint="lg"
-      nzNoAnimation
-      [nzCollapsed]="isCollapsed"
-      [nzCollapsedWidth]="CollapsedNavWidth"
-      [nzTheme]="isNightTheme ? 'dark' : 'light'"
-      [nzWidth]="SideNavWidth"
-    />
+    @if (isFixedLeftNav && isMixinMode && isHasNavArea && !isOverMode && (mixinModeLeftNav.length > 0 || !isSplitNav)) {
+    <nz-sider nzBreakpoint="lg" nzNoAnimation [nzCollapsed]="isCollapsed" [nzCollapsedWidth]="CollapsedNavWidth" [nzTheme]="isNightTheme ? 'dark' : 'light'" [nzWidth]="SideNavWidth" />
+    }
     <!--混合模式sider-->
+    @if (isMixinMode && isHasNavArea && !isOverMode && (mixinModeLeftNav.length > 0 || !isSplitNav)) {
     <nz-sider
-      *ngIf="isMixinMode && isHasNavArea && !isOverMode && (mixinModeLeftNav.length > 0 || !isSplitNav)"
       class="menu-sidebar"
       nzBreakpoint="lg"
       nzNoAnimation
@@ -103,24 +101,31 @@
     >
       <div class="mix-sider-height" style="overflow: hidden auto"><app-nav-bar [isMixinLeft]="isSplitNav" /></div>
     </nz-sider>
+    }
 
     <nz-layout>
       <nz-content [ngStyle]="{ marginTop: contentMarginTop }">
         <div>
-          <app-tab *ngIf="isShowTab"></app-tab>
+          @if (isShowTab) {
+          <app-tab></app-tab>
+          }
           <div [@fadeRouteAnimation]="prepareRoute(outlet)">
             <router-outlet #outlet="outlet"></router-outlet>
           </div>
         </div>
       </nz-content>
-      <nz-footer *ngIf="isHasFooterArea" class="text-center">Ant Design ©2022 Implement By 华舰</nz-footer>
+      @if (isHasFooterArea) {
+      <nz-footer class="text-center">Ant Design ©2022 Implement By 华舰</nz-footer>
+      }
     </nz-layout>
   </nz-layout>
 </nz-layout>
 
 <app-setting-drawer />
 
-<app-chat *ngIf="showChats" (changeShows)="showChats = false" />
+@if (showChats) {
+<app-chat (changeShows)="showChats = false" />
+}
 
 <ng-template #trigger>
   <ul nz-menu nzMode="inline" [nzSelectable]="false" [nzTheme]="isMixinMode && !isOverMode ? 'light' : theme">
@@ -139,23 +144,26 @@
 
 <ng-template #headerTpl>
   <app-tool-bar>
-    <ng-container *ngIf="isOverMode || isSideMode; else topHeadTpl" left>
+    @if (isOverMode || isSideMode) {
+    <ng-container left>
       <i id="trigger" class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="changeCollapsed(!isCollapsed)"></i>
     </ng-container>
-    <ng-template #topHeadTpl>
-      <div class="left-start-center flex-1" style="z-index: 100">
-        <ng-container *ngIf="isHasNavHeadArea">
-          <img class="m-l-10" alt="" src="assets/imgs/logo.svg" style="max-height: 32px; max-width: 54px" />
-          <span class="sp-18 m-r-8 ng17color">Ant Design</span>
-        </ng-container>
-        <div class="flex-1">
-          <app-nav-bar />
-        </div>
+    } @else {
+    <div class="left-start-center flex-1" style="z-index: 100">
+      @if (isHasNavHeadArea) {
+      <img class="m-l-10" alt="" src="assets/imgs/logo.svg" style="max-height: 32px; max-width: 54px" />
+      <span class="sp-18 m-r-8 ng17color">Ant Design</span>
+      }
+      <div class="flex-1">
+        <app-nav-bar />
       </div>
-    </ng-template>
+    </div>
+    }
     <ng-container right>
       <app-layout-head-right-menu />
     </ng-container>
   </app-tool-bar>
 </ng-template>
-<app-nav-drawer *ngIf="isOverMode" #navDrawer />
+@if (isOverMode) {
+<app-nav-drawer #navDrawer />
+}

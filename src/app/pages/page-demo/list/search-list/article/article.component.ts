@@ -1,4 +1,4 @@
-import { NgStyle, NgFor, NgIf } from '@angular/common';
+import { NgStyle } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -28,8 +28,6 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
     NzGridModule,
     NgStyle,
     NzTagModule,
-    NgFor,
-    NgIf,
     NzIconModule,
     NzButtonModule,
     NzDividerModule,

@@ -22,7 +22,7 @@
             </nz-form-control>
           </nz-form-item>
         </div>
-        <ng-container *ngIf="!isCollapse">
+        @if (!isCollapse) {
           <div nz-col [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXl]="8" [nzXs]="24" [nzXXl]="8">
             <nz-form-item>
               <nz-form-label [nzFor]="">服务调用次数</nz-form-label>
@@ -47,7 +47,7 @@
               </nz-form-control>
             </nz-form-item>
           </div>
-        </ng-container>
+        }
 
         <div class="m-b-8 text-right p-0" nz-col [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXl]="8" [nzXs]="24" [nzXXl]="8">
           <button nz-button [nzType]="'primary'">
@@ -59,8 +59,12 @@
             重置
           </button>
           <a class="collapse operate-text" (click)="toggleCollapse()">
-            <span *ngIf="isCollapse">展开</span>
-            <span *ngIf="!isCollapse">收起</span>
+            @if (isCollapse) {
+              <span>展开</span>
+            }
+            @if (!isCollapse) {
+              <span>收起</span>
+            }
             <i nz-icon [nzType]="isCollapse ? 'down' : 'up'"></i>
           </a>
         </div>

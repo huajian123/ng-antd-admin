@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, inject } from '@angular/core';
 
 import {
@@ -37,7 +36,7 @@ import { AngularImgComponent } from '../angular-img/angular-img.component';
     fadeInOnEnterAnimation({ anchor: 'btnEnterFadeIn', delay: 12500, duration: 500 })
   ],
   standalone: true,
-  imports: [NgFor, AngularImgComponent, NzButtonModule, NzWaveModule]
+  imports: [AngularImgComponent, NzButtonModule, NzWaveModule]
 })
 export class ExperimentsComponent {
   text1 = '少林功夫好，真的好，少林功夫棒，真的棒...'.split('');

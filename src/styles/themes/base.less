@@ -1,5 +1,5 @@
-@import "./minireset.less";
-@import "../../../node_modules/ng-zorro-antd/resizable/style/entry.less";
+@import './minireset.less';
+@import '../../../node_modules/ng-zorro-antd/resizable/style/entry.less';
 
 @layout-header-height: 48px;
 @layout-header-padding: 0;
@@ -11,25 +11,22 @@
   box-sizing: border-box;
 }
 
-
 body {
   // min-width: 570px;
 }
-
 
 img {
   display: inline-block;
   width: 100%;
 }
 
-
 p {
   margin: 0;
   padding: 0;
 }
 
-
-audio, video {
+audio,
+video {
   outline: none;
 }
 
@@ -41,7 +38,12 @@ input:focus {
   text-decoration: none;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin-bottom: 0;
 }
 
@@ -54,13 +56,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .text-break {
-  word-break: break-all
+  word-break: break-all;
 }
 
 .full-height {
   height: 100%;
 }
-
 
 .full-with {
   width: 100% !important;
@@ -93,7 +94,7 @@ h1, h2, h3, h4, h5, h6 {
   content: '.';
 }
 
-.grey-theme{
+.grey-theme {
   filter: grayscale(100%);
 }
 
@@ -106,9 +107,8 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 auto;
 }
 
-
 .text-left {
-  text-align: left !important;;
+  text-align: left !important;
 }
 
 .text-center {
@@ -116,7 +116,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .text-right {
-  text-align: right !important;;
+  text-align: right !important;
 }
 
 .pull-left {
@@ -243,7 +243,6 @@ h1, h2, h3, h4, h5, h6 {
   margin-left: 10px !important;
 }
 
-
 .m-l-15 {
   margin-left: 15px !important;
 }
@@ -288,7 +287,6 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 30px !important;
 }
 
-
 .m-l-18 {
   margin-left: 18px !important;
 }
@@ -305,7 +303,6 @@ h1, h2, h3, h4, h5, h6 {
   margin-left: 50px !important;
 }
 
-
 .p-0 {
   padding: 0 !important;
 }
@@ -317,7 +314,6 @@ h1, h2, h3, h4, h5, h6 {
 .p-16 {
   padding: 16px !important;
 }
-
 
 .p-24 {
   padding: 24px !important;
@@ -339,7 +335,6 @@ h1, h2, h3, h4, h5, h6 {
   padding-top: 24px !important;
 }
 
-
 .p-l-0 {
   padding-left: 0 !important;
 }
@@ -347,7 +342,6 @@ h1, h2, h3, h4, h5, h6 {
 .p-l-8 {
   padding-left: 8px !important;
 }
-
 
 .p-l-10 {
   padding-left: 10px !important;
@@ -364,7 +358,6 @@ h1, h2, h3, h4, h5, h6 {
 .p-l-25 {
   padding-left: 25px !important;
 }
-
 
 .p-l-35 {
   padding-left: 35px !important;
@@ -447,7 +440,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .animate-03 {
-  transition: all .3s;
+  transition: all 0.3s;
 }
 
 .clear-fix::after {
@@ -455,7 +448,6 @@ h1, h2, h3, h4, h5, h6 {
   clear: both;
   content: '';
 }
-
 
 .default-theme {
   background: #fff;
@@ -482,7 +474,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .text-error {
-  color: #f5222d !important
+  color: #f5222d !important;
 }
 
 .grey-color {
@@ -519,7 +511,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .center {
   display: flex;
-  .center-fn()
+  .center-fn();
 }
 
 .flex {
@@ -539,21 +531,20 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .end-start-center {
-  .center-fn(flex-end)
+  .center-fn(flex-end);
 }
 
 .left-start-center {
-  .center-fn(flex-start)
+  .center-fn(flex-start);
 }
 
 .space-between {
-  .center-fn(space-between)
+  .center-fn(space-between);
 }
 
 .space-around {
-  .center-fn(space-around)
+  .center-fn(space-around);
 }
-
 
 .bg-color-no {
   background: none !important;
@@ -584,7 +575,7 @@ h1, h2, h3, h4, h5, h6 {
       flex: 1 1;
       font-size: 16px;
       line-height: 24px;
-      opacity: .85;
+      opacity: 0.85;
       will-change: transform;
     }
 
@@ -606,7 +597,6 @@ h1, h2, h3, h4, h5, h6 {
     padding: 24px;
   }
 }
-
 
 /* 覆盖zorro样式 */
 
@@ -642,7 +632,9 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-.ant-menu-inline, .ant-menu-vertical, .ant-menu-vertical-left {
+.ant-menu-inline,
+.ant-menu-vertical,
+.ant-menu-vertical-left {
   border: none;
 }
 
@@ -655,9 +647,9 @@ input[nz-input] {
 }
 
 // zorro更新日志中16.2.2版本的中内置 cdk-overlay 样式影响，删除这段样式会导致拖拽modal的示例demo，同时弹出2个对话框，点击不同的对话框，z-index不生效
-.cdk-global-overlay-wrapper{
+.cdk-global-overlay-wrapper {
   z-index: unset;
-  position:unset;
+  position: unset;
   display: unset;
 }
 
@@ -694,7 +686,7 @@ input[nz-input] {
   }
 }
 
-.ng17color{
+.ng17color {
   background: linear-gradient(to right, #8514f5, #f637e3, #fa2c05);
   background-clip: text;
   -webkit-text-fill-color: transparent;

@@ -1,4 +1,4 @@
-import { NgIf, NgFor, NgClass, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, ChangeDetectorRef, OnChanges, SimpleChanges } from '@angular/core';
 
 import { AntTableConfig, SortFile, TableHeader } from '@shared/components/ant-table/ant-table.component';
@@ -34,7 +34,7 @@ export abstract class AntTreeTableComponentToken {
   providers: [{ provide: AntTreeTableComponentToken, useExisting: TreeTableComponent }],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [NzTableModule, NgIf, NgFor, NzResizableModule, NgClass, NgTemplateOutlet, MapPipe, TableFiledPipe]
+  imports: [NzTableModule, NzResizableModule, NgClass, NgTemplateOutlet, MapPipe, TableFiledPipe]
 })
 export class TreeTableComponent implements OnChanges {
   _dataList!: TreeNodeInterface[];

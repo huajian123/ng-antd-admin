@@ -1,5 +1,5 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
@@ -43,7 +43,7 @@ interface LoginFormComponentInterface {
   styleUrls: ['./login1.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [NzGridModule, NzCardModule, AdDirective_1, NgIf, NzSwitchModule, FormsModule, NzDropDownModule, NzIconModule, NzButtonModule, NzMenuModule, AsyncPipe]
+  imports: [NzGridModule, NzCardModule, AdDirective_1, NzSwitchModule, FormsModule, NzDropDownModule, NzIconModule, NzButtonModule, NzMenuModule, AsyncPipe]
 })
 export class Login1Component implements OnInit {
   private themesService = inject(ThemeService);

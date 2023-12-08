@@ -2,7 +2,7 @@ import { Directive, ElementRef, HostBinding, Input, numberAttribute, OnChanges, 
 
 @Directive({
   // eslint-disable-next-line
-    selector: '.psm__progress-bar',
+  selector: '.psm__progress-bar',
   standalone: true
 })
 export class PSMProgressBarDirective implements OnChanges {
@@ -27,7 +27,10 @@ export class PSMProgressBarDirective implements OnChanges {
 
   private defaultColors = ['darkred', 'orangered', 'orange', 'yellowgreen', 'green'];
 
-  constructor(private renderer: Renderer2, private el: ElementRef<HTMLDivElement>) {
+  constructor(
+    private renderer: Renderer2,
+    private el: ElementRef<HTMLDivElement>
+  ) {
     this.progressBar = this.el.nativeElement;
   }
 

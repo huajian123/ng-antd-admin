@@ -13,22 +13,24 @@
 </nz-card>
 <ng-template #notificationTpl>
   <nz-list nzItemLayout="horizontal">
-    <nz-list-item *ngFor="let i of 4 | numberLoop">
-      <nz-list-item-meta>
-        <nz-list-item-meta-title>
-          <div class="flex p-l-10 p-r-10">
-            <span class="flex-1" nz-typography nzEllipsis>第三方紧急代码变更</span>
-            <nz-tag class="m-l-10" [nzColor]="'red'">马上到期</nz-tag>
-          </div>
-        </nz-list-item-meta-title>
-        <nz-list-item-meta-description>
-          <div class="p-l-10 p-r-10">
-            <p nz-typography nzEllipsis nzType="secondary" [nzEllipsisRows]="3">冠霖提交于 2017-01-06，需在 2017-01-07 前完成代码变更任务</p>
-            <p>审核时间：2022-2-22</p>
-          </div>
-        </nz-list-item-meta-description>
-      </nz-list-item-meta>
-    </nz-list-item>
+    @for (i of 4 | numberLoop; track i) {
+      <nz-list-item>
+        <nz-list-item-meta>
+          <nz-list-item-meta-title>
+            <div class="flex p-l-10 p-r-10">
+              <span class="flex-1" nz-typography nzEllipsis>第三方紧急代码变更</span>
+              <nz-tag class="m-l-10" [nzColor]="'red'">马上到期</nz-tag>
+            </div>
+          </nz-list-item-meta-title>
+          <nz-list-item-meta-description>
+            <div class="p-l-10 p-r-10">
+              <p nz-typography nzEllipsis nzType="secondary" [nzEllipsisRows]="3">冠霖提交于 2017-01-06，需在 2017-01-07 前完成代码变更任务</p>
+              <p>审核时间：2022-2-22</p>
+            </div>
+          </nz-list-item-meta-description>
+        </nz-list-item-meta>
+      </nz-list-item>
+    }
     <!--  <nz-list-empty *ngIf="deptNoticeListObj.checkRecordDtos.length === 0"></nz-list-empty>-->
     <nz-list-footer>
       <div class="center operate-text full-with full-height">清空通知</div>

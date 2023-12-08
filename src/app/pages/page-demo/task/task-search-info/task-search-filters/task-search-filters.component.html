@@ -4,12 +4,14 @@
     <span class="p-l-10 sp-14">TAGS</span>
   </nz-list-item>
 
-  <nz-list-item *ngFor="let item of data1" class="p-0 m-l-10 m-r-10 m-b-4">
-    <div class="p-r-16 p-l-10 center hand-model list-item full-with">
-      <nz-avatar [nzSize]="12" [style]="{ background: item.color }"></nz-avatar>
-      <div class="m-l-8 flex-auto">{{ item.title }}</div>
-    </div>
-  </nz-list-item>
+  @for (item of data1; track item) {
+    <nz-list-item class="p-0 m-l-10 m-r-10 m-b-4">
+      <div class="p-r-16 p-l-10 center hand-model list-item full-with">
+        <nz-avatar [nzSize]="12" [style]="{ background: item.color }"></nz-avatar>
+        <div class="m-l-8 flex-auto">{{ item.title }}</div>
+      </div>
+    </nz-list-item>
+  }
 </nz-list>
 
 <nz-list class="p-0" nzItemLayout="horizontal" nzSize="small" nzSplit="false">
@@ -17,12 +19,14 @@
     <span class="p-l-10 sp-14">TEAM MEMBERS</span>
   </nz-list-item>
 
-  <nz-list-item *ngFor="let item of data2" class="p-0 m-l-10 m-r-10 m-b-4">
-    <div class="p-r-16 p-l-10 center hand-model list-item full-with">
-      <nz-avatar nzIcon="user" nzSrc="assets/imgs/avatar2.jpg" [nzSize]="12"></nz-avatar>
-      <div class="m-l-8 flex-auto">{{ item }}</div>
-    </div>
-  </nz-list-item>
+  @for (item of data2; track item) {
+    <nz-list-item class="p-0 m-l-10 m-r-10 m-b-4">
+      <div class="p-r-16 p-l-10 center hand-model list-item full-with">
+        <nz-avatar nzIcon="user" nzSrc="assets/imgs/avatar2.jpg" [nzSize]="12"></nz-avatar>
+        <div class="m-l-8 flex-auto">{{ item }}</div>
+      </div>
+    </nz-list-item>
+  }
 </nz-list>
 
 <nz-list class="p-0" nzItemLayout="horizontal" nzSize="small" nzSplit="false">
@@ -30,10 +34,12 @@
     <span class="p-l-10 sp-14">ARCHIVES</span>
   </nz-list-item>
 
-  <nz-list-item *ngFor="let item of data3" class="p-0 m-l-10 m-r-10 m-b-4">
-    <div class="p-r-16 p-l-10 center hand-model list-item full-with">
-      <span nz-icon nzTheme="outline" nzType="cloud-server"></span>
-      <div class="m-l-8 flex-auto">{{ item }}</div>
-    </div>
-  </nz-list-item>
+  @for (item of data3; track item) {
+    <nz-list-item class="p-0 m-l-10 m-r-10 m-b-4">
+      <div class="p-r-16 p-l-10 center hand-model list-item full-with">
+        <span nz-icon nzTheme="outline" nzType="cloud-server"></span>
+        <div class="m-l-8 flex-auto">{{ item }}</div>
+      </div>
+    </nz-list-item>
+  }
 </nz-list>

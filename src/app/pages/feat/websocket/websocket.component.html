@@ -9,12 +9,12 @@
     </div>
     <div nz-col nzFlex="auto">
       <nz-card nzTitle="消息内容">
-        <ng-container *ngFor="let item of result">
+        @for (item of result; track item) {
           <div class="m-t-0 p-8 text-break m-b-8" nz-result-content>
             <span nz-typography>{{ item }}</span>
           </div>
           <div class="sp-12 text-right m-t-5" nz-typography nzType="secondary">已读</div>
-        </ng-container>
+        }
       </nz-card>
     </div>
   </div>

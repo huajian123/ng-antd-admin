@@ -34,6 +34,10 @@
   </nz-card>
 </div>
 <ng-template #combineTpl let-control>
-  <ng-container *ngIf="control.hasError('message')">{{ control.errors.message }}</ng-container>
-  <ng-container *ngIf="control.hasError('required')">必填项</ng-container>
+  @if (control.hasError('message')) {
+    {{ control.errors.message }}
+  }
+  @if (control.hasError('required')) {
+    必填项
+  }
 </ng-template>

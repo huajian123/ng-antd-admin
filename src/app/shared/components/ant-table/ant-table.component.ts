@@ -1,4 +1,4 @@
-import { NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, inject, Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef } from '@angular/core';
 
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -58,7 +58,7 @@ export interface SortFile {
   providers: [{ provide: AntTableComponentToken, useExisting: AntTableComponent }],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [NzTableModule, NgIf, NgFor, NzResizableModule, NgClass, NgTemplateOutlet, MapPipe, TableFiledPipe]
+  imports: [NzTableModule, NzResizableModule, NgClass, NgTemplateOutlet, MapPipe, TableFiledPipe]
 })
 export class AntTableComponent implements OnInit, OnChanges {
   _dataList!: NzSafeAny[];

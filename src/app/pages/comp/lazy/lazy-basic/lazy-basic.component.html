@@ -1,6 +1,8 @@
 <app-page-header [pageHeaderInfo]="pageHeaderInfo" />
 <div class="normal-table-wrap">
-  <button *ngIf="!isStarted" nz-button nzType="primary" (click)="lazyServiceService.create(); isStarted = true">点击</button>
+  @if (!isStarted) {
+    <button nz-button nzType="primary" (click)="lazyServiceService.create(); isStarted = true">点击</button>
+  }
   <div class="left-start-center" style="flex-wrap: wrap">
     <ng-template appAd></ng-template>
   </div>

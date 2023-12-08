@@ -1,4 +1,4 @@
-import { NgIf, NgTemplateOutlet, NgFor, AsyncPipe } from '@angular/common';
+import { NgTemplateOutlet, AsyncPipe } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Input, Inject, inject, DestroyRef, booleanAttribute } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
@@ -9,7 +9,6 @@ import { ThemeMode } from '@app/layout/default/setting-drawer/setting-drawer.com
 import { TabService } from '@core/services/common/tab.service';
 import { Menu } from '@core/services/types';
 import { AuthDirective } from '@shared/directives/auth.directive';
-import { TrackByPropertyDirective } from '@shared/directives/track-by-property.directive';
 import { MenuStoreService } from '@store/common-store/menu-store.service';
 import { SplitNavStoreService } from '@store/common-store/split-nav-store.service';
 import { ThemeService } from '@store/common-store/theme.service';
@@ -25,7 +24,7 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
   templateUrl: './nav-bar.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [NgIf, NzMenuModule, NzNoAnimationModule, NgTemplateOutlet, NgFor, TrackByPropertyDirective, AuthDirective, NzButtonModule, NzIconModule, RouterLink, AsyncPipe]
+  imports: [NzMenuModule, NzNoAnimationModule, NgTemplateOutlet, AuthDirective, NzButtonModule, NzIconModule, RouterLink, AsyncPipe]
 })
 export class NavBarComponent implements OnInit {
   @Input({ transform: booleanAttribute })

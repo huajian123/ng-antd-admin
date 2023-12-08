@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef, inject } from '@angular/core';
 import { FormBuilder, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -41,7 +40,6 @@ interface SearchParam {
     NzFormModule,
     NzGridModule,
     NzInputModule,
-    NgIf,
     NzButtonModule,
     NzWaveModule,
     NzIconModule,

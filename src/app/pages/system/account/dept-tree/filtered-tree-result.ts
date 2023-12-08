@@ -6,5 +6,8 @@ export interface TreeNode {
 }
 
 export class FilteredTreeResult {
-  constructor(public treeData: TreeNode[], public needsToExpanded: TreeNode[] = []) {}
+  constructor(
+    public treeData: TreeNode[],
+    public needsToExpanded: TreeNode[] = []
+  ) {}
 }

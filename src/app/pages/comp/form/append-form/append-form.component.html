@@ -8,27 +8,33 @@
 
     <form nz-form [formGroup]="validateForm">
       <ng-container formArrayName="formArray">
-        <div *ngFor="let item of valuesArray.controls; let groupIndex = index" class="full-with m-b-20" nz-card-grid nz-row [formGroupName]="groupIndex">
-          <nz-form-item nz-col [nzSpan]="20">
-            <nz-form-label [nzSpan]="8">Detail</nz-form-label>
-            <nz-form-control [nzErrorTip]="combineTpl" [nzSpan]="22">
-              <input id="detail" class="full-with" formControlName="detail" nz-input placeholder="项目名称" />
-            </nz-form-control>
-          </nz-form-item>
+        @for (item of valuesArray.controls; track item; let groupIndex = $index) {
+          <div class="full-with m-b-20" nz-card-grid nz-row [formGroupName]="groupIndex">
+            <nz-form-item nz-col [nzSpan]="20">
+              <nz-form-label [nzSpan]="8">Detail</nz-form-label>
+              <nz-form-control [nzErrorTip]="combineTpl" [nzSpan]="22">
+                <input id="detail" class="full-with" formControlName="detail" nz-input placeholder="项目名称" />
+              </nz-form-control>
+            </nz-form-item>
 
-          <nz-form-item nz-col [nzSpan]="4">
-            <button nz-button [nzGhost]="true" [nzType]="'primary'" (click)="del(groupIndex)">
-              <i nz-icon nzType="delete"></i>
-              移除
-            </button>
-          </nz-form-item>
-        </div>
+            <nz-form-item nz-col [nzSpan]="4">
+              <button nz-button [nzGhost]="true" [nzType]="'primary'" (click)="del(groupIndex)">
+                <i nz-icon nzType="delete"></i>
+                移除
+              </button>
+            </nz-form-item>
+          </div>
+        }
       </ng-container>
     </form>
 
     <ng-template #combineTpl let-control>
-      <ng-container *ngIf="control.hasError('message')">{{ control.errors.message }}</ng-container>
-      <ng-container *ngIf="control.hasError('required')">必填项</ng-container>
+      @if (control.hasError('message')) {
+        {{ control.errors.message }}
+      }
+      @if (control.hasError('required')) {
+        必填项
+      }
     </ng-template>
   </nz-card>
 
@@ -137,7 +143,7 @@
                 </div>
                 <div class="text-right">
                   截止时间
-                  <p>{{ item.endTime | date : 'yyyy-MM-dd' }}</p>
+                  <p>{{ item.endTime | date: 'yyyy-MM-dd' }}</p>
                 </div>
               </div>
               <nz-progress [nzPercent]="item.finishRate" [nzStatus]="item.taskStateName" [nzStrokeWidth]="6"></nz-progress>

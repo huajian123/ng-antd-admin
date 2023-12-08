@@ -1,4 +1,4 @@
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, ChangeDetectionStrategy, AfterViewInit, ViewChild, TemplateRef, inject } from '@angular/core';
 
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
@@ -17,7 +17,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
   styleUrls: ['./card-table.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [PageHeaderComponent, NzGridModule, NgIf, WaterMarkComponent, NzCardModule, NzIconModule, NzButtonModule, NgFor, NzAvatarModule, AsyncPipe]
+  imports: [PageHeaderComponent, NzGridModule, WaterMarkComponent, NzCardModule, NzIconModule, NzButtonModule, NzAvatarModule, AsyncPipe]
 })
 export class CardTableComponent implements AfterViewInit {
   private themesService = inject(ThemeService);

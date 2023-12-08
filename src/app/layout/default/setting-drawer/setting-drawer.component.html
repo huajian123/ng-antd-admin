@@ -1,32 +1,40 @@
 <div id="drawer-handle" class="drawer-handle" cdkDrag cdkDragLockAxis="y" [class.open]="isCollapsed" (cdkDragEnded)="dragEnd()" (cdkDragStarted)="dragging = true" (click)="changeCollapsed()">
-  <ng-container *ngIf="!isCollapsed; then settingIcon; else closeIcon"></ng-container>
-  <ng-template #settingIcon>
+  @if (!isCollapsed) {
     <i nz-icon nzTheme="outline" nzType="setting"></i>
-  </ng-template>
-  <ng-template #closeIcon>
+  } @else {
     <i nz-icon nzTheme="outline" nzType="close"></i>
-  </ng-template>
+  }
 </div>
 <nz-drawer [nzClosable]="false" [nzWidth]="300" [(nzVisible)]="isCollapsed" (nzOnClose)="isCollapsed = !isCollapsed">
   <ng-container *nzDrawerContent>
-    <div *ngIf="_themesOptions.mode !== 'mixin'" class="m-b-24">
-      <h3 class="title">整体风格设置</h3>
-      <div class="block-checkbox">
-        <div *ngFor="let theme of themes" class="item" nz-tooltip [nzTooltipTitle]="theme.title" (click)="changeTheme(theme)">
-          <img [alt]="theme.title" [src]="theme.image" />
-          <div *ngIf="theme.isChecked" class="select-icon">
-            <i nz-icon nzTheme="outline" nzType="check"></i>
-          </div>
+    @if (_themesOptions.mode !== 'mixin') {
+      <div class="m-b-24">
+        <h3 class="title">整体风格设置</h3>
+        <div class="block-checkbox">
+          @for (theme of themes; track theme) {
+            <div class="item" nz-tooltip [nzTooltipTitle]="theme.title" (click)="changeTheme(theme)">
+              <img [alt]="theme.title" [src]="theme.image" />
+              @if (theme.isChecked) {
+                <div class="select-icon">
+                  <i nz-icon nzTheme="outline" nzType="check"></i>
+                </div>
+              }
+            </div>
+          }
         </div>
       </div>
-    </div>
+    }
 
     <div class="m-b-24 theme-color" [class.m-t-25]="_themesOptions.mode !== 'mixin'">
       <h3 class="title">主题色</h3>
       <div class="content">
-        <div *ngFor="let color of colors" class="color-block" nz-tooltip [nzTooltipTitle]="color.title" [style.background]="color.color" (click)="changePrimaryColor(color)">
-          <i *ngIf="color.isChecked" nz-icon nzTheme="outline" nzType="check"></i>
-        </div>
+        @for (color of colors; track color) {
+          <div class="color-block" nz-tooltip [nzTooltipTitle]="color.title" [style.background]="color.color" (click)="changePrimaryColor(color)">
+            @if (color.isChecked) {
+              <i nz-icon nzTheme="outline" nzType="check"></i>
+            }
+          </div>
+        }
       </div>
     </div>
 
@@ -35,12 +43,16 @@
     <div class="m-b-24">
       <h3 class="title">导航模式</h3>
       <div class="block-checkbox">
-        <div *ngFor="let mode of modes" class="item" nz-tooltip [nzTooltipTitle]="mode.title" (click)="changeMode(mode)">
-          <img [alt]="mode.title" [src]="mode.image" />
-          <div *ngIf="mode.isChecked" class="select-icon">
-            <i nz-icon nzTheme="outline" nzType="check"></i>
+        @for (mode of modes; track mode) {
+          <div class="item" nz-tooltip [nzTooltipTitle]="mode.title" (click)="changeMode(mode)">
+            <img [alt]="mode.title" [src]="mode.image" />
+            @if (mode.isChecked) {
+              <div class="select-icon">
+                <i nz-icon nzTheme="outline" nzType="check"></i>
+              </div>
+            }
           </div>
-        </div>
+        }
       </div>
     </div>
     <nz-list [nzSplit]="false">

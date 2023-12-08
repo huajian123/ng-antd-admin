@@ -5,5 +5,7 @@
   </p>
   <p>在下面输入框中输入值，再切换tab，体验组件的缓存效果</p>
   <input nz-input />
-  <p *ngFor="let item of 60 | numberLoop; let index = index">为了演示滚动条缓存{{ index }}</p>
+  @for (item of 60 | numberLoop; track item; let index = $index) {
+    <p>为了演示滚动条缓存{{ index }}</p>
+  }
 </div>

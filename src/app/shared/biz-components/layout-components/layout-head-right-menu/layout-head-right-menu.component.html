@@ -25,10 +25,11 @@
       nzTooltipPlacement="bottom"
       [nzTooltipTitle]="toogleFullScreenDir.isFullscreenFlag ? '全屏' : '退出全屏'"
     >
-      <i *ngIf="toogleFullScreenDir.isFullscreenFlag; else exitFullTpl" nz-icon nzTheme="outline" nzType="fullscreen"></i>
-      <ng-template #exitFullTpl>
+      @if (toogleFullScreenDir.isFullscreenFlag) {
+        <i nz-icon nzTheme="outline" nzType="fullscreen"></i>
+      } @else {
         <i nz-icon nzTheme="outline" nzType="fullscreen-exit"></i>
-      </ng-template>
+      }
     </span>
 
     <span class="bst-header-icon" nz-dropdown nzPlacement="bottomRight" nzTrigger="click" [nzDropdownMenu]="noticeMenu">

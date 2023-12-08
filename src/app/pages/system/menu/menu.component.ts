@@ -1,4 +1,4 @@
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
@@ -50,14 +50,12 @@ interface SearchParam {
     NzGridModule,
     NzInputModule,
     NzSelectModule,
-    NgFor,
     NzButtonModule,
     NzWaveModule,
     NzIconModule,
     CardTableWrapComponent,
     TreeTableComponent,
     AuthDirective,
-    NgIf,
     NgTemplateOutlet,
     NzTagModule
   ]

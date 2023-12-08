@@ -1,5 +1,5 @@
 import { normalizePassiveListenerOptions } from '@angular/cdk/platform';
-import { NgIf, NgFor } from '@angular/common';
+
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef, HostListener, NgZone, inject, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
@@ -36,7 +36,7 @@ const passiveEventListenerOptions = <AddEventListenerOptions>normalizePassiveLis
   styleUrls: ['./search-route.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [NzButtonModule, NzInputModule, FormsModule, NgIf, NzIconModule, NzEmptyModule, NgFor, NzGridModule, NzDividerModule]
+  imports: [NzButtonModule, NzInputModule, FormsModule, NzIconModule, NzEmptyModule, NzGridModule, NzDividerModule]
 })
 export class SearchRouteComponent extends BasicConfirmModalComponent implements OnInit, AfterViewInit {
   private cdr = inject(ChangeDetectorRef);

@@ -1,4 +1,4 @@
-import { NgFor, NgIf, NgTemplateOutlet, NgStyle } from '@angular/common';
+import { NgTemplateOutlet, NgStyle } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
@@ -30,10 +30,8 @@ import { NzResultModule } from 'ng-zorro-antd/result';
   imports: [
     PageHeaderComponent,
     NzCardModule,
-    NgFor,
     NzCheckboxModule,
     FormsModule,
-    NgIf,
     NzIconModule,
     NzButtonModule,
     NzDividerModule,

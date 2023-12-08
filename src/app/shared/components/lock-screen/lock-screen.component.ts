@@ -1,4 +1,4 @@
-import { NgIf, AsyncPipe, DatePipe } from '@angular/common';
+import { AsyncPipe, DatePipe } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, inject, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -28,7 +28,7 @@ import { ChangNumberToChinesePipe } from '../../pipes/chang-number-to-chinese.pi
   styleUrls: ['./lock-screen.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [NzIconModule, NzButtonModule, NzGridModule, NgIf, NzAvatarModule, FormsModule, NzFormModule, ReactiveFormsModule, NzInputModule, ChangNumberToChinesePipe, AsyncPipe, DatePipe]
+  imports: [NzIconModule, NzButtonModule, NzGridModule, NzAvatarModule, FormsModule, NzFormModule, ReactiveFormsModule, NzInputModule, ChangNumberToChinesePipe, AsyncPipe, DatePipe]
 })
 export class LockScreenComponent implements OnInit {
   public showUnlock = false;

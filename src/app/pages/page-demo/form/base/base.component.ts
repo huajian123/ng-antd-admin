@@ -1,4 +1,3 @@
-import { NgIf, NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -35,9 +34,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
     NzDatePickerModule,
     NzInputNumberModule,
     NzRadioModule,
-    NgIf,
     NzSelectModule,
-    NgFor,
     NzButtonModule,
     NzWaveModule
   ]

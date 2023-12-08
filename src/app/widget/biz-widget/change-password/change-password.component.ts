@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl, NonNullableFormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Observable, of } from 'rxjs';
@@ -17,13 +16,16 @@ import { NzModalRef } from 'ng-zorro-antd/modal';
   templateUrl: './change-password.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzButtonModule, PasswordStrengthMeterComponent, NzIconModule, NgIf]
+  imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzButtonModule, PasswordStrengthMeterComponent, NzIconModule]
 })
 export class ChangePasswordComponent {
   passwordVisible = false;
   compirePasswordVisible = false;
 
-  constructor(private modalRef: NzModalRef, private fb: NonNullableFormBuilder) {}
+  constructor(
+    private modalRef: NzModalRef,
+    private fb: NonNullableFormBuilder
+  ) {}
 
   get newPassword(): string {
     return this.validateForm.controls.newPassword.value!;

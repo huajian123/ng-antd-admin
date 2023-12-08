@@ -33,12 +33,16 @@
           <div nz-row [nzGutter]="[16, 16]">
             <div nz-col nzSpan="12">
               <nz-select formControlName="province" (ngModelChange)="provinceChange($event)">
-                <nz-option *ngFor="let p of provinceData" [nzLabel]="p" [nzValue]="p"></nz-option>
+                @for (p of provinceData; track p) {
+                  <nz-option [nzLabel]="p" [nzValue]="p"></nz-option>
+                }
               </nz-select>
             </div>
             <div nz-col nzSpan="12">
               <nz-select formControlName="city">
-                <nz-option *ngFor="let c of cityData[selectedProvince]" [nzLabel]="c" [nzValue]="c"></nz-option>
+                @for (c of cityData[selectedProvince]; track c) {
+                  <nz-option [nzLabel]="c" [nzValue]="c"></nz-option>
+                }
               </nz-select>
             </div>
           </div>
@@ -70,7 +74,9 @@
     </form>
   </div>
   <div class="avatar" nz-col [ngClass]="{ 'is-full': formOrder === 1 }" [nzLg]="24" [nzMd]="24" [nzOrder]="avatarOrder" [nzSm]="24" [nzXl]="12" [nzXs]="24" [nzXXl]="12">
-    <div *ngIf="formOrder === 0" class="m-b-8">头像</div>
+    @if (formOrder === 0) {
+      <div class="m-b-8">头像</div>
+    }
     <div class="avatar-wrap">
       <nz-avatar class="m-b-8" [nzSize]="144" [nzSrc]="'assets/imgs/default_face.png'"></nz-avatar>
       <div class="upload">
@@ -85,6 +91,10 @@
   </div>
 </div>
 <ng-template #combineTpl let-control>
-  <ng-container *ngIf="control.hasError('message')">{{ control.errors.message }}</ng-container>
-  <ng-container *ngIf="control.hasError('required')">必填项</ng-container>
+  @if (control.hasError('message')) {
+    {{ control.errors.message }}
+  }
+  @if (control.hasError('required')) {
+    必填项
+  }
 </ng-template>

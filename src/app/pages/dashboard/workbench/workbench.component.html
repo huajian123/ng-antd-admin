@@ -8,33 +8,37 @@
         <div nz-col nzSpan="24">
           <nz-card nzTitle="进行中的项目" [nzExtra]="extraTemplate">
             <div nz-row>
-              <div *ngFor="let i of 6 | numberLoop" nz-card-grid nz-col [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXl]="8" [nzXs]="24" [nzXXl]="8">
-                <nz-card-meta nzDescription="城镇中有那么多的酒馆，她却偏偏走进了我的酒馆" [nzTitle]="cardTitleTpl"></nz-card-meta>
-                <div class="card-foot">
-                  <span nz-typography nzType="secondary">小华</span>
-                  <span nz-typography nzType="secondary">4年前</span>
+              @for (i of 6 | numberLoop; track i) {
+                <div nz-card-grid nz-col [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXl]="8" [nzXs]="24" [nzXXl]="8">
+                  <nz-card-meta nzDescription="城镇中有那么多的酒馆，她却偏偏走进了我的酒馆" [nzTitle]="cardTitleTpl"></nz-card-meta>
+                  <div class="card-foot">
+                    <span nz-typography nzType="secondary">小华</span>
+                    <span nz-typography nzType="secondary">4年前</span>
+                  </div>
                 </div>
-              </div>
+              }
             </div>
           </nz-card>
         </div>
         <div nz-col nzSpan="24">
           <nz-card nzTitle="动态">
             <nz-list>
-              <nz-list-item *ngFor="let item of 6 | numberLoop" style="padding: 16px 24px">
-                <nz-list-item-meta>
-                  <nz-list-item-meta-avatar [nzSrc]="'assets/imgs/default_face.png'"></nz-list-item-meta-avatar>
-                  <nz-list-item-meta-title>
-                    <a>
-                      曲丽丽 在
-                      <span class="operate-text">高逼格设计天团</span>
-                      新建项目
-                      <span class="operate-text">六月迭代</span>
-                    </a>
-                  </nz-list-item-meta-title>
-                  <nz-list-item-meta-description>19 天前</nz-list-item-meta-description>
-                </nz-list-item-meta>
-              </nz-list-item>
+              @for (item of 6 | numberLoop; track item) {
+                <nz-list-item style="padding: 16px 24px">
+                  <nz-list-item-meta>
+                    <nz-list-item-meta-avatar [nzSrc]="'assets/imgs/default_face.png'"></nz-list-item-meta-avatar>
+                    <nz-list-item-meta-title>
+                      <a>
+                        曲丽丽 在
+                        <span class="operate-text">高逼格设计天团</span>
+                        新建项目
+                        <span class="operate-text">六月迭代</span>
+                      </a>
+                    </nz-list-item-meta-title>
+                    <nz-list-item-meta-description>19 天前</nz-list-item-meta-description>
+                  </nz-list-item-meta>
+                </nz-list-item>
+              }
             </nz-list>
           </nz-card>
         </div>
@@ -46,9 +50,11 @@
         <div nz-col nzSpan="24">
           <nz-card nzTitle="快速开始/便捷导航">
             <div nz-row [nzGutter]="[16, 16]">
-              <div *ngFor="let item of 6 | numberLoop" nz-col nzSpan="6">
-                <a (click)="msg.success('点击了')">操作一</a>
-              </div>
+              @for (item of 6 | numberLoop; track item) {
+                <div nz-col nzSpan="6">
+                  <a (click)="msg.success('点击了')">操作一</a>
+                </div>
+              }
               <div nz-col nzSpan="6">
                 <button nz-button nzGhost nzType="primary" [nzSize]="'small'">
                   <i nz-icon nzType="plus"></i>
@@ -66,12 +72,14 @@
         <div nz-col nzSpan="24">
           <nz-card nzTitle="团队">
             <div nz-row>
-              <div *ngFor="let item of 5 | numberLoop" nz-col nzSpan="12">
-                <a class="group">
-                  <nz-avatar [nzSize]="24" [nzSrc]="'https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png'"></nz-avatar>
-                  <span class="m-l-10">科学搬砖组</span>
-                </a>
-              </div>
+              @for (item of 5 | numberLoop; track item) {
+                <div nz-col nzSpan="12">
+                  <a class="group">
+                    <nz-avatar [nzSize]="24" [nzSrc]="'https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png'"></nz-avatar>
+                    <span class="m-l-10">科学搬砖组</span>
+                  </a>
+                </div>
+              }
             </div>
           </nz-card>
         </div>

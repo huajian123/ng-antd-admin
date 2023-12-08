@@ -6,21 +6,25 @@
       <nz-tag class="m-r-25 m-b-10" nzMode="checkable" (click)="allSel()">
         <span class="sp-14">全部</span>
       </nz-tag>
-      <ng-container *ngFor="let tag of tagArray">
+      @for (tag of tagArray; track tag) {
         <nz-tag class="m-r-25 m-b-10" nzMode="checkable" [(nzChecked)]="tag.isChecked">
           <span class="sp-14">{{ tag.name }}</span>
         </nz-tag>
-      </ng-container>
+      }
     </div>
     <div nz-col nzFlex="51px">
-      <a *ngIf="!expanded" class="operate-text" (click)="expanded = true">
-        展开
-        <i nz-icon nzTheme="outline" nzType="down"></i>
-      </a>
-      <a *ngIf="expanded" class="operate-text" (click)="expanded = false">
-        收起
-        <i nz-icon nzTheme="outline" nzType="up"></i>
-      </a>
+      @if (!expanded) {
+        <a class="operate-text" (click)="expanded = true">
+          展开
+          <i nz-icon nzTheme="outline" nzType="down"></i>
+        </a>
+      }
+      @if (expanded) {
+        <a class="operate-text" (click)="expanded = false">
+          收起
+          <i nz-icon nzTheme="outline" nzType="up"></i>
+        </a>
+      }
     </div>
   </div>
   <nz-divider class="m-0" nzDashed></nz-divider>
@@ -64,42 +68,44 @@
 <nz-card class="m-t-20">
   <app-water-mark />
   <nz-list [nzItemLayout]="'vertical'">
-    <nz-list-item *ngFor="let item of 8 | numberLoop" nzNoFlex>
-      <nz-list-item-meta>
-        <nz-list-item-meta-title>
-          <a>Alipay</a>
-        </nz-list-item-meta-title>
-        <nz-list-item-meta-description>
-          <nz-tag>Ant Design</nz-tag>
-          <nz-tag>设计语言</nz-tag>
-          <nz-tag>蚂蚁金服</nz-tag>
-        </nz-list-item-meta-description>
-      </nz-list-item-meta>
-      段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台
-      ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。
-      <div class="m-t-15 info">
-        <div nz-row>
-          <nz-avatar class="m-r-8" [nzSize]="'small'" [nzSrc]="'assets/imgs/default_face.png'"></nz-avatar>
-          <a class="operate-text">付小小</a>
-          <span class="m-r-8">发布在</span>
-          <a class="m-r-8 operate-text">https://ant.design</a>
-          <time nz-typography nzType="secondary">2021-02-19 14:21</time>
+    @for (item of 8 | numberLoop; track item) {
+      <nz-list-item nzNoFlex>
+        <nz-list-item-meta>
+          <nz-list-item-meta-title>
+            <a>Alipay</a>
+          </nz-list-item-meta-title>
+          <nz-list-item-meta-description>
+            <nz-tag>Ant Design</nz-tag>
+            <nz-tag>设计语言</nz-tag>
+            <nz-tag>蚂蚁金服</nz-tag>
+          </nz-list-item-meta-description>
+        </nz-list-item-meta>
+        段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台
+        ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。
+        <div class="m-t-15 info">
+          <div nz-row>
+            <nz-avatar class="m-r-8" [nzSize]="'small'" [nzSrc]="'assets/imgs/default_face.png'"></nz-avatar>
+            <a class="operate-text">付小小</a>
+            <span class="m-r-8">发布在</span>
+            <a class="m-r-8 operate-text">https://ant.design</a>
+            <time nz-typography nzType="secondary">2021-02-19 14:21</time>
+          </div>
         </div>
-      </div>
-      <ul nz-list-item-actions>
-        <nz-list-item-action>
-          <i class="m-r-8" nz-icon nzType="star"></i>
-          156
-        </nz-list-item-action>
-        <nz-list-item-action>
-          <i class="m-r-8" nz-icon nzType="like"></i>
-          156
-        </nz-list-item-action>
-        <nz-list-item-action>
-          <i class="m-r-8" nz-icon nzType="message"></i>
-          2
-        </nz-list-item-action>
-      </ul>
-    </nz-list-item>
+        <ul nz-list-item-actions>
+          <nz-list-item-action>
+            <i class="m-r-8" nz-icon nzType="star"></i>
+            156
+          </nz-list-item-action>
+          <nz-list-item-action>
+            <i class="m-r-8" nz-icon nzType="like"></i>
+            156
+          </nz-list-item-action>
+          <nz-list-item-action>
+            <i class="m-r-8" nz-icon nzType="message"></i>
+            2
+          </nz-list-item-action>
+        </ul>
+      </nz-list-item>
+    }
   </nz-list>
 </nz-card>

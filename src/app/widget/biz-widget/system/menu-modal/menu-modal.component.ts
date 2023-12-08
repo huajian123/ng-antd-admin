@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Observable, of } from 'rxjs';
@@ -23,7 +22,7 @@ type menuType = 'C' | 'F';
   templateUrl: './menu-modal.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzRadioModule, NgIf, NzButtonModule, IconSelComponent, NzInputNumberModule, NzSwitchModule]
+  imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzRadioModule, NzButtonModule, IconSelComponent, NzInputNumberModule, NzSwitchModule]
 })
 export class MenuModalComponent implements OnInit {
   validateForm!: FormGroup;

@@ -1,4 +1,4 @@
-import { NgTemplateOutlet, NgIf } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -29,19 +29,7 @@ import { HomeNoticeComponent } from '../home-notice/home-notice.component';
   styleUrls: ['./layout-head-right-menu.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [
-    NgTemplateOutlet,
-    ScreenLessHiddenDirective,
-    NzToolTipModule,
-    NzIconModule,
-    NzButtonModule,
-    ToggleFullscreenDirective,
-    NgIf,
-    NzDropDownModule,
-    NzBadgeModule,
-    NzMenuModule,
-    HomeNoticeComponent
-  ]
+  imports: [NgTemplateOutlet, ScreenLessHiddenDirective, NzToolTipModule, NzIconModule, NzButtonModule, ToggleFullscreenDirective, NzDropDownModule, NzBadgeModule, NzMenuModule, HomeNoticeComponent]
 })
 export class LayoutHeadRightMenuComponent implements OnInit {
   user!: UserPsd;

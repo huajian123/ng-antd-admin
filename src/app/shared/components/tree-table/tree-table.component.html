@@ -20,83 +20,84 @@
   <ng-template #rangeTemplate let-range="range" let-total>{{ range[0] }}-{{ range[1] }} 共 {{ total }} 条</ng-template>
   <thead>
     <tr>
-      <th
-        *ngIf="tableConfig.showCheckbox"
-        class="animate-bg-0"
-        [nzChecked]="allChecked"
-        [nzIndeterminate]="indeterminate"
-        [nzLeft]="true"
-        [nzWidth]="'40px'"
-        (nzCheckedChange)="onAllChecked($event)"
-      ></th>
-      <ng-container *ngFor="let head of tableConfig.headers; let headIndex = index; let last = last; let first = first">
-        <th
-          *ngIf="head.show === undefined || head.show === true"
-          class="animate-bg-0"
-          nz-resizable
-          nzBounds="parent"
-          nzPreview
-          [nzLeft]="!!head.fixed && head.fixedDir === 'left'"
-          [nzMaxWidth]="1200"
-          [nzMinWidth]="1"
-          [nzRight]="!!head.fixed && head.fixedDir === 'right'"
-          [nzWidth]="head.width + 'px'"
-          (nzResizeEnd)="onResize($event, head.title)"
-        >
-          <nz-resize-handle *ngIf="!last && (tableConfig.showCheckbox ? true : !last)" nzDirection="right">
-            <div class="resize-trigger"></div>
-          </nz-resize-handle>
-          {{ head.title }}
-          <div *ngIf="head.showSort" class="sort-wrap m-l-8 hand-model" (click)="changeSort(head)">
-            <i class="sort-caret ascending" [class.sort-caret-sel-asc]="head.sortDir === 'asc'"></i>
-            <i class="sort-caret descending" [class.sort-caret-sel-desc]="head.sortDir === 'desc'"></i>
-          </div>
-        </th>
-      </ng-container>
+      @if (tableConfig.showCheckbox) {
+        <th class="animate-bg-0" [nzChecked]="allChecked" [nzIndeterminate]="indeterminate" [nzLeft]="true" [nzWidth]="'40px'" (nzCheckedChange)="onAllChecked($event)"></th>
+      }
+      @for (head of tableConfig.headers; track head; let headIndex = $index; let last = $last; let first = $first) {
+        @if (head.show === undefined || head.show === true) {
+          <th
+            class="animate-bg-0"
+            nz-resizable
+            nzBounds="parent"
+            nzPreview
+            [nzLeft]="!!head.fixed && head.fixedDir === 'left'"
+            [nzMaxWidth]="1200"
+            [nzMinWidth]="1"
+            [nzRight]="!!head.fixed && head.fixedDir === 'right'"
+            [nzWidth]="head.width + 'px'"
+            (nzResizeEnd)="onResize($event, head.title)"
+          >
+            @if (!last && (tableConfig.showCheckbox ? true : !last)) {
+              <nz-resize-handle nzDirection="right">
+                <div class="resize-trigger"></div>
+              </nz-resize-handle>
+            }
+            {{ head.title }}
+            @if (head.showSort) {
+              <div class="sort-wrap m-l-8 hand-model" (click)="changeSort(head)">
+                <i class="sort-caret ascending" [class.sort-caret-sel-asc]="head.sortDir === 'asc'"></i>
+                <i class="sort-caret descending" [class.sort-caret-sel-desc]="head.sortDir === 'desc'"></i>
+              </div>
+            }
+          </th>
+        }
+      }
     </tr>
   </thead>
   <tbody>
-    <ng-container *ngFor="let data of _dataList">
-      <ng-container *ngFor="let item of mapOfExpandedData[data.id]; let rowIndex = index">
-        <tr *ngIf="(item.parent && item.parent.expand) || !item.parent">
-          <td
-            *ngIf="tableConfig.showCheckbox"
-            class="animate-bg-0"
-            nzEllipsis
-            [nzChecked]="item['_checked']"
-            [nzIndeterminate]="item['indeterminate']"
-            [nzLeft]="true"
-            (nzCheckedChange)="checkRowSingle($event, rowIndex, item)"
-          ></td>
-          <ng-container *ngFor="let head of tableConfig.headers; let headIndex = index; let last = last; let first = first">
-            <td
-              *ngIf="head.show === undefined || head.show === true"
-              [ngClass]="head.tdClassList ? head.tdClassList : ''"
-              [nzEllipsis]="!head.notNeedEllipsis"
-              [nzIndentSize]="first ? item.level! * 20 : 0"
-              [nzLeft]="!!head.fixed && head.fixedDir === 'left'"
-              [nzRight]="!!head.fixed && head.fixedDir === 'right'"
-              [nzShowExpand]="first ? !!item.children : false"
-              [(nzExpand)]="item.expand"
-              (nzExpandChange)="collapse(mapOfExpandedData[data.id], item, $event)"
-            >
-              <ng-container *ngIf="head.tdTemplate; else rowTpl">
-                <ng-container *ngTemplateOutlet="head.tdTemplate; context: item"></ng-container>
-              </ng-container>
-              <ng-template #rowTpl>
-                <ng-container *ngIf="head.pipe; else noPipe">
-                  <span [title]="item | tableFiledPipe : head.field | map : head.pipe">{{ item | tableFiledPipe : head.field | map : head.pipe }}</span>
-                </ng-container>
-                <ng-template #noPipe>
-                  <ng-container>
-                    <span [title]="item | tableFiledPipe : head.field">{{ item | tableFiledPipe : head.field }}</span>
-                  </ng-container>
-                </ng-template>
-              </ng-template>
-            </td>
-          </ng-container>
-        </tr>
-      </ng-container>
-    </ng-container>
+    @for (data of _dataList; track data) {
+      @for (item of mapOfExpandedData[data.id]; track item; let rowIndex = $index) {
+        @if ((item.parent && item.parent.expand) || !item.parent) {
+          <tr>
+            @if (tableConfig.showCheckbox) {
+              <td
+                class="animate-bg-0"
+                nzEllipsis
+                [nzChecked]="item['_checked']"
+                [nzIndeterminate]="item['indeterminate']"
+                [nzLeft]="true"
+                (nzCheckedChange)="checkRowSingle($event, rowIndex, item)"
+              ></td>
+            }
+            @for (head of tableConfig.headers; track head; let headIndex = $index; let last = $last; let first = $first) {
+              @if (head.show === undefined || head.show === true) {
+                <td
+                  [ngClass]="head.tdClassList ? head.tdClassList : ''"
+                  [nzEllipsis]="!head.notNeedEllipsis"
+                  [nzIndentSize]="first ? item.level! * 20 : 0"
+                  [nzLeft]="!!head.fixed && head.fixedDir === 'left'"
+                  [nzRight]="!!head.fixed && head.fixedDir === 'right'"
+                  [nzShowExpand]="first ? !!item.children : false"
+                  [(nzExpand)]="item.expand"
+                  (nzExpandChange)="collapse(mapOfExpandedData[data.id], item, $event)"
+                >
+                  @if (head.tdTemplate) {
+                    <ng-container *ngTemplateOutlet="head.tdTemplate; context: item"></ng-container>
+                  } @else {
+                    @if (head.pipe) {
+                      <span [title]="item | tableFiledPipe: head.field | map: head.pipe">{{ item | tableFiledPipe: head.field | map: head.pipe }}</span>
+                    } @else {
+                      <ng-container>
+                        <span [title]="item | tableFiledPipe: head.field">{{ item | tableFiledPipe: head.field }}</span>
+                      </ng-container>
+                    }
+                  }
+                </td>
+              }
+            }
+          </tr>
+        }
+      }
+    }
   </tbody>
 </nz-table>

@@ -8,7 +8,10 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 // 动态组件
 export class DynamicComponent {
-  constructor(public component: Type<NzSafeAny>, public data: NzSafeAny) {}
+  constructor(
+    public component: Type<NzSafeAny>,
+    public data: NzSafeAny
+  ) {}
 }
 
 // select下拉

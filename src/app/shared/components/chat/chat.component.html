@@ -11,45 +11,48 @@
         </div>
         <div nz-col nzFlex="30px"></div>
       </div>
-      <ng-container *ngFor="let item of messageArray; let last = last">
-        <div *ngIf="item.dir === 'left'" class="m-t-20" nz-row>
-          <nz-avatar class="m-r-8" nz-col nzFlex="30px" nzIcon="user" nzSrc="assets/imgs/logo.svg"></nz-avatar>
-          <div class="m-t-0 p-8" nz-col nz-result-content nzFlex="1">
-            {{ item.msg }}
-          </div>
-          <div nz-col nzFlex="30px"></div>
-          {{ last ? scrollToBottom() : '' }}
-        </div>
-
-        <div *ngIf="item.dir === 'right'" class="m-t-20" nz-row>
-          <div nz-col nzFlex="30px"></div>
-          <!--有未读的样式-->
-          <div class="flex flex-coloum" nz-col nzFlex="1">
-            <div class="m-t-0 p-8 text-break" nz-result-content>
-              <span nz-typography>{{ item.msg }}</span>
-              {{ last ? scrollToBottom() : '' }}
+      @for (item of messageArray; track item; let last = $last) {
+        @if (item.dir === 'left') {
+          <div class="m-t-20" nz-row>
+            <nz-avatar class="m-r-8" nz-col nzFlex="30px" nzIcon="user" nzSrc="assets/imgs/logo.svg"></nz-avatar>
+            <div class="m-t-0 p-8" nz-col nz-result-content nzFlex="1">
+              {{ item.msg }}
             </div>
-            <span class="sp-12 text-right m-t-5" nz-typography nzType="secondary">{{ item.isReaded ? '已读' : '未读' }}</span>
+            <div nz-col nzFlex="30px"></div>
+            {{ last ? scrollToBottom() : '' }}
           </div>
+        }
 
-          <!--没有未读的样式-->
-          <!-- <div class="m-t-0 p-8 text-break" nz-result-content nz-col nzFlex="1">
+        @if (item.dir === 'right') {
+          <div class="m-t-20" nz-row>
+            <div nz-col nzFlex="30px"></div>
+            <!--有未读的样式-->
+            <div class="flex flex-coloum" nz-col nzFlex="1">
+              <div class="m-t-0 p-8 text-break" nz-result-content>
+                <span nz-typography>{{ item.msg }}</span>
+                {{ last ? scrollToBottom() : '' }}
+              </div>
+              <span class="sp-12 text-right m-t-5" nz-typography nzType="secondary">{{ item.isReaded ? '已读' : '未读' }}</span>
+            </div>
+
+            <!--没有未读的样式-->
+            <!-- <div class="m-t-0 p-8 text-break" nz-result-content nz-col nzFlex="1">
              <span nz-typography>{{item}}</span>{{last ? scrollToBottom() : ''}}
            </div>-->
 
-          <div nz-col nzFlex="8px"></div>
-          <nz-avatar nz-col nzFlex="30px" nzIcon="user" nzSrc="assets/imgs/default_face.png"></nz-avatar>
-        </div>
-      </ng-container>
+            <div nz-col nzFlex="8px"></div>
+            <nz-avatar nz-col nzFlex="30px" nzIcon="user" nzSrc="assets/imgs/default_face.png"></nz-avatar>
+          </div>
+        }
+      }
     </div>
   </nz-card>
   <ng-template #extraTemplate>
-    <ng-template [ngIf]="show" [ngIfElse]="notShow">
+    @if (show) {
       <i class="hand-model" nz-icon nzTheme="outline" nzType="shrink" (click)="show = !show"></i>
-    </ng-template>
-    <ng-template #notShow>
+    } @else {
       <i class="hand-model" nz-icon nzTheme="outline" nzType="arrows-alt" (click)="show = !show"></i>
-    </ng-template>
+    }
     <i class="hand-model m-l-8" nz-icon nzTheme="outline" nzType="close" (click)="close()"></i>
   </ng-template>
   <ng-template #titleTemplate>

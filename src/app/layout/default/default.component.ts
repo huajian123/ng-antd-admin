@@ -1,4 +1,4 @@
-import { NgIf, NgTemplateOutlet, AsyncPipe, NgClass, NgStyle, NgOptimizedImage } from '@angular/common';
+import { NgTemplateOutlet, AsyncPipe, NgClass, NgStyle, NgOptimizedImage } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, AfterViewInit, inject, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterOutlet } from '@angular/router';
@@ -37,7 +37,6 @@ import { ToolBarComponent } from './tool-bar/tool-bar.component';
   imports: [
     TopProgressBarComponent,
     NzLayoutModule,
-    NgIf,
     NgClass,
     NzNoAnimationModule,
     NgStyle,
@@ -47,7 +46,6 @@ import { ToolBarComponent } from './tool-bar/tool-bar.component';
     NzButtonModule,
     NzIconModule,
     AsyncPipe,
-    NgIf,
     SideNavComponent,
     NgTemplateOutlet,
     ToolBarComponent,
