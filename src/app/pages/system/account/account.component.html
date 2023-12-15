@@ -61,8 +61,7 @@
               <a class="collapse operate-text" (click)="toggleCollapse()">
                 @if (isCollapse) {
                   <span>展开</span>
-                }
-                @if (!isCollapse) {
+                } @else {
                   <span>收起</span>
                 }
                 <i nz-icon [nzType]="isCollapse ? 'down' : 'up'"></i>

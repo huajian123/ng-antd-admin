@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { inject, Inject, Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 
 /*
  * 顶部滚动pre服务

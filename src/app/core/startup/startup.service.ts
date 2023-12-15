@@ -2,7 +2,6 @@ import { inject, Injectable } from '@angular/core';
 
 import { TokenKey, TokenPre } from '@config/constant';
 import { LoginInOutService } from '@core/services/common/login-in-out.service';
-import { UserInfoService } from '@store/common-store/userInfo.service';
 
 import { WindowService } from '../services/common/window.service';
 
