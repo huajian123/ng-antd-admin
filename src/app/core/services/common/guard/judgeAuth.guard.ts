@@ -10,7 +10,6 @@ import { fnGetUUID } from '@utils/tools';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 import { Menu } from '../../types';
-import { WindowService } from '../window.service';
 
 // 有兴趣的可以看看class与fn的争议https://github.com/angular/angular/pull/47924
 // 我这里提供了跟judgeLogin.guard.ts的不同写法，供大家参考,也可以去官网查找mapToCanActivate 这个api，
@@ -25,7 +24,6 @@ export class JudgeAuthGuardService {
   destroyRef = inject(DestroyRef);
 
   constructor(
-    private windowSrc: WindowService,
     private loginOutService: LoginInOutService,
     private router: Router,
     private userInfoService: UserInfoService,
