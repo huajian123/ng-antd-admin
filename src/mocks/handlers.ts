@@ -1777,5 +1777,12 @@ export const handlers = [
       ]
     });
   }),
-  http.get(/.*\.(js|svg|css|png|woff2)$/, () => passthrough())
+  http.get(/.*\.(js|svg|css|jpg|png|woff2)$/, () => passthrough()),
+  http.get('https://vdata.amap.com/tiles', () => passthrough()),
+  http.get('https://restapi.amap.com/v3/log/init', () => passthrough()),
+  http.get('http://webapi.amap.com/count', () => passthrough()),
+  http.get('https://webapi.amap.com/count', () => passthrough()),
+  http.get('https://webapi.amap.com/theme/v1.3/openhand.cur', () => passthrough()),
+  http.get('https://webapi.amap.com/style2', () => passthrough()),
+  http.get('https://webapi.amap.com/maps', () => passthrough())
 ];
