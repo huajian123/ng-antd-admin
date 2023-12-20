@@ -76,6 +76,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
+    "msw": "^2.0.11",
     "prettier": "^3.1.0",
     "prettier-plugin-organize-attributes": "^1.0.0",
     "stylelint": "^14.6.0",
@@ -85,5 +86,8 @@
     "stylelint-declaration-block-no-ignored-properties": "^2.7.0",
     "stylelint-order": "^6.0.3",
     "typescript": "~5.2.2"
+  },
+  "msw": {
+    "workerDirectory": "src"
   }
 }

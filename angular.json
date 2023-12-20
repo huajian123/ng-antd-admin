@@ -54,7 +54,8 @@
                 "glob": "**/*",
                 "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
                 "output": "/assets/"
-              }
+              },
+              "src/mockServiceWorker.js"
             ],
             "styles": [
               "node_modules/driver.js/dist/driver.css",
@@ -136,10 +137,6 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "proxyConfig": "proxy.conf.json",
-            "buildTarget": "ng-ant-admin:build"
-          },
           "configurations": {
             "production": {
               "buildTarget": "ng-ant-admin:build:production"
