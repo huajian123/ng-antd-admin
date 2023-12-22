@@ -1,0 +1,13 @@
+diff --git a/node_modules/@angular-devkit/build-angular/src/tools/esbuild/stylesheets/less-language.js b/node_modules/@angular-devkit/build-angular/src/tools/esbuild/stylesheets/less-language.js
+index f6aa3c9..cd95e3c 100755
+--- a/node_modules/@angular-devkit/build-angular/src/tools/esbuild/stylesheets/less-language.js
++++ b/node_modules/@angular-devkit/build-angular/src/tools/esbuild/stylesheets/less-language.js
+@@ -46,7 +46,7 @@ exports.LessStylesheetLanguage = Object.freeze({
+     fileFilter: /\.less$/,
+     process(data, file, _, options, build) {
+         return compileString(data, file, options, build.resolve.bind(build),
+-        /* unsafeInlineJavaScript */ false);
++        /* unsafeInlineJavaScript */ true);
+     },
+ });
+ async function compileString(data, filename, options, resolver, unsafeInlineJavaScript) {

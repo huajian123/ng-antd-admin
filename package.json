@@ -11,7 +11,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "lint:fix": "eslint --fix --cache . --ext .ts,.html",
-    "lint:style": "npx stylelint \"src/**/*.less\" --fix"
+    "lint:style": "npx stylelint \"src/**/*.less\" --fix",
+    "postinstall": "patch-package"
   },
   "private": true,
   "dependencies": {
@@ -77,6 +78,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
     "msw": "^2.0.11",
+    "patch-package": "^8.0.0",
     "prettier": "^3.1.0",
     "prettier-plugin-organize-attributes": "^1.0.0",
     "stylelint": "^14.6.0",
