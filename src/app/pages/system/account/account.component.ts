@@ -66,7 +66,7 @@ export class AccountComponent implements OnInit {
   searchParam: Partial<SearchParam> = {};
   tableConfig!: AntTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
-    title: '账号管理(数据库每10分钟从备份恢复一次)',
+    title: '账号管理(此页面所有接口只mock了admin10这条账号的数据，所有请求入参，响应，请在控制台查看)',
     breadcrumb: ['首页', '用户管理', '账号管理']
   };
   dataList: User[] = [];
