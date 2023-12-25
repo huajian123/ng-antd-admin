@@ -180,6 +180,13 @@
               "src/**/*.html"
             ]
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "baseHref": "/ng-ant-admin/",
+            "noSilent": true
+          }
         }
       }
     }
