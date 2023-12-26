@@ -184,7 +184,7 @@
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
           "options": {
-            "baseHref": "/ng-ant-admin/",
+            "baseHref": "/ng-ant-admin-show/",
             "noSilent": true
           }
         }

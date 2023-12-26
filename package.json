@@ -6,7 +6,7 @@
     "start": "ng serve --o --port 4201",
     "ng-high-memory-start": "node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng serve",
     "prettier": "prettier --write \"src/**/*.ts\" \"src/**/*.html\" \"src/**/*.less\" \"src/**/*.json\"",
-    "build": "ng build --base-href=/ng-ant-admin/browser/",
+    "build": "ng build --base-href=/ng-ant-admin-show/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
