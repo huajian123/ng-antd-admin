@@ -4,9 +4,12 @@
 [![Angular](https://img.shields.io/badge/Build%20with-Angular%20CLI-red?logo=angular)](https://www.github.com/angular/angular)
 
 ## ✨前言
-- 本项目作为我为angular社区尽一点力所能及之力，希望大家喜欢这个模板，也希望更多的国内开发者能重新审视angular这一前端框架，我相信angular会越来越好，我也会一直维护下去，如果您有什么好的建议，可以加入qq群一起讨论，群号：376065816。
+- 本项目作为我为angular社区尽一点力所能及之力，希望大家喜欢这个模板，也希望更多的国内开发者能重新审视angular这一前端框架，特别是ng17以后的版本，我相信angular会越来越好，我也会一直维护下去，如果您有什么好的建议，可以加入qq群一起讨论，群号：376065816。
 - 本项目也有一点点教学性质，其中用到大量angular新特性，有详细的注释以及参考文章链接在代码中，大家可以看看源码，有问题与我讨论，有改进处可以提pr，我们一起进步
-
+- 在线地址[这里](https://huajian123.github.io/ng-ant-admin/browser/)
+- 国内镜像在线地址（2024年5月份后弃用，服务器太贵了，到时候换成码云的）[这里](http://1.117.181.242/)
+- [v17.1](https://github.com/huajian123/ng-ant-admin/releases/tag/v17.1.0)是最后一个采用真实接口的示例。在这之后的版本都采用mswjs来mock接口，但是仍然配套了java服务端相同接口与数据结构，可以配套使用，源码地址[这里](https://github.com/huajian123/ng-ant-admin-api)
+  
 ## ✨特性
 
 - 支持最新angular版本
@@ -21,37 +24,29 @@
 - <font color=red size=6>Standalone Components（module style is [here](https://github.com/huajian123/ng-ant-admin/releases/tag/v15.0)）</font>
 
 
-## 文档
+## ✨文档
 
 有关文档与示例，请访问 [doc](http://1.117.181.242:8081/)
 <br>
 <br>
-angular这1年来的更新，比以往几年来更新都多，api有不少写法不一致，所以未及时更新schematic，现在single只是开发者预览版，为了保证生产，我在ng16版本也没有使用，我想等api写法稳定后再更新schematic，如果你想用我提供的schematic，目前只能适配ng15版本的，采用module而不是独立组件的版本。
 
 # 项目介绍
 1.如果您用我的项目进行学习或者参考，请先确定您使用的是angular哪个版本，因为angular15后写法有部分不一样，所以我的建议是，您正在使用angular什么版本，则下载对应版本的ng-ant-admin,最新版本直接从master分支下载即可，历史版本在这个链接进行下载[这里](https://github.com/huajian123/ng-ant-admin/releases)。<br>
-1.If you use my project for study or reference, please first determine which version of angular you are using, because some of the writing methods are different after angular15, so my suggestion is, what version of angular are you using, then download the corresponding version of ng -ant-admin, the latest version can be downloaded directly from the master branch, and the historical version can be downloaded from this link [here](https://github.com/huajian123/ng-ant-admin/releases)。<br>
 <br>
 <br>
-2.账号admin，密码123456 ,系统管理菜单下都为真是api接口调用示例，数据库每10分钟从备份恢复一次<br>
-2.Account admin, password 123456, under the system management menu are real api interface call examples, the database is restored from backup every 10 minutes<br>
+2.[v17.1](https://github.com/huajian123/ng-ant-admin/releases/tag/v17.1.0)这个版本前，系统管理菜单下都为真实api接口调用示例。账号admin，密码123456 ,，数据库每10分钟从备份恢复一次<br>
+之后的版本接口均为mswjs,mock数据<br>
 <br>
 <br>
-3.默认登录超时时间为1h，上传，下载，websocket，系统管理模块均为真实接口调用展示。<br>
-3.The default login timeout is 1h, upload, download, websocket, and system management modules are all real interface call display。<br>
+3.上传，下载，websocket，系统管理模块均为真实接口调用展示。<br>
 <br>
 <br>
 4.完成最常用的权限控制，人员账号管理，角色管理，菜单管理，登录超时等。添加了大量业务示例，开箱即用。<br>
-4.Complete the most commonly used permission control, personnel account management, role management, menu management, login timeout, etc. Added a lot of business examples, out of the box。<br>
 <br>
-<br>
-5.使用本项目遇到问题，可以加入376065816 qq群号与我沟通。<br>
-5.If you encounter problems using this project, you can join the 376065816 qq group number to communicate with me。<br>
 <br>
 <br>
 快速二开使用详解 [快速二开使用详解](https://www.bilibili.com/video/BV1gF411x7rN/)<br>
 项目搭建简易教程 [项目搭建简易教程](https://www.bilibili.com/video/BV1EM4y1w7zd/)<br>
-online demo地址 [demo](http://1.117.181.242/)<br>
 纯净版项目地址 [pure](https://gitee.com/hjxiaoqianduan/ng-ant-admin-pure/)<br>
 pure project address [pure](https://gitee.com/hjxiaoqianduan/ng-ant-admin-pure/)<br>
 服务端源码地址 [serviceApi](https://github.com/huajian123/ng-ant-admin-api)<br>
