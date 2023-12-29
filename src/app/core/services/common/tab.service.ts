@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, Params, Router, UrlSegment } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -23,8 +23,8 @@ export class TabService {
   private tabArray$ = new BehaviorSubject<TabModel[]>([]);
   private tabArray: TabModel[] = [];
   private currSelectedIndexTab = 0;
-
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+  private router = inject(Router);
+  private activatedRoute = inject(ActivatedRoute);
 
   getTabArray$(): Observable<TabModel[]> {
     return this.tabArray$.asObservable();
@@ -43,22 +43,22 @@ export class TabService {
     this.setTabsSourceData();
   }
 
-  addTab(param: TabModel, isNewTabDetailPage = false): void {
+  addTab(tabModel: TabModel, isNewTabDetailPage = false): void {
     this.tabArray.forEach(tab => {
       // 列表详情操作，例如用户表单点击详情，在当前tab中打开这个详情，可以看在线示例：“查询表格”与表格中的“查看按钮”
       // title需和用户表单详情组件路由的title相同
-      if (tab.title === param.title && !isNewTabDetailPage) {
+      if (tab.title === tabModel.title && !isNewTabDetailPage) {
         // 将每个tab下的组件快照存入tab数组中，下面做了去重操作
-        tab.snapshotArray = _.uniqBy([...tab.snapshotArray, ...param.snapshotArray], item => {
+        tab.snapshotArray = _.uniqBy([...tab.snapshotArray, ...tabModel.snapshotArray], item => {
           // @ts-ignore
           return item['_routerState'].url;
         });
         // 当前页中打开详情时，需要将对应的tab的path替换掉
-        tab.path = param.path;
+        tab.path = tabModel.path;
       }
     });
-    if (!this.tabArray.find(value => value.path === param.path)) {
-      this.tabArray.push(param);
+    if (!this.tabArray.find(value => value.path === tabModel.path)) {
+      this.tabArray.push(tabModel);
     }
     this.setTabsSourceData();
   }
@@ -224,7 +224,7 @@ export class TabService {
       params = snapshot.params;
       // @ts-ignore
       urlWithOutParam = this.getCurrentPathWithoutParam(snapshot['_urlSegment'].segments, params);
-      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigateByUrl('/blank/global-loading', { skipLocationChange: true }).then(() => {
         SimpleReuseStrategy.deleteRouteSnapshot(key);
         this.router.navigate([urlWithOutParam, ...Object.values(params)]);
       });
@@ -234,7 +234,7 @@ export class TabService {
       const sourceUrl = this.router.url;
       const currentRoute = fnGetPathWithoutParam(sourceUrl);
       // 是query传参
-      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigateByUrl('/blank/global-loading', { skipLocationChange: true }).then(() => {
         SimpleReuseStrategy.deleteRouteSnapshot(key);
         this.router.navigate([currentRoute], { queryParams: params });
       });

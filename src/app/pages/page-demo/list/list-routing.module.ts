@@ -1,17 +1,10 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Route } from '@angular/router';
 
-const routes: Routes = [
+export default [
   { path: '', redirectTo: 'search-table', pathMatch: 'full' },
-  { path: 'search-table', loadChildren: () => import('./search-table/search-table.module').then(m => m.SearchTableModule) },
-  { path: 'standard-table', loadChildren: () => import('./standard-table/standard-table.module').then(m => m.StandardTableModule) },
-  { path: 'tree-list', loadChildren: () => import('./tree-list/tree-list.module').then(m => m.TreeListModule) },
-  { path: 'card-table', loadChildren: () => import('./card-table/card-table.module').then(m => m.CardTableModule) },
-  { path: 'search-list', loadChildren: () => import('./search-list/search-list.module').then(m => m.SearchListModule) }
-];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
-})
-export class ListRoutingModule {}
+  { path: 'search-table', loadChildren: () => import('./search-table/search-table-routing') },
+  { path: 'standard-table', title: '标准表格', data: { key: 'standard-table' }, loadComponent: () => import('./standard-table/standard-table.component').then(m => m.StandardTableComponent) },
+  { path: 'tree-list', title: '树状表格', data: { key: 'tree-list' }, loadComponent: () => import('./tree-list/tree-list.component').then(m => m.TreeListComponent) },
+  { path: 'card-table', title: '卡片列表', data: { key: 'card-table' }, loadComponent: () => import('./card-table/card-table.component').then(m => m.CardTableComponent) },
+  { path: 'search-list', loadChildren: () => import('./search-list/search-list-routing') }
+] as Route[];

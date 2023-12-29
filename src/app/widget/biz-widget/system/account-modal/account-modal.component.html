@@ -5,12 +5,14 @@
       <input id="userName" formControlName="userName" nz-input placeholder="用户名" />
     </nz-form-control>
   </nz-form-item>
-  <nz-form-item *ngIf="!isEdit">
-    <nz-form-label nzFor="roleId" nzRequired [nzSm]="4" [nzXs]="24">密码</nz-form-label>
-    <nz-form-control nzExtra="新建用户初始密码为：a123456" [nzErrorTip]="combineTpl" [nzSm]="18" [nzXs]="24">
-      <input formControlName="password" nz-input placeholder="密码" [type]="'password'" />
-    </nz-form-control>
-  </nz-form-item>
+  @if (!isEdit) {
+    <nz-form-item>
+      <nz-form-label nzFor="roleId" nzRequired [nzSm]="4" [nzXs]="24">密码</nz-form-label>
+      <nz-form-control nzExtra="新建用户初始密码为：a123456" [nzErrorTip]="combineTpl" [nzSm]="18" [nzXs]="24">
+        <input formControlName="password" nz-input placeholder="密码" [type]="'password'" />
+      </nz-form-control>
+    </nz-form-item>
+  }
   <nz-form-item>
     <nz-form-label nzFor="sex" nzRequired [nzSm]="4" [nzXs]="24">性别</nz-form-label>
     <nz-form-control [nzErrorTip]="combineTpl" [nzSm]="18" [nzXs]="24">
@@ -60,12 +62,18 @@
     <nz-form-label nzFor="roleId" nzRequired [nzSm]="4" [nzXs]="24">用户角色</nz-form-label>
     <nz-form-control [nzErrorTip]="combineTpl" [nzSm]="18" [nzXs]="24">
       <nz-select formControlName="roleId" nzMode="multiple" nzPlaceHolder="角色">
-        <nz-option *ngFor="let option of roleOptions" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+        @for (option of roleOptions; track option) {
+          <nz-option [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+        }
       </nz-select>
     </nz-form-control>
   </nz-form-item>
 </form>
 <ng-template #combineTpl let-control>
-  <ng-container *ngIf="control.hasError('message')">{{ control.errors.message }}</ng-container>
-  <ng-container *ngIf="control.hasError('required')">必填项</ng-container>
+  @if (control.hasError('message')) {
+    {{ control.errors.message }}
+  }
+  @if (control.hasError('required')) {
+    必填项
+  }
 </ng-template>

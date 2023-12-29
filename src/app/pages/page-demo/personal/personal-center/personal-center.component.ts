@@ -1,7 +1,20 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AdComponent, DynamicComponent } from '@core/services/types';
 import { AdDirective } from '@shared/directives/ad.directive';
+import { NumberLoopPipe } from '@shared/pipes/number-loop.pipe';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzNoAnimationModule } from 'ng-zorro-antd/core/no-animation';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzTagModule } from 'ng-zorro-antd/tag';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
 
 import { ApplicationComponent } from './application/application.component';
 import { ArticleComponent } from './article/article.component';
@@ -16,7 +29,24 @@ interface TabInterface {
   selector: 'app-personal-center',
   templateUrl: './personal-center.component.html',
   styleUrls: ['./personal-center.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    NzGridModule,
+    NzCardModule,
+    NzAvatarModule,
+    NzTypographyModule,
+    NzIconModule,
+    NzButtonModule,
+    NzDividerModule,
+    NzTagModule,
+    NzNoAnimationModule,
+    NzInputModule,
+    FormsModule,
+    NzTabsModule,
+    AdDirective,
+    NumberLoopPipe
+  ]
 })
 export class PersonalCenterComponent implements OnInit {
   tagArray: string[] = ['很有想法的', '专注设计', '大长腿', '川妹子', '海纳百川'];

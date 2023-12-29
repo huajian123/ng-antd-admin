@@ -1,13 +1,15 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NzIconModule, NzButtonModule, RouterOutlet]
 })
-export class LoginComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
-}
+export class LoginComponent {}

@@ -1,24 +1,30 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, Inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 
-import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzScrollService } from 'ng-zorro-antd/core/services';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzGridModule } from 'ng-zorro-antd/grid';
 
 /*https://segmentfault.com/a/1190000020769492*/
 @Component({
   selector: 'app-play-scroll',
   templateUrl: './play-scroll.component.html',
   styleUrls: ['./play-scroll.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [PageHeaderComponent, NzCardModule, NzGridModule, NzButtonModule, NzWaveModule]
 })
-export class PlayScrollComponent implements OnInit {
+export class PlayScrollComponent {
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '玩弄滚动条',
     breadcrumb: ['首页', '拓展功能', '玩弄滚动条'],
     desc: '传说有一位少年骑着电驴去买瓜'
   };
-
-  constructor(private scrollService: NzScrollService, @Inject(DOCUMENT) private _doc: Document) {}
+  private scrollService = inject(NzScrollService);
+  private _doc = inject(DOCUMENT);
 
   toDocBottom(): void {
     this.scrollService.scrollTo(null, this._doc.body.scrollHeight);
@@ -39,6 +45,4 @@ export class PlayScrollComponent implements OnInit {
   toDocHead(): void {
     this.scrollService.scrollTo(null, 0);
   }
-
-  ngOnInit(): void {}
 }

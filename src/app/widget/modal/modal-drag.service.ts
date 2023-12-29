@@ -1,5 +1,5 @@
 import { DragDrop, DragRef } from '@angular/cdk/drag-drop';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { ModalTypes, NzModalService } from 'ng-zorro-antd/modal';
@@ -7,10 +7,14 @@ import { ModalTypes, NzModalService } from 'ng-zorro-antd/modal';
 /**
  * 对话框拖动服务
  */
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ModalDragService {
   static readonly DRAG_CLS_PREFIX = 'NZ-MODAL-WRAP-CLS-';
-  constructor(public modal: NzModalService, public dragDrop: DragDrop) {}
+
+  modal = inject(NzModalService);
+  dragDrop = inject(DragDrop);
 
   /**
    * 创建拖拽手柄
@@ -30,7 +34,7 @@ export class ModalDragService {
   /**
    * 获取随机类名
    */
-  getRandomCls() {
+  getRandomCls(): string {
     return ModalDragService.DRAG_CLS_PREFIX + Date.now() + Math.random().toString().replace('0.', '');
   }
 

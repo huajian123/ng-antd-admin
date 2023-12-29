@@ -1,4 +1,12 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NzTableModule } from 'ng-zorro-antd/table';
 interface ItemData {
   id: string;
   name: string;
@@ -9,7 +17,9 @@ interface ItemData {
 @Component({
   selector: 'app-user-member-manage',
   templateUrl: './user-member-manage.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NzTableModule, NzInputModule, FormsModule, NzPopconfirmModule, NzButtonModule, NzWaveModule, NzIconModule]
 })
 export class UserMemberManageComponent implements OnInit {
   // 表格

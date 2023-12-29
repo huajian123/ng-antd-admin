@@ -1,20 +1,32 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgClass } from '@angular/common';
+import { Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ValidatorsService } from '@core/services/validators/validators.service';
 import { fnCheckForm } from '@utils/tools';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzUploadChangeParam, NzUploadModule } from 'ng-zorro-antd/upload';
 
 @Component({
   selector: 'app-base',
   templateUrl: './base.component.html',
   styleUrls: ['./base.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NzGridModule, FormsModule, NzFormModule, ReactiveFormsModule, NzInputModule, NzSelectModule, NzButtonModule, NzWaveModule, NgClass, NzAvatarModule, NzUploadModule, NzIconModule]
 })
 export class BaseComponent implements OnInit {
-  @Input() data!: { label: string };
+  @Input({ required: true }) data!: { label: string };
   validateForm!: FormGroup;
   selectedProvince = 'Zhejiang';
   selectedCity = 'Hangzhou';
@@ -25,8 +37,13 @@ export class BaseComponent implements OnInit {
     Zhejiang: ['Hangzhou', 'Ningbo', 'Wenzhou'],
     Jiangsu: ['Nanjing', 'Suzhou', 'Zhenjiang']
   };
+  destroyRef = inject(DestroyRef);
 
-  constructor(private fb: FormBuilder, private msg: NzMessageService, private validatorsService: ValidatorsService, private breakpointObserver: BreakpointObserver, private cdr: ChangeDetectorRef) {}
+  private fb = inject(FormBuilder);
+  private msg = inject(NzMessageService);
+  private validatorsService = inject(ValidatorsService);
+  private breakpointObserver = inject(BreakpointObserver);
+  private cdr = inject(ChangeDetectorRef);
 
   provinceChange(value: string): void {
     this.selectedCity = this.cityData[value][0];
@@ -66,16 +83,19 @@ export class BaseComponent implements OnInit {
   }
 
   obBreakPoint(): void {
-    this.breakpointObserver.observe(['(max-width: 1200px)']).subscribe(result => {
-      if (result.matches) {
-        this.formOrder = 1;
-        this.avatarOrder = 0;
-      } else {
-        this.formOrder = 0;
-        this.avatarOrder = 1;
-      }
-      this.cdr.markForCheck();
-    });
+    this.breakpointObserver
+      .observe(['(max-width: 1200px)'])
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(result => {
+        if (result.matches) {
+          this.formOrder = 1;
+          this.avatarOrder = 0;
+        } else {
+          this.formOrder = 0;
+          this.avatarOrder = 1;
+        }
+        this.cdr.markForCheck();
+      });
   }
 
   ngOnInit(): void {

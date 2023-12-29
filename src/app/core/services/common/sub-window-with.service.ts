@@ -1,5 +1,6 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Injectable } from '@angular/core';
+import { DestroyRef, inject, Injectable } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { switchMap } from 'rxjs/operators';
 
 import { SideCollapsedMaxWidth, TopCollapsedMaxWidth } from '@config/constant';
@@ -19,8 +20,10 @@ export class SubWindowWithService {
     '(min-width: 1200px) and (max-width: 1599.98px)': [EquipmentWidth.xl, [1200, 1599.98]],
     '(min-width: 1600px)': [EquipmentWidth.xxl, [1600, 9999]]
   };
-
-  constructor(private winWidthService: WindowsWidthService, private breakpointObserver: BreakpointObserver, private themesService: ThemeService) {}
+  private destroyRef = inject(DestroyRef);
+  private winWidthService = inject(WindowsWidthService);
+  private breakpointObserver = inject(BreakpointObserver);
+  private themesService = inject(ThemeService);
 
   // 监听主题（是top，还是side），确定over模式最小宽度
   subWidthForTheme(): void {
@@ -29,14 +32,15 @@ export class SubWindowWithService {
       .pipe(
         switchMap(res => {
           let maxWidth = '';
-          if (res.mode === 'side' || (res.mode === 'mixi' && !res.splitNav)) {
+          if (res.mode === 'side' || (res.mode === 'mixin' && !res.splitNav)) {
             maxWidth = `(max-width: ${SideCollapsedMaxWidth}px)`;
-          } else if (res.mode === 'top' || (res.mode === 'mixi' && res.splitNav)) {
+          } else if (res.mode === 'top' || (res.mode === 'mixin' && res.splitNav)) {
             maxWidth = `(max-width: ${TopCollapsedMaxWidth}px)`;
           }
           // 可以入参[Breakpoints.Small, Breakpoints.XSmall]
           return this.breakpointObserver.observe([maxWidth]);
-        })
+        }),
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe(result => {
         const isOverMode = result.matches;
@@ -61,13 +65,16 @@ export class SubWindowWithService {
 
   // 监听浏览器宽度用于通用的栅格系统
   subWidthForStore(): void {
-    this.breakpointObserver.observe(Object.keys(this.subWidthObj)).subscribe(res => {
-      Object.keys(res.breakpoints).forEach(item => {
-        if (res.breakpoints[item]) {
-          this.winWidthService.setWindowWidthStore(this.subWidthObj[item][0]);
-        }
+    this.breakpointObserver
+      .observe(Object.keys(this.subWidthObj))
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(res => {
+        Object.keys(res.breakpoints).forEach(item => {
+          if (res.breakpoints[item]) {
+            this.winWidthService.setWindowWidthStore(this.subWidthObj[item][0]);
+          }
+        });
       });
-    });
   }
 
   subWindowWidth(): void {

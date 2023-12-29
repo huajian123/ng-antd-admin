@@ -1,15 +1,32 @@
 import { DOCUMENT } from '@angular/common';
-import { Inject } from '@angular/core';
+import { DestroyRef, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRouteSnapshot, DetachedRouteHandle, RouteReuseStrategy } from '@angular/router';
 
 import { ScrollService } from '@core/services/common/scroll.service';
-import { fnGetReuseStrategyKeyFn } from '@utils/tools';
+import { ThemeService } from '@store/common-store/theme.service';
+import { fnGetReuseStrategyKeyFn, getDeepReuseStrategyKeyFn } from '@utils/tools';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
+export type ReuseHookTypes = '_onReuseInit' | '_onReuseDestroy';
+
+export interface ReuseComponentInstance {
+  _onReuseInit: () => void;
+  _onReuseDestroy: () => void;
+}
+
+export interface ReuseComponentRef {
+  instance: ReuseComponentInstance;
+}
 
 /*路由复用*/
 // 参考https://zhuanlan.zhihu.com/p/29823560
 // https://blog.csdn.net/weixin_30561425/article/details/96985967?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control
 export class SimpleReuseStrategy implements RouteReuseStrategy {
+  destroyRef = inject(DestroyRef);
+  private readonly doc = inject(DOCUMENT);
+  private readonly scrollService = inject(ScrollService);
+
   // 缓存每个component的map
   static handlers: { [key: string]: NzSafeAny } = {};
   // 缓存每个页面的scroll位置,为啥不放在handlers里面呢,因为路由离开时路由复用导致以当前页为key为null了
@@ -18,6 +35,9 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
   // 这个参数的目的是，在当前页签中点击删除按钮，虽然页签关闭了，但是在路由离开的时候，还是会将已经关闭的页签的组件缓存，
   // 用这个参数来记录，是否需要缓存当前路由
   public static waitDelete: string | null;
+
+  // 是否有多页签，没有多页签则不做路由缓存
+  isShowTab$ = inject(ThemeService).getThemesMode();
 
   public static deleteRouteSnapshot(key: string): void {
     if (SimpleReuseStrategy.handlers[key]) {
@@ -29,11 +49,25 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
     }
   }
 
-  constructor(@Inject(DOCUMENT) private doc: Document, private scrollService: ScrollService) {}
+  // 删除全部的缓存，在退出登录，不使用多标签 等操作中需要用到
+  public static deleteAllRouteSnapshot(route: ActivatedRouteSnapshot): Promise<void> {
+    return new Promise(resolve => {
+      Object.keys(SimpleReuseStrategy.handlers).forEach(key => {
+        SimpleReuseStrategy.deleteRouteSnapshot(key);
+      });
+      SimpleReuseStrategy.waitDelete = getDeepReuseStrategyKeyFn(route);
+      resolve();
+    });
+  }
 
   // 是否允许复用路由
   shouldDetach(route: ActivatedRouteSnapshot): boolean {
-    return route.data['shouldDetach'] !== 'no';
+    // 是否展示多页签，如果不展示多页签，则不做路由复用
+    let isShowTab = false;
+    this.isShowTab$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => {
+      isShowTab = res.isShowTab;
+    });
+    return route.data['shouldDetach'] !== 'no' && isShowTab;
   }
 
   // 当路由离开时会触发，存储路由
@@ -59,8 +93,8 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
       scrollContain.forEach((item: string) => {
         const el = this.doc.querySelector(item)!;
         if (el) {
-          const postion = this.scrollService.getScrollPosition(el);
-          innerScrollContainer.push({ [item]: postion });
+          const position = this.scrollService.getScrollPosition(el);
+          innerScrollContainer.push({ [item]: position });
         }
       });
       innerScrollContainer.push({ window: this.scrollService.getScrollPosition() });
@@ -124,15 +158,4 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
     }
     (fn as () => void).call(compThis);
   }
-}
-
-export type ReuseHookTypes = '_onReuseInit' | '_onReuseDestroy';
-
-export interface ReuseComponentInstance {
-  _onReuseInit: () => void;
-  _onReuseDestroy: () => void;
-}
-
-export interface ReuseComponentRef {
-  instance: ReuseComponentInstance;
 }

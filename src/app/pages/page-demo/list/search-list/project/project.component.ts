@@ -1,14 +1,45 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { NgStyle } from '@angular/common';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
+import { WaterMarkComponent } from '@shared/components/water-mark/water-mark.component';
+import { NumberLoopPipe } from '@shared/pipes/number-loop.pipe';
 import { SearchListStoreService } from '@store/biz-store-service/search-list/search-list-store.service';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzTagModule } from 'ng-zorro-antd/tag';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
 
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
   styleUrls: ['./project.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    NzCardModule,
+    WaterMarkComponent,
+    NzGridModule,
+    NgStyle,
+    NzTagModule,
+    NzIconModule,
+    NzButtonModule,
+    NzDividerModule,
+    NzSelectModule,
+    FormsModule,
+    NzTypographyModule,
+    NzAvatarModule,
+    NzToolTipModule,
+    NumberLoopPipe
+  ]
 })
-export class ProjectComponent implements OnInit {
+export class ProjectComponent {
   expanded = false;
   allSelFlag = false;
   searchInfo = {
@@ -30,8 +61,9 @@ export class ProjectComponent implements OnInit {
     { name: '类目十一', isChecked: false },
     { name: '类目十二', isChecked: false }
   ];
+  private searchListService = inject(SearchListStoreService);
 
-  constructor(private searchListService: SearchListStoreService) {
+  constructor() {
     this._onReuseInit();
   }
 
@@ -46,6 +78,4 @@ export class ProjectComponent implements OnInit {
   _onReuseInit(): void {
     this.searchListService.setCurrentSearchListComponentStore('搜索列表（项目）');
   }
-
-  ngOnInit(): void {}
 }

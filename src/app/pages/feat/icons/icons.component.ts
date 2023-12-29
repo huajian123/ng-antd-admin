@@ -1,9 +1,15 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { MatIconRegistry } from '@angular/material/icon';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatIconRegistry, MatIconModule } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 
-import { DestroyService } from '@core/services/common/destory.service';
-import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { IconSelComponent } from '@shared/biz-components/icon-sel/icon-sel.component';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
 
 const THUMBUP_ICON =
   `
@@ -20,7 +26,8 @@ const THUMBUP_ICON =
   templateUrl: './icons.component.html',
   styleUrls: ['./icons.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DestroyService]
+  standalone: true,
+  imports: [PageHeaderComponent, NzCardModule, NzButtonModule, NzWaveModule, NzInputModule, FormsModule, IconSelComponent, NzIconModule, MatIconModule]
 })
 export class IconsComponent {
   pageHeaderInfo: Partial<PageHeaderType> = {
@@ -31,10 +38,13 @@ export class IconsComponent {
   seletedIcon = '';
   visible = false;
 
-  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+  private iconRegistry = inject(MatIconRegistry);
+  private sanitizer = inject(DomSanitizer);
+
+  constructor() {
     // Note that we provide the icon here as a string literal here due to a limitation in
     // Stackblitz. If you want to provide the icon from a URL, you can use:
     // `iconRegistry.addSvgIcon('thumbs-up', sanitizer.bypassSecurityTrustResourceUrl('icon.svg'));`
-    iconRegistry.addSvgIconLiteral('thumbs-up', sanitizer.bypassSecurityTrustHtml(THUMBUP_ICON));
+    this.iconRegistry.addSvgIconLiteral('thumbs-up', this.sanitizer.bypassSecurityTrustHtml(THUMBUP_ICON));
   }
 }

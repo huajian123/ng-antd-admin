@@ -1,9 +1,15 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+import { NzListModule } from 'ng-zorro-antd/list';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
 
 @Component({
   selector: 'app-notice',
   templateUrl: './notice.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NzListModule, NzSwitchModule, FormsModule]
 })
 export class NoticeComponent implements OnInit {
   i: {
@@ -15,8 +21,9 @@ export class NoticeComponent implements OnInit {
     messages: true,
     todo: true
   };
+  @Input({ required: true }) data!: { label: string };
 
-  constructor() {}
-
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.data);
+  }
 }

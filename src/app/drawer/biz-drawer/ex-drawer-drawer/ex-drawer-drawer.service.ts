@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { DrawerWrapService } from '@app/drawer/base-drawer';
@@ -10,7 +10,7 @@ import { NzDrawerOptions } from 'ng-zorro-antd/drawer';
   providedIn: 'root'
 })
 export class ExDrawerDrawerService {
-  constructor(private drawerWrapService: DrawerWrapService) {}
+  private drawerWrapService = inject(DrawerWrapService);
 
   protected getContentComponent(): NzSafeAny {
     return ExDrawerDrawerComponent;

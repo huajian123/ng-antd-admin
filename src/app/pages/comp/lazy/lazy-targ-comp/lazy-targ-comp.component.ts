@@ -1,7 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy, NgModule, Input, Output, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, SimpleChanges, OnChanges, inject, DestroyRef } from '@angular/core';
 
-import { DestroyService } from '@core/services/common/destory.service';
-import { SharedModule } from '@shared/shared.module';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 
 export enum LazySelPeopleEnum {
   'Yanzu',
@@ -15,15 +17,15 @@ export enum LazySelPeopleEnum {
   templateUrl: './lazy-targ-comp.component.html',
   styleUrls: ['./lazy-targ-comp.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DestroyService]
+  standalone: true,
+  imports: [NzCardModule, NzAvatarModule, NzButtonModule, NzWaveModule]
 })
-export class LazyTargCompComponent implements OnInit, OnChanges {
+export class LazyTargCompComponent implements OnChanges {
   @Input() purChoosePeople: LazySelPeopleEnum = LazySelPeopleEnum.YiLin;
   @Output() readonly currentPeople = new EventEmitter<LazySelPeopleEnum>();
   lazySelPeopleEnum = LazySelPeopleEnum;
   disabled = true;
-
-  constructor(public destroy$: DestroyService) {}
+  destroyRef = inject(DestroyRef);
 
   // 选择明星
   choosePeople(people: LazySelPeopleEnum): void {
@@ -32,13 +34,7 @@ export class LazyTargCompComponent implements OnInit, OnChanges {
     this.disabled = false;
   }
 
-  ngOnInit(): void {}
-
-  ngOnChanges(changes: SimpleChanges): void {}
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+  }
 }
-
-@NgModule({
-  declarations: [LazyTargCompComponent],
-  imports: [SharedModule]
-})
-class LazyTargCompModule {}

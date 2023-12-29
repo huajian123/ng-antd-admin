@@ -1,10 +1,18 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import { NgStyle } from '@angular/common';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Input, Output, EventEmitter, AfterViewInit, inject, DestroyRef, booleanAttribute } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
-import { DestroyService } from '@core/services/common/destory.service';
 import { zorroIcons } from '@shared/biz-components/icon-sel/zorro-icons';
 import { fnKebabCase } from '@utils/camelFn';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
 
 interface IconItem {
   icon: string;
@@ -15,13 +23,14 @@ interface IconItem {
   selector: 'app-icon-sel',
   templateUrl: './icon-sel.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DestroyService]
+  standalone: true,
+  imports: [NzIconModule, NzButtonModule, NzPopoverModule, NzInputModule, NzCardModule, NgStyle, NzEmptyModule, NzPaginationModule]
 })
 export class IconSelComponent implements OnInit, AfterViewInit {
-  @Input() visible = false;
+  @Input({ transform: booleanAttribute }) visible = false;
   // 做图标搜索防抖
   private searchText$ = new Subject<string>();
-  seletedIcon = '';
+  selectedIcon = '';
   @Output() readonly selIcon = new EventEmitter<string>();
   // 分页信息
   pageObj = {
@@ -35,8 +44,11 @@ export class IconSelComponent implements OnInit, AfterViewInit {
   gridStyle = {
     width: '20%'
   };
+  destroyRef = inject(DestroyRef);
 
-  constructor(private cdr: ChangeDetectorRef, private destroy$: DestroyService) {
+  private cdr = inject(ChangeDetectorRef);
+
+  constructor() {
     zorroIcons.forEach(item => {
       this.sourceIconsArray.push({ icon: fnKebabCase(item), isChecked: false });
     });
@@ -48,11 +60,10 @@ export class IconSelComponent implements OnInit, AfterViewInit {
   }
 
   selIconFn(item: IconItem): void {
-    this.seletedIcon = item.icon;
-    this.sourceIconsArray.forEach(icon => (icon.isChecked = false));
-    this.iconsStrShowArray.forEach(icon => (icon.isChecked = false));
-    this.iconsStrAllArray.forEach(icon => (icon.isChecked = false));
-
+    this.selectedIcon = item.icon;
+    [this.sourceIconsArray, this.iconsStrShowArray, this.iconsStrAllArray].forEach(item => {
+      item.forEach(icon => (icon.isChecked = false));
+    });
     item.isChecked = true;
     this.selIcon.emit(item.icon);
   }
@@ -74,7 +85,7 @@ export class IconSelComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.searchText$.pipe(debounceTime(200), distinctUntilChanged(), takeUntil(this.destroy$)).subscribe(res => {
+    this.searchText$.pipe(debounceTime(200), distinctUntilChanged(), takeUntilDestroyed(this.destroyRef)).subscribe(res => {
       this.iconsStrAllArray = this.sourceIconsArray.filter(item => item.icon.includes(res));
       this.getData();
       this.cdr.markForCheck();

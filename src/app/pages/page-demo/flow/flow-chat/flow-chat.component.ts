@@ -1,15 +1,24 @@
 import { Component, OnInit, ChangeDetectionStrategy, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 
-import { Addon, Graph } from '@antv/x6';
-import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { Graph } from '@antv/x6';
+import { Dnd } from '@antv/x6-plugin-dnd';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzResultModule } from 'ng-zorro-antd/result';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 
 @Component({
   selector: 'app-flow-chat',
   templateUrl: './flow-chat.component.html',
   styleUrls: ['./flow-chat.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [PageHeaderComponent, NzCardModule, NzResultModule, NzGridModule, NzButtonModule, NzToolTipModule, NzIconModule]
 })
-export class FlowChatComponent implements OnInit, AfterViewInit {
+export class FlowChatComponent implements AfterViewInit {
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '流程编辑器，有了流程图，我就该知道未来该做什么了',
     breadcrumb: ['首页', '扩展功能', '图形编辑器', '流程图'],
@@ -38,15 +47,11 @@ export class FlowChatComponent implements OnInit, AfterViewInit {
     }
   };
 
-  constructor() {}
-
-  ngOnInit(): void {}
-
   drag(event: MouseEvent): void {
     const target = event.currentTarget as HTMLElement;
     const shap = target.getAttribute('shap')!;
 
-    const dnd = new Addon.Dnd({
+    const dnd = new Dnd({
       target: this.graph
     });
 

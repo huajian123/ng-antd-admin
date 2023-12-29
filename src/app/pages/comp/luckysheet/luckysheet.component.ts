@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, AfterViewInit, inject } from '@angular/core';
 
 import { LazyService } from '@core/services/common/lazy.service';
 
@@ -6,12 +6,11 @@ import { LazyService } from '@core/services/common/lazy.service';
   selector: 'app-luckysheet',
   templateUrl: './luckysheet.component.html',
   styleUrls: ['./luckysheet.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true
 })
-export class LuckysheetComponent implements OnInit, AfterViewInit {
-  constructor(private lazyService: LazyService) {}
-
-  ngOnInit(): void {}
+export class LuckysheetComponent implements AfterViewInit {
+  private lazyService = inject(LazyService);
 
   ngAfterViewInit(): void {
     this.lazyService

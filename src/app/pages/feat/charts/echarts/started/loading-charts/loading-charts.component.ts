@@ -1,17 +1,22 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { EChartsOption } from 'echarts/types/dist/echarts';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 @Component({
   selector: 'app-loading-charts',
   template: `
     <div class="button-groups">
-      <button (click)="isLoading = !isLoading" nz-button nzType="default">Toggle Loading</button>
+      <button nz-button nzType="default" (click)="isLoading = !isLoading">Toggle Loading</button>
     </div>
-    <div echarts [options]="options" [loading]="isLoading" theme="macarons" class="demo-chart"></div>
+    <div class="demo-chart" echarts theme="macarons" [loading]="isLoading" [options]="options"></div>
   `,
   styles: [],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NzButtonModule, NzWaveModule, NgxEchartsModule]
 })
 export class LoadingChartsComponent {
   isLoading = false;

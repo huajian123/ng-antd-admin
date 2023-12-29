@@ -1,7 +1,8 @@
 /*
 使用方法：
 accidentTypeOptions: OptionsInterface[];
-this.accidentTypeOptions = [...MapPipe.transformMapToArray(MapSet.accidentType)];*/
+this.accidentTypeOptions = [...MapPipe.transformMapToArray(MapSet.accidentType)];
+*/
 
 import { DatePipe } from '@angular/common';
 import { Pipe, PipeTransform } from '@angular/core';
@@ -45,7 +46,8 @@ export interface MapItem {
 }
 
 @Pipe({
-  name: 'map'
+  name: 'map',
+  standalone: true
 })
 export class MapPipe implements PipeTransform {
   private datePipe: DatePipe = new DatePipe('en-US');

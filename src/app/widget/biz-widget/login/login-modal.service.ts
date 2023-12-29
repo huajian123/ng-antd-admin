@@ -1,4 +1,4 @@
-import { Injectable, Injector } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { ModalWrapService } from '@widget/base-modal';
@@ -10,7 +10,7 @@ import { LoginModalComponent } from './login-modal.component';
   providedIn: 'root'
 })
 export class LoginModalService {
-  constructor(private modalWrapService: ModalWrapService) {}
+  private modalWrapService = inject(ModalWrapService);
 
   protected getContentComponent(): NzSafeAny {
     return LoginModalComponent;

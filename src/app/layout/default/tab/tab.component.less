@@ -1,31 +1,32 @@
+@import 'admin-variable';
 :host ::ng-deep {
   .ant-tabs-tab {
     transition: background-color 0s !important;
   }
+
   .ant-tabs-nav {
-    transition: background-color 0s!important;
-    margin-bottom: 0!important;
+    margin-bottom: 0 !important;
+    transition: background-color 0s !important;
   }
-
-
 }
-.fixed-tab{
-  transition: width 0.2s;
-  width: calc(100% - 208px);
+
+.fixed-tab {
   position: fixed;
   right: 0;
   z-index: 999;
-  i{
-    display: none;
+  width: calc(100% - @left-nav-width);
+  transition: width 0.2s;
+
+  i {
     position: absolute;
     top: 4px;
     right: 0;
+    display: none;
   }
 }
 
-
 .fixed-collapsed {
-  width: calc(100% - 48px);
+  width: calc(100% - @collapsed-nav-width);
 }
 
 .fixed-over-mode {

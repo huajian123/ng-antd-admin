@@ -1,16 +1,26 @@
-import { Component, OnInit, ChangeDetectionStrategy, AfterViewInit, ViewChild, TemplateRef } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { Component, ChangeDetectionStrategy, AfterViewInit, ViewChild, TemplateRef, inject } from '@angular/core';
 
-import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
+import { WaterMarkComponent } from '@shared/components/water-mark/water-mark.component';
 import { ThemeService } from '@store/common-store/theme.service';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @Component({
   selector: 'app-card-table',
   templateUrl: './card-table.component.html',
   styleUrls: ['./card-table.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [PageHeaderComponent, NzGridModule, WaterMarkComponent, NzCardModule, NzIconModule, NzButtonModule, NzAvatarModule, AsyncPipe]
 })
-export class CardTableComponent implements OnInit, AfterViewInit {
+export class CardTableComponent implements AfterViewInit {
+  private themesService = inject(ThemeService);
   isOverMode$ = this.themesService.getIsOverMode();
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '',
@@ -69,10 +79,6 @@ export class CardTableComponent implements OnInit, AfterViewInit {
     }
   ];
   @ViewChild('headerContent', { static: false }) headerContent!: TemplateRef<NzSafeAny>;
-
-  constructor(private themesService: ThemeService) {}
-
-  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     this.pageHeaderInfo = {

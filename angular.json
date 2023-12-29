@@ -37,11 +37,11 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/ng-ant-admin",
             "index": "src/index.html",
-            "main": "src/main.ts",
+            "browser": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -54,10 +54,11 @@
                 "glob": "**/*",
                 "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
                 "output": "/assets/"
-              }
+              },
+              "src/mockServiceWorker.js"
             ],
             "styles": [
-              "node_modules/driver.js/dist/driver.min.css",
+              "node_modules/driver.js/dist/driver.css",
               {
                 "input": "src/styles/default.less",
                 "bundleName": "default",
@@ -70,10 +71,12 @@
               }
             ],
             "stylePreprocessorOptions": {
-              "includePaths": ["src/styles/themes"]
+              "includePaths": [
+                "src/styles/themes"
+              ]
             },
             "scripts": [
-              "node_modules/driver.js/dist/driver.min.js"
+              "node_modules/driver.js/dist/driver.js.iife.js"
             ],
             "allowedCommonJsDependencies": [
               "crypto-js",
@@ -113,7 +116,7 @@
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "10kb",
-                  "maximumError": "15kb"
+                  "maximumError": "20kb"
                 }
               ],
               "fileReplacements": [
@@ -125,28 +128,21 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
+              "sourceMap": true
             }
           },
           "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "ng-ant-admin:build",
-            "proxyConfig": "proxy.conf.json"
-          },
           "configurations": {
             "production": {
-              "browserTarget": "ng-ant-admin:build:production"
+              "buildTarget": "ng-ant-admin:build:production"
             },
             "development": {
-              "browserTarget": "ng-ant-admin:build:development"
+              "buildTarget": "ng-ant-admin:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -154,7 +150,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ng-ant-admin:build"
+            "buildTarget": "ng-ant-admin:build"
           }
         },
         "test": {
@@ -175,8 +171,30 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "baseHref": "/ng-ant-admin/browser/",
+            "noSilent": true
+          }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false,
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }

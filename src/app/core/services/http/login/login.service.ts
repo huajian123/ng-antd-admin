@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { inject, Inject, Injectable } from '@angular/core';
 import { delay, Observable, of } from 'rxjs';
 
 // import { MENU_TOKEN } from '@config/menu';
@@ -15,11 +15,8 @@ export interface UserLogin {
   providedIn: 'root'
 })
 export class LoginService {
-  constructor(
-    public http: BaseHttpService,
-    // @Inject(MENU_TOKEN) public menus: Menu[],
-    private menuService: MenusService
-  ) {}
+  http = inject(BaseHttpService);
+  // private menus = inject(MENU_TOKEN);
 
   public login(params: UserLogin): Observable<string> {
     return this.http.post('/login', params, { needSuccessInfo: false });

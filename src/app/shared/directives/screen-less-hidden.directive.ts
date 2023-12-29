@@ -1,11 +1,12 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Directive, inject, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 /*屏幕宽度小于某个宽度时不显示的组件*/
 @Directive({
-  selector: '[appScreenLessHidden]'
+  selector: '[appScreenLessHidden]',
+  standalone: true
 })
 export class ScreenLessHiddenDirective {
   @Input('appScreenLessHidden')
@@ -23,7 +24,9 @@ export class ScreenLessHiddenDirective {
     });
   }
 
-  constructor(private breakpointObserver: BreakpointObserver, private templateRef: TemplateRef<NzSafeAny>, private viewContainerRef: ViewContainerRef) {}
+  private breakpointObserver = inject(BreakpointObserver);
+  private templateRef = inject(TemplateRef);
+  private viewContainerRef = inject(ViewContainerRef);
 
   private show(matched: boolean): void {
     matched ? this.viewContainerRef.createEmbeddedView(this.templateRef) : this.viewContainerRef.clear();

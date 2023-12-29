@@ -1,5 +1,5 @@
 <!--头部版块-->
-<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+<app-page-header [pageHeaderInfo]="pageHeaderInfo" />
 <ng-template #headerExtra>
   <nz-radio-group>
     <label nz-radio-button>操作一</label>
@@ -46,7 +46,7 @@
 
 <div class="normal-table-wrap">
   <nz-card [nzTitle]="'流程进度'">
-    <app-water-mark></app-water-mark>
+    <app-water-mark />
     <nz-steps [nzCurrent]="1" [nzDirection]="stepDirection" [nzProgressDot]="progressTemplate">
       <nz-step nzTitle="创建项目" [nzDescription]="createTpl"></nz-step>
       <nz-step nzTitle="部门初审" [nzDescription]="trialTpl"></nz-step>
@@ -86,7 +86,7 @@
   </nz-card>
 
   <nz-card class="m-t-20" [nzTitle]="'用户信息'">
-    <app-water-mark></app-water-mark>
+    <app-water-mark />
     <nz-descriptions>
       <nz-descriptions-item nzTitle="用户姓名">付小小</nz-descriptions-item>
       <nz-descriptions-item nzTitle="会员卡号">32943898021309809423</nz-descriptions-item>
@@ -126,12 +126,12 @@
   </nz-card>
 
   <nz-card class="m-t-20" [nzTitle]="'用户近半年来电记录'">
-    <app-water-mark></app-water-mark>
+    <app-water-mark />
     <nz-empty></nz-empty>
   </nz-card>
 
   <nz-card class="m-t-20">
-    <app-water-mark></app-water-mark>
+    <app-water-mark />
     <nz-card-tab>
       <nz-tabset nzSize="large">
         <nz-tab nzTitle="操作日志一"></nz-tab>

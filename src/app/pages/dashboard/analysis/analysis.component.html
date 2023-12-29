@@ -98,13 +98,15 @@
             </div>
             <div nz-col [nzLg]="12" [nzMd]="11" [nzSm]="24" [nzXl]="7" [nzXs]="24">
               <h3 class="p-l-35 m-b-20">门店销售额排名</h3>
-              <div *ngFor="let item of 7 | numberLoop; let i = index" class="rank-list" title="工专路 {{ i }} 号店">
-                <div class="center">
-                  <nz-badge [nzCount]="i + 1" [nzStyle]="{ background: i < 4 ? '#314659' : '#fafafa', color: i < 4 ? '#fff' : 'black' }"></nz-badge>
-                  <span class="m-l-5">工专路 {{ i }} 号店</span>
+              @for (item of 7 | numberLoop; track item; let i = $index) {
+                <div class="rank-list" title="工专路 {{ i }} 号店">
+                  <div class="center">
+                    <nz-badge [nzCount]="i + 1" [nzStyle]="{ background: i < 4 ? '#314659' : '#fafafa', color: i < 4 ? '#fff' : 'black' }"></nz-badge>
+                    <span class="m-l-5">工专路 {{ i }} 号店</span>
+                  </div>
+                  <div>323,234</div>
                 </div>
-                <div>323,234</div>
-              </div>
+              }
             </div>
           </div>
         </nz-tab>
@@ -168,16 +170,20 @@
           <nz-table #sortTable class="m-t-25" nzSize="small" nzTableLayout="fixed" [nzData]="listOfData">
             <thead>
               <tr>
-                <th *ngFor="let column of listOfColumn" [nzSortFn]="column.compare" [nzSortPriority]="column.priority">{{ column.title }}</th>
+                @for (column of listOfColumn; track column) {
+                  <th [nzSortFn]="column.compare" [nzSortPriority]="column.priority">{{ column.title }}</th>
+                }
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let data of sortTable.data">
-                <td>{{ data.name }}</td>
-                <td>{{ data.chinese }}</td>
-                <td>{{ data.math }}</td>
-                <td>{{ data.english }}</td>
-              </tr>
+              @for (data of sortTable.data; track data) {
+                <tr>
+                  <td>{{ data.name }}</td>
+                  <td>{{ data.chinese }}</td>
+                  <td>{{ data.math }}</td>
+                  <td>{{ data.english }}</td>
+                </tr>
+              }
             </tbody>
           </nz-table>
         </div>

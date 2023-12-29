@@ -16,7 +16,6 @@ export enum EquipmentWidth {
 export class WindowsWidthService {
   private windowWidth$ = new BehaviorSubject<EquipmentWidth>(EquipmentWidth.xxl);
 
-  constructor() {}
   setWindowWidthStore(store: EquipmentWidth): void {
     this.windowWidth$.next(store);
   }

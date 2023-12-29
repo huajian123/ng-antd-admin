@@ -1,11 +1,11 @@
 import { Platform } from '@angular/cdk/platform';
 import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable } from '@angular/core';
-
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { inject, Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class ScrollService {
+  private readonly _doc = inject(DOCUMENT);
+  private readonly platform = inject(Platform);
   private _getDoc(): Document {
     return this._doc || document;
   }
@@ -14,8 +14,6 @@ export class ScrollService {
     const doc = this._getDoc();
     return doc.defaultView || window;
   }
-
-  constructor(@Inject(DOCUMENT) private _doc: NzSafeAny, private platform: Platform) {}
 
   /**
    * 获取滚动条位置

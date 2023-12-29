@@ -1,12 +1,23 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef, inject } from '@angular/core';
+import { FormBuilder, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { SearchCommonVO } from '@core/services/types';
 import { AntTableConfig, SortFile } from '@shared/components/ant-table/ant-table.component';
-import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { CardTableWrapComponent } from '@shared/components/card-table-wrap/card-table-wrap.component';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
+import { TreeTableComponent } from '@shared/components/tree-table/tree-table.component';
+import { WaterMarkComponent } from '@shared/components/water-mark/water-mark.component';
 import { fnFlattenTreeDataByDataList } from '@utils/treeTableTools';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
@@ -19,7 +30,23 @@ interface SearchParam {
 @Component({
   selector: 'app-tree-list',
   templateUrl: './tree-list.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    PageHeaderComponent,
+    NzCardModule,
+    WaterMarkComponent,
+    FormsModule,
+    NzFormModule,
+    NzGridModule,
+    NzInputModule,
+    NzButtonModule,
+    NzWaveModule,
+    NzIconModule,
+    CardTableWrapComponent,
+    TreeTableComponent,
+    NzBadgeModule
+  ]
 })
 export class TreeListComponent implements OnInit {
   @ViewChild('highLightTpl', { static: true }) highLightTpl!: TemplateRef<NzSafeAny>;
@@ -36,7 +63,9 @@ export class TreeListComponent implements OnInit {
   checkedCashArray: any[] = [];
   dataList: NzSafeAny[] = [];
 
-  constructor(private fb: FormBuilder, private modalSrv: NzModalService, public message: NzMessageService, private router: Router, private cdr: ChangeDetectorRef) {}
+  private modalSrv = inject(NzModalService);
+  private message = inject(NzMessageService);
+  private cdr = inject(ChangeDetectorRef);
 
   reloadTable(): void {
     this.message.info('已经刷新了');

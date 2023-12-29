@@ -1,11 +1,18 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
-import { DestroyService } from '@core/services/common/destory.service';
 import { MenuListObj } from '@services/system/menus.service';
+import { IconSelComponent } from '@shared/biz-components/icon-sel/icon-sel.component';
 import { fnCheckForm } from '@utils/tools';
-import { NzModalRef } from 'ng-zorro-antd/modal';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { NZ_MODAL_DATA, NzModalRef } from 'ng-zorro-antd/modal';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
 
 // c:菜单，f按钮
 type menuType = 'C' | 'F';
@@ -14,15 +21,17 @@ type menuType = 'C' | 'F';
   selector: 'app-menu-modal',
   templateUrl: './menu-modal.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DestroyService]
+  standalone: true,
+  imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzRadioModule, NzButtonModule, IconSelComponent, NzInputNumberModule, NzSwitchModule]
 })
 export class MenuModalComponent implements OnInit {
   validateForm!: FormGroup;
   selIconVisible = false;
-  params!: MenuListObj;
+  readonly nzModalData: MenuListObj = inject(NZ_MODAL_DATA);
   menuType: menuType = 'C';
+  private fb = inject(FormBuilder);
 
-  constructor(private modalRef: NzModalRef, private destroy$: DestroyService, private fb: FormBuilder) {}
+  constructor(private modalRef: NzModalRef) {}
 
   // 返回false则不关闭对话框
   protected getCurrentValue(): Observable<any> {
@@ -51,7 +60,7 @@ export class MenuModalComponent implements OnInit {
     this.validateForm.get('icon')?.setValue(e);
   }
 
-  setFormStatusByType(methodName: 'disable' | 'enable') {
+  setFormStatusByType(methodName: 'disable' | 'enable'): void {
     this.validateForm.get('newLinkFlag')?.[methodName]();
     this.validateForm.get('icon')?.[methodName]();
     this.validateForm.get('alIcon')?.[methodName]();
@@ -71,9 +80,9 @@ export class MenuModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    if (Object.keys(this.params).length > 0) {
-      this.changeMenuType(this.params.menuType);
-      this.validateForm.patchValue(this.params);
+    if (!!this.nzModalData) {
+      this.changeMenuType(this.nzModalData.menuType);
+      this.validateForm.patchValue(this.nzModalData);
     }
   }
 }

@@ -1,27 +1,82 @@
-@import "base";
+@import 'mixin';
+@import 'base';
+@import 'admin-variable';
 
 .trigger {
+  z-index: 10;
+  padding: 0 24px;
   font-size: 18px;
   line-height: 64px;
-  padding: 0 24px;
   cursor: pointer;
   transition: color 0.3s;
-  z-index: 10;
 }
 
 .trigger:hover {
   color: #1890ff;
 }
 
+.mix-sider-height {
+  height: calc(100vh - @layout-header-height - @layout-trigger-height);
+}
+
+.themeMixin({
+  :host {
+    .menu-sidebar {
+      min-height: 100vh;
+      box-shadow: 2px 0 6px #00152959;
+      z-index: 10;
+    }
+
+    .dark-top-nav-bg {
+      background: @menu-dark-bg;
+      color: @white;
+
+      ::ng-deep .ant-badge {
+        color: @white;
+      }
+    }
+  }
+});
+
+.trigger-top-border {
+  border-top: 1px solid;
+}
+
+.mixin-left-nav-fixed {
+  position: fixed;
+  top: 48px;
+  left: 0;
+}
+
+.left-nav-fixed {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
 
 .fixed {
   position: fixed;
   top: 0;
   right: 0;
-  left: 0;
   z-index: 999;
+  flex: auto;
+  width: calc(100% - @left-nav-width);
 }
 
-.mix-sider-height {
-  height: calc(100vh - @layout-header-height - @layout-trigger-height);
+.top-fixed {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 999;
+  flex: auto;
+}
+
+.fixed-collapsed {
+  width: calc(100% - @collapsed-nav-width);
+}
+
+.fixed-over-mode {
+  width: 100%;
 }

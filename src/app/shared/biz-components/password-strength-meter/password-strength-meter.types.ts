@@ -1,4 +1,5 @@
 import { InjectionToken } from '@angular/core';
+
 import { OptionsType } from '@zxcvbn-ts/core/dist/types';
 
 export type PSMOptions = OptionsType;

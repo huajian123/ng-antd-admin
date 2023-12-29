@@ -1,14 +1,20 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
-import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { DateFormat } from '@shared/pipes/map.pipe';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
+import { NzTagModule } from 'ng-zorro-antd/tag';
 
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [PageHeaderComponent, NzCardModule, NzDescriptionsModule, NzTagModule, DatePipe]
 })
-export class AboutComponent implements OnInit {
+export class AboutComponent {
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '关于',
     breadcrumb: ['首页', '拓展功能', '关于'],
@@ -16,7 +22,4 @@ export class AboutComponent implements OnInit {
   };
   data = new Date();
   dateFormat = DateFormat.DateTime;
-  constructor() {}
-
-  ngOnInit(): void {}
 }

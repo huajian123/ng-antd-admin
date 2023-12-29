@@ -1,10 +1,22 @@
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { AfterContentInit, ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
+import { CdkDragDrop, moveItemInArray, CdkDropList, CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
+import { NgTemplateOutlet, NgStyle } from '@angular/common';
+import { AfterContentInit, booleanAttribute, ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 
 import { AntTreeTableComponentToken } from '@shared/components/tree-table/tree-table.component';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
+import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzTableSize } from 'ng-zorro-antd/table';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 
+import { ScreenLessHiddenDirective } from '../../directives/screen-less-hidden.directive';
 import { AntTableComponentToken, TableHeader } from '../ant-table/ant-table.component';
 
 interface TableSizeItem {
@@ -16,12 +28,32 @@ interface TableSizeItem {
 @Component({
   selector: 'app-card-table-wrap',
   templateUrl: './card-table-wrap.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    NzCardModule,
+    NgTemplateOutlet,
+    NzDividerModule,
+    NzSpaceModule,
+    NzIconModule,
+    NzButtonModule,
+    NzPopoverModule,
+    NzToolTipModule,
+    ScreenLessHiddenDirective,
+    NzDropDownModule,
+    NzMenuModule,
+    CdkDropList,
+    CdkDrag,
+    CdkDragHandle,
+    NzCheckboxModule,
+    NgStyle
+  ]
 })
-export class CardTableWrapComponent implements OnInit, AfterContentInit {
+export class CardTableWrapComponent implements AfterContentInit {
   @Input() tableTitle: string | TemplateRef<NzSafeAny> | undefined;
   @Input() btnTpl: TemplateRef<NzSafeAny> | undefined;
-  @Input() isNormalTable = true; // 如果只是需要card-table-wrap的样式，这里设置为false
+  @Input({ transform: booleanAttribute })
+  isNormalTable = true; // 如果只是需要card-table-wrap的样式，这里设置为false
   @Output() readonly reload = new EventEmitter<NzSafeAny>();
   @ContentChild(AntTableComponentToken) antTableComponent!: AntTableComponentToken;
   @ContentChild(AntTreeTableComponentToken) antTreeTableComponent!: AntTreeTableComponentToken;
@@ -36,8 +68,6 @@ export class CardTableWrapComponent implements OnInit, AfterContentInit {
   allTableFieldChecked = false; // 设置里面全选列
   allTableFieldIndeterminate = false; // 设置里面全选列的半选状态
   copyHeader: TableHeader[] = []; // 缓存默认配置
-
-  constructor() {}
 
   // 是否展示复选框
   changeTableCheckBoxShow(e: boolean): void {
@@ -126,8 +156,6 @@ export class CardTableWrapComponent implements OnInit, AfterContentInit {
     this.currentTableComponent.tableConfig.headers = [...this.tableHeaders];
     this.tableChangeDectction();
   }
-
-  ngOnInit(): void {}
 
   ngAfterContentInit(): void {
     this.currentTableComponent = this.antTableComponent || this.antTreeTableComponent;

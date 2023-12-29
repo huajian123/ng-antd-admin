@@ -1,4 +1,4 @@
-@import "mixin";
+@import 'mixin';
 
 .themeMixin({
   :host {
@@ -19,7 +19,7 @@
       height: 64px;
       line-height: 64px;
       overflow: hidden;
-      transition: all .3s;
+      transition: all 0.3s;
 
       a {
         min-height: 32px;
@@ -47,15 +47,17 @@
   }
 });
 
-.dark-scrollbar{
-  ::-webkit-scrollbar { /*滚动条整体样式*/
+.dark-scrollbar {
+  ::-webkit-scrollbar {
+    /* 滚动条整体样式 */
     width: 6px;
     height: 6px;
-    background: #263848!important;
+    background: #263848 !important;
   }
 
-  ::-webkit-scrollbar-thumb { /*滚动条里面小方块*/
-    background: #53616E !important;
+  ::-webkit-scrollbar-thumb {
+    /* 滚动条里面小方块 */
+    background: #53616e !important;
     border-radius: 4px;
   }
 }

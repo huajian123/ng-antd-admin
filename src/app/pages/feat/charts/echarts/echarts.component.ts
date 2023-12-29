@@ -1,11 +1,13 @@
-import { ComponentPortal, ComponentType, Portal } from '@angular/cdk/portal';
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit, ViewChild, TemplateRef } from '@angular/core';
+import { ComponentPortal, ComponentType, Portal, PortalModule } from '@angular/cdk/portal';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit, ViewChild, TemplateRef, inject } from '@angular/core';
 
 import { AdvancedComponent } from '@app/pages/feat/charts/echarts/advanced/advanced.component';
 import { SeriesComponent } from '@app/pages/feat/charts/echarts/series/series.component';
 import { StartedComponent } from '@app/pages/feat/charts/echarts/started/started.component';
-import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NGX_ECHARTS_CONFIG, NgxEchartsModule } from 'ngx-echarts';
 
 enum TabEnum {
   Started,
@@ -18,7 +20,15 @@ type targetComp = StartedComponent | AdvancedComponent | SeriesComponent;
 @Component({
   selector: 'app-echarts',
   templateUrl: './echarts.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [PageHeaderComponent, PortalModule, NzTabsModule, NgxEchartsModule],
+  providers: [
+    {
+      provide: NGX_ECHARTS_CONFIG,
+      useFactory: () => ({ echarts: () => import('echarts') })
+    }
+  ]
 })
 export class EchartsComponent implements OnInit, AfterViewInit {
   pageHeaderInfo: Partial<PageHeaderType> = {
@@ -34,7 +44,7 @@ export class EchartsComponent implements OnInit, AfterViewInit {
   componentPortal?: ComponentPortal<targetComp>;
   selectedPortal!: Portal<any>;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  private cdr = inject(ChangeDetectorRef);
 
   to(tabIndex: TabEnum): void {
     this.currentSelTab = tabIndex;

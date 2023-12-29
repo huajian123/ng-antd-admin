@@ -1,14 +1,13 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-blank',
   template: `
     <router-outlet></router-outlet>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [RouterOutlet]
 })
-export class BlankComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
-}
+export class BlankComponent {}

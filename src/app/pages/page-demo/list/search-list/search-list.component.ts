@@ -1,12 +1,17 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild, TemplateRef, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, NavigationEnd, Router, RouterEvent, RouterOutlet } from '@angular/router';
-import { filter, takeUntil } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 
 import { fadeRouteAnimation } from '@app/animations/fade.animation';
-import { DestroyService } from '@core/services/common/destory.service';
-import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
+import { WaterMarkComponent } from '@shared/components/water-mark/water-mark.component';
 import { SearchListStoreService } from '@store/biz-store-service/search-list/search-list-store.service';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
 
 interface TabInterface {
   label: string;
@@ -18,9 +23,10 @@ interface TabInterface {
   templateUrl: './search-list.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeRouteAnimation],
-  providers: [DestroyService]
+  standalone: true,
+  imports: [PageHeaderComponent, WaterMarkComponent, NzButtonModule, NzInputModule, NzWaveModule, NzTabsModule, RouterOutlet]
 })
-export class SearchListComponent implements OnInit {
+export class SearchListComponent {
   @ViewChild('headerContent', { static: true }) headerContent!: TemplateRef<NzSafeAny>;
   @ViewChild('headerFooter', { static: true }) headerFooter!: TemplateRef<NzSafeAny>;
   pageHeaderInfo: Partial<PageHeaderType> = {
@@ -30,17 +36,20 @@ export class SearchListComponent implements OnInit {
     footer: this.headerFooter
   };
   currentSelTab: number = 0;
-
+  destroyRef = inject(DestroyRef);
   tabData: TabInterface[] = [
     { label: '文章', url: '/default/page-demo/list/search-list/article' },
     { label: '项目', url: '/default/page-demo/list/search-list/project' },
     { label: '应用', url: '/default/page-demo/list/search-list/application' }
   ];
+  private cdr = inject(ChangeDetectorRef);
+  private searchListService = inject(SearchListStoreService);
+  private router = inject(Router);
 
-  constructor(private searchListService: SearchListStoreService, private activatedRoute: ActivatedRoute, private destroy$: DestroyService, private router: Router, private cdr: ChangeDetectorRef) {
+  constructor() {
     this.searchListService
       .getCurrentSearchListComponentStore()
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(componentType => {
         this.pageHeaderInfo = {
           title: componentType,
@@ -50,13 +59,18 @@ export class SearchListComponent implements OnInit {
         };
         this.cdr.markForCheck();
       });
-    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(event => {
-      if (event instanceof RouterEvent) {
-        this.currentSelTab = this.tabData.findIndex(item => {
-          return item.url === event.url;
-        });
-      }
-    });
+    this.router.events
+      .pipe(
+        filter(event => event instanceof NavigationEnd),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe(event => {
+        if (event instanceof RouterEvent) {
+          this.currentSelTab = this.tabData.findIndex(item => {
+            return item.url === event.url;
+          });
+        }
+      });
   }
 
   prepareRoute(outlet: RouterOutlet): string {
@@ -66,6 +80,4 @@ export class SearchListComponent implements OnInit {
   to(item: TabInterface): void {
     this.router.navigateByUrl(item.url);
   }
-
-  ngOnInit(): void {}
 }

@@ -1,15 +1,25 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 
 import { ActionCode } from '@app/config/actionCode';
-import { MessageService } from '@core/services/common/message.service';
 import { SearchCommonVO } from '@core/services/types';
 import { Role, RoleService } from '@services/system/role.service';
-import { AntTableConfig } from '@shared/components/ant-table/ant-table.component';
-import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { AntTableConfig, AntTableComponent } from '@shared/components/ant-table/ant-table.component';
+import { CardTableWrapComponent } from '@shared/components/card-table-wrap/card-table-wrap.component';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
+import { AuthDirective } from '@shared/directives/auth.directive';
 import { ModalBtnStatus } from '@widget/base-modal';
 import { RoleManageModalService } from '@widget/biz-widget/system/role-manage-modal/role-manage-modal.service';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
@@ -21,7 +31,22 @@ interface SearchParam {
 @Component({
   selector: 'app-role-manage',
   templateUrl: './role-manage.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    PageHeaderComponent,
+    NzCardModule,
+    FormsModule,
+    NzFormModule,
+    NzGridModule,
+    NzInputModule,
+    NzButtonModule,
+    NzWaveModule,
+    NzIconModule,
+    CardTableWrapComponent,
+    AntTableComponent,
+    AuthDirective
+  ]
 })
 export class RoleManageComponent implements OnInit {
   @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<any>;
@@ -34,16 +59,14 @@ export class RoleManageComponent implements OnInit {
   dataList: Role[] = [];
   checkedCashArray = [];
   ActionCode = ActionCode;
+  destroyRef = inject(DestroyRef);
 
-  constructor(
-    private dataService: RoleService,
-    private modalSrv: NzModalService,
-    private cdr: ChangeDetectorRef,
-    private messageService: MessageService,
-    private modalService: RoleManageModalService,
-    private router: Router,
-    public message: NzMessageService
-  ) {}
+  private dataService = inject(RoleService);
+  private modalSrv = inject(NzModalService);
+  private cdr = inject(ChangeDetectorRef);
+  private modalService = inject(RoleManageModalService);
+  private router = inject(Router);
+  private message = inject(NzMessageService);
 
   selectedChecked(e: any): void {
     // @ts-ignore
@@ -67,7 +90,8 @@ export class RoleManageComponent implements OnInit {
       .pipe(
         finalize(() => {
           this.tableLoading(false);
-        })
+        }),
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe(data => {
         const { list, total, pageNum } = data;
@@ -97,17 +121,22 @@ export class RoleManageComponent implements OnInit {
   }
 
   add(): void {
-    this.modalService.show({ nzTitle: '新增' }).subscribe(
-      res => {
+    this.modalService
+      .show({ nzTitle: '新增' })
+      .pipe(
+        finalize(() => {
+          this.tableLoading(false);
+        }),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe(res => {
         if (!res || res.status === ModalBtnStatus.Cancel) {
           return;
         }
         const param = { ...res.modalValue };
         this.tableLoading(true);
         this.addEditData(param, 'addRoles');
-      },
-      error => this.tableLoading(false)
-    );
+      });
   }
 
   reloadTable(): void {
@@ -117,25 +146,35 @@ export class RoleManageComponent implements OnInit {
 
   // 修改
   edit(id: number): void {
-    this.dataService.getRolesDetail(id).subscribe(res => {
-      this.modalService.show({ nzTitle: '编辑' }, res).subscribe(
-        ({ modalValue, status }) => {
-          if (status === ModalBtnStatus.Cancel) {
-            return;
-          }
-          modalValue.id = id;
-          this.tableLoading(true);
-          this.addEditData(modalValue, 'editRoles');
-        },
-        error => this.tableLoading(false)
-      );
-    });
+    this.dataService
+      .getRolesDetail(id)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(res => {
+        this.modalService
+          .show({ nzTitle: '编辑' }, res)
+          .pipe(
+            finalize(() => {
+              this.tableLoading(false);
+            }),
+            takeUntilDestroyed(this.destroyRef)
+          )
+          .subscribe(({ modalValue, status }) => {
+            if (status === ModalBtnStatus.Cancel) {
+              return;
+            }
+            modalValue.id = id;
+            this.tableLoading(true);
+            this.addEditData(modalValue, 'editRoles');
+          });
+      });
   }
 
   addEditData(param: Role, methodName: 'editRoles' | 'addRoles'): void {
-    this.dataService[methodName](param).subscribe(() => {
-      this.getDataList();
-    });
+    this.dataService[methodName](param)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        this.getDataList();
+      });
   }
 
   del(id: number): void {
@@ -145,15 +184,20 @@ export class RoleManageComponent implements OnInit {
       nzContent: '删除后不可恢复',
       nzOnOk: () => {
         this.tableLoading(true);
-        this.dataService.delRoles(ids).subscribe(
-          () => {
+        this.dataService
+          .delRoles(ids)
+          .pipe(
+            finalize(() => {
+              this.tableLoading(false);
+            }),
+            takeUntilDestroyed(this.destroyRef)
+          )
+          .subscribe(() => {
             if (this.dataList.length === 1) {
               this.tableConfig.pageIndex--;
             }
             this.getDataList();
-          },
-          error => this.tableLoading(false)
-        );
+          });
       }
     });
   }

@@ -1,16 +1,22 @@
 <nz-page-header class="site-page-header" [nzBackIcon]="backTpl ? backTpl : null" [nzGhost]="false" [nzTitle]="pageHeaderInfo.title" (nzBack)="back()">
   <nz-breadcrumb nz-page-header-breadcrumb>
-    <nz-breadcrumb-item *ngFor="let breadcrumb of pageHeaderInfo.breadcrumb">
-      <a>{{ breadcrumb }}</a>
-    </nz-breadcrumb-item>
+    @for (breadcrumb of pageHeaderInfo.breadcrumb; track breadcrumb) {
+      <nz-breadcrumb-item>
+        <a>{{ breadcrumb }}</a>
+      </nz-breadcrumb-item>
+    }
   </nz-breadcrumb>
   <nz-page-header-extra>
     <ng-container *nzStringTemplateOutlet="pageHeaderInfo.extra">{{ pageHeaderInfo.extra }}</ng-container>
   </nz-page-header-extra>
-  <nz-page-header-content *ngIf="pageHeaderInfo.desc">
-    <ng-container *nzStringTemplateOutlet="pageHeaderInfo.desc">{{ pageHeaderInfo.desc }}</ng-container>
-  </nz-page-header-content>
-  <nz-page-header-footer *ngIf="pageHeaderInfo.footer">
-    <ng-container *nzStringTemplateOutlet="pageHeaderInfo.footer">{{ pageHeaderInfo.footer }}</ng-container>
-  </nz-page-header-footer>
+  @if (pageHeaderInfo.desc) {
+    <nz-page-header-content>
+      <ng-container *nzStringTemplateOutlet="pageHeaderInfo.desc">{{ pageHeaderInfo.desc }}</ng-container>
+    </nz-page-header-content>
+  }
+  @if (pageHeaderInfo.footer) {
+    <nz-page-header-footer>
+      <ng-container *nzStringTemplateOutlet="pageHeaderInfo.footer">{{ pageHeaderInfo.footer }}</ng-container>
+    </nz-page-header-footer>
+  }
 </nz-page-header>

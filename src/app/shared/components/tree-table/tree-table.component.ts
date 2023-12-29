@@ -1,10 +1,14 @@
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, ChangeDetectorRef, OnChanges, SimpleChanges } from '@angular/core';
 
 import { AntTableConfig, SortFile, TableHeader } from '@shared/components/ant-table/ant-table.component';
 import { fnGetFlattenTreeDataByMap, fnTreeDataToMap } from '@utils/treeTableTools';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { NzResizeEvent } from 'ng-zorro-antd/resizable';
-import { NzTableQueryParams, NzTableSize } from 'ng-zorro-antd/table';
+import { NzResizeEvent, NzResizableModule } from 'ng-zorro-antd/resizable';
+import { NzTableQueryParams, NzTableSize, NzTableModule } from 'ng-zorro-antd/table';
+
+import { MapPipe } from '../../pipes/map.pipe';
+import { TableFiledPipe } from '../../pipes/table-filed.pipe';
 
 export interface TreeNodeInterface {
   id: string | number;
@@ -28,9 +32,11 @@ export abstract class AntTreeTableComponentToken {
   templateUrl: './tree-table.component.html',
   styleUrls: ['./tree-table.component.less'],
   providers: [{ provide: AntTreeTableComponentToken, useExisting: TreeTableComponent }],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NzTableModule, NzResizableModule, NgClass, NgTemplateOutlet, MapPipe, TableFiledPipe]
 })
-export class TreeTableComponent implements OnInit, OnChanges {
+export class TreeTableComponent implements OnChanges {
   _dataList!: TreeNodeInterface[];
   allChecked: boolean = false;
   indeterminate = false;
@@ -41,7 +47,7 @@ export class TreeTableComponent implements OnInit, OnChanges {
   @Output() readonly changePageNum = new EventEmitter<NzTableQueryParams>();
   @Output() readonly changePageSize = new EventEmitter<number>();
   mapOfExpandedData: { [key: string]: TreeNodeInterface[] } = {};
-  @Input() tableConfig!: AntTableConfig;
+  @Input({ required: true }) tableConfig!: AntTableConfig;
   @Output() readonly selectedChange: EventEmitter<NzSafeAny[]> = new EventEmitter<NzSafeAny[]>();
   cashExpandIdArray: Array<number | string> = []; // 缓存已经展开的节点的id
 
@@ -211,6 +217,4 @@ export class TreeTableComponent implements OnInit, OnChanges {
       this.refreshStatus();
     }
   }
-
-  ngOnInit(): void {}
 }

@@ -26,13 +26,15 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
  * ```
  */
 @Directive({
-  selector: 'ng-template[named]'
+  selector: 'ng-template[named]',
+  standalone: true
 })
+// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class NamedTemplate<T> implements OnInit {
   /**
    * 模板名称
    */
-  @Input() named!: string;
+  @Input({ required: true }) named!: string;
   constructor(public template: TemplateRef<T>) {}
 
   ngOnInit(): void {

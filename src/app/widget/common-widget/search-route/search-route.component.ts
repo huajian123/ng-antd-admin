@@ -1,15 +1,23 @@
 import { normalizePassiveListenerOptions } from '@angular/cdk/platform';
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef, HostListener, NgZone } from '@angular/core';
+
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef, HostListener, NgZone, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { fromEvent, of } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map, switchMap, takeUntil } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
 
-import { DestroyService } from '@core/services/common/destory.service';
 import { Menu } from '@core/services/types';
 import { MenuStoreService } from '@store/common-store/menu-store.service';
 import { ThemeService } from '@store/common-store/theme.service';
 import { BasicConfirmModalComponent } from '@widget/base-modal';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 
 interface ResultItem {
@@ -27,25 +35,25 @@ const passiveEventListenerOptions = <AddEventListenerOptions>normalizePassiveLis
   templateUrl: './search-route.component.html',
   styleUrls: ['./search-route.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DestroyService]
+  standalone: true,
+  imports: [NzButtonModule, NzInputModule, FormsModule, NzIconModule, NzEmptyModule, NzGridModule, NzDividerModule]
 })
 export class SearchRouteComponent extends BasicConfirmModalComponent implements OnInit, AfterViewInit {
+  private cdr = inject(ChangeDetectorRef);
+  private ngZone = inject(NgZone);
+  private menuStoreService = inject(MenuStoreService);
+  private router = inject(Router);
+  private themesService = inject(ThemeService);
+
   isNightTheme$ = this.themesService.getIsNightTheme();
   resultListShow: ResultItem[] = [];
   resultList: ResultItem[] = [];
   @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
   inputValue: string | null = null;
   menuNavList: Menu[] = [];
+  destroyRef = inject(DestroyRef);
 
-  constructor(
-    private themesService: ThemeService,
-    private cdr: ChangeDetectorRef,
-    private ngZone: NgZone,
-    private destroy$: DestroyService,
-    private menuStoreService: MenuStoreService,
-    private router: Router,
-    protected override modalRef: NzModalRef
-  ) {
+  constructor(protected override modalRef: NzModalRef) {
     super(modalRef);
   }
 
@@ -72,7 +80,7 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
   }
 
   @HostListener('window:keyup.enter')
-  onEnterUp() {
+  onEnterUp(): void {
     const index = this.resultListShow.findIndex(item => item.selItem);
     if (index > -1) {
       this.resultClick(this.resultListShow[index]);
@@ -80,7 +88,7 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
   }
 
   @HostListener('window:keyup.arrowUp')
-  onArrowUp() {
+  onArrowUp(): void {
     const index = this.changeSelAnswerIndex('up');
     if (index !== null) {
       this.mouseOverItem(this.resultListShow[index]);
@@ -88,7 +96,7 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
   }
 
   @HostListener('window:keyup.arrowDown')
-  onArrowDown() {
+  onArrowDown(): void {
     const index = this.changeSelAnswerIndex('down');
     if (index !== null) {
       this.mouseOverItem(this.resultListShow[index]);
@@ -144,7 +152,7 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
           switchMap(item => {
             return of(item);
           }),
-          takeUntil(this.destroy$)
+          takeUntilDestroyed(this.destroyRef)
         )
         .subscribe(res => {
           this.resultListShow = [];
@@ -182,7 +190,7 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
   getMenus(): void {
     this.menuStoreService
       .getMenuArrayStore()
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(menus => {
         this.menuNavList = menus;
       });

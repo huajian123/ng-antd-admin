@@ -13,7 +13,7 @@
       </nz-form-control>
     </nz-form-item>
     <nz-form-item nz-col [nzLg]="8" [nzMd]="24" [nzSm]="24" [nzXl]="8" [nzXs]="24" [nzXXl]="8">
-      <nz-form-label nzFor="warehouseManager" nzRequired nzRequired nzSpan="24">仓库管理员</nz-form-label>
+      <nz-form-label nzFor="warehouseManager" nzRequired nzSpan="24">仓库管理员</nz-form-label>
       <nz-form-control [nzErrorTip]="combineTpl" [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzXl]="24" [nzXXl]="24">
         <input id="warehouseManager" formControlName="warehouseManager" nz-input />
       </nz-form-control>
@@ -40,6 +40,10 @@
   </div>
 </ng-container>
 <ng-template #combineTpl let-control>
-  <ng-container *ngIf="control.hasError('message')">{{ control.errors.message }}</ng-container>
-  <ng-container *ngIf="control.hasError('required')">必填项</ng-container>
+  @if (control.hasError('message')) {
+    {{ control.errors.message }}
+  }
+  @if (control.hasError('required')) {
+    必填项
+  }
 </ng-template>

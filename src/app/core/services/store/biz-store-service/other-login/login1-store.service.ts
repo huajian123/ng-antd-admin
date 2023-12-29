@@ -11,8 +11,6 @@ export class Login1StoreService {
   private loginType$ = new BehaviorSubject<LoginType>(LoginType.Normal);
   private isLogin1OverModel$ = new BehaviorSubject<boolean>(false);
 
-  constructor() {}
-
   setLoginTypeStore(type: LoginType): void {
     this.loginType$.next(type);
   }

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { ModalWrapService } from '@widget/base-modal';
@@ -10,7 +10,8 @@ import { ModalOptions } from 'ng-zorro-antd/modal';
   providedIn: 'root'
 })
 export class AppendFormModalService {
-  constructor(private modalWrapService: ModalWrapService) {}
+  private modalWrapService = inject(ModalWrapService);
+
   protected getContentComponent(): NzSafeAny {
     return AppendFormModalComponent;
   }

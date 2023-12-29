@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, inject } from '@angular/core';
 
 import {
   rotateInDownLeftOnEnterAnimation,
@@ -12,6 +12,10 @@ import {
   fadeInOnEnterAnimation,
   rubberBandOnEnterAnimation
 } from 'angular-animations';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+
+import { AngularImgComponent } from '../angular-img/angular-img.component';
 
 @Component({
   selector: 'app-experiments',
@@ -30,9 +34,11 @@ import {
     flashAnimation({ anchor: 'flash' }),
     rubberBandOnEnterAnimation({ anchor: 'btnEnter', delay: 12500 }),
     fadeInOnEnterAnimation({ anchor: 'btnEnterFadeIn', delay: 12500, duration: 500 })
-  ]
+  ],
+  standalone: true,
+  imports: [AngularImgComponent, NzButtonModule, NzWaveModule]
 })
-export class ExperimentsComponent implements OnInit {
+export class ExperimentsComponent {
   text1 = '少林功夫好，真的好，少林功夫棒，真的棒...'.split('');
   text2 = '你有金刚腿，我有金刚腿，我有铁头功，嗷嗷...'.split('');
   text3 = '我拳拳虎虎生风，虎虎生风，我掌掌黯然销魂，黯然销魂...'.split('');
@@ -41,7 +47,7 @@ export class ExperimentsComponent implements OnInit {
   hueState = false;
   flashState = false;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  private cdr = inject(ChangeDetectorRef);
 
   getDelay(index: number, lenght: number): number {
     if (index < lenght / 2 - 2) {
@@ -58,6 +64,4 @@ export class ExperimentsComponent implements OnInit {
       this.cdr.markForCheck();
     }, 1);
   }
-
-  ngOnInit(): void {}
 }

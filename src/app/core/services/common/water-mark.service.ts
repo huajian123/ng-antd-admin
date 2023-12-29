@@ -9,8 +9,6 @@ import { Injectable } from '@angular/core';
 export class WaterMarkService {
   watermark = '';
 
-  constructor() {}
-
   getWatermark(): string {
     if (!this.watermark) {
       const canvas = document.createElement('canvas');

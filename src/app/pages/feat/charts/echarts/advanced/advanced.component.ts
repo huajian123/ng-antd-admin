@@ -1,9 +1,13 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { ComponentPortal, ComponentType, Portal } from '@angular/cdk/portal';
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { ComponentPortal, ComponentType, Portal, PortalModule } from '@angular/cdk/portal';
+
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { ConnectChartsComponent } from '@app/pages/feat/charts/echarts/advanced/connect-charts/connect-charts.component';
 import { DraggableChartsComponent } from '@app/pages/feat/charts/echarts/advanced/draggable-charts/draggable-charts.component';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzTabPosition } from 'ng-zorro-antd/tabs/interfaces';
 
 type targetComp = ConnectChartsComponent | DraggableChartsComponent;
@@ -11,7 +15,9 @@ type targetComp = ConnectChartsComponent | DraggableChartsComponent;
 @Component({
   selector: 'app-advanced',
   templateUrl: './advanced.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NzCardModule, NzTabsModule, PortalModule]
 })
 export class AdvancedComponent implements OnInit {
   componentPortal?: ComponentPortal<targetComp>;
@@ -20,10 +26,11 @@ export class AdvancedComponent implements OnInit {
     { label: 'Connect Charts', value: ConnectChartsComponent },
     { label: 'Draggable Chart', value: DraggableChartsComponent }
   ];
-
+  destroyRef = inject(DestroyRef);
   tabPosition: NzTabPosition = 'left';
 
-  constructor(private cdr: ChangeDetectorRef, private breakpointObserver: BreakpointObserver) {}
+  private cdr = inject(ChangeDetectorRef);
+  private breakpointObserver = inject(BreakpointObserver);
 
   to(tabIndex: number): void {
     this.componentPortal = new ComponentPortal(this.tabArray[tabIndex].value);
@@ -32,9 +39,12 @@ export class AdvancedComponent implements OnInit {
 
   ngOnInit(): void {
     this.to(0);
-    this.breakpointObserver.observe(['(max-width: 767px)']).subscribe(result => {
-      this.tabPosition = result.matches ? 'top' : 'left';
-      this.cdr.markForCheck();
-    });
+    this.breakpointObserver
+      .observe(['(max-width: 767px)'])
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(result => {
+        this.tabPosition = result.matches ? 'top' : 'left';
+        this.cdr.markForCheck();
+      });
   }
 }

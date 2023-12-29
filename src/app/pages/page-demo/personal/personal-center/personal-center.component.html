@@ -26,33 +26,31 @@
         <nz-divider nzDashed></nz-divider>
         <div class="tags">
           <h5 class="m-b-10">标签</h5>
-          <nz-tag *ngFor="let item of tagArray" class="m-b-5">{{ item }}</nz-tag>
-          <nz-tag *ngIf="!inputVisible" class="editable-tag" nzNoAnimation (click)="showInput()">
-            <i nz-icon nzType="plus"></i>
-            New Tag
-          </nz-tag>
-          <input
-            *ngIf="inputVisible"
-            #inputElement
-            type="text"
-            nz-input
-            nzSize="small"
-            style="width: 78px"
-            [(ngModel)]="inputValue"
-            (blur)="handleInputConfirm()"
-            (keydown.enter)="handleInputConfirm()"
-          />
+          @for (item of tagArray; track item) {
+            <nz-tag class="m-b-5">{{ item }}</nz-tag>
+          }
+          @if (!inputVisible) {
+            <nz-tag class="editable-tag" nzNoAnimation (click)="showInput()">
+              <i nz-icon nzType="plus"></i>
+              New Tag
+            </nz-tag>
+          }
+          @if (inputVisible) {
+            <input #inputElement type="text" nz-input nzSize="small" style="width: 78px" [(ngModel)]="inputValue" (blur)="handleInputConfirm()" (keydown.enter)="handleInputConfirm()" />
+          }
         </div>
         <nz-divider nzDashed></nz-divider>
         <div class="team">
           <h5 class="m-b-10">团队</h5>
           <div nz-row>
-            <div *ngFor="let item of 5 | numberLoop" nz-col nzSpan="12" style="padding: 0 18px 0 0">
-              <a class="group">
-                <nz-avatar [nzSize]="24" [nzSrc]="'https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png'"></nz-avatar>
-                <span class="m-l-10">全组都是吴彦祖</span>
-              </a>
-            </div>
+            @for (item of 5 | numberLoop; track item) {
+              <div nz-col nzSpan="12" style="padding: 0 18px 0 0">
+                <a class="group">
+                  <nz-avatar [nzSize]="24" [nzSrc]="'https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png'"></nz-avatar>
+                  <span class="m-l-10">全组都是吴彦祖</span>
+                </a>
+              </div>
+            }
           </div>
         </div>
       </nz-card>
@@ -61,7 +59,9 @@
       <nz-card>
         <nz-card-tab>
           <nz-tabset nzSize="large">
-            <nz-tab *ngFor="let item of tabData" [nzTitle]="item.label" (nzClick)="to(item)"></nz-tab>
+            @for (item of tabData; track item) {
+              <nz-tab [nzTitle]="item.label" (nzClick)="to(item)"></nz-tab>
+            }
           </nz-tabset>
         </nz-card-tab>
         <ng-template appAd></ng-template>

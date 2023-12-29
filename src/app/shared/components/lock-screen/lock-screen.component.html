@@ -5,45 +5,53 @@
   </div>
   <div class="flex-auto" nz-row nzJustify="space-around" style="align-items: center">
     <div class="hour center" nz-col style="flex: auto" [nzLg]="10" [nzMd]="10" [nzSm]="10" [nzXl]="10" [nzXs]="10" [nzXXl]="10">
-      <span>{{ time$ | async | date : 'hh' }}</span>
+      <span>{{ time$ | async | date: 'hh' }}</span>
     </div>
     <div class="hour center" nz-col style="flex: auto" [nzLg]="10" [nzMd]="10" [nzSm]="10" [nzXl]="10" [nzXs]="10" [nzXXl]="10">
-      <span>{{ time$ | async | date : 'mm' }}</span>
+      <span>{{ time$ | async | date: 'mm' }}</span>
     </div>
   </div>
-  <div *ngIf="showUnlock" class="lock-page-entry center">
-    <div class="flex center flex-coloum form">
-      <nz-avatar [nzSize]="70" [nzSrc]="'assets/imgs/default_face.png'"></nz-avatar>
-      <p class="sp-16 m-t-8 name">Serati Ma</p>
+  @if (showUnlock) {
+    <div class="lock-page-entry center">
+      <div class="flex center flex-coloum form">
+        <nz-avatar [nzSize]="70" [nzSrc]="'assets/imgs/default_face.png'"></nz-avatar>
+        <p class="sp-16 m-t-8 name">Serati Ma</p>
 
-      <form class="full-with m-b-20" autocomplete="off" nz-form [formGroup]="validateForm" [nzLayout]="'vertical'">
-        <nz-form-item>
-          <nz-form-control [nzErrorTip]="combineTpl">
-            <nz-input-group [nzSuffix]="suffixTemplate">
-              <input name="password" autocomplete="off" formControlName="password" nz-input placeholder="请输入" [type]="passwordVisible ? 'text' : 'password'" />
-            </nz-input-group>
-            <ng-template #suffixTemplate>
-              <i nz-icon [nzType]="!passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
-            </ng-template>
-          </nz-form-control>
-        </nz-form-item>
-        <div class="full-with space-between">
-          <span class="operate-text" (click)="showUnlock = false">返回</span>
-          <span class="operate-text" (click)="loginOut()">返回登录</span>
-          <span class="operate-text" (click)="intoSys()">进入系统</span>
-        </div>
-      </form>
+        <form class="full-with m-b-20" autocomplete="off" nz-form [formGroup]="validateForm" [nzLayout]="'vertical'">
+          <nz-form-item>
+            <nz-form-control [nzErrorTip]="combineTpl">
+              <nz-input-group [nzSuffix]="suffixTemplate">
+                <input name="password" autocomplete="off" formControlName="password" nz-input placeholder="请输入" [type]="passwordVisible ? 'text' : 'password'" />
+              </nz-input-group>
+              <ng-template #suffixTemplate>
+                <i nz-icon [nzType]="!passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+          <div class="full-with space-between">
+            <span class="operate-text" (click)="showUnlock = false">返回</span>
+            <span class="operate-text" (click)="loginOut()">返回登录</span>
+            <span class="operate-text" (click)="intoSys()">进入系统</span>
+          </div>
+        </form>
+      </div>
     </div>
-  </div>
-  <div *ngIf="showUnlock" class="flex flex-coloum center title bottom-time">
-    <span style="user-select: none">{{ time$ | async | date : 'HH:mm a' }}</span>
-  </div>
+  }
+  @if (showUnlock) {
+    <div class="flex flex-coloum center title bottom-time">
+      <span style="user-select: none">{{ time$ | async | date: 'HH:mm a' }}</span>
+    </div>
+  }
   <div class="flex flex-coloum center title bottom-date">
-    <span style="user-select: none">{{ time$ | async | date : 'yyyy-MM-dd' }}星期{{ getDays(time$ | async) | changNumberToChinese }}</span>
+    <span style="user-select: none">{{ time$ | async | date: 'yyyy-MM-dd' }}星期{{ getDays(time$ | async) | changNumberToChinese }}</span>
   </div>
 </div>
 
 <ng-template #combineTpl let-control>
-  <ng-container *ngIf="control.hasError('required')">请填写锁屏密码</ng-container>
-  <ng-container *ngIf="control.hasError('notRight')">锁屏密码不正确</ng-container>
+  @if (control.hasError('required')) {
+    请填写锁屏密码
+  }
+  @if (control.hasError('notRight')) {
+    锁屏密码不正确
+  }
 </ng-template>

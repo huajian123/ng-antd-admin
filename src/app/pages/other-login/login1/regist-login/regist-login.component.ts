@@ -1,11 +1,19 @@
-import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { takeUntil } from 'rxjs/operators';
+import { NgStyle } from '@angular/common';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormBuilder, FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule, AbstractControl } from '@angular/forms';
 
 import { LoginType } from '@app/pages/other-login/login1/login1.component';
-import { DestroyService } from '@core/services/common/destory.service';
+import { PasswordStrengthMeterComponent } from '@shared/biz-components/password-strength-meter/password-strength-meter.component';
 import { Login1StoreService } from '@store/biz-store-service/other-login/login1-store.service';
 import { EquipmentWidth, WindowsWidthService } from '@store/common-store/windows-width.service';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
 
 /*https://www.npmjs.com/package/angular-password-strength-meter*/
 @Component({
@@ -13,7 +21,8 @@ import { EquipmentWidth, WindowsWidthService } from '@store/common-store/windows
   templateUrl: './regist-login.component.html',
   styleUrls: ['./regist-login.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DestroyService]
+  standalone: true,
+  imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzButtonModule, NzWaveModule, NgStyle, PasswordStrengthMeterComponent, NzIconModule, NzCheckboxModule]
 })
 export class RegistLoginComponent implements OnInit {
   validateForm!: FormGroup;
@@ -24,17 +33,15 @@ export class RegistLoginComponent implements OnInit {
   isOverModel = false;
   equipmentWidthEnum = EquipmentWidth;
   currentEquipmentWidth: EquipmentWidth = EquipmentWidth.md;
-  get password() {
+  get password(): AbstractControl | null {
     return this.validateForm.get('password');
   }
+  destroyRef = inject(DestroyRef);
 
-  constructor(
-    private destroy$: DestroyService,
-    private windowsWidthService: WindowsWidthService,
-    private cdr: ChangeDetectorRef,
-    private fb: FormBuilder,
-    private login1StoreService: Login1StoreService
-  ) {}
+  private fb = inject(FormBuilder);
+  private login1StoreService = inject(Login1StoreService);
+  private windowsWidthService = inject(WindowsWidthService);
+  private cdr = inject(ChangeDetectorRef);
 
   subScreenWidth(): void {
     this.windowsWidthService.getWindowWidthStore().subscribe(res => {
@@ -74,7 +81,7 @@ export class RegistLoginComponent implements OnInit {
   subLogin1Store(): void {
     this.login1StoreService
       .getIsLogin1OverModelStore()
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(res => {
         this.isOverModel = res;
         this.cdr.markForCheck();

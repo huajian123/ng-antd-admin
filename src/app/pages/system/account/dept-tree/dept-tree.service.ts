@@ -1,11 +1,12 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { ChangeDetectorRef, Injectable, OnInit } from '@angular/core';
+import { ChangeDetectorRef, DestroyRef, inject, Injectable } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BehaviorSubject } from 'rxjs';
 
 import { SearchCommonVO } from '@core/services/types';
 import { DeptService } from '@services/system/dept.service';
-import { fnFlatDataHasParentToTree, fnFlattenTreeDataByDataList } from '@utils/treeTableTools';
+import { fnFlatDataHasParentToTree } from '@utils/treeTableTools';
 import { NzTreeFlatDataSource, NzTreeFlattener } from 'ng-zorro-antd/tree-view';
 
 interface TreeNode {
@@ -27,6 +28,7 @@ export interface FlatNode {
 export class DeptTreeService {
   TREE_DATA$ = new BehaviorSubject<any[]>([]);
   currentSelNode: FlatNode | null = null;
+  destroyRef = inject(DestroyRef);
   private transformer = (node: TreeNode, level: number): FlatNode => ({
     expandable: !!node.children && node.children.length > 0,
     departmentName: node.departmentName,
@@ -52,7 +54,8 @@ export class DeptTreeService {
   dataSource = new NzTreeFlatDataSource(this.treeControl, this.treeFlattener);
   hasChild = (_: number, node: FlatNode): boolean => node.expandable;
 
-  constructor(private dataService: DeptService, private cdr: ChangeDetectorRef) {}
+  private dataService = inject(DeptService);
+  private cdr = inject(ChangeDetectorRef);
 
   resetTree(): void {
     if (this.currentSelNode) {
@@ -72,8 +75,11 @@ export class DeptTreeService {
       pageSize: 0,
       pageNum: 0
     };
-    this.dataService.getDepts(params).subscribe(deptList => {
-      this.TREE_DATA$.next(fnFlatDataHasParentToTree(deptList.list));
-    });
+    this.dataService
+      .getDepts(params)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(deptList => {
+        this.TREE_DATA$.next(fnFlatDataHasParentToTree(deptList.list));
+      });
   }
 }

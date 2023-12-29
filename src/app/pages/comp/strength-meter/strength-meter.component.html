@@ -1,4 +1,4 @@
-<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+<app-page-header [pageHeaderInfo]="pageHeaderInfo" />
 
 <div class="normal-table-wrap">
   <div nz-row nzJustify="center" [nzGutter]="[32, 16]">
@@ -7,11 +7,11 @@
         <nz-input-group [nzSuffix]="suffixTemplate1">
           <input id="newPassword" nz-input placeholder="新密码" [type]="passwordVisible ? 'text' : 'password'" [(ngModel)]="newPassword" />
         </nz-input-group>
-        <password-strength-meter [password]="newPassword"></password-strength-meter>
+        <password-strength-meter [password]="newPassword" />
         <nz-input-group [nzSuffix]="suffixTemplate1">
           <input id="disablePassword" nz-input placeholder="禁用" [disabled]="true" />
         </nz-input-group>
-        <password-strength-meter [password]="'fasdfasd23423'"></password-strength-meter>
+        <password-strength-meter [password]="'fasdfasd23423'" />
       </nz-card>
     </div>
   </div>

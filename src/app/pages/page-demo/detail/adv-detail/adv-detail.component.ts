@@ -1,9 +1,29 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, AfterViewInit, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-import { AntTableConfig } from '@shared/components/ant-table/ant-table.component';
-import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { AntTableConfig, AntTableComponent } from '@shared/components/ant-table/ant-table.component';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
+import { WaterMarkComponent } from '@shared/components/water-mark/water-mark.component';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { NzStatisticModule } from 'ng-zorro-antd/statistic';
+import { NzStepsModule } from 'ng-zorro-antd/steps';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 
 interface ReturnObj {
   num: string;
@@ -22,7 +42,31 @@ enum TabEnum {
 @Component({
   selector: 'app-adv-detail',
   templateUrl: './adv-detail.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    PageHeaderComponent,
+    NzRadioModule,
+    NzDropDownModule,
+    NzIconModule,
+    NzButtonModule,
+    NzMenuModule,
+    NzWaveModule,
+    NzGridModule,
+    NzDescriptionsModule,
+    NzStatisticModule,
+    NzTabsModule,
+    NzCardModule,
+    WaterMarkComponent,
+    NzStepsModule,
+    NzPopoverModule,
+    NgTemplateOutlet,
+    NzBadgeModule,
+    NzToolTipModule,
+    NzDividerModule,
+    NzEmptyModule,
+    AntTableComponent
+  ]
 })
 export class AdvDetailComponent implements OnInit, AfterViewInit {
   @ViewChild('headerExtra', { static: false }) headerExtra!: TemplateRef<NzSafeAny>;
@@ -40,6 +84,7 @@ export class AdvDetailComponent implements OnInit, AfterViewInit {
   };
   tabEnum = TabEnum;
   currentSelTab: number = this.tabEnum.Detail;
+  destroyRef = inject(DestroyRef);
 
   returnDataList: ReturnObj[] = [
     {
@@ -83,8 +128,8 @@ export class AdvDetailComponent implements OnInit, AfterViewInit {
       price: '2.00'
     }
   ];
-
-  constructor(private cdr: ChangeDetectorRef, private breakpointObserver: BreakpointObserver) {}
+  private cdr = inject(ChangeDetectorRef);
+  private breakpointObserver = inject(BreakpointObserver);
 
   to(tabIndex: TabEnum): void {
     this.currentSelTab = tabIndex;
@@ -132,13 +177,16 @@ export class AdvDetailComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.breakpointObserver.observe(['(max-width: 770px)']).subscribe(result => {
-      if (result.matches) {
-        this.stepDirection = 'vertical';
-      } else {
-        this.stepDirection = 'horizontal';
-      }
-    });
+    this.breakpointObserver
+      .observe(['(max-width: 770px)'])
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(result => {
+        if (result.matches) {
+          this.stepDirection = 'vertical';
+        } else {
+          this.stepDirection = 'horizontal';
+        }
+      });
     this.initReturnTable();
   }
 

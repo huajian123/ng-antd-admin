@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { Menu, PageInfo, SearchCommonVO } from '@core/services/types';
@@ -21,7 +21,7 @@ export interface MenuListObj {
   providedIn: 'root'
 })
 export class MenusService {
-  constructor(public http: BaseHttpService) {}
+  http = inject(BaseHttpService);
 
   public getMenuList(param: SearchCommonVO<any>): Observable<PageInfo<Menu>> {
     return this.http.post('/sysPermission/list', param);

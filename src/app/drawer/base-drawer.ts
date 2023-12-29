@@ -1,7 +1,10 @@
-import { Injectable, Injector, TemplateRef, Type } from '@angular/core';
+import { ComponentRef, DestroyRef, Inject, inject, Injectable, Injector, TemplateRef, Type } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Observable, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
+import { GLOBAL_DRAWER_FOOT_TPL_TOKEN } from '@app/tpl/global-drawer-foot-tpl/global-drawer-foot-tpl-token';
+import { GlobalDrawerFootTplComponentToken } from '@app/tpl/global-drawer-foot-tpl/global-drawer-foot-tpl.component';
 import { ModalBtnStatus } from '@widget/base-modal';
 import * as _ from 'lodash';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -9,12 +12,15 @@ import { NzDrawerOptions, NzDrawerRef, NzDrawerService } from 'ng-zorro-antd/dra
 
 @Injectable({ providedIn: 'root' })
 export class DrawerWrapService {
-  protected bsDrawerService: NzDrawerService;
-  private btnTpl!: TemplateRef<any>;
   drawerRef!: NzDrawerRef;
-
-  constructor(private baseInjector: Injector) {
-    this.bsDrawerService = this.baseInjector.get(NzDrawerService);
+  private destroyRef = inject(DestroyRef);
+  private baseInjector = inject(Injector);
+  private btnComponentRef: ComponentRef<GlobalDrawerFootTplComponentToken> = inject(GLOBAL_DRAWER_FOOT_TPL_TOKEN);
+  protected bsDrawerService: NzDrawerService = this.baseInjector.get(NzDrawerService);
+  private btnTpl: TemplateRef<any> = this.btnComponentRef.instance.componentTpl;
+  constructor() {
+    this.btnComponentRef.instance.sureEmitter.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => this.sure());
+    this.btnComponentRef.instance.cancelEmitter.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => this.cancel());
   }
 
   show(component: Type<NzSafeAny>, drawerOptions: NzDrawerOptions = {}, params: object = {}): Observable<NzSafeAny> {
@@ -34,13 +40,9 @@ export class DrawerWrapService {
       nzContentParams: {
         params
       },
-      nzFooter: this.btnTpl
+      nzFooter: drawerOptions.nzFooter || this.btnTpl
     };
     return _.merge(defaultOptions, drawerOptions);
-  }
-
-  setTemplate(btnTpl: TemplateRef<any>): void {
-    this.btnTpl = btnTpl;
   }
 
   sure(): void {
@@ -54,7 +56,8 @@ export class DrawerWrapService {
           } else {
             return this.drawerRef.close({ status: ModalBtnStatus.Ok, modalValue });
           }
-        })
+        }),
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe();
   }

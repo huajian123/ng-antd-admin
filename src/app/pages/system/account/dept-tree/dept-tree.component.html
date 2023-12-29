@@ -12,7 +12,7 @@
     <nz-tree-node *nzTreeNodeDef="let node" nzTreeNodePadding>
       <nz-tree-node-toggle nzTreeNodeNoopToggle></nz-tree-node-toggle>
       <nz-tree-node-option [nzDisabled]="node.disabled" [nzSelected]="selectListSelection.isSelected(node)" (nzClick)="clickNode(node)">
-        <span [innerHTML]="node.departmentName | nzHighlight : deptTreeSearchService.searchValue : 'i' : 'highlight'"></span>
+        <span [innerHTML]="node.departmentName | nzHighlight: deptTreeSearchService.searchValue : 'i' : 'highlight'"></span>
       </nz-tree-node-option>
     </nz-tree-node>
 
@@ -21,7 +21,7 @@
         <i nz-icon nzTreeNodeToggleRotateIcon nzType="caret-down"></i>
       </nz-tree-node-toggle>
       <nz-tree-node-option [nzDisabled]="node.disabled" [nzSelected]="selectListSelection.isSelected(node)" (nzClick)="clickNode(node)">
-        <span [innerHTML]="node.departmentName | nzHighlight : deptTreeSearchService.searchValue : 'i' : 'highlight'"></span>
+        <span [innerHTML]="node.departmentName | nzHighlight: deptTreeSearchService.searchValue : 'i' : 'highlight'"></span>
       </nz-tree-node-option>
     </nz-tree-node>
   </nz-tree-view>

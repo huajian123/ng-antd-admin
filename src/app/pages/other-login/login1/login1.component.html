@@ -21,11 +21,15 @@
   </div>
 
   <div class="absolute screen-full-width p-l-16 p-r-16" nz-row nzJustify="space-between" style="top: 16px">
-    <div *ngIf="!isOverModel" nz-col></div>
-    <div *ngIf="isOverModel" nz-col>
-      <img alt="ant" src="./assets/imgs/logo-color.svg" style="width: 32px" />
-      <span class="sp-16 m-l-8" style="color: white">AntDesignPro</span>
-    </div>
+    @if (!isOverModel) {
+      <div nz-col></div>
+    }
+    @if (isOverModel) {
+      <div nz-col>
+        <img alt="ant" src="./assets/imgs/logo-color.svg" style="width: 32px" />
+        <span class="sp-16 m-l-8" style="color: white">AntDesignPro</span>
+      </div>
+    }
     <div nz-col>
       <nz-switch [ngModel]="isNightTheme$ | async" [nzCheckedChildren]="checkedTemplate" [nzUnCheckedChildren]="unCheckedTemplate" (ngModelChange)="changeNight($event)"></nz-switch>
       <ng-template #checkedTemplate><img alt="" src="assets/imgs/login1/sun.svg" /></ng-template>

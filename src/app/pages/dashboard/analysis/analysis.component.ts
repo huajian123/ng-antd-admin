@@ -1,8 +1,23 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, inject, NgZone, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { Chart } from '@antv/g2';
 import { Pie, RingProgress, TinyColumn, TinyArea, Progress } from '@antv/g2plot';
+import { NumberLoopPipe } from '@shared/pipes/number-loop.pipe';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
 import { inNextTick } from 'ng-zorro-antd/core/util';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
 
 interface DataItem {
   name: string;
@@ -15,9 +30,27 @@ interface DataItem {
   selector: 'app-analysis',
   templateUrl: './analysis.component.html',
   styleUrls: ['./analysis.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    NzCardModule,
+    NzBreadCrumbModule,
+    NzGridModule,
+    NzIconModule,
+    NzButtonModule,
+    NzToolTipModule,
+    NzDividerModule,
+    NzTabsModule,
+    NzBadgeModule,
+    NzRadioModule,
+    NzDatePickerModule,
+    NzTypographyModule,
+    NzTableModule,
+    NumberLoopPipe
+  ]
 })
-export class AnalysisComponent implements OnInit, AfterViewInit {
+export class AnalysisComponent implements AfterViewInit {
+  destroyRef = inject(DestroyRef);
   cardPadding = { padding: '20px 24px 8px' };
   miniBarData = [497, 666, 219, 269, 274, 337, 81, 497, 666, 219, 269];
   miniAreaData = [264, 274, 284, 294, 284, 274, 264, 264, 274, 264, 264, 264, 284, 264, 254, 264, 244, 340, 264, 243, 226, 192];
@@ -98,10 +131,7 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
       english: 89
     }
   ];
-
-  constructor(private cdr: ChangeDetectorRef, private ngZone: NgZone) {}
-
-  ngOnInit(): void {}
+  private ngZone = inject(NgZone);
 
   initMinibar(): void {
     const data = this.miniBarData;
@@ -257,17 +287,19 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    inNextTick().subscribe(() => {
-      this.ngZone.runOutsideAngular(() => {
-        this.initMinibar();
-        this.initMiniArea();
-        this.initProgress();
-        this.initHistogram();
-        this.initSearchArea();
-        this.initSearchAvgArea();
-        this.initRing();
-        // this.initMiniRing();
+    inNextTick()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        this.ngZone.runOutsideAngular(() => {
+          this.initMinibar();
+          this.initMiniArea();
+          this.initProgress();
+          this.initHistogram();
+          this.initSearchArea();
+          this.initSearchAvgArea();
+          this.initRing();
+          // this.initMiniRing();
+        });
       });
-    });
   }
 }

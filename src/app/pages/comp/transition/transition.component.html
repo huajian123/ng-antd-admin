@@ -1,4 +1,4 @@
-<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+<app-page-header [pageHeaderInfo]="pageHeaderInfo" />
 <div class="normal-table-wrap">
   <button class="m-r-8" nz-button nzType="primary" (click)="currentComp = 'home'">主动画</button>
   <button class="m-r-8" nz-button nzType="primary" (click)="currentComp = 'EnterLeave'">进场/离场</button>
@@ -7,10 +7,18 @@
 
   <nz-card class="m-t-8">
     <div class="center">
-      <app-demo-main *ngIf="currentComp === 'home'"></app-demo-main>
-      <app-demo-on-enter-on-leave *ngIf="currentComp === 'EnterLeave'"></app-demo-on-enter-on-leave>
-      <app-demo-dynamic-params *ngIf="currentComp === 'Dynamic'"></app-demo-dynamic-params>
-      <app-experiments *ngIf="currentComp === 'Experiments'"></app-experiments>
+      @if (currentComp === 'home') {
+        <app-demo-main />
+      }
+      @if (currentComp === 'EnterLeave') {
+        <app-demo-on-enter-on-leave />
+      }
+      @if (currentComp === 'Dynamic') {
+        <app-demo-dynamic-params />
+      }
+      @if (currentComp === 'Experiments') {
+        <app-experiments />
+      }
     </div>
   </nz-card>
 </div>

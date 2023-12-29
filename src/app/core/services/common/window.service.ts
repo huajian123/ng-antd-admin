@@ -1,5 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Inject, Injectable, InjectionToken, PLATFORM_ID } from '@angular/core';
+import { inject, Injectable, InjectionToken, PLATFORM_ID } from '@angular/core';
 
 const WINDOW_TOKEN = new InjectionToken<Window>('A reference to the window object', {
   factory: () => window
@@ -11,8 +11,10 @@ const WINDOW_TOKEN = new InjectionToken<Window>('A reference to the window objec
 })
 export class WindowService {
   private readonly isBrowser: boolean;
+  private readonly platformId = inject(PLATFORM_ID);
+  private readonly window = inject(WINDOW_TOKEN);
 
-  constructor(@Inject(PLATFORM_ID) private platformId: object, @Inject(WINDOW_TOKEN) private window: Window) {
+  constructor() {
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
 

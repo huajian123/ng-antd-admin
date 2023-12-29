@@ -1,11 +1,14 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, TemplateRef, Renderer2, ElementRef } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
+import { Component, OnInit, ChangeDetectionStrategy, Input, TemplateRef, Renderer2, ElementRef, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { merge } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
-import { DestroyService } from '@core/services/common/destory.service';
+import { CollapsedNavWidth, SideNavWidth } from '@app/config/constant';
 import { Menu } from '@core/services/types';
 import { SplitNavStoreService } from '@store/common-store/split-nav-store.service';
 import { ThemeService } from '@store/common-store/theme.service';
+import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 @Component({
@@ -13,10 +16,16 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
   templateUrl: './footer-submit.component.html',
   styleUrls: ['./footer-submit.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DestroyService]
+  standalone: true,
+  imports: [NzCardModule, NgTemplateOutlet]
 })
 export class FooterSubmitComponent implements OnInit {
-  @Input() leftTpl!: TemplateRef<NzSafeAny>;
+  private splitNavStoreService = inject(SplitNavStoreService);
+  private themesService = inject(ThemeService);
+  private rd2 = inject(Renderer2);
+  private el = inject(ElementRef);
+
+  @Input() leftTpl: TemplateRef<NzSafeAny> | undefined;
   themesOptions$ = this.themesService.getThemesMode();
   isNightTheme$ = this.themesService.getIsNightTheme();
   isCollapsed$ = this.themesService.getIsCollapsed();
@@ -28,8 +37,7 @@ export class FooterSubmitComponent implements OnInit {
   isTopMode = false;
   leftMenuArray: Menu[] = [];
   isMixMode = false;
-
-  constructor(private destroy$: DestroyService, private splitNavStoreService: SplitNavStoreService, private themesService: ThemeService, private rd2: Renderer2, private el: ElementRef) {}
+  destroyRef = inject(DestroyRef);
 
   setWidth(width: number): void {
     const dom = this.el.nativeElement.querySelector('.ant-pro-footer-bar');
@@ -41,7 +49,7 @@ export class FooterSubmitComponent implements OnInit {
       tap(themesOptions => {
         this.hasLeftNav = themesOptions.hasNavArea;
         this.isTopMode = themesOptions.mode === 'top';
-        this.isMixMode = themesOptions.mode === 'mixi';
+        this.isMixMode = themesOptions.mode === 'mixin';
       })
     );
     const sub2$ = this.isCollapsed$.pipe(
@@ -60,14 +68,14 @@ export class FooterSubmitComponent implements OnInit {
       })
     );
     merge(sub1$, sub2$, sub3$, sub4$)
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {
         if (this.isOverMode || this.isTopMode || (this.isMixMode && !this.leftMenuArray)) {
           this.setWidth(0);
         } else {
           let width = 0;
           if (this.hasLeftNav) {
-            width = this.isCollapsed ? 48 : 208;
+            width = this.isCollapsed ? CollapsedNavWidth : SideNavWidth;
           }
           this.setWidth(width);
         }

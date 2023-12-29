@@ -1,4 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { NgSwitch, NgSwitchCase, NgSwitchDefault, NgFor } from '@angular/common';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import {
   bounceAnimation,
@@ -86,6 +88,11 @@ import {
   bounceInUpOnEnterAnimation,
   hueRotateAnimation
 } from 'angular-animations';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+
+import { AngularImgComponent } from '../angular-img/angular-img.component';
 
 @Component({
   selector: 'app-demo-main',
@@ -180,7 +187,9 @@ import {
     rotateAnimation({ anchor: 'rotate90', degrees: 90 }),
     hueRotateAnimation(),
     hueRotateAnimation({ anchor: 'hueButton', duration: 20000 })
-  ]
+  ],
+  standalone: true,
+  imports: [NgSwitch, NgSwitchCase, AngularImgComponent, NgSwitchDefault, NzSelectModule, FormsModule, NgFor, NzButtonModule, NzWaveModule]
 })
 export class DemoMainComponent {
   options = [
@@ -250,7 +259,7 @@ export class DemoMainComponent {
   animationWithState = false;
   hueBtnState = false;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  private cdr = inject(ChangeDetectorRef);
 
   animate(): void {
     this.animationState = false;

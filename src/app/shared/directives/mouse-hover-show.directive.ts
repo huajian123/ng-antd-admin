@@ -1,7 +1,8 @@
-import { Directive, ElementRef, HostListener, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, HostListener, inject, Renderer2 } from '@angular/core';
 
 @Directive({
-  selector: '[appMouseHoverShow]'
+  selector: '[appMouseHoverShow]',
+  standalone: true
 })
 export class MouseHoverShowDirective {
   @HostListener('mouseover')
@@ -14,9 +15,10 @@ export class MouseHoverShowDirective {
     this.mouse('none');
   }
 
-  constructor(private el: ElementRef, private renderer: Renderer2) {}
+  private el = inject(ElementRef);
+  private renderer = inject(Renderer2);
 
-  private mouse(dis: string) {
+  private mouse(dis: string): void {
     this.renderer.setStyle(this.el.nativeElement.lastChild, 'display', dis);
   }
 }

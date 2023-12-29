@@ -1,8 +1,27 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { ModalBtnStatus } from '@widget/base-modal';
 import { AppendFormModalService } from '@widget/biz-widget/form/append-form-modal/append-form-modal.service';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzListModule } from 'ng-zorro-antd/list';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NzProgressModule } from 'ng-zorro-antd/progress';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { NzTagModule } from 'ng-zorro-antd/tag';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
 
 /*
  * 任务对象
@@ -50,9 +69,33 @@ export enum TaskStateSearchCheckPeriodEnum {
   selector: 'app-append-form',
   templateUrl: './append-form.component.html',
   styleUrls: ['./append-form.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    PageHeaderComponent,
+    NzCardModule,
+    NzGridModule,
+    NzTypographyModule,
+    NzDividerModule,
+    NzRadioModule,
+    FormsModule,
+    NzButtonModule,
+    NzInputModule,
+    NzWaveModule,
+    NzIconModule,
+    NzListModule,
+    NzDropDownModule,
+    NzMenuModule,
+    NzTagModule,
+    NzProgressModule,
+    NzPaginationModule,
+    DatePipe,
+    NzFormModule,
+    ReactiveFormsModule
+  ]
 })
 export class AppendFormComponent implements OnInit {
+  destroyRef = inject(DestroyRef);
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '表单增删示例',
     breadcrumb: ['首页', '组件', 'Form', '表单增删'],
@@ -150,7 +193,32 @@ export class AppendFormComponent implements OnInit {
   ];
   taskCheckPeriodStateEnum = TaskStateSearchCheckPeriodEnum;
   loading = false;
-  constructor(private modalService: AppendFormModalService, private cdr: ChangeDetectorRef) {}
+
+  validateForm = this.fb.group({
+    formArray: this.fb.array([this.creatForm()])
+  });
+
+  get valuesArray(): FormArray {
+    return this.validateForm.controls['formArray'] as FormArray;
+  }
+  constructor(
+    private modalService: AppendFormModalService,
+    private cdr: ChangeDetectorRef,
+    private fb: FormBuilder
+  ) {}
+
+  creatForm(): FormGroup {
+    return this.fb.group({
+      detail: [null]
+    });
+  }
+
+  del(groupIndex: number): void {
+    this.valuesArray.removeAt(groupIndex);
+  }
+  addForm(): void {
+    this.valuesArray.push(this.creatForm());
+  }
 
   pageSizeChange(event: number): void {
     this.pageObj = { ...this.pageObj, pageSize: event };
@@ -168,14 +236,17 @@ export class AppendFormComponent implements OnInit {
   }
 
   add(): void {
-    this.modalService.show({ nzTitle: '新增' }).subscribe(({ modalValue, status }) => {
-      if (status === ModalBtnStatus.Cancel) {
-        return;
-      }
-      this.showAllTaskList.push(modalValue);
-      this.getData(1);
-      console.log(modalValue);
-    });
+    this.modalService
+      .show({ nzTitle: '新增' })
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(({ modalValue, status }) => {
+        if (status === ModalBtnStatus.Cancel) {
+          return;
+        }
+        this.showAllTaskList.push(modalValue);
+        this.getData(1);
+        console.log(modalValue);
+      });
   }
 
   onEllipsisChange(ellipsis: boolean): void {

@@ -1,4 +1,4 @@
-<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+<app-page-header [pageHeaderInfo]="pageHeaderInfo" />
 <div class="normal-table-wrap">
   <nz-card nzTitle="简单实例，服务器返回的文件地址统一，演示功能不会保存上传的文件">
     <nz-upload [nzAction]="uploadUrl" [nzFileList]="fileList" [nzLimit]="1" [nzName]="'document'" [nzShowButton]="true" [nzSize]="1024 * 5" (nzChange)="handleChange($event)">
@@ -34,6 +34,10 @@
   </nz-card>
 </div>
 <ng-template #combineTpl let-control>
-  <ng-container *ngIf="control.hasError('message')">{{ control.errors.message }}</ng-container>
-  <ng-container *ngIf="control.hasError('required')">必填项</ng-container>
+  @if (control.hasError('message')) {
+    {{ control.errors.message }}
+  }
+  @if (control.hasError('required')) {
+    必填项
+  }
 </ng-template>

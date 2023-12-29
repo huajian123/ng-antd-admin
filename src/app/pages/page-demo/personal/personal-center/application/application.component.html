@@ -1,26 +1,28 @@
 <div nz-row [nzGutter]="[16, 16]">
-  <div *ngFor="let item of 8 | numberLoop" nz-col [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXl]="12" [nzXs]="24" [nzXXl]="12">
-    <nz-card nzHoverable [nzActions]="[op1, op2, op3, op4]">
-      <nz-card-meta [nzAvatar]="nzAvatar" [nzTitle]="'Alipay'">
-        <ng-template #nzAvatar>
-          <nz-avatar nzSize="small" [nzSrc]="'assets/imgs/default_face.png'"></nz-avatar>
-        </ng-template>
-      </nz-card-meta>
-      <div class="card-info">
-        <div>
-          <p nz-typography nzType="secondary">活跃用户</p>
-          <p>
-            12
-            <span class="wan">万</span>
-          </p>
+  @for (item of 8 | numberLoop; track item) {
+    <div nz-col [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXl]="12" [nzXs]="24" [nzXXl]="12">
+      <nz-card nzHoverable [nzActions]="[op1, op2, op3, op4]">
+        <nz-card-meta [nzAvatar]="nzAvatar" [nzTitle]="'Alipay'">
+          <ng-template #nzAvatar>
+            <nz-avatar nzSize="small" [nzSrc]="'assets/imgs/default_face.png'"></nz-avatar>
+          </ng-template>
+        </nz-card-meta>
+        <div class="card-info">
+          <div>
+            <p nz-typography nzType="secondary">活跃用户</p>
+            <p>
+              12
+              <span class="wan">万</span>
+            </p>
+          </div>
+          <div>
+            <p nz-typography nzType="secondary">新增用户</p>
+            <p>{{ 1962 | number: '3.' }}</p>
+          </div>
         </div>
-        <div>
-          <p nz-typography nzType="secondary">新增用户</p>
-          <p>{{ 1962 | number : '3.' }}</p>
-        </div>
-      </div>
-    </nz-card>
-  </div>
+      </nz-card>
+    </div>
+  }
 </div>
 
 <ng-template #op1>

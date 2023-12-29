@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Injectable, SimpleChange } from '@angular/core';
-import { takeUntil } from 'rxjs/operators';
+import { ChangeDetectorRef, inject, Injectable } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { LazySelPeopleEnum } from '@app/pages/comp/lazy/lazy-targ-comp/lazy-targ-comp.component';
 import { AdDirective } from '@shared/directives/ad.directive';
@@ -15,7 +15,7 @@ export class LazyServiceService {
     this._adHost = value;
   }
 
-  constructor(public cdr: ChangeDetectorRef) {}
+  cdr = inject(ChangeDetectorRef);
 
   async create(selPerson: LazySelPeopleEnum = LazySelPeopleEnum.YiLin): Promise<void> {
     await this.lazyLoadCard(selPerson);
@@ -25,14 +25,16 @@ export class LazyServiceService {
   async lazyLoadCard(selPerson: LazySelPeopleEnum = LazySelPeopleEnum.YiLin): Promise<void> {
     const viewContainerRef = this._adHost.viewContainerRef;
     const { LazyTargCompComponent } = await import('./lazy-targ-comp/lazy-targ-comp.component');
-    const { instance } = viewContainerRef.createComponent(LazyTargCompComponent);
-    instance.purChoosePeople = selPerson;
-    instance.currentPeople.pipe(takeUntil(instance.destroy$)).subscribe(() => {
-      this.create(instance.purChoosePeople);
+    const componentRef = viewContainerRef.createComponent(LazyTargCompComponent);
+    // 使用setInput api可以被onchange钩子管理
+    componentRef.setInput('purChoosePeople', selPerson);
+    // 传递destroy引用
+    componentRef.instance.currentPeople.pipe(takeUntilDestroyed(componentRef.instance.destroyRef)).subscribe(() => {
+      this.create(componentRef.instance.purChoosePeople);
     });
     // 实现OnChange钩子
-    (instance as any).ngOnChanges({
-      purChoosePeople: new SimpleChange(null, instance.purChoosePeople, true)
-    });
+    // (instance as any).ngOnChanges({
+    //   purChoosePeople: new SimpleChange(null, instance.purChoosePeople, true)
+    // });
   }
 }

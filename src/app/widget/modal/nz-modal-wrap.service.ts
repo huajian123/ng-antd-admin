@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -6,9 +6,12 @@ import { ConfirmType, ModalOptions, NzModalRef, NzModalService } from 'ng-zorro-
 
 import { ModalDragService } from './modal-drag.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class NzModalWrapService {
-  constructor(public modal: NzModalService, public modalDragService: ModalDragService) {}
+  modal = inject(NzModalService);
+  modalDragService = inject(ModalDragService);
 
   /**
    * 创建对话框, 增加可拖拽功能
@@ -51,7 +54,7 @@ export class NzModalWrapService {
     return this.createModalWidthDrag(options, c => this.modal.warning(c));
   }
 
-  protected createModalWidthDrag<T, R = NzSafeAny>(config: ModalOptions<T, R>, create: (newConfig: ModalOptions<T, R>) => NzModalRef<T, R>) {
+  protected createModalWidthDrag<T, R = NzSafeAny>(config: ModalOptions<T, R>, create: (newConfig: ModalOptions<T, R>) => NzModalRef<T, R>): NzModalRef {
     const wrapCls = this.modalDragService.getRandomCls();
     const newConfig = this.createModalConfig(config, wrapCls);
     const modalRef = create(newConfig);

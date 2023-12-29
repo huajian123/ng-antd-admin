@@ -1,20 +1,46 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { NgTemplateOutlet, NgStyle } from '@angular/common';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { concatMap } from 'rxjs/operators';
 
 import { Menu } from '@core/services/types';
 import { MenusService } from '@services/system/menus.service';
 import { PutPermissionParam, RoleService } from '@services/system/role.service';
-import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { FooterSubmitComponent } from '@shared/components/footer-submit/footer-submit.component';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { fnAddTreeDataGradeAndLeaf, fnFlatDataHasParentToTree, fnFlattenTreeDataByDataList } from '@utils/treeTableTools';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzResultModule } from 'ng-zorro-antd/result';
 
 @Component({
   selector: 'app-set-role',
   templateUrl: './set-role.component.html',
   styleUrls: ['./set-role.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  standalone: true,
+  imports: [
+    PageHeaderComponent,
+    NzCardModule,
+    NzCheckboxModule,
+    FormsModule,
+    NzIconModule,
+    NzButtonModule,
+    NzDividerModule,
+    NzResultModule,
+    NgTemplateOutlet,
+    NgStyle,
+    FooterSubmitComponent,
+    NzWaveModule
+  ]
 })
 export class SetRoleComponent implements OnInit {
   pageHeaderInfo: Partial<PageHeaderType> = {
@@ -24,17 +50,15 @@ export class SetRoleComponent implements OnInit {
   };
   authCodeArr: string[] = [];
   permissionList: Array<Menu & { isOpen?: boolean; checked?: boolean }> = [];
-  id!: number;
   roleName!: string;
+  destroyRef = inject(DestroyRef);
+  @Input({ required: true }) id!: string; // 从路由中获取的角色id，ng16支持的新特性
 
-  constructor(
-    private dataService: RoleService,
-    private cdr: ChangeDetectorRef,
-    private menusService: MenusService,
-    private routeInfo: ActivatedRoute,
-    private router: Router,
-    public message: NzMessageService
-  ) {}
+  private dataService = inject(RoleService);
+  private menusService = inject(MenusService);
+  private router = inject(Router);
+  private message = inject(NzMessageService);
+  private cdr = inject(ChangeDetectorRef);
 
   // 初始化数据
   initPermission(): void {
@@ -46,7 +70,8 @@ export class SetRoleComponent implements OnInit {
           this.authCodeArr = authCodeArr;
           // 获取所有菜单
           return this.menusService.getMenuList({ pageNum: 0, pageSize: 0 });
-        })
+        }),
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe(response => {
         // isOpen表示 节点是否展开
@@ -61,10 +86,13 @@ export class SetRoleComponent implements OnInit {
   }
 
   getRoleName(): void {
-    this.dataService.getRolesDetail(this.id).subscribe(({ roleName }) => {
-      this.pageHeaderInfo = { ...this.pageHeaderInfo, ...{ desc: `当前角色：${roleName}` } };
-      this.cdr.markForCheck();
-    });
+    this.dataService
+      .getRolesDetail(+this.id)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(({ roleName }) => {
+        this.pageHeaderInfo = { ...this.pageHeaderInfo, ...{ desc: `当前角色：${roleName}` } };
+        this.cdr.markForCheck();
+      });
   }
 
   back(): void {
@@ -74,19 +102,22 @@ export class SetRoleComponent implements OnInit {
   submit(): void {
     const temp = [...this.permissionList];
     const flatArray = fnFlattenTreeDataByDataList(temp);
-    const seledAuthArray: number[] = [];
+    const seledAuthArray: string[] = [];
     flatArray.forEach(item => {
       if (item['checked']) {
-        seledAuthArray.push(+item.id);
+        seledAuthArray.push(`${item.id}`);
       }
     });
     const param: PutPermissionParam = {
       permissionIds: seledAuthArray,
       roleId: +this.id
     };
-    this.dataService.updatePermission(param).subscribe(() => {
-      this.message.success('设置成功，重新登录后生效');
-    });
+    this.dataService
+      .updatePermission(param)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        this.message.success('设置成功，重新登录后生效');
+      });
   }
 
   _onReuseInit(): void {
@@ -94,10 +125,7 @@ export class SetRoleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.routeInfo.queryParams.subscribe(res => {
-      this.id = res['id'];
-      this.getRoleName();
-      this.initPermission();
-    });
+    this.getRoleName();
+    this.initPermission();
   }
 }

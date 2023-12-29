@@ -9,7 +9,7 @@ module.exports = {
   bracketSpacing: true,
   proseWrap: 'preserve',
   trailingComma: 'none',
-  endOfLine: 'lf',
+  endOfLine: 'auto',
   // attributeGroups: ["^class$", "^(id|name)$", "$DEFAULT", "^aria-"]
   "attributeGroups": [
     "$ANGULAR_STRUCTURAL_DIRECTIVE",

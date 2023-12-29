@@ -1,0 +1,8 @@
+<ng-template #componentTpl>
+  <span class="hover-blue full-height flex-auto text-right d-i-b" (click)="fullScreenIconClick($event)">
+    <i class="m-r-8" nz-icon nzTheme="outline" [nzType]="(modalFullStatus$ | async) ? 'fullscreen-exit' : 'fullscreen'"></i>
+  </span>
+  <span class="hover-red full-height flex-auto d-i-b m-r-15" (click)="closeModal()">
+    <i nz-icon nzTheme="outline" nzType="close"></i>
+  </span>
+</ng-template>

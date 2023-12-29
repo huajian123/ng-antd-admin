@@ -25,10 +25,11 @@
       nzTooltipPlacement="bottom"
       [nzTooltipTitle]="toogleFullScreenDir.isFullscreenFlag ? '全屏' : '退出全屏'"
     >
-      <i *ngIf="toogleFullScreenDir.isFullscreenFlag; else exitFullTpl" nz-icon nzTheme="outline" nzType="fullscreen"></i>
-      <ng-template #exitFullTpl>
+      @if (toogleFullScreenDir.isFullscreenFlag) {
+        <i nz-icon nzTheme="outline" nzType="fullscreen"></i>
+      } @else {
         <i nz-icon nzTheme="outline" nzType="fullscreen-exit"></i>
-      </ng-template>
+      }
     </span>
 
     <span class="bst-header-icon" nz-dropdown nzPlacement="bottomRight" nzTrigger="click" [nzDropdownMenu]="noticeMenu">
@@ -43,41 +44,31 @@
     <nz-dropdown-menu #userSettingMenu>
       <ul nz-menu>
         <li nz-menu-item (click)="goPage('personal-center')">
-          <a>
-            <i class="m-r-8" nz-icon nzTheme="outline" nzType="user"></i>
-            <span>个人中心</span>
-          </a>
+          <i class="m-r-8" nz-icon nzTheme="outline" nzType="user"></i>
+          <span>个人中心</span>
         </li>
         <li nz-menu-item (click)="goPage('personal-setting')">
-          <a>
-            <i class="m-r-8" nz-icon nzTheme="outline" nzType="setting"></i>
-            <span>个人设置</span>
-          </a>
+          <i class="m-r-8" nz-icon nzTheme="outline" nzType="setting"></i>
+          <span>个人设置</span>
         </li>
         <li nz-menu-item (click)="changePassWorld()">
-          <a>
-            <i class="m-r-8" nz-icon nzTheme="outline" nzType="lock"></i>
-            <span>修改密码</span>
-          </a>
+          <i class="m-r-8" nz-icon nzTheme="outline" nzType="lock"></i>
+          <span>修改密码</span>
         </li>
         <li nz-menu-divider></li>
         <li nz-menu-item (click)="clean()">
-          <a>
-            <i class="m-r-8" nz-icon nzTheme="outline" nzType="clear"></i>
-            <span>清除缓存</span>
-          </a>
+          <i class="m-r-8" nz-icon nzTheme="outline" nzType="clear"></i>
+          <span>清除缓存</span>
         </li>
         <li nz-menu-item (click)="lockScreen()">
-          <a>
-            <i class="m-r-8" nz-icon nzTheme="outline" nzType="lock"></i>
-            <span>锁定屏幕</span>
-          </a>
+          <i class="m-r-8" nz-icon nzTheme="outline" nzType="lock"></i>
+          <span>锁定屏幕</span>
         </li>
         <li nz-menu-item>
-          <a (click)="goLogin()">
+          <div (click)="goLogin()">
             <i class="m-r-8" nz-icon nzTheme="outline" nzType="logout"></i>
             <span>退出登录</span>
-          </a>
+          </div>
         </li>
       </ul>
     </nz-dropdown-menu>

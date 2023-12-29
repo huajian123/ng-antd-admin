@@ -1,15 +1,24 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { NonNullableFormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
+import { NonNullableFormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { environment } from '@env/environment';
-import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
+import { WaterMarkComponent } from '@shared/components/water-mark/water-mark.component';
+import { EditorComponent } from '@tinymce/tinymce-angular';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzGridModule } from 'ng-zorro-antd/grid';
 
 @Component({
   selector: 'app-rich-text',
   templateUrl: './rich-text.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [PageHeaderComponent, NzCardModule, WaterMarkComponent, FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, EditorComponent]
 })
-export class RichTextComponent implements OnInit {
+export class RichTextComponent {
+  private fb = inject(NonNullableFormBuilder);
+
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '富文本，人们总是喜欢用花里胡哨的文字，表达自己空虚的情感',
     breadcrumb: ['首页', '扩展功能', '富文本']
@@ -46,8 +55,4 @@ export class RichTextComponent implements OnInit {
     // image_advtab: true,
     // imagetools_toolbar: 'rotateleft rotateright | flipv fliph | editimage imageoptions',
   };
-
-  constructor(private fb: NonNullableFormBuilder) {}
-
-  ngOnInit(): void {}
 }

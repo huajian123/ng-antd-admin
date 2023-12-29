@@ -10,6 +10,7 @@
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
+    "esModuleInterop": true,
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
@@ -36,7 +37,6 @@
       "@shared/*": ["src/app/shared/*"],
       "@assets/*": ["src/assets/*"]
     },
-    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true
   },
   "angularCompilerOptions": {

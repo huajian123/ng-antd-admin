@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -23,7 +23,7 @@ export interface Permission {
 
 // 更新权限参数接口
 export interface PutPermissionParam {
-  permissionIds: number[];
+  permissionIds: string[];
   roleId: number;
 }
 
@@ -40,7 +40,7 @@ export interface Role {
   providedIn: 'root'
 })
 export class RoleService {
-  constructor(public http: BaseHttpService) {}
+  http = inject(BaseHttpService);
 
   public getRoles(param: SearchCommonVO<Role>): Observable<PageInfo<Role>> {
     return this.http.post('/role/list/', param);
@@ -62,7 +62,7 @@ export class RoleService {
     return this.http.put('/role/', param);
   }
 
-  public getPermissionById(id: number): Observable<string[]> {
+  public getPermissionById(id: string): Observable<string[]> {
     return this.http.get(`/permission/${id}/`);
   }
 

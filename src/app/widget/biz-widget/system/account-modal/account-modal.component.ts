@@ -1,8 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
-import { DestroyService } from '@core/services/common/destory.service';
 import { OptionsInterface } from '@core/services/types';
 import { ValidatorsService } from '@core/services/validators/validators.service';
 import { User } from '@services/system/account.service';
@@ -12,23 +11,36 @@ import { fnCheckForm } from '@utils/tools';
 import { fnAddTreeDataGradeAndLeaf, fnFlatDataHasParentToTree } from '@utils/treeTableTools';
 import { NzTreeNodeOptions } from 'ng-zorro-antd/core/tree';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { NzModalRef } from 'ng-zorro-antd/modal';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NZ_MODAL_DATA, NzModalRef } from 'ng-zorro-antd/modal';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 
 @Component({
   selector: 'app-account-modal',
   templateUrl: './account-modal.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DestroyService]
+  standalone: true,
+  imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzRadioModule, NzSwitchModule, NzTreeSelectModule, NzSelectModule]
 })
 export class AccountModalComponent implements OnInit {
   addEditForm!: FormGroup;
-  params!: User;
+  readonly nzModalData: User = inject(NZ_MODAL_DATA);
   roleOptions: OptionsInterface[] = [];
   isEdit = false;
   value?: string;
   deptNodes: NzTreeNodeOptions[] = [];
 
-  constructor(private modalRef: NzModalRef, private fb: FormBuilder, private validatorsService: ValidatorsService, private roleService: RoleService, private deptService: DeptService) {}
+  private fb = inject(FormBuilder);
+  private validatorsService = inject(ValidatorsService);
+  private roleService = inject(RoleService);
+  private deptService = inject(DeptService);
+
+  constructor(private modalRef: NzModalRef) {}
 
   // 此方法为如果有异步数据需要加载，则在该方法中添加
   protected getAsyncFnData(modalValue: NzSafeAny): Observable<NzSafeAny> {
@@ -93,10 +105,10 @@ export class AccountModalComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.initForm();
-    this.isEdit = Object.keys(this.params).length > 0;
+    this.isEdit = !!this.nzModalData;
     await Promise.all([this.getRoleList(), this.getDeptList()]);
     if (this.isEdit) {
-      this.addEditForm.patchValue(this.params);
+      this.addEditForm.patchValue(this.nzModalData);
       this.addEditForm.controls['password'].disable();
     }
   }

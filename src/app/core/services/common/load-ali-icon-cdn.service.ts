@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 
 import { NzIconService } from 'ng-zorro-antd/icon';
 
@@ -7,7 +7,7 @@ import { NzIconService } from 'ng-zorro-antd/icon';
   providedIn: 'root'
 })
 export class LoadAliIconCdnService {
-  constructor(private iconService: NzIconService) {}
+  private iconService = inject(NzIconService);
 
   load(): void {
     // 这个js你要自己去阿里图标库的官网自己生成

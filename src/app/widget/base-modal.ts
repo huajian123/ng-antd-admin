@@ -1,8 +1,12 @@
 import { DragDrop, DragRef } from '@angular/cdk/drag-drop';
-import { Injectable, Injector, Renderer2, RendererFactory2, TemplateRef, Type } from '@angular/core';
+import { ComponentRef, DestroyRef, Inject, inject, Injectable, Injector, Renderer2, RendererFactory2, TemplateRef, Type } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Observable, of } from 'rxjs';
 import { first, tap } from 'rxjs/operators';
 
+import { GLOBAL_TPL_MODAL_ACTION_TOKEN } from '@app/tpl/global-modal-btn-tpl/global-modal-btn-tpl-token';
+import { GlobalModalBtnTplComponentToken } from '@app/tpl/global-modal-btn-tpl/global-modal-btn-tpl.component';
+import { ModalFullStatusStoreService } from '@store/common-store/modal-full-status-store.service';
 import { fnGetUUID } from '@utils/tools';
 import * as _ from 'lodash';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -20,28 +24,41 @@ export const enum ModalBtnStatus {
 
 // 组件实例需要继承此类
 export abstract class BasicConfirmModalComponent {
-  protected params: NzSafeAny; // service传给component instance的参数
   protected constructor(protected modalRef: NzModalRef) {}
 
   protected abstract getCurrentValue(): NzSafeAny;
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ModalWrapService {
   protected bsModalService: NzModalService;
   private btnTpl!: TemplateRef<any>;
-  fullScreenFlag = false;
   private renderer: Renderer2;
+  destroyRef = inject(DestroyRef);
 
-  constructor(private baseInjector: Injector, public dragDrop: DragDrop, rendererFactory: RendererFactory2) {
+  private baseInjector = inject(Injector);
+  private modalFullStatusStoreService = inject(ModalFullStatusStoreService);
+  dragDrop = inject(DragDrop);
+  rendererFactory = inject(RendererFactory2);
+  private btnComponentRef: ComponentRef<GlobalModalBtnTplComponentToken> = inject(GLOBAL_TPL_MODAL_ACTION_TOKEN);
+
+  constructor() {
     this.bsModalService = this.baseInjector.get(NzModalService);
-    this.renderer = rendererFactory.createRenderer(null, null);
+    this.renderer = this.rendererFactory.createRenderer(null, null);
+    this.btnTpl = this.btnComponentRef.instance.componentTpl;
+    this.modalFullStatusStoreService
+      .getModalFullStatusStore()
+      .pipe(takeUntilDestroyed())
+      .subscribe(fullStatus => {
+        this.fullScreenIconClick(fullStatus);
+      });
   }
 
-  fullScreenIconClick(): void {
-    this.fullScreenFlag = !this.fullScreenFlag;
+  fullScreenIconClick(fullStatus: boolean): void {
     this.bsModalService.openModals.forEach(modal => {
-      if (this.fullScreenFlag) {
+      if (fullStatus) {
         this.renderer.addClass(modal.containerInstance['host'].nativeElement, 'fullscreen-modal');
       } else {
         this.renderer.removeClass(modal.containerInstance['host'].nativeElement, 'fullscreen-modal');
@@ -49,15 +66,12 @@ export class ModalWrapService {
     });
   }
 
-  setTemplate(btnTpl: TemplateRef<any>): void {
-    this.btnTpl = btnTpl;
-  }
-
-  protected getRandomCls() {
+  protected getRandomCls(): string {
     return `NZ-MODAL-WRAP-CLS-${fnGetUUID()}`;
   }
 
   private cancelCallback(modalButtonOptions: ModalButtonOptions): void {
+    this.modalFullStatusStoreService.setModalFullStatusStore(false);
     return modalButtonOptions['modalRef'].destroy({ status: ModalBtnStatus.Cancel, value: null });
   }
 
@@ -66,12 +80,14 @@ export class ModalWrapService {
       .getCurrentValue()
       .pipe(
         tap(modalValue => {
+          this.modalFullStatusStoreService.setModalFullStatusStore(false);
           if (!modalValue) {
             return of(false);
           } else {
             return modalButtonOptions['modalRef'].destroy({ status: ModalBtnStatus.Ok, modalValue });
           }
-        })
+        }),
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe();
   }
@@ -140,11 +156,11 @@ export class ModalWrapService {
   }
 
   // 创建对话框的配置项
-  createModalConfig(component: Type<NzSafeAny>, modalOptions: ModalOptions = {}, params: object = {}, wrapCls: string): ModalOptions {
+  createModalConfig<T>(component: Type<NzSafeAny>, modalOptions: ModalOptions = {}, params: T, wrapCls: string): ModalOptions {
     const defaultOptions: ModalOptions = {
       nzTitle: '',
       nzContent: component,
-      nzCloseIcon: this.btnTpl,
+      nzCloseIcon: modalOptions.nzCloseIcon || this.btnTpl,
       nzMaskClosable: false,
       nzFooter: [
         {
@@ -167,16 +183,14 @@ export class ModalWrapService {
       },
       nzClosable: true,
       nzWidth: 720,
-      nzComponentParams: {
-        params
-      } // 参数中的属性将传入nzContent实例中
+      nzData: params // 参数中的属性将传入nzContent实例中
     };
     const newOptions = _.merge(defaultOptions, modalOptions);
     newOptions.nzWrapClassName = `${newOptions.nzWrapClassName || ''} ${wrapCls}`;
     return newOptions;
   }
 
-  show(component: Type<NzSafeAny>, modalOptions: ModalOptions = {}, params: object = {}): Observable<NzSafeAny> {
+  show<T>(component: Type<NzSafeAny>, modalOptions: ModalOptions = {}, params?: T): Observable<NzSafeAny> {
     const wrapCls = this.getRandomCls();
     const newOptions = this.createModalConfig(component, modalOptions, params, wrapCls);
     const modalRef = this.bsModalService.create(newOptions);
@@ -189,7 +203,7 @@ export class ModalWrapService {
       tap(() => {
         drag!.dispose();
         drag = null;
-        this.fullScreenFlag = false;
+        this.modalFullStatusStoreService.setModalFullStatusStore(false);
       })
     );
   }

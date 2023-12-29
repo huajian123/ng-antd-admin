@@ -1,24 +1,28 @@
-import { Component, OnInit, ChangeDetectionStrategy, AfterViewInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, AfterViewInit } from '@angular/core';
 
 import { getInstanceByDom, connect } from 'echarts';
 import { EChartsOption } from 'echarts/types/dist/echarts';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 @Component({
   selector: 'app-connect-charts',
   template: `
     <div nz-row>
       <div nz-col nzSpan="12">
-        <h5> id=chart1 </h5>
-        <div id="chart1" echarts [options]="options" theme="macarons" class="demo-chart"></div>
+        <h5>id=chart1</h5>
+        <div id="chart1" class="demo-chart" echarts theme="macarons" [options]="options"></div>
       </div>
       <div nz-col nzSpan="12">
-        <h5> id=chart2 </h5>
-        <div id="chart2" echarts [options]="options" theme="macarons" class="demo-chart"></div>
+        <h5>id=chart2</h5>
+        <div id="chart2" class="demo-chart" echarts theme="macarons" [options]="options"></div>
       </div>
     </div>
   `,
   styles: [],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NzGridModule, NgxEchartsModule]
 })
 export class ConnectChartsComponent implements AfterViewInit {
   options: EChartsOption = {
@@ -58,7 +62,6 @@ export class ConnectChartsComponent implements AfterViewInit {
       }
     ]
   };
-  constructor() {}
 
   ngAfterViewInit(): void {
     setTimeout(() => {

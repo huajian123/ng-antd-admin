@@ -1,20 +1,27 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
 
-import { PageHeaderType } from '@shared/components/page-header/page-header.component';
-import { NzImageService } from 'ng-zorro-antd/image';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzImageService, NzImageModule } from 'ng-zorro-antd/image';
+import { NzSpaceModule } from 'ng-zorro-antd/space';
 
 @Component({
   selector: 'app-img-preview',
   templateUrl: './img-preview.component.html',
   styleUrls: ['./img-preview.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [PageHeaderComponent, NzImageModule, NzSpaceModule, NzButtonModule, NzWaveModule]
 })
-export class ImgPreviewComponent implements OnInit {
+export class ImgPreviewComponent {
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '图片预览',
     breadcrumb: ['首页', '功能', '图片预览']
   };
-  constructor(private nzImageService: NzImageService) {}
+
+  private nzImageService = inject(NzImageService);
+
   onClick(): void {
     const images = [
       {
@@ -32,5 +39,4 @@ export class ImgPreviewComponent implements OnInit {
     ];
     this.nzImageService.preview(images, { nzZoom: 1.5, nzRotate: 0 });
   }
-  ngOnInit(): void {}
 }

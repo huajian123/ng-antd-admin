@@ -1,15 +1,43 @@
-import { ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
+import { WaterMarkComponent } from '@shared/components/water-mark/water-mark.component';
 import { fnCheckForm } from '@utils/tools';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 @Component({
   selector: 'app-base',
   templateUrl: './base.component.html',
   styleUrls: ['./base.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    PageHeaderComponent,
+    NzCardModule,
+    WaterMarkComponent,
+    FormsModule,
+    NzFormModule,
+    ReactiveFormsModule,
+    NzGridModule,
+    NzInputModule,
+    NzDatePickerModule,
+    NzInputNumberModule,
+    NzRadioModule,
+    NzSelectModule,
+    NzButtonModule,
+    NzWaveModule
+  ]
 })
 export class BaseComponent implements OnInit {
   @ViewChild('dragTpl', { static: true }) dragTpl!: TemplateRef<NzSafeAny>;
@@ -30,10 +58,8 @@ export class BaseComponent implements OnInit {
     if (!fnCheckForm(this.validateForm)) {
       return;
     }
-    console.log(this.validateForm.value);
   }
-
-  constructor(private fb: FormBuilder) {}
+  private fb = inject(FormBuilder);
 
   initForm(): void {
     this.validateForm = this.fb.group({

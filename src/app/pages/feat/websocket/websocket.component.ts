@@ -1,16 +1,28 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy, AfterViewInit, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormsModule } from '@angular/forms';
 
-import { ip, port } from '@env/environment.prod';
-import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { ip } from '@env/environment.prod';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzResultModule } from 'ng-zorro-antd/result';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { webSocket } from 'rxjs/webSocket';
 
 @Component({
   selector: 'app-websocket',
   templateUrl: './websocket.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [PageHeaderComponent, NzGridModule, NzInputModule, FormsModule, NzButtonModule, NzWaveModule, NzCardModule, NzResultModule, NzTypographyModule]
 })
-export class WebsocketComponent implements OnInit, OnDestroy {
+export class WebsocketComponent implements OnDestroy, AfterViewInit {
   concate = true;
+  destroyRef = inject(DestroyRef);
   // https://github.com/ReactiveX/rxjs/issues/4166
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: 'websocket',
@@ -20,7 +32,7 @@ export class WebsocketComponent implements OnInit, OnDestroy {
   result: string[] = [];
   msg = '';
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  private cdr = inject(ChangeDetectorRef);
 
   send(): void {
     this.subject.next(this.msg);
@@ -32,10 +44,8 @@ export class WebsocketComponent implements OnInit, OnDestroy {
     this.concate = false;
   }
 
-  ngOnInit(): void {}
-
   ngAfterViewInit(): void {
-    this.subject.subscribe(res => {
+    this.subject.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => {
       // @ts-ignore
       this.result.push(res.message);
       this.result = [...this.result];

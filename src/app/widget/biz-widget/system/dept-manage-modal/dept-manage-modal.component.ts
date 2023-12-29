@@ -1,23 +1,29 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
+import { Dept } from '@services/system/dept.service';
 import { fnCheckForm } from '@utils/tools';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { NzModalRef } from 'ng-zorro-antd/modal';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NZ_MODAL_DATA, NzModalRef } from 'ng-zorro-antd/modal';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
 
 @Component({
   selector: 'app-dept-manage-modal',
   templateUrl: './dept-manage-modal.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzRadioModule]
 })
 export class DeptManageModalComponent implements OnInit {
   addEditForm!: FormGroup;
-  params: object;
+  readonly nzModalData: Dept = inject(NZ_MODAL_DATA);
+  private fb = inject(FormBuilder);
 
-  constructor(private modalRef: NzModalRef, private fb: FormBuilder) {
-    this.params = {};
-  }
+  constructor(private modalRef: NzModalRef) {}
 
   initForm(): void {
     this.addEditForm = this.fb.group({
@@ -41,8 +47,8 @@ export class DeptManageModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    if (Object.keys(this.params).length > 0) {
-      this.addEditForm.patchValue(this.params);
+    if (!!this.nzModalData) {
+      this.addEditForm.patchValue(this.nzModalData);
     }
   }
 }

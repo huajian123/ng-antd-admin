@@ -1,34 +1,34 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
+import { NgxEchartsModule } from 'ngx-echarts';
 import LinearGradient from 'zrender/lib/graphic/LinearGradient';
 
 @Component({
   selector: 'app-events-charts',
   template: `
     <div
+      class="demo-chart"
       echarts
       [options]="options"
-      class="demo-chart"
-      (chartInit)="onChartEvent($event, 'chartInit')"
       (chartClick)="onChartEvent($event, 'chartClick')"
-      (chartDblClick)="onChartEvent($event, 'chartDblClick')"
-      (chartMouseDown)="onChartEvent($event, 'chartMouseDown')"
-      (chartMouseUp)="onChartEvent($event, 'chartMouseUp')"
-      (chartMouseOver)="onChartEvent($event, 'chartMouseOver')"
-      (chartMouseOut)="onChartEvent($event, 'chartMouseOut')"
-      (chartGlobalOut)="onChartEvent($event, 'chartGlobalOut')"
       (chartContextMenu)="onChartEvent($event, 'chartContextMenu')"
       (chartDataZoom)="onChartEvent($event, 'chartDataZoom')"
-    >
-    </div>
+      (chartDblClick)="onChartEvent($event, 'chartDblClick')"
+      (chartGlobalOut)="onChartEvent($event, 'chartGlobalOut')"
+      (chartInit)="onChartEvent($event, 'chartInit')"
+      (chartMouseDown)="onChartEvent($event, 'chartMouseDown')"
+      (chartMouseOut)="onChartEvent($event, 'chartMouseOut')"
+      (chartMouseOver)="onChartEvent($event, 'chartMouseOver')"
+      (chartMouseUp)="onChartEvent($event, 'chartMouseUp')"
+    ></div>
   `,
   styles: [],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NgxEchartsModule]
 })
 export class EventsChartsComponent implements OnInit {
   options: any;
-
-  constructor() {}
 
   ngOnInit(): void {
     const dataAxis = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'];

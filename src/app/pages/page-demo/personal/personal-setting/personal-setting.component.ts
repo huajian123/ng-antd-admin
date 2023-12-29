@@ -1,14 +1,22 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { NgClass } from '@angular/common';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { AdComponent, DynamicComponent } from '@core/services/types';
 import { AdDirective } from '@shared/directives/ad.directive';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzMenuModeType } from 'ng-zorro-antd/menu/menu.types';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
 
 import { BaseComponent } from './base/base.component';
 import { BindComponent } from './bind/bind.component';
 import { NoticeComponent } from './notice/notice.component';
 import { SafeComponent } from './safe/safe.component';
+import { AdDirective as AdDirective_1 } from '../../../../shared/directives/ad.directive';
 
 interface TabInterface {
   key: string;
@@ -19,7 +27,9 @@ interface TabInterface {
   selector: 'app-personal-setting',
   templateUrl: './personal-setting.component.html',
   styleUrls: ['./personal-setting.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NzCardModule, NgClass, NzMenuModule, NzButtonModule, NzGridModule, NzTypographyModule, AdDirective_1]
 })
 export class PersonalSettingComponent implements OnInit {
   @ViewChild(AdDirective, { static: true }) adHost!: AdDirective;
@@ -30,6 +40,7 @@ export class PersonalSettingComponent implements OnInit {
     { key: 'bind', component: new DynamicComponent(BindComponent, { label: '账号绑定' }) },
     { key: 'notice', component: new DynamicComponent(NoticeComponent, { label: '新消息通知' }) }
   ];
+  destroyRef = inject(DestroyRef);
   menus: Array<{ key: string; title: string; selected?: boolean }> = [
     {
       key: 'base',
@@ -54,7 +65,8 @@ export class PersonalSettingComponent implements OnInit {
   ];
   currentTitle: string = this.menus[0].title;
 
-  constructor(private breakpointObserver: BreakpointObserver, private cdr: ChangeDetectorRef) {}
+  private breakpointObserver = inject(BreakpointObserver);
+  private cdr = inject(ChangeDetectorRef);
 
   to(item: { key: string; title: string; selected?: boolean }): void {
     const selMenu = this.settingComponent.find(({ key }) => {
@@ -68,10 +80,13 @@ export class PersonalSettingComponent implements OnInit {
   }
 
   obBreakPoint(): void {
-    this.breakpointObserver.observe(['(max-width: 767px)']).subscribe(result => {
-      this.tabModel = result.matches ? 'horizontal' : 'inline';
-      this.cdr.markForCheck();
-    });
+    this.breakpointObserver
+      .observe(['(max-width: 767px)'])
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(result => {
+        this.tabModel = result.matches ? 'horizontal' : 'inline';
+        this.cdr.markForCheck();
+      });
   }
 
   ngOnInit(): void {

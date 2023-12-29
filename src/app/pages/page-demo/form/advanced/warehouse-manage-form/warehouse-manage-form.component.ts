@@ -1,9 +1,13 @@
-import { Component, OnInit, ChangeDetectionStrategy, forwardRef } from '@angular/core';
-import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
+import { Component, OnInit, ChangeDetectionStrategy, forwardRef, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 import { fnCheckForm } from '@utils/tools';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzInputModule } from 'ng-zorro-antd/input';
 
 // 不要在这里定义，这里只是写个例子
 interface WareHouseManageObj {
@@ -26,13 +30,15 @@ const EXE_COUNTER_VALUE_ACCESSOR = {
   templateUrl: './warehouse-manage-form.component.html',
   styleUrls: ['./warehouse-manage-form.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [EXE_COUNTER_VALUE_ACCESSOR]
+  providers: [EXE_COUNTER_VALUE_ACCESSOR],
+  standalone: true,
+  imports: [FormsModule, ReactiveFormsModule, NzGridModule, NzFormModule, NzInputModule]
 })
 export class WarehouseManageFormComponent implements OnInit, ControlValueAccessor {
   validateForm!: FormGroup;
   onChange: (value: string) => void = () => null;
   onTouched: () => void = () => null;
-
+  destroyRef = inject(DestroyRef);
   constructor(private fb: FormBuilder) {}
 
   initForm(): void {
@@ -48,7 +54,7 @@ export class WarehouseManageFormComponent implements OnInit, ControlValueAccesso
 
   ngOnInit(): void {
     this.initForm();
-    this.validateForm.valueChanges.pipe(debounceTime(500), distinctUntilChanged()).subscribe(res => {
+    this.validateForm.valueChanges.pipe(debounceTime(500), distinctUntilChanged(), takeUntilDestroyed(this.destroyRef)).subscribe(res => {
       this.onChange(res);
     });
   }

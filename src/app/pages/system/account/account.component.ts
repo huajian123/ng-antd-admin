@@ -1,20 +1,34 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 
 import { ActionCode } from '@app/config/actionCode';
-import { MessageService } from '@core/services/common/message.service';
 import { OptionsInterface, SearchCommonVO } from '@core/services/types';
 import { AccountService, User } from '@services/system/account.service';
-import { AntTableConfig } from '@shared/components/ant-table/ant-table.component';
-import { PageHeaderType } from '@shared/components/page-header/page-header.component';
+import { AntTableConfig, AntTableComponent } from '@shared/components/ant-table/ant-table.component';
+import { CardTableWrapComponent } from '@shared/components/card-table-wrap/card-table-wrap.component';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
+import { AuthDirective } from '@shared/directives/auth.directive';
 import { MapKeyType, MapPipe, MapSet } from '@shared/pipes/map.pipe';
 import { ModalBtnStatus } from '@widget/base-modal';
 import { AccountModalService } from '@widget/biz-widget/system/account-modal/account-modal.service';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
+
+import { DeptTreeComponent } from './dept-tree/dept-tree.component';
 
 interface SearchParam {
   userName: string;
@@ -26,7 +40,25 @@ interface SearchParam {
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    PageHeaderComponent,
+    NzGridModule,
+    DeptTreeComponent,
+    NzCardModule,
+    FormsModule,
+    NzFormModule,
+    NzInputModule,
+    NzSelectModule,
+    NzButtonModule,
+    NzWaveModule,
+    NzIconModule,
+    CardTableWrapComponent,
+    AntTableComponent,
+    AuthDirective,
+    NzSwitchModule
+  ]
 })
 export class AccountComponent implements OnInit {
   @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<any>;
@@ -34,7 +66,7 @@ export class AccountComponent implements OnInit {
   searchParam: Partial<SearchParam> = {};
   tableConfig!: AntTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
-    title: '账号管理(数据库每10分钟从备份恢复一次)',
+    title: '账号管理(只mock了admin10这条账号的数据的增删改查接口操作，所有请求入参，响应，请在控制台查看)',
     breadcrumb: ['首页', '用户管理', '账号管理']
   };
   dataList: User[] = [];
@@ -42,16 +74,14 @@ export class AccountComponent implements OnInit {
   ActionCode = ActionCode;
   isCollapse = true;
   availableOptions: OptionsInterface[] = [];
+  destroyRef = inject(DestroyRef);
 
-  constructor(
-    private dataService: AccountService,
-    private modalSrv: NzModalService,
-    private cdr: ChangeDetectorRef,
-    private messageService: MessageService,
-    private modalService: AccountModalService,
-    private router: Router,
-    public message: NzMessageService
-  ) {}
+  private dataService = inject(AccountService);
+  private modalSrv = inject(NzModalService);
+  private cdr = inject(ChangeDetectorRef);
+  private modalService = inject(AccountModalService);
+  private router = inject(Router);
+  private message = inject(NzMessageService);
 
   selectedChecked(e: User[]): void {
     this.checkedCashArray = [...e];
@@ -74,7 +104,8 @@ export class AccountComponent implements OnInit {
       .pipe(
         finalize(() => {
           this.tableLoading(false);
-        })
+        }),
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe(data => {
         const { list, total, pageNum } = data;
@@ -104,16 +135,21 @@ export class AccountComponent implements OnInit {
   }
 
   add(): void {
-    this.modalService.show({ nzTitle: '新增' }).subscribe(
-      res => {
+    this.modalService
+      .show({ nzTitle: '新增' })
+      .pipe(
+        finalize(() => {
+          this.tableLoading(false);
+        }),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe(res => {
         if (!res || res.status === ModalBtnStatus.Cancel) {
           return;
         }
         this.tableLoading(true);
         this.addEditData(res.modalValue, 'addAccount');
-      },
-      error => this.tableLoading(false)
-    );
+      });
   }
 
   reloadTable(): void {
@@ -123,16 +159,27 @@ export class AccountComponent implements OnInit {
 
   // 修改
   edit(id: number): void {
-    this.dataService.getAccountDetail(id).subscribe(res => {
-      this.modalService.show({ nzTitle: '编辑' }, res).subscribe(({ modalValue, status }) => {
-        if (status === ModalBtnStatus.Cancel) {
-          return;
-        }
-        modalValue.id = id;
-        this.tableLoading(true);
-        this.addEditData(modalValue, 'editAccount');
+    this.dataService
+      .getAccountDetail(id)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(res => {
+        this.modalService
+          .show({ nzTitle: '编辑' }, res)
+          .pipe(
+            finalize(() => {
+              this.tableLoading(false);
+            }),
+            takeUntilDestroyed(this.destroyRef)
+          )
+          .subscribe(({ modalValue, status }) => {
+            if (status === ModalBtnStatus.Cancel) {
+              return;
+            }
+            modalValue.id = id;
+            this.tableLoading(true);
+            this.addEditData(modalValue, 'editAccount');
+          });
       });
-    });
   }
 
   addEditData(param: User, methodName: 'editAccount' | 'addAccount'): void {
@@ -140,7 +187,8 @@ export class AccountComponent implements OnInit {
       .pipe(
         finalize(() => {
           this.tableLoading(false);
-        })
+        }),
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe(() => {
         this.getDataList();
@@ -158,7 +206,8 @@ export class AccountComponent implements OnInit {
       .pipe(
         finalize(() => {
           this.tableLoading(false);
-        })
+        }),
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe(res => {
         this.getDataList();
@@ -181,18 +230,16 @@ export class AccountComponent implements OnInit {
             .pipe(
               finalize(() => {
                 this.tableLoading(false);
-              })
+              }),
+              takeUntilDestroyed(this.destroyRef)
             )
-            .subscribe(
-              () => {
-                if (this.dataList.length === 1) {
-                  this.tableConfig.pageIndex--;
-                }
-                this.getDataList();
-                this.checkedCashArray = [];
-              },
-              error => this.tableLoading(false)
-            );
+            .subscribe(() => {
+              if (this.dataList.length === 1) {
+                this.tableConfig.pageIndex--;
+              }
+              this.getDataList();
+              this.checkedCashArray = [];
+            });
         }
       });
     } else {
@@ -208,21 +255,25 @@ export class AccountComponent implements OnInit {
       nzContent: '删除后不可恢复',
       nzOnOk: () => {
         this.tableLoading(true);
-        this.dataService.delAccount(ids).subscribe(
-          () => {
+        this.dataService
+          .delAccount(ids)
+          .pipe(
+            finalize(() => {
+              this.tableLoading(false);
+            }),
+            takeUntilDestroyed(this.destroyRef)
+          )
+          .subscribe(() => {
             if (this.dataList.length === 1) {
               this.tableConfig.pageIndex--;
             }
             this.getDataList();
-          },
-          error => this.tableLoading(false)
-        );
+          });
       }
     });
   }
 
   // 修改一页几条
-
   changePageSize(e: number): void {
     this.tableConfig.pageSize = e;
   }

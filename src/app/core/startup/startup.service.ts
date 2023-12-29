@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 
-import { TokenKey } from '@config/constant';
+import { TokenKey, TokenPre } from '@config/constant';
 import { LoginInOutService } from '@core/services/common/login-in-out.service';
-import { UserInfoService } from '@store/common-store/userInfo.service';
 
 import { WindowService } from '../services/common/window.service';
 
@@ -10,10 +9,11 @@ import { WindowService } from '../services/common/window.service';
   providedIn: 'root'
 })
 export class StartupService {
-  constructor(private userInfoService: UserInfoService, private loginInOutService: LoginInOutService, private windowSer: WindowService) {}
+  private loginInOutService = inject(LoginInOutService);
+  private windowSer = inject(WindowService);
 
   load(): Promise<void> {
-    const token = this.windowSer.getSessionStorage(TokenKey);
+    const token = this.windowSer.getSessionStorage(TokenKey)?.replace(TokenPre, '');
     if (token) {
       return this.loginInOutService.loginIn(token);
     }

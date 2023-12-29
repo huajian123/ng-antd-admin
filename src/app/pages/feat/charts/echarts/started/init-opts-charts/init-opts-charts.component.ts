@@ -1,12 +1,17 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { EChartsOption } from 'echarts/types/dist/echarts';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 @Component({
   selector: 'app-init-opts-charts',
-  template: ` <echarts [initOpts]="initOpts" [options]="options"></echarts> `,
+  template: `
+    <echarts [initOpts]="initOpts" [options]="options"></echarts>
+  `,
   styles: [],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NgxEchartsModule]
 })
 export class InitOptsChartsComponent {
   initOpts = {

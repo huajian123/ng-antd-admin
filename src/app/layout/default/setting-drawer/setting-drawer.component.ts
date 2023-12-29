@@ -1,14 +1,26 @@
+import { CdkDrag } from '@angular/cdk/drag-drop';
 import { DOCUMENT } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject, OnInit, Renderer2 } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, Renderer2 } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 
 import { IsNightKey, ThemeOptionsKey } from '@config/constant';
+import { SimpleReuseStrategy } from '@core/services/common/reuse-strategy';
+import { TabService } from '@core/services/common/tab.service';
 import { ThemeSkinService } from '@core/services/common/theme-skin.service';
 import { WindowService } from '@core/services/common/window.service';
 import { SettingInterface, ThemeService } from '@store/common-store/theme.service';
 import { fnFormatToHump } from '@utils/tools';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzConfigService } from 'ng-zorro-antd/core/config';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzListModule } from 'ng-zorro-antd/list';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 
 interface NormalModel {
   image?: string;
@@ -29,16 +41,27 @@ interface Color extends NormalModel {
 }
 
 export interface ThemeMode extends NormalModel {
-  key: 'side' | 'top' | 'mixi';
+  key: 'side' | 'top' | 'mixin';
 }
 
 @Component({
   selector: 'app-setting-drawer',
   templateUrl: './setting-drawer.component.html',
   styleUrls: ['./setting-drawer.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [CdkDrag, NzIconModule, NzButtonModule, NzDrawerModule, NzToolTipModule, NzDividerModule, NzListModule, NzSwitchModule, FormsModule]
 })
 export class SettingDrawerComponent implements OnInit {
+  private themesService = inject(ThemeService);
+  private tabService = inject(TabService);
+  private activatedRoute = inject(ActivatedRoute);
+  private doc = inject(DOCUMENT);
+  private nzConfigService = inject(NzConfigService);
+  private themeSkinService = inject(ThemeSkinService);
+  private windowServe = inject(WindowService);
+  private rd2 = inject(Renderer2);
+
   themesOptions$ = this.themesService.getThemesMode();
   isNightTheme$ = this.themesService.getIsNightTheme();
   _isNightTheme = false;
@@ -47,6 +70,7 @@ export class SettingDrawerComponent implements OnInit {
     color: '#1890FF',
     mode: 'side',
     fixedTab: false,
+    isShowTab: true,
     splitNav: true,
     greyTheme: false,
     colorWeak: false,
@@ -63,13 +87,13 @@ export class SettingDrawerComponent implements OnInit {
   themes: Theme[] = [
     {
       key: 'dark',
-      image: '/assets/imgs/theme-dark.svg',
+      image: 'assets/imgs/theme-dark.svg',
       title: '暗色菜单风格',
       isChecked: true
     },
     {
       key: 'light',
-      image: '/assets/imgs/theme-light.svg',
+      image: 'assets/imgs/theme-light.svg',
       title: '亮色菜单风格',
       isChecked: false
     }
@@ -127,33 +151,23 @@ export class SettingDrawerComponent implements OnInit {
   modes: ThemeMode[] = [
     {
       key: 'side',
-      image: '/assets/imgs/menu-side.svg',
+      image: 'assets/imgs/menu-side.svg',
       title: '侧边菜单布局',
       isChecked: true
     },
     {
       key: 'top',
-      image: '/assets/imgs/menu-top.svg',
+      image: 'assets/imgs/menu-top.svg',
       title: '顶部菜单布局',
       isChecked: false
     },
     {
-      key: 'mixi',
-      image: '/assets/imgs/menu-top.svg',
+      key: 'mixin',
+      image: 'assets/imgs/menu-top.svg',
       title: '混合菜单布局',
       isChecked: false
     }
   ];
-
-  constructor(
-    private themesService: ThemeService,
-    @Inject(DOCUMENT) private doc: Document,
-    public message: NzMessageService,
-    private nzConfigService: NzConfigService,
-    private themeSkinService: ThemeSkinService,
-    private windowServe: WindowService,
-    private rd2: Renderer2
-  ) {}
 
   changeCollapsed(): void {
     if (!this.dragging) {
@@ -204,13 +218,24 @@ export class SettingDrawerComponent implements OnInit {
   }
 
   // 修改固定头部
-  changeFixed(isFixed: boolean, type: 'splitNav' | 'fixedTab' | 'fixedLeftNav' | 'fixedHead' | 'hasTopArea' | 'hasFooterArea' | 'hasNavArea' | 'hasNavHeadArea'): void {
+  changeFixed(isTrue: boolean, type: 'isShowTab' | 'splitNav' | 'fixedTab' | 'fixedLeftNav' | 'fixedHead' | 'hasTopArea' | 'hasFooterArea' | 'hasNavArea' | 'hasNavHeadArea'): void {
     // 非固定头部时，设置标签也不固定
-    if (type === 'fixedHead' && !isFixed) {
+    if (type === 'fixedHead' && !isTrue) {
       this._themesOptions['fixedTab'] = false;
     }
-    this._themesOptions[type] = isFixed;
+    this._themesOptions[type] = isTrue;
     this.setThemeOptions();
+
+    // 如果不展示多标签，则要清空tab,以及已经被缓存的所有组件
+    if (type === 'isShowTab') {
+      if (!isTrue) {
+        SimpleReuseStrategy.deleteAllRouteSnapshot(this.activatedRoute.snapshot).then(() => {
+          this.tabService.clearTabs();
+        });
+      } else {
+        this.tabService.refresh();
+      }
+    }
   }
 
   // 修改特殊主题，色弱主题，灰色主题
