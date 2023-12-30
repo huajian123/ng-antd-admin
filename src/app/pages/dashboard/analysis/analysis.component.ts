@@ -1,5 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, inject, NgZone, OnInit } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, inject, NgZone } from '@angular/core';
 
 import { Chart } from '@antv/g2';
 import { Pie, RingProgress, TinyColumn, TinyArea, Progress } from '@antv/g2plot';
@@ -8,7 +7,6 @@ import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { inNextTick } from 'ng-zorro-antd/core/util';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzGridModule } from 'ng-zorro-antd/grid';
@@ -287,19 +285,17 @@ export class AnalysisComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    inNextTick()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => {
-        this.ngZone.runOutsideAngular(() => {
-          this.initMinibar();
-          this.initMiniArea();
-          this.initProgress();
-          this.initHistogram();
-          this.initSearchArea();
-          this.initSearchAvgArea();
-          this.initRing();
-          // this.initMiniRing();
-        });
-      });
+  setTimeout(()=>{
+    this.ngZone.runOutsideAngular(() => {
+      this.initMinibar();
+      this.initMiniArea();
+      this.initProgress();
+      this.initHistogram();
+      this.initSearchArea();
+      this.initSearchAvgArea();
+      this.initRing();
+      // this.initMiniRing();
+    });``
+  })
   }
 }
