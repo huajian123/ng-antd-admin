@@ -1,6 +1,6 @@
 import { http, HttpResponse } from 'msw';
 
-export const menu = http.get('/site/api/sysPermission/menu/1', () => {
+const menuList = http.get('/site/api/sysPermission/menu/1', () => {
   return HttpResponse.json({
     code: 0,
     msg: 'SUCCESS',
@@ -1768,3 +1768,13 @@ export const menu = http.get('/site/api/sysPermission/menu/1', () => {
     ]
   });
 });
+
+// 删除用户，入参示例为，删除id为3的角色
+// {
+//   ids:[3]
+// }
+const delMenu = http.post('/site/api/sysPermission/del', () => {
+  return HttpResponse.json({ code: 0, msg: 'SUCCESS', data: null });
+});
+
+export const menu = [menuList, delMenu];

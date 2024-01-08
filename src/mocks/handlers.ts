@@ -8,7 +8,7 @@ import { user } from './business/user';
 
 export const handlers = [
   login, // 登陆
-  menu, // 菜单
+  ...menu, // 菜单
   ...role, // 角色列表
   ...user, // 用户列表
   ...department, // 部门
