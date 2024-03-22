@@ -62,7 +62,7 @@
     @for (row of _dataList; track trackByTableBody(rowIndex, row); let rowIndex = $index) {
       <tr>
         @if (_tableConfig.showCheckbox) {
-          <td class="animate-bg-0" nzEllipsis [nzChecked]="row['_checked']" [nzLeft]="true" (nzCheckedChange)="checkRowSingle($event, rowIndex)"></td>
+          <td class="animate-bg-0" nzEllipsis [nzDisabled]="row['_disabled']" [nzChecked]="row['_checked']" [nzLeft]="true" (nzCheckedChange)="checkRowSingle($event, rowIndex)"></td>
         }
         @for (head of _tableConfig.headers; track head) {
           @if (head.show === undefined || head.show === true) {
