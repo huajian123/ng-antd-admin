@@ -6,7 +6,7 @@ import { map, tap } from 'rxjs/operators';
 import { GLOBAL_DRAWER_FOOT_TPL_TOKEN } from '@app/tpl/global-drawer-foot-tpl/global-drawer-foot-tpl-token';
 import { GlobalDrawerFootTplComponentToken } from '@app/tpl/global-drawer-foot-tpl/global-drawer-foot-tpl.component';
 import { ModalBtnStatus } from '@widget/base-modal';
-import * as _ from 'lodash';
+import _ from 'lodash';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzDrawerOptions, NzDrawerRef, NzDrawerService } from 'ng-zorro-antd/drawer';
 

@@ -8,7 +8,7 @@ import { GLOBAL_TPL_MODAL_ACTION_TOKEN } from '@app/tpl/global-modal-btn-tpl/glo
 import { GlobalModalBtnTplComponentToken } from '@app/tpl/global-modal-btn-tpl/global-modal-btn-tpl.component';
 import { ModalFullStatusStoreService } from '@store/common-store/modal-full-status-store.service';
 import { fnGetUUID } from '@utils/tools';
-import * as _ from 'lodash';
+import _ from 'lodash';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { ModalButtonOptions, ModalOptions, NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 
