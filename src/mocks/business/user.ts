@@ -340,4 +340,25 @@ const delUser = http.post('/site/api/user/del/', () => {
   });
 });
 
-export const user = [userList, delUser];
+// id为24的角色信息
+const user24Info = http.get('/site/api/user/24/', () => {
+  return HttpResponse.json({
+    code: 0,
+    msg: 'SUCCESS',
+    data: {
+      id: 24,
+      userName: 'admin10',
+      available: true,
+      roleName: null,
+      sex: 1,
+      mobile: 13131313131,
+      email: '345@adf.v',
+      telephone: '02884449802',
+      roleId: [1, 2],
+      departmentName: '开发一部',
+      departmentId: 17
+    }
+  });
+});
+
+export const user = [userList, delUser, user24Info];
