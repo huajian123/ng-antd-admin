@@ -73,7 +73,7 @@
               [nzRight]="!!head.fixed && head.fixedDir === 'right'"
             >
               @if (head.tdTemplate) {
-                <ng-container *ngTemplateOutlet="head.tdTemplate; context: row"></ng-container>
+                <ng-container *ngTemplateOutlet="head.tdTemplate; context: row | contextPipe: '$$dataItem'"></ng-container>
               } @else {
                 @if (head.pipe) {
                   <span [title]="row | tableFiledPipe: head.field | map: head.pipe">{{ row | tableFiledPipe: head.field | map: head.pipe }}</span>

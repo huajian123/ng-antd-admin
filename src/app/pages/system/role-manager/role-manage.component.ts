@@ -144,8 +144,11 @@ export class RoleManageComponent implements OnInit {
     this.getDataList();
   }
 
+  // 在这里做了一个示例，用于获取选中列的数据，而不通过接口，这里可以通过dataItem获取到当前列的数据，也可以通过id从dataList中找到匹配的数据
+  // 推荐使用接口获取详情的方式，因为这样保证了数据的实时性
   // 修改
-  edit(id: number): void {
+  edit(id: number, dataItem: Role): void {
+    console.log(dataItem);
     this.dataService
       .getRolesDetail(id)
       .pipe(takeUntilDestroyed(this.destroyRef))

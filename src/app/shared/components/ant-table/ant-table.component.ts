@@ -1,6 +1,7 @@
 import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, inject, Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef } from '@angular/core';
 
+import { ContextPipePipe } from '@shared/components/ant-table/context-pipe.pipe';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzResizeEvent, NzResizableModule } from 'ng-zorro-antd/resizable';
 import { NzTableQueryParams, NzTableSize, NzTableModule } from 'ng-zorro-antd/table';
@@ -58,7 +59,7 @@ export interface SortFile {
   providers: [{ provide: AntTableComponentToken, useExisting: AntTableComponent }],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [NzTableModule, NzResizableModule, NgClass, NgTemplateOutlet, MapPipe, TableFiledPipe]
+  imports: [NzTableModule, NzResizableModule, NgClass, NgTemplateOutlet, MapPipe, TableFiledPipe, ContextPipePipe]
 })
 export class AntTableComponent implements OnInit, OnChanges {
   _dataList!: NzSafeAny[];
