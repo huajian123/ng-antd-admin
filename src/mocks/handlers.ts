@@ -3,6 +3,7 @@ import { http, HttpResponse, passthrough } from 'msw';
 import { department } from './business/department';
 import { login } from './business/login';
 import { menu } from './business/menu';
+import { other } from './business/other';
 import { role } from './business/role';
 import { user } from './business/user';
 
@@ -12,6 +13,7 @@ export const handlers = [
   ...role, // 角色列表
   ...user, // 用户列表
   ...department, // 部门
+  ...other, // 其他
 
   http.get(/.*\.(js|svg|css|jpg|gif|png|woff2)$/, () => passthrough()),
   http.get('https://vdata.amap.com/tiles', () => passthrough()),
