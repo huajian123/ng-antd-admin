@@ -47,15 +47,15 @@ export class AccountService {
   }
 
   public addAccount(param: User): Observable<void> {
-    return this.http.post('/user/', param);
+    return this.http.post('/user/', param, { needSuccessInfo: true });
   }
 
   public delAccount(ids: number[]): Observable<void> {
-    return this.http.post('/user/del/', { ids });
+    return this.http.post('/user/del/', { ids }, { needSuccessInfo: true });
   }
 
   public editAccount(param: User): Observable<void> {
-    return this.http.put('/user/', param);
+    return this.http.put('/user/', param, { needSuccessInfo: true });
   }
 
   public editAccountPsd(param: UserPsd): Observable<void> {

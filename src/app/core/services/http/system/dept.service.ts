@@ -30,14 +30,14 @@ export class DeptService {
   }
 
   public addDepts(param: Dept): Observable<void> {
-    return this.http.post('/department/', param);
+    return this.http.post('/department/', param, { needSuccessInfo: true });
   }
 
   public delDepts(ids: number[]): Observable<void> {
-    return this.http.post('/department/del/', { ids });
+    return this.http.post('/department/del/', { ids }, { needSuccessInfo: true });
   }
 
   public editDepts(param: Dept): Observable<void> {
-    return this.http.put('/department/', param);
+    return this.http.put('/department/', param, { needSuccessInfo: true });
   }
 }

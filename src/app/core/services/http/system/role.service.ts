@@ -51,15 +51,15 @@ export class RoleService {
   }
 
   public addRoles(param: Role): Observable<void> {
-    return this.http.post('/role/', param);
+    return this.http.post('/role/', param, { needSuccessInfo: true });
   }
 
   public delRoles(ids: number[]): Observable<void> {
-    return this.http.post('/role/del/', { ids });
+    return this.http.post('/role/del/', { ids }, { needSuccessInfo: true });
   }
 
   public editRoles(param: Role): Observable<void> {
-    return this.http.put('/role/', param);
+    return this.http.put('/role/', param, { needSuccessInfo: true });
   }
 
   public getPermissionById(id: string): Observable<string[]> {
@@ -67,6 +67,6 @@ export class RoleService {
   }
 
   public updatePermission(param: PutPermissionParam): Observable<NzSafeAny> {
-    return this.http.put('/permission/', param);
+    return this.http.put('/permission/', param, { needSuccessInfo: true });
   }
 }

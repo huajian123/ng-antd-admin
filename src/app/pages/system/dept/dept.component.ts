@@ -66,7 +66,7 @@ export class DeptComponent implements OnInit {
   destroyRef = inject(DestroyRef);
   tableConfig!: AntTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
-    title: '部门管理(数据库每10分钟从备份恢复一次)',
+    title: '部门管理(只mock了开发部门这一条数据)',
     breadcrumb: ['首页', '系统管理', '部门管理']
   };
   dataList: TreeNodeInterface[] = [];

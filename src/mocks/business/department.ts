@@ -91,4 +91,41 @@ const departmentList = http.post('/site/api/department/list/', () => {
   });
 });
 
-export const department = [departmentList];
+const getDepartmentInfo = http.get('/site/api/department/*', () => {
+  return HttpResponse.json({
+    code: 0,
+    msg: 'SUCCESS',
+    data: {
+      id: 15,
+      departmentName: '开发部门',
+      fatherId: 0,
+      createTime: 1631522590000,
+      updateTime: 1652253868000,
+      state: true,
+      orderNum: 1
+    }
+  });
+});
+
+const updateDepartment = http.put('/site/api/department', () => {
+  return HttpResponse.json({ code: 0, msg: 'SUCCESS', data: null });
+});
+
+// {
+//   ids:[3]
+// }
+const delDepartment = http.post('/site/api/department/del/', () => {
+  return HttpResponse.json({ code: 0, msg: 'SUCCESS', data: null });
+});
+
+// {
+//   "departmentName": "133",
+//   "state": true,
+//   "orderNum": "1",
+//   "fatherId": 15
+// }
+const addChild = http.post('/site/api/department/', () => {
+  return HttpResponse.json({ code: 0, msg: 'SUCCESS', data: null });
+});
+
+export const department = [departmentList, getDepartmentInfo, updateDepartment, delDepartment, addChild];

@@ -341,7 +341,7 @@ const delUser = http.post('/site/api/user/del/', () => {
 });
 
 // id为24的角色信息
-const user24Info = http.get('/site/api/user/24/', () => {
+const user24Info = http.get('/site/api/user/*', () => {
   return HttpResponse.json({
     code: 0,
     msg: 'SUCCESS',
@@ -361,4 +361,20 @@ const user24Info = http.get('/site/api/user/24/', () => {
   });
 });
 
-export const user = [userList, delUser, user24Info];
+const updateUserInfo = http.put('/site/api/user/', () => {
+  return HttpResponse.json({
+    code: 0,
+    msg: 'SUCCESS',
+    data: null
+  });
+});
+
+const updateUserPassword = http.put('/site/api/user/psd', () => {
+  return HttpResponse.json({
+    code: 0,
+    msg: 'SUCCESS',
+    data: null
+  });
+});
+
+export const user = [userList, delUser, user24Info, updateUserInfo, updateUserPassword];
