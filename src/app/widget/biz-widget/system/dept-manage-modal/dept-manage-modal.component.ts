@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 
 import { Dept } from '@services/system/dept.service';
 import { fnCheckForm } from '@utils/tools';
+import { BasicConfirmModalComponent } from '@widget/base-modal';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
@@ -18,12 +19,14 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
   standalone: true,
   imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzRadioModule]
 })
-export class DeptManageModalComponent implements OnInit {
+export class DeptManageModalComponent extends BasicConfirmModalComponent implements OnInit {
   addEditForm!: FormGroup;
   readonly nzModalData: Dept = inject(NZ_MODAL_DATA);
   private fb = inject(FormBuilder);
 
-  constructor(private modalRef: NzModalRef) {}
+  constructor(protected override modalRef: NzModalRef) {
+    super(modalRef);
+  }
 
   initForm(): void {
     this.addEditForm = this.fb.group({

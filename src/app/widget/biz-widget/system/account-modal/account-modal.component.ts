@@ -9,6 +9,7 @@ import { DeptService } from '@services/system/dept.service';
 import { RoleService } from '@services/system/role.service';
 import { fnCheckForm } from '@utils/tools';
 import { fnAddTreeDataGradeAndLeaf, fnFlatDataHasParentToTree } from '@utils/treeTableTools';
+import { BasicConfirmModalComponent } from '@widget/base-modal';
 import { NzTreeNodeOptions } from 'ng-zorro-antd/core/tree';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzFormModule } from 'ng-zorro-antd/form';
@@ -27,7 +28,7 @@ import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
   standalone: true,
   imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzRadioModule, NzSwitchModule, NzTreeSelectModule, NzSelectModule]
 })
-export class AccountModalComponent implements OnInit {
+export class AccountModalComponent extends BasicConfirmModalComponent implements OnInit {
   addEditForm!: FormGroup;
   readonly nzModalData: User = inject(NZ_MODAL_DATA);
   roleOptions: OptionsInterface[] = [];
@@ -40,7 +41,9 @@ export class AccountModalComponent implements OnInit {
   private roleService = inject(RoleService);
   private deptService = inject(DeptService);
 
-  constructor(private modalRef: NzModalRef) {}
+  constructor(override modalRef: NzModalRef) {
+    super(modalRef);
+  }
 
   // 此方法为如果有异步数据需要加载，则在该方法中添加
   protected getAsyncFnData(modalValue: NzSafeAny): Observable<NzSafeAny> {

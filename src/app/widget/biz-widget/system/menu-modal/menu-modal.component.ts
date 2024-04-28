@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { MenuListObj } from '@services/system/menus.service';
 import { IconSelComponent } from '@shared/biz-components/icon-sel/icon-sel.component';
 import { fnCheckForm } from '@utils/tools';
+import { BasicConfirmModalComponent } from '@widget/base-modal';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
@@ -24,15 +25,16 @@ type menuType = 'C' | 'F';
   standalone: true,
   imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzRadioModule, NzButtonModule, IconSelComponent, NzInputNumberModule, NzSwitchModule]
 })
-export class MenuModalComponent implements OnInit {
+export class MenuModalComponent extends BasicConfirmModalComponent implements OnInit {
   validateForm!: FormGroup;
   selIconVisible = false;
   readonly nzModalData: MenuListObj = inject(NZ_MODAL_DATA);
   menuType: menuType = 'C';
   private fb = inject(FormBuilder);
 
-  constructor(private modalRef: NzModalRef) {}
-
+  constructor(protected override modalRef: NzModalRef) {
+    super(modalRef);
+  }
   // 返回false则不关闭对话框
   protected getCurrentValue(): Observable<any> {
     if (!fnCheckForm(this.validateForm)) {

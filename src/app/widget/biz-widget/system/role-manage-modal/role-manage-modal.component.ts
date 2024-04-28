@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 
 import { Role } from '@services/system/role.service';
 import { fnCheckForm } from '@utils/tools';
+import { BasicConfirmModalComponent } from '@widget/base-modal';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
@@ -17,13 +18,15 @@ import { NZ_MODAL_DATA, NzModalRef } from 'ng-zorro-antd/modal';
   standalone: true,
   imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule]
 })
-export class RoleManageModalComponent implements OnInit {
+export class RoleManageModalComponent extends BasicConfirmModalComponent implements OnInit {
   addEditForm!: FormGroup;
 
   readonly nzModalData: Role = inject(NZ_MODAL_DATA);
   private fb = inject(FormBuilder);
 
-  constructor(private modalRef: NzModalRef) {}
+  constructor(protected override modalRef: NzModalRef) {
+    super(modalRef);
+  }
 
   initForm(): void {
     this.addEditForm = this.fb.group({

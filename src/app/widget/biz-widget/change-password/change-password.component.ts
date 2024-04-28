@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 
 import { PasswordStrengthMeterComponent } from '@shared/biz-components/password-strength-meter/password-strength-meter.component';
 import { fnCheckForm } from '@utils/tools';
+import { BasicConfirmModalComponent } from '@widget/base-modal';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
@@ -18,14 +19,16 @@ import { NzModalRef } from 'ng-zorro-antd/modal';
   standalone: true,
   imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzButtonModule, PasswordStrengthMeterComponent, NzIconModule]
 })
-export class ChangePasswordComponent {
+export class ChangePasswordComponent extends BasicConfirmModalComponent {
   passwordVisible = false;
   compirePasswordVisible = false;
 
   constructor(
-    private modalRef: NzModalRef,
+    protected override modalRef: NzModalRef,
     private fb: NonNullableFormBuilder
-  ) {}
+  ) {
+    super(modalRef);
+  }
 
   get newPassword(): string {
     return this.validateForm.controls.newPassword.value!;

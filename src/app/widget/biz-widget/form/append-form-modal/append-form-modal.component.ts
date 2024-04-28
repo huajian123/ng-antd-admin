@@ -6,6 +6,7 @@ import { ValidatorsService } from '@core/services/validators/validators.service'
 import { DeptService } from '@services/system/dept.service';
 import { RoleService } from '@services/system/role.service';
 import { fnCheckForm } from '@utils/tools';
+import { BasicConfirmModalComponent } from '@widget/base-modal';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzFormModule } from 'ng-zorro-antd/form';
@@ -21,11 +22,13 @@ import { NzSliderModule } from 'ng-zorro-antd/slider';
   standalone: true,
   imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzDatePickerModule, NzSliderModule]
 })
-export class AppendFormModalComponent implements OnInit {
+export class AppendFormModalComponent extends BasicConfirmModalComponent implements OnInit {
   addEditForm!: FormGroup;
   private fb = inject(FormBuilder);
 
-  constructor(private modalRef: NzModalRef) {}
+  constructor(override modalRef: NzModalRef) {
+    super(modalRef);
+  }
 
   // 返回false则不关闭对话框
   protected getCurrentValue(): Observable<NzSafeAny> {
