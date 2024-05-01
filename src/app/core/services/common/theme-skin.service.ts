@@ -1,5 +1,6 @@
 import { DOCUMENT } from '@angular/common';
-import { inject, Injectable } from '@angular/core';
+import { DestroyRef, inject, Injectable } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { first } from 'rxjs/operators';
 
 import { ThemeService } from '@store/common-store/theme.service';
@@ -18,6 +19,7 @@ export class ThemeSkinService {
   currentTheme!: ThemeType;
   private readonly doc = inject(DOCUMENT);
   private readonly themesService = inject(ThemeService);
+  destroyRef = inject(DestroyRef);
 
   reverseTheme(theme: ThemeType): ThemeType {
     return theme === ThemeType.dark ? ThemeType.default : ThemeType.dark;
@@ -47,7 +49,7 @@ export class ThemeSkinService {
     if (isFirstLoad) {
       this.themesService
         .getIsNightTheme()
-        .pipe(first())
+        .pipe(first(), takeUntilDestroyed(this.destroyRef))
         .subscribe(res => {
           this.currentTheme = res ? ThemeType.dark : ThemeType.default;
         });

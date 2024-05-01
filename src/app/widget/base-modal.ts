@@ -195,7 +195,7 @@ export class ModalWrapService {
     const newOptions = this.createModalConfig(component, modalOptions, params, wrapCls);
     const modalRef = this.bsModalService.create(newOptions);
     let drag: DragRef | null;
-    modalRef.afterOpen.pipe(first()).subscribe(() => {
+    modalRef.afterOpen.pipe(first(), takeUntilDestroyed(this.destroyRef)).subscribe(() => {
       drag = this.createDrag(wrapCls);
     });
 
