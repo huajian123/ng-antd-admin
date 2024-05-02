@@ -67,6 +67,6 @@ export class RoleService {
   }
 
   public updatePermission(param: PutPermissionParam): Observable<NzSafeAny> {
-    return this.http.put('/permission/', param, { needSuccessInfo: true });
+    return this.http.put('/permission/', param);
   }
 }
