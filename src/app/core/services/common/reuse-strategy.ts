@@ -148,10 +148,10 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
   }
 
   runHook(method: ReuseHookTypes, comp: ReuseComponentRef): void {
-    const compThis = comp.instance;
-    if (comp == null || !compThis) {
+    if (comp == null || !comp.instance) {
       return;
     }
+    const compThis = comp.instance;
     const fn = compThis[method];
     if (typeof fn !== 'function') {
       return;
