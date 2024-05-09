@@ -2,11 +2,13 @@ import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/cor
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 
+import { fnCheckForm } from '@utils/tools';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 
 @Component({
@@ -19,7 +21,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 })
 export class RegisterFormComponent implements OnInit {
   validateForm!: FormGroup;
-
+  messageService = inject(NzMessageService);
   private fb = inject(FormBuilder);
   private router = inject(Router);
 
@@ -35,15 +37,14 @@ export class RegisterFormComponent implements OnInit {
     };*/
 
   submitForm(): void {
-    this.router.navigateByUrl('main');
-    Object.keys(this.validateForm.controls).forEach(key => {
-      this.validateForm.controls[key].markAsDirty();
-      this.validateForm.controls[key].updateValueAndValidity();
-    });
-    if (this.validateForm.invalid) {
+    const invalid = fnCheckForm(this.validateForm);
+    if (!invalid) {
       return;
     }
+    this.messageService.success('注册成功，请重新登录');
+    this.router.navigateByUrl('login/login-form');
     const param = this.validateForm.getRawValue();
+
     /* this.dataService.login(param).subscribe((res) => {
        this.router.navigateByUrl('hazard');
      });*/
