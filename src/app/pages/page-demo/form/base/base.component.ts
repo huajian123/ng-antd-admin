@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
@@ -39,8 +40,9 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
     NzWaveModule
   ]
 })
-export class BaseComponent implements OnInit {
+export class BaseComponent implements OnInit, AfterViewInit {
   @ViewChild('dragTpl', { static: true }) dragTpl!: TemplateRef<NzSafeAny>;
+  @ViewChild('baseForm', { static: true }) baseForm!: FormGroup;
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '基础表单',
     desc: '表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。',
@@ -51,6 +53,7 @@ export class BaseComponent implements OnInit {
     { label: '同事乙', value: '同事乙' },
     { label: '同事丙', value: '同事丙' }
   ];
+  destroyRef = inject(DestroyRef);
 
   validateForm!: FormGroup;
 
@@ -76,5 +79,12 @@ export class BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+  }
+
+  ngAfterViewInit(): void {
+    // 无论是模版式表单还是响应式表单，都可以通过这种方式来监听表单数据都变化
+    this.baseForm.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => {
+      console.log(res);
+    });
   }
 }
