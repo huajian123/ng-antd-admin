@@ -19,8 +19,7 @@
               <a (click)="changeRoute($event, menu)">
                 @if (menu.icon) {
                   <i nz-icon [nzType]="menu.icon"></i>
-                }
-                @if (menu.alIcon) {
+                } @else if (menu.alIcon) {
                   <i nz-icon [nzIconfont]="menu.alIcon"></i>
                 }
                 <span>{{ menu.menuName }}</span>
@@ -34,8 +33,7 @@
               <ng-template #titleTpl>
                 @if (menu.icon) {
                   <i nz-icon [nzType]="menu.icon"></i>
-                }
-                @if (menu.alIcon) {
+                } @else if (menu.alIcon) {
                   <i nz-icon [nzIconfont]="menu.alIcon"></i>
                 }
                 <span>{{ menu.menuName }}</span>
@@ -49,8 +47,7 @@
                         <a (click)="changeRoute($event, menuSecond)">
                           @if (menuSecond.icon) {
                             <i nz-icon [nzType]="menuSecond.icon"></i>
-                          }
-                          @if (menuSecond.alIcon) {
+                          } @else if (menuSecond.alIcon) {
                             <i nz-icon [nzIconfont]="menuSecond.alIcon"></i>
                           }
                           <span>{{ menuSecond.menuName }}</span>
@@ -69,8 +66,7 @@
                         <ng-template #titleTpl>
                           @if (menuSecond.icon) {
                             <i nz-icon [nzType]="menuSecond.icon"></i>
-                          }
-                          @if (menuSecond.alIcon) {
+                          } @else if (menuSecond.alIcon) {
                             <i nz-icon [nzIconfont]="menuSecond.alIcon"></i>
                           }
                           <span>{{ menuSecond.menuName }}</span>
@@ -83,8 +79,7 @@
                                   <a (click)="changeRoute($event, menuThird)">
                                     @if (menuThird.icon) {
                                       <i nz-icon [nzType]="menuThird.icon"></i>
-                                    }
-                                    @if (menuThird.alIcon) {
+                                    } @else if (menuThird.alIcon) {
                                       <i nz-icon [nzIconfont]="menuThird.alIcon"></i>
                                     }
                                     <span>{{ menuThird.menuName }}</span>
@@ -96,16 +91,18 @@
                                 <li
                                   nz-submenu
                                   [nzPaddingLeft]="(themesMode !== 'top' || isOverMode) && !isCollapsed ? 48 : 0"
-                                  [nzTitle]="menuThird.menuName"
+                                  [nzTitle]="fourthTitleTpl"
                                   [(nzOpen)]="menuThird.open"
                                   (nzOpenChange)="changeOpen(menuThird, menuSecond.children)"
                                 >
-                                  @if (menuThird.icon) {
-                                    <i nz-icon [nzType]="menuThird.icon"></i>
-                                  }
-                                  @if (menuThird.alIcon) {
-                                    <i nz-icon [nzIconfont]="menuThird.alIcon"></i>
-                                  }
+                                  <ng-template #fourthTitleTpl>
+                                    @if (menuThird.icon) {
+                                      <i nz-icon [nzType]="menuSecond.icon"></i>
+                                    } @else if (menuThird.alIcon) {
+                                      <i nz-icon [nzIconfont]="menuSecond.alIcon"></i>
+                                    }
+                                    <span>{{ menuThird.menuName }}</span>
+                                  </ng-template>
                                   <ul>
                                     @for (forthThird of menuThird.children; track forthThird) {
                                       <ng-container *appAuth="forthThird.code">
@@ -113,8 +110,7 @@
                                           <a (click)="changeRoute($event, forthThird)">
                                             @if (forthThird.icon) {
                                               <i nz-icon [nzType]="forthThird.icon"></i>
-                                            }
-                                            @if (forthThird.alIcon) {
+                                            } @else if (forthThird.alIcon) {
                                               <i nz-icon [nzIconfont]="forthThird.alIcon"></i>
                                             }
                                             <span>{{ forthThird.menuName }}</span>
@@ -151,8 +147,7 @@
             <a [routerLink]="[menu.path]">
               @if (menu.icon) {
                 <i nz-icon [nzType]="menu.icon"></i>
-              }
-              @if (menu.alIcon) {
+              } @else if (menu.alIcon) {
                 <i nz-icon [nzIconfont]="menu.alIcon"></i>
               }
               <span>{{ menu.menuName }}</span>
@@ -164,8 +159,7 @@
           <li nz-menu-item [nzSelected]="menu.selected" (click)="changTopNav(i)">
             @if (menu.icon) {
               <i nz-icon [nzType]="menu.icon"></i>
-            }
-            @if (menu.alIcon) {
+            } @else if (menu.alIcon) {
               <i nz-icon [nzIconfont]="menu.alIcon"></i>
             }
             <span>{{ menu.menuName }}</span>
