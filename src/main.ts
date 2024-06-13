@@ -14,6 +14,7 @@ async function prepareApp(): Promise<ServiceWorkerRegistration | undefined> {
   });
 }
 
+// 启动mock数据
 prepareApp().then(() => {
   bootstrapApplication(AppComponent, appConfig).catch(err => console.error(err));
 });
