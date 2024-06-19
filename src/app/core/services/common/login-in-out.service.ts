@@ -43,7 +43,7 @@ export class LoginInOutService {
       this.windowServe.setSessionStorage(TokenKey, TokenPre + token);
       // 解析token ，然后获取用户信息
       const userInfo: UserInfo = this.userInfoService.parsToken(TokenPre + token);
-      // todo  这里是手动添加静态页面标签页操作中打开详情的按钮的权限，因为他们涉及到路由跳转，会走路由守卫，但是权限又没有通过后端管理，所以下面两行手动添加权限，实际操作中可以删除下面2行
+      // todo  这里是手动添加静态页面标签页操作中打开详情的按钮的权限，因为他们涉及到路由跳转，会走路由守卫，但是权限又没有通过后端管理，所以下面两行手动添加权限，实际操作中可以删除下面2行，如果你也有类似的需求，请全局搜索ActionCode.TabsDetail，这个需要在路由中配置一下
       userInfo.authCode.push(ActionCode.TabsDetail);
       userInfo.authCode.push(ActionCode.SearchTableDetail);
       // 将用户信息缓存到全局service中
