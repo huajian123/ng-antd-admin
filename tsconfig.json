@@ -13,7 +13,6 @@
     "esModuleInterop": true,
     "sourceMap": true,
     "declaration": false,
-    "downlevelIteration": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
@@ -36,8 +35,7 @@
       "@env/*": ["src/environments/*"],
       "@shared/*": ["src/app/shared/*"],
       "@assets/*": ["src/assets/*"]
-    },
-    "allowSyntheticDefaultImports": true
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
