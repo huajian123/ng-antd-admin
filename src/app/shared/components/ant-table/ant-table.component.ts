@@ -150,12 +150,12 @@ export class AntTableComponent implements OnInit, OnChanges {
     return data.id;
   }
 
-  public trackByTableHead(index: number, item: NzSafeAny): NzSafeAny {
-    return item;
+  public trackByTableHead(index: number, item: NzSafeAny): string {
+    return `${item.title}-${index}`;
   }
 
-  public trackByTableBody(index: number, item: NzSafeAny): NzSafeAny {
-    return item;
+  public trackByTableBody(index: number, item: NzSafeAny): string {
+    return `${item.id}-${index}`;
   }
 
   // 分页页码改变

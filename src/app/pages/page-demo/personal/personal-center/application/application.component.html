@@ -1,5 +1,5 @@
 <div nz-row [nzGutter]="[16, 16]">
-  @for (item of 8 | numberLoop; track item) {
+  @for (item of 8 | numberLoop; track $index) {
     <div nz-col [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXl]="12" [nzXs]="24" [nzXXl]="12">
       <nz-card nzHoverable [nzActions]="[op1, op2, op3, op4]">
         <nz-card-meta [nzAvatar]="nzAvatar" [nzTitle]="'Alipay'">

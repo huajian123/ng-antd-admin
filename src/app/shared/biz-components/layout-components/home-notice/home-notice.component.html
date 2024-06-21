@@ -13,7 +13,7 @@
 </nz-card>
 <ng-template #notificationTpl>
   <nz-list nzItemLayout="horizontal">
-    @for (i of 4 | numberLoop; track i) {
+    @for (i of 4 | numberLoop; track $index) {
       <nz-list-item>
         <nz-list-item-meta>
           <nz-list-item-meta-title>

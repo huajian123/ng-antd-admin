@@ -8,7 +8,7 @@
         <div nz-col nzSpan="24">
           <nz-card nzTitle="进行中的项目" [nzExtra]="extraTemplate">
             <div nz-row>
-              @for (i of 6 | numberLoop; track i) {
+              @for (i of 6 | numberLoop; track $index) {
                 <div nz-card-grid nz-col [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXl]="8" [nzXs]="24" [nzXXl]="8">
                   <nz-card-meta nzDescription="城镇中有那么多的酒馆，她却偏偏走进了我的酒馆" [nzTitle]="cardTitleTpl"></nz-card-meta>
                   <div class="card-foot">
@@ -23,7 +23,7 @@
         <div nz-col nzSpan="24">
           <nz-card nzTitle="动态">
             <nz-list>
-              @for (item of 6 | numberLoop; track item) {
+              @for (item of 6 | numberLoop; track $index) {
                 <nz-list-item style="padding: 16px 24px">
                   <nz-list-item-meta>
                     <nz-list-item-meta-avatar [nzSrc]="'assets/imgs/default_face.png'"></nz-list-item-meta-avatar>
@@ -50,7 +50,7 @@
         <div nz-col nzSpan="24">
           <nz-card nzTitle="快速开始/便捷导航">
             <div nz-row [nzGutter]="[16, 16]">
-              @for (item of 6 | numberLoop; track item) {
+              @for (item of 6 | numberLoop; track $index) {
                 <div nz-col nzSpan="6">
                   <a (click)="msg.success('点击了')">操作一</a>
                 </div>
@@ -72,7 +72,7 @@
         <div nz-col nzSpan="24">
           <nz-card nzTitle="团队">
             <div nz-row>
-              @for (item of 5 | numberLoop; track item) {
+              @for (item of 5 | numberLoop; track $index) {
                 <div nz-col nzSpan="12">
                   <a class="group">
                     <nz-avatar [nzSize]="24" [nzSrc]="'https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png'"></nz-avatar>

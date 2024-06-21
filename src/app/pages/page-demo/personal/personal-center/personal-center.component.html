@@ -43,7 +43,7 @@
         <div class="team">
           <h5 class="m-b-10">团队</h5>
           <div nz-row>
-            @for (item of 5 | numberLoop; track item) {
+            @for (item of 5 | numberLoop; track $index) {
               <div nz-col nzSpan="12" style="padding: 0 18px 0 0">
                 <a class="group">
                   <nz-avatar [nzSize]="24" [nzSrc]="'https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png'"></nz-avatar>

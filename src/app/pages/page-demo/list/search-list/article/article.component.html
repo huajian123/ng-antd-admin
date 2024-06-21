@@ -68,7 +68,7 @@
 <nz-card class="m-t-20">
   <app-water-mark />
   <nz-list [nzItemLayout]="'vertical'">
-    @for (item of 8 | numberLoop; track item) {
+    @for (item of 8 | numberLoop; track $index) {
       <nz-list-item nzNoFlex>
         <nz-list-item-meta>
           <nz-list-item-meta-title>

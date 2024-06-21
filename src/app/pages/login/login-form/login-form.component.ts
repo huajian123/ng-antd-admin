@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, inject, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { NavigationEnd, Router, RouterLink, RoutesRecognized } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 
 import { LoginInOutService } from '@core/services/common/login-in-out.service';
@@ -86,6 +86,17 @@ export class LoginFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.router.events.subscribe(event => {
+      if (event instanceof RoutesRecognized) {
+        console.log(event);
+        console.log(1);
+      }
+
+      if (event instanceof NavigationEnd) {
+        console.log(event);
+        console.log(2);
+      }
+    });
     this.validateForm = this.fb.group({
       userName: [null, [Validators.required]],
       password: [null, [Validators.required]],

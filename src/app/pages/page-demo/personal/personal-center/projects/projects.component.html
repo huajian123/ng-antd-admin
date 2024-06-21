@@ -1,5 +1,5 @@
 <div nz-row [nzGutter]="[16, 16]">
-  @for (item of 8 | numberLoop; track item) {
+  @for (item of 8 | numberLoop; track $index) {
     <div nz-col [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXl]="12" [nzXs]="24" [nzXXl]="12">
       <nz-card nzHoverable [nzCover]="coverTemplate">
         <nz-card-meta nzDescription="希望是一个好东西，也许是最好的，好东西是不会消亡的" [nzTitle]="'Alipay'"></nz-card-meta>
