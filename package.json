@@ -12,8 +12,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "lint:fix": "eslint --fix --cache . --ext .ts,.html",
-    "lint:style": "npx stylelint \"src/**/*.less\" --fix",
-    "postinstall": "patch-package"
+    "lint:style": "npx stylelint \"src/**/*.less\" --fix"
   },
   "private": true,
   "dependencies": {
