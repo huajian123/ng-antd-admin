@@ -8,9 +8,9 @@
 - 本项目也有一点点教学性质，其中用到大量angular新特性，有详细的注释以及参考文章链接在代码中，大家可以看看源码，有问题与我讨论，有改进处可以提pr，我们一起进步
 - 在线地址[这里](https://huajian123.github.io/ng-ant-admin/browser/)
 - [v17.1](https://github.com/huajian123/ng-ant-admin/releases/tag/v17.1.0)是最后一个采用真实接口的示例。在这之后的版本都采用mswjs来mock接口，但是仍然配套了java服务端相同接口与数据结构，可以配套使用，源码地址[这里](https://github.com/huajian123/ng-ant-admin-api)
+- 全面开启zoneless，性能快人一步
   
 ## ✨特性
-
 - 支持最新angular版本
 - Support the latest angular version
 - 所有组件onPush,性能卓越
@@ -22,14 +22,7 @@
 - <font color=red size=6>全部组件均为独立组件，文件量减少（如果需要module版本，请看[这里](https://github.com/huajian123/ng-ant-admin/releases/tag/v15.0)）</font>
 - <font color=red size=6>Standalone Components（module style is [here](https://github.com/huajian123/ng-ant-admin/releases/tag/v15.0)）</font>
 
-
-## ✨文档
-
-有关文档与示例，请访问 [doc](http://1.117.181.242:8081/)
-<br>
-<br>
-
-# 项目介绍
+# ✨项目介绍
 1.如果您用我的项目进行学习或者参考，请先确定您使用的是angular哪个版本，因为angular15后写法有部分不一样，所以我的建议是，您正在使用angular什么版本，则下载对应版本的ng-ant-admin,最新版本直接从master分支下载即可，历史版本在这个链接进行下载[这里](https://github.com/huajian123/ng-ant-admin/releases)。<br>
 <br>
 <br>
