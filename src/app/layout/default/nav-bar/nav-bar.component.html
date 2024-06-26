@@ -10,7 +10,7 @@
   >
     <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: isMixinLeft ? leftMenuArray : menus }"></ng-container>
     <ng-template #menuTpl let-menus>
-      @for (menu of menus; track menu) {
+      @for (menu of menus; track $index) {
         <!--权限1-->
         <ng-container *appAuth="menu.code">
           <!--一级菜单-->
@@ -39,7 +39,7 @@
                 <span>{{ menu.menuName }}</span>
               </ng-template>
               <ul>
-                @for (menuSecond of menu.children; track menuSecond) {
+                @for (menuSecond of menu.children; track $index) {
                   <!--权限2-->
                   <ng-container *appAuth="menuSecond.code">
                     @if (!menuSecond.children || menuSecond.children.length === 0) {
@@ -72,7 +72,7 @@
                           <span>{{ menuSecond.menuName }}</span>
                         </ng-template>
                         <ul>
-                          @for (menuThird of menuSecond.children; track menuThird) {
+                          @for (menuThird of menuSecond.children; track $index) {
                             <ng-container *appAuth="menuThird.code">
                               @if (!menuThird.children || menuThird.children.length === 0) {
                                 <li nz-menu-item [nzPaddingLeft]="(themesMode !== 'top' || isOverMode) && !isCollapsed ? 48 : 0" [nzSelected]="menuThird.selected">
@@ -104,7 +104,7 @@
                                     <span>{{ menuThird.menuName }}</span>
                                   </ng-template>
                                   <ul>
-                                    @for (forthThird of menuThird.children; track forthThird) {
+                                    @for (forthThird of menuThird.children; track $index) {
                                       <ng-container *appAuth="forthThird.code">
                                         <li nz-menu-item [nzPaddingLeft]="(themesMode !== 'top' || isOverMode) && !isCollapsed ? 64 : 0" [nzSelected]="forthThird.selected">
                                           <a (click)="changeRoute($event, forthThird)">
@@ -139,7 +139,7 @@
   </ul>
 } @else {
   <ul nz-menu nzMode="horizontal" nzTheme="dark">
-    @for (menu of menus; track menu; let i = $index) {
+    @for (menu of menus; track $index) {
       <!--权限1（不需要时删除此ng-container节点）-->
       <ng-container *appAuth="menu.code">
         @if (!menu.children || menu.children.length === 0) {
@@ -156,7 +156,7 @@
         }
 
         @if (menu.children && menu.children.length > 0) {
-          <li nz-menu-item [nzSelected]="menu.selected" (click)="changTopNav(i)">
+          <li nz-menu-item [nzSelected]="menu.selected" (click)="changTopNav($index)">
             @if (menu.icon) {
               <i nz-icon [nzType]="menu.icon"></i>
             } @else if (menu.alIcon) {
