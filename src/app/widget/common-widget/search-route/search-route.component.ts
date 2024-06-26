@@ -161,6 +161,7 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
             }
           });
           if (this.resultListShow.length > 0) {
+            this.resultListShow.map(item => (item.selItem = false));
             this.resultListShow[0].selItem = true;
           }
           this.resultListShow = [...this.resultListShow];

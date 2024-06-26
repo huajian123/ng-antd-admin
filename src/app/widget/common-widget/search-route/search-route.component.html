@@ -11,7 +11,7 @@
   <div class="m-t-15">
     @if (resultListShow.length > 0) {
       <ul>
-        @for (item of resultListShow; track item) {
+        @for (item of resultListShow; track item.routePath) {
           <li class="result-item sp-16" nz-row [class.result-item-bg]="item.selItem" [style]="{ color: item.selItem ? 'white' : '' }" (click)="resultClick(item)" (mouseover)="mouseOverItem(item)">
             <div nz-col nzFlex="auto">
               @if (!item.isAliIcon) {
