@@ -2,7 +2,7 @@
   @if ((themesOptions$ | async)!.hasNavHeadArea) {
     <div class="sidebar-logo" [class.p-l-8]="isCollapsed$ | async">
       <a href="#" target="_blank">
-        <img alt="logo" src="assets/imgs/logo.svg" />
+        <img alt="logo" src="/imgs/logo.svg" />
         <h1 class="animate-02 ng17color" [class.light]="(themesOptions$ | async)!.theme === 'light' && (isNightTheme$ | async) === false">Ant Design Pro</h1>
       </a>
     </div>

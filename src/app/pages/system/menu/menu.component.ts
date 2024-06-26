@@ -104,7 +104,7 @@ export class MenuComponent implements OnInit {
   getDataList(e?: NzTableQueryParams): void {
     this.tableConfig.loading = true;
     this.tableConfig.loading = true;
-    const params: SearchCommonVO<any> = {
+    const params: SearchCommonVO<NzSafeAny> = {
       pageSize: 0,
       pageNum: 0,
       filters: this.searchParam

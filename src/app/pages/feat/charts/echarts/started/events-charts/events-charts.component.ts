@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NgxEchartsModule } from 'ngx-echarts';
 import LinearGradient from 'zrender/lib/graphic/LinearGradient';
 
@@ -28,7 +29,7 @@ import LinearGradient from 'zrender/lib/graphic/LinearGradient';
   imports: [NgxEchartsModule]
 })
 export class EventsChartsComponent implements OnInit {
-  options: any;
+  options: NzSafeAny;
 
   ngOnInit(): void {
     const dataAxis = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'];
@@ -36,7 +37,6 @@ export class EventsChartsComponent implements OnInit {
     const yMax = 500;
     const dataShadow = [];
 
-    // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < data.length; i++) {
       dataShadow.push(yMax);
     }
@@ -113,7 +113,7 @@ export class EventsChartsComponent implements OnInit {
     };
   }
 
-  onChartEvent(event: any, type: string): void {
+  onChartEvent(event: NzSafeAny, type: string): void {
     console.log('chart event:', type, event);
   }
 }

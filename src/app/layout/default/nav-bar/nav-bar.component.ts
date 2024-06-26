@@ -1,5 +1,5 @@
 import { NgTemplateOutlet, AsyncPipe } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Input, Inject, inject, DestroyRef, booleanAttribute } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Input, inject, DestroyRef, booleanAttribute } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -16,6 +16,7 @@ import { UserInfoService } from '@store/common-store/userInfo.service';
 import { fnStopMouseEvent } from '@utils/tools';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzNoAnimationModule } from 'ng-zorro-antd/core/no-animation';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 
@@ -51,7 +52,7 @@ export class NavBarComponent implements OnInit {
   isCollapsed$ = this.themesService.getIsCollapsed();
   isOverMode$ = this.themesService.getIsOverMode();
   leftMenuArray$ = this.splitNavStoreService.getSplitLeftNavArrayStore();
-  subTheme$: Observable<any>;
+  subTheme$: Observable<NzSafeAny>;
 
   themesMode: ThemeMode['key'] = 'side';
   isOverMode = false;
@@ -124,7 +125,7 @@ export class NavBarComponent implements OnInit {
       )
       .subscribe(routeData => {
         // 详情页是否是打开新tab页签形式
-        let isNewTabDetailPage = routeData['newTab'] === 'true';
+        const isNewTabDetailPage = routeData['newTab'] === 'true';
         this.routeEndAction(isNewTabDetailPage);
       });
   }
@@ -155,7 +156,7 @@ export class NavBarComponent implements OnInit {
   cloneMenuArray(sourceMenuArray: Menu[], target: Menu[] = []): Menu[] {
     sourceMenuArray.forEach(item => {
       const obj: Menu = { menuName: '', menuType: 'C', path: '', id: -1, fatherId: -1 };
-      for (let i in item) {
+      for (const i in item) {
         if (item.hasOwnProperty(i)) {
           // @ts-ignore
           if (Array.isArray(item[i])) {

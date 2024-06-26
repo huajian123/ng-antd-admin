@@ -8,8 +8,7 @@ import { AdDirective } from '@shared/directives/ad.directive';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzGridModule } from 'ng-zorro-antd/grid';
-import { NzMenuModule } from 'ng-zorro-antd/menu';
-import { NzMenuModeType } from 'ng-zorro-antd/menu/menu.types';
+import { NzMenuModeType, NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 
 import { BaseComponent } from './base/base.component';

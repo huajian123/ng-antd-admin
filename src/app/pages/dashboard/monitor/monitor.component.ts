@@ -585,7 +585,7 @@ export class MonitorComponent implements AfterViewInit {
             }
           })
             .then(AMap => {
-              let map = new AMap.Map('map', {
+              const map = new AMap.Map('map', {
                 resizeEnable: true,
                 zoom: 2,
                 center: [116.397428, 39.90923]

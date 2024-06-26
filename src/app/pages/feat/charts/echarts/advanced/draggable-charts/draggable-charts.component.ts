@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 
-import { EChartsOption } from 'echarts/types/dist/echarts';
+import { EChartsOption } from 'echarts';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NgxEchartsModule } from 'ngx-echarts';
 import * as util from 'zrender/lib/core/util';
 
@@ -81,17 +82,14 @@ export class DraggableChartsComponent implements OnDestroy {
     ]
   };
 
-  constructor() {}
-
   ngOnDestroy(): void {
     if (this.updatePosition) {
       window.removeEventListener('resize', this.updatePosition);
     }
   }
 
-  onChartReady(myChart: any): void {
-    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-    const onPointDragging = function (dataIndex: string | number) {
+  onChartReady(myChart: NzSafeAny): void {
+    const onPointDragging = function (dataIndex: string | number): void {
       // @ts-ignore
       Data[dataIndex] = myChart.convertFromPixel({ gridIndex: 0 }, this.position) as number[];
 
@@ -106,7 +104,7 @@ export class DraggableChartsComponent implements OnDestroy {
       });
     };
 
-    const showTooltip = (dataIndex: any): void => {
+    const showTooltip = (dataIndex: NzSafeAny): void => {
       myChart.dispatchAction({
         type: 'showTip',
         seriesIndex: 0,
@@ -148,11 +146,11 @@ export class DraggableChartsComponent implements OnDestroy {
             invisible: true,
             draggable: true,
             // @ts-ignore
-            ondrag: util.curry<(dataIndex: any) => void, number>(onPointDragging, dataIndex),
+            ondrag: util.curry<(dataIndex: NzSafeAny) => void, number>(onPointDragging, dataIndex),
             // @ts-ignore
-            onmousemove: util.curry<(dataIndex: any) => void, number>(showTooltip, dataIndex),
+            onmousemove: util.curry<(dataIndex: NzSafeAny) => void, number>(showTooltip, dataIndex),
             // @ts-ignore
-            onmouseout: util.curry<(dataIndex: any) => void, number>(hideTooltip, dataIndex),
+            onmouseout: util.curry<(dataIndex: NzSafeAny) => void, number>(hideTooltip, dataIndex),
             z: 100
           };
         })

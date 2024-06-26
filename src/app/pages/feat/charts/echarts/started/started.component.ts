@@ -1,6 +1,5 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { ComponentPortal, ComponentType, Portal, PortalModule } from '@angular/cdk/portal';
-
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -12,8 +11,8 @@ import { MergeChartsComponent } from '@app/pages/feat/charts/echarts/started/mer
 import { SimpleChartComponent } from '@app/pages/feat/charts/echarts/started/simple-chart/simple-chart.component';
 import { ThemeChartsComponent } from '@app/pages/feat/charts/echarts/started/theme-charts/theme-charts.component';
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { NzTabsModule } from 'ng-zorro-antd/tabs';
-import { NzTabPosition } from 'ng-zorro-antd/tabs/interfaces';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzTabsModule, NzTabPosition } from 'ng-zorro-antd/tabs';
 
 type targetComp = EventsChartsComponent | InitOptsChartsComponent | InstanceOptsChartsComponent | LoadingChartsComponent | MergeChartsComponent | SimpleChartComponent | ThemeChartsComponent;
 
@@ -27,7 +26,7 @@ type targetComp = EventsChartsComponent | InitOptsChartsComponent | InstanceOpts
 export class StartedComponent implements OnInit {
   tabPosition: NzTabPosition = 'left';
   componentPortal?: ComponentPortal<targetComp>;
-  selectedPortal!: Portal<any>;
+  selectedPortal!: Portal<NzSafeAny>;
   tabArray: Array<{ label: string; value: ComponentType<targetComp> }> = [
     { label: 'Simple Chart', value: SimpleChartComponent },
     { label: 'Events', value: EventsChartsComponent },

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import AMapLoader from '@amap/amap-jsapi-loader';
@@ -14,7 +14,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
   standalone: true,
   imports: [PageHeaderComponent, NzCardModule, WaterMarkComponent, NzInputModule, FormsModule]
 })
-export class GaodeMapComponent implements OnInit, AfterViewInit {
+export class GaodeMapComponent implements AfterViewInit {
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '高德地图，可不要暴露行踪了哟',
     breadcrumb: ['首页', '功能', '图表', '高德地图']
@@ -38,7 +38,7 @@ export class GaodeMapComponent implements OnInit, AfterViewInit {
       }
     })
       .then(AMap => {
-        let map = new AMap.Map('container', {
+        const map = new AMap.Map('container', {
           resizeEnable: true,
           zoom: 11,
           center: [116.397428, 39.90923]
@@ -61,6 +61,4 @@ export class GaodeMapComponent implements OnInit, AfterViewInit {
         console.error(e);
       });
   }
-
-  ngOnInit(): void {}
 }

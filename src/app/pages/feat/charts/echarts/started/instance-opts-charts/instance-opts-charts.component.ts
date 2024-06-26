@@ -1,7 +1,8 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
-import { EChartsOption } from 'echarts/types/dist/echarts';
+import { EChartsOption } from 'echarts';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NgxEchartsModule } from 'ngx-echarts';
@@ -24,7 +25,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
   imports: [NzButtonModule, NzWaveModule, NgxEchartsModule]
 })
 export class InstanceOptsChartsComponent {
-  chartInstance: any;
+  chartInstance: NzSafeAny;
 
   options: EChartsOption = {
     backgroundColor: '#2c343c',
@@ -99,7 +100,7 @@ export class InstanceOptsChartsComponent {
 
   constructor(private msg: NzMessageService) {}
 
-  onChartInit(e: any): void {
+  onChartInit(e: NzSafeAny): void {
     this.chartInstance = e;
     console.log('on chart init:', e);
   }

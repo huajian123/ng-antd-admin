@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, AfterViewInit, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewChild, ElementRef, AfterViewInit, inject } from '@angular/core';
 
 import { WaterMarkService } from '@core/services/common/water-mark.service';
 
@@ -9,12 +9,10 @@ import { WaterMarkService } from '@core/services/common/water-mark.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true
 })
-export class WaterMarkComponent implements OnInit, AfterViewInit {
+export class WaterMarkComponent implements AfterViewInit {
   @ViewChild('watermark', { static: false }) watermark!: ElementRef;
 
   private waterMarkService = inject(WaterMarkService);
-
-  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     const watermarkImg = this.waterMarkService.getWatermark();

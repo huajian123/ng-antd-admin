@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { NonNullableFormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { environment } from '@env/environment';
@@ -41,7 +41,7 @@ export class RichTextComponent {
     plugins: ['image'],
     fontsize_formats: '12px 14px 16px 18px 24px 36px 48px 56px 72px',
     language: 'zh_CN',
-    // images_upload_handler: function (blobInfo: any, success: (arg0: string) => void, failure: any) {
+    // images_upload_handler: function (blobInfo: NzSafeAny, success: (arg0: string) => void, failure: any) {
     //   console.log(blobInfo);
     //   console.log(success);
     //   /* no matter what you upload, we will turn it into TinyMCE logo :)*/

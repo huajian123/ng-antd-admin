@@ -4,6 +4,7 @@ import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/cor
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NgxEchartsModule } from 'ngx-echarts';
 import * as util from 'zrender/lib/core/util';
 
@@ -19,18 +20,18 @@ import * as util from 'zrender/lib/core/util';
 })
 export class FromLeftToRightComponent implements OnInit {
   // @ts-ignore
-  options: Observable<any>;
+  options: Observable<NzSafeAny>;
   private http = inject(HttpClient);
 
   ngOnInit(): void {
-    this.options = this.http.get<any>('assets/data/flare.json', { responseType: 'json' }).pipe(
+    this.options = this.http.get<NzSafeAny>('/data/flare.json', { responseType: 'json' }).pipe(
       map(data => {
         // @ts-ignore
         util.each(
           // @ts-ignore
           data.children,
           // @ts-ignore
-          (datum: any, index: number) => index % 2 === 0 && (datum.collapsed = true)
+          (datum: NzSafeAny, index: number) => index % 2 === 0 && (datum.collapsed = true)
         );
         return {
           tooltip: {

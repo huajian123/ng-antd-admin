@@ -1,7 +1,6 @@
 import { Directive, ElementRef, HostBinding, Input, numberAttribute, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
 
 @Directive({
-  // eslint-disable-next-line
   selector: '.psm__progress-bar',
   standalone: true
 })
@@ -52,7 +51,7 @@ export class PSMProgressBarDirective implements OnChanges {
 
     Array(this.numberOfProgressBarItems)
       .fill(1)
-      .forEach(_ => {
+      .forEach(() => {
         const progressBarItem = this.renderer.createElement('div');
         this.renderer.addClass(progressBarItem, 'psm__progress-bar-item');
         this.renderer.setStyle(progressBarItem, 'width', `${width}%`);

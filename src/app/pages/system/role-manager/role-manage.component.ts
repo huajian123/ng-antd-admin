@@ -15,6 +15,7 @@ import { ModalBtnStatus } from '@widget/base-modal';
 import { RoleManageModalService } from '@widget/biz-widget/system/role-manage-modal/role-manage-modal.service';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
@@ -49,7 +50,7 @@ interface SearchParam {
   ]
 })
 export class RoleManageComponent implements OnInit {
-  @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<any>;
+  @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<NzSafeAny>;
   searchParam: Partial<SearchParam> = {};
   tableConfig!: AntTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
@@ -68,7 +69,7 @@ export class RoleManageComponent implements OnInit {
   private router = inject(Router);
   private message = inject(NzMessageService);
 
-  selectedChecked(e: any): void {
+  selectedChecked(e: NzSafeAny): void {
     // @ts-ignore
     this.checkedCashArray = [...e];
   }
@@ -80,7 +81,7 @@ export class RoleManageComponent implements OnInit {
 
   getDataList(e?: NzTableQueryParams): void {
     this.tableConfig.loading = true;
-    const params: SearchCommonVO<any> = {
+    const params: SearchCommonVO<NzSafeAny> = {
       pageSize: this.tableConfig.pageSize!,
       pageNum: e?.pageIndex || this.tableConfig.pageIndex!,
       filters: this.searchParam

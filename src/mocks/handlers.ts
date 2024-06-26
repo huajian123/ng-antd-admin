@@ -1,4 +1,4 @@
-import { http, HttpResponse, passthrough } from 'msw';
+import { http, passthrough } from 'msw';
 
 import { department } from './business/department';
 import { login } from './business/login';

@@ -1,5 +1,4 @@
 import { normalizePassiveListenerOptions } from '@angular/cdk/platform';
-
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef, HostListener, NgZone, inject, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
@@ -28,7 +27,7 @@ interface ResultItem {
   icon: string;
 }
 
-const passiveEventListenerOptions = <AddEventListenerOptions>normalizePassiveListenerOptions({ passive: true });
+const passiveEventListenerOptions = normalizePassiveListenerOptions({ passive: true }) as AddEventListenerOptions;
 
 @Component({
   selector: 'app-search-route',
@@ -108,9 +107,9 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
     this.modalRef.destroy();
   }
 
-  getResultItem(menu: Menu, fatherTitle: string = ''): ResultItem[] {
+  getResultItem(menu: Menu, fatherTitle = ''): ResultItem[] {
     const fatherTitleTemp = fatherTitle === '' ? menu.menuName : `${fatherTitle} > ${menu.menuName}`;
-    let resultItem: ResultItem = {
+    const resultItem: ResultItem = {
       title: fatherTitleTemp,
       routePath: menu.path!,
       selItem: false,

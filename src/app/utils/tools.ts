@@ -10,8 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 /*获取1到100之间的随机整数 this.randomNum(1,101)*/
 const fnGetRandomNum = function getRandomNum(m: number, n: number): number {
-  let num = Math.floor(Math.random() * (m - n) + n);
-  return num;
+  return Math.floor(Math.random() * (m - n) + n);
 };
 
 const fnGetFile = function getFile(url: string, isBlob = false): Promise<NzSafeAny> {

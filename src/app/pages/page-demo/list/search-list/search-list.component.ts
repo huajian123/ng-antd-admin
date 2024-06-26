@@ -1,6 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild, TemplateRef, inject, DestroyRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild, TemplateRef, inject, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, NavigationEnd, Router, RouterEvent, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterEvent, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
 import { fadeRouteAnimation } from '@app/animations/fade.animation';
@@ -35,7 +35,7 @@ export class SearchListComponent {
     breadcrumb: ['首页', '列表页', '查询表格'],
     footer: this.headerFooter
   };
-  currentSelTab: number = 0;
+  currentSelTab = 0;
   destroyRef = inject(DestroyRef);
   tabData: TabInterface[] = [
     { label: '文章', url: '/default/page-demo/list/search-list/article' },

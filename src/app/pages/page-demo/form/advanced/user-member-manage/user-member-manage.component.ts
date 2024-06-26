@@ -23,7 +23,7 @@ interface ItemData {
 })
 export class UserMemberManageComponent implements OnInit {
   // 表格
-  editCache: { [key: string]: { edit: boolean; data: ItemData } } = {};
+  editCache: Record<string, { edit: boolean; data: ItemData }> = {};
   listOfData: ItemData[] = [];
   constructor() {}
 

@@ -1,13 +1,13 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { ComponentPortal, CdkPortalOutletAttachedRef, Portal, ComponentType, PortalModule } from '@angular/cdk/portal';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ComponentRef, DestroyRef, inject, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ComponentRef, DestroyRef, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormBuilder } from '@angular/forms';
 
 import { StepThreeComponent } from '@app/pages/page-demo/form/step/step-three/step-three.component';
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { WaterMarkComponent } from '@shared/components/water-mark/water-mark.component';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
 
 import { StepOneComponent } from './step-one/step-one.component';
@@ -30,7 +30,7 @@ enum StepEnum {
   imports: [PageHeaderComponent, NzCardModule, WaterMarkComponent, NzStepsModule, PortalModule]
 })
 export class StepComponent implements OnInit, AfterViewInit {
-  selectedPortal!: Portal<any>;
+  selectedPortal!: Portal<NzSafeAny>;
   stepDirection: 'horizontal' | 'vertical' = 'horizontal';
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '分步表单',
@@ -83,7 +83,7 @@ export class StepComponent implements OnInit, AfterViewInit {
       .observe(['(max-width: 770px)'])
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(result => {
-        let tempDir: 'vertical' | 'horizontal' = result.matches ? 'vertical' : 'horizontal';
+        const tempDir: 'vertical' | 'horizontal' = result.matches ? 'vertical' : 'horizontal';
         if (tempDir !== this.stepDirection) {
           this.stepDirection = tempDir;
           this.cdr.markForCheck();

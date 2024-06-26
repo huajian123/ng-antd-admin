@@ -15,6 +15,6 @@ import { NzResultModule } from 'ng-zorro-antd/result';
   imports: [NzResultModule, NzButtonModule, NzWaveModule, NzDescriptionsModule]
 })
 export class StepThreeComponent {
-  @Input('stepDirection') stepDirection: 'horizontal' | 'vertical' = 'horizontal';
+  @Input() stepDirection: 'horizontal' | 'vertical' = 'horizontal';
   @Output() readonly next = new EventEmitter<NzSafeAny>();
 }

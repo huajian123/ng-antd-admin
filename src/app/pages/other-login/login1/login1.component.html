@@ -2,11 +2,11 @@
   <div class="min-screen-full-height" nz-row style="padding: 0 5%">
     <div class="relative min-screen-full-height" nz-col [nzLg]="0" [nzMd]="0" [nzSm]="0" [nzXl]="12" [nzXs]="0" [nzXXl]="10">
       <div class="absolute logo center">
-        <img alt="ant" src="./assets/imgs/logo-color.svg" style="width: 48px" />
+        <img alt="ant" src="/imgs/logo-color.svg" style="width: 48px" />
         <span>AntDesignPro</span>
       </div>
       <div class="full-height flex-coloum center" style="align-items: flex-start">
-        <div><img alt="ant" src="./assets/imgs/login1/login-box-bg.svg" style="width: 50%" /></div>
+        <div><img alt="ant" src="/imgs/login1/login-box-bg.svg" style="width: 50%" /></div>
         <div class="desc"><span>开箱即用的中后台管理系统</span></div>
         <div class="sub-desc"><span>输入您的个人详细信息开始使用！</span></div>
       </div>
@@ -26,17 +26,17 @@
     }
     @if (isOverModel) {
       <div nz-col>
-        <img alt="ant" src="./assets/imgs/logo-color.svg" style="width: 32px" />
+        <img alt="ant" src="/imgs/logo-color.svg" style="width: 32px" />
         <span class="sp-16 m-l-8" style="color: white">AntDesignPro</span>
       </div>
     }
     <div nz-col>
       <nz-switch [ngModel]="isNightTheme$ | async" [nzCheckedChildren]="checkedTemplate" [nzUnCheckedChildren]="unCheckedTemplate" (ngModelChange)="changeNight($event)"></nz-switch>
-      <ng-template #checkedTemplate><img alt="" src="assets/imgs/login1/sun.svg" /></ng-template>
-      <ng-template #unCheckedTemplate><img alt="" src="assets/imgs/login1/moon.svg" /></ng-template>
+      <ng-template #checkedTemplate><img alt="" src="/imgs/login1/sun.svg" /></ng-template>
+      <ng-template #unCheckedTemplate><img alt="" src="/imgs/login1/moon.svg" /></ng-template>
 
       <span class="hand-model m-l-8" nz-dropdown [nzDropdownMenu]="language">
-        <i nz-icon nzTheme="outline" nzType="font-size" [style.color]="!(isNightTheme$ | async) ? (isOverModel ? 'white' : 'black') : 'white'"></i>
+        <i nz-icon nzTheme="outline" nzType="font-size" [style.color]="(isNightTheme$ | async) === false ? (isOverModel ? 'white' : 'black') : 'white'"></i>
       </span>
       <nz-dropdown-menu #language="nzDropdownMenu">
         <ul nz-menu nzSelectable>

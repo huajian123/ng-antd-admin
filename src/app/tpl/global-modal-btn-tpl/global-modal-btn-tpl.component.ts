@@ -4,10 +4,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { ModalFullStatusStoreService } from '@store/common-store/modal-full-status-store.service';
 import { fnStopMouseEvent } from '@utils/tools';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
 export abstract class GlobalModalBtnTplComponentToken {
-  componentTpl!: TemplateRef<any>;
+  componentTpl!: TemplateRef<NzSafeAny>;
   abstract fullScreenIconClick($event: MouseEvent): void;
   modalFullScreenFlag = false;
 }
@@ -21,7 +22,7 @@ export abstract class GlobalModalBtnTplComponentToken {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GlobalModalBtnTplComponent implements GlobalModalBtnTplComponentToken {
-  @ViewChild('componentTpl', { static: true }) componentTpl!: TemplateRef<any>;
+  @ViewChild('componentTpl', { static: true }) componentTpl!: TemplateRef<NzSafeAny>;
   modalFullScreenFlag = false;
   private modalFullStatus = inject(ModalFullStatusStoreService);
 

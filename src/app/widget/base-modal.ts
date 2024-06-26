@@ -1,5 +1,5 @@
 import { DragDrop, DragRef } from '@angular/cdk/drag-drop';
-import { ComponentRef, DestroyRef, Inject, inject, Injectable, Injector, Renderer2, RendererFactory2, TemplateRef, Type } from '@angular/core';
+import { ComponentRef, DestroyRef, inject, Injectable, Injector, Renderer2, RendererFactory2, TemplateRef, Type } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Observable, of } from 'rxjs';
 import { first, tap } from 'rxjs/operators';
@@ -34,7 +34,7 @@ export abstract class BasicConfirmModalComponent {
 })
 export class ModalWrapService {
   protected bsModalService: NzModalService;
-  private btnTpl!: TemplateRef<any>;
+  private btnTpl!: TemplateRef<NzSafeAny>;
   private renderer: Renderer2;
   destroyRef = inject(DestroyRef);
 

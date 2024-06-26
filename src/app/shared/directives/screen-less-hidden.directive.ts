@@ -1,15 +1,13 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Directive, inject, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 /*屏幕宽度小于某个宽度时不显示的组件*/
 @Directive({
   selector: '[appScreenLessHidden]',
   standalone: true
 })
 export class ScreenLessHiddenDirective {
-  @Input('appScreenLessHidden')
+  @Input()
   set appScreenLessHidden(lessScreen: string | undefined) {
     if (!lessScreen) {
       this.show(true);

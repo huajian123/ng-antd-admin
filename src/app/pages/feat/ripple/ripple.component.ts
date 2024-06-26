@@ -24,6 +24,6 @@ export class RippleComponent {
   centered = false;
   disabled = false;
   unbounded = false;
-  radius: number = 0;
-  color: string = 'red';
+  radius = 0;
+  color = 'red';
 }

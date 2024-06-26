@@ -1,5 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NgxEchartsModule } from 'ngx-echarts';
 
 @Component({
@@ -13,7 +14,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
   imports: [NgxEchartsModule]
 })
 export class SimpleChartComponent implements OnInit {
-  options: any;
+  options: NzSafeAny;
 
   ngOnInit(): void {
     const xAxisData = [];

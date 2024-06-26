@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy, inject } from '@angular/core';
 
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NgxEchartsModule } from 'ngx-echarts';
 
 @Component({
@@ -13,14 +14,14 @@ import { NgxEchartsModule } from 'ngx-echarts';
   imports: [NgxEchartsModule]
 })
 export class MergeChartsComponent implements OnInit, OnDestroy {
-  options: any;
-  updateOptions: any;
+  options: NzSafeAny;
+  updateOptions: NzSafeAny;
 
   private oneDay = 24 * 3600 * 1000;
   private now: Date | undefined;
   private value: number | undefined;
-  private data: any[] = [];
-  private timer: any;
+  private data: NzSafeAny[] = [];
+  private timer: NzSafeAny;
 
   private cdr = inject(ChangeDetectorRef);
 
@@ -41,7 +42,7 @@ export class MergeChartsComponent implements OnInit, OnDestroy {
       },
       tooltip: {
         trigger: 'axis',
-        formatter: (params: any[]) => {
+        formatter: (params: NzSafeAny[]) => {
           params = params[0];
           // @ts-ignore
           const date = new Date(params.name);

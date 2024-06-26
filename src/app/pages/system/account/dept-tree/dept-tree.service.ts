@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 import { SearchCommonVO } from '@core/services/types';
 import { DeptService } from '@services/system/dept.service';
 import { fnFlatDataHasParentToTree } from '@utils/treeTableTools';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzTreeFlatDataSource, NzTreeFlattener } from 'ng-zorro-antd/tree-view';
 
 interface TreeNode {
@@ -26,7 +27,7 @@ export interface FlatNode {
 
 @Injectable()
 export class DeptTreeService {
-  TREE_DATA$ = new BehaviorSubject<any[]>([]);
+  TREE_DATA$ = new BehaviorSubject<NzSafeAny[]>([]);
   currentSelNode: FlatNode | null = null;
   destroyRef = inject(DestroyRef);
   private transformer = (node: TreeNode, level: number): FlatNode => ({
@@ -71,7 +72,7 @@ export class DeptTreeService {
   }
 
   initDate(): void {
-    const params: SearchCommonVO<any> = {
+    const params: SearchCommonVO<NzSafeAny> = {
       pageSize: 0,
       pageNum: 0
     };

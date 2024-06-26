@@ -7,6 +7,7 @@ import { IconSelComponent } from '@shared/biz-components/icon-sel/icon-sel.compo
 import { fnCheckForm } from '@utils/tools';
 import { BasicConfirmModalComponent } from '@widget/base-modal';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -36,7 +37,7 @@ export class MenuModalComponent extends BasicConfirmModalComponent implements On
     super(modalRef);
   }
   // 返回false则不关闭对话框
-  protected getCurrentValue(): Observable<any> {
+  protected getCurrentValue(): Observable<NzSafeAny> {
     if (!fnCheckForm(this.validateForm)) {
       return of(false);
     }

@@ -35,33 +35,33 @@ export class BaseHttpService {
 
   get<T>(path: string, param?: NzSafeAny, config?: HttpCustomConfig): Observable<T> {
     config = config || { needSuccessInfo: false };
-    let reqPath = this.getUrl(path, config);
+    const reqPath = this.getUrl(path, config);
     const params = new HttpParams({ fromString: qs.stringify(param) });
     return this.http.get<ActionResult<T>>(reqPath, { params }).pipe(this.resultHandle<T>(config));
   }
 
   delete<T>(path: string, param?: NzSafeAny, config?: HttpCustomConfig): Observable<T> {
     config = config || { needSuccessInfo: false };
-    let reqPath = this.getUrl(path, config);
+    const reqPath = this.getUrl(path, config);
     const params = new HttpParams({ fromString: qs.stringify(param) });
     return this.http.delete<ActionResult<T>>(reqPath, { params }).pipe(this.resultHandle<T>(config));
   }
 
   post<T>(path: string, param?: NzSafeAny, config?: HttpCustomConfig): Observable<T> {
     config = config || { needSuccessInfo: false };
-    let reqPath = this.getUrl(path, config);
+    const reqPath = this.getUrl(path, config);
     return this.http.post<ActionResult<T>>(reqPath, param).pipe(this.resultHandle<T>(config));
   }
 
   put<T>(path: string, param?: NzSafeAny, config?: HttpCustomConfig): Observable<T> {
     config = config || { needSuccessInfo: false };
-    let reqPath = this.getUrl(path, config);
+    const reqPath = this.getUrl(path, config);
     return this.http.put<ActionResult<T>>(reqPath, param).pipe(this.resultHandle<T>(config));
   }
 
   downLoadWithBlob(path: string, param?: NzSafeAny, config?: HttpCustomConfig): Observable<NzSafeAny> {
     config = config || { needSuccessInfo: false };
-    let reqPath = this.getUrl(path, config);
+    const reqPath = this.getUrl(path, config);
     return this.http.post(reqPath, param, {
       responseType: 'blob',
       headers: new HttpHeaders().append('Content-Type', 'application/json')

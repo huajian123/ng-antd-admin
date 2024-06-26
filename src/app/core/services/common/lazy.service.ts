@@ -19,8 +19,8 @@ export interface LazyResult {
  */
 @Injectable({ providedIn: 'root' })
 export class LazyService {
-  private list: { [key: string]: boolean } = {};
-  private cached: { [key: string]: LazyResult } = {};
+  private list: Record<string, boolean> = {};
+  private cached: Record<string, LazyResult> = {};
   private _notify: BehaviorSubject<LazyResult[]> = new BehaviorSubject<LazyResult[]>([]);
   private readonly doc = inject(DOCUMENT);
 
@@ -105,7 +105,7 @@ export class LazyService {
     });
   }
 
-  loadStyle(path: string, rel: string = 'stylesheet', innerContent?: string): Promise<LazyResult> {
+  loadStyle(path: string, rel = 'stylesheet', innerContent?: string): Promise<LazyResult> {
     return new Promise(resolve => {
       if (this.list[path] === true) {
         resolve(this.cached[path]);

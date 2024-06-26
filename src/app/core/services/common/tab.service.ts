@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 import { getDeepReuseStrategyKeyFn, fnGetPathWithoutParam } from '@utils/tools';
 import _ from 'lodash';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { SimpleReuseStrategy } from './reuse-strategy';
 
@@ -196,7 +197,7 @@ export class TabService {
     return current;
   }
 
-  getCurrentPathWithoutParam(urlSegmentArray: UrlSegment[], queryParam: { [key: string]: any }): string {
+  getCurrentPathWithoutParam(urlSegmentArray: UrlSegment[], queryParam: Record<string, NzSafeAny>): string {
     const temp: string[] = [];
     // 获取所有参数的value
     const queryParamValuesArray = Object.values(queryParam);

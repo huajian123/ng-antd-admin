@@ -21,7 +21,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
   imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzSelectModule, NzButtonModule, NzInputModule, NzWaveModule, NzDividerModule, NzTypographyModule]
 })
 export class StepOneComponent implements OnInit {
-  @Input('stepDirection') stepDirection: 'horizontal' | 'vertical' = 'horizontal';
+  @Input() stepDirection: 'horizontal' | 'vertical' = 'horizontal';
   validateForm!: FormGroup;
   @Output() readonly next = new EventEmitter<NzSafeAny>();
 

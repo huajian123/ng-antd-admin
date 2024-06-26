@@ -3,6 +3,7 @@ import { Component, ChangeDetectionStrategy, TemplateRef, inject } from '@angula
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -53,7 +54,7 @@ export class MsgComponent {
     });
   }
 
-  createBasicNotification(template: TemplateRef<{}>): void {
+  createBasicNotification(template: TemplateRef<NzSafeAny>): void {
     this.notification.template(template);
   }
 }

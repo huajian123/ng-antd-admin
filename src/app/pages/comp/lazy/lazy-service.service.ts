@@ -33,7 +33,7 @@ export class LazyServiceService {
       this.create(componentRef.instance.purChoosePeople);
     });
     // 实现OnChange钩子
-    // (instance as any).ngOnChanges({
+    // (instance as NzSafeAny).ngOnChanges({
     //   purChoosePeople: new SimpleChange(null, instance.purChoosePeople, true)
     // });
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl, NonNullableFormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
@@ -6,6 +6,7 @@ import { PasswordStrengthMeterComponent } from '@shared/biz-components/password-
 import { fnCheckForm } from '@utils/tools';
 import { BasicConfirmModalComponent } from '@widget/base-modal';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -34,14 +35,14 @@ export class ChangePasswordComponent extends BasicConfirmModalComponent {
     return this.validateForm.controls.newPassword.value!;
   }
 
-  protected getCurrentValue(): Observable<any> {
+  protected getCurrentValue(): Observable<NzSafeAny> {
     if (!fnCheckForm(this.validateForm)) {
       return of(false);
     }
     return of(this.validateForm.value);
   }
 
-  confirmationValidator = (control: FormControl): { [s: string]: any } => {
+  confirmationValidator = (control: FormControl): Record<string, NzSafeAny> => {
     if (!control.value) {
       return { required: true };
     } else if (control.value !== this.validateForm.controls.newPassword.value) {

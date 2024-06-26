@@ -1,5 +1,5 @@
 import { assertInInjectionContext, inject } from '@angular/core';
-import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, CanActivateChildFn, CanActivateFn, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot, CanActivateChildFn, CanActivateFn, Router } from '@angular/router';
 
 import { TokenKey } from '@config/constant';
 

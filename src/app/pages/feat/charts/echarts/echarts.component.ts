@@ -42,7 +42,7 @@ export class EchartsComponent implements OnInit, AfterViewInit {
   currentSelTab: number = this.tabEnum.Started;
   componentArray: Array<ComponentType<targetComp>> = [StartedComponent, AdvancedComponent, SeriesComponent];
   componentPortal?: ComponentPortal<targetComp>;
-  selectedPortal!: Portal<any>;
+  selectedPortal!: Portal<NzSafeAny>;
 
   private cdr = inject(ChangeDetectorRef);
 

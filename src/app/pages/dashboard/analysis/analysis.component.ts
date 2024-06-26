@@ -285,17 +285,17 @@ export class AnalysisComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-  setTimeout(()=>{
-    this.ngZone.runOutsideAngular(() => {
-      this.initMinibar();
-      this.initMiniArea();
-      this.initProgress();
-      this.initHistogram();
-      this.initSearchArea();
-      this.initSearchAvgArea();
-      this.initRing();
-      // this.initMiniRing();
-    });``
-  })
+    setTimeout(() => {
+      this.ngZone.runOutsideAngular(() => {
+        this.initMinibar();
+        this.initMiniArea();
+        this.initProgress();
+        this.initHistogram();
+        this.initSearchArea();
+        this.initSearchAvgArea();
+        this.initRing();
+        // this.initMiniRing();
+      });
+    });
   }
 }

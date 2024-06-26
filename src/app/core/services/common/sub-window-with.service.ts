@@ -12,7 +12,7 @@ import { EquipmentWidth, WindowsWidthService } from '@store/common-store/windows
   providedIn: 'root'
 })
 export class SubWindowWithService {
-  subWidthObj: { [key: string]: [EquipmentWidth, [number, number]] } = {
+  subWidthObj: Record<string, [EquipmentWidth, [number, number]]> = {
     '(max-width: 575.98px)': [EquipmentWidth.xs, [0, 575.98]],
     '(min-width: 576px) and (max-width: 767.98px)': [EquipmentWidth.sm, [576, 767.98]],
     '(min-width: 768px) and (max-width: 991.98px)': [EquipmentWidth.md, [768, 991.98]],

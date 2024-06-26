@@ -1,8 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef, inject } from '@angular/core';
-import { FormBuilder, FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
-import { SearchCommonVO } from '@core/services/types';
 import { AntTableConfig, SortFile } from '@shared/components/ant-table/ant-table.component';
 import { CardTableWrapComponent } from '@shared/components/card-table-wrap/card-table-wrap.component';
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
@@ -60,7 +58,7 @@ export class TreeListComponent implements OnInit {
     // desc: '表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。',
     breadcrumb: ['首页', '列表页', '树状表格']
   };
-  checkedCashArray: any[] = [];
+  checkedCashArray: NzSafeAny[] = [];
   dataList: NzSafeAny[] = [];
 
   private modalSrv = inject(NzModalService);
@@ -86,10 +84,6 @@ export class TreeListComponent implements OnInit {
 
   getDataList(e?: NzTableQueryParams): void {
     this.tableConfig.loading = true;
-    const params: SearchCommonVO<NzSafeAny> = {
-      pageSize: this.tableConfig.pageSize!,
-      pageNum: e?.pageIndex! || this.tableConfig.pageIndex!
-    };
     this.dataList = [];
     setTimeout(() => {
       this.dataList = [
@@ -233,7 +227,7 @@ export class TreeListComponent implements OnInit {
 
     /*-----实际业务请求http接口如下------*/
     // this.tableConfig.loading = true;
-    // const params: SearchCommonVO<any> = {
+    // const params: SearchCommonVO<NzSafeAny> = {
     //   pageSize: this.tableConfig.pageSize!,
     //   pageNum: e?.pageIndex || this.tableConfig.pageIndex!,
     //   filters: this.searchParam
@@ -256,7 +250,7 @@ export class TreeListComponent implements OnInit {
   }
 
   /*查看*/
-  check(id: string, children: any[], parent: any[]): void {
+  check(id: string, children: NzSafeAny[], parent: NzSafeAny[]): void {
     this.message.success(id);
     console.log(children);
     console.log(parent);
@@ -359,7 +353,7 @@ export class TreeListComponent implements OnInit {
   }
 
   // 最左侧复选框选中触发
-  selectedChecked(e: any): void {
+  selectedChecked(e: NzSafeAny): void {
     this.checkedCashArray = [...e];
     console.log(this.checkedCashArray);
   }

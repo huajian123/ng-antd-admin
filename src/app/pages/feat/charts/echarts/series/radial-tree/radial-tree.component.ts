@@ -4,6 +4,7 @@ import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/cor
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NgxEchartsModule } from 'ngx-echarts';
 @Component({
   selector: 'app-radial-tree',
@@ -17,11 +18,11 @@ import { NgxEchartsModule } from 'ngx-echarts';
 })
 export class RadialTreeComponent implements OnInit {
   // @ts-ignore
-  options: Observable<any>;
+  options: Observable<NzSafeAny>;
   private http = inject(HttpClient);
 
   ngOnInit(): void {
-    this.options = this.http.get<any>('assets/data/flare.json', { responseType: 'json' }).pipe(
+    this.options = this.http.get<NzSafeAny>('/data/flare.json', { responseType: 'json' }).pipe(
       map(data => ({
         tooltip: {
           trigger: 'item',

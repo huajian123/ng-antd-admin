@@ -11,7 +11,6 @@ export class ToggleFullscreenDirective implements OnInit {
   isFullscreenFlag = true;
   private cdr = inject(ChangeDetectorRef);
 
-  constructor() {}
   ngOnInit(): void {
     screenfull.onchange(() => {
       setTimeout(() => {

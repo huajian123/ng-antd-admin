@@ -2,7 +2,6 @@ import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, Cha
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { SearchCommonVO } from '@core/services/types';
 import { AntTableConfig, SortFile, AntTableComponent } from '@shared/components/ant-table/ant-table.component';
 import { CardTableWrapComponent } from '@shared/components/card-table-wrap/card-table-wrap.component';
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
@@ -85,7 +84,7 @@ export class SearchTableComponent implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   // 最左侧复选框选中触发
-  selectedChecked(e: any): void {
+  selectedChecked(e: NzSafeAny): void {
     this.checkedCashArray = [...e];
   }
 
@@ -109,10 +108,6 @@ export class SearchTableComponent implements OnInit {
 
   getDataList(e?: NzTableQueryParams): void {
     this.tableConfig.loading = true;
-    const params: SearchCommonVO<NzSafeAny> = {
-      pageSize: this.tableConfig.pageSize!,
-      pageNum: e?.pageIndex! || this.tableConfig.pageIndex!
-    };
     this.dataList = [];
     setTimeout(() => {
       this.dataList = [
@@ -179,7 +174,7 @@ export class SearchTableComponent implements OnInit {
 
     /*-----实际业务请求http接口如下------*/
     // this.tableConfig.loading = true;
-    // const params: SearchCommonVO<any> = {
+    // const params: SearchCommonVO<NzSafeAny> = {
     //   pageSize: this.tableConfig.pageSize!,
     //   pageNum: e?.pageIndex || this.tableConfig.pageIndex!,
     //   filters: this.searchParam

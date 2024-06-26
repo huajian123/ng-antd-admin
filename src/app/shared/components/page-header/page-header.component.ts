@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, Input, OnInit, Output, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ThemeService } from '@store/common-store/theme.service';
@@ -23,7 +23,7 @@ export interface PageHeaderType {
   standalone: true,
   imports: [NzPageHeaderModule, NzBreadCrumbModule, NzOutletModule]
 })
-export class PageHeaderComponent implements OnInit {
+export class PageHeaderComponent {
   private themesService = inject(ThemeService);
   private router = inject(Router);
 
@@ -35,6 +35,4 @@ export class PageHeaderComponent implements OnInit {
   back(): void {
     this.router.navigateByUrl(this.backUrl);
   }
-
-  ngOnInit(): void {}
 }

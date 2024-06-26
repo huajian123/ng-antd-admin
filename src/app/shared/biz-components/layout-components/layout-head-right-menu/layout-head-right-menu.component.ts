@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { LoginInOutService } from '@core/services/common/login-in-out.service';
@@ -31,7 +31,7 @@ import { HomeNoticeComponent } from '../home-notice/home-notice.component';
   standalone: true,
   imports: [NgTemplateOutlet, ScreenLessHiddenDirective, NzToolTipModule, NzIconModule, NzButtonModule, ToggleFullscreenDirective, NzDropDownModule, NzBadgeModule, NzMenuModule, HomeNoticeComponent]
 })
-export class LayoutHeadRightMenuComponent implements OnInit {
+export class LayoutHeadRightMenuComponent {
   user!: UserPsd;
 
   private router = inject(Router);
@@ -106,6 +106,4 @@ export class LayoutHeadRightMenuComponent implements OnInit {
   goPage(path: string): void {
     this.router.navigateByUrl(`/default/page-demo/personal/${path}`);
   }
-
-  ngOnInit(): void {}
 }

@@ -10,7 +10,7 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 export class HtmlPipe implements PipeTransform {
   constructor(private domSanitizer: DomSanitizer) {}
 
-  transform(value: NzSafeAny, args?: NzSafeAny): NzSafeAny {
+  transform(value: NzSafeAny): NzSafeAny {
     return this.domSanitizer.bypassSecurityTrustHtml(value);
   }
 }

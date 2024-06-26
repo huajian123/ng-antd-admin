@@ -61,7 +61,7 @@ interface SearchParam {
   ]
 })
 export class AccountComponent implements OnInit {
-  @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<any>;
+  @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<NzSafeAny>;
   @ViewChild('availableFlag', { static: true }) availableFlag!: TemplateRef<NzSafeAny>;
   searchParam: Partial<SearchParam> = {};
   tableConfig!: AntTableConfig;
@@ -94,7 +94,7 @@ export class AccountComponent implements OnInit {
 
   getDataList(e?: NzTableQueryParams): void {
     this.tableConfig.loading = true;
-    const params: SearchCommonVO<any> = {
+    const params: SearchCommonVO<NzSafeAny> = {
       pageSize: this.tableConfig.pageSize!,
       pageNum: e?.pageIndex || this.tableConfig.pageIndex!,
       filters: this.searchParam
@@ -212,7 +212,7 @@ export class AccountComponent implements OnInit {
         }),
         takeUntilDestroyed(this.destroyRef)
       )
-      .subscribe(res => {
+      .subscribe(() => {
         this.getDataList();
       });
   }

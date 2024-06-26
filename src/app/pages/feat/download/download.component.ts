@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, inject, DestroyRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { ip } from '@env/environment.prod';
@@ -16,7 +16,7 @@ import { NzWaveModule } from 'ng-zorro-antd/core/wave';
   standalone: true,
   imports: [PageHeaderComponent, NzCardModule, NzButtonModule, NzWaveModule]
 })
-export class DownloadComponent implements OnInit {
+export class DownloadComponent {
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '文件下载',
     breadcrumb: ['首页', '功能', '文件下载'],
@@ -25,8 +25,6 @@ export class DownloadComponent implements OnInit {
   destroyRef = inject(DestroyRef);
 
   private downloadService = inject(DownloadService);
-
-  ngOnInit(): void {}
 
   fileStreamDownload(): void {
     const downloadDto = {

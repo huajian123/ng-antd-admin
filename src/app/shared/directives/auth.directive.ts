@@ -1,7 +1,6 @@
 import { Directive, inject, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 
 import { UserInfoService } from '@store/common-store/userInfo.service';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 @Directive({
   selector: '[appAuth]',
@@ -14,7 +13,7 @@ export class AuthDirective {
   private templateRef = inject(TemplateRef);
   private viewContainerRef = inject(ViewContainerRef);
 
-  @Input('appAuth')
+  @Input()
   set appAuth(authCode: string | undefined) {
     if (!authCode) {
       this.show(true);

@@ -28,9 +28,9 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
   private readonly scrollService = inject(ScrollService);
 
   // 缓存每个component的map
-  static handlers: { [key: string]: NzSafeAny } = {};
+  static handlers: Record<string, NzSafeAny> = {};
   // 缓存每个页面的scroll位置,为啥不放在handlers里面呢,因为路由离开时路由复用导致以当前页为key为null了
-  static scrollHandlers: { [key: string]: NzSafeAny } = {};
+  static scrollHandlers: Record<string, NzSafeAny> = {};
 
   // 这个参数的目的是，在当前页签中点击删除按钮，虽然页签关闭了，但是在路由离开的时候，还是会将已经关闭的页签的组件缓存，
   // 用这个参数来记录，是否需要缓存当前路由
@@ -139,7 +139,7 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
     // 重新获取是因为future在上面while循环中已经变了
     const scrollFutureKey = fnGetReuseStrategyKeyFn(future);
     if (!!scrollFutureKey && SimpleReuseStrategy.scrollHandlers[scrollFutureKey]) {
-      SimpleReuseStrategy.scrollHandlers[scrollFutureKey].scroll.forEach((elOptionItem: { [key: string]: [number, number] }) => {
+      SimpleReuseStrategy.scrollHandlers[scrollFutureKey].scroll.forEach((elOptionItem: Record<string, [number, number]>) => {
         Object.keys(elOptionItem).forEach(element => {
           setTimeout(() => {
             this.scrollService.scrollToPosition(this.doc.querySelector(element), elOptionItem[element]);

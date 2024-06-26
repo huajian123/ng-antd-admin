@@ -50,7 +50,7 @@ export class LoginFormComponent implements OnInit {
     // todo 登录后台返回统一模式为,如果code不为0，会自动被拦截，如果需要修改，请在src/app/core/services/http/base-http.service.ts中进行修改
     // {
     //   code:number,
-    //   data:any,
+    //   data:NzSafeAny,
     //   msg：string
     // }
     this.dataService

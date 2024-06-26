@@ -1,5 +1,5 @@
 import { DecimalPipe } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, inject, NgZone, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, inject, NgZone, TemplateRef, ViewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { Radar } from '@antv/g2plot';
@@ -41,7 +41,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
     NumberLoopPipe
   ]
 })
-export class WorkbenchComponent implements OnInit, AfterViewInit {
+export class WorkbenchComponent implements AfterViewInit {
   @ViewChild('pageHeaderContent', { static: false }) pageHeaderContent!: TemplateRef<NzSafeAny>;
   destroyRef = inject(DestroyRef);
   radarData = [
@@ -73,8 +73,6 @@ export class WorkbenchComponent implements OnInit, AfterViewInit {
   };
   private ngZone = inject(NgZone);
   msg = inject(NzMessageService);
-
-  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     this.pageHeaderInfo = {

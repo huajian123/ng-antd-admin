@@ -33,7 +33,7 @@ export class LazyScrollComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.lazyServiceService.adHost = this.adHost;
     this.zone.runOutsideAngular(() => {
-      fromEvent(window, 'scroll', <AddEventListenerOptions>passiveEventListenerOptions)
+      fromEvent(window, 'scroll', passiveEventListenerOptions as AddEventListenerOptions)
         .pipe(
           debounceTime(50),
           filter(() => {

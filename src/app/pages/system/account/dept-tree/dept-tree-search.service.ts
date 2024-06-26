@@ -22,7 +22,6 @@ export class DeptTreeSearchService {
       distinctUntilChanged(),
       map(value => (this.searchValue = value))
     )
-    // @ts-ignore
   ]).pipe(map(([data, value]) => (value ? this.filterTreeData(data as TreeNode[], value) : new FilteredTreeResult(data as TreeNode[]))));
 
   constructor() {

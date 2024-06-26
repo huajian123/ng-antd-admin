@@ -29,6 +29,7 @@ export class TopProgressBarComponent {
       if (evt instanceof NavigationError || evt instanceof NavigationCancel) {
         this.isFetching = false;
         if (evt instanceof NavigationError) {
+          console.error('路由跳转失败');
         }
         this.cdr.markForCheck();
         return;

@@ -1,7 +1,6 @@
 import { Component, ChangeDetectionStrategy, AfterViewInit } from '@angular/core';
 
-import { getInstanceByDom, connect } from 'echarts';
-import { EChartsOption } from 'echarts/types/dist/echarts';
+import { getInstanceByDom, connect, EChartsOption } from 'echarts';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NgxEchartsModule } from 'ngx-echarts';
 

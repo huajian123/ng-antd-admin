@@ -1,4 +1,4 @@
-import { inject, Inject, Injectable, Optional } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 
 import { zxcvbn, zxcvbnOptions } from '@zxcvbn-ts/core';
 import zxcvbnEnPackage from '@zxcvbn-ts/language-en';

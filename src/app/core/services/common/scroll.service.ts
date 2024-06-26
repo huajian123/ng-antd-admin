@@ -37,6 +37,7 @@ export class ScrollService {
    * 设置滚动条位置
    *
    * @param element 指定元素
+   * @param position
    */
   scrollToPosition(element: Element | Window | null | undefined, position: [number, number]): void {
     if (!this.platform.isBrowser) {
@@ -51,7 +52,7 @@ export class ScrollService {
    * @param element 指定元素，默认 `document.body`
    * @param topOffset 偏移值，默认 `0`
    */
-  scrollToElement(element?: Element | null, topOffset: number = 0): void {
+  scrollToElement(element?: Element | null, topOffset = 0): void {
     if (!this.platform.isBrowser) {
       return;
     }
@@ -76,7 +77,7 @@ export class ScrollService {
    *
    * @param topOffset 偏移值，默认 `0`
    */
-  scrollToTop(topOffset: number = 0): void {
+  scrollToTop(topOffset = 0): void {
     if (!this.platform.isBrowser) {
       return;
     }

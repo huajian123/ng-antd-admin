@@ -1,5 +1,5 @@
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, inject, Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, inject, Input, OnChanges, Output, SimpleChanges, TemplateRef } from '@angular/core';
 
 import { ContextPipePipe } from '@shared/components/ant-table/context-pipe.pipe';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -23,8 +23,8 @@ export interface TableHeader {
   tdClassList?: string[]; // 为td单元格指定类 (父组件中的类必须加上 /deep/ 前缀才能对子组件生效)
   thClassList?: string[]; // 为th单元格指定类  (父组件中的类必须加上 /deep/ 前缀才能对子组件生效)
   show?: boolean; // 是否显示列，false:不显示，其他：显示
-  tdClassFn?: (data: any, index: number) => string[];
-  thClassFn?: (data: any) => string[];
+  tdClassFn?: (data: NzSafeAny, index: number) => string[];
+  thClassFn?: (data: NzSafeAny) => string[];
 }
 
 export interface AntTableConfig {
@@ -61,7 +61,7 @@ export interface SortFile {
   standalone: true,
   imports: [NzTableModule, NzResizableModule, NgClass, NgTemplateOutlet, MapPipe, TableFiledPipe, ContextPipePipe]
 })
-export class AntTableComponent implements OnInit, OnChanges {
+export class AntTableComponent implements OnChanges {
   _dataList!: NzSafeAny[];
   _tableConfig!: AntTableConfig;
   _scrollConfig: { x: string; y: string } | {} = {};
@@ -106,8 +106,8 @@ export class AntTableComponent implements OnInit, OnChanges {
   @Output() readonly changePageSize = new EventEmitter<number>();
   @Output() readonly selectedChange: EventEmitter<NzSafeAny[]> = new EventEmitter<NzSafeAny[]>();
   @Output() readonly sortFn: EventEmitter<SortFile> = new EventEmitter<SortFile>();
-  indeterminate: boolean = false;
-  allChecked: boolean = false;
+  indeterminate = false;
+  allChecked = false;
   private cdr = inject(ChangeDetectorRef);
 
   setScrollConfig(value: AntTableConfig): void {
@@ -226,8 +226,6 @@ export class AntTableComponent implements OnInit, OnChanges {
     this.allChecked = allChecked;
     this.indeterminate = !allChecked && !allUnChecked;
   }
-
-  ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['checkedCashArrayFromComment']) {

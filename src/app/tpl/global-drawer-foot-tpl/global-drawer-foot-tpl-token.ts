@@ -1,9 +1,8 @@
 // https://netbasal.com/getting-to-know-the-createcomponent-api-in-angular-22fb115f08e2
 // https://angular.io/api/core/createComponent
-import { ApplicationRef, ComponentRef, createComponent, EnvironmentInjector, inject, InjectionToken, TemplateRef } from '@angular/core';
+import { ApplicationRef, ComponentRef, createComponent, EnvironmentInjector, inject, InjectionToken } from '@angular/core';
 
 import { GlobalDrawerFootTplComponent } from '@app/tpl/global-drawer-foot-tpl/global-drawer-foot-tpl.component';
-import { GlobalModalBtnTplComponent } from '@app/tpl/global-modal-btn-tpl/global-modal-btn-tpl.component';
 
 /**
  * 全局抽屉的footer模板，也就是确定，取消按钮啦

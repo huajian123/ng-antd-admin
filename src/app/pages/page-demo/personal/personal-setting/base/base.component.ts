@@ -33,7 +33,7 @@ export class BaseComponent implements OnInit {
   provinceData = ['Zhejiang', 'Jiangsu'];
   formOrder = 1;
   avatarOrder = 0;
-  cityData: { [place: string]: string[] } = {
+  cityData: Record<string, string[]> = {
     Zhejiang: ['Hangzhou', 'Ningbo', 'Wenzhou'],
     Jiangsu: ['Nanjing', 'Suzhou', 'Zhenjiang']
   };

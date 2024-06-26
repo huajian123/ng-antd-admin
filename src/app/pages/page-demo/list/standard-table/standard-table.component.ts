@@ -14,8 +14,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
-import { NzProgressModule } from 'ng-zorro-antd/progress';
-import { NzProgressStatusType } from 'ng-zorro-antd/progress/typings';
+import { NzProgressModule, NzProgressStatusType } from 'ng-zorro-antd/progress';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzStatisticModule } from 'ng-zorro-antd/statistic';
 

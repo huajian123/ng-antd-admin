@@ -3,8 +3,9 @@ import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/cor
 import { LazyService } from '@core/services/common/lazy.service';
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
-declare var BMap: any;
+declare let BMap: NzSafeAny;
 @Component({
   selector: 'app-baidu-map',
   templateUrl: './baidu-map.component.html',
