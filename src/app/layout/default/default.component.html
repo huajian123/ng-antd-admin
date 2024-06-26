@@ -28,13 +28,10 @@
   @if (isMixinMode && isHasTopArea) {
     <nz-header class="animate-02 dark-top-nav-bg top-fixed screen-full-width">
       <app-tool-bar>
-        @if (isOverMode) {
-          <ng-container left>
+        <ng-container left>
+          @if (isOverMode) {
             <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="changeCollapsed(!isCollapsed)"></i>
-          </ng-container>
-        }
-        @if (!isOverMode) {
-          <ng-container left>
+          } @else {
             <div class="left-start-center flex-1" style="z-index: 100">
               <img class="m-l-10" alt="" src="/imgs/logo.svg" style="max-height: 32px; max-width: 54px" />
               <span class="sp-18 m-r-25 ng17color">Ant Design Pro</span>
@@ -44,8 +41,9 @@
                 }
               </div>
             </div>
-          </ng-container>
-        }
+          }
+        </ng-container>
+
         <ng-container right>
           <app-layout-head-right-menu />
         </ng-container>
@@ -145,21 +143,22 @@
 
 <ng-template #headerTpl>
   <app-tool-bar>
-    @if (isOverMode || isSideMode) {
-      <ng-container left>
+    <ng-container left>
+      @if (isOverMode || isSideMode) {
         <i id="trigger" class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="changeCollapsed(!isCollapsed)"></i>
-      </ng-container>
-    } @else {
-      <div class="left-start-center flex-1" style="z-index: 100">
-        @if (isHasNavHeadArea) {
-          <img class="m-l-10" alt="" src="/imgs/logo.svg" style="max-height: 32px; max-width: 54px" />
-          <span class="sp-18 m-r-8 ng17color">Ant Design</span>
-        }
-        <div class="flex-1">
-          <app-nav-bar />
+      } @else {
+        <div class="left-start-center flex-1" style="z-index: 100">
+          @if (isHasNavHeadArea) {
+            <img class="m-l-10" alt="" src="/imgs/logo.svg" style="max-height: 32px; max-width: 54px" />
+            <span class="sp-18 m-r-8 ng17color">Ant Design</span>
+          }
+          <div class="flex-1">
+            <app-nav-bar />
+          </div>
         </div>
-      </div>
-    }
+      }
+    </ng-container>
+
     <ng-container right>
       <app-layout-head-right-menu />
     </ng-container>
