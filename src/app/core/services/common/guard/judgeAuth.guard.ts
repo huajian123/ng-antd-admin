@@ -22,14 +22,13 @@ export class JudgeAuthGuardService {
   selMenu: Menu | null = null;
   menuNavList: Menu[] = [];
   destroyRef = inject(DestroyRef);
+  loginOutService = inject(LoginInOutService);
+  router = inject(Router);
+  userInfoService = inject(UserInfoService);
+  menuStoreService = inject(MenuStoreService);
+  message = inject(NzMessageService);
 
-  constructor(
-    private loginOutService: LoginInOutService,
-    private router: Router,
-    private userInfoService: UserInfoService,
-    private menuStoreService: MenuStoreService,
-    private message: NzMessageService
-  ) {
+  constructor() {
     this.menuStoreService
       .getMenuArrayStore()
       .pipe(takeUntilDestroyed(this.destroyRef))

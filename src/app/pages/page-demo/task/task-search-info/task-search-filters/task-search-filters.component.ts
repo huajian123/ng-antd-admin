@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
@@ -9,7 +8,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
 @Component({
   selector: 'app-task-search-filters',
   standalone: true,
-  imports: [CommonModule, NzListModule, NzTypographyModule, NzAvatarModule, NzIconModule],
+  imports: [NzListModule, NzTypographyModule, NzAvatarModule, NzIconModule],
   templateUrl: './task-search-filters.component.html',
   styleUrls: ['./task-search-filters.component.less']
 })

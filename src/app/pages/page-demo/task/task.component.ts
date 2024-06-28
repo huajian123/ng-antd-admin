@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { TaskListPanelComponent } from '@app/pages/page-demo/task/task-list-panel/task-list-panel.component';
@@ -10,7 +9,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 @Component({
   selector: 'app-task',
   standalone: true,
-  imports: [CommonModule, PageHeaderComponent, NzGridModule, TaskSearchInfoComponent, NzCardModule, TaskListPanelComponent],
+  imports: [PageHeaderComponent, NzGridModule, TaskSearchInfoComponent, NzCardModule, TaskListPanelComponent],
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush

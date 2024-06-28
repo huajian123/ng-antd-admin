@@ -1,4 +1,4 @@
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
 import { Component } from '@angular/core';
 
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
@@ -9,7 +9,7 @@ import { NzListModule } from 'ng-zorro-antd/list';
 @Component({
   selector: 'app-user-info',
   standalone: true,
-  imports: [CommonModule, NzCardModule, NzAvatarModule, NzIconModule, NzListModule, NgOptimizedImage],
+  imports: [NzCardModule, NzAvatarModule, NzIconModule, NzListModule, NgOptimizedImage],
   templateUrl: './user-info.component.html',
   styleUrls: ['./user-info.component.less']
 })

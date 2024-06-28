@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, AfterViewInit, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, AfterViewInit, inject } from '@angular/core';
 
 import { LazyService } from '@core/services/common/lazy.service';
 

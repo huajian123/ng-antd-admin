@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
 import { NzCardModule } from 'ng-zorro-antd/card';
@@ -8,7 +7,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 @Component({
   selector: 'app-task-list-panel',
   standalone: true,
-  imports: [CommonModule, NzCollapseModule, NzCardModule, NzIconModule],
+  imports: [NzCollapseModule, NzCardModule, NzIconModule],
   templateUrl: './task-list-panel.component.html',
   styleUrls: ['./task-list-panel.component.less']
 })
