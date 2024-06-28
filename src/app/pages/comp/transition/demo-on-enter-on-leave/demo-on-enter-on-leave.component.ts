@@ -1,4 +1,4 @@
-import { NgFor, NgSwitch, NgSwitchCase, NgIf, NgSwitchDefault } from '@angular/common';
+
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -187,7 +187,7 @@ import { AngularImgComponent } from '../angular-img/angular-img.component';
     fadeOutCollapseLeftOnLeaveAnimation({ duration: 400 })
   ],
   standalone: true,
-  imports: [NzSelectModule, FormsModule, NgFor, NzButtonModule, NzWaveModule, NgSwitch, NgSwitchCase, NgIf, AngularImgComponent, NgSwitchDefault]
+  imports: [NzSelectModule, FormsModule, NzButtonModule, NzWaveModule, AngularImgComponent]
 })
 export class DemoOnEnterOnLeaveComponent {
   options = [

@@ -1,4 +1,3 @@
-import { NgSwitch, NgSwitchCase, NgSwitchDefault, NgFor } from '@angular/common';
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -189,7 +188,7 @@ import { AngularImgComponent } from '../angular-img/angular-img.component';
     hueRotateAnimation({ anchor: 'hueButton', duration: 20000 })
   ],
   standalone: true,
-  imports: [NgSwitch, NgSwitchCase, AngularImgComponent, NgSwitchDefault, NzSelectModule, FormsModule, NgFor, NzButtonModule, NzWaveModule]
+  imports: [AngularImgComponent, NzSelectModule, FormsModule, NzButtonModule, NzWaveModule]
 })
 export class DemoMainComponent {
   options = [

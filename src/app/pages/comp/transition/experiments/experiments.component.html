@@ -1,5 +1,5 @@
 <div class="center">
-  @for (i of [0, 1, 2, 3, 4]; track i) {
+  @for (i of [0, 1, 2, 3, 4]; track $index) {
     <app-angular-img [@enter]="{ value: '', params: { delay: i * 150 } }" (@enter.done)="hueState = !hueState"></app-angular-img>
   }
 </div>
@@ -8,12 +8,12 @@
 
 <div [@flash]="flashState">
   <div>
-    @for (letter of text1; track letter; let i = $index; let last = $last) {
+    @for (letter of text1; track $index; let last = $last) {
       <div
         class="letter"
-        [@enterLetterAnim1]="{ value: '', params: { delay: 1500 + i * 100 } }"
-        [@hueLetter]="{ value: hueState, params: { delay: i * 50 } }"
-        [@letterAnim1]="{ value: animationState, params: { delay: i * 30 } }"
+        [@enterLetterAnim1]="{ value: '', params: { delay: 1500 + $index * 100 } }"
+        [@hueLetter]="{ value: hueState, params: { delay: $index * 50 } }"
+        [@letterAnim1]="{ value: animationState, params: { delay: $index * 30 } }"
         (@letterAnim1.done)="last && (hueState = !hueState)"
       >
         {{ letter }}
@@ -22,12 +22,12 @@
   </div>
 
   <div>
-    @for (letter of text2; track letter; let i = $index; let last = $last) {
+    @for (letter of text2; track $index; let last = $last) {
       <div
         class="letter"
-        [@enterLetterAnim2]="{ value: '', params: { delay: 6000 + getDelay(i, text2.length) } }"
-        [@hueLetter]="{ value: hueState, params: { delay: i * 75 } }"
-        [@letterAnim2]="{ value: animationState, params: { delay: 500 + i * 30 } }"
+        [@enterLetterAnim2]="{ value: '', params: { delay: 6000 + getDelay($index, text2.length) } }"
+        [@hueLetter]="{ value: hueState, params: { delay: $index * 75 } }"
+        [@letterAnim2]="{ value: animationState, params: { delay: 500 + $index * 30 } }"
         (@enterLetterAnim2.done)="last && (hueState = !hueState)"
       >
         {{ letter }}
@@ -36,12 +36,12 @@
   </div>
 
   <div>
-    @for (letter of text3; track letter; let i = $index; let last = $last; let first = $first) {
+    @for (letter of text3; track $index; let first = $first) {
       <div
         class="letter"
-        [@enterLetterAnim3]="{ value: '', params: { delay: 8000 + text3.length * 100 - i * 100 } }"
-        [@hueLetter]="{ value: hueState, params: { delay: i * 150 } }"
-        [@letterAnim3]="{ value: animationState, params: { delay: 1000 + i * 30 } }"
+        [@enterLetterAnim3]="{ value: '', params: { delay: 8000 + text3.length * 100 - $index * 100 } }"
+        [@hueLetter]="{ value: hueState, params: { delay: $index * 150 } }"
+        [@letterAnim3]="{ value: animationState, params: { delay: 1000 + $index * 30 } }"
         (@enterLetterAnim3.done)="first && (flashState = !flashState)"
       >
         {{ letter }}

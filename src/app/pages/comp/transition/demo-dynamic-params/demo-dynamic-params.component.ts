@@ -1,4 +1,3 @@
-import { NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault, NgFor } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -191,22 +190,7 @@ import { AngularImgComponent } from '../angular-img/angular-img.component';
     hueRotateAnimation({ anchor: 'hueButton', duration: 20000 })
   ],
   standalone: true,
-  imports: [
-    FormsModule,
-    NzFormModule,
-    NzGridModule,
-    NzInputNumberModule,
-    NgIf,
-    NzInputModule,
-    NgSwitch,
-    NgSwitchCase,
-    AngularImgComponent,
-    NgSwitchDefault,
-    NzSelectModule,
-    NgFor,
-    NzButtonModule,
-    NzWaveModule
-  ]
+  imports: [FormsModule, NzFormModule, NzGridModule, NzInputNumberModule, NzInputModule, AngularImgComponent, NzSelectModule, NzButtonModule, NzWaveModule]
 })
 export class DemoDynamicParamsComponent implements OnInit {
   delay = 0;

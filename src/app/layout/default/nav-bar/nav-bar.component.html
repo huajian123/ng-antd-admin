@@ -29,8 +29,8 @@
           <!--二级菜单-->
           @if (menu.children && menu.children.length > 0) {
             <!--*appAuth="menu.code"-->
-            <li nz-submenu [nzPaddingLeft]="(themesMode !== 'top' || isOverMode) && !isCollapsed ? 16 : 0" [nzTitle]="titleTpl" [(nzOpen)]="menu.open" (nzOpenChange)="changeOpen(menu, menus)">
-              <ng-template #titleTpl>
+            <li nz-submenu [nzPaddingLeft]="(themesMode !== 'top' || isOverMode) && !isCollapsed ? 16 : 0" [nzTitle]="menuTitleTpl" [(nzOpen)]="menu.open" (nzOpenChange)="changeOpen(menu, menus)">
+              <ng-template #menuTitleTpl>
                 @if (menu.icon) {
                   <i nz-icon [nzType]="menu.icon"></i>
                 } @else if (menu.alIcon) {
@@ -59,11 +59,11 @@
                       <li
                         nz-submenu
                         [nzPaddingLeft]="(themesMode !== 'top' || isOverMode) && !isCollapsed ? 32 : 0"
-                        [nzTitle]="titleTpl"
+                        [nzTitle]="menuSecondTitleTpl"
                         [(nzOpen)]="menuSecond.open"
                         (nzOpenChange)="changeOpen(menuSecond, menu.children)"
                       >
-                        <ng-template #titleTpl>
+                        <ng-template #menuSecondTitleTpl>
                           @if (menuSecond.icon) {
                             <i nz-icon [nzType]="menuSecond.icon"></i>
                           } @else if (menuSecond.alIcon) {
