@@ -35,5 +35,11 @@ export default [
     title: '任务',
     data: { key: 'task' },
     loadComponent: () => import('./task/task.component').then(m => m.TaskComponent)
+  },
+  {
+    path: 'page-demo1',
+    title: '新布局',
+    data: { key: 'page-demo1' },
+    loadComponent: () => import('./new-page-layout/new-page-layout.component').then(m => m.NewPageLayoutComponent)
   }
 ] as Route[];

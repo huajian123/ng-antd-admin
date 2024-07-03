@@ -1511,7 +1511,7 @@ const menuList = http.get('/site/api/sysPermission/menu/*', () => {
       },
       {
         id: 166,
-        menuName: '新页面1',
+        menuName: '新布局',
         code: 'default:page-demo:page-demo1',
         fatherId: 43,
         orderNum: 9,
