@@ -4,12 +4,9 @@
 export const TokenPre = 'Bearer ';
 // tokenKey
 export const TokenKey = 'Authorization';
-// 是否是暗黑模式key
-export const IsNightKey = 'IsNightKey';
-export const IsCompact = 'IsCompact';
 // 主题设置key
 export const ThemeOptionsKey = 'ThemeOptionsKey';
-// 主题模式key
+// 主题风格模式key，阿里云、紧凑、默认、暗黑
 export const StyleThemeModelKey = 'StyleThemeModelKey';
 // 用于记录是否是第一次加载
 export const IsFirstLogin = 'IsFirstLogin';

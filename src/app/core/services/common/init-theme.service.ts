@@ -3,14 +3,14 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 
-import { IsNightKey, ThemeOptionsKey } from '@config/constant';
-import { ThemeService } from '@store/common-store/theme.service';
+import { StyleThemeModelKey, ThemeOptionsKey } from '@config/constant';
+import { StyleTheme, ThemeService } from '@store/common-store/theme.service';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { WindowService } from './window.service';
 
-type setThemeProp = 'setIsNightTheme' | 'setThemesMode';
-type getThemeProp = 'getIsNightTheme' | 'getThemesMode';
+type setThemeProp = 'setStyleThemeMode' | 'setThemesMode';
+type getThemeProp = 'getStyleThemeMode' | 'getThemesMode';
 
 interface InitThemeOption {
   storageKey: string;
@@ -31,9 +31,9 @@ export class InitThemeService {
 
   themeInitOption: InitThemeOption[] = [
     {
-      storageKey: IsNightKey,
-      setMethodName: 'setIsNightTheme',
-      getMethodName: 'getIsNightTheme'
+      storageKey: StyleThemeModelKey,
+      setMethodName: 'setStyleThemeMode',
+      getMethodName: 'getStyleThemeMode'
     },
     {
       storageKey: ThemeOptionsKey,
@@ -47,7 +47,11 @@ export class InitThemeService {
       this.themeInitOption.forEach(item => {
         const hasCash = this.windowServe.getStorage(item.storageKey);
         if (hasCash) {
-          this.themesService[item.setMethodName](JSON.parse(hasCash));
+          if (item.setMethodName === 'setStyleThemeMode') {
+            this.themesService[item.setMethodName](hasCash as StyleTheme);
+          } else {
+            this.themesService[item.setMethodName](JSON.parse(hasCash));
+          }
         } else {
           (this.themesService[item.getMethodName]() as Observable<NzSafeAny>)
             .pipe(first(), takeUntilDestroyed(this.destroyRef))

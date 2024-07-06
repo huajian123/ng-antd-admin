@@ -8,7 +8,7 @@ import { NormalLoginComponent } from '@app/pages/other-login/login1/normal-login
 import { PhoneLoginComponent } from '@app/pages/other-login/login1/phone-login/phone-login.component';
 import { QrLoginComponent } from '@app/pages/other-login/login1/qr-login/qr-login.component';
 import { RegistLoginComponent } from '@app/pages/other-login/login1/regist-login/regist-login.component';
-import { IsNightKey } from '@config/constant';
+import { StyleThemeModelKey } from '@config/constant';
 import { ThemeSkinService } from '@core/services/common/theme-skin.service';
 import { WindowService } from '@core/services/common/window.service';
 import { AdComponent, DynamicComponent } from '@core/services/types';
@@ -86,8 +86,9 @@ export class Login1Component implements OnInit {
   }
 
   changeNight(isNight: boolean): void {
-    this.windowServe.setStorage(IsNightKey, `${isNight}`);
-    this.themesService.setIsNightTheme(isNight);
+    const mode = isNight ? 'dark' : 'default';
+    this.windowServe.setStorage(StyleThemeModelKey, mode);
+    this.themesService.setStyleThemeMode(mode);
     this.themeSkinService.toggleTheme().then(() => {
       this.cdr.markForCheck();
     });

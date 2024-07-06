@@ -32,7 +32,6 @@ export type StyleThemeInterface = {
 })
 export class ThemeService {
   private isNightTheme$ = new BehaviorSubject<boolean>(false);
-  private isCompactTheme$ = new BehaviorSubject<boolean>(false);
   private isOverModeTheme$ = new BehaviorSubject<boolean>(false);
   private themesMode$ = new BehaviorSubject<SettingInterface>({
     theme: 'dark',
@@ -65,20 +64,16 @@ export class ThemeService {
 
   // 获取主题模式
   setStyleThemeMode(mode: StyleTheme): void {
+    if (mode === 'dark') {
+      this.setIsNightTheme(true);
+    } else {
+      this.setIsNightTheme(false);
+    }
     this.styleThemeMode$.next(mode);
   }
 
   getStyleThemeMode(): Observable<StyleTheme> {
     return this.styleThemeMode$.asObservable();
-  }
-
-  // 主题是否是暗色主题
-  setIsCompactTheme(isNight: boolean): void {
-    this.isCompactTheme$.next(isNight);
-  }
-
-  getIsCompactTheme(): Observable<boolean> {
-    return this.isCompactTheme$.asObservable();
   }
 
   // 主题是否是暗色主题

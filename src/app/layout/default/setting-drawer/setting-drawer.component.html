@@ -25,18 +25,20 @@
       </div>
     }
 
-    <div class="m-b-24 theme-color" [class.m-t-25]="_themesOptions.mode !== 'mixin'">
-      <h3 class="title">主题色</h3>
-      <div class="content">
-        @for (color of colors; track color) {
-          <div class="color-block" nz-tooltip [nzTooltipTitle]="color.title" [style.background]="color.color" (click)="changePrimaryColor(color)">
-            @if (color.isChecked) {
-              <i nz-icon nzTheme="outline" nzType="check"></i>
-            }
-          </div>
-        }
+    @if (_currentStyleTheme.default) {
+      <div class="m-b-24 theme-color" [class.m-t-25]="_themesOptions.mode !== 'mixin'">
+        <h3 class="title">主题色</h3>
+        <div class="content">
+          @for (color of colors; track color) {
+            <div class="color-block" nz-tooltip [nzTooltipTitle]="color.title" [style.background]="color.color" (click)="changePrimaryColor(color)">
+              @if (color.isChecked) {
+                <i nz-icon nzTheme="outline" nzType="check"></i>
+              }
+            </div>
+          }
+        </div>
       </div>
-    </div>
+    }
 
     <nz-divider />
 
