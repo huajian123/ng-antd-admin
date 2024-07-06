@@ -124,9 +124,27 @@
     <div class="m-b-24">
       <h3 class="title">其他设置</h3>
       <nz-list [nzSplit]="false">
-        <nz-list-item [nzActions]="[layoutAction]">暗黑模式</nz-list-item>
-        <ng-template #layoutAction>
-          <nz-switch nzSize="small" [ngModel]="_isNightTheme" (ngModelChange)="changeNightTheme($event)"></nz-switch>
+        <nz-list-item [nzActions]="[layoutDefaultAction]">默认模式</nz-list-item>
+        <ng-template #layoutDefaultAction>
+          <nz-switch nzSize="small" [ngModel]="_currentStyleTheme.default" (ngModelChange)="changeStyleTheme('default')"></nz-switch>
+        </ng-template>
+      </nz-list>
+      <nz-list [nzSplit]="false">
+        <nz-list-item [nzActions]="[layoutNightAction]">暗黑模式</nz-list-item>
+        <ng-template #layoutNightAction>
+          <nz-switch nzSize="small" [ngModel]="_currentStyleTheme.dark" (ngModelChange)="changeStyleTheme('dark')"></nz-switch>
+        </ng-template>
+      </nz-list>
+      <nz-list [nzSplit]="false">
+        <nz-list-item [nzActions]="[layoutAliyunAction]">阿里云模式</nz-list-item>
+        <ng-template #layoutAliyunAction>
+          <nz-switch nzSize="small" [ngModel]="_currentStyleTheme.aliyun" (ngModelChange)="changeStyleTheme('aliyun')"></nz-switch>
+        </ng-template>
+      </nz-list>
+      <nz-list [nzSplit]="false">
+        <nz-list-item [nzActions]="[layoutCompactAction]">紧凑模式</nz-list-item>
+        <ng-template #layoutCompactAction>
+          <nz-switch nzSize="small" [ngModel]="_currentStyleTheme.compact" (ngModelChange)="changeStyleTheme('compact')"></nz-switch>
         </ng-template>
       </nz-list>
       <nz-list [nzSplit]="false">

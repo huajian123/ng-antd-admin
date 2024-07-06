@@ -3,12 +3,8 @@ import { DestroyRef, inject, Injectable } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { first } from 'rxjs/operators';
 
-import { ThemeService } from '@store/common-store/theme.service';
+import { StyleTheme, ThemeService } from '@store/common-store/theme.service';
 
-const enum ThemeType {
-  dark = 'dark',
-  default = 'default'
-}
 /*
  * 切换主题服务
  * */
@@ -16,16 +12,16 @@ const enum ThemeType {
   providedIn: 'root'
 })
 export class ThemeSkinService {
-  currentTheme!: ThemeType;
+  currentTheme: StyleTheme = 'default';
   private readonly doc = inject(DOCUMENT);
   private readonly themesService = inject(ThemeService);
   destroyRef = inject(DestroyRef);
 
-  reverseTheme(theme: ThemeType): ThemeType {
-    return theme === ThemeType.dark ? ThemeType.default : ThemeType.dark;
+  reverseTheme(theme: StyleTheme): StyleTheme {
+    return theme;
   }
 
-  removeUnusedTheme(theme: ThemeType): void {
+  removeUnusedTheme(theme: StyleTheme): void {
     this.doc.documentElement.classList.remove(theme);
     const removedThemeStyle = this.doc.getElementById(theme);
     if (removedThemeStyle) {
@@ -48,14 +44,24 @@ export class ThemeSkinService {
   public loadTheme(isFirstLoad = true): Promise<Event> {
     if (isFirstLoad) {
       this.themesService
-        .getIsNightTheme()
+        .getStyleThemeMode()
         .pipe(first(), takeUntilDestroyed(this.destroyRef))
-        .subscribe(res => {
-          this.currentTheme = res ? ThemeType.dark : ThemeType.default;
+        .subscribe(currentStyleTheme => {
+          let trueKey: StyleTheme = 'default';
+          for (let key in currentStyleTheme) {
+            if (currentStyleTheme[key as StyleTheme] == true) {
+              trueKey = key as StyleTheme;
+              break;
+            }
+          }
+          console.log(trueKey);
+          this.currentTheme = trueKey;
         });
     }
     const theme = this.currentTheme;
     if (isFirstLoad) {
+      console.log(theme);
+      console.log(3333);
       this.doc.documentElement.classList.add(theme);
     }
     return new Promise<Event>((resolve, reject) => {

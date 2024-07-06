@@ -20,11 +20,19 @@ export interface SettingInterface {
   hasNavHeadArea: boolean; // 菜单是否有菜单头
 }
 
+export type StyleTheme = 'default' | 'dark' | 'aliyun' | 'compact';
+
+// 主题风格
+export type StyleThemeInterface = {
+  [key in StyleTheme]: boolean;
+};
+
 @Injectable({
   providedIn: 'root'
 })
 export class ThemeService {
   private isNightTheme$ = new BehaviorSubject<boolean>(false);
+  private isCompactTheme$ = new BehaviorSubject<boolean>(false);
   private isOverModeTheme$ = new BehaviorSubject<boolean>(false);
   private themesMode$ = new BehaviorSubject<SettingInterface>({
     theme: 'dark',
@@ -42,6 +50,12 @@ export class ThemeService {
     hasNavArea: true,
     hasNavHeadArea: true
   });
+  private styleThemeMode$ = new BehaviorSubject<StyleThemeInterface>({
+    default: true,
+    compact: false,
+    dark: false,
+    aliyun: false
+  });
 
   private isCollapsed$ = new BehaviorSubject<boolean>(false);
 
@@ -52,6 +66,24 @@ export class ThemeService {
 
   getThemesMode(): Observable<SettingInterface> {
     return this.themesMode$.asObservable();
+  }
+
+  // 获取主题模式
+  setStyleThemeMode(mode: StyleThemeInterface): void {
+    this.styleThemeMode$.next(mode);
+  }
+
+  getStyleThemeMode(): Observable<StyleThemeInterface> {
+    return this.styleThemeMode$.asObservable();
+  }
+
+  // 主题是否是暗色主题
+  setIsCompactTheme(isNight: boolean): void {
+    this.isCompactTheme$.next(isNight);
+  }
+
+  getIsCompactTheme(): Observable<boolean> {
+    return this.isCompactTheme$.asObservable();
   }
 
   // 主题是否是暗色主题

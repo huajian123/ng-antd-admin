@@ -6,12 +6,12 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 
-import { IsNightKey, ThemeOptionsKey } from '@config/constant';
+import { IsCompact, IsNightKey, StyleThemeKey, ThemeOptionsKey } from '@config/constant';
 import { SimpleReuseStrategy } from '@core/services/common/reuse-strategy';
 import { TabService } from '@core/services/common/tab.service';
 import { ThemeSkinService } from '@core/services/common/theme-skin.service';
 import { WindowService } from '@core/services/common/window.service';
-import { SettingInterface, ThemeService } from '@store/common-store/theme.service';
+import { SettingInterface, StyleTheme, StyleThemeInterface, ThemeService } from '@store/common-store/theme.service';
 import { fnFormatToHump } from '@utils/tools';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzConfigService } from 'ng-zorro-antd/core/config';
@@ -65,8 +65,12 @@ export class SettingDrawerComponent implements OnInit {
 
   destroyRef = inject(DestroyRef);
   themesOptions$ = this.themesService.getThemesMode();
-  isNightTheme$ = this.themesService.getIsNightTheme();
-  _isNightTheme = false;
+  _currentStyleTheme: StyleThemeInterface = {
+    default: true,
+    dark: false,
+    compact: false,
+    aliyun: false
+  };
   _themesOptions: SettingInterface = {
     theme: 'dark',
     color: '#1890FF',
@@ -186,10 +190,16 @@ export class SettingDrawerComponent implements OnInit {
     this.setThemeOptions();
   }
 
-  // 修改黑夜主题
-  changeNightTheme(isNight: boolean): void {
-    this.windowServe.setStorage(IsNightKey, `${isNight}`);
-    this.themesService.setIsNightTheme(isNight);
+  // 修改主题
+  changeStyleTheme(styleTheme: StyleTheme): void {
+    Object.keys(this._currentStyleTheme).forEach(item => {
+      this._currentStyleTheme[item as StyleTheme] = false;
+    });
+    this._currentStyleTheme[styleTheme] = true;
+
+    this.themesService.setStyleThemeMode(this._currentStyleTheme);
+    this.windowServe.setStorage(StyleThemeKey, JSON.stringify(this._currentStyleTheme));
+    console.log(this._currentStyleTheme);
     this.themeSkinService.toggleTheme().then();
   }
 
@@ -254,7 +264,7 @@ export class SettingDrawerComponent implements OnInit {
   }
 
   initThemeOption(): void {
-    this.isNightTheme$.pipe(first(), takeUntilDestroyed(this.destroyRef)).subscribe(res => (this._isNightTheme = res));
+    // this.isNightTheme$.pipe(first(), takeUntilDestroyed(this.destroyRef)).subscribe(res => (this._isNightTheme = res));
     this.themesOptions$.pipe(first(), takeUntilDestroyed(this.destroyRef)).subscribe(res => {
       this._themesOptions = res;
     });

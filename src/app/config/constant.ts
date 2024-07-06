@@ -6,8 +6,11 @@ export const TokenPre = 'Bearer ';
 export const TokenKey = 'Authorization';
 // 是否是暗黑模式key
 export const IsNightKey = 'IsNightKey';
+export const IsCompact = 'IsCompact';
 // 主题设置key
 export const ThemeOptionsKey = 'ThemeOptionsKey';
+// 主题模式key
+export const StyleThemeKey = 'StyleThemeKey';
 // 用于记录是否是第一次加载
 export const IsFirstLogin = 'IsFirstLogin';
 // 锁屏key

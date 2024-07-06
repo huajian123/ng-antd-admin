@@ -71,6 +71,16 @@
                 "input": "src/styles/dark.less",
                 "bundleName": "dark",
                 "inject": false
+              },
+              {
+                "input": "src/styles/aliyun.less",
+                "bundleName": "aliyun",
+                "inject": false
+              },
+              {
+                "input": "src/styles/compact.less",
+                "bundleName": "compact",
+                "inject": false
               }
             ],
             "stylePreprocessorOptions": {
