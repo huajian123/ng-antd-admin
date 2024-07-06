@@ -61,7 +61,7 @@ export class ThemeSkinService {
             .forEach(item => {
               setTimeout(() => {
                 this.removeUnusedTheme(<StyleTheme>item);
-              }, 0);
+              }, 1);
             });
 
           resolve(e);
