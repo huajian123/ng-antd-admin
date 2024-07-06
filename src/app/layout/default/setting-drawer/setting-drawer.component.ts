@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 
-import { StyleThemeKey, ThemeOptionsKey } from '@config/constant';
+import { StyleThemeModelKey, ThemeOptionsKey } from '@config/constant';
 import { SimpleReuseStrategy } from '@core/services/common/reuse-strategy';
 import { TabService } from '@core/services/common/tab.service';
 import { ThemeSkinService } from '@core/services/common/theme-skin.service';
@@ -192,12 +192,17 @@ export class SettingDrawerComponent implements OnInit {
 
   // 修改主题
   changeStyleTheme(styleTheme: StyleTheme): void {
+    // 让每个主题都变成未选中
     Object.keys(this._currentStyleTheme).forEach(item => {
       this._currentStyleTheme[item as StyleTheme] = false;
     });
+    // 当前选中的主题变为选中状态
     this._currentStyleTheme[styleTheme] = true;
-    this.themesService.setStyleThemeMode(this._currentStyleTheme);
-    this.windowServe.setStorage(StyleThemeKey, JSON.stringify(this._currentStyleTheme));
+    // 存储主题模式状态
+    this.themesService.setStyleThemeMode(styleTheme);
+    // 持久化
+    this.windowServe.setStorage(StyleThemeModelKey, styleTheme);
+    // 切换主题
     this.themeSkinService.toggleTheme().then();
   }
 

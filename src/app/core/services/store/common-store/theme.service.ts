@@ -50,12 +50,7 @@ export class ThemeService {
     hasNavArea: true,
     hasNavHeadArea: true
   });
-  private styleThemeMode$ = new BehaviorSubject<StyleThemeInterface>({
-    default: true,
-    compact: false,
-    dark: false,
-    aliyun: false
-  });
+  private styleThemeMode$ = new BehaviorSubject<StyleTheme>('default');
 
   private isCollapsed$ = new BehaviorSubject<boolean>(false);
 
@@ -69,11 +64,11 @@ export class ThemeService {
   }
 
   // 获取主题模式
-  setStyleThemeMode(mode: StyleThemeInterface): void {
+  setStyleThemeMode(mode: StyleTheme): void {
     this.styleThemeMode$.next(mode);
   }
 
-  getStyleThemeMode(): Observable<StyleThemeInterface> {
+  getStyleThemeMode(): Observable<StyleTheme> {
     return this.styleThemeMode$.asObservable();
   }
 

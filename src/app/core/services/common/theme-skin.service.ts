@@ -12,10 +12,9 @@ import { StyleTheme, StyleThemeInterface, ThemeService } from '@store/common-sto
   providedIn: 'root'
 })
 export class ThemeSkinService {
-  currentTheme: StyleTheme = 'default';
   private readonly doc = inject(DOCUMENT);
   private readonly themesService = inject(ThemeService);
-  private sourceTheme: any;
+  private currentStyleThemeModel!: StyleTheme; // 已经在构造函数中初始化了,当前主题风格的模式，阿里云、默认、紧凑、暗黑
   destroyRef = inject(DestroyRef);
 
   constructor() {
@@ -23,28 +22,8 @@ export class ThemeSkinService {
       .getStyleThemeMode()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(currentStyleTheme => {
-        this.sourceTheme = currentStyleTheme;
-        let trueKey: StyleTheme = 'default';
-        for (let key in currentStyleTheme) {
-          if (currentStyleTheme[key as StyleTheme] == true) {
-            trueKey = key as StyleTheme;
-            break;
-          }
-        }
-        this.currentTheme = trueKey;
+        this.currentStyleThemeModel = currentStyleTheme;
       });
-  }
-
-  reverseTheme(theme: StyleTheme): any {
-    let trueKey;
-    for (let key in this.sourceTheme) {
-      if (this.sourceTheme[key as StyleTheme] == true) {
-        trueKey = key as StyleTheme;
-        break;
-      }
-    }
-
-    return trueKey;
   }
 
   removeUnusedTheme(theme: StyleTheme): void {
@@ -68,7 +47,7 @@ export class ThemeSkinService {
   }
 
   public loadTheme(isFirstLoad = true): Promise<Event> {
-    const theme = this.currentTheme;
+    const theme = this.currentStyleThemeModel;
     if (isFirstLoad) {
       this.doc.documentElement.classList.add(theme);
     }
@@ -78,12 +57,12 @@ export class ThemeSkinService {
           if (!isFirstLoad) {
             this.doc.documentElement.classList.add(theme);
           }
-          Object.keys(this.currentTheme).forEach(item => {
-            // @ts-ignore
-            if (this.currentTheme[item] === false) {
-              this.removeUnusedTheme(<'default' | 'dark' | 'aliyun' | 'compact'>item);
-            }
-          });
+          (['default', 'aliyun', 'compact', 'dark'] as StyleTheme[])
+            .filter(item => item !== this.currentStyleThemeModel)
+            .forEach(item => {
+              console.log(item);
+              this.removeUnusedTheme(<StyleTheme>item);
+            });
 
           resolve(e);
         },
@@ -93,7 +72,6 @@ export class ThemeSkinService {
   }
 
   public toggleTheme(): Promise<Event> {
-    this.currentTheme = this.reverseTheme(this.currentTheme);
     return this.loadTheme(false);
   }
 }

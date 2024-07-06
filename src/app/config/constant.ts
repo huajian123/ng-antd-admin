@@ -10,7 +10,7 @@ export const IsCompact = 'IsCompact';
 // 主题设置key
 export const ThemeOptionsKey = 'ThemeOptionsKey';
 // 主题模式key
-export const StyleThemeKey = 'StyleThemeKey';
+export const StyleThemeModelKey = 'StyleThemeModelKey';
 // 用于记录是否是第一次加载
 export const IsFirstLogin = 'IsFirstLogin';
 // 锁屏key
