@@ -39,8 +39,9 @@
         </div>
       </div>
     }
-
-    <nz-divider />
+    @if (_themesOptions.mode !== 'mixin' || _currentStyleTheme.default) {
+      <nz-divider />
+    }
 
     <div class="m-b-24">
       <h3 class="title">导航模式</h3>
