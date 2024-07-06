@@ -1,6 +1,6 @@
 import { CdkDrag } from '@angular/cdk/drag-drop';
 import { DOCUMENT } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, OnInit, Renderer2 } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit, Renderer2 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -19,7 +19,6 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzListModule } from 'ng-zorro-antd/list';
-import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 
@@ -66,7 +65,7 @@ export class SettingDrawerComponent implements OnInit {
   destroyRef = inject(DestroyRef);
   themesOptions$ = this.themesService.getThemesMode();
   _currentStyleTheme: StyleThemeInterface = {
-    default: true,
+    default: false,
     dark: false,
     compact: false,
     aliyun: false
@@ -267,7 +266,10 @@ export class SettingDrawerComponent implements OnInit {
   }
 
   initThemeOption(): void {
-    // this.isNightTheme$.pipe(first(), takeUntilDestroyed(this.destroyRef)).subscribe(res => (this._isNightTheme = res));
+    this.themesService
+      .getStyleThemeMode()
+      .pipe(first(), takeUntilDestroyed(this.destroyRef))
+      .subscribe(res => (this._currentStyleTheme[res] = true));
     this.themesOptions$.pipe(first(), takeUntilDestroyed(this.destroyRef)).subscribe(res => {
       this._themesOptions = res;
     });

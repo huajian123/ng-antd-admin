@@ -1,9 +1,8 @@
 import { DOCUMENT } from '@angular/common';
 import { DestroyRef, inject, Injectable } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { first } from 'rxjs/operators';
 
-import { StyleTheme, StyleThemeInterface, ThemeService } from '@store/common-store/theme.service';
+import { StyleTheme, ThemeService } from '@store/common-store/theme.service';
 
 /*
  * 切换主题服务
@@ -60,8 +59,9 @@ export class ThemeSkinService {
           (['default', 'aliyun', 'compact', 'dark'] as StyleTheme[])
             .filter(item => item !== this.currentStyleThemeModel)
             .forEach(item => {
-              console.log(item);
-              this.removeUnusedTheme(<StyleTheme>item);
+              setTimeout(() => {
+                this.removeUnusedTheme(<StyleTheme>item);
+              }, 0);
             });
 
           resolve(e);
