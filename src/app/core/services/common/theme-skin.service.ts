@@ -3,7 +3,7 @@ import { DestroyRef, inject, Injectable } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { first } from 'rxjs/operators';
 
-import { StyleTheme, ThemeService } from '@store/common-store/theme.service';
+import { StyleTheme, StyleThemeInterface, ThemeService } from '@store/common-store/theme.service';
 
 /*
  * 切换主题服务
@@ -15,10 +15,36 @@ export class ThemeSkinService {
   currentTheme: StyleTheme = 'default';
   private readonly doc = inject(DOCUMENT);
   private readonly themesService = inject(ThemeService);
+  private sourceTheme: any;
   destroyRef = inject(DestroyRef);
 
-  reverseTheme(theme: StyleTheme): StyleTheme {
-    return theme;
+  constructor() {
+    this.themesService
+      .getStyleThemeMode()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(currentStyleTheme => {
+        this.sourceTheme = currentStyleTheme;
+        let trueKey: StyleTheme = 'default';
+        for (let key in currentStyleTheme) {
+          if (currentStyleTheme[key as StyleTheme] == true) {
+            trueKey = key as StyleTheme;
+            break;
+          }
+        }
+        this.currentTheme = trueKey;
+      });
+  }
+
+  reverseTheme(theme: StyleTheme): any {
+    let trueKey;
+    for (let key in this.sourceTheme) {
+      if (this.sourceTheme[key as StyleTheme] == true) {
+        trueKey = key as StyleTheme;
+        break;
+      }
+    }
+
+    return trueKey;
   }
 
   removeUnusedTheme(theme: StyleTheme): void {
@@ -42,26 +68,8 @@ export class ThemeSkinService {
   }
 
   public loadTheme(isFirstLoad = true): Promise<Event> {
-    if (isFirstLoad) {
-      this.themesService
-        .getStyleThemeMode()
-        .pipe(first(), takeUntilDestroyed(this.destroyRef))
-        .subscribe(currentStyleTheme => {
-          let trueKey: StyleTheme = 'default';
-          for (let key in currentStyleTheme) {
-            if (currentStyleTheme[key as StyleTheme] == true) {
-              trueKey = key as StyleTheme;
-              break;
-            }
-          }
-          console.log(trueKey);
-          this.currentTheme = trueKey;
-        });
-    }
     const theme = this.currentTheme;
     if (isFirstLoad) {
-      console.log(theme);
-      console.log(3333);
       this.doc.documentElement.classList.add(theme);
     }
     return new Promise<Event>((resolve, reject) => {
@@ -70,7 +78,13 @@ export class ThemeSkinService {
           if (!isFirstLoad) {
             this.doc.documentElement.classList.add(theme);
           }
-          this.removeUnusedTheme(this.reverseTheme(theme));
+          Object.keys(this.currentTheme).forEach(item => {
+            // @ts-ignore
+            if (this.currentTheme[item] === false) {
+              this.removeUnusedTheme(<'default' | 'dark' | 'aliyun' | 'compact'>item);
+            }
+          });
+
           resolve(e);
         },
         e => reject(e)

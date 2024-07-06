@@ -126,25 +126,25 @@
       <nz-list [nzSplit]="false">
         <nz-list-item [nzActions]="[layoutDefaultAction]">默认模式</nz-list-item>
         <ng-template #layoutDefaultAction>
-          <nz-switch nzSize="small" [ngModel]="_currentStyleTheme.default" (ngModelChange)="changeStyleTheme('default')"></nz-switch>
+          <nz-switch nzSize="small" [ngModel]="_currentStyleTheme.default" [nzDisabled]="_currentStyleTheme.default" (ngModelChange)="changeStyleTheme('default')"></nz-switch>
         </ng-template>
       </nz-list>
       <nz-list [nzSplit]="false">
         <nz-list-item [nzActions]="[layoutNightAction]">暗黑模式</nz-list-item>
         <ng-template #layoutNightAction>
-          <nz-switch nzSize="small" [ngModel]="_currentStyleTheme.dark" (ngModelChange)="changeStyleTheme('dark')"></nz-switch>
+          <nz-switch nzSize="small" [ngModel]="_currentStyleTheme.dark" [nzDisabled]="_currentStyleTheme.dark" (ngModelChange)="changeStyleTheme('dark')"></nz-switch>
         </ng-template>
       </nz-list>
       <nz-list [nzSplit]="false">
         <nz-list-item [nzActions]="[layoutAliyunAction]">阿里云模式</nz-list-item>
         <ng-template #layoutAliyunAction>
-          <nz-switch nzSize="small" [ngModel]="_currentStyleTheme.aliyun" (ngModelChange)="changeStyleTheme('aliyun')"></nz-switch>
+          <nz-switch nzSize="small" [ngModel]="_currentStyleTheme.aliyun" [nzDisabled]="_currentStyleTheme.aliyun" (ngModelChange)="changeStyleTheme('aliyun')"></nz-switch>
         </ng-template>
       </nz-list>
       <nz-list [nzSplit]="false">
         <nz-list-item [nzActions]="[layoutCompactAction]">紧凑模式</nz-list-item>
         <ng-template #layoutCompactAction>
-          <nz-switch nzSize="small" [ngModel]="_currentStyleTheme.compact" (ngModelChange)="changeStyleTheme('compact')"></nz-switch>
+          <nz-switch nzSize="small" [ngModel]="_currentStyleTheme.compact" [nzDisabled]="_currentStyleTheme.compact" (ngModelChange)="changeStyleTheme('compact')"></nz-switch>
         </ng-template>
       </nz-list>
       <nz-list [nzSplit]="false">

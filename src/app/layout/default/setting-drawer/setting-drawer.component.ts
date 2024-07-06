@@ -1,12 +1,12 @@
 import { CdkDrag } from '@angular/cdk/drag-drop';
 import { DOCUMENT } from '@angular/common';
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit, Renderer2 } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, OnInit, Renderer2 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 
-import { IsCompact, IsNightKey, StyleThemeKey, ThemeOptionsKey } from '@config/constant';
+import { StyleThemeKey, ThemeOptionsKey } from '@config/constant';
 import { SimpleReuseStrategy } from '@core/services/common/reuse-strategy';
 import { TabService } from '@core/services/common/tab.service';
 import { ThemeSkinService } from '@core/services/common/theme-skin.service';
@@ -196,10 +196,8 @@ export class SettingDrawerComponent implements OnInit {
       this._currentStyleTheme[item as StyleTheme] = false;
     });
     this._currentStyleTheme[styleTheme] = true;
-
     this.themesService.setStyleThemeMode(this._currentStyleTheme);
     this.windowServe.setStorage(StyleThemeKey, JSON.stringify(this._currentStyleTheme));
-    console.log(this._currentStyleTheme);
     this.themeSkinService.toggleTheme().then();
   }
 
