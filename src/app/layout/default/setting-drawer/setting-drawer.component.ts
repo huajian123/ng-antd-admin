@@ -44,6 +44,9 @@ export interface ThemeMode extends NormalModel {
   key: 'side' | 'top' | 'mixin';
 }
 
+type ExcludedKeys = 'theme' | 'color' | 'mode';
+type SettingKey = Exclude<keyof SettingInterface, ExcludedKeys>;
+
 @Component({
   selector: 'app-setting-drawer',
   templateUrl: './setting-drawer.component.html',
@@ -70,6 +73,7 @@ export class SettingDrawerComponent implements OnInit {
     compact: false,
     aliyun: false
   };
+
   _themesOptions: SettingInterface = {
     theme: 'dark',
     color: '#1890FF',
@@ -231,8 +235,8 @@ export class SettingDrawerComponent implements OnInit {
     this.windowServe.setStorage(ThemeOptionsKey, JSON.stringify(this._themesOptions));
   }
 
-  // 修改固定头部
-  changeFixed(isTrue: boolean, type: 'isShowTab' | 'splitNav' | 'fixedTab' | 'fixedLeftNav' | 'fixedHead' | 'hasTopArea' | 'hasFooterArea' | 'hasNavArea' | 'hasNavHeadArea'): void {
+  // 修改主题配置项
+  changeThemeOptions(isTrue: boolean, type: SettingKey): void {
     // 非固定头部时，设置标签也不固定
     if (type === 'fixedHead' && !isTrue) {
       this._themesOptions['fixedTab'] = false;

@@ -26,9 +26,9 @@ export class ThemeSkinService {
   }
 
   removeUnusedTheme(theme: StyleTheme): void {
-    this.doc.documentElement.classList.remove(theme);
     const removedThemeStyle = this.doc.getElementById(theme);
     if (removedThemeStyle) {
+      this.doc.documentElement.classList.remove(theme);
       this.doc.head.removeChild(removedThemeStyle);
     }
   }

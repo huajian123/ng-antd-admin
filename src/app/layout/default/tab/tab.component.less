@@ -9,6 +9,18 @@
     margin-bottom: 0 !important;
     transition: background-color 0s !important;
   }
+
+
+  // 固定页签模式下，移除tab的底部边框，底部会有2条线重合
+  .fixed-tab{
+    .ant-tabs-nav::before,
+    .ant-tabs-nav::after {
+      display: none;
+    }
+    .ant-tabs-tab {
+      border-bottom: none !important;
+    }
+  }
 }
 
 .fixed-tab {

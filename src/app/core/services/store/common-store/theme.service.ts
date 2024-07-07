@@ -20,7 +20,7 @@ export interface SettingInterface {
   hasNavHeadArea: boolean; // 菜单是否有菜单头
 }
 
-export type StyleTheme = 'default' | 'dark' | 'aliyun' | 'compact';
+export type StyleTheme = 'default' | 'dark' | 'aliyun' | 'compact'; // 默认主题，暗黑主题，阿里云主题，紧凑主题
 
 // 主题风格
 export type StyleThemeInterface = {
@@ -31,8 +31,9 @@ export type StyleThemeInterface = {
   providedIn: 'root'
 })
 export class ThemeService {
-  private isNightTheme$ = new BehaviorSubject<boolean>(false);
-  private isOverModeTheme$ = new BehaviorSubject<boolean>(false);
+  private isNightTheme$ = new BehaviorSubject<boolean>(false); // 暗黑主题observable
+  private isCompactTheme$ = new BehaviorSubject<boolean>(false); // 紧凑主题
+  private isOverModeTheme$ = new BehaviorSubject<boolean>(false); // over模式，即拖动浏览器宽度，至菜单栏消失的状态
   private themesMode$ = new BehaviorSubject<SettingInterface>({
     theme: 'dark',
     color: '#1890FF',
@@ -49,9 +50,8 @@ export class ThemeService {
     hasNavArea: true,
     hasNavHeadArea: true
   });
-  private styleThemeMode$ = new BehaviorSubject<StyleTheme>('default');
-
-  private isCollapsed$ = new BehaviorSubject<boolean>(false);
+  private styleThemeMode$ = new BehaviorSubject<StyleTheme>('default'); // 主题风格，暗黑，默认，紧凑，阿里云
+  private isCollapsed$ = new BehaviorSubject<boolean>(false); // 菜单收缩模式，拖动浏览器至菜单自动缩短成图标
 
   // 获取主题参数
   setThemesMode(mode: SettingInterface): void {
@@ -64,11 +64,8 @@ export class ThemeService {
 
   // 获取主题模式
   setStyleThemeMode(mode: StyleTheme): void {
-    if (mode === 'dark') {
-      this.setIsNightTheme(true);
-    } else {
-      this.setIsNightTheme(false);
-    }
+    this.setIsNightTheme(mode === 'dark');
+    this.setIsCompactTheme(mode === 'compact');
     this.styleThemeMode$.next(mode);
   }
 
@@ -76,13 +73,22 @@ export class ThemeService {
     return this.styleThemeMode$.asObservable();
   }
 
-  // 主题是否是暗色主题
+  // 主题是否是暗黑主题
   setIsNightTheme(isNight: boolean): void {
     this.isNightTheme$.next(isNight);
   }
 
   getIsNightTheme(): Observable<boolean> {
     return this.isNightTheme$.asObservable();
+  }
+
+  // 主题是否是紧凑主题
+  setIsCompactTheme(isNight: boolean): void {
+    this.isCompactTheme$.next(isNight);
+  }
+
+  getIsCompactTheme(): Observable<boolean> {
+    return this.isCompactTheme$.asObservable();
   }
 
   // 主题是否over侧边栏
