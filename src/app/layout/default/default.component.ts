@@ -75,6 +75,7 @@ export class DefaultComponent implements OnInit, AfterViewInit {
   isNightTheme$ = this.themesService.getIsNightTheme();
   isCompactTheme$ = this.themesService.getIsCompactTheme();
   themesOptions$ = this.themesService.getThemesMode();
+  styleThemeMode$ = this.themesService.getStyleThemeMode();
   isOverMode$: Observable<boolean> = this.themesService.getIsOverMode();
   isCollapsed$: Observable<boolean> = this.themesService.getIsCollapsed();
   mixinModeLeftNav$ = this.splitNavStoreService.getSplitLeftNavArrayStore();
@@ -133,6 +134,11 @@ export class DefaultComponent implements OnInit, AfterViewInit {
   }
 
   getThemeOptions(): void {
+    this.styleThemeMode$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+      // 切换风格模式时也要重新计算margin，这个跟themesOptions$里貌似时重复的代码，考虑用combineLatest来进行合并的话，会有性能损失（切换风格时也会执行themeOptions里面的逻辑），所以这里分开来写了
+      this.contentMarginTop = this.judgeMarginTop();
+    });
+
     this.themesOptions$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => {
       this.themesOptions = res;
 
