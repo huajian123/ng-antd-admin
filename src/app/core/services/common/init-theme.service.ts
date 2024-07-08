@@ -43,6 +43,7 @@ export class InitThemeService {
   ];
 
   initTheme(): Promise<void> {
+    // todo 有待优化
     return new Promise(resolve => {
       this.themeInitOption.forEach(item => {
         const hasCash = this.windowServe.getStorage(item.storageKey);
@@ -53,9 +54,13 @@ export class InitThemeService {
             this.themesService[item.setMethodName](JSON.parse(hasCash));
           }
         } else {
-          (this.themesService[item.getMethodName]() as Observable<NzSafeAny>)
-            .pipe(first(), takeUntilDestroyed(this.destroyRef))
-            .subscribe(res => this.windowServe.setStorage(item.storageKey, JSON.stringify(res)));
+          (this.themesService[item.getMethodName]() as Observable<NzSafeAny>).pipe(first(), takeUntilDestroyed(this.destroyRef)).subscribe(res => {
+            if (item.setMethodName === 'setStyleThemeMode') {
+              this.windowServe.setStorage(item.storageKey, res);
+            } else {
+              this.windowServe.setStorage(item.storageKey, JSON.stringify(res));
+            }
+          });
         }
       });
       return resolve();

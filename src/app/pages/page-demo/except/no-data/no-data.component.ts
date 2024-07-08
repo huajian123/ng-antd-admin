@@ -12,5 +12,5 @@ import { NzResultModule } from 'ng-zorro-antd/result';
   imports: [NzResultModule, NzButtonModule, NzWaveModule]
 })
 export class NoDataComponent {
-  img = '/imgs/except/no-data.svg';
+  img = 'imgs/except/no-data.svg';
 }

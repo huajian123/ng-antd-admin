@@ -12,5 +12,5 @@ import { NzResultModule } from 'ng-zorro-antd/result';
   imports: [NzResultModule, NzButtonModule, NzWaveModule]
 })
 export class NetworkErrorComponent {
-  img = '/imgs/except/net-error.svg';
+  img = 'imgs/except/net-error.svg';
 }

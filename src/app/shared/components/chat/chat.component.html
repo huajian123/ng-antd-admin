@@ -3,7 +3,7 @@
     <div #scrollMe class="flex chart-content">
       <span class="text-center sp-12 m-b-5" nz-typography nzType="secondary">2021-7-27</span>
       <div nz-row>
-        <nz-avatar class="m-r-8" nz-col nzFlex="30px" nzIcon="user" nzSrc="/imgs/logo.svg"></nz-avatar>
+        <nz-avatar class="m-r-8" nz-col nzFlex="30px" nzIcon="user" nzSrc="imgs/logo.svg"></nz-avatar>
         <div class="m-t-0 p-8" nz-col nz-result-content nzFlex="1">
           请
           <span nz-typography nzType="danger">一句话</span>
@@ -14,7 +14,7 @@
       @for (item of messageArray; track item; let last = $last) {
         @if (item.dir === 'left') {
           <div class="m-t-20" nz-row>
-            <nz-avatar class="m-r-8" nz-col nzFlex="30px" nzIcon="user" nzSrc="/imgs/logo.svg"></nz-avatar>
+            <nz-avatar class="m-r-8" nz-col nzFlex="30px" nzIcon="user" nzSrc="imgs/logo.svg"></nz-avatar>
             <div class="m-t-0 p-8" nz-col nz-result-content nzFlex="1">
               {{ item.msg }}
             </div>
@@ -41,7 +41,7 @@
            </div>-->
 
             <div nz-col nzFlex="8px"></div>
-            <nz-avatar nz-col nzFlex="30px" nzIcon="user" nzSrc="/imgs/default_face.png"></nz-avatar>
+            <nz-avatar nz-col nzFlex="30px" nzIcon="user" nzSrc="imgs/default_face.png"></nz-avatar>
           </div>
         }
       }
