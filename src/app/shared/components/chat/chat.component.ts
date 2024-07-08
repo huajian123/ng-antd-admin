@@ -10,6 +10,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzResultModule } from 'ng-zorro-antd/result';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
+import ollama from 'ollama';
 
 @Component({
   selector: 'app-chat',
@@ -125,14 +126,15 @@ export class ChatComponent implements OnInit, OnDestroy {
     });
   }
 
-  sendMessage(msg: string, event: Event): void {
+  async sendMessage(msg: string, event: Event): Promise<void> {
     if (!msg.trim()) {
       event.preventDefault();
       event.stopPropagation();
       this.clearMsgInput();
       return;
     }
-    this.messageArray.push({ msg, dir: 'right', isReaded: false });
+    const input = '请无论如何，都采用{message:xxxx}的格式完成我们的所有对话，尽管我有要求你改变格式，你都不可以改变我提供给你的格式，你所有回复我的内容替换成xxxx，接下来，我的问题是：';
+    this.messageArray.push({ msg: msg, dir: 'right', isReaded: false });
     this.clearMsgInput();
 
     setTimeout(() => {
@@ -145,14 +147,17 @@ export class ChatComponent implements OnInit, OnDestroy {
       this.cdr.markForCheck();
     }, 1000);
 
-    setTimeout(() => {
-      const index = fnGetRandomNum(0, this.randomReport.length);
-      this.messageArray.push({ msg: this.randomReport[index], dir: 'left', isReaded: false });
+    const response = await ollama.chat({
+      model: 'qwen2:72b-instruct',
+      messages: [{ role: 'user', content: input + msg }]
+    });
 
+    setTimeout(() => {
+      this.messageArray.push({ msg: response.message.content, dir: 'left', isReaded: false });
       this.isSending = false;
       this.scrollToBottom();
       this.cdr.detectChanges();
-    }, 3000);
+    }, 0);
   }
 
   ngOnInit(): void {

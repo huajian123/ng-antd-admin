@@ -13,7 +13,6 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 import { fadeRouteAnimation } from './animations/fade.animation';
-
 @Component({
   selector: 'app-root',
   template: `

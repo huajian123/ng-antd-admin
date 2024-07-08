@@ -41,6 +41,7 @@
     "ng-zorro-antd": "^18.0.1",
     "ngx-color-picker": "^15.0.0",
     "ngx-echarts": "^17.1.0",
+    "ollama": "^0.5.2",
     "rxjs": "~7.8.0",
     "screenfull": "^6.0.2",
     "tslib": "^2.3.0",
