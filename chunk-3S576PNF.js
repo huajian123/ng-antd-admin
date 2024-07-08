@@ -1,0 +1,1 @@
+import{Da as i}from"./chunk-XNENNAZS.js";var o=(()=>{let t=class t{transform(e){return Array(e).fill(0)}};t.\u0275fac=function(n){return new(n||t)},t.\u0275pipe=i({name:"numberLoop",type:t,pure:!0,standalone:!0});let r=t;return r})();export{o as a};

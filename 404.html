@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en" data-critters-container>
+  <head><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta charset="utf-8">
+    <title>NgAntAdmin</title>
+    <base href="/ng-ant-admin/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="image/x-icon" href="favicon.ico" rel="icon">
+    <style type="text/css">
+      .global-loader {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        opacity: 1;
+        will-change: transform;
+        transition: opacity 0.5s ease-in-out;
+      }
+
+      .global-loader-fade-in {
+        will-change: transform;
+        opacity: 0;
+      }
+
+      .global-loader-hidden {
+        display: none;
+      }
+
+      .global-loader h1 {
+        font-family: 'Helvetica Neue', Helvetica, sans-serif;
+        font-weight: normal;
+        font-size: 18px;
+        letter-spacing: 0.04rem;
+        white-space: pre;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-image: repeating-linear-gradient(to right, #f44336, #9c27b0, #3f51b5, #03a9f4, #009688, #8bc34a, #ffeb3b, #ff9800);
+        background-size: 750% auto;
+        background-position: 0 100%;
+        animation: gradient 20s infinite;
+        animation-fill-mode: forwards;
+        animation-timing-function: linear;
+      }
+
+      .night-bg {
+        background-color: #141414;
+      }
+
+      @keyframes gradient {
+        0% {
+          background-position: 0 0;
+        }
+
+        100% {
+          background-position: -750% 0;
+        }
+      }
+    </style>
+    <!--
+    参考https://www.cdnplanet.com/blog/faster-google-webfonts-preconnect/
+    没用到谷歌字体可以删除
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+  -->
+    <!--
+    谷歌字体
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  -->
+    <!--谷歌materialIcon ，如果你没用material icons可以删除-->
+    <style>@font-face{font-family:'Material Icons';font-style:normal;font-weight:400;src:url(https://fonts.gstatic.com/s/materialicons/v142/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');}.material-icons{font-family:'Material Icons';font-weight:normal;font-style:normal;font-size:24px;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';-webkit-font-smoothing:antialiased;}</style>
+  <link rel="stylesheet" href="styles-D5R4YKNL.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles-D5R4YKNL.css"></noscript></head>
+  <body>
+    <app-root></app-root>
+    <div id="globalLoader" class="global-loader">
+      <h1>loading...</h1>
+    </div>
+  <link rel="modulepreload" href="chunk-2MHJOQQ7.js"><link rel="modulepreload" href="chunk-C5JYVLWC.js"><link rel="modulepreload" href="chunk-ASVMZEEL.js"><script src="scripts-DHZEZMTP.js" defer></script><script src="main-MAKLSDSG.js" type="module"></script></body>
+  <script>
+    const isNight = window.localStorage.getItem('IsNightKey');
+    if (isNight === 'true') {
+      document.getElementById('globalLoader').className += ' night-bg';
+    }
+  </script>
+</html>
