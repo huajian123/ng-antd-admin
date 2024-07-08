@@ -192,6 +192,13 @@
               "src/**/*.html"
             ]
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "baseHref": "/ng-ant-admin/",
+            "repo": "https://github.com/huajian123/ng-ant-admin.git"
+          }
         }
       }
     }
