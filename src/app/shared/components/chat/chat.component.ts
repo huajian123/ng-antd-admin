@@ -1,7 +1,9 @@
+import { AsyncPipe, NgClass } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, OnDestroy, Output, EventEmitter, ChangeDetectorRef, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { fnGetRandomNum } from '@app/utils/tools';
+import { ThemeService } from '@store/common-store/theme.service';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
@@ -17,7 +19,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
   styleUrls: ['./chat.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [NzCardModule, NzTypographyModule, NzGridModule, NzAvatarModule, NzResultModule, NzIconModule, NzButtonModule, FormsModule, ReactiveFormsModule, NzInputModule]
+  imports: [NzCardModule, NzTypographyModule, NzGridModule, NzAvatarModule, NzResultModule, NzIconModule, NzButtonModule, FormsModule, ReactiveFormsModule, NzInputModule, NgClass, AsyncPipe]
 })
 export class ChatComponent implements OnInit, OnDestroy {
   @ViewChild('scrollMe') private myScrollContainer!: ElementRef;
@@ -98,6 +100,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     '闭关修炼中'
   ];
 
+  readonly themesModel$ = inject(ThemeService).getStyleThemeMode();
   private fb = inject(FormBuilder);
   private cdr = inject(ChangeDetectorRef);
 

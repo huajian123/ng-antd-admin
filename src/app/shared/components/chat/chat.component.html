@@ -1,4 +1,12 @@
-<div id="chats" class="chat-wrap" [class.show]="show">
+<div
+  id="chats"
+  class="chat-wrap"
+  [ngClass]="{
+    show: show,
+    'compact-mode': (themesModel$ | async) === 'compact',
+    'aliyun-mode': (themesModel$ | async) === 'aliyun'
+  }"
+>
   <nz-card [nzActions]="[inputTpl]" [nzBodyStyle]="{ padding: 0 }" [nzExtra]="extraTemplate" [nzTitle]="titleTemplate">
     <div #scrollMe class="flex chart-content">
       <span class="text-center sp-12 m-b-5" nz-typography nzType="secondary">2021-7-27</span>
