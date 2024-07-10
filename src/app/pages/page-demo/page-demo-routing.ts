@@ -41,5 +41,29 @@ export default [
     title: '新布局',
     data: { key: 'page-demo1' },
     loadComponent: () => import('./new-page-layout/new-page-layout.component').then(m => m.NewPageLayoutComponent)
+  },
+  {
+    path: 'page-demo1',
+    title: '新布局',
+    data: { key: 'page-demo1' },
+    loadComponent: () => import('./new-page-layout/new-page-layout.component').then(m => m.NewPageLayoutComponent)
+  },
+  {
+    path: 'page-demo2',
+    title: '新页面2',
+    data: { key: 'page-demo2' },
+    loadComponent: () => import('../../pages/no-content/no-content.component').then(m => m.NoContentComponent)
+  },
+  {
+    path: 'page-demo3',
+    title: '新页面3',
+    data: { key: 'page-demo3' },
+    loadComponent: () => import('../../pages/no-content/no-content.component').then(m => m.NoContentComponent)
+  },
+  {
+    path: 'page-demo4',
+    title: '新页面4',
+    data: { key: 'page-demo4' },
+    loadComponent: () => import('../../pages/no-content/no-content.component').then(m => m.NoContentComponent)
   }
 ] as Route[];
