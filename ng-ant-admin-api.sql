@@ -5,7 +5,7 @@
  Source Server Type    : MySQL
  Source Server Version : 50736
  Source Host           : localhost:3306
- Source Schema         : ng-ant-admin-api
+ Source Schema         : ng-antd-admin-api
 
  Target Server Type    : MySQL
  Target Server Version : 50736
@@ -266,7 +266,7 @@ INSERT INTO `sys_permission` VALUES (85, '富文本', 'default:feat:rich-text', 
 INSERT INTO `sys_permission` VALUES (86, 'clickOutSide', 'default:feat:click-out-side', 76, 10, '/default/feat/click-out-side', 'C', '1', '1', 0, NULL, 'dashboard', '2022-05-10 10:01:52', '2022-05-10 14:58:36');
 INSERT INTO `sys_permission` VALUES (87, '外部文档', 'default:feat:frame', 76, 11, '/default/feat/frame', 'C', '1', '1', 0, NULL, 'dashboard', '2022-05-10 10:02:33', '2022-05-10 14:58:36');
 INSERT INTO `sys_permission` VALUES (88, 'zorro文档', 'default:feat:frame:zorro-doc', 87, 1, '/default/feat/frame/zorro-doc', 'C', '1', '1', 0, NULL, 'dashboard', '2022-05-10 10:03:27', '2022-05-10 14:58:36');
-INSERT INTO `sys_permission` VALUES (89, '外部链接', 'https://github.com/huajian123/ng-ant-admin', 87, 2, 'https://github.com/huajian123/ng-ant-admin', 'C', '1', '1', 1, NULL, 'usergroup-delete', '2022-05-10 10:05:11', '2022-05-10 14:58:53');
+INSERT INTO `sys_permission` VALUES (89, '外部链接', 'https://github.com/huajian123/ng-antd-admin', 87, 2, 'https://github.com/huajian123/ng-antd-admin', 'C', '1', '1', 1, NULL, 'usergroup-delete', '2022-05-10 10:05:11', '2022-05-10 14:58:53');
 INSERT INTO `sys_permission` VALUES (90, '滚动条', 'default:feat:scroll', 76, 12, '/default/feat/scroll', 'C', '1', '1', 0, NULL, 'dashboard', '2022-05-10 10:05:43', '2022-05-10 14:58:36');
 INSERT INTO `sys_permission` VALUES (91, '缓存滚动条', 'default:feat:scroll:keep-scroll-page', 90, 1, '/default/feat/scroll/keep-scroll-page', 'C', '1', '1', 0, NULL, 'dashboard', '2022-05-10 10:06:02', '2022-05-10 14:58:36');
 INSERT INTO `sys_permission` VALUES (92, '玩弄滚动条', 'default:feat:scroll:play-scroll', 90, 2, '/default/feat/scroll/play-scroll', 'C', '1', '1', 0, NULL, 'dashboard', '2022-05-10 10:06:24', '2022-05-10 14:58:36');

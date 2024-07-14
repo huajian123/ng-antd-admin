@@ -18,7 +18,7 @@ export class WaterMarkService {
       ctx!.fillStyle = 'rgba(24,144,255,0.15)';
       ctx!.font = '16px Georgia';
       ctx!.setTransform(1, -0.4, 0.4, 1, 0, 0);
-      ctx!.fillText('Ng-Ant-Admin', 10, 100);
+      ctx!.fillText('ng-antd-admin', 10, 100);
       this.watermark = canvas.toDataURL('image/png');
     }
     return this.watermark;

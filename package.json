@@ -1,12 +1,12 @@
 {
-  "name": "ng-ant-admin",
+  "name": "ng-antd-admin",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --o --port 4201",
     "ng-high-memory-start": "node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng serve",
     "prettier": "prettier --write \"src/**/*.ts\" \"src/**/*.html\" \"src/**/*.less\" \"src/**/*.json\"",
-    "build": "ng build --base-href=/ng-ant-admin/",
+    "build": "ng build --base-href=/ng-antd-admin/",
     "deploy": "ng deploy",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",

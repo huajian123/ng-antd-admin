@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ng-ant-admin": {
+    "ng-antd-admin": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -152,10 +152,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "ng-ant-admin:build:production"
+              "buildTarget": "ng-antd-admin:build:production"
             },
             "development": {
-              "buildTarget": "ng-ant-admin:build:development"
+              "buildTarget": "ng-antd-admin:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -196,8 +196,8 @@
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
           "options": {
-            "baseHref": "/ng-ant-admin/",
-            "repo": "https://github.com/huajian123/ng-ant-admin.git"
+            "baseHref": "/ng-antd-admin/",
+            "repo": "https://github.com/huajian123/ng-antd-admin.git"
           }
         }
       }

@@ -74,7 +74,7 @@ export class LoginFormComponent implements OnInit {
             this.notification.blank(
               '温馨提示',
               `
-                源码地址：<a href="https://github.com/huajian123/ng-ant-admin">在这里</a>
+                源码地址：<a href="https://github.com/huajian123/ng-antd-admin">在这里</a>
             `,
               {
                 nzPlacement: 'top',

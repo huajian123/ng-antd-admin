@@ -143,7 +143,7 @@ module.exports = {
                 position: 'before'
               },
               {
-                pattern: 'ng-ant-admin/**',
+                pattern: 'ng-antd-admin/**',
                 group: 'internal',
                 position: 'before'
               }

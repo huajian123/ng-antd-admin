@@ -440,10 +440,10 @@ const menuList = http.get('/site/api/sysPermission/menu/*', () => {
       {
         id: 89,
         menuName: '外部链接',
-        code: 'https://github.com/huajian123/ng-ant-admin',
+        code: 'https://github.com/huajian123/ng-antd-admin',
         fatherId: 87,
         orderNum: 2,
-        path: 'https://github.com/huajian123/ng-ant-admin',
+        path: 'https://github.com/huajian123/ng-antd-admin',
         menuType: 'C',
         visible: true,
         status: true,

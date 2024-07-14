@@ -1,15 +1,15 @@
-# ng-ant-admin
-[![CodeFactor](https://www.codefactor.io/repository/github/huajian123/ng-ant-admin/badge)](https://www.codefactor.io/repository/github/huajian123/ng-ant-admin)
+# ng-antd-admin
+[![CodeFactor](https://www.codefactor.io/repository/github/huajian123/ng-antd-admin/badge)](https://www.codefactor.io/repository/github/huajian123/ng-antd-admin)
 ![License](https://img.shields.io/badge/License-MIT-blue.svg)
 [![Angular](https://img.shields.io/badge/Build%20with-Angular%20CLI-red?logo=angular)](https://www.github.com/angular/angular)
 
 ## ✨前言
 - 本项目作为我为angular社区尽一点力所能及之力，希望大家喜欢这个模板，也希望更多的国内开发者能重新审视angular这一前端框架，特别是ng17以后的版本，我相信angular会越来越好，我也会一直维护下去，如果您有什么好的建议，可以加我的微信号hj345678912，我拉你进交流群，一起学习进步交流。
 - 本项目也有一点点教学性质，其中用到大量angular新特性，有详细的注释以及参考文章链接在代码中，大家可以看看源码，有问题与我讨论，有改进处可以提pr，我们一起进步
-- <font color=red>在线预览地址</font> [这里](https://huajian123.github.io/ng-ant-admin/)
+- <font color=red>在线预览地址</font> [这里](https://huajian123.github.io/ng-antd-admin/)
 - <font color=red>online preview</font>
-    [这里](https://huajian123.github.io/ng-ant-admin/)
-- [v17.1](https://github.com/huajian123/ng-ant-admin/releases/tag/v17.1.0)是最后一个采用真实接口的示例。在这之后的版本都采用mswjs来mock接口，但是仍然配套了java服务端相同接口与数据结构，可以配套使用，源码地址[这里](https://github.com/huajian123/ng-ant-admin-api)
+    [这里](https://huajian123.github.io/ng-antd-admin/)
+- [v17.1](https://github.com/huajian123/ng-antd-admin/releases/tag/v17.1.0)是最后一个采用真实接口的示例。在这之后的版本都采用mswjs来mock接口，但是仍然配套了java服务端相同接口与数据结构，可以配套使用，源码地址[这里](https://github.com/huajian123/ng-antd-admin-api)
 - 全面开启zoneless，性能快人一步
   
 ## ✨特性
@@ -21,14 +21,14 @@
 - Rich code examples, complete server background, front-end and back-end separation examples
 - 常用工具类，服务， 指令，管道，封装了表格，抽屉，对话框等常用功能
 - Common tools, services, instructions, pipelines。Encapsulates common functions such as tables, drawers, and dialog boxes
-- <font color=red size=6>全部组件均为独立组件，文件量减少（如果需要module版本，请看[这里](https://github.com/huajian123/ng-ant-admin/releases/tag/v15.0)）</font>
-- <font color=red size=6>Standalone Components（module style is [here](https://github.com/huajian123/ng-ant-admin/releases/tag/v15.0)）</font>
+- <font color=red size=6>全部组件均为独立组件，文件量减少（如果需要module版本，请看[这里](https://github.com/huajian123/ng-antd-admin/releases/tag/v15.0)）</font>
+- <font color=red size=6>Standalone Components（module style is [here](https://github.com/huajian123/ng-antd-admin/releases/tag/v15.0)）</font>
 
 # ✨项目介绍
-1.如果您用我的项目进行学习或者参考，请先确定您使用的是angular哪个版本，因为angular15后写法有部分不一样，所以我的建议是，您正在使用angular什么版本，则下载对应版本的ng-ant-admin,最新版本直接从master分支下载即可，历史版本在这个链接进行下载[这里](https://github.com/huajian123/ng-ant-admin/releases)。<br>
+1.如果您用我的项目进行学习或者参考，请先确定您使用的是angular哪个版本，因为angular15后写法有部分不一样，所以我的建议是，您正在使用angular什么版本，则下载对应版本的ng-antd-admin,最新版本直接从master分支下载即可，历史版本在这个链接进行下载[这里](https://github.com/huajian123/ng-antd-admin/releases)。<br>
 <br>
 <br>
-2.[v17.1](https://github.com/huajian123/ng-ant-admin/releases/tag/v17.1.0)这个版本前，系统管理菜单下都为真实api接口调用示例。账号admin，密码123456 ,，数据库每10分钟从备份恢复一次<br>
+2.[v17.1](https://github.com/huajian123/ng-antd-admin/releases/tag/v17.1.0)这个版本前，系统管理菜单下都为真实api接口调用示例。账号admin，密码123456 ,，数据库每10分钟从备份恢复一次<br>
 之后的版本接口均为mswjs,mock数据<br>
 <br>
 <br>
@@ -41,10 +41,10 @@
 <br>
 快速二开使用详解 [快速二开使用详解](https://www.bilibili.com/video/BV1gF411x7rN/)<br>
 项目搭建简易教程 [项目搭建简易教程](https://www.bilibili.com/video/BV1EM4y1w7zd/)<br>
-纯净版项目地址 [pure](https://gitee.com/hjxiaoqianduan/ng-ant-admin-pure/)<br>
-pure project address [pure](https://gitee.com/hjxiaoqianduan/ng-ant-admin-pure/)<br>
-服务端源码地址 [serviceApi](https://github.com/huajian123/ng-ant-admin-api)<br>
-serviceApi address [serviceApi](https://github.com/huajian123/ng-ant-admin-api)<br>
+纯净版项目地址 [pure](https://gitee.com/hjxiaoqianduan/ng-antd-admin-pure/)<br>
+pure project address [pure](https://gitee.com/hjxiaoqianduan/ng-antd-admin-pure/)<br>
+服务端源码地址 [serviceApi](https://github.com/huajian123/ng-antd-admin-api)<br>
+serviceApi address [serviceApi](https://github.com/huajian123/ng-antd-admin-api)<br>
 
 
 
@@ -129,7 +129,7 @@ _onReuseDestroy: () => void;
 It can be realized by directly writing the method named _onReuseInit or _onReuseDestroy in the target component<br>
 
 ## 系统截图(System screenshot)
-![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/11.png)
+![ScreenShot](https://github.com/huajian123/ng-antd-admin/blob/master/projectImg/11.png)
 
 ## star支持
 我是自费服务器搭建后端服务接口,所以如果本项目对您有用，如果您也愿意的话，麻烦举起您性感的小手帮我点个免费的star以资鼓励，谢谢啊<br>
@@ -140,8 +140,8 @@ if help you, if you want ,please give me a star ,thank you<br>
 ## 捐赠
 如果本项目对您有用，正巧您如果也想请我喝一杯咖啡，请扫下面的码，哈哈<br>
 If this project is useful to you, and you happen to want to invite me for a cup of coffee, please scan Alipay or WeChat<br>
-![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/weixin.jpeg)
-![ScreenShot](https://github.com/huajian123/ng-ant-admin/blob/master/projectImg/zhifubao.jpeg)
+![ScreenShot](https://github.com/huajian123/ng-antd-admin/blob/master/projectImg/weixin.jpeg)
+![ScreenShot](https://github.com/huajian123/ng-antd-admin/blob/master/projectImg/zhifubao.jpeg)
 
 
 
