@@ -1,1 +1,0 @@
-import"./chunk-VB56BUGO.js";var r=[{path:"zorro-doc",title:"zorro\u6587\u6863",data:{key:"zorro-doc"},loadComponent:()=>import("./chunk-WF6JQLRQ.js").then(o=>o.ZorroDocComponent)},{path:"",redirectTo:"zorro-doc",pathMatch:"full"}];export{r as default};
