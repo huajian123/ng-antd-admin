@@ -698,6 +698,10 @@ input[nz-input] {
   background: linear-gradient(to right, #8514f5, #f637e3, #fa2c05);
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  @media screen and (max-width: 430px) {
+    background:none;
+    -webkit-text-fill-color: white;
+  }
 }
 
 @keyframes textGradientAnimation {
@@ -714,6 +718,6 @@ input[nz-input] {
   }
 
   100% {
-    background-position: 0% 50%;
+    background-position: 0 50%;
   }
 }
