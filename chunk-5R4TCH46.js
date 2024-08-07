@@ -1,0 +1,1 @@
+import{Ca as i,Hb as r,wa as t}from"./chunk-PHCOYEBV.js";var e=class e{constructor(){this.viewContainerRef=t(r)}};e.\u0275fac=function(a){return new(a||e)},e.\u0275dir=i({type:e,selectors:[["","appAd",""]],standalone:!0});var n=e;export{n as a};

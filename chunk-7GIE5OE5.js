@@ -1,0 +1,1 @@
+import{i as e,qa as a}from"./chunk-PHCOYEBV.js";var t=class t{constructor(){this.splitLeftNavArray$=new e([])}setSplitLeftNavArrayStore(r){this.splitLeftNavArray$.next(r)}getSplitLeftNavArrayStore(){return this.splitLeftNavArray$.asObservable()}};t.\u0275fac=function(i){return new(i||t)},t.\u0275prov=a({token:t,factory:t.\u0275fac,providedIn:"root"});var o=t;export{o as a};

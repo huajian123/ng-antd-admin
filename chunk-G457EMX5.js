@@ -1,1 +1,0 @@
-import"./chunk-VB56BUGO.js";var t=[{path:"",redirectTo:"menu1",pathMatch:"full"},{path:"menu1",loadChildren:()=>import("./chunk-7PXQJ7VE.js")},{path:"menu2",title:"Menu2",data:{key:"menu2"},loadComponent:()=>import("./chunk-GZGUK7BR.js").then(e=>e.Menu2Component)}];export{t as default};

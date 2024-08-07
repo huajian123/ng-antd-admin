@@ -1,0 +1,1 @@
+import{i as t,qa as a}from"./chunk-PHCOYEBV.js";var o=class o{constructor(){this.globalSpin$=new t(!1)}setCurrentGlobalSpinStore(e){this.globalSpin$.next(e)}getCurrentGlobalSpinStore(){return this.globalSpin$.asObservable()}};o.\u0275fac=function(l){return new(l||o)},o.\u0275prov=a({token:o,factory:o.\u0275fac,providedIn:"root"});var r=o;export{r as a};
