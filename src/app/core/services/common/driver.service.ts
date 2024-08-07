@@ -87,6 +87,9 @@ export class DriverService {
       onHighlightStarted: () => {
         this.doc.body.style.cssText = 'overflow:hidden';
       },
+      onDestroyed: () => {
+        this.doc.body.style.cssText = 'overflow:auto';
+      },
       steps
     });
 
