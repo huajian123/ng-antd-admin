@@ -1479,7 +1479,7 @@ const menuList = http.get('/site/api/sysPermission/menu/*', () => {
       },
       {
         id: 160,
-        menuName: '新组件1',
+        menuName: 'blingbling',
         code: 'default:comp:comp1',
         fatherId: 104,
         orderNum: 8,

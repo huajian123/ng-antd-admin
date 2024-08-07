@@ -11,9 +11,9 @@ export default [
   { path: 'form', loadChildren: () => import('./form/form-routing') },
   {
     path: 'comp1',
-    title: '新组件1',
+    title: 'blingbling',
     data: { key: 'comp1' },
-    loadComponent: () => import('../../pages/no-content/no-content.component').then(m => m.NoContentComponent)
+    loadComponent: () => import('../../pages/comp/blingbling/blingbling.component').then(m => m.BlingblingComponent)
   },
   {
     path: 'comp2',
