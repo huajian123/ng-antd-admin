@@ -95,6 +95,10 @@ export enum TaskStateSearchCheckPeriodEnum {
   ]
 })
 export class AppendFormComponent implements OnInit {
+  private modalService = inject(AppendFormModalService);
+  private cdr = inject(ChangeDetectorRef);
+  private fb = inject(FormBuilder);
+
   destroyRef = inject(DestroyRef);
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '表单增删示例',
@@ -201,11 +205,6 @@ export class AppendFormComponent implements OnInit {
   get valuesArray(): FormArray {
     return this.validateForm.controls['formArray'] as FormArray;
   }
-  constructor(
-    private modalService: AppendFormModalService,
-    private cdr: ChangeDetectorRef,
-    private fb: FormBuilder
-  ) {}
 
   creatForm(): FormGroup {
     return this.fb.group({

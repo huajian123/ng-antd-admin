@@ -51,10 +51,7 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
   inputValue: string | null = null;
   menuNavList: Menu[] = [];
   destroyRef = inject(DestroyRef);
-
-  constructor(protected override modalRef: NzModalRef) {
-    super(modalRef);
-  }
+  override modalRef = inject(NzModalRef);
 
   changeSelAnswerIndex(dir: 'up' | 'down'): number | null {
     const index = this.resultListShow.findIndex(item => item.selItem);

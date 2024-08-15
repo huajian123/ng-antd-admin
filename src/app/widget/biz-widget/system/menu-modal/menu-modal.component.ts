@@ -32,10 +32,8 @@ export class MenuModalComponent extends BasicConfirmModalComponent implements On
   readonly nzModalData: MenuListObj = inject(NZ_MODAL_DATA);
   menuType: menuType = 'C';
   private fb = inject(FormBuilder);
+  override modalRef = inject(NzModalRef);
 
-  constructor(protected override modalRef: NzModalRef) {
-    super(modalRef);
-  }
   // 返回false则不关闭对话框
   protected getCurrentValue(): Observable<NzSafeAny> {
     if (!fnCheckForm(this.validateForm)) {

@@ -1,4 +1,4 @@
-import { Directive, Input, OnInit, TemplateRef } from '@angular/core';
+import { Directive, Input, OnInit, TemplateRef, inject } from '@angular/core';
 
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
@@ -31,11 +31,12 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 })
 // eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class NamedTemplate<T> implements OnInit {
+  template = inject<TemplateRef<T>>(TemplateRef);
+
   /**
    * 模板名称
    */
   @Input({ required: true }) named!: string;
-  constructor(public template: TemplateRef<T>) {}
 
   ngOnInit(): void {
     this.resolveName();

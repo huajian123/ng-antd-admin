@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import {
@@ -193,6 +193,8 @@ import { AngularImgComponent } from '../angular-img/angular-img.component';
   imports: [FormsModule, NzFormModule, NzGridModule, NzInputNumberModule, NzInputModule, AngularImgComponent, NzSelectModule, NzButtonModule, NzWaveModule]
 })
 export class DemoDynamicParamsComponent implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   delay = 0;
   duration = 0;
   scale = 0;
@@ -264,8 +266,6 @@ export class DemoDynamicParamsComponent implements OnInit {
   animation = 'pulse';
   animationState = false;
   animationWithState = false;
-
-  constructor(private cdr: ChangeDetectorRef) {}
 
   animate(): void {
     this.animationState = false;

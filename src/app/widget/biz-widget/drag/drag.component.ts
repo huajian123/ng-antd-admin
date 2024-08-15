@@ -22,9 +22,7 @@ export interface DragModalData {
 export class DragComponent extends BasicConfirmModalComponent implements OnInit {
   readonly nzModalData: DragModalData = inject(NZ_MODAL_DATA);
   messageService = inject(NzMessageService);
-  constructor(override modalRef: NzModalRef) {
-    super(modalRef);
-  }
+  override modalRef = inject(NzModalRef);
 
   protected getCurrentValue(): Observable<NzSafeAny> {
     return of(true);

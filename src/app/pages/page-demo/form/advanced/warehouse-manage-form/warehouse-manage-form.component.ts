@@ -35,11 +35,12 @@ const EXE_COUNTER_VALUE_ACCESSOR = {
   imports: [FormsModule, ReactiveFormsModule, NzGridModule, NzFormModule, NzInputModule]
 })
 export class WarehouseManageFormComponent implements OnInit, ControlValueAccessor {
+  private fb = inject(FormBuilder);
+
   validateForm!: FormGroup;
   onChange: (value: string) => void = () => null;
   onTouched: () => void = () => null;
   destroyRef = inject(DestroyRef);
-  constructor(private fb: FormBuilder) {}
 
   initForm(): void {
     this.validateForm = this.fb.group({

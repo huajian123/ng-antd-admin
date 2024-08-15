@@ -40,10 +40,7 @@ export class AccountModalComponent extends BasicConfirmModalComponent implements
   private validatorsService = inject(ValidatorsService);
   private roleService = inject(RoleService);
   private deptService = inject(DeptService);
-
-  constructor(override modalRef: NzModalRef) {
-    super(modalRef);
-  }
+  override modalRef = inject(NzModalRef);
 
   // 此方法为如果有异步数据需要加载，则在该方法中添加
   protected getAsyncFnData(modalValue: NzSafeAny): Observable<NzSafeAny> {

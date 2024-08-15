@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform, inject } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -8,7 +8,7 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
   standalone: true
 })
 export class HtmlPipe implements PipeTransform {
-  constructor(private domSanitizer: DomSanitizer) {}
+  private domSanitizer = inject(DomSanitizer);
 
   transform(value: NzSafeAny): NzSafeAny {
     return this.domSanitizer.bypassSecurityTrustHtml(value);

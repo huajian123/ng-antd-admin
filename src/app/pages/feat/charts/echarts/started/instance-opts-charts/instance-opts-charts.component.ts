@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 
 import { EChartsOption } from 'echarts';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -25,6 +25,8 @@ import { NgxEchartsModule } from 'ngx-echarts';
   imports: [NzButtonModule, NzWaveModule, NgxEchartsModule]
 })
 export class InstanceOptsChartsComponent {
+  private msg = inject(NzMessageService);
+
   chartInstance: NzSafeAny;
 
   options: EChartsOption = {
@@ -97,8 +99,6 @@ export class InstanceOptsChartsComponent {
       }
     ]
   };
-
-  constructor(private msg: NzMessageService) {}
 
   onChartInit(e: NzSafeAny): void {
     this.chartInstance = e;

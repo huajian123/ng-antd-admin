@@ -1,5 +1,5 @@
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, ChangeDetectorRef, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, ChangeDetectorRef, OnChanges, SimpleChanges, inject } from '@angular/core';
 
 import { AntTableConfig, SortFile, TableHeader } from '@shared/components/ant-table/ant-table.component';
 import { fnGetFlattenTreeDataByMap, fnTreeDataToMap } from '@utils/treeTableTools';
@@ -37,6 +37,8 @@ export abstract class AntTreeTableComponentToken {
   imports: [NzTableModule, NzResizableModule, NgClass, NgTemplateOutlet, MapPipe, TableFiledPipe]
 })
 export class TreeTableComponent implements OnChanges {
+  private cdr = inject(ChangeDetectorRef);
+
   _dataList!: TreeNodeInterface[];
   allChecked = false;
   indeterminate = false;
@@ -88,8 +90,6 @@ export class TreeTableComponent implements OnChanges {
   get tableSize(): NzTableSize {
     return this._tableSize;
   }
-
-  constructor(private cdr: ChangeDetectorRef) {}
 
   tableChangeDectction(): void {
     // 改变引用触发变更检测。

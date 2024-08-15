@@ -23,10 +23,7 @@ export class RoleManageModalComponent extends BasicConfirmModalComponent impleme
 
   readonly nzModalData: Role = inject(NZ_MODAL_DATA);
   private fb = inject(FormBuilder);
-
-  constructor(protected override modalRef: NzModalRef) {
-    super(modalRef);
-  }
+  override modalRef = inject(NzModalRef);
 
   initForm(): void {
     this.addEditForm = this.fb.group({

@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { FormControl, NonNullableFormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
@@ -21,15 +21,11 @@ import { NzModalRef } from 'ng-zorro-antd/modal';
   imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzButtonModule, PasswordStrengthMeterComponent, NzIconModule]
 })
 export class ChangePasswordComponent extends BasicConfirmModalComponent {
+  private fb = inject(NonNullableFormBuilder);
+  override modalRef = inject(NzModalRef);
+
   passwordVisible = false;
   compirePasswordVisible = false;
-
-  constructor(
-    protected override modalRef: NzModalRef,
-    private fb: NonNullableFormBuilder
-  ) {
-    super(modalRef);
-  }
 
   get newPassword(): string {
     return this.validateForm.controls.newPassword.value!;

@@ -1,10 +1,13 @@
-import { Directive, ElementRef, HostBinding, Input, numberAttribute, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
+import { Directive, ElementRef, HostBinding, Input, numberAttribute, OnChanges, Renderer2, SimpleChanges, inject } from '@angular/core';
 
 @Directive({
   selector: '.psm__progress-bar',
   standalone: true
 })
 export class PSMProgressBarDirective implements OnChanges {
+  private renderer = inject(Renderer2);
+  private el = inject<ElementRef<HTMLDivElement>>(ElementRef);
+
   @Input({ transform: numberAttribute })
   numberOfProgressBarItems: number | undefined;
 
@@ -26,10 +29,7 @@ export class PSMProgressBarDirective implements OnChanges {
 
   private defaultColors = ['darkred', 'orangered', 'orange', 'yellowgreen', 'green'];
 
-  constructor(
-    private renderer: Renderer2,
-    private el: ElementRef<HTMLDivElement>
-  ) {
+  constructor() {
     this.progressBar = this.el.nativeElement;
   }
 

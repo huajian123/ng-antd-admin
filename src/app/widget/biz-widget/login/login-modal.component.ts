@@ -25,10 +25,7 @@ export class LoginModalComponent extends BasicConfirmModalComponent implements O
 
   private fb = inject(FormBuilder);
   private loginService = inject(LoginService);
-
-  constructor(protected override modalRef: NzModalRef) {
-    super(modalRef);
-  }
+  override modalRef = inject(NzModalRef);
 
   // 返回false则不关闭对话框
   protected getCurrentValue(): Observable<NzSafeAny> {
