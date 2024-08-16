@@ -24,7 +24,7 @@ export class DragComponent extends BasicConfirmModalComponent implements OnInit 
   messageService = inject(NzMessageService);
   override modalRef = inject(NzModalRef);
 
-  protected getCurrentValue(): Observable<NzSafeAny> {
+  override getCurrentValue(): Observable<NzSafeAny> {
     return of(true);
   }
 

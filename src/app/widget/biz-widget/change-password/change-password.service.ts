@@ -1,11 +1,10 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, Type } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { ChangePasswordComponent } from '@widget/biz-widget/change-password/change-password.component';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { ModalOptions } from 'ng-zorro-antd/modal';
 
-import { ModalWrapService } from '../../base-modal';
+import { ModalResponse, ModalWrapService } from '../../base-modal';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +12,11 @@ import { ModalWrapService } from '../../base-modal';
 export class ChangePasswordService {
   private modalWrapService = inject(ModalWrapService);
 
-  protected getContentComponent(): NzSafeAny {
+  protected getContentComponent(): Type<ChangePasswordComponent> {
     return ChangePasswordComponent;
   }
 
-  public show(modalOptions: ModalOptions = {}, params?: object): Observable<NzSafeAny> {
-    return this.modalWrapService.show(this.getContentComponent(), modalOptions, params);
+  public show(modalOptions: ModalOptions = {}, params?: object): Observable<ModalResponse> {
+    return this.modalWrapService.show<ChangePasswordComponent, object>(this.getContentComponent(), modalOptions, params);
   }
 }

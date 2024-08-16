@@ -1,8 +1,7 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, Type } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { ModalWrapService } from '@widget/base-modal';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { ModalResponse, ModalWrapService } from '@widget/base-modal';
 import { ModalOptions } from 'ng-zorro-antd/modal';
 
 import { DragComponent, DragModalData } from './drag.component';
@@ -12,11 +11,11 @@ import { DragComponent, DragModalData } from './drag.component';
 export class DragService {
   private modalWrapService = inject(ModalWrapService);
 
-  protected getContentComponent(): NzSafeAny {
+  protected getContentComponent(): Type<DragComponent> {
     return DragComponent;
   }
 
-  public show(modalOptions: ModalOptions = {}, modalData?: DragModalData): Observable<NzSafeAny> {
-    return this.modalWrapService.show(this.getContentComponent(), modalOptions, modalData);
+  public show(modalOptions: ModalOptions = {}, modalData?: DragModalData): Observable<ModalResponse> {
+    return this.modalWrapService.show<DragComponent, DragModalData>(this.getContentComponent(), modalOptions, modalData);
   }
 }

@@ -55,7 +55,7 @@ export class LockWidgetComponent extends BasicConfirmModalComponent {
     this.router.navigateByUrl(`/blank/empty-for-lock`);
   }
 
-  protected getCurrentValue(): NzSafeAny {
+  override getCurrentValue(): NzSafeAny {
     return of(true);
   }
 }

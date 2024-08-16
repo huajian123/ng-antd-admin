@@ -198,5 +198,5 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
     this.resultListFactory();
   }
 
-  protected getCurrentValue(): NzSafeAny {}
+  override getCurrentValue(): NzSafeAny {}
 }

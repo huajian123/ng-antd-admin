@@ -39,7 +39,7 @@ export class DeptManageModalComponent extends BasicConfirmModalComponent impleme
     return of(modalValue);
   }
 
-  protected getCurrentValue(): Observable<NzSafeAny> {
+  override getCurrentValue(): Observable<NzSafeAny> {
     if (!fnCheckForm(this.addEditForm)) {
       return of(false);
     }

@@ -35,7 +35,7 @@ export class MenuModalComponent extends BasicConfirmModalComponent implements On
   override modalRef = inject(NzModalRef);
 
   // 返回false则不关闭对话框
-  protected getCurrentValue(): Observable<NzSafeAny> {
+  override getCurrentValue(): Observable<NzSafeAny> {
     if (!fnCheckForm(this.validateForm)) {
       return of(false);
     }

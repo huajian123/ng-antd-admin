@@ -38,7 +38,7 @@ export class RoleManageModalComponent extends BasicConfirmModalComponent impleme
   }
 
   // 返回false则不关闭对话框
-  protected getCurrentValue(): Observable<NzSafeAny> {
+  override getCurrentValue(): Observable<NzSafeAny> {
     if (!fnCheckForm(this.addEditForm)) {
       return of(false);
     }

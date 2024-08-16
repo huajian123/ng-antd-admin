@@ -31,7 +31,7 @@ export class ChangePasswordComponent extends BasicConfirmModalComponent {
     return this.validateForm.controls.newPassword.value!;
   }
 
-  protected getCurrentValue(): Observable<NzSafeAny> {
+  override getCurrentValue(): Observable<NzSafeAny> {
     if (!fnCheckForm(this.validateForm)) {
       return of(false);
     }
