@@ -7,6 +7,7 @@ import { first, tap } from 'rxjs/operators';
 import { GLOBAL_TPL_MODAL_ACTION_TOKEN } from '@app/tpl/global-modal-btn-tpl/global-modal-btn-tpl-token';
 import { GlobalModalBtnTplComponentToken } from '@app/tpl/global-modal-btn-tpl/global-modal-btn-tpl.component';
 import { ModalFullStatusStoreService } from '@store/common-store/modal-full-status-store.service';
+import { throwModalGetCurrentFnError, throwModalRefError } from '@utils/errors';
 import { fnGetUUID } from '@utils/tools';
 import _ from 'lodash';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -75,11 +76,13 @@ export class ModalWrapService {
   }
 
   private cancelCallback<T extends BasicConfirmModalComponent>(modalContentCompInstance: T): void {
+    this.modalCompVerification(modalContentCompInstance);
     this.modalFullStatusStoreService.setModalFullStatusStore(false);
     return modalContentCompInstance.modalRef.destroy({ status: ModalBtnStatus.Cancel, modalValue: null });
   }
 
   private confirmCallback<T extends BasicConfirmModalComponent>(modalContentCompInstance: T): void {
+    this.modalCompVerification(modalContentCompInstance);
     modalContentCompInstance.modalRef.componentInstance
       .getCurrentValue()
       .pipe(
@@ -94,6 +97,15 @@ export class ModalWrapService {
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe();
+  }
+
+  modalCompVerification(modalContentCompInstance: BasicConfirmModalComponent): void {
+    if (!modalContentCompInstance.modalRef) {
+      throwModalRefError();
+    }
+    if (!modalContentCompInstance.modalRef.componentInstance.getCurrentValue) {
+      throwModalGetCurrentFnError();
+    }
   }
 
   getZIndex(element: HTMLElement): number {
