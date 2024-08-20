@@ -11,7 +11,7 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true,
-    "isolatedModules": true,
+    "isolatedModules": true, // https://blog.angular.dev/using-isolatedmodules-in-angular-18-2-68a7d3a6c03d
     "sourceMap": false,
     "inlineSourceMap": false,
     "declaration": false,
@@ -20,7 +20,7 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
-    "useDefineForClassFields": false,
+    "useDefineForClassFields": true,
     "lib": [
       "ES2022",
       "dom"
