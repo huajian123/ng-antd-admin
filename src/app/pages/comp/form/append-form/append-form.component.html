@@ -28,6 +28,19 @@
       </ng-container>
     </form>
 
+    <button class="m-b-8" nz-button nzBlock [nzType]="'dashed'" (click)="submitForm()">
+      <i nz-icon nzType="plus"></i>
+      <span>提交(查看控制台)</span>
+    </button>
+    <button class="m-b-8" nz-button nzBlock [nzType]="'dashed'" (click)="updateFormItem()">
+      <i nz-icon nzType="plus"></i>
+      <span>修改索引为0的input(查看控制台)</span>
+    </button>
+    <button class="m-b-8" nz-button nzBlock [nzType]="'dashed'" (click)="add2form()">
+      <i nz-icon nzType="plus"></i>
+      <span>新增但是不触发valueChange(查看控制台)</span>
+    </button>
+
     <ng-template #combineTpl let-control>
       @if (control.hasError('message')) {
         {{ control.errors.message }}
