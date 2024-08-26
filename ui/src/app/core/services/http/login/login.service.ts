@@ -22,10 +22,6 @@ export class LoginService {
     return this.http.post('/login', params, { needSuccessInfo: false });
   }
 
-  public test(): Observable<string> {
-    return this.http.get('/getHello');
-  }
-
   public getMenuByUserId(userId: number): Observable<Menu[]> {
     // 如果是静态菜单，就把下面注释放开
     // return of(this.menus);

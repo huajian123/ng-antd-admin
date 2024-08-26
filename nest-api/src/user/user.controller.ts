@@ -2,7 +2,7 @@ import { Controller, Get, Post, Put } from '@nestjs/common';
 
 @Controller('user')
 export class UserController {
-  @Post()
+  @Post('/list')
   getUserList() {
     return {
       code: 0,

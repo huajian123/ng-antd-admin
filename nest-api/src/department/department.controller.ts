@@ -94,7 +94,7 @@ export class DepartmentController {
     };
   }
 
-  @Get('/{id}')
+  @Get('/*')
   getDepartmentDetail() {
     return {
       code: 0,

@@ -46,10 +46,6 @@ export class LoginFormComponent implements OnInit {
     this.spinService.setCurrentGlobalSpinStore(true);
     // 获取表单的值
     const param = this.validateForm.getRawValue();
-
-    this.dataService.test().subscribe(res => {
-      console.log(res);
-    });
     // 调用登录接口
     // todo 登录后台返回统一模式为,如果code不为0，会自动被拦截，如果需要修改，请在src/app/core/services/http/base-http.service.ts中进行修改
     // {
