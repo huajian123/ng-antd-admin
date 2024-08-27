@@ -1,9 +1,6 @@
 .full-screen {
   position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
   z-index: 9999999;
   background-color: black;
 }
@@ -15,10 +12,7 @@
 
 .lock-page-entry {
   position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
   z-index: 10000000;
   background-color: rgb(0 0 0 / 50%) !important;
   backdrop-filter: blur(8px) !important;
@@ -52,7 +46,7 @@
     z-index: 99999999;
   }
 
-  @media screen and (max-width: 500px) {
+  @media screen and (width <= 500px) {
     font-size: 14px;
 
     &.clock {
@@ -64,7 +58,7 @@
     }
   }
 
-  @media (min-width: 501px) and (max-width: 768px) {
+  @media (width >= 501px) and (width <= 768px) {
     font-size: 16px;
 
     &.clock {
@@ -75,7 +69,8 @@
       bottom: -65px;
     }
   }
-  @media (min-width: 769px) and (max-width: 992px) {
+
+  @media (width >= 769px) and (width <= 992px) {
     font-size: 18px;
 
     &.clock {
@@ -86,7 +81,8 @@
       bottom: -55px;
     }
   }
-  @media (min-width: 993px) and (max-width: 1200px) {
+
+  @media (width >= 993px) and (width <= 1200px) {
     font-size: 20px;
   }
 }
@@ -100,17 +96,19 @@
   background-color: #141313;
   border-radius: 30px;
 
-  @media screen and (max-width: 500px) {
+  @media screen and (width <= 500px) {
     font-size: 120px;
   }
 
-  @media (min-width: 501px) and (max-width: 768px) {
+  @media (width >= 501px) and (width <= 768px) {
     font-size: 160px;
   }
-  @media (min-width: 769px) and (max-width: 992px) {
+
+  @media (width >= 769px) and (width <= 992px) {
     font-size: 160px;
   }
-  @media (min-width: 993px) and (max-width: 1200px) {
+
+  @media (width >= 993px) and (width <= 1200px) {
     font-size: 220px;
   }
 }
