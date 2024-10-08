@@ -21,4 +21,4 @@ export default [
       key: 'search-table-detail'
     }
   }
-] as Route[];
+] satisfies Route[];

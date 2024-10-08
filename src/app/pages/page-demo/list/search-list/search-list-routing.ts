@@ -18,4 +18,4 @@ export default [
   },
 
   { path: '', redirectTo: '/search-list', pathMatch: 'full' }
-] as Route[];
+] satisfies Route[];

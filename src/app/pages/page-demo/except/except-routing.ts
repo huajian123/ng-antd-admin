@@ -7,4 +7,4 @@ export default [
   { path: 'except500', title: '500', data: { key: 'except500' }, loadComponent: () => import('./except500/except500.component').then(m => m.Except500Component) },
   { path: 'network-error', title: '网络错误', data: { key: 'network-error' }, loadComponent: () => import('./network-error/network-error.component').then(m => m.NetworkErrorComponent) },
   { path: 'no-data', title: '无数据', data: { key: 'no-data' }, loadComponent: () => import('./no-data/no-data.component').then(m => m.NoDataComponent) }
-] as Route[];
+] satisfies Route[];

@@ -1,7 +1,7 @@
 import { DOCUMENT, registerLocaleData } from '@angular/common';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import zh from '@angular/common/locales/zh';
-import { APP_INITIALIZER, ApplicationConfig, importProvidersFrom, provideExperimentalZonelessChangeDetection } from '@angular/core';
+import { APP_INITIALIZER, ApplicationConfig, FactoryProvider, importProvidersFrom, provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter, RouteReuseStrategy, TitleStrategy, withComponentInputBinding, withHashLocation, withInMemoryScrolling, withPreloading } from '@angular/router';
 
@@ -49,7 +49,7 @@ export function SubWindowWithServiceFactory(subWindowWithService: SubWindowWithS
   return () => subWindowWithService.subWindowWidth();
 }
 
-const APPINIT_PROVIDES = [
+const APPINIT_PROVIDES: FactoryProvider[] = [
   // 项目启动
   {
     provide: APP_INITIALIZER,
@@ -63,7 +63,7 @@ const APPINIT_PROVIDES = [
     useFactory: LoadAliIconCdnFactory,
     deps: [LoadAliIconCdnService],
     multi: true
-  },
+  } satisfies FactoryProvider,
   // 初始化锁屏服务
   {
     provide: APP_INITIALIZER,

@@ -9,4 +9,4 @@ export default [
   },
   { path: 'play-scroll', title: '玩弄滚动条', data: { key: 'play-scroll' }, loadComponent: () => import('./play-scroll/play-scroll.component').then(m => m.PlayScrollComponent) },
   { path: '', redirectTo: 'keep-scroll-page', pathMatch: 'full' }
-] as Route[];
+] satisfies Route[];

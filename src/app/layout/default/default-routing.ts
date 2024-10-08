@@ -46,4 +46,4 @@ export default [
       }
     ]
   }
-] as Route[];
+] satisfies Route[];

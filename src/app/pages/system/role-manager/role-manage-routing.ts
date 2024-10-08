@@ -21,4 +21,4 @@ export default [
       authCode: ActionCode.RoleManagerSetRole
     }
   }
-] as Route[];
+] satisfies Route[];
