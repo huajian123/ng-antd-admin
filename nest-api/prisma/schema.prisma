@@ -17,11 +17,14 @@ model User {
   id    Int     @default(autoincrement()) @id
   email String?  @unique
   userName  String
+  available Boolean
+  roleName String
   sex Int
   mobile Int
   telephone String
   departmentId Int
   departmentName String
+  lastLoginTime DateTime @default(now()) @map("last_login_time")
   createdTime DateTime @default(now()) @map("created_time")
   updatedTime DateTime @updatedAt @map("updated_time")
   @@map("user") // 映射的表名
