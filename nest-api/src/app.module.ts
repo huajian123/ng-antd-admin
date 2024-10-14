@@ -5,7 +5,7 @@ import { LoginModule } from './login/login.module';
 import { PermissionModule } from './permission/permission.module';
 import { DepartmentModule } from './department/department.module';
 import { ConfigModule } from '@nestjs/config';
-import { UserModule } from './user/user.module';
+import { ModulesModule } from './modules/modules.module';
 
 @Module({
   imports: [
@@ -13,7 +13,7 @@ import { UserModule } from './user/user.module';
     LoginModule,
     PermissionModule,
     DepartmentModule,
-    UserModule,
+    ModulesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
