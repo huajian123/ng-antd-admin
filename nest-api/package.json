@@ -29,6 +29,9 @@
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/swagger": "^7.4.2",
     "@prisma/client": "^5.20.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
+    "prisma-extension-pagination": "^0.7.4",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1"
   },

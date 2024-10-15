@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { PrismaService } from '../../prisma.service';
+import { PrismaService } from '../../common/database/prisma.service';
+import { FilterParam, TableDataInfo } from '../../common/result/result';
 
 @Injectable()
 export class UserService {
@@ -11,8 +12,16 @@ export class UserService {
     return this.prisma.user.create({ data });
   }
 
-  findAll() {
-    return this.prisma.user.findMany();
+  async findAll(searchParam: FilterParam<Partial<CreateUserDto>>) {
+    const total = await this.prisma.user.count({
+      where: searchParam.filters,
+    });
+    const list = await this.prisma.user.findMany({
+      where: searchParam.filters,
+      skip: (searchParam.pageNum - 1) * searchParam.pageSize,
+      take: searchParam.pageSize,
+    });
+    return TableDataInfo.result(total, list);
   }
 
   findOne(id: number) {

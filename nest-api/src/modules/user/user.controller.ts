@@ -11,7 +11,7 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { ResultData } from '../../common/result';
+import { ResultData } from '../../common/result/result';
 
 @ApiTags('user') // 规整到user的swagger tag中
 @Controller('user')
@@ -25,8 +25,13 @@ export class UserController {
   }
 
   @Get()
-  findAll() {
-    return this.userService.findAll();
+  async findAll() {
+    const data = await this.userService.findAll({
+      pageNum: 1,
+      pageSize: 3,
+      filters: { userName: '123' },
+    });
+    return ResultData.success({ list: data });
   }
 
   @Get(':id')

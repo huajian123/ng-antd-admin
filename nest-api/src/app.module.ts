@@ -5,7 +5,8 @@ import { LoginModule } from './login/login.module';
 import { PermissionModule } from './permission/permission.module';
 import { DepartmentModule } from './department/department.module';
 import { ConfigModule } from '@nestjs/config';
-import { ModulesModule } from './modules/modules.module';
+import { ApiModulesModule } from './modules/api-modules.module';
+import { PrismaModule } from './common/database/prisma.module';
 
 @Module({
   imports: [
@@ -13,7 +14,8 @@ import { ModulesModule } from './modules/modules.module';
     LoginModule,
     PermissionModule,
     DepartmentModule,
-    ModulesModule,
+    PrismaModule,
+    ApiModulesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
