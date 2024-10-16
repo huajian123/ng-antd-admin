@@ -32,15 +32,12 @@ export class LockWidgetComponent extends BasicConfirmModalComponent {
   private lockScreenStoreService = inject(LockScreenStoreService);
   private activatedRoute = inject(ActivatedRoute);
   private router = inject(Router);
+  override modalRef = inject(NzModalRef);
 
   validateForm = this.fb.group({
     password: ['', [Validators.required]]
   });
   passwordVisible = false;
-
-  constructor(protected override modalRef: NzModalRef) {
-    super(modalRef);
-  }
 
   submitForm(): void {
     if (!fnCheckForm(this.validateForm)) {
@@ -58,7 +55,7 @@ export class LockWidgetComponent extends BasicConfirmModalComponent {
     this.router.navigateByUrl(`/blank/empty-for-lock`);
   }
 
-  protected getCurrentValue(): NzSafeAny {
+  override getCurrentValue(): NzSafeAny {
     return of(true);
   }
 }

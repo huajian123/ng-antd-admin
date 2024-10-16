@@ -7,4 +7,4 @@ export default [
   { path: 'tree-list', title: '树状表格', data: { key: 'tree-list' }, loadComponent: () => import('./tree-list/tree-list.component').then(m => m.TreeListComponent) },
   { path: 'card-table', title: '卡片列表', data: { key: 'card-table' }, loadComponent: () => import('./card-table/card-table.component').then(m => m.CardTableComponent) },
   { path: 'search-list', loadChildren: () => import('./search-list/search-list-routing') }
-] as Route[];
+] satisfies Route[];

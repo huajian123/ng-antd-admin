@@ -1,5 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
 import { OptionsInterface } from '@core/services/types';
@@ -40,10 +40,7 @@ export class AccountModalComponent extends BasicConfirmModalComponent implements
   private validatorsService = inject(ValidatorsService);
   private roleService = inject(RoleService);
   private deptService = inject(DeptService);
-
-  constructor(override modalRef: NzModalRef) {
-    super(modalRef);
-  }
+  override modalRef = inject(NzModalRef);
 
   // 此方法为如果有异步数据需要加载，则在该方法中添加
   protected getAsyncFnData(modalValue: NzSafeAny): Observable<NzSafeAny> {
@@ -51,7 +48,7 @@ export class AccountModalComponent extends BasicConfirmModalComponent implements
   }
 
   // 返回false则不关闭对话框
-  protected getCurrentValue(): Observable<NzSafeAny> {
+  override getCurrentValue(): Observable<NzSafeAny> {
     if (!fnCheckForm(this.addEditForm)) {
       return of(false);
     }
@@ -84,8 +81,7 @@ export class AccountModalComponent extends BasicConfirmModalComponent implements
           item.key = item.id;
         });
 
-        const target = fnAddTreeDataGradeAndLeaf(fnFlatDataHasParentToTree(list));
-        this.deptNodes = target;
+        this.deptNodes = fnAddTreeDataGradeAndLeaf(fnFlatDataHasParentToTree(list));
         resolve();
       });
     });

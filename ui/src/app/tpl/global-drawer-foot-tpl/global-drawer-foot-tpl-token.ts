@@ -2,7 +2,7 @@
 // https://angular.io/api/core/createComponent
 import { ApplicationRef, ComponentRef, createComponent, EnvironmentInjector, inject, InjectionToken } from '@angular/core';
 
-import { GlobalDrawerFootTplComponent } from './global-drawer-foot-tpl.component';
+import { GlobalDrawerFootTplComponent } from '@app/tpl/global-drawer-foot-tpl/global-drawer-foot-tpl.component';
 
 /**
  * 全局抽屉的footer模板，也就是确定，取消按钮啦

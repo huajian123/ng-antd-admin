@@ -22,13 +22,10 @@ import { NzSliderModule } from 'ng-zorro-antd/slider';
 export class AppendFormModalComponent extends BasicConfirmModalComponent implements OnInit {
   addEditForm!: FormGroup;
   private fb = inject(FormBuilder);
-
-  constructor(override modalRef: NzModalRef) {
-    super(modalRef);
-  }
+  override modalRef = inject(NzModalRef);
 
   // 返回false则不关闭对话框
-  protected getCurrentValue(): Observable<NzSafeAny> {
+  override getCurrentValue(): Observable<NzSafeAny> {
     if (!fnCheckForm(this.addEditForm)) {
       return of(false);
     }

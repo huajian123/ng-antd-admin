@@ -83,7 +83,6 @@ export class BaseHttpService {
           return this.handleFilter(item, !!config.needSuccessInfo);
         }),
         map(item => {
-          console.log(item);
           if (item.code !== 0) {
             throw new Error(item.msg);
           }

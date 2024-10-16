@@ -20,13 +20,11 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
   imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzRadioModule]
 })
 export class DeptManageModalComponent extends BasicConfirmModalComponent implements OnInit {
+  override modalRef = inject(NzModalRef);
+
   addEditForm!: FormGroup;
   readonly nzModalData: Dept = inject(NZ_MODAL_DATA);
   private fb = inject(FormBuilder);
-
-  constructor(protected override modalRef: NzModalRef) {
-    super(modalRef);
-  }
 
   initForm(): void {
     this.addEditForm = this.fb.group({
@@ -41,7 +39,7 @@ export class DeptManageModalComponent extends BasicConfirmModalComponent impleme
     return of(modalValue);
   }
 
-  protected getCurrentValue(): Observable<NzSafeAny> {
+  override getCurrentValue(): Observable<NzSafeAny> {
     if (!fnCheckForm(this.addEditForm)) {
       return of(false);
     }

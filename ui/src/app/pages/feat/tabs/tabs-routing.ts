@@ -10,4 +10,4 @@ export default [
     data: { newTab: 'true', authCode: ActionCode.TabsDetail, key: 'example-detail' },
     loadComponent: () => import('./detail/detail.component').then(m => m.DetailComponent)
   }
-] as Route[];
+] satisfies Route[];

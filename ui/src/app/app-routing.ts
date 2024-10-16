@@ -6,4 +6,4 @@ export const appRoutes = [
   { path: 'login', data: { preload: true }, loadChildren: () => import('./pages/login/login-routing') },
   { path: 'default', data: { preload: true }, loadChildren: () => import('./layout/default/default-routing') },
   { path: '**', redirectTo: '/login/login-form' }
-] as Route[];
+] satisfies Route[];

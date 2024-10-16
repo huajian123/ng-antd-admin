@@ -1,0 +1,59 @@
+
+span {
+  font-size: 60px;
+  font-weight: normal;
+  color: #9747ff;
+  margin: 0;
+}
+.shark-txt {
+  -webkit-text-fill-color: transparent;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0) 60%) -100%/50% no-repeat currentColor;
+  -webkit-background-clip: text;
+  animation: shark-txt 2s infinite;
+}
+@keyframes shark-txt {
+  to {
+    background-position: 200%;
+  }
+}
+
+.logo {
+  display: block;
+  width: 150px;
+}
+
+.shark-wrap {
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+.shark-wrap::after {
+  content: '';
+  position: absolute;
+  inset: -20%;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0) 60%);
+  animation: shark-wrap 2s infinite;
+  transform: translateX(-100%);
+}
+@keyframes shark-wrap {
+  to {
+    transform: translateX(100%);
+  }
+}
+.card {
+  width: 300px;
+  border-radius: 8px;
+  background-color: #ffe8a3;
+}
+.card img {
+  display: block;
+  width: 100%;
+}
+.radius {
+  width: 150px;
+  border-radius: 50%;
+}
+.radius img {
+  display: block;
+  width: 100%;
+}

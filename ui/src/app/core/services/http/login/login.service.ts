@@ -2,8 +2,8 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 // import { MENU_TOKEN } from '@config/menu';
-import { Menu } from '../../types';
-import { BaseHttpService } from '../base-http.service';
+import { Menu } from '@core/services/types';
+import { BaseHttpService } from '@services/base-http.service';
 // import { MenusService } from '@services/system/menus.service';
 
 export interface UserLogin {

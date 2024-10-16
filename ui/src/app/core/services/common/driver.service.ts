@@ -77,6 +77,12 @@ export class DriverService {
       }
     ];
 
+    // https://github.com/kamranahmedse/driver.js/issues/489
+    const filteredSteps: any = steps.filter(step => {
+      const element = document.querySelector(step.element as string);
+      return !step.element || element !== null;
+    });
+
     const driverObj = driver({
       showProgress: true,
       animate: true,
@@ -87,7 +93,10 @@ export class DriverService {
       onHighlightStarted: () => {
         this.doc.body.style.cssText = 'overflow:hidden';
       },
-      steps
+      onDestroyed: () => {
+        this.doc.body.style.cssText = '';
+      },
+      steps: filteredSteps
     });
 
     driverObj.drive();

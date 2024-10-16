@@ -95,6 +95,10 @@ export enum TaskStateSearchCheckPeriodEnum {
   ]
 })
 export class AppendFormComponent implements OnInit {
+  private modalService = inject(AppendFormModalService);
+  private cdr = inject(ChangeDetectorRef);
+  private fb = inject(FormBuilder);
+
   destroyRef = inject(DestroyRef);
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '表单增删示例',
@@ -201,11 +205,16 @@ export class AppendFormComponent implements OnInit {
   get valuesArray(): FormArray {
     return this.validateForm.controls['formArray'] as FormArray;
   }
-  constructor(
-    private modalService: AppendFormModalService,
-    private cdr: ChangeDetectorRef,
-    private fb: FormBuilder
-  ) {}
+
+  add2form(): void {
+    this.valuesArray.insert(0, this.creatForm(), { emitEvent: false });
+  }
+
+  updateFormItem(): void {
+    // this.valuesArray.at(0).setValue({ detail: 111 });
+    this.valuesArray.setControl(0, this.fb.group({ detail: 555 }));
+    // this.valuesArray.at(0).patchValue({ detail: 333 });
+  }
 
   creatForm(): FormGroup {
     return this.fb.group({
@@ -223,6 +232,10 @@ export class AppendFormComponent implements OnInit {
   pageSizeChange(event: number): void {
     this.pageObj = { ...this.pageObj, pageSize: event };
     this.getData(1);
+  }
+
+  submitForm(): void {
+    console.log(this.validateForm.value);
   }
 
   searchTask(event: number, type: 'checkPeriod' | 'taskState'): void {
@@ -261,6 +274,9 @@ export class AppendFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.validateForm.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => {
+      console.log(res);
+    });
     this.getData(1);
   }
 }

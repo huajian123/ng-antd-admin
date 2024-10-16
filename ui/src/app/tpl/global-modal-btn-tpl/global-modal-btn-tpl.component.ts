@@ -2,11 +2,10 @@ import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, TemplateRef, ViewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
+import { ModalFullStatusStoreService } from '@store/common-store/modal-full-status-store.service';
+import { fnStopMouseEvent } from '@utils/tools';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-
-import { ModalFullStatusStoreService } from '../../core/services/store/common-store/modal-full-status-store.service';
-import { fnStopMouseEvent } from '../../utils/tools';
 
 export abstract class GlobalModalBtnTplComponentToken {
   componentTpl!: TemplateRef<NzSafeAny>;

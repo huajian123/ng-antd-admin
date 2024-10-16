@@ -2,7 +2,7 @@
 // https://angular.io/api/core/createComponent
 import { ApplicationRef, ComponentRef, createComponent, EnvironmentInjector, inject, InjectionToken } from '@angular/core';
 
-import { GlobalModalBtnTplComponent } from './global-modal-btn-tpl.component';
+import { GlobalModalBtnTplComponent } from '@app/tpl/global-modal-btn-tpl/global-modal-btn-tpl.component';
 
 /**
  * 全局对话框右上角，拓展最大化功能模板

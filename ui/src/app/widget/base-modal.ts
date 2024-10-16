@@ -7,10 +7,11 @@ import { first, tap } from 'rxjs/operators';
 import { GLOBAL_TPL_MODAL_ACTION_TOKEN } from '@app/tpl/global-modal-btn-tpl/global-modal-btn-tpl-token';
 import { GlobalModalBtnTplComponentToken } from '@app/tpl/global-modal-btn-tpl/global-modal-btn-tpl.component';
 import { ModalFullStatusStoreService } from '@store/common-store/modal-full-status-store.service';
+import { throwModalGetCurrentFnError, throwModalRefError } from '@utils/errors';
 import { fnGetUUID } from '@utils/tools';
 import _ from 'lodash';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { ModalButtonOptions, ModalOptions, NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { ModalOptions, NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 
 interface ModalZIndex {
   zIndex: number;
@@ -22,11 +23,15 @@ export const enum ModalBtnStatus {
   Ok
 }
 
+export interface ModalResponse {
+  status: ModalBtnStatus;
+  modalValue: NzSafeAny;
+}
+
 // 组件实例需要继承此类
 export abstract class BasicConfirmModalComponent {
-  protected constructor(protected modalRef: NzModalRef) {}
-
-  protected abstract getCurrentValue(): NzSafeAny;
+  modalRef: NzModalRef<NzSafeAny, ModalResponse | boolean> = inject(NzModalRef);
+  abstract getCurrentValue(): NzSafeAny;
 }
 
 @Injectable({
@@ -70,13 +75,15 @@ export class ModalWrapService {
     return `NZ-MODAL-WRAP-CLS-${fnGetUUID()}`;
   }
 
-  private cancelCallback(modalButtonOptions: ModalButtonOptions): void {
+  private cancelCallback<T extends BasicConfirmModalComponent>(modalContentCompInstance: T): void {
+    this.modalCompVerification(modalContentCompInstance);
     this.modalFullStatusStoreService.setModalFullStatusStore(false);
-    return modalButtonOptions['modalRef'].destroy({ status: ModalBtnStatus.Cancel, value: null });
+    return modalContentCompInstance.modalRef.destroy({ status: ModalBtnStatus.Cancel, modalValue: null });
   }
 
-  private confirmCallback(modalButtonOptions: ModalButtonOptions): void {
-    (modalButtonOptions['modalRef'].componentInstance as NzSafeAny)
+  private confirmCallback<T extends BasicConfirmModalComponent>(modalContentCompInstance: T): void {
+    this.modalCompVerification(modalContentCompInstance);
+    modalContentCompInstance.modalRef.componentInstance
       .getCurrentValue()
       .pipe(
         tap(modalValue => {
@@ -84,12 +91,21 @@ export class ModalWrapService {
           if (!modalValue) {
             return of(false);
           } else {
-            return modalButtonOptions['modalRef'].destroy({ status: ModalBtnStatus.Ok, modalValue });
+            return modalContentCompInstance.modalRef.destroy({ status: ModalBtnStatus.Ok, modalValue });
           }
         }),
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe();
+  }
+
+  modalCompVerification(modalContentCompInstance: BasicConfirmModalComponent): void {
+    if (!modalContentCompInstance.modalRef) {
+      throwModalRefError();
+    }
+    if (!modalContentCompInstance.modalRef.componentInstance.getCurrentValue) {
+      throwModalGetCurrentFnError();
+    }
   }
 
   getZIndex(element: HTMLElement): number {
@@ -156,8 +172,8 @@ export class ModalWrapService {
   }
 
   // 创建对话框的配置项
-  createModalConfig<T>(component: Type<NzSafeAny>, modalOptions: ModalOptions = {}, params: T, wrapCls: string): ModalOptions {
-    const defaultOptions: ModalOptions = {
+  createModalConfig<T extends BasicConfirmModalComponent, U>(component: Type<T>, modalOptions: ModalOptions = {}, params?: U, wrapCls: string = ''): ModalOptions {
+    const defaultOptions: ModalOptions<NzSafeAny, U> = {
       nzTitle: '',
       nzContent: component,
       nzCloseIcon: modalOptions.nzCloseIcon || this.btnTpl,
@@ -167,18 +183,18 @@ export class ModalWrapService {
           label: '确认',
           type: 'primary',
           show: true,
-          onClick: this.confirmCallback.bind(this)
+          onClick: this.confirmCallback.bind(this)<T>
         },
         {
           label: '取消',
           type: 'default',
           show: true,
-          onClick: this.cancelCallback.bind(this)
+          onClick: this.cancelCallback.bind(this)<T>
         }
       ],
       nzOnCancel: () => {
-        return new Promise(resolve => {
-          resolve({ status: ModalBtnStatus.Cancel, value: null });
+        return new Promise<ModalResponse>(resolve => {
+          resolve({ status: ModalBtnStatus.Cancel, modalValue: null });
         });
       },
       nzClosable: true,
@@ -190,9 +206,9 @@ export class ModalWrapService {
     return newOptions;
   }
 
-  show<T>(component: Type<NzSafeAny>, modalOptions: ModalOptions = {}, params?: T): Observable<NzSafeAny> {
+  show<T extends BasicConfirmModalComponent, U>(component: Type<T>, modalOptions: ModalOptions = {}, params?: U): Observable<NzSafeAny> {
     const wrapCls = this.getRandomCls();
-    const newOptions = this.createModalConfig(component, modalOptions, params, wrapCls);
+    const newOptions = this.createModalConfig<T, U>(component, modalOptions, params, wrapCls);
     const modalRef = this.bsModalService.create(newOptions);
     let drag: DragRef | null;
     modalRef.afterOpen.pipe(first(), takeUntilDestroyed(this.destroyRef)).subscribe(() => {

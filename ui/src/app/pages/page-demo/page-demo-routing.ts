@@ -66,4 +66,4 @@ export default [
     data: { key: 'page-demo4' },
     loadComponent: () => import('../../pages/no-content/no-content.component').then(m => m.NoContentComponent)
   }
-] as Route[];
+] satisfies Route[];
