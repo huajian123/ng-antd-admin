@@ -21,7 +21,12 @@ export class UserService {
       skip: (searchParam.pageNum - 1) * searchParam.pageSize,
       take: searchParam.pageSize,
     });
-    return TableDataInfo.result(total, list);
+    return TableDataInfo.result(
+      list,
+      total,
+      searchParam.pageSize,
+      searchParam.pageNum,
+    );
   }
 
   findOne(id: number) {

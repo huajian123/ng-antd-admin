@@ -39,7 +39,7 @@ export class AccountService {
   http = inject(BaseHttpService);
 
   public getAccount(param: SearchCommonVO<User>): Observable<PageInfo<User>> {
-    return this.http.post('/user/list/', param);
+    return this.http.post('/user/list', param);
   }
 
   public getAccountDetail(id: number): Observable<User> {

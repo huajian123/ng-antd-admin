@@ -38,6 +38,8 @@ export class LoginFormComponent implements OnInit {
   private loginInOutService = inject(LoginInOutService);
 
   submitForm(): void {
+    this.router.navigateByUrl('default/system/account');
+    return
     // 校验表单
     if (!fnCheckForm(this.validateForm)) {
       return;

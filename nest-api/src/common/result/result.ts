@@ -55,19 +55,36 @@ export class TableDataInfo<T> {
     description: '总记录数',
   })
   total: number;
+  @ApiProperty({
+    example: 0,
+    description: '总记录数',
+  })
+  pageSize: number;
+  @ApiProperty({
+    example: 0,
+    description: '总记录数',
+  })
+  pageNumber: number;
 
   @ApiProperty({
     default: null,
     description: '列表数据',
   })
   list: T[];
-  constructor(list: T[], total: number) {
+  constructor(list: T[], total: number, pageSize: number, pageNumber: number) {
     this.total = total;
+    this.pageSize = pageSize;
+    this.pageNumber = pageNumber;
     this.list = list;
   }
 
-  static result<U>(total: number, list: U[]) {
-    return new TableDataInfo(list, total);
+  static result<U>(
+    list: U[],
+    total: number,
+    pageSize: number,
+    pageNum: number,
+  ) {
+    return new TableDataInfo(list, total, pageSize, pageNum);
   }
 }
 

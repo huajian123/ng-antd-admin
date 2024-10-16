@@ -76,11 +76,11 @@ export class DeptTreeService {
       pageSize: 0,
       pageNum: 0
     };
-    this.dataService
-      .getDepts(params)
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(deptList => {
-        this.TREE_DATA$.next(fnFlatDataHasParentToTree(deptList.list));
-      });
+    // this.dataService
+    //   .getDepts(params)
+    //   .pipe(takeUntilDestroyed(this.destroyRef))
+    //   .subscribe(deptList => {
+    //     this.TREE_DATA$.next(fnFlatDataHasParentToTree(deptList.list));
+    //   });
   }
 }

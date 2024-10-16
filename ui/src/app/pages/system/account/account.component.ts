@@ -66,7 +66,7 @@ export class AccountComponent implements OnInit {
   searchParam: Partial<SearchParam> = {};
   tableConfig!: AntTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
-    title: '账号管理(只mock了admin10这条账号的数据的增删改查接口操作，所有请求入参，响应，请在控制台查看)',
+    title: '账号管理',
     breadcrumb: ['首页', '用户管理', '账号管理']
   };
   dataList: User[] = [];
@@ -89,10 +89,10 @@ export class AccountComponent implements OnInit {
 
   resetForm(): void {
     this.searchParam = {};
-    this.getDataList();
+    this.getDataList({ pageIndex: 1 });
   }
 
-  getDataList(e?: NzTableQueryParams): void {
+  getDataList(e?: { pageIndex: number }): void {
     this.tableConfig.loading = true;
     const params: SearchCommonVO<NzSafeAny> = {
       pageSize: this.tableConfig.pageSize!,

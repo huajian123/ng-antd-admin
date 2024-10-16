@@ -10,7 +10,7 @@ export default [
     path: '',
     component: DefaultComponent,
     data: { shouldDetach: 'no', preload: true },
-    canActivateChild: [JudgeLoginGuard, JudgeAuthGuard],
+    canActivateChild: [],
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       {

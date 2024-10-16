@@ -83,7 +83,7 @@ export class BaseHttpService {
           return this.handleFilter(item, !!config.needSuccessInfo);
         }),
         map(item => {
-          if (item.code !== 0) {
+          if (![200, 201].includes(item.code)) {
             throw new Error(item.msg);
           }
           return item.data;
@@ -93,7 +93,10 @@ export class BaseHttpService {
   }
 
   handleFilter<T>(item: ActionResult<T>, needSuccessInfo: boolean): boolean {
-    if (item.code !== 0) {
+    console.log(item.code);
+    console.log(![200, 201].includes(item.code));
+
+    if (![200, 201].includes(item.code)) {
       this.message.error(item.msg);
     } else if (needSuccessInfo) {
       this.message.success('操作成功');
