@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   ParseIntPipe,
+  Put,
 } from '@nestjs/common';
 import { RoleService } from './role.service';
 import { CreateRoleDto } from './dto/create-role.dto';
@@ -37,16 +38,15 @@ export class RoleController {
     return ResultData.success(data);
   }
 
-  @Patch(':id')
-  update(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() updateRoleDto: UpdateRoleDto,
-  ) {
-    return this.roleService.update(id, updateRoleDto);
+  @Put('update')
+  async update(@Body() updateRoleDto: UpdateRoleDto) {
+    const data = await this.roleService.update(updateRoleDto);
+    return ResultData.success(data);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.roleService.remove(+id);
+  @Post('del')
+  async remove(@Body() { ids }: { ids: number[] }) {
+    const data = await this.roleService.remove(ids);
+    return ResultData.success(data);
   }
 }

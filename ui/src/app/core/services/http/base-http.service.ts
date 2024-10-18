@@ -93,9 +93,6 @@ export class BaseHttpService {
   }
 
   handleFilter<T>(item: ActionResult<T>, needSuccessInfo: boolean): boolean {
-    console.log(item.code);
-    console.log(![200, 201].includes(item.code));
-
     if (![200, 201].includes(item.code)) {
       this.message.error(item.msg);
     } else if (needSuccessInfo) {

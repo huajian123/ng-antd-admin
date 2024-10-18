@@ -55,11 +55,11 @@ export class RoleService {
   }
 
   public delRoles(ids: number[]): Observable<void> {
-    return this.http.post('/role/del/', { ids }, { needSuccessInfo: true });
+    return this.http.post('/role/del', { ids }, { needSuccessInfo: true });
   }
 
   public editRoles(param: Role): Observable<void> {
-    return this.http.put('/role/', param, { needSuccessInfo: true });
+    return this.http.put('/role/update', param, { needSuccessInfo: true });
   }
 
   public getPermissionById(id: string): Observable<string[]> {

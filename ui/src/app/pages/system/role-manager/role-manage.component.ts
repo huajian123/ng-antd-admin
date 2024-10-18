@@ -197,10 +197,12 @@ export class RoleManageComponent implements OnInit {
             takeUntilDestroyed(this.destroyRef)
           )
           .subscribe(() => {
-            if (this.dataList.length === 1) {
+            // 例如分页第二页只有一条数据，此时删除这条数据，跳转到第一页，并重新查询一下列表
+            if (this.dataList.length === 1 && this.tableConfig.pageIndex !== 1) {
               this.tableConfig.pageIndex--;
+            } else {
+              this.getDataList();
             }
-            this.getDataList();
           });
       }
     });

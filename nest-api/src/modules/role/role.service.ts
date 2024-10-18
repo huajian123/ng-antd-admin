@@ -9,7 +9,6 @@ export class RoleService {
   constructor(private prisma: PrismaService) {}
 
   async create(data: CreateRoleDto) {
-    console.log(data);
     await this.prisma.role.create({ data });
     return null;
   }
@@ -39,11 +38,22 @@ export class RoleService {
     });
   }
 
-  update(id: number, updateRoleDto: UpdateRoleDto) {
-    return `This action updates a #${id} role`;
+  async update(data: UpdateRoleDto) {
+    await this.prisma.role.update({
+      where: {
+        id: data.id,
+      },
+      data,
+    });
+    return null;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} role`;
+  async remove(ids: number[]) {
+    await this.prisma.role.deleteMany({
+      where: {
+        id: { in: ids },
+      },
+    });
+    return null;
   }
 }
