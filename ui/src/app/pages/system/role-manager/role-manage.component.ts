@@ -54,7 +54,7 @@ export class RoleManageComponent implements OnInit {
   searchParam: Partial<SearchParam> = {};
   tableConfig!: AntTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
-    title: '角色管理(数据库每10分钟从备份恢复一次)',
+    title: '角色管理',
     breadcrumb: ['首页', '用户管理', '角色管理']
   };
   dataList: Role[] = [];
@@ -76,10 +76,10 @@ export class RoleManageComponent implements OnInit {
 
   resetForm(): void {
     this.searchParam = {};
-    this.getDataList();
+    this.getDataList({ pageIndex: 1 });
   }
 
-  getDataList(e?: NzTableQueryParams): void {
+  getDataList(e?: { pageIndex: number }): void {
     this.tableConfig.loading = true;
     const params: SearchCommonVO<NzSafeAny> = {
       pageSize: this.tableConfig.pageSize!,

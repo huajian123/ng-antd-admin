@@ -16,16 +16,27 @@ datasource db {
 model User {
   id    Int     @default(autoincrement()) @id
   email String?
-  userName  String
+  userName  String @map("user_name")
   available Boolean
-  roleName String
+  roleName String @map("role_name")
   sex Int
   mobile Int
   telephone String
-  departmentId Int
-  departmentName String
+  departmentId Int @map("department_id")
+  departmentName String @map("department_name")
   lastLoginTime DateTime @default(now()) @map("last_login_time")
   createdTime DateTime @default(now()) @map("created_time")
   updatedTime DateTime @updatedAt @map("updated_time")
+
   @@map("user") // 映射的表名
+}
+
+model Role {
+  id    Int     @default(autoincrement()) @id
+  roleName  String @map("role_name")
+  roleDesc  String? @map("role_desc")
+  createdTime DateTime @default(now()) @map("created_time")
+  updatedTime DateTime @updatedAt @map("updated_time")
+
+  @@map("role") // 映射的表名
 }

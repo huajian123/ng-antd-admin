@@ -64,17 +64,17 @@ export class TableDataInfo<T> {
     example: 0,
     description: '总记录数',
   })
-  pageNumber: number;
+  pageNum: number;
 
   @ApiProperty({
     default: null,
     description: '列表数据',
   })
   list: T[];
-  constructor(list: T[], total: number, pageSize: number, pageNumber: number) {
+  constructor(list: T[], total: number, pageSize: number, pageNum: number) {
     this.total = total;
     this.pageSize = pageSize;
-    this.pageNumber = pageNumber;
+    this.pageNum = pageNum;
     this.list = list;
   }
 
@@ -95,11 +95,11 @@ export class ResultData {
     public data: any,
   ) {}
 
-  static success<T>(data: T, msg = '') {
+  static success<T>(data: T, msg = 'SUCCESS') {
     return new ResultData(HttpStatus.OK, msg, data);
   }
 
-  static fail<T>(code = HttpStatus.BAD_REQUEST, data: T, message = '') {
+  static fail<T>(code = HttpStatus.BAD_REQUEST, data: T, message = 'FAIL') {
     return new ResultData(code, message, data);
   }
 }

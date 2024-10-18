@@ -10,11 +10,11 @@ import {
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 import { ResultData } from '../../common/result/result';
 import { TableSearchFilterDto } from '../../common/tableSearchDto';
 
-@ApiTags('user') // 规整到user的swagger tag中
+@ApiTags('用户管理') // 规整到user的swagger tag中
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}

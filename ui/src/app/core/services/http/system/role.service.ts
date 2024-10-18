@@ -43,15 +43,15 @@ export class RoleService {
   http = inject(BaseHttpService);
 
   public getRoles(param: SearchCommonVO<Role>): Observable<PageInfo<Role>> {
-    return this.http.post('/role/list/', param);
+    return this.http.post('/role/list', param);
   }
 
   public getRolesDetail(id: number): Observable<Role> {
-    return this.http.get(`/role/${id}/`);
+    return this.http.get(`/role/${id}`);
   }
 
   public addRoles(param: Role): Observable<void> {
-    return this.http.post('/role/', param, { needSuccessInfo: true });
+    return this.http.post('/role/create', param, { needSuccessInfo: true });
   }
 
   public delRoles(ids: number[]): Observable<void> {
