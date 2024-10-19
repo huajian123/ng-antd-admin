@@ -1,3 +1,4 @@
+import { SortFile } from '@shared/components/ant-table/ant-table.component';
 import { TreeNodeInterface } from '@shared/components/tree-table/tree-table.component';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
@@ -94,7 +95,6 @@ const fnAddTreeDataGradeAndLeaf = function AddTreeDataGradeAndLeaf(array: NzSafe
 };
 
 // 摊平的tree数据
-
 const fnFlattenTreeDataByDataList = function flattenTreeData(dataList: NzSafeAny[]): TreeNodeInterface[] {
   const mapOfExpandedData: Record<string, TreeNodeInterface[]> = fnTreeDataToMap(dataList);
   return fnGetFlattenTreeDataByMap(mapOfExpandedData);
@@ -111,4 +111,24 @@ const fnGetFlattenTreeDataByMap = function getFlattenTreeData(mapOfExpandedData:
   return targetArray;
 };
 
-export { fnTreeDataToMap, fnAddTreeDataGradeAndLeaf, fnFlatDataHasParentToTree, fnFlattenTreeDataByDataList, fnGetFlattenTreeDataByMap };
+// 给树结构数据进行排序
+const fnSortTreeData = function sortTreeData(data: TreeNodeInterface[], sortObj: SortFile): void {
+  data.forEach(item => {
+    if (item.children && item.children.length > 0) {
+      fnSortTreeData(item.children, sortObj);
+    }
+  });
+  data.sort((a, b) => {
+    const aValue = a[sortObj.fileName];
+    const bValue = b[sortObj.fileName];
+
+    if (sortObj.sortDir === 'asc') {
+      return aValue - bValue; // 升序
+    } else if (sortObj.sortDir === 'desc') {
+      return bValue - aValue; // 降序
+    }
+    return 0; // 不排序的情况
+  });
+};
+
+export { fnTreeDataToMap, fnAddTreeDataGradeAndLeaf, fnFlatDataHasParentToTree, fnFlattenTreeDataByDataList, fnGetFlattenTreeDataByMap, fnSortTreeData };

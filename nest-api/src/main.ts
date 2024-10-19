@@ -12,8 +12,6 @@ async function bootstrap() {
     .setTitle('NgAntdAdmin Api')
     .setDescription('这里是ngAntdAdmin的nestjs api')
     .setVersion('1.0')
-    .addTag('用户管理')
-    .addTag('角色管理')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

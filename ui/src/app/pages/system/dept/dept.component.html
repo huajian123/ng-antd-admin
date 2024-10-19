@@ -41,11 +41,16 @@
   </nz-card>
 
   <app-card-table-wrap [btnTpl]="tableBtns" [tableTitle]="'部门列表'" (reload)="reloadTable()">
-    <app-tree-table [tableConfig]="tableConfig" [tableData]="dataList" (changePageNum)="getDataList($event)" (changePageSize)="changePageSize($event)"></app-tree-table>
-    <ng-template #operationTpl let-fatherId="fatherId" let-id="id">
-      <span *appAuth="ActionCode.DeptEdit" class="operate-text" (click)="edit(id, fatherId)">编辑</span>
-      <span *appAuth="ActionCode.DeptDel" class="operate-text" (click)="del(id)">删除</span>
-      <span *appAuth="ActionCode.DeptAddLowLevel" class="operate-text" (click)="add(id)">添加下级</span>
+    <app-tree-table [tableConfig]="tableConfig" (sortFn)="changeSort($event)" [tableData]="dataList" (changePageNum)="getDataList()" (changePageSize)="changePageSize($event)"></app-tree-table>
+    <ng-template #operationTpl let-fatherId="fatherId" let-id="id" let-level="level">
+      <span class="operate-text" (click)="edit(id, fatherId)">编辑</span>
+      <span class="operate-text" (click)="del(id)">删除</span>
+      @if (level < 3) {
+        <span class="operate-text" (click)="add(id)">添加下级</span>
+      }
+      <!--      <span *appAuth="ActionCode.DeptEdit" class="operate-text" (click)="edit(id, fatherId)">编辑</span>-->
+      <!--      <span *appAuth="ActionCode.DeptDel" class="operate-text" (click)="del(id)">删除</span>-->
+      <!--      <span *appAuth="ActionCode.DeptAddLowLevel" class="operate-text" (click)="add(id)">添加下级</span>-->
     </ng-template>
   </app-card-table-wrap>
 </div>

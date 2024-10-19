@@ -40,3 +40,15 @@ model Role {
 
   @@map("role") // 映射的表名
 }
+
+model Department {
+  id    Int     @default(autoincrement()) @id
+  fatherId    Int   @map("father_id")
+  departmentName  String @map("department_name")
+  orderNum Int @map("order_num")
+  state  Boolean @default(true)
+  createdTime DateTime @default(now()) @map("created_time")
+  updatedTime DateTime @updatedAt @map("updated_time")
+
+  @@map("department") // 映射的表名
+}

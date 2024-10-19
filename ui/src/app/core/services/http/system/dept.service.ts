@@ -22,15 +22,15 @@ export class DeptService {
   http = inject(BaseHttpService);
 
   public getDepts(param: SearchCommonVO<Dept>): Observable<PageInfo<Dept>> {
-    return this.http.post('/department/list/', param);
+    return this.http.post('/department/list', param);
   }
 
   public getDeptsDetail(id: number): Observable<Dept> {
-    return this.http.get(`/department/${id}/`);
+    return this.http.get(`/department/${id}`);
   }
 
   public addDepts(param: Dept): Observable<void> {
-    return this.http.post('/department/', param, { needSuccessInfo: true });
+    return this.http.post('/department/create', param, { needSuccessInfo: true });
   }
 
   public delDepts(ids: number[]): Observable<void> {
@@ -38,6 +38,6 @@ export class DeptService {
   }
 
   public editDepts(param: Dept): Observable<void> {
-    return this.http.put('/department/', param, { needSuccessInfo: true });
+    return this.http.put('/department/update', param, { needSuccessInfo: true });
   }
 }

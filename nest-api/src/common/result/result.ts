@@ -71,7 +71,7 @@ export class TableDataInfo<T> {
     description: '列表数据',
   })
   list: T[];
-  constructor(list: T[], total: number, pageSize: number, pageNum: number) {
+  constructor(list: T[], pageSize = 0, pageNum = 0, total: number) {
     this.total = total;
     this.pageSize = pageSize;
     this.pageNum = pageNum;
@@ -80,11 +80,11 @@ export class TableDataInfo<T> {
 
   static result<U>(
     list: U[],
-    total: number,
-    pageSize: number,
-    pageNum: number,
+    pageSize?: number,
+    pageNum?: number,
+    total?: number,
   ) {
-    return new TableDataInfo(list, total, pageSize, pageNum);
+    return new TableDataInfo(list, pageSize, pageNum, total);
   }
 }
 

@@ -7,13 +7,13 @@ import { finalize } from 'rxjs/operators';
 import { ActionCode } from '@app/config/actionCode';
 import { OptionsInterface, SearchCommonVO } from '@core/services/types';
 import { Dept, DeptService } from '@services/system/dept.service';
-import { AntTableConfig } from '@shared/components/ant-table/ant-table.component';
+import { AntTableComponent, AntTableConfig, SortFile } from '@shared/components/ant-table/ant-table.component';
 import { CardTableWrapComponent } from '@shared/components/card-table-wrap/card-table-wrap.component';
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { TreeNodeInterface, TreeTableComponent } from '@shared/components/tree-table/tree-table.component';
 import { AuthDirective } from '@shared/directives/auth.directive';
 import { MapKeyType, MapPipe, MapSet } from '@shared/pipes/map.pipe';
-import { fnFlatDataHasParentToTree, fnFlattenTreeDataByDataList } from '@utils/treeTableTools';
+import { fnFlatDataHasParentToTree, fnFlattenTreeDataByDataList, fnSortTreeData } from '@utils/treeTableTools';
 import { ModalBtnStatus } from '@widget/base-modal';
 import { DeptManageModalService } from '@widget/biz-widget/system/dept-manage-modal/dept-manage-modal.service';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -55,7 +55,8 @@ interface SearchParam {
     TreeTableComponent,
     AuthDirective,
     NgTemplateOutlet,
-    NzTagModule
+    NzTagModule,
+    AntTableComponent
   ]
 })
 export class DeptComponent implements OnInit {
@@ -66,7 +67,7 @@ export class DeptComponent implements OnInit {
   destroyRef = inject(DestroyRef);
   tableConfig!: AntTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
-    title: '部门管理(只mock了开发部门这一条数据)',
+    title: '部门管理',
     breadcrumb: ['首页', '系统管理', '部门管理']
   };
   dataList: TreeNodeInterface[] = [];
@@ -95,7 +96,7 @@ export class DeptComponent implements OnInit {
     this.tableChangeDectction();
   }
 
-  getDataList(e?: NzTableQueryParams): void {
+  getDataList(sortFile?: SortFile): void {
     this.tableConfig.loading = true;
     const params: SearchCommonVO<NzSafeAny> = {
       pageSize: 0,
@@ -113,6 +114,10 @@ export class DeptComponent implements OnInit {
       .subscribe(deptList => {
         const target = fnFlatDataHasParentToTree(deptList.list);
         this.dataList = fnFlattenTreeDataByDataList(target);
+        // 因为前段要对后端返回的数据进行处理，所以排序这里交给了前段来做
+        if (sortFile) {
+          fnSortTreeData(this.dataList, sortFile);
+        }
         this.tableLoading(false);
       });
   }
@@ -212,6 +217,10 @@ export class DeptComponent implements OnInit {
       });
   }
 
+  changeSort(e: SortFile): void {
+    this.getDataList(e);
+  }
+
   // 修改一页几条
   changePageSize(e: number): void {
     this.tableConfig.pageSize = e;
@@ -234,11 +243,12 @@ export class DeptComponent implements OnInit {
         {
           title: '排序',
           field: 'orderNum',
+          showSort: true,
           width: 100
         },
         {
           title: '创建时间',
-          field: 'createTime',
+          field: 'createdTime',
           pipe: 'date:yyyy-MM-dd HH:mm',
           width: 180
         },
