@@ -72,7 +72,7 @@ export class MenuComponent implements OnInit {
   destroyRef = inject(DestroyRef);
   tableConfig!: AntTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
-    title: '菜单管理(只mock了Dashboard这一个菜单的增删改查),新增完菜单记得给对应角色添加刚刚新增的菜单权限，不然无法展示',
+    title: '菜单管理,新增完菜单记得给对应角色添加刚刚新增的菜单权限，不然无法展示',
     breadcrumb: ['首页', '系统管理', '菜单管理']
   };
   dataList: TreeNodeInterface[] = [];
