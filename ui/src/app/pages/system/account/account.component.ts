@@ -96,7 +96,7 @@ export class AccountComponent implements OnInit {
     this.tableConfig.loading = true;
     const params: SearchCommonVO<NzSafeAny> = {
       pageSize: this.tableConfig.pageSize!,
-      pageNum: e?.pageIndex || this.tableConfig.pageIndex!,
+      pageIndex: e?.pageIndex || this.tableConfig.pageIndex!,
       filters: this.searchParam
     };
     this.dataService
@@ -108,10 +108,10 @@ export class AccountComponent implements OnInit {
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe(data => {
-        const { list, total, pageNum } = data;
+        const { list, total, pageIndex } = data;
         this.dataList = [...list];
         this.tableConfig.total = total!;
-        this.tableConfig.pageIndex = pageNum!;
+        this.tableConfig.pageIndex = pageIndex!;
         this.tableLoading(false);
         this.checkedCashArray = [...this.checkedCashArray];
       });

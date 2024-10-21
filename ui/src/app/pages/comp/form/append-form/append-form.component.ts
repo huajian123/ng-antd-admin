@@ -110,7 +110,7 @@ export class AppendFormComponent implements OnInit {
   taskCheckPeriodState = TaskStateSearchCheckPeriodEnum.All;
   pageObj = {
     pageSize: 3,
-    pageNum: 1
+    pageIndex: 1
   };
   showTaskList: TaskObj[] = [];
   showAllTaskList: TaskObj[] = [
@@ -239,7 +239,7 @@ export class AppendFormComponent implements OnInit {
   }
 
   searchTask(event: number, type: 'checkPeriod' | 'taskState'): void {
-    this.pageObj = { ...this.pageObj, pageNum: 1 };
+    this.pageObj = { ...this.pageObj, pageIndex: 1 };
 
     this.showAllTaskList = this.showAllTaskList.filter(item => {
       return true;
@@ -267,9 +267,9 @@ export class AppendFormComponent implements OnInit {
   }
 
   // 分页获取数据
-  getData(event: number = this.pageObj.pageNum): void {
-    this.pageObj = { ...this.pageObj, pageNum: event };
-    this.showTaskList = [...this.showAllTaskList.slice((this.pageObj.pageNum - 1) * this.pageObj.pageSize, this.pageObj.pageNum * this.pageObj.pageSize)];
+  getData(event: number = this.pageObj.pageIndex): void {
+    this.pageObj = { ...this.pageObj, pageIndex: event };
+    this.showTaskList = [...this.showAllTaskList.slice((this.pageObj.pageIndex - 1) * this.pageObj.pageSize, this.pageObj.pageIndex * this.pageObj.pageSize)];
     this.cdr.markForCheck();
   }
 

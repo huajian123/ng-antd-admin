@@ -106,7 +106,7 @@ export class MenuComponent implements OnInit {
     this.tableConfig.loading = true;
     const params: SearchCommonVO<NzSafeAny> = {
       pageSize: 0,
-      pageNum: 0,
+      pageIndex: 0,
       filters: this.searchParam
     };
     this.dataService
@@ -275,7 +275,13 @@ export class MenuComponent implements OnInit {
         },
         {
           title: '创建时间',
-          field: 'createTime',
+          field: 'createdTime',
+          pipe: 'date:yyyy-MM-dd HH:mm',
+          width: 180
+        },
+        {
+          title: '更新时间',
+          field: 'updatedTime',
           pipe: 'date:yyyy-MM-dd HH:mm',
           width: 180
         },

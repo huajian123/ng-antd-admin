@@ -22,14 +22,14 @@ export interface OptionsInterface {
 
 // 列表搜索
 export interface SearchCommonVO<T> {
-  pageNum: number;
+  pageIndex: number;
   pageSize: number;
   filters?: T;
 }
 
 // 分页
 export interface PageInfo<T> {
-  pageNum: number;
+  pageIndex: number;
   pageSize: number;
   size?: number;
   orderBy?: string;
@@ -47,7 +47,7 @@ export interface PageInfo<T> {
   hasPreviousPage?: boolean;
   hasNextPage?: boolean;
   navigatePages?: number;
-  navigatepageNums?: number[];
+  navigatepageIndexs?: number[];
 }
 
 // 动态组件

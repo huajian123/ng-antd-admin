@@ -83,7 +83,7 @@ export class RoleManageComponent implements OnInit {
     this.tableConfig.loading = true;
     const params: SearchCommonVO<NzSafeAny> = {
       pageSize: this.tableConfig.pageSize!,
-      pageNum: e?.pageIndex || this.tableConfig.pageIndex!,
+      pageIndex: e?.pageIndex || this.tableConfig.pageIndex!,
       filters: this.searchParam
     };
     this.dataService
@@ -95,10 +95,10 @@ export class RoleManageComponent implements OnInit {
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe(data => {
-        const { list, total, pageNum } = data;
+        const { list, total, pageIndex } = data;
         this.dataList = [...list];
         this.tableConfig.total = total!;
-        this.tableConfig.pageIndex = pageNum!;
+        this.tableConfig.pageIndex = pageIndex!;
         this.tableLoading(false);
         this.checkedCashArray = [...this.checkedCashArray];
       });
@@ -149,7 +149,6 @@ export class RoleManageComponent implements OnInit {
   // 推荐使用接口获取详情的方式，因为这样保证了数据的实时性
   // 修改
   edit(id: number, dataItem: Role): void {
-    console.log(dataItem);
     this.dataService
       .getRolesDetail(id)
       .pipe(takeUntilDestroyed(this.destroyRef))
@@ -207,7 +206,6 @@ export class RoleManageComponent implements OnInit {
       }
     });
   }
-  // 修改一页几条
 
   changePageSize(e: number): void {
     this.tableConfig.pageSize = e;

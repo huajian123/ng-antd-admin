@@ -46,7 +46,7 @@ export class TreeTableComponent implements OnChanges {
   @Input() cashArray: NzSafeAny[] = [];
   checkedCashArrayFromComment: NzSafeAny[] = [];
   @Output() readonly sortFn: EventEmitter<SortFile> = new EventEmitter<SortFile>();
-  @Output() readonly changePageNum = new EventEmitter<NzTableQueryParams>();
+  @Output() readonly changePageIndex = new EventEmitter<NzTableQueryParams>();
   @Output() readonly changePageSize = new EventEmitter<number>();
   mapOfExpandedData: Record<string, TreeNodeInterface[]> = {};
   @Input({ required: true }) tableConfig!: AntTableConfig;
@@ -124,7 +124,7 @@ export class TreeTableComponent implements OnChanges {
 
   // 分页页码改变
   onQueryParamsChange(tableQueryParams: NzTableQueryParams): void {
-    this.changePageNum.emit(tableQueryParams);
+    this.changePageIndex.emit(tableQueryParams);
   }
 
   // 修改一页几条的页码

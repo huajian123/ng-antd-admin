@@ -229,16 +229,16 @@ export class TreeListComponent implements OnInit {
     // this.tableConfig.loading = true;
     // const params: SearchCommonVO<NzSafeAny> = {
     //   pageSize: this.tableConfig.pageSize!,
-    //   pageNum: e?.pageIndex || this.tableConfig.pageIndex!,
+    //   pageIndex: e?.pageIndex || this.tableConfig.pageIndex!,
     //   filters: this.searchParam
     // };
     // this.dataService.getFireSysList(params).pipe(finalize(() => {
     //   this.tableLoading(false);
     // })).subscribe((data => {
-    //   const {list, total, pageNum} = data;
+    //   const {list, total, pageIndex} = data;
     //   this.dataList = [...list];
     //   this.tableConfig.total = total!;
-    //   this.tableConfig.pageIndex = pageNum!;
+    //   this.tableConfig.pageIndex = pageIndex!;
     //   this.tableLoading(false);
     //   this.checkedCashArray = [...this.checkedCashArray];
     // }));

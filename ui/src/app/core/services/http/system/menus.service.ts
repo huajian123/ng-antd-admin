@@ -25,22 +25,22 @@ export class MenusService {
   http = inject(BaseHttpService);
 
   public getMenuList(param: SearchCommonVO<NzSafeAny>): Observable<PageInfo<Menu>> {
-    return this.http.post('/sysPermission/list', param);
+    return this.http.post('/menu/list', param);
   }
 
   public addMenus(param: MenuListObj): Observable<void> {
-    return this.http.post('/sysPermission', param, { needSuccessInfo: true });
+    return this.http.post('/menu/create', param, { needSuccessInfo: true });
   }
 
   public editMenus(param: MenuListObj): Observable<void> {
-    return this.http.put('/sysPermission', param, { needSuccessInfo: true });
+    return this.http.put('/menu/update', param, { needSuccessInfo: true });
   }
 
   public delMenus(id: number): Observable<void> {
-    return this.http.post('/sysPermission/del', { ids: [id] }, { needSuccessInfo: true });
+    return this.http.post('/menu/del', { ids: [id] }, { needSuccessInfo: true });
   }
 
   public getMenuDetail(id: number): Observable<MenuListObj> {
-    return this.http.get(`/sysPermission/${id}`);
+    return this.http.get(`/menu/${id}`);
   }
 }

@@ -58,12 +58,12 @@ model Menu{
   fatherId    Int   @map("father_id")
   menuName  String @map("menu_name")
   menuType  String @map("menu_Type")
-  alIcon  String @map("al_icon")
-  icon  String @map("icon")
+  alIcon  String?  @map("al_icon")
+  icon  String? @map("icon")
   path  String
-  code  Int
+  code  String
   orderNum Int @map("order_num")
-  state  Boolean @default(true)
+  status  Boolean @default(true)
   newLinkFlag  Boolean @default(false) @map("new_link_flag")
   visible  Boolean @default(true)
   createdTime DateTime @default(now()) @map("created_time")

@@ -7,7 +7,7 @@ export class TableSearchFilterDto<T> {
   @IsNotEmpty({ message: '页码不能为空' })
   @Transform((v) => +v.value)
   @IsNumber()
-  pageNum: number;
+  pageIndex: number;
   @ApiProperty({ description: '页面条数', example: 10 })
   @IsNotEmpty({ message: '页面条数不能为空' })
   @Transform((v) => +v.value)

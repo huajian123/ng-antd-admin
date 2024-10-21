@@ -19,14 +19,14 @@ export class RoleService {
     });
     const list = await this.prisma.role.findMany({
       where: searchParam.filters,
-      skip: (searchParam.pageNum - 1) * searchParam.pageSize,
+      skip: (searchParam.pageIndex - 1) * searchParam.pageSize,
       take: searchParam.pageSize,
     });
     return TableDataInfo.result(
       list,
-      total,
       searchParam.pageSize,
-      searchParam.pageNum,
+      searchParam.pageIndex,
+      total,
     );
   }
 

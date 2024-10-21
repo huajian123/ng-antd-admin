@@ -57,7 +57,7 @@ export class AccountModalComponent extends BasicConfirmModalComponent implements
 
   getRoleList(): Promise<void> {
     return new Promise<void>(resolve => {
-      this.roleService.getRoles({ pageNum: 0, pageSize: 0 }).subscribe(({ list }) => {
+      this.roleService.getRoles({ pageIndex: 0, pageSize: 0 }).subscribe(({ list }) => {
         this.roleOptions = [];
         list.forEach(({ id, roleName }) => {
           const obj: OptionsInterface = {
@@ -73,7 +73,7 @@ export class AccountModalComponent extends BasicConfirmModalComponent implements
 
   getDeptList(): Promise<void> {
     return new Promise<void>(resolve => {
-      this.deptService.getDepts({ pageNum: 0, pageSize: 0 }).subscribe(({ list }) => {
+      this.deptService.getDepts({ pageIndex: 0, pageSize: 0 }).subscribe(({ list }) => {
         list.forEach(item => {
           // @ts-ignore
           item.title = item.departmentName;

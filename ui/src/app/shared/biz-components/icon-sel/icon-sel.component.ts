@@ -35,7 +35,7 @@ export class IconSelComponent implements OnInit, AfterViewInit {
   // 分页信息
   pageObj = {
     pageSize: 50,
-    pageNum: 1
+    pageIndex: 1
   };
   // 图标搜索出来的所有结果
   iconsStrAllArray: IconItem[] = [];
@@ -74,9 +74,9 @@ export class IconSelComponent implements OnInit, AfterViewInit {
   }
 
   // 分页获取数据
-  getData(event: number = this.pageObj.pageNum): void {
-    this.pageObj = { ...this.pageObj, pageNum: event };
-    this.iconsStrShowArray = [...this.iconsStrAllArray.slice((this.pageObj.pageNum - 1) * this.pageObj.pageSize, this.pageObj.pageNum * this.pageObj.pageSize)];
+  getData(event: number = this.pageObj.pageIndex): void {
+    this.pageObj = { ...this.pageObj, pageIndex: event };
+    this.iconsStrShowArray = [...this.iconsStrAllArray.slice((this.pageObj.pageIndex - 1) * this.pageObj.pageSize, this.pageObj.pageIndex * this.pageObj.pageSize)];
     this.cdr.markForCheck();
   }
 

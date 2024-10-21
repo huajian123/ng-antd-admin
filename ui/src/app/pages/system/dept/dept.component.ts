@@ -100,7 +100,7 @@ export class DeptComponent implements OnInit {
     this.tableConfig.loading = true;
     const params: SearchCommonVO<NzSafeAny> = {
       pageSize: 0,
-      pageNum: 0,
+      pageIndex: 0,
       filters: this.searchParam
     };
     this.dataService

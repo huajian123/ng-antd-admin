@@ -102,7 +102,7 @@ export class AntTableComponent implements OnChanges {
     return this._tableConfig;
   }
 
-  @Output() readonly changePageNum = new EventEmitter<NzTableQueryParams>();
+  @Output() readonly changePageIndex = new EventEmitter<NzTableQueryParams>();
   @Output() readonly changePageSize = new EventEmitter<number>();
   @Output() readonly selectedChange: EventEmitter<NzSafeAny[]> = new EventEmitter<NzSafeAny[]>();
   @Output() readonly sortFn: EventEmitter<SortFile> = new EventEmitter<SortFile>();
@@ -160,7 +160,7 @@ export class AntTableComponent implements OnChanges {
 
   // 分页页码改变
   onQueryParamsChange(tableQueryParams: NzTableQueryParams): void {
-    this.changePageNum.emit(tableQueryParams);
+    this.changePageIndex.emit(tableQueryParams);
   }
 
   // 修改一页几条的页码

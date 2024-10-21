@@ -34,7 +34,7 @@
     [nzPageSizeOptions]="[20, 50]"
     [nzSize]="'small'"
     [nzTotal]="iconsStrAllArray.length"
-    [(nzPageIndex)]="pageObj.pageNum"
+    [(nzPageIndex)]="pageObj.pageIndex"
     (nzPageIndexChange)="getData($event)"
     (nzPageSizeChange)="pageSizeChange($event)"
   ></nz-pagination>

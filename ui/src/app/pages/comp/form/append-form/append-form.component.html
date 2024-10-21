@@ -171,7 +171,7 @@
           [nzPageSize]="pageObj.pageSize"
           [nzPageSizeOptions]="[3, 5, 10, 20]"
           [nzTotal]="showAllTaskList.length"
-          [(nzPageIndex)]="pageObj.pageNum"
+          [(nzPageIndex)]="pageObj.pageIndex"
           (nzPageIndexChange)="getData($event)"
           (nzPageSizeChange)="pageSizeChange($event)"
         ></nz-pagination>

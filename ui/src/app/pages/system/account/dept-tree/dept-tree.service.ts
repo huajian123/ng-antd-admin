@@ -74,7 +74,7 @@ export class DeptTreeService {
   initDate(): void {
     const params: SearchCommonVO<NzSafeAny> = {
       pageSize: 0,
-      pageNum: 0
+      pageIndex: 0
     };
     // this.dataService
     //   .getDepts(params)

@@ -7,7 +7,7 @@ import { Transform } from 'class-transformer';
 
 export class FilterParam<T> {
   @IsNumber()
-  pageNum: number;
+  pageIndex: number;
   @IsNumber()
   pageSize: number;
   filters?: T;
@@ -41,7 +41,7 @@ export class PageDomain {
   @IsNumber()
   @IsOptional()
   @Transform((v) => +v.value)
-  pageNum: number = 1;
+  pageIndex: number = 1;
   @ApiProperty({ description: '每页的数据条目', required: false })
   @IsNumber()
   @IsOptional()
@@ -64,27 +64,27 @@ export class TableDataInfo<T> {
     example: 0,
     description: '总记录数',
   })
-  pageNum: number;
+  pageIndex: number;
 
   @ApiProperty({
     default: null,
     description: '列表数据',
   })
   list: T[];
-  constructor(list: T[], pageSize = 0, pageNum = 0, total: number) {
+  constructor(list: T[], pageSize = 0, pageIndex = 0, total: number) {
     this.total = total;
     this.pageSize = pageSize;
-    this.pageNum = pageNum;
+    this.pageIndex = pageIndex;
     this.list = list;
   }
 
   static result<U>(
     list: U[],
     pageSize?: number,
-    pageNum?: number,
+    pageIndex?: number,
     total?: number,
   ) {
-    return new TableDataInfo(list, pageSize, pageNum, total);
+    return new TableDataInfo(list, pageSize, pageIndex, total);
   }
 }
 
