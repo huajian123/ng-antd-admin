@@ -105,8 +105,8 @@ export class RoleManageComponent implements OnInit {
   }
 
   // 设置权限
-  setRole(id: number): void {
-    this.router.navigate(['/default/system/role-manager/set-role'], { queryParams: { id: id } });
+  setRole(id: number, roleName: string): void {
+    this.router.navigate(['/default/system/role-manager/set-role'], { queryParams: { id, roleName } });
   }
 
   // 触发表格变更检测

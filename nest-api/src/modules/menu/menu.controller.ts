@@ -31,7 +31,6 @@ export class MenuController {
 
   @Get(':id')
   async findOne(@Param('id', ParseIntPipe) id: number) {
-    console.log(id);
     const data = await this.menuService.findOne(id);
     return ResultData.success(data);
   }

@@ -50,9 +50,9 @@ export class SetRoleComponent implements OnInit {
   };
   authCodeArr: string[] = [];
   permissionList: Array<Menu & { isOpen?: boolean; checked?: boolean }> = [];
-  roleName!: string;
   destroyRef = inject(DestroyRef);
   @Input({ required: true }) id!: string; // 从路由中获取的角色id，ng16支持的新特性
+  @Input({ required: true }) roleName!: string; // 从路由中获取的角色名称，ng16支持的新特性
 
   private dataService = inject(RoleService);
   private menusService = inject(MenusService);
@@ -86,13 +86,8 @@ export class SetRoleComponent implements OnInit {
   }
 
   getRoleName(): void {
-    this.dataService
-      .getRolesDetail(+this.id)
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(({ roleName }) => {
-        this.pageHeaderInfo = { ...this.pageHeaderInfo, ...{ desc: `当前角色：${roleName}` } };
-        this.cdr.markForCheck();
-      });
+    this.pageHeaderInfo = { ...this.pageHeaderInfo, ...{ desc: `当前角色：${this.roleName}` } };
+    this.cdr.markForCheck();
   }
 
   back(): void {
