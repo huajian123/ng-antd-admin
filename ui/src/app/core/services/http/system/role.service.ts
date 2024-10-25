@@ -23,7 +23,7 @@ export interface Permission {
 
 // 更新权限参数接口
 export interface PutPermissionParam {
-  permissionIds: string[];
+  permissionIds: number[];
   roleId: number;
 }
 
@@ -67,6 +67,10 @@ export class RoleService {
   }
 
   public updatePermission(param: PutPermissionParam): Observable<NzSafeAny> {
-    return this.http.put('/permission/', param);
+    param = {
+      roleId: 1,
+      permissionIds: [1, 40, 41, 42, 43]
+    };
+    return this.http.post('/permission/assign-role-menu', param);
   }
 }

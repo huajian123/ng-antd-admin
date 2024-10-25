@@ -71,3 +71,19 @@ model Menu{
 
   @@map("menu") // 映射的表名
 }
+
+model SysRoleMenu{
+  id    Int     @default(autoincrement()) @id
+  roleId Int  @map("role_id")
+  menuId Int @map("menu_id")
+  createdTime DateTime @default(now()) @map("created_time")
+  updatedTime DateTime @updatedAt @map("updated_time")
+}
+
+model SysUserRole{
+  id    Int     @default(autoincrement()) @id
+  roleId Int  @map("role_id")
+  userId Int @map("user_id")
+  createdTime DateTime @default(now()) @map("created_time")
+  updatedTime DateTime @updatedAt @map("updated_time")
+}

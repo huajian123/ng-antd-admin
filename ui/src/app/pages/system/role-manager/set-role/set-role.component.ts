@@ -97,10 +97,10 @@ export class SetRoleComponent implements OnInit {
   submit(): void {
     const temp = [...this.permissionList];
     const flatArray = fnFlattenTreeDataByDataList(temp);
-    const seledAuthArray: string[] = [];
+    const seledAuthArray: number[] = [];
     flatArray.forEach(item => {
       if (item['checked']) {
-        seledAuthArray.push(`${item.id}`);
+        seledAuthArray.push(+item.id);
       }
     });
     const param: PutPermissionParam = {
