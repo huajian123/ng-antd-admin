@@ -1,8 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import {
-  CreatePermissionDto,
-  PermissionAssignRoleMenuReqDto,
-} from './dto/create-permission.dto';
+import { PermissionAssignRoleMenuReqDto } from './dto/create-permission.dto';
 import { UpdatePermissionDto } from './dto/update-permission.dto';
 import { PrismaService } from '../../common/database/prisma.service';
 
@@ -10,13 +7,36 @@ import { PrismaService } from '../../common/database/prisma.service';
 export class PermissionService {
   constructor(private prisma: PrismaService) {}
 
-  assignRoleMenu(data: PermissionAssignRoleMenuReqDto) {
-    // this.prisma.sysRoleMenu.upsert();
-    return;
+  async assignRoleMenu(data: PermissionAssignRoleMenuReqDto) {
+    const { roleId, permissionIds } = data;
+    // 进行增删操作的事务
+    await this.prisma.$transaction(async (db) => {
+      await db.sysRoleMenu.deleteMany({
+        where: {
+          roleId,
+        },
+      });
+
+      await db.sysRoleMenu.createMany({
+        data: permissionIds.map((menuId) => ({
+          roleId,
+          menuId,
+        })),
+      });
+      return null;
+    });
   }
 
-  findAll() {
-    return `This action returns all permission`;
+  async getMenusPermissionByRoleId(roleId: number) {
+    const data = await this.prisma.sysRoleMenu.findMany({
+      where: {
+        roleId,
+      },
+      select: {
+        menuId: true,
+      },
+    });
+    return data.map((item) => item.menuId);
   }
 
   findOne(id: number) {

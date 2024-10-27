@@ -1,18 +1,17 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Patch,
-  Param,
+  Controller,
   Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
 } from '@nestjs/common';
 import { PermissionService } from './permission.service';
-import {
-  CreatePermissionDto,
-  PermissionAssignRoleMenuReqDto,
-} from './dto/create-permission.dto';
+import { PermissionAssignRoleMenuReqDto } from './dto/create-permission.dto';
 import { UpdatePermissionDto } from './dto/update-permission.dto';
+import { ResultData } from '../../common/result/result';
 
 @Controller('permission')
 export class PermissionController {
@@ -21,13 +20,17 @@ export class PermissionController {
   // 赋予角色菜单
   @Post('assign-role-menu')
   assignRoleMenu(@Body() data: PermissionAssignRoleMenuReqDto) {
-    return this.permissionService.assignRoleMenu(data);
+    return ResultData.success(this.permissionService.assignRoleMenu(data));
   }
 
   // 获得角色所拥有的菜单编号
-  @Get('list-role-resources')
-  listRoleMenus() {
-    return this.permissionService.findAll();
+  @Get('list-role-resources/:roleId')
+  async getMenusPermissionByRoleId(
+    @Param('roleId', ParseIntPipe) roleId: number,
+  ) {
+    const data =
+      await this.permissionService.getMenusPermissionByRoleId(roleId);
+    return ResultData.success(data);
   }
 
   @Get(':id')

@@ -80,7 +80,7 @@ export class AccountModalComponent extends BasicConfirmModalComponent implements
           // @ts-ignore
           item.key = item.id;
         });
-
+        console.log(list);
         this.deptNodes = fnAddTreeDataGradeAndLeaf(fnFlatDataHasParentToTree(list));
         resolve();
       });
@@ -97,8 +97,7 @@ export class AccountModalComponent extends BasicConfirmModalComponent implements
       mobile: [null, [this.validatorsService.mobileValidator()]],
       email: [null, [this.validatorsService.emailValidator()]],
       roleId: [null, [Validators.required]],
-      departmentId: [null, [Validators.required]],
-      departmentName: [null]
+      departmentId: [null, [Validators.required]]
     });
   }
 

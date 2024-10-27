@@ -48,7 +48,7 @@ export class SetRoleComponent implements OnInit {
     desc: '当前角色：',
     breadcrumb: ['首页', '用户管理', '角色管理', '设置权限']
   };
-  authCodeArr: string[] = [];
+  authCodeArr: number[] = [];
   permissionList: Array<Menu & { isOpen?: boolean; checked?: boolean }> = [];
   destroyRef = inject(DestroyRef);
   @Input({ required: true }) id!: string; // 从路由中获取的角色id，ng16支持的新特性
@@ -78,7 +78,7 @@ export class SetRoleComponent implements OnInit {
         const menuArray: Array<Menu & { isOpen?: boolean; checked?: boolean }> = response.list;
         menuArray.forEach(item => {
           item.isOpen = false;
-          item.checked = this.authCodeArr.includes(item.code!);
+          item.checked = this.authCodeArr.includes(+item.id!);
         });
         this.permissionList = fnAddTreeDataGradeAndLeaf(fnFlatDataHasParentToTree(menuArray));
         this.cdr.markForCheck();

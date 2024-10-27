@@ -62,15 +62,11 @@ export class RoleService {
     return this.http.put('/role/update', param, { needSuccessInfo: true });
   }
 
-  public getPermissionById(id: string): Observable<string[]> {
-    return this.http.get(`/permission/${id}/`);
+  public getPermissionById(id: string): Observable<number[]> {
+    return this.http.get(`/permission/list-role-resources/${id}`);
   }
 
   public updatePermission(param: PutPermissionParam): Observable<NzSafeAny> {
-    param = {
-      roleId: 1,
-      permissionIds: [1, 40, 41, 42, 43]
-    };
     return this.http.post('/permission/assign-role-menu', param);
   }
 }

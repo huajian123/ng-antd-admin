@@ -336,7 +336,7 @@ export class AccountComponent implements OnInit {
         {
           title: '创建时间',
           width: 100,
-          field: 'createTime',
+          field: 'createdTime',
           pipe: 'date:yyyy-MM-dd HH:mm'
         },
         {

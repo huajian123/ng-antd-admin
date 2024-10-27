@@ -10,7 +10,7 @@ import {
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ResultData } from '../../common/result/result';
 import { TableSearchFilterDto } from '../../common/tableSearchDto';
 
@@ -19,11 +19,12 @@ import { TableSearchFilterDto } from '../../common/tableSearchDto';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  // @ApiOperation({ summary: '创建用户' })
-  // @Post()
-  // create(@Body() createUserDto: CreateUserDto) {
-  //   return ResultData.success(this.userService.create(createUserDto));
-  // }
+  @ApiOperation({ summary: '创建用户' })
+  @Post()
+  async create(@Body() createUserDto: CreateUserDto) {
+    const data = await this.userService.create(createUserDto);
+    return ResultData.success(data);
+  }
 
   @Post('list')
   async findAll(@Body() searchParam: TableSearchFilterDto<CreateUserDto>) {

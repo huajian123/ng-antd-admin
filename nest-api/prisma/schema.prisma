@@ -17,13 +17,13 @@ model User {
   id    Int     @default(autoincrement()) @id
   email String?
   userName  String @map("user_name")
+  password  String
   available Boolean
-  roleName String @map("role_name")
   sex Int
-  mobile Int
+  mobile String
   telephone String
   departmentId Int @map("department_id")
-  departmentName String @map("department_name")
+  departmentName  String? @map("department_name")
   lastLoginTime DateTime @default(now()) @map("last_login_time")
   createdTime DateTime @default(now()) @map("created_time")
   updatedTime DateTime @updatedAt @map("updated_time")
@@ -78,6 +78,8 @@ model SysRoleMenu{
   menuId Int @map("menu_id")
   createdTime DateTime @default(now()) @map("created_time")
   updatedTime DateTime @updatedAt @map("updated_time")
+
+  @@map("sys_role_menu") // 映射的表名
 }
 
 model SysUserRole{
@@ -86,4 +88,7 @@ model SysUserRole{
   userId Int @map("user_id")
   createdTime DateTime @default(now()) @map("created_time")
   updatedTime DateTime @updatedAt @map("updated_time")
+
+  @@map("sys_user_role") // 映射的表名
+
 }
