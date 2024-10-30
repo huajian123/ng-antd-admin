@@ -4,6 +4,9 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
+// 分文件管理
+// https://www.prisma.io/blog/organize-your-prisma-schema-with-multi-file-support?mode=light
+
 generator client {
   provider = "prisma-client-js"
 }
