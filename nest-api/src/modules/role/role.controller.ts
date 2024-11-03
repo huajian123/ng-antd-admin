@@ -1,18 +1,20 @@
 import {
+  Body,
   Controller,
   Get,
-  Post,
-  Body,
   Param,
   ParseIntPipe,
+  Post,
   Put,
 } from '@nestjs/common';
 import { RoleService } from './role.service';
-import { CreateRoleDto } from './dto/create-role.dto';
-import { UpdateRoleDto } from './dto/update-role.dto';
+
 import { ApiTags } from '@nestjs/swagger';
 import { TableSearchFilterDto } from '../../common/tableSearchDto';
+import { CreateRoleDto } from './dto/create-role.dto';
 import { ResultData } from '../../common/result/result';
+import { UpdateRoleDto } from './dto/update-role.dto';
+
 @ApiTags('角色管理') // 规整到user的swagger tag中
 @Controller('role')
 export class RoleController {
@@ -29,7 +31,7 @@ export class RoleController {
     const data = await this.roleService.findAll(searchParam);
     return ResultData.success(data);
   }
-
+  //
   @Get(':id')
   async findOne(@Param('id', ParseIntPipe) id: number) {
     const data = await this.roleService.findOne(id);

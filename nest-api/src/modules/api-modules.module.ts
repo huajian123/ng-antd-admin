@@ -6,6 +6,12 @@ import { MenuModule } from './menu/menu.module';
 import { PermissionModule } from './permission/permission.module';
 
 @Module({
-  imports: [UserModule, RoleModule, DepartmentModule, MenuModule, PermissionModule],
+  imports: [
+    UserModule,
+    RoleModule,
+    DepartmentModule,
+    MenuModule,
+    PermissionModule,
+  ],
 })
 export class ApiModulesModule {}

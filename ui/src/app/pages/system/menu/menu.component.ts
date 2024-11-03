@@ -7,14 +7,14 @@ import { finalize } from 'rxjs/operators';
 import { ActionCode } from '@app/config/actionCode';
 import { OptionsInterface, SearchCommonVO } from '@core/services/types';
 import { MenuListObj, MenusService } from '@services/system/menus.service';
-import { AntTableConfig } from '@shared/components/ant-table/ant-table.component';
+import { AntTableConfig, SortFile } from '@shared/components/ant-table/ant-table.component';
 import { CardTableWrapComponent } from '@shared/components/card-table-wrap/card-table-wrap.component';
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { TreeNodeInterface, TreeTableComponent } from '@shared/components/tree-table/tree-table.component';
 import { WaterMarkComponent } from '@shared/components/water-mark/water-mark.component';
 import { AuthDirective } from '@shared/directives/auth.directive';
 import { MapKeyType, MapPipe, MapSet } from '@shared/pipes/map.pipe';
-import { fnFlatDataHasParentToTree, fnFlattenTreeDataByDataList } from '@utils/treeTableTools';
+import { fnFlatDataHasParentToTree, fnFlattenTreeDataByDataList, fnSortTreeData } from '@utils/treeTableTools';
 import { ModalBtnStatus } from '@widget/base-modal';
 import { MenuModalService } from '@widget/biz-widget/system/menu-modal/menu-modal.service';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -101,8 +101,7 @@ export class MenuComponent implements OnInit {
     this.tableChangeDectction();
   }
 
-  getDataList(e?: NzTableQueryParams): void {
-    this.tableConfig.loading = true;
+  getDataList(sortFile?: SortFile): void {
     this.tableConfig.loading = true;
     const params: SearchCommonVO<NzSafeAny> = {
       pageSize: 0,
@@ -120,6 +119,11 @@ export class MenuComponent implements OnInit {
       .subscribe(menuList => {
         const target = fnFlatDataHasParentToTree(menuList.list, 'fatherId');
         this.dataList = fnFlattenTreeDataByDataList(target);
+        console.log(sortFile);
+        // 因为前段要对后端返回的数据进行处理，所以排序这里交给了前段来做
+        if (sortFile) {
+          fnSortTreeData(this.dataList, sortFile);
+        }
         this.tableLoading(false);
       });
   }
@@ -275,13 +279,13 @@ export class MenuComponent implements OnInit {
         },
         {
           title: '创建时间',
-          field: 'createdTime',
+          field: 'createdAt',
           pipe: 'date:yyyy-MM-dd HH:mm',
           width: 180
         },
         {
           title: '更新时间',
-          field: 'updatedTime',
+          field: 'updatedAt',
           pipe: 'date:yyyy-MM-dd HH:mm',
           width: 180
         },
