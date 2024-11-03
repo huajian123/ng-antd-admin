@@ -29,12 +29,12 @@ export class RoleService {
 
   async findAll(searchParam: FilterParam<Partial<CreateRoleDto>>) {
     const filters: SQL[] = [];
-    if (searchParam.filters.roleName) {
+    if (searchParam.filters?.roleName) {
       filters.push(
         ilike(roleTable.roleName, `%${searchParam.filters.roleName}%`),
       );
     }
-    if (searchParam.filters.roleDesc) {
+    if (searchParam.filters?.roleDesc) {
       filters.push(
         ilike(roleTable.roleDesc, `%${searchParam.filters.roleDesc}%`),
       );

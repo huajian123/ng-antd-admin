@@ -31,7 +31,7 @@ export class RoleController {
     const data = await this.roleService.findAll(searchParam);
     return ResultData.success(data);
   }
-  //
+
   @Get(':id')
   async findOne(@Param('id', ParseIntPipe) id: number) {
     const data = await this.roleService.findOne(id);

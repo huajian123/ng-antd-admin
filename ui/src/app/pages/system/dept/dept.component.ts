@@ -182,10 +182,12 @@ export class DeptComponent implements OnInit {
             takeUntilDestroyed(this.destroyRef)
           )
           .subscribe(() => {
-            if (this.dataList.length === 1) {
+            // 例如分页第二页只有一条数据，此时删除这条数据，跳转到第一页，并重新查询一下列表,pageIndex改变会由changePageIndex自动触发表格查询getDataList（）
+            if (this.dataList.length === 1 && this.tableConfig.pageIndex !== 1) {
               this.tableConfig.pageIndex--;
+            } else {
+              this.getDataList();
             }
-            this.getDataList();
           });
       }
     });
@@ -248,7 +250,7 @@ export class DeptComponent implements OnInit {
         },
         {
           title: '创建时间',
-          field: 'createdTime',
+          field: 'createdAt',
           pipe: 'date:yyyy-MM-dd HH:mm',
           width: 180
         },

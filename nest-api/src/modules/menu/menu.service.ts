@@ -32,7 +32,7 @@ export class MenuService {
     order: 'asc' | 'desc' = 'asc',
   ) {
     const filters: SQL[] = [];
-    if (searchParam.filters.menuName) {
+    if (searchParam.filters?.menuName) {
       filters.push(
         ilike(menuTable.menuName, `%${searchParam.filters.menuName}%`),
       );

@@ -1,8 +1,11 @@
-import { Controller } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { UserService } from './user.service';
 // import { CreateUserDto } from './dto/create-user.dto';
 // import { UpdateUserDto } from './dto/update-user.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { CreateUserDto } from './dto/create-user.dto';
+import { ResultData } from '../../common/result/result';
+import { TableSearchFilterDto } from '../../common/tableSearchDto';
 // import { ResultData } from '../../common/result/result';
 // import { TableSearchFilterDto } from '../../common/tableSearchDto';
 
@@ -11,18 +14,18 @@ import { ApiTags } from '@nestjs/swagger';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  // @ApiOperation({ summary: '创建用户' })
-  // @Post()
-  // async create(@Body() createUserDto: CreateUserDto) {
-  //   const data = await this.userService.create(createUserDto);
-  //   return ResultData.success(data);
-  // }
-  //
-  // @Post('list')
-  // async findAll(@Body() searchParam: TableSearchFilterDto<CreateUserDto>) {
-  //   const data = await this.userService.findAll(searchParam);
-  //   return ResultData.success(data);
-  // }
+  @ApiOperation({ summary: '创建用户' })
+  @Post()
+  async create(@Body() createUserDto: CreateUserDto) {
+    const data = await this.userService.create(createUserDto);
+    return ResultData.success(data);
+  }
+
+  @Post('list')
+  async findAll(@Body() searchParam: TableSearchFilterDto<CreateUserDto>) {
+    const data = await this.userService.findAll(searchParam);
+    return ResultData.success(data);
+  }
   //
   // @Get(':id')
   // findOne(@Param('id') id: string) {
