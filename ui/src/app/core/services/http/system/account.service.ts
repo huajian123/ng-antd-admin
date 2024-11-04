@@ -43,11 +43,11 @@ export class AccountService {
   }
 
   public getAccountDetail(id: number): Observable<User> {
-    return this.http.get(`/user/${id}/`);
+    return this.http.get(`/user/${id}`);
   }
 
   public addAccount(param: User): Observable<void> {
-    return this.http.post('/user/', param, { needSuccessInfo: true });
+    return this.http.post('/user/create', param, { needSuccessInfo: true });
   }
 
   public delAccount(ids: number[]): Observable<void> {
@@ -55,7 +55,7 @@ export class AccountService {
   }
 
   public editAccount(param: User): Observable<void> {
-    return this.http.put('/user/', param, { needSuccessInfo: true });
+    return this.http.put('/user/update', param, { needSuccessInfo: true });
   }
 
   public editAccountPsd(param: UserPsd): Observable<void> {

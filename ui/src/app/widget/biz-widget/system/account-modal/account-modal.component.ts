@@ -80,7 +80,6 @@ export class AccountModalComponent extends BasicConfirmModalComponent implements
           // @ts-ignore
           item.key = item.id;
         });
-        console.log(list);
         this.deptNodes = fnAddTreeDataGradeAndLeaf(fnFlatDataHasParentToTree(list));
         resolve();
       });

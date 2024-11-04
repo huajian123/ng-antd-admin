@@ -57,6 +57,7 @@ export class LoginInOutService {
           takeUntilDestroyed(this.destroyRef)
         )
         .subscribe(menus => {
+          console.log(menus);
           menus = menus.filter(item => {
             item.selected = false;
             item.open = false;

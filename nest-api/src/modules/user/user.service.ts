@@ -3,12 +3,15 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { DrizzleAsyncProvider } from '../../drizzle/drizzle.provider';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 import * as schema from '../../drizzle/schema';
-import { sysUserRoleTable, userTable } from '../../drizzle/schema';
+import {
+  departmentTable,
+  sysUserRoleTable,
+  userTable,
+} from '../../drizzle/schema';
 import { FilterParam, TableDataInfo } from '../../common/result/result';
-import { and, asc, SQL } from 'drizzle-orm';
-// import { CreateUserDto } from './dto/create-user.dto';
-// import { UpdateUserDto } from './dto/update-user.dto';
-// import { FilterParam, TableDataInfo } from '../../common/result/result';
+import { and, asc, eq, getTableColumns, inArray, SQL } from 'drizzle-orm';
+import { extractField } from 'src/untils';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UserService {
@@ -37,7 +40,7 @@ export class UserService {
     const filters: SQL[] = [];
     const { total, list } = await this.conn.transaction(async (db) => {
       // 计算符合条件的记录总数
-      const total = await this.conn.$count(
+      const total = await db.$count(
         userTable,
         filters.length > 0 ? and(...filters) : undefined,
       );
@@ -49,34 +52,26 @@ export class UserService {
           ? (searchParam.pageIndex - 1) * searchParam.pageSize
           : undefined;
 
-      const list = await this.conn
-        .select()
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { createdAt, updatedAt, deletedAt, ...userColumns } =
+        getTableColumns(userTable);
+      const list = await db
+        .select({
+          ...userColumns,
+          departmentName: departmentTable.departmentName,
+        })
         .from(userTable)
+        .leftJoin(
+          departmentTable,
+          eq(userTable.departmentId, departmentTable.id),
+        )
         .where(filters.length > 0 ? and(...filters) : undefined)
         .orderBy(asc(userTable.id))
         .limit(pageSize)
         .offset(pageIndex);
 
-      // 提取所有相关的 departmentId
-      // const deptIds = list.map((user) => user.departmentId);
-      // const deptInfos = await db.department.findMany({
-      //   where: {
-      //     id: { in: deptIds },
-      //   },
-      // });
-      // return { total, list, deptInfos };
       return { total, list };
     });
-
-    // const deptMap = Object.fromEntries(
-    //   deptInfos.map((dept) => [dept.id, dept.departmentName]),
-    // );
-    //
-    // // 为每个用户设置对应的 departmentName
-    // list.forEach((item) => {
-    //   item.departmentName = deptMap[item.departmentId] || null; // 设置部门名称
-    // });
-
     return TableDataInfo.result(
       list,
       searchParam.pageSize,
@@ -84,16 +79,52 @@ export class UserService {
       total,
     );
   }
-  //
-  // findOne(id: number) {
-  //   return `This action returns a #${id} user`;
-  // }
-  //
-  // update(id: number, updateUserDto: UpdateUserDto) {
-  //   return `This action updates a #${id} user`;
-  // }
-  //
-  // remove(id: number) {
-  //   return `This action removes a #${id} user`;
-  // }
+
+  async findOne(id: number) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { createdAt, updatedAt, deletedAt, ...res } =
+      getTableColumns(userTable);
+    const { result, roleIdArray } = await this.conn.transaction(async (db) => {
+      const data = await db
+        .select({ ...res })
+        .from(userTable)
+        .where(eq(userTable.id, id));
+      const roleIds = await db
+        .select({ roleId: sysUserRoleTable.roleId })
+        .from(sysUserRoleTable)
+        .where(eq(sysUserRoleTable.userId, id));
+      const roleIdArray = extractField(roleIds, 'roleId');
+      return { result: data[0], roleIdArray };
+    });
+
+    return { ...result, roleId: roleIdArray };
+  }
+
+  async update(data: UpdateUserDto) {
+    const { id, ...obj } = data;
+    await this.conn.transaction(async (db) => {
+      await db.update(userTable).set(obj).where(eq(userTable.id, id));
+      await db.delete(sysUserRoleTable).where(eq(sysUserRoleTable.userId, id));
+      await db.insert(sysUserRoleTable).values(
+        obj.roleId.map((rId) => ({
+          userId: id,
+          roleId: rId,
+        })),
+      );
+    });
+
+    return null;
+  }
+
+  async remove(ids: number[]) {
+    if (ids.length === 0) return null; // 如果没有要删除的 ID，直接返回
+    await this.conn.transaction(async (db) => {
+      await db.delete(userTable).where(inArray(userTable.id, ids));
+      await db
+        .delete(sysUserRoleTable)
+        .where(inArray(sysUserRoleTable.userId, ids));
+    });
+
+    return null;
+  }
 }
