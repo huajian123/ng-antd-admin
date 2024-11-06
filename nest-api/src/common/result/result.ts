@@ -7,9 +7,9 @@ import { Transform } from 'class-transformer';
 
 export class FilterParam<T> {
   @IsNumber()
-  pageIndex: number;
+  pageIndex?: number;
   @IsNumber()
-  pageSize: number;
+  pageSize?: number;
   filters?: T;
 }
 

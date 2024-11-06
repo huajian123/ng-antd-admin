@@ -9,7 +9,15 @@ import {
   userTable,
 } from '../../drizzle/schema';
 import { FilterParam, TableDataInfo } from '../../common/result/result';
-import { and, asc, eq, getTableColumns, inArray, SQL } from 'drizzle-orm';
+import {
+  and,
+  asc,
+  eq,
+  getTableColumns,
+  ilike,
+  inArray,
+  SQL,
+} from 'drizzle-orm';
 import { extractField } from 'src/untils';
 import { UpdateUserDto } from './dto/update-user.dto';
 
@@ -38,6 +46,12 @@ export class UserService {
 
   async findAll(searchParam: FilterParam<Partial<CreateUserDto>>) {
     const filters: SQL[] = [];
+    if (searchParam.filters?.userName) {
+      filters.push(
+        ilike(userTable.userName, `${searchParam.filters.userName}`),
+      );
+    }
+
     const { total, list } = await this.conn.transaction(async (db) => {
       // 计算符合条件的记录总数
       const total = await db.$count(

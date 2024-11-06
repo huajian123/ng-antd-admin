@@ -7,7 +7,7 @@ import { BaseHttpService } from '@services/base-http.service';
 // import { MenusService } from '@services/system/menus.service';
 
 export interface UserLogin {
-  name: string;
+  userName: string;
   password: string;
 }
 
@@ -19,7 +19,7 @@ export class LoginService {
   // private menus = inject(MENU_TOKEN);
 
   public login(params: UserLogin): Observable<string> {
-    return this.http.post('/login', params, { needSuccessInfo: false });
+    return this.http.post('/auth/signin', params, { needSuccessInfo: false });
   }
 
   public getMenuByUserId(userId: number): Observable<Menu[]> {
