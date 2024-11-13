@@ -46,6 +46,10 @@ export class AccountService {
     return this.http.get(`/user/${id}`);
   }
 
+  public getAccountAuthCode(id: number): Observable<string[]> {
+    return this.http.get(`/user/auto-code/${id}`);
+  }
+
   public addAccount(param: User): Observable<void> {
     return this.http.post('/user/create', param, { needSuccessInfo: true });
   }

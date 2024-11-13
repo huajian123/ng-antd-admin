@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 
 import { LoginInOutService } from '@core/services/common/login-in-out.service';
 import { MenuStoreService } from '@store/common-store/menu-store.service';
-import { UserInfoService } from '@store/common-store/userInfo.service';
+import { UserInfoStoreService } from '@store/common-store/userInfo-store.service';
 import { fnGetUUID } from '@utils/tools';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
@@ -24,7 +24,7 @@ export class JudgeAuthGuardService {
   destroyRef = inject(DestroyRef);
   loginOutService = inject(LoginInOutService);
   router = inject(Router);
-  userInfoService = inject(UserInfoService);
+  userInfoService = inject(UserInfoStoreService);
   menuStoreService = inject(MenuStoreService);
   message = inject(NzMessageService);
 
@@ -62,10 +62,9 @@ export class JudgeAuthGuardService {
   }
 
   canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    this.userInfoService
-      .getUserInfo()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(res => (this.authCodeArray = res.authCode));
+    this.userInfoService.getUserInfo().pipe(takeUntilDestroyed(this.destroyRef));
+    // todo huajian
+    // .subscribe(res => (this.authCodeArray = res.authCode));
     while (route.firstChild) {
       route = route.firstChild;
     }

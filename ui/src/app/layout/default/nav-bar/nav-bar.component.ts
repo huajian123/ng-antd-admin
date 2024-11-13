@@ -12,7 +12,7 @@ import { AuthDirective } from '@shared/directives/auth.directive';
 import { MenuStoreService } from '@store/common-store/menu-store.service';
 import { SplitNavStoreService } from '@store/common-store/split-nav-store.service';
 import { ThemeService } from '@store/common-store/theme.service';
-import { UserInfoService } from '@store/common-store/userInfo.service';
+import { UserInfoStoreService } from '@store/common-store/userInfo-store.service';
 import { fnStopMouseEvent } from '@utils/tools';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzNoAnimationModule } from 'ng-zorro-antd/core/no-animation';
@@ -34,7 +34,7 @@ export class NavBarComponent implements OnInit {
   isMixinLeft = false;
 
   private router = inject(Router);
-  private userInfoService = inject(UserInfoService);
+  private userInfoService = inject(UserInfoStoreService);
   private menuServices = inject(MenuStoreService);
   private splitNavStoreService = inject(SplitNavStoreService);
   private activatedRoute = inject(ActivatedRoute);
@@ -287,10 +287,9 @@ export class NavBarComponent implements OnInit {
   }
 
   subAuth(): void {
-    this.userInfoService
-      .getUserInfo()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(res => (this.authCodeArray = res.authCode));
+    // todo huajian
+    this.userInfoService.getUserInfo().pipe(takeUntilDestroyed(this.destroyRef));
+    // .subscribe(res => (this.authCodeArray = res.authCode));
   }
 
   // 监听混合模式下左侧菜单数据源

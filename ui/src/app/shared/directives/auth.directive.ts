@@ -1,6 +1,6 @@
 import { Directive, inject, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 
-import { UserInfoService } from '@store/common-store/userInfo.service';
+import { UserInfoStoreService } from '@store/common-store/userInfo-store.service';
 
 @Directive({
   selector: '[appAuth]',
@@ -9,7 +9,7 @@ import { UserInfoService } from '@store/common-store/userInfo.service';
 export class AuthDirective {
   codeArray!: string[];
 
-  private userInfoService = inject(UserInfoService);
+  private userInfoService = inject(UserInfoStoreService);
   private templateRef = inject(TemplateRef);
   private viewContainerRef = inject(ViewContainerRef);
 
@@ -24,7 +24,8 @@ export class AuthDirective {
 
   constructor() {
     this.userInfoService.getUserInfo().subscribe(userInfo => {
-      this.codeArray = userInfo.authCode;
+      // todo huajian
+      // this.codeArray = userInfo.authCode;
     });
   }
 

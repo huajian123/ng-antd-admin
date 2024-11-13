@@ -11,11 +11,10 @@ export class AuthService {
 
   // 登录
   async signIn(userName: string, password: string) {
-    console.log(password);
-
     const res = await this.userService.findOneByUserName(userName);
     console.log(res);
     if (res?.password !== password) {
+      console.log('密码错误');
       throw new UnauthorizedException();
     }
     // 生成token

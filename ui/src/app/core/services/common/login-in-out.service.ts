@@ -12,7 +12,7 @@ import { WindowService } from '@core/services/common/window.service';
 import { Menu } from '@core/services/types';
 import { LoginService } from '@services/login/login.service';
 import { MenuStoreService } from '@store/common-store/menu-store.service';
-import { UserInfo, UserInfoService } from '@store/common-store/userInfo.service';
+import { UserInfo, UserInfoStoreService } from '@store/common-store/userInfo-store.service';
 import { fnFlatDataHasParentToTree } from '@utils/treeTableTools';
 
 /*
@@ -27,7 +27,7 @@ export class LoginInOutService {
   private tabService = inject(TabService);
   private loginService = inject(LoginService);
   private router = inject(Router);
-  private userInfoService = inject(UserInfoService);
+  private userInfoService = inject(UserInfoStoreService);
   private menuService = inject(MenuStoreService);
   private windowServe = inject(WindowService);
 
@@ -43,10 +43,11 @@ export class LoginInOutService {
       this.windowServe.setSessionStorage(TokenKey, TokenPre + token);
       // 解析token ，然后获取用户信息
       const userInfo: UserInfo = this.userInfoService.parsToken(TokenPre + token);
+      this.userInfoService.getUserAuthCodeByUserId(userInfo.userId);
       console.log(userInfo);
       // todo  这里是手动添加静态页面标签页操作中打开详情的按钮的权限，因为他们涉及到路由跳转，会走路由守卫，但是权限又没有通过后端管理，所以下面两行手动添加权限，实际操作中可以删除下面2行，如果你也有类似的需求，请全局搜索ActionCode.TabsDetail，这个需要在路由中配置一下
-      userInfo.authCode.push(ActionCode.TabsDetail);
-      userInfo.authCode.push(ActionCode.SearchTableDetail);
+      // userInfo.authCode.push(ActionCode.TabsDetail);
+      // userInfo.authCode.push(ActionCode.SearchTableDetail);
       // 将用户信息缓存到全局service中
       this.userInfoService.setUserInfo(userInfo);
       // 通过用户id来获取这个用户所拥有的menu

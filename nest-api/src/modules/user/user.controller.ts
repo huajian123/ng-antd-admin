@@ -47,4 +47,10 @@ export class UserController {
     const data = await this.userService.remove(ids);
     return ResultData.success(data);
   }
+
+  @Get('auto-code/:id')
+  async findOneAuthCode(@Param('id', ParseIntPipe) id: number) {
+    const data = await this.userService.findOneAuthCode(id);
+    return ResultData.success(data);
+  }
 }

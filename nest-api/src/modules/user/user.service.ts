@@ -4,10 +4,10 @@ import { DrizzleAsyncProvider } from '../../drizzle/drizzle.provider';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 import * as schema from '../../drizzle/schema';
 import {
-  departmentTable,
+  departmentTable, sysRolePermTable,
   sysUserRoleTable,
-  userTable,
-} from '../../drizzle/schema';
+  userTable
+} from "../../drizzle/schema";
 import { FilterParam, TableDataInfo } from '../../common/result/result';
 import {
   and,
@@ -123,6 +123,25 @@ export class UserService {
     });
 
     return { ...result, roleId: roleIdArray };
+  }
+
+  async findOneAuthCode(id: number) {
+    const autoCodeArray = [];
+    // 子查询：获取用户的角色 ID 列表
+    const roleIdsSubquery = this.conn
+      .select({ roleId: sysUserRoleTable.roleId })
+      .from(sysUserRoleTable)
+      .where(eq(sysUserRoleTable.userId, id));
+
+    // 使用子查询作为条件来查找权限码
+    const data = await this.conn
+      .select()
+      .from(sysRolePermTable)
+      .where(inArray(sysRolePermTable.roleId, roleIdsSubquery));
+    data.forEach(item=>{
+      autoCodeArray.push(item.permCode);
+    })
+    return autoCodeArray;
   }
 
   async update(data: UpdateUserDto) {

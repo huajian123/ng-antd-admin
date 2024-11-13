@@ -7,7 +7,7 @@ import { WindowService } from '@core/services/common/window.service';
 import { AccountService, UserPsd } from '@services/system/account.service';
 import { ScreenLessHiddenDirective } from '@shared/directives/screen-less-hidden.directive';
 import { ToggleFullscreenDirective } from '@shared/directives/toggle-fullscreen.directive';
-import { UserInfoService } from '@store/common-store/userInfo.service';
+import { UserInfoStoreService } from '@store/common-store/userInfo-store.service';
 import { ModalBtnStatus } from '@widget/base-modal';
 import { ChangePasswordService } from '@widget/biz-widget/change-password/change-password.service';
 import { LockWidgetService } from '@widget/common-widget/lock-widget/lock-widget.service';
@@ -41,7 +41,7 @@ export class LayoutHeadRightMenuComponent {
   private windowServe = inject(WindowService);
   private searchRouteService = inject(SearchRouteService);
   private message = inject(NzMessageService);
-  private userInfoService = inject(UserInfoService);
+  private userInfoService = inject(UserInfoStoreService);
   private accountService = inject(AccountService);
 
   // 锁定屏幕

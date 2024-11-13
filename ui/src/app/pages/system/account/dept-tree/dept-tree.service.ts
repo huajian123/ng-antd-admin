@@ -76,6 +76,7 @@ export class DeptTreeService {
       pageSize: 0,
       pageIndex: 0
     };
+    // todo 这段逻辑造成在用户管理列表点击退出按钮，会屏幕闪烁一下
     this.dataService
       .getDepts(params)
       .pipe(takeUntilDestroyed(this.destroyRef))

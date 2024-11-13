@@ -8,7 +8,7 @@ import { TokenKey, TokenPre } from '@config/constant';
 import { WindowService } from '@core/services/common/window.service';
 import { Login1StoreService } from '@store/biz-store-service/other-login/login1-store.service';
 import { SpinService } from '@store/common-store/spin.service';
-import { UserInfoService } from '@store/common-store/userInfo.service';
+import { UserInfoStoreService } from '@store/common-store/userInfo-store.service';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';
@@ -37,7 +37,7 @@ export class NormalLoginComponent implements OnInit {
   private router = inject(Router);
   private spinService = inject(SpinService);
   private login1StoreService = inject(Login1StoreService);
-  private userInfoService = inject(UserInfoService);
+  private userInfoService = inject(UserInfoStoreService);
   private cdr = inject(ChangeDetectorRef);
   private windowServe = inject(WindowService);
 
