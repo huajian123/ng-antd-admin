@@ -22,9 +22,7 @@ export class LoginService {
     return this.http.post('/auth/signin', params, { needSuccessInfo: false });
   }
 
-  public getMenuByUserId(userId: number): Observable<Menu[]> {
-    // 如果是静态菜单，就把下面注释放开
-    // return of(this.menus);
-    return this.http.get(`/sysPermission/menu/${userId}`);
+  public getMenuByUserAuthCode(userAuthCode: string[]): Observable<Menu[]> {
+    return this.http.post(`/auth/menu`, userAuthCode);
   }
 }

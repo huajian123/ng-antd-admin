@@ -7,13 +7,14 @@ import { AccountService } from '@services/system/account.service';
 export interface UserInfo {
   userName: string;
   userId: number;
+  authCode: string[];
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserInfoStoreService {
-  private userInfo$ = new BehaviorSubject<UserInfo>({ userId: -1, userName: '' });
+  private userInfo$ = new BehaviorSubject<UserInfo>({ userId: -1, userName: '', authCode: [] });
 
   userService = inject(AccountService);
 
@@ -23,17 +24,19 @@ export class UserInfoStoreService {
       const { userName, sub } = helper.decodeToken(token);
       return {
         userId: sub,
-        userName
+        userName,
+        authCode: []
       };
     } catch (e) {
       return {
         userId: -1,
-        userName: ''
+        userName: '',
+        authCode: []
       };
     }
   }
 
-  getUserAuthCodeByUserId(userId: number): any {
+  getUserAuthCodeByUserId(userId: number): Observable<string[]> {
     return this.userService.getAccountAuthCode(userId);
   }
 

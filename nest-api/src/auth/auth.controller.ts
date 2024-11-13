@@ -19,4 +19,10 @@ export class AuthController {
     const { userName, password } = dto;
     return this.authService.signup(userName, password);
   }
+
+  @Post('menu')
+  async getMenuByUserAuthCode(@Body() dto: string[]) {
+    const data = await this.authService.getMenuByUserAuthCode(dto);
+    return ResultData.success(data);
+  }
 }

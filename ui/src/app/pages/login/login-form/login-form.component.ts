@@ -47,7 +47,7 @@ export class LoginFormComponent implements OnInit {
     // 获取表单的值
     const param = this.validateForm.getRawValue();
     // 调用登录接口
-    // todo 登录后台返回统一模式为,如果code不为0，会自动被拦截，如果需要修改，请在src/app/core/services/http/base-http.service.ts中进行修改
+    // todo 登录后台返回统一模式为,如果code不为200，会自动被拦截，如果需要修改，请在src/app/core/services/http/base-http.service.ts中进行修改
     // {
     //   code:number,
     //   data:NzSafeAny,
@@ -67,7 +67,7 @@ export class LoginFormComponent implements OnInit {
         this.loginInOutService
           .loginIn(userToken)
           .then(() => {
-            // this.router.navigateByUrl('default/dashboard/analysis');
+            this.router.navigateByUrl('default/dashboard/analysis');
           })
           .finally(() => {
             this.spinService.setCurrentGlobalSpinStore(false);

@@ -2,7 +2,7 @@ import { DestroyRef, inject, Injectable } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { finalize, switchMap } from 'rxjs/operators';
 
 import { ActionCode } from '@config/actionCode';
 import { TokenKey, TokenPre } from '@config/constant';
@@ -31,9 +31,9 @@ export class LoginInOutService {
   private menuService = inject(MenuStoreService);
   private windowServe = inject(WindowService);
 
-  // 通过用户Id来获取菜单数组
-  getMenuByUserId(userId: number): Observable<Menu[]> {
-    return this.loginService.getMenuByUserId(userId);
+  // 通过用户所拥有的权限码来获取菜单数组
+  getMenuByUserAuthCode(authCode: string[]): Observable<Menu[]> {
+    return this.loginService.getMenuByUserAuthCode(authCode);
   }
 
   loginIn(token: string): Promise<void> {
@@ -43,23 +43,25 @@ export class LoginInOutService {
       this.windowServe.setSessionStorage(TokenKey, TokenPre + token);
       // 解析token ，然后获取用户信息
       const userInfo: UserInfo = this.userInfoService.parsToken(TokenPre + token);
-      this.userInfoService.getUserAuthCodeByUserId(userInfo.userId);
-      console.log(userInfo);
-      // todo  这里是手动添加静态页面标签页操作中打开详情的按钮的权限，因为他们涉及到路由跳转，会走路由守卫，但是权限又没有通过后端管理，所以下面两行手动添加权限，实际操作中可以删除下面2行，如果你也有类似的需求，请全局搜索ActionCode.TabsDetail，这个需要在路由中配置一下
-      // userInfo.authCode.push(ActionCode.TabsDetail);
-      // userInfo.authCode.push(ActionCode.SearchTableDetail);
-      // 将用户信息缓存到全局service中
-      this.userInfoService.setUserInfo(userInfo);
-      // 通过用户id来获取这个用户所拥有的menu
-      this.getMenuByUserId(userInfo.userId)
+      // 根据用户的id来获取当前用户所拥有的权限码
+      this.userInfoService
+        .getUserAuthCodeByUserId(userInfo.userId)
         .pipe(
+          switchMap(autoCodeArray => {
+            userInfo.authCode = autoCodeArray;
+            // todo  这里是手动添加静态页面标签页操作中打开详情的按钮的权限，因为他们涉及到路由跳转，会走路由守卫，但是权限又没有通过后端管理，所以下面两行手动添加权限，实际操作中可以删除下面2行，如果你也有类似的需求，请全局搜索ActionCode.TabsDetail，这个需要在路由中配置一下
+            userInfo.authCode.push(ActionCode.TabsDetail);
+            userInfo.authCode.push(ActionCode.SearchTableDetail);
+            // 将用户信息缓存到全局service中
+            this.userInfoService.setUserInfo(userInfo);
+            return this.getMenuByUserAuthCode(userInfo.authCode);
+          }),
           finalize(() => {
             resolve();
           }),
           takeUntilDestroyed(this.destroyRef)
         )
         .subscribe(menus => {
-          console.log(menus);
           menus = menus.filter(item => {
             item.selected = false;
             item.open = false;

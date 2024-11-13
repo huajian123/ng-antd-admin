@@ -24,8 +24,7 @@ export class AuthDirective {
 
   constructor() {
     this.userInfoService.getUserInfo().subscribe(userInfo => {
-      // todo huajian
-      // this.codeArray = userInfo.authCode;
+      this.codeArray = userInfo.authCode;
     });
   }
 

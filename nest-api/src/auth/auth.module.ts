@@ -7,10 +7,12 @@ import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ConfigEnum } from '../enum/config.enum';
 import { JwtStrategy } from './auth.strategy';
+import { DrizzleModule } from '../drizzle/drizzle.module';
 
 @Module({
   imports: [
     UserModule,
+    DrizzleModule,
     PassportModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],

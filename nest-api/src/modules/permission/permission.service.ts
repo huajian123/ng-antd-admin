@@ -4,7 +4,7 @@ import { DrizzleAsyncProvider } from '../../drizzle/drizzle.provider';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 import * as schema from '../../drizzle/schema';
 import { eq } from 'drizzle-orm';
-import { sysRolePermTable } from "../../drizzle/schema";
+import { sysRolePermTable } from '../../drizzle/schema';
 
 @Injectable()
 export class PermissionService {

@@ -287,9 +287,10 @@ export class NavBarComponent implements OnInit {
   }
 
   subAuth(): void {
-    // todo huajian
-    this.userInfoService.getUserInfo().pipe(takeUntilDestroyed(this.destroyRef));
-    // .subscribe(res => (this.authCodeArray = res.authCode));
+    this.userInfoService
+      .getUserInfo()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(res => (this.authCodeArray = res.authCode));
   }
 
   // 监听混合模式下左侧菜单数据源

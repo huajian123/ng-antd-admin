@@ -62,9 +62,10 @@ export class JudgeAuthGuardService {
   }
 
   canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    this.userInfoService.getUserInfo().pipe(takeUntilDestroyed(this.destroyRef));
-    // todo huajian
-    // .subscribe(res => (this.authCodeArray = res.authCode));
+    this.userInfoService
+      .getUserInfo()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(res => (this.authCodeArray = res.authCode));
     while (route.firstChild) {
       route = route.firstChild;
     }

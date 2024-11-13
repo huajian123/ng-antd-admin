@@ -4,10 +4,11 @@ import { DrizzleAsyncProvider } from '../../drizzle/drizzle.provider';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 import * as schema from '../../drizzle/schema';
 import {
-  departmentTable, sysRolePermTable,
+  departmentTable,
+  sysRolePermTable,
   sysUserRoleTable,
-  userTable
-} from "../../drizzle/schema";
+  userTable,
+} from '../../drizzle/schema';
 import { FilterParam, TableDataInfo } from '../../common/result/result';
 import {
   and,
@@ -135,12 +136,12 @@ export class UserService {
 
     // 使用子查询作为条件来查找权限码
     const data = await this.conn
-      .select()
+      .selectDistinctOn([sysRolePermTable.permCode])
       .from(sysRolePermTable)
       .where(inArray(sysRolePermTable.roleId, roleIdsSubquery));
-    data.forEach(item=>{
+    data.forEach((item) => {
       autoCodeArray.push(item.permCode);
-    })
+    });
     return autoCodeArray;
   }
 
