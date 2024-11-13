@@ -75,11 +75,11 @@ export const menuTable = pgTable('menu', {
   ...timestamps,
 });
 
-// SysRoleMenu 表
-export const sysRoleMenuTable = pgTable('sys_role_menu', {
+// SysRolePerm 表
+export const sysRolePermTable = pgTable('sys_role_perm', {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   roleId: integer('role_id').notNull(), // 角色 ID
-  menuId: integer('menu_id').notNull(), // 菜单 ID
+  permCode: varchar('perm_code',{ length: 255 }).notNull(), // 权限码
   ...timestamps,
 });
 

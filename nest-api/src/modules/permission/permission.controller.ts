@@ -14,10 +14,10 @@ import { ResultData } from '../../common/result/result';
 export class PermissionController {
   constructor(private readonly permissionService: PermissionService) {}
 
-  // 赋予角色菜单
+  // 赋予角色权限码
   @Post('assign-role-menu')
   assignRoleMenu(@Body() data: PermissionAssignRoleMenuReqDto) {
-    return ResultData.success(this.permissionService.assignRoleMenu(data));
+    return ResultData.success(this.permissionService.assignRolePermCode(data));
   }
 
   // 获得角色所拥有的菜单编号

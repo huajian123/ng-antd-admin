@@ -23,7 +23,7 @@ export interface Permission {
 
 // 更新权限参数接口
 export interface PutPermissionParam {
-  permissionIds: number[];
+  permCodes: string[];
   roleId: number;
 }
 
@@ -62,7 +62,7 @@ export class RoleService {
     return this.http.put('/role/update', param, { needSuccessInfo: true });
   }
 
-  public getPermissionById(id: string): Observable<number[]> {
+  public getPermissionById(id: string): Observable<string[]> {
     return this.http.get(`/permission/list-role-resources/${id}`);
   }
 

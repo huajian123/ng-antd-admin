@@ -44,6 +44,17 @@ export class UserService {
     return null;
   }
 
+  async findOneByUserName(userName: string) {
+    const userInfo = await this.conn
+      .select({
+        id: userTable.id,
+        password: userTable.password,
+      })
+      .from(userTable)
+      .where(eq(userTable.userName, userName));
+    return userInfo[0] || null;
+  }
+
   async findAll(searchParam: FilterParam<Partial<CreateUserDto>>) {
     const filters: SQL[] = [];
     if (searchParam.filters?.userName) {

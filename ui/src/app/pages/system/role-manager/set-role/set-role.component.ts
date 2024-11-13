@@ -48,7 +48,7 @@ export class SetRoleComponent implements OnInit {
     desc: '当前角色：',
     breadcrumb: ['首页', '用户管理', '角色管理', '设置权限']
   };
-  authCodeArr: number[] = [];
+  authCodeArr: string[] = [];
   permissionList: Array<Menu & { isOpen?: boolean; checked?: boolean }> = [];
   destroyRef = inject(DestroyRef);
   @Input({ required: true }) id!: string; // 从路由中获取的角色id，ng16支持的新特性
@@ -78,7 +78,7 @@ export class SetRoleComponent implements OnInit {
         const menuArray: Array<Menu & { isOpen?: boolean; checked?: boolean }> = response.list;
         menuArray.forEach(item => {
           item.isOpen = false;
-          item.checked = this.authCodeArr.includes(+item.id!);
+          item.checked = this.authCodeArr.includes(item.code);
         });
         this.permissionList = fnAddTreeDataGradeAndLeaf(fnFlatDataHasParentToTree(menuArray));
         this.cdr.markForCheck();
@@ -97,14 +97,15 @@ export class SetRoleComponent implements OnInit {
   submit(): void {
     const temp = [...this.permissionList];
     const flatArray = fnFlattenTreeDataByDataList(temp);
-    const seledAuthArray: number[] = [];
+    console.log(flatArray);
+    const selectedAuthCodeArray: string[] = [];
     flatArray.forEach(item => {
       if (item['checked']) {
-        seledAuthArray.push(+item.id);
+        selectedAuthCodeArray.push(item['code']);
       }
     });
     const param: PutPermissionParam = {
-      permissionIds: seledAuthArray,
+      permCodes: selectedAuthCodeArray,
       roleId: +this.id
     };
     this.dataService

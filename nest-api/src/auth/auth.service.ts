@@ -13,23 +13,22 @@ export class AuthService {
   async signIn(userName: string, password: string) {
     console.log(password);
 
-    const res = await this.userService.findAll({ filters: { userName } });
-    console.log(res.list[0].password === password);
-    if (res.list[0].password === password) {
-      console.log(res.list[0]);
-      // 生成token
-      return await this.jwt.signAsync(
-        {
-          userName: res.list[0].userName,
-          id: res.list[0].id,
-        },
-        // 局部设置
-        // {
-        //   expiresIn: '1h',
-        // },
-      );
+    const res = await this.userService.findOneByUserName(userName);
+    console.log(res);
+    if (res?.password !== password) {
+      throw new UnauthorizedException();
     }
-    throw new UnauthorizedException();
+    // 生成token
+    return await this.jwt.signAsync(
+      {
+        userName: userName,
+        sub: res.id,
+      },
+      // 局部设置
+      // {
+      //   expiresIn: '1h',
+      // },
+    );
   }
   signup(userName: string, password: string) {}
 }

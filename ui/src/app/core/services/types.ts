@@ -77,6 +77,6 @@ export interface Menu {
   open?: boolean;
   selected?: boolean; // 是否选中
   children?: Menu[];
-  code?: string; // 权限码
+  code: string; // 权限码
   newLinkFlag?: 0 | 1; // 是否是新页
 }

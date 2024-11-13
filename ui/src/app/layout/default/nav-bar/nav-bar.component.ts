@@ -155,7 +155,7 @@ export class NavBarComponent implements OnInit {
   // 深拷贝克隆菜单数组
   cloneMenuArray(sourceMenuArray: Menu[], target: Menu[] = []): Menu[] {
     sourceMenuArray.forEach(item => {
-      const obj: Menu = { menuName: '', menuType: 'C', path: '', id: -1, fatherId: -1 };
+      const obj: Menu = { menuName: '', menuType: 'C', path: '', id: -1, fatherId: -1, code: '' };
       for (const i in item) {
         if (item.hasOwnProperty(i)) {
           // @ts-ignore
