@@ -60,13 +60,13 @@ export const departmentTable = pgTable('department', {
 
 // Menu 表
 export const menuTable = pgTable('menu', {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  id: integer().primaryKey(),
   fatherId: integer('father_id').notNull(), // 父级菜单 ID
   menuName: varchar('menu_name', { length: 255 }).notNull(), // 菜单名称
   menuType: varchar('menu_type', { length: 100 }).notNull(), // 菜单类型
   alIcon: varchar('al_icon', { length: 255 }), // 可选的阿里图标
   icon: varchar({ length: 255 }), // 可选的图标
-  path: varchar({ length: 255 }).notNull(), // 路径
+  path: varchar({ length: 255 }), // 路径
   code: varchar({ length: 100 }).notNull(), // 代码
   orderNum: integer('order_num').notNull(), // 排序号
   status: boolean().default(true), // 状态
@@ -79,7 +79,7 @@ export const menuTable = pgTable('menu', {
 export const sysRolePermTable = pgTable('sys_role_perm', {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   roleId: integer('role_id').notNull(), // 角色 ID
-  permCode: varchar('perm_code',{ length: 255 }).notNull(), // 权限码
+  permCode: varchar('perm_code', { length: 255 }).notNull(), // 权限码
   ...timestamps,
 });
 

@@ -46,4 +46,10 @@ export class MenuController {
     const data = await this.menuService.remove(ids);
     return ResultData.success(data);
   }
+
+  @Post('menu-seed')
+  async menuSeed() {
+    await this.menuService.seed();
+    return;
+  }
 }

@@ -95,7 +95,6 @@ export class LoginInOutService {
   }
 
   loginOut(): Promise<void> {
-    this.router.navigate(['/login/login-form']);
     return this.clearTabCash()
       .then(() => {
         return this.clearSessionCash();

@@ -81,23 +81,19 @@
           (selectedChange)="selectedChecked($event)"
         ></app-ant-table>
         <ng-template #operationTpl let-id="id" let-$$dataItem="$$dataItem">
-          <!--          <span *appAuth="ActionCode.AccountEdit" class="operate-text" (click)="edit(id, $$dataItem)">编辑</span>-->
-          <!--          <span *appAuth="ActionCode.AccountDel" class="operate-text" (click)="del(id)">删除</span>-->
-          <span class="operate-text" (click)="edit(id, $$dataItem)">编辑</span>
-          <span class="operate-text" (click)="del(id)">删除</span>
+          <span *appAuth="ActionCode.AccountEdit" class="operate-text" (click)="edit(id, $$dataItem)">编辑</span>
+          <span *appAuth="ActionCode.AccountDel" class="operate-text" (click)="del(id)">删除</span>
         </ng-template>
       </app-card-table-wrap>
     </div>
   </div>
 
   <ng-template #tableBtns>
-    <!--    <button *appAuth="ActionCode.AccountAdd" class="m-r-8" nz-button nzType="primary" (click)="add()">-->
-    <button class="m-r-8" nz-button nzType="primary" (click)="add()">
+    <button *appAuth="ActionCode.AccountAdd" class="m-r-8" nz-button nzType="primary" (click)="add()">
       <i nz-icon nzType="plus"></i>
       新建
     </button>
-    <!--    <button *appAuth="ActionCode.AccountDel" nz-button nzType="default" (click)="allDel()">-->
-    <button nz-button nzType="default" (click)="allDel()">
+    <button *appAuth="ActionCode.AccountDel" nz-button nzType="default" (click)="allDel()">
       <i nz-icon nzType="delete"></i>
       批量删除
     </button>

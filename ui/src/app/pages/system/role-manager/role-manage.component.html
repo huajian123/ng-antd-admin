@@ -31,20 +31,15 @@
   <app-card-table-wrap [btnTpl]="tableBtns" [tableTitle]="'角色列表'" (reload)="reloadTable()">
     <app-ant-table [tableConfig]="tableConfig" [tableData]="dataList" (changePageIndex)="getDataList($event)" (changePageSize)="changePageSize($event)"></app-ant-table>
     <ng-template #operationTpl let-id="id" let-roleName="roleName" let-$$dataItem="$$dataItem">
-      <span class="operate-text" (click)="setRole(id, roleName)">设置权限</span>
-      <span class="operate-text" (click)="edit(id, $$dataItem)">编辑</span>
-      <span class="operate-text" (click)="del(id)">删除</span>
-
-      <!--      <span *appAuth="ActionCode.RoleManagerSetRole" class="operate-text" (click)="setRole(id)">设置权限</span>-->
-      <!--      <span *appAuth="ActionCode.RoleManagerEdit" class="operate-text" (click)="edit(id, $$dataItem)">编辑</span>-->
-      <!--      <span *appAuth="ActionCode.RoleManagerDel" class="operate-text" (click)="del(id)">删除</span>-->
+      <span *appAuth="ActionCode.RoleManagerSetRole" class="operate-text" (click)="setRole(id, roleName)">设置权限</span>
+      <span *appAuth="ActionCode.RoleManagerEdit" class="operate-text" (click)="edit(id, $$dataItem)">编辑</span>
+      <span *appAuth="ActionCode.RoleManagerDel" class="operate-text" (click)="del(id)">删除</span>
     </ng-template>
   </app-card-table-wrap>
 </div>
 
 <ng-template #tableBtns>
-  <!--  <button *appAuth="ActionCode.RoleManagerAdd" class="m-r-8" nz-button nzType="primary" (click)="add()">-->
-  <button class="m-r-8" nz-button nzType="primary" (click)="add()">
+  <button *appAuth="ActionCode.RoleManagerAdd" class="m-r-8" nz-button nzType="primary" (click)="add()">
     <i nz-icon nzType="plus"></i>
     新建
   </button>
