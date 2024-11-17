@@ -2,6 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsOptional } from 'class-validator';
 
 export class CreateMenuDto {
+  id: number;
   @IsOptional()
   @ApiProperty({
     description: '阿里图标',

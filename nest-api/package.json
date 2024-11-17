@@ -21,7 +21,9 @@
     "generate": "drizzle-kit generate",
     "migrate": "drizzle-kit migrate",
     "studio": "drizzle-kit studio",
-    "push-drizzle": "drizzle-kit push"
+    "push-drizzle": "drizzle-kit push",
+    "push-generate": "drizzle-kit generate",
+    "docker-init": "docker-compose up -d"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
