@@ -30,14 +30,12 @@ export class RoleController {
   }
 
   @Post('list')
-  // @UseGuards(JwtGuard)
+  @UseGuards(JwtGuard)
   async findAll(
     @Body() searchParam: TableSearchFilterDto<CreateRoleDto>,
     // 这里req中的user是通过AuthGuard('jwt')中的validate方法返回的，由passportModule自动添加
     // @Req() req,
   ) {
-    // console.log(req);
-    console.log(32323);
     const data = await this.roleService.findAll(searchParam);
     return ResultData.success(data);
   }
