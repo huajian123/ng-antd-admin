@@ -14,6 +14,12 @@ export class AuthController {
     return ResultData.success(token);
   }
 
+  @Post('signout')
+  async signOut() {
+    this.authService.signOut();
+    return ResultData.success(null);
+  }
+
   @Post('signup')
   signup(@Body() dto: SigninUserDto) {
     const { userName, password } = dto;

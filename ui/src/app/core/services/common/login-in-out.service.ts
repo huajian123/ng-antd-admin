@@ -16,7 +16,7 @@ import { UserInfo, UserInfoStoreService } from '@store/common-store/userInfo-sto
 import { fnFlatDataHasParentToTree } from '@utils/treeTableTools';
 
 /*
- * 退出登录
+ * 登录/登出
  * */
 @Injectable({
   providedIn: 'root'
@@ -95,6 +95,7 @@ export class LoginInOutService {
   }
 
   loginOut(): Promise<void> {
+    this.loginService.loginOut().pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
     return this.clearTabCash()
       .then(() => {
         return this.clearSessionCash();

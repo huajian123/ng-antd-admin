@@ -21,10 +21,13 @@ import {
 } from 'drizzle-orm';
 import { extractField } from 'src/untils';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { ConfigEnum } from '../../enum/config.enum';
+import { Cache, CACHE_MANAGER } from '@nestjs/cache-manager';
 
 @Injectable()
 export class UserService {
   constructor(
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
     @Inject(DrizzleAsyncProvider) private conn: NodePgDatabase<typeof schema>,
   ) {}
 
@@ -142,6 +145,7 @@ export class UserService {
     data.forEach((item) => {
       autoCodeArray.push(item.permCode);
     });
+    await this.cacheManager.set(ConfigEnum.AUTH_CODE, autoCodeArray || [], 0);
     return autoCodeArray;
   }
 

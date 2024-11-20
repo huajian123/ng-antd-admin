@@ -30,7 +30,7 @@ DROP TABLE IF EXISTS "public"."role";
 DROP TABLE IF EXISTS "public"."menu";
 DROP TABLE IF EXISTS "public"."department";
 --
--- Name: SCHEMA "public"; Type: COMMENT; Schema: -; Owner: -
+-- Name: SCHEMA "public"; Type: COMMENT; Schema: -; Owner: pg_database_owner
 --
 
 COMMENT ON SCHEMA "public" IS 'standard public schema';
@@ -41,7 +41,7 @@ SET default_tablespace = '';
 SET default_table_access_method = "heap";
 
 --
--- Name: department; Type: TABLE; Schema: public; Owner: -
+-- Name: department; Type: TABLE; Schema: public; Owner: admin
 --
 
 CREATE TABLE "public"."department" (
@@ -56,8 +56,10 @@ CREATE TABLE "public"."department" (
 );
 
 
+ALTER TABLE "public"."department" OWNER TO "admin";
+
 --
--- Name: department_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: department_id_seq; Type: SEQUENCE; Schema: public; Owner: admin
 --
 
 ALTER TABLE "public"."department" ALTER COLUMN "id" ADD GENERATED ALWAYS AS IDENTITY (
@@ -71,7 +73,7 @@ ALTER TABLE "public"."department" ALTER COLUMN "id" ADD GENERATED ALWAYS AS IDEN
 
 
 --
--- Name: menu; Type: TABLE; Schema: public; Owner: -
+-- Name: menu; Type: TABLE; Schema: public; Owner: admin
 --
 
 CREATE TABLE "public"."menu" (
@@ -93,8 +95,10 @@ CREATE TABLE "public"."menu" (
 );
 
 
+ALTER TABLE "public"."menu" OWNER TO "admin";
+
 --
--- Name: role; Type: TABLE; Schema: public; Owner: -
+-- Name: role; Type: TABLE; Schema: public; Owner: admin
 --
 
 CREATE TABLE "public"."role" (
@@ -107,8 +111,10 @@ CREATE TABLE "public"."role" (
 );
 
 
+ALTER TABLE "public"."role" OWNER TO "admin";
+
 --
--- Name: role_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: role_id_seq; Type: SEQUENCE; Schema: public; Owner: admin
 --
 
 ALTER TABLE "public"."role" ALTER COLUMN "id" ADD GENERATED ALWAYS AS IDENTITY (
@@ -122,7 +128,7 @@ ALTER TABLE "public"."role" ALTER COLUMN "id" ADD GENERATED ALWAYS AS IDENTITY (
 
 
 --
--- Name: sys_role_perm; Type: TABLE; Schema: public; Owner: -
+-- Name: sys_role_perm; Type: TABLE; Schema: public; Owner: admin
 --
 
 CREATE TABLE "public"."sys_role_perm" (
@@ -135,8 +141,10 @@ CREATE TABLE "public"."sys_role_perm" (
 );
 
 
+ALTER TABLE "public"."sys_role_perm" OWNER TO "admin";
+
 --
--- Name: sys_role_perm_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: sys_role_perm_id_seq; Type: SEQUENCE; Schema: public; Owner: admin
 --
 
 ALTER TABLE "public"."sys_role_perm" ALTER COLUMN "id" ADD GENERATED ALWAYS AS IDENTITY (
@@ -150,7 +158,7 @@ ALTER TABLE "public"."sys_role_perm" ALTER COLUMN "id" ADD GENERATED ALWAYS AS I
 
 
 --
--- Name: sys_user_role; Type: TABLE; Schema: public; Owner: -
+-- Name: sys_user_role; Type: TABLE; Schema: public; Owner: admin
 --
 
 CREATE TABLE "public"."sys_user_role" (
@@ -163,8 +171,10 @@ CREATE TABLE "public"."sys_user_role" (
 );
 
 
+ALTER TABLE "public"."sys_user_role" OWNER TO "admin";
+
 --
--- Name: sys_user_role_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: sys_user_role_id_seq; Type: SEQUENCE; Schema: public; Owner: admin
 --
 
 ALTER TABLE "public"."sys_user_role" ALTER COLUMN "id" ADD GENERATED ALWAYS AS IDENTITY (
@@ -178,7 +188,7 @@ ALTER TABLE "public"."sys_user_role" ALTER COLUMN "id" ADD GENERATED ALWAYS AS I
 
 
 --
--- Name: user; Type: TABLE; Schema: public; Owner: -
+-- Name: user; Type: TABLE; Schema: public; Owner: admin
 --
 
 CREATE TABLE "public"."user" (
@@ -198,8 +208,10 @@ CREATE TABLE "public"."user" (
 );
 
 
+ALTER TABLE "public"."user" OWNER TO "admin";
+
 --
--- Name: user_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: user_id_seq; Type: SEQUENCE; Schema: public; Owner: admin
 --
 
 ALTER TABLE "public"."user" ALTER COLUMN "id" ADD GENERATED ALWAYS AS IDENTITY (
@@ -213,13 +225,20 @@ ALTER TABLE "public"."user" ALTER COLUMN "id" ADD GENERATED ALWAYS AS IDENTITY (
 
 
 --
--- Data for Name: department; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: department; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
+INSERT INTO "public"."department" OVERRIDING SYSTEM VALUE VALUES (1, 0, 'Ant科技', 0, true, NULL, '2024-11-19 13:28:41.89055', NULL);
+INSERT INTO "public"."department" OVERRIDING SYSTEM VALUE VALUES (2, 1, '南京总公司', 0, true, NULL, '2024-11-19 13:28:50.898313', NULL);
+INSERT INTO "public"."department" OVERRIDING SYSTEM VALUE VALUES (3, 1, '上海分公司', 0, true, NULL, '2024-11-19 13:29:01.310086', NULL);
+INSERT INTO "public"."department" OVERRIDING SYSTEM VALUE VALUES (4, 2, '研发部门', 0, true, NULL, '2024-11-19 13:29:09.132471', NULL);
+INSERT INTO "public"."department" OVERRIDING SYSTEM VALUE VALUES (5, 2, '测试部门', 1, true, NULL, '2024-11-19 13:29:15.138077', NULL);
+INSERT INTO "public"."department" OVERRIDING SYSTEM VALUE VALUES (6, 3, '市场部门', 0, true, NULL, '2024-11-19 13:29:21.009278', NULL);
+INSERT INTO "public"."department" OVERRIDING SYSTEM VALUE VALUES (7, 3, '营销部门', 1, true, NULL, '2024-11-19 13:29:27.913413', NULL);
 
 
 --
--- Data for Name: menu; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: menu; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
 INSERT INTO "public"."menu" VALUES (1, 0, 'Dashboard', 'C', '', 'dashboard', '/default/dashboard', 'default:dashboard', 1, true, false, true, '2022-05-11 05:42:19', '2022-03-31 00:03:44', NULL);
@@ -349,66 +368,201 @@ INSERT INTO "public"."menu" VALUES (159, 76, '新功能5', 'C', NULL, 'up-circle
 
 
 --
--- Data for Name: role; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: role; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
-
-
---
--- Data for Name: sys_role_perm; Type: TABLE DATA; Schema: public; Owner: -
---
-
+INSERT INTO "public"."role" OVERRIDING SYSTEM VALUE VALUES (1, '超级管理员', '拥有所有权限', NULL, '2024-11-19 13:26:21.226165', NULL);
+INSERT INTO "public"."role" OVERRIDING SYSTEM VALUE VALUES (2, '普通开发', '权限有限', NULL, '2024-11-19 13:26:33.038129', NULL);
 
 
 --
--- Data for Name: sys_user_role; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: sys_role_perm; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (1, 2, 'default:dashboard', NULL, '2024-11-19 13:26:42.775771', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (2, 2, 'default:dashboard:analysis', NULL, '2024-11-19 13:26:42.775771', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (3, 2, 'default:dashboard:monitor', NULL, '2024-11-19 13:26:42.775771', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (4, 2, 'default:dashboard:workbench', NULL, '2024-11-19 13:26:42.775771', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (5, 2, 'default:about', NULL, '2024-11-19 13:26:42.775771', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (6, 1, 'default:dashboard', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (7, 1, 'default:dashboard:analysis', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (8, 1, 'default:dashboard:monitor', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (9, 1, 'default:dashboard:workbench', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (10, 1, 'default:page-demo', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (11, 1, 'default:page-demo:form', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (12, 1, 'default:page-demo:form:base-form', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (13, 1, 'default:page-demo:form:step-form', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (14, 1, 'default:page-demo:form:advanced-form', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (15, 1, 'default:page-demo:list', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (16, 1, 'default:page-demo:list:search-list', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (17, 1, 'default:page-demo:list:search-list:article', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (18, 1, 'default:page-demo:list:search-list:project', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (19, 1, 'default:page-demo:list:search-list:application', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (20, 1, 'default:page-demo:list:search-table', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (21, 1, 'default:page-demo:list:tree-list', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (22, 1, 'default:page-demo:list:standard-table', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (23, 1, 'default:page-demo:list:card-table', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (24, 1, 'default:page-demo:detail', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (25, 1, 'default:page-demo:detail:base-detail', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (26, 1, 'default:page-demo:detail:adv-detail', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (27, 1, 'default:page-demo:result', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (28, 1, 'default:page-demo:result:success', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (29, 1, 'default:page-demo:result:fail', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (30, 1, 'default:page-demo:except', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (31, 1, 'default:page-demo:except:except403', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (32, 1, 'default:page-demo:except:except404', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (33, 1, 'default:page-demo:except:except500', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (34, 1, 'default:page-demo:except:network-error', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (35, 1, 'default:page-demo:except:no-data', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (36, 1, 'default:page-demo:personal', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (37, 1, 'default:page-demo:personal:personal-center', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (38, 1, 'default:page-demo:personal:personal-setting', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (39, 1, 'default:page-demo:flow', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (40, 1, 'default:page-demo:flow:flow-chat', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (41, 1, 'default:page-demo:task', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (42, 1, 'default:page-demo:page-demo1', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (43, 1, 'default:page-demo:page-demo2', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (44, 1, 'default:page-demo:page-demo3', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (45, 1, 'default:page-demo:page-demo4', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (46, 1, 'default:feat', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (47, 1, 'default:feat:msg', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (48, 1, 'default:feat:icons', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (49, 1, 'default:feat:context-menu', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (50, 1, 'default:feat:img-preview', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (51, 1, 'default:feat:full-screen', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (52, 1, 'default:feat:tabs', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (53, 1, 'default:feat:ex-modal', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (54, 1, 'default:feat:ex-drawer', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (55, 1, 'default:feat:rich-text', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (56, 1, 'default:feat:click-out-side', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (57, 1, 'default:feat:frame', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (58, 1, 'default:feat:frame:zorro-doc', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (59, 1, 'https://github.com/huajian123/ng-antd-admin', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (60, 1, 'default:feat:scroll', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (61, 1, 'default:feat:scroll:keep-scroll-page', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (62, 1, 'default:feat:scroll:play-scroll', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (63, 1, 'default:feat:charts', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (64, 1, 'default:feat:charts:gaode-map', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (65, 1, 'default:feat:charts:baidu-map', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (66, 1, 'default:feat:charts:echarts', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (67, 1, 'blank:other-login', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (68, 1, 'blank:other-login:login1', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (69, 1, 'default:feat:color-sel', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (70, 1, 'default:feat:ripple', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (71, 1, 'default:feat:copy', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (72, 1, 'blank:empty-page', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (73, 1, 'default:feat:setup', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (74, 1, 'default:feat:session-timeout', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (75, 1, 'default:feat:websocket', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (76, 1, 'default:feat:upload', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (77, 1, 'default:feat:download', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (78, 1, 'default:feat:qrcode', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (79, 1, 'default:feat:water-mark', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (80, 1, 'default:feat:feat1', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (81, 1, 'default:feat:feat2', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (82, 1, 'default:feat:feat3', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (83, 1, 'default:feat:feat4', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (84, 1, 'default:feat:feat5', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (85, 1, 'default:comp', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (86, 1, 'default:comp:basic', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (87, 1, 'default:comp:transition', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (88, 1, 'default:comp:luckysheet', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (89, 1, 'default:comp:lazy', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (90, 1, 'default:comp:lazy:lazy-basic', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (91, 1, 'default:comp:lazy:lazy-scroll', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (92, 1, 'default:comp:desc', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (93, 1, 'default:comp:strength-meter', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (94, 1, 'default:comp:form', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (95, 1, 'default:comp:form:shrink-form', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (96, 1, 'default:comp:form:append-form', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (97, 1, 'default:comp:comp1', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (98, 1, 'default:comp:comp2', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (99, 1, 'default:comp:comp3', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (100, 1, 'default:comp:comp4', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (101, 1, 'default:comp:comp5', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (102, 1, 'default:level', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (103, 1, 'default:level:menu1', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (104, 1, 'default:level:menu1:menu1-1', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (105, 1, 'default:level:menu1:menu1-1:menu1-1-1', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (106, 1, 'default:level:menu1:menu1-1:menu1-1-2', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (107, 1, 'default:level:menu1:menu1-2', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (108, 1, 'default:level:menu2', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (109, 1, 'default:system', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (110, 1, 'default:system:account', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (111, 1, 'default:system:account:add', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (112, 1, 'default:system:account:edit', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (113, 1, 'default:system:account:del', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (114, 1, 'default:system:role-manager', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (115, 1, 'default:system:role-manager:add', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (116, 1, 'default:system:role-manager:edit', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (117, 1, 'default:system:role-manager:del', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (118, 1, 'default:system:role-manager:set-role', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (119, 1, 'default:system:menu', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (120, 1, 'default:system:menu:add', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (121, 1, 'default:system:menu:edit', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (122, 1, 'default:system:menu:del', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (123, 1, 'default:system:menu:addlowlevel', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (124, 1, 'default:system:dept', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (125, 1, 'default:system:dept:add', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (126, 1, 'default:system:dept:edit', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (127, 1, 'default:system:dept:del', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (128, 1, 'default:system:dept:addlowlevel', NULL, '2024-11-19 13:28:20.012862', NULL);
+INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (129, 1, 'default:about', NULL, '2024-11-19 13:28:20.012862', NULL);
 
 
 --
--- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: sys_user_role; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
-
-
---
--- Name: department_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('"public"."department_id_seq"', 1, false);
+INSERT INTO "public"."sys_user_role" OVERRIDING SYSTEM VALUE VALUES (1, 1, 1, NULL, '2024-11-19 13:29:56.402677', NULL);
+INSERT INTO "public"."sys_user_role" OVERRIDING SYSTEM VALUE VALUES (2, 2, 2, NULL, '2024-11-19 13:30:19.169902', NULL);
 
 
 --
--- Name: role_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('"public"."role_id_seq"', 1, false);
-
-
---
--- Name: sys_role_perm_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('"public"."sys_role_perm_id_seq"', 1, false);
+INSERT INTO "public"."user" OVERRIDING SYSTEM VALUE VALUES (1, '287643967@qq.com', 'admin', 'a123456', true, 1, '13131313131', '02884449802', 4, '2024-11-19 13:29:56.402677', NULL, '2024-11-19 13:29:56.402677', NULL);
+INSERT INTO "public"."user" OVERRIDING SYSTEM VALUE VALUES (2, '287643967@qq.com', '普通用户', 'a123456', true, 1, '13131313131', '02884449802', 4, '2024-11-19 13:30:19.169902', NULL, '2024-11-19 13:30:19.169902', NULL);
 
 
 --
--- Name: sys_user_role_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: department_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('"public"."sys_user_role_id_seq"', 1, false);
-
-
---
--- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('"public"."user_id_seq"', 1, false);
+SELECT pg_catalog.setval('"public"."department_id_seq"', 7, true);
 
 
 --
--- Name: department department_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: role_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
+--
+
+SELECT pg_catalog.setval('"public"."role_id_seq"', 2, true);
+
+
+--
+-- Name: sys_role_perm_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
+--
+
+SELECT pg_catalog.setval('"public"."sys_role_perm_id_seq"', 129, true);
+
+
+--
+-- Name: sys_user_role_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
+--
+
+SELECT pg_catalog.setval('"public"."sys_user_role_id_seq"', 2, true);
+
+
+--
+-- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
+--
+
+SELECT pg_catalog.setval('"public"."user_id_seq"', 2, true);
+
+
+--
+-- Name: department department_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY "public"."department"
@@ -416,7 +570,7 @@ ALTER TABLE ONLY "public"."department"
 
 
 --
--- Name: menu menu_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: menu menu_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY "public"."menu"
@@ -424,7 +578,7 @@ ALTER TABLE ONLY "public"."menu"
 
 
 --
--- Name: role role_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: role role_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY "public"."role"
@@ -432,7 +586,7 @@ ALTER TABLE ONLY "public"."role"
 
 
 --
--- Name: sys_role_perm sys_role_perm_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: sys_role_perm sys_role_perm_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY "public"."sys_role_perm"
@@ -440,7 +594,7 @@ ALTER TABLE ONLY "public"."sys_role_perm"
 
 
 --
--- Name: sys_user_role sys_user_role_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: sys_user_role sys_user_role_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY "public"."sys_user_role"
@@ -448,7 +602,7 @@ ALTER TABLE ONLY "public"."sys_user_role"
 
 
 --
--- Name: user user_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: user user_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY "public"."user"

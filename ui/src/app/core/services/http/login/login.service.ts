@@ -22,6 +22,10 @@ export class LoginService {
     return this.http.post('/auth/signin', params, { needSuccessInfo: false });
   }
 
+  public loginOut(): Observable<string> {
+    return this.http.post('/auth/signout', null, { needSuccessInfo: false });
+  }
+
   public getMenuByUserAuthCode(userAuthCode: string[]): Observable<Menu[]> {
     return this.http.post(`/auth/menu`, userAuthCode);
   }

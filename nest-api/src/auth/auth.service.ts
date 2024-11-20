@@ -7,12 +7,15 @@ import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 import * as schema from '../drizzle/schema';
 import { menuTable } from '../drizzle/schema';
 import { inArray } from 'drizzle-orm';
+import { Cache, CACHE_MANAGER } from '@nestjs/cache-manager';
+import { ConfigEnum } from '../enum/config.enum';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly userService: UserService,
     private jwt: JwtService,
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
     @Inject(DrizzleAsyncProvider) private conn: NodePgDatabase<typeof schema>,
   ) {}
 
@@ -37,6 +40,9 @@ export class AuthService {
     );
   }
   signup(userName: string, password: string) {}
+  signOut() {
+    this.cacheManager.del(ConfigEnum.AUTH_CODE).then();
+  }
 
   async getMenuByUserAuthCode(authCode: string[]) {
     const data = await this.conn

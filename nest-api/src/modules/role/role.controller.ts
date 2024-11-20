@@ -17,6 +17,8 @@ import { CreateRoleDto } from './dto/create-role.dto';
 import { ResultData } from '../../common/result/result';
 import { UpdateRoleDto } from './dto/update-role.dto';
 import { JwtGuard } from '../../guards/jwt.guard';
+import { AuthGuard } from '../../guards/auth.guard';
+import { Permission } from '../../decorators/permission.decorator';
 
 @ApiTags('角色管理') // 规整到user的swagger tag中
 @Controller('role')
@@ -30,7 +32,8 @@ export class RoleController {
   }
 
   @Post('list')
-  @UseGuards(JwtGuard)
+  @UseGuards(JwtGuard, AuthGuard)
+  @Permission('default:system:role-manager')
   async findAll(
     @Body() searchParam: TableSearchFilterDto<CreateRoleDto>,
     // 这里req中的user是通过AuthGuard('jwt')中的validate方法返回的，由passportModule自动添加
