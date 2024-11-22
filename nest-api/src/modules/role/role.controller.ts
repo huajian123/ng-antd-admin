@@ -26,6 +26,8 @@ export class RoleController {
   constructor(private readonly roleService: RoleService) {}
 
   @Post('create')
+  @UseGuards(JwtGuard, AuthGuard)
+  @Permission('default:system:role-manager:add')
   async create(@Body() createRoleDto: CreateRoleDto) {
     const data = await this.roleService.create(createRoleDto);
     return ResultData.success(data);
@@ -44,18 +46,24 @@ export class RoleController {
   }
 
   @Get(':id')
+  @UseGuards(JwtGuard, AuthGuard)
+  @Permission('default:system:role-manager')
   async findOne(@Param('id', ParseIntPipe) id: number) {
     const data = await this.roleService.findOne(id);
     return ResultData.success(data);
   }
 
   @Put('update')
+  @UseGuards(JwtGuard, AuthGuard)
+  @Permission('default:system:role-manager:edit')
   async update(@Body() updateRoleDto: UpdateRoleDto) {
     const data = await this.roleService.update(updateRoleDto);
     return ResultData.success(data);
   }
 
   @Post('del')
+  @UseGuards(JwtGuard, AuthGuard)
+  @Permission('default:system:role-manager:del')
   async remove(@Body() { ids }: { ids: number[] }) {
     const data = await this.roleService.remove(ids);
     return ResultData.success(data);

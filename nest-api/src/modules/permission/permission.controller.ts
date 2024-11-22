@@ -5,10 +5,14 @@ import {
   Param,
   ParseIntPipe,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { PermissionService } from './permission.service';
 import { PermissionAssignRoleMenuReqDto } from './dto/create-permission.dto';
 import { ResultData } from '../../common/result/result';
+import { JwtGuard } from '../../guards/jwt.guard';
+import { AuthGuard } from '../../guards/auth.guard';
+import { Permission } from '../../decorators/permission.decorator';
 
 @Controller('permission')
 export class PermissionController {
@@ -16,6 +20,8 @@ export class PermissionController {
 
   // 赋予角色权限码
   @Post('assign-role-menu')
+  @UseGuards(JwtGuard, AuthGuard)
+  @Permission('default:system:role-manager:set-role')
   assignRoleMenu(@Body() data: PermissionAssignRoleMenuReqDto) {
     return ResultData.success(this.permissionService.assignRolePermCode(data));
   }
