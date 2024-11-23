@@ -126,7 +126,7 @@ _onReuseDestroy: () => void;
 It can be realized by directly writing the method named _onReuseInit or _onReuseDestroy in the target component<br>
 
 ## 系统截图(System screenshot)
-![ScreenShot](https://github.com/huajian123/ng-antd-admin/blob/master/projectImg/11.png)
+![ScreenShot](https://github.com/huajian123/ng-antd-admin/blob/master/ui/projectImg/11.png)
 
 ## star支持
 我是自费服务器搭建后端服务接口,所以如果本项目对您有用，如果您也愿意的话，麻烦举起您性感的小手帮我点个免费的star以资鼓励，谢谢啊<br>
@@ -137,8 +137,8 @@ if help you, if you want ,please give me a star ,thank you<br>
 ## 捐赠
 如果本项目对您有用，正巧您如果也想请我喝一杯咖啡，请扫下面的码，哈哈<br>
 If this project is useful to you, and you happen to want to invite me for a cup of coffee, please scan Alipay or WeChat<br>
-![ScreenShot](https://github.com/huajian123/ng-antd-admin/blob/master/projectImg/weixin.jpeg)
-![ScreenShot](https://github.com/huajian123/ng-antd-admin/blob/master/projectImg/zhifubao.jpeg)
+![ScreenShot](https://github.com/huajian123/ng-antd-admin/blob/master/ui/projectImg/weixin.jpeg)
+![ScreenShot](https://github.com/huajian123/ng-antd-admin/blob/master/ui/projectImg/zhifubao.jpeg)
 
 
 
