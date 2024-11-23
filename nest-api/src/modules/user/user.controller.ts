@@ -47,6 +47,7 @@ export class UserController {
     const data = await this.userService.findOne(id);
     return ResultData.success(data);
   }
+
   @Put('update')
   @UseGuards(JwtGuard, AuthGuard)
   @Permission('default:system:account:edit')
@@ -54,6 +55,7 @@ export class UserController {
     const data = await this.userService.update(updateRoleDto);
     return ResultData.success(data);
   }
+
   @Post('del')
   @UseGuards(JwtGuard, AuthGuard)
   @Permission('default:system:account:del')
@@ -62,7 +64,7 @@ export class UserController {
     return ResultData.success(data);
   }
 
-  @Get('auto-code/:id')
+  @Get('auth-code/:id')
   async findOneAuthCode(@Param('id', ParseIntPipe) id: number) {
     const data = await this.userService.findOneAuthCode(id);
     return ResultData.success(data);

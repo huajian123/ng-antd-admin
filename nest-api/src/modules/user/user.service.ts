@@ -23,6 +23,7 @@ import { extractField } from 'src/untils';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ConfigEnum } from '../../enum/config.enum';
 import { Cache, CACHE_MANAGER } from '@nestjs/cache-manager';
+import * as argon2 from 'argon2';
 
 @Injectable()
 export class UserService {
@@ -33,6 +34,8 @@ export class UserService {
 
   async create(data: CreateUserDto) {
     const { roleId, ...user } = data;
+    // 对用户密码使用argon2进行加密
+    user.password = await argon2.hash(user.password);
     await this.conn.transaction(async (db) => {
       //更新用户信息
       const addUser = await db
@@ -65,6 +68,14 @@ export class UserService {
       filters.push(
         ilike(userTable.userName, `${searchParam.filters.userName}`),
       );
+    }
+    if (searchParam.filters?.departmentId) {
+      filters.push(
+        eq(userTable.departmentId, searchParam.filters.departmentId),
+      );
+    }
+    if (searchParam.filters?.mobile) {
+      filters.push(ilike(userTable.mobile, `${searchParam.filters.mobile}`));
     }
 
     const { total, list } = await this.conn.transaction(async (db) => {

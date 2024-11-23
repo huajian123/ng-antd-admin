@@ -1,14 +1,15 @@
-import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
-import { UserService } from '../modules/user/user.service';
+import { ForbiddenException, Inject, Injectable } from '@nestjs/common';
+import { UserService } from '../user/user.service';
 import { JwtService } from '@nestjs/jwt';
 import { rowId } from 'drizzle-orm/sqlite-core/expressions';
-import { DrizzleAsyncProvider } from '../drizzle/drizzle.provider';
+import { DrizzleAsyncProvider } from '../../drizzle/drizzle.provider';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
-import * as schema from '../drizzle/schema';
-import { menuTable } from '../drizzle/schema';
+import * as schema from '../../drizzle/schema';
+import { menuTable } from '../../drizzle/schema';
 import { inArray } from 'drizzle-orm';
 import { Cache, CACHE_MANAGER } from '@nestjs/cache-manager';
-import { ConfigEnum } from '../enum/config.enum';
+import { ConfigEnum } from '../../enum/config.enum';
+import * as argon2 from 'argon2';
 
 @Injectable()
 export class AuthService {
@@ -22,9 +23,12 @@ export class AuthService {
   // 登录
   async signIn(userName: string, password: string) {
     const res = await this.userService.findOneByUserName(userName);
-    if (res?.password !== password) {
-      console.log('密码错误');
-      throw new UnauthorizedException();
+    if (!res) {
+      throw new ForbiddenException('用户不存在，请注册');
+    }
+    const isPasswordValid = await argon2.verify(res.password, password);
+    if (!isPasswordValid) {
+      throw new ForbiddenException('用户名或密码错误');
     }
     // 生成token
     return await this.jwt.signAsync(
