@@ -64,6 +64,16 @@ export class UserController {
     return ResultData.success(data);
   }
 
+  @Put('psd')
+  @UseGuards(JwtGuard, AuthGuard)
+  @Permission('default:system:account:edit')
+  async changePsd(
+    @Body() userPsd: { id: number; newPassword: string; oldPassword: string },
+  ) {
+    await this.userService.changePsd(userPsd);
+    return ResultData.success(null);
+  }
+
   @Get('auth-code/:id')
   async findOneAuthCode(@Param('id', ParseIntPipe) id: number) {
     const data = await this.userService.findOneAuthCode(id);

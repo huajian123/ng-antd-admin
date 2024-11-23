@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { ForbiddenException, Inject, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { DrizzleAsyncProvider } from '../../drizzle/drizzle.provider';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
@@ -172,6 +172,36 @@ export class UserService {
         })),
       );
     });
+
+    return null;
+  }
+
+  async changePsd(data: {
+    id: number;
+    newPassword: string;
+    oldPassword: string;
+  }) {
+    const res = await this.conn
+      .select({ id: userTable.id, password: userTable.password })
+      .from(userTable)
+      .where(eq(userTable.id, data.id));
+    const user = res[0];
+    if (!user) {
+      throw new ForbiddenException('用户不存在');
+    }
+    const isPasswordValid = await argon2.verify(
+      user.password,
+      data.oldPassword,
+    );
+    if (!isPasswordValid) {
+      throw new ForbiddenException('原密码错误');
+    }
+
+    const newPassword = await argon2.hash(data.newPassword);
+    await this.conn
+      .update(userTable)
+      .set({ password: newPassword })
+      .where(eq(userTable.id, data.id));
 
     return null;
   }
