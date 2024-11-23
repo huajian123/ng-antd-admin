@@ -514,16 +514,16 @@ INSERT INTO "public"."sys_role_perm" OVERRIDING SYSTEM VALUE VALUES (129, 1, 'de
 -- Data for Name: sys_user_role; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
-INSERT INTO "public"."sys_user_role" OVERRIDING SYSTEM VALUE VALUES (1, 1, 1, NULL, '2024-11-19 13:29:56.402677', NULL);
-INSERT INTO "public"."sys_user_role" OVERRIDING SYSTEM VALUE VALUES (2, 2, 2, NULL, '2024-11-19 13:30:19.169902', NULL);
+INSERT INTO "public"."sys_user_role" OVERRIDING SYSTEM VALUE VALUES (3, 1, 3, NULL, '2024-11-23 09:52:45.101522', NULL);
+INSERT INTO "public"."sys_user_role" OVERRIDING SYSTEM VALUE VALUES (5, 2, 4, NULL, '2024-11-23 10:09:51.870838', NULL);
 
 
 --
 -- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
-INSERT INTO "public"."user" OVERRIDING SYSTEM VALUE VALUES (1, '287643967@qq.com', 'admin', 'a123456', true, 1, '13131313131', '02884449802', 4, '2024-11-19 13:29:56.402677', NULL, '2024-11-19 13:29:56.402677', NULL);
-INSERT INTO "public"."user" OVERRIDING SYSTEM VALUE VALUES (2, '287643967@qq.com', '普通用户', 'a123456', true, 1, '13131313131', '02884449802', 4, '2024-11-19 13:30:19.169902', NULL, '2024-11-19 13:30:19.169902', NULL);
+INSERT INTO "public"."user" OVERRIDING SYSTEM VALUE VALUES (3, '287643967@qq.com', 'admin', '$argon2id$v=19$m=65536,t=3,p=4$Luz1aQm4lsNaUL3G2EjIaw$8D/tDbkhT02WmB42CY/beFPDYot9TMppOvMKZ3LYo4I', true, 1, '13131313131', '02884449802', 4, '2024-11-23 09:52:45.101522', NULL, '2024-11-23 09:52:45.101522', NULL);
+INSERT INTO "public"."user" OVERRIDING SYSTEM VALUE VALUES (4, '287643967@qq.com', '普通用户', '$argon2id$v=19$m=65536,t=3,p=4$+7i55+ojvRh0ch48FHaknQ$7XQTQRICP4y+0xtkAJ/y9NSggiXt5ISkkxjznF2bNG4', true, 1, '13131313131', '02884449802', 5, '2024-11-23 09:53:08.019371', NULL, '2024-11-23 10:09:51.872', NULL);
 
 
 --
@@ -551,14 +551,14 @@ SELECT pg_catalog.setval('"public"."sys_role_perm_id_seq"', 129, true);
 -- Name: sys_user_role_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('"public"."sys_user_role_id_seq"', 2, true);
+SELECT pg_catalog.setval('"public"."sys_user_role_id_seq"', 5, true);
 
 
 --
 -- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('"public"."user_id_seq"', 2, true);
+SELECT pg_catalog.setval('"public"."user_id_seq"', 4, true);
 
 
 --
