@@ -1,0 +1,18 @@
+# docker-compose.yml
+# https://juejin.cn/post/7112694027212259364
+services:
+
+  # Docker connection string: postgres://postgres:postgres@localhost:5432/
+
+  postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_DB=ng-antd-admin-db  # 创建一个名为 ng-antd-admin-db 的数据库
+
+    ports:
+      - '5432:5432'
+
+volumes:
+  postgres:

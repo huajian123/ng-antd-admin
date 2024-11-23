@@ -4,15 +4,14 @@
 [![Angular](https://img.shields.io/badge/Build%20with-Angular%20CLI-red?logo=angular)](https://www.github.com/angular/angular)
 
 ## ✨前言
-- 我作为angular的粉丝，想以本项目作为我为angular社区尽一点力所能及之力，希望大家喜欢这个模板，也希望更多的国内开发者能重新审视angular这一前端框架，特别是ng17以后的版本，我相信angular会越来越好，我也会一直维护下去，如果您有什么好的建议，可以加我的微信号hj345678912，我拉你进交流群，一起学习进步交流。
+- 本项目作为我为angular社区尽一点力所能及之力，希望大家喜欢这个模板，也希望更多的国内开发者能重新审视angular这一前端框架，特别是ng17以后的版本，我相信angular会越来越好，我也会一直维护下去，如果您有什么好的建议，可以加我的微信号hj345678912，我拉你进交流群，一起学习进步交流。
 - 本项目也有一点点教学性质，其中用到大量angular新特性，有详细的注释以及参考文章链接在代码中，大家可以看看源码，有问题与我讨论，有改进处可以提pr，我们一起进步
-- <font color=red>在线预览地址</font> [这里](https://huajian123.github.io/ng-antd-admin/)为了节省服务器费用，这个预览地址为ng17，仅供参考，所有接口采用线上mock，并且不会再维护，因此可能与最新页面有一点点差异，源码[这里](https://github.com/huajian123/ng-antd-admin/tree/ng17-mock)
-    [这里](https://huajian123.github.io/ng-antd-admin/)，
+- <font color=red>在线预览地址</font> [这里](https://huajian123.github.io/ng-antd-admin/)
+- <font color=red>online preview</font>
+    [这里](https://huajian123.github.io/ng-antd-admin/)
+- [v17.1](https://github.com/huajian123/ng-antd-admin/releases/tag/v17.1.0)是最后一个采用真实接口的示例。在这之后的版本都采用mswjs来mock接口，但是仍然配套了java服务端相同接口与数据结构，可以配套使用，源码地址[这里](https://github.com/huajian123/ng-antd-admin-api)
 - 全面开启zoneless，性能快人一步
-
-## ✨service
-- 采用nestjs,drizzle,postgresql,以rbac为权限模型，集成了用户管理，菜单管理，部门管理，角色管理。开箱即用  
-
+  
 ## ✨特性
 - 支持最新angular版本
 - Support the latest angular version
@@ -29,10 +28,14 @@
 1.如果您用我的项目进行学习或者参考，请先确定您使用的是angular哪个版本，因为angular15后写法有部分不一样，所以我的建议是，您正在使用angular什么版本，则下载对应版本的ng-antd-admin,最新版本直接从master分支下载即可，历史版本在这个链接进行下载[这里](https://github.com/huajian123/ng-antd-admin/releases)。<br>
 <br>
 <br>
-2.账号admin，密码a123456<br>
+2.[v17.1](https://github.com/huajian123/ng-antd-admin/releases/tag/v17.1.0)这个版本前，系统管理菜单下都为真实api接口调用示例。账号admin，密码123456 ,，数据库每10分钟从备份恢复一次<br>
+之后的版本接口均为mswjs,mock数据<br>
 <br>
 <br>
 3.上传，下载，websocket，系统管理模块均为真实接口调用展示。<br>
+<br>
+<br>
+4.完成最常用的权限控制，人员账号管理，角色管理，菜单管理，登录超时等。添加了大量业务示例，开箱即用。<br>
 <br>
 <br>
 <br>

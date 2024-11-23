@@ -1,15 +1,16 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # Compiled output
-/dist
-/tmp
-/out-tsc
-/bazel-out
-
+ui/dist
+ui/tmp
+ui/out-tsc
+ui/bazel-out
+nest-api/dist
 # Node
-/node_modules
-npm-debug.log
-yarn-error.log
+ui/node_modules
+nest-api/node_modules
+ui/npm-debug.log
+ui/yarn-error.log
 
 # IDEs and editors
 .idea/
@@ -21,15 +22,15 @@ yarn-error.log
 *.sublime-workspace
 
 # Visual Studio Code
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
+ui/.vscode/*
+!ui/.vscode/settings.json
+!ui/.vscode/tasks.json
+!ui/.vscode/launch.json
+!ui/.vscode/extensions.json
 .history/*
 
 # Miscellaneous
-/.angular/cache
+ui/.angular/cache
 .sass-cache/
 /connect.lock
 /coverage
