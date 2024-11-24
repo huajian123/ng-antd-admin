@@ -35,28 +35,6 @@ export class PermissionService {
       .select()
       .from(sysRolePermTable)
       .where(eq(sysRolePermTable.roleId, roleId));
-
-    console.log(data);
-    // const data = await this.prisma.sysRoleMenu.findMany({
-    //   where: {
-    //     roleId,
-    //   },
-    //   select: {
-    //     menuId: true,
-    //   },
-    // });
     return data.map((item) => item.permCode);
   }
-  //
-  // findOne(id: number) {
-  //   return `This action returns a #${id} permission`;
-  // }
-  //
-  // update(id: number, updatePermissionDto: UpdatePermissionDto) {
-  //   return `This action updates a #${id} permission`;
-  // }
-  //
-  // remove(id: number) {
-  //   return `This action removes a #${id} permission`;
-  // }
 }
