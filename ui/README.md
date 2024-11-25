@@ -67,15 +67,16 @@ const routes: Routes = [
 ];
 ```
 
-# 模块不需要保存状态，类似于vue的keep-alive，默认都是开启的，如果不需要这个功能，则配置shouldDetach: 'no'(Modules don't need to save state)
-
+# 组件不需要保存状态，(Modules don't need to save state)
+保存状态的意思是，类似于vue的keep-alive，在angular中称为路由复用，组件的状态会保留，不会由于切换页签而丢失状态，默认都是开启的，如果不需要这个功能，则配置shouldDetach: 'no'
 ```typescript
 const routes: Routes = [
   {path: '', data: {key: 'login', shouldDetach: 'no'}, component: LoginFormComponent}
 ];
 ```
 
-# 模块在保存状态(即“路由复用”)的情况下切换页签，onInit,onOndestroy会失效(因为组件被缓存了，没有重新创建或者销毁)，我们提供了临时声明周期如下，可以在进入页面，或者离开页面时被触发(The temporary statement cycle of switching tab calls is as follows)
+# 组件在保存状态下的生命周期(The temporary statement cycle of switching tab calls is as follows)
+组件在保存状态下(即“路由复用”)的情况下切换页签，onInit,onOndestroy会失效(因为组件被缓存了，没有重新创建或者销毁)，我们提供了临时声明周期如下，可以在进入页面，或者离开页面时被触发
 直接在目标组件中写出方法名为_onReuseInit或者_onReuseDestroy的方法即可实现，你可以全局搜这两个方法的名字，看示例<br>
 It can be realized by directly writing the method named _onReuseInit or _onReuseDestroy in the target component<br>
 ```typescript
@@ -107,8 +108,8 @@ enum EquipmentWidth {
 ```
 
 
-# 所有模块默认预加载，如果模块不需要预加载则添加以下配置(Modules do not need to be preloaded)
-
+# 组件不要预加载(Modules do not need to be preloaded)
+如果模块不需要预加载则添加以下配置，默认都是开启的
 ```typescript
 export const routes: Routes = [
   {
@@ -123,12 +124,34 @@ export const routes: Routes = [
 
 
 # 模块中打开新tab页来展示详情，必须设置参数如下(Open a new tab page in the module to display the details, and the parameters must be set as follows)
-在data中设置(newTab Set newTab in data)，这个场景请看在线地址上的演示，菜单为：功能>标签页操作>打开详情页1、打开详情页2、打开详情页3
+在data中设置，这个场景请看在线地址上的演示，菜单为：功能>标签页操作>打开详情页1、打开详情页2、打开详情页3
 ```typescript
 const routes: Routes = [
   {path: '', component: TabsComponent, data: {title: '标签页操作', key: 'tabs'}},
   {path: 'example-detail', component: DetailComponent, data: {newTab:'true', title: '演示详情', key: 'example-detail'}}
 ];
+```
+
+# 在当前页签中打开详情
+在data中设置title需要是同样的，这样就可以在当前页签中打开详情，这个场景请看在线地址上的演示，菜单为：系统管理>角色管理>设置权限
+```typescript
+export default [
+  {
+    path: '',
+    component: RoleManageComponent,
+    title: '角色管理',
+    data: { key: 'role-manage' }
+  },
+  {
+    path: 'set-role',
+    component: SetRoleComponent,
+    title: '角色管理',
+    data: {
+      key: 'set-role',
+      authCode: ActionCode.RoleManagerSetRole
+    }
+  }
+] satisfies Route[];
 ```
 
 # 缓存页面中指定容器的滚动条(The scroll bar of the specified container in the cache page)
