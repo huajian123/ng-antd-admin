@@ -17,7 +17,6 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
   selector: 'app-dept-manage-modal',
   templateUrl: './dept-manage-modal.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzRadioModule, NzInputNumberComponent]
 })
 export class DeptManageModalComponent extends BasicConfirmModalComponent implements OnInit {

@@ -28,7 +28,6 @@ interface SearchParam {
   selector: 'app-search-table',
   templateUrl: './search-table.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     PageHeaderComponent,
     NzCardModule,

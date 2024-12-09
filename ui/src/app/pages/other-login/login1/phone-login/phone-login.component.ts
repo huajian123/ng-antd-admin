@@ -17,7 +17,6 @@ import { NzInputModule } from 'ng-zorro-antd/input';
   templateUrl: './phone-login.component.html',
   styleUrls: ['./phone-login.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzButtonModule, NzWaveModule, NgStyle]
 })
 export class PhoneLoginComponent implements OnInit {

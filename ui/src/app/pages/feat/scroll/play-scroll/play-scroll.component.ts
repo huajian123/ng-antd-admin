@@ -14,7 +14,6 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
   templateUrl: './play-scroll.component.html',
   styleUrls: ['./play-scroll.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [PageHeaderComponent, NzCardModule, NzGridModule, NzButtonModule, NzWaveModule]
 })
 export class PlayScrollComponent {

@@ -13,7 +13,6 @@ import { NzWaveModule } from 'ng-zorro-antd/core/wave';
   selector: 'app-download',
   templateUrl: './download.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [PageHeaderComponent, NzCardModule, NzButtonModule, NzWaveModule]
 })
 export class DownloadComponent {

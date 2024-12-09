@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { TaskManageFormComponent } from '@app/pages/page-demo/form/advanced/task-manage-form/task-manage-form.component';
@@ -24,7 +24,6 @@ import { WarehouseManageFormComponent as WarehouseManageFormComponent_1 } from '
   templateUrl: './advanced.component.html',
   styleUrls: ['./advanced.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     PageHeaderComponent,
     FormsModule,

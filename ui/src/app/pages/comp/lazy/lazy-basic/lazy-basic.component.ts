@@ -12,7 +12,6 @@ import { NzWaveModule } from 'ng-zorro-antd/core/wave';
   styleUrls: ['./lazy-basic.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [LazyServiceService],
-  standalone: true,
   imports: [PageHeaderComponent, NzButtonModule, NzWaveModule, AdDirective]
 })
 export class LazyBasicComponent implements AfterViewInit {

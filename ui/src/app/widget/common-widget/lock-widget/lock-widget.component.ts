@@ -23,7 +23,6 @@ import { NzModalRef } from 'ng-zorro-antd/modal';
   templateUrl: './lock-widget.component.html',
   styleUrls: ['./lock-widget.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NzAvatarModule, FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzButtonModule, NzInputModule, NzIconModule, NzWaveModule]
 })
 export class LockWidgetComponent extends BasicConfirmModalComponent {

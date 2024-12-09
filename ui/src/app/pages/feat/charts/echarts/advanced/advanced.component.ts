@@ -15,7 +15,6 @@ type targetComp = ConnectChartsComponent | DraggableChartsComponent;
   selector: 'app-advanced',
   templateUrl: './advanced.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NzCardModule, NzTabsModule, PortalModule]
 })
 export class AdvancedComponent implements OnInit {

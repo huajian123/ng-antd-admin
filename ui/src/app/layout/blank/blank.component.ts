@@ -7,7 +7,6 @@ import { RouterOutlet } from '@angular/router';
     <router-outlet></router-outlet>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [RouterOutlet]
 })
 export class BlankComponent {}

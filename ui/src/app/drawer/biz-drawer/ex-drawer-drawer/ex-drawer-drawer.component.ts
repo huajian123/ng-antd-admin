@@ -12,7 +12,6 @@ import { NzInputModule } from 'ng-zorro-antd/input';
   selector: 'app-ex-drawer-drawer',
   templateUrl: './ex-drawer-drawer.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [FormsModule, ReactiveFormsModule, NzGridModule, NzFormModule, NzInputModule]
 })
 export class ExDrawerDrawerComponent {

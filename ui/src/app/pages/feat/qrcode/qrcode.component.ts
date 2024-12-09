@@ -5,7 +5,6 @@ import { NzQRCodeModule } from 'ng-zorro-antd/qr-code';
 
 @Component({
   selector: 'app-qrcode',
-  standalone: true,
   imports: [NzQRCodeModule, PageHeaderComponent],
   templateUrl: './qrcode.component.html',
   styleUrls: ['./qrcode.component.less'],

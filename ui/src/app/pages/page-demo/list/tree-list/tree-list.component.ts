@@ -29,7 +29,6 @@ interface SearchParam {
   selector: 'app-tree-list',
   templateUrl: './tree-list.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     PageHeaderComponent,
     NzCardModule,

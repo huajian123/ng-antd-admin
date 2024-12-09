@@ -9,7 +9,6 @@ import { NzWaveModule } from 'ng-zorro-antd/core/wave';
   selector: 'app-setup',
   templateUrl: './setup.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [PageHeaderComponent, NzButtonModule, NzWaveModule]
 })
 export class SetupComponent {

@@ -9,7 +9,6 @@ import { NzInputModule } from 'ng-zorro-antd/input';
   selector: 'app-detail',
   templateUrl: './detail.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NzInputModule, NumberLoopPipe]
 })
 export class DetailComponent implements OnInit {

@@ -16,7 +16,6 @@ import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzTableSize } from 'ng-zorro-antd/table';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 
-import { ScreenLessHiddenDirective } from '../../directives/screen-less-hidden.directive';
 import { AntTableComponentToken, TableHeader } from '../ant-table/ant-table.component';
 
 interface TableSizeItem {
@@ -29,7 +28,6 @@ interface TableSizeItem {
   selector: 'app-card-table-wrap',
   templateUrl: './card-table-wrap.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     NzCardModule,
     NgTemplateOutlet,
@@ -39,7 +37,6 @@ interface TableSizeItem {
     NzButtonModule,
     NzPopoverModule,
     NzToolTipModule,
-    ScreenLessHiddenDirective,
     NzDropDownModule,
     NzMenuModule,
     CdkDropList,

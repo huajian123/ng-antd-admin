@@ -43,7 +43,6 @@ enum TabEnum {
   selector: 'app-adv-detail',
   templateUrl: './adv-detail.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     PageHeaderComponent,
     NzRadioModule,

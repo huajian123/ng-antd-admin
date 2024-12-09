@@ -19,7 +19,6 @@ interface SearchParam {
   selector: 'app-shrink-form',
   templateUrl: './shrink-form.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [PageHeaderComponent, NzCardModule, FormsModule, NzFormModule, NzGridModule, NzInputModule, NzButtonModule, NzWaveModule, NzIconModule]
 })
 export class ShrinkFormComponent {

@@ -9,7 +9,6 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
   templateUrl: './keep-scroll-page.component.html',
   styleUrls: ['./keep-scroll-page.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [PageHeaderComponent, NzCardModule, NzGridModule]
 })
 export class KeepScrollPageComponent {

@@ -15,7 +15,6 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
   selector: 'app-success',
   templateUrl: './success.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NzCardModule, NzResultModule, NzTypographyModule, NzGridModule, NzStepsModule, NzIconModule, NzButtonModule, NzWaveModule]
 })
 export class SuccessComponent implements OnInit {
@@ -29,7 +28,7 @@ export class SuccessComponent implements OnInit {
       .observe(['(max-width: 770px)'])
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(result => {
-        let tempDir: 'vertical' | 'horizontal' = 'vertical';
+        let tempDir: 'vertical' | 'horizontal';
         if (result.matches) {
           tempDir = 'vertical';
         } else {

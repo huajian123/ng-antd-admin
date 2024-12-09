@@ -23,7 +23,6 @@ import { NzInputModule } from 'ng-zorro-antd/input';
   templateUrl: './normal-login.component.html',
   styleUrls: ['./normal-login.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzButtonModule, NzIconModule, NzCheckboxModule, NzWaveModule, NzDividerModule]
 })
 export class NormalLoginComponent implements OnInit {

@@ -21,7 +21,6 @@ import { NgxEchartsModule } from 'ngx-echarts';
   `,
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NzButtonModule, NzWaveModule, NgxEchartsModule]
 })
 export class InstanceOptsChartsComponent {

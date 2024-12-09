@@ -23,7 +23,6 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzTabsModule, NzGridModule, NzButtonModule, NzInputModule, NzWaveModule, NzCheckboxModule, NzIconModule, RouterLink, NzNotificationModule]
 })
 export class LoginFormComponent implements OnInit {

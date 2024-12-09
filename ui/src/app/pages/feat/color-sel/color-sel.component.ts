@@ -8,7 +8,6 @@ import { ColorPickerModule } from 'ngx-color-picker';
   selector: 'app-color-sel',
   templateUrl: './color-sel.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [PageHeaderComponent, NzCardModule, ColorPickerModule]
 })
 export class ColorSelComponent {

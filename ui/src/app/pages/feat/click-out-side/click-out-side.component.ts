@@ -13,7 +13,6 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
   templateUrl: './click-out-side.component.html',
   styleUrls: ['./click-out-side.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [PageHeaderComponent]
 })
 export class ClickOutSideComponent implements AfterViewInit {

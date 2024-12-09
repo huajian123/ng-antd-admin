@@ -7,7 +7,6 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
 
 @Component({
   selector: 'app-task-search-filters',
-  standalone: true,
   imports: [NzListModule, NzTypographyModule, NzAvatarModule, NzIconModule],
   templateUrl: './task-search-filters.component.html',
   styleUrls: ['./task-search-filters.component.less']

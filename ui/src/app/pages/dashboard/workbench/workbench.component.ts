@@ -24,7 +24,6 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
   templateUrl: './workbench.component.html',
   styleUrls: ['./workbench.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     PageHeaderComponent,
     NzGridModule,

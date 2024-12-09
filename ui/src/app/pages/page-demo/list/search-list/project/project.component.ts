@@ -21,7 +21,6 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
   templateUrl: './project.component.html',
   styleUrls: ['./project.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     NzCardModule,
     WaterMarkComponent,

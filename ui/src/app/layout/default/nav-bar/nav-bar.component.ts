@@ -8,7 +8,6 @@ import { filter, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 import { ThemeMode } from '@app/layout/default/setting-drawer/setting-drawer.component';
 import { TabService } from '@core/services/common/tab.service';
 import { Menu } from '@core/services/types';
-import { AuthDirective } from '@shared/directives/auth.directive';
 import { MenuStoreService } from '@store/common-store/menu-store.service';
 import { SplitNavStoreService } from '@store/common-store/split-nav-store.service';
 import { ThemeService } from '@store/common-store/theme.service';
@@ -24,8 +23,7 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [NzMenuModule, NzNoAnimationModule, NgTemplateOutlet, AuthDirective, NzButtonModule, NzIconModule, RouterLink, AsyncPipe]
+  imports: [NzMenuModule, NzNoAnimationModule, NgTemplateOutlet, NzButtonModule, NzIconModule, RouterLink, AsyncPipe]
 })
 export class NavBarComponent implements OnInit {
   @Input({ transform: booleanAttribute })

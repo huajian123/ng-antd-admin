@@ -13,7 +13,7 @@
   <input nz-input [placeholder]="'搜索图标的type'" (input)="searchIcon($event)" />
 </ng-template>
 <ng-template #contentTemplate>
-  <nz-card style="width: 300px; max-height: 220px; overflow: auto" [nzBodyStyle]="{ padding: '0' }" [nzBorderless]="true">
+  <nz-card style="width: 300px; max-height: 220px; overflow: auto" [nzBodyStyle]="{ padding: '0' }" [nzBordered]="false">
     @if (iconsStrShowArray && iconsStrShowArray.length > 0) {
       <nz-card>
         @for (item of iconsStrShowArray; track item) {

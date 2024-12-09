@@ -22,7 +22,6 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
   templateUrl: './base.component.html',
   styleUrls: ['./base.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     PageHeaderComponent,
     NzCardModule,

@@ -10,7 +10,6 @@ declare let BMap: NzSafeAny;
   selector: 'app-baidu-map',
   templateUrl: './baidu-map.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [PageHeaderComponent, NzCardModule]
 })
 export class BaiduMapComponent implements OnInit {

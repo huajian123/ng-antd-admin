@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-global-loading',
-  standalone: true,
   imports: [],
   template: `
     <div class="screen-full-height screen-full-width center">

@@ -26,7 +26,6 @@ enum StepEnum {
   templateUrl: './step.component.html',
   styleUrls: ['./step.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [PageHeaderComponent, NzCardModule, WaterMarkComponent, NzStepsModule, PortalModule]
 })
 export class StepComponent implements OnInit, AfterViewInit {

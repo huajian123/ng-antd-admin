@@ -21,7 +21,6 @@ interface ReturnObj {
   selector: 'app-base-detail',
   templateUrl: './base-detail.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [PageHeaderComponent, NzCardModule, WaterMarkComponent, NzDescriptionsModule, NzDividerModule, AntTableComponent]
 })
 export class BaseDetailComponent implements OnInit {

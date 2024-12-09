@@ -20,7 +20,6 @@ type targetComp = EventsChartsComponent | InitOptsChartsComponent | InstanceOpts
   selector: 'app-started',
   templateUrl: './started.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NzCardModule, NzTabsModule, PortalModule]
 })
 export class StartedComponent implements OnInit {

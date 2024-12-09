@@ -13,7 +13,6 @@ import { NzMessageService } from 'ng-zorro-antd/message';
   selector: 'app-copy',
   templateUrl: './copy.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [PageHeaderComponent, NzCardModule, NzButtonModule, NzInputModule, FormsModule, NzWaveModule, ClipboardModule]
 })
 export class CopyComponent {

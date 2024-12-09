@@ -18,7 +18,6 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NzCardModule, NzTypographyModule, NzGridModule, NzAvatarModule, NzResultModule, NzIconModule, NzButtonModule, FormsModule, ReactiveFormsModule, NzInputModule, NgClass, AsyncPipe]
 })
 export class ChatComponent implements OnInit, OnDestroy {

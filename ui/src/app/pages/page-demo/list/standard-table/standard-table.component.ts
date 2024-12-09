@@ -23,7 +23,6 @@ import { NzStatisticModule } from 'ng-zorro-antd/statistic';
   templateUrl: './standard-table.component.html',
   styleUrls: ['./standard-table.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     PageHeaderComponent,
     NzCardModule,

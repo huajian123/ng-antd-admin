@@ -11,7 +11,6 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
   selector: 'app-about',
   templateUrl: './about.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [PageHeaderComponent, NzCardModule, NzDescriptionsModule, NzTagModule, DatePipe]
 })
 export class AboutComponent {

@@ -13,7 +13,6 @@ import { NgxEchartsModule } from 'ngx-echarts';
   `,
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NgxEchartsModule, AsyncPipe]
 })
 export class RadialTreeComponent implements OnInit {

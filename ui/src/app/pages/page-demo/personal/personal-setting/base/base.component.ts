@@ -22,7 +22,6 @@ import { NzUploadChangeParam, NzUploadModule } from 'ng-zorro-antd/upload';
   templateUrl: './base.component.html',
   styleUrls: ['./base.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NzGridModule, FormsModule, NzFormModule, ReactiveFormsModule, NzInputModule, NzSelectModule, NzButtonModule, NzWaveModule, NgClass, NzAvatarModule, NzUploadModule, NzIconModule]
 })
 export class BaseComponent implements OnInit {

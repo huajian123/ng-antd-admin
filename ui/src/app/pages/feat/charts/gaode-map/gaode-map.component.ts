@@ -11,7 +11,6 @@ import { NzInputModule } from 'ng-zorro-antd/input';
   selector: 'app-gaode-map',
   templateUrl: './gaode-map.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [PageHeaderComponent, NzCardModule, WaterMarkComponent, NzInputModule, FormsModule]
 })
 export class GaodeMapComponent implements AfterViewInit {

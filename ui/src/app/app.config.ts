@@ -1,7 +1,7 @@
 import { DOCUMENT, registerLocaleData } from '@angular/common';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import zh from '@angular/common/locales/zh';
-import { APP_INITIALIZER, ApplicationConfig, FactoryProvider, importProvidersFrom, provideExperimentalZonelessChangeDetection } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, provideExperimentalZonelessChangeDetection, inject, provideAppInitializer, EnvironmentProviders } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter, RouteReuseStrategy, TitleStrategy, withComponentInputBinding, withHashLocation, withInMemoryScrolling, withPreloading } from '@angular/router';
 
@@ -49,51 +49,39 @@ export function SubWindowWithServiceFactory(subWindowWithService: SubWindowWithS
   return () => subWindowWithService.subWindowWidth();
 }
 
-const APPINIT_PROVIDES: FactoryProvider[] = [
+const APPINIT_PROVIDES: EnvironmentProviders[] = [
   // 项目启动
-  {
-    provide: APP_INITIALIZER,
-    useFactory: StartupServiceFactory,
-    deps: [StartupService],
-    multi: true
-  },
+  provideAppInitializer(() => {
+    const initializerFn = StartupServiceFactory(inject(StartupService));
+    return initializerFn();
+  }),
   // load阿里图标库cdn
-  {
-    provide: APP_INITIALIZER,
-    useFactory: LoadAliIconCdnFactory,
-    deps: [LoadAliIconCdnService],
-    multi: true
-  } satisfies FactoryProvider,
+  provideAppInitializer(() => {
+    const initializerFn = LoadAliIconCdnFactory(inject(LoadAliIconCdnService));
+    return initializerFn();
+  }),
   // 初始化锁屏服务
-  {
-    provide: APP_INITIALIZER,
-    useFactory: InitLockedStatusServiceFactory,
-    deps: [SubLockedStatusService],
-    multi: true
-  },
+  provideAppInitializer(() => {
+    const initializerFn = InitLockedStatusServiceFactory(inject(SubLockedStatusService));
+    return initializerFn();
+  }),
   // 初始化主题
-  {
-    provide: APP_INITIALIZER,
-    useFactory: InitThemeServiceFactory,
-    deps: [InitThemeService],
-    multi: true
-  },
+  provideAppInitializer(() => {
+    const initializerFn = InitThemeServiceFactory(inject(InitThemeService));
+    return initializerFn();
+  }),
   // 初始化监听屏幕宽度服务
-  {
-    provide: APP_INITIALIZER,
-    useFactory: SubWindowWithServiceFactory,
-    deps: [SubWindowWithService],
-    multi: true
-  },
+  provideAppInitializer(() => {
+    const initializerFn = SubWindowWithServiceFactory(inject(SubWindowWithService));
+    return initializerFn();
+  }),
   // 初始化暗黑模式还是default模式的css
-  {
-    provide: APP_INITIALIZER,
-    useFactory: (themeService: ThemeSkinService) => () => {
+  provideAppInitializer(() => {
+    const initializerFn = ((themeService: ThemeSkinService) => () => {
       return themeService.loadTheme();
-    },
-    deps: [ThemeSkinService],
-    multi: true
-  }
+    })(inject(ThemeSkinService));
+    return initializerFn();
+  })
 ];
 
 export const appConfig: ApplicationConfig = {

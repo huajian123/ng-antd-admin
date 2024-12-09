@@ -12,7 +12,6 @@ import { CardTableWrapComponent } from '@shared/components/card-table-wrap/card-
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { TreeNodeInterface, TreeTableComponent } from '@shared/components/tree-table/tree-table.component';
 import { WaterMarkComponent } from '@shared/components/water-mark/water-mark.component';
-import { AuthDirective } from '@shared/directives/auth.directive';
 import { MapKeyType, MapPipe, MapSet } from '@shared/pipes/map.pipe';
 import { fnFlatDataHasParentToTree, fnFlattenTreeDataByDataList, fnSortTreeData } from '@utils/treeTableTools';
 import { ModalBtnStatus } from '@widget/base-modal';
@@ -28,7 +27,6 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 
 interface SearchParam {
@@ -40,7 +38,6 @@ interface SearchParam {
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     PageHeaderComponent,
     WaterMarkComponent,
@@ -55,7 +52,6 @@ interface SearchParam {
     NzIconModule,
     CardTableWrapComponent,
     TreeTableComponent,
-    AuthDirective,
     NgTemplateOutlet,
     NzTagModule
   ]

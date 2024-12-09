@@ -6,7 +6,6 @@ import { NzListModule } from 'ng-zorro-antd/list';
   selector: 'app-safe',
   templateUrl: './safe.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NzListModule]
 })
 export class SafeComponent implements OnInit {

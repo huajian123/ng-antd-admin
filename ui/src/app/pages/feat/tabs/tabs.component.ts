@@ -13,7 +13,6 @@ import { NzInputModule } from 'ng-zorro-antd/input';
   selector: 'app-tabs',
   templateUrl: './tabs.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [PageHeaderComponent, NzCardModule, NzAlertModule, NzButtonModule, NzInputModule, NzWaveModule]
 })
 export class TabsComponent {

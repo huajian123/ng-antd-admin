@@ -11,7 +11,6 @@ import screenfull from 'screenfull';
   selector: 'app-full-screen',
   templateUrl: './full-screen.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [PageHeaderComponent, NzCardModule, NzSpaceModule, NzButtonModule, NzWaveModule]
 })
 export class FullScreenComponent implements OnInit {

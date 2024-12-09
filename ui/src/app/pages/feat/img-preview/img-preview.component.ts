@@ -11,7 +11,6 @@ import { NzSpaceModule } from 'ng-zorro-antd/space';
   templateUrl: './img-preview.component.html',
   styleUrls: ['./img-preview.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [PageHeaderComponent, NzImageModule, NzSpaceModule, NzButtonModule, NzWaveModule]
 })
 export class ImgPreviewComponent {

@@ -13,7 +13,6 @@ import { NzInputModule } from 'ng-zorro-antd/input';
   selector: 'app-strength-meter',
   templateUrl: './strength-meter.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [PageHeaderComponent, NzGridModule, NzCardModule, NzButtonModule, NzInputModule, FormsModule, PasswordStrengthMeterComponent, NzIconModule]
 })
 export class StrengthMeterComponent {

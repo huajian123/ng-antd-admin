@@ -34,7 +34,6 @@ const passiveEventListenerOptions = normalizePassiveListenerOptions({ passive: t
   templateUrl: './search-route.component.html',
   styleUrls: ['./search-route.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NzButtonModule, NzInputModule, FormsModule, NzIconModule, NzEmptyModule, NzGridModule, NzDividerModule]
 })
 export class SearchRouteComponent extends BasicConfirmModalComponent implements OnInit, AfterViewInit {

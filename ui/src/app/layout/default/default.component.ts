@@ -1,4 +1,4 @@
-import { NgTemplateOutlet, AsyncPipe, NgClass, NgStyle, NgOptimizedImage } from '@angular/common';
+import { NgTemplateOutlet, NgClass, NgStyle } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, AfterViewInit, inject, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterOutlet } from '@angular/router';
@@ -33,7 +33,6 @@ import { ToolBarComponent } from './tool-bar/tool-bar.component';
   styleUrls: ['./default.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeRouteAnimation],
-  standalone: true,
   imports: [
     TopProgressBarComponent,
     NzLayoutModule,
@@ -45,7 +44,6 @@ import { ToolBarComponent } from './tool-bar/tool-bar.component';
     NzMenuModule,
     NzButtonModule,
     NzIconModule,
-    AsyncPipe,
     SideNavComponent,
     NgTemplateOutlet,
     ToolBarComponent,
@@ -56,9 +54,7 @@ import { ToolBarComponent } from './tool-bar/tool-bar.component';
     TabComponent,
     RouterOutlet,
     NavDrawerComponent,
-    AsyncPipe,
-    ChatComponent,
-    NgOptimizedImage
+    ChatComponent
   ]
 })
 export class DefaultComponent implements OnInit, AfterViewInit {

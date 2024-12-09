@@ -52,7 +52,6 @@ type SettingKey = Exclude<keyof SettingInterface, ExcludedKeys>;
   templateUrl: './setting-drawer.component.html',
   styleUrls: ['./setting-drawer.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [CdkDrag, NzIconModule, NzButtonModule, NzDrawerModule, NzToolTipModule, NzDividerModule, NzListModule, NzSwitchModule, FormsModule]
 })
 export class SettingDrawerComponent implements OnInit {

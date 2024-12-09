@@ -25,7 +25,6 @@ import LinearGradient from 'zrender/lib/graphic/LinearGradient';
   `,
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NgxEchartsModule]
 })
 export class EventsChartsComponent implements OnInit {

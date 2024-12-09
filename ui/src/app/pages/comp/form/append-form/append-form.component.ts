@@ -70,7 +70,6 @@ export enum TaskStateSearchCheckPeriodEnum {
   templateUrl: './append-form.component.html',
   styleUrls: ['./append-form.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     PageHeaderComponent,
     NzCardModule,

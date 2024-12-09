@@ -1,6 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Output, EventEmitter, inject } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { DeptTreeSearchService } from '@app/pages/system/account/dept-tree/dept-tree-search.service';
@@ -18,7 +18,6 @@ import { NzTreeViewModule } from 'ng-zorro-antd/tree-view';
   styleUrls: ['./dept-tree.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [DeptTreeService, DeptTreeSearchService],
-  standalone: true,
   imports: [NzCardModule, NzButtonModule, NzInputModule, FormsModule, NzIconModule, NzTreeViewModule, NzHighlightModule]
 })
 export class DeptTreeComponent implements OnInit {

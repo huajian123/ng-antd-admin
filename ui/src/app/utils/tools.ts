@@ -2,7 +2,7 @@ import { FormArray, FormGroup } from '@angular/forms';
 import { ActivatedRouteSnapshot } from '@angular/router';
 
 import { LockScreenFlag } from '@store/common-store/lock-screen-store.service';
-import CryptoJS from 'crypto-js';
+// import CryptoJS from 'crypto-js';
 import { endOfDay, startOfDay } from 'date-fns';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { silentEvent } from 'ng-zorro-antd/core/util';
@@ -117,15 +117,19 @@ const fnGetBase64 = function getBase64(file: File): Promise<string | ArrayBuffer
   });
 };
 
+// todo https://stackoverflow.com/questions/78263714/the-package-crypto-wasnt-found-on-the-file-system-but-is-built-into-node
+// https://stackoverflow.com/questions/77918038/problem-while-ng-build-using-the-new-angular-17-application-builder
 // 加密
 const fnEncrypt = function encrypt(word: NzSafeAny, keyStr: string): string {
-  return CryptoJS.AES.encrypt(JSON.stringify(word), keyStr).toString();
+  return JSON.stringify(word);
+  // return CryptoJS.AES.encrypt(JSON.stringify(word), keyStr).toString();
 };
 
 // 解密
 const fnDecrypt = function decrypt(word: NzSafeAny, keyStr: string): LockScreenFlag {
-  const bytes = CryptoJS.AES.decrypt(word, keyStr);
-  return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+  return JSON.parse(word);
+  // const bytes = CryptoJS.AES.decrypt(word, keyStr);
+  // return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
 };
 
 /*import {endOfDay, startOfDay} from 'date-fns';*/

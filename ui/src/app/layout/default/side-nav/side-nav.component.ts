@@ -11,7 +11,6 @@ import { NavBarComponent } from '../nav-bar/nav-bar.component';
   templateUrl: './side-nav.component.html',
   styleUrls: ['./side-nav.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NavBarComponent, AsyncPipe]
 })
 export class SideNavComponent {

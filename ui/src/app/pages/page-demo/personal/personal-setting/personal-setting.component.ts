@@ -27,7 +27,6 @@ interface TabInterface {
   templateUrl: './personal-setting.component.html',
   styleUrls: ['./personal-setting.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NzCardModule, NgClass, NzMenuModule, NzButtonModule, NzGridModule, NzTypographyModule, AdDirective_1]
 })
 export class PersonalSettingComponent implements OnInit {

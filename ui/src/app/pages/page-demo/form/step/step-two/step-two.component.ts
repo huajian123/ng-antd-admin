@@ -17,7 +17,6 @@ import { NzInputModule } from 'ng-zorro-antd/input';
   templateUrl: './step-two.component.html',
   styleUrls: ['./step-two.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NzAlertModule, NzDescriptionsModule, NzDividerModule, FormsModule, ReactiveFormsModule, NzGridModule, NzFormModule, NzButtonModule, NzInputModule, NzWaveModule]
 })
 export class StepTwoComponent implements OnInit {

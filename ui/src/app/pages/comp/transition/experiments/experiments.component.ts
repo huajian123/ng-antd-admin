@@ -35,7 +35,6 @@ import { AngularImgComponent } from '../angular-img/angular-img.component';
     rubberBandOnEnterAnimation({ anchor: 'btnEnter', delay: 12500 }),
     fadeInOnEnterAnimation({ anchor: 'btnEnterFadeIn', delay: 12500, duration: 500 })
   ],
-  standalone: true,
   imports: [AngularImgComponent, NzButtonModule, NzWaveModule]
 })
 export class ExperimentsComponent {

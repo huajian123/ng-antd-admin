@@ -23,7 +23,6 @@ interface TabInterface {
   templateUrl: './search-list.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeRouteAnimation],
-  standalone: true,
   imports: [PageHeaderComponent, WaterMarkComponent, NzButtonModule, NzInputModule, NzWaveModule, NzTabsModule, RouterOutlet]
 })
 export class SearchListComponent {

@@ -31,7 +31,6 @@ const EXE_COUNTER_VALUE_ACCESSOR = {
   styleUrls: ['./warehouse-manage-form.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [EXE_COUNTER_VALUE_ACCESSOR],
-  standalone: true,
   imports: [FormsModule, ReactiveFormsModule, NzGridModule, NzFormModule, NzInputModule]
 })
 export class WarehouseManageFormComponent implements OnInit, ControlValueAccessor {

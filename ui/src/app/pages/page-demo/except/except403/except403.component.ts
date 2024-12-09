@@ -14,7 +14,6 @@ import { NzResultModule } from 'ng-zorro-antd/result';
     </nz-result>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NzResultModule, NzButtonModule, NzWaveModule]
 })
 export class Except403Component {}

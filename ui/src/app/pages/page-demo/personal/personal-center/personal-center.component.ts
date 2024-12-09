@@ -30,7 +30,6 @@ interface TabInterface {
   templateUrl: './personal-center.component.html',
   styleUrls: ['./personal-center.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     NzGridModule,
     NzCardModule,

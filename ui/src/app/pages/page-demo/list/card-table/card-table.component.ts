@@ -16,7 +16,6 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
   templateUrl: './card-table.component.html',
   styleUrls: ['./card-table.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [PageHeaderComponent, NzGridModule, WaterMarkComponent, NzCardModule, NzIconModule, NzButtonModule, NzAvatarModule, AsyncPipe]
 })
 export class CardTableComponent implements AfterViewInit {

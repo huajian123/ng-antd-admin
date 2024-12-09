@@ -7,7 +7,6 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 
 @Component({
   selector: 'app-task-search-info',
-  standalone: true,
   imports: [UserInfoComponent, TaskSearchFiltersComponent, NzDividerModule, NzCardModule],
   templateUrl: './task-search-info.component.html',
   styleUrls: ['./task-search-info.component.less']

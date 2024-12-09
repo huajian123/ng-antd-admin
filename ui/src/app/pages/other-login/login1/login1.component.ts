@@ -42,7 +42,6 @@ interface LoginFormComponentInterface {
   templateUrl: './login1.component.html',
   styleUrls: ['./login1.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NzGridModule, NzCardModule, AdDirective_1, NzSwitchModule, FormsModule, NzDropDownModule, NzIconModule, NzButtonModule, NzMenuModule, AsyncPipe]
 })
 export class Login1Component implements OnInit {

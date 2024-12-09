@@ -9,7 +9,6 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NzIconModule, NzButtonModule, RouterOutlet]
 })
 export class LoginComponent {}

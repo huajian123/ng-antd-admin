@@ -1,5 +1,5 @@
 import { NgStyle } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { WaterMarkComponent } from '@shared/components/water-mark/water-mark.component';
@@ -21,7 +21,6 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
   templateUrl: './article.component.html',
   styleUrls: ['./article.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     NzCardModule,
     WaterMarkComponent,

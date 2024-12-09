@@ -7,7 +7,6 @@ import { NzInputModule } from 'ng-zorro-antd/input';
   selector: 'app-menu2',
   templateUrl: './menu2.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NzInputModule, NumberLoopPipe]
 })
 export class Menu2Component {}

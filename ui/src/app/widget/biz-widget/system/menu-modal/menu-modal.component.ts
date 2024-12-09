@@ -23,7 +23,6 @@ type menuType = 'C' | 'F';
   selector: 'app-menu-modal',
   templateUrl: './menu-modal.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzRadioModule, NzButtonModule, IconSelComponent, NzInputNumberModule, NzSwitchModule]
 })
 export class MenuModalComponent extends BasicConfirmModalComponent implements OnInit {

@@ -1,4 +1,3 @@
-import { NgOptimizedImage } from '@angular/common';
 import { Component } from '@angular/core';
 
 import { PageHeaderComponent, PageHeaderType } from '@shared/components/page-header/page-header.component';
@@ -6,8 +5,7 @@ import { NzCardComponent } from 'ng-zorro-antd/card';
 
 @Component({
   selector: 'app-blingbling',
-  standalone: true,
-  imports: [PageHeaderComponent, NzCardComponent, NgOptimizedImage],
+  imports: [PageHeaderComponent, NzCardComponent],
   templateUrl: './blingbling.component.html',
   styleUrl: './blingbling.component.less'
 })

@@ -16,7 +16,6 @@ import { NzSliderModule } from 'ng-zorro-antd/slider';
   selector: 'app-append-form-modal',
   templateUrl: './append-form-modal.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzDatePickerModule, NzSliderModule]
 })
 export class AppendFormModalComponent extends BasicConfirmModalComponent implements OnInit {

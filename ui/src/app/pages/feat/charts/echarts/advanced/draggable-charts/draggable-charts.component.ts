@@ -21,7 +21,6 @@ const Data = [
   `,
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NgxEchartsModule]
 })
 export class DraggableChartsComponent implements OnDestroy {

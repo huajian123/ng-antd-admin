@@ -26,7 +26,6 @@ const THUMBUP_ICON =
   templateUrl: './icons.component.html',
   styleUrls: ['./icons.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [PageHeaderComponent, NzCardModule, NzButtonModule, NzWaveModule, NzInputModule, FormsModule, IconSelComponent, NzIconModule, MatIconModule]
 })
 export class IconsComponent {

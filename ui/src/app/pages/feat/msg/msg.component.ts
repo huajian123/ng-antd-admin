@@ -19,7 +19,6 @@ type confirmType = common | 'info' | 'confirm';
   templateUrl: './msg.component.html',
   styleUrls: ['./msg.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [PageHeaderComponent, NzCardModule, NzButtonModule, NzWaveModule, NzIconModule, NzNotificationServiceModule]
 })
 export class MsgComponent {

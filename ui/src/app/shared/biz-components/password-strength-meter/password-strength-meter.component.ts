@@ -8,7 +8,6 @@ import { PSMProgressBarDirective } from './psm-progress-bar.directive';
   selector: 'password-strength-meter',
   templateUrl: './password-strength-meter.component.html',
   styleUrls: ['./password-strength-meter.component.less'],
-  standalone: true,
   providers: [PasswordStrengthMeterService],
   imports: [PSMProgressBarDirective]
 })

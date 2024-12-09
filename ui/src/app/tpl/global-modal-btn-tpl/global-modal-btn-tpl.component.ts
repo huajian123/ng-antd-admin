@@ -15,7 +15,6 @@ export abstract class GlobalModalBtnTplComponentToken {
 
 @Component({
   selector: 'app-global-modal-btn-tpl',
-  standalone: true,
   imports: [NzIconModule, AsyncPipe],
   templateUrl: './global-modal-btn-tpl.component.html',
   providers: [{ provide: GlobalModalBtnTplComponentToken, useExisting: GlobalModalBtnTplComponent }],

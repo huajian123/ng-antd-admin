@@ -15,7 +15,6 @@ import { NZ_MODAL_DATA, NzModalRef } from 'ng-zorro-antd/modal';
   selector: 'app-role-manage-modal',
   templateUrl: './role-manage-modal.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule]
 })
 export class RoleManageModalComponent extends BasicConfirmModalComponent implements OnInit {

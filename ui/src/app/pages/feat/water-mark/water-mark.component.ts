@@ -5,7 +5,6 @@ import { NzWaterMarkModule } from 'ng-zorro-antd/water-mark';
 
 @Component({
   selector: 'app-water-mark',
-  standalone: true,
   imports: [NzWaterMarkModule, PageHeaderComponent],
   templateUrl: './water-mark.component.html',
   styleUrls: ['./water-mark.component.less'],

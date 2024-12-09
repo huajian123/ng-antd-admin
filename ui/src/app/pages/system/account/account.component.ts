@@ -10,7 +10,6 @@ import { AccountService, User } from '@services/system/account.service';
 import { AntTableConfig, AntTableComponent } from '@shared/components/ant-table/ant-table.component';
 import { CardTableWrapComponent } from '@shared/components/card-table-wrap/card-table-wrap.component';
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
-import { AuthDirective } from '@shared/directives/auth.directive';
 import { MapKeyType, MapPipe, MapSet } from '@shared/pipes/map.pipe';
 import { ModalBtnStatus } from '@widget/base-modal';
 import { AccountModalService } from '@widget/biz-widget/system/account-modal/account-modal.service';
@@ -26,7 +25,6 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
-import { NzTableQueryParams } from 'ng-zorro-antd/table';
 
 import { DeptTreeComponent } from './dept-tree/dept-tree.component';
 
@@ -41,7 +39,6 @@ interface SearchParam {
   selector: 'app-account',
   templateUrl: './account.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     PageHeaderComponent,
     NzGridModule,
@@ -56,7 +53,6 @@ interface SearchParam {
     NzIconModule,
     CardTableWrapComponent,
     AntTableComponent,
-    AuthDirective,
     NzSwitchModule
   ]
 })

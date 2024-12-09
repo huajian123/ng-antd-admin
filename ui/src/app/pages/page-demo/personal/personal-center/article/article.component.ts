@@ -14,7 +14,6 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
   templateUrl: './article.component.html',
   styleUrls: ['./article.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NzListModule, NzTagModule, NzGridModule, NzAvatarModule, NzTypographyModule, NzIconModule, NzButtonModule, NumberLoopPipe]
 })
 export class ArticleComponent {}

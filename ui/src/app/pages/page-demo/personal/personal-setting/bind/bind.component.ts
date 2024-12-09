@@ -9,7 +9,6 @@ import { NzListModule } from 'ng-zorro-antd/list';
   templateUrl: './bind.component.html',
   styleUrls: ['./bind.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NzListModule, NzIconModule, NzButtonModule]
 })
 export class BindComponent implements OnInit {

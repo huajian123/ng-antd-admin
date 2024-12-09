@@ -34,7 +34,6 @@ import { fadeRouteAnimation } from './animations/fade.animation';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeRouteAnimation],
-  standalone: true,
   imports: [LockScreenComponent, NzBackTopModule, RouterOutlet, NzSpinModule, AsyncPipe]
 })
 export class AppComponent implements OnInit, AfterViewInit {

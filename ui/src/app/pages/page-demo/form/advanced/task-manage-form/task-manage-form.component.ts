@@ -30,7 +30,6 @@ const EXE_COUNTER_VALUE_ACCESSOR = {
   styleUrls: ['./task-manage-form.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [EXE_COUNTER_VALUE_ACCESSOR],
-  standalone: true,
   imports: [FormsModule, ReactiveFormsModule, NzGridModule, NzFormModule, NzInputModule]
 })
 export class TaskManageFormComponent implements OnInit, ControlValueAccessor {

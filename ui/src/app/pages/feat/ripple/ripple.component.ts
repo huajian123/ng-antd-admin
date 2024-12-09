@@ -13,7 +13,6 @@ import { ColorPickerModule } from 'ngx-color-picker';
   templateUrl: './ripple.component.html',
   styleUrls: ['./ripple.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [PageHeaderComponent, NzCardModule, NzCheckboxModule, FormsModule, NzInputNumberModule, ColorPickerModule, MatRippleModule]
 })
 export class RippleComponent {

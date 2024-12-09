@@ -16,7 +16,6 @@ import { ExperimentsComponent } from './experiments/experiments.component';
   templateUrl: './transition.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInOnEnterAnimation(), fadeOutOnLeaveAnimation(), rubberBandAnimation(), collapseAnimation()],
-  standalone: true,
   imports: [PageHeaderComponent, NzButtonModule, NzWaveModule, NzCardModule, DemoMainComponent, DemoOnEnterOnLeaveComponent, DemoDynamicParamsComponent, ExperimentsComponent]
 })
 export class TransitionComponent {

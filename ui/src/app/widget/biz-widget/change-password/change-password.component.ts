@@ -17,7 +17,6 @@ import { NzModalRef } from 'ng-zorro-antd/modal';
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzButtonModule, PasswordStrengthMeterComponent, NzIconModule]
 })
 export class ChangePasswordComponent extends BasicConfirmModalComponent {

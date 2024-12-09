@@ -21,7 +21,6 @@ type targetComp = StartedComponent | AdvancedComponent | SeriesComponent;
   selector: 'app-echarts',
   templateUrl: './echarts.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [PageHeaderComponent, PortalModule, NzTabsModule, NgxEchartsModule],
   providers: [
     {

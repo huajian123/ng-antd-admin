@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';
@@ -14,7 +14,6 @@ import { NzResultModule } from 'ng-zorro-antd/result';
     </nz-result>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NzResultModule, NzButtonModule, NzWaveModule]
 })
 export class Except404Component {}

@@ -12,7 +12,6 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
   selector: 'app-desc',
   templateUrl: './desc.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [PageHeaderComponent, NzGridModule, NzCardModule, NzDescriptionsModule, NzToolTipModule, NzIconModule, NzButtonModule]
 })
 export class DescComponent {

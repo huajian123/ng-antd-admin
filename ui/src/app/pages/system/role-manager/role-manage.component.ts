@@ -23,7 +23,6 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { NzTableQueryParams } from 'ng-zorro-antd/table';
 
 interface SearchParam {
   roleName: string;
@@ -33,21 +32,7 @@ interface SearchParam {
   selector: 'app-role-manage',
   templateUrl: './role-manage.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [
-    PageHeaderComponent,
-    NzCardModule,
-    FormsModule,
-    NzFormModule,
-    NzGridModule,
-    NzInputModule,
-    NzButtonModule,
-    NzWaveModule,
-    NzIconModule,
-    CardTableWrapComponent,
-    AntTableComponent,
-    AuthDirective
-  ]
+  imports: [PageHeaderComponent, NzCardModule, FormsModule, NzFormModule, NzGridModule, NzInputModule, NzButtonModule, NzWaveModule, NzIconModule, CardTableWrapComponent, AntTableComponent]
 })
 export class RoleManageComponent implements OnInit {
   @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<NzSafeAny>;

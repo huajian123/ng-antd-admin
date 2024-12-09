@@ -17,7 +17,6 @@ export enum LazySelPeopleEnum {
   templateUrl: './lazy-targ-comp.component.html',
   styleUrls: ['./lazy-targ-comp.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NzCardModule, NzAvatarModule, NzButtonModule, NzWaveModule]
 })
 export class LazyTargCompComponent implements OnChanges {

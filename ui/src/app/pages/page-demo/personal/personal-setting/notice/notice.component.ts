@@ -8,7 +8,6 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
   selector: 'app-notice',
   templateUrl: './notice.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NzListModule, NzSwitchModule, FormsModule]
 })
 export class NoticeComponent implements OnInit {

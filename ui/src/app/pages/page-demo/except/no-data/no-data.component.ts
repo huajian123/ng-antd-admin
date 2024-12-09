@@ -8,7 +8,6 @@ import { NzResultModule } from 'ng-zorro-antd/result';
   selector: 'app-no-data',
   templateUrl: './no-data.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NzResultModule, NzButtonModule, NzWaveModule]
 })
 export class NoDataComponent {

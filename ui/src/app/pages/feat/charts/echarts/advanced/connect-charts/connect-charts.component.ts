@@ -20,7 +20,6 @@ import { NgxEchartsModule } from 'ngx-echarts';
   `,
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NzGridModule, NgxEchartsModule]
 })
 export class ConnectChartsComponent implements AfterViewInit {

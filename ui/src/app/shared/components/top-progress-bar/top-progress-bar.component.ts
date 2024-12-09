@@ -6,7 +6,6 @@ import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Rout
   templateUrl: './top-progress-bar.component.html',
   styleUrls: ['./top-progress-bar.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: []
 })
 export class TopProgressBarComponent {

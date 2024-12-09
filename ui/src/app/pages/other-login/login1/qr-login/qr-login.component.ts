@@ -16,7 +16,6 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
   templateUrl: './qr-login.component.html',
   styleUrls: ['./qr-login.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzTypographyModule, NzButtonModule, NzWaveModule, NzQRCodeModule]
 })
 export class QrLoginComponent implements OnInit {

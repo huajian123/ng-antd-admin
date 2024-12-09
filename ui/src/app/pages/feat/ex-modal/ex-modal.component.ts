@@ -16,7 +16,6 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
   selector: 'app-ex-modal',
   templateUrl: './ex-modal.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [PageHeaderComponent, NzButtonModule, NzWaveModule, NzModalModule, ModalDragDirective, CdkDrag, CdkDragHandle]
 })
 export class ExModalComponent {

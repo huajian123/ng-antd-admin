@@ -17,7 +17,6 @@ import { BasicConfirmModalComponent } from '../../base-modal';
   selector: 'app-login-modal',
   templateUrl: './login-modal.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule]
 })
 export class LoginModalComponent extends BasicConfirmModalComponent implements OnInit {

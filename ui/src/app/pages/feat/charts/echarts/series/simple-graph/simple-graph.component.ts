@@ -10,7 +10,6 @@ import { NgxEchartsModule } from 'ngx-echarts';
   `,
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NgxEchartsModule]
 })
 export class SimpleGraphComponent {

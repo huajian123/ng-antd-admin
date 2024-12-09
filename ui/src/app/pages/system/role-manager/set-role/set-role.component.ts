@@ -26,7 +26,6 @@ import { NzResultModule } from 'ng-zorro-antd/result';
   styleUrls: ['./set-role.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
   imports: [
     PageHeaderComponent,
     NzCardModule,

@@ -7,11 +7,10 @@ import { finalize } from 'rxjs/operators';
 import { ActionCode } from '@app/config/actionCode';
 import { OptionsInterface, SearchCommonVO } from '@core/services/types';
 import { Dept, DeptService } from '@services/system/dept.service';
-import { AntTableComponent, AntTableConfig, SortFile } from '@shared/components/ant-table/ant-table.component';
+import { AntTableConfig, SortFile } from '@shared/components/ant-table/ant-table.component';
 import { CardTableWrapComponent } from '@shared/components/card-table-wrap/card-table-wrap.component';
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { TreeNodeInterface, TreeTableComponent } from '@shared/components/tree-table/tree-table.component';
-import { AuthDirective } from '@shared/directives/auth.directive';
 import { MapKeyType, MapPipe, MapSet } from '@shared/pipes/map.pipe';
 import { fnFlatDataHasParentToTree, fnFlattenTreeDataByDataList, fnSortTreeData } from '@utils/treeTableTools';
 import { ModalBtnStatus } from '@widget/base-modal';
@@ -27,7 +26,6 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 
 interface SearchParam {
@@ -39,7 +37,6 @@ interface SearchParam {
   selector: 'app-dept',
   templateUrl: './dept.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     PageHeaderComponent,
     NzCardModule,
@@ -53,10 +50,8 @@ interface SearchParam {
     NzIconModule,
     CardTableWrapComponent,
     TreeTableComponent,
-    AuthDirective,
     NgTemplateOutlet,
-    NzTagModule,
-    AntTableComponent
+    NzTagModule
   ]
 })
 export class DeptComponent implements OnInit {

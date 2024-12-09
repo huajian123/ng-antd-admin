@@ -14,7 +14,6 @@ import { SideNavComponent } from '../side-nav/side-nav.component';
   templateUrl: './nav-drawer.component.html',
   styleUrls: ['./nav-drawer.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NzDrawerModule, NzLayoutModule, SideNavComponent, AsyncPipe]
 })
 export class NavDrawerComponent implements OnInit {

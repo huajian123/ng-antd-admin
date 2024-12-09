@@ -187,7 +187,6 @@ import { AngularImgComponent } from '../angular-img/angular-img.component';
     hueRotateAnimation(),
     hueRotateAnimation({ anchor: 'hueButton', duration: 20000 })
   ],
-  standalone: true,
   imports: [AngularImgComponent, NzSelectModule, FormsModule, NzButtonModule, NzWaveModule]
 })
 export class DemoMainComponent {

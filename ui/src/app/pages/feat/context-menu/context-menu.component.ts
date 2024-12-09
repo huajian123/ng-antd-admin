@@ -11,7 +11,6 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
   selector: 'app-context-menu',
   templateUrl: './context-menu.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [PageHeaderComponent, NzCardModule, NzButtonModule, NzWaveModule, NzDropDownModule, NzMenuModule]
 })
 export class ContextMenuComponent {

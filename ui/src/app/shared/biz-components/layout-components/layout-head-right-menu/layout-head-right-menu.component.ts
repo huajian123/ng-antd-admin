@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { LoginInOutService } from '@core/services/common/login-in-out.service';
 import { WindowService } from '@core/services/common/window.service';
 import { AccountService, UserPsd } from '@services/system/account.service';
-import { ScreenLessHiddenDirective } from '@shared/directives/screen-less-hidden.directive';
 import { ToggleFullscreenDirective } from '@shared/directives/toggle-fullscreen.directive';
 import { UserInfoStoreService } from '@store/common-store/userInfo-store.service';
 import { ModalBtnStatus } from '@widget/base-modal';
@@ -28,8 +27,7 @@ import { HomeNoticeComponent } from '../home-notice/home-notice.component';
   templateUrl: './layout-head-right-menu.component.html',
   styleUrls: ['./layout-head-right-menu.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [NgTemplateOutlet, ScreenLessHiddenDirective, NzToolTipModule, NzIconModule, NzButtonModule, ToggleFullscreenDirective, NzDropDownModule, NzBadgeModule, NzMenuModule, HomeNoticeComponent]
+  imports: [NgTemplateOutlet, NzToolTipModule, NzIconModule, NzButtonModule, ToggleFullscreenDirective, NzDropDownModule, NzBadgeModule, NzMenuModule, HomeNoticeComponent]
 })
 export class LayoutHeadRightMenuComponent {
   user!: UserPsd;

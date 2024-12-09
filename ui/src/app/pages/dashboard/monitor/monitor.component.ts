@@ -16,7 +16,6 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
   templateUrl: './monitor.component.html',
   styleUrls: ['./monitor.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NzCardModule, NzBreadCrumbModule, NzGridModule, NzStatisticModule, NzTypographyModule, DecimalPipe, PercentPipe]
 })
 export class MonitorComponent implements AfterViewInit {

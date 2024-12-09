@@ -15,7 +15,6 @@ const passiveEventListenerOptions = normalizePassiveListenerOptions({ passive: t
   templateUrl: './lazy-scroll.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [LazyServiceService],
-  standalone: true,
   imports: [PageHeaderComponent, AdDirective]
 })
 export class LazyScrollComponent implements AfterViewInit {

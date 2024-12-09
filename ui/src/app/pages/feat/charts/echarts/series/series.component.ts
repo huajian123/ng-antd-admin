@@ -16,7 +16,6 @@ type targetComp = SimpleGraphComponent | FromLeftToRightComponent | RadialTreeCo
   selector: 'app-series',
   templateUrl: './series.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NzCardModule, NzTabsModule, PortalModule]
 })
 export class SeriesComponent implements OnInit {

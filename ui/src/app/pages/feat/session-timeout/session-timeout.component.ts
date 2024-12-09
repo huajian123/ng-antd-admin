@@ -10,7 +10,6 @@ import { NzWaveModule } from 'ng-zorro-antd/core/wave';
   selector: 'app-session-timeout',
   templateUrl: './session-timeout.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [PageHeaderComponent, NzButtonModule, NzWaveModule]
 })
 export class SessionTimeoutComponent {

@@ -20,7 +20,6 @@ export interface PageHeaderType {
   templateUrl: './page-header.component.html',
   styleUrls: ['./page-header.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NzPageHeaderModule, NzBreadCrumbModule, NzOutletModule]
 })
 export class PageHeaderComponent {

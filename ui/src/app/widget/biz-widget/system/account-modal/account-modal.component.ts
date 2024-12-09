@@ -25,7 +25,6 @@ import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
   selector: 'app-account-modal',
   templateUrl: './account-modal.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzRadioModule, NzSwitchModule, NzTreeSelectModule, NzSelectModule]
 })
 export class AccountModalComponent extends BasicConfirmModalComponent implements OnInit {

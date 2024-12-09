@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 
 import { Graph } from '@antv/x6';
 import { Dnd } from '@antv/x6-plugin-dnd';
@@ -15,7 +15,6 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
   templateUrl: './flow-chat.component.html',
   styleUrls: ['./flow-chat.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [PageHeaderComponent, NzCardModule, NzResultModule, NzGridModule, NzButtonModule, NzToolTipModule, NzIconModule]
 })
 export class FlowChatComponent implements AfterViewInit {

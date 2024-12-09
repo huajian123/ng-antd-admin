@@ -11,7 +11,6 @@ import { NzResultModule } from 'ng-zorro-antd/result';
   templateUrl: './step-three.component.html',
   styleUrls: ['./step-three.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NzResultModule, NzButtonModule, NzWaveModule, NzDescriptionsModule]
 })
 export class StepThreeComponent {

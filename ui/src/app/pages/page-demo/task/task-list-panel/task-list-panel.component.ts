@@ -6,7 +6,6 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @Component({
   selector: 'app-task-list-panel',
-  standalone: true,
   imports: [NzCollapseModule, NzCardModule, NzIconModule],
   templateUrl: './task-list-panel.component.html',
   styleUrls: ['./task-list-panel.component.less']
