@@ -11,6 +11,7 @@ import { AntTableConfig, SortFile } from '@shared/components/ant-table/ant-table
 import { CardTableWrapComponent } from '@shared/components/card-table-wrap/card-table-wrap.component';
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { TreeNodeInterface, TreeTableComponent } from '@shared/components/tree-table/tree-table.component';
+import { AuthDirective } from '@shared/directives/auth.directive';
 import { MapKeyType, MapPipe, MapSet } from '@shared/pipes/map.pipe';
 import { fnFlatDataHasParentToTree, fnFlattenTreeDataByDataList, fnSortTreeData } from '@utils/treeTableTools';
 import { ModalBtnStatus } from '@widget/base-modal';
@@ -51,7 +52,8 @@ interface SearchParam {
     CardTableWrapComponent,
     TreeTableComponent,
     NgTemplateOutlet,
-    NzTagModule
+    NzTagModule,
+    AuthDirective
   ]
 })
 export class DeptComponent implements OnInit {

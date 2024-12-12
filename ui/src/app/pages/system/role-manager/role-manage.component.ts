@@ -32,7 +32,20 @@ interface SearchParam {
   selector: 'app-role-manage',
   templateUrl: './role-manage.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [PageHeaderComponent, NzCardModule, FormsModule, NzFormModule, NzGridModule, NzInputModule, NzButtonModule, NzWaveModule, NzIconModule, CardTableWrapComponent, AntTableComponent]
+  imports: [
+    PageHeaderComponent,
+    NzCardModule,
+    FormsModule,
+    NzFormModule,
+    NzGridModule,
+    NzInputModule,
+    NzButtonModule,
+    NzWaveModule,
+    NzIconModule,
+    CardTableWrapComponent,
+    AntTableComponent,
+    AuthDirective
+  ]
 })
 export class RoleManageComponent implements OnInit {
   @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<NzSafeAny>;

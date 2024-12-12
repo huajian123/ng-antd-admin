@@ -8,6 +8,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-tabs',
@@ -20,7 +21,7 @@ export class TabsComponent {
     title: '标签页操作示例，如果需要在当前tab页面展示详情，请在"列表页>查询表格"中点击表格查看按钮，演示效果',
     breadcrumb: ['首页', '扩展功能', '标签页面操作示例']
   };
-
+  private msg = inject(NzMessageService);
   private tabService = inject(TabService);
   private router = inject(Router);
 
@@ -41,7 +42,11 @@ export class TabsComponent {
 
   closeCurrent(): void {
     const tabArray = this.tabService.getTabArray();
-    this.tabService.delTab(tabArray[this.tabService.getCurrentTabIndex()], this.tabService.getCurrentTabIndex());
+    if (tabArray.length > 1) {
+      this.tabService.delTab(tabArray[this.tabService.getCurrentTabIndex()], this.tabService.getCurrentTabIndex());
+    } else {
+      this.msg.warning('这是最后一个页签，无法关闭');
+    }
   }
 
   openDetailPage(i: number): void {

@@ -41,7 +41,8 @@ interface SearchParam {
     NzIconModule,
     CardTableWrapComponent,
     AntTableComponent,
-    NzBadgeModule
+    NzBadgeModule,
+    CardTableWrapComponent
   ]
 })
 export class SearchTableComponent implements OnInit {

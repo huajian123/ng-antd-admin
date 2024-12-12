@@ -1,5 +1,5 @@
 {
-  "$schema": "../node_modules/@angular/cli/lib/config/schema.json",
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -57,8 +57,7 @@
                 "glob": "**/*",
                 "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
                 "output": "/assets/"
-              },
-              "src/mockServiceWorker.js"
+              }
             ],
             "styles": [
               "node_modules/driver.js/dist/driver.css",
@@ -169,10 +168,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": [],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "less",
             "assets": [
@@ -194,13 +190,6 @@
               "src/**/*.ts",
               "src/**/*.html"
             ]
-          }
-        },
-        "deploy": {
-          "builder": "angular-cli-ghpages:deploy",
-          "options": {
-            "baseHref": "/ng-antd-admin/",
-            "repo": "https://github.com/huajian123/ng-antd-admin.git"
           }
         }
       }

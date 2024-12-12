@@ -10,6 +10,7 @@ import { AccountService, User } from '@services/system/account.service';
 import { AntTableConfig, AntTableComponent } from '@shared/components/ant-table/ant-table.component';
 import { CardTableWrapComponent } from '@shared/components/card-table-wrap/card-table-wrap.component';
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
+import { AuthDirective } from '@shared/directives/auth.directive';
 import { MapKeyType, MapPipe, MapSet } from '@shared/pipes/map.pipe';
 import { ModalBtnStatus } from '@widget/base-modal';
 import { AccountModalService } from '@widget/biz-widget/system/account-modal/account-modal.service';
@@ -53,7 +54,8 @@ interface SearchParam {
     NzIconModule,
     CardTableWrapComponent,
     AntTableComponent,
-    NzSwitchModule
+    NzSwitchModule,
+    AuthDirective
   ]
 })
 export class AccountComponent implements OnInit {

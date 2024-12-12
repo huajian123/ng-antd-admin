@@ -3,6 +3,7 @@ import { NgTemplateOutlet, NgStyle } from '@angular/common';
 import { AfterContentInit, booleanAttribute, ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 
 import { AntTreeTableComponentToken } from '@shared/components/tree-table/tree-table.component';
+import { ScreenLessHiddenDirective } from '@shared/directives/screen-less-hidden.directive';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
@@ -43,7 +44,8 @@ interface TableSizeItem {
     CdkDrag,
     CdkDragHandle,
     NzCheckboxModule,
-    NgStyle
+    NgStyle,
+    ScreenLessHiddenDirective
   ]
 })
 export class CardTableWrapComponent implements AfterContentInit {
