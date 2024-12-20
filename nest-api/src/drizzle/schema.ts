@@ -49,7 +49,7 @@ export const departmentTable = pgTable('department', {
 
 // Menu 表
 export const menuTable = pgTable('menu', {
-  id: integer().primaryKey(),
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
   fatherId: integer('father_id').notNull(), // 父级菜单 ID
   menuName: varchar('menu_name', { length: 255 }).notNull(), // 菜单名称
   menuType: varchar('menu_type', { length: 100 }).notNull(), // 菜单类型
