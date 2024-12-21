@@ -45,6 +45,10 @@ export class TabService {
   }
 
   addTab(tabModel: TabModel, isNewTabDetailPage = false): void {
+    // 如果是刷新操作时的
+    if (tabModel.title === 'refresh-empty') {
+      return;
+    }
     this.tabArray.forEach(tab => {
       // 列表详情操作，例如用户表单点击详情，在当前tab中打开这个详情，可以看在线示例：“查询表格”与表格中的“查看按钮”
       // title需和用户表单详情组件路由的title相同
@@ -225,7 +229,7 @@ export class TabService {
       params = snapshot.params;
       // @ts-ignore
       urlWithOutParam = this.getCurrentPathWithoutParam(snapshot['_urlSegment'].segments, params);
-      this.router.navigateByUrl('/blank/global-loading', { skipLocationChange: true }).then(() => {
+      this.router.navigateByUrl('/default/refresh-empty', { skipLocationChange: true }).then(() => {
         SimpleReuseStrategy.deleteRouteSnapshot(key);
         this.router.navigate([urlWithOutParam, ...Object.values(params)]);
       });
@@ -235,7 +239,7 @@ export class TabService {
       const sourceUrl = this.router.url;
       const currentRoute = fnGetPathWithoutParam(sourceUrl);
       // 是query传参
-      this.router.navigateByUrl('/blank/global-loading', { skipLocationChange: true }).then(() => {
+      this.router.navigateByUrl('/default/refresh-empty', { skipLocationChange: true }).then(() => {
         SimpleReuseStrategy.deleteRouteSnapshot(key);
         this.router.navigate([currentRoute], { queryParams: params });
       });

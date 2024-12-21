@@ -84,6 +84,10 @@ export class NavBarComponent implements OnInit {
     this.router.events
       .pipe(
         filter(event => event instanceof NavigationEnd),
+        filter((event: NavigationEnd) => {
+          // 忽略刷新tab时的占用路由跳转
+          return event.url !== '/default/refresh-empty';
+        }),
         tap(() => {
           this.subTheme$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
             // 主题切换为混合模式下，设置左侧菜单数据源

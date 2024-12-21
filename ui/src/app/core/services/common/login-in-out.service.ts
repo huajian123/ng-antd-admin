@@ -96,12 +96,13 @@ export class LoginInOutService {
 
   loginOut(): Promise<void> {
     this.loginService.loginOut().pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
-    return this.clearTabCash()
+    return this.router
+      .navigate(['/login/login-form'])
       .then(() => {
-        return this.clearSessionCash();
+        return this.clearTabCash();
       })
       .then(() => {
-        this.router.navigate(['/login/login-form']);
+        return this.clearSessionCash();
       });
   }
 }

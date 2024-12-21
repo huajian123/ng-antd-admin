@@ -43,6 +43,13 @@ export default [
       {
         path: 'system',
         loadChildren: () => import('../../pages/system/system-routing')
+      },
+      // 此路由用于tab刷新时占位组件
+      {
+        path: 'refresh-empty',
+        title: 'refresh-empty',
+        data: { key: 'refresh-empty', shouldDetach: 'no' },
+        loadComponent: () => import('./refresh-empty/refresh-empty.component').then(m => m.RefreshEmptyComponent)
       }
     ]
   }
