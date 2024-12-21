@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-refresh-empty',
   imports: [],
-  template: '<input type="text">'
+  template: ''
 })
 export class RefreshEmptyComponent {}

@@ -4,7 +4,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterOutlet } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { fadeRouteAnimation } from '@app/animations/fade.animation';
 import { SettingDrawerComponent, Theme } from '@app/layout/default/setting-drawer/setting-drawer.component';
 import { CollapsedNavWidth, IsFirstLogin, SideNavWidth } from '@config/constant';
 import { DriverService } from '@core/services/common/driver.service';
@@ -32,7 +31,6 @@ import { ToolBarComponent } from './tool-bar/tool-bar.component';
   templateUrl: './default.component.html',
   styleUrls: ['./default.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [fadeRouteAnimation],
   imports: [
     TopProgressBarComponent,
     NzLayoutModule,
@@ -109,11 +107,6 @@ export class DefaultComponent implements OnInit, AfterViewInit {
     this.isCollapsed = isCollapsed;
     // 设置左侧菜单是否折叠的状态
     this.themesService.setIsCollapsed(this.isCollapsed);
-  }
-
-  // 路由动画
-  prepareRoute(outlet: RouterOutlet): string {
-    return outlet?.activatedRouteData?.['key'];
   }
 
   judgeMarginTop(): string {

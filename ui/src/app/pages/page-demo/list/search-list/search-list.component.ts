@@ -72,10 +72,6 @@ export class SearchListComponent {
       });
   }
 
-  prepareRoute(outlet: RouterOutlet): string {
-    return outlet?.activatedRouteData?.['key'];
-  }
-
   to(item: TabInterface): void {
     this.router.navigateByUrl(item.url);
   }

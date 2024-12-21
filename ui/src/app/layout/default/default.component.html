@@ -108,9 +108,7 @@
           @if (isShowTab) {
             <app-tab></app-tab>
           }
-          <div [@fadeRouteAnimation]="prepareRoute(outlet)">
-            <router-outlet #outlet="outlet"></router-outlet>
-          </div>
+          <router-outlet></router-outlet>
         </div>
       </nz-content>
       @if (isHasFooterArea) {
