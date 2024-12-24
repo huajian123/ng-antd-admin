@@ -1,6 +1,6 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { NgClass } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef, input } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -25,7 +25,9 @@ import { NzUploadChangeParam, NzUploadModule } from 'ng-zorro-antd/upload';
   imports: [NzGridModule, FormsModule, NzFormModule, ReactiveFormsModule, NzInputModule, NzSelectModule, NzButtonModule, NzWaveModule, NgClass, NzAvatarModule, NzUploadModule, NzIconModule]
 })
 export class BaseComponent implements OnInit {
-  @Input({ required: true }) data!: { label: string };
+  readonly data = input.required<{
+    label: string;
+}>();
   validateForm!: FormGroup;
   selectedProvince = 'Zhejiang';
   selectedCity = 'Hangzhou';

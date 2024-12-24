@@ -20,6 +20,8 @@ export class SearchTableDetailComponent implements OnInit {
     breadcrumb: ['首页', '列表页', '查询表格', '详情']
   };
   validateForm!: FormGroup;
+  // TODO: Skipped for migration because:
+  //  Your application code writes to the input. This prevents migration.
   @Input({ required: true }) name!: string; // 从路由中获取的参数，ng16支持的新特性
   backUrl = '/default/page-demo/list/search-table';
   destroyRef = inject(DestroyRef);

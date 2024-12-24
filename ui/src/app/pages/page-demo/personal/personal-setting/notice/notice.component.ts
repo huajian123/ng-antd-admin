@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { NzListModule } from 'ng-zorro-antd/list';
@@ -20,9 +20,11 @@ export class NoticeComponent implements OnInit {
     messages: true,
     todo: true
   };
-  @Input({ required: true }) data!: { label: string };
+  readonly data = input.required<{
+    label: string;
+  }>();
 
   ngOnInit(): void {
-    console.log(this.data);
+    console.log(this.data());
   }
 }

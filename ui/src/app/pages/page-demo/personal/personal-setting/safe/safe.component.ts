@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, input } from '@angular/core';
 
 import { NzListModule } from 'ng-zorro-antd/list';
 
@@ -9,9 +9,11 @@ import { NzListModule } from 'ng-zorro-antd/list';
   imports: [NzListModule]
 })
 export class SafeComponent implements OnInit {
-  @Input({ required: true }) data!: { label: string };
+  readonly data = input.required<{
+    label: string;
+  }>();
 
   ngOnInit(): void {
-    console.log(this.data);
+    console.log(this.data());
   }
 }

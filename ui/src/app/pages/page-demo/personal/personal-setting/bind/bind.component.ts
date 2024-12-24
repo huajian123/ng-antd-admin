@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, input } from '@angular/core';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -12,9 +12,11 @@ import { NzListModule } from 'ng-zorro-antd/list';
   imports: [NzListModule, NzIconModule, NzButtonModule]
 })
 export class BindComponent implements OnInit {
-  @Input({ required: true }) data!: { label: string };
+  readonly data = input.required<{
+    label: string;
+  }>();
 
   ngOnInit(): void {
-    console.log(this.data);
+    console.log(this.data());
   }
 }

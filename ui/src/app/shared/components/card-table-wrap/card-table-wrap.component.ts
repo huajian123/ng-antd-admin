@@ -1,6 +1,6 @@
 import { CdkDragDrop, moveItemInArray, CdkDropList, CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
 import { NgTemplateOutlet, NgStyle } from '@angular/common';
-import { AfterContentInit, booleanAttribute, ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
+import { AfterContentInit, booleanAttribute, ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, Output, TemplateRef, input } from '@angular/core';
 
 import { AntTreeTableComponentToken } from '@shared/components/tree-table/tree-table.component';
 import { ScreenLessHiddenDirective } from '@shared/directives/screen-less-hidden.directive';
@@ -49,10 +49,12 @@ interface TableSizeItem {
   ]
 })
 export class CardTableWrapComponent implements AfterContentInit {
-  @Input() tableTitle: string | TemplateRef<NzSafeAny> | undefined;
+  readonly tableTitle = input<string | TemplateRef<NzSafeAny>>();
+  // TODO: Skipped for migration because:
+  //  This input is used in a control flow expression (e.g. `@if` or `*ngIf`)
+  //  and migrating would break narrowing currently.
   @Input() btnTpl: TemplateRef<NzSafeAny> | undefined;
-  @Input({ transform: booleanAttribute })
-  isNormalTable = true; // 如果只是需要card-table-wrap的样式，这里设置为false
+  readonly isNormalTable = input(true, { transform: booleanAttribute }); // 如果只是需要card-table-wrap的样式，这里设置为false
   @Output() readonly reload = new EventEmitter<NzSafeAny>();
   @ContentChild(AntTableComponentToken) antTableComponent!: AntTableComponentToken;
   @ContentChild(AntTreeTableComponentToken) antTreeTableComponent!: AntTreeTableComponentToken;
@@ -70,7 +72,7 @@ export class CardTableWrapComponent implements AfterContentInit {
 
   // 是否展示复选框
   changeTableCheckBoxShow(e: boolean): void {
-    this.currentTableComponent.tableConfig.showCheckbox = e;
+    this.currentTableComponent.tableConfig().showCheckbox = e;
     this.tableChangeDectction();
   }
 
@@ -108,7 +110,7 @@ export class CardTableWrapComponent implements AfterContentInit {
         noFixedArray.push(item);
       }
     });
-    this.currentTableComponent.tableConfig.headers = [...fixedLeftArray, ...noFixedArray, ...fixedRightArray];
+    this.currentTableComponent.tableConfig().headers = [...fixedLeftArray, ...noFixedArray, ...fixedRightArray];
     this.tableChangeDectction();
   }
 
@@ -152,15 +154,15 @@ export class CardTableWrapComponent implements AfterContentInit {
     this.copyHeader.forEach(item => {
       this.tableHeaders.push({ ...item });
     });
-    this.currentTableComponent.tableConfig.headers = [...this.tableHeaders];
+    this.currentTableComponent.tableConfig().headers = [...this.tableHeaders];
     this.tableChangeDectction();
   }
 
   ngAfterContentInit(): void {
     this.currentTableComponent = this.antTableComponent || this.antTreeTableComponent;
 
-    if (this.isNormalTable) {
-      this.tableHeaders = [...this.currentTableComponent.tableConfig.headers];
+    if (this.isNormalTable()) {
+      this.tableHeaders = [...this.currentTableComponent.tableConfig().headers];
       this.tableHeaders.forEach(item => {
         if (item.show === undefined) {
           item.show = true;

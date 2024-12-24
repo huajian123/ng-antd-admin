@@ -26,6 +26,8 @@ interface IconItem {
   imports: [NzIconModule, NzButtonModule, NzPopoverModule, NzInputModule, NzCardModule, NgStyle, NzEmptyModule, NzPaginationModule]
 })
 export class IconSelComponent implements OnInit, AfterViewInit {
+  // TODO: Skipped for migration because:
+  //  Your application code writes to the input. This prevents migration.
   @Input({ transform: booleanAttribute }) visible = false;
   // 做图标搜索防抖
   private searchText$ = new Subject<string>();

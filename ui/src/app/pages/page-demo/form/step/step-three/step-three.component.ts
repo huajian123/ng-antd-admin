@@ -14,6 +14,8 @@ import { NzResultModule } from 'ng-zorro-antd/result';
   imports: [NzResultModule, NzButtonModule, NzWaveModule, NzDescriptionsModule]
 })
 export class StepThreeComponent {
+  // TODO: Skipped for migration because:
+  //  Your application code writes to the input. This prevents migration.
   @Input() stepDirection: 'horizontal' | 'vertical' = 'horizontal';
   @Output() readonly next = new EventEmitter<NzSafeAny>();
 }

@@ -7,6 +7,8 @@ import { Directive, inject, Input, TemplateRef, ViewContainerRef } from '@angula
   standalone: true
 })
 export class ScreenLessHiddenDirective {
+  // TODO: Skipped for migration because:
+  //  Accessor inputs cannot be migrated as they are too complex.
   @Input()
   set appScreenLessHidden(lessScreen: string | undefined) {
     if (!lessScreen) {

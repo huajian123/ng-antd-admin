@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostBinding, Input, numberAttribute, OnChanges, Renderer2, SimpleChanges, inject } from '@angular/core';
+import { Directive, ElementRef, HostBinding, numberAttribute, OnChanges, Renderer2, SimpleChanges, inject, input } from '@angular/core';
 
 @Directive({
   selector: '.psm__progress-bar',
@@ -8,14 +8,11 @@ export class PSMProgressBarDirective implements OnChanges {
   private renderer = inject(Renderer2);
   private el = inject<ElementRef<HTMLDivElement>>(ElementRef);
 
-  @Input({ transform: numberAttribute })
-  numberOfProgressBarItems: number | undefined;
+  readonly numberOfProgressBarItems = input<number, unknown>(undefined, { transform: numberAttribute });
 
-  @Input({ transform: numberAttribute })
-  passwordStrength: number | undefined;
+  readonly passwordStrength = input<number, unknown>(undefined, { transform: numberAttribute });
 
-  @Input()
-  colors: string[] = [];
+  readonly colors = input<string[]>([]);
 
   @HostBinding('attr.aria-valuemin') minProgressVal = 0;
 
@@ -43,13 +40,13 @@ export class PSMProgressBarDirective implements OnChanges {
 
   setProgressBarItems(): void {
     const progressBarItemContainer = this.progressBar.querySelector('.psm__progress-bar-items');
-    const width = 100 / this.numberOfProgressBarItems!;
+    const width = 100 / this.numberOfProgressBarItems()!;
 
     progressBarItemContainer!.childNodes.forEach(item => {
       this.renderer.removeChild(progressBarItemContainer, item);
     });
 
-    Array(this.numberOfProgressBarItems)
+    Array(this.numberOfProgressBarItems())
       .fill(1)
       .forEach(() => {
         const progressBarItem = this.renderer.createElement('div');
@@ -60,13 +57,13 @@ export class PSMProgressBarDirective implements OnChanges {
   }
 
   setProgressBar(): void {
-    const progressBarOverlayWidth = this.getFillMeterWidth(this.passwordStrength as number);
+    const progressBarOverlayWidth = this.getFillMeterWidth(this.passwordStrength() as number);
     const progressBarOverlayWidthInPx = `${progressBarOverlayWidth}%`;
 
-    const progressLevelBasedOnItems = (progressBarOverlayWidth / 100) * this.numberOfProgressBarItems!;
+    const progressLevelBasedOnItems = (progressBarOverlayWidth / 100) * this.numberOfProgressBarItems()!;
     const progressBarOverlayColor = this.getMeterFillColor(progressLevelBasedOnItems);
 
-    this.dataPasswordStrength = this.passwordStrength || 0;
+    this.dataPasswordStrength = this.passwordStrength() || 0;
     this.currentProgressVal = progressBarOverlayWidth;
 
     const overlayElement = this.progressBar.querySelector<HTMLDivElement>('.psm__progress-bar-overlay');
@@ -85,18 +82,19 @@ export class PSMProgressBarDirective implements OnChanges {
 
     const strengthInPercentage = strength !== null ? ((strength + 1) / 5) * 100 : 0;
 
-    const roundedStrengthInPercentage = this.getRoundedStrength(strengthInPercentage, 100 / this.numberOfProgressBarItems!);
+    const roundedStrengthInPercentage = this.getRoundedStrength(strengthInPercentage, 100 / this.numberOfProgressBarItems()!);
     return roundedStrengthInPercentage;
   }
 
   getMeterFillColor(progressLevel: number): string {
-    if (!progressLevel || progressLevel <= 0 || (progressLevel > this.colors.length && progressLevel > this.defaultColors.length)) {
-      return this.colors[0] ? this.colors[0] : this.defaultColors[0];
+    const colors = this.colors();
+    if (!progressLevel || progressLevel <= 0 || (progressLevel > this.colors().length && progressLevel > this.defaultColors.length)) {
+      return colors[0] ? colors[0] : this.defaultColors[0];
     }
 
     const index = progressLevel - 1;
 
-    return this.colors[index] ? this.colors[index] : this.defaultColors[index];
+    return colors[index] ? colors[index] : this.defaultColors[index];
   }
 
   private getRoundedStrength(strength: number, roundTo: number): number {

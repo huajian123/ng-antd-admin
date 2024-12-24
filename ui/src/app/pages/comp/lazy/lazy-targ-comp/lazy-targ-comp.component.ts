@@ -20,6 +20,8 @@ export enum LazySelPeopleEnum {
   imports: [NzCardModule, NzAvatarModule, NzButtonModule, NzWaveModule]
 })
 export class LazyTargCompComponent implements OnChanges {
+  // TODO: Skipped for migration because:
+  //  Your application code writes to the input. This prevents migration.
   @Input() purChoosePeople: LazySelPeopleEnum = LazySelPeopleEnum.YiLin;
   @Output() readonly currentPeople = new EventEmitter<LazySelPeopleEnum>();
   lazySelPeopleEnum = LazySelPeopleEnum;

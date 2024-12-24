@@ -1,5 +1,5 @@
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, ChangeDetectorRef, OnChanges, SimpleChanges, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, ChangeDetectorRef, OnChanges, SimpleChanges, inject, input, InputSignal } from '@angular/core';
 
 import { AntTableConfig, SortFile, TableHeader } from '@shared/components/ant-table/ant-table.component';
 import { fnGetFlattenTreeDataByMap, fnTreeDataToMap } from '@utils/treeTableTools';
@@ -22,7 +22,7 @@ export interface TreeNodeInterface {
 
 export abstract class AntTreeTableComponentToken {
   tableSize!: NzTableSize;
-  tableConfig!: AntTableConfig;
+  tableConfig!: InputSignal<AntTableConfig>;
 
   abstract tableChangeDectction(): void;
 }
@@ -42,16 +42,18 @@ export class TreeTableComponent implements OnChanges {
   allChecked = false;
   indeterminate = false;
   // 从业务组件中传入的缓存的已经选中的checkbox数据数组,相当于缓存的tableData
-  @Input() cashArray: NzSafeAny[] = [];
+  readonly cashArray = input<NzSafeAny[]>([]);
   checkedCashArrayFromComment: NzSafeAny[] = [];
   @Output() readonly sortFn: EventEmitter<SortFile> = new EventEmitter<SortFile>();
   @Output() readonly changePageIndex = new EventEmitter<NzTableQueryParams>();
   @Output() readonly changePageSize = new EventEmitter<number>();
   mapOfExpandedData: Record<string, TreeNodeInterface[]> = {};
-  @Input({ required: true }) tableConfig!: AntTableConfig;
+  readonly tableConfig = input.required<AntTableConfig>();
   @Output() readonly selectedChange: EventEmitter<NzSafeAny[]> = new EventEmitter<NzSafeAny[]>();
   cashExpandIdArray: Array<number | string> = []; // 缓存已经展开的节点的id
 
+  // TODO: Skipped for migration because:
+  //  Accessor inputs cannot be migrated as they are too complex.
   @Input()
   set tableData(value: TreeNodeInterface[]) {
     this._dataList = value;
@@ -98,7 +100,7 @@ export class TreeTableComponent implements OnChanges {
 
   // 表头拖动
   onResize(nzResizeEvent: NzResizeEvent, col: string): void {
-    this.tableConfig.headers = this.tableConfig.headers.map(e =>
+    this.tableConfig().headers = this.tableConfig().headers.map(e =>
       e.title === col
         ? {
             ...e,
@@ -110,7 +112,7 @@ export class TreeTableComponent implements OnChanges {
 
   // 点击排序
   changeSort(tableHeader: TableHeader): void {
-    this.tableConfig.headers.forEach(item => {
+    this.tableConfig().headers.forEach(item => {
       if (item.field !== tableHeader.field) {
         item.sortDir = undefined;
       }

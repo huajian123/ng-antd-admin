@@ -1,5 +1,5 @@
 <nz-card class="ant-pro-footer-bar" [nzBodyStyle]="{ padding: 0, width: '100%', display: 'flex' }" [nzBordered]="false">
-  <ng-container *ngTemplateOutlet="leftTpl || defaultTpl"></ng-container>
+  <ng-container *ngTemplateOutlet="leftTpl() || defaultTpl"></ng-container>
   <ng-content></ng-content>
 </nz-card>
 <ng-template #defaultTpl><div style="flex: auto"></div></ng-template>

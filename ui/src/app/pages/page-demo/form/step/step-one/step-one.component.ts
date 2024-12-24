@@ -20,6 +20,8 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
   imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzSelectModule, NzButtonModule, NzInputModule, NzWaveModule, NzDividerModule, NzTypographyModule]
 })
 export class StepOneComponent implements OnInit {
+  // TODO: Skipped for migration because:
+  //  Your application code writes to the input. This prevents migration.
   @Input() stepDirection: 'horizontal' | 'vertical' = 'horizontal';
   validateForm!: FormGroup;
   @Output() readonly next = new EventEmitter<NzSafeAny>();

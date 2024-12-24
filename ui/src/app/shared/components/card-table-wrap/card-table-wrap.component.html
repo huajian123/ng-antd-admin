@@ -1,4 +1,4 @@
-<nz-card nzHoverable style="width: 100%" [nzBordered]="false" [nzExtra]="tableToolbar" [nzTitle]="tableTitle">
+<nz-card nzHoverable style="width: 100%" [nzBordered]="false" [nzExtra]="tableToolbar" [nzTitle]="tableTitle()">
   <ng-content></ng-content>
 </nz-card>
 <ng-template #tableToolbar>
@@ -8,7 +8,7 @@
         <ng-container *ngTemplateOutlet="btnTpl"></ng-container>
       </div>
     }
-    @if (isNormalTable) {
+    @if (isNormalTable()) {
       <div class="ant-pro-table-toolbar-default-option">
         <nz-divider nzType="vertical"></nz-divider>
         <nz-space nzDirection="horizontal" [nzSize]="16">
@@ -83,7 +83,7 @@
 <ng-template #popoverTitle>
   <div class="space-between">
     <span>
-      <label nz-checkbox [(nzChecked)]="currentTableComponent.tableConfig.showCheckbox" (nzCheckedChange)="changeTableCheckBoxShow($event)">勾选列</label>
+      <label nz-checkbox [(nzChecked)]="currentTableComponent.tableConfig().showCheckbox" (nzCheckedChange)="changeTableCheckBoxShow($event)">勾选列</label>
       <label nz-checkbox [nzIndeterminate]="allTableFieldIndeterminate" [(nzChecked)]="allTableFieldChecked" (nzCheckedChange)="changeAllTableTableConfigShow($event)">列展示</label>
     </span>
     <button class="operate-text" nz-button nzType="text" (click)="reset()">重置</button>

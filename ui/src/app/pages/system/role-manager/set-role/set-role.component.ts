@@ -1,5 +1,5 @@
 import { NgTemplateOutlet, NgStyle } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, OnInit, ViewEncapsulation, input } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -50,8 +50,8 @@ export class SetRoleComponent implements OnInit {
   authCodeArr: string[] = [];
   permissionList: Array<Menu & { isOpen?: boolean; checked?: boolean }> = [];
   destroyRef = inject(DestroyRef);
-  @Input({ required: true }) id!: string; // 从路由中获取的角色id，ng16支持的新特性
-  @Input({ required: true }) roleName!: string; // 从路由中获取的角色名称，ng16支持的新特性
+  readonly id = input.required<string>(); // 从路由中获取的角色id，ng16支持的新特性
+  readonly roleName = input.required<string>(); // 从路由中获取的角色名称，ng16支持的新特性
 
   private dataService = inject(RoleService);
   private menusService = inject(MenusService);
@@ -63,7 +63,7 @@ export class SetRoleComponent implements OnInit {
   initPermission(): void {
     // 通过角色id获取这个角色拥有的权限码
     this.dataService
-      .getPermissionById(this.id)
+      .getPermissionById(this.id())
       .pipe(
         concatMap(authCodeArr => {
           this.authCodeArr = authCodeArr;
@@ -85,7 +85,7 @@ export class SetRoleComponent implements OnInit {
   }
 
   getRoleName(): void {
-    this.pageHeaderInfo = { ...this.pageHeaderInfo, ...{ desc: `当前角色：${this.roleName}` } };
+    this.pageHeaderInfo = { ...this.pageHeaderInfo, ...{ desc: `当前角色：${this.roleName()}` } };
     this.cdr.markForCheck();
   }
 
@@ -105,7 +105,7 @@ export class SetRoleComponent implements OnInit {
     });
     const param: PutPermissionParam = {
       permCodes: selectedAuthCodeArray,
-      roleId: +this.id
+      roleId: +this.id()
     };
     this.dataService
       .updatePermission(param)

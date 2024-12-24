@@ -1,5 +1,5 @@
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, inject, Input, OnChanges, Output, SimpleChanges, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, inject, Input, OnChanges, Output, SimpleChanges, TemplateRef, input, computed, effect, InputSignal } from '@angular/core';
 
 import { ContextPipePipe } from '@shared/components/ant-table/context-pipe.pipe';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -42,7 +42,7 @@ export interface AntTableConfig {
 
 export abstract class AntTableComponentToken {
   tableSize!: NzTableSize;
-  tableConfig!: AntTableConfig;
+  tableConfig!: InputSignal<AntTableConfig>;
 
   abstract tableChangeDectction(): void;
 }
@@ -62,15 +62,17 @@ export interface SortFile {
 })
 export class AntTableComponent implements OnChanges {
   _dataList!: NzSafeAny[];
-  _tableConfig!: AntTableConfig;
+  // _tableConfig!: AntTableConfig;
   _scrollConfig: { x: string; y: string } | {} = {};
   // 从业务组件中传入的缓存的已经选中的checkbox数据数组
-  @Input() checkedCashArrayFromComment: NzSafeAny[] = [];
+  readonly checkedCashArrayFromComment = input<NzSafeAny[]>([]);
 
+  // TODO: Skipped for migration because:
+  //  Accessor inputs cannot be migrated as they are too complex.
   @Input()
   set tableData(value: NzSafeAny[]) {
     this._dataList = value;
-    if (this.tableConfig.showCheckbox) {
+    if (this.tableConfig().showCheckbox) {
       this._dataList.forEach(item => {
         item['_checked'] = false;
       });
@@ -91,15 +93,21 @@ export class AntTableComponent implements OnChanges {
     return this._tableSize;
   }
 
-  @Input()
-  set tableConfig(value: AntTableConfig) {
-    this._tableConfig = value;
-    this.setScrollConfig(value);
-  }
+  tableConfig = input.required<AntTableConfig>();
+  _tableConfig = computed(() => this.tableConfig());
+  private tableConfigEffect = effect(() => {
+    this.setScrollConfig(this._tableConfig());
+  });
 
-  get tableConfig(): AntTableConfig {
-    return this._tableConfig;
-  }
+  // @Input()
+  // set tableConfig(value: AntTableConfig) {
+  //   this._tableConfig = value;
+  //   this.setScrollConfig(value);
+  // }
+  //
+  // get tableConfig(): AntTableConfig {
+  //   return this._tableConfig;
+  // }
 
   @Output() readonly changePageIndex = new EventEmitter<NzTableQueryParams>();
   @Output() readonly changePageSize = new EventEmitter<number>();
@@ -128,7 +136,7 @@ export class AntTableComponent implements OnChanges {
   }
 
   changeSort(tableHeader: TableHeader): void {
-    this.tableConfig.headers.forEach(item => {
+    this.tableConfig().headers.forEach(item => {
       if (item.field !== tableHeader.field) {
         item.sortDir = undefined;
       }
@@ -168,7 +176,7 @@ export class AntTableComponent implements OnChanges {
   }
 
   onResize({ width }: NzResizeEvent, col: string): void {
-    this.tableConfig.headers = this.tableConfig.headers.map(e =>
+    this.tableConfig().headers = this.tableConfig().headers.map(e =>
       e.title === col
         ? {
             ...e,
@@ -180,14 +188,14 @@ export class AntTableComponent implements OnChanges {
 
   checkFn(dataItem: NzSafeAny, isChecked: boolean): void {
     dataItem['_checked'] = isChecked;
-    const index = this.checkedCashArrayFromComment.findIndex(cashItem => cashItem.id === dataItem.id);
+    const index = this.checkedCashArrayFromComment().findIndex(cashItem => cashItem.id === dataItem.id);
     if (isChecked) {
       if (index === -1) {
-        this.checkedCashArrayFromComment.push(dataItem);
+        this.checkedCashArrayFromComment().push(dataItem);
       }
     } else {
       if (index !== -1) {
-        this.checkedCashArrayFromComment.splice(index, 1);
+        this.checkedCashArrayFromComment().splice(index, 1);
       }
     }
   }
@@ -195,7 +203,7 @@ export class AntTableComponent implements OnChanges {
   // 单选
   public checkRowSingle(isChecked: boolean, selectIndex: number): void {
     this.checkFn(this._dataList[selectIndex], isChecked);
-    this.selectedChange.emit(this.checkedCashArrayFromComment);
+    this.selectedChange.emit(this.checkedCashArrayFromComment());
     this.refreshStatus();
   }
 
@@ -204,14 +212,14 @@ export class AntTableComponent implements OnChanges {
     this._dataList.forEach(item => {
       this.checkFn(item, isChecked);
     });
-    this.selectedChange.emit(this.checkedCashArrayFromComment);
+    this.selectedChange.emit(this.checkedCashArrayFromComment());
     this.refreshStatus();
   }
 
   // 刷新复选框状态
   refreshStatus(): void {
     this._dataList.forEach(item => {
-      const index = this.checkedCashArrayFromComment.findIndex(cashItem => {
+      const index = this.checkedCashArrayFromComment().findIndex(cashItem => {
         return item.id === cashItem.id;
       });
       item['_checked'] = index !== -1;

@@ -1,6 +1,6 @@
 <!--如果只有side模式时，可以考虑使用zorro的menu递归-->
 <!--https://github.com/NG-ZORRO/ng-zorro-antd/issues/6306-->
-@if (!isMixinHead) {
+@if (!isMixinHead()) {
   <ul
     nz-menu
     [nzInlineCollapsed]="isCollapsed$ | async"
@@ -8,7 +8,7 @@
     [nzNoAnimation]="(themesOptions$ | async)!.mode === 'top' && !isOverMode"
     [nzTheme]="isMixinMode && (isOverMode$ | async) === false && (isNightTheme$ | async) === false ? 'light' : isMixinMode && (isNightTheme$ | async) ? 'dark' : (themesOptions$ | async)!.theme"
   >
-    <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: isMixinLeft ? leftMenuArray : menus }"></ng-container>
+    <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: isMixinLeft() ? leftMenuArray : menus }"></ng-container>
     <ng-template #menuTpl let-menus>
       @for (menu of menus; track menu.path) {
         <!--权限1-->

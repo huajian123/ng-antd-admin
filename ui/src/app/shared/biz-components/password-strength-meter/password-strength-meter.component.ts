@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter, HostBinding, booleanAttribute, numberAttribute, inject } from '@angular/core';
+import { Component, OnChanges, SimpleChanges, Output, EventEmitter, HostBinding, booleanAttribute, numberAttribute, inject, input } from '@angular/core';
 
 import { PasswordStrengthMeterService } from './password-strength-meter.service';
 import { PSMProgressBarDirective } from './psm-progress-bar.directive';
@@ -12,15 +12,15 @@ import { PSMProgressBarDirective } from './psm-progress-bar.directive';
   imports: [PSMProgressBarDirective]
 })
 export class PasswordStrengthMeterComponent implements OnChanges {
-  @Input() password: string | undefined;
+  readonly password = input<string>();
 
-  @Input({ transform: numberAttribute }) minPasswordLength = 8;
+  readonly minPasswordLength = input(8, { transform: numberAttribute });
 
-  @Input({ transform: booleanAttribute }) enableFeedback = false;
+  readonly enableFeedback = input(false, { transform: booleanAttribute });
 
-  @Input() colors: string[] = [];
+  readonly colors = input<string[]>([]);
 
-  @Input({ transform: numberAttribute }) numberOfProgressBarItems = 5;
+  readonly numberOfProgressBarItems = input(5, { transform: numberAttribute });
 
   @Output() readonly strengthChange = new EventEmitter<number>();
 
@@ -42,19 +42,20 @@ export class PasswordStrengthMeterComponent implements OnChanges {
 
   private calculatePasswordStrength(): void {
     // TODO validation logic optimization
-    if (!this.password) {
+    const password = this.password();
+    if (!password) {
       this.passwordStrength = null;
       this.feedback = null;
-    } else if (this.password && this.password.length < this.minPasswordLength) {
+    } else if (password && password.length < this.minPasswordLength()) {
       this.passwordStrength = 0;
       this.feedback = null;
     } else {
-      if (this.enableFeedback) {
-        const result = this.passwordStrengthMeterService.scoreWithFeedback(this.password);
+      if (this.enableFeedback()) {
+        const result = this.passwordStrengthMeterService.scoreWithFeedback(password);
         this.passwordStrength = result.score;
         this.feedback = result.feedback;
       } else {
-        this.passwordStrength = this.passwordStrengthMeterService.score(this.password);
+        this.passwordStrength = this.passwordStrengthMeterService.score(password);
         this.feedback = null;
       }
     }
