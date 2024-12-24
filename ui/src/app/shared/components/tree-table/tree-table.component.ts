@@ -1,5 +1,5 @@
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, ChangeDetectorRef, OnChanges, SimpleChanges, inject, input, InputSignal } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, ChangeDetectorRef, OnChanges, SimpleChanges, inject, input, InputSignal, output } from '@angular/core';
 
 import { AntTableConfig, SortFile, TableHeader } from '@shared/components/ant-table/ant-table.component';
 import { fnGetFlattenTreeDataByMap, fnTreeDataToMap } from '@utils/treeTableTools';
@@ -44,12 +44,12 @@ export class TreeTableComponent implements OnChanges {
   // 从业务组件中传入的缓存的已经选中的checkbox数据数组,相当于缓存的tableData
   readonly cashArray = input<NzSafeAny[]>([]);
   checkedCashArrayFromComment: NzSafeAny[] = [];
-  @Output() readonly sortFn: EventEmitter<SortFile> = new EventEmitter<SortFile>();
-  @Output() readonly changePageIndex = new EventEmitter<NzTableQueryParams>();
-  @Output() readonly changePageSize = new EventEmitter<number>();
+  readonly sortFn = output<SortFile>();
+  readonly changePageIndex = output<NzTableQueryParams>();
+  readonly changePageSize = output<number>();
   mapOfExpandedData: Record<string, TreeNodeInterface[]> = {};
   readonly tableConfig = input.required<AntTableConfig>();
-  @Output() readonly selectedChange: EventEmitter<NzSafeAny[]> = new EventEmitter<NzSafeAny[]>();
+  readonly selectedChange = output<NzSafeAny[]>();
   cashExpandIdArray: Array<number | string> = []; // 缓存已经展开的节点的id
 
   // TODO: Skipped for migration because:

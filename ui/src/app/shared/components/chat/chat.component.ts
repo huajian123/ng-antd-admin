@@ -1,5 +1,5 @@
 import { AsyncPipe, NgClass } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, OnDestroy, Output, EventEmitter, ChangeDetectorRef, inject } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, OnDestroy, ChangeDetectorRef, inject, output } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { fnGetRandomNum } from '@app/utils/tools';
@@ -22,7 +22,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
 })
 export class ChatComponent implements OnInit, OnDestroy {
   @ViewChild('scrollMe') private myScrollContainer!: ElementRef;
-  @Output() readonly changeShows = new EventEmitter<boolean>();
+  readonly changeShows = output<boolean>();
   validateForm!: FormGroup;
   messageArray: Array<{ msg: string; dir: 'left' | 'right'; isReaded: boolean }> = [];
   isSending = false;

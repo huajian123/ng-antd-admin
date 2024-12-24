@@ -1,5 +1,5 @@
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, inject, Input, OnChanges, Output, SimpleChanges, TemplateRef, input, computed, effect, InputSignal } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, OnChanges, SimpleChanges, TemplateRef, input, computed, effect, InputSignal, output } from '@angular/core';
 
 import { ContextPipePipe } from '@shared/components/ant-table/context-pipe.pipe';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -109,10 +109,10 @@ export class AntTableComponent implements OnChanges {
   //   return this._tableConfig;
   // }
 
-  @Output() readonly changePageIndex = new EventEmitter<NzTableQueryParams>();
-  @Output() readonly changePageSize = new EventEmitter<number>();
-  @Output() readonly selectedChange: EventEmitter<NzSafeAny[]> = new EventEmitter<NzSafeAny[]>();
-  @Output() readonly sortFn: EventEmitter<SortFile> = new EventEmitter<SortFile>();
+  readonly changePageIndex = output<NzTableQueryParams>();
+  readonly changePageSize = output<number>();
+  readonly selectedChange = output<NzSafeAny[]>();
+  readonly sortFn = output<SortFile>();
   indeterminate = false;
   allChecked = false;
   private cdr = inject(ChangeDetectorRef);

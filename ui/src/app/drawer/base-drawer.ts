@@ -19,8 +19,8 @@ export class DrawerWrapService {
   protected bsDrawerService: NzDrawerService = this.baseInjector.get(NzDrawerService);
   private btnTpl: TemplateRef<NzSafeAny> = this.btnComponentRef.instance.componentTpl;
   constructor() {
-    this.btnComponentRef.instance.sureEmitter.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => this.sure());
-    this.btnComponentRef.instance.cancelEmitter.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => this.cancel());
+    this.btnComponentRef.instance.sureEmitter!.subscribe(() => this.sure());
+    this.btnComponentRef.instance.cancelEmitter!.subscribe(() => this.cancel());
   }
 
   show(component: Type<NzSafeAny>, drawerOptions: NzDrawerOptions = {}, params: object = {}): Observable<NzSafeAny> {

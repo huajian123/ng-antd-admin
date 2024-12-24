@@ -1,5 +1,5 @@
 import { NgStyle } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Input, Output, EventEmitter, AfterViewInit, inject, DestroyRef, booleanAttribute } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Input, AfterViewInit, inject, DestroyRef, booleanAttribute, output } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
@@ -32,7 +32,7 @@ export class IconSelComponent implements OnInit, AfterViewInit {
   // 做图标搜索防抖
   private searchText$ = new Subject<string>();
   selectedIcon = '';
-  @Output() readonly selIcon = new EventEmitter<string>();
+  readonly selIcon = output<string>();
   // 分页信息
   pageObj = {
     pageSize: 50,

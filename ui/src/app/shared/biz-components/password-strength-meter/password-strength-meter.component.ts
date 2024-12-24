@@ -1,4 +1,4 @@
-import { Component, OnChanges, SimpleChanges, Output, EventEmitter, HostBinding, booleanAttribute, numberAttribute, inject, input } from '@angular/core';
+import { Component, OnChanges, SimpleChanges, HostBinding, booleanAttribute, numberAttribute, inject, input, output } from '@angular/core';
 
 import { PasswordStrengthMeterService } from './password-strength-meter.service';
 import { PSMProgressBarDirective } from './psm-progress-bar.directive';
@@ -22,7 +22,7 @@ export class PasswordStrengthMeterComponent implements OnChanges {
 
   readonly numberOfProgressBarItems = input(5, { transform: numberAttribute });
 
-  @Output() readonly strengthChange = new EventEmitter<number>();
+  readonly strengthChange = output<number>();
 
   @HostBinding('class') baseClass = 'psm';
 
