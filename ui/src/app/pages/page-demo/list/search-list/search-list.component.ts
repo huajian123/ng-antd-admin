@@ -30,9 +30,7 @@ export class SearchListComponent {
   readonly headerFooter = viewChild.required<TemplateRef<NzSafeAny>>('headerFooter');
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '搜索列表（文章）',
-    desc: this.headerContent(),
-    breadcrumb: ['首页', '列表页', '查询表格'],
-    footer: this.headerFooter()
+    breadcrumb: ['首页', '列表页', '查询表格']
   };
   currentSelTab = 0;
   destroyRef = inject(DestroyRef);
