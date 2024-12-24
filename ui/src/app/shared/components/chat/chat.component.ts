@@ -1,5 +1,5 @@
 import { AsyncPipe, NgClass } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, OnDestroy, ChangeDetectorRef, inject, output } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ElementRef, OnDestroy, ChangeDetectorRef, inject, output, viewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { fnGetRandomNum } from '@app/utils/tools';
@@ -21,7 +21,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
   imports: [NzCardModule, NzTypographyModule, NzGridModule, NzAvatarModule, NzResultModule, NzIconModule, NzButtonModule, FormsModule, ReactiveFormsModule, NzInputModule, NgClass, AsyncPipe]
 })
 export class ChatComponent implements OnInit, OnDestroy {
-  @ViewChild('scrollMe') private myScrollContainer!: ElementRef;
+  readonly myScrollContainer = viewChild.required<ElementRef>('scrollMe');
   readonly changeShows = output<boolean>();
   validateForm!: FormGroup;
   messageArray: Array<{ msg: string; dir: 'left' | 'right'; isReaded: boolean }> = [];
@@ -114,7 +114,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   scrollToBottom(): void {
     setTimeout(() => {
       try {
-        this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+        this.myScrollContainer().nativeElement.scrollTop = this.myScrollContainer().nativeElement.scrollHeight;
       } catch (err) {
         console.error(err);
       }

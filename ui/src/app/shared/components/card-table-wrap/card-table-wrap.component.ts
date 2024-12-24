@@ -1,6 +1,6 @@
 import { CdkDragDrop, moveItemInArray, CdkDropList, CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
 import { NgTemplateOutlet, NgStyle } from '@angular/common';
-import { AfterContentInit, booleanAttribute, ChangeDetectionStrategy, Component, ContentChild, Input, TemplateRef, input, output } from '@angular/core';
+import { AfterContentInit, booleanAttribute, ChangeDetectionStrategy, Component, Input, TemplateRef, input, output, contentChild } from '@angular/core';
 
 import { AntTreeTableComponentToken } from '@shared/components/tree-table/tree-table.component';
 import { ScreenLessHiddenDirective } from '@shared/directives/screen-less-hidden.directive';
@@ -56,8 +56,8 @@ export class CardTableWrapComponent implements AfterContentInit {
   @Input() btnTpl: TemplateRef<NzSafeAny> | undefined;
   readonly isNormalTable = input(true, { transform: booleanAttribute }); // 如果只是需要card-table-wrap的样式，这里设置为false
   readonly reload = output();
-  @ContentChild(AntTableComponentToken) antTableComponent!: AntTableComponentToken;
-  @ContentChild(AntTreeTableComponentToken) antTreeTableComponent!: AntTreeTableComponentToken;
+  readonly antTableComponent = contentChild.required(AntTableComponentToken);
+  readonly antTreeTableComponent = contentChild.required(AntTreeTableComponentToken);
   tableConfigVisible = false;
   tableSizeOptions: TableSizeItem[] = [
     { sizeName: '默认', selected: true, value: 'default' },
@@ -159,7 +159,7 @@ export class CardTableWrapComponent implements AfterContentInit {
   }
 
   ngAfterContentInit(): void {
-    this.currentTableComponent = this.antTableComponent || this.antTreeTableComponent;
+    this.currentTableComponent = this.antTableComponent() || this.antTreeTableComponent();
 
     if (this.isNormalTable()) {
       this.tableHeaders = [...this.currentTableComponent.tableConfig().headers];

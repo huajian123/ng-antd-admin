@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, TemplateRef, ChangeDetectorRef, inject, DestroyRef, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
@@ -57,8 +57,8 @@ interface SearchParam {
   ]
 })
 export class DeptComponent implements OnInit {
-  @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<NzSafeAny>;
-  @ViewChild('state', { static: true }) state!: TemplateRef<NzSafeAny>;
+  readonly operationTpl = viewChild.required<TemplateRef<NzSafeAny>>('operationTpl');
+  readonly state = viewChild.required<TemplateRef<NzSafeAny>>('state');
   ActionCode = ActionCode;
   searchParam: Partial<SearchParam> = {};
   destroyRef = inject(DestroyRef);
@@ -236,7 +236,7 @@ export class DeptComponent implements OnInit {
         {
           title: '部门状态',
           field: 'state',
-          tdTemplate: this.state,
+          tdTemplate: this.state(),
           width: 100
         },
         {
@@ -253,7 +253,7 @@ export class DeptComponent implements OnInit {
         },
         {
           title: '操作',
-          tdTemplate: this.operationTpl,
+          tdTemplate: this.operationTpl(),
           width: 180,
           fixed: false,
           fixedDir: 'right'

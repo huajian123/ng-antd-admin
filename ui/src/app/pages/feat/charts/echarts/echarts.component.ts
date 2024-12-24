@@ -1,5 +1,5 @@
 import { ComponentPortal, ComponentType, Portal, PortalModule } from '@angular/cdk/portal';
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit, ViewChild, TemplateRef, inject } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit, TemplateRef, inject, viewChild } from '@angular/core';
 
 import { AdvancedComponent } from '@app/pages/feat/charts/echarts/advanced/advanced.component';
 import { SeriesComponent } from '@app/pages/feat/charts/echarts/series/series.component';
@@ -35,7 +35,7 @@ export class EchartsComponent implements OnInit, AfterViewInit {
     breadcrumb: ['首页', '功能', '图表', 'Echarts'],
     desc: 'Echarts的示例内容'
   };
-  @ViewChild('headerFooter', { static: false }) headerFooter!: TemplateRef<NzSafeAny>;
+  readonly headerFooter = viewChild.required<TemplateRef<NzSafeAny>>('headerFooter');
 
   tabEnum = TabEnum;
   currentSelTab: number = this.tabEnum.Started;
@@ -61,7 +61,7 @@ export class EchartsComponent implements OnInit, AfterViewInit {
       title: 'Echarts',
       desc: 'Echarts的示例内容',
       breadcrumb: ['首页', '功能', '图表', 'Echarts'],
-      footer: this.headerFooter
+      footer: this.headerFooter()
     };
   }
 }

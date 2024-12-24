@@ -21,6 +21,9 @@ export abstract class GlobalModalBtnTplComponentToken {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GlobalModalBtnTplComponent implements GlobalModalBtnTplComponentToken {
+  // TODO: Skipped for migration because:
+  //  This query overrides a field from a superclass, while the superclass field
+  //  is not migrated.
   @ViewChild('componentTpl', { static: true }) componentTpl!: TemplateRef<NzSafeAny>;
   modalFullScreenFlag = false;
   private modalFullStatus = inject(ModalFullStatusStoreService);

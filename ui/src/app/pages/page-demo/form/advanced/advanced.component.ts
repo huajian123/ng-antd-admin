@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, viewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { TaskManageFormComponent } from '@app/pages/page-demo/form/advanced/task-manage-form/task-manage-form.component';
@@ -40,8 +40,8 @@ import { WarehouseManageFormComponent as WarehouseManageFormComponent_1 } from '
   ]
 })
 export class AdvancedComponent implements OnInit {
-  @ViewChild('warehouseManageComponent') warehouseManageComponent!: WarehouseManageFormComponent;
-  @ViewChild('taskManageComponent') taskManageComponent!: TaskManageFormComponent;
+  readonly warehouseManageComponent = viewChild.required<WarehouseManageFormComponent>('warehouseManageComponent');
+  readonly taskManageComponent = viewChild.required<TaskManageFormComponent>('taskManageComponent');
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '高级表单',
     desc: '高级表单常见于一次性输入和提交大批量数据的场景。(演示自定义表单)',
@@ -54,7 +54,7 @@ export class AdvancedComponent implements OnInit {
 
   submit(): void {
     // @ts-ignore
-    if (!fnCheckForm(this.validateForm) | this.warehouseManageComponent.checkForm() | this.taskManageComponent.checkForm()) {
+    if (!fnCheckForm(this.validateForm) | this.warehouseManageComponent().checkForm() | this.taskManageComponent().checkForm()) {
       return;
     }
     this.message.info('控制台打印出了表单数据');

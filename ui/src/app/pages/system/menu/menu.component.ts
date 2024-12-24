@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, TemplateRef, ChangeDetectorRef, inject, DestroyRef, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
@@ -59,11 +59,11 @@ interface SearchParam {
   ]
 })
 export class MenuComponent implements OnInit {
-  @ViewChild('zorroIconTpl', { static: true }) zorroIconTpl!: TemplateRef<NzSafeAny>;
-  @ViewChild('aliIconTpl', { static: true }) aliIconTpl!: TemplateRef<NzSafeAny>;
-  @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<NzSafeAny>;
-  @ViewChild('visibleTpl', { static: true }) visibleTpl!: TemplateRef<NzSafeAny>;
-  @ViewChild('newLinkFlag', { static: true }) newLinkFlag!: TemplateRef<NzSafeAny>;
+  readonly zorroIconTpl = viewChild.required<TemplateRef<NzSafeAny>>('zorroIconTpl');
+  readonly aliIconTpl = viewChild.required<TemplateRef<NzSafeAny>>('aliIconTpl');
+  readonly operationTpl = viewChild.required<TemplateRef<NzSafeAny>>('operationTpl');
+  readonly visibleTpl = viewChild.required<TemplateRef<NzSafeAny>>('visibleTpl');
+  readonly newLinkFlag = viewChild.required<TemplateRef<NzSafeAny>>('newLinkFlag');
 
   ActionCode = ActionCode;
   searchParam: Partial<SearchParam> = {};
@@ -234,13 +234,13 @@ export class MenuComponent implements OnInit {
           title: 'zorro图标',
           field: 'icon',
           width: 100,
-          tdTemplate: this.zorroIconTpl
+          tdTemplate: this.zorroIconTpl()
         },
         {
           title: '阿里图标',
           field: 'alIcon',
           width: 100,
-          tdTemplate: this.aliIconTpl
+          tdTemplate: this.aliIconTpl()
         },
         {
           title: '权限码',
@@ -267,14 +267,14 @@ export class MenuComponent implements OnInit {
           title: '展示',
           field: 'visible',
           pipe: 'isOrNot',
-          tdTemplate: this.visibleTpl,
+          tdTemplate: this.visibleTpl(),
           width: 100
         },
         {
           title: '外链',
           field: 'newLinkFlag',
           pipe: 'isOrNot',
-          tdTemplate: this.newLinkFlag,
+          tdTemplate: this.newLinkFlag(),
           width: 100
         },
         {
@@ -291,7 +291,7 @@ export class MenuComponent implements OnInit {
         },
         {
           title: '操作',
-          tdTemplate: this.operationTpl,
+          tdTemplate: this.operationTpl(),
           width: 180,
           fixed: true,
           fixedDir: 'right'

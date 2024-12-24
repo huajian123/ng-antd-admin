@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, AfterViewInit, ElementRef, viewChild } from '@angular/core';
 
 import { Graph } from '@antv/x6';
 import { Dnd } from '@antv/x6-plugin-dnd';
@@ -24,7 +24,7 @@ export class FlowChatComponent implements AfterViewInit {
     desc: '千言万语不如一张图，流程图是表示算法思路的好方法(简单流程图示例,具体功能需要自己完善，antV x6)'
   };
   graph!: Graph;
-  @ViewChild('container') container!: ElementRef;
+  readonly container = viewChild.required<ElementRef>('container');
 
   /** x6画布的一些基础属性 */
   graphBasicConfig = {
@@ -122,7 +122,7 @@ export class FlowChatComponent implements AfterViewInit {
   initGraph(): void {
     const graphConfig = {
       ...this.graphBasicConfig,
-      container: this.container.nativeElement
+      container: this.container().nativeElement
     };
     this.graph = new Graph(graphConfig);
   }

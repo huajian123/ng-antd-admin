@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef, inject } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, TemplateRef, ChangeDetectorRef, inject, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AntTableConfig, SortFile } from '@shared/components/ant-table/ant-table.component';
@@ -46,8 +46,8 @@ interface SearchParam {
   ]
 })
 export class TreeListComponent implements OnInit {
-  @ViewChild('highLightTpl', { static: true }) highLightTpl!: TemplateRef<NzSafeAny>;
-  @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<NzSafeAny>;
+  readonly highLightTpl = viewChild.required<TemplateRef<NzSafeAny>>('highLightTpl');
+  readonly operationTpl = viewChild.required<TemplateRef<NzSafeAny>>('operationTpl');
   searchParam: Partial<SearchParam> = {};
 
   isCollapse = true;
@@ -380,7 +380,7 @@ export class TreeListComponent implements OnInit {
           title: '性别',
           field: 'sex',
           width: 230,
-          tdTemplate: this.highLightTpl
+          tdTemplate: this.highLightTpl()
         },
         {
           title: '年龄',
@@ -394,7 +394,7 @@ export class TreeListComponent implements OnInit {
         },
         {
           title: '操作',
-          tdTemplate: this.operationTpl,
+          tdTemplate: this.operationTpl(),
           width: 130,
           fixed: true,
           fixedDir: 'right'

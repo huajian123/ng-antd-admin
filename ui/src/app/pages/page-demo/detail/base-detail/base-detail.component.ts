@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, TemplateRef, viewChild } from '@angular/core';
 
 import { AntTableConfig, AntTableComponent } from '@shared/components/ant-table/ant-table.component';
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
@@ -24,7 +24,7 @@ interface ReturnObj {
   imports: [PageHeaderComponent, NzCardModule, WaterMarkComponent, NzDescriptionsModule, NzDividerModule, AntTableComponent]
 })
 export class BaseDetailComponent implements OnInit {
-  @ViewChild('returnProductTpl', { static: true }) returnProductTpl!: TemplateRef<NzSafeAny>;
+  readonly returnProductTpl = viewChild.required<TemplateRef<NzSafeAny>>('returnProductTpl');
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '基础详情页',
     breadcrumb: ['首页', '详情页', '基础详情页']
@@ -82,7 +82,7 @@ export class BaseDetailComponent implements OnInit {
           title: '商品编号',
           field: 'num',
           width: 150,
-          tdTemplate: this.returnProductTpl
+          tdTemplate: this.returnProductTpl()
         },
         {
           title: '商品名称',
@@ -121,7 +121,7 @@ export class BaseDetailComponent implements OnInit {
           title: '商品编号',
           field: 'num',
           width: 150,
-          tdTemplate: this.returnProductTpl
+          tdTemplate: this.returnProductTpl()
         },
         {
           title: '商品名称',

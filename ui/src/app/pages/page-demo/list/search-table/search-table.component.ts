@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef, inject } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, TemplateRef, ChangeDetectorRef, inject, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -47,8 +47,8 @@ interface SearchParam {
 })
 export class SearchTableComponent implements OnInit {
   searchParam: Partial<SearchParam> = {};
-  @ViewChild('highLightTpl', { static: true }) highLightTpl!: TemplateRef<NzSafeAny>;
-  @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<NzSafeAny>;
+  readonly highLightTpl = viewChild.required<TemplateRef<NzSafeAny>>('highLightTpl');
+  readonly operationTpl = viewChild.required<TemplateRef<NzSafeAny>>('operationTpl');
   isCollapse = true;
   tableConfig!: AntTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
@@ -344,7 +344,7 @@ export class SearchTableComponent implements OnInit {
         {
           title: '自定义模板',
           field: 'name',
-          tdTemplate: this.highLightTpl,
+          tdTemplate: this.highLightTpl(),
           width: 140
         },
         {
@@ -353,7 +353,7 @@ export class SearchTableComponent implements OnInit {
         },
         {
           title: '操作',
-          tdTemplate: this.operationTpl,
+          tdTemplate: this.operationTpl(),
           width: 120,
           fixed: true,
           fixedDir: 'right'

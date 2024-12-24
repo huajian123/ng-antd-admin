@@ -1,6 +1,6 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { NgClass } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { AdComponent, DynamicComponent } from '@core/services/types';
@@ -30,7 +30,7 @@ interface TabInterface {
   imports: [NzCardModule, NgClass, NzMenuModule, NzButtonModule, NzGridModule, NzTypographyModule, AdDirective_1]
 })
 export class PersonalSettingComponent implements OnInit {
-  @ViewChild(AdDirective, { static: true }) adHost!: AdDirective;
+  readonly adHost = viewChild.required(AdDirective);
   tabModel: NzMenuModeType = 'inline';
   settingComponent: TabInterface[] = [
     { key: 'base', component: new DynamicComponent(BaseComponent, { label: '基本设置' }) },
@@ -71,7 +71,7 @@ export class PersonalSettingComponent implements OnInit {
       return key === item.key;
     });
     this.currentTitle = selMenu!.component.data.label;
-    const viewContainerRef = this.adHost.viewContainerRef;
+    const viewContainerRef = this.adHost().viewContainerRef;
     viewContainerRef.clear();
     const componentRef = viewContainerRef.createComponent<AdComponent>(selMenu!.component.component);
     componentRef.instance.data = selMenu!.component.data;

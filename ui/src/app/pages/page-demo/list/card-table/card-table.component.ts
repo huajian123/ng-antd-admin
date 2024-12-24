@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, ChangeDetectionStrategy, AfterViewInit, ViewChild, TemplateRef, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, AfterViewInit, TemplateRef, inject, viewChild } from '@angular/core';
 
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { WaterMarkComponent } from '@shared/components/water-mark/water-mark.component';
@@ -77,13 +77,13 @@ export class CardTableComponent implements AfterViewInit {
       desc: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。'
     }
   ];
-  @ViewChild('headerContent', { static: false }) headerContent!: TemplateRef<NzSafeAny>;
+  readonly headerContent = viewChild.required<TemplateRef<NzSafeAny>>('headerContent');
 
   ngAfterViewInit(): void {
     this.pageHeaderInfo = {
       title: '卡片列表',
       breadcrumb: ['首页', '列表页', '卡片列表'],
-      desc: this.headerContent
+      desc: this.headerContent()
     };
   }
 }

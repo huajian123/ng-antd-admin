@@ -1,5 +1,5 @@
 import { normalizePassiveListenerOptions } from '@angular/cdk/platform';
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef, HostListener, NgZone, inject, DestroyRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ElementRef, AfterViewInit, ChangeDetectorRef, HostListener, NgZone, inject, DestroyRef, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -46,7 +46,7 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
   isNightTheme$ = this.themesService.getIsNightTheme();
   resultListShow: ResultItem[] = [];
   resultList: ResultItem[] = [];
-  @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
+  readonly searchInput = viewChild.required<ElementRef<HTMLInputElement>>('searchInput');
   inputValue: string | null = null;
   menuNavList: Menu[] = [];
   destroyRef = inject(DestroyRef);
@@ -139,7 +139,7 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
 
   subSearchFn(): void {
     this.ngZone.runOutsideAngular(() => {
-      fromEvent(this.searchInput.nativeElement, 'input', passiveEventListenerOptions)
+      fromEvent(this.searchInput().nativeElement, 'input', passiveEventListenerOptions)
         .pipe(
           map(e => (e.target as HTMLInputElement).value),
           debounceTime(500),

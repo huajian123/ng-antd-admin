@@ -1,5 +1,5 @@
 import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
-import { Component, ChangeDetectionStrategy, TemplateRef, ViewChild, inject, DestroyRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, TemplateRef, inject, DestroyRef, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
@@ -19,7 +19,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
   imports: [PageHeaderComponent, NzButtonModule, NzWaveModule, NzModalModule, ModalDragDirective, CdkDrag, CdkDragHandle]
 })
 export class ExModalComponent {
-  @ViewChild('dragTpl', { static: true }) dragTpl!: TemplateRef<NzSafeAny>;
+  readonly dragTpl = viewChild.required<TemplateRef<NzSafeAny>>('dragTpl');
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '拖动Modal，树挪死，人挪活',
     breadcrumb: ['首页', '拖拽modal']

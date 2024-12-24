@@ -19,6 +19,9 @@ export abstract class GlobalDrawerFootTplComponentToken {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GlobalDrawerFootTplComponent implements GlobalDrawerFootTplComponentToken {
+  // TODO: Skipped for migration because:
+  //  This query overrides a field from a superclass, while the superclass field
+  //  is not migrated.
   @ViewChild('componentTpl', { static: true }) componentTpl!: TemplateRef<NzSafeAny>;
   readonly sureEmitter = output<void>();
   readonly cancelEmitter = output<void>();

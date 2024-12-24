@@ -1,5 +1,5 @@
 import { normalizePassiveListenerOptions } from '@angular/cdk/platform';
-import { Component, ChangeDetectionStrategy, ViewChild, ChangeDetectorRef, AfterViewInit, NgZone, inject, DestroyRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit, NgZone, inject, DestroyRef, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { fromEvent, take } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
@@ -26,11 +26,11 @@ export class LazyScrollComponent implements AfterViewInit {
     breadcrumb: ['首页', '组件', '滚动懒加载'],
     desc: '滚动页面，加载组件'
   };
-  @ViewChild(AdDirective, { static: true }) adHost!: AdDirective;
+  readonly adHost = viewChild.required(AdDirective);
   destroyRef = inject(DestroyRef);
 
   ngAfterViewInit(): void {
-    this.lazyServiceService.adHost = this.adHost;
+    this.lazyServiceService.adHost = this.adHost();
     this.zone.runOutsideAngular(() => {
       fromEvent(window, 'scroll', passiveEventListenerOptions as AddEventListenerOptions)
         .pipe(

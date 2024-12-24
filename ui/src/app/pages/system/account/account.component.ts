@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, TemplateRef, ChangeDetectorRef, inject, DestroyRef, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -59,8 +59,8 @@ interface SearchParam {
   ]
 })
 export class AccountComponent implements OnInit {
-  @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<NzSafeAny>;
-  @ViewChild('availableFlag', { static: true }) availableFlag!: TemplateRef<NzSafeAny>;
+  readonly operationTpl = viewChild.required<TemplateRef<NzSafeAny>>('operationTpl');
+  readonly availableFlag = viewChild.required<TemplateRef<NzSafeAny>>('availableFlag');
   searchParam: Partial<SearchParam> = {};
   tableConfig!: AntTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
@@ -309,7 +309,7 @@ export class AccountComponent implements OnInit {
           title: '是否可用',
           width: 100,
           field: 'available',
-          tdTemplate: this.availableFlag
+          tdTemplate: this.availableFlag()
         },
         {
           title: '性别',
@@ -351,7 +351,7 @@ export class AccountComponent implements OnInit {
         },
         {
           title: '操作',
-          tdTemplate: this.operationTpl,
+          tdTemplate: this.operationTpl(),
           width: 150,
           fixed: true
         }

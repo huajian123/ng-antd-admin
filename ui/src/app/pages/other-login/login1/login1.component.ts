@@ -56,6 +56,8 @@ export class Login1Component implements OnInit {
   isOverModel = true;
   isNightTheme$ = this.themesService.getIsNightTheme();
   destroyRef = inject(DestroyRef);
+  // TODO: Skipped for migration because:
+  //  Accessor queries cannot be migrated as they are too complex.
   @ViewChild(AdDirective) set adHost1(content: AdDirective) {
     if (content) {
       this.adHost = content;

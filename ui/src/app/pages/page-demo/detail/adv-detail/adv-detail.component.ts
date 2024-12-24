@@ -1,6 +1,6 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, AfterViewInit, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, TemplateRef, AfterViewInit, ChangeDetectorRef, inject, DestroyRef, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { AntTableConfig, AntTableComponent } from '@shared/components/ant-table/ant-table.component';
@@ -68,10 +68,10 @@ enum TabEnum {
   ]
 })
 export class AdvDetailComponent implements OnInit, AfterViewInit {
-  @ViewChild('headerExtra', { static: false }) headerExtra!: TemplateRef<NzSafeAny>;
-  @ViewChild('headerContent', { static: false }) headerContent!: TemplateRef<NzSafeAny>;
-  @ViewChild('headerFooter', { static: false }) headerFooter!: TemplateRef<NzSafeAny>;
-  @ViewChild('highLightTpl', { static: true }) highLightTpl!: TemplateRef<NzSafeAny>;
+  readonly headerExtra = viewChild.required<TemplateRef<NzSafeAny>>('headerExtra');
+  readonly headerContent = viewChild.required<TemplateRef<NzSafeAny>>('headerContent');
+  readonly headerFooter = viewChild.required<TemplateRef<NzSafeAny>>('headerFooter');
+  readonly highLightTpl = viewChild.required<TemplateRef<NzSafeAny>>('highLightTpl');
   stepDirection: 'horizontal' | 'vertical' = 'horizontal';
   returnTableConfig!: AntTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
@@ -153,7 +153,7 @@ export class AdvDetailComponent implements OnInit, AfterViewInit {
           title: '执行结果',
           width: 50,
           field: 'code',
-          tdTemplate: this.highLightTpl
+          tdTemplate: this.highLightTpl()
         },
         {
           title: '操作时间',
@@ -193,9 +193,9 @@ export class AdvDetailComponent implements OnInit, AfterViewInit {
     this.pageHeaderInfo = {
       title: '单号：234231029431',
       breadcrumb: ['首页', '详情页', '高级详情页'],
-      extra: this.headerExtra,
-      desc: this.headerContent,
-      footer: this.headerFooter
+      extra: this.headerExtra(),
+      desc: this.headerContent(),
+      footer: this.headerFooter()
     };
   }
 }

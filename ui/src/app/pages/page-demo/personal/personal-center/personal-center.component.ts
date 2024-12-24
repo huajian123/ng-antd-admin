@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ElementRef, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AdComponent, DynamicComponent } from '@core/services/types';
@@ -50,7 +50,7 @@ interface TabInterface {
 export class PersonalCenterComponent implements OnInit {
   tagArray: string[] = ['很有想法的', '专注设计', '大长腿', '川妹子', '海纳百川'];
   inputVisible = false;
-  @ViewChild('inputElement', { static: false }) inputElement?: ElementRef;
+  readonly inputElement = viewChild<ElementRef>('inputElement');
   inputValue = '';
   tabData: TabInterface[] = [
     { label: '文章(8)', component: new DynamicComponent(ArticleComponent, {}) },
@@ -58,12 +58,12 @@ export class PersonalCenterComponent implements OnInit {
     { label: '项目(8)', component: new DynamicComponent(ProjectsComponent, {}) }
   ];
 
-  @ViewChild(AdDirective, { static: true }) adHost!: AdDirective;
+  readonly adHost = viewChild.required(AdDirective);
 
   constructor() {}
 
   to(adItem: TabInterface): void {
-    const viewContainerRef = this.adHost.viewContainerRef;
+    const viewContainerRef = this.adHost().viewContainerRef;
     viewContainerRef.clear();
     const componentRef = viewContainerRef.createComponent<AdComponent>(adItem.component.component);
     componentRef.instance.data = adItem.component.data;
@@ -80,7 +80,7 @@ export class PersonalCenterComponent implements OnInit {
   showInput(): void {
     this.inputVisible = true;
     setTimeout(() => {
-      this.inputElement?.nativeElement.focus();
+      this.inputElement()?.nativeElement.focus();
     }, 10);
   }
 

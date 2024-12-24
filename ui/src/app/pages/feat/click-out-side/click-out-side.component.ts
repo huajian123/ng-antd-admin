@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild, AfterViewInit, ElementRef, inject, DestroyRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit, ElementRef, inject, DestroyRef, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { fromEvent, merge, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -18,19 +18,19 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 export class ClickOutSideComponent implements AfterViewInit {
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '点内外部触发事件，点一点总会有好运',
-    breadcrumb: ['首页', '功能', 'ClickOutSide']
+    breadcrumb: ['首页', '功能', 'clickOutSide']
   };
   destroyRef = inject(DestroyRef);
   text = '点击内部或者外部';
   winClick$!: Observable<Event>; // 绑定window的click事件
-  @ViewChild('targetHtml') targetHtml!: ElementRef;
+  readonly targetHtml = viewChild.required<ElementRef>('targetHtml');
   targetHtmlClick$!: Observable<NzSafeAny>;
 
   private cdr = inject(ChangeDetectorRef);
   private doc = inject(DOCUMENT);
 
   ngAfterViewInit(): void {
-    this.targetHtmlClick$ = fromEvent(this.targetHtml.nativeElement, 'click').pipe(
+    this.targetHtmlClick$ = fromEvent(this.targetHtml().nativeElement, 'click').pipe(
       tap(e => {
         fnStopMouseEvent(e as MouseEvent);
         this.text = '刀斩肉身';
