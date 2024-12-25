@@ -83,7 +83,7 @@
 <ng-template #popoverTitle>
   <div class="space-between">
     <span>
-      <label nz-checkbox [(nzChecked)]="currentTableComponent.tableConfig().showCheckbox" (nzCheckedChange)="changeTableCheckBoxShow($event)">勾选列</label>
+      <label nz-checkbox [(nzChecked)]="currentTableComponent().tableConfig().showCheckbox" (nzCheckedChange)="changeTableCheckBoxShow($event)">勾选列</label>
       <label nz-checkbox [nzIndeterminate]="allTableFieldIndeterminate" [(nzChecked)]="allTableFieldChecked" (nzCheckedChange)="changeAllTableTableConfigShow($event)">列展示</label>
     </span>
     <button class="operate-text" nz-button nzType="text" (click)="reset()">重置</button>

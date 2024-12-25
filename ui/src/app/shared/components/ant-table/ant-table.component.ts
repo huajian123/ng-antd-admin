@@ -1,5 +1,5 @@
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, OnChanges, SimpleChanges, TemplateRef, input, computed, effect, InputSignal, output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, OnChanges, SimpleChanges, TemplateRef, input, computed, effect, InputSignal, output, signal } from '@angular/core';
 
 import { ContextPipePipe } from '@shared/components/ant-table/context-pipe.pipe';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -62,8 +62,6 @@ export interface SortFile {
 })
 export class AntTableComponent implements OnChanges {
   _dataList!: NzSafeAny[];
-  // _tableConfig!: AntTableConfig;
-  _scrollConfig: { x: string; y: string } | {} = {};
   // 从业务组件中传入的缓存的已经选中的checkbox数据数组
   readonly checkedCashArrayFromComment = input<NzSafeAny[]>([]);
 
@@ -94,20 +92,10 @@ export class AntTableComponent implements OnChanges {
   }
 
   tableConfig = input.required<AntTableConfig>();
-  _tableConfig = computed(() => this.tableConfig());
-  private tableConfigEffect = effect(() => {
-    this.setScrollConfig(this._tableConfig());
-  });
 
-  // @Input()
-  // set tableConfig(value: AntTableConfig) {
-  //   this._tableConfig = value;
-  //   this.setScrollConfig(value);
-  // }
-  //
-  // get tableConfig(): AntTableConfig {
-  //   return this._tableConfig;
-  // }
+  _scrollConfig = computed(() => {
+    return this.setScrollConfig(this.tableConfig());
+  });
 
   readonly changePageIndex = output<NzTableQueryParams>();
   readonly changePageSize = output<number>();
@@ -117,22 +105,18 @@ export class AntTableComponent implements OnChanges {
   allChecked = false;
   private cdr = inject(ChangeDetectorRef);
 
-  setScrollConfig(value: AntTableConfig): void {
-    if (value && !value.needNoScroll) {
-      // 默认x：100
-      this._scrollConfig = { x: '100px' };
-      let tempX = {};
-      if (value.xScroll !== undefined) {
-        tempX = { x: `${value.xScroll}px` };
-      }
-      let tempY = {};
-      if (value.yScroll !== undefined) {
-        tempY = { y: `${value.yScroll}px` };
-      }
-      this._scrollConfig = { ...this._scrollConfig, ...tempX, ...tempY };
-    } else {
-      this._scrollConfig = {};
+  setScrollConfig(value: AntTableConfig): { x: string; y: string } | {} {
+    if (!value || value.needNoScroll) {
+      return {};
     }
+    const scrollConfig: { x?: string; y?: string } = { x: '100px' };
+    if (value.xScroll !== undefined) {
+      scrollConfig.x = `${value.xScroll}px`;
+    }
+    if (value.yScroll !== undefined) {
+      scrollConfig.y = `${value.yScroll}px`;
+    }
+    return scrollConfig;
   }
 
   changeSort(tableHeader: TableHeader): void {

@@ -1,3 +1,4 @@
+@let tableConfig = this.tableConfig();
 <nz-table
   nzShowPagination
   nzShowQuickJumper
@@ -6,24 +7,24 @@
   [nzBordered]="true"
   [nzData]="_dataList"
   [nzFrontPagination]="false"
-  [nzLoading]="tableConfig().loading"
+  [nzLoading]="tableConfig.loading"
   [nzOuterBordered]="true"
-  [nzPageIndex]="tableConfig().pageIndex"
-  [nzPageSize]="tableConfig().pageSize"
-  [nzScroll]="tableConfig().needNoScroll ? {} : { x: '1100px' }"
+  [nzPageIndex]="tableConfig.pageIndex"
+  [nzPageSize]="tableConfig.pageSize"
+  [nzScroll]="tableConfig.needNoScroll ? {} : { x: '1100px' }"
   [nzShowTotal]="rangeTemplate"
   [nzSize]="tableSize"
-  [nzTotal]="tableConfig()!.total"
+  [nzTotal]="tableConfig.total"
   (nzPageSizeChange)="onPageSizeChange($event)"
   (nzQueryParams)="onQueryParamsChange($event)"
 >
   <ng-template #rangeTemplate let-range="range" let-total>{{ range[0] }}-{{ range[1] }} 共 {{ total }} 条</ng-template>
   <thead>
     <tr>
-      @if (tableConfig().showCheckbox) {
+      @if (tableConfig.showCheckbox) {
         <th class="animate-bg-0" [nzChecked]="allChecked" [nzIndeterminate]="indeterminate" [nzLeft]="true" [nzWidth]="'40px'" (nzCheckedChange)="onAllChecked($event)"></th>
       }
-      @for (head of tableConfig().headers; track head; let headIndex = $index; let last = $last; let first = $first) {
+      @for (head of tableConfig.headers; track head; let headIndex = $index; let last = $last; let first = $first) {
         @if (head.show === undefined || head.show === true) {
           <th
             class="animate-bg-0"
@@ -37,7 +38,7 @@
             [nzWidth]="head.width + 'px'"
             (nzResizeEnd)="onResize($event, head.title)"
           >
-            @if (!last && (tableConfig().showCheckbox ? true : !last)) {
+            @if (!last && (tableConfig.showCheckbox ? true : !last)) {
               <nz-resize-handle nzDirection="right">
                 <div class="resize-trigger"></div>
               </nz-resize-handle>
@@ -59,7 +60,7 @@
       @for (item of mapOfExpandedData[data.id]; track item; let rowIndex = $index) {
         @if ((item.parent && item.parent.expand) || !item.parent) {
           <tr>
-            @if (tableConfig().showCheckbox) {
+            @if (tableConfig.showCheckbox) {
               <td
                 class="animate-bg-0"
                 nzEllipsis
@@ -69,7 +70,7 @@
                 (nzCheckedChange)="checkRowSingle($event, rowIndex, item)"
               ></td>
             }
-            @for (head of tableConfig().headers; track head; let headIndex = $index; let last = $last; let first = $first) {
+            @for (head of tableConfig.headers; track head; let headIndex = $index; let last = $last; let first = $first) {
               @if (head.show === undefined || head.show === true) {
                 <td
                   [ngClass]="head.tdClassList ? head.tdClassList : ''"
