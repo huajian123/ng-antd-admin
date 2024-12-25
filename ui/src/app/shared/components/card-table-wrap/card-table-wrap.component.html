@@ -3,6 +3,8 @@
 </nz-card>
 <ng-template #tableToolbar>
   <div class="ant-pro-table-toolbar">
+    <!--https://github.com/angular/angular/issues/49161-->
+    @let btnTpl = this.btnTpl();
     @if (btnTpl) {
       <div class="ant-pro-table-toolbar-option">
         <ng-container *ngTemplateOutlet="btnTpl"></ng-container>

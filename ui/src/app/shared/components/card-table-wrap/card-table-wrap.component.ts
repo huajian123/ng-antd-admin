@@ -50,10 +50,7 @@ interface TableSizeItem {
 })
 export class CardTableWrapComponent implements AfterContentInit {
   readonly tableTitle = input<string | TemplateRef<NzSafeAny>>();
-  // TODO: Skipped for migration because:
-  //  This input is used in a control flow expression (e.g. `@if` or `*ngIf`)
-  //  and migrating would break narrowing currently.
-  @Input() btnTpl: TemplateRef<NzSafeAny> | undefined;
+  readonly btnTpl = input<TemplateRef<NzSafeAny>>();
   readonly isNormalTable = input(true, { transform: booleanAttribute }); // 如果只是需要card-table-wrap的样式，这里设置为false
   readonly reload = output();
   readonly antTableComponent = contentChild(AntTableComponentToken);
@@ -66,6 +63,7 @@ export class CardTableWrapComponent implements AfterContentInit {
   ];
   tableHeaders: TableHeader[] = [];
 
+  // 当前包裹的table组件
   currentTableComponent = computed(() => {
     const tableComponent = this.antTableComponent() || this.antTreeTableComponent();
     if (!tableComponent) {

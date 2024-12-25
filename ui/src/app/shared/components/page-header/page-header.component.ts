@@ -25,15 +25,8 @@ export interface PageHeaderType {
 export class PageHeaderComponent {
   private themesService = inject(ThemeService);
   private router = inject(Router);
-
-  // TODO: Skipped for migration because:
-  //  This input is used in a control flow expression (e.g. `@if` or `*ngIf`)
-  //  and migrating would break narrowing currently.
-  @Input() backTpl: TemplateRef<NzSafeAny> | undefined;
-  // TODO: Skipped for migration because:
-  //  This input is used in a control flow expression (e.g. `@if` or `*ngIf`)
-  //  and migrating would break narrowing currently.
-  @Input() pageHeaderInfo: Partial<PageHeaderType> = {};
+  readonly backTpl = input<TemplateRef<NzSafeAny>>();
+  readonly pageHeaderInfo = input<Partial<PageHeaderType>>({});
   readonly backUrl = input('');
   themesOptions$ = this.themesService.getThemesMode();
 

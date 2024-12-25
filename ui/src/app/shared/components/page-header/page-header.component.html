@@ -1,3 +1,5 @@
+@let backTpl = this.backTpl();
+@let pageHeaderInfo = this.pageHeaderInfo();
 <nz-page-header class="site-page-header" [nzBackIcon]="backTpl ? backTpl : null" [nzGhost]="false" [nzTitle]="pageHeaderInfo.title" (nzBack)="back()">
   <nz-breadcrumb nz-page-header-breadcrumb>
     @for (breadcrumb of pageHeaderInfo.breadcrumb; track breadcrumb) {
