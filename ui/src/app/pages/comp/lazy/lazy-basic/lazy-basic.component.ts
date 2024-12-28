@@ -19,7 +19,7 @@ export class LazyBasicComponent implements AfterViewInit {
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '懒加载组件示例',
     breadcrumb: ['首页', '组件', '懒加载组件'],
-    desc: '懒加载组件,我永远喜欢周杰伦'
+    desc: '懒加载组件,我不再喜欢明星'
   };
   readonly adHost = viewChild.required(AdDirective);
   isStarted = false;

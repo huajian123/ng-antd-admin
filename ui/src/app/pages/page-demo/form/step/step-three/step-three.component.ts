@@ -1,7 +1,6 @@
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, output } from '@angular/core';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzResultModule } from 'ng-zorro-antd/result';
@@ -14,8 +13,8 @@ import { NzResultModule } from 'ng-zorro-antd/result';
   imports: [NzResultModule, NzButtonModule, NzWaveModule, NzDescriptionsModule]
 })
 export class StepThreeComponent {
-  // TODO: Skipped for migration because:
-  //  Your application code writes to the input. This prevents migration.
-  @Input() stepDirection: 'horizontal' | 'vertical' = 'horizontal';
-  @Output() readonly next = new EventEmitter<NzSafeAny>();
+  // stepDirection: InputSignal<'horizontal' | 'vertical'> = input('horizontal');
+  // todo 类型错误待解决
+  stepDirection = input('horizontal');
+  readonly next = output<void>();
 }

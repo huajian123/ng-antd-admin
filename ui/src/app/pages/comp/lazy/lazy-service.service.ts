@@ -28,13 +28,8 @@ export class LazyServiceService {
     const componentRef = viewContainerRef.createComponent(LazyTargCompComponent);
     // 使用setInput api可以被onchange钩子管理
     componentRef.setInput('purChoosePeople', selPerson);
-    // 传递destroy引用
-    componentRef.instance.currentPeople.pipe(takeUntilDestroyed(componentRef.instance.destroyRef)).subscribe(() => {
-      this.create(componentRef.instance.purChoosePeople);
+    componentRef.instance.currentPeople.subscribe(currentPeople => {
+      this.create(currentPeople);
     });
-    // 实现OnChange钩子
-    // (instance as NzSafeAny).ngOnChanges({
-    //   purChoosePeople: new SimpleChange(null, instance.purChoosePeople, true)
-    // });
   }
 }

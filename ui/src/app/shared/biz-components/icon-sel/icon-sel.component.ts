@@ -1,5 +1,5 @@
 import { NgStyle } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Input, AfterViewInit, inject, DestroyRef, booleanAttribute, output } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Input, AfterViewInit, inject, DestroyRef, booleanAttribute, output, input } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
@@ -26,9 +26,7 @@ interface IconItem {
   imports: [NzIconModule, NzButtonModule, NzPopoverModule, NzInputModule, NzCardModule, NgStyle, NzEmptyModule, NzPaginationModule]
 })
 export class IconSelComponent implements OnInit, AfterViewInit {
-  // TODO: Skipped for migration because:
-  //  Your application code writes to the input. This prevents migration.
-  @Input({ transform: booleanAttribute }) visible = false;
+  visible = input(false, { transform: booleanAttribute });
   // 做图标搜索防抖
   private searchText$ = new Subject<string>();
   selectedIcon = '';

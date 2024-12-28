@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Signal, TemplateRef, viewChild, ViewChild, ViewChildFunction } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { ModalFullStatusStoreService } from '@store/common-store/modal-full-status-store.service';
@@ -8,7 +8,7 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
 export abstract class GlobalModalBtnTplComponentToken {
-  componentTpl!: TemplateRef<NzSafeAny>;
+  componentTpl!: Signal<TemplateRef<any>>;
   abstract fullScreenIconClick($event: MouseEvent): void;
   modalFullScreenFlag = false;
 }
@@ -21,10 +21,8 @@ export abstract class GlobalModalBtnTplComponentToken {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GlobalModalBtnTplComponent implements GlobalModalBtnTplComponentToken {
-  // TODO: Skipped for migration because:
-  //  This query overrides a field from a superclass, while the superclass field
-  //  is not migrated.
-  @ViewChild('componentTpl', { static: true }) componentTpl!: TemplateRef<NzSafeAny>;
+  readonly componentTpl: Signal<TemplateRef<any>> = viewChild.required<TemplateRef<NzSafeAny>>('componentTpl');
+
   modalFullScreenFlag = false;
   private modalFullStatus = inject(ModalFullStatusStoreService);
 

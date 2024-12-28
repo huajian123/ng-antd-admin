@@ -7,7 +7,7 @@
   [nzPopoverContent]="contentTemplate"
   [nzPopoverTitle]="searchTitle"
   [nzType]="selectedIcon || 'appstore'"
-  [(nzPopoverVisible)]="visible"
+  [nzPopoverVisible]="visible()"
 ></i>
 <ng-template #searchTitle>
   <input nz-input [placeholder]="'搜索图标的type'" (input)="searchIcon($event)" />

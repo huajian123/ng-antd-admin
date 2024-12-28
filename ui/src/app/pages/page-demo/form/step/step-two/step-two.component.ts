@@ -1,10 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, inject } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject, output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { fnCheckForm } from '@utils/tools';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
@@ -20,8 +19,8 @@ import { NzInputModule } from 'ng-zorro-antd/input';
   imports: [NzAlertModule, NzDescriptionsModule, NzDividerModule, FormsModule, ReactiveFormsModule, NzGridModule, NzFormModule, NzButtonModule, NzInputModule, NzWaveModule]
 })
 export class StepTwoComponent implements OnInit {
-  @Output() readonly next = new EventEmitter<NzSafeAny>();
-  @Output() readonly previous = new EventEmitter<NzSafeAny>();
+  readonly next = output<void>();
+  readonly previous = output<void>();
   validateForm!: FormGroup;
   private fb = inject(FormBuilder);
 

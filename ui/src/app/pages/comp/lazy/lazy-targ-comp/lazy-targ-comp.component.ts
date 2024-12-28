@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, SimpleChanges, OnChanges, inject, DestroyRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, SimpleChanges, OnChanges, inject, DestroyRef, input, computed, output } from '@angular/core';
 
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -20,18 +20,16 @@ export enum LazySelPeopleEnum {
   imports: [NzCardModule, NzAvatarModule, NzButtonModule, NzWaveModule]
 })
 export class LazyTargCompComponent implements OnChanges {
-  // TODO: Skipped for migration because:
-  //  Your application code writes to the input. This prevents migration.
-  @Input() purChoosePeople: LazySelPeopleEnum = LazySelPeopleEnum.YiLin;
-  @Output() readonly currentPeople = new EventEmitter<LazySelPeopleEnum>();
+  readonly purChoosePeople = input<LazySelPeopleEnum>(LazySelPeopleEnum.YiLin);
+  _purChoosePeople = computed(() => this.purChoosePeople());
+  readonly currentPeople = output<LazySelPeopleEnum>();
   lazySelPeopleEnum = LazySelPeopleEnum;
   disabled = true;
   destroyRef = inject(DestroyRef);
 
   // 选择明星
   choosePeople(people: LazySelPeopleEnum): void {
-    this.purChoosePeople = people;
-    this.currentPeople.next(people);
+    this.currentPeople.emit(people);
     this.disabled = false;
   }
 

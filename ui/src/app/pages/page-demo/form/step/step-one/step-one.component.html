@@ -1,3 +1,4 @@
+@let stepDirection = this.stepDirection();
 <form class="form-wrap p-b-0 center-row" nz-form [class.p-0]="stepDirection === 'vertical'" [formGroup]="validateForm">
   <nz-form-item>
     <nz-form-label nzFor="title" nzRequired [nzSm]="6" [nzXs]="24">付款账户</nz-form-label>

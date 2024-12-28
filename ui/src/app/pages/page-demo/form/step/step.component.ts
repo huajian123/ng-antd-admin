@@ -55,22 +55,22 @@ export class StepComponent implements OnInit, AfterViewInit {
   initComponent(ref: CdkPortalOutletAttachedRef): void {
     if (ref instanceof ComponentRef) {
       if (ref.instance instanceof StepOneComponent) {
-        ref.instance.stepDirection = this.stepDirection;
-        ref.instance.next.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+        ref.setInput('stepDirection', this.stepDirection);
+        ref.instance.next.subscribe(() => {
           this.go(StepEnum.Two, ref, this.currentStep + 1);
         });
       }
       if (ref.instance instanceof StepTwoComponent) {
-        ref.instance.previous.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+        ref.instance.previous.subscribe(() => {
           this.go(StepEnum.One, ref, this.currentStep - 1);
         });
-        ref.instance.next.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+        ref.instance.next.subscribe(() => {
           this.go(StepEnum.Three, ref, this.currentStep + 1);
         });
       }
       if (ref.instance instanceof StepThreeComponent) {
-        ref.instance.stepDirection = this.stepDirection;
-        ref.instance.next.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+        ref.setInput('stepDirection', this.stepDirection);
+        ref.instance.next.subscribe(() => {
           this.go(StepEnum.One, ref, 1);
         });
       }

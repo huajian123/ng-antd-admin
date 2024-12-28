@@ -4,10 +4,11 @@
     <button nz-button>查看账单</button>
   </div>
 </nz-result>
+@let stepDirection = this.stepDirection();
 <div class="desc-bg center" nz-result-content [class.p-l-16]="stepDirection === 'vertical'">
   <div class="determine-wrap p-b-0">
     <nz-descriptions class="m-t-20 p-0">
-      <nz-descriptions-item nzTitle="付款账户">ant-design&#64;alipay.com</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="付款账户">{{ stepDirection }}ant-design&#64;alipay.com</nz-descriptions-item>
       <nz-descriptions-item nzTitle="收款账户">test&#64;example.com</nz-descriptions-item>
       <nz-descriptions-item nzTitle="收款人姓名">Alex</nz-descriptions-item>
       <nz-descriptions-item nzTitle="转账金额">500元</nz-descriptions-item>

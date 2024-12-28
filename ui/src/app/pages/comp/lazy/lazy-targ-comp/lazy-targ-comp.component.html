@@ -5,14 +5,28 @@
   <nz-avatar [nzSrc]="'imgs/default_face.png'"></nz-avatar>
 </ng-template>
 <ng-template #coverTemplate>
-  <img
-    alt="example"
-    src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fp0.itc.cn%2Fimages01%2F20211012%2Fbd7b3c856106482693b008ec4b2bf50f.jpeg&refer=http%3A%2F%2Fp0.itc.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1663854369&t=4545717439bec2b85dcd33238426f373"
-  />
+  @switch (this._purChoosePeople()) {
+    @case (lazySelPeopleEnum.Dehua) {
+      <img alt="example" src="https://img0.baidu.com/it/u=2629271049,2481912950&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=1161" />
+    }
+    @case (lazySelPeopleEnum.Yanzu) {
+      <img
+        alt="example"
+        src="https://b0.bdstatic.com/ugc/cL2Reh1KFPTadYeZoDQ7GQeed22d83fa40ed020b52492293ae742a.jpg?x-bce-process=image/auto-orient,o_1/watermark,image_NDU0ZjAyZDU5YjQ1LnBuZw==,bucket_searchbox,w_31,text_QOWwj-aaluiusOW9leWlveaXtuWFiQ==,type_RlpMYW5UaW5nSGVp,size_31,x_20,y_20,interval_4,color_FFFFFF,effect_softoutline,shc_000000,blr_2,align_1"
+      />
+    }
+    @case (lazySelPeopleEnum.YiLin) {
+      <img alt="example" src="https://img1.baidu.com/it/u=775973739,2856715338&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=1200" />
+    }
+    @case (lazySelPeopleEnum.Jielun) {
+      <img alt="example" src="https://img1.baidu.com/it/u=2503939360,3255596132&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=1200" />
+    }
+  }
 </ng-template>
 <ng-template #actionSetting>
-  <button class="m-r-8" nz-button nzType="default" [disabled]="!disabled" [nzDanger]="purChoosePeople === lazySelPeopleEnum.Yanzu" (click)="choosePeople(lazySelPeopleEnum.Yanzu)">彦祖</button>
-  <button class="m-r-8" nz-button nzType="default" [disabled]="!disabled" [nzDanger]="purChoosePeople === lazySelPeopleEnum.Dehua" (click)="choosePeople(lazySelPeopleEnum.Dehua)">德华</button>
-  <button class="m-r-8" nz-button nzType="default" [disabled]="!disabled" [nzDanger]="purChoosePeople === lazySelPeopleEnum.YiLin" (click)="choosePeople(lazySelPeopleEnum.YiLin)">依林</button>
-  <button class="m-r-8" nz-button nzType="default" [disabled]="!disabled" [nzDanger]="purChoosePeople === lazySelPeopleEnum.Jielun" (click)="choosePeople(lazySelPeopleEnum.Jielun)">杰伦</button>
+  @let _purChoosePeople = this._purChoosePeople();
+  <button class="m-r-8" nz-button nzType="default" [disabled]="!disabled" [nzDanger]="_purChoosePeople === lazySelPeopleEnum.Yanzu" (click)="choosePeople(lazySelPeopleEnum.Yanzu)">彦祖</button>
+  <button class="m-r-8" nz-button nzType="default" [disabled]="!disabled" [nzDanger]="_purChoosePeople === lazySelPeopleEnum.Dehua" (click)="choosePeople(lazySelPeopleEnum.Dehua)">德华</button>
+  <button class="m-r-8" nz-button nzType="default" [disabled]="!disabled" [nzDanger]="_purChoosePeople === lazySelPeopleEnum.YiLin" (click)="choosePeople(lazySelPeopleEnum.YiLin)">依林</button>
+  <button class="m-r-8" nz-button nzType="default" [disabled]="!disabled" [nzDanger]="_purChoosePeople === lazySelPeopleEnum.Jielun" (click)="choosePeople(lazySelPeopleEnum.Jielun)">杰伦</button>
 </ng-template>

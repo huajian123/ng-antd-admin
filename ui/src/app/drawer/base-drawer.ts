@@ -1,4 +1,4 @@
-import { ComponentRef, DestroyRef, inject, Injectable, Injector, TemplateRef, Type } from '@angular/core';
+import { ComponentRef, DestroyRef, inject, Injectable, Injector, Signal, TemplateRef, Type } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Observable, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
@@ -17,7 +17,7 @@ export class DrawerWrapService {
   private baseInjector = inject(Injector);
   private btnComponentRef: ComponentRef<GlobalDrawerFootTplComponentToken> = inject(GLOBAL_DRAWER_FOOT_TPL_TOKEN);
   protected bsDrawerService: NzDrawerService = this.baseInjector.get(NzDrawerService);
-  private btnTpl: TemplateRef<NzSafeAny> = this.btnComponentRef.instance.componentTpl;
+  private btnTpl: Signal<TemplateRef<any>> = this.btnComponentRef.instance.componentTpl;
   constructor() {
     this.btnComponentRef.instance.sureEmitter!.subscribe(() => this.sure());
     this.btnComponentRef.instance.cancelEmitter!.subscribe(() => this.cancel());
@@ -40,7 +40,7 @@ export class DrawerWrapService {
       nzContentParams: {
         params
       },
-      nzFooter: drawerOptions.nzFooter || this.btnTpl
+      nzFooter: drawerOptions.nzFooter || this.btnTpl()
     };
     return _.merge(defaultOptions, drawerOptions);
   }
