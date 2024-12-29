@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, Input, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
@@ -20,9 +20,7 @@ export class SearchTableDetailComponent implements OnInit {
     breadcrumb: ['首页', '列表页', '查询表格', '详情']
   };
   validateForm!: FormGroup;
-  // TODO: Skipped for migration because:
-  //  Your application code writes to the input. This prevents migration.
-  @Input({ required: true }) name!: string; // 从路由中获取的参数，ng16支持的新特性
+  name = input.required<string>(); // 从路由中获取的参数，ng16支持的新特性
   backUrl = '/default/page-demo/list/search-table';
   destroyRef = inject(DestroyRef);
 
@@ -46,6 +44,6 @@ export class SearchTableDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.validateForm.get('userName')?.setValue(this.name);
+    this.validateForm.get('userName')?.setValue(this.name());
   }
 }
