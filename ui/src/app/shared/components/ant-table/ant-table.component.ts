@@ -1,13 +1,14 @@
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, OnChanges, SimpleChanges, TemplateRef, input, computed, effect, InputSignal, output, signal } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, inject, input, InputSignal, OnChanges, output, SimpleChanges, TemplateRef } from '@angular/core';
 
 import { ContextPipePipe } from '@shared/components/ant-table/context-pipe.pipe';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { NzResizeEvent, NzResizableModule } from 'ng-zorro-antd/resizable';
-import { NzTableQueryParams, NzTableSize, NzTableModule } from 'ng-zorro-antd/table';
+import { NzResizableModule, NzResizeEvent } from 'ng-zorro-antd/resizable';
+import { NzTableModule, NzTableQueryParams, NzTableSize } from 'ng-zorro-antd/table';
 
 import { MapPipe } from '../../pipes/map.pipe';
 import { TableFiledPipe } from '../../pipes/table-filed.pipe';
+
 export interface TableHeader {
   title: string; // 表头名称
   field?: string; // 字段
@@ -61,25 +62,18 @@ export interface SortFile {
   imports: [NzTableModule, NzResizableModule, NgClass, NgTemplateOutlet, MapPipe, TableFiledPipe, ContextPipePipe]
 })
 export class AntTableComponent implements OnChanges {
-  _dataList!: NzSafeAny[];
   // 从业务组件中传入的缓存的已经选中的checkbox数据数组
   readonly checkedCashArrayFromComment = input<NzSafeAny[]>([]);
 
-  // TODO: Skipped for migration because:
-  //  Accessor inputs cannot be migrated as they are too complex.
-  @Input()
-  set tableData(value: NzSafeAny[]) {
-    this._dataList = value;
+  tableData = input<NzSafeAny[]>([]);
+  _dataList = computed(() => {
     if (this.tableConfig().showCheckbox) {
-      this._dataList.forEach(item => {
-        item['_checked'] = false;
+      return this.tableData().map(item => {
+        return { ...item, _checked: false };
       });
     }
-  }
-
-  get tableData(): NzSafeAny[] {
-    return this._dataList;
-  }
+    return this.tableData();
+  });
 
   _tableSize: NzTableSize = 'default';
   set tableSize(value: NzTableSize) {
@@ -133,7 +127,7 @@ export class AntTableComponent implements OnChanges {
 
   tableChangeDectction(): void {
     // 改变引用触发变更检测。
-    this._dataList = [...this._dataList];
+    // this._dataList() = [...this._dataList()];
     this.cdr.markForCheck();
   }
 
@@ -186,14 +180,14 @@ export class AntTableComponent implements OnChanges {
 
   // 单选
   public checkRowSingle(isChecked: boolean, selectIndex: number): void {
-    this.checkFn(this._dataList[selectIndex], isChecked);
+    this.checkFn(this._dataList()[selectIndex], isChecked);
     this.selectedChange.emit(this.checkedCashArrayFromComment());
     this.refreshStatus();
   }
 
   // 全选
   onAllChecked(isChecked: boolean): void {
-    this._dataList.forEach(item => {
+    this._dataList().forEach(item => {
       this.checkFn(item, isChecked);
     });
     this.selectedChange.emit(this.checkedCashArrayFromComment());
@@ -202,18 +196,18 @@ export class AntTableComponent implements OnChanges {
 
   // 刷新复选框状态
   refreshStatus(): void {
-    this._dataList.forEach(item => {
+    this._dataList().forEach(item => {
       const index = this.checkedCashArrayFromComment().findIndex(cashItem => {
         return item.id === cashItem.id;
       });
       item['_checked'] = index !== -1;
     });
     const allChecked =
-      this._dataList.length > 0 &&
-      this._dataList.every(item => {
+      this._dataList().length > 0 &&
+      this._dataList().every(item => {
         return item['_checked'] === true;
       });
-    const allUnChecked = this._dataList.every(item => item['_checked'] !== true);
+    const allUnChecked = this._dataList().every(item => item['_checked'] !== true);
     this.allChecked = allChecked;
     this.indeterminate = !allChecked && !allUnChecked;
   }
