@@ -96,7 +96,6 @@ export class SetRoleComponent implements OnInit {
   submit(): void {
     const temp = [...this.permissionList];
     const flatArray = fnFlattenTreeDataByDataList(temp);
-    console.log(flatArray);
     const selectedAuthCodeArray: string[] = [];
     flatArray.forEach(item => {
       if (item['checked']) {

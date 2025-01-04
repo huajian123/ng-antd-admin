@@ -1,5 +1,5 @@
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { Component, ChangeDetectionStrategy, Input, ChangeDetectorRef, OnChanges, SimpleChanges, inject, input, InputSignal, output } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnChanges, SimpleChanges, inject, input, InputSignal, output, computed } from '@angular/core';
 
 import { AntTableConfig, SortFile, TableHeader } from '@shared/components/ant-table/ant-table.component';
 import { fnGetFlattenTreeDataByMap, fnTreeDataToMap } from '@utils/treeTableTools';
@@ -38,7 +38,7 @@ export abstract class AntTreeTableComponentToken {
 export class TreeTableComponent implements OnChanges {
   private cdr = inject(ChangeDetectorRef);
 
-  _dataList!: TreeNodeInterface[];
+  // _dataList!: TreeNodeInterface[];
   allChecked = false;
   indeterminate = false;
   // 从业务组件中传入的缓存的已经选中的checkbox数据数组,相当于缓存的tableData
@@ -52,13 +52,10 @@ export class TreeTableComponent implements OnChanges {
   readonly selectedChange = output<NzSafeAny[]>();
   cashExpandIdArray: Array<number | string> = []; // 缓存已经展开的节点的id
 
-  // TODO: Skipped for migration because:
-  //  Accessor inputs cannot be migrated as they are too complex.
-  @Input()
-  set tableData(value: TreeNodeInterface[]) {
-    this._dataList = value;
+  tableData = input<TreeNodeInterface[]>([]);
+  _dataList = computed(() => {
     // 根据dataList获取map形式的treeData,每一个key对应一组（也就是有子集）的数据
-    this.mapOfExpandedData = fnTreeDataToMap(this._dataList);
+    this.mapOfExpandedData = fnTreeDataToMap(this.tableData());
     const beFilterId: Array<string | number> = []; // 待删除的展开数据的child集的id数组
     Object.values(this.mapOfExpandedData).forEach(menuArray => {
       menuArray.forEach(menuItem => {
@@ -76,11 +73,8 @@ export class TreeTableComponent implements OnChanges {
     beFilterId.forEach(item => {
       delete this.mapOfExpandedData[item];
     });
-  }
-
-  get tableData(): NzSafeAny[] {
-    return this._dataList;
-  }
+    return this.tableData();
+  });
 
   _tableSize: NzTableSize = 'default';
   set tableSize(value: NzTableSize) {
@@ -94,7 +88,7 @@ export class TreeTableComponent implements OnChanges {
 
   tableChangeDectction(): void {
     // 改变引用触发变更检测。
-    this._dataList = [...this._dataList];
+    // this._dataList = [...this._dataList];
     this.cdr.markForCheck();
   }
 

@@ -1,4 +1,4 @@
-import { Directive, inject, Input, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Directive, inject, input, Input, InputSignal, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 
 import { UserInfoStoreService } from '@store/common-store/userInfo-store.service';
 
@@ -6,28 +6,27 @@ import { UserInfoStoreService } from '@store/common-store/userInfo-store.service
   selector: '[appAuth]',
   standalone: true
 })
-export class AuthDirective {
+export class AuthDirective implements OnInit {
   codeArray!: string[];
 
   private userInfoService = inject(UserInfoStoreService);
   private templateRef = inject(TemplateRef);
   private viewContainerRef = inject(ViewContainerRef);
 
-  // TODO: Skipped for migration because:
-  //  Accessor inputs cannot be migrated as they are too complex.
-  @Input()
-  set appAuth(authCode: string | undefined) {
-    if (!authCode) {
-      this.show(true);
-      return;
-    }
-    this.codeArray.includes(authCode) ? this.show(true) : this.show(false);
-  }
+  appAuth = input.required<string>();
 
   constructor() {
     this.userInfoService.getUserInfo().subscribe(userInfo => {
       this.codeArray = userInfo.authCode;
     });
+  }
+
+  ngOnInit(): void {
+    if (!this.appAuth()) {
+      this.show(true);
+      return;
+    }
+    this.codeArray.includes(this.appAuth()) ? this.show(true) : this.show(false);
   }
 
   private show(hasAuth: boolean): void {

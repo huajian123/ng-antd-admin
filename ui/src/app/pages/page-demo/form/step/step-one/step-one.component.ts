@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, inject, input, output } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject, input, output, InputSignal } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { fnCheckForm } from '@utils/tools';
@@ -19,10 +19,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
   imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzSelectModule, NzButtonModule, NzInputModule, NzWaveModule, NzDividerModule, NzTypographyModule]
 })
 export class StepOneComponent implements OnInit {
-  // @Input() stepDirection: 'horizontal' | 'vertical' = 'horizontal';
-  // stepDirection: InputSignal<'horizontal' | 'vertical'> = input('horizontal');
-  // todo 类型错误待解决
-  stepDirection = input('horizontal');
+  stepDirection: InputSignal<'horizontal' | 'vertical'> = input<'horizontal' | 'vertical'>('horizontal');
   validateForm!: FormGroup;
   readonly next = output<void>();
 

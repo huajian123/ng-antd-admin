@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, input, output } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, output, InputSignal } from '@angular/core';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';
@@ -13,8 +13,6 @@ import { NzResultModule } from 'ng-zorro-antd/result';
   imports: [NzResultModule, NzButtonModule, NzWaveModule, NzDescriptionsModule]
 })
 export class StepThreeComponent {
-  // stepDirection: InputSignal<'horizontal' | 'vertical'> = input('horizontal');
-  // todo 类型错误待解决
-  stepDirection = input('horizontal');
+  stepDirection: InputSignal<'horizontal' | 'vertical'> = input<'horizontal' | 'vertical'>('horizontal');
   readonly next = output<void>();
 }

@@ -1,6 +1,6 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { AsyncPipe } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 
@@ -51,20 +51,10 @@ export class Login1Component implements OnInit {
   private cdr = inject(ChangeDetectorRef);
   private login1StoreService = inject(Login1StoreService);
   private breakpointObserver = inject(BreakpointObserver);
-
-  private adHost!: AdDirective;
   isOverModel = true;
   isNightTheme$ = this.themesService.getIsNightTheme();
   destroyRef = inject(DestroyRef);
-  // TODO: Skipped for migration because:
-  //  Accessor queries cannot be migrated as they are too complex.
-  @ViewChild(AdDirective) set adHost1(content: AdDirective) {
-    if (content) {
-      this.adHost = content;
-      this.subLoginType();
-      this.cdr.detectChanges();
-    }
-  }
+  readonly adHost = viewChild.required(AdDirective);
 
   formData: LoginFormComponentInterface[] = [
     { type: LoginType.Normal, component: new DynamicComponent(NormalLoginComponent, {}) },
@@ -78,7 +68,7 @@ export class Login1Component implements OnInit {
   }
 
   to(adItem: LoginFormComponentInterface): void {
-    const viewContainerRef = this.adHost.viewContainerRef;
+    const viewContainerRef = this.adHost().viewContainerRef;
     viewContainerRef.clear();
     const componentRef = viewContainerRef.createComponent<AdComponent>(adItem.component.component);
     componentRef.instance.data = adItem.component.data;
@@ -105,6 +95,7 @@ export class Login1Component implements OnInit {
   }
 
   ngOnInit(): void {
+    this.subLoginType();
     this.breakpointObserver
       .observe(['(max-width: 1200px)'])
       .pipe(takeUntilDestroyed(this.destroyRef))

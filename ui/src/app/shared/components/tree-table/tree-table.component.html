@@ -5,7 +5,7 @@
   nzShowSizeChanger
   nzTableLayout="fixed"
   [nzBordered]="true"
-  [nzData]="_dataList"
+  [nzData]="_dataList()"
   [nzFrontPagination]="false"
   [nzLoading]="tableConfig.loading"
   [nzOuterBordered]="true"
@@ -56,7 +56,7 @@
     </tr>
   </thead>
   <tbody>
-    @for (data of _dataList; track data) {
+    @for (data of _dataList(); track data) {
       @for (item of mapOfExpandedData[data.id]; track item; let rowIndex = $index) {
         @if ((item.parent && item.parent.expand) || !item.parent) {
           <tr>
