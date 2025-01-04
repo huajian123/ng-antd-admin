@@ -1,5 +1,5 @@
 import { DOCUMENT, registerLocaleData } from '@angular/common';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
 import zh from '@angular/common/locales/zh';
 import { ApplicationConfig, importProvidersFrom, provideExperimentalZonelessChangeDetection, inject, provideAppInitializer, EnvironmentProviders } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -17,6 +17,7 @@ import { SelectivePreloadingStrategyService } from '@core/services/common/select
 import { SubLockedStatusService } from '@core/services/common/sub-locked-status.service';
 import { SubWindowWithService } from '@core/services/common/sub-window-with.service';
 import { ThemeSkinService } from '@core/services/common/theme-skin.service';
+import { httpInterceptorService } from '@core/services/interceptors/http-interceptor';
 import { StartupService } from '@core/startup/startup.service';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NZ_I18N, zh_CN } from 'ng-zorro-antd/i18n';
@@ -106,10 +107,9 @@ export const appConfig: ApplicationConfig = {
       withComponentInputBinding() // 开启路由参数绑定到组件的输入属性,ng16新增特性
     ),
     importProvidersFrom(NzDrawerModule, NzModalModule),
-    ...interceptors, // http拦截器
     ...APPINIT_PROVIDES, // 项目启动之前，需要调用的一系列方法
     provideAnimationsAsync(), // 开启延迟加载动画，ng17新增特性，如果想要项目启动时就加载动画，可以使用provideAnimations()
-    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(withInterceptors([httpInterceptorService])),
     provideExperimentalZonelessChangeDetection() // 开启 zoneless
   ]
 };
