@@ -1,9 +1,9 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef, TemplateRef, inject, DestroyRef, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, TemplateRef, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterEvent, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
-import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
+import { PageHeaderComponent, PageHeaderType } from '@shared/components/page-header/page-header.component';
 import { WaterMarkComponent } from '@shared/components/water-mark/water-mark.component';
 import { SearchListStoreService } from '@store/biz-store-service/search-list/search-list-store.service';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -26,10 +26,15 @@ interface TabInterface {
 export class SearchListComponent {
   readonly headerContent = viewChild.required<TemplateRef<NzSafeAny>>('headerContent');
   readonly headerFooter = viewChild.required<TemplateRef<NzSafeAny>>('headerFooter');
-  pageHeaderInfo: Partial<PageHeaderType> = {
-    title: '搜索列表（文章）',
-    breadcrumb: ['首页', '列表页', '查询表格']
-  };
+
+  pageHeaderInfo = computed<Partial<PageHeaderType>>(() => {
+    return {
+      title: this.searchListService.searchListComponentStore(),
+      desc: this.headerContent(),
+      footer: this.headerFooter(),
+      breadcrumb: ['首页', '列表页', this.searchListService.searchListComponentStore()]
+    };
+  });
   currentSelTab = 0;
   destroyRef = inject(DestroyRef);
   tabData: TabInterface[] = [
@@ -37,23 +42,11 @@ export class SearchListComponent {
     { label: '项目', url: '/default/page-demo/list/search-list/project' },
     { label: '应用', url: '/default/page-demo/list/search-list/application' }
   ];
-  private cdr = inject(ChangeDetectorRef);
   private searchListService = inject(SearchListStoreService);
   private router = inject(Router);
 
   constructor() {
-    this.searchListService
-      .getCurrentSearchListComponentStore()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(componentType => {
-        this.pageHeaderInfo = {
-          title: componentType,
-          desc: this.headerContent(),
-          footer: this.headerFooter(),
-          breadcrumb: ['首页', '列表页', componentType]
-        };
-        this.cdr.markForCheck();
-      });
+    // todo 好像第一次路由结束以后不会执行，导致刷新的时候tab的索引错乱
     this.router.events
       .pipe(
         filter(event => event instanceof NavigationEnd),

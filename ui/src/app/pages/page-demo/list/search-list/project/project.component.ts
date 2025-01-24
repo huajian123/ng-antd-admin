@@ -75,6 +75,6 @@ export class ProjectComponent {
   }
 
   _onReuseInit(): void {
-    this.searchListService.setCurrentSearchListComponentStore('搜索列表（项目）');
+    this.searchListService.searchListComponentStore.set('搜索列表（项目）');
   }
 }
