@@ -1,5 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef, computed } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { LoginType } from '@app/pages/other-login/login1/login1.component';
@@ -22,12 +21,13 @@ export class QrLoginComponent implements OnInit {
   validateForm!: FormGroup;
   password?: string;
   typeEnum = LoginType;
-  isOverModel = false;
+  isOverModel = computed(() => {
+    return this.login1StoreService.isLogin1OverModelSignalStore();
+  });
   destroyRef = inject(DestroyRef);
 
   private fb = inject(FormBuilder);
   private login1StoreService = inject(Login1StoreService);
-  private cdr = inject(ChangeDetectorRef);
 
   submitForm(): void {}
 
@@ -36,13 +36,6 @@ export class QrLoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.login1StoreService
-      .getIsLogin1OverModelStore()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(res => {
-        this.isOverModel = res;
-        this.cdr.markForCheck();
-      });
     this.validateForm = this.fb.group({
       userName: [null, [Validators.required]],
       password: [null, [Validators.required]],

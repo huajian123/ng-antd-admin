@@ -95,7 +95,7 @@ export class Login1Component implements OnInit {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(res => {
         this.isOverModel = res.matches;
-        this.login1StoreService.setIsLogin1OverModelStore(res.matches);
+        this.login1StoreService.isLogin1OverModelSignalStore.set(res.matches);
         this.cdr.detectChanges();
       });
   }

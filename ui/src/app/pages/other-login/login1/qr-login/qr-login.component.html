@@ -1,5 +1,5 @@
 <div>
-  <h2 [class.is-over-model]="isOverModel">二维码登录</h2>
+  <h2 [class.is-over-model]="isOverModel()">二维码登录</h2>
   <div class="full-with">
     <form class="login-form-wrap" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
       <nz-form-item>

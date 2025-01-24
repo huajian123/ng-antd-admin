@@ -1,6 +1,5 @@
 import { NgStyle } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef, computed } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule, AbstractControl } from '@angular/forms';
 
 import { LoginType } from '@app/pages/other-login/login1/login1.component';
@@ -29,7 +28,9 @@ export class RegistLoginComponent implements OnInit {
   passwordVisible = false;
   compirePasswordVisible = false;
 
-  isOverModel = false;
+  isOverModel = computed(() => {
+    return this.login1StoreService.isLogin1OverModelSignalStore();
+  });
   equipmentWidthEnum = EquipmentWidth;
   currentEquipmentWidth: EquipmentWidth = EquipmentWidth.md;
   get password(): AbstractControl | null {
@@ -77,19 +78,8 @@ export class RegistLoginComponent implements OnInit {
     });
   }
 
-  subLogin1Store(): void {
-    this.login1StoreService
-      .getIsLogin1OverModelStore()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(res => {
-        this.isOverModel = res;
-        this.cdr.markForCheck();
-      });
-  }
-
   ngOnInit(): void {
     this.subScreenWidth();
     this.initForm();
-    this.subLogin1Store();
   }
 }
