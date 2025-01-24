@@ -36,7 +36,7 @@ export class PhoneLoginComponent implements OnInit {
   submitForm(): void {}
 
   goOtherWay(type: LoginType): void {
-    this.login1StoreService.setLoginTypeStore(type);
+    this.login1StoreService.loginTypeSignalStore.set(type);
   }
 
   initForm(): void {

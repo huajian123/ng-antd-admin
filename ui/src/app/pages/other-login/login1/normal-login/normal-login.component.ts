@@ -58,7 +58,7 @@ export class NormalLoginComponent implements OnInit {
   }
 
   goOtherWay(type: LoginType): void {
-    this.login1StoreService.setLoginTypeStore(type);
+    this.login1StoreService.loginTypeSignalStore.set(type);
   }
 
   ngOnInit(): void {

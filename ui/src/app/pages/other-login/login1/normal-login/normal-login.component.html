@@ -1,7 +1,7 @@
 <div>
   <h2 class="m-b-8" [class.is-over-model]="isOverModel">登 录</h2>
   <div class="full-with">
-    <form class="login-form-wrap" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+    <form class="login-form-wrap" nz-form [formGroup]="validateForm">
       <nz-form-item>
         <nz-form-control nzErrorTip="请输入用户名!">
           <input type="text" formControlName="userName" nz-input nzSize="large" placeholder="用户名" [placeholder]="'没有账号密码直接登陆'" />
@@ -27,7 +27,7 @@
           <a class="operate-text">忘记密码?</a>
         </div>
       </div>
-      <button class="full-with m-t-15 btn" nz-button nzSize="large" [nzType]="'primary'">登 录</button>
+      <button class="full-with m-t-15 btn" nz-button nzSize="large" (click)="submitForm()" [nzType]="'primary'">登 录</button>
       <div class="m-t-15" nz-row nzJustify="space-between">
         <button class="m-b-8" nz-button nz-col nzType="default" [nzSm]="7" [nzXs]="24" (click)="goOtherWay(typeEnum.Phone)">手机登录</button>
         <button class="m-b-8" nz-button nz-col nzType="default" [nzSm]="7" [nzXs]="24" (click)="goOtherWay(typeEnum.Qr)">二维码登录</button>

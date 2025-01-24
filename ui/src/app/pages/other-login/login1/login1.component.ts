@@ -1,6 +1,6 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { AsyncPipe } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef, viewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef, viewChild, effect } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 
@@ -63,6 +63,10 @@ export class Login1Component implements OnInit {
     { type: LoginType.Register, component: new DynamicComponent(RegistLoginComponent, {}) }
   ];
 
+  changePageTypeEffect = effect(() => {
+    this.to(this.getCurrentComponent(this.login1StoreService.loginTypeSignalStore()));
+  });
+
   getCurrentComponent(type: LoginType): LoginFormComponentInterface {
     return this.formData.find(item => item.type === type)!;
   }
@@ -85,17 +89,7 @@ export class Login1Component implements OnInit {
     });
   }
 
-  subLoginType(): void {
-    this.login1StoreService
-      .getLoginTypeStore()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(res => {
-        this.to(this.getCurrentComponent(res));
-      });
-  }
-
   ngOnInit(): void {
-    this.subLoginType();
     this.breakpointObserver
       .observe(['(max-width: 1200px)'])
       .pipe(takeUntilDestroyed(this.destroyRef))
