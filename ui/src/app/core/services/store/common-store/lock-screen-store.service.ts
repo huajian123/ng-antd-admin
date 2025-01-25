@@ -1,5 +1,4 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Injectable, signal } from '@angular/core';
 
 export interface LockScreenFlag {
   locked: boolean;
@@ -14,13 +13,5 @@ export interface LockScreenFlag {
   providedIn: 'root'
 })
 export class LockScreenStoreService {
-  private lockScreenStore$ = new BehaviorSubject<LockScreenFlag>({ locked: false, password: '', beforeLockPath: '' });
-
-  setLockScreenStore(store: LockScreenFlag): void {
-    this.lockScreenStore$.next(store);
-  }
-
-  getLockScreenStore(): Observable<LockScreenFlag> {
-    return this.lockScreenStore$.asObservable();
-  }
+  lockScreenSignalStore = signal<LockScreenFlag>({ locked: false, password: '', beforeLockPath: '' });
 }

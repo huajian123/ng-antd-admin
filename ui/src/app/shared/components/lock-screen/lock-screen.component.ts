@@ -1,5 +1,5 @@
 import { AsyncPipe, DatePipe } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, inject, DestroyRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject, DestroyRef, computed } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
 import { LockedKey, salt } from '@config/constant';
 import { LoginInOutService } from '@core/services/common/login-in-out.service';
 import { WindowService } from '@core/services/common/window.service';
-import { LockScreenFlag, LockScreenStoreService } from '@store/common-store/lock-screen-store.service';
+import { LockScreenStoreService } from '@store/common-store/lock-screen-store.service';
 import { fnCheckForm, fnEncrypt } from '@utils/tools';
 import { getDay } from 'date-fns';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
@@ -38,11 +38,9 @@ export class LockScreenComponent implements OnInit {
   );
   validateForm!: FormGroup;
   passwordVisible = false;
-  lockedState: LockScreenFlag = {
-    locked: false,
-    password: '',
-    beforeLockPath: '' // 锁屏前的页面路由
-  };
+  lockedState = computed(() => {
+    return this.lockScreenStoreService.lockScreenSignalStore();
+  });
   destroyRef = inject(DestroyRef);
 
   private lockScreenStoreService = inject(LockScreenStoreService);
@@ -62,10 +60,10 @@ export class LockScreenComponent implements OnInit {
     if (!fnCheckForm(this.validateForm)) {
       return;
     }
-    if (this.lockedState.locked) {
+    if (this.lockedState().locked) {
       // 密码正确则解锁
-      if (this.lockedState.password === this.validateForm.get('password')!.value) {
-        this.router.navigateByUrl(this.lockedState.beforeLockPath);
+      if (this.lockedState().password === this.validateForm.get('password')!.value) {
+        this.router.navigateByUrl(this.lockedState().beforeLockPath);
         this.unlock();
       } else {
         this.validateForm.get('password')!.setErrors({ notRight: true });
@@ -76,7 +74,7 @@ export class LockScreenComponent implements OnInit {
   // 解锁
   unlock(): void {
     const lockedStatus = { locked: false, password: '', beforeLockPath: '' };
-    this.lockScreenStoreService.setLockScreenStore(lockedStatus);
+    this.lockScreenStoreService.lockScreenSignalStore.set(lockedStatus);
     this.windowSrv.setSessionStorage(LockedKey, fnEncrypt(lockedStatus, salt));
   }
 
@@ -96,17 +94,7 @@ export class LockScreenComponent implements OnInit {
     });
   }
 
-  subLockedState(): void {
-    this.lockScreenStoreService
-      .getLockScreenStore()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(res => {
-        this.lockedState = res;
-      });
-  }
-
   ngOnInit(): void {
-    this.subLockedState();
     this.initForm();
   }
 }

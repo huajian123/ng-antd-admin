@@ -18,7 +18,7 @@ export default [
       },
       {
         title: '锁屏',
-        canDeactivate: [(component: EmptyForLockComponent) => !component.routeStatus.locked],
+        canDeactivate: [(component: EmptyForLockComponent) => !component.routeStatus().locked],
         data: { key: 'empty-for-lock', shouldDetach: 'no' },
         path: 'empty-for-lock',
         loadComponent: () => import('../../shared/components/empty-for-lock/empty-for-lock.component').then(m => m.EmptyForLockComponent)

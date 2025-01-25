@@ -1,7 +1,6 @@
-import { Component, ChangeDetectionStrategy, inject, DestroyRef } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Component, ChangeDetectionStrategy, inject, DestroyRef, computed } from '@angular/core';
 
-import { LockScreenFlag, LockScreenStoreService } from '@store/common-store/lock-screen-store.service';
+import { LockScreenStoreService } from '@store/common-store/lock-screen-store.service';
 
 /*此组件为了解决锁屏时f12仍然能查看到被隐藏的页面，而创建的空白页面*/
 @Component({
@@ -11,17 +10,10 @@ import { LockScreenFlag, LockScreenStoreService } from '@store/common-store/lock
   standalone: true
 })
 export class EmptyForLockComponent {
-  // 路由的锁屏状态
-  routeStatus!: LockScreenFlag;
   destroyRef = inject(DestroyRef);
   private lockScreenStoreService = inject(LockScreenStoreService);
-
-  constructor() {
-    this.lockScreenStoreService
-      .getLockScreenStore()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(res => {
-        this.routeStatus = res;
-      });
-  }
+  // 路由的锁屏状态
+  routeStatus = computed(() => {
+    return this.lockScreenStoreService.lockScreenSignalStore();
+  });
 }

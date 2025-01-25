@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, computed, DestroyRef, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs/operators';
@@ -15,7 +15,7 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 @Component({
   selector: 'app-root',
   template: `
-    @if ((lockedState$ | async)!.locked) {
+    @if (lockedState()!.locked) {
       <app-lock-screen></app-lock-screen>
     }
     <nz-back-top></nz-back-top>
@@ -40,7 +40,9 @@ export class AppComponent implements OnInit, AfterViewInit {
   private router = inject(Router);
 
   loading$ = this.spinService.getCurrentGlobalSpinStore();
-  lockedState$ = this.lockScreenStoreService.getLockScreenStore();
+  lockedState = computed(() => {
+    return this.lockScreenStoreService.lockScreenSignalStore();
+  });
   destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {

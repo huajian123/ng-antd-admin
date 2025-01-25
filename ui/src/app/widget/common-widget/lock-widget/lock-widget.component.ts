@@ -48,7 +48,7 @@ export class LockWidgetComponent extends BasicConfirmModalComponent {
       // @ts-ignore
       beforeLockPath: this.activatedRoute.snapshot['_routerState'].url
     };
-    this.lockScreenStoreService.setLockScreenStore(lockedState);
+    this.lockScreenStoreService.lockScreenSignalStore.set(lockedState);
     this.windowSrv.setSessionStorage(LockedKey, fnEncrypt(lockedState, salt));
     this.modalRef.destroy();
     this.router.navigateByUrl(`/blank/empty-for-lock`);
