@@ -42,7 +42,7 @@ export class LoginFormComponent implements OnInit {
       return;
     }
     // 设置全局loading
-    this.spinService.setCurrentGlobalSpinStore(true);
+    this.spinService.$globalSpinStore.set(true);
     // 获取表单的值
     const param = this.validateForm.getRawValue();
     // 调用登录接口
@@ -57,7 +57,7 @@ export class LoginFormComponent implements OnInit {
       .pipe(
         // 无论如何设置全局loading为false
         finalize(() => {
-          this.spinService.setCurrentGlobalSpinStore(false);
+          this.spinService.$globalSpinStore.set(false);
         }),
         takeUntilDestroyed(this.destroyRef)
       )
@@ -69,7 +69,7 @@ export class LoginFormComponent implements OnInit {
             this.router.navigateByUrl('default/dashboard/analysis');
           })
           .finally(() => {
-            this.spinService.setCurrentGlobalSpinStore(false);
+            this.spinService.$globalSpinStore.set(false);
             this.notification.blank(
               '温馨提示',
               `

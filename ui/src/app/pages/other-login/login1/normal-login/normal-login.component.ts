@@ -41,7 +41,7 @@ export class NormalLoginComponent implements OnInit {
   private windowServe = inject(WindowService);
 
   submitForm(): void {
-    this.spinService.setCurrentGlobalSpinStore(true);
+    this.spinService.$globalSpinStore.set(true);
     this.windowServe.setSessionStorage(TokenKey, 'TokenPre + token');
     const userInfo = this.userInfoService.parsToken(TokenPre);
     this.userInfoService.setUserInfo(userInfo);
@@ -52,7 +52,7 @@ export class NormalLoginComponent implements OnInit {
       // 请查看src/app/pages/login/login-form/login-form.component.ts文件中的登录逻辑
       // 这里的登录逻辑只是做个展示示例
       this.router.navigateByUrl('default/dashboard/analysis').then(() => {
-        this.spinService.setCurrentGlobalSpinStore(false);
+        this.spinService.$globalSpinStore.set(false);
       });
     }, 100);
   }
