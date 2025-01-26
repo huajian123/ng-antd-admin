@@ -1,5 +1,5 @@
 import { DragDrop, DragRef } from '@angular/cdk/drag-drop';
-import { ComponentRef, DestroyRef, inject, Injectable, Injector, Renderer2, RendererFactory2, Signal, TemplateRef, Type } from '@angular/core';
+import { ComponentRef, DestroyRef, effect, inject, Injectable, Injector, Renderer2, RendererFactory2, Signal, TemplateRef, Type } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Observable, of } from 'rxjs';
 import { first, tap } from 'rxjs/operators';
@@ -48,17 +48,14 @@ export class ModalWrapService {
   dragDrop = inject(DragDrop);
   rendererFactory = inject(RendererFactory2);
   private btnComponentRef: ComponentRef<GlobalModalBtnTplComponentToken> = inject(GLOBAL_TPL_MODAL_ACTION_TOKEN);
+  fullScreenStatusEffect = effect(() => {
+    this.fullScreenIconClick(this.modalFullStatusStoreService.$modalFullStatusStore());
+  });
 
   constructor() {
     this.bsModalService = this.baseInjector.get(NzModalService);
     this.renderer = this.rendererFactory.createRenderer(null, null);
     this.btnTpl = this.btnComponentRef.instance.componentTpl;
-    this.modalFullStatusStoreService
-      .getModalFullStatusStore()
-      .pipe(takeUntilDestroyed())
-      .subscribe(fullStatus => {
-        this.fullScreenIconClick(fullStatus);
-      });
   }
 
   fullScreenIconClick(fullStatus: boolean): void {
@@ -77,7 +74,7 @@ export class ModalWrapService {
 
   private cancelCallback<T extends BasicConfirmModalComponent>(modalContentCompInstance: T): void {
     this.modalCompVerification(modalContentCompInstance);
-    this.modalFullStatusStoreService.setModalFullStatusStore(false);
+    this.modalFullStatusStoreService.$modalFullStatusStore.set(false);
     return modalContentCompInstance.modalRef.destroy({ status: ModalBtnStatus.Cancel, modalValue: null });
   }
 
@@ -87,7 +84,7 @@ export class ModalWrapService {
       .getCurrentValue()
       .pipe(
         tap(modalValue => {
-          this.modalFullStatusStoreService.setModalFullStatusStore(false);
+          this.modalFullStatusStoreService.$modalFullStatusStore.set(false);
           if (!modalValue) {
             return of(false);
           } else {
@@ -219,7 +216,7 @@ export class ModalWrapService {
       tap(() => {
         drag!.dispose();
         drag = null;
-        this.modalFullStatusStoreService.setModalFullStatusStore(false);
+        this.modalFullStatusStoreService.$modalFullStatusStore.set(false);
       })
     );
   }
