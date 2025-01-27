@@ -71,7 +71,7 @@ export class SubWindowWithService {
       .subscribe(res => {
         Object.keys(res.breakpoints).forEach(item => {
           if (res.breakpoints[item]) {
-            this.winWidthService.setWindowWidthStore(this.subWidthObj[item][0]);
+            this.winWidthService.$windowWidth.set(this.subWidthObj[item][0]);
           }
         });
       });
@@ -81,6 +81,6 @@ export class SubWindowWithService {
     this.subWidthForTheme();
     this.subWidthForStore();
     // 初始化的时候就设置当前节点
-    this.winWidthService.setWindowWidthStore(this.judgeWindowsWidth(window.innerWidth));
+    this.winWidthService.$windowWidth.set(this.judgeWindowsWidth(window.innerWidth));
   }
 }

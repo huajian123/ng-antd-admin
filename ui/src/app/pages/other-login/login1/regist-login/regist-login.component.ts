@@ -1,5 +1,5 @@
 import { NgStyle } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef, computed } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject, DestroyRef, computed } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule, AbstractControl } from '@angular/forms';
 
 import { LoginType } from '@app/pages/other-login/login1/login1.component';
@@ -32,7 +32,7 @@ export class RegistLoginComponent implements OnInit {
     return this.login1StoreService.isLogin1OverModelSignalStore();
   });
   equipmentWidthEnum = EquipmentWidth;
-  currentEquipmentWidth: EquipmentWidth = EquipmentWidth.md;
+  $currentEquipmentWidth = computed(() => this.windowsWidthService.$windowWidth());
   get password(): AbstractControl | null {
     return this.validateForm.get('password');
   }
@@ -41,14 +41,6 @@ export class RegistLoginComponent implements OnInit {
   private fb = inject(FormBuilder);
   private login1StoreService = inject(Login1StoreService);
   private windowsWidthService = inject(WindowsWidthService);
-  private cdr = inject(ChangeDetectorRef);
-
-  subScreenWidth(): void {
-    this.windowsWidthService.getWindowWidthStore().subscribe(res => {
-      this.currentEquipmentWidth = res;
-      this.cdr.markForCheck();
-    });
-  }
 
   submitForm(): void {}
 
@@ -79,7 +71,6 @@ export class RegistLoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.subScreenWidth();
     this.initForm();
   }
 }

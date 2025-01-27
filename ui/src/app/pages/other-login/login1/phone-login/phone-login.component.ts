@@ -1,6 +1,5 @@
 import { NgStyle } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef, computed } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Component, OnInit, ChangeDetectionStrategy, inject, DestroyRef, computed } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { LoginType } from '@app/pages/other-login/login1/login1.component';
@@ -27,13 +26,12 @@ export class PhoneLoginComponent implements OnInit {
   isOverModel = computed(() => {
     return this.login1StoreService.isLogin1OverModelSignalStore();
   });
-  currentEquipmentWidth: EquipmentWidth = EquipmentWidth.md;
+  $currentEquipmentWidth = computed(() => this.windowsWidthService.$windowWidth());
   destroyRef = inject(DestroyRef);
 
   private fb = inject(FormBuilder);
   private login1StoreService = inject(Login1StoreService);
   private windowsWidthService = inject(WindowsWidthService);
-  private cdr = inject(ChangeDetectorRef);
 
   submitForm(): void {}
 
@@ -49,18 +47,7 @@ export class PhoneLoginComponent implements OnInit {
     });
   }
 
-  subScreenWidth(): void {
-    this.windowsWidthService
-      .getWindowWidthStore()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(res => {
-        this.currentEquipmentWidth = res;
-        this.cdr.markForCheck();
-      });
-  }
-
   ngOnInit(): void {
-    this.subScreenWidth();
     this.initForm();
   }
 }

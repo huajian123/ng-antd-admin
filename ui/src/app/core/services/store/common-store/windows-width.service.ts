@@ -1,5 +1,4 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Injectable, signal } from '@angular/core';
 
 export enum EquipmentWidth {
   xs,
@@ -14,13 +13,5 @@ export enum EquipmentWidth {
   providedIn: 'root'
 })
 export class WindowsWidthService {
-  private windowWidth$ = new BehaviorSubject<EquipmentWidth>(EquipmentWidth.xxl);
-
-  setWindowWidthStore(store: EquipmentWidth): void {
-    this.windowWidth$.next(store);
-  }
-
-  getWindowWidthStore(): Observable<EquipmentWidth> {
-    return this.windowWidth$.asObservable();
-  }
+  $windowWidth = signal<EquipmentWidth>(EquipmentWidth.xxl);
 }
