@@ -80,6 +80,6 @@ export class ApplicationComponent {
   }
 
   _onReuseInit(): void {
-    this.searchListService.searchListComponentStore.set('搜索列表（应用）');
+    this.searchListService.$searchListComponentStore.set('搜索列表（应用）');
   }
 }

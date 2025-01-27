@@ -45,7 +45,7 @@ export class RegistLoginComponent implements OnInit {
   submitForm(): void {}
 
   goOtherWay(type: LoginType): void {
-    this.login1StoreService.loginTypeSignalStore.set(type);
+    this.login1StoreService.$loginTypeStore.set(type);
   }
 
   updateConfirmValidator(): void {

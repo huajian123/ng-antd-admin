@@ -9,5 +9,5 @@ type componentName = '搜索列表（文章）' | '搜索列表（项目）' | '
   providedIn: 'root'
 })
 export class SearchListStoreService {
-  searchListComponentStore = signal<componentName>('搜索列表（文章）');
+  $searchListComponentStore = signal<componentName>('搜索列表（文章）');
 }

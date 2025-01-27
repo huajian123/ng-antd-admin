@@ -29,10 +29,10 @@ export class SearchListComponent {
 
   pageHeaderInfo = computed<Partial<PageHeaderType>>(() => {
     return {
-      title: this.searchListService.searchListComponentStore(),
+      title: this.searchListService.$searchListComponentStore(),
       desc: this.headerContent(),
       footer: this.headerFooter(),
-      breadcrumb: ['首页', '列表页', this.searchListService.searchListComponentStore()]
+      breadcrumb: ['首页', '列表页', this.searchListService.$searchListComponentStore()]
     };
   });
   currentSelTab = 0;

@@ -63,7 +63,7 @@ export class Login1Component implements OnInit {
   ];
 
   changePageTypeEffect = effect(() => {
-    this.to(this.getCurrentComponent(this.login1StoreService.loginTypeSignalStore()));
+    this.to(this.getCurrentComponent(this.login1StoreService.$loginTypeStore()));
   });
 
   getCurrentComponent(type: LoginType): LoginFormComponentInterface {

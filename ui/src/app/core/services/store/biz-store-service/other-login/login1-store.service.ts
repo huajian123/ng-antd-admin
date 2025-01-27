@@ -7,7 +7,7 @@ import { LoginType } from '@app/pages/other-login/login1/login1.component';
   providedIn: 'root'
 })
 export class Login1StoreService {
-  loginTypeSignalStore = signal<LoginType>(LoginType.Normal);
+  $loginTypeStore = signal<LoginType>(LoginType.Normal);
 
   isLogin1OverModelSignalStore = signal<boolean>(false);
 }

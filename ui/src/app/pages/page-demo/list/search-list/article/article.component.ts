@@ -75,6 +75,6 @@ export class ArticleComponent {
   }
 
   _onReuseInit(): void {
-    this.searchListService.searchListComponentStore.set('搜索列表（文章）');
+    this.searchListService.$searchListComponentStore.set('搜索列表（文章）');
   }
 }

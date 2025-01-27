@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef, computed } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject, DestroyRef, computed } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -58,7 +58,7 @@ export class NormalLoginComponent implements OnInit {
   }
 
   goOtherWay(type: LoginType): void {
-    this.login1StoreService.loginTypeSignalStore.set(type);
+    this.login1StoreService.$loginTypeStore.set(type);
   }
 
   ngOnInit(): void {
