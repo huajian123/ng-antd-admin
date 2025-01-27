@@ -1,5 +1,5 @@
 import { NgTemplateOutlet, AsyncPipe } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef, booleanAttribute, input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef, booleanAttribute, input, computed } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -42,7 +42,9 @@ export class NavBarComponent implements OnInit {
   routerPath = this.router.url;
   menus: Menu[] = [];
   copyMenus: Menu[] = [];
-  authCodeArray: string[] = [];
+  authCodeArray = computed(() => {
+    return this.userInfoService.$userInfo().authCode;
+  });
 
   themesOptions$ = this.themesService.getThemesMode();
   isNightTheme$ = this.themesService.getIsNightTheme();
@@ -78,7 +80,6 @@ export class NavBarComponent implements OnInit {
     this.subMixinModeSideMenu();
     // 监听折叠菜单事件
     this.subIsCollapsed();
-    this.subAuth();
     this.router.events
       .pipe(
         filter(event => event instanceof NavigationEnd),
@@ -185,7 +186,7 @@ export class NavBarComponent implements OnInit {
       /*添加了权限版*/
       // 获取有权限的二级菜单集合（在左侧展示的）
       currentLeftNavArray = currentLeftNavArray.filter(item => {
-        return this.authCodeArray.includes(item.code!);
+        return this.authCodeArray().includes(item.code!);
       });
       // 如果第一个二级菜单，没有三级菜单
       if (currentLeftNavArray.length > 0 && !currentLeftNavArray[0].children) {
@@ -285,13 +286,6 @@ export class NavBarComponent implements OnInit {
     this.clickMenuItem(this.menus);
     this.clickMenuItem(this.copyMenus);
     this.closeMenuOpen(this.menus);
-  }
-
-  subAuth(): void {
-    this.userInfoService
-      .getUserInfo()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(res => (this.authCodeArray = res.authCode));
   }
 
   // 监听混合模式下左侧菜单数据源

@@ -1,4 +1,4 @@
-import { Directive, inject, input, Input, InputSignal, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
+import { computed, Directive, inject, input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 
 import { UserInfoStoreService } from '@store/common-store/userInfo-store.service';
 
@@ -7,7 +7,9 @@ import { UserInfoStoreService } from '@store/common-store/userInfo-store.service
   standalone: true
 })
 export class AuthDirective implements OnInit {
-  codeArray!: string[];
+  codeArray = computed(() => {
+    return this.userInfoService.$userInfo().authCode;
+  });
 
   private userInfoService = inject(UserInfoStoreService);
   private templateRef = inject(TemplateRef);
@@ -15,18 +17,12 @@ export class AuthDirective implements OnInit {
 
   appAuth = input.required<string>();
 
-  constructor() {
-    this.userInfoService.getUserInfo().subscribe(userInfo => {
-      this.codeArray = userInfo.authCode;
-    });
-  }
-
   ngOnInit(): void {
     if (!this.appAuth()) {
       this.show(true);
       return;
     }
-    this.codeArray.includes(this.appAuth()) ? this.show(true) : this.show(false);
+    this.codeArray().includes(this.appAuth()) ? this.show(true) : this.show(false);
   }
 
   private show(hasAuth: boolean): void {

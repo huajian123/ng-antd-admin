@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject, computed } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { LoginInOutService } from '@core/services/common/login-in-out.service';
@@ -42,6 +42,9 @@ export class LayoutHeadRightMenuComponent {
   private message = inject(NzMessageService);
   private userInfoService = inject(UserInfoStoreService);
   private accountService = inject(AccountService);
+  userInfo = computed(() => {
+    return this.userInfoService.$userInfo();
+  });
 
   // 锁定屏幕
   lockScreen(): void {
@@ -62,13 +65,11 @@ export class LayoutHeadRightMenuComponent {
       if (status === ModalBtnStatus.Cancel) {
         return;
       }
-      this.userInfoService.getUserInfo().subscribe(res => {
-        this.user = {
-          id: res.userId,
-          oldPassword: modalValue.oldPassword,
-          newPassword: modalValue.newPassword
-        };
-      });
+      this.user = {
+        id: this.userInfo().userId,
+        oldPassword: modalValue.oldPassword,
+        newPassword: modalValue.newPassword
+      };
       this.accountService.editAccountPsd(this.user).subscribe(() => {
         this.loginOutService.loginOut().then();
         this.message.success('修改成功，请重新登录');

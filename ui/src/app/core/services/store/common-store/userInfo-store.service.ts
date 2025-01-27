@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -14,7 +14,7 @@ export interface UserInfo {
   providedIn: 'root'
 })
 export class UserInfoStoreService {
-  private userInfo$ = new BehaviorSubject<UserInfo>({ userId: -1, userName: '', authCode: [] });
+  $userInfo = signal<UserInfo>({ userId: -1, userName: '', authCode: [] });
 
   userService = inject(AccountService);
 
@@ -38,13 +38,5 @@ export class UserInfoStoreService {
 
   getUserAuthCodeByUserId(userId: number): Observable<string[]> {
     return this.userService.getAccountAuthCode(userId);
-  }
-
-  setUserInfo(userInfo: UserInfo): void {
-    this.userInfo$.next(userInfo);
-  }
-
-  getUserInfo(): Observable<UserInfo> {
-    return this.userInfo$.asObservable();
   }
 }

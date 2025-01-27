@@ -1,4 +1,4 @@
-import { DestroyRef, inject, Injectable } from '@angular/core';
+import { computed, DestroyRef, inject, Injectable } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router, CanActivateChildFn } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -18,7 +18,6 @@ import { Menu } from '../../types';
   providedIn: 'root'
 })
 export class JudgeAuthGuardService {
-  authCodeArray: string[] = [];
   selMenu: Menu | null = null;
   menuNavList: Menu[] = [];
   destroyRef = inject(DestroyRef);
@@ -27,6 +26,9 @@ export class JudgeAuthGuardService {
   userInfoService = inject(UserInfoStoreService);
   menuStoreService = inject(MenuStoreService);
   message = inject(NzMessageService);
+  authCodeArray = computed(() => {
+    return this.userInfoService.$userInfo().authCode;
+  });
 
   constructor() {
     this.menuStoreService
@@ -62,28 +64,24 @@ export class JudgeAuthGuardService {
   }
 
   canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    this.userInfoService
-      .getUserInfo()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(res => (this.authCodeArray = res.authCode));
     while (route.firstChild) {
       route = route.firstChild;
     }
     // 如果有authCode，则表示是页面上点击按钮跳转到新的路由，而不是菜单中的路由
     if (!!route.data['authCode']) {
-      return this.getResult(route.data['authCode'], this.authCodeArray);
+      return this.getResult(route.data['authCode'], this.authCodeArray());
     }
 
     // 如果是菜单上的按钮，则走下面
     this.getMenu(this.menuNavList, state.url);
     // 没找到菜单，直接回登录页
     if (!this.selMenu) {
-      return this.getResult(fnGetUUID(), this.authCodeArray);
+      return this.getResult(fnGetUUID(), this.authCodeArray());
     }
     const selMenuCode = this.selMenu.code;
     this.selMenu = null;
     // 找到了菜单，但是菜单的权限码用户不拥有，则跳转到登录页
-    return this.getResult(selMenuCode!, this.authCodeArray);
+    return this.getResult(selMenuCode!, this.authCodeArray());
   }
 }
 

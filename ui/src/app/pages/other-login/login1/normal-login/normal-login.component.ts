@@ -44,7 +44,7 @@ export class NormalLoginComponent implements OnInit {
     this.spinService.$globalSpinStore.set(true);
     this.windowServe.setSessionStorage(TokenKey, 'TokenPre + token');
     const userInfo = this.userInfoService.parsToken(TokenPre);
-    this.userInfoService.setUserInfo(userInfo);
+    this.userInfoService.$userInfo.set(userInfo);
     // if (!fnCheckForm(this.validateForm)) {
     //   return;
     // }

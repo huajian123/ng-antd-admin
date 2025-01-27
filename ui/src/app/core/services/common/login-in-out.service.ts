@@ -53,7 +53,7 @@ export class LoginInOutService {
             userInfo.authCode.push(ActionCode.TabsDetail);
             userInfo.authCode.push(ActionCode.SearchTableDetail);
             // 将用户信息缓存到全局service中
-            this.userInfoService.setUserInfo(userInfo);
+            this.userInfoService.$userInfo.set(userInfo);
             return this.getMenuByUserAuthCode(userInfo.authCode);
           }),
           finalize(() => {
