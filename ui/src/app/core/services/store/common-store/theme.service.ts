@@ -32,7 +32,7 @@ export type StyleThemeInterface = {
 })
 export class ThemeService {
   $isNightTheme = signal(false); // 暗黑主题
-  private isCompactTheme$ = new BehaviorSubject<boolean>(false); // 紧凑主题
+  $isCompactTheme = signal(false); // 紧凑主题
   private isOverModeTheme$ = new BehaviorSubject<boolean>(false); // over模式，即拖动浏览器宽度，至菜单栏消失的状态
   private themesMode$ = new BehaviorSubject<SettingInterface>({
     theme: 'dark',
@@ -65,21 +65,12 @@ export class ThemeService {
   // 获取主题模式
   setStyleThemeMode(mode: StyleTheme): void {
     this.$isNightTheme.set(mode === 'dark');
-    this.setIsCompactTheme(mode === 'compact');
+    this.$isCompactTheme.set(mode === 'compact');
     this.styleThemeMode$.next(mode);
   }
 
   getStyleThemeMode(): Observable<StyleTheme> {
     return this.styleThemeMode$.asObservable();
-  }
-
-  // 主题是否是紧凑主题
-  setIsCompactTheme(isNight: boolean): void {
-    this.isCompactTheme$.next(isNight);
-  }
-
-  getIsCompactTheme(): Observable<boolean> {
-    return this.isCompactTheme$.asObservable();
   }
 
   // 主题是否over侧边栏
