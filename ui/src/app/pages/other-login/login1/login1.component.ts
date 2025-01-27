@@ -1,6 +1,5 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { AsyncPipe } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef, viewChild, effect } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef, viewChild, effect, computed } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 
@@ -42,7 +41,7 @@ interface LoginFormComponentInterface {
   templateUrl: './login1.component.html',
   styleUrls: ['./login1.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NzGridModule, NzCardModule, AdDirective_1, NzSwitchModule, FormsModule, NzDropDownModule, NzIconModule, NzButtonModule, NzMenuModule, AsyncPipe]
+  imports: [NzGridModule, NzCardModule, AdDirective_1, NzSwitchModule, FormsModule, NzDropDownModule, NzIconModule, NzButtonModule, NzMenuModule]
 })
 export class Login1Component implements OnInit {
   private themesService = inject(ThemeService);
@@ -52,7 +51,7 @@ export class Login1Component implements OnInit {
   private login1StoreService = inject(Login1StoreService);
   private breakpointObserver = inject(BreakpointObserver);
   isOverModel = true;
-  isNightTheme$ = this.themesService.getIsNightTheme();
+  $isNightTheme = computed(() => this.themesService.$isNightTheme());
   destroyRef = inject(DestroyRef);
   readonly adHost = viewChild.required(AdDirective);
 

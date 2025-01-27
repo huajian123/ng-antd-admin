@@ -43,7 +43,6 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
   private router = inject(Router);
   private themesService = inject(ThemeService);
 
-  isNightTheme$ = this.themesService.getIsNightTheme();
   resultListShow: ResultItem[] = [];
   resultList: ResultItem[] = [];
   readonly searchInput = viewChild.required<ElementRef<HTMLInputElement>>('searchInput');

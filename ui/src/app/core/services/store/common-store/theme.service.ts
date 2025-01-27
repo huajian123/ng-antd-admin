@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { Theme, ThemeMode } from '@app/layout/default/setting-drawer/setting-drawer.component';
@@ -31,7 +31,7 @@ export type StyleThemeInterface = {
   providedIn: 'root'
 })
 export class ThemeService {
-  private isNightTheme$ = new BehaviorSubject<boolean>(false); // 暗黑主题observable
+  $isNightTheme = signal(false); // 暗黑主题
   private isCompactTheme$ = new BehaviorSubject<boolean>(false); // 紧凑主题
   private isOverModeTheme$ = new BehaviorSubject<boolean>(false); // over模式，即拖动浏览器宽度，至菜单栏消失的状态
   private themesMode$ = new BehaviorSubject<SettingInterface>({
@@ -64,22 +64,13 @@ export class ThemeService {
 
   // 获取主题模式
   setStyleThemeMode(mode: StyleTheme): void {
-    this.setIsNightTheme(mode === 'dark');
+    this.$isNightTheme.set(mode === 'dark');
     this.setIsCompactTheme(mode === 'compact');
     this.styleThemeMode$.next(mode);
   }
 
   getStyleThemeMode(): Observable<StyleTheme> {
     return this.styleThemeMode$.asObservable();
-  }
-
-  // 主题是否是暗黑主题
-  setIsNightTheme(isNight: boolean): void {
-    this.isNightTheme$.next(isNight);
-  }
-
-  getIsNightTheme(): Observable<boolean> {
-    return this.isNightTheme$.asObservable();
   }
 
   // 主题是否是紧凑主题

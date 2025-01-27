@@ -1,5 +1,5 @@
 import { NgTemplateOutlet, NgClass, NgStyle } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, AfterViewInit, inject, DestroyRef, viewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, AfterViewInit, inject, DestroyRef, viewChild, computed } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterOutlet } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -65,8 +65,6 @@ export class DefaultComponent implements OnInit, AfterViewInit {
   driverService = inject(DriverService); // 用于引导用户
   themesService = inject(ThemeService); // 用于获取主题
   splitNavStoreService = inject(SplitNavStoreService); // 用于获取分割菜单的store
-
-  isNightTheme$ = this.themesService.getIsNightTheme();
   isCompactTheme$ = this.themesService.getIsCompactTheme();
   themesOptions$ = this.themesService.getThemesMode();
   styleThemeMode$ = this.themesService.getStyleThemeMode();
@@ -76,7 +74,7 @@ export class DefaultComponent implements OnInit, AfterViewInit {
 
   showChats = true; // 是否显示聊天窗口
   isMixinMode = false; // 是否是混合模式
-  isNightTheme = false; // 是否是暗色主题
+  isNightTheme = computed(() => this.themesService.$isNightTheme());
   isCompactTheme = false; // 是否是紧凑主题
   isFixedLeftNav = false; // 是否固定左侧菜单
   isSplitNav = false; // 是否分割菜单
@@ -152,7 +150,6 @@ export class DefaultComponent implements OnInit, AfterViewInit {
 
     this.isCollapsed$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => (this.isCollapsed = res));
     this.isOverMode$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => (this.isOverMode = res));
-    this.isNightTheme$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => (this.isNightTheme = res));
     this.isCompactTheme$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => (this.isCompactTheme = res));
     this.mixinModeLeftNav$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => (this.mixinModeLeftNav = res));
   }

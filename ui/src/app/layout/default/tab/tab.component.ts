@@ -37,7 +37,6 @@ export class TabComponent implements OnInit {
   tabsSourceData: TabModel[] = [];
   tabsSourceData$ = this.tabService.getTabArray$();
   themesOptions$ = this.themesService.getThemesMode();
-  isNightTheme$ = this.themesService.getIsNightTheme();
   leftMenuArray$: Observable<Menu[]> = this.splitNavStoreService.getSplitLeftNavArrayStore();
   isOverMode$ = this.themesService.getIsOverMode();
   isCollapsed$ = this.themesService.getIsCollapsed();

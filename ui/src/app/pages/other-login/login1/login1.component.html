@@ -1,4 +1,4 @@
-<div class="min-screen-full-height container relative" [class.is-night]="isNightTheme$ | async" [class.over-modal]="isOverModel">
+<div class="min-screen-full-height container relative" [class.is-night]="$isNightTheme()" [class.over-modal]="isOverModel">
   <div class="min-screen-full-height" nz-row style="padding: 0 5%">
     <div class="relative min-screen-full-height" nz-col [nzLg]="0" [nzMd]="0" [nzSm]="0" [nzXl]="12" [nzXs]="0" [nzXXl]="10">
       <div class="absolute logo center">
@@ -13,7 +13,7 @@
     </div>
     <div class="relative min-screen-full-height center" nz-col [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzXl]="12" [nzXs]="24" [nzXXl]="14">
       <div class="full-height flex-coloum center">
-        <nz-card [class.is-night]="isNightTheme$ | async" [nzBordered]="isOverModel">
+        <nz-card [class.is-night]="$isNightTheme()" [nzBordered]="isOverModel">
           <ng-template appAd></ng-template>
         </nz-card>
       </div>
@@ -31,12 +31,12 @@
       </div>
     }
     <div nz-col>
-      <nz-switch [ngModel]="isNightTheme$ | async" [nzCheckedChildren]="checkedTemplate" [nzUnCheckedChildren]="unCheckedTemplate" (ngModelChange)="changeNight($event)"></nz-switch>
+      <nz-switch [ngModel]="$isNightTheme()" [nzCheckedChildren]="checkedTemplate" [nzUnCheckedChildren]="unCheckedTemplate" (ngModelChange)="changeNight($event)"></nz-switch>
       <ng-template #checkedTemplate><img alt="" src="imgs/login1/sun.svg" /></ng-template>
       <ng-template #unCheckedTemplate><img alt="" src="imgs/login1/moon.svg" /></ng-template>
 
       <span class="hand-model m-l-8" nz-dropdown [nzDropdownMenu]="language">
-        <i nz-icon nzTheme="outline" nzType="font-size" [style.color]="(isNightTheme$ | async) === false ? (isOverModel ? 'white' : 'black') : 'white'"></i>
+        <i nz-icon nzTheme="outline" nzType="font-size" [style.color]="$isNightTheme() === false ? (isOverModel ? 'white' : 'black') : 'white'"></i>
       </span>
       <nz-dropdown-menu #language="nzDropdownMenu">
         <ul nz-menu nzSelectable>

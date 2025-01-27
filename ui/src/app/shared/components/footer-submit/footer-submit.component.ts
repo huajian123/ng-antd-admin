@@ -26,7 +26,6 @@ export class FooterSubmitComponent implements OnInit {
 
   readonly leftTpl = input<TemplateRef<NzSafeAny>>();
   themesOptions$ = this.themesService.getThemesMode();
-  isNightTheme$ = this.themesService.getIsNightTheme();
   isCollapsed$ = this.themesService.getIsCollapsed();
   isOverMode$ = this.themesService.getIsOverMode();
   leftMenuArray$ = this.splitNavStoreService.getSplitLeftNavArrayStore();

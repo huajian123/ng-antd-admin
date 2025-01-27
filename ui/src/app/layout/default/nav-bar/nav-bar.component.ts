@@ -47,7 +47,7 @@ export class NavBarComponent implements OnInit {
   });
 
   themesOptions$ = this.themesService.getThemesMode();
-  isNightTheme$ = this.themesService.getIsNightTheme();
+  $isNightTheme = computed(() => this.themesService.$isNightTheme());
   isCollapsed$ = this.themesService.getIsCollapsed();
   isOverMode$ = this.themesService.getIsOverMode();
   leftMenuArray$ = this.splitNavStoreService.getSplitLeftNavArrayStore();
