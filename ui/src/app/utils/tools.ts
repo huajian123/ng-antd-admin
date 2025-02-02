@@ -68,19 +68,22 @@ const fnRemoveDouble = function removeDouble<T>(list: NzSafeAny[], col: NzSafeAn
 };
 
 // 获取路由复用缓存的key，为key+param的形式：login{name:xxx}
-const getDeepReuseStrategyKeyFn = function (route: ActivatedRouteSnapshot): string {
+const getDeepReuseStrategyKeyFn = function (route: ActivatedRouteSnapshot, needParams = true): string {
   let temp = route;
   while (temp.firstChild) {
     temp = temp.firstChild;
   }
-  return fnGetReuseStrategyKeyFn(temp);
+  return fnGetReuseStrategyKeyFn(temp, needParams);
 };
 
 // 获取key，为key+param的形式：login{name:xxx}
-const fnGetReuseStrategyKeyFn = function getKey(route: ActivatedRouteSnapshot): string {
+const fnGetReuseStrategyKeyFn = function getKey(route: ActivatedRouteSnapshot, needParams = true): string {
   const configKey = route.data['key'];
   if (!configKey) {
     return '';
+  }
+  if (!needParams) {
+    return configKey;
   }
   // 是query传参,并且有参数
   if (Object.keys(route.queryParams).length > 0) {
