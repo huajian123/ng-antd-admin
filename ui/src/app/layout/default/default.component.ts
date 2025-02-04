@@ -1,13 +1,11 @@
 import { NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, computed, DestroyRef, effect, inject, OnInit, viewChild } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { AfterViewInit, ChangeDetectionStrategy, Component, computed, DestroyRef, effect, inject, viewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { SettingDrawerComponent, Theme } from '@app/layout/default/setting-drawer/setting-drawer.component';
 import { CollapsedNavWidth, IsFirstLogin, SideNavWidth } from '@config/constant';
 import { DriverService } from '@core/services/common/driver.service';
 import { WindowService } from '@core/services/common/window.service';
-import { Menu } from '@core/services/types';
 import { LayoutHeadRightMenuComponent } from '@shared/biz-components/layout-components/layout-head-right-menu/layout-head-right-menu.component';
 import { ChatComponent } from '@shared/components/chat/chat.component';
 import { TopProgressBarComponent } from '@shared/components/top-progress-bar/top-progress-bar.component';
@@ -54,7 +52,7 @@ import { ToolBarComponent } from './tool-bar/tool-bar.component';
     ChatComponent
   ]
 })
-export class DefaultComponent implements OnInit, AfterViewInit {
+export class DefaultComponent implements AfterViewInit {
   readonly navDrawer = viewChild.required<NavDrawerComponent>('navDrawer');
   SideNavWidth = SideNavWidth;
   CollapsedNavWidth = CollapsedNavWidth;
@@ -89,7 +87,6 @@ export class DefaultComponent implements OnInit, AfterViewInit {
     // 切换风格模式时也要重新计算margin，这个跟themesOptions$里貌似时重复的代码，考虑用combineLatest来进行合并的话，会有性能损失（切换风格时也会执行themeOptions里面的逻辑），所以这里分开来写了
     this.contentMarginTop = this.judgeMarginTop();
   });
-  mixinModeLeftNav$ = this.splitNavStoreService.getSplitLeftNavArrayStore();
 
   showChats = true; // 是否显示聊天窗口
   isMixinMode = false; // 是否是混合模式
@@ -111,7 +108,10 @@ export class DefaultComponent implements OnInit, AfterViewInit {
   isTopMode = false; // 是否是顶部模式
   theme: Theme['key'] = 'dark'; // 主题模式
 
-  mixinModeLeftNav: Menu[] = []; // 混合模式下的左侧菜单
+  // 混合模式下的左侧菜单
+  mixinModeLeftNav = computed(() => {
+    return this.splitNavStoreService.$splitLeftNavArray();
+  });
   contentMarginTop = '48px';
 
   changeCollapsed(isCollapsed: boolean): void {
@@ -137,19 +137,11 @@ export class DefaultComponent implements OnInit, AfterViewInit {
     return `${marginTop}px`;
   }
 
-  getThemeOptions(): void {
-    this.mixinModeLeftNav$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => (this.mixinModeLeftNav = res));
-  }
-
   ngAfterViewInit(): void {
     if (this.windowService.getStorage(IsFirstLogin) === 'false') {
       return;
     }
     this.windowService.setStorage(IsFirstLogin, 'false');
     this.driverService.load();
-  }
-
-  ngOnInit(): void {
-    this.getThemeOptions();
   }
 }

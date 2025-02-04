@@ -1,5 +1,4 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Injectable, signal } from '@angular/core';
 
 import { Menu } from '../../types';
 
@@ -10,13 +9,5 @@ import { Menu } from '../../types';
   providedIn: 'root'
 })
 export class SplitNavStoreService {
-  private splitLeftNavArray$ = new BehaviorSubject<Menu[]>([]);
-
-  setSplitLeftNavArrayStore(menu: Menu[]): void {
-    this.splitLeftNavArray$.next(menu);
-  }
-
-  getSplitLeftNavArrayStore(): Observable<Menu[]> {
-    return this.splitLeftNavArray$.asObservable();
-  }
+  $splitLeftNavArray = signal<Menu[]>([]);
 }

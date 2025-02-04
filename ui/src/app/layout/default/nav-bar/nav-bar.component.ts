@@ -51,7 +51,7 @@ export class NavBarComponent implements OnInit {
   themesOptions$ = toObservable(this.themesService.$themesOptions);
   isCollapsed$ = toObservable(this.themesService.$isCollapsed);
   isOverMode$ = toObservable(this.themesService.$isOverModeTheme);
-  leftMenuArray$ = this.splitNavStoreService.getSplitLeftNavArrayStore();
+  leftMenuArray$ = toObservable(this.splitNavStoreService.$splitLeftNavArray);
   subTheme$: Observable<NzSafeAny>;
 
   themesMode: ThemeMode['key'] = 'side';
@@ -150,7 +150,7 @@ export class NavBarComponent implements OnInit {
   setMixModeLeftMenu(): void {
     this.menus.forEach(item => {
       if (item.selected) {
-        this.splitNavStoreService.setSplitLeftNavArrayStore(item.children || []);
+        this.splitNavStoreService.$splitLeftNavArray.set(item.children || []);
       }
     });
   }
@@ -207,7 +207,7 @@ export class NavBarComponent implements OnInit {
       //   this.splitNavStoreService.setSplitLeftNavArrayStore(currentLeftNavArray);
       // }
     }
-    this.splitNavStoreService.setSplitLeftNavArrayStore(currentLeftNavArray);
+    this.splitNavStoreService.$splitLeftNavArray.set(currentLeftNavArray);
   }
 
   flatMenu(menus: Menu[], routePath: string): void {

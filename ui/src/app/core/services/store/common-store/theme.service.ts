@@ -28,6 +28,7 @@ export type StyleThemeInterface = Record<StyleTheme, boolean>;
   providedIn: 'root'
 })
 export class ThemeService {
+  // todo 跟$themeStyle有重复，日后优化
   $isNightTheme = signal(false); // 暗黑主题
   $isCompactTheme = signal(false); // 紧凑主题
   $isOverModeTheme = signal(false); // over模式，即拖动浏览器宽度，至菜单栏消失的状态

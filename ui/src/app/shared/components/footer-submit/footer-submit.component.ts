@@ -29,7 +29,7 @@ export class FooterSubmitComponent implements OnInit {
   themesOptions$ = toObservable(this.themesService.$themesOptions);
   isCollapsed$ = toObservable(this.themesService.$isCollapsed);
   isOverMode$ = toObservable(this.themesService.$isOverModeTheme);
-  leftMenuArray$ = this.splitNavStoreService.getSplitLeftNavArrayStore();
+  leftMenuArray$ = toObservable(this.splitNavStoreService.$splitLeftNavArray);
   isCollapsed = false;
   isOverMode = false;
   hasLeftNav = false;
