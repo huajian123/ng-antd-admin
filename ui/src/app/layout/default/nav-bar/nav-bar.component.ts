@@ -1,6 +1,6 @@
 import { NgTemplateOutlet, AsyncPipe } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef, booleanAttribute, input, computed } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, map, mergeMap, switchMap, tap } from 'rxjs/operators';
@@ -49,7 +49,8 @@ export class NavBarComponent implements OnInit {
   themesOptions$ = this.themesService.getThemesMode();
   $isNightTheme = computed(() => this.themesService.$isNightTheme());
   isCollapsed$ = this.themesService.getIsCollapsed();
-  isOverMode$ = this.themesService.getIsOverMode();
+  // todo signal最后要修正
+  isOverMode$ = toObservable(this.themesService.$isOverModeTheme);
   leftMenuArray$ = this.splitNavStoreService.getSplitLeftNavArrayStore();
   subTheme$: Observable<NzSafeAny>;
 

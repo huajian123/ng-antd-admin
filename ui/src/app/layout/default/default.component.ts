@@ -67,7 +67,6 @@ export class DefaultComponent implements OnInit, AfterViewInit {
   splitNavStoreService = inject(SplitNavStoreService); // 用于获取分割菜单的store
   themesOptions$ = this.themesService.getThemesMode();
   styleThemeMode$ = this.themesService.getStyleThemeMode();
-  isOverMode$: Observable<boolean> = this.themesService.getIsOverMode();
   isCollapsed$: Observable<boolean> = this.themesService.getIsCollapsed();
   mixinModeLeftNav$ = this.splitNavStoreService.getSplitLeftNavArrayStore();
 
@@ -78,7 +77,7 @@ export class DefaultComponent implements OnInit, AfterViewInit {
   isFixedLeftNav = false; // 是否固定左侧菜单
   isSplitNav = false; // 是否分割菜单
   isCollapsed = false; // 是否折叠左侧菜单
-  isOverMode = false; // 窗口变窄时，导航栏是否变成抽屉模式
+  isOverMode = computed(() => this.themesService.$isOverModeTheme()); // 窗口变窄时，导航栏是否变成抽屉模式
   isShowTab = false; // 是否显示页签
   isFixedTab = false; // 是否固定页签
   isHasNavArea = false; // 是否有菜单区域
@@ -97,7 +96,7 @@ export class DefaultComponent implements OnInit, AfterViewInit {
 
   changeCollapsed(isCollapsed: boolean): void {
     // 如果是over模式，点击左侧菜单，显示抽屉菜单
-    if (this.isOverMode) {
+    if (this.isOverMode()) {
       this.navDrawer().showDraw();
       return;
     }
@@ -148,7 +147,6 @@ export class DefaultComponent implements OnInit, AfterViewInit {
     });
 
     this.isCollapsed$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => (this.isCollapsed = res));
-    this.isOverMode$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => (this.isOverMode = res));
     this.mixinModeLeftNav$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => (this.mixinModeLeftNav = res));
   }
 

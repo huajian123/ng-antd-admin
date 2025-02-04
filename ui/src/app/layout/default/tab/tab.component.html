@@ -24,7 +24,7 @@
     [ngClass]="{
       'fixed-collapsed': (isCollapsed$ | async),
       'fixed-over-mode':
-        (isOverMode$ | async) ||
+        $isOverMode() ||
         !(themesOptions$ | async)!.hasNavArea ||
         (themesOptions$ | async)?.mode === 'top' ||
         ((themesOptions$ | async)?.mode === 'mixin' && (leftMenuArray$ | async)!.length === 0 && (themesOptions$ | async)?.splitNav)

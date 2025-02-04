@@ -1,6 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, TemplateRef, Renderer2, ElementRef, inject, DestroyRef, input } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { merge } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
@@ -25,9 +25,10 @@ export class FooterSubmitComponent implements OnInit {
   private el = inject(ElementRef);
 
   readonly leftTpl = input<TemplateRef<NzSafeAny>>();
+  // todo signal最后要修正
   themesOptions$ = this.themesService.getThemesMode();
   isCollapsed$ = this.themesService.getIsCollapsed();
-  isOverMode$ = this.themesService.getIsOverMode();
+  isOverMode$ = toObservable(this.themesService.$isOverModeTheme);
   leftMenuArray$ = this.splitNavStoreService.getSplitLeftNavArrayStore();
   isCollapsed = false;
   isOverMode = false;

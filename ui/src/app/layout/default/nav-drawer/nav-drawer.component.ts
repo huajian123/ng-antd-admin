@@ -1,6 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Component, ChangeDetectionStrategy, inject, DestroyRef, signal, effect } from '@angular/core';
 
 import { SideNavWidth } from '@app/config/constant';
 import { ThemeService } from '@store/common-store/theme.service';
@@ -16,31 +15,21 @@ import { SideNavComponent } from '../side-nav/side-nav.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NzDrawerModule, NzLayoutModule, SideNavComponent, AsyncPipe]
 })
-export class NavDrawerComponent implements OnInit {
-  private cdr = inject(ChangeDetectorRef);
+export class NavDrawerComponent {
   private themesService = inject(ThemeService);
-  isShowModal = false;
+  isShowModal = signal(false);
   themesOptions$ = this.themesService.getThemesMode();
   destroyRef = inject(DestroyRef);
   SideNavWidth = SideNavWidth;
 
-  subTheme(): void {
-    this.themesService
-      .getIsOverMode()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(res => {
-        if (!res) {
-          this.isShowModal = false;
-        }
-      });
-  }
+  changeOverModeEffect = effect(() => {
+    const source = this.themesService.$isOverModeTheme();
+    if (!source) {
+      this.isShowModal.set(false);
+    }
+  });
 
   showDraw(): void {
-    this.isShowModal = true;
-    this.cdr.markForCheck();
-  }
-
-  ngOnInit(): void {
-    this.subTheme();
+    this.isShowModal.set(true);
   }
 }

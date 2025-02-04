@@ -1,5 +1,4 @@
-import { AsyncPipe } from '@angular/common';
-import { Component, ChangeDetectionStrategy, AfterViewInit, TemplateRef, inject, viewChild } from '@angular/core';
+import { Component, ChangeDetectionStrategy, AfterViewInit, TemplateRef, inject, viewChild, computed } from '@angular/core';
 
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { WaterMarkComponent } from '@shared/components/water-mark/water-mark.component';
@@ -16,11 +15,11 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
   templateUrl: './card-table.component.html',
   styleUrls: ['./card-table.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [PageHeaderComponent, NzGridModule, WaterMarkComponent, NzCardModule, NzIconModule, NzButtonModule, NzAvatarModule, AsyncPipe]
+  imports: [PageHeaderComponent, NzGridModule, WaterMarkComponent, NzCardModule, NzIconModule, NzButtonModule, NzAvatarModule]
 })
 export class CardTableComponent implements AfterViewInit {
   private themesService = inject(ThemeService);
-  isOverMode$ = this.themesService.getIsOverMode();
+  $isOverMode = computed(() => this.themesService.$isOverModeTheme());
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '',
     breadcrumb: [],

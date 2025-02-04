@@ -44,7 +44,7 @@ export class SubWindowWithService {
       )
       .subscribe(result => {
         const isOverMode = result.matches;
-        this.themesService.setIsOverMode(isOverMode);
+        this.themesService.$isOverModeTheme.set(isOverMode);
         // 是over模式，展开折叠状态得左侧菜单
         if (isOverMode) {
           this.themesService.setIsCollapsed(false);
