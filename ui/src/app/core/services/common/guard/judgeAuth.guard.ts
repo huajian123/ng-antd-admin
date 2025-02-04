@@ -31,12 +31,12 @@ export class JudgeAuthGuardService {
   });
 
   constructor() {
-    this.menuStoreService
-      .getMenuArrayStore()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(res => {
-        this.menuNavList = res;
-      });
+    // this.menuStoreService
+    //   .getMenuArrayStore()
+    //   .pipe(takeUntilDestroyed(this.destroyRef))
+    //   .subscribe(res => {
+    //     this.menuNavList = res;
+    //   });
   }
 
   // 保存当前的menu到this.selMenu

@@ -1,5 +1,5 @@
 import { NgTemplateOutlet, AsyncPipe } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef, booleanAttribute, input, computed } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef, booleanAttribute, input, computed, signal, effect, Signal, WritableSignal } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -40,8 +40,15 @@ export class NavBarComponent implements OnInit {
   private themesService = inject(ThemeService);
 
   routerPath = this.router.url;
-  menus: Menu[] = [];
-  copyMenus: Menu[] = [];
+  menus = signal<Menu[]>([]);
+  copyMenus = signal<Menu[]>([]);
+  menuSourceEffect = effect(() => {
+    const source = this.menuServices.$menuArray();
+    this.menus.set(source);
+    this.copyMenus.set(source);
+    this.clickMenuItem(this.menus);
+    this.clickMenuItem(this.copyMenus);
+  });
   authCodeArray = computed(() => {
     return this.userInfoService.$userInfo().authCode;
   });
@@ -51,19 +58,24 @@ export class NavBarComponent implements OnInit {
   themesOptions$ = toObservable(this.themesService.$themesOptions);
   isCollapsed$ = toObservable(this.themesService.$isCollapsed);
   isOverMode$ = toObservable(this.themesService.$isOverModeTheme);
-  leftMenuArray$ = toObservable(this.splitNavStoreService.$splitLeftNavArray);
+
   subTheme$: Observable<NzSafeAny>;
 
   themesMode: ThemeMode['key'] = 'side';
   isOverMode = false;
   isCollapsed = false;
   isMixinMode = false;
-  leftMenuArray: Menu[] = [];
+  leftMenuArray = signal<Menu[]>([]);
+  // 监听混合模式下左侧菜单数据源
+  leftMenuArrayEffect = effect(() => {
+    const source = this.splitNavStoreService.$splitLeftNavArray();
+    this.leftMenuArray.set(source);
+  });
 
   destroyRef = inject(DestroyRef);
 
   constructor() {
-    this.initMenus();
+    // this.initMenus();
 
     this.subTheme$ = this.isOverMode$.pipe(
       switchMap(res => {
@@ -76,9 +88,6 @@ export class NavBarComponent implements OnInit {
       }),
       takeUntilDestroyed(this.destroyRef)
     );
-
-    // 监听混合模式下左侧菜单数据源
-    this.subMixinModeSideMenu();
     // 监听折叠菜单事件
     this.subIsCollapsed();
     this.router.events
@@ -103,7 +112,8 @@ export class NavBarComponent implements OnInit {
           this.clickMenuItem(this.copyMenus);
           // 是折叠的菜单并且不是over菜单,解决折叠左侧菜单时，切换tab会有悬浮框菜单的bug
           if (this.isCollapsed && !this.isOverMode) {
-            this.closeMenuOpen(this.menus);
+            const temp = this.closeMenuOpen(this.menus());
+            this.menus.set(temp);
           }
 
           // 顶部菜单模式，并且不是over模式，解决顶部模式时，切换tab会有悬浮框菜单的bug
@@ -133,22 +143,9 @@ export class NavBarComponent implements OnInit {
       });
   }
 
-  initMenus(): void {
-    this.menuServices
-      .getMenuArrayStore()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(menusArray => {
-        this.menus = menusArray;
-        this.copyMenus = this.cloneMenuArray(this.menus);
-        this.clickMenuItem(this.menus);
-        this.clickMenuItem(this.copyMenus);
-        this.cdr.markForCheck();
-      });
-  }
-
   // 设置混合模式时，左侧菜单"自动分割菜单"模式的数据源
   setMixModeLeftMenu(): void {
-    this.menus.forEach(item => {
+    this.menus().forEach(item => {
       if (item.selected) {
         this.splitNavStoreService.$splitLeftNavArray.set(item.children || []);
       }
@@ -179,7 +176,7 @@ export class NavBarComponent implements OnInit {
   // 混合模式点击一级菜单，要让一级菜单下的第一个子菜单被选中
   changTopNav(index: number): void {
     // 当前选中的第一级菜单对象
-    const currentTopNav = this.menus[index];
+    const currentTopNav = this.menus()[index];
     let currentLeftNavArray = currentTopNav.children || [];
     // 如果一级菜单下有二级菜单
     if (currentLeftNavArray.length > 0) {
@@ -210,7 +207,7 @@ export class NavBarComponent implements OnInit {
     this.splitNavStoreService.$splitLeftNavArray.set(currentLeftNavArray);
   }
 
-  flatMenu(menus: Menu[], routePath: string): void {
+  flatMenu(menus: Menu[], routePath: string): Menu[] {
     menus.forEach(item => {
       item.selected = false;
       item.open = false;
@@ -222,16 +219,18 @@ export class NavBarComponent implements OnInit {
         this.flatMenu(item.children, routePath);
       }
     });
+    return menus;
   }
 
-  clickMenuItem(menus: Menu[]): void {
-    if (!menus) {
+  clickMenuItem(menus: WritableSignal<Menu[]>): void {
+    if (!menus()) {
       return;
     }
     const index = this.routerPath.indexOf('?') === -1 ? this.routerPath.length : this.routerPath.indexOf('?');
     const routePath = this.routerPath.substring(0, index);
-    this.flatMenu(menus, routePath);
-    this.cdr.markForCheck();
+    const menuTemp = this.flatMenu(menus(), routePath);
+    menus.set(menuTemp);
+    // this.cdr.markForCheck();
   }
 
   // 改变当前菜单展示状态
@@ -242,7 +241,7 @@ export class NavBarComponent implements OnInit {
     currentMenu.open = true;
   }
 
-  closeMenuOpen(menus: Menu[]): void {
+  closeMenuOpen(menus: Menu[]): Menu[] {
     menus.forEach(menu => {
       menu.open = false;
       if (menu.children && menu.children.length > 0) {
@@ -251,6 +250,7 @@ export class NavBarComponent implements OnInit {
         return;
       }
     });
+    return menus;
   }
 
   changeRoute(e: MouseEvent, menu: Menu): void {
@@ -268,7 +268,7 @@ export class NavBarComponent implements OnInit {
       this.isCollapsed = isCollapsed;
       // 菜单展开
       if (!this.isCollapsed) {
-        this.menus = this.cloneMenuArray(this.copyMenus);
+        this.menus.set(this.copyMenus());
         this.clickMenuItem(this.menus);
         // 混合模式下要在点击一下左侧菜单数据源,不然有二级菜单的菜单在折叠状态变为展开时，不open
         if (this.themesMode === 'mixin') {
@@ -276,8 +276,9 @@ export class NavBarComponent implements OnInit {
         }
       } else {
         // 菜单收起
-        this.copyMenus = this.cloneMenuArray(this.menus);
-        this.closeMenuOpen(this.menus);
+        this.copyMenus.set(this.menus());
+        const temp = this.closeMenuOpen(this.menus());
+        this.menus.set(temp);
       }
       this.cdr.markForCheck();
     });
@@ -286,14 +287,8 @@ export class NavBarComponent implements OnInit {
   closeMenu(): void {
     this.clickMenuItem(this.menus);
     this.clickMenuItem(this.copyMenus);
-    this.closeMenuOpen(this.menus);
-  }
-
-  // 监听混合模式下左侧菜单数据源
-  private subMixinModeSideMenu(): void {
-    this.leftMenuArray$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => {
-      this.leftMenuArray = res;
-    });
+    const temp = this.closeMenuOpen(this.menus());
+    this.menus.set(temp);
   }
 
   routeEndAction(isNewTabDetailPage = false): void {

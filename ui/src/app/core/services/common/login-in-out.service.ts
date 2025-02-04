@@ -69,7 +69,7 @@ export class LoginInOutService {
           });
           const temp = fnFlatDataHasParentToTree(menus);
           // 存储menu
-          this.menuService.setMenuArrayStore(temp);
+          this.menuService.$menuArray.set(temp);
           resolve();
         });
     });
@@ -89,7 +89,7 @@ export class LoginInOutService {
   clearSessionCash(): Promise<void> {
     return new Promise(resolve => {
       this.windowServe.removeSessionStorage(TokenKey);
-      this.menuService.setMenuArrayStore([]);
+      this.menuService.$menuArray.set([]);
       resolve();
     });
   }

@@ -183,12 +183,12 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
   }
 
   getMenus(): void {
-    this.menuStoreService
-      .getMenuArrayStore()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(menus => {
-        this.menuNavList = menus;
-      });
+    // this.menuStoreService
+    //   .getMenuArrayStore()
+    //   .pipe(takeUntilDestroyed(this.destroyRef))
+    //   .subscribe(menus => {
+    //     this.menuNavList = menus;
+    //   });
   }
 
   ngOnInit(): void {
