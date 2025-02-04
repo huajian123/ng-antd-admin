@@ -47,7 +47,7 @@ export class SubWindowWithService {
         this.themesService.$isOverModeTheme.set(isOverMode);
         // 是over模式，展开折叠状态得左侧菜单
         if (isOverMode) {
-          this.themesService.setIsCollapsed(false);
+          this.themesService.$isCollapsed.set(false);
         }
       });
   }

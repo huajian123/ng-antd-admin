@@ -23,9 +23,7 @@ export interface SettingInterface {
 export type StyleTheme = 'default' | 'dark' | 'aliyun' | 'compact'; // 默认主题，暗黑主题，阿里云主题，紧凑主题
 
 // 主题风格
-export type StyleThemeInterface = {
-  [key in StyleTheme]: boolean;
-};
+export type StyleThemeInterface = Record<StyleTheme, boolean>;
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +32,7 @@ export class ThemeService {
   $isNightTheme = signal(false); // 暗黑主题
   $isCompactTheme = signal(false); // 紧凑主题
   $isOverModeTheme = signal(false); // over模式，即拖动浏览器宽度，至菜单栏消失的状态
+  $isCollapsed = signal(false); // 菜单收缩模式，拖动浏览器至菜单自动缩短成图标
 
   private themesMode$ = new BehaviorSubject<SettingInterface>({
     theme: 'dark',
@@ -52,7 +51,6 @@ export class ThemeService {
     hasNavHeadArea: true
   });
   private styleThemeMode$ = new BehaviorSubject<StyleTheme>('default'); // 主题风格，暗黑，默认，紧凑，阿里云
-  private isCollapsed$ = new BehaviorSubject<boolean>(false); // 菜单收缩模式，拖动浏览器至菜单自动缩短成图标
 
   // 获取主题参数
   setThemesMode(mode: SettingInterface): void {
@@ -72,13 +70,5 @@ export class ThemeService {
 
   getStyleThemeMode(): Observable<StyleTheme> {
     return this.styleThemeMode$.asObservable();
-  }
-  // 菜单是否折叠
-  setIsCollapsed(isCollapsed: boolean): void {
-    this.isCollapsed$.next(isCollapsed);
-  }
-
-  getIsCollapsed(): Observable<boolean> {
-    return this.isCollapsed$.asObservable();
   }
 }

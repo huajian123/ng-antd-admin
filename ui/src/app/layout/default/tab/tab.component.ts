@@ -39,7 +39,7 @@ export class TabComponent implements OnInit {
   themesOptions$ = this.themesService.getThemesMode();
   leftMenuArray$: Observable<Menu[]> = this.splitNavStoreService.getSplitLeftNavArrayStore();
   $isOverMode = computed(() => this.themesService.$isOverModeTheme());
-  isCollapsed$ = this.themesService.getIsCollapsed();
+  $isCollapsed = computed(() => this.themesService.$isCollapsed());
   destroyRef = inject(DestroyRef);
 
   constructor() {

@@ -22,7 +22,7 @@
     id="multi-tab2"
     class="fixed-tab"
     [ngClass]="{
-      'fixed-collapsed': (isCollapsed$ | async),
+      'fixed-collapsed': $isCollapsed(),
       'fixed-over-mode':
         $isOverMode() ||
         !(themesOptions$ | async)!.hasNavArea ||

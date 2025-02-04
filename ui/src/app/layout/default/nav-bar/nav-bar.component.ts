@@ -48,8 +48,8 @@ export class NavBarComponent implements OnInit {
 
   themesOptions$ = this.themesService.getThemesMode();
   $isNightTheme = computed(() => this.themesService.$isNightTheme());
-  isCollapsed$ = this.themesService.getIsCollapsed();
   // todo signal最后要修正
+  isCollapsed$ = toObservable(this.themesService.$isCollapsed);
   isOverMode$ = toObservable(this.themesService.$isOverModeTheme);
   leftMenuArray$ = this.splitNavStoreService.getSplitLeftNavArrayStore();
   subTheme$: Observable<NzSafeAny>;

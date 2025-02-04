@@ -17,5 +17,5 @@ export class SideNavComponent {
   private themesService = inject(ThemeService);
   themesOptions$ = this.themesService.getThemesMode();
   $isNightTheme = computed(() => this.themesService.$isNightTheme());
-  isCollapsed$: Observable<boolean> = this.themesService.getIsCollapsed();
+  $isCollapsed = computed(() => this.themesService.$isCollapsed());
 }
