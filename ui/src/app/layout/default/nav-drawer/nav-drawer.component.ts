@@ -1,5 +1,4 @@
-import { AsyncPipe } from '@angular/common';
-import { Component, ChangeDetectionStrategy, inject, DestroyRef, signal, effect } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject, DestroyRef, signal, effect, computed } from '@angular/core';
 
 import { SideNavWidth } from '@app/config/constant';
 import { ThemeService } from '@store/common-store/theme.service';
@@ -13,12 +12,12 @@ import { SideNavComponent } from '../side-nav/side-nav.component';
   templateUrl: './nav-drawer.component.html',
   styleUrls: ['./nav-drawer.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NzDrawerModule, NzLayoutModule, SideNavComponent, AsyncPipe]
+  imports: [NzDrawerModule, NzLayoutModule, SideNavComponent]
 })
 export class NavDrawerComponent {
   private themesService = inject(ThemeService);
   isShowModal = signal(false);
-  themesOptions$ = this.themesService.getThemesMode();
+  $themesOptions = computed(() => this.themesService.$themesOptions());
   destroyRef = inject(DestroyRef);
   SideNavWidth = SideNavWidth;
 

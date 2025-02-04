@@ -1,3 +1,5 @@
+@let _currentStyleTheme = this.$currentStyleTheme();
+@let _themesOptions = this.$themesOptions();
 <div id="drawer-handle" class="drawer-handle" cdkDrag cdkDragLockAxis="y" [class.open]="isCollapsed" (cdkDragEnded)="dragEnd()" (cdkDragStarted)="dragging = true" (click)="changeCollapsed()">
   <i nz-icon nzTheme="outline" [nzType]="!isCollapsed ? 'setting' : 'close'"></i>
 </div>

@@ -1,10 +1,8 @@
 import { CdkDrag } from '@angular/cdk/drag-drop';
 import { DOCUMENT } from '@angular/common';
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit, Renderer2 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ChangeDetectionStrategy, Component, computed, DestroyRef, effect, inject, OnInit, Renderer2, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { first } from 'rxjs/operators';
 
 import { StyleThemeModelKey, ThemeOptionsKey } from '@config/constant';
 import { SimpleReuseStrategy } from '@core/services/common/reuse-strategy';
@@ -63,32 +61,30 @@ export class SettingDrawerComponent implements OnInit {
   private themeSkinService = inject(ThemeSkinService);
   private windowServe = inject(WindowService);
   private rd2 = inject(Renderer2);
-
   destroyRef = inject(DestroyRef);
-  themesOptions$ = this.themesService.getThemesMode();
-  _currentStyleTheme: StyleThemeInterface = {
+
+  $themesOptions = computed(() => {
+    return this.themesService.$themesOptions();
+  });
+  $currentStyleTheme = signal<StyleThemeInterface>({
     default: false,
     dark: false,
     compact: false,
     aliyun: false
-  };
+  });
+  themeStyleEffect = effect(() => {
+    const source = this.themesService.$themeStyle();
+    this.$currentStyleTheme.set({
+      ...{
+        default: false,
+        dark: false,
+        compact: false,
+        aliyun: false
+      },
+      [source]: true
+    });
+  });
 
-  _themesOptions: SettingInterface = {
-    theme: 'dark',
-    color: '#1890FF',
-    mode: 'side',
-    fixedTab: false,
-    isShowTab: true,
-    splitNav: true,
-    greyTheme: false,
-    colorWeak: false,
-    fixedLeftNav: true,
-    fixedHead: true,
-    hasTopArea: true,
-    hasFooterArea: true,
-    hasNavArea: true,
-    hasNavHeadArea: true
-  };
   isCollapsed = false;
   dragging = false;
 
@@ -188,20 +184,27 @@ export class SettingDrawerComponent implements OnInit {
   changePrimaryColor(color: Color): void {
     this.selOne(color as NormalModel, this.colors);
     this.nzConfigService.set('theme', { primaryColor: color.color });
-    this._themesOptions.color = color.color;
+    this.themesService.$themesOptions.update(v => {
+      return { ...v, color: color.color };
+    });
     this.setThemeOptions();
   }
 
   // 修改主题
   changeStyleTheme(styleTheme: StyleTheme): void {
-    // 让每个主题都变成未选中
-    Object.keys(this._currentStyleTheme).forEach(item => {
-      this._currentStyleTheme[item as StyleTheme] = false;
+    // 让每个主题都变成未选中,当前选中的主题变为选中状态
+    this.$currentStyleTheme.set({
+      ...{
+        default: false,
+        dark: false,
+        compact: false,
+        aliyun: false
+      },
+      [styleTheme]: true
     });
-    // 当前选中的主题变为选中状态
-    this._currentStyleTheme[styleTheme] = true;
+
     // 存储主题模式状态
-    this.themesService.setStyleThemeMode(styleTheme);
+    this.themesService.$themeStyle.set(styleTheme);
     // 持久化
     this.windowServe.setStorage(StyleThemeModelKey, styleTheme);
     // 切换主题
@@ -217,30 +220,39 @@ export class SettingDrawerComponent implements OnInit {
   changeMode(mode: ThemeMode): void {
     this.selOne(mode, this.modes);
     this.themesService.$isCollapsed.set(false);
-    this._themesOptions.mode = mode.key;
+
+    this.themesService.$themesOptions.update(v => {
+      return { ...v, mode: mode.key };
+    });
+
     this.setThemeOptions();
   }
 
   // 切换主题
   changeTheme(themeItem: Theme): void {
     this.selOne(themeItem, this.themes);
-    this._themesOptions.theme = themeItem.key;
+    this.themesService.$themesOptions.update(v => {
+      return { ...v, theme: themeItem.key };
+    });
     this.setThemeOptions();
   }
 
   // 设置主题参数
   setThemeOptions(): void {
-    this.themesService.setThemesMode(this._themesOptions);
-    this.windowServe.setStorage(ThemeOptionsKey, JSON.stringify(this._themesOptions));
+    this.windowServe.setStorage(ThemeOptionsKey, JSON.stringify(this.$themesOptions()));
   }
 
   // 修改主题配置项
   changeThemeOptions(isTrue: boolean, type: SettingKey): void {
     // 非固定头部时，设置标签也不固定
     if (type === 'fixedHead' && !isTrue) {
-      this._themesOptions['fixedTab'] = false;
+      this.themesService.$themesOptions.update(v => {
+        return { ...v, fixedTab: false };
+      });
     }
-    this._themesOptions[type] = isTrue;
+    this.themesService.$themesOptions.update(v => {
+      return { ...v, [type]: isTrue };
+    });
     this.setThemeOptions();
 
     // 如果不展示多标签，则要清空tab,以及已经被缓存的所有组件
@@ -264,34 +276,28 @@ export class SettingDrawerComponent implements OnInit {
     } else {
       this.rd2.removeClass(name[0], themeType);
     }
-    this._themesOptions[theme as SpecialThemeHump] = e;
+    this.themesService.$themesOptions.update(v => {
+      return { ...v, [theme as SpecialThemeHump]: e };
+    });
     this.setThemeOptions();
   }
 
   initThemeOption(): void {
-    this.themesService
-      .getStyleThemeMode()
-      .pipe(first(), takeUntilDestroyed(this.destroyRef))
-      .subscribe(res => (this._currentStyleTheme[res] = true));
-    this.themesOptions$.pipe(first(), takeUntilDestroyed(this.destroyRef)).subscribe(res => {
-      this._themesOptions = res;
-    });
-
     // 特殊模式主题变换（色弱模式，灰色模式）
     (['grey-theme', 'color-weak'] as SpecialTheme[]).forEach(item => {
       const specialTheme = fnFormatToHump(item);
-      this.changeSpecialTheme(this._themesOptions[specialTheme as SpecialThemeHump], item);
+      this.changeSpecialTheme(this.$themesOptions()[specialTheme as SpecialThemeHump], item);
     });
 
     this.modes.forEach(item => {
-      item.isChecked = item.key === this._themesOptions.mode;
+      item.isChecked = item.key === this.$themesOptions().mode;
     });
     this.colors.forEach(item => {
-      item.isChecked = item.color === this._themesOptions.color;
+      item.isChecked = item.color === this.$themesOptions().color;
     });
     this.changePrimaryColor(this.colors.find(item => item.isChecked)!);
     this.themes.forEach(item => {
-      item.isChecked = item.key === this._themesOptions.theme;
+      item.isChecked = item.key === this.$themesOptions().theme;
     });
   }
 

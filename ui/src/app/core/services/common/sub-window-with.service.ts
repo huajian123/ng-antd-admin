@@ -1,6 +1,6 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { DestroyRef, inject, Injectable } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { switchMap } from 'rxjs/operators';
 
 import { SideCollapsedMaxWidth, TopCollapsedMaxWidth } from '@config/constant';
@@ -24,11 +24,11 @@ export class SubWindowWithService {
   private winWidthService = inject(WindowsWidthService);
   private breakpointObserver = inject(BreakpointObserver);
   private themesService = inject(ThemeService);
-
+  // todo signal 修正
+  themesOptions$ = toObservable(this.themesService.$themesOptions);
   // 监听主题（是top，还是side），确定over模式最小宽度
   subWidthForTheme(): void {
-    this.themesService
-      .getThemesMode()
+    this.themesOptions$
       .pipe(
         switchMap(res => {
           let maxWidth = '';

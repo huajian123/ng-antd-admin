@@ -1,5 +1,5 @@
-import { AsyncPipe, NgClass } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ElementRef, OnDestroy, ChangeDetectorRef, inject, output, viewChild } from '@angular/core';
+import { NgClass } from '@angular/common';
+import { Component, OnInit, ChangeDetectionStrategy, ElementRef, OnDestroy, ChangeDetectorRef, inject, output, viewChild, computed } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { fnGetRandomNum } from '@app/utils/tools';
@@ -18,7 +18,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NzCardModule, NzTypographyModule, NzGridModule, NzAvatarModule, NzResultModule, NzIconModule, NzButtonModule, FormsModule, ReactiveFormsModule, NzInputModule, NgClass, AsyncPipe]
+  imports: [NzCardModule, NzTypographyModule, NzGridModule, NzAvatarModule, NzResultModule, NzIconModule, NzButtonModule, FormsModule, ReactiveFormsModule, NzInputModule, NgClass]
 })
 export class ChatComponent implements OnInit, OnDestroy {
   readonly myScrollContainer = viewChild.required<ElementRef>('scrollMe');
@@ -98,8 +98,11 @@ export class ChatComponent implements OnInit, OnDestroy {
     '等会再下凡见见尔等凡夫俗子',
     '闭关修炼中'
   ];
+  themeService = inject(ThemeService);
 
-  readonly themesModel$ = inject(ThemeService).getStyleThemeMode();
+  readonly $themeStyle = computed(() => {
+    return this.themeService.$themeStyle();
+  });
   private fb = inject(FormBuilder);
   private cdr = inject(ChangeDetectorRef);
 

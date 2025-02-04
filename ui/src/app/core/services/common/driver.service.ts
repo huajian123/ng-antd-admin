@@ -1,6 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { DestroyRef, inject, Injectable } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { computed, DestroyRef, inject, Injectable } from '@angular/core';
 
 import { ThemeService } from '@store/common-store/theme.service';
 import { driver, DriveStep } from 'driver.js';
@@ -15,16 +14,11 @@ export class DriverService {
   themesService = inject(ThemeService);
   destroyRef = inject(DestroyRef);
   private readonly doc = inject(DOCUMENT);
+  $fixedTab = computed(() => this.themesService.$themesOptions().fixedTab);
 
   load(): void {
     // 是否是固定页签
-    let tabId = '';
-    this.themesService
-      .getThemesMode()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(res => {
-        tabId = !res.fixedTab ? '#multi-tab' : '#multi-tab2';
-      });
+    let tabId = !this.$fixedTab() ? '#multi-tab' : '#multi-tab2';
     const steps: DriveStep[] = [
       {
         element: '#menuNav',

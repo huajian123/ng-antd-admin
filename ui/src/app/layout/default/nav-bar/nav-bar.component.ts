@@ -46,9 +46,9 @@ export class NavBarComponent implements OnInit {
     return this.userInfoService.$userInfo().authCode;
   });
 
-  themesOptions$ = this.themesService.getThemesMode();
   $isNightTheme = computed(() => this.themesService.$isNightTheme());
   // todo signal最后要修正
+  themesOptions$ = toObservable(this.themesService.$themesOptions);
   isCollapsed$ = toObservable(this.themesService.$isCollapsed);
   isOverMode$ = toObservable(this.themesService.$isOverModeTheme);
   leftMenuArray$ = this.splitNavStoreService.getSplitLeftNavArrayStore();

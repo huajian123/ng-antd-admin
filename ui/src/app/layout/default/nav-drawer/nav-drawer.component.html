@@ -1,7 +1,7 @@
 <nz-drawer nzPlacement="left" [nzBodyStyle]="{ padding: 0 }" [nzClosable]="false" [nzVisible]="isShowModal()" [nzWidth]="SideNavWidth" (nzOnClose)="isShowModal.set(false)">
   <ng-container *nzDrawerContent>
     <nz-layout style="overflow-x: hidden">
-      <nz-sider class="menu-sidebar" [nzTheme]="(themesOptions$ | async)!.theme" [nzTrigger]="null" [nzWidth]="SideNavWidth">
+      <nz-sider class="menu-sidebar" [nzTheme]="$themesOptions().theme" [nzTrigger]="null" [nzWidth]="SideNavWidth">
         <app-side-nav />
       </nz-sider>
     </nz-layout>

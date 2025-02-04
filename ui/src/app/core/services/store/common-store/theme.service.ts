@@ -1,5 +1,4 @@
-import { Injectable, signal } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { effect, Injectable, signal } from '@angular/core';
 
 import { Theme, ThemeMode } from '@app/layout/default/setting-drawer/setting-drawer.component';
 
@@ -33,8 +32,7 @@ export class ThemeService {
   $isCompactTheme = signal(false); // 紧凑主题
   $isOverModeTheme = signal(false); // over模式，即拖动浏览器宽度，至菜单栏消失的状态
   $isCollapsed = signal(false); // 菜单收缩模式，拖动浏览器至菜单自动缩短成图标
-
-  private themesMode$ = new BehaviorSubject<SettingInterface>({
+  $themesOptions = signal<SettingInterface>({
     theme: 'dark',
     color: '#1890FF',
     mode: 'side',
@@ -50,25 +48,10 @@ export class ThemeService {
     hasNavArea: true,
     hasNavHeadArea: true
   });
-  private styleThemeMode$ = new BehaviorSubject<StyleTheme>('default'); // 主题风格，暗黑，默认，紧凑，阿里云
-
-  // 获取主题参数
-  setThemesMode(mode: SettingInterface): void {
-    this.themesMode$.next(mode);
-  }
-
-  getThemesMode(): Observable<SettingInterface> {
-    return this.themesMode$.asObservable();
-  }
-
-  // 获取主题模式
-  setStyleThemeMode(mode: StyleTheme): void {
-    this.$isNightTheme.set(mode === 'dark');
-    this.$isCompactTheme.set(mode === 'compact');
-    this.styleThemeMode$.next(mode);
-  }
-
-  getStyleThemeMode(): Observable<StyleTheme> {
-    return this.styleThemeMode$.asObservable();
-  }
+  $themeStyle = signal<StyleTheme>('default'); // 主题风格，暗黑，默认，紧凑，阿里云
+  themeStyleChangeEffect = effect(() => {
+    const source = this.$themeStyle();
+    this.$isNightTheme.set(source === 'dark');
+    this.$isCompactTheme.set(source === 'compact');
+  });
 }

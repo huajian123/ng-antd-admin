@@ -3,8 +3,8 @@
   class="chat-wrap"
   [ngClass]="{
     show: show,
-    'compact-mode': (themesModel$ | async) === 'compact',
-    'aliyun-mode': (themesModel$ | async) === 'aliyun'
+    'compact-mode': $themeStyle() === 'compact',
+    'aliyun-mode': $themeStyle() === 'aliyun'
   }"
 >
   <nz-card [nzActions]="[inputTpl]" [nzBodyStyle]="{ padding: 0 }" [nzExtra]="extraTemplate" [nzTitle]="titleTemplate">

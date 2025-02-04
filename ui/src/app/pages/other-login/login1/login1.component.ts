@@ -82,7 +82,7 @@ export class Login1Component implements OnInit {
   changeNight(isNight: boolean): void {
     const mode = isNight ? 'dark' : 'default';
     this.windowServe.setStorage(StyleThemeModelKey, mode);
-    this.themesService.setStyleThemeMode(mode);
+    this.themesService.$themeStyle.set(mode);
     this.themeSkinService.toggleTheme().then(() => {
       this.cdr.markForCheck();
     });

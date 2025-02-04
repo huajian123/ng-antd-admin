@@ -1,5 +1,6 @@
+@let $themesOptions = this.$themesOptions();
 <!--非固定tab模式-->
-@if (!(themesOptions$ | async)?.fixedTab) {
+@if (!$themesOptions.fixedTab) {
   <nz-card id="multi-tab" class="m-t-10" style="height: 35px" [nzBodyStyle]="{ padding: 0 }" [nzBordered]="false">
     <nz-tabset [nzHideAdd]="true" [nzSelectedIndex]="currentIndex" [nzTabBarStyle]="{ height: '35px' }" [nzTabPosition]="'top'" [nzType]="'editable-card'" (nzClose)="clickCloseIcon($event)">
       @for (tab of tabsSourceData$ | async; track trackByTab(i, tab); let i = $index) {
@@ -24,12 +25,9 @@
     [ngClass]="{
       'fixed-collapsed': $isCollapsed(),
       'fixed-over-mode':
-        $isOverMode() ||
-        !(themesOptions$ | async)!.hasNavArea ||
-        (themesOptions$ | async)?.mode === 'top' ||
-        ((themesOptions$ | async)?.mode === 'mixin' && (leftMenuArray$ | async)!.length === 0 && (themesOptions$ | async)?.splitNav)
+        $isOverMode() || !$themesOptions.hasNavArea || $themesOptions.mode === 'top' || ($themesOptions.mode === 'mixin' && (leftMenuArray$ | async)!.length === 0 && $themesOptions.splitNav)
     }"
-    [ngStyle]="{ top: (themesOptions$ | async)!.hasTopArea ? '48px' : '0', left: !(themesOptions$ | async)!.hasNavArea ? '0' : '' }"
+    [ngStyle]="{ top: $themesOptions.hasTopArea ? '48px' : '0', left: !$themesOptions.hasNavArea ? '0' : '' }"
     [nzBodyStyle]="{ padding: 0 }"
     [nzBordered]="true"
   >

@@ -1,6 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { DestroyRef, inject } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { computed, DestroyRef, inject } from '@angular/core';
 import { ActivatedRouteSnapshot, DetachedRouteHandle, RouteReuseStrategy } from '@angular/router';
 
 import { ScrollService } from '@core/services/common/scroll.service';
@@ -35,9 +34,11 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
   // 这个参数的目的是，在当前页签中点击删除按钮，虽然页签关闭了，但是在路由离开的时候，还是会将已经关闭的页签的组件缓存，
   // 用这个参数来记录，是否需要缓存当前路由
   public static waitDelete: string | null;
-
+  themesService = inject(ThemeService); // 用于获取主题
   // 是否有多页签，没有多页签则不做路由缓存
-  isShowTab$ = inject(ThemeService).getThemesMode();
+  $isShowTab = computed(() => {
+    return this.themesService.$themesOptions().isShowTab;
+  });
 
   public static deleteRouteSnapshot(key: string): void {
     if (SimpleReuseStrategy.handlers[key]) {
@@ -63,11 +64,7 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
   // 是否允许复用路由
   shouldDetach(route: ActivatedRouteSnapshot): boolean {
     // 是否展示多页签，如果不展示多页签，则不做路由复用
-    let isShowTab = false;
-    this.isShowTab$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => {
-      isShowTab = res.isShowTab;
-    });
-    return route.data['shouldDetach'] !== 'no' && isShowTab;
+    return route.data['shouldDetach'] !== 'no' && this.$isShowTab();
   }
 
   // 当路由离开时会触发，存储路由

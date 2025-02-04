@@ -1,6 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { DestroyRef, inject, Injectable } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { computed, inject, Injectable } from '@angular/core';
 
 import { StyleTheme, ThemeService } from '@store/common-store/theme.service';
 
@@ -13,17 +12,7 @@ import { StyleTheme, ThemeService } from '@store/common-store/theme.service';
 export class ThemeSkinService {
   private readonly doc = inject(DOCUMENT);
   private readonly themesService = inject(ThemeService);
-  private currentStyleThemeModel!: StyleTheme; // 已经在构造函数中初始化了,当前主题风格的模式，阿里云、默认、紧凑、暗黑
-  destroyRef = inject(DestroyRef);
-
-  constructor() {
-    this.themesService
-      .getStyleThemeMode()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(currentStyleTheme => {
-        this.currentStyleThemeModel = currentStyleTheme;
-      });
-  }
+  private $currentStyleTheme = computed(() => this.themesService.$themeStyle());
 
   removeUnusedTheme(theme: StyleTheme): void {
     const removedThemeStyle = this.doc.getElementById(theme);
@@ -46,7 +35,7 @@ export class ThemeSkinService {
   }
 
   public loadTheme(isFirstLoad = true): Promise<Event> {
-    const theme = this.currentStyleThemeModel;
+    const theme = this.$currentStyleTheme();
     if (isFirstLoad) {
       this.doc.documentElement.classList.add(theme);
     }
@@ -57,7 +46,7 @@ export class ThemeSkinService {
             this.doc.documentElement.classList.add(theme);
           }
           (['default', 'aliyun', 'compact', 'dark'] as StyleTheme[])
-            .filter(item => item !== this.currentStyleThemeModel)
+            .filter(item => item !== this.$currentStyleTheme())
             .forEach(item => {
               setTimeout(() => {
                 this.removeUnusedTheme(<StyleTheme>item);

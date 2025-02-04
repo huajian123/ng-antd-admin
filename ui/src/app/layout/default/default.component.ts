@@ -1,8 +1,7 @@
-import { NgTemplateOutlet, NgClass, NgStyle } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, AfterViewInit, inject, DestroyRef, viewChild, computed } from '@angular/core';
+import { NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
+import { AfterViewInit, ChangeDetectionStrategy, Component, computed, DestroyRef, effect, inject, OnInit, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterOutlet } from '@angular/router';
-import { Observable } from 'rxjs';
 
 import { SettingDrawerComponent, Theme } from '@app/layout/default/setting-drawer/setting-drawer.component';
 import { CollapsedNavWidth, IsFirstLogin, SideNavWidth } from '@config/constant';
@@ -13,7 +12,7 @@ import { LayoutHeadRightMenuComponent } from '@shared/biz-components/layout-comp
 import { ChatComponent } from '@shared/components/chat/chat.component';
 import { TopProgressBarComponent } from '@shared/components/top-progress-bar/top-progress-bar.component';
 import { SplitNavStoreService } from '@store/common-store/split-nav-store.service';
-import { SettingInterface, ThemeService } from '@store/common-store/theme.service';
+import { ThemeService } from '@store/common-store/theme.service';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzNoAnimationModule } from 'ng-zorro-antd/core/no-animation';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -65,8 +64,31 @@ export class DefaultComponent implements OnInit, AfterViewInit {
   driverService = inject(DriverService); // 用于引导用户
   themesService = inject(ThemeService); // 用于获取主题
   splitNavStoreService = inject(SplitNavStoreService); // 用于获取分割菜单的store
-  themesOptions$ = this.themesService.getThemesMode();
-  styleThemeMode$ = this.themesService.getStyleThemeMode();
+  $themesOptionsEffect = effect(() => {
+    const { fixedTab, fixedHead, hasFooterArea, mode, fixedLeftNav, hasNavArea, hasTopArea, hasNavHeadArea, isShowTab, splitNav, theme } = this.themesService.$themesOptions();
+
+    this.isMixinMode = mode === 'mixin';
+    this.isSideMode = mode === 'side';
+    this.isTopMode = mode === 'top';
+    this.isFixedLeftNav = fixedLeftNav;
+    this.isHasNavArea = hasNavArea;
+    this.isHasTopArea = hasTopArea;
+    this.isHasNavHeadArea = hasNavHeadArea;
+    this.isShowTab = isShowTab;
+    this.isSplitNav = splitNav;
+    this.theme = theme;
+    this.isFixedHead = fixedHead;
+    this.isHasFooterArea = hasFooterArea;
+    this.isFixedTab = fixedTab;
+
+    this.contentMarginTop = this.judgeMarginTop();
+  });
+  $themeStyleEffect = effect(() => {
+    // 引用single以触发effect
+    const source = this.themesService.$themeStyle();
+    // 切换风格模式时也要重新计算margin，这个跟themesOptions$里貌似时重复的代码，考虑用combineLatest来进行合并的话，会有性能损失（切换风格时也会执行themeOptions里面的逻辑），所以这里分开来写了
+    this.contentMarginTop = this.judgeMarginTop();
+  });
   mixinModeLeftNav$ = this.splitNavStoreService.getSplitLeftNavArrayStore();
 
   showChats = true; // 是否显示聊天窗口
@@ -89,7 +111,6 @@ export class DefaultComponent implements OnInit, AfterViewInit {
   isTopMode = false; // 是否是顶部模式
   theme: Theme['key'] = 'dark'; // 主题模式
 
-  themesOptions!: SettingInterface;
   mixinModeLeftNav: Menu[] = []; // 混合模式下的左侧菜单
   contentMarginTop = '48px';
 
@@ -117,33 +138,6 @@ export class DefaultComponent implements OnInit, AfterViewInit {
   }
 
   getThemeOptions(): void {
-    this.styleThemeMode$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-      // 切换风格模式时也要重新计算margin，这个跟themesOptions$里貌似时重复的代码，考虑用combineLatest来进行合并的话，会有性能损失（切换风格时也会执行themeOptions里面的逻辑），所以这里分开来写了
-      this.contentMarginTop = this.judgeMarginTop();
-    });
-
-    this.themesOptions$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => {
-      this.themesOptions = res;
-
-      const { fixedTab, fixedHead, hasFooterArea, mode, fixedLeftNav, hasNavArea, hasTopArea, hasNavHeadArea, isShowTab, splitNav, theme } = this.themesOptions;
-
-      this.isMixinMode = mode === 'mixin';
-      this.isSideMode = mode === 'side';
-      this.isTopMode = mode === 'top';
-      this.isFixedLeftNav = fixedLeftNav;
-      this.isHasNavArea = hasNavArea;
-      this.isHasTopArea = hasTopArea;
-      this.isHasNavHeadArea = hasNavHeadArea;
-      this.isShowTab = isShowTab;
-      this.isSplitNav = splitNav;
-      this.theme = theme;
-      this.isFixedHead = fixedHead;
-      this.isHasFooterArea = hasFooterArea;
-      this.isFixedTab = fixedTab;
-
-      this.contentMarginTop = this.judgeMarginTop();
-    });
-
     this.mixinModeLeftNav$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => (this.mixinModeLeftNav = res));
   }
 
