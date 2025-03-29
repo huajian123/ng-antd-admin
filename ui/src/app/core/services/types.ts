@@ -70,7 +70,7 @@ export interface Menu {
   id: number | string;
   fatherId: number | string;
   path: string;
-  orderNum: number;
+  orderNum?: number;
   menuName: string;
   menuType: 'C' | 'F'; // c:菜单，f按钮
   icon?: string; // 如果showIcon为false，设置这个为搜索窗口时，最左侧的icon

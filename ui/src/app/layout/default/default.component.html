@@ -108,12 +108,10 @@
 
     <nz-layout>
       <nz-content [ngStyle]="{ marginTop: contentMarginTop }">
-        <div>
-          @if (isShowTab) {
-            <app-tab></app-tab>
-          }
-          <router-outlet></router-outlet>
-        </div>
+        @if (isShowTab) {
+          <app-tab></app-tab>
+        }
+        <router-outlet></router-outlet>
       </nz-content>
       @if (isHasFooterArea) {
         <nz-footer class="text-center">Ant Design ©2022 Implement By 华舰</nz-footer>
