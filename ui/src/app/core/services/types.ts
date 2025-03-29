@@ -70,12 +70,18 @@ export interface Menu {
   id: number | string;
   fatherId: number | string;
   path: string;
+  orderNum: number;
   menuName: string;
   menuType: 'C' | 'F'; // c:菜单，f按钮
   icon?: string; // 如果showIcon为false，设置这个为搜索窗口时，最左侧的icon
   alIcon?: string; // 如果showIcon为false，设置这个为搜索窗口时，最左侧的icon
+  updatedAt?: string;
+  createdAt?: string;
+  deletedAt?: string;
   open?: boolean;
   selected?: boolean; // 是否选中
+  status?: boolean; // 是否禁用
+  visible?: boolean; // 是否可见
   children?: Menu[];
   code: string; // 权限码
   newLinkFlag?: 0 | 1; // 是否是新页
