@@ -1,5 +1,4 @@
-import { DOCUMENT } from '@angular/common';
-import { computed, DestroyRef, inject } from '@angular/core';
+import { computed, DestroyRef, inject, DOCUMENT } from '@angular/core';
 import { ActivatedRouteSnapshot, DetachedRouteHandle, RouteReuseStrategy } from '@angular/router';
 
 import { ScrollService } from '@core/services/common/scroll.service';
@@ -115,7 +114,7 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
   // 如果在这里获取目标路由组件的实例，执行生命周期，会导致组件的生命周期执行多次（大于等于2次），但是这样又能避免shouldReuseRoute里面用while
   // https://github.com/angular/angular/issues/43251
   // https://github.com/angular/angular/issues/42794
-  retrieve(route: ActivatedRouteSnapshot): DetachedRouteHandle {
+  retrieve(route: ActivatedRouteSnapshot): DetachedRouteHandle | null {
     const key = fnGetReuseStrategyKeyFn(route);
     return !key ? null : SimpleReuseStrategy.handlers[key];
   }

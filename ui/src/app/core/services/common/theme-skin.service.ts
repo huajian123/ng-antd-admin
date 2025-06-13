@@ -1,5 +1,4 @@
-import { DOCUMENT } from '@angular/common';
-import { computed, inject, Injectable } from '@angular/core';
+import { computed, inject, Injectable, DOCUMENT } from '@angular/core';
 
 import { StyleTheme, ThemeService } from '@store/common-store/theme.service';
 

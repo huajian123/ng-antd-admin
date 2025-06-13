@@ -1,6 +1,5 @@
 import { CdkDrag } from '@angular/cdk/drag-drop';
-import { DOCUMENT } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, DestroyRef, effect, inject, OnInit, Renderer2, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, DestroyRef, effect, inject, OnInit, Renderer2, signal, DOCUMENT } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 

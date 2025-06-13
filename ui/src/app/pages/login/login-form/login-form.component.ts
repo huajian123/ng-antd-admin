@@ -15,7 +15,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzNotificationModule, NzNotificationService } from 'ng-zorro-antd/notification';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 
 @Component({
@@ -23,7 +23,7 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzTabsModule, NzGridModule, NzButtonModule, NzInputModule, NzWaveModule, NzCheckboxModule, NzIconModule, RouterLink, NzNotificationModule]
+  imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzTabsModule, NzGridModule, NzButtonModule, NzInputModule, NzWaveModule, NzCheckboxModule, NzIconModule, RouterLink]
 })
 export class LoginFormComponent implements OnInit {
   validateForm!: FormGroup;

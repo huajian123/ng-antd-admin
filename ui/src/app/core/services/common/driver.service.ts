@@ -1,5 +1,4 @@
-import { DOCUMENT } from '@angular/common';
-import { computed, DestroyRef, inject, Injectable } from '@angular/core';
+import { computed, DestroyRef, inject, Injectable, DOCUMENT } from '@angular/core';
 
 import { ThemeService } from '@store/common-store/theme.service';
 import { driver, DriveStep } from 'driver.js';

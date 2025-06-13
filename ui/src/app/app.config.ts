@@ -1,7 +1,7 @@
-import { DOCUMENT, registerLocaleData } from '@angular/common';
+import { registerLocaleData } from '@angular/common';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import zh from '@angular/common/locales/zh';
-import { ApplicationConfig, importProvidersFrom, provideExperimentalZonelessChangeDetection, inject, provideAppInitializer, EnvironmentProviders } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, provideZonelessChangeDetection, inject, provideAppInitializer, EnvironmentProviders, DOCUMENT } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter, RouteReuseStrategy, TitleStrategy, withComponentInputBinding, withHashLocation, withInMemoryScrolling, withPreloading, withViewTransitions } from '@angular/router';
 
@@ -117,6 +117,6 @@ export const appConfig: ApplicationConfig = {
     ...APPINIT_PROVIDES, // 项目启动之前，需要调用的一系列方法
     provideAnimationsAsync(), // 开启延迟加载动画，ng17新增特性，如果想要项目启动时就加载动画，可以使用provideAnimations()
     provideHttpClient(withInterceptors([httpInterceptorService])),
-    provideExperimentalZonelessChangeDetection() // 开启 zoneless
+    provideZonelessChangeDetection() // 开启 zoneless
   ]
 };

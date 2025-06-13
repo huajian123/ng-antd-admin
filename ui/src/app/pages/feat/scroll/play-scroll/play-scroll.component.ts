@@ -1,5 +1,4 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject, DOCUMENT } from '@angular/core';
 
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
