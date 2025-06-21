@@ -71,7 +71,7 @@ export class TableDataInfo<T> {
     description: '列表数据',
   })
   list: T[];
-  constructor(list: T[], pageSize = 0, pageIndex = 0, total: number) {
+  constructor(list: T[], pageSize = 0, pageIndex = 0, total = 0) {
     this.total = total;
     this.pageSize = pageSize;
     this.pageIndex = pageIndex;
