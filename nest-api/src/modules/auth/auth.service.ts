@@ -28,24 +28,19 @@ export class AuthService {
     }
     const isPasswordValid = await argon2.verify(res.password, password);
     if (!isPasswordValid) {
+      // 为了安全不要明确告诉用户是用户名还是密码错误
       throw new ForbiddenException('用户名或密码错误');
     }
     // 生成token
-    return await this.jwt.signAsync(
-      {
-        userName: userName,
-        roles: rowId,
-        sub: res.id,
-      },
-      // 局部设置
-      // {
-      //   expiresIn: '1h',
-      // },
-    );
+    return await this.jwt.signAsync({
+      userName: userName,
+      roles: rowId,
+      sub: res.id,
+    });
   }
   signup(userName: string, password: string) {}
-  signOut() {
-    this.cacheManager.del(ConfigEnum.AUTH_CODE).then();
+  async signOut() {
+    await this.cacheManager.del(ConfigEnum.AUTH_CODE);
   }
 
   async getMenuByUserAuthCode(authCode: string[]) {
