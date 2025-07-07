@@ -32,7 +32,7 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [LockScreenComponent, NzBackTopModule, RouterOutlet, NzSpinModule]
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class App implements OnInit, AfterViewInit {
   private preloader = inject(PreloaderService);
   private lockScreenStoreService = inject(LockScreenStoreService);
   private spinService = inject(SpinService);

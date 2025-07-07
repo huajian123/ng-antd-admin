@@ -26,7 +26,7 @@ module.exports = {
         "@angular-eslint/no-empty-lifecycle-method": ["off"],
         'jsdoc/newline-after-description': 'off',
         '@angular-eslint/component-class-suffix': [
-          'error',
+          'off',
           {
             suffixes: ['Directive', 'Component', 'Base', 'Widget']
           }
