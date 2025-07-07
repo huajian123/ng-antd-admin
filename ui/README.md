@@ -49,13 +49,13 @@
    直接npm install，npm run star查看效果。
 
 2. 如果你想启动nodejs端，
-  1. 需要本地安装好docker。
-  2. 进入nest-api目录下
-  3. 在命令行运行命令"docker-compose up -d"，用以安装postgresql镜像以及容器，
-  4. 启动docker中的容器新拉的postgresql容器，
-  5. 你可能需要一款数据库连接工具，例如用DataGrip,Navicat等工具连接docker中的postgres数据库。用户名“admin”，密码“123456”，数据库名称“ng-antd-admin-db”
-  6. 执行nest-api目录下的ng-antd-admin-db.sql这个sql
-  7. 在nest-api目录下npm install ,执行npm run start.在ui目录下执行npm install ,以及npm run start
+1. 需要本地安装好docker。
+2. 进入nest-api目录下
+3. 在命令行运行命令"docker-compose up -d"，用以安装postgresql镜像以及容器，
+4. 启动docker中的容器新拉的postgresql容器，
+5. 你可能需要一款数据库连接工具，例如用DataGrip,Navicat等工具连接docker中的postgres数据库。用户名“admin”，密码“123456”，数据库名称“ng-antd-admin-db”
+6. 执行nest-api目录下的ng-antd-admin-db.sql这个sql
+7. 在nest-api目录下npm install ,执行npm run start.在ui目录下执行npm install ,以及npm run start
 
 # ✨前端的一些配置项
 # 路由的key(routing key)

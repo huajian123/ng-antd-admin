@@ -1,4 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy, input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  input,
+} from '@angular/core';
 
 import { NzListModule } from 'ng-zorro-antd/list';
 
@@ -6,7 +11,7 @@ import { NzListModule } from 'ng-zorro-antd/list';
   selector: 'app-safe',
   templateUrl: './safe.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NzListModule]
+  imports: [NzListModule],
 })
 export class SafeComponent implements OnInit {
   readonly data = input.required<{
@@ -14,6 +19,6 @@ export class SafeComponent implements OnInit {
   }>();
 
   ngOnInit(): void {
-    console.log(this.data());
+    console.log(this.data);
   }
 }
