@@ -1,5 +1,5 @@
 <nz-card [nzBodyStyle]="{ padding: 0 }">
-  <nz-tabset nzCentered [nzTabBarStyle]="{ paddingLeft: '15px', paddingRight: '15px' }">
+  <nz-tabs nzCentered [nzTabBarStyle]="{ paddingLeft: '15px', paddingRight: '15px' }">
     <nz-tab nzTitle="通知(4)">
       <ng-container *ngTemplateOutlet="notificationTpl"></ng-container>
     </nz-tab>
@@ -9,7 +9,7 @@
     <nz-tab nzTitle="待办(4)">
       <ng-container *ngTemplateOutlet="notificationTpl"></ng-container>
     </nz-tab>
-  </nz-tabset>
+  </nz-tabs>
 </nz-card>
 <ng-template #notificationTpl>
   <nz-list nzItemLayout="horizontal">

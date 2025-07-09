@@ -3,9 +3,9 @@
   <ng-template [cdkPortalOutlet]="selectedPortal"></ng-template>
 </div>
 <ng-template #headerFooter>
-  <nz-tabset [(nzSelectedIndex)]="currentSelTab">
+  <nz-tabs [(nzSelectedIndex)]="currentSelTab">
     <nz-tab nzTitle="开始" (nzClick)="to(tabEnum.Started)"></nz-tab>
     <nz-tab nzTitle="高级" (nzClick)="to(tabEnum.Advanced)"></nz-tab>
     <nz-tab nzTitle="系列" (nzClick)="to(tabEnum.Series)"></nz-tab>
-  </nz-tabset>
+  </nz-tabs>
 </ng-template>

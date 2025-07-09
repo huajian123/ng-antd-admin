@@ -2,7 +2,7 @@
 <!--非固定tab模式-->
 @if (!$themesOptions.fixedTab) {
   <nz-card id="multi-tab" class="m-t-10" style="height: 35px" [nzBodyStyle]="{ padding: 0 }" [nzBordered]="false">
-    <nz-tabset [nzHideAdd]="true" [nzSelectedIndex]="currentIndex" [nzTabBarStyle]="{ height: '35px' }" [nzTabPosition]="'top'" [nzType]="'editable-card'" (nzClose)="clickCloseIcon($event)">
+    <nz-tabs [nzHideAdd]="true" [nzSelectedIndex]="currentIndex" [nzTabBarStyle]="{ height: '35px' }" [nzTabPosition]="'top'" [nzType]="'editable-card'" (nzClose)="clickCloseIcon($event)">
       @for (tab of tabsSourceData$ | async; track trackByTab(i, tab); let i = $index) {
         <nz-tab nzClosable [nzTitle]="tab.title" (nzClick)="goPage(tab)" (nzContextmenu)="contextMenu($event, menu)">
           <nz-dropdown-menu #menu="nzDropdownMenu">
@@ -16,7 +16,7 @@
           </nz-dropdown-menu>
         </nz-tab>
       }
-    </nz-tabset>
+    </nz-tabs>
   </nz-card>
 } @else {
   <nz-card
@@ -30,7 +30,7 @@
     [nzBodyStyle]="{ padding: 0 }"
     [nzBordered]="true"
   >
-    <nz-tabset [nzAnimated]="false" [nzSelectedIndex]="currentIndex" [nzTabPosition]="'top'">
+    <nz-tabs [nzAnimated]="false" [nzSelectedIndex]="currentIndex" [nzTabPosition]="'top'">
       @for (tab of tabsSourceData$ | async; track trackByTab(i, tab); let i = $index) {
         <nz-tab nzClosable [nzTitle]="titleTemplate" (nzClick)="goPage(tab)" (nzContextmenu)="contextMenu($event, menu)">
           <ng-template #titleTemplate>
@@ -50,7 +50,7 @@
           </nz-dropdown-menu>
         </nz-tab>
       }
-    </nz-tabset>
+    </nz-tabs>
   </nz-card>
 }
 <!--固定tab模式-->

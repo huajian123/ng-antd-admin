@@ -38,10 +38,10 @@
   </div>
 </ng-template>
 <ng-template #headerFooter>
-  <nz-tabset [(nzSelectedIndex)]="currentSelTab">
+  <nz-tabs [(nzSelectedIndex)]="currentSelTab">
     <nz-tab nzTitle="详情" (nzClick)="to(tabEnum.Detail)"></nz-tab>
     <nz-tab nzTitle="规则" (nzClick)="to(tabEnum.Rule)"></nz-tab>
-  </nz-tabset>
+  </nz-tabs>
 </ng-template>
 
 <div class="normal-table-wrap">
@@ -133,11 +133,11 @@
   <nz-card class="m-t-20">
     <app-water-mark />
     <nz-card-tab>
-      <nz-tabset nzSize="large">
+      <nz-tabs nzSize="large">
         <nz-tab nzTitle="操作日志一"></nz-tab>
         <nz-tab nzTitle="操作日志二"></nz-tab>
         <nz-tab nzTitle="操作日志三"></nz-tab>
-      </nz-tabset>
+      </nz-tabs>
     </nz-card-tab>
     <app-ant-table [tableConfig]="returnTableConfig" [tableData]="returnDataList"></app-ant-table>
   </nz-card>

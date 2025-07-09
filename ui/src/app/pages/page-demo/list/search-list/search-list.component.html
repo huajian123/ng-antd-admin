@@ -15,11 +15,11 @@
 </ng-template>
 
 <ng-template #headerFooter>
-  <nz-tabset [(nzSelectedIndex)]="currentSelTab">
+  <nz-tabs [(nzSelectedIndex)]="currentSelTab">
     @for (item of tabData; track item) {
       <nz-tab [nzTitle]="item.label" (nzClick)="to(item)"></nz-tab>
     }
-  </nz-tabset>
+  </nz-tabs>
 </ng-template>
 <div class="normal-table-wrap">
   <router-outlet></router-outlet>

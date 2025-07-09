@@ -1,9 +1,9 @@
 <nz-card nzTitle="简单开始">
-  <nz-tabset [nzTabPosition]="tabPosition">
+  <nz-tabs [nzTabPosition]="tabPosition">
     @for (item of tabArray; track item; let index = $index) {
       <nz-tab [nzTitle]="item.label" (nzClick)="to(index)">
         <ng-template [cdkPortalOutlet]="selectedPortal"></ng-template>
       </nz-tab>
     }
-  </nz-tabset>
+  </nz-tabs>
 </nz-card>

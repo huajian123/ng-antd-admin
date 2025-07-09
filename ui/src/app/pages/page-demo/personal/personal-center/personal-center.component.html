@@ -58,11 +58,11 @@
     <div nz-col [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzXl]="17" [nzXs]="24" [nzXXl]="17">
       <nz-card>
         <nz-card-tab>
-          <nz-tabset nzSize="large">
+          <nz-tabs nzSize="large">
             @for (item of tabData; track item) {
               <nz-tab [nzTitle]="item.label" (nzClick)="to(item)"></nz-tab>
             }
-          </nz-tabset>
+          </nz-tabs>
         </nz-card-tab>
         <ng-template appAd></ng-template>
       </nz-card>

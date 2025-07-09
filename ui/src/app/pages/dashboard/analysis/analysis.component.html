@@ -89,7 +89,7 @@
 
   <section class="flow-wrap m-t-20">
     <nz-card [nzBodyStyle]="{ padding: 0 }" [nzBordered]="true">
-      <nz-tabset [nzAnimated]="false" [nzTabBarExtraContent]="extraTemplate" [nzTabBarStyle]="{ padding: '0 10px', fontSize: '16px' }">
+      <nz-tabs [nzAnimated]="false" [nzTabBarExtraContent]="extraTemplate" [nzTabBarStyle]="{ padding: '0 10px', fontSize: '16px' }">
         <nz-tab nzTitle="销售额">
           <div nz-row>
             <div nz-col [nzLg]="12" [nzMd]="13" [nzSm]="24" [nzXl]="17" [nzXs]="24">
@@ -113,7 +113,7 @@
         <nz-tab nzTitle="访问量">
           <h3>❤❤❤❤等待你的pr❤❤❤❤</h3>
         </nz-tab>
-      </nz-tabset>
+      </nz-tabs>
     </nz-card>
 
     <ng-template #extraTemplate>
@@ -203,13 +203,13 @@
   <!--等待你的pr-->
   <!--  <section class="m-t-20">
       <nz-card>
-        <nz-tabset>
+        <nz-tabs>
           <ng-container *ngFor="let i of 51|numberLoop">
             <nz-tab [nzTitle]="tabTitle">
               ❤❤❤❤等待你的pr❤❤❤❤
             </nz-tab>
           </ng-container>
-        </nz-tabset>
+        </nz-tabs>
         <ng-template #tabTitle>
           <div class="bottom-block-tab-wrap">
             <div class="tab-title">stores 0</div>

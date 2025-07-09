@@ -6,8 +6,6 @@ import { catchError, filter } from 'rxjs/operators';
 import { TokenKey } from '@config/constant';
 import { WindowService } from '@core/services/common/window.service';
 
-import { NzMessageService } from 'ng-zorro-antd/message';
-
 interface CustomHttpConfig {
   headers?: HttpHeaders;
 }
@@ -38,7 +36,6 @@ function handleError(error: HttpErrorResponse): Observable<never> {
 
 export const httpInterceptorService: HttpInterceptorFn = (req, next) => {
   const windowServe = inject(WindowService);
-  const message = inject(NzMessageService);
   const token = windowServe.getSessionStorage(TokenKey);
   let httpConfig: CustomHttpConfig = {};
   if (token) {

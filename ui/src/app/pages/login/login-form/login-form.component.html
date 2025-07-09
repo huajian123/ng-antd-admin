@@ -1,6 +1,6 @@
 <div class="login-form-wrap">
   <form class="login-form" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
-    <nz-tabset [nzAnimated]="false">
+    <nz-tabs [nzAnimated]="false">
       <nz-tab nzTitle="账户密码登录">
         <nz-form-item>
           <nz-form-control nzErrorTip="账号名：admin">
@@ -35,7 +35,7 @@
           <button class="p-0" nz-button nz-col nzType="default" [nzSize]="'large'" [nzSm]="7" [nzXs]="7">获取验证码</button>
         </nz-form-item>
       </nz-tab>
-    </nz-tabset>
+    </nz-tabs>
     <div class="login-form-margin" nz-row>
       <div nz-col [nzSpan]="12">
         <label formControlName="remember" nz-checkbox>
