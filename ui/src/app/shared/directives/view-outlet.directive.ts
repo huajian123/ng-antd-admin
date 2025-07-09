@@ -29,6 +29,7 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
  * 视图 Outlet 组件，取代 NgComponentOutlet 和 NgTemplateOutlet
  */
 @Directive({
+  // eslint-disable-next-line @angular-eslint/directive-selector
   selector: '[viewOutlet]',
   standalone: true
 })

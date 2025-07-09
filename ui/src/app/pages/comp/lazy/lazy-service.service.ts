@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, inject, Injectable } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { LazySelPeopleEnum } from '@app/pages/comp/lazy/lazy-targ-comp/lazy-targ-comp.component';
 import { AdDirective } from '@shared/directives/ad.directive';

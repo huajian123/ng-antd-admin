@@ -10,6 +10,7 @@ import { LoadingChartsComponent } from '@app/pages/feat/charts/echarts/started/l
 import { MergeChartsComponent } from '@app/pages/feat/charts/echarts/started/merge-charts/merge-charts.component';
 import { SimpleChartComponent } from '@app/pages/feat/charts/echarts/started/simple-chart/simple-chart.component';
 import { ThemeChartsComponent } from '@app/pages/feat/charts/echarts/started/theme-charts/theme-charts.component';
+
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzTabsModule, NzTabPosition } from 'ng-zorro-antd/tabs';

@@ -6,6 +6,7 @@ import { LoginType } from '@app/pages/other-login/login1/login1.component';
 import { PasswordStrengthMeterComponent } from '@shared/biz-components/password-strength-meter/password-strength-meter.component';
 import { Login1StoreService } from '@store/biz-store-service/other-login/login1-store.service';
 import { EquipmentWidth, WindowsWidthService } from '@store/common-store/windows-width.service';
+
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';

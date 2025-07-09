@@ -8,6 +8,7 @@ import { WindowService } from '@core/services/common/window.service';
 import { Login1StoreService } from '@store/biz-store-service/other-login/login1-store.service';
 import { SpinService } from '@store/common-store/spin.service';
 import { UserInfoStoreService } from '@store/common-store/userInfo-store.service';
+
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';

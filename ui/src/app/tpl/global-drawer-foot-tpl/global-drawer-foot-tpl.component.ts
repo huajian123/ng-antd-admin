@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, TemplateRef, ViewChild, output, OutputEmitterRef, Signal, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, TemplateRef, output, OutputEmitterRef, Signal, viewChild } from '@angular/core';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 export abstract class GlobalDrawerFootTplComponentToken {
-  componentTpl!: Signal<TemplateRef<any>>;
+  componentTpl!: Signal<TemplateRef<NzSafeAny>>;
   readonly sureEmitter: OutputEmitterRef<void> | undefined;
   readonly cancelEmitter: OutputEmitterRef<void> | undefined;
   abstract sure(): void;
@@ -19,7 +19,7 @@ export abstract class GlobalDrawerFootTplComponentToken {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GlobalDrawerFootTplComponent implements GlobalDrawerFootTplComponentToken {
-  readonly componentTpl: Signal<TemplateRef<any>> = viewChild.required<TemplateRef<NzSafeAny>>('componentTpl');
+  readonly componentTpl: Signal<TemplateRef<NzSafeAny>> = viewChild.required<TemplateRef<NzSafeAny>>('componentTpl');
   readonly sureEmitter = output<void>();
   readonly cancelEmitter = output<void>();
   sure(): void {

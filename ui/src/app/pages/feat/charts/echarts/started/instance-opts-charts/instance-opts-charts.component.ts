@@ -1,11 +1,12 @@
 import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 
 import { EChartsOption } from 'echarts';
+import { NgxEchartsModule } from 'ngx-echarts';
+
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { NgxEchartsModule } from 'ngx-echarts';
 
 @Component({
   selector: 'app-instance-opts-charts',

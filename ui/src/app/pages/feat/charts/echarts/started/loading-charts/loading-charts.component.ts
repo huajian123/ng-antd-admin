@@ -1,9 +1,10 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { EChartsOption } from 'echarts';
+import { NgxEchartsModule } from 'ngx-echarts';
+
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';
-import { NgxEchartsModule } from 'ngx-echarts';
 
 @Component({
   selector: 'app-loading-charts',

@@ -30,7 +30,7 @@
 
   <app-card-table-wrap [btnTpl]="tableBtns" [tableTitle]="'角色列表'" (reload)="reloadTable()">
     <app-ant-table [tableConfig]="tableConfig" [tableData]="dataList" (changePageIndex)="getDataList($event)" (changePageSize)="changePageSize($event)"></app-ant-table>
-    <ng-template #operationTpl let-id="id" let-roleName="roleName" let-$$dataItem="$$dataItem">
+    <ng-template #operationTpl let-$$dataItem="$$dataItem" let-id="id" let-roleName="roleName">
       <span class="operate-text" (click)="setRole(id, roleName)">设置权限</span>
       <span *appAuth="ActionCode.RoleManagerEdit" class="operate-text" (click)="edit(id, $$dataItem)">编辑</span>
       <span *appAuth="ActionCode.RoleManagerDel" class="operate-text" (click)="del(id)">删除</span>

@@ -5,9 +5,10 @@ import { AdvancedComponent } from '@app/pages/feat/charts/echarts/advanced/advan
 import { SeriesComponent } from '@app/pages/feat/charts/echarts/series/series.component';
 import { StartedComponent } from '@app/pages/feat/charts/echarts/started/started.component';
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
+import { NGX_ECHARTS_CONFIG, NgxEchartsModule } from 'ngx-echarts';
+
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
-import { NGX_ECHARTS_CONFIG, NgxEchartsModule } from 'ngx-echarts';
 
 enum TabEnum {
   Started,

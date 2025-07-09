@@ -1,5 +1,5 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Directive, inject, input, Input, InputSignal, numberAttribute, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Directive, inject, input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 
 /*屏幕宽度小于某个宽度时不显示的组件*/
 @Directive({

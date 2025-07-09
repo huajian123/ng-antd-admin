@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } 
 
 import { ValidatorsService } from '@core/services/validators/validators.service';
 import { fnCheckForm } from '@utils/tools';
+
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';
@@ -27,7 +28,7 @@ import { NzUploadChangeParam, NzUploadModule } from 'ng-zorro-antd/upload';
 export class BaseComponent implements OnInit {
   readonly data = input.required<{
     label: string;
-}>();
+  }>();
   validateForm!: FormGroup;
   selectedProvince = 'Zhejiang';
   selectedCity = 'Hangzhou';

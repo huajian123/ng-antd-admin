@@ -48,7 +48,7 @@ export class ThemeSkinService {
             .filter(item => item !== this.$currentStyleTheme())
             .forEach(item => {
               setTimeout(() => {
-                this.removeUnusedTheme(<StyleTheme>item);
+                this.removeUnusedTheme(item as StyleTheme);
               }, 1);
             });
 

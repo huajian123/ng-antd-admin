@@ -1,13 +1,12 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NgxEchartsModule } from 'ngx-echarts';
+
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 @Component({
   selector: 'app-simple-chart',
-  template: `
-    <div class="demo-chart" echarts [options]="options"></div>
-  `,
+  template: ` <div class="demo-chart" echarts [options]="options"></div> `,
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NgxEchartsModule]

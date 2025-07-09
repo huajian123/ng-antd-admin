@@ -3,9 +3,7 @@ import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-blank',
-  template: `
-    <router-outlet></router-outlet>
-  `,
+  template: `<router-outlet></router-outlet>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterOutlet]
 })

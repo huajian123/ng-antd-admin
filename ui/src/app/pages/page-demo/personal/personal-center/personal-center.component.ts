@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { AdComponent, DynamicComponent } from '@core/services/types';
 import { AdDirective } from '@shared/directives/ad.directive';
 import { NumberLoopPipe } from '@shared/pipes/number-loop.pipe';
+
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';

@@ -1,8 +1,5 @@
 import { Route } from '@angular/router';
 
-import { JudgeAuthGuard } from '@core/services/common/guard/judgeAuth.guard';
-import { JudgeLoginGuard } from '@core/services/common/guard/judgeLogin.guard';
-
 import { DefaultComponent } from './default.component';
 
 export default [

@@ -4,6 +4,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import AMapLoader from '@amap/amap-jsapi-loader';
 import { Gauge, Liquid, RingProgress, TinyArea, WordCloud } from '@antv/g2plot';
+
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { inNextTick } from 'ng-zorro-antd/core/util';

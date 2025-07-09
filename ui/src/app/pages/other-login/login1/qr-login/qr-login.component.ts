@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } 
 
 import { LoginType } from '@app/pages/other-login/login1/login1.component';
 import { Login1StoreService } from '@store/biz-store-service/other-login/login1-store.service';
+
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 import { NzFormModule } from 'ng-zorro-antd/form';

@@ -1,6 +1,7 @@
 import { Directive, ElementRef, HostBinding, numberAttribute, OnChanges, Renderer2, SimpleChanges, inject, input } from '@angular/core';
 
 @Directive({
+  // eslint-disable-next-line @angular-eslint/directive-selector
   selector: '.psm__progress-bar',
   standalone: true
 })

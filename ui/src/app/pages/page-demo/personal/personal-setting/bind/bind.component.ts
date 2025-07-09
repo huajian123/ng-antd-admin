@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, input } from '@angular/core';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -14,7 +9,7 @@ import { NzListModule } from 'ng-zorro-antd/list';
   templateUrl: './bind.component.html',
   styleUrls: ['./bind.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NzListModule, NzIconModule, NzButtonModule],
+  imports: [NzListModule, NzIconModule, NzButtonModule]
 })
 export class BindComponent implements OnInit {
   readonly data = input.required<{

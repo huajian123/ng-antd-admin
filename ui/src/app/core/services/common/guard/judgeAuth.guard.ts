@@ -7,6 +7,7 @@ import { LoginInOutService } from '@core/services/common/login-in-out.service';
 import { MenuStoreService } from '@store/common-store/menu-store.service';
 import { UserInfoStoreService } from '@store/common-store/userInfo-store.service';
 import { fnGetUUID } from '@utils/tools';
+
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 import { Menu } from '../../types';
@@ -41,6 +42,7 @@ export class JudgeAuthGuardService {
 
   // 保存当前的menu到this.selMenu
   getMenu(menu: Menu[], url: string): void {
+    // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i < menu.length; i++) {
       if (url === menu[i].path) {
         this.selMenu = menu[i];
@@ -68,7 +70,7 @@ export class JudgeAuthGuardService {
       route = route.firstChild;
     }
     // 如果有authCode，则表示是页面上点击按钮跳转到新的路由，而不是菜单中的路由
-    if (!!route.data['authCode']) {
+    if (route.data['authCode']) {
       return this.getResult(route.data['authCode'], this.authCodeArray());
     }
 

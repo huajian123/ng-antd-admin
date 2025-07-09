@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { ip } from '@env/environment.prod';
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
+import { webSocket } from 'rxjs/webSocket';
+
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';
@@ -11,7 +13,6 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzResultModule } from 'ng-zorro-antd/result';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
-import { webSocket } from 'rxjs/webSocket';
 
 @Component({
   selector: 'app-websocket',

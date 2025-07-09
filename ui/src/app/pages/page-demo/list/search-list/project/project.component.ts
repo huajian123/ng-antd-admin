@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { WaterMarkComponent } from '@shared/components/water-mark/water-mark.component';
 import { NumberLoopPipe } from '@shared/pipes/number-loop.pipe';
 import { SearchListStoreService } from '@store/biz-store-service/search-list/search-list-store.service';
+
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';

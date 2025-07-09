@@ -2,11 +2,12 @@ import { ChangeDetectionStrategy, Component, computed, inject, Signal, TemplateR
 
 import { ModalFullStatusStoreService } from '@store/common-store/modal-full-status-store.service';
 import { fnStopMouseEvent } from '@utils/tools';
+
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
 export abstract class GlobalModalBtnTplComponentToken {
-  componentTpl!: Signal<TemplateRef<any>>;
+  componentTpl!: Signal<TemplateRef<NzSafeAny>>;
   abstract fullScreenIconClick($event: MouseEvent): void;
   modalFullScreenFlag: Signal<boolean> | undefined;
 }
@@ -19,7 +20,7 @@ export abstract class GlobalModalBtnTplComponentToken {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GlobalModalBtnTplComponent implements GlobalModalBtnTplComponentToken {
-  readonly componentTpl: Signal<TemplateRef<any>> = viewChild.required<TemplateRef<NzSafeAny>>('componentTpl');
+  readonly componentTpl: Signal<TemplateRef<NzSafeAny>> = viewChild.required<TemplateRef<NzSafeAny>>('componentTpl');
   private modalFullStatusService = inject(ModalFullStatusStoreService);
   modalFullScreenFlag = computed(() => {
     return this.modalFullStatusService.$modalFullStatusStore();

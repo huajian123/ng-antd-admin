@@ -1,9 +1,10 @@
 import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 
 import { EChartsOption } from 'echarts';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NgxEchartsModule } from 'ngx-echarts';
 import * as util from 'zrender/lib/core/util';
+
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 const SymbolSize = 20;
 const Data = [
@@ -16,9 +17,7 @@ const Data = [
 
 @Component({
   selector: 'app-draggable-charts',
-  template: `
-    <div echarts style="height: 600px;" [options]="options" (chartInit)="onChartReady($event)"></div>
-  `,
+  template: `<div echarts style="height: 600px;" [options]="options" (chartInit)="onChartReady($event)"></div>`,
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NgxEchartsModule]

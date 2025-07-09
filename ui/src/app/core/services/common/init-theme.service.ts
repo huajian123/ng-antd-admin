@@ -17,12 +17,12 @@ export class InitThemeService {
 
   initTheme(): Promise<void> {
     return new Promise(resolve => {
-      let themeStyleCash = this.windowServe.getStorage(StyleThemeModelKey);
+      const themeStyleCash = this.windowServe.getStorage(StyleThemeModelKey);
       if (themeStyleCash) {
-        this.themesService.$themeStyle.set(<StyleTheme>themeStyleCash);
+        this.themesService.$themeStyle.set(themeStyleCash as StyleTheme);
       }
 
-      let themeOptionsCash = this.windowServe.getStorage(ThemeOptionsKey);
+      const themeOptionsCash = this.windowServe.getStorage(ThemeOptionsKey);
       if (themeOptionsCash) {
         this.themesService.$themesOptions.set(JSON.parse(themeOptionsCash));
       }

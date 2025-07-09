@@ -27,7 +27,7 @@
           <a class="operate-text">忘记密码?</a>
         </div>
       </div>
-      <button class="full-with m-t-15 btn" nz-button nzSize="large" (click)="submitForm()" [nzType]="'primary'">登 录</button>
+      <button class="full-with m-t-15 btn" nz-button nzSize="large" [nzType]="'primary'" (click)="submitForm()">登 录</button>
       <div class="m-t-15" nz-row nzJustify="space-between">
         <button class="m-b-8" nz-button nz-col nzType="default" [nzSm]="7" [nzXs]="24" (click)="goOtherWay(typeEnum.Phone)">手机登录</button>
         <button class="m-b-8" nz-button nz-col nzType="default" [nzSm]="7" [nzXs]="24" (click)="goOtherWay(typeEnum.Qr)">二维码登录</button>

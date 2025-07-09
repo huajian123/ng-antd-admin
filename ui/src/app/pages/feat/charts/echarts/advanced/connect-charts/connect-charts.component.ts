@@ -1,8 +1,9 @@
 import { Component, ChangeDetectionStrategy, AfterViewInit } from '@angular/core';
 
 import { getInstanceByDom, connect, EChartsOption } from 'echarts';
-import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NgxEchartsModule } from 'ngx-echarts';
+
+import { NzGridModule } from 'ng-zorro-antd/grid';
 
 @Component({
   selector: 'app-connect-charts',

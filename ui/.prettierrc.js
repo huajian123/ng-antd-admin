@@ -4,12 +4,12 @@ module.exports = {
   printWidth: 200,
   tabWidth: 2,
   semi: true,
-  htmlWhitespaceSensitivity: 'ignore',
-  arrowParens: 'avoid',
+  htmlWhitespaceSensitivity: 'strict',
+  arrowParens: 'avoid', // 'avoid' 箭头函数参数是否加括号
   bracketSpacing: true,
   proseWrap: 'preserve',
   trailingComma: 'none',
-  endOfLine: 'auto',
+  endOfLine: 'lf',
   // attributeGroups: ["^class$", "^(id|name)$", "$DEFAULT", "^aria-"]
   "attributeGroups": [
     "$ANGULAR_STRUCTURAL_DIRECTIVE",
@@ -26,5 +26,7 @@ module.exports = {
     "$ANGULAR_TWO_WAY_BINDING",
     "$ANGULAR_OUTPUT"
   ],
-  "attributeSort": "ASC"
+  "attributeSort": "ASC",
+
+  plugins: ['prettier-plugin-organize-attributes']
 };

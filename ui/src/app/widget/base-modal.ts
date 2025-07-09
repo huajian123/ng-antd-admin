@@ -10,6 +10,7 @@ import { ModalFullStatusStoreService } from '@store/common-store/modal-full-stat
 import { throwModalGetCurrentFnError, throwModalRefError } from '@utils/errors';
 import { fnGetUUID } from '@utils/tools';
 import _ from 'lodash';
+
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { ModalOptions, NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 
@@ -39,7 +40,7 @@ export abstract class BasicConfirmModalComponent {
 })
 export class ModalWrapService {
   protected bsModalService: NzModalService;
-  private readonly btnTpl: Signal<TemplateRef<any>>;
+  private readonly btnTpl: Signal<TemplateRef<NzSafeAny>>;
   private renderer: Renderer2;
   destroyRef = inject(DestroyRef);
 

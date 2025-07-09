@@ -1,14 +1,6 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { NgClass } from '@angular/common';
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  inject,
-  DestroyRef,
-  viewChild,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { AdComponent, DynamicComponent } from '@core/services/types';
@@ -36,15 +28,7 @@ interface TabInterface {
   templateUrl: './personal-setting.component.html',
   styleUrls: ['./personal-setting.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    NzCardModule,
-    NgClass,
-    NzMenuModule,
-    NzButtonModule,
-    NzGridModule,
-    NzTypographyModule,
-    AdDirective_1,
-  ],
+  imports: [NzCardModule, NgClass, NzMenuModule, NzButtonModule, NzGridModule, NzTypographyModule, AdDirective_1]
 })
 export class PersonalSettingComponent implements OnInit {
   readonly adHost = viewChild.required(AdDirective);
@@ -52,43 +36,43 @@ export class PersonalSettingComponent implements OnInit {
   settingComponent: TabInterface[] = [
     {
       key: 'base',
-      component: new DynamicComponent(BaseComponent, { label: '基本设置' }),
+      component: new DynamicComponent(BaseComponent, { label: '基本设置' })
     },
     {
       key: 'safe',
-      component: new DynamicComponent(SafeComponent, { label: '安全设置' }),
+      component: new DynamicComponent(SafeComponent, { label: '安全设置' })
     },
     {
       key: 'bind',
-      component: new DynamicComponent(BindComponent, { label: '账号绑定' }),
+      component: new DynamicComponent(BindComponent, { label: '账号绑定' })
     },
     {
       key: 'notice',
-      component: new DynamicComponent(NoticeComponent, { label: '新消息通知' }),
-    },
+      component: new DynamicComponent(NoticeComponent, { label: '新消息通知' })
+    }
   ];
   destroyRef = inject(DestroyRef);
   menus: Array<{ key: string; title: string; selected?: boolean }> = [
     {
       key: 'base',
       title: '基本设置',
-      selected: true,
+      selected: true
     },
     {
       key: 'safe',
       title: '安全设置',
-      selected: false,
+      selected: false
     },
     {
       selected: false,
       key: 'bind',
-      title: '账号绑定',
+      title: '账号绑定'
     },
     {
       selected: false,
       key: 'notice',
-      title: '新消息通知',
-    },
+      title: '新消息通知'
+    }
   ];
   currentTitle: string = this.menus[0].title;
 
@@ -102,9 +86,7 @@ export class PersonalSettingComponent implements OnInit {
     this.currentTitle = selMenu!.component.data.label;
     const viewContainerRef = this.adHost().viewContainerRef;
     viewContainerRef.clear();
-    const componentRef = viewContainerRef.createComponent<AdComponent>(
-      selMenu!.component.component,
-    );
+    const componentRef = viewContainerRef.createComponent<AdComponent>(selMenu!.component.component);
     componentRef.instance.data = selMenu!.component.data;
   }
 
@@ -112,7 +94,7 @@ export class PersonalSettingComponent implements OnInit {
     this.breakpointObserver
       .observe(['(max-width: 767px)'])
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((result) => {
+      .subscribe(result => {
         this.tabModel = result.matches ? 'horizontal' : 'inline';
         this.cdr.markForCheck();
       });

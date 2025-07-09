@@ -2,6 +2,8 @@ import { computed, DestroyRef, inject, Injectable, DOCUMENT } from '@angular/cor
 
 import { ThemeService } from '@store/common-store/theme.service';
 import { driver, DriveStep } from 'driver.js';
+
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 /*
  * https://madewith.cn/766
  * 引导页
@@ -17,7 +19,7 @@ export class DriverService {
 
   load(): void {
     // 是否是固定页签
-    let tabId = !this.$fixedTab() ? '#multi-tab' : '#multi-tab2';
+    const tabId = !this.$fixedTab() ? '#multi-tab' : '#multi-tab2';
     const steps: DriveStep[] = [
       {
         element: '#menuNav',
@@ -71,7 +73,7 @@ export class DriverService {
     ];
 
     // https://github.com/kamranahmedse/driver.js/issues/489
-    const filteredSteps: any = steps.filter(step => {
+    const filteredSteps: NzSafeAny = steps.filter(step => {
       const element = document.querySelector(step.element as string);
       return !step.element || element !== null;
     });

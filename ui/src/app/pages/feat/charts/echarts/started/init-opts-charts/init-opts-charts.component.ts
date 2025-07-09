@@ -5,9 +5,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
 
 @Component({
   selector: 'app-init-opts-charts',
-  template: `
-    <echarts [initOpts]="initOpts" [options]="options"></echarts>
-  `,
+  template: `<echarts [initOpts]="initOpts" [options]="options"></echarts>`,
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NgxEchartsModule]

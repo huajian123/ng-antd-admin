@@ -4,15 +4,14 @@ import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/cor
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NgxEchartsModule } from 'ngx-echarts';
 import * as util from 'zrender/lib/core/util';
 
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 @Component({
   selector: 'app-from-left-to-right',
-  template: `
-    <div class="demo-chart" echarts [options]="options | async"></div>
-  `,
+  template: `<div class="demo-chart" echarts [options]="options | async"></div>`,
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NgxEchartsModule, AsyncPipe]

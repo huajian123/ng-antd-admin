@@ -4,6 +4,7 @@ import { Chart } from '@antv/g2';
 import { Pie, RingProgress, TinyColumn, TinyArea, Progress } from '@antv/g2plot';
 import { ScreenLessHiddenDirective } from '@shared/directives/screen-less-hidden.directive';
 import { NumberLoopPipe } from '@shared/pipes/number-loop.pipe';
+
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzButtonModule } from 'ng-zorro-antd/button';

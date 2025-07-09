@@ -7,6 +7,7 @@ import { GLOBAL_DRAWER_FOOT_TPL_TOKEN } from '@app/tpl/global-drawer-foot-tpl/gl
 import { GlobalDrawerFootTplComponentToken } from '@app/tpl/global-drawer-foot-tpl/global-drawer-foot-tpl.component';
 import { ModalBtnStatus } from '@widget/base-modal';
 import _ from 'lodash';
+
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzDrawerOptions, NzDrawerRef, NzDrawerService } from 'ng-zorro-antd/drawer';
 
@@ -17,7 +18,7 @@ export class DrawerWrapService {
   private baseInjector = inject(Injector);
   private btnComponentRef: ComponentRef<GlobalDrawerFootTplComponentToken> = inject(GLOBAL_DRAWER_FOOT_TPL_TOKEN);
   protected bsDrawerService: NzDrawerService = this.baseInjector.get(NzDrawerService);
-  private btnTpl: Signal<TemplateRef<any>> = this.btnComponentRef.instance.componentTpl;
+  private btnTpl: Signal<TemplateRef<NzSafeAny>> = this.btnComponentRef.instance.componentTpl;
   constructor() {
     this.btnComponentRef.instance.sureEmitter!.subscribe(() => this.sure());
     this.btnComponentRef.instance.cancelEmitter!.subscribe(() => this.cancel());

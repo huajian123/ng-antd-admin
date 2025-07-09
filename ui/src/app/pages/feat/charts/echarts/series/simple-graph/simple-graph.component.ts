@@ -5,9 +5,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
 
 @Component({
   selector: 'app-simple-graph',
-  template: `
-    <div class="demo-chart" echarts [options]="options"></div>
-  `,
+  template: ` <div class="demo-chart" echarts [options]="options"></div> `,
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NgxEchartsModule]

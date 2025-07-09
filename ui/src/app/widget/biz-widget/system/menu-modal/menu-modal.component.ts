@@ -6,6 +6,7 @@ import { MenuListObj } from '@services/system/menus.service';
 import { IconSelComponent } from '@shared/biz-components/icon-sel/icon-sel.component';
 import { fnCheckForm } from '@utils/tools';
 import { BasicConfirmModalComponent } from '@widget/base-modal';
+
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzFormModule } from 'ng-zorro-antd/form';
@@ -80,7 +81,7 @@ export class MenuModalComponent extends BasicConfirmModalComponent implements On
 
   ngOnInit(): void {
     this.initForm();
-    if (!!this.nzModalData) {
+    if (this.nzModalData) {
       this.changeMenuType(this.nzModalData.menuType);
       this.validateForm.patchValue(this.nzModalData);
     }

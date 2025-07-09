@@ -2,6 +2,7 @@ import { inject, Injectable, Type } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { ModalResponse, ModalWrapService } from '@widget/base-modal';
+
 import { ModalOptions } from 'ng-zorro-antd/modal';
 
 import { DragComponent, DragModalData } from './drag.component';

@@ -16,6 +16,7 @@ import { MapKeyType, MapPipe, MapSet } from '@shared/pipes/map.pipe';
 import { fnFlatDataHasParentToTree, fnFlattenTreeDataByDataList, fnSortTreeData } from '@utils/treeTableTools';
 import { ModalBtnStatus } from '@widget/base-modal';
 import { DeptManageModalService } from '@widget/biz-widget/system/dept-manage-modal/dept-manage-modal.service';
+
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -120,7 +121,7 @@ export class DeptComponent implements OnInit {
   }
 
   /*查看*/
-  check(id: string, children: any[], parent: any[]): void {
+  check(id: string, children: NzSafeAny[], parent: NzSafeAny[]): void {
     this.message.success(id);
   }
 

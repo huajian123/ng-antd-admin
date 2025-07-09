@@ -8,6 +8,11 @@ import prettier from 'eslint-plugin-prettier';
 import importPlugin from 'eslint-plugin-import';
 import unusedImports from 'eslint-plugin-unused-imports';
 
+/*https://blog.miniasp.com/post/2021/08/29/Angular-ESLint-with-so-much-details*/
+/*https://github.com/angular-eslint/angular-eslint/tree/main/packages/eslint-plugin/docs/rules*/
+/*https://www.wenjiangs.com/doc/eslint-docs-rules-no-redeclare*/
+/*https://eslint.org/docs/latest/user-guide/getting-started*/
+
 export default tseslint.config(
   {
     ignores: [
@@ -70,6 +75,7 @@ export default tseslint.config(
       '@angular-eslint/prefer-output-readonly': 'error',
       '@angular-eslint/use-component-selector': 'off',
       '@angular-eslint/use-component-view-encapsulation': 'off',
+
       '@typescript-eslint/array-type': [
         'error',
         {
@@ -171,9 +177,13 @@ export default tseslint.config(
   },
   {
     files: ["**/*.html"],
+    plugins: {
+      prettier
+    },
     extends: [
       ...angular.configs.templateRecommended,
-      ...angular.configs.templateAccessibility,
+      // todo(a11y)
+      // ...angular.configs.templateAccessibility,
     ],
     rules: {
       'prettier/prettier': [

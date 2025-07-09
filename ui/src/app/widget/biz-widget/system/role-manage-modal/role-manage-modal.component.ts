@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { Role } from '@services/system/role.service';
 import { fnCheckForm } from '@utils/tools';
 import { BasicConfirmModalComponent } from '@widget/base-modal';
+
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
@@ -46,7 +47,7 @@ export class RoleManageModalComponent extends BasicConfirmModalComponent impleme
 
   ngOnInit(): void {
     this.initForm();
-    if (!!this.nzModalData) {
+    if (this.nzModalData) {
       this.addEditForm.patchValue(this.nzModalData);
     }
   }

@@ -41,7 +41,7 @@
   </nz-card>
 
   <app-card-table-wrap [btnTpl]="tableBtns" [tableTitle]="'部门列表'" (reload)="reloadTable()">
-    <app-tree-table [tableConfig]="tableConfig" (sortFn)="changeSort($event)" [tableData]="dataList" (changePageIndex)="getDataList()" (changePageSize)="changePageSize($event)"></app-tree-table>
+    <app-tree-table [tableConfig]="tableConfig" [tableData]="dataList" (changePageIndex)="getDataList()" (changePageSize)="changePageSize($event)" (sortFn)="changeSort($event)"></app-tree-table>
     <ng-template #operationTpl let-fatherId="fatherId" let-id="id" let-level="level">
       <span *appAuth="ActionCode.DeptEdit" class="operate-text" (click)="edit(id, fatherId)">编辑</span>
       <span *appAuth="ActionCode.DeptDel" class="operate-text" (click)="del(id)">删除</span>

@@ -12,6 +12,7 @@ import {
   fadeInOnEnterAnimation,
   rubberBandOnEnterAnimation
 } from 'angular-animations';
+
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 

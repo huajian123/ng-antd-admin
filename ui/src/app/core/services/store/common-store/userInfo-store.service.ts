@@ -1,5 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AccountService } from '@services/system/account.service';

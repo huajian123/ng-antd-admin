@@ -87,6 +87,7 @@ import {
   fadeInRightOnEnterAnimation,
   rotateInUpLeftOnEnterAnimation
 } from 'angular-animations';
+
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 import { NzFormModule } from 'ng-zorro-antd/form';

@@ -87,6 +87,7 @@ import {
   bounceInUpOnEnterAnimation,
   hueRotateAnimation
 } from 'angular-animations';
+
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 import { NzSelectModule } from 'ng-zorro-antd/select';

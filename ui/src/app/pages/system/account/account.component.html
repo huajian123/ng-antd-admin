@@ -80,7 +80,7 @@
           (changePageSize)="changePageSize($event)"
           (selectedChange)="selectedChecked($event)"
         ></app-ant-table>
-        <ng-template #operationTpl let-id="id" let-$$dataItem="$$dataItem">
+        <ng-template #operationTpl let-$$dataItem="$$dataItem" let-id="id">
           <span *appAuth="ActionCode.AccountEdit" class="operate-text" (click)="edit(id, $$dataItem)">编辑</span>
           <span *appAuth="ActionCode.AccountDel" class="operate-text" (click)="del(id)">删除</span>
         </ng-template>
