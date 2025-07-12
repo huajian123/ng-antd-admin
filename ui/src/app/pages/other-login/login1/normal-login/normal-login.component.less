@@ -5,15 +5,11 @@
 */
 
 h2 {
-  font-weight: 700;
   font-size: 30px;
+  font-weight: 700;
 }
 
 .login-form-wrap {
-  @media (min-width: 470px) {
-    width: 404px;
-  }
-
   .btn {
     background: #0c63bd;
 
@@ -21,14 +17,18 @@ h2 {
       opacity: 0.8;
     }
   }
+
+  @media (width >= 470px) {
+    width: 404px;
+  }
 }
 
 i {
   font-size: 24px;
 
   &:hover {
-    color: #1890ff;
     cursor: pointer;
+    color: #1890ff;
   }
 }
 

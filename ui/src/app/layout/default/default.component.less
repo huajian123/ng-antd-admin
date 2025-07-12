@@ -3,11 +3,11 @@
 @import 'admin-variable';
 
 .trigger {
+  cursor: pointer;
   z-index: 10;
   padding: 0 24px;
   font-size: 18px;
   line-height: 64px;
-  cursor: pointer;
   transition: color 0.3s;
 }
 
@@ -57,19 +57,19 @@
 
 .fixed {
   position: fixed;
+  z-index: 999;
   top: 0;
   right: 0;
-  z-index: 999;
   flex: auto;
   width: calc(100% - @left-nav-width);
 }
 
 .top-fixed {
   position: fixed;
+  z-index: 999;
   top: 0;
   right: 0;
   left: 0;
-  z-index: 999;
   flex: auto;
 }
 

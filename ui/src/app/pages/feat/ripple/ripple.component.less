@@ -13,14 +13,14 @@
   }
 
   .mat-ripple-element {
+    pointer-events: none;
     position: absolute;
-    background-color: rgb(0 0 0 / 10%);
-    border-radius: 50%;
     transform: scale(0);
+    border-radius: 50%;
+    background-color: rgb(0 0 0 / 0.1);
     transition:
       opacity,
       transform 0ms cubic-bezier(0, 0, 0.2, 1);
-    pointer-events: none;
   }
 
   .cdk-high-contrast-active .mat-ripple-element {
@@ -30,29 +30,29 @@
   .mat-button .mat-ripple-element,
   .mat-icon-button .mat-ripple-element,
   .mat-stroked-button .mat-ripple-element {
-    background-color: currentcolor;
     opacity: 0.1;
+    background-color: currentcolor;
   }
 
   .mat-flat-button.mat-primary .mat-ripple-element,
   .mat-raised-button.mat-primary .mat-ripple-element,
   .mat-fab.mat-primary .mat-ripple-element,
   .mat-mini-fab.mat-primary .mat-ripple-element {
-    background-color: rgb(255 255 255 / 10%);
+    background-color: rgb(255 255 255 / 0.1);
   }
 
   .mat-flat-button.mat-accent .mat-ripple-element,
   .mat-raised-button.mat-accent .mat-ripple-element,
   .mat-fab.mat-accent .mat-ripple-element,
   .mat-mini-fab.mat-accent .mat-ripple-element {
-    background-color: rgb(255 255 255 / 10%);
+    background-color: rgb(255 255 255 / 0.1);
   }
 
   .mat-flat-button.mat-warn .mat-ripple-element,
   .mat-raised-button.mat-warn .mat-ripple-element,
   .mat-fab.mat-warn .mat-ripple-element,
   .mat-mini-fab.mat-warn .mat-ripple-element {
-    background-color: rgb(255 255 255 / 10%);
+    background-color: rgb(255 255 255 / 0.1);
   }
 
   .mat-checkbox .mat-ripple-element {
@@ -75,19 +75,19 @@
   }
 
   .mat-chip.mat-standard-chip.mat-chip-selected.mat-primary .mat-ripple-element {
-    background-color: rgb(255 255 255 / 10%);
+    background-color: rgb(255 255 255 / 0.1);
   }
 
   .mat-chip.mat-standard-chip.mat-chip-selected.mat-warn .mat-ripple-element {
-    background-color: rgb(255 255 255 / 10%);
+    background-color: rgb(255 255 255 / 0.1);
   }
 
   .mat-chip.mat-standard-chip.mat-chip-selected.mat-accent .mat-ripple-element {
-    background-color: rgb(255 255 255 / 10%);
+    background-color: rgb(255 255 255 / 0.1);
   }
 
   .mat-form-field-ripple {
-    background-color: rgb(0 0 0 / 87%);
+    background-color: rgb(0 0 0 / 0.87);
   }
 
   .mat-form-field.mat-focused .mat-form-field-ripple {
@@ -130,7 +130,7 @@
 
   .mat-radio-button.mat-radio-disabled .mat-radio-ripple .mat-ripple-element,
   .mat-radio-button.mat-radio-disabled .mat-radio-inner-circle {
-    background-color: rgb(0 0 0 / 38%);
+    background-color: rgb(0 0 0 / 0.38);
   }
 
   .mat-radio-button .mat-ripple-element {
@@ -159,8 +159,8 @@
   .mat-tab-nav-bar.mat-background-primary > .mat-tab-header .mat-ripple-element,
   .mat-tab-nav-bar.mat-background-primary > .mat-tab-link-container .mat-ripple-element,
   .mat-tab-nav-bar.mat-background-primary > .mat-tab-header-pagination .mat-ripple-element {
-    background-color: #fff;
     opacity: 0.12;
+    background-color: #fff;
   }
 
   .mat-tab-group.mat-background-accent > .mat-tab-header .mat-ripple-element,
@@ -169,8 +169,8 @@
   .mat-tab-nav-bar.mat-background-accent > .mat-tab-header .mat-ripple-element,
   .mat-tab-nav-bar.mat-background-accent > .mat-tab-link-container .mat-ripple-element,
   .mat-tab-nav-bar.mat-background-accent > .mat-tab-header-pagination .mat-ripple-element {
-    background-color: #fff;
     opacity: 0.12;
+    background-color: #fff;
   }
 
   .mat-tab-group.mat-background-warn > .mat-tab-header .mat-ripple-element,
@@ -179,8 +179,8 @@
   .mat-tab-nav-bar.mat-background-warn > .mat-tab-header .mat-ripple-element,
   .mat-tab-nav-bar.mat-background-warn > .mat-tab-link-container .mat-ripple-element,
   .mat-tab-nav-bar.mat-background-warn > .mat-tab-header-pagination .mat-ripple-element {
-    background-color: #fff;
     opacity: 0.12;
+    background-color: #fff;
   }
 
   .mat-toolbar .mat-form-field-underline,

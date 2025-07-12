@@ -87,11 +87,11 @@ h6 {
 //}
 
 .clearfix::after {
-  display: block;
+  content: '.';
   clear: both;
+  display: block;
   height: 0;
   visibility: hidden;
-  content: '.';
 }
 
 .grey-theme {
@@ -452,9 +452,9 @@ h6 {
 }
 
 .clear-fix::after {
-  display: block;
-  clear: both;
   content: '';
+  clear: both;
+  display: block;
 }
 
 .default-theme {
@@ -502,9 +502,9 @@ h6 {
 }
 
 .operate-text {
-  .hand-model;
 
   margin-right: 5px;
+  .hand-model;
 }
 
 .center-row {
@@ -579,11 +579,11 @@ h6 {
     justify-content: space-between;
 
     .ant-pro-table-toolbar-title {
+      will-change: transform;
       flex: 1 1;
       font-size: 16px;
       line-height: 24px;
       opacity: 0.85;
-      will-change: transform;
     }
 
     .ant-pro-table-toolbar-option {
@@ -609,27 +609,24 @@ h6 {
 
 // 对话框增加滚动条
 .ant-modal-body {
-  max-height: 600px;
   overflow: auto;
+  max-height: 600px;
 }
 
 .fullscreen-modal {
   overflow: hidden;
 
   .ant-modal {
-    top: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    left: 0 !important;
+    inset: 0 !important;
+    transform: translate3d(0, 0, 0) !important;
     width: 100% !important;
     max-width: initial;
     height: 100%;
     padding: 0;
-    transform: translate3d(0, 0, 0) !important;
 
     &-content {
-      height: 100%;
       transform: translate3d(0, 0, 0) !important;
+      height: 100%;
 
       .ant-modal-body {
         height: calc(100% - 55px - 53px);
@@ -673,23 +670,23 @@ input[nz-input] {
 
 @keyframes progress-bar-grad-colours {
   0% {
-    background: linear-gradient(90deg, rgb(232 128 152 / 0%) 0%, #e88098 30%, #e88098 50%, #e88098 70%, rgb(232 128 152 / 0%) 100%);
+    background: linear-gradient(90deg, rgb(232 128 152 / 0) 0%, #e88098 30%, #e88098 50%, #e88098 70%, rgb(232 128 152 / 0) 100%);
   }
 
   20% {
-    background: linear-gradient(90deg, rgb(132 190 190 / 0%) 0%, #84bebe 30%, #84bebe 50%, #84bebe 70%, rgb(132 190 190 / 0%) 100%);
+    background: linear-gradient(90deg, rgb(132 190 190 / 0) 0%, #84bebe 30%, #84bebe 50%, #84bebe 70%, rgb(132 190 190 / 0) 100%);
   }
 
   40% {
-    background: linear-gradient(90deg, rgb(233 135 36 / 0%) 0%, #e98724 30%, #e98724 50%, #e98724 70%, rgb(233 135 36 / 0%) 100%);
+    background: linear-gradient(90deg, rgb(233 135 36 / 0) 0%, #e98724 30%, #e98724 50%, #e98724 70%, rgb(233 135 36 / 0) 100%);
   }
 
   60% {
-    background: linear-gradient(90deg, rgb(175 201 78 / 0%) 0%, #afc94e 30%, #afc94e 50%, #afc94e 70%, rgb(175 201 78 / 0%) 100%);
+    background: linear-gradient(90deg, rgb(175 201 78 / 0) 0%, #afc94e 30%, #afc94e 50%, #afc94e 70%, rgb(175 201 78 / 0) 100%);
   }
 
   80% {
-    background: linear-gradient(90deg, rgb(98 151 164 / 0%) 0%, #6297a4 30%, #6297a4 50%, #6297a4 70%, rgb(98 151 164 / 0%) 100%);
+    background: linear-gradient(90deg, rgb(98 151 164 / 0) 0%, #6297a4 30%, #6297a4 50%, #6297a4 70%, rgb(98 151 164 / 0) 100%);
   }
 }
 
@@ -697,7 +694,8 @@ input[nz-input] {
   background: linear-gradient(to right, #8514f5, #f637e3, #fa2c05);
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  @media screen and (max-width: 430px) {
+
+  @media screen and (width <= 430px) {
     background: none;
     -webkit-text-fill-color: white;
   }

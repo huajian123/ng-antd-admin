@@ -58,16 +58,6 @@ const fnStopMouseEvent = function stopMouseEvent(e: MouseEvent): void {
   // e.preventDefault();
 };
 
-// 数组对象去重
-const fnRemoveDouble = function removeDouble<T>(list: NzSafeAny[], col: NzSafeAny): T {
-  const obj = {};
-  return list.reduce((cur, next) => {
-    // @ts-ignore
-    obj[next[col]] ? '' : (obj[next[col]] = true && cur.push(next));
-    return cur;
-  }, []);
-};
-
 // 获取路由复用缓存的key，为key+param的形式：login{name:xxx}
 const getDeepReuseStrategyKeyFn = function (route: ActivatedRouteSnapshot, needParams = true): string {
   let temp = route;
@@ -148,7 +138,7 @@ const fnEndOfDay = function EndOfDay(time: number): number {
 // weak-theme 转换为 weakTheme
 // https://blog.csdn.net/weixin_39238200/article/details/125665052
 const fnFormatToHump = function formatToHump(value: string): string {
-  return value.replace(/\-(\w)/g, (_, letter) => letter.toUpperCase());
+  return value.replace(/-(\w)/g, (_, letter) => letter.toUpperCase());
 };
 
 export {
@@ -163,7 +153,6 @@ export {
   fnCheckForm,
   fnStopMouseEvent,
   getDeepReuseStrategyKeyFn,
-  fnRemoveDouble,
   fnGetRandomNum,
   fnStartOfDay,
   fnEndOfDay,

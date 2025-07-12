@@ -238,10 +238,10 @@ export class AppendFormComponent implements OnInit {
     console.log(this.validateForm.value);
   }
 
-  searchTask(event: number, type: 'checkPeriod' | 'taskState'): void {
+  searchTask(): void {
     this.pageObj = { ...this.pageObj, pageIndex: 1 };
 
-    this.showAllTaskList = this.showAllTaskList.filter(item => {
+    this.showAllTaskList = this.showAllTaskList.filter(() => {
       return true;
     });
 

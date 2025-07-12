@@ -11,7 +11,6 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
   selector: 'app-task',
   imports: [NzGridModule, TaskSearchInfoComponent, NzCardModule, TaskListPanelComponent],
   templateUrl: './task.component.html',
-  styleUrls: ['./task.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskComponent {

@@ -8,7 +8,6 @@ import { NzWaterMarkModule } from 'ng-zorro-antd/water-mark';
   selector: 'app-water-mark',
   imports: [NzWaterMarkModule, PageHeaderComponent],
   templateUrl: './water-mark.component.html',
-  styleUrls: ['./water-mark.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WaterMarkComponent {

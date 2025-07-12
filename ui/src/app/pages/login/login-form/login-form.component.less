@@ -1,9 +1,6 @@
 .login-form-wrap {
   width: 368px;
   margin: 0 auto;
-  @media screen and (max-width: 375px) {
-    padding: 0 15px;
-  }
 
   .login-form-margin {
     margin-bottom: 16px;
@@ -26,8 +23,8 @@
       font-size: 24px;
 
       &:hover {
-        color: #1890ff;
         cursor: pointer;
+        color: #1890ff;
       }
     }
   }
@@ -35,5 +32,9 @@
   .other-way {
     display: flex;
     justify-content: space-between;
+  }
+
+  @media screen and (width <= 375px) {
+    padding: 0 15px;
   }
 }

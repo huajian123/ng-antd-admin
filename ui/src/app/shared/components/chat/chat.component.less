@@ -1,17 +1,17 @@
 .chat-wrap {
   position: fixed;
+  z-index: 998;
   right: 30px;
   bottom: -537px;
-  z-index: 998;
   width: 320px;
   transition: bottom 0.3s cubic-bezier(0.23, 1, 0.32, 1);
 
   .chart-content {
+    overflow: auto;
     flex-direction: column;
     width: 320px;
     height: 415px;
     padding: 24px;
-    overflow: auto;
   }
 
   &.compact-mode {
@@ -37,7 +37,7 @@
 }
 
 .desc-wrap {
-  color: rgb(0 0 0 / 45%);
+  color: rgb(0 0 0 / 0.45);
 }
 
 .show {

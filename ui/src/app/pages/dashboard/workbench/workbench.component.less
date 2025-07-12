@@ -8,7 +8,7 @@ img {
   }
 }
 
-@media (max-width: 820px) {
+@media (width <= 820px) {
   .mini-screen {
     display: block;
   }
@@ -29,13 +29,13 @@ img {
 }
 
 .group {
+  overflow: hidden;
   display: block;
   height: 24px;
   margin: 12px 0;
-  overflow: hidden;
-  white-space: nowrap;
   text-overflow: ellipsis;
   word-break: break-all;
+  white-space: nowrap;
   // color: rgba(0,0,0,.85);
   transition: all 0.3s;
 }

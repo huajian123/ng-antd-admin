@@ -37,6 +37,7 @@ export class EventsChartsComponent implements OnInit {
     const yMax = 500;
     const dataShadow = [];
 
+    // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i < data.length; i++) {
       dataShadow.push(yMax);
     }

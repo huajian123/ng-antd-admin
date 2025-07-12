@@ -4,7 +4,8 @@
 
 :host ::ng-deep .ant-divider-vertical {
   height: 56px;
-  @media screen and (max-width: 576px) {
+
+  @media screen and (width <= 576px) {
     display: none;
   }
 }
@@ -16,8 +17,8 @@
 
   .list-content-item {
     display: inline-block;
-    color: rgb(0 0 0 / 45%);
     font-size: 14px;
+    color: rgb(0 0 0 / 0.45);
     vertical-align: middle;
   }
 
