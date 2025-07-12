@@ -8,7 +8,6 @@ import { NzQRCodeModule } from 'ng-zorro-antd/qr-code';
   selector: 'app-qrcode',
   imports: [NzQRCodeModule, PageHeaderComponent],
   templateUrl: './qrcode.component.html',
-  styleUrls: ['./qrcode.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QrcodeComponent {

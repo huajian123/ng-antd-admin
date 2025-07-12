@@ -73,7 +73,7 @@ export default {
 
     // 3. --- 样式和兼容性规则 ---
     'alpha-value-notation': 'number', // alpha 值使用数字表示 (e.g., rgba(0, 0, 0, 0.5))
-    'color-function-notation': 'legacy', // 颜色函数使用旧版写法 (e.g., rgba())
+    'color-function-notation': 'modern', // 颜色函数使用旧版写法 (e.g., rgba())
     'number-max-precision': 8, // 数字最大精度，保留以防特定计算需要
 
     // 4. --- 关闭或放宽一些不必要的规则 ---
