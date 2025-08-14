@@ -7,6 +7,7 @@
     "ng-high-memory-start": "node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng serve",
     "prettier": "prettier --write \"src/**/*.ts\" \"src/**/*.html\" \"src/**/*.less\" \"public/**/*.json\"",
     "build": "ng build --base-href=/ng-antd-admin/",
+    "analyze-package": "ng build --stats-json",
     "deploy": "ng deploy",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
