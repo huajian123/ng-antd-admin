@@ -14,5 +14,29 @@ export default [
     title: 'blingbling',
     data: { key: 'blingbling' },
     loadComponent: () => import('../../pages/comp/blingbling/blingbling.component').then(m => m.BlingblingComponent)
+  },
+  {
+    path: 'comp2',
+    title: '新组件2',
+    data: { key: 'comp2' },
+    loadComponent: () => import('../../pages/no-content/no-content.component').then(m => m.NoContentComponent)
+  },
+  {
+    path: 'comp3',
+    title: '新组件3',
+    data: { key: 'comp3' },
+    loadComponent: () => import('../../pages/no-content/no-content.component').then(m => m.NoContentComponent)
+  },
+  {
+    path: 'comp4',
+    title: '新组件4',
+    data: { key: 'comp4' },
+    loadComponent: () => import('../../pages/no-content/no-content.component').then(m => m.NoContentComponent)
+  },
+  {
+    path: 'comp5',
+    title: '新组件5',
+    data: { key: 'comp5' },
+    loadComponent: () => import('../../pages/no-content/no-content.component').then(m => m.NoContentComponent)
   }
 ] satisfies Route[];

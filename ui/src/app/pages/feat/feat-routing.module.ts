@@ -40,5 +40,29 @@ export default [
   { path: 'download', title: '文件下载', data: { key: 'download' }, loadComponent: () => import('./download/download.component').then(m => m.DownloadComponent) },
   { path: 'qrcode', title: '二维码', data: { key: 'qrcode' }, loadComponent: () => import('./qrcode/qrcode.component').then(m => m.QrcodeComponent) },
   { path: 'water-mark', title: '水印', data: { key: 'water-mark' }, loadComponent: () => import('./water-mark/water-mark.component').then(m => m.WaterMarkComponent) },
-  { path: 'keep-alive', title: 'KeepAlive', data: { key: 'keep-alive' }, loadComponent: () => import('./keep-alive/keep-alive').then(m => m.KeepAliveDemo) }
+  { path: 'keep-alive', title: 'KeepAlive', data: { key: 'keep-alive' }, loadComponent: () => import('./keep-alive/keep-alive').then(m => m.KeepAliveDemo) },
+  {
+    path: 'feat1',
+    title: '新功能1',
+    data: { key: 'feat1' },
+    loadComponent: () => import('../../pages/no-content/no-content.component').then(m => m.NoContentComponent)
+  },
+  {
+    path: 'feat3',
+    title: '新功能3',
+    data: { key: 'feat3' },
+    loadComponent: () => import('../../pages/no-content/no-content.component').then(m => m.NoContentComponent)
+  },
+  {
+    path: 'feat4',
+    title: '新功能4',
+    data: { key: 'feat4' },
+    loadComponent: () => import('../../pages/no-content/no-content.component').then(m => m.NoContentComponent)
+  },
+  {
+    path: 'feat5',
+    title: '新功能5',
+    data: { key: 'feat5' },
+    loadComponent: () => import('../../pages/no-content/no-content.component').then(m => m.NoContentComponent)
+  }
 ] satisfies Route[];
