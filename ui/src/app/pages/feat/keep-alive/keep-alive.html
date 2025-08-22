@@ -1,0 +1,5 @@
+<app-page-header [pageHeaderInfo]="pageHeaderInfo" />
+<div class="normal-table-wrap">
+  <button class="m-b-8" nz-button (click)="go()">切 换</button>
+  <input *appKeepAlive="flag()" class="full-with" nz-input placeholder="输入框输入内容，点击切换按钮，内容仍然能保留，表单内容也可以" />
+</div>
