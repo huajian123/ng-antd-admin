@@ -1,5 +1,5 @@
-<div class="full-screen screen-full-width flex flex-coloum">
-  <div class="flex flex-coloum center title clock hand-model" (click)="unlockBtn()">
+<div class="full-screen screen-full-width flex flex-column">
+  <div class="flex flex-column center title clock hand-model" (click)="unlockBtn()">
     <i nz-icon nzTheme="outline" nzType="lock"></i>
     <span>点击解锁</span>
   </div>
@@ -13,7 +13,7 @@
   </div>
   @if (showUnlock) {
     <div class="lock-page-entry center">
-      <div class="flex center flex-coloum form">
+      <div class="flex center flex-column form">
         <nz-avatar [nzSize]="70" [nzSrc]="'imgs/default_face.png'"></nz-avatar>
         <p class="sp-16 m-t-8 name">Serati Ma</p>
 
@@ -38,11 +38,11 @@
     </div>
   }
   @if (showUnlock) {
-    <div class="flex flex-coloum center title bottom-time">
+    <div class="flex flex-column center title bottom-time">
       <span style="user-select: none">{{ time$ | async | date: 'HH:mm a' }}</span>
     </div>
   }
-  <div class="flex flex-coloum center title bottom-date">
+  <div class="flex flex-column center title bottom-date">
     <span style="user-select: none">{{ time$ | async | date: 'yyyy-MM-dd' }}星期{{ getDays(time$ | async) | changNumberToChinese }}</span>
   </div>
 </div>
