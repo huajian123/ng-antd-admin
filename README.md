@@ -33,7 +33,7 @@ Simply run `npm install` and then `npm run start` to see the result.
 4.  启动docker中的容器新拉的postgresql容器，
 5.  你可能需要一款数据库连接工具，例如用DataGrip,Navicat等工具连接docker中的postgres数据库。用户名“admin”，密码“123456”，数据库名称“ng-antd-admin-db”
 6.  执行nest-api目录下的ng-antd-admin-db.sql这个sql
-7.  在nest-api目录下npm install ,执行npm run start.在ui目录下执行npm install ,以及npm run start
+7.  在nest-api目录下npm install ,执行npm run start.在ui目录下执行npm install ,以及npm run push-drizzle,npm run start
 
 ---
 
@@ -45,7 +45,7 @@ Simply run `npm install` and then `npm run start` to see the result.
 4.  Start the new PostgreSQL container in Docker.
 5.  You might need a database connection tool like DataGrip or Navicat to connect to the PostgreSQL database in Docker. The credentials are: **username** "admin", **password** "123456", **database name** "ng-antd-admin-db".
 6.  Execute the `ng-antd-admin-db.sql` SQL script in the `nest-api` directory.
-7.  In the `nest-api` directory, run `npm install` and then `npm run start`. In the `ui` directory, run `npm install` and then `npm run start`.
+7.  In the `nest-api` directory, run `npm install` and then `npm run start`. In the `ui` directory, run `npm install` and  `npm run push-drizzle` then `npm run start`.
 
 ## ✨项目介绍 / Project Introduction
 

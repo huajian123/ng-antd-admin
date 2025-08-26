@@ -19,13 +19,14 @@ export class PermissionService {
       await db
         .delete(sysRolePermTable)
         .where(eq(sysRolePermTable.roleId, roleId));
-
-      await db.insert(sysRolePermTable).values(
-        permCodes.map((permCode) => ({
-          roleId,
-          permCode,
-        })),
-      );
+      if (permCodes.length > 0) {
+        await db.insert(sysRolePermTable).values(
+          permCodes.map((permCode) => ({
+            roleId,
+            permCode,
+          })),
+        );
+      }
       return null;
     });
   }

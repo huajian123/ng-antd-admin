@@ -16,7 +16,7 @@ export class KeepAliveDemo {
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: 'KeepAlive',
     breadcrumb: ['首页', '功能', 'keepAlive'],
-    desc: 'ng群主提供的指令，我觉得很棒分享给大家。你先输入一些内容到输入框，切换按钮，输入框中的内容仍然能保留'
+    desc: 'ng群主提供的指令，我觉得很棒分享给大家。你先输入一些内容到输入框，切换按钮，输入框中的内容仍然能保留。可以是输入框也可以是表单'
   };
 
   flag = signal(true);

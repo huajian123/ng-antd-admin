@@ -12,7 +12,7 @@
  Target Server Version : 170004 (170004)
  File Encoding         : 65001
 
- Date: 22/08/2025 19:25:14
+ Date: 25/08/2025 10:53:54
 */
 
 
@@ -29,6 +29,18 @@ CACHE 1;
 ALTER SEQUENCE "public"."department_id_seq" OWNER TO "admin";
 
 -- ----------------------------
+-- Sequence structure for department_id_seq1
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."department_id_seq1";
+CREATE SEQUENCE "public"."department_id_seq1"
+    INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+ALTER SEQUENCE "public"."department_id_seq1" OWNER TO "admin";
+
+-- ----------------------------
 -- Sequence structure for menu_id_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."menu_id_seq";
@@ -39,6 +51,18 @@ MAXVALUE 2147483647
 START 1
 CACHE 1;
 ALTER SEQUENCE "public"."menu_id_seq" OWNER TO "admin";
+
+-- ----------------------------
+-- Sequence structure for menu_id_seq1
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."menu_id_seq1";
+CREATE SEQUENCE "public"."menu_id_seq1"
+    INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+ALTER SEQUENCE "public"."menu_id_seq1" OWNER TO "admin";
 
 -- ----------------------------
 -- Sequence structure for role_id_seq
@@ -53,6 +77,18 @@ CACHE 1;
 ALTER SEQUENCE "public"."role_id_seq" OWNER TO "admin";
 
 -- ----------------------------
+-- Sequence structure for role_id_seq1
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."role_id_seq1";
+CREATE SEQUENCE "public"."role_id_seq1"
+    INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+ALTER SEQUENCE "public"."role_id_seq1" OWNER TO "admin";
+
+-- ----------------------------
 -- Sequence structure for sys_role_perm_id_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."sys_role_perm_id_seq";
@@ -63,6 +99,18 @@ MAXVALUE 2147483647
 START 1
 CACHE 1;
 ALTER SEQUENCE "public"."sys_role_perm_id_seq" OWNER TO "admin";
+
+-- ----------------------------
+-- Sequence structure for sys_role_perm_id_seq1
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."sys_role_perm_id_seq1";
+CREATE SEQUENCE "public"."sys_role_perm_id_seq1"
+    INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+ALTER SEQUENCE "public"."sys_role_perm_id_seq1" OWNER TO "admin";
 
 -- ----------------------------
 -- Sequence structure for sys_user_role_id_seq
@@ -77,6 +125,18 @@ CACHE 1;
 ALTER SEQUENCE "public"."sys_user_role_id_seq" OWNER TO "admin";
 
 -- ----------------------------
+-- Sequence structure for sys_user_role_id_seq1
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."sys_user_role_id_seq1";
+CREATE SEQUENCE "public"."sys_user_role_id_seq1"
+    INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+ALTER SEQUENCE "public"."sys_user_role_id_seq1" OWNER TO "admin";
+
+-- ----------------------------
 -- Sequence structure for user_id_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."user_id_seq";
@@ -87,6 +147,18 @@ MAXVALUE 2147483647
 START 1
 CACHE 1;
 ALTER SEQUENCE "public"."user_id_seq" OWNER TO "admin";
+
+-- ----------------------------
+-- Sequence structure for user_id_seq1
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."user_id_seq1";
+CREATE SEQUENCE "public"."user_id_seq1"
+    INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+ALTER SEQUENCE "public"."user_id_seq1" OWNER TO "admin";
 
 -- ----------------------------
 -- Table structure for department
@@ -273,6 +345,7 @@ INSERT INTO "public"."menu" ("id", "father_id", "menu_name", "menu_type", "al_ic
 INSERT INTO "public"."menu" ("id", "father_id", "menu_name", "menu_type", "al_icon", "icon", "path", "code", "order_num", "status", "new_link_flag", "visible", "updated_at", "created_at", "deleted_at") OVERRIDING SYSTEM VALUE VALUES (152, 76, '二维码', 'C', NULL, 'gitlab', '/default/feat/qrcode', 'default:feat:qrcode', 24, 't', 'f', 't', '2023-10-10 13:50:27', '2023-10-10 13:50:27', NULL);
 INSERT INTO "public"."menu" ("id", "father_id", "menu_name", "menu_type", "al_icon", "icon", "path", "code", "order_num", "status", "new_link_flag", "visible", "updated_at", "created_at", "deleted_at") OVERRIDING SYSTEM VALUE VALUES (153, 76, '水印', 'C', NULL, 'windows', '/default/feat/water-mark', 'default:feat:water-mark', 25, 't', 'f', 't', '2023-10-10 14:05:21', '2023-10-10 14:05:21', NULL);
 INSERT INTO "public"."menu" ("id", "father_id", "menu_name", "menu_type", "al_icon", "icon", "path", "code", "order_num", "status", "new_link_flag", "visible", "updated_at", "created_at", "deleted_at") OVERRIDING SYSTEM VALUE VALUES (4, 76, 'KeepAlive', 'C', NULL, 'border-horizontal', '/default/feat/keep-alive', 'default:feat:keep-alive', 26, 't', 'f', 't', NULL, '2025-08-22 11:11:18.893', NULL);
+INSERT INTO "public"."menu" ("id", "father_id", "menu_name", "menu_type", "al_icon", "icon", "path", "code", "order_num", "status", "new_link_flag", "visible", "updated_at", "created_at", "deleted_at") OVERRIDING SYSTEM VALUE VALUES (3, 0, '关于', 'C', NULL, 'apple', '/default/about', 'default:about', 7, 't', 'f', 't', NULL, '2025-08-25 02:53:11.79085', NULL);
 COMMIT;
 
 -- ----------------------------
@@ -521,47 +594,89 @@ COMMIT;
 -- ----------------------------
 ALTER SEQUENCE "public"."department_id_seq"
     OWNED BY "public"."department"."id";
-SELECT setval('"public"."department_id_seq"', 7, true);
+SELECT setval('"public"."department_id_seq"', 1, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."department_id_seq1"
+    OWNED BY "public"."department"."id";
+SELECT setval('"public"."department_id_seq1"', 1, false);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."menu_id_seq"
     OWNED BY "public"."menu"."id";
-SELECT setval('"public"."menu_id_seq"', 4, true);
+SELECT setval('"public"."menu_id_seq"', 2, true);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."menu_id_seq1"
+    OWNED BY "public"."menu"."id";
+SELECT setval('"public"."menu_id_seq1"', 3, true);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."role_id_seq"
     OWNED BY "public"."role"."id";
-SELECT setval('"public"."role_id_seq"', 4, true);
+SELECT setval('"public"."role_id_seq"', 1, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."role_id_seq1"
+    OWNED BY "public"."role"."id";
+SELECT setval('"public"."role_id_seq1"', 1, false);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."sys_role_perm_id_seq"
     OWNED BY "public"."sys_role_perm"."id";
-SELECT setval('"public"."sys_role_perm_id_seq"', 472, true);
+SELECT setval('"public"."sys_role_perm_id_seq"', 1, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."sys_role_perm_id_seq1"
+    OWNED BY "public"."sys_role_perm"."id";
+SELECT setval('"public"."sys_role_perm_id_seq1"', 1, false);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."sys_user_role_id_seq"
     OWNED BY "public"."sys_user_role"."id";
-SELECT setval('"public"."sys_user_role_id_seq"', 5, true);
+SELECT setval('"public"."sys_user_role_id_seq"', 1, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."sys_user_role_id_seq1"
+    OWNED BY "public"."sys_user_role"."id";
+SELECT setval('"public"."sys_user_role_id_seq1"', 1, false);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."user_id_seq"
     OWNED BY "public"."user"."id";
-SELECT setval('"public"."user_id_seq"', 4, true);
+SELECT setval('"public"."user_id_seq"', 1, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."user_id_seq1"
+    OWNED BY "public"."user"."id";
+SELECT setval('"public"."user_id_seq1"', 1, false);
 
 -- ----------------------------
 -- Auto increment value for department
 -- ----------------------------
-SELECT setval('"public"."department_id_seq"', 7, true);
+SELECT setval('"public"."department_id_seq1"', 1, false);
 
 -- ----------------------------
 -- Primary Key structure for table department
@@ -571,7 +686,7 @@ ALTER TABLE "public"."department" ADD CONSTRAINT "department_pkey" PRIMARY KEY (
 -- ----------------------------
 -- Auto increment value for menu
 -- ----------------------------
-SELECT setval('"public"."menu_id_seq"', 4, true);
+SELECT setval('"public"."menu_id_seq1"', 3, true);
 
 -- ----------------------------
 -- Primary Key structure for table menu
@@ -581,7 +696,7 @@ ALTER TABLE "public"."menu" ADD CONSTRAINT "menu_pkey" PRIMARY KEY ("id");
 -- ----------------------------
 -- Auto increment value for role
 -- ----------------------------
-SELECT setval('"public"."role_id_seq"', 4, true);
+SELECT setval('"public"."role_id_seq1"', 1, false);
 
 -- ----------------------------
 -- Primary Key structure for table role
@@ -591,7 +706,7 @@ ALTER TABLE "public"."role" ADD CONSTRAINT "role_pkey" PRIMARY KEY ("id");
 -- ----------------------------
 -- Auto increment value for sys_role_perm
 -- ----------------------------
-SELECT setval('"public"."sys_role_perm_id_seq"', 472, true);
+SELECT setval('"public"."sys_role_perm_id_seq1"', 1, false);
 
 -- ----------------------------
 -- Primary Key structure for table sys_role_perm
@@ -601,7 +716,7 @@ ALTER TABLE "public"."sys_role_perm" ADD CONSTRAINT "sys_role_perm_pkey" PRIMARY
 -- ----------------------------
 -- Auto increment value for sys_user_role
 -- ----------------------------
-SELECT setval('"public"."sys_user_role_id_seq"', 5, true);
+SELECT setval('"public"."sys_user_role_id_seq1"', 1, false);
 
 -- ----------------------------
 -- Primary Key structure for table sys_user_role
@@ -611,7 +726,7 @@ ALTER TABLE "public"."sys_user_role" ADD CONSTRAINT "sys_user_role_pkey" PRIMARY
 -- ----------------------------
 -- Auto increment value for user
 -- ----------------------------
-SELECT setval('"public"."user_id_seq"', 4, true);
+SELECT setval('"public"."user_id_seq1"', 1, false);
 
 -- ----------------------------
 -- Primary Key structure for table user

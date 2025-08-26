@@ -21,7 +21,7 @@
     "generate": "drizzle-kit generate",
     "migrate": "drizzle-kit migrate",
     "studio": "drizzle-kit studio",
-    "push-drizzle": "drizzle-kit push",
+    "push-drizzle": "drizzle-kit push --force",
     "push-generate": "drizzle-kit generate",
     "docker-init": "docker-compose up -d"
   },
@@ -38,11 +38,11 @@
     "cache-manager": "^7.0.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.2",
-    "drizzle-orm": "^0.44.2",
+    "drizzle-orm": "^0.44.4",
     "joi": "^17.13.3",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
-    "pg": "^8.16.2",
+    "pg": "^8.16.3",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1"
   },
