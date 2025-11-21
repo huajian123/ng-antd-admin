@@ -9,6 +9,7 @@
   <button class="m-r-8 m-b-8" nz-button (click)="showDailogError()">创建可拖动的error（by山间之明月）</button>
   <button class="m-r-8 m-b-8" nz-button (click)="showDailogWarning()">创建可拖动的warning（by山间之明月）</button>
   <button class="m-r-8 m-b-8" nz-button (click)="isVisibleByDir = true">指令创建（by山间之明月）</button>
+  <button class="m-r-8 m-b-8" nz-button nzType="primary" (click)="isVisibleDragResize = true">可拖拽+可调整大小的modal</button>
 </div>
 
 <nz-modal [nzTitle]="dragTpl" [(nzVisible)]="isVisible" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
@@ -20,12 +21,37 @@
   </ng-container>
 </nz-modal>
 
-<nz-modal nzxModalDrag [nzTitle]="'指令创建可拖拽'" [(nzVisible)]="isVisibleByDir" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+<nz-modal nzxModalDrag nzxModalResize [nzTitle]="'指令创建可拖拽'" [(nzVisible)]="isVisibleByDir" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
   <ng-container *nzModalContent>
     <p>床前明月光</p>
     <p>疑似地上霜</p>
     <p>举头望明月</p>
     <p>低头思故乡</p>
+  </ng-container>
+</nz-modal>
+
+<nz-modal
+  nzxModalDrag
+  nzxModalResize
+  [nzFooter]="null"
+  [nzTitle]="'可拖拽+可调整大小'"
+  [nzWidth]="700"
+  [nzxResizeConfig]="{ minHeight: 500, minWidth: 500, maxWidth: 1200 }"
+  [(nzVisible)]="isVisibleDragResize"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+>
+  <ng-container *nzModalContent>
+    <p>这个对话框同时支持拖拽和调整大小</p>
+    <p
+      ><strong>拖拽：</strong
+      >点击并拖动标题栏来调整大小：拖动边缘或角落来改变大小调整大小：拖动边缘或角落来改变大小调整大小：拖动边缘或角落来改变大小调整大小：拖动边缘或角落来改变大小调整大小：拖动边缘或角落来改变大小调整大小：拖动边缘或角落来改变大小调整大小：拖动边缘或角落来改变大小调整大小：拖动边缘或角落来改变大小调整大小：拖动边缘或角落来改变大小调整大小：拖动边缘或角落来改变大小调整大小：拖动边缘或角落来改变大小调整大小：拖动边缘或角落来改变大小调整大小：拖动边缘或角落来改变大小移动对话框</p
+    >
+    <p><strong>调整大小：</strong>拖动边缘或角落来改变大小</p>
+    <p>两个功能可以同时使用，互不干扰</p>
+    <div style="margin-top: 20px; padding: 15px; background: #f0f0f0; border-radius: 4px">
+      <p style="margin: 0"><strong>提示：</strong>这个对话框更加灵活，可以根据内容需要自由调整位置和大小</p>
+    </div>
   </ng-container>
 </nz-modal>
 

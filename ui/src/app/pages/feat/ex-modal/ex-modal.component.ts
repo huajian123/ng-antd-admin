@@ -6,6 +6,7 @@ import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-hea
 import { ModalBtnStatus } from '@widget/base-modal';
 import { DragService } from '@widget/biz-widget/drag/drag.service';
 import { ModalDragDirective } from '@widget/modal/modal-drag.directive';
+import { ModalResizeDirective } from '@widget/modal/modal-resize.directive';
 import { NzModalWrapService } from '@widget/modal/nz-modal-wrap.service';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -17,7 +18,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
   selector: 'app-ex-modal',
   templateUrl: './ex-modal.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [PageHeaderComponent, NzButtonModule, NzWaveModule, NzModalModule, ModalDragDirective, CdkDrag, CdkDragHandle]
+  imports: [PageHeaderComponent, NzButtonModule, NzWaveModule, NzModalModule, ModalDragDirective, ModalResizeDirective, CdkDrag, CdkDragHandle]
 })
 export class ExModalComponent {
   readonly dragTpl = viewChild.required<TemplateRef<NzSafeAny>>('dragTpl');
@@ -28,6 +29,8 @@ export class ExModalComponent {
   destroyRef = inject(DestroyRef);
   isVisible = false;
   isVisibleByDir = false;
+  isVisibleResize = false;
+  isVisibleDragResize = false;
 
   private dragService = inject(DragService);
   private modalDragService = inject(NzModalWrapService);
@@ -36,12 +39,16 @@ export class ExModalComponent {
     console.log('Button ok clicked!');
     this.isVisible = false;
     this.isVisibleByDir = false;
+    this.isVisibleResize = false;
+    this.isVisibleDragResize = false;
   }
 
   handleCancel(): void {
     console.log('Button cancel clicked!');
     this.isVisible = false;
     this.isVisibleByDir = false;
+    this.isVisibleResize = false;
+    this.isVisibleDragResize = false;
   }
 
   showDailog1(): void {
