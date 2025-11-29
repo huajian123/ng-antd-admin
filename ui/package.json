@@ -22,7 +22,6 @@
     "@angular/compiler": "^20.3.2",
     "@angular/core": "^20.3.2",
     "@angular/forms": "^20.3.2",
-    "@angular/material": "^20.2.5",
     "@angular/platform-browser": "^20.3.2",
     "@angular/router": "^20.3.2",
     "@antv/g2plot": "^2.4.33",
