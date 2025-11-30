@@ -39,7 +39,7 @@ export default [
   { path: 'setup', title: '引导页', data: { key: 'setup' }, loadComponent: () => import('./setup/setup.component').then(m => m.SetupComponent) },
   { path: 'download', title: '文件下载', data: { key: 'download' }, loadComponent: () => import('./download/download.component').then(m => m.DownloadComponent) },
   { path: 'qrcode', title: '二维码', data: { key: 'qrcode' }, loadComponent: () => import('./qrcode/qrcode.component').then(m => m.QrcodeComponent) },
-  { path: 'water-mark', title: '水印', data: { key: 'water-mark' }, loadComponent: () => import('./water-mark/water-mark.component').then(m => m.WaterMarkComponent) },
+  { path: 'water-mark', title: '水印', data: { key: 'water-mark' }, loadComponent: () => import('./water-mark/water-mark.component').then(m => m.WaterMarkDemoComponent) },
   { path: 'keep-alive', title: 'KeepAlive', data: { key: 'keep-alive' }, loadComponent: () => import('./keep-alive/keep-alive').then(m => m.KeepAliveDemo) },
   {
     path: 'feat1',
