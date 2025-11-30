@@ -28,8 +28,6 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 
-import { DeptTreeComponent } from './dept-tree/dept-tree.component';
-
 interface SearchParam {
   userName: string;
   departmentId: number;
@@ -44,7 +42,6 @@ interface SearchParam {
   imports: [
     PageHeaderComponent,
     NzGridModule,
-    DeptTreeComponent,
     NzCardModule,
     FormsModule,
     NzFormModule,
@@ -66,7 +63,8 @@ export class AccountComponent implements OnInit {
   tableConfig!: AntTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '账号管理',
-    breadcrumb: ['首页', '用户管理', '账号管理']
+    breadcrumb: ['首页', '用户管理', '账号管理'],
+    desc: '移除了左侧部门的布局，如果有需要可以看v20及以下的模版代码'
   };
   dataList: User[] = [];
   checkedCashArray: User[] = [];
