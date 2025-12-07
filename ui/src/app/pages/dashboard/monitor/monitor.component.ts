@@ -2,15 +2,17 @@ import { DecimalPipe, PercentPipe } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, inject, NgZone } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-import AMapLoader from '@amap/amap-jsapi-loader';
 import { Gauge, Liquid, RingProgress, TinyArea, WordCloud } from '@antv/g2plot';
+import { LazyService } from '@core/services/common/lazy.service';
 
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { inNextTick } from 'ng-zorro-antd/core/util';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzStatisticModule } from 'ng-zorro-antd/statistic';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
+declare let BMap: NzSafeAny;
 
 @Component({
   selector: 'app-monitor',
@@ -20,6 +22,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
   imports: [NzCardModule, NzBreadCrumbModule, NzGridModule, NzStatisticModule, NzTypographyModule, DecimalPipe, PercentPipe]
 })
 export class MonitorComponent implements AfterViewInit {
+  private lazyService = inject(LazyService);
   deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30;
   destroyRef = inject(DestroyRef);
   miniAreaData = [264, 274, 284, 294, 300, 310, 320, 330, 340, 350, 360, 370, 380, 390, 400, 410, 420, 430, 440, 450, 460, 470];
@@ -571,31 +574,12 @@ export class MonitorComponent implements AfterViewInit {
           }
 
           this.wordCloud();
-          // 地图
-          // api地址
-          // https://lbs.amap.com/demo/javascript-api/example/map-lifecycle/map-show
-          // 自己去申请一个key，别用我这个Key，多谢
-          // 申请地址 https://console.amap.com/dev/key/app
-          AMapLoader.load({
-            key: '1c1b77fae2e59c25eb26ced9a0801103', //首次load必填
-            version: '1.4.15',
-            AMapUI: {
-              version: '1.1',
-              plugins: ['overlay/SimpleMarker']
-            }
-          })
-            .then(AMap => {
-              const map = new AMap.Map('map', {
-                resizeEnable: true,
-                zoom: 2,
-                center: [116.397428, 39.90923]
-              });
-              const styleName = 'amap://styles/darkblue';
-              map.setMapStyle(styleName);
-            })
-            .catch(e => {
-              console.error(e);
-            });
+          this.lazyService.loadScript('http://api.map.baidu.com/getscript?v=2.0&ak=RD5HkkjTa6uAIDpw7GRFtR83Fk7Wdk0j').then(() => {
+            const map = new BMap.Map('map'); //创建地图实例
+            const point = new BMap.Point(116.404, 39.915); //创建点坐标
+            map.centerAndZoom(point, 15); //初始化地图，设置中心点坐标和地图级别
+            map.enableScrollWheelZoom(true); //开启鼠标滚轮缩放
+          });
         });
       });
   }
