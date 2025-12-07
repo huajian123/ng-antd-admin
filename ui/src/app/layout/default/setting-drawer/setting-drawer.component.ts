@@ -18,7 +18,7 @@ import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
-import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzTooltipModule } from 'ng-zorro-antd/tooltip';
 
 interface NormalModel {
   image?: string;
@@ -50,7 +50,7 @@ type SettingKey = Exclude<keyof SettingInterface, ExcludedKeys>;
   templateUrl: './setting-drawer.component.html',
   styleUrls: ['./setting-drawer.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CdkDrag, NzIconModule, NzButtonModule, NzDrawerModule, NzToolTipModule, NzDividerModule, NzListModule, NzSwitchModule, FormsModule]
+  imports: [CdkDrag, NzIconModule, NzButtonModule, NzDrawerModule, NzTooltipModule, NzDividerModule, NzListModule, NzSwitchModule, FormsModule]
 })
 export class SettingDrawerComponent implements OnInit {
   private themesService = inject(ThemeService);

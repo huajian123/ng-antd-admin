@@ -7,13 +7,13 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzTooltipModule } from 'ng-zorro-antd/tooltip';
 
 @Component({
   selector: 'app-desc',
   templateUrl: './desc.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [PageHeaderComponent, NzGridModule, NzCardModule, NzDescriptionsModule, NzToolTipModule, NzIconModule, NzButtonModule]
+  imports: [PageHeaderComponent, NzGridModule, NzCardModule, NzDescriptionsModule, NzTooltipModule, NzIconModule, NzButtonModule]
 })
 export class DescComponent {
   pageHeaderInfo: Partial<PageHeaderType> = {

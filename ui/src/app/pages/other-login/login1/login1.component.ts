@@ -17,7 +17,7 @@ import { ThemeService } from '@store/common-store/theme.service';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzDropdownModule } from 'ng-zorro-antd/dropdown';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
@@ -42,7 +42,7 @@ interface LoginFormComponentInterface {
   templateUrl: './login1.component.html',
   styleUrls: ['./login1.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NzGridModule, NzCardModule, AdDirective_1, NzSwitchModule, FormsModule, NzDropDownModule, NzIconModule, NzButtonModule, NzMenuModule]
+  imports: [NzGridModule, NzCardModule, AdDirective_1, NzSwitchModule, FormsModule, NzDropdownModule, NzIconModule, NzButtonModule, NzMenuModule]
 })
 export class Login1Component implements OnInit {
   private themesService = inject(ThemeService);

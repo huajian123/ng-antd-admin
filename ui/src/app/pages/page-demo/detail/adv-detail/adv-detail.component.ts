@@ -14,7 +14,7 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
-import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzDropdownModule } from 'ng-zorro-antd/dropdown';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -24,7 +24,7 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzStatisticModule } from 'ng-zorro-antd/statistic';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
-import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzTooltipModule } from 'ng-zorro-antd/tooltip';
 
 interface ReturnObj {
   num: string;
@@ -47,7 +47,7 @@ enum TabEnum {
   imports: [
     PageHeaderComponent,
     NzRadioModule,
-    NzDropDownModule,
+    NzDropdownModule,
     NzIconModule,
     NzButtonModule,
     NzMenuModule,
@@ -62,7 +62,7 @@ enum TabEnum {
     NzPopoverModule,
     NgTemplateOutlet,
     NzBadgeModule,
-    NzToolTipModule,
+    NzTooltipModule,
     NzDividerModule,
     NzEmptyModule,
     AntTableComponent

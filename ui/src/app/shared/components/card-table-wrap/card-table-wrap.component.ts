@@ -10,13 +10,13 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
-import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzDropdownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzTableSize } from 'ng-zorro-antd/table';
-import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzTooltipModule } from 'ng-zorro-antd/tooltip';
 
 import { AntTableComponentToken, TableHeader } from '../ant-table/ant-table.component';
 
@@ -38,8 +38,8 @@ interface TableSizeItem {
     NzIconModule,
     NzButtonModule,
     NzPopoverModule,
-    NzToolTipModule,
-    NzDropDownModule,
+    NzTooltipModule,
+    NzDropdownModule,
     NzMenuModule,
     CdkDropList,
     CdkDrag,

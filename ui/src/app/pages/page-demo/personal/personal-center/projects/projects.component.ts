@@ -5,7 +5,7 @@ import { NumberLoopPipe } from '@shared/pipes/number-loop.pipe';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzGridModule } from 'ng-zorro-antd/grid';
-import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzTooltipModule } from 'ng-zorro-antd/tooltip';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 
 @Component({
@@ -13,6 +13,6 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NzGridModule, NzCardModule, NzTypographyModule, NzAvatarModule, NzToolTipModule, NumberLoopPipe]
+  imports: [NzGridModule, NzCardModule, NzTypographyModule, NzAvatarModule, NzTooltipModule, NumberLoopPipe]
 })
 export class ProjectsComponent {}

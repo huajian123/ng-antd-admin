@@ -5,14 +5,14 @@ import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-hea
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';
-import { NzContextMenuService, NzDropdownMenuComponent, NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzContextMenuService, NzDropdownMenuComponent, NzDropdownModule } from 'ng-zorro-antd/dropdown';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 
 @Component({
   selector: 'app-context-menu',
   templateUrl: './context-menu.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [PageHeaderComponent, NzCardModule, NzButtonModule, NzWaveModule, NzDropDownModule, NzMenuModule]
+  imports: [PageHeaderComponent, NzCardModule, NzButtonModule, NzWaveModule, NzDropdownModule, NzMenuModule]
 })
 export class ContextMenuComponent {
   pageHeaderInfo: Partial<PageHeaderType> = {
