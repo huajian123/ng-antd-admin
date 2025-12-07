@@ -26,7 +26,7 @@
       'fixed-collapsed': $isCollapsed(),
       'fixed-over-mode': $isOverMode() || !$themesOptions.hasNavArea || $themesOptions.mode === 'top' || ($themesOptions.mode === 'mixin' && $leftMenuArray().length === 0 && $themesOptions.splitNav)
     }"
-    [ngStyle]="{ top: $themesOptions.hasTopArea ? '48px' : '0', left: !$themesOptions.hasNavArea ? '0' : '' }"
+    [style]="{ top: $themesOptions.hasTopArea ? '48px' : '0', left: !$themesOptions.hasNavArea ? '0' : '' }"
     [nzBodyStyle]="{ padding: 0 }"
     [nzBordered]="true"
   >

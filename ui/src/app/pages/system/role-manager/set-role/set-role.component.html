@@ -23,7 +23,7 @@
             @if (isOpen) {
               @for (childPermission of childPermissionArray; track childPermission; let first = $first) {
                 @if (childPermission.menuType === 'C') {
-                  <div class="first-menu" [ngStyle]="{ paddingLeft: childPermission.level * 16 + 'px' }">
+                  <div class="first-menu" [style.paddingLeft]="childPermission.level * 16 + 'px'">
                     <label nz-checkbox [(ngModel)]="childPermission.checked">{{ childPermission.menuName }}</label>
                     @if (childPermission.children && childPermission.children.length > 0) {
                       <span class="hand-model" (click)="childPermission.isOpen = !childPermission.isOpen">

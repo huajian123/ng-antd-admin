@@ -1,4 +1,4 @@
-import { NgTemplateOutlet, NgStyle } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, OnInit, ViewEncapsulation, input } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
@@ -37,10 +37,9 @@ import { NzResultModule } from 'ng-zorro-antd/result';
     NzDividerModule,
     NzResultModule,
     NgTemplateOutlet,
-    NgStyle,
     FooterSubmitComponent,
     NzWaveModule
-  ]
+]
 })
 export class SetRoleComponent implements OnInit {
   pageHeaderInfo: Partial<PageHeaderType> = {

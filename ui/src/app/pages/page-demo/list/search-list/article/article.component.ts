@@ -1,4 +1,4 @@
-import { NgStyle } from '@angular/common';
+
 import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -26,7 +26,6 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
     NzCardModule,
     WaterMarkComponent,
     NzGridModule,
-    NgStyle,
     NzTagModule,
     NzIconModule,
     NzButtonModule,
@@ -37,7 +36,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
     NzAvatarModule,
     NzTypographyModule,
     NumberLoopPipe
-  ]
+]
 })
 export class ArticleComponent {
   expanded = false;

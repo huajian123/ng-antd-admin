@@ -1,4 +1,4 @@
-import { NgStyle, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, computed, DestroyRef, effect, inject, viewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
@@ -33,7 +33,6 @@ import { ToolBarComponent } from './tool-bar/tool-bar.component';
     TopProgressBarComponent,
     NzLayoutModule,
     NzNoAnimationModule,
-    NgStyle,
     SettingDrawerComponent,
     ChatComponent,
     NzMenuModule,

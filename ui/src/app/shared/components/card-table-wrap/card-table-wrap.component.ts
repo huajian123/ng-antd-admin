@@ -1,5 +1,5 @@
 import { CdkDragDrop, moveItemInArray, CdkDropList, CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
-import { NgTemplateOutlet, NgStyle } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { AfterContentInit, booleanAttribute, ChangeDetectionStrategy, Component, TemplateRef, input, output, contentChild, computed } from '@angular/core';
 
 import { AntTreeTableComponentToken } from '@shared/components/tree-table/tree-table.component';
@@ -45,9 +45,8 @@ interface TableSizeItem {
     CdkDrag,
     CdkDragHandle,
     NzCheckboxModule,
-    NgStyle,
     ScreenLessHiddenDirective
-  ]
+]
 })
 export class CardTableWrapComponent implements AfterContentInit {
   readonly tableTitle = input<string | TemplateRef<NzSafeAny>>();

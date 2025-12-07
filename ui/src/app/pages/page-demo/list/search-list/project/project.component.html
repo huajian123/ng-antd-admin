@@ -2,7 +2,7 @@
   <app-water-mark />
   <div nz-row>
     <div nz-col nzFlex="94px">所属类目:</div>
-    <div class="tag-wrap" nz-col nzFlex="1" [ngStyle]="{ maxHeight: expanded ? '58px' : '33px' }">
+    <div class="tag-wrap" nz-col nzFlex="1" [style.maxHeight]="expanded ? '58px' : '33px'">
       <nz-tag class="m-r-25 m-b-10" nzMode="checkable" (click)="allSel()">
         <span class="sp-14">全部</span>
       </nz-tag>

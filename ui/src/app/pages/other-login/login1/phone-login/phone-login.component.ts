@@ -1,4 +1,4 @@
-import { NgStyle } from '@angular/common';
+
 import { Component, OnInit, ChangeDetectionStrategy, inject, DestroyRef, computed } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -17,7 +17,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
   templateUrl: './phone-login.component.html',
   styleUrls: ['./phone-login.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzButtonModule, NzWaveModule, NgStyle]
+  imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzButtonModule, NzWaveModule]
 })
 export class PhoneLoginComponent implements OnInit {
   validateForm!: FormGroup;

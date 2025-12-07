@@ -63,7 +63,7 @@
             nzTheme="outline"
             nzTooltipTitle="固定到左侧"
             nzType="vertical-right"
-            [ngStyle]="{ color: item.fixedDir === 'left' && item.fixed ? '#409eff' : '' }"
+            [style.color]="item.fixedDir === 'left' && item.fixed ? '#409eff' : ''"
             (click)="fixedTableHead('left', item)"
           ></i>
           <nz-divider nzType="vertical"></nz-divider>
@@ -74,7 +74,7 @@
             nzTheme="outline"
             nzTooltipTitle="固定到右侧"
             nzType="vertical-left"
-            [ngStyle]="{ color: item.fixedDir === 'right' && item.fixed ? '#409eff' : '' }"
+            [style.color]="item.fixedDir === 'right' && item.fixed ? '#409eff' : ''"
             (click)="fixedTableHead('right', item)"
           ></i>
         </div>

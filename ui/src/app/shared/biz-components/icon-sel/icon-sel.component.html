@@ -17,8 +17,8 @@
     @if (iconsStrShowArray && iconsStrShowArray.length > 0) {
       <nz-card>
         @for (item of iconsStrShowArray; track item) {
-          <div class="center" nz-card-grid [ngStyle]="gridStyle" (click)="selIconFn(item)">
-            <i class="sp-18" nz-icon nzTheme="outline" [ngStyle]="{ color: item.isChecked ? '#409eff' : '' }" [nzType]="item.icon"></i>
+          <div class="center" nz-card-grid [style]="gridStyle" (click)="selIconFn(item)">
+            <i class="sp-18" nz-icon nzTheme="outline" [nzType]="item.icon" [style.color]="item.isChecked ? '#409eff' : ''"></i>
           </div>
         }
       </nz-card>

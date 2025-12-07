@@ -1,4 +1,4 @@
-import { NgStyle, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef, computed } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';
@@ -23,7 +23,7 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
   templateUrl: './tab.component.html',
   styleUrls: ['./tab.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NzCardModule, NzTabsModule, NzDropdownModule, NzMenuModule, NzButtonModule, NgStyle, MouseHoverShowDirective, NzIconModule, AsyncPipe]
+  imports: [NzCardModule, NzTabsModule, NzDropdownModule, NzMenuModule, NzButtonModule, MouseHoverShowDirective, NzIconModule, AsyncPipe]
 })
 export class TabComponent implements OnInit {
   private tabService = inject(TabService);

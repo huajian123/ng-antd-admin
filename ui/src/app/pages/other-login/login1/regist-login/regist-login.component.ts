@@ -1,4 +1,4 @@
-import { NgStyle } from '@angular/common';
+
 import { Component, OnInit, ChangeDetectionStrategy, inject, DestroyRef, computed } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule, AbstractControl } from '@angular/forms';
 
@@ -21,7 +21,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
   templateUrl: './regist-login.component.html',
   styleUrls: ['./regist-login.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzButtonModule, NzWaveModule, NgStyle, PasswordStrengthMeterComponent, NzIconModule, NzCheckboxModule]
+  imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzButtonModule, NzWaveModule, PasswordStrengthMeterComponent, NzIconModule, NzCheckboxModule]
 })
 export class RegistLoginComponent implements OnInit {
   validateForm!: FormGroup;

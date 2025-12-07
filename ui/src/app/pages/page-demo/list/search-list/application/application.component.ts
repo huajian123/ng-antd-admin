@@ -1,4 +1,4 @@
-import { NgStyle, DecimalPipe } from '@angular/common';
+import { DecimalPipe } from '@angular/common';
 import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -28,7 +28,6 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
     NzCardModule,
     WaterMarkComponent,
     NzGridModule,
-    NgStyle,
     NzTagModule,
     NzIconModule,
     NzButtonModule,
@@ -42,7 +41,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
     NzMenuModule,
     DecimalPipe,
     NumberLoopPipe
-  ]
+]
 })
 export class ApplicationComponent {
   expanded = false;

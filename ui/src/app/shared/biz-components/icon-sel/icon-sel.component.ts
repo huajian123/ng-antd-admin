@@ -1,4 +1,4 @@
-import { NgStyle } from '@angular/common';
+
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit, inject, DestroyRef, booleanAttribute, output, input } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Subject } from 'rxjs';
@@ -24,7 +24,7 @@ interface IconItem {
   selector: 'app-icon-sel',
   templateUrl: './icon-sel.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NzIconModule, NzButtonModule, NzPopoverModule, NzInputModule, NzCardModule, NgStyle, NzEmptyModule, NzPaginationModule]
+  imports: [NzIconModule, NzButtonModule, NzPopoverModule, NzInputModule, NzCardModule, NzEmptyModule, NzPaginationModule]
 })
 export class IconSelComponent implements OnInit, AfterViewInit {
   visible = input(false, { transform: booleanAttribute });

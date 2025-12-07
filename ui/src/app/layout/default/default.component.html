@@ -107,7 +107,7 @@
     }
 
     <nz-layout>
-      <nz-content [ngStyle]="{ marginTop: contentMarginTop }">
+      <nz-content [style.marginTop]="contentMarginTop">
         @if (isShowTab) {
           <app-tab></app-tab>
         }
@@ -128,14 +128,7 @@
 
 <ng-template #trigger>
   <ul nz-menu nzMode="inline" [nzSelectable]="false" [nzTheme]="isMixinMode && !isOverMode ? 'light' : theme">
-    <li
-      class="trigger-top-border m-0"
-      nz-menu-item
-      [ngStyle]="{
-        'border-top-color': (!isMixinMode && theme === 'dark') || isNightTheme ? 'rgba(0,0,0,0.25)' : 'rgb(240,240,240)'
-      }"
-      [nzPaddingLeft]="16"
-    >
+    <li class="trigger-top-border m-0" nz-menu-item [nzPaddingLeft]="16" [style.border-top-color]="(!isMixinMode && theme === 'dark') || isNightTheme ? 'rgba(0,0,0,0.25)' : 'rgb(240,240,240)'">
       <i class="sp-16" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
     </li>
   </ul>
