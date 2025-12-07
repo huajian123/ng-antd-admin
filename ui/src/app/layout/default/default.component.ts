@@ -1,4 +1,4 @@
-import { NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
+import { NgStyle, NgTemplateOutlet } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, computed, DestroyRef, effect, inject, viewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
@@ -32,7 +32,6 @@ import { ToolBarComponent } from './tool-bar/tool-bar.component';
   imports: [
     TopProgressBarComponent,
     NzLayoutModule,
-    NgClass,
     NzNoAnimationModule,
     NgStyle,
     SettingDrawerComponent,
@@ -51,7 +50,7 @@ import { ToolBarComponent } from './tool-bar/tool-bar.component';
     RouterOutlet,
     NavDrawerComponent,
     ChatComponent
-  ]
+]
 })
 export class DefaultComponent implements AfterViewInit {
   readonly navDrawer = viewChild.required<NavDrawerComponent>('navDrawer');

@@ -1,4 +1,4 @@
-import { NgClass } from '@angular/common';
+
 import { Component, OnInit, ChangeDetectionStrategy, ElementRef, OnDestroy, ChangeDetectorRef, inject, output, viewChild, computed } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -19,7 +19,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NzCardModule, NzTypographyModule, NzGridModule, NzAvatarModule, NzResultModule, NzIconModule, NzButtonModule, FormsModule, ReactiveFormsModule, NzInputModule, NgClass]
+  imports: [NzCardModule, NzTypographyModule, NzGridModule, NzAvatarModule, NzResultModule, NzIconModule, NzButtonModule, FormsModule, ReactiveFormsModule, NzInputModule]
 })
 export class ChatComponent implements OnInit, OnDestroy {
   readonly myScrollContainer = viewChild.required<ElementRef>('scrollMe');

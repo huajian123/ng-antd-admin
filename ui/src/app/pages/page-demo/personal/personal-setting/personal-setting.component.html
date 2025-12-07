@@ -1,7 +1,7 @@
 <div class="content-wrap">
   <nz-card [nzBodyStyle]="{ padding: 0 }">
-    <div class="menu-wrap" [ngClass]="{ 'horizontal-model': tabModel === 'horizontal' }">
-      <ul nz-menu nzTheme="light" [ngClass]="{ menu: tabModel !== 'horizontal' }" [nzMode]="tabModel">
+    <div class="menu-wrap" [class.horizontal-model]="tabModel === 'horizontal'">
+      <ul nz-menu nzTheme="light" [class.menu]="tabModel !== 'horizontal'" [nzMode]="tabModel">
         @for (m of menus; track m) {
           <li nz-menu-item [nzSelected]="m.selected" (click)="to(m)">{{ m.title }}</li>
         }

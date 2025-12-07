@@ -73,7 +73,7 @@
       </nz-form-item>
     </form>
   </div>
-  <div class="avatar" nz-col [ngClass]="{ 'is-full': formOrder === 1 }" [nzLg]="24" [nzMd]="24" [nzOrder]="avatarOrder" [nzSm]="24" [nzXl]="12" [nzXs]="24" [nzXXl]="12">
+  <div class="avatar" nz-col [class.is-full]="formOrder === 1" [nzLg]="24" [nzMd]="24" [nzOrder]="avatarOrder" [nzSm]="24" [nzXl]="12" [nzXs]="24" [nzXXl]="12">
     @if (formOrder === 0) {
       <div class="m-b-8">头像</div>
     }

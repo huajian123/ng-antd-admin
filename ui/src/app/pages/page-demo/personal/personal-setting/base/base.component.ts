@@ -1,5 +1,5 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { NgClass } from '@angular/common';
+
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef, input } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -23,7 +23,7 @@ import { NzUploadChangeParam, NzUploadModule } from 'ng-zorro-antd/upload';
   templateUrl: './base.component.html',
   styleUrls: ['./base.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NzGridModule, FormsModule, NzFormModule, ReactiveFormsModule, NzInputModule, NzSelectModule, NzButtonModule, NzWaveModule, NgClass, NzAvatarModule, NzUploadModule, NzIconModule]
+  imports: [NzGridModule, FormsModule, NzFormModule, ReactiveFormsModule, NzInputModule, NzSelectModule, NzButtonModule, NzWaveModule, NzAvatarModule, NzUploadModule, NzIconModule]
 })
 export class BaseComponent implements OnInit {
   readonly data = input.required<{

@@ -60,7 +60,7 @@
     @if (!isMixinMode && isHasTopArea && isSideMode) {
       <nz-header
         style="transition: width 0.2s"
-        [ngClass]="{
+        [class]="{
           'full-with': !isHasNavArea,
           fixed: isFixedHead,
           'fixed-collapsed': isFixedHead && isCollapsed,
@@ -73,7 +73,7 @@
     <!--top模式header-->
     @if (!isMixinMode && isHasTopArea && isTopMode) {
       <nz-header
-        [ngClass]="{
+        [class]="{
           'dark-top-nav-bg': theme === 'dark',
           'top-fixed': isFixedHead
         }"

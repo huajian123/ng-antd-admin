@@ -22,7 +22,7 @@
   <nz-card
     id="multi-tab2"
     class="fixed-tab"
-    [ngClass]="{
+    [class]="{
       'fixed-collapsed': $isCollapsed(),
       'fixed-over-mode': $isOverMode() || !$themesOptions.hasNavArea || $themesOptions.mode === 'top' || ($themesOptions.mode === 'mixin' && $leftMenuArray().length === 0 && $themesOptions.splitNav)
     }"
