@@ -12,8 +12,7 @@
 
 [在线预览](https://huajian123.github.io/ng-antd-admin/) · [功能演示](https://www.bilibili.com/video/BV1gF411x7rN/) · [问题反馈](https://github.com/huajian123/ng-antd-admin/issues) · [更新日志](https://github.com/huajian123/ng-antd-admin/releases)
 
-<img src="[https://github.com/huajian123/ng-antd-admin/blob/master/ui/projectImg/11.png?raw=true](https://github.com/huajian123/ng-antd-admin/blob/master/ui/projectImg/11.png?raw=true)" alt="系统截图" width="800"/>
-
+<img src="https://github.com/huajian123/ng-antd-admin/blob/master/ui/projectImg/11.png?raw=true" alt="系统截图" width="800"/>
 </div>
 
 ---
