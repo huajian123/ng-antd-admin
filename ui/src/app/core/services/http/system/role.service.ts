@@ -43,7 +43,7 @@ export class RoleService {
   http = inject(BaseHttpService);
 
   public getRoles(param: SearchCommonVO<Role>): Observable<PageInfo<Role>> {
-    return this.http.post('/role/list', param);
+    return this.http.post('/role/list', param, { showLoading: true, loadingText: '请求中' });
   }
 
   public getRolesDetail(id: number): Observable<Role> {
