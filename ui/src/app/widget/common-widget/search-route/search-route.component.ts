@@ -134,7 +134,7 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
   clearInput(): void {
     this.inputValue = '';
     this.resultListShow = [];
-    this.cdr.markForCheck();
+    // Template event handlers automatically trigger change detection
   }
 
   subSearchFn(): void {

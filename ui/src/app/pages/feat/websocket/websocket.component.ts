@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy, AfterViewInit, inject, DestroyRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnDestroy, AfterViewInit, inject, DestroyRef, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 
@@ -29,10 +29,8 @@ export class WebsocketComponent implements OnDestroy, AfterViewInit {
     breadcrumb: ['首页', '功能', 'websocket']
   };
   subject = webSocket(`ws://${ip}:8003/webSocket`);
-  result: string[] = [];
+  result = signal<string[]>([]);
   msg = '';
-
-  private cdr = inject(ChangeDetectorRef);
 
   send(): void {
     this.subject.next(this.msg);
@@ -47,9 +45,8 @@ export class WebsocketComponent implements OnDestroy, AfterViewInit {
   ngAfterViewInit(): void {
     this.subject.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => {
       // @ts-ignore
-      this.result.push(res.message);
-      this.result = [...this.result];
-      this.cdr.markForCheck();
+      this.result.update(arr => [...arr, res.message]);
+      // Signal automatically triggers change detection
     });
   }
 

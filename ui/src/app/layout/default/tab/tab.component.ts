@@ -43,10 +43,12 @@ export class TabComponent implements OnInit {
 
   constructor() {
     this.router.events
-      .pipe(filter((event: NzSafeAny) => event instanceof NavigationEnd))
-      .pipe(takeUntilDestroyed())
+      .pipe(
+        filter((event: NzSafeAny) => event instanceof NavigationEnd),
+        takeUntilDestroyed()
+      )
       .subscribe(() => {
-        this.cdr.markForCheck();
+        // Router events automatically trigger change detection in zoneless mode
       });
   }
 

@@ -143,7 +143,7 @@ export class NavBarComponent implements OnInit {
         this.copyMenus = this.cloneMenuArray(this.menus);
         this.clickMenuItem(this.menus);
         this.clickMenuItem(this.copyMenus);
-        this.cdr.markForCheck();
+        // Observable subscriptions automatically trigger change detection in zoneless mode
       });
   }
 
@@ -232,7 +232,6 @@ export class NavBarComponent implements OnInit {
     const index = this.routerPath.indexOf('?') === -1 ? this.routerPath.length : this.routerPath.indexOf('?');
     const routePath = this.routerPath.substring(0, index);
     this.flatMenu(menus, routePath);
-    this.cdr.markForCheck();
   }
 
   // 改变当前菜单展示状态
@@ -280,7 +279,7 @@ export class NavBarComponent implements OnInit {
         this.copyMenus = this.cloneMenuArray(this.menus);
         this.closeMenuOpen(this.menus);
       }
-      this.cdr.markForCheck();
+      // Observable subscriptions automatically trigger change detection in zoneless mode
     });
   }
 

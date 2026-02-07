@@ -1,4 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject, signal, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { timer } from 'rxjs';
 
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import screenfull from 'screenfull';
@@ -20,9 +22,8 @@ export class FullScreenComponent implements OnInit {
     breadcrumb: ['首页', '功能', '全屏示例']
   };
 
-  isFullscreenFlag = true;
-
-  private cdr = inject(ChangeDetectorRef);
+  isFullscreenFlag = signal(true);
+  destroyRef = inject(DestroyRef);
 
   toggle(): void {
     if (screenfull.isEnabled) {
@@ -50,10 +51,11 @@ export class FullScreenComponent implements OnInit {
 
   ngOnInit(): void {
     screenfull.onchange(() => {
-      setTimeout(() => {
-        this.isFullscreenFlag = !this.isFullscreenFlag;
-        this.cdr.markForCheck();
-      }, 10);
+      // Use RxJS timer instead of setTimeout
+      timer(10).pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+        this.isFullscreenFlag.update(v => !v);
+        // Signal automatically triggers change detection
+      });
     });
   }
 }
