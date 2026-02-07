@@ -1,11 +1,9 @@
-import { NgTemplateOutlet, AsyncPipe } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef, booleanAttribute, input, computed } from '@angular/core';
-import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { NgTemplateOutlet } from '@angular/common';
+import { Component, OnInit, ChangeDetectionStrategy, inject, DestroyRef, booleanAttribute, input, computed, signal, effect } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
-import { Observable } from 'rxjs';
-import { filter, map, mergeMap, switchMap, tap } from 'rxjs/operators';
+import { filter, map, mergeMap, tap } from 'rxjs/operators';
 
-import { ThemeMode } from '@app/layout/default/setting-drawer/setting-drawer.component';
 import { TabService } from '@core/services/common/tab.service';
 import { Menu } from '@core/services/types';
 import { AuthDirective } from '@shared/directives/auth.directive';
@@ -17,7 +15,6 @@ import { fnStopMouseEvent } from '@utils/tools';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzNoAnimationModule } from 'ng-zorro-antd/core/animation';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 
@@ -25,7 +22,7 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NzMenuModule, NzNoAnimationModule, NgTemplateOutlet, NzButtonModule, NzIconModule, RouterLink, AsyncPipe, AuthDirective]
+  imports: [NzMenuModule, NzNoAnimationModule, NgTemplateOutlet, NzButtonModule, NzIconModule, RouterLink, AuthDirective]
 })
 export class NavBarComponent implements OnInit {
   readonly isMixinHead = input(false, { transform: booleanAttribute }); // 是混合模式顶部导航
@@ -37,78 +34,76 @@ export class NavBarComponent implements OnInit {
   private splitNavStoreService = inject(SplitNavStoreService);
   private activatedRoute = inject(ActivatedRoute);
   private tabService = inject(TabService);
-  private cdr = inject(ChangeDetectorRef);
   private themesService = inject(ThemeService);
+  private destroyRef = inject(DestroyRef);
 
-  routerPath = this.router.url;
-  menus: Menu[] = [];
-  copyMenus: Menu[] = [];
-  authCodeArray = computed(() => {
-    return this.userInfoService.$userInfo().authCode;
-  });
+  // Signals for state management
+  routerPath = signal(this.router.url);
+  menus = signal<Menu[]>([]);
+  copyMenus = signal<Menu[]>([]);
 
+  // Computed signals from services
+  authCodeArray = computed(() => this.userInfoService.$userInfo().authCode);
   $isNightTheme = computed(() => this.themesService.$isNightTheme());
-  // todo signal最后要修正
-  themesOptions$ = toObservable(this.themesService.$themesOptions);
-  isCollapsed$ = toObservable(this.themesService.$isCollapsed);
-  isOverMode$ = toObservable(this.themesService.$isOverModeTheme);
-  leftMenuArray$ = toObservable(this.splitNavStoreService.$splitLeftNavArray);
-  subTheme$: Observable<NzSafeAny>;
 
-  themesMode: ThemeMode['key'] = 'side';
-  isOverMode = false;
-  isCollapsed = false;
-  isMixinMode = false;
-  leftMenuArray: Menu[] = [];
+  // Direct access to service signals (they are already signals, not observables)
+  themesOptions = this.themesService.$themesOptions;
+  isCollapsed = this.themesService.$isCollapsed;
+  isOverMode = this.themesService.$isOverModeTheme;
+  // 混合模式下左侧菜单数据源
+  leftMenuArray = this.splitNavStoreService.$splitLeftNavArray;
 
-  destroyRef = inject(DestroyRef);
+  // Computed signals for derived state
+  themesMode = computed(() => this.themesOptions().mode);
+  isMixinMode = computed(() => this.themesMode() === 'mixin');
 
   constructor() {
     this.initMenus();
+    this.setupRouterListener();
+    this.setupCollapseEffect();
+    this.setupThemeEffect();
+  }
 
-    this.subTheme$ = this.isOverMode$.pipe(
-      switchMap(res => {
-        this.isOverMode = res;
-        return this.themesOptions$;
-      }),
-      tap(options => {
-        this.themesMode = options.mode;
-        this.isMixinMode = this.themesMode === 'mixin';
-      }),
-      takeUntilDestroyed(this.destroyRef)
-    );
+  private initMenus(): void {
+    this.menuServices
+      .getMenuArrayStore()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(menusArray => {
+        this.menus.set(menusArray);
+        this.copyMenus.set(this.cloneMenuArray(menusArray));
+        this.clickMenuItem(this.menus());
+        this.clickMenuItem(this.copyMenus());
+      });
+  }
 
-    // 监听混合模式下左侧菜单数据源
-    this.subMixinModeSideMenu();
-    // 监听折叠菜单事件
-    this.subIsCollapsed();
+  private setupRouterListener(): void {
     this.router.events
       .pipe(
         filter(event => event instanceof NavigationEnd),
-        filter((event: NavigationEnd) => {
-          // 忽略刷新tab时的占用路由跳转
-          return event.url !== '/default/refresh-empty';
-        }),
+        filter((event: NavigationEnd) => event.url !== '/default/refresh-empty'),
         tap(() => {
-          this.subTheme$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-            // 主题切换为混合模式下，设置左侧菜单数据源
-            // 如果放在ngInit监听里面，会在混合模式下，刷新完页面切换路由，runOutSideAngular
-            if (this.isMixinMode) {
-              this.setMixModeLeftMenu();
-            }
-          });
           // @ts-ignore
-          this.routerPath = this.activatedRoute.snapshot['_routerState'].url;
-          // 做一个copyMenus来记录当前menu状态，因为顶部模式时是不展示子menu的，然而主题由顶部模式切换成侧边栏模式，要把当前顶部模式中菜单的状态体现于侧边栏模式的菜单中
-          this.clickMenuItem(this.menus);
-          this.clickMenuItem(this.copyMenus);
-          // 是折叠的菜单并且不是over菜单,解决折叠左侧菜单时，切换tab会有悬浮框菜单的bug
-          if (this.isCollapsed && !this.isOverMode) {
-            this.closeMenuOpen(this.menus);
+          const url = this.activatedRoute.snapshot['_routerState'].url;
+          this.routerPath.set(url);
+
+          // 主题切换为混合模式下，设置左侧菜单数据源
+          // 如果放在ngInit监听里面，会在混合模式下，刷新完页面切换路由，runOutSideAngular
+          if (this.isMixinMode()) {
+            this.setMixModeLeftMenu();
           }
 
-          // 顶部菜单模式，并且不是over模式，解决顶部模式时，切换tab会有悬浮框菜单的bug
-          if (this.themesMode === 'top' && !this.isOverMode) {
+          // 更新菜单状态
+          //  做一个copyMenus来记录当前menu状态，因为顶部模式时是不展示子menu的，然而主题由顶部模式切换成侧边栏模式，要把当前顶部模式中菜单的状态体现于侧边栏模式的菜单中
+          this.clickMenuItem(this.menus());
+          this.clickMenuItem(this.copyMenus());
+
+          // 折叠菜单且不是over模式时，关闭菜单
+          if (this.isCollapsed() && !this.isOverMode()) {
+            this.closeMenuOpen(this.menus());
+          }
+
+          // 顶部菜单模式且不是over模式时，关闭菜单。解决顶部模式时，切换tab会有悬浮框菜单的bug
+          if (this.themesMode() === 'top' && !this.isOverMode()) {
             this.closeMenu();
           }
         }),
@@ -119,37 +114,54 @@ export class NavBarComponent implements OnInit {
           }
           return route;
         }),
-        filter(route => {
-          return route.outlet === 'primary';
-        }),
-        mergeMap(route => {
-          return route.data;
-        }),
+        filter(route => route.outlet === 'primary'),
+        mergeMap(route => route.data),
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe(routeData => {
-        // 详情页是否是打开新tab页签形式
         const isNewTabDetailPage = routeData['newTab'] === 'true';
         this.routeEndAction(isNewTabDetailPage);
       });
   }
 
-  initMenus(): void {
-    this.menuServices
-      .getMenuArrayStore()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(menusArray => {
-        this.menus = menusArray;
-        this.copyMenus = this.cloneMenuArray(this.menus);
-        this.clickMenuItem(this.menus);
-        this.clickMenuItem(this.copyMenus);
-        // Observable subscriptions automatically trigger change detection in zoneless mode
-      });
+  // 监听折叠菜单事件
+  private setupCollapseEffect(): void {
+    effect(() => {
+      const collapsed = this.isCollapsed();
+
+      if (!collapsed) {
+        // 菜单展开
+        this.menus.set(this.cloneMenuArray(this.copyMenus()));
+        this.clickMenuItem(this.menus());
+
+        // 混合模式下要在点击一下左侧菜单数据源，不然有二级菜单的菜单在折叠状态变为展开时不open
+        if (this.themesMode() === 'mixin') {
+          this.clickMenuItem(this.leftMenuArray());
+        }
+      } else {
+        // 菜单收起
+        this.copyMenus.set(this.cloneMenuArray(this.menus()));
+        this.closeMenuOpen(this.menus());
+      }
+    });
+  }
+
+  // Effect to handle theme mode changes
+  private setupThemeEffect(): void {
+    effect(() => {
+      const mode = this.themesMode();
+      const overMode = this.isOverMode();
+
+      if (mode === 'top' && !overMode) {
+        this.closeMenu();
+      }
+    });
   }
 
   // 设置混合模式时，左侧菜单"自动分割菜单"模式的数据源
   setMixModeLeftMenu(): void {
-    this.menus.forEach(item => {
+    const menus = this.menus();
+    menus.forEach(item => {
       if (item.selected) {
         this.splitNavStoreService.$splitLeftNavArray.set(item.children || []);
       }
@@ -180,7 +192,7 @@ export class NavBarComponent implements OnInit {
   // 混合模式点击一级菜单，要让一级菜单下的第一个子菜单被选中
   changTopNav(index: number): void {
     // 当前选中的第一级菜单对象
-    const currentTopNav = this.menus[index];
+    const currentTopNav = this.menus()[index];
     let currentLeftNavArray = currentTopNav.children || [];
     // 如果一级菜单下有二级菜单
     if (currentLeftNavArray.length > 0) {
@@ -197,16 +209,6 @@ export class NavBarComponent implements OnInit {
         // 如果有三级菜单，则跳转到第一个三级菜单
         this.router.navigateByUrl(currentLeftNavArray[0].children[0].path!);
       }
-      /*添加了权限版结束*/
-      /*注释的是没有权限版*/
-      // const currentLeftNavArray = currentTopNav.children;
-      // if (!currentLeftNavArray[0].children) {
-      //   this.router.navigateByUrl(currentLeftNavArray[0].path!);
-      //   this.splitNavStoreService.setSplitLeftNavArrayStore(currentLeftNavArray);
-      // } else {
-      //   this.router.navigateByUrl(currentLeftNavArray[0].children[0].path!);
-      //   this.splitNavStoreService.setSplitLeftNavArrayStore(currentLeftNavArray);
-      // }
     }
     this.splitNavStoreService.$splitLeftNavArray.set(currentLeftNavArray);
   }
@@ -229,8 +231,9 @@ export class NavBarComponent implements OnInit {
     if (!menus) {
       return;
     }
-    const index = this.routerPath.indexOf('?') === -1 ? this.routerPath.length : this.routerPath.indexOf('?');
-    const routePath = this.routerPath.substring(0, index);
+    const routerPath = this.routerPath();
+    const index = routerPath.indexOf('?') === -1 ? routerPath.length : routerPath.indexOf('?');
+    const routePath = routerPath.substring(0, index);
     this.flatMenu(menus, routePath);
   }
 
@@ -262,38 +265,10 @@ export class NavBarComponent implements OnInit {
     this.router.navigate([menu.path]);
   }
 
-  // 监听折叠菜单事件
-  subIsCollapsed(): void {
-    this.isCollapsed$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(isCollapsed => {
-      this.isCollapsed = isCollapsed;
-      // 菜单展开
-      if (!this.isCollapsed) {
-        this.menus = this.cloneMenuArray(this.copyMenus);
-        this.clickMenuItem(this.menus);
-        // 混合模式下要在点击一下左侧菜单数据源,不然有二级菜单的菜单在折叠状态变为展开时，不open
-        if (this.themesMode === 'mixin') {
-          this.clickMenuItem(this.leftMenuArray);
-        }
-      } else {
-        // 菜单收起
-        this.copyMenus = this.cloneMenuArray(this.menus);
-        this.closeMenuOpen(this.menus);
-      }
-      // Observable subscriptions automatically trigger change detection in zoneless mode
-    });
-  }
-
   closeMenu(): void {
-    this.clickMenuItem(this.menus);
-    this.clickMenuItem(this.copyMenus);
-    this.closeMenuOpen(this.menus);
-  }
-
-  // 监听混合模式下左侧菜单数据源
-  private subMixinModeSideMenu(): void {
-    this.leftMenuArray$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => {
-      this.leftMenuArray = res;
-    });
+    this.clickMenuItem(this.menus());
+    this.clickMenuItem(this.copyMenus());
+    this.closeMenuOpen(this.menus());
   }
 
   routeEndAction(isNewTabDetailPage = false): void {
@@ -311,22 +286,16 @@ export class NavBarComponent implements OnInit {
       {
         snapshotArray: [route.snapshot],
         title,
-        path: this.routerPath
+        path: this.routerPath()
       },
       isNewTabDetailPage
     );
-    this.tabService.findIndex(this.routerPath);
+    this.tabService.findIndex(this.routerPath());
     // 混合模式时，切换tab，让左侧菜单也相应变化
     this.setMixModeLeftMenu();
   }
 
   ngOnInit(): void {
-    // 顶部模式时要关闭menu的open状态
-    this.subTheme$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(options => {
-      if (options.mode === 'top' && !this.isOverMode) {
-        this.closeMenu();
-      }
-    });
     this.routeEndAction();
   }
 }
