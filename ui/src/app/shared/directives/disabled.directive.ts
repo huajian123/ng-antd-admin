@@ -1,8 +1,12 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { Directive, Input } from '@angular/core';
 
 @Directive({
   selector: '[appEnable]',
-  standalone: true
+  standalone: true,
+  host: {
+    '[class.operate-text]': 'enable',
+    '[class.operate-text-disabled]': 'disabledStyle'
+  }
 })
 export class DisabledDirective {
   @Input('appEnable')
@@ -11,6 +15,6 @@ export class DisabledDirective {
     this.disabledStyle = !value;
   }
 
-  @HostBinding('class.operate-text') enable = false;
-  @HostBinding('class.operate-text-disabled') disabledStyle = false;
+  enable = false;
+  disabledStyle = false;
 }

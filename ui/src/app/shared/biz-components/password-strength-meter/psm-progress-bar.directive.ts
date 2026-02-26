@@ -1,9 +1,15 @@
-import { Directive, ElementRef, HostBinding, numberAttribute, OnChanges, Renderer2, SimpleChanges, inject, input } from '@angular/core';
+import { Directive, ElementRef, numberAttribute, OnChanges, Renderer2, SimpleChanges, inject, input } from '@angular/core';
 
 @Directive({
   // eslint-disable-next-line @angular-eslint/directive-selector
   selector: '.psm__progress-bar',
-  standalone: true
+  standalone: true,
+  host: {
+    '[attr.aria-valuemin]': 'minProgressVal',
+    '[attr.aria-valuemax]': 'maxProgressVal',
+    '[attr.aria-valuenow]': 'currentProgressVal',
+    '[attr.data-strength]': 'dataPasswordStrength'
+  }
 })
 export class PSMProgressBarDirective implements OnChanges {
   private renderer = inject(Renderer2);
@@ -15,13 +21,10 @@ export class PSMProgressBarDirective implements OnChanges {
 
   readonly colors = input<string[]>([]);
 
-  @HostBinding('attr.aria-valuemin') minProgressVal = 0;
-
-  @HostBinding('attr.aria-valuemax') maxProgressVal = 100;
-
-  @HostBinding('attr.aria-valuenow') currentProgressVal = 0;
-
-  @HostBinding('attr.data-strength') dataPasswordStrength = 0;
+  minProgressVal = 0;
+  maxProgressVal = 100;
+  currentProgressVal = 0;
+  dataPasswordStrength = 0;
 
   progressBar: HTMLDivElement;
 

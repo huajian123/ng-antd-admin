@@ -1,4 +1,4 @@
-import { Directive, EventEmitter, HostListener, Input, OnInit, OnDestroy, Output, numberAttribute } from '@angular/core';
+import { Directive, EventEmitter, Input, OnInit, OnDestroy, Output, numberAttribute } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
@@ -6,7 +6,10 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 @Directive({
   selector: '[appDebounceClick]',
-  standalone: true
+  standalone: true,
+  host: {
+    '(click)': 'clickEvent($event)'
+  }
 })
 export class DebounceClickDirective implements OnInit, OnDestroy {
   @Input({ transform: numberAttribute }) debounceTime = 500;
@@ -14,7 +17,6 @@ export class DebounceClickDirective implements OnInit, OnDestroy {
   private clicks = new Subject<NzSafeAny>();
   private subscription!: Subscription;
 
-  @HostListener('click', ['$event'])
   clickEvent(event: MouseEvent): void {
     event.preventDefault();
     event.stopPropagation();
