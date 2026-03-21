@@ -1,0 +1,590 @@
+
+
+.task-container {
+  padding: 24px;
+  background: #f0f2f5;
+  min-height: calc(100vh - 200px);
+}
+
+// 统计卡片样式
+.stats-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+
+  .stat-card {
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    }
+
+    :deep(.ant-card-body) {
+      padding: 20px;
+    }
+
+    .stat-content {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+
+      .stat-icon {
+        font-size: 36px;
+        opacity: 0.9;
+      }
+
+      .stat-info {
+        flex: 1;
+
+        .stat-value {
+          font-size: 28px;
+          font-weight: 600;
+          line-height: 1.2;
+          margin-bottom: 4px;
+        }
+
+        .stat-label {
+          font-size: 14px;
+          opacity: 0.75;
+        }
+      }
+    }
+
+    // 不同卡片的主题色
+    &.stat-card-total {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    &.stat-card-active {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      color: white;
+    }
+
+    &.stat-card-completed {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      color: white;
+    }
+
+    &.stat-card-urgent {
+      background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+      color: white;
+    }
+  }
+}
+
+// 主任务卡片
+.task-main-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: none;
+
+  :deep(.ant-card-head) {
+    border-bottom: 1px solid #f0f0f0;
+    padding: 16px 24px;
+
+    .ant-card-head-title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+  }
+
+  :deep(.ant-card-body) {
+    padding: 24px;
+  }
+}
+
+// 添加任务区域
+.add-task-section {
+  margin-bottom: 16px;
+
+  .add-task-input {
+    font-size: 15px;
+    border-radius: 8px;
+    padding: 10px 16px;
+    border: 2px solid #e8e8e8;
+    transition: all 0.3s ease;
+
+    &:hover {
+      border-color: #40a9ff;
+    }
+
+    &:focus {
+      border-color: #1890ff;
+      box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.1);
+    }
+  }
+
+  .add-task-btn {
+    margin-left: 8px;
+    transition: all 0.3s ease;
+
+    &:hover:not(:disabled) {
+      transform: scale(1.1);
+    }
+  }
+}
+
+// 过滤器标签
+.filter-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  padding: 8px;
+  background: #fafafa;
+  border-radius: 8px;
+
+  .filter-tab {
+    flex: 1;
+    height: 40px;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    &:hover {
+      background: #e6f7ff;
+      color: #1890ff;
+    }
+
+    &.active {
+      background: #1890ff;
+      color: white;
+      font-weight: 500;
+
+      &:hover {
+        background: #40a9ff;
+      }
+    }
+
+    span[nz-icon] {
+      font-size: 16px;
+    }
+  }
+}
+
+// 任务列表
+.task-list {
+  .empty-text {
+    color: #999;
+    font-size: 14px;
+  }
+}
+
+// 拖拽手柄
+.drag-handle {
+  display: flex;
+  align-items: center;
+  color: #bbb;
+  cursor: grab;
+  padding: 0 4px;
+  flex-shrink: 0;
+  transition: color 0.2s;
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  span[nz-icon] {
+    font-size: 16px;
+  }
+}
+
+// 拖拽占位
+.drag-placeholder {
+  background: #e6f7ff;
+  border: 2px dashed #91d5ff;
+  border-radius: 10px;
+  min-height: 72px;
+  margin-bottom: 12px;
+}
+
+// CDK 拖拽中的元素
+.cdk-drag-preview {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  opacity: 0.95;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.task-list.cdk-drop-list-dragging .task-item:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+// 任务项
+.task-item {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  margin-bottom: 12px;
+  background: white;
+  border-radius: 10px;
+  border: 2px solid #f0f0f0;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: #1890ff;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover {
+    border-color: #1890ff;
+    box-shadow: 0 4px 12px rgba(24, 144, 255, 0.15);
+    transform: translateX(4px);
+
+    &::before {
+      opacity: 1;
+    }
+  }
+
+  // 已完成状态
+  &.completed {
+    background: #f6ffed;
+    border-color: #b7eb8f;
+    opacity: 0.8;
+
+    &::before {
+      background: #52c41a;
+      opacity: 1;
+    }
+
+    .task-title {
+      text-decoration: line-through;
+      color: #999;
+    }
+
+    .task-description {
+      color: #bbb;
+    }
+  }
+
+  // 逾期状态
+  &.overdue {
+    border-color: #ffccc7;
+    background: #fff2f0;
+
+    &::before {
+      background: #ff4d4f;
+      opacity: 1;
+    }
+  }
+
+  .task-checkbox {
+    margin-top: 4px;
+    flex-shrink: 0;
+
+    :deep(.ant-checkbox) {
+      transform: scale(1.2);
+    }
+  }
+
+  .task-content {
+    flex: 1;
+    min-width: 0;
+
+    .task-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 8px;
+
+      .task-title {
+        flex: 1;
+        font-size: 16px;
+        font-weight: 500;
+        color: #262626;
+        line-height: 1.5;
+        word-break: break-word;
+      }
+
+      .task-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-shrink: 0;
+
+        .priority-tag {
+          margin: 0;
+          font-size: 12px;
+          padding: 2px 8px;
+          border-radius: 4px;
+          font-weight: 500;
+        }
+
+        .action-btn {
+          opacity: 0;
+          transition: all 0.3s ease;
+
+          &:hover {
+            background: #f5f5f5;
+          }
+        }
+      }
+    }
+
+    .task-description {
+      font-size: 14px;
+      color: #8c8c8c;
+      line-height: 1.6;
+      margin-bottom: 12px;
+      word-break: break-word;
+    }
+
+    .task-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+
+      .task-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+
+        .task-tag {
+          margin: 0;
+          font-size: 12px;
+          padding: 2px 8px;
+          border-radius: 4px;
+          display: flex;
+          align-items: center;
+          gap: 4px;
+
+          span[nz-icon] {
+            font-size: 12px;
+          }
+        }
+      }
+
+      .task-date {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        color: #8c8c8c;
+        padding: 4px 10px;
+        background: #fafafa;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+
+        span[nz-icon] {
+          font-size: 14px;
+        }
+
+        &.date-today {
+          background: #fff7e6;
+          color: #fa8c16;
+          font-weight: 500;
+        }
+
+        &.date-overdue {
+          background: #fff2f0;
+          color: #ff4d4f;
+          font-weight: 500;
+          animation: pulse 2s infinite;
+        }
+      }
+
+      .task-assignee {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 10px;
+        background: #f0f5ff;
+        border-radius: 6px;
+        color: #1890ff;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: #e6f7ff;
+        }
+
+        .assignee-name {
+          font-size: 13px;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+
+  // 鼠标悬停时显示操作按钮
+  &:hover {
+    .task-actions .action-btn {
+      opacity: 1;
+    }
+  }
+}
+
+// 动画效果
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  .task-container {
+    padding: 16px;
+  }
+
+  .stats-cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .filter-tabs {
+    flex-direction: column;
+
+    .filter-tab {
+      width: 100%;
+    }
+  }
+
+  .task-item {
+    .task-header {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .task-actions {
+        width: 100%;
+        justify-content: flex-end;
+      }
+    }
+
+    .task-meta {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+}
+
+// 暗黑模式支持
+:host-context(.dark-theme) {
+  .task-container {
+    background: #141414;
+  }
+
+  .task-main-card {
+    background: #1f1f1f;
+    border-color: #303030;
+
+    :deep(.ant-card-head) {
+      border-bottom-color: #303030;
+      color: rgba(255, 255, 255, 0.85);
+    }
+  }
+
+  .filter-tabs {
+    background: #262626;
+
+    .filter-tab {
+      color: rgba(255, 255, 255, 0.65);
+
+      &:hover {
+        background: #303030;
+        color: #40a9ff;
+      }
+
+      &.active {
+        background: #1890ff;
+        color: white;
+      }
+    }
+  }
+
+  .task-item {
+    background: #1f1f1f;
+    border-color: #303030;
+
+    &:hover {
+      border-color: #177ddc;
+      box-shadow: 0 4px 12px rgba(23, 125, 220, 0.2);
+    }
+
+    &.completed {
+      background: #162312;
+      border-color: #274916;
+    }
+
+    &.overdue {
+      background: #2a1215;
+      border-color: #58181c;
+    }
+
+    .task-title {
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .task-description {
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    .task-meta {
+      .task-date {
+        background: #262626;
+        color: rgba(255, 255, 255, 0.65);
+
+        &.date-today {
+          background: #2b2111;
+          color: #ffa940;
+        }
+
+        &.date-overdue {
+          background: #2a1215;
+          color: #ff7875;
+        }
+      }
+
+      .task-assignee {
+        background: #111d2c;
+        color: #40a9ff;
+
+        &:hover {
+          background: #112a45;
+        }
+      }
+    }
+  }
+
+  .add-task-input {
+    background: #1f1f1f;
+    border-color: #434343;
+    color: rgba(255, 255, 255, 0.85);
+
+    &:hover {
+      border-color: #177ddc;
+    }
+
+    &:focus {
+      border-color: #1890ff;
+      box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+    }
+  }
+}
