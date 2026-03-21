@@ -1,9 +1,9 @@
 <div class="content-wrap">
-  <div nz-row>
-    <div nz-col nzFlex="240px">
+  <div nz-row [nzGutter]="[8, 8]">
+    <div nz-col [nzLg]="6" [nzMd]="6" [nzSm]="24" [nzXl]="5" [nzXs]="24">
       <app-task-search-info />
     </div>
-    <div class="m-l-8" nz-col nzFlex="1">
+    <div nz-col [nzLg]="18" [nzMd]="18" [nzSm]="24" [nzXl]="19" [nzXs]="24">
       <app-task-list-panel />
     </div>
   </div>

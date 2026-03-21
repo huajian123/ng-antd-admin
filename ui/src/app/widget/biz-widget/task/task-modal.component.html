@@ -1,0 +1,60 @@
+<form nz-form [formGroup]="taskForm">
+  <nz-form-item>
+    <nz-form-label nzFor="title" nzRequired [nzSm]="4" [nzXs]="24">任务标题</nz-form-label>
+    <nz-form-control [nzErrorTip]="combineTpl" [nzSm]="18" [nzXs]="24">
+      <input id="title" formControlName="title" nz-input placeholder="请输入任务标题" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzFor="description" [nzSm]="4" [nzXs]="24">任务描述</nz-form-label>
+    <nz-form-control [nzErrorTip]="combineTpl" [nzSm]="18" [nzXs]="24">
+      <textarea id="description" formControlName="description" nz-input placeholder="请输入任务描述（可选）" rows="3"></textarea>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzFor="priority" nzRequired [nzSm]="4" [nzXs]="24">优先级</nz-form-label>
+    <nz-form-control [nzErrorTip]="combineTpl" [nzSm]="18" [nzXs]="24">
+      <nz-radio-group formControlName="priority">
+        <label nz-radio nzValue="high">紧急</label>
+        <label nz-radio nzValue="medium">中等</label>
+        <label nz-radio nzValue="low">普通</label>
+      </nz-radio-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzFor="tags" [nzSm]="4" [nzXs]="24">标签</nz-form-label>
+    <nz-form-control [nzErrorTip]="combineTpl" [nzSm]="18" [nzXs]="24">
+      <nz-select formControlName="tags" nzMode="multiple" nzPlaceHolder="选择标签（可选）">
+        @for (tag of availableTags; track tag) {
+          <nz-option [nzLabel]="tag" [nzValue]="tag"></nz-option>
+        }
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzFor="assignee" [nzSm]="4" [nzXs]="24">负责人</nz-form-label>
+    <nz-form-control [nzErrorTip]="combineTpl" [nzSm]="18" [nzXs]="24">
+      <input id="assignee" formControlName="assignee" nz-input placeholder="请输入负责人（可选）" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzFor="dueDate" [nzSm]="4" [nzXs]="24">截止日期</nz-form-label>
+    <nz-form-control [nzErrorTip]="combineTpl" [nzSm]="18" [nzXs]="24">
+      <nz-date-picker id="dueDate" formControlName="dueDate" nzPlaceHolder="选择截止日期（可选）"></nz-date-picker>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+
+<ng-template #combineTpl let-control>
+  @if (control.hasError('message')) {
+    {{ control.errors.message }}
+  }
+  @if (control.hasError('required')) {
+    必填项
+  }
+</ng-template>
