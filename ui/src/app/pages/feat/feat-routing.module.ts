@@ -41,6 +41,7 @@ export default [
   { path: 'qrcode', title: '二维码', data: { key: 'qrcode' }, loadComponent: () => import('./qrcode/qrcode.component').then(m => m.QrcodeComponent) },
   { path: 'water-mark', title: '水印', data: { key: 'water-mark' }, loadComponent: () => import('./water-mark/water-mark.component').then(m => m.WaterMarkDemoComponent) },
   { path: 'keep-alive', title: 'KeepAlive', data: { key: 'keep-alive' }, loadComponent: () => import('./keep-alive/keep-alive').then(m => m.KeepAliveDemo) },
+  { path: 'transitions', loadChildren: () => import('./transitions/transitions-routing') },
   {
     path: 'feat1',
     title: '新功能1',

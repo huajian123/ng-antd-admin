@@ -34,6 +34,7 @@ import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NZ_I18N, zh_CN } from 'ng-zorro-antd/i18n';
 import { NZ_ICONS } from 'ng-zorro-antd/icon';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { ViewTransitionService } from '@core/services/common/view-transition.service';
 
 const icons = [MenuFoldOutline, MenuUnfoldOutline, DashboardOutline, FormOutline];
 
@@ -112,11 +113,20 @@ export const appConfig: ApplicationConfig = {
       withPreloading(SelectivePreloadingStrategyService), // 自定义模块预加载
       withViewTransitions({
         skipInitialTransition: true,
-        onViewTransitionCreated: ({ transition, from }) => {
-          const fromSource = getDeepReuseStrategyKeyFn(from, false);
+        onViewTransitionCreated: (info) => {
+
+          const viewTransitionService = inject(ViewTransitionService);
+
+          viewTransitionService.currentTransition.set(info);
+          info.transition.finished.finally(() => {
+            viewTransitionService.currentTransition.set(null);
+          });
+
+          const fromSource = getDeepReuseStrategyKeyFn(info.from, false);
+
           if (fromSource === 'refresh-empty') {
             // 刷新tab或者切换“是否展示tab”时禁用过渡动画，否则页面tab栏会闪烁
-            transition.skipTransition();
+            info.transition.skipTransition();
           }
         }
       }), // 路由切换过渡，ng17新增实验性特性参考资料https://netbasal.com/angular-v17s-view-transitions-navigate-in-elegance-f2d48fd8ceda

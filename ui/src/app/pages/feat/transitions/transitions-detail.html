@@ -1,0 +1,44 @@
+<app-page-header [pageHeaderInfo]="pageHeaderInfo" />
+
+<div class="normal-table-wrap">
+  <div class="m-b-20">
+    <a nz-button nzType="text" [routerLink]="['../']">
+      <i nz-icon nzType="arrow-left"></i>
+      返回列表
+    </a>
+  </div>
+
+  <div class="detail-layout" nz-row [nzGutter]="[32, 32]">
+    <div nz-col [nzMd]="10" [nzXs]="24">
+      <div class="detail-cover" appViewTransition="card-image" [id]="item().id" [style.background]="item().color">
+        <span class="cover-emoji-large">{{ item().id }}</span>
+        <div class="cover-overlay"></div>
+        <div class="cover-title-large">
+          <h2 class="m-0">{{ item().title }}</h2>
+          <p class="sp-14 m-0">{{ item().subtitle }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div nz-col [nzMd]="14" [nzXs]="24">
+      <div class="detail-content">
+        <h1 class="m-b-8">{{ item().title }}</h1>
+        <p class="sp-16 m-b-20" style="color: #8c8c8c">{{ item().subtitle }}</p>
+
+        <div class="flex m-b-24" style="gap: 8px; flex-wrap: wrap">
+          @for (tag of item().tags; track tag) {
+            <nz-tag [nzColor]="item().color">{{ tag }}</nz-tag>
+          }
+        </div>
+
+        <p class="sp-16" style="line-height: 1.8; color: #595959">{{ item().desc }}</p>
+
+        <nz-card class="detail-tip m-t-24" [nzBodyStyle]="{ padding: 0 }">
+          <p class="sp-14 m-0" style="color: #8c8c8c">
+            💡 这个卡片封面图通过 <code>appViewTransition="card-image"</code> 指令与列表页的对应卡片共享了 <code>view-transition-name</code>，浏览器在路由切换时自动完成了平滑过渡动画。
+          </p>
+        </nz-card>
+      </div>
+    </div>
+  </div>
+</div>
