@@ -6,7 +6,8 @@ const port = '80';
 export const localUrl = `http://${ip}:${port}`;
 
 export const environment = {
-  production: false
+  production: false,
+  mockEnabled: true
 };
 
 /*
