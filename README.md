@@ -127,21 +127,25 @@ provideRouter(routes, withViewTransitions({ skipInitialTransition: true }))
 ## 📦 快速开始
 
 ### 方式一：仅前端预览 (推荐体验)
-使用 MSW (Mock Service Worker) 模拟数据，无需后端即可体验完整功能。
+使用 MSW (Mock Service Worker) 模拟数据，无需启动后端即可体验完整功能。
 
 ```bash
-# 1. 克隆纯前端 Mock 分支
-下载 zip包 https://github.com/huajian123/ng-antd-admin/releases/tag/v17.3.0
+# 1. 克隆 mock 分支
+git clone -b mock https://github.com/huajian123/ng-antd-admin.git
 
-# 2. 安装依赖
-cd ng-antd-admin
+# 2. 进入前端目录
+cd ng-antd-admin/ui
+
+# 3. 安装依赖
 npm install
 
-# 3. 启动项目
+# 4. 启动项目
 npm start
 
-# 4. 访问 http://localhost:4201
+# 5. 访问 http://localhost:4201
 ```
+
+> 也可直接在线预览：[https://huajian123.github.io/ng-antd-admin/](https://huajian123.github.io/ng-antd-admin/)
 
 ### 方式二：完整全栈版 (前端 + 后端)
 适合需要二次开发完整业务系统的场景。
