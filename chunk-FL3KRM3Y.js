@@ -1,0 +1,1 @@
+import{Db as t,Jb as r,ra as i}from"./chunk-7PDYF5WL.js";var c=class e{viewContainerRef=i(t);static \u0275fac=function(n){return new(n||e)};static \u0275dir=r({type:e,selectors:[["","appAd",""]]})};export{c as a};

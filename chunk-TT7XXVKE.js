@@ -1,0 +1,1 @@
+function e(u){return u.buttons===0||u.detail===0}function o(u){let r=u.touches&&u.touches[0]||u.changedTouches&&u.changedTouches[0];return!!r&&r.identifier===-1&&(r.radiusX==null||r.radiusX===1)&&(r.radiusY==null||r.radiusY===1)}export{e as a,o as b};

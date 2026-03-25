@@ -1,0 +1,1 @@
+import{Hb as n}from"./chunk-7PDYF5WL.js";import"./chunk-DAQOROHW.js";var o=class e{static \u0275fac=function(t){return new(t||e)};static \u0275cmp=n({type:e,selectors:[["app-refresh-empty"]],decls:0,vars:0,template:function(t,s){},encapsulation:2})};export{o as RefreshEmptyComponent};

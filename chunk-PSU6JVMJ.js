@@ -1,0 +1,1 @@
+import{Ka as c,ma as a}from"./chunk-7PDYF5WL.js";var x=(o=>(o[o.xs=0]="xs",o[o.sm=1]="sm",o[o.md=2]="md",o[o.lg=3]="lg",o[o.xl=4]="xl",o[o.xxl=5]="xxl",o))(x||{}),l=class r{$windowWidth=c(5);static \u0275fac=function(s){return new(s||r)};static \u0275prov=a({token:r,factory:r.\u0275fac,providedIn:"root"})};export{x as a,l as b};

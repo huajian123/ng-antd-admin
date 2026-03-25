@@ -1,0 +1,1 @@
+import{Kb as i}from"./chunk-7PDYF5WL.js";var t=class r{transform(e){return Array(e).fill(0)}static \u0275fac=function(n){return new(n||r)};static \u0275pipe=i({name:"numberLoop",type:r,pure:!0})};export{t as a};
