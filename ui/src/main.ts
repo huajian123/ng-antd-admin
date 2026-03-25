@@ -7,7 +7,7 @@ import { environment } from './environments/environment';
 async function bootstrap() {
   if (environment.mockEnabled) {
     const { worker } = await import('./mocks/browser');
-    await worker.start({ onUnhandledRequest: 'bypass' });
+    await worker.start({ onUnhandledRequest: 'bypass', serviceWorker: { url: '/ng-antd-admin/mockServiceWorker.js' } });
   }
   bootstrapApplication(App, appConfig).catch(err => console.error(err));
 }

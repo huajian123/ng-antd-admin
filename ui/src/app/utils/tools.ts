@@ -121,7 +121,11 @@ const fnEncrypt = function encrypt(word: NzSafeAny, keyStr: string): string {
 
 // 解密
 const fnDecrypt = function decrypt(word: NzSafeAny, keyStr: string): LockScreenFlag {
-  return JSON.parse(word);
+  try {
+    return JSON.parse(word);
+  } catch {
+    return { locked: false, password: '', beforeLockPath: '' };
+  }
   // const bytes = CryptoJS.AES.decrypt(word, keyStr);
   // return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
 };
