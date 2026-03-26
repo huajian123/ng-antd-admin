@@ -30,8 +30,8 @@ export default {
         'at-variables',
         'custom-properties',
         { type: 'at-rule', name: 'mixin' },
-        'declarations',
         'less-mixins',
+        'declarations',
         {
           type: 'rule',
           selector: /^&::[\w-]+/, // 伪元素选择器

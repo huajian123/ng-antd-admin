@@ -33,7 +33,12 @@
             </nz-row>
           </div>
           <div nz-col nzSpan="24" style="min-height: 430px">
-            <div id="map"></div>
+            <nz-empty
+              class="center"
+              nzNotFoundContent="原本是放百度地图，但是给我打电话说我的key暴露了，你可以看源码，我这里有演示异步加载百度地图的方式，看TS注释即可"
+              style="height: 430px"
+            ></nz-empty>
+            <!-- <div id="map"></div>-->
           </div>
         </div>
       </nz-card>

@@ -9,6 +9,7 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { inNextTick } from 'ng-zorro-antd/core/util';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzStatisticModule } from 'ng-zorro-antd/statistic';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
@@ -19,7 +20,7 @@ declare let BMap: NzSafeAny;
   templateUrl: './monitor.component.html',
   styleUrls: ['./monitor.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NzCardModule, NzBreadCrumbModule, NzGridModule, NzStatisticModule, NzTypographyModule, DecimalPipe, PercentPipe]
+  imports: [NzCardModule, NzBreadCrumbModule, NzGridModule, NzStatisticModule, NzTypographyModule, NzEmptyModule, DecimalPipe, PercentPipe]
 })
 export class MonitorComponent implements AfterViewInit {
   private lazyService = inject(LazyService);
@@ -574,12 +575,12 @@ export class MonitorComponent implements AfterViewInit {
           }
 
           this.wordCloud();
-          this.lazyService.loadScript('http://api.map.baidu.com/getscript?v=2.0&ak=RD5HkkjTa6uAIDpw7GRFtR83Fk7Wdk0j').then(() => {
-            const map = new BMap.Map('map'); //创建地图实例
-            const point = new BMap.Point(116.404, 39.915); //创建点坐标
-            map.centerAndZoom(point, 15); //初始化地图，设置中心点坐标和地图级别
-            map.enableScrollWheelZoom(true); //开启鼠标滚轮缩放
-          });
+          // this.lazyService.loadScript('http://api.map.baidu.com/getscript?v=2.0&ak=RD5HkkjTa6uAIDpw7GRFtR83Fk7Wdk0j').then(() => {
+          //   const map = new BMap.Map('map'); //创建地图实例
+          //   const point = new BMap.Point(116.404, 39.915); //创建点坐标
+          //   map.centerAndZoom(point, 15); //初始化地图，设置中心点坐标和地图级别
+          //   map.enableScrollWheelZoom(true); //开启鼠标滚轮缩放
+          // });
         });
       });
   }

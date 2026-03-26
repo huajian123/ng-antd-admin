@@ -98,10 +98,11 @@
             </div>
             <div nz-col [nzLg]="12" [nzMd]="11" [nzSm]="24" [nzXl]="7" [nzXs]="24">
               <h3 class="p-l-35 m-b-20">门店销售额排名</h3>
-              @for (item of 7 | numberLoop; track $index) {
+              @for (_ of 7 | numberLoop; track $index) {
                 <div class="rank-list" title="工专路 {{ $index + 1 }} 号店">
                   <div class="center">
-                    <nz-badge [nzCount]="$index + 1" [nzStyle]="{ background: $index < 4 ? '#314659' : '#fafafa', color: $index < 4 ? '#fff' : 'black' }"></nz-badge>
+                    <!--  <nz-badge [nzCount]="$index + 1" [nzStyle]="{ backgroundColor: $index < 4 ? '#314659' : '#fafafa', color: $index < 4 ? '#fff' : 'black' }"></nz-badge>-->
+                    <span class="rank-badge" [style.backgroundColor]="$index < 4 ? '#314659' : '#fafafa'" [style.color]="$index < 4 ? '#fff' : 'black'">{{ $index + 1 }}</span>
                     <span class="m-l-5">工专路 {{ $index + 1 }} 号店</span>
                   </div>
                   <div>323,234</div>
