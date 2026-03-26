@@ -127,15 +127,20 @@ provideRouter(routes, withViewTransitions({ skipInitialTransition: true }))
 
 ## 📦 快速开始
 
-### 方式一：仅前端预览 (推荐体验)
-使用 MSW (Mock Service Worker) 模拟数据，无需后端即可体验完整功能。
+本项目支持两种启动模式，**默认为 Mock 模式**，无需任何后端环境即可运行。
+
+### 模式一：Mock 模式（默认，推荐）
+
+使用 [MSW (Mock Service Worker)](https://mswjs.io/) 在浏览器端拦截请求并返回模拟数据，**零依赖、开箱即用**，适合快速体验和前端开发调试。
+
+`src/environments/environment.ts` 中 `mockEnabled: true` 即为开启状态（默认已开启）。
 
 ```bash
-# 1. 克隆纯前端 Mock 分支
-下载 zip包 https://github.com/huajian123/ng-antd-admin/releases/tag/v17.3.0
+# 1. 克隆项目
+git clone https://github.com/huajian123/ng-antd-admin.git
+cd ng-antd-admin/ui
 
 # 2. 安装依赖
-cd ng-antd-admin
 npm install
 
 # 3. 启动项目
@@ -144,10 +149,27 @@ npm start
 # 4. 访问 http://localhost:4201
 ```
 
-### 方式二：完整全栈版 (前端 + 后端)
-适合需要二次开发完整业务系统的场景。
+> 无需配置数据库、无需启动后端服务，直接运行即可体验完整功能。
 
-#### 1. 启动后端 (NestJS)
+---
+
+### 模式二：全栈模式（对接真实后端）
+
+适合需要二次开发完整业务系统的场景，由 **NestJS + PostgreSQL** 提供真实后端服务。
+
+#### 第一步：关闭 Mock
+
+将 `src/environments/environment.ts` 中的 `mockEnabled` 改为 `false`：
+
+```typescript
+export const environment = {
+  production: false,
+  mockEnabled: false  // 关闭 Mock，请求将转发至真实后端
+};
+```
+
+#### 第二步：启动后端 (NestJS)
+
 ```bash
 # 1. 确保已安装 Docker
 docker --version
@@ -169,24 +191,23 @@ npm install
 npm run start
 ```
 
-#### 2. 启动前端
+#### 第三步：启动前端
+
 ```bash
-# 1. 进入前端目录
 cd ui
-
-# 2. 安装依赖
 npm install
-
-# 3. 启动开发服务器
 npm start
 
-# 4. 浏览器访问 http://localhost:4201
+# 访问 http://localhost:4201
 ```
 
-### 方式三：纯净版 (零业务代码)
+---
+
+### 模式三：纯净版（零业务代码）
+
 仅保留基础架构，适合直接对接已有后端 API。
 
-```html
+```
 https://gitee.com/hjxiaoqianduan/ng-ant-admin-pure
 ```
 
