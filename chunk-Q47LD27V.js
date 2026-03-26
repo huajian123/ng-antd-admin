@@ -1,0 +1,1 @@
+import{Ka as r,ma as o}from"./chunk-5BNMSUNZ.js";var t=class n{currentTransition=r(null);static \u0275fac=function(i){return new(i||n)};static \u0275prov=o({token:n,factory:n.\u0275fac,providedIn:"root"})};export{t as a};

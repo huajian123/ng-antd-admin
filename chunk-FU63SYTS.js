@@ -1,0 +1,1 @@
+import"./chunk-DAQOROHW.js";var o=[{path:"",redirectTo:"flow-chat",pathMatch:"full"},{path:"flow-chat",title:"\u6D41\u7A0B\u56FE",data:{key:"flow-chat"},loadComponent:()=>import("./chunk-VTYQI7VT.js").then(t=>t.FlowChatComponent)}];export{o as default};
