@@ -18,7 +18,6 @@ export interface DragModalData {
   selector: 'app-drag',
   templateUrl: './drag.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true
 })
 export class DragComponent extends BasicConfirmModalComponent implements OnInit {
   readonly nzModalData: DragModalData = inject(NZ_MODAL_DATA);

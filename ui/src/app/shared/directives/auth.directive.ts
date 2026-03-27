@@ -4,7 +4,6 @@ import { UserInfoStoreService } from '@store/common-store/userInfo-store.service
 
 @Directive({
   selector: '[appAuth]',
-  standalone: true
 })
 export class AuthDirective implements OnInit {
   codeArray = computed(() => {

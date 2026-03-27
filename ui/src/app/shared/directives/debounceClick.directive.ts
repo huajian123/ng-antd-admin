@@ -6,7 +6,6 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 @Directive({
   selector: '[appDebounceClick]',
-  standalone: true,
   host: {
     '(click)': 'clickEvent($event)'
   }

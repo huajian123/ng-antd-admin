@@ -5,6 +5,5 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   templateUrl: './zorro-doc.component.html',
   styleUrls: ['./zorro-doc.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true
 })
 export class ZorroDocComponent {}

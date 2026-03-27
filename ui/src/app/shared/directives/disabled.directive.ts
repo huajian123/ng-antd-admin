@@ -2,7 +2,6 @@ import { Directive, Input } from '@angular/core';
 
 @Directive({
   selector: '[appEnable]',
-  standalone: true,
   host: {
     '[class.operate-text]': 'enable',
     '[class.operate-text-disabled]': 'disabledStyle'

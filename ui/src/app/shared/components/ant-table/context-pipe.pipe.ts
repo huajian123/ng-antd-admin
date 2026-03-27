@@ -7,7 +7,6 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
  * */
 @Pipe({
   name: 'contextPipe',
-  standalone: true
 })
 export class ContextPipePipe implements PipeTransform {
   transform(row: NzSafeAny, key: string): NzSafeAny {

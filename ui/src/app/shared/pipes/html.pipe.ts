@@ -5,7 +5,6 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 @Pipe({
   name: 'htmlPipe',
-  standalone: true
 })
 export class HtmlPipe implements PipeTransform {
   private domSanitizer = inject(DomSanitizer);

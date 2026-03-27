@@ -7,7 +7,6 @@ import { WaterMarkService } from '@core/services/common/water-mark.service';
   templateUrl: './water-mark.component.html',
   styleUrls: ['./water-mark.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true
 })
 export class WaterMarkComponent implements AfterViewInit {
   readonly watermark = viewChild.required<ElementRef>('watermark');

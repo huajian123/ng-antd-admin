@@ -2,7 +2,6 @@ import { Directive, ElementRef, inject, Renderer2 } from '@angular/core';
 
 @Directive({
   selector: '[appMouseHoverShow]',
-  standalone: true,
   host: {
     '(mouseover)': 'onMouseenter()',
     '(mouseout)': 'onMouseLeave()'

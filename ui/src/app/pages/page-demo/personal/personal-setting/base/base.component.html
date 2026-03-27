@@ -1,6 +1,6 @@
 <div nz-row>
   <div nz-col [nzLg]="24" [nzMd]="24" [nzOrder]="formOrder" [nzSm]="24" [nzXl]="12" [nzXs]="24" [nzXXl]="12">
-    <form nz-form [formGroup]="validateForm" [nzLayout]="'vertical'" (ngSubmit)="submitForm()">
+    <form nz-form [formGroup]="validateForm" nzLayout="vertical" (ngSubmit)="submitForm()">
       <nz-form-item>
         <nz-form-label nzFor="email" nzRequired nzSpan="24">邮箱</nz-form-label>
         <nz-form-control nzErrorTip="请输入邮箱" nzSpan="24">

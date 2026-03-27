@@ -3,7 +3,6 @@ import { Directive, ElementRef, numberAttribute, OnChanges, Renderer2, SimpleCha
 @Directive({
   // eslint-disable-next-line @angular-eslint/directive-selector
   selector: '.psm__progress-bar',
-  standalone: true,
   host: {
     '[attr.aria-valuemin]': 'minProgressVal',
     '[attr.aria-valuemax]': 'maxProgressVal',

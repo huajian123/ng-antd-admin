@@ -7,7 +7,6 @@ import { LockScreenStoreService } from '@store/common-store/lock-screen-store.se
   selector: 'app-empty-for-lock',
   template: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true
 })
 export class EmptyForLockComponent {
   destroyRef = inject(DestroyRef);

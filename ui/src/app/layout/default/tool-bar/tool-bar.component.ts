@@ -10,6 +10,5 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   `,
   styleUrls: ['./tool-bar.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true
 })
 export class ToolBarComponent {}

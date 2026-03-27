@@ -28,7 +28,6 @@ import { ChangNumberToChinesePipe } from '../../pipes/chang-number-to-chinese.pi
   templateUrl: './lock-screen.component.html',
   styleUrls: ['./lock-screen.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NzIconModule, NzButtonModule, NzGridModule, NzAvatarModule, FormsModule, NzFormModule, ReactiveFormsModule, NzInputModule, ChangNumberToChinesePipe, AsyncPipe, DatePipe]
 })
 export class LockScreenComponent implements OnInit {

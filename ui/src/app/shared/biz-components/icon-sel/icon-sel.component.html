@@ -32,7 +32,7 @@
     style="max-width: 300px"
     [nzPageSize]="pageObj.pageSize"
     [nzPageSizeOptions]="[20, 50]"
-    [nzSize]="'small'"
+    nzSize="small"
     [nzTotal]="iconsStrAllArray.length"
     [(nzPageIndex)]="pageObj.pageIndex"
     (nzPageIndexChange)="getData($event)"

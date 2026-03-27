@@ -31,7 +31,6 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 @Directive({
   // eslint-disable-next-line @angular-eslint/directive-selector
   selector: '[viewOutlet]',
-  standalone: true
 })
 export class ViewOutletDirective implements OnChanges {
   private componentRef: ComponentRef<NzSafeAny> | undefined;

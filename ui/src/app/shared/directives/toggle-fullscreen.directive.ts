@@ -5,7 +5,6 @@ import screenfull from 'screenfull';
 @Directive({
   selector: '[appToggleFullscreen]',
   exportAs: 'appToggleFullscreen',
-  standalone: true,
   host: {
     '(click)': 'onClick()'
   }

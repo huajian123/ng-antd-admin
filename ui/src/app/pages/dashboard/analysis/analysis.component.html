@@ -112,7 +112,102 @@
           </div>
         </nz-tab>
         <nz-tab nzTitle="访问量">
-          <h3>❤❤❤❤等待你的pr❤❤❤❤</h3>
+          <div class="p-16">
+            <div nz-row [nzGutter]="[16, 16]">
+              <div nz-col [nzLg]="8" [nzMd]="8" [nzSm]="24" [nzXl]="8" [nzXs]="24">
+                <nz-card [nzBordered]="false">
+                  <div nz-typography nzType="secondary">今日访问量</div>
+                  <h2 class="m-t-10 m-b-0">98,765</h2>
+                  <div class="m-t-10">
+                    <span nz-typography nzType="success">较昨日 +12.6%</span>
+                  </div>
+                </nz-card>
+              </div>
+
+              <div nz-col [nzLg]="8" [nzMd]="8" [nzSm]="24" [nzXl]="8" [nzXs]="24">
+                <nz-card [nzBordered]="false">
+                  <div nz-typography nzType="secondary">人均访问时长</div>
+                  <h2 class="m-t-10 m-b-0">6分32秒</h2>
+                  <div class="m-t-10">
+                    <span nz-typography nzType="warning">较上周 -3.1%</span>
+                  </div>
+                </nz-card>
+              </div>
+
+              <div nz-col [nzLg]="8" [nzMd]="8" [nzSm]="24" [nzXl]="8" [nzXs]="24">
+                <nz-card [nzBordered]="false">
+                  <div nz-typography nzType="secondary">跳出率</div>
+                  <h2 class="m-t-10 m-b-0">24.8%</h2>
+                  <div class="m-t-10">
+                    <span nz-typography nzType="success">较上周 -1.4%</span>
+                  </div>
+                </nz-card>
+              </div>
+            </div>
+
+            <div class="m-t-12">
+              <div nz-row [nzGutter]="[16, 16]">
+                <div nz-col [nzLg]="14" [nzMd]="14" [nzSm]="24" [nzXl]="14" [nzXs]="24">
+                  <nz-card nzTitle="访问来源分布" [nzBordered]="false">
+                    <div class="m-b-10" nz-typography nzType="secondary">自然流量持续增长，搜索引擎和直接访问占比稳定。</div>
+                    <div class="rank-list">
+                      <div class="center"><span class="rank-badge" style="background: #314659; color: #fff">1</span><span class="m-l-5">直接访问</span></div>
+                      <div>35.2%</div>
+                    </div>
+                    <div class="rank-list">
+                      <div class="center"><span class="rank-badge" style="background: #314659; color: #fff">2</span><span class="m-l-5">搜索引擎</span></div>
+                      <div>28.7%</div>
+                    </div>
+                    <div class="rank-list">
+                      <div class="center"><span class="rank-badge" style="background: #314659; color: #fff">3</span><span class="m-l-5">外部链接</span></div>
+                      <div>19.5%</div>
+                    </div>
+                    <div class="rank-list">
+                      <div class="center"><span class="rank-badge" style="background: #fafafa; color: #000">4</span><span class="m-l-5">社交媒体</span></div>
+                      <div>10.1%</div>
+                    </div>
+                    <div class="rank-list">
+                      <div class="center"><span class="rank-badge" style="background: #fafafa; color: #000">5</span><span class="m-l-5">邮件营销</span></div>
+                      <div>6.5%</div>
+                    </div>
+                  </nz-card>
+                </div>
+
+                <div nz-col [nzLg]="10" [nzMd]="10" [nzSm]="24" [nzXl]="10" [nzXs]="24">
+                  <nz-card nzTitle="近7天访问趋势" [nzBordered]="false">
+                    <div class="rank-list">
+                      <div>周一</div>
+                      <div>12,430</div>
+                    </div>
+                    <div class="rank-list">
+                      <div>周二</div>
+                      <div>13,012</div>
+                    </div>
+                    <div class="rank-list">
+                      <div>周三</div>
+                      <div>13,876</div>
+                    </div>
+                    <div class="rank-list">
+                      <div>周四</div>
+                      <div>14,205</div>
+                    </div>
+                    <div class="rank-list">
+                      <div>周五</div>
+                      <div>15,090</div>
+                    </div>
+                    <div class="rank-list">
+                      <div>周六</div>
+                      <div>14,660</div>
+                    </div>
+                    <div class="rank-list">
+                      <div>周日</div>
+                      <div>15,492</div>
+                    </div>
+                  </nz-card>
+                </div>
+              </div>
+            </div>
+          </div>
         </nz-tab>
       </nz-tabs>
     </nz-card>
@@ -200,32 +295,4 @@
       </nz-card>
     </div>
   </section>
-
-  <!--等待你的pr-->
-  <!--  <section class="m-t-20">
-      <nz-card>
-        <nz-tabs>
-          <ng-container *ngFor="let i of 51|numberLoop">
-            <nz-tab [nzTitle]="tabTitle">
-              ❤❤❤❤等待你的pr❤❤❤❤
-            </nz-tab>
-          </ng-container>
-        </nz-tabs>
-        <ng-template #tabTitle>
-          <div class="bottom-block-tab-wrap">
-            <div class="tab-title">stores 0</div>
-            <div class="tab-pipe-wrap">
-              <div>
-                <div>转化率</div>
-                <div>90%</div>
-              </div>
-              <div>
-                <div id="miniRing"></div>
-              </div>
-            </div>
-          </div>
-        </ng-template>
-      </nz-card>
-
-    </section>-->
 </section>

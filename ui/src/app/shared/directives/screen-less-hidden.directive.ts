@@ -4,7 +4,6 @@ import { Directive, inject, input, OnInit, TemplateRef, ViewContainerRef } from 
 /*屏幕宽度小于某个宽度时不显示的组件*/
 @Directive({
   selector: '[appScreenLessHidden]',
-  standalone: true
 })
 export class ScreenLessHiddenDirective implements OnInit {
   appScreenLessHidden = input('', { transform: this.appendPx });

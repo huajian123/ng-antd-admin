@@ -28,7 +28,6 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 @Directive({
   // eslint-disable-next-line @angular-eslint/directive-selector
   selector: 'ng-template[named]',
-  standalone: true
 })
 export class NamedTemplate<T> implements OnInit {
   template = inject<TemplateRef<T>>(TemplateRef);
