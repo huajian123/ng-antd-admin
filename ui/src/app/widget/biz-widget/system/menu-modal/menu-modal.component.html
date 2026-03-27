@@ -9,8 +9,8 @@
     <nz-form-label nzFor="menuType" nzRequired [nzSm]="6" [nzXs]="24">类型</nz-form-label>
     <nz-form-control [nzErrorTip]="combineTpl" [nzSm]="14" [nzXs]="24">
       <nz-radio-group formControlName="menuType" (ngModelChange)="changeMenuType($event)">
-        <label nz-radio [nzValue]="'C'">菜单</label>
-        <label nz-radio [nzValue]="'F'">按钮</label>
+        <label nz-radio nzValue="C">菜单</label>
+        <label nz-radio nzValue="F">按钮</label>
       </nz-radio-group>
     </nz-form-control>
   </nz-form-item>

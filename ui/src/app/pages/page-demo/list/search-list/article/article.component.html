@@ -32,7 +32,7 @@
     <div nz-col nzFlex="94px">owner:</div>
     <div class="flex-1" nz-col>
       <div class="left-start-center" nz-row>
-        <nz-select nzMode="multiple" [nzPlaceHolder]="'不限'" [(ngModel)]="searchInfo.owner">
+        <nz-select nzMode="multiple" nzPlaceHolder="不限" [(ngModel)]="searchInfo.owner">
           <nz-option nzLabel="我自己" nzValue="1"></nz-option>
           <nz-option nzLabel="吴家豪" nzValue="2"></nz-option>
           <nz-option nzLabel="周星星" nzValue="3"></nz-option>
@@ -44,19 +44,19 @@
     </div>
   </div>
   <nz-divider class="m-0" nzDashed></nz-divider>
-  <div class="m-t-20 m-b-20" nz-row [nzAlign]="'middle'">
+  <div class="m-t-20 m-b-20" nz-row nzAlign="middle">
     <div nz-col nzFlex="94px">其他选项:</div>
     <div nz-col nzFlex="1">
       <div nz-row>
         <div nz-col [nzLg]="8" [nzMd]="12" [nzSm]="12" [nzXl]="8" [nzXs]="12" [nzXXl]="8">
           活跃用户：
-          <nz-select class="max-width" [nzPlaceHolder]="'不限'" [(ngModel)]="searchInfo.author">
+          <nz-select class="max-width" nzPlaceHolder="不限" [(ngModel)]="searchInfo.author">
             <nz-option nzLabel="李三" nzValue="1"></nz-option>
           </nz-select>
         </div>
         <div nz-col [nzLg]="8" [nzMd]="12" [nzSm]="12" [nzXl]="8" [nzXs]="12" [nzXXl]="8">
           好评度：
-          <nz-select class="max-width" [nzPlaceHolder]="'不限'" [(ngModel)]="searchInfo.like">
+          <nz-select class="max-width" nzPlaceHolder="不限" [(ngModel)]="searchInfo.like">
             <nz-option nzLabel="优秀" nzValue="1"></nz-option>
             <nz-option nzLabel="普通" nzValue="2"></nz-option>
           </nz-select>
@@ -67,7 +67,7 @@
 </nz-card>
 <nz-card class="m-t-20">
   <app-water-mark />
-  <nz-list [nzItemLayout]="'vertical'">
+  <nz-list nzItemLayout="vertical">
     @for (item of 8 | numberLoop; track $index) {
       <nz-list-item nzNoFlex>
         <nz-list-item-meta>
@@ -84,7 +84,7 @@
         ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。
         <div class="m-t-15 info">
           <div nz-row>
-            <nz-avatar class="m-r-8" nzSize="small" [nzSrc]="'imgs/default_face.png'"></nz-avatar>
+            <nz-avatar class="m-r-8" nzSize="small" nzSrc="imgs/default_face.png"></nz-avatar>
             <a class="operate-text">付小小</a>
             <span class="m-r-8">发布在</span>
             <a class="m-r-8 operate-text">https://ant.design</a>

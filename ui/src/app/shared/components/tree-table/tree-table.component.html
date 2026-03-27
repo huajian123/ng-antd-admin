@@ -4,11 +4,11 @@
   nzShowQuickJumper
   nzShowSizeChanger
   nzTableLayout="fixed"
-  [nzBordered]="true"
+  nzBordered
   [nzData]="_dataList()"
   [nzFrontPagination]="false"
   [nzLoading]="tableConfig.loading"
-  [nzOuterBordered]="true"
+  nzOuterBordered
   [nzPageIndex]="tableConfig.pageIndex"
   [nzPageSize]="tableConfig.pageSize"
   [nzScroll]="tableConfig.needNoScroll ? {} : { x: '1100px' }"
@@ -22,7 +22,7 @@
   <thead>
     <tr>
       @if (tableConfig.showCheckbox) {
-        <th class="animate-bg-0" [nzChecked]="allChecked" [nzIndeterminate]="indeterminate" [nzLeft]="true" [nzWidth]="'40px'" (nzCheckedChange)="onAllChecked($event)"></th>
+        <th class="animate-bg-0" [nzChecked]="allChecked" [nzIndeterminate]="indeterminate" [nzLeft]="true" nzWidth="40px" (nzCheckedChange)="onAllChecked($event)"></th>
       }
       @for (head of tableConfig.headers; track head; let headIndex = $index; let last = $last; let first = $first) {
         @if (head.show === undefined || head.show === true) {
@@ -73,7 +73,7 @@
             @for (head of tableConfig.headers; track head; let headIndex = $index; let last = $last; let first = $first) {
               @if (head.show === undefined || head.show === true) {
                 <td
-                  [ngClass]="head.tdClassList ? head.tdClassList : ''"
+                  [class]="head.tdClassList ? head.tdClassList : ''"
                   [nzEllipsis]="!head.notNeedEllipsis"
                   [nzIndentSize]="first ? item.level! * 20 : 0"
                   [nzLeft]="!!head.fixed && head.fixedDir === 'left'"

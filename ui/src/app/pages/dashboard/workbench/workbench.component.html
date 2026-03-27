@@ -26,7 +26,7 @@
               @for (item of 6 | numberLoop; track $index) {
                 <nz-list-item style="padding: 16px 24px">
                   <nz-list-item-meta>
-                    <nz-list-item-meta-avatar [nzSrc]="'imgs/default_face.png'"></nz-list-item-meta-avatar>
+                    <nz-list-item-meta-avatar nzSrc="imgs/default_face.png"></nz-list-item-meta-avatar>
                     <nz-list-item-meta-title>
                       <a>
                         曲丽丽 在
@@ -75,7 +75,7 @@
               @for (item of 5 | numberLoop; track $index) {
                 <div nz-col nzSpan="12">
                   <a class="group">
-                    <nz-avatar [nzSize]="24" [nzSrc]="'https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png'"></nz-avatar>
+                    <nz-avatar [nzSize]="24" nzSrc="https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png"></nz-avatar>
                     <span class="m-l-10">科学搬砖组</span>
                   </a>
                 </div>
@@ -104,13 +104,13 @@
     <div nz-col nzFlex="280px">
       <nz-row>
         <nz-col [nzSpan]="8">
-          <nz-statistic [nzTitle]="'项目数'" [nzValue]="(56 | number)!"></nz-statistic>
+          <nz-statistic nzTitle="项目数" [nzValue]="(56 | number)!"></nz-statistic>
         </nz-col>
         <nz-col [nzSpan]="8">
-          <nz-statistic [nzTitle]="'团队内排名'" [nzValue]="'8/24'"></nz-statistic>
+          <nz-statistic nzTitle="团队内排名" nzValue="8/24"></nz-statistic>
         </nz-col>
         <nz-col [nzSpan]="8">
-          <nz-statistic [nzTitle]="'项目访问'" [nzValue]="(2223 | number)!"></nz-statistic>
+          <nz-statistic nzTitle="项目访问" [nzValue]="(2223 | number)!"></nz-statistic>
         </nz-col>
       </nz-row>
     </div>
@@ -121,6 +121,6 @@
 </ng-template>
 
 <ng-template #cardTitleTpl>
-  <nz-avatar [nzSize]="24" [nzSrc]="'https://gw.alipayobjects.com/zos/rmsportal/zOsKZmFRdUtvpqCImOVY.png'"></nz-avatar>
+  <nz-avatar [nzSize]="24" nzSrc="https://gw.alipayobjects.com/zos/rmsportal/zOsKZmFRdUtvpqCImOVY.png"></nz-avatar>
   <span class="m-l-10">Angular</span>
 </ng-template>

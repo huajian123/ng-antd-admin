@@ -15,20 +15,20 @@
           <div nz-col [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXl]="12" [nzXs]="24" [nzXXl]="12">
             <nz-row [nzGutter]="16">
               <nz-col [nzLg]="12" [nzMd]="24" [nzSm]="24" [nzXl]="12" [nzXs]="24" [nzXXl]="12">
-                <nz-statistic [nzTitle]="'今日交易总额'" [nzValue]="(124543233 | number)! + '元'"></nz-statistic>
+                <nz-statistic nzTitle="今日交易总额" [nzValue]="(124543233 | number)! + '元'"></nz-statistic>
               </nz-col>
               <nz-col [nzLg]="12" [nzMd]="24" [nzSm]="24" [nzXl]="12" [nzXs]="24" [nzXXl]="12">
-                <nz-statistic [nzTitle]="'销售目标完成率'" [nzValue]="(0.92 | percent)!"></nz-statistic>
+                <nz-statistic nzTitle="销售目标完成率" [nzValue]="(0.92 | percent)!"></nz-statistic>
               </nz-col>
             </nz-row>
           </div>
           <div nz-col [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXl]="12" [nzXs]="24" [nzXXl]="12">
             <nz-row [nzGutter]="16">
               <nz-col [nzLg]="12" [nzMd]="24" [nzSm]="24" [nzXl]="12" [nzXs]="24" [nzXXl]="12">
-                <nz-countdown [nzFormat]="'HH:mm:ss:SSS'" [nzTitle]="'活动剩余时间'" [nzValue]="deadline"></nz-countdown>
+                <nz-countdown nzFormat="HH:mm:ss:SSS" nzTitle="活动剩余时间" [nzValue]="deadline"></nz-countdown>
               </nz-col>
               <nz-col [nzLg]="12" [nzMd]="24" [nzSm]="24" [nzXl]="12" [nzXs]="24" [nzXXl]="12">
-                <nz-statistic [nzTitle]="'每秒交易总额'" [nzValue]="(234 | number)! + '元'"></nz-statistic>
+                <nz-statistic nzTitle="每秒交易总额" [nzValue]="(234 | number)! + '元'"></nz-statistic>
               </nz-col>
             </nz-row>
           </div>

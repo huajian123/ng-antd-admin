@@ -21,7 +21,7 @@
         </div>
       </div>
       <nz-steps nzProgressDot [nzCurrent]="1" [nzDirection]="stepDirection">
-        <nz-step [nzDescription]="createDesc" [nzTitle]="'创建项目'">
+        <nz-step [nzDescription]="createDesc" nzTitle="创建项目">
           <ng-template #createDesc>
             <div class="sp-14 relative">
               <div class="m-t-8 m-b-4">
@@ -32,7 +32,7 @@
             </div>
           </ng-template>
         </nz-step>
-        <nz-step [nzDescription]="checkedDesc" [nzTitle]="'部门初审'">
+        <nz-step [nzDescription]="checkedDesc" nzTitle="部门初审">
           <ng-template #checkedDesc>
             <div class="sp-14 relative">
               <div class="m-t-8 m-b-4">
@@ -45,8 +45,8 @@
             </div>
           </ng-template>
         </nz-step>
-        <nz-step [nzTitle]="'财务复核'"></nz-step>
-        <nz-step [nzTitle]="'完成'"></nz-step>
+        <nz-step nzTitle="财务复核"></nz-step>
+        <nz-step nzTitle="完成"></nz-step>
       </nz-steps>
     </div>
     <div nz-result-extra>

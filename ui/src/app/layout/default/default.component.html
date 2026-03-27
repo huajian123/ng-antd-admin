@@ -18,7 +18,7 @@
       [class.left-nav-fixed]="isFixedLeftNav"
       [nzCollapsed]="isCollapsed"
       [nzCollapsedWidth]="CollapsedNavWidth"
-      [nzCollapsible]="true"
+      nzCollapsible
       [nzTheme]="theme"
       [nzTrigger]="trigger"
       [nzWidth]="SideNavWidth"
@@ -96,7 +96,7 @@
         [class.t-0]="!isHasTopArea"
         [nzCollapsed]="isCollapsed"
         [nzCollapsedWidth]="CollapsedNavWidth"
-        [nzCollapsible]="true"
+        nzCollapsible
         [nzTheme]="isNightTheme ? 'dark' : 'light'"
         [nzTrigger]="trigger"
         [nzWidth]="SideNavWidth"

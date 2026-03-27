@@ -1,7 +1,7 @@
 <app-page-header [pageHeaderInfo]="pageHeaderInfo" />
 <div class="normal-table-wrap">
   <nz-card class="m-b-10" nzTitle="Message">
-    <button class="m-b-8" nz-button nzBlock [nzType]="'dashed'" (click)="addForm()">
+    <button class="m-b-8" nz-button nzBlock nzType="dashed" (click)="addForm()">
       <i nz-icon nzType="plus"></i>
       <span>添加</span>
     </button>
@@ -18,7 +18,7 @@
             </nz-form-item>
 
             <nz-form-item nz-col [nzSpan]="4">
-              <button nz-button [nzGhost]="true" nzType="primary" (click)="del(groupIndex)">
+              <button nz-button nzGhost nzType="primary" (click)="del(groupIndex)">
                 <i nz-icon nzType="delete"></i>
                 移除
               </button>
@@ -28,15 +28,15 @@
       </ng-container>
     </form>
 
-    <button class="m-b-8" nz-button nzBlock [nzType]="'dashed'" (click)="submitForm()">
+    <button class="m-b-8" nz-button nzBlock nzType="dashed" (click)="submitForm()">
       <i nz-icon nzType="plus"></i>
       <span>提交(查看控制台)</span>
     </button>
-    <button class="m-b-8" nz-button nzBlock [nzType]="'dashed'" (click)="updateFormItem()">
+    <button class="m-b-8" nz-button nzBlock nzType="dashed" (click)="updateFormItem()">
       <i nz-icon nzType="plus"></i>
       <span>修改索引为0的input(查看控制台)</span>
     </button>
-    <button class="m-b-8" nz-button nzBlock [nzType]="'dashed'" (click)="add2form()">
+    <button class="m-b-8" nz-button nzBlock nzType="dashed" (click)="add2form()">
       <i nz-icon nzType="plus"></i>
       <span>新增但是不触发valueChange(查看控制台)</span>
     </button>
@@ -116,7 +116,7 @@
       </div>
     </div>
 
-    <button class="m-b-8 m-t-20" nz-button nzBlock [nzType]="'dashed'" (click)="add()">
+    <button class="m-b-8 m-t-20" nz-button nzBlock nzType="dashed" (click)="add()">
       <i nz-icon nzType="plus"></i>
       <span>添加</span>
     </button>
@@ -142,7 +142,7 @@
           <nz-list-item-meta [nzDescription]="item.taskDesc" [nzTitle]="nzTitle">
             <ng-template #nzTitle>
               <a class="sp-18 m-r-8" href="{{ item.href }}" target="_blank">{{ item.taskName }}</a>
-              <nz-tag [nzColor]="'blue'">标记</nz-tag>
+              <nz-tag nzColor="blue">标记</nz-tag>
             </ng-template>
           </nz-list-item-meta>
           <ng-template #nzContent>

@@ -4,7 +4,7 @@
   <nz-radio-group>
     <label nz-radio-button>操作一</label>
     <label nz-radio-button>操作二</label>
-    <label nz-dropdown nz-radio-button [nzDropdownMenu]="menu" [nzPlacement]="'bottomRight'">
+    <label nz-dropdown nz-radio-button [nzDropdownMenu]="menu" nzPlacement="bottomRight">
       <i nz-icon nzTheme="outline" nzType="ellipsis"></i>
     </label>
     <nz-dropdown-menu #menu="nzDropdownMenu">
@@ -45,7 +45,7 @@
 </ng-template>
 
 <div class="normal-table-wrap">
-  <nz-card [nzTitle]="'流程进度'">
+  <nz-card nzTitle="流程进度">
     <app-water-mark />
     <nz-steps [nzCurrent]="1" [nzDirection]="stepDirection" [nzProgressDot]="progressTemplate">
       <nz-step nzTitle="创建项目" [nzDescription]="createTpl"></nz-step>
@@ -85,7 +85,7 @@
     </ng-template>
   </nz-card>
 
-  <nz-card class="m-t-20" [nzTitle]="'用户信息'">
+  <nz-card class="m-t-20" nzTitle="用户信息">
     <app-water-mark />
     <nz-descriptions>
       <nz-descriptions-item nzTitle="用户姓名">付小小</nz-descriptions-item>
@@ -125,7 +125,7 @@
     </nz-card>
   </nz-card>
 
-  <nz-card class="m-t-20" [nzTitle]="'用户近半年来电记录'">
+  <nz-card class="m-t-20" nzTitle="用户近半年来电记录">
     <app-water-mark />
     <nz-empty></nz-empty>
   </nz-card>

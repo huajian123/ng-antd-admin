@@ -54,7 +54,7 @@
   <nz-form-item>
     <nz-form-label nzFor="departmentId" nzRequired [nzSm]="4" [nzXs]="24">所属部门</nz-form-label>
     <nz-form-control [nzErrorTip]="combineTpl" [nzSm]="18" [nzXs]="24">
-      <nz-tree-select formControlName="departmentId" nzPlaceHolder="Please select" nzShowSearch [nzDropdownMatchSelectWidth]="true" [nzNodes]="deptNodes"></nz-tree-select>
+      <nz-tree-select formControlName="departmentId" nzPlaceHolder="Please select" nzShowSearch nzDropdownMatchSelectWidth [nzNodes]="deptNodes"></nz-tree-select>
     </nz-form-control>
   </nz-form-item>
 

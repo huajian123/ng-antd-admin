@@ -5,11 +5,11 @@
   nzShowQuickJumper
   nzShowSizeChanger
   nzTableLayout="fixed"
-  [nzBordered]="true"
+  nzBordered
   [nzData]="_dataList()"
   [nzFrontPagination]="false"
   [nzLoading]="tableConfig.loading"
-  [nzOuterBordered]="true"
+  nzOuterBordered
   [nzPageIndex]="tableConfig.pageIndex"
   [nzPageSize]="tableConfig.pageSize"
   [nzScroll]="_scrollConfig"
@@ -24,7 +24,7 @@
   <thead>
     <tr>
       @if (tableConfig.showCheckbox) {
-        <th class="animate-bg-0" [nzChecked]="allChecked" [nzIndeterminate]="indeterminate" [nzLeft]="true" [nzWidth]="'40px'" (nzCheckedChange)="onAllChecked($event)"></th>
+        <th class="animate-bg-0" [nzChecked]="allChecked" [nzIndeterminate]="indeterminate" [nzLeft]="true" nzWidth="40px" (nzCheckedChange)="onAllChecked($event)"></th>
       }
       @for (head of tableConfig.headers; track trackByTableHead(headIndex, head); let headIndex = $index; let last = $last; let first = $first) {
         @if (head.show === undefined || head.show === true) {
@@ -33,7 +33,7 @@
             nz-resizable
             nzBounds="parent"
             nzPreview
-            [ngClass]="[head.thClassList ? head.thClassList : [], head.thClassFn ? head.thClassFn(head) : ''].flat()"
+            [class]="[head.thClassList ? head.thClassList : [], head.thClassFn ? head.thClassFn(head) : ''].flat()"
             [nzLeft]="!!head.fixed && head.fixedDir === 'left'"
             [nzMaxWidth]="1200"
             [nzMinWidth]="1"
@@ -69,7 +69,7 @@
         @for (head of tableConfig.headers; track trackByTableHead($index, head)) {
           @if (head.show === undefined || head.show === true) {
             <td
-              [ngClass]="[head.tdClassList ? head.tdClassList : [], head.tdClassFn ? head.tdClassFn(row, rowIndex) : ''].flat()"
+              [class]="[head.tdClassList ? head.tdClassList : [], head.tdClassFn ? head.tdClassFn(row, rowIndex) : ''].flat()"
               [nzEllipsis]="!head.notNeedEllipsis"
               [nzLeft]="!!head.fixed && head.fixedDir === 'left'"
               [nzRight]="!!head.fixed && head.fixedDir === 'right'"
