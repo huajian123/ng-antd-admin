@@ -1,5 +1,5 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject, DestroyRef, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -18,25 +18,18 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
   imports: [NzCardModule, NzResultModule, NzTypographyModule, NzGridModule, NzStepsModule, NzIconModule, NzButtonModule, NzWaveModule]
 })
 export class SuccessComponent implements OnInit {
-  stepDirection: 'horizontal' | 'vertical' = 'horizontal';
+  stepDirection = signal<'horizontal' | 'vertical'>('horizontal');
   destroyRef = inject(DestroyRef);
   private breakpointObserver = inject(BreakpointObserver);
-  private cdr = inject(ChangeDetectorRef);
 
   ngOnInit(): void {
     this.breakpointObserver
       .observe(['(max-width: 770px)'])
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(result => {
-        let tempDir: 'vertical' | 'horizontal';
-        if (result.matches) {
-          tempDir = 'vertical';
-        } else {
-          tempDir = 'horizontal';
-        }
-        if (tempDir !== this.stepDirection) {
-          this.stepDirection = tempDir;
-          this.cdr.markForCheck();
+        const tempDir: 'vertical' | 'horizontal' = result.matches ? 'vertical' : 'horizontal';
+        if (tempDir !== this.stepDirection()) {
+          this.stepDirection.set(tempDir);
         }
       });
   }

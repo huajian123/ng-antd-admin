@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy, inject } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, signal } from '@angular/core';
 
 import { NgxEchartsModule } from 'ngx-echarts';
 
@@ -6,22 +6,20 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 @Component({
   selector: 'app-merge-charts',
-  template: `<div class="demo-chart" echarts [merge]="updateOptions" [options]="options"></div>`,
+  template: `<div class="demo-chart" echarts [merge]="updateOptions()" [options]="options"></div>`,
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NgxEchartsModule]
 })
 export class MergeChartsComponent implements OnInit, OnDestroy {
   options: NzSafeAny;
-  updateOptions: NzSafeAny;
+  updateOptions = signal<NzSafeAny>(undefined);
 
   private oneDay = 24 * 3600 * 1000;
   private now: Date | undefined;
   private value: number | undefined;
   private data: NzSafeAny[] = [];
   private timer: NzSafeAny;
-
-  private cdr = inject(ChangeDetectorRef);
 
   ngOnInit(): void {
     // generate some random testing data:
@@ -82,15 +80,13 @@ export class MergeChartsComponent implements OnInit, OnDestroy {
         this.data.push(this.randomData());
       }
 
-      // update series data:
-      this.updateOptions = {
+      this.updateOptions.set({
         series: [
           {
             data: this.data
           }
         ]
-      };
-      this.cdr.detectChanges();
+      });
     }, 1000);
   }
 

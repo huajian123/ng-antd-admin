@@ -1,6 +1,6 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { ComponentPortal, CdkPortalOutletAttachedRef, Portal, ComponentType, PortalModule } from '@angular/cdk/portal';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ComponentRef, DestroyRef, inject, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ComponentRef, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { StepThreeComponent } from '@app/pages/page-demo/form/step/step-three/step-three.component';
@@ -31,7 +31,7 @@ enum StepEnum {
 })
 export class StepComponent implements OnInit, AfterViewInit {
   selectedPortal!: Portal<NzSafeAny>;
-  stepDirection: 'horizontal' | 'vertical' = 'horizontal';
+  stepDirection = signal<'horizontal' | 'vertical'>('horizontal');
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '分步表单',
     desc: '将一个冗长或用户不熟悉的表单任务分成多个步骤，指导用户完成。（演示cdk传送点）',
@@ -56,7 +56,7 @@ export class StepComponent implements OnInit, AfterViewInit {
   initComponent(ref: CdkPortalOutletAttachedRef): void {
     if (ref instanceof ComponentRef) {
       if (ref.instance instanceof StepOneComponent) {
-        ref.setInput('stepDirection', this.stepDirection);
+        ref.setInput('stepDirection', this.stepDirection());
         ref.instance.next.subscribe(() => {
           this.go(StepEnum.Two, ref, this.currentStep + 1);
         });
@@ -70,7 +70,7 @@ export class StepComponent implements OnInit, AfterViewInit {
         });
       }
       if (ref.instance instanceof StepThreeComponent) {
-        ref.setInput('stepDirection', this.stepDirection);
+        ref.setInput('stepDirection', this.stepDirection());
         ref.instance.next.subscribe(() => {
           this.go(StepEnum.One, ref, 1);
         });
@@ -84,9 +84,8 @@ export class StepComponent implements OnInit, AfterViewInit {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(result => {
         const tempDir: 'vertical' | 'horizontal' = result.matches ? 'vertical' : 'horizontal';
-        if (tempDir !== this.stepDirection) {
-          this.stepDirection = tempDir;
-          this.cdr.markForCheck();
+        if (tempDir !== this.stepDirection()) {
+          this.stepDirection.set(tempDir);
         }
       });
   }
