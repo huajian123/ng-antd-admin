@@ -1,6 +1,6 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { ComponentPortal, ComponentType, Portal, PortalModule } from '@angular/cdk/portal';
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject, DestroyRef, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { ConnectChartsComponent } from '@app/pages/feat/charts/echarts/advanced/connect-charts/connect-charts.component';
@@ -26,9 +26,8 @@ export class AdvancedComponent implements OnInit {
     { label: 'Draggable Chart', value: DraggableChartsComponent }
   ];
   destroyRef = inject(DestroyRef);
-  tabPosition: NzTabPosition = 'left';
+  tabPosition = signal<NzTabPosition>('left');
 
-  private cdr = inject(ChangeDetectorRef);
   private breakpointObserver = inject(BreakpointObserver);
 
   to(tabIndex: number): void {
@@ -42,8 +41,7 @@ export class AdvancedComponent implements OnInit {
       .observe(['(max-width: 767px)'])
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(result => {
-        this.tabPosition = result.matches ? 'top' : 'left';
-        this.cdr.markForCheck();
+        this.tabPosition.set(result.matches ? 'top' : 'left');
       });
   }
 }
