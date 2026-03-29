@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit, ElementRef, inject, DestroyRef, viewChild, DOCUMENT } from '@angular/core';
+import { Component, ChangeDetectionStrategy, AfterViewInit, ElementRef, inject, DestroyRef, viewChild, DOCUMENT, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { fromEvent, merge, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -21,30 +21,27 @@ export class ClickOutSideComponent implements AfterViewInit {
     breadcrumb: ['首页', '功能', 'clickOutSide']
   };
   destroyRef = inject(DestroyRef);
-  text = '点击内部或者外部';
+  text = signal('点击内部或者外部');
   winClick$!: Observable<Event>; // 绑定window的click事件
   readonly targetHtml = viewChild.required<ElementRef>('targetHtml');
   targetHtmlClick$!: Observable<NzSafeAny>;
 
-  private cdr = inject(ChangeDetectorRef);
   private doc = inject(DOCUMENT);
 
   ngAfterViewInit(): void {
     this.targetHtmlClick$ = fromEvent(this.targetHtml().nativeElement, 'click').pipe(
       tap(e => {
         fnStopMouseEvent(e as MouseEvent);
-        this.text = '刀斩肉身';
+        this.text.set('刀斩肉身');
       })
     );
     this.winClick$ = fromEvent(this.doc, 'click').pipe(
       tap(() => {
-        this.text = '心斩灵魂';
+        this.text.set('心斩灵魂');
       })
     );
     merge(this.targetHtmlClick$, this.winClick$)
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => {
-        this.cdr.markForCheck();
-      });
+      .subscribe();
   }
 }
