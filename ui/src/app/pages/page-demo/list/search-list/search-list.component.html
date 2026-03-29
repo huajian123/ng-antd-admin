@@ -4,12 +4,10 @@
   <div class="center">
     <app-water-mark />
     <div style="width: 455px">
-      <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
+      <nz-space-compact nzSize="large" [style.width.%]="100">
         <input type="text" nz-input placeholder="请输入" />
-      </nz-input-group>
-      <ng-template #suffixButton>
-        <button nz-button nzSearch nzSize="large" nzType="primary">搜索</button>
-      </ng-template>
+        <button nz-button nzType="primary">搜索</button>
+      </nz-space-compact>
     </div>
   </div>
 </ng-template>

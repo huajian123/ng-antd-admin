@@ -18,6 +18,7 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzProgressModule, NzProgressStatusType } from 'ng-zorro-antd/progress';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzStatisticModule } from 'ng-zorro-antd/statistic';
+import { NzSpaceCompactComponent } from 'ng-zorro-antd/space';
 
 @Component({
   selector: 'app-standard-table',
@@ -40,7 +41,8 @@ import { NzStatisticModule } from 'ng-zorro-antd/statistic';
     NzProgressModule,
     NzDropdownModule,
     NzMenuModule,
-    NzPaginationModule
+    NzPaginationModule,
+    NzSpaceCompactComponent
   ]
 })
 export class StandardTableComponent {
