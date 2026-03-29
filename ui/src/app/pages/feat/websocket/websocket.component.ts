@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy, OnDestroy, AfterViewInit, inject, DestroyRef, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 
 import { ip } from '@env/environment.prod';
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
@@ -18,7 +19,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
   selector: 'app-websocket',
   templateUrl: './websocket.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [PageHeaderComponent, NzGridModule, NzInputModule, FormsModule, NzButtonModule, NzWaveModule, NzCardModule, NzResultModule, NzTypographyModule]
+  imports: [PageHeaderComponent, NzGridModule, NzInputModule, FormsModule, NzButtonModule, NzWaveModule, NzCardModule, NzResultModule, NzTypographyModule, CdkTextareaAutosize]
 })
 export class WebsocketComponent implements OnDestroy, AfterViewInit {
   concate = true;

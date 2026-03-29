@@ -1,6 +1,6 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef, input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject, DestroyRef, input, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -33,8 +33,8 @@ export class BaseComponent implements OnInit {
   selectedProvince = 'Zhejiang';
   selectedCity = 'Hangzhou';
   provinceData = ['Zhejiang', 'Jiangsu'];
-  formOrder = 1;
-  avatarOrder = 0;
+  formOrder = signal(1);
+  avatarOrder = signal(0);
   cityData: Record<string, string[]> = {
     Zhejiang: ['Hangzhou', 'Ningbo', 'Wenzhou'],
     Jiangsu: ['Nanjing', 'Suzhou', 'Zhenjiang']
@@ -45,7 +45,6 @@ export class BaseComponent implements OnInit {
   private msg = inject(NzMessageService);
   private validatorsService = inject(ValidatorsService);
   private breakpointObserver = inject(BreakpointObserver);
-  private cdr = inject(ChangeDetectorRef);
 
   provinceChange(value: string): void {
     this.selectedCity = this.cityData[value][0];
@@ -90,13 +89,12 @@ export class BaseComponent implements OnInit {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(result => {
         if (result.matches) {
-          this.formOrder = 1;
-          this.avatarOrder = 0;
+          this.formOrder.set(1);
+          this.avatarOrder.set(0);
         } else {
-          this.formOrder = 0;
-          this.avatarOrder = 1;
+          this.formOrder.set(0);
+          this.avatarOrder.set(1);
         }
-        this.cdr.markForCheck();
       });
   }
 
