@@ -20,12 +20,10 @@
         <form class="full-with m-b-20" autocomplete="off" nz-form [formGroup]="validateForm" nzLayout="vertical">
           <nz-form-item>
             <nz-form-control [nzErrorTip]="combineTpl">
-              <nz-input-group [nzSuffix]="suffixTemplate">
+              <nz-input-wrapper>
                 <input name="password" autocomplete="off" formControlName="password" nz-input placeholder="请输入" [type]="passwordVisible ? 'text' : 'password'" />
-              </nz-input-group>
-              <ng-template #suffixTemplate>
-                <i nz-icon [nzType]="!passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
-              </ng-template>
+                <i nzInputSuffix nz-icon [nzType]="!passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
+              </nz-input-wrapper>
             </nz-form-control>
           </nz-form-item>
           <div class="full-with space-between">

@@ -3,12 +3,10 @@
 <div class="normal-table-wrap">
   <nz-card nzTitle="图标选择器">
     <button class="m-b-8" nz-button nzType="primary" (click)="visible = !visible">打开图标选择器</button>
-    <nz-input-group [nzAddOnAfter]="selIcon">
-      <input disabled nz-input [placeholder]="'点击右侧图标选择图标，这句话有点绕'" [(ngModel)]="seletedIcon" />
-    </nz-input-group>
-    <ng-template #selIcon>
-      <app-icon-sel [visible]="visible" (selIcon)="seletedIcon = $event"></app-icon-sel>
-    </ng-template>
+    <nz-input-wrapper>
+      <input disabled nz-input placeholder="点击右侧图标选择图标，这句话有点绕" [(ngModel)]="seletedIcon" />
+      <app-icon-sel nzInputAddonAfter [visible]="visible" (selIcon)="seletedIcon = $event"></app-icon-sel>
+    </nz-input-wrapper>
   </nz-card>
 
   <nz-card nzTitle="zorro官网直接用">

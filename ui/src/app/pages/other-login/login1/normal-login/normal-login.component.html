@@ -9,12 +9,10 @@
       </nz-form-item>
       <nz-form-item>
         <nz-form-control nzErrorTip="请输入密码!">
-          <nz-input-group nzSize="large" [nzSuffix]="suffixTemplate">
-            <input autocomplete="on" formControlName="password" nz-input placeholder="密码" [placeholder]="'no username and password,just login'" [type]="passwordVisible ? 'text' : 'password'" />
-          </nz-input-group>
-          <ng-template #suffixTemplate>
-            <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
-          </ng-template>
+          <nz-input-wrapper>
+            <input autocomplete="on" formControlName="password" nz-input nzSize="large" placeholder="密码" [placeholder]="'no username and password,just login'" [type]="passwordVisible ? 'text' : 'password'" />
+            <i nzInputSuffix nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
+          </nz-input-wrapper>
         </nz-form-control>
       </nz-form-item>
       <div nz-row nzJustify="space-between">

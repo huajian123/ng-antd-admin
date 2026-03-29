@@ -18,12 +18,10 @@
     <nz-form-item>
       <nz-form-label nzFor="icon" [nzSm]="6" [nzXs]="24">zorro图标</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24">
-        <nz-input-group [nzAddOnAfter]="selIcon">
+        <nz-input-wrapper>
           <input formControlName="icon" nz-input />
-        </nz-input-group>
-        <ng-template #selIcon>
-          <app-icon-sel [visible]="selIconVisible" (selIcon)="seledIcon($event)"></app-icon-sel>
-        </ng-template>
+          <app-icon-sel nzInputAddonAfter [visible]="selIconVisible" (selIcon)="seledIcon($event)"></app-icon-sel>
+        </nz-input-wrapper>
       </nz-form-control>
     </nz-form-item>
   }

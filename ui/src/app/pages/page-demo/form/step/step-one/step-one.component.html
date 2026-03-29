@@ -11,15 +11,13 @@
   <nz-form-item>
     <nz-form-label nzFor="a" nzRequired [nzSm]="6" [nzXs]="24">收款账户</nz-form-label>
     <nz-form-control nzErrorTip="请输入收款账户" [nzSm]="14" [nzXs]="24">
-      <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
-        <ng-template #addOnBeforeTemplate>
-          <nz-select class="phone-select" formControlName="payWay" style="width: 90px">
-            <nz-option nzLabel="支付宝" nzValue="zhifubao"></nz-option>
-            <nz-option nzLabel="银行卡" nzValue="bankcard"></nz-option>
-          </nz-select>
-        </ng-template>
+      <nz-input-wrapper>
+        <nz-select nzInputAddonBefore class="phone-select" formControlName="payWay" style="width: 90px">
+          <nz-option nzLabel="支付宝" nzValue="zhifubao"></nz-option>
+          <nz-option nzLabel="银行卡" nzValue="bankcard"></nz-option>
+        </nz-select>
         <input id="'payWayNo'" formControlName="payWayNo" nz-input />
-      </nz-input-group>
+      </nz-input-wrapper>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
@@ -31,9 +29,9 @@
   <nz-form-item>
     <nz-form-label nzFor="a" nzRequired [nzSm]="6" [nzXs]="24">收款金额</nz-form-label>
     <nz-form-control nzErrorTip="请输入收款金额" [nzSm]="14" [nzXs]="24">
-      <nz-input-group nzPrefix="￥">
+      <nz-input-wrapper nzPrefix="￥">
         <input type="number" formControlName="amount" nz-input />
-      </nz-input-group>
+      </nz-input-wrapper>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item nz-row>
