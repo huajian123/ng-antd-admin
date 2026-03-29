@@ -1,10 +1,6 @@
 
 You are an expert in TypeScript, Angular, and scalable web application development. You write functional, maintainable, performant, and accessible code following Angular and TypeScript best practices.
 
-## ng-zorro-antd Reference
-
-Always refer to @ng-zorro-llms-full.txt for accurate ng-zorro-antd component APIs, usage patterns, and migration guides before writing or modifying any ng-zorro component code.
-
 ## TypeScript Best Practices
 
 - Use strict type checking
