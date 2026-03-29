@@ -1,6 +1,6 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef, viewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject, DestroyRef, viewChild, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { AdComponent, DynamicComponent } from '@core/services/types';
@@ -32,7 +32,7 @@ interface TabInterface {
 })
 export class PersonalSettingComponent implements OnInit {
   readonly adHost = viewChild.required(AdDirective);
-  tabModel: NzMenuModeType = 'inline';
+  tabModel = signal<NzMenuModeType>('inline');
   settingComponent: TabInterface[] = [
     {
       key: 'base',
@@ -77,7 +77,6 @@ export class PersonalSettingComponent implements OnInit {
   currentTitle: string = this.menus[0].title;
 
   private breakpointObserver = inject(BreakpointObserver);
-  private cdr = inject(ChangeDetectorRef);
 
   to(item: { key: string; title: string; selected?: boolean }): void {
     const selMenu = this.settingComponent.find(({ key }) => {
@@ -95,8 +94,7 @@ export class PersonalSettingComponent implements OnInit {
       .observe(['(max-width: 767px)'])
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(result => {
-        this.tabModel = result.matches ? 'horizontal' : 'inline';
-        this.cdr.markForCheck();
+        this.tabModel.set(result.matches ? 'horizontal' : 'inline');
       });
   }
 

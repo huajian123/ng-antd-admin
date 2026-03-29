@@ -23,9 +23,9 @@
       appToggleFullscreen
       nz-tooltip
       nzTooltipPlacement="bottom"
-      [nzTooltipTitle]="toogleFullScreenDir.isFullscreenFlag ? '全屏' : '退出全屏'"
+      [nzTooltipTitle]="toogleFullScreenDir.isFullscreenFlag() ? '全屏' : '退出全屏'"
     >
-      @if (toogleFullScreenDir.isFullscreenFlag) {
+      @if (toogleFullScreenDir.isFullscreenFlag()) {
         <i nz-icon nzTheme="outline" nzType="fullscreen"></i>
       } @else {
         <i nz-icon nzTheme="outline" nzType="fullscreen-exit"></i>
