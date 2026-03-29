@@ -9,12 +9,13 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import {NzSpaceCompactComponent} from 'ng-zorro-antd/space';
 
 @Component({
   selector: 'app-copy',
   templateUrl: './copy.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [PageHeaderComponent, NzCardModule, NzButtonModule, NzInputModule, FormsModule, NzWaveModule, ClipboardModule]
+  imports: [PageHeaderComponent, NzCardModule, NzButtonModule, NzInputModule, FormsModule, NzWaveModule, ClipboardModule, NzSpaceCompactComponent]
 })
 export class CopyComponent {
   private msg = inject(NzMessageService);

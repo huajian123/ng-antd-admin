@@ -18,12 +18,10 @@
   <nz-card class="m-t-15 b-r-8" nzHoverable nzTitle="模板管理">
     <div class="full-with flex space-between m-b-8">
       <button nz-button nzType="primary">新建人员</button>
-      <nz-input-group style="width: 220px" [nzSuffix]="suffixIconSearch">
+      <nz-input-wrapper style="width: 220px">
         <input type="text" nz-input placeholder="请搜索人员" />
-      </nz-input-group>
-      <ng-template #suffixIconSearch>
-        <span nz-icon nzType="search"></span>
-      </ng-template>
+        <span nzInputSuffix nz-icon nzType="search"></span>
+      </nz-input-wrapper>
     </div>
     <app-user-member-manage></app-user-member-manage>
   </nz-card>
