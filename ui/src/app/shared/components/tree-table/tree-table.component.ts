@@ -34,7 +34,7 @@ export abstract class AntTreeTableComponentToken {
   styleUrls: ['./tree-table.component.less'],
   providers: [{ provide: AntTreeTableComponentToken, useExisting: TreeTableComponent }],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NzTableModule, NzResizableModule, NgClass, NgTemplateOutlet, MapPipe, TableFiledPipe]
+  imports: [NzTableModule, NzResizableModule, NgTemplateOutlet, MapPipe, TableFiledPipe]
 })
 export class TreeTableComponent implements OnChanges {
   private cdr = inject(ChangeDetectorRef);
