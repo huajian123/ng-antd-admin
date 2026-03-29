@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-top-progress-bar',
@@ -9,38 +11,34 @@ import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Rout
   imports: []
 })
 export class TopProgressBarComponent {
-  isFetching = false;
+  isFetching = signal(false);
 
   private router = inject(Router);
-  private cdr = inject(ChangeDetectorRef);
+  private destroyRef = inject(DestroyRef);
 
   constructor() {
-    this.router.events.subscribe(evt => {
+    this.router.events.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(evt => {
       // 表示在惰性加载某个路由配置前触发的事件。
-      if (!this.isFetching && evt instanceof RouteConfigLoadStart) {
-        this.isFetching = true;
-        this.cdr.markForCheck();
+      if (!this.isFetching() && evt instanceof RouteConfigLoadStart) {
+        this.isFetching.set(true);
       }
-      if (!this.isFetching && evt instanceof NavigationStart) {
-        this.isFetching = true;
-        this.cdr.markForCheck();
+      if (!this.isFetching() && evt instanceof NavigationStart) {
+        this.isFetching.set(true);
       }
       if (evt instanceof NavigationError || evt instanceof NavigationCancel) {
-        this.isFetching = false;
+        this.isFetching.set(false);
         if (evt instanceof NavigationError) {
           console.error('路由跳转失败');
         }
-        this.cdr.markForCheck();
         return;
       }
       if (!(evt instanceof NavigationEnd || evt instanceof RouteConfigLoadEnd)) {
         return;
       }
-      if (this.isFetching) {
-        setTimeout(() => {
-          this.isFetching = false;
-          this.cdr.markForCheck();
-        }, 600);
+      if (this.isFetching()) {
+        timer(600).pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+          this.isFetching.set(false);
+        });
       }
     });
   }
