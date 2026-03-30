@@ -1,5 +1,5 @@
 import { normalizePassiveListenerOptions } from '@angular/cdk/platform';
-import { Component, OnInit, ChangeDetectionStrategy, ElementRef, AfterViewInit, ChangeDetectorRef, HostListener, NgZone, inject, DestroyRef, viewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ElementRef, AfterViewInit, inject, DestroyRef, viewChild, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -35,16 +35,19 @@ const passiveEventListenerOptions = normalizePassiveListenerOptions({ passive: t
   templateUrl: './search-route.component.html',
   styleUrls: ['./search-route.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NzButtonModule, NzInputModule, FormsModule, NzIconModule, NzEmptyModule, NzGridModule, NzDividerModule]
+  imports: [NzButtonModule, NzInputModule, FormsModule, NzIconModule, NzEmptyModule, NzGridModule, NzDividerModule],
+  host: {
+    '(window:keyup.enter)': 'onEnterUp()',
+    '(window:keyup.arrowUp)': 'onArrowUp()',
+    '(window:keyup.arrowDown)': 'onArrowDown()'
+  }
 })
 export class SearchRouteComponent extends BasicConfirmModalComponent implements OnInit, AfterViewInit {
-  private cdr = inject(ChangeDetectorRef);
-  private ngZone = inject(NgZone);
   private menuStoreService = inject(MenuStoreService);
   private router = inject(Router);
   private themesService = inject(ThemeService);
 
-  resultListShow: ResultItem[] = [];
+  resultListShow = signal<ResultItem[]>([]);
   resultList: ResultItem[] = [];
   readonly searchInput = viewChild.required<ElementRef<HTMLInputElement>>('searchInput');
   inputValue: string | null = null;
@@ -53,48 +56,37 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
   override modalRef = inject(NzModalRef);
 
   changeSelAnswerIndex(dir: 'up' | 'down'): number | null {
-    const index = this.resultListShow.findIndex(item => item.selItem);
+    const list = this.resultListShow();
+    const index = list.findIndex(item => item.selItem);
     if (index > -1) {
-      // 向上
       if (dir === 'up') {
-        if (index === 0) {
-          return this.resultListShow.length - 1;
-        } else {
-          return index - 1;
-        }
+        return index === 0 ? list.length - 1 : index - 1;
       } else {
-        if (index === this.resultListShow.length - 1) {
-          return 0;
-        } else {
-          return index + 1;
-        }
+        return index === list.length - 1 ? 0 : index + 1;
       }
-    } else {
-      return null;
     }
+    return null;
   }
 
-  @HostListener('window:keyup.enter')
   onEnterUp(): void {
-    const index = this.resultListShow.findIndex(item => item.selItem);
+    const list = this.resultListShow();
+    const index = list.findIndex(item => item.selItem);
     if (index > -1) {
-      this.resultClick(this.resultListShow[index]);
+      this.resultClick(list[index]);
     }
   }
 
-  @HostListener('window:keyup.arrowUp')
   onArrowUp(): void {
     const index = this.changeSelAnswerIndex('up');
     if (index !== null) {
-      this.mouseOverItem(this.resultListShow[index]);
+      this.mouseOverItem(this.resultListShow()[index]);
     }
   }
 
-  @HostListener('window:keyup.arrowDown')
   onArrowDown(): void {
     const index = this.changeSelAnswerIndex('down');
     if (index !== null) {
-      this.mouseOverItem(this.resultListShow[index]);
+      this.mouseOverItem(this.resultListShow()[index]);
     }
   }
 
@@ -133,50 +125,39 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
 
   clearInput(): void {
     this.inputValue = '';
-    this.resultListShow = [];
-    // Template event handlers automatically trigger change detection
+    this.resultListShow.set([]);
   }
 
   subSearchFn(): void {
-    this.ngZone.runOutsideAngular(() => {
-      fromEvent(this.searchInput().nativeElement, 'input', passiveEventListenerOptions)
-        .pipe(
-          map(e => (e.target as HTMLInputElement).value),
-          debounceTime(500),
-          distinctUntilChanged(),
-          switchMap(item => {
-            return of(item);
-          }),
-          takeUntilDestroyed(this.destroyRef)
-        )
-        .subscribe(res => {
-          this.resultListShow = [];
-          this.resultList.forEach(item => {
-            if (item.title.includes(res)) {
-              this.resultListShow.push(item);
-            }
-          });
-          if (this.resultListShow.length > 0) {
-            this.resultListShow.map(item => (item.selItem = false));
-            this.resultListShow[0].selItem = true;
+    fromEvent(this.searchInput().nativeElement, 'input', passiveEventListenerOptions)
+      .pipe(
+        map(e => (e.target as HTMLInputElement).value),
+        debounceTime(500),
+        distinctUntilChanged(),
+        switchMap(item => of(item)),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe(res => {
+        const matched: ResultItem[] = [];
+        this.resultList.forEach(item => {
+          if (item.title.includes(res)) {
+            matched.push(item);
           }
-          this.resultListShow = [...this.resultListShow];
-          // 清空搜索条件时将结果集置空
-          if (!res) {
-            this.resultListShow = [];
-          }
-          this.ngZone.run(() => {
-            this.cdr.markForCheck();
-          });
         });
-    });
+        if (matched.length > 0) {
+          matched.forEach(item => (item.selItem = false));
+          matched[0].selItem = true;
+        }
+        this.resultListShow.set(res ? matched : []);
+      });
   }
 
   mouseOverItem(item: ResultItem): void {
-    this.resultListShow.forEach(resultItem => {
-      resultItem.selItem = false;
+    this.resultListShow.update(list => {
+      list.forEach(resultItem => (resultItem.selItem = false));
+      item.selItem = true;
+      return [...list];
     });
-    item.selItem = true;
   }
 
   ngAfterViewInit(): void {
