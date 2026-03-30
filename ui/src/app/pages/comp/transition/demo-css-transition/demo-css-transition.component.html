@@ -1,0 +1,26 @@
+<section class="demo-section">
+  <h3 class="demo-title">尺寸过渡</h3>
+  <p class="demo-desc">通过 CSS <code>transition</code> 实现平滑的尺寸变化</p>
+  <div class="box" [class.expanded]="expanded()"></div>
+  <button nz-button nzType="primary" (click)="toggle('expand')">
+    {{ expanded() ? '收起' : '展开' }}
+  </button>
+</section>
+
+<section class="demo-section">
+  <h3 class="demo-title">颜色过渡</h3>
+  <p class="demo-desc">通过 CSS <code>transition</code> 实现背景色与文字颜色渐变</p>
+  <div class="color-box" [class.highlighted]="highlighted()">
+    {{ highlighted() ? '已高亮' : '默认状态' }}
+  </div>
+  <button nz-button nzType="primary" (click)="toggle('highlight')">切换颜色</button>
+</section>
+
+<section class="demo-section">
+  <h3 class="demo-title">位移过渡</h3>
+  <p class="demo-desc">通过 CSS <code>transition</code> + <code>transform</code> 实现位移动画</p>
+  <div class="move-track">
+    <div class="move-box" [class.moved]="moved()"></div>
+  </div>
+  <button nz-button nzType="primary" (click)="toggle('move')">移动</button>
+</section>

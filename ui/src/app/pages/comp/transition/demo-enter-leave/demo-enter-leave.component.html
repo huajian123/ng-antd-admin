@@ -1,0 +1,38 @@
+<section class="demo-section">
+  <h3 class="demo-title">淡入 / 淡出</h3>
+  <p class="demo-desc">使用 <code>animate.enter</code> / <code>animate.leave</code> 配合 CSS <code>&#64;keyframes</code>，Angular 在元素进入/离开 DOM 时自动挂载对应 class</p>
+  <div class="stage">
+    @if (showFade()) {
+      <div class="card" animate.enter="fade-in" animate.leave="fade-out">淡入 / 淡出</div>
+    }
+  </div>
+  <button nz-button nzType="primary" (click)="toggleFade()">
+    {{ showFade() ? '移除' : '添加' }}
+  </button>
+</section>
+
+<section class="demo-section">
+  <h3 class="demo-title">滑入 / 滑出</h3>
+  <p class="demo-desc">元素从顶部滑入，向顶部滑出</p>
+  <div class="stage">
+    @if (showSlide()) {
+      <div class="card slide" animate.enter="slide-in" animate.leave="slide-out">滑入 / 滑出</div>
+    }
+  </div>
+  <button nz-button nzType="primary" (click)="toggleSlide()">
+    {{ showSlide() ? '移除' : '添加' }}
+  </button>
+</section>
+
+<section class="demo-section">
+  <h3 class="demo-title">缩放进入 / 离开</h3>
+  <p class="demo-desc">元素以缩放方式进场与离场</p>
+  <div class="stage">
+    @if (showZoom()) {
+      <div class="card zoom" animate.enter="zoom-in" animate.leave="zoom-out">缩放进入 / 离开</div>
+    }
+  </div>
+  <button nz-button nzType="primary" (click)="toggleZoom()">
+    {{ showZoom() ? '移除' : '添加' }}
+  </button>
+</section>

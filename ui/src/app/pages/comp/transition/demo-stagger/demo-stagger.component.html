@@ -1,0 +1,23 @@
+<section class="demo-section">
+  <h3 class="demo-title">交错进场</h3>
+  <p class="demo-desc">通过 CSS <code>animation-delay</code> 配合 <code>&#64;for</code> 的 <code>$index</code> 实现交错动画，无需任何动画库</p>
+  <div class="stage">
+    @for (item of items(); track item) {
+      <div class="stagger-item" [style.animation-delay]="$index * 80 + 'ms'" [style.background]="colors[$index]">
+        {{ $index + 1 }}
+      </div>
+    }
+  </div>
+  <button nz-button nzType="primary" (click)="play()">播放</button>
+</section>
+
+<section class="demo-section">
+  <h3 class="demo-title">核心原理</h3>
+  <p class="demo-desc">每个元素的 <code>animation-delay</code> = <code>$index × 间隔时间</code>，配合 <code>&#64;if</code> / <code>&#64;for</code> 控制元素的添加即可实现交错效果。</p>
+  <pre class="code-block"><code>&#64;for (item of items(); track item) &#123;
+  &lt;div
+    class="stagger-item"
+    [style.animation-delay]="$index * 80 + 'ms'"
+  &gt;{{ '{{' }} item {{ '}}' }}&lt;/div&gt;
+&#125;</code></pre>
+</section>
