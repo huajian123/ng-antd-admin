@@ -1,23 +1,64 @@
-<section class="demo-section">
-  <h3 class="demo-title">交错进场</h3>
-  <p class="demo-desc">通过 CSS <code>animation-delay</code> 配合 <code>&#64;for</code> 的 <code>$index</code> 实现交错动画，无需任何动画库</p>
-  <div class="stage">
-    @for (item of items(); track item) {
-      <div class="stagger-item" [style.animation-delay]="$index * 80 + 'ms'" [style.background]="colors[$index]">
-        {{ $index + 1 }}
+<div nz-row [nzGutter]="[24, 24]">
+  <div nz-col [nzMd]="12" [nzSm]="24" [nzXs]="24">
+    <nz-card nzTitle="卡片交错进场" [nzExtra]="cardTpl">
+      <ng-template #cardTpl>
+        <nz-tag nzColor="orange">animation-delay: $index × 80ms</nz-tag>
+      </ng-template>
+      <div class="preview">
+        <div class="card-grid">
+          @for (item of visibleCards(); track item.label) {
+            <div class="stagger-card" [style.animation-delay]="$index * 80 + 'ms'" [style.background]="item.color">
+              {{ item.label }}
+            </div>
+          }
+        </div>
       </div>
-    }
-  </div>
-  <button nz-button nzType="primary" (click)="play()">播放</button>
-</section>
-
-<section class="demo-section">
-  <h3 class="demo-title">核心原理</h3>
-  <p class="demo-desc">每个元素的 <code>animation-delay</code> = <code>$index × 间隔时间</code>，配合 <code>&#64;if</code> / <code>&#64;for</code> 控制元素的添加即可实现交错效果。</p>
-  <pre class="code-block"><code>&#64;for (item of items(); track item) &#123;
+      <nz-divider />
+      <pre class="code-block"><code>&#64;for (item of items(); track item) &#123;
   &lt;div
-    class="stagger-item"
+    class="stagger-card"
     [style.animation-delay]="$index * 80 + 'ms'"
-  &gt;{{ '{{' }} item {{ '}}' }}&lt;/div&gt;
+  &gt;...&lt;/div&gt;
+&#125;
+
+.stagger-card &#123;
+  opacity: 0;
+  animation: staggerIn 0.4s
+    cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 &#125;</code></pre>
-</section>
+      <button nz-button nzBlock nzType="primary" (click)="playCards()">播放</button>
+    </nz-card>
+  </div>
+
+  <div nz-col [nzMd]="12" [nzSm]="24" [nzXs]="24">
+    <nz-card nzTitle="列表交错进场" [nzExtra]="listTpl">
+      <ng-template #listTpl>
+        <nz-tag nzColor="orange">animation-delay: $index × 60ms</nz-tag>
+      </ng-template>
+      <div class="preview list">
+        <div class="list-wrap">
+          @for (item of visibleList(); track item.label) {
+            <div class="stagger-list-item" [style.animation-delay]="$index * 60 + 'ms'" [style.border-left-color]="item.color">
+              <span class="item-dot" [style.background]="item.color"></span>
+              <span class="item-label">{{ item.label }}</span>
+              <span class="item-badge" [style.color]="item.color" [style.background]="item.color + '1a'">完成</span>
+            </div>
+          }
+        </div>
+      </div>
+      <nz-divider />
+      <pre class="code-block"><code>&#64;for (item of items(); track item) &#123;
+  &lt;div
+    class="stagger-list-item"
+    [style.animation-delay]="$index * 60 + 'ms'"
+  &gt;...&lt;/div&gt;
+&#125;
+
+.stagger-list-item &#123;
+  opacity: 0;
+  animation: slideInLeft 0.35s ease forwards;
+&#125;</code></pre>
+      <button nz-button nzBlock nzType="primary" (click)="playList()">播放</button>
+    </nz-card>
+  </div>
+</div>

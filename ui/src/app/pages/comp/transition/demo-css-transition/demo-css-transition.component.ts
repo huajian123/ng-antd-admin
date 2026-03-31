@@ -1,23 +1,33 @@
 import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzTagModule } from 'ng-zorro-antd/tag';
 
 @Component({
   selector: 'app-demo-css-transition',
   templateUrl: './demo-css-transition.component.html',
   styleUrl: './demo-css-transition.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NzButtonModule, NzWaveModule]
+  imports: [NzButtonModule, NzWaveModule, NzCardModule, NzGridModule, NzTagModule, NzDividerModule]
 })
 export class DemoCssTransitionComponent {
   expanded = signal(false);
   highlighted = signal(false);
   moved = signal(false);
 
-  toggle(type: 'expand' | 'highlight' | 'move'): void {
-    if (type === 'expand') this.expanded.update(v => !v);
-    if (type === 'highlight') this.highlighted.update(v => !v);
-    if (type === 'move') this.moved.update(v => !v);
+  toggleExpand(): void {
+    this.expanded.update(v => !v);
+  }
+
+  toggleHighlight(): void {
+    this.highlighted.update(v => !v);
+  }
+
+  toggleMove(): void {
+    this.moved.update(v => !v);
   }
 }

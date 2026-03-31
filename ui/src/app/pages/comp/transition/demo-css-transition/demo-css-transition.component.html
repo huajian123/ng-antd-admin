@@ -1,26 +1,60 @@
-<section class="demo-section">
-  <h3 class="demo-title">尺寸过渡</h3>
-  <p class="demo-desc">通过 CSS <code>transition</code> 实现平滑的尺寸变化</p>
-  <div class="box" [class.expanded]="expanded()"></div>
-  <button nz-button nzType="primary" (click)="toggle('expand')">
-    {{ expanded() ? '收起' : '展开' }}
-  </button>
-</section>
-
-<section class="demo-section">
-  <h3 class="demo-title">颜色过渡</h3>
-  <p class="demo-desc">通过 CSS <code>transition</code> 实现背景色与文字颜色渐变</p>
-  <div class="color-box" [class.highlighted]="highlighted()">
-    {{ highlighted() ? '已高亮' : '默认状态' }}
+<div nz-row [nzGutter]="[24, 24]">
+  <div nz-col [nzMd]="12" [nzSm]="24" [nzXl]="8" [nzXs]="24">
+    <nz-card nzTitle="尺寸过渡" [nzExtra]="sizeTpl">
+      <ng-template #sizeTpl>
+        <nz-tag nzColor="blue">transition: width height</nz-tag>
+      </ng-template>
+      <div class="preview">
+        <div class="box" [class.expanded]="expanded()"></div>
+      </div>
+      <nz-divider />
+      <pre class="code-block"><code>.box &#123;
+  width: 80px; height: 80px;
+  transition: width 0.4s ease, height 0.4s ease;
+  &.expanded &#123; width: 200px; height: 120px; &#125;
+&#125;</code></pre>
+      <button nz-button nzBlock nzType="primary" (click)="toggleExpand()">
+        {{ expanded() ? '收起' : '展开' }}
+      </button>
+    </nz-card>
   </div>
-  <button nz-button nzType="primary" (click)="toggle('highlight')">切换颜色</button>
-</section>
 
-<section class="demo-section">
-  <h3 class="demo-title">位移过渡</h3>
-  <p class="demo-desc">通过 CSS <code>transition</code> + <code>transform</code> 实现位移动画</p>
-  <div class="move-track">
-    <div class="move-box" [class.moved]="moved()"></div>
+  <div nz-col [nzMd]="12" [nzSm]="24" [nzXl]="8" [nzXs]="24">
+    <nz-card nzTitle="颜色过渡" [nzExtra]="colorTpl">
+      <ng-template #colorTpl>
+        <nz-tag nzColor="blue">transition: background color</nz-tag>
+      </ng-template>
+      <div class="preview">
+        <div class="color-box" [class.highlighted]="highlighted()"></div>
+      </div>
+      <nz-divider />
+      <pre class="code-block"><code>.color-box &#123;
+  width: 120px; height: 120px;
+  background: #d9d9d9;
+  transition: background 0.5s ease;
+  &.highlighted &#123; background: #52c41a; &#125;
+&#125;</code></pre>
+      <button nz-button nzBlock nzType="primary" (click)="toggleHighlight()">切换颜色</button>
+    </nz-card>
   </div>
-  <button nz-button nzType="primary" (click)="toggle('move')">移动</button>
-</section>
+
+  <div nz-col [nzMd]="12" [nzSm]="24" [nzXl]="8" [nzXs]="24">
+    <nz-card nzTitle="位移过渡" [nzExtra]="moveTpl">
+      <ng-template #moveTpl>
+        <nz-tag nzColor="blue">transition: transform</nz-tag>
+      </ng-template>
+      <div class="preview">
+        <div class="move-track">
+          <div class="move-box" [class.moved]="moved()"></div>
+        </div>
+      </div>
+      <nz-divider />
+      <pre class="code-block"><code>.move-box &#123;
+  transition: transform 0.5s
+    cubic-bezier(0.34, 1.56, 0.64, 1);
+  &.moved &#123; transform: translateX(180px); &#125;
+&#125;</code></pre>
+      <button nz-button nzBlock nzType="primary" (click)="toggleMove()">移动</button>
+    </nz-card>
+  </div>
+</div>

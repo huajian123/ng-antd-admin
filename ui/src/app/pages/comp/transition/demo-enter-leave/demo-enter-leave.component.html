@@ -1,38 +1,74 @@
-<section class="demo-section">
-  <h3 class="demo-title">淡入 / 淡出</h3>
-  <p class="demo-desc">使用 <code>animate.enter</code> / <code>animate.leave</code> 配合 CSS <code>&#64;keyframes</code>，Angular 在元素进入/离开 DOM 时自动挂载对应 class</p>
-  <div class="stage">
-    @if (showFade()) {
-      <div class="card" animate.enter="fade-in" animate.leave="fade-out">淡入 / 淡出</div>
-    }
-  </div>
-  <button nz-button nzType="primary" (click)="toggleFade()">
-    {{ showFade() ? '移除' : '添加' }}
-  </button>
-</section>
+<div nz-row [nzGutter]="[24, 24]">
+  <div nz-col [nzMd]="12" [nzSm]="24" [nzXl]="8" [nzXs]="24">
+    <nz-card nzTitle="淡入 / 淡出" [nzExtra]="fadeTpl">
+      <ng-template #fadeTpl>
+        <nz-tag nzColor="green">animate.enter / animate.leave</nz-tag>
+      </ng-template>
+      <div class="preview">
+        @if (showFade()) {
+          <div class="anim-box fade" animate.enter="fade-in" animate.leave="fade-out"></div>
+        }
+      </div>
+      <nz-divider />
+      <pre class="code-block"><code>&lt;div
+  animate.enter="fade-in"
+  animate.leave="fade-out"
+&gt;...&lt;/div&gt;
 
-<section class="demo-section">
-  <h3 class="demo-title">滑入 / 滑出</h3>
-  <p class="demo-desc">元素从顶部滑入，向顶部滑出</p>
-  <div class="stage">
-    @if (showSlide()) {
-      <div class="card slide" animate.enter="slide-in" animate.leave="slide-out">滑入 / 滑出</div>
-    }
+.fade-in &#123; animation: fadeIn 0.4s ease forwards; &#125;
+.fade-out &#123; animation: fadeOut 0.4s ease forwards; &#125;</code></pre>
+      <button nz-button nzBlock nzType="primary" (click)="toggle('fade')">
+        {{ showFade() ? '移除' : '添加' }}
+      </button>
+    </nz-card>
   </div>
-  <button nz-button nzType="primary" (click)="toggleSlide()">
-    {{ showSlide() ? '移除' : '添加' }}
-  </button>
-</section>
 
-<section class="demo-section">
-  <h3 class="demo-title">缩放进入 / 离开</h3>
-  <p class="demo-desc">元素以缩放方式进场与离场</p>
-  <div class="stage">
-    @if (showZoom()) {
-      <div class="card zoom" animate.enter="zoom-in" animate.leave="zoom-out">缩放进入 / 离开</div>
-    }
+  <div nz-col [nzMd]="12" [nzSm]="24" [nzXl]="8" [nzXs]="24">
+    <nz-card nzTitle="滑入 / 滑出" [nzExtra]="slideTpl">
+      <ng-template #slideTpl>
+        <nz-tag nzColor="green">animate.enter / animate.leave</nz-tag>
+      </ng-template>
+      <div class="preview">
+        @if (showSlide()) {
+          <div class="anim-box slide" animate.enter="slide-in" animate.leave="slide-out"></div>
+        }
+      </div>
+      <nz-divider />
+      <pre class="code-block"><code>&lt;div
+  animate.enter="slide-in"
+  animate.leave="slide-out"
+&gt;...&lt;/div&gt;
+
+.slide-in &#123; animation: slideIn 0.4s ease forwards; &#125;
+.slide-out &#123; animation: slideOut 0.4s ease forwards; &#125;</code></pre>
+      <button nz-button nzBlock nzType="primary" (click)="toggle('slide')">
+        {{ showSlide() ? '移除' : '添加' }}
+      </button>
+    </nz-card>
   </div>
-  <button nz-button nzType="primary" (click)="toggleZoom()">
-    {{ showZoom() ? '移除' : '添加' }}
-  </button>
-</section>
+
+  <div nz-col [nzMd]="12" [nzSm]="24" [nzXl]="8" [nzXs]="24">
+    <nz-card nzTitle="缩放进入 / 离开" [nzExtra]="zoomTpl">
+      <ng-template #zoomTpl>
+        <nz-tag nzColor="green">animate.enter / animate.leave</nz-tag>
+      </ng-template>
+      <div class="preview">
+        @if (showZoom()) {
+          <div class="anim-box zoom" animate.enter="zoom-in" animate.leave="zoom-out"></div>
+        }
+      </div>
+      <nz-divider />
+      <pre class="code-block"><code>&lt;div
+  animate.enter="zoom-in"
+  animate.leave="zoom-out"
+&gt;...&lt;/div&gt;
+
+.zoom-in &#123; animation: zoomIn 0.35s
+  cubic-bezier(0.34, 1.56, 0.64, 1) forwards; &#125;
+.zoom-out &#123; animation: zoomOut 0.35s ease forwards; &#125;</code></pre>
+      <button nz-button nzBlock nzType="primary" (click)="toggle('zoom')">
+        {{ showZoom() ? '移除' : '添加' }}
+      </button>
+    </nz-card>
+  </div>
+</div>

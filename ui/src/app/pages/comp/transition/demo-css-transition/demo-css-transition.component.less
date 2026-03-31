@@ -1,72 +1,64 @@
 :host {
   display: block;
+  padding: 16px 0;
+}
+
+.preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 160px;
+  margin-bottom: 8px;
   padding: 16px;
+  background: #f5f5f5;
+  border-radius: 6px;
 }
 
-.demo-section {
-  margin-bottom: 40px;
-}
-
-.demo-title {
-  margin-bottom: 4px;
-  font-size: 15px;
-  font-weight: 600;
-}
-
-.demo-desc {
-  margin-bottom: 16px;
-  color: #666;
-  font-size: 13px;
+.code-block {
+  margin: 0 0 16px;
+  padding: 12px;
+  background: #f5f5f5;
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 1.7;
+  overflow-x: auto;
 
   code {
-    padding: 1px 4px;
-    background: #f0f0f0;
-    border-radius: 3px;
-    font-family: monospace;
+    font-family: 'SFMono-Regular', Consolas, monospace;
   }
 }
 
 .box {
   width: 80px;
   height: 80px;
-  margin-bottom: 16px;
   background: #1890ff;
-  border-radius: 6px;
+  border-radius: 8px;
   transition: width 0.4s ease, height 0.4s ease;
 
   &.expanded {
-    width: 200px;
+    width: 220px;
     height: 120px;
   }
 }
 
 .color-box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 200px;
-  height: 60px;
-  margin-bottom: 16px;
-  background: #f0f0f0;
-  border-radius: 6px;
-  color: #333;
-  font-weight: 500;
-  transition: background 0.4s ease, color 0.4s ease;
+  width: 120px;
+  height: 120px;
+  border-radius: 8px;
+  background: #d9d9d9;
+  transition: background 0.5s ease;
 
   &.highlighted {
     background: #52c41a;
-    color: #fff;
   }
 }
 
 .move-track {
   position: relative;
-  width: 100%;
+  width: 260px;
   height: 60px;
-  margin-bottom: 16px;
-  background: #fafafa;
-  border: 1px dashed #d9d9d9;
-  border-radius: 6px;
+  background: #f0f0f0;
+  border-radius: 30px;
   overflow: hidden;
 }
 
@@ -77,10 +69,10 @@
   width: 40px;
   height: 40px;
   background: #722ed1;
-  border-radius: 6px;
+  border-radius: 50%;
   transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 
   &.moved {
-    transform: translateX(calc(100vw - 120px));
+    transform: translateX(210px);
   }
 }

@@ -49,3 +49,10 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 - Design services around a single responsibility
 - Use the `providedIn: 'root'` option for singleton services
 - Use the `inject()` function instead of constructor injection
+
+## Styles
+
+- Do NOT use CSS variables (e.g. `var(--ant-color-xxx)`) in component Less files
+- Do NOT use Less variables (e.g. `@primary-color`) unless explicitly wrapping inside `.themeMixin({})` for theme support
+- For colors in component styles, use plain CSS color values (e.g. `#1890ff`, `#f5f5f5`) unless the task specifically requires theme-aware styling
+- This project uses Less + `.themeMixin()` for theming, not CSS custom properties
