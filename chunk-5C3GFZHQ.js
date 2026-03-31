@@ -1,1 +1,0 @@
-import{Ka as r,ma as e}from"./chunk-5BNMSUNZ.js";var a=class t{$splitLeftNavArray=r([]);static \u0275fac=function(o){return new(o||t)};static \u0275prov=e({token:t,factory:t.\u0275fac,providedIn:"root"})};export{a};
