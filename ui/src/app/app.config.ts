@@ -8,11 +8,9 @@ import {
   inject,
   provideAppInitializer,
   EnvironmentProviders,
-  DOCUMENT,
   provideBrowserGlobalErrorListeners
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter, RouteReuseStrategy, TitleStrategy, withComponentInputBinding, withHashLocation, withInMemoryScrolling, withPreloading, withViewTransitions } from '@angular/router';
 
 import { DashboardOutline, FormOutline, MenuFoldOutline, MenuUnfoldOutline } from '@ant-design/icons-angular/icons';
@@ -21,7 +19,6 @@ import { CustomPageTitleResolverService } from '@core/services/common/custom-pag
 import { InitThemeService } from '@core/services/common/init-theme.service';
 import { LoadAliIconCdnService } from '@core/services/common/load-ali-icon-cdn.service';
 import { SimpleReuseStrategy } from '@core/services/common/reuse-strategy';
-import { ScrollService } from '@core/services/common/scroll.service';
 import { SelectivePreloadingStrategyService } from '@core/services/common/selective-preloading-strategy.service';
 import { SubLockedStatusService } from '@core/services/common/sub-locked-status.service';
 import { SubWindowWithService } from '@core/services/common/sub-window-with.service';
@@ -101,7 +98,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     // 在无 Zone.js (Zoneless) 的新模式下，Angular 不再依赖 Zone.js 来感知异步操作和错误。这就导致了原生异步任务（如 setTimeout 或 Promise）中未处理的错误会“逃逸”出 Angular 的管理范围。
     provideBrowserGlobalErrorListeners(), // 在浏览器环境中，设置全局的错误监听器，并自动将捕获到的未处理错误和 Promise 拒绝 (rejection) 转发给 Angular 的 ErrorHandler 进行统一处理。
-    { provide: RouteReuseStrategy, useClass: SimpleReuseStrategy, deps: [DOCUMENT, ScrollService] }, // 路由复用
+    { provide: RouteReuseStrategy, useClass: SimpleReuseStrategy }, // 路由复用
     {
       provide: TitleStrategy, // 相关资料：https://dev.to/brandontroberts/setting-page-titles-natively-with-the-angular-router-393j
       useClass: CustomPageTitleResolverService // 自定义路由切换时，浏览器title的显示，在ng14以上支持。旧版本使用方式请看我的github v16tag以下版本代码
@@ -113,8 +110,7 @@ export const appConfig: ApplicationConfig = {
       withPreloading(SelectivePreloadingStrategyService), // 自定义模块预加载
       withViewTransitions({
         skipInitialTransition: true,
-        onViewTransitionCreated: (info) => {
-
+        onViewTransitionCreated: info => {
           const viewTransitionService = inject(ViewTransitionService);
 
           viewTransitionService.currentTransition.set(info);
@@ -138,7 +134,6 @@ export const appConfig: ApplicationConfig = {
     ),
     importProvidersFrom(NzDrawerModule, NzModalModule, FormsModule),
     ...APPINIT_PROVIDES, // 项目启动之前，需要调用的一系列方法
-    provideAnimationsAsync(), // 开启延迟加载动画，ng17新增特性，如果想要项目启动时就加载动画，可以使用provideAnimations()
     provideHttpClient(withInterceptors([httpInterceptorService])),
     provideZonelessChangeDetection() // 开启 zoneless
   ]

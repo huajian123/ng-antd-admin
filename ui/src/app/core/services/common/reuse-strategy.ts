@@ -64,7 +64,25 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
   // 是否允许复用路由
   shouldDetach(route: ActivatedRouteSnapshot): boolean {
     // 是否展示多页签，如果不展示多页签，则不做路由复用
-    return route.data['shouldDetach'] !== 'no' && this.$isShowTab();
+    const shouldDetach = route.data['shouldDetach'] !== 'no' && this.$isShowTab();
+    // 在此处记录滚动位置：shouldDetach 在 outlet.detach() 之前调用，DOM 还在文档中
+    // 修改记录滚动位置的时机，如果放在路由离开时才记录，会造成获取不到dom
+    if (shouldDetach && route.data['needKeepScroll'] !== 'no') {
+      const key = fnGetReuseStrategyKeyFn(route);
+      if (key) {
+        const innerScrollContainer: Record<string, [number, number]>[] = [];
+        const scrollContain: string[] = route.data['scrollContain'] ?? [];
+        scrollContain.forEach(item => {
+          const el = this.doc.querySelector(item);
+          if (el) {
+            innerScrollContainer.push({ [item]: this.scrollService.getScrollPosition(el) });
+          }
+        });
+        innerScrollContainer.push({ window: this.scrollService.getScrollPosition() });
+        SimpleReuseStrategy.scrollHandlers[key] = { scroll: innerScrollContainer };
+      }
+    }
+    return shouldDetach;
   }
 
   // 当路由离开时会触发，存储路由
@@ -82,22 +100,7 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
       return;
     }
 
-    // 离开路由的时候缓存当前页面的scroll位置
-    // 默认都需要keepScroll，如果不需要keepScroll才添加needKeepScroll:no属性
-    const innerScrollContainer = [];
-    if (route.data['needKeepScroll'] !== 'no') {
-      const scrollContain = route.data['scrollContain'] ?? [];
-      scrollContain.forEach((item: string) => {
-        const el = this.doc.querySelector(item)!;
-        if (el) {
-          const position = this.scrollService.getScrollPosition(el);
-          innerScrollContainer.push({ [item]: position });
-        }
-      });
-      innerScrollContainer.push({ window: this.scrollService.getScrollPosition() });
-    }
-
-    SimpleReuseStrategy.scrollHandlers[key] = { scroll: innerScrollContainer };
+    // 滚动位置已在 shouldDetach 时提前记录，此处 DOM 可能已被移除，不再操作
     SimpleReuseStrategy.handlers[key] = handle;
 
     if (handle && handle.componentRef) {
