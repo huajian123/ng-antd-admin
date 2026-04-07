@@ -15,10 +15,10 @@
       id="menuNav"
       class="menu-sidebar"
       nzBreakpoint="lg"
+      nzCollapsible
       [class.left-nav-fixed]="isFixedLeftNav"
       [nzCollapsed]="isCollapsed"
       [nzCollapsedWidth]="CollapsedNavWidth"
-      nzCollapsible
       [nzTheme]="theme"
       [nzTrigger]="trigger"
       [nzWidth]="SideNavWidth"
@@ -91,12 +91,12 @@
       <nz-sider
         class="menu-sidebar"
         nzBreakpoint="lg"
+        nzCollapsible
         nzNoAnimation
         [class.mixin-left-nav-fixed]="isFixedLeftNav"
         [class.t-0]="!isHasTopArea"
         [nzCollapsed]="isCollapsed"
         [nzCollapsedWidth]="CollapsedNavWidth"
-        nzCollapsible
         [nzTheme]="isNightTheme ? 'dark' : 'light'"
         [nzTrigger]="trigger"
         [nzWidth]="SideNavWidth"

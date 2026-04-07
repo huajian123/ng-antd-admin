@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ElementRef, viewChild } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ElementRef, viewChild, signal, afterNextRender, inject, Injector } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AdComponent, DynamicComponent } from '@core/services/types';
@@ -8,7 +8,6 @@ import { NumberLoopPipe } from '@shared/pipes/number-loop.pipe';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { NzNoAnimationModule } from 'ng-zorro-antd/core/animation';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -20,6 +19,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { ApplicationComponent } from './application/application.component';
 import { ArticleComponent } from './article/article.component';
 import { ProjectsComponent } from './projects/projects.component';
+import { NzNoAnimationDirective } from 'ng-zorro-antd/core/animation';
 
 interface TabInterface {
   label: string;
@@ -40,28 +40,32 @@ interface TabInterface {
     NzButtonModule,
     NzDividerModule,
     NzTagModule,
-    NzNoAnimationModule,
     NzInputModule,
     FormsModule,
     NzTabsModule,
     AdDirective,
-    NumberLoopPipe
+    NumberLoopPipe,
+    NzNoAnimationDirective
   ]
 })
-export class PersonalCenterComponent implements OnInit {
-  tagArray: string[] = ['很有想法的', '专注设计', '大长腿', '川妹子', '海纳百川'];
-  inputVisible = false;
+export class PersonalCenterComponent {
+  readonly tagArray = signal<string[]>(['很有想法的', '专注设计', '大长腿', '川妹子', '海纳百川']);
+  readonly inputVisible = signal(false);
+  readonly inputValue = signal('');
   readonly inputElement = viewChild<ElementRef>('inputElement');
-  inputValue = '';
-  tabData: TabInterface[] = [
+  readonly adHost = viewChild.required(AdDirective);
+
+  readonly tabData: TabInterface[] = [
     { label: '文章(8)', component: new DynamicComponent(ArticleComponent, {}) },
     { label: '应用(8)', component: new DynamicComponent(ApplicationComponent, {}) },
     { label: '项目(8)', component: new DynamicComponent(ProjectsComponent, {}) }
   ];
 
-  readonly adHost = viewChild.required(AdDirective);
+  private readonly injector = inject(Injector);
 
-  constructor() {}
+  constructor() {
+    afterNextRender(() => this.to(this.tabData[0]), { injector: this.injector });
+  }
 
   to(adItem: TabInterface): void {
     const viewContainerRef = this.adHost().viewContainerRef;
@@ -71,21 +75,16 @@ export class PersonalCenterComponent implements OnInit {
   }
 
   handleInputConfirm(): void {
-    if (this.inputValue && this.tagArray.indexOf(this.inputValue) === -1) {
-      this.tagArray = [...this.tagArray, this.inputValue];
+    const value = this.inputValue();
+    if (value && !this.tagArray().includes(value)) {
+      this.tagArray.update(tags => [...tags, value]);
     }
-    this.inputValue = '';
-    this.inputVisible = false;
+    this.inputValue.set('');
+    this.inputVisible.set(false);
   }
 
   showInput(): void {
-    this.inputVisible = true;
-    setTimeout(() => {
-      this.inputElement()?.nativeElement.focus();
-    }, 10);
-  }
-
-  ngOnInit(): void {
-    this.to(this.tabData[0]);
+    this.inputVisible.set(true);
+    afterNextRender(() => this.inputElement()?.nativeElement.focus(), { injector: this.injector });
   }
 }

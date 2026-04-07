@@ -14,7 +14,7 @@ import { UserInfoStoreService } from '@store/common-store/userInfo-store.service
 import { fnStopMouseEvent } from '@utils/tools';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzNoAnimationModule } from 'ng-zorro-antd/core/animation';
+import { NzNoAnimationDirective } from 'ng-zorro-antd/core/animation';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 
@@ -22,7 +22,7 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NzMenuModule, NzNoAnimationModule, NgTemplateOutlet, NzButtonModule, NzIconModule, RouterLink, AuthDirective]
+  imports: [NzMenuModule, NzNoAnimationDirective, NgTemplateOutlet, NzButtonModule, NzIconModule, RouterLink, AuthDirective]
 })
 export class NavBarComponent implements OnInit {
   readonly isMixinHead = input(false, { transform: booleanAttribute }); // 是混合模式顶部导航
