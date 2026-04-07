@@ -1,19 +1,15 @@
-import { Directive, Input } from '@angular/core';
+import { Directive, computed, input } from '@angular/core';
 
 @Directive({
   selector: '[appEnable]',
   host: {
-    '[class.operate-text]': 'enable',
-    '[class.operate-text-disabled]': 'disabledStyle'
+    '[class.operate-text]': 'enable()',
+    '[class.operate-text-disabled]': 'disabledStyle()'
   }
 })
 export class DisabledDirective {
-  @Input('appEnable')
-  set appDisabled(value: boolean) {
-    this.enable = value;
-    this.disabledStyle = !value;
-  }
+  readonly appEnable = input<boolean>(false);
 
-  enable = false;
-  disabledStyle = false;
+  readonly enable = computed(() => this.appEnable());
+  readonly disabledStyle = computed(() => !this.appEnable());
 }

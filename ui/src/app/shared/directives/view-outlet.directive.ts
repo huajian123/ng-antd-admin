@@ -1,17 +1,13 @@
 import {
   ComponentRef,
   Directive,
-  Input,
-  ChangeDetectorRef,
-  EmbeddedViewRef,
-  OnChanges,
-  SimpleChanges,
   Type,
   ViewContainerRef,
   TemplateRef,
-  KeyValueDiffer,
-  KeyValueDiffers,
-  inject
+  inject,
+  input,
+  effect,
+  ChangeDetectorRef
 } from '@angular/core';
 
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -32,68 +28,49 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
   // eslint-disable-next-line @angular-eslint/directive-selector
   selector: '[viewOutlet]',
 })
-export class ViewOutletDirective implements OnChanges {
+export class ViewOutletDirective {
   private componentRef: ComponentRef<NzSafeAny> | undefined;
-
-  private embeddedViewRef: EmbeddedViewRef<NzSafeAny> | undefined;
 
   /**
    * 组件或者模板 TemplateRef
    */
-  @Input() viewOutlet: Type<NzSafeAny> | TemplateRef<NzSafeAny> | null = null;
+  readonly viewOutlet = input<Type<NzSafeAny> | TemplateRef<NzSafeAny> | null>(null);
 
   /**
    * 组件和模板上下文传递数据
    */
-  @Input() viewOutletContext?: NzSafeAny;
+  readonly viewOutletContext = input<NzSafeAny>();
 
-  private keyValueDiffer!: KeyValueDiffer<NzSafeAny, NzSafeAny>;
-  private viewContainerRef = inject(ViewContainerRef);
-  private keyValueDiffers = inject(KeyValueDiffers);
+  private readonly viewContainerRef = inject(ViewContainerRef);
 
-  ngOnChanges(changes: SimpleChanges): void {
-    const { viewContainerRef: viewContainerRef } = this;
-    if (changes['viewOutlet']) {
+  constructor() {
+    effect(() => {
+      const outlet = this.viewOutlet();
+      const context = this.viewOutletContext();
+      const { viewContainerRef } = this;
+
       viewContainerRef.clear();
       this.componentRef = undefined;
-      this.embeddedViewRef = undefined;
 
-      if (this.viewOutlet) {
-        if (this.viewOutlet instanceof TemplateRef) {
-          this.embeddedViewRef = viewContainerRef.createEmbeddedView(this.viewOutlet, this.viewOutletContext);
-        } else {
-          this.componentRef = viewContainerRef.createComponent(this.viewOutlet, {
-            index: viewContainerRef.length
-          });
+      if (!outlet) return;
+
+      if (outlet instanceof TemplateRef) {
+        viewContainerRef.createEmbeddedView(outlet, context);
+      } else {
+        this.componentRef = viewContainerRef.createComponent(outlet, {
+          index: viewContainerRef.length
+        });
+        if (context) {
+          this.updateContext(this.componentRef.instance, context);
+          this.componentRef.injector.get(ChangeDetectorRef).markForCheck();
         }
       }
-    }
-
-    if (changes['viewOutletContext']) {
-      let updatedKeys: string[] = [];
-      if (changes['viewOutletContext'].isFirstChange()) {
-        this.keyValueDiffer = this.keyValueDiffers.find(this.viewOutletContext).create();
-        this.keyValueDiffer.diff(this.viewOutletContext);
-        updatedKeys = Object.keys(this.viewOutletContext);
-      } else {
-        const changes = this.keyValueDiffer.diff(this.viewOutletContext);
-        changes!.forEachChangedItem(item => {
-          updatedKeys.push(item.key);
-        });
-      }
-      if (this.componentRef) {
-        this.updateContext(this.componentRef.instance, updatedKeys);
-        this.componentRef.injector.get(ChangeDetectorRef).markForCheck();
-      } else if (this.embeddedViewRef) {
-        this.updateContext(this.embeddedViewRef.context, updatedKeys);
-        this.embeddedViewRef.markForCheck();
-      }
-    }
+    });
   }
 
-  private updateContext(context: NzSafeAny, updatedKeys: string[]): void {
-    updatedKeys.forEach(key => {
-      context[key] = this.viewOutletContext[key];
+  private updateContext(instance: NzSafeAny, context: NzSafeAny): void {
+    Object.keys(context).forEach(key => {
+      instance[key] = context[key];
     });
   }
 }

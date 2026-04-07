@@ -1,30 +1,26 @@
-import { computed, Directive, inject, input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
+import { computed, Directive, effect, inject, input, TemplateRef, ViewContainerRef } from '@angular/core';
 
 import { UserInfoStoreService } from '@store/common-store/userInfo-store.service';
 
 @Directive({
   selector: '[appAuth]',
 })
-export class AuthDirective implements OnInit {
-  codeArray = computed(() => {
-    return this.userInfoService.$userInfo().authCode;
+export class AuthDirective {
+  readonly appAuth = input.required<string>();
+
+  private readonly userInfoService = inject(UserInfoStoreService);
+  private readonly templateRef = inject(TemplateRef);
+  private readonly viewContainerRef = inject(ViewContainerRef);
+
+  private readonly hasAuth = computed(() => {
+    const code = this.appAuth();
+    if (!code) return true;
+    return this.userInfoService.$userInfo().authCode.includes(code);
   });
 
-  private userInfoService = inject(UserInfoStoreService);
-  private templateRef = inject(TemplateRef);
-  private viewContainerRef = inject(ViewContainerRef);
-
-  appAuth = input.required<string>();
-
-  ngOnInit(): void {
-    if (!this.appAuth()) {
-      this.show(true);
-      return;
-    }
-    this.codeArray().includes(this.appAuth()) ? this.show(true) : this.show(false);
-  }
-
-  private show(hasAuth: boolean): void {
-    hasAuth ? this.viewContainerRef.createEmbeddedView(this.templateRef) : this.viewContainerRef.clear();
+  constructor() {
+    effect(() => {
+      this.hasAuth() ? this.viewContainerRef.createEmbeddedView(this.templateRef) : this.viewContainerRef.clear();
+    });
   }
 }

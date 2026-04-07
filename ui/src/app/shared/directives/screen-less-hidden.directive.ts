@@ -1,32 +1,30 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Directive, inject, input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
+import { DestroyRef, Directive, effect, inject, input, TemplateRef, ViewContainerRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 /*屏幕宽度小于某个宽度时不显示的组件*/
 @Directive({
   selector: '[appScreenLessHidden]',
 })
-export class ScreenLessHiddenDirective implements OnInit {
-  appScreenLessHidden = input('', { transform: this.appendPx });
+export class ScreenLessHiddenDirective {
+  readonly appScreenLessHidden = input('', { transform: appendPx });
 
-  private breakpointObserver = inject(BreakpointObserver);
-  private templateRef = inject(TemplateRef);
-  private viewContainerRef = inject(ViewContainerRef);
+  private readonly breakpointObserver = inject(BreakpointObserver);
+  private readonly templateRef = inject(TemplateRef);
+  private readonly viewContainerRef = inject(ViewContainerRef);
+  private readonly destroyRef = inject(DestroyRef);
 
-  private show(matched: boolean): void {
-    matched ? this.viewContainerRef.createEmbeddedView(this.templateRef) : this.viewContainerRef.clear();
-  }
-
-  appendPx(value: number): string {
-    return `${value}px`;
-  }
-
-  ngOnInit(): void {
-    this.breakpointObserver.observe([`(max-width: ${this.appScreenLessHidden()})`]).subscribe(result => {
-      if (result.matches) {
-        this.show(false);
-      } else {
-        this.show(true);
-      }
+  constructor() {
+    effect((onCleanup) => {
+      const query = `(max-width: ${this.appScreenLessHidden()})`;
+      const sub = this.breakpointObserver.observe([query]).pipe(takeUntilDestroyed(this.destroyRef)).subscribe(result => {
+        result.matches ? this.viewContainerRef.clear() : this.viewContainerRef.createEmbeddedView(this.templateRef);
+      });
+      onCleanup(() => sub.unsubscribe());
     });
   }
+}
+
+function appendPx(value: number): string {
+  return `${value}px`;
 }

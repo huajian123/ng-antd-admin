@@ -1,4 +1,4 @@
-import { Directive, Input, OnInit, TemplateRef, inject } from '@angular/core';
+import { Directive, TemplateRef, inject, input, signal, effect } from '@angular/core';
 
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
@@ -18,7 +18,7 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
  *
  *   trace() {
  *     this.list.forEach(it => {
- *       console.log(it.named);
+ *       console.log(it.named());
  *       console.log(it.template);
  *     });
  *   }
@@ -29,23 +29,29 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
   // eslint-disable-next-line @angular-eslint/directive-selector
   selector: 'ng-template[named]',
 })
-export class NamedTemplate<T> implements OnInit {
+export class NamedTemplate<T> {
   template = inject<TemplateRef<T>>(TemplateRef);
 
   /**
    * 模板名称
    */
-  @Input({ required: true }) named!: string;
+  readonly namedInput = input<string>('', { alias: 'named' });
 
-  ngOnInit(): void {
-    this.resolveName();
-  }
+  /**
+   * 解析后的模板名称（fallback 到模板变量名）
+   */
+  readonly named = signal<string>('');
 
-  resolveName(): void {
-    if (!this.named && this.template) {
-      const tplRef = this.template as NzSafeAny;
-      // localNames为数组, 如果没有name则为null
-      this.named = tplRef._declarationTContainer.localNames?.[0];
-    }
+  constructor() {
+    effect(() => {
+      const name = this.namedInput();
+      if (name) {
+        this.named.set(name);
+      } else {
+        const tplRef = this.template as NzSafeAny;
+        // localNames为数组, 如果没有name则为null
+        this.named.set(tplRef._declarationTContainer.localNames?.[0] ?? '');
+      }
+    });
   }
 }

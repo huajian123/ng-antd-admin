@@ -1,4 +1,4 @@
-import { Directive, OnInit, signal } from '@angular/core';
+import { Directive, DestroyRef, inject, signal } from '@angular/core';
 
 import screenfull from 'screenfull';
 
@@ -9,13 +9,13 @@ import screenfull from 'screenfull';
     '(click)': 'onClick()'
   }
 })
-export class ToggleFullscreenDirective implements OnInit {
-  isFullscreenFlag = signal(true);
+export class ToggleFullscreenDirective {
+  readonly isFullscreenFlag = signal(true);
 
-  ngOnInit(): void {
-    screenfull.onchange(() => {
-      this.isFullscreenFlag.update(v => !v);
-    });
+  constructor() {
+    const handler = () => this.isFullscreenFlag.update(v => !v);
+    screenfull.on('change', handler);
+    inject(DestroyRef).onDestroy(() => screenfull.off('change', handler));
   }
 
   onClick(): void {

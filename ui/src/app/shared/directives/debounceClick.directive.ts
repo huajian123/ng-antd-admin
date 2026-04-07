@@ -1,5 +1,5 @@
-import { Directive, EventEmitter, Input, OnInit, OnDestroy, Output, numberAttribute } from '@angular/core';
-import { Subject, Subscription } from 'rxjs';
+import { Directive, effect, input, numberAttribute, output } from '@angular/core';
+import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -10,23 +10,22 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
     '(click)': 'clickEvent($event)'
   }
 })
-export class DebounceClickDirective implements OnInit, OnDestroy {
-  @Input({ transform: numberAttribute }) debounceTime = 500;
-  @Output() readonly debounceClick = new EventEmitter();
+export class DebounceClickDirective {
+  readonly debounceTime = input(500, { transform: numberAttribute });
+  readonly debounceClick = output<NzSafeAny>();
+
   private clicks = new Subject<NzSafeAny>();
-  private subscription!: Subscription;
+
+  constructor() {
+    effect((onCleanup) => {
+      const sub = this.clicks.pipe(debounceTime(this.debounceTime())).subscribe(e => this.debounceClick.emit(e));
+      onCleanup(() => sub.unsubscribe());
+    });
+  }
 
   clickEvent(event: MouseEvent): void {
     event.preventDefault();
     event.stopPropagation();
     this.clicks.next(event);
-  }
-
-  ngOnInit(): void {
-    this.subscription = this.clicks.pipe(debounceTime(this.debounceTime)).subscribe(e => this.debounceClick.emit(e));
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 }
