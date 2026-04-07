@@ -21,16 +21,12 @@ export class ModalResizeService {
   private startY = 0;
   private startWidth = 0;
   private startHeight = 0;
-  // private startLeft = 0;
-  // private startTop = 0;
+  private startMarginLeft = 0;
+  private startMarginTop = 0;
   private modalElement: HTMLElement | null = null;
+  // .ant-modal 外层容器，用于 n/w 方向的位置偏移，不干扰 CDK drag 的 transform
+  private modalOuterElement: HTMLElement | null = null;
 
-  /**
-   * 创建调整大小处理程序
-   *
-   * @param wrapCls 类名
-   * @param config 配置选项
-   */
   createResizeHandlers(wrapCls: string, config: ModalResizeConfig = {}): void {
     const wrapElement = document.querySelector<HTMLDivElement>(`.${wrapCls}`)!;
     const modalContent = wrapElement.querySelector<HTMLDivElement>(`.ant-modal-content`)!;
@@ -40,17 +36,18 @@ export class ModalResizeService {
     }
 
     this.modalElement = modalContent;
+    this.modalOuterElement = wrapElement.querySelector<HTMLDivElement>('.ant-modal');
+    const initialHeight = modalContent.getBoundingClientRect().height;
     const defaultConfig: ModalResizeConfig = {
       minWidth: 400,
-      minHeight: 300,
       maxWidth: window.innerWidth - 100,
       maxHeight: window.innerHeight - 100,
-      ...config
+      ...config,
+      // 以 modal 打开时的实际高度作为最小高度
+      minHeight: initialHeight,
     };
 
-    // 创建8个调整大小的手柄（4个边 + 4个角）
-    const handles = ['e', 's', 'se'];
-    // const handles = ['n', 'e', 's', 'w', 'ne', 'nw', 'se', 'sw'];
+    const handles = ['n', 'e', 's', 'w', 'ne', 'nw', 'se', 'sw'];
 
     handles.forEach(direction => {
       const handle = document.createElement('div');
@@ -64,13 +61,9 @@ export class ModalResizeService {
       });
     });
 
-    // 确保 modal-content 相对定位
     modalContent.style.position = 'relative';
   }
 
-  /**
-   * 开始调整大小
-   */
   private startResize(e: MouseEvent, direction: string, config: ModalResizeConfig): void {
     e.preventDefault();
     e.stopPropagation();
@@ -85,10 +78,27 @@ export class ModalResizeService {
     this.startY = e.clientY;
 
     const rect = this.modalElement.getBoundingClientRect();
-    this.startWidth = rect.width;
-    this.startHeight = rect.height;
-    // this.startLeft = rect.left;
-    // this.startTop = rect.top;
+    const minWidth = config.minWidth || 400;
+    const minHeight = config.minHeight || 300;
+
+    // 记录实际尺寸与最小值的最大值作为起始值，不提前写入 style，避免固化 auto 高度
+    this.startWidth = Math.max(rect.width, minWidth);
+    this.startHeight = Math.max(rect.height, minHeight);
+
+    // 记录 .ant-modal 当前的 margin 偏移作为起始位置（n/w 方向通过 margin 移动，不碰 CDK drag 的 transform）
+    const outer = this.modalOuterElement;
+    if (outer) {
+      // getComputedStyle 能正确解析 auto，得到实际像素值
+      const computed = getComputedStyle(outer);
+      this.startMarginLeft = parseFloat(computed.marginLeft) || 0;
+      this.startMarginTop = parseFloat(computed.marginTop) || 0;
+      // 将 auto margin 固化为像素值，防止后续设置时被 auto 覆盖
+      outer.style.marginLeft = `${this.startMarginLeft}px`;
+      outer.style.marginTop = `${this.startMarginTop}px`;
+    } else {
+      this.startMarginLeft = 0;
+      this.startMarginTop = 0;
+    }
 
     const onMouseMove = (moveEvent: MouseEvent): void => {
       this.resize(moveEvent, config);
@@ -119,55 +129,63 @@ export class ModalResizeService {
     const deltaX = e.clientX - this.startX;
     const deltaY = e.clientY - this.startY;
 
-    let newWidth = this.startWidth;
-    let newHeight = this.startHeight;
-    // const newLeft = this.startLeft;
-    // const newTop = this.startTop;
-
-    // 根据手柄方向计算新的尺寸和位置
-    if (this.currentHandle.includes('e')) {
-      newWidth = this.startWidth + deltaX;
-    }
-    // if (this.currentHandle.includes('w')) {
-    //   newWidth = this.startWidth - deltaX;
-    //   newLeft = this.startLeft + deltaX;
-    // }
-    if (this.currentHandle.includes('s')) {
-      newHeight = this.startHeight + deltaY;
-    }
-    // if (this.currentHandle.includes('n')) {
-    //   newHeight = this.startHeight - deltaY;
-    //   newTop = this.startTop + deltaY;
-    // }
-
-    // 应用最小和最大尺寸约束
     const minWidth = config.minWidth || 400;
     const minHeight = config.minHeight || 300;
     const maxWidth = config.maxWidth || window.innerWidth;
     const maxHeight = config.maxHeight || window.innerHeight;
 
-    newWidth = Math.max(minWidth, Math.min(newWidth, maxWidth));
-    newHeight = Math.max(minHeight, Math.min(newHeight, maxHeight));
+    let newWidth = this.startWidth;
+    let newHeight = this.startHeight;
+    let newMarginLeft = this.startMarginLeft;
+    let newMarginTop = this.startMarginTop;
 
-    // 更新模态框尺寸
+    if (this.currentHandle.includes('e')) {
+      newWidth = this.startWidth + deltaX;
+    }
+    if (this.currentHandle.includes('w')) {
+      newWidth = this.startWidth - deltaX;
+      newMarginLeft = this.startMarginLeft + deltaX;
+    }
+    if (this.currentHandle.includes('s')) {
+      newHeight = this.startHeight + deltaY;
+    }
+    if (this.currentHandle.includes('n')) {
+      newHeight = this.startHeight - deltaY;
+      newMarginTop = this.startMarginTop + deltaY;
+    }
+
+    // 应用尺寸约束，并反向修正 margin，防止小于最小值时位置漂移
+    if (newWidth < minWidth) {
+      if (this.currentHandle.includes('w')) {
+        newMarginLeft = this.startMarginLeft + (this.startWidth - minWidth);
+      }
+      newWidth = minWidth;
+    }
+    if (newWidth > maxWidth) {
+      newWidth = maxWidth;
+    }
+    if (newHeight < minHeight) {
+      if (this.currentHandle.includes('n')) {
+        newMarginTop = this.startMarginTop + (this.startHeight - minHeight);
+      }
+      newHeight = minHeight;
+    }
+    if (newHeight > maxHeight) {
+      newHeight = maxHeight;
+    }
+
     this.modalElement.style.width = `${newWidth}px`;
     this.modalElement.style.height = `${newHeight}px`;
 
-    // 如果从左边或上边调整大小，需要更新位置
-    // if (this.currentHandle.includes('w') || this.currentHandle.includes('n')) {
-    //   const modal = this.modalElement.parentElement;
-    //   if (modal && modal.classList.contains('ant-modal')) {
-    //     // 计算位置调整
-    //     if (this.currentHandle.includes('w')) {
-    //       const leftAdjust = this.startWidth - newWidth;
-    //       modal.style.left = `${this.startLeft + leftAdjust}px`;
-    //     }
-    //     if (this.currentHandle.includes('n')) {
-    //       const topAdjust = this.startHeight - newHeight;
-    //       modal.style.top = `${this.startTop + topAdjust}px`;
-    //     }
-    //   }
-    // }
+    // n/w 方向通过操作 .ant-modal 的 margin 移动位置，完全不碰 CDK drag 管理的 transform
+    if (this.modalOuterElement) {
+      if (this.currentHandle.includes('w')) {
+        this.modalOuterElement.style.marginLeft = `${newMarginLeft}px`;
+      }
+      if (this.currentHandle.includes('n')) {
+        this.modalOuterElement.style.marginTop = `${newMarginTop}px`;
+      }
+    }
   }
 
   /**
@@ -185,13 +203,13 @@ export class ModalResizeService {
    */
   private getCursor(direction: string): string {
     const cursorMap: Record<string, string> = {
-      // n: 'ns-resize',
+      n: 'ns-resize',
       s: 'ns-resize',
       e: 'ew-resize',
-      // w: 'ew-resize',
-      // ne: 'nesw-resize',
-      // sw: 'nesw-resize',
-      // nw: 'nwse-resize',
+      w: 'ew-resize',
+      ne: 'nesw-resize',
+      sw: 'nesw-resize',
+      nw: 'nwse-resize',
       se: 'nwse-resize'
     };
     return cursorMap[direction] || 'default';
@@ -206,6 +224,7 @@ export class ModalResizeService {
     });
     this.resizeHandles = [];
     this.modalElement = null;
+    this.modalOuterElement = null;
     this.stopResize();
   }
 }

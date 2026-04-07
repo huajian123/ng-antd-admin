@@ -21,7 +21,7 @@
   </ng-container>
 </nz-modal>
 
-<nz-modal nzxModalDrag nzxModalResize nzTitle="指令创建可拖拽" [(nzVisible)]="isVisibleByDir" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+<nz-modal nzTitle="指令创建可拖拽" nzxModalDrag nzxModalResize [(nzVisible)]="isVisibleByDir" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
   <ng-container *nzModalContent>
     <p>床前明月光</p>
     <p>疑似地上霜</p>
@@ -31,10 +31,10 @@
 </nz-modal>
 
 <nz-modal
+  nzTitle="可拖拽+可调整大小"
   nzxModalDrag
   nzxModalResize
   [nzFooter]="null"
-  nzTitle="可拖拽+可调整大小"
   [nzWidth]="700"
   [nzxResizeConfig]="{ minHeight: 500, minWidth: 500, maxWidth: 1200 }"
   [(nzVisible)]="isVisibleDragResize"
