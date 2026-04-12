@@ -1,11 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, TemplateRef, Renderer2, ElementRef, inject, DestroyRef, input } from '@angular/core';
-import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { merge } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Component, ChangeDetectionStrategy, TemplateRef, Renderer2, ElementRef, inject, effect, input } from '@angular/core';
 
 import { CollapsedNavWidth, SideNavWidth } from '@app/config/constant';
-import { Menu } from '@core/services/types';
 import { SplitNavStoreService } from '@store/common-store/split-nav-store.service';
 import { ThemeService } from '@store/common-store/theme.service';
 
@@ -19,70 +15,38 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NzCardModule, NgTemplateOutlet]
 })
-export class FooterSubmitComponent implements OnInit {
+export class FooterSubmitComponent {
   private splitNavStoreService = inject(SplitNavStoreService);
   private themesService = inject(ThemeService);
   private rd2 = inject(Renderer2);
   private el = inject(ElementRef);
 
   readonly leftTpl = input<TemplateRef<NzSafeAny>>();
-  // todo signal最后要修正
-  themesOptions$ = toObservable(this.themesService.$themesOptions);
-  isCollapsed$ = toObservable(this.themesService.$isCollapsed);
-  isOverMode$ = toObservable(this.themesService.$isOverModeTheme);
-  leftMenuArray$ = toObservable(this.splitNavStoreService.$splitLeftNavArray);
-  isCollapsed = false;
-  isOverMode = false;
-  hasLeftNav = false;
-  isTopMode = false;
-  leftMenuArray: Menu[] = [];
-  isMixMode = false;
-  destroyRef = inject(DestroyRef);
 
-  setWidth(width: number): void {
+  constructor() {
+    effect(() => {
+      const { hasNavArea, mode } = this.themesService.$themesOptions();
+      const isCollapsed = this.themesService.$isCollapsed();
+      const isOverMode = this.themesService.$isOverModeTheme();
+      const leftMenuArray = this.splitNavStoreService.$splitLeftNavArray();
+
+      const isTopMode = mode === 'top';
+      const isMixMode = mode === 'mixin';
+
+      if (isOverMode || isTopMode || (isMixMode && !leftMenuArray)) {
+        this.setWidth(0);
+      } else {
+        let width = 0;
+        if (hasNavArea) {
+          width = isCollapsed ? CollapsedNavWidth : SideNavWidth;
+        }
+        this.setWidth(width);
+      }
+    });
+  }
+
+  private setWidth(width: number): void {
     const dom = this.el.nativeElement.querySelector('.ant-pro-footer-bar');
     this.rd2.setStyle(dom, 'width', `calc(100% - ${width}px)`);
-  }
-
-  subTheme(): void {
-    const sub1$ = this.themesOptions$.pipe(
-      tap(themesOptions => {
-        this.hasLeftNav = themesOptions.hasNavArea;
-        this.isTopMode = themesOptions.mode === 'top';
-        this.isMixMode = themesOptions.mode === 'mixin';
-      })
-    );
-    const sub2$ = this.isCollapsed$.pipe(
-      tap(isCollapsed => {
-        this.isCollapsed = isCollapsed;
-      })
-    );
-    const sub3$ = this.isOverMode$.pipe(
-      tap(res => {
-        this.isOverMode = res;
-      })
-    );
-    const sub4$ = this.leftMenuArray$.pipe(
-      tap(res => {
-        this.leftMenuArray = res;
-      })
-    );
-    merge(sub1$, sub2$, sub3$, sub4$)
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => {
-        if (this.isOverMode || this.isTopMode || (this.isMixMode && !this.leftMenuArray)) {
-          this.setWidth(0);
-        } else {
-          let width = 0;
-          if (this.hasLeftNav) {
-            width = this.isCollapsed ? CollapsedNavWidth : SideNavWidth;
-          }
-          this.setWidth(width);
-        }
-      });
-  }
-
-  ngOnInit(): void {
-    this.subTheme();
   }
 }
