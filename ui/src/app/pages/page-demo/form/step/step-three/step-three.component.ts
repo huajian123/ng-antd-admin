@@ -8,7 +8,7 @@ import { NzResultModule } from 'ng-zorro-antd/result';
 @Component({
   selector: 'app-step-three',
   templateUrl: './step-three.component.html',
-  styleUrls: ['./step-three.component.less'],
+  styleUrl: './step-three.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NzResultModule, NzButtonModule, NzWaveModule, NzDescriptionsModule]
 })

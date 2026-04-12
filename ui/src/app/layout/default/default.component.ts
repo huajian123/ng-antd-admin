@@ -27,7 +27,7 @@ import { ToolBarComponent } from './tool-bar/tool-bar.component';
 @Component({
   selector: 'app-default',
   templateUrl: './default.component.html',
-  styleUrls: ['./default.component.less'],
+  styleUrl: './default.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     TopProgressBarComponent,

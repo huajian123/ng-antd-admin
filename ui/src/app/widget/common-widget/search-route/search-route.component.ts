@@ -33,7 +33,7 @@ const passiveEventListenerOptions = normalizePassiveListenerOptions({ passive: t
 @Component({
   selector: 'app-search-route',
   templateUrl: './search-route.component.html',
-  styleUrls: ['./search-route.component.less'],
+  styleUrl: './search-route.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NzButtonModule, NzInputModule, FormsModule, NzIconModule, NzEmptyModule, NzGridModule, NzDividerModule],
   host: {

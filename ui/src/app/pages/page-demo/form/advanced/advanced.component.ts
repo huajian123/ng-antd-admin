@@ -23,7 +23,7 @@ import { WarehouseManageFormComponent as WarehouseManageFormComponent_1 } from '
 @Component({
   selector: 'app-advanced',
   templateUrl: './advanced.component.html',
-  styleUrls: ['./advanced.component.less'],
+  styleUrl: './advanced.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     PageHeaderComponent,

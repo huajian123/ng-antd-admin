@@ -15,7 +15,7 @@ export enum LazySelPeopleEnum {
 @Component({
   selector: 'app-lazy-targ-comp',
   templateUrl: './lazy-targ-comp.component.html',
-  styleUrls: ['./lazy-targ-comp.component.less'],
+  styleUrl: './lazy-targ-comp.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NzCardModule, NzAvatarModule, NzButtonModule, NzWaveModule]
 })

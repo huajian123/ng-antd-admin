@@ -14,7 +14,7 @@ import { NzTooltipModule } from 'ng-zorro-antd/tooltip';
 @Component({
   selector: 'app-flow-chat',
   templateUrl: './flow-chat.component.html',
-  styleUrls: ['./flow-chat.component.less'],
+  styleUrl: './flow-chat.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [PageHeaderComponent, NzCardModule, NzResultModule, NzGridModule, NzButtonModule, NzTooltipModule, NzIconModule]
 })

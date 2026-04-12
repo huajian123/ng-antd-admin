@@ -22,7 +22,7 @@ import { NzModalRef } from 'ng-zorro-antd/modal';
 @Component({
   selector: 'app-lock-widget',
   templateUrl: './lock-widget.component.html',
-  styleUrls: ['./lock-widget.component.less'],
+  styleUrl: './lock-widget.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NzAvatarModule, FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzButtonModule, NzInputModule, NzIconModule, NzWaveModule]
 })

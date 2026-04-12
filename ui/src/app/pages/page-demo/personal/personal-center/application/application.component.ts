@@ -16,7 +16,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
 @Component({
   selector: 'app-application',
   templateUrl: './application.component.html',
-  styleUrls: ['./application.component.less'],
+  styleUrl: './application.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NzGridModule, NzCardModule, NzAvatarModule, NzTypographyModule, NzIconModule, NzButtonModule, NzTooltipModule, NzDropdownModule, NzMenuModule, DecimalPipe, NumberLoopPipe]
 })

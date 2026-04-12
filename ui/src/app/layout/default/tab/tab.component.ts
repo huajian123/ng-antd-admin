@@ -21,7 +21,7 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
 @Component({
   selector: 'app-tab',
   templateUrl: './tab.component.html',
-  styleUrls: ['./tab.component.less'],
+  styleUrl: './tab.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NzCardModule, NzTabsModule, NzDropdownModule, NzMenuModule, NzButtonModule, MouseHoverShowDirective, NzIconModule, AsyncPipe]
 })

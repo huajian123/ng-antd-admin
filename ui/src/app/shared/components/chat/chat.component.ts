@@ -19,7 +19,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.less'],
+  styleUrl: './chat.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NzCardModule, NzTypographyModule, NzGridModule, NzAvatarModule, NzResultModule, NzIconModule, NzButtonModule, FormsModule, ReactiveFormsModule, NzInputModule]
 })

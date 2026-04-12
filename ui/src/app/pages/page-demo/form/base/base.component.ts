@@ -21,7 +21,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 @Component({
   selector: 'app-base',
   templateUrl: './base.component.html',
-  styleUrls: ['./base.component.less'],
+  styleUrl: './base.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     PageHeaderComponent,

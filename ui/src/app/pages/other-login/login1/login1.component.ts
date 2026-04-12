@@ -41,7 +41,7 @@ interface LoginFormComponentInterface {
 @Component({
   selector: 'app-login1',
   templateUrl: './login1.component.html',
-  styleUrls: ['./login1.component.less'],
+  styleUrl: './login1.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NzGridModule, NzCardModule, AdDirective_1, NzSwitchModule, FormsModule, NzDropdownModule, NzIconModule, NzButtonModule, NzMenuModule]
 })

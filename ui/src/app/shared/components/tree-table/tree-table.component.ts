@@ -31,7 +31,7 @@ export abstract class AntTreeTableComponentToken {
 @Component({
   selector: 'app-tree-table',
   templateUrl: './tree-table.component.html',
-  styleUrls: ['./tree-table.component.less'],
+  styleUrl: './tree-table.component.less',
   providers: [{ provide: AntTreeTableComponentToken, useExisting: TreeTableComponent }],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NzTableModule, NzResizableModule, NgTemplateOutlet, MapPipe, TableFiledPipe]

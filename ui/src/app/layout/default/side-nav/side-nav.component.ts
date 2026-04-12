@@ -7,7 +7,7 @@ import { NavBarComponent } from '../nav-bar/nav-bar.component';
 @Component({
   selector: 'app-side-nav',
   templateUrl: './side-nav.component.html',
-  styleUrls: ['./side-nav.component.less'],
+  styleUrl: './side-nav.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NavBarComponent]
 })

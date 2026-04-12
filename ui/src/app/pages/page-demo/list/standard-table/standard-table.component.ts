@@ -23,7 +23,7 @@ import { NzSpaceCompactComponent } from 'ng-zorro-antd/space';
 @Component({
   selector: 'app-standard-table',
   templateUrl: './standard-table.component.html',
-  styleUrls: ['./standard-table.component.less'],
+  styleUrl: './standard-table.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     PageHeaderComponent,

@@ -57,7 +57,7 @@ export interface SortFile {
 @Component({
   selector: 'app-ant-table',
   templateUrl: './ant-table.component.html',
-  styleUrls: ['./ant-table.component.less'],
+  styleUrl: './ant-table.component.less',
   providers: [{ provide: AntTableComponentToken, useExisting: AntTableComponent }],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NzTableModule, NzResizableModule, NgTemplateOutlet, MapPipe, TableFiledPipe, ContextPipePipe]

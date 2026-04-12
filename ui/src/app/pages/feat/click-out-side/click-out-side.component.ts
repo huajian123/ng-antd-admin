@@ -11,7 +11,7 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 @Component({
   selector: 'app-click-out-side',
   templateUrl: './click-out-side.component.html',
-  styleUrls: ['./click-out-side.component.less'],
+  styleUrl: './click-out-side.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [PageHeaderComponent]
 })

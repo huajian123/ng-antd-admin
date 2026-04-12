@@ -26,7 +26,7 @@ interface TabInterface {
 @Component({
   selector: 'app-personal-setting',
   templateUrl: './personal-setting.component.html',
-  styleUrls: ['./personal-setting.component.less'],
+  styleUrl: './personal-setting.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NzCardModule, NzMenuModule, NzButtonModule, NzGridModule, NzTypographyModule, AdDirective_1]
 })

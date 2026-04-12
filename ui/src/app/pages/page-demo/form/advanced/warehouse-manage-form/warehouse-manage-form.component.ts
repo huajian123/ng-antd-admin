@@ -29,7 +29,7 @@ const EXE_COUNTER_VALUE_ACCESSOR = {
 @Component({
   selector: 'app-warehouse-manage-form',
   templateUrl: './warehouse-manage-form.component.html',
-  styleUrls: ['./warehouse-manage-form.component.less'],
+  styleUrl: './warehouse-manage-form.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [EXE_COUNTER_VALUE_ACCESSOR],
   imports: [FormsModule, ReactiveFormsModule, NzGridModule, NzFormModule, NzInputModule]

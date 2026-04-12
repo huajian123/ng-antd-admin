@@ -15,7 +15,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
 @Component({
   selector: 'app-step-one',
   templateUrl: './step-one.component.html',
-  styleUrls: ['./step-one.component.less'],
+  styleUrl: './step-one.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzSelectModule, NzButtonModule, NzInputModule, NzWaveModule, NzDividerModule, NzTypographyModule]
 })

@@ -24,7 +24,7 @@ import { NzResultModule } from 'ng-zorro-antd/result';
 @Component({
   selector: 'app-set-role',
   templateUrl: './set-role.component.html',
-  styleUrls: ['./set-role.component.less'],
+  styleUrl: './set-role.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [

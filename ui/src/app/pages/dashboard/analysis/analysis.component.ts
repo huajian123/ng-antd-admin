@@ -29,7 +29,7 @@ interface DataItem {
 @Component({
   selector: 'app-analysis',
   templateUrl: './analysis.component.html',
-  styleUrls: ['./analysis.component.less'],
+  styleUrl: './analysis.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     NzCardModule,

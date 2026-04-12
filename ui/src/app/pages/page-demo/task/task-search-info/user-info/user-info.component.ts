@@ -9,6 +9,6 @@ import { NzListModule } from 'ng-zorro-antd/list';
   selector: 'app-user-info',
   imports: [NzCardModule, NzAvatarModule, NzIconModule, NzListModule],
   templateUrl: './user-info.component.html',
-  styleUrls: ['./user-info.component.less']
+  styleUrl: './user-info.component.less'
 })
 export class UserInfoComponent {}

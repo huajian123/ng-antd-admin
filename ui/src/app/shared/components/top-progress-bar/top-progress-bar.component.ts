@@ -6,7 +6,7 @@ import { timer } from 'rxjs';
 @Component({
   selector: 'app-top-progress-bar',
   templateUrl: './top-progress-bar.component.html',
-  styleUrls: ['./top-progress-bar.component.less'],
+  styleUrl: './top-progress-bar.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: []
 })

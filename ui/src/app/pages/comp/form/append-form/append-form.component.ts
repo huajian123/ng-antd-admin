@@ -69,7 +69,7 @@ export enum TaskStateSearchCheckPeriodEnum {
 @Component({
   selector: 'app-append-form',
   templateUrl: './append-form.component.html',
-  styleUrls: ['./append-form.component.less'],
+  styleUrl: './append-form.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     PageHeaderComponent,

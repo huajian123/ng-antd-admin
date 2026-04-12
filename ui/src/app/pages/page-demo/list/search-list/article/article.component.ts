@@ -20,7 +20,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
 @Component({
   selector: 'app-article',
   templateUrl: './article.component.html',
-  styleUrls: ['./article.component.less'],
+  styleUrl: './article.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     NzCardModule,

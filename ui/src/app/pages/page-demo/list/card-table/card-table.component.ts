@@ -14,7 +14,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 @Component({
   selector: 'app-card-table',
   templateUrl: './card-table.component.html',
-  styleUrls: ['./card-table.component.less'],
+  styleUrl: './card-table.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [PageHeaderComponent, NzGridModule, WaterMarkComponent, NzCardModule, NzIconModule, NzButtonModule, NzAvatarModule]
 })

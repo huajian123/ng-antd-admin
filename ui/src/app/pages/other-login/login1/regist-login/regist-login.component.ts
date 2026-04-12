@@ -19,7 +19,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 @Component({
   selector: 'app-regist-login',
   templateUrl: './regist-login.component.html',
-  styleUrls: ['./regist-login.component.less'],
+  styleUrl: './regist-login.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzButtonModule, NzWaveModule, PasswordStrengthMeterComponent, NzIconModule, NzCheckboxModule]
 })

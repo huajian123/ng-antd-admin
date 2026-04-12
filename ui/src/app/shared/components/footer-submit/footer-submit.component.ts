@@ -15,7 +15,7 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 @Component({
   selector: 'app-footer-submit',
   templateUrl: './footer-submit.component.html',
-  styleUrls: ['./footer-submit.component.less'],
+  styleUrl: './footer-submit.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NzCardModule, NgTemplateOutlet]
 })

@@ -12,7 +12,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
 @Component({
   selector: 'app-home-notice',
   templateUrl: './home-notice.component.html',
-  styleUrls: ['./home-notice.component.less'],
+  styleUrl: './home-notice.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NzCardModule, NzTabsModule, NgTemplateOutlet, NzListModule, NzTypographyModule, NzTagModule, NumberLoopPipe]
 })

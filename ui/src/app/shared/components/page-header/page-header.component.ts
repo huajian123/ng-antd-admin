@@ -17,7 +17,7 @@ export interface PageHeaderType {
 @Component({
   selector: 'app-page-header',
   templateUrl: './page-header.component.html',
-  styleUrls: ['./page-header.component.less'],
+  styleUrl: './page-header.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NzPageHeaderModule, NzBreadCrumbModule, NzOutletModule]
 })

@@ -10,7 +10,7 @@ import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 @Component({
   selector: 'app-lazy-basic',
   templateUrl: './lazy-basic.component.html',
-  styleUrls: ['./lazy-basic.component.less'],
+  styleUrl: './lazy-basic.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [LazyServiceService],
   imports: [PageHeaderComponent, NzButtonModule, NzWaveModule, AdDirective]

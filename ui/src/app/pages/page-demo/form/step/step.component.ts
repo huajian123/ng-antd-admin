@@ -25,7 +25,7 @@ enum StepEnum {
 @Component({
   selector: 'app-step',
   templateUrl: './step.component.html',
-  styleUrls: ['./step.component.less'],
+  styleUrl: './step.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [PageHeaderComponent, NzCardModule, WaterMarkComponent, NzStepsModule, PortalModule]
 })

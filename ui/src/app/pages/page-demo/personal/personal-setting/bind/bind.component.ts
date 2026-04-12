@@ -7,7 +7,7 @@ import { NzListModule } from 'ng-zorro-antd/list';
 @Component({
   selector: 'app-bind',
   templateUrl: './bind.component.html',
-  styleUrls: ['./bind.component.less'],
+  styleUrl: './bind.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NzListModule, NzIconModule, NzButtonModule]
 })

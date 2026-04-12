@@ -18,7 +18,7 @@ declare let BMap: NzSafeAny;
 @Component({
   selector: 'app-monitor',
   templateUrl: './monitor.component.html',
-  styleUrls: ['./monitor.component.less'],
+  styleUrl: './monitor.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NzCardModule, NzBreadCrumbModule, NzGridModule, NzStatisticModule, NzTypographyModule, NzEmptyModule, DecimalPipe, PercentPipe]
 })

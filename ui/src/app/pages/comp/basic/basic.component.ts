@@ -11,7 +11,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 @Component({
   selector: 'app-basic',
   templateUrl: './basic.component.html',
-  styleUrls: ['./basic.component.less'],
+  styleUrl: './basic.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [PageHeaderComponent, NzGridModule, NzCardModule, NzButtonModule, NzWaveModule, NzIconModule]
 })

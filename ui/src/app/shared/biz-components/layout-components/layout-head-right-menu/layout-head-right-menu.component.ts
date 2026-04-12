@@ -27,7 +27,7 @@ import { HomeNoticeComponent } from '../home-notice/home-notice.component';
 @Component({
   selector: 'app-layout-head-right-menu',
   templateUrl: './layout-head-right-menu.component.html',
-  styleUrls: ['./layout-head-right-menu.component.less'],
+  styleUrl: './layout-head-right-menu.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NgTemplateOutlet, NzTooltipModule, NzIconModule, NzButtonModule, ToggleFullscreenDirective, NzDropdownModule, NzBadgeModule, NzMenuModule, HomeNoticeComponent, ScreenLessHiddenDirective]
 })

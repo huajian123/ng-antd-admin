@@ -15,7 +15,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 @Component({
   selector: 'app-register-form',
   templateUrl: './register-form.component.html',
-  styleUrls: ['./register-form.component.less'],
+  styleUrl: './register-form.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzButtonModule, NzInputModule, NzSelectModule, NzWaveModule, RouterLink]
 })

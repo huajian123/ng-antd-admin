@@ -7,7 +7,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.less'],
+  styleUrl: './login.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NzIconModule, NzButtonModule, RouterOutlet]
 })

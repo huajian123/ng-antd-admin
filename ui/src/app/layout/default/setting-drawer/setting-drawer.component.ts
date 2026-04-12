@@ -48,7 +48,7 @@ type SettingKey = Exclude<keyof SettingInterface, ExcludedKeys>;
 @Component({
   selector: 'app-setting-drawer',
   templateUrl: './setting-drawer.component.html',
-  styleUrls: ['./setting-drawer.component.less'],
+  styleUrl: './setting-drawer.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CdkDrag, NzIconModule, NzButtonModule, NzDrawerModule, NzTooltipModule, NzDividerModule, NzListModule, NzSwitchModule, FormsModule]
 })

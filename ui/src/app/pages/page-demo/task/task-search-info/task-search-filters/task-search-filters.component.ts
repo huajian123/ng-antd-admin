@@ -9,7 +9,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
   selector: 'app-task-search-filters',
   imports: [NzListModule, NzTypographyModule, NzAvatarModule, NzIconModule],
   templateUrl: './task-search-filters.component.html',
-  styleUrls: ['./task-search-filters.component.less']
+  styleUrl: './task-search-filters.component.less'
 })
 export class TaskSearchFiltersComponent {
   data1 = [

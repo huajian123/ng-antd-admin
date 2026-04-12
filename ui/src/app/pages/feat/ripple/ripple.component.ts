@@ -11,7 +11,7 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 @Component({
   selector: 'app-ripple',
   templateUrl: './ripple.component.html',
-  styleUrls: ['./ripple.component.less'],
+  styleUrl: './ripple.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [PageHeaderComponent, NzCardModule, NzCheckboxModule, FormsModule, NzInputNumberModule] // , ColorPickerDirective, MatRippleModule
 })

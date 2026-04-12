@@ -5,7 +5,7 @@ import { WaterMarkService } from '@core/services/common/water-mark.service';
 @Component({
   selector: 'app-water-mark',
   templateUrl: './water-mark.component.html',
-  styleUrls: ['./water-mark.component.less'],
+  styleUrl: './water-mark.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WaterMarkComponent implements AfterViewInit {

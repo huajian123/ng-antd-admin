@@ -23,7 +23,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
 @Component({
   selector: 'app-workbench',
   templateUrl: './workbench.component.html',
-  styleUrls: ['./workbench.component.less'],
+  styleUrl: './workbench.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     PageHeaderComponent,
