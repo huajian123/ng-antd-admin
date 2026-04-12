@@ -1,4 +1,4 @@
-import { effect, Injectable, signal } from '@angular/core';
+import { computed, Injectable, signal } from '@angular/core';
 
 import { Theme, ThemeMode } from '@app/layout/default/setting-drawer/setting-drawer.component';
 
@@ -28,9 +28,9 @@ export type StyleThemeInterface = Record<StyleTheme, boolean>;
   providedIn: 'root'
 })
 export class ThemeService {
-  // todo 跟$themeStyle有重复，日后优化
-  $isNightTheme = signal(false); // 暗黑主题
-  $isCompactTheme = signal(false); // 紧凑主题
+  $themeStyle = signal<StyleTheme>('default'); // 主题风格，暗黑，默认，紧凑，阿里云
+  $isNightTheme = computed(() => this.$themeStyle() === 'dark'); // 暗黑主题
+  $isCompactTheme = computed(() => this.$themeStyle() === 'compact'); // 紧凑主题
   $isOverModeTheme = signal(false); // over模式，即拖动浏览器宽度，至菜单栏消失的状态
   $isCollapsed = signal(false); // 菜单收缩模式，拖动浏览器至菜单自动缩短成图标
   $themesOptions = signal<SettingInterface>({
@@ -48,11 +48,5 @@ export class ThemeService {
     hasFooterArea: true,
     hasNavArea: true,
     hasNavHeadArea: true
-  });
-  $themeStyle = signal<StyleTheme>('default'); // 主题风格，暗黑，默认，紧凑，阿里云
-  themeStyleChangeEffect = effect(() => {
-    const source = this.$themeStyle();
-    this.$isNightTheme.set(source === 'dark');
-    this.$isCompactTheme.set(source === 'compact');
   });
 }
