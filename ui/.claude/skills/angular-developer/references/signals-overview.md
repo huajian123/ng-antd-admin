@@ -92,3 +92,23 @@ effect(async () => {
   console.log(currentTheme);
 });
 ```
+
+## When NOT to Use Signals
+
+Signals are for **reactive state** — values that change over time and need to notify consumers. Do not wrap static, never-changing data in a signal.
+
+```ts
+// ❌ UNNECESSARY: this value never changes, signal adds no value
+readonly pageHeaderInfo = signal<Partial<PageHeaderType>>({
+  title: '基础组件',
+  breadcrumb: ['首页', '组件', '基础组件'],
+});
+
+// ✅ CORRECT: use a plain readonly property for static configuration
+readonly pageHeaderInfo: Partial<PageHeaderType> = {
+  title: '基础组件',
+  breadcrumb: ['首页', '组件', '基础组件'],
+};
+```
+
+Using `signal()` on static data misleads readers into thinking the value will change, and adds unnecessary overhead with no benefit.
