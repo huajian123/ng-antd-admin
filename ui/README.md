@@ -12,8 +12,7 @@
 
 [在线预览](https://huajian123.github.io/ng-antd-admin/) · [功能演示](https://www.bilibili.com/video/BV1gF411x7rN/) · [问题反馈](https://github.com/huajian123/ng-antd-admin/issues) · [更新日志](https://github.com/huajian123/ng-antd-admin/releases)
 
-<img src="[https://github.com/huajian123/ng-antd-admin/blob/master/ui/projectImg/11.png](https://github.com/huajian123/ng-antd-admin/blob/master/ui/projectImg/11.png)" alt="系统截图" width="800"/>
-
+<img src="https://github.com/huajian123/ng-antd-admin/blob/master/ui/projectImg/11.png?raw=true" alt="系统截图" width="800"/>
 </div>
 
 ---
@@ -127,49 +126,31 @@ provideRouter(routes, withViewTransitions({ skipInitialTransition: true }))
 
 ## 📦 快速开始
 
-本项目支持两种启动模式，**默认为 Mock 模式**，无需任何后端环境即可运行。
-
-### 模式一：Mock 模式（默认，推荐）
-
-使用 [MSW (Mock Service Worker)](https://mswjs.io/) 在浏览器端拦截请求并返回模拟数据，**零依赖、开箱即用**，适合快速体验和前端开发调试。
-
-`src/environments/environment.ts` 中 `mockEnabled: true` 即为开启状态（默认已开启）。
+### 方式一：仅前端预览 (推荐体验)
+使用 MSW (Mock Service Worker) 模拟数据，无需启动后端即可体验完整功能。
 
 ```bash
-# 1. 克隆项目
-git clone https://github.com/huajian123/ng-antd-admin.git
+# 1. 克隆 mock 分支
+git clone -b mock https://github.com/huajian123/ng-antd-admin.git
+
+# 2. 进入前端目录
 cd ng-antd-admin/ui
 
-# 2. 安装依赖
+# 3. 安装依赖
 npm install
 
-# 3. 启动项目
+# 4. 启动项目
 npm start
 
-# 4. 访问 http://localhost:4201
+# 5. 访问 http://localhost:4201
 ```
 
-> 无需配置数据库、无需启动后端服务，直接运行即可体验完整功能。
+> 也可直接在线预览：[https://huajian123.github.io/ng-antd-admin/](https://huajian123.github.io/ng-antd-admin/)
 
----
+### 方式二：完整全栈版 (前端 + 后端)
+适合需要二次开发完整业务系统的场景。
 
-### 模式二：全栈模式（对接真实后端）
-
-适合需要二次开发完整业务系统的场景，由 **NestJS + PostgreSQL** 提供真实后端服务。
-
-#### 第一步：关闭 Mock
-
-将 `src/environments/environment.ts` 中的 `mockEnabled` 改为 `false`：
-
-```typescript
-export const environment = {
-  production: false,
-  mockEnabled: false  // 关闭 Mock，请求将转发至真实后端
-};
-```
-
-#### 第二步：启动后端 (NestJS)
-
+#### 1. 启动后端 (NestJS)
 ```bash
 # 1. 确保已安装 Docker
 docker --version
@@ -191,23 +172,24 @@ npm install
 npm run start
 ```
 
-#### 第三步：启动前端
-
+#### 2. 启动前端
 ```bash
+# 1. 进入前端目录
 cd ui
+
+# 2. 安装依赖
 npm install
+
+# 3. 启动开发服务器
 npm start
 
-# 访问 http://localhost:4201
+# 4. 浏览器访问 http://localhost:4201
 ```
 
----
-
-### 模式三：纯净版（零业务代码）
-
+### 方式三：纯净版 (零业务代码)
 仅保留基础架构，适合直接对接已有后端 API。
 
-```
+```html
 https://gitee.com/hjxiaoqianduan/ng-ant-admin-pure
 ```
 
@@ -286,6 +268,55 @@ this.winWidthService.getWindowWidthStore()
 | v15.x | Angular 15 | 传统 NgModule 版本 | [下载](https://github.com/huajian123/ng-antd-admin/tree/v15) |
 
 > ⚠️ **注意**：Angular 15+ 引入了 Standalone Components，项目结构变化较大。请根据您的团队技术栈选择对应的版本。
+
+---
+
+## 🤖 AI 辅助上手
+
+本项目在 `docs/meta-model/` 下维护了一套**项目元模型文档**，覆盖模块地图、核心流程、权限体系、状态管理、变更热区等。
+
+如果你使用 AI 编程助手（Claude、Cursor、Copilot 等），可以直接把 `meta-index.md` 喂给 AI，让它快速建立对项目的完整认知，而不需要重新扫描整个仓库。
+
+### 推荐用法
+
+**1. 快速了解项目结构**
+
+把 `docs/meta-model/meta-index.md` 的内容粘贴到对话里，然后问：
+
+```
+读完这份索引，帮我解释一下这个项目的整体架构
+```
+
+**2. 定位某个功能的源码**
+
+```
+参考 meta-index.md，帮我找到"多页签"功能的实现逻辑在哪里
+```
+
+**3. 处理需求或 Bug**
+
+```
+先读 docs/meta-model/meta-index.md，我要给账号管理页新增"批量禁用"功能，帮我定位影响面和需要改哪些文件
+```
+
+**4. 理解某个核心流程**
+
+```
+参考 docs/meta-model/flow-index.md，帮我梳理登录到权限加载的完整流程
+```
+
+### 文档索引
+
+| 文档 | 内容 |
+|------|------|
+| [meta-index.md](./docs/meta-model/meta-index.md) | 总入口，先读这里 |
+| [module-index.md](./docs/meta-model/module-index.md) | 所有页面模块地图 |
+| [functional-inventory.md](./docs/meta-model/functional-inventory.md) | 功能清单（功能 → 路由 → 源码） |
+| [auth-login-index.md](./docs/meta-model/auth-login-index.md) | 认证与权限体系 |
+| [flow-index.md](./docs/meta-model/flow-index.md) | 核心流程（登录、HTTP、路由复用等） |
+| [change-hotspots.md](./docs/meta-model/change-hotspots.md) | 高风险变更区，二次开发必读 |
+
+> 元模型文档会随项目持续更新。如果你发现文档与代码不符，欢迎提 PR 修正。
 
 ---
 

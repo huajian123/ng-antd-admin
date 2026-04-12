@@ -271,6 +271,55 @@ this.winWidthService.getWindowWidthStore()
 
 ---
 
+## 🤖 AI 辅助上手
+
+本项目在 `docs/meta-model/` 下维护了一套**项目元模型文档**，覆盖模块地图、核心流程、权限体系、状态管理、变更热区等。
+
+如果你使用 AI 编程助手（Claude、Cursor、Copilot 等），可以直接把 `meta-index.md` 喂给 AI，让它快速建立对项目的完整认知，而不需要重新扫描整个仓库。
+
+### 推荐用法
+
+**1. 快速了解项目结构**
+
+把 `docs/meta-model/meta-index.md` 的内容粘贴到对话里，然后问：
+
+```
+读完这份索引，帮我解释一下这个项目的整体架构
+```
+
+**2. 定位某个功能的源码**
+
+```
+参考 meta-index.md，帮我找到"多页签"功能的实现逻辑在哪里
+```
+
+**3. 处理需求或 Bug**
+
+```
+先读 docs/meta-model/meta-index.md，我要给账号管理页新增"批量禁用"功能，帮我定位影响面和需要改哪些文件
+```
+
+**4. 理解某个核心流程**
+
+```
+参考 docs/meta-model/flow-index.md，帮我梳理登录到权限加载的完整流程
+```
+
+### 文档索引
+
+| 文档 | 内容 |
+|------|------|
+| [meta-index.md](./docs/meta-model/meta-index.md) | 总入口，先读这里 |
+| [module-index.md](./docs/meta-model/module-index.md) | 所有页面模块地图 |
+| [functional-inventory.md](./docs/meta-model/functional-inventory.md) | 功能清单（功能 → 路由 → 源码） |
+| [auth-login-index.md](./docs/meta-model/auth-login-index.md) | 认证与权限体系 |
+| [flow-index.md](./docs/meta-model/flow-index.md) | 核心流程（登录、HTTP、路由复用等） |
+| [change-hotspots.md](./docs/meta-model/change-hotspots.md) | 高风险变更区，二次开发必读 |
+
+> 元模型文档会随项目持续更新。如果你发现文档与代码不符，欢迎提 PR 修正。
+
+---
+
 ## 🤝 参与贡献
 
 我们非常欢迎各种形式的贡献！
