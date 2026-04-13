@@ -1,6 +1,5 @@
 import { DecimalPipe } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, inject, NgZone, TemplateRef, viewChild } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { afterNextRender, ChangeDetectionStrategy, Component, computed, inject, TemplateRef, viewChild } from '@angular/core';
 
 import { Radar } from '@antv/g2plot';
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
@@ -11,7 +10,6 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { inNextTick } from 'ng-zorro-antd/core/util';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -41,9 +39,9 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
     NumberLoopPipe
   ]
 })
-export class WorkbenchComponent implements AfterViewInit {
+export class WorkbenchComponent {
   readonly pageHeaderContent = viewChild.required<TemplateRef<NzSafeAny>>('pageHeaderContent');
-  destroyRef = inject(DestroyRef);
+  msg = inject(NzMessageService);
   radarData = [
     { item: 'Design', user: 'a', score: 70 },
     { item: 'Design', user: 'b', score: 30 },
@@ -66,30 +64,20 @@ export class WorkbenchComponent implements AfterViewInit {
     { item: 'UX', user: 'a', score: 50 },
     { item: 'UX', user: 'b', score: 60 }
   ];
-  pageHeaderInfo: Partial<PageHeaderType> = {
-    title: '',
-    breadcrumb: [],
-    desc: ''
-  };
-  private ngZone = inject(NgZone);
-  msg = inject(NzMessageService);
+  pageHeaderInfo = computed<Partial<PageHeaderType>>(() => ({
+    title: '工作台',
+    breadcrumb: ['首页', 'Dashboard', '工作台'],
+    desc: this.pageHeaderContent()
+  }));
 
-  ngAfterViewInit(): void {
-    this.pageHeaderInfo = {
-      title: '工作台',
-      breadcrumb: ['首页', 'Dashboard', '工作台'],
-      desc: this.pageHeaderContent()
-    };
-    inNextTick()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => {
-        this.initRadar();
-      });
+  constructor() {
+    afterNextRender(() => {
+      this.initRadar();
+    });
   }
 
   private initRadar(): void {
-    this.ngZone.runOutsideAngular(() => {
-      const radarPlot = new Radar('randar', {
+    const radarPlot = new Radar('randar', {
         data: this.radarData,
         xField: 'item',
         yField: 'score',
@@ -116,8 +104,7 @@ export class WorkbenchComponent implements AfterViewInit {
         point: {
           size: 2
         }
-      });
-      radarPlot.render();
     });
+    radarPlot.render();
   }
 }

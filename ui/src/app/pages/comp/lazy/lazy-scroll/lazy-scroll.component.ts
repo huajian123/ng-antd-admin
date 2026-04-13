@@ -1,5 +1,5 @@
 import { normalizePassiveListenerOptions } from '@angular/cdk/platform';
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit, NgZone, inject, DestroyRef, viewChild } from '@angular/core';
+import { AfterViewInit, Component, ChangeDetectionStrategy, DestroyRef, inject, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { fromEvent, take } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
@@ -19,33 +19,25 @@ const passiveEventListenerOptions = normalizePassiveListenerOptions({ passive: t
 })
 export class LazyScrollComponent implements AfterViewInit {
   private lazyServiceService = inject(LazyServiceService);
-  private zone = inject(NgZone);
-  private cdr = inject(ChangeDetectorRef);
-  pageHeaderInfo: Partial<PageHeaderType> = {
+  private destroyRef = inject(DestroyRef);
+  readonly adHost = viewChild.required(AdDirective);
+  readonly pageHeaderInfo: Partial<PageHeaderType> = {
     title: '滚动懒加载组件示例',
     breadcrumb: ['首页', '组件', '滚动懒加载'],
     desc: '滚动页面，加载组件'
   };
-  readonly adHost = viewChild.required(AdDirective);
-  destroyRef = inject(DestroyRef);
 
   ngAfterViewInit(): void {
     this.lazyServiceService.adHost = this.adHost();
-    this.zone.runOutsideAngular(() => {
-      fromEvent(window, 'scroll', passiveEventListenerOptions as AddEventListenerOptions)
-        .pipe(
-          debounceTime(50),
-          filter(() => {
-            return window.scrollY >= 200;
-          }),
-          take(1),
-          takeUntilDestroyed(this.destroyRef)
-        )
-        .subscribe(() => {
-          this.lazyServiceService.create().then(() => {
-            this.cdr.detectChanges();
-          });
-        });
-    });
+    fromEvent(window, 'scroll', passiveEventListenerOptions as AddEventListenerOptions)
+      .pipe(
+        debounceTime(50),
+        filter(() => window.scrollY >= 200),
+        take(1),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe(() => {
+        this.lazyServiceService.create();
+      });
   }
 }

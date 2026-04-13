@@ -87,7 +87,7 @@ export class NavBarComponent implements OnInit {
           this.routerPath.set(url);
 
           // 主题切换为混合模式下，设置左侧菜单数据源
-          // 如果放在ngInit监听里面，会在混合模式下，刷新完页面切换路由，runOutSideAngular
+          // 如果放在ngInit监听里面，会在混合模式下，刷新完页面切换路由
           if (this.isMixinMode()) {
             this.setMixModeLeftMenu();
           }

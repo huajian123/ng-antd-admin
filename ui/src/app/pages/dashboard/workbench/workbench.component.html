@@ -1,4 +1,4 @@
-<app-page-header [pageHeaderInfo]="pageHeaderInfo" />
+<app-page-header [pageHeaderInfo]="pageHeaderInfo()" />
 
 <div class="normal-table-wrap">
   <div nz-row [nzGutter]="[32, 32]">
@@ -56,7 +56,7 @@
                 </div>
               }
               <div nz-col nzSpan="6">
-                <button nz-button nzGhost nzType="primary" nzSize="small">
+                <button nz-button nzGhost nzSize="small" nzType="primary">
                   <i nz-icon nzType="plus"></i>
                   <span>添加</span>
                 </button>
@@ -75,7 +75,7 @@
               @for (item of 5 | numberLoop; track $index) {
                 <div nz-col nzSpan="12">
                   <a class="group">
-                    <nz-avatar [nzSize]="24" nzSrc="https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png"></nz-avatar>
+                    <nz-avatar nzSrc="https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png" [nzSize]="24"></nz-avatar>
                     <span class="m-l-10">科学搬砖组</span>
                   </a>
                 </div>
@@ -121,6 +121,6 @@
 </ng-template>
 
 <ng-template #cardTitleTpl>
-  <nz-avatar [nzSize]="24" nzSrc="https://gw.alipayobjects.com/zos/rmsportal/zOsKZmFRdUtvpqCImOVY.png"></nz-avatar>
+  <nz-avatar nzSrc="https://gw.alipayobjects.com/zos/rmsportal/zOsKZmFRdUtvpqCImOVY.png" [nzSize]="24"></nz-avatar>
   <span class="m-l-10">Angular</span>
 </ng-template>

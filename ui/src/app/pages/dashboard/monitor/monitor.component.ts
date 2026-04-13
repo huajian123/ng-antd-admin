@@ -1,6 +1,5 @@
 import { DecimalPipe, PercentPipe } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, inject, NgZone } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { afterNextRender, ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { Gauge, Liquid, RingProgress, TinyArea, WordCloud } from '@antv/g2plot';
 import { LazyService } from '@core/services/common/lazy.service';
@@ -8,7 +7,6 @@ import { LazyService } from '@core/services/common/lazy.service';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { inNextTick } from 'ng-zorro-antd/core/util';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzStatisticModule } from 'ng-zorro-antd/statistic';
@@ -22,10 +20,9 @@ declare let BMap: NzSafeAny;
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NzCardModule, NzBreadCrumbModule, NzGridModule, NzStatisticModule, NzTypographyModule, NzEmptyModule, DecimalPipe, PercentPipe]
 })
-export class MonitorComponent implements AfterViewInit {
+export class MonitorComponent {
   private lazyService = inject(LazyService);
-  deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30;
-  destroyRef = inject(DestroyRef);
+  readonly deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30;
   miniAreaData = [264, 274, 284, 294, 300, 310, 320, 330, 340, 350, 360, 370, 380, 390, 400, 410, 420, 430, 440, 450, 460, 470];
   wordCloudData = [
     {
@@ -414,7 +411,23 @@ export class MonitorComponent implements AfterViewInit {
       category: 'europe'
     }
   ];
-  private ngZone = inject(NgZone);
+  constructor() {
+    afterNextRender(() => {
+      this.initDashBoard();
+      this.initArea();
+      this.initLiquidPlot();
+      for (let i = 1; i <= 3; i++) {
+        this.initRingProgress(i);
+      }
+      this.wordCloud();
+      // this.lazyService.loadScript('http://api.map.baidu.com/getscript?v=2.0&ak=RD5HkkjTa6uAIDpw7GRFtR83Fk7Wdk0j').then(() => {
+      //   const map = new BMap.Map('map');
+      //   const point = new BMap.Point(116.404, 39.915);
+      //   map.centerAndZoom(point, 15);
+      //   map.enableScrollWheelZoom(true);
+      // });
+    });
+  }
 
   initDashBoard(): void {
     const gauge = new Gauge('dashBoard', {
@@ -543,11 +556,7 @@ export class MonitorComponent implements AfterViewInit {
         }
       }
     });
-    inNextTick()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => {
-        wordCloud.render();
-      });
+    wordCloud.render();
   }
 
   initRingProgress(i: number): void {
@@ -560,28 +569,5 @@ export class MonitorComponent implements AfterViewInit {
     });
 
     ringProgress.render();
-  }
-
-  ngAfterViewInit(): void {
-    inNextTick()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => {
-        this.ngZone.runOutsideAngular(() => {
-          this.initDashBoard();
-          this.initArea();
-          this.initLiquidPlot();
-          for (let i = 1; i <= 3; i++) {
-            this.initRingProgress(i);
-          }
-
-          this.wordCloud();
-          // this.lazyService.loadScript('http://api.map.baidu.com/getscript?v=2.0&ak=RD5HkkjTa6uAIDpw7GRFtR83Fk7Wdk0j').then(() => {
-          //   const map = new BMap.Map('map'); //创建地图实例
-          //   const point = new BMap.Point(116.404, 39.915); //创建点坐标
-          //   map.centerAndZoom(point, 15); //初始化地图，设置中心点坐标和地图级别
-          //   map.enableScrollWheelZoom(true); //开启鼠标滚轮缩放
-          // });
-        });
-      });
   }
 }

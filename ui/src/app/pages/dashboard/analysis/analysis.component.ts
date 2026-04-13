@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, inject, NgZone } from '@angular/core';
+import { afterNextRender, ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { Chart } from '@antv/g2';
 import { Pie, RingProgress, TinyColumn, TinyArea, Progress } from '@antv/g2plot';
@@ -49,9 +49,8 @@ interface DataItem {
     ScreenLessHiddenDirective
   ]
 })
-export class AnalysisComponent implements AfterViewInit {
-  destroyRef = inject(DestroyRef);
-  cardPadding = { padding: '20px 24px 8px' };
+export class AnalysisComponent {
+  readonly cardPadding = { padding: '20px 24px 8px' };
   miniBarData = [497, 666, 219, 269, 274, 337, 81, 497, 666, 219, 269];
   miniAreaData = [264, 274, 284, 294, 284, 274, 264, 264, 274, 264, 264, 264, 284, 264, 254, 264, 244, 340, 264, 243, 226, 192];
   histogramData = [
@@ -131,7 +130,18 @@ export class AnalysisComponent implements AfterViewInit {
       english: 89
     }
   ];
-  private ngZone = inject(NgZone);
+  constructor() {
+    afterNextRender(() => {
+      this.initMinibar();
+      this.initMiniArea();
+      this.initProgress();
+      this.initHistogram();
+      this.initSearchArea();
+      this.initSearchAvgArea();
+      this.initRing();
+      // this.initMiniRing();
+    });
+  }
 
   initMinibar(): void {
     const data = this.miniBarData;
@@ -284,20 +294,5 @@ export class AnalysisComponent implements AfterViewInit {
     });
 
     ringProgress.render();
-  }
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.ngZone.runOutsideAngular(() => {
-        this.initMinibar();
-        this.initMiniArea();
-        this.initProgress();
-        this.initHistogram();
-        this.initSearchArea();
-        this.initSearchAvgArea();
-        this.initRing();
-        // this.initMiniRing();
-      });
-    });
   }
 }
