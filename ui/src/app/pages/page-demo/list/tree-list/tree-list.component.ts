@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, TemplateRef, ChangeDetectorRef, inject, viewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, TemplateRef, inject, signal, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AntTableConfig, SortFile } from '@shared/components/ant-table/ant-table.component';
@@ -52,41 +52,32 @@ export class TreeListComponent implements OnInit {
   searchParam: Partial<SearchParam> = {};
 
   isCollapse = true;
-  tableConfig!: AntTableConfig;
-  pageHeaderInfo: Partial<PageHeaderType> = {
+  tableConfig = signal<AntTableConfig>({ headers: [], total: 0, showCheckbox: false, loading: false, pageSize: 10, pageIndex: 1 });
+  readonly pageHeaderInfo: Partial<PageHeaderType> = {
     title: '树状表格（演示默认值的情况，删除或者查看，可以打印选中行的id）',
     // desc: '表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。',
     breadcrumb: ['首页', '列表页', '树状表格']
   };
   checkedCashArray: NzSafeAny[] = [];
-  dataList: NzSafeAny[] = [];
+  dataList = signal<NzSafeAny[]>([]);
 
   private modalSrv = inject(NzModalService);
   private message = inject(NzMessageService);
-  private cdr = inject(ChangeDetectorRef);
 
   reloadTable(): void {
     this.message.info('已经刷新了');
     this.getDataList();
   }
 
-  // 触发表格变更检测
-  tableChangeDectction(): void {
-    // 改变引用触发变更检测。
-    this.dataList = [...this.dataList];
-    this.cdr.detectChanges();
-  }
-
   tableLoading(isLoading: boolean): void {
-    this.tableConfig.loading = isLoading;
-    this.tableChangeDectction();
+    this.tableConfig.update(config => ({ ...config, loading: isLoading }));
   }
 
   getDataList(e?: NzTableQueryParams): void {
-    this.tableConfig.loading = true;
-    this.dataList = [];
+    this.tableLoading(true);
+    this.dataList.set([]);
     setTimeout(() => {
-      this.dataList = [
+      this.dataList.set([
         {
           id: `1`,
           name: 'John Brown sr.',
@@ -158,9 +149,8 @@ export class TreeListComponent implements OnInit {
           age: 32,
           address: 'Sidney No. 1 Lake Park'
         }
-      ];
-      this.tableConfig.total = 13;
-      this.tableConfig.pageIndex = 1;
+      ]);
+      this.tableConfig.update(c => ({ ...c, total: 13, pageIndex: 1 }));
       const cashFromHttp = [
         {
           id: `1`,
@@ -360,7 +350,7 @@ export class TreeListComponent implements OnInit {
 
   // 修改一页几条
   changePageSize(e: number): void {
-    this.tableConfig.pageSize = e;
+    this.tableConfig.update(c => ({ ...c, pageSize: e }));
   }
 
   private initTable(): void {
@@ -368,7 +358,7 @@ export class TreeListComponent implements OnInit {
      * 注意，这里需要留一列不要设置width，让列表自适应宽度
      *
      * */
-    this.tableConfig = {
+    this.tableConfig.set({
       headers: [
         {
           title: '姓名',
@@ -406,7 +396,7 @@ export class TreeListComponent implements OnInit {
       loading: false,
       pageSize: 10,
       pageIndex: 1
-    };
+    });
   }
 
   ngOnInit(): void {

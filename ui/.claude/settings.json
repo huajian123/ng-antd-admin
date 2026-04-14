@@ -1,0 +1,3 @@
+{
+  "customInstructions": "When editing code, preserve all existing comments unless they are directly related to code being deleted. Never remove comments that explain logic, provide context, or serve as documentation. IMPORTANT: Only perform tasks explicitly requested by the user. Never expand scope beyond what was asked, even if related improvements seem obvious or beneficial. If you identify additional improvements, mention them as suggestions only — do not implement them without explicit user approval."
+}

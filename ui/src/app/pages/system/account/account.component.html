@@ -69,8 +69,8 @@
   <app-card-table-wrap [btnTpl]="tableBtns" [tableTitle]="'账号列表'" (reload)="reloadTable()">
     <app-ant-table
       [checkedCashArrayFromComment]="checkedCashArray"
-      [tableConfig]="tableConfig"
-      [tableData]="dataList"
+      [tableConfig]="tableConfig()"
+      [tableData]="dataList()"
       (changePageIndex)="getDataList($event)"
       (changePageSize)="changePageSize($event)"
       (selectedChange)="selectedChecked($event)"

@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, TemplateRef, ChangeDetectorRef, inject, DestroyRef, viewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, TemplateRef, inject, DestroyRef, signal, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
@@ -69,39 +69,30 @@ export class MenuComponent implements OnInit {
   ActionCode = ActionCode;
   searchParam: Partial<SearchParam> = {};
   destroyRef = inject(DestroyRef);
-  tableConfig!: AntTableConfig;
-  pageHeaderInfo: Partial<PageHeaderType> = {
+  tableConfig = signal<AntTableConfig>({ headers: [], total: 0, showCheckbox: false, loading: false, pageSize: 10, pageIndex: 1 });
+  readonly pageHeaderInfo: Partial<PageHeaderType> = {
     title: '菜单管理,新增完菜单记得给对应角色添加刚刚新增的菜单权限，不然无法展示',
     breadcrumb: ['首页', '系统管理', '菜单管理']
   };
-  dataList: TreeNodeInterface[] = [];
-  visibleOptions: OptionsInterface[] = [];
+  dataList = signal<TreeNodeInterface[]>([]);
+  readonly visibleOptions: OptionsInterface[] = [...MapPipe.transformMapToArray(MapSet.visible, MapKeyType.Boolean)];
 
   private menuModalService = inject(MenuModalService);
   private dataService = inject(MenusService);
   private modalSrv = inject(NzModalService);
   private message = inject(NzMessageService);
-  private cdr = inject(ChangeDetectorRef);
 
   reloadTable(): void {
     this.message.info('已经刷新了');
     this.getDataList();
   }
 
-  // 触发表格变更检测
-  tableChangeDectction(): void {
-    // 改变引用触发变更检测。
-    this.dataList = [...this.dataList];
-    this.cdr.detectChanges();
-  }
-
   tableLoading(isLoading: boolean): void {
-    this.tableConfig.loading = isLoading;
-    this.tableChangeDectction();
+    this.tableConfig.update(config => ({ ...config, loading: isLoading }));
   }
 
   getDataList(sortFile?: SortFile): void {
-    this.tableConfig.loading = true;
+    this.tableLoading(true);
     const params: SearchCommonVO<NzSafeAny> = {
       pageSize: 0,
       pageIndex: 0,
@@ -117,12 +108,13 @@ export class MenuComponent implements OnInit {
       )
       .subscribe(menuList => {
         const target = fnFlatDataHasParentToTree(menuList.list, 'fatherId');
-        this.dataList = fnFlattenTreeDataByDataList(target);
+        let list = fnFlattenTreeDataByDataList(target);
         console.log(sortFile);
         // 因为前段要对后端返回的数据进行处理，所以排序这里交给了前段来做
         if (sortFile) {
-          fnSortTreeData(this.dataList, sortFile);
+          fnSortTreeData(list, sortFile);
         }
+        this.dataList.set(list);
         this.tableLoading(false);
       });
   }
@@ -182,8 +174,8 @@ export class MenuComponent implements OnInit {
           )
           .subscribe(() => {
             // 例如分页第二页只有一条数据，此时删除这条数据，跳转到第一页，并重新查询一下列表,pageIndex改变会由changePageIndex自动触发表格查询getDataList（）
-            if (this.dataList.length === 1 && this.tableConfig.pageIndex !== 1) {
-              this.tableConfig.pageIndex--;
+            if (this.dataList().length === 1 && this.tableConfig().pageIndex !== 1) {
+              this.tableConfig.update(c => ({ ...c, pageIndex: c.pageIndex! - 1 }));
             } else {
               this.getDataList();
             }
@@ -220,11 +212,11 @@ export class MenuComponent implements OnInit {
 
   // 修改一页几条
   changePageSize(e: number): void {
-    this.tableConfig.pageSize = e;
+    this.tableConfig.update(config => ({ ...config, pageSize: e }));
   }
 
   private initTable(): void {
-    this.tableConfig = {
+    this.tableConfig.set({
       headers: [
         {
           title: '菜单名称',
@@ -303,11 +295,10 @@ export class MenuComponent implements OnInit {
       loading: false,
       pageSize: 10,
       pageIndex: 1
-    };
+    });
   }
 
   ngOnInit(): void {
     this.initTable();
-    this.visibleOptions = [...MapPipe.transformMapToArray(MapSet.visible, MapKeyType.Boolean)];
   }
 }

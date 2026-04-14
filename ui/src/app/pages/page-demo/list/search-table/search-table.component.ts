@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, TemplateRef, ChangeDetectorRef, inject, viewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, TemplateRef, inject, signal, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -51,8 +51,8 @@ export class SearchTableComponent implements OnInit {
   readonly highLightTpl = viewChild.required<TemplateRef<NzSafeAny>>('highLightTpl');
   readonly operationTpl = viewChild.required<TemplateRef<NzSafeAny>>('operationTpl');
   isCollapse = true;
-  tableConfig!: AntTableConfig;
-  pageHeaderInfo: Partial<PageHeaderType> = {
+  tableConfig = signal<AntTableConfig>({ headers: [], total: 0, showCheckbox: true, loading: false, pageSize: 10, pageIndex: 1 });
+  readonly pageHeaderInfo: Partial<PageHeaderType> = {
     title: '查询表格（表头可拖动，点击列表的"查看"按钮，演示在当前tab打开详情操作，如果需要新开tab展示详情，请跳转到"功能>页签操作"中查看演示效果）',
     // desc: '表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。',
     breadcrumb: ['首页', '列表页', '查询表格']
@@ -77,12 +77,11 @@ export class SearchTableComponent implements OnInit {
       obj: { a: { b: '点出来的值1' } }
     }
   ]; // 需修改为对应业务的数据类型
-  dataList: NzSafeAny[] = []; // 需修改为对应业务的数据类型
+  dataList = signal<NzSafeAny[]>([]); // 需修改为对应业务的数据类型
 
   private modalSrv = inject(NzModalService);
   private message = inject(NzMessageService);
   private router = inject(Router);
-  private cdr = inject(ChangeDetectorRef);
 
   // 最左侧复选框选中触发
   selectedChecked(e: NzSafeAny): void {
@@ -95,23 +94,15 @@ export class SearchTableComponent implements OnInit {
     this.getDataList();
   }
 
-  // 触发表格变更检测
-  tableChangeDectction(): void {
-    // 改变引用触发变更检测。
-    this.dataList = [...this.dataList];
-    this.cdr.detectChanges();
-  }
-
   tableLoading(isLoading: boolean): void {
-    this.tableConfig.loading = isLoading;
-    this.tableChangeDectction();
+    this.tableConfig.update(config => ({ ...config, loading: isLoading }));
   }
 
   getDataList(e?: NzTableQueryParams): void {
-    this.tableConfig.loading = true;
-    this.dataList = [];
+    this.tableLoading(true);
+    this.dataList.set([]);
     setTimeout(() => {
-      this.dataList = [
+      this.dataList.set([
         {
           id: '1',
           noShow: '默认不展示',
@@ -166,9 +157,8 @@ export class SearchTableComponent implements OnInit {
           addStyle: '加样式',
           obj: { a: { b: '点出来的值1' } }
         }
-      ];
-      this.tableConfig.total = 13;
-      this.tableConfig.pageIndex = 1;
+      ]);
+      this.tableConfig.update(c => ({ ...c, total: 13, pageIndex: 1 }));
       this.checkedCashArray = [...this.checkedCashArray];
       this.tableLoading(false);
     });
@@ -306,7 +296,7 @@ export class SearchTableComponent implements OnInit {
 
   // 修改一页几条
   changePageSize(e: number): void {
-    this.tableConfig.pageSize = e;
+    this.tableConfig.update(c => ({ ...c, pageSize: e }));
   }
 
   private initTable(): void {
@@ -314,7 +304,7 @@ export class SearchTableComponent implements OnInit {
      * 注意，这里需要留一列不要设置width，让列表自适应宽度
      *
      * */
-    this.tableConfig = {
+    this.tableConfig.set({
       headers: [
         {
           title: '默认不显示',
@@ -365,7 +355,7 @@ export class SearchTableComponent implements OnInit {
       loading: false,
       pageSize: 10,
       pageIndex: 1
-    };
+    });
   }
 
   ngOnInit(): void {

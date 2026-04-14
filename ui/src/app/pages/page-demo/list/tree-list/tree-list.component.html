@@ -75,8 +75,8 @@
   <app-card-table-wrap [btnTpl]="tableBtns" (reload)="reloadTable()">
     <app-tree-table
       [cashArray]="checkedCashArray"
-      [tableConfig]="tableConfig"
-      [tableData]="dataList"
+      [tableConfig]="tableConfig()"
+      [tableData]="dataList()"
       (changePageIndex)="getDataList($event)"
       (changePageSize)="changePageSize($event)"
       (selectedChange)="selectedChecked($event)"
