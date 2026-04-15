@@ -293,21 +293,6 @@
 }
 ```
 
-## 7. 主题和颜色使用方式
-
-### 7.1 使用 CSS 变量
-- **背景色**：`var(--ant-color-bg-container, #fff)`
-- **边框色**：`var(--ant-color-border, #f0f0f0)`
-- **主色**：`var(--ant-color-primary, #1890ff)`
-- **错误色**：`var(--ant-color-error-bg, #fff2f0)`
-
-```less
-.col-body {
-  background: var(--ant-color-bg-container, #fff);
-  border: 1px solid var(--ant-color-border, #f0f0f0);
-}
-```
-
 ### 7.2 避免硬编码颜色
 - **不要写 `#fff`, `#000` 等硬编码颜色**
 - **使用 ng-zorro 组件的颜色属性**：`nzType="primary"`, `nzDanger`
