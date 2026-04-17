@@ -1,8 +1,5 @@
-import { AsyncPipe } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, DestroyRef, computed } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { Component, ChangeDetectionStrategy, inject, computed } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { TabModel, TabService } from '@core/services/common/tab.service';
 import { MouseHoverShowDirective } from '@shared/directives/mouse-hover-show.directive';
@@ -12,7 +9,6 @@ import { fnStopMouseEvent } from '@utils/tools';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzContextMenuService, NzDropdownMenuComponent, NzDropdownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
@@ -23,38 +19,21 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
   templateUrl: './tab.component.html',
   styleUrl: './tab.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NzCardModule, NzTabsModule, NzDropdownModule, NzMenuModule, NzButtonModule, MouseHoverShowDirective, NzIconModule, AsyncPipe]
+  imports: [NzCardModule, NzTabsModule, NzDropdownModule, NzMenuModule, NzButtonModule, MouseHoverShowDirective, NzIconModule]
 })
-export class TabComponent implements OnInit {
+export class TabComponent {
   private tabService = inject(TabService);
   private nzContextMenuService = inject(NzContextMenuService);
   private splitNavStoreService = inject(SplitNavStoreService);
   private themesService = inject(ThemeService);
   router = inject(Router);
-  private cdr = inject(ChangeDetectorRef);
 
-  tabsSourceData: TabModel[] = [];
-  tabsSourceData$ = this.tabService.getTabArray$();
+  tabsSourceData = this.tabService.$tabArray;
+  currentIndex = computed(() => this.tabService.$currSelectedIndexTab());
   $themesOptions = computed(() => this.themesService.$themesOptions());
   $leftMenuArray = computed(() => this.splitNavStoreService.$splitLeftNavArray());
   $isOverMode = computed(() => this.themesService.$isOverModeTheme());
   $isCollapsed = computed(() => this.themesService.$isCollapsed());
-  destroyRef = inject(DestroyRef);
-
-  constructor() {
-    this.router.events
-      .pipe(
-        filter((event: NzSafeAny) => event instanceof NavigationEnd),
-        takeUntilDestroyed()
-      )
-      .subscribe(() => {
-        // Router events automatically trigger change detection in zoneless mode
-      });
-  }
-
-  get currentIndex(): number {
-    return this.tabService.getCurrentTabIndex();
-  }
 
   public trackByTab(index: number, tab: TabModel): string {
     return tab.title;
@@ -94,17 +73,15 @@ export class TabComponent implements OnInit {
 
   // 点击tab上的关闭icon
   clickCloseIcon(indexObj: { index: number }): void {
-    this.closeCurrentTab(this.tabsSourceData[indexObj.index], indexObj.index);
+    this.closeCurrentTab(this.tabsSourceData()[indexObj.index], indexObj.index);
   }
 
   // 关闭当前Tab
   closeCurrentTab(tab: TabModel, index: number): void {
-    if (this.tabsSourceData.length === 1) {
+    if (this.tabsSourceData().length === 1) {
       return;
     }
     this.tabService.delTab(tab, index);
-    // ngZoneEventCoalescing，ngZoneRunCoalescing例子,请查看main.ts
-    this.cdr.detectChanges();
   }
 
   refresh(): void {
@@ -118,10 +95,5 @@ export class TabComponent implements OnInit {
   closeMenu(): void {
     this.nzContextMenuService.close();
   }
-
-  ngOnInit(): void {
-    this.tabsSourceData$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => {
-      this.tabsSourceData = res;
-    });
-  }
 }
+

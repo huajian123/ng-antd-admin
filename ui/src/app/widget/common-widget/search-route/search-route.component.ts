@@ -1,5 +1,5 @@
 import { normalizePassiveListenerOptions } from '@angular/cdk/platform';
-import { Component, OnInit, ChangeDetectionStrategy, ElementRef, AfterViewInit, inject, DestroyRef, viewChild, signal } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ElementRef, AfterViewInit, inject, DestroyRef, viewChild, signal, effect } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -8,7 +8,6 @@ import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operato
 
 import { Menu } from '@core/services/types';
 import { MenuStoreService } from '@store/common-store/menu-store.service';
-import { ThemeService } from '@store/common-store/theme.service';
 import { BasicConfirmModalComponent } from '@widget/base-modal';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -42,10 +41,9 @@ const passiveEventListenerOptions = normalizePassiveListenerOptions({ passive: t
     '(window:keyup.arrowDown)': 'onArrowDown()'
   }
 })
-export class SearchRouteComponent extends BasicConfirmModalComponent implements OnInit, AfterViewInit {
+export class SearchRouteComponent extends BasicConfirmModalComponent implements AfterViewInit {
   private menuStoreService = inject(MenuStoreService);
   private router = inject(Router);
-  private themesService = inject(ThemeService);
 
   resultListShow = signal<ResultItem[]>([]);
   resultList: ResultItem[] = [];
@@ -54,6 +52,14 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
   menuNavList: Menu[] = [];
   destroyRef = inject(DestroyRef);
   override modalRef = inject(NzModalRef);
+
+  constructor() {
+    super();
+    effect(() => {
+      this.menuNavList = this.menuStoreService.$menuArray();
+      this.resultListFactory();
+    });
+  }
 
   changeSelAnswerIndex(dir: 'up' | 'down'): number | null {
     const list = this.resultListShow();
@@ -91,8 +97,7 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
   }
 
   resultClick(resultItem: ResultItem): void {
-    this.router.navigate([resultItem.routePath]);
-    this.modalRef.destroy();
+    this.router.navigate([resultItem.routePath]).then(() => {this.modalRef.destroy();})
   }
 
   getResultItem(menu: Menu, fatherTitle = ''): ResultItem[] {
@@ -162,20 +167,6 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
 
   ngAfterViewInit(): void {
     this.subSearchFn();
-  }
-
-  getMenus(): void {
-    this.menuStoreService
-      .getMenuArrayStore()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(menus => {
-        this.menuNavList = menus;
-      });
-  }
-
-  ngOnInit(): void {
-    this.getMenus();
-    this.resultListFactory();
   }
 
   override getCurrentValue(): NzSafeAny {}

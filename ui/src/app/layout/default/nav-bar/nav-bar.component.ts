@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, inject, DestroyRef, booleanAttribute, input, computed, signal, effect } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject, DestroyRef, booleanAttribute, input, computed, signal, effect, untracked } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
 import { filter, map, mergeMap, tap } from 'rxjs/operators';
@@ -65,15 +65,25 @@ export class NavBarComponent implements OnInit {
   }
 
   private initMenus(): void {
-    this.menuServices
-      .getMenuArrayStore()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(menusArray => {
-        this.menus.set(menusArray);
-        this.copyMenus.set(this.cloneMenuArray(menusArray));
-        this.clickMenuItem(this.menus());
-        this.clickMenuItem(this.copyMenus());
-      });
+    // 1. 读取 $menuArray() —— 这是 effect 的唯一"触发源"，$menuArray 变化才会重新执行。
+    // 2. untracked(() => this.clickMenuItem(menusArray))
+    //    clickMenuItem 内部会读取 this.routerPath()（也是 signal）。
+    //    如果不加 untracked，routerPath 变化也会触发这个 effect，导致菜单数据被意外重置。
+    //    用 untracked 包裹，表示"我只是借用 routerPath 的值，但不订阅它的变化"。
+    //
+    // 3. untracked(() => this.cloneMenuArray(processed))
+    //    cloneMenuArray 本身不读 signal，加 untracked 是防御性写法，确保 effect 依赖关系清晰。
+    effect(() => {
+      const menusArray = this.menuServices.$menuArray();
+      const processed = untracked(() => this.clickMenuItem(menusArray));
+      this.menus.set(processed);
+      this.copyMenus.set(untracked(() => this.cloneMenuArray(processed)));
+      // effect 是异步调度的，ngOnInit 里的 setMixModeLeftMenu() 执行时 menus 可能还是空数组。
+      // 菜单数据就绪后，在混合模式下需要重新设置左侧菜单，否则刷新页面左侧菜单会消失。
+      if (untracked(() => this.isMixinMode())) {
+        untracked(() => this.setMixModeLeftMenu());
+      }
+    });
   }
 
   private setupRouterListener(): void {
@@ -87,24 +97,25 @@ export class NavBarComponent implements OnInit {
           this.routerPath.set(url);
 
           // 主题切换为混合模式下，设置左侧菜单数据源
-          // 如果放在ngInit监听里面，会在混合模式下，刷新完页面切换路由
+          // 注意：故意在 menus.set() 之前调用，读取的是上一次路由留下的 selected 状态。
+          // 混合模式下切换顶部一级菜单时，左侧菜单应跟随"当前已选中的一级菜单"，而非新路由。
           if (this.isMixinMode()) {
             this.setMixModeLeftMenu();
           }
 
           // 更新菜单状态
           //  做一个copyMenus来记录当前menu状态，因为顶部模式时是不展示子menu的，然而主题由顶部模式切换成侧边栏模式，要把当前顶部模式中菜单的状态体现于侧边栏模式的菜单中
-          this.clickMenuItem(this.menus());
-          this.clickMenuItem(this.copyMenus());
+          this.menus.set(this.clickMenuItem(this.menus()));
+          this.copyMenus.set(this.clickMenuItem(this.copyMenus()));
 
           // 折叠菜单且不是over模式时，关闭菜单
           if (this.isCollapsed() && !this.isOverMode()) {
-            this.closeMenuOpen(this.menus());
+            this.menus.set(this.closeMenuOpen(this.menus()));
           }
 
           // 顶部菜单模式且不是over模式时，关闭菜单。解决顶部模式时，切换tab会有悬浮框菜单的bug
           if (this.themesMode() === 'top' && !this.isOverMode()) {
-            this.closeMenu();
+            this.closeAllMenuOpen();
           }
         }),
         map(() => this.activatedRoute),
@@ -131,17 +142,20 @@ export class NavBarComponent implements OnInit {
 
       if (!collapsed) {
         // 菜单展开
-        this.menus.set(this.cloneMenuArray(this.copyMenus()));
-        this.clickMenuItem(this.menus());
+        const updated = untracked(() => this.clickMenuItem(this.cloneMenuArray(this.copyMenus())));
+        this.menus.set(updated);
 
         // 混合模式下要在点击一下左侧菜单数据源，不然有二级菜单的菜单在折叠状态变为展开时不open
-        if (this.themesMode() === 'mixin') {
-          this.clickMenuItem(this.leftMenuArray());
+        if (untracked(() => this.themesMode()) === 'mixin') {
+          const leftUpdated = untracked(() => this.clickMenuItem(this.leftMenuArray()));
+          this.splitNavStoreService.$splitLeftNavArray.set(leftUpdated);
         }
       } else {
-        // 菜单收起
-        this.copyMenus.set(this.cloneMenuArray(this.menus()));
-        this.closeMenuOpen(this.menus());
+        // 菜单收起：保存当前展开状态到 copyMenus，供展开时恢复。
+        // 注意：不调用 menus.set()，视觉折叠效果由 nzInlineCollapsed 驱动，
+        // closeMenuOpen 只是同步内存里的 open 状态，防止展开时状态错乱。
+        const copy = untracked(() => this.cloneMenuArray(this.menus()));
+        this.copyMenus.set(this.closeMenuOpen(copy));
       }
     });
   }
@@ -150,10 +164,10 @@ export class NavBarComponent implements OnInit {
   private setupThemeEffect(): void {
     effect(() => {
       const mode = this.themesMode();
-      const overMode = this.isOverMode();
+      const overMode = untracked(() => this.isOverMode());
 
       if (mode === 'top' && !overMode) {
-        this.closeMenu();
+        untracked(() => this.closeMenu());
       }
     });
   }
@@ -213,28 +227,31 @@ export class NavBarComponent implements OnInit {
     this.splitNavStoreService.$splitLeftNavArray.set(currentLeftNavArray);
   }
 
-  flatMenu(menus: Menu[], routePath: string): void {
-    menus.forEach(item => {
-      item.selected = false;
-      item.open = false;
-      if (routePath.includes(item.path) && !item.newLinkFlag) {
-        item.selected = true;
-        item.open = true;
-      }
-      if (!!item.children && item.children.length > 0) {
-        this.flatMenu(item.children, routePath);
-      }
+  // flatMenu 必须是纯函数（返回新数组），不能直接 mutate 传入的 menus。
+  // 原因：此方法在 effect() 内部被调用（通过 clickMenuItem），如果直接修改 signal 内部的对象，
+  // Angular 会检测到变化并重新触发 effect，导致无限循环白屏。
+  flatMenu(menus: Menu[], routePath: string): Menu[] {
+    return menus.map(item => {
+      const isActive = routePath.includes(item.path) && !item.newLinkFlag;
+      const hasChildren = item.children && item.children.length > 0;
+
+      return {
+        ...item,
+        selected: isActive,
+        open: isActive,
+        children: hasChildren ? this.flatMenu(item.children!, routePath) : item.children
+      };
     });
   }
 
-  clickMenuItem(menus: Menu[]): void {
+  clickMenuItem(menus: Menu[]): Menu[] {
     if (!menus) {
-      return;
+      return menus;
     }
     const routerPath = this.routerPath();
     const index = routerPath.indexOf('?') === -1 ? routerPath.length : routerPath.indexOf('?');
     const routePath = routerPath.substring(0, index);
-    this.flatMenu(menus, routePath);
+    return this.flatMenu(menus, routePath);
   }
 
   // 改变当前菜单展示状态
@@ -245,15 +262,15 @@ export class NavBarComponent implements OnInit {
     currentMenu.open = true;
   }
 
-  closeMenuOpen(menus: Menu[]): void {
-    menus.forEach(menu => {
-      menu.open = false;
-      if (menu.children && menu.children.length > 0) {
-        this.closeMenuOpen(menu.children);
-      } else {
-        return;
-      }
-    });
+  // 同 flatMenu，必须是纯函数，不能直接 mutate，原因相同。
+  closeMenuOpen(menus: Menu[]): Menu[] {
+    return menus.map(menu => ({
+      ...menu,
+      open: false,
+      children: menu.children && menu.children.length > 0
+        ? this.closeMenuOpen(menu.children)
+        : menu.children
+    }));
   }
 
   changeRoute(e: MouseEvent, menu: Menu): void {
@@ -265,10 +282,16 @@ export class NavBarComponent implements OnInit {
     this.router.navigate([menu.path]);
   }
 
+  // 只负责关闭所有展开项，不更新选中状态
+  private closeAllMenuOpen(): void {
+    this.menus.set(this.closeMenuOpen(this.menus()));
+  }
+
   closeMenu(): void {
-    this.clickMenuItem(this.menus());
-    this.clickMenuItem(this.copyMenus());
-    this.closeMenuOpen(this.menus());
+    // 先用 clickMenuItem 更新菜单选中状态，再用 closeMenuOpen 关闭所有展开项
+    const menusWithSelection = this.clickMenuItem(this.menus());
+    this.menus.set(this.closeMenuOpen(menusWithSelection));
+    this.copyMenus.set(this.clickMenuItem(this.copyMenus()));
   }
 
   routeEndAction(isNewTabDetailPage = false): void {

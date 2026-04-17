@@ -2,15 +2,15 @@
 <!--非固定tab模式-->
 @if (!$themesOptions.fixedTab) {
   <nz-card id="multi-tab" class="m-t-10" style="height: 35px" [nzBodyStyle]="{ padding: 0 }" [nzBordered]="false">
-    <nz-tabs nzHideAdd [nzSelectedIndex]="currentIndex" [nzTabBarStyle]="{ height: '35px' }" nzTabPosition="top" nzType="editable-card" (nzClose)="clickCloseIcon($event)">
-      @for (tab of tabsSourceData$ | async; track trackByTab(i, tab); let i = $index) {
+    <nz-tabs nzHideAdd nzTabPosition="top" nzType="editable-card" [nzSelectedIndex]="currentIndex()" [nzTabBarStyle]="{ height: '35px' }" (nzClose)="clickCloseIcon($event)">
+      @for (tab of tabsSourceData(); track trackByTab(i, tab); let i = $index) {
         <nz-tab nzClosable [nzTitle]="tab.title" (nzClick)="goPage(tab)" (nzContextmenu)="contextMenu($event, menu)">
           <nz-dropdown-menu #menu="nzDropdownMenu">
             <ul nz-menu>
               <li nz-menu-item [nzDisabled]="router.url !== tab.path" (click)="refresh()">刷新</li>
-              <li nz-menu-item [nzDisabled]="tabsSourceData.length - 1 === 0" (click)="closeTab(tab, $event, i)">关闭标签</li>
-              <li nz-menu-item [nzDisabled]="tabsSourceData.length - 1 === 0" (click)="closeOtherTab(tab, $event, i)">关闭其他标签</li>
-              <li nz-menu-item [nzDisabled]="tabsSourceData.length - 1 === i" (click)="closeRithTab(tab, $event, i)">关闭右侧标签</li>
+              <li nz-menu-item [nzDisabled]="tabsSourceData().length - 1 === 0" (click)="closeTab(tab, $event, i)">关闭标签</li>
+              <li nz-menu-item [nzDisabled]="tabsSourceData().length - 1 === 0" (click)="closeOtherTab(tab, $event, i)">关闭其他标签</li>
+              <li nz-menu-item [nzDisabled]="tabsSourceData().length - 1 === i" (click)="closeRithTab(tab, $event, i)">关闭右侧标签</li>
               <li nz-menu-item [nzDisabled]="i === 0" (click)="closeLeftTab(tab, $event, i)">关闭左侧标签</li>
             </ul>
           </nz-dropdown-menu>
@@ -22,29 +22,29 @@
   <nz-card
     id="multi-tab2"
     class="fixed-tab"
+    nzBordered
     [class]="{
       'fixed-collapsed': $isCollapsed(),
       'fixed-over-mode': $isOverMode() || !$themesOptions.hasNavArea || $themesOptions.mode === 'top' || ($themesOptions.mode === 'mixin' && $leftMenuArray().length === 0 && $themesOptions.splitNav)
     }"
-    [style]="{ top: $themesOptions.hasTopArea ? '48px' : '0', left: !$themesOptions.hasNavArea ? '0' : '' }"
     [nzBodyStyle]="{ padding: 0 }"
-    nzBordered
+    [style]="{ top: $themesOptions.hasTopArea ? '48px' : '0', left: !$themesOptions.hasNavArea ? '0' : '' }"
   >
-    <nz-tabs [nzAnimated]="false" [nzSelectedIndex]="currentIndex" nzTabPosition="top">
-      @for (tab of tabsSourceData$ | async; track trackByTab(i, tab); let i = $index) {
+    <nz-tabs nzTabPosition="top" [nzAnimated]="false" [nzSelectedIndex]="currentIndex()">
+      @for (tab of tabsSourceData(); track trackByTab(i, tab); let i = $index) {
         <nz-tab nzClosable [nzTitle]="titleTemplate" (nzClick)="goPage(tab)" (nzContextmenu)="contextMenu($event, menu)">
           <ng-template #titleTemplate>
             <span class="text-center p-l-16 p-r-16 relative d-i-b" appMouseHoverShow style="min-width: 60px">
               {{ tab.title }}
-              <i class="m-0 none" nz-icon nzType="close" (click)="clickCloseIcon({ index: i })"></i>
+              <i class="m-0 none" nz-icon nzType="close" (click)="clickCloseIcon({ index: i }); $event.stopPropagation()"></i>
             </span>
           </ng-template>
           <nz-dropdown-menu #menu="nzDropdownMenu">
             <ul nz-menu>
               <li nz-menu-item [nzDisabled]="router.url !== tab.path" (click)="refresh()">刷新</li>
-              <li nz-menu-item [nzDisabled]="tabsSourceData.length - 1 === 0" (click)="closeTab(tab, $event, i)">关闭标签</li>
-              <li nz-menu-item [nzDisabled]="tabsSourceData.length - 1 === 0" (click)="closeOtherTab(tab, $event, i)">关闭其他标签</li>
-              <li nz-menu-item [nzDisabled]="tabsSourceData.length - 1 === i" (click)="closeRithTab(tab, $event, i)">关闭右侧标签</li>
+              <li nz-menu-item [nzDisabled]="tabsSourceData().length - 1 === 0" (click)="closeTab(tab, $event, i)">关闭标签</li>
+              <li nz-menu-item [nzDisabled]="tabsSourceData().length - 1 === 0" (click)="closeOtherTab(tab, $event, i)">关闭其他标签</li>
+              <li nz-menu-item [nzDisabled]="tabsSourceData().length - 1 === i" (click)="closeRithTab(tab, $event, i)">关闭右侧标签</li>
               <li nz-menu-item [nzDisabled]="i === 0" (click)="closeLeftTab(tab, $event, i)">关闭左侧标签</li>
             </ul>
           </nz-dropdown-menu>

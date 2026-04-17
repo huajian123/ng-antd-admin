@@ -23,7 +23,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 export class ExModalComponent {
   readonly dragTpl = viewChild.required<TemplateRef<NzSafeAny>>('dragTpl');
   pageHeaderInfo: Partial<PageHeaderType> = {
-    title: '拖动Modal，树挪死，人挪活',
+    title: '拖动Modal，是对zorro弹窗组件的拓展',
     breadcrumb: ['首页', '拖拽modal']
   };
   destroyRef = inject(DestroyRef);
