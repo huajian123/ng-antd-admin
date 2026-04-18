@@ -9,8 +9,6 @@ import { GlobalModalBtnTplComponentToken } from '@app/tpl/global-modal-btn-tpl/g
 import { ModalFullStatusStoreService } from '@store/common-store/modal-full-status-store.service';
 import { throwModalGetCurrentFnError, throwModalRefError } from '@utils/errors';
 import { fnGetUUID } from '@utils/tools';
-import _ from 'lodash';
-
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { ModalOptions, NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 
@@ -199,7 +197,7 @@ export class ModalWrapService {
       nzWidth: 720,
       nzData: params // 参数中的属性将传入nzContent实例中
     };
-    const newOptions = _.merge(defaultOptions, modalOptions);
+    const newOptions: ModalOptions = { ...defaultOptions, ...modalOptions };
     newOptions.nzWrapClassName = `${newOptions.nzWrapClassName || ''} ${wrapCls}`;
     return newOptions;
   }

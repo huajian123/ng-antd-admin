@@ -2,8 +2,6 @@ import { inject, Injectable, signal } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, Params, Router, UrlSegment } from '@angular/router';
 
 import { getDeepReuseStrategyKeyFn, fnGetPathWithoutParam } from '@utils/tools';
-import _ from 'lodash';
-
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { SimpleReuseStrategy } from './reuse-strategy';
@@ -40,11 +38,6 @@ export class TabService {
         if (tab.title === tabModel.title && !isNewTabDetailPage) {
           // 列表详情操作，例如用户表单点击详情，在当前tab中打开这个详情，可以看在线示例："查询表格"与表格中的"查看按钮"
           // title需和用户表单详情组件路由的title相同
-          // 将每个tab下的组件快照存入tab数组中，下面做了去重操作
-          tab.snapshotArray = _.uniqBy([...tab.snapshotArray, ...tabModel.snapshotArray], item => {
-            // @ts-ignore
-            return item['_routerState'].url;
-          });
           // 当前页中打开详情时，需要将对应的tab的path替换掉
           tab.path = tabModel.path;
         }
