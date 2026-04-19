@@ -1,5 +1,5 @@
 <!--头部版块-->
-<app-page-header [pageHeaderInfo]="pageHeaderInfo" />
+<app-page-header [pageHeaderInfo]="pageHeaderInfo()" />
 <ng-template #headerExtra>
   <nz-radio-group>
     <label nz-radio-button>操作一</label>
@@ -38,7 +38,7 @@
   </div>
 </ng-template>
 <ng-template #headerFooter>
-  <nz-tabs [(nzSelectedIndex)]="currentSelTab">
+  <nz-tabs [nzSelectedIndex]="currentSelTab()">
     <nz-tab nzTitle="详情" (nzClick)="to(tabEnum.Detail)"></nz-tab>
     <nz-tab nzTitle="规则" (nzClick)="to(tabEnum.Rule)"></nz-tab>
   </nz-tabs>
@@ -47,7 +47,7 @@
 <div class="normal-table-wrap">
   <nz-card nzTitle="流程进度">
     <app-water-mark />
-    <nz-steps [nzCurrent]="1" [nzDirection]="stepDirection" [nzProgressDot]="progressTemplate">
+    <nz-steps [nzCurrent]="1" [nzDirection]="stepDirection()" [nzProgressDot]="progressTemplate">
       <nz-step nzTitle="创建项目" [nzDescription]="createTpl"></nz-step>
       <nz-step nzTitle="部门初审" [nzDescription]="trialTpl"></nz-step>
       <nz-step nzTitle="财务复核"></nz-step>
@@ -139,7 +139,7 @@
         <nz-tab nzTitle="操作日志三"></nz-tab>
       </nz-tabs>
     </nz-card-tab>
-    <app-ant-table [tableConfig]="returnTableConfig" [tableData]="returnDataList"></app-ant-table>
+    <app-ant-table [tableConfig]="returnTableConfig()" [tableData]="returnDataList"></app-ant-table>
   </nz-card>
 </div>
 

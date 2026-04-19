@@ -50,6 +50,18 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 - Use the `providedIn: 'root'` option for singleton services
 - Use the `inject()` function instead of constructor injection
 
+## Code Modification Principles
+
+- **Prove there is a problem before making a change.** Do not modify code just because it looks suspicious or matches a pattern. Before changing anything, answer these three questions:
+  1. Does this code have an actual bug right now?
+  2. What is the concrete benefit of the change?
+  3. What is the risk of the change?
+  If the answer to question 1 is "no bug", stop — do not change it.
+
+- **Batch searches produce candidates, not conclusions.** When searching for a pattern across the codebase (e.g. all uses of `ChangeDetectorRef`), the result is a list of files to investigate — not a list of files to fix. Each file must be analyzed independently before deciding whether a change is needed.
+
+- **Understand the context before replacing.** For example, `inject(ChangeDetectorRef)` inside a Service injects the host component's detector — not a global one. `detectChanges()` is valid in Zoneless mode. Do not replace working code with an alternative just because the alternative exists.
+
 ## Styles
 
 - Do NOT use CSS variables (e.g. `var(--ant-color-xxx)`) in component Less files

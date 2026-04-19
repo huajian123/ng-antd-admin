@@ -112,3 +112,23 @@ readonly pageHeaderInfo: Partial<PageHeaderType> = {
 ```
 
 Using `signal()` on static data misleads readers into thinking the value will change, and adds unnecessary overhead with no benefit.
+
+## When to Use Signals
+
+The correct question to ask is: **"Is this component state? Does it change over time? Does the view need to reflect that change?"**
+
+If all three answers are yes, use a signal. The decision has nothing to do with whether change detection would otherwise trigger — that is the wrong criterion.
+
+```ts
+// ✅ USE signal: value changes, view reflects it
+iconsStrShowArray = signal<IconItem[]>([]);
+pageObj = signal({ pageSize: 50, pageIndex: 1 });
+
+// ❌ DO NOT use signal just because markForCheck() was previously needed
+// markForCheck() being present does not mean signal is required —
+// it may simply mean the old code had unnecessary or broken calls.
+```
+
+### Common mistake to avoid
+
+Do **not** decide whether to use `signal` based on whether change detection needs to be triggered. In Zoneless mode, event bindings already schedule change detection automatically. The right reason to use `signal` is that the value is **mutable state that the view depends on**.

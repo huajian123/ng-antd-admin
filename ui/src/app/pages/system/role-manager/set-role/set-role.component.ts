@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, OnInit, ViewEncapsulation, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit, ViewEncapsulation, input, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -42,13 +42,13 @@ import { NzResultModule } from 'ng-zorro-antd/result';
 ]
 })
 export class SetRoleComponent implements OnInit {
-  pageHeaderInfo: Partial<PageHeaderType> = {
+  pageHeaderInfo = signal<Partial<PageHeaderType>>({
     title: '设置权限',
     desc: '当前角色：',
     breadcrumb: ['首页', '用户管理', '角色管理', '设置权限']
-  };
+  });
   authCodeArr: string[] = [];
-  permissionList: Array<Menu & { isOpen?: boolean; checked?: boolean }> = [];
+  permissionList = signal<Array<Menu & { isOpen?: boolean; checked?: boolean }>>([]);
   destroyRef = inject(DestroyRef);
   readonly id = input.required<string>(); // 从路由中获取的角色id，ng16支持的新特性
   readonly roleName = input.required<string>(); // 从路由中获取的角色名称，ng16支持的新特性
@@ -57,7 +57,6 @@ export class SetRoleComponent implements OnInit {
   private menusService = inject(MenusService);
   private router = inject(Router);
   private message = inject(NzMessageService);
-  private cdr = inject(ChangeDetectorRef);
 
   // 初始化数据
   initPermission(): void {
@@ -79,14 +78,12 @@ export class SetRoleComponent implements OnInit {
           item.isOpen = false;
           item.checked = this.authCodeArr.includes(item.code);
         });
-        this.permissionList = fnAddTreeDataGradeAndLeaf(fnFlatDataHasParentToTree(menuArray));
-        this.cdr.markForCheck();
+        this.permissionList.set(fnAddTreeDataGradeAndLeaf(fnFlatDataHasParentToTree(menuArray)));
       });
   }
 
   getRoleName(): void {
-    this.pageHeaderInfo = { ...this.pageHeaderInfo, ...{ desc: `当前角色：${this.roleName()}` } };
-    this.cdr.markForCheck();
+    this.pageHeaderInfo.update(v => ({ ...v, desc: `当前角色：${this.roleName()}` }));
   }
 
   back(): void {
@@ -94,7 +91,7 @@ export class SetRoleComponent implements OnInit {
   }
 
   submit(): void {
-    const temp = [...this.permissionList];
+    const temp = [...this.permissionList()];
     const flatArray = fnFlattenTreeDataByDataList(temp);
     const selectedAuthCodeArray: string[] = [];
     flatArray.forEach(item => {

@@ -1,6 +1,6 @@
 
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit, inject, DestroyRef, booleanAttribute, output, input } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Component, ChangeDetectionStrategy, booleanAttribute, output, input, signal, computed } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
@@ -26,69 +26,54 @@ interface IconItem {
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NzIconModule, NzButtonModule, NzPopoverModule, NzInputModule, NzCardModule, NzEmptyModule, NzPaginationModule]
 })
-export class IconSelComponent implements OnInit, AfterViewInit {
+export class IconSelComponent {
   visible = input(false, { transform: booleanAttribute });
-  // 做图标搜索防抖
-  private searchText$ = new Subject<string>();
-  selectedIcon = '';
   readonly selIcon = output<string>();
-  // 分页信息
-  pageObj = {
-    pageSize: 50,
-    pageIndex: 1
-  };
+  // 做图标搜索防抖
+  private readonly searchText$ = new Subject<string>();
+  private readonly searchText = toSignal(this.searchText$.pipe(debounceTime(200), distinctUntilChanged()), { initialValue: '' });
+
+  // 所有icon的数据源
+  private readonly sourceIconsArray: IconItem[] = zorroIcons.map(item => ({ icon: fnKebabCase(item), isChecked: false }));
+
   // 图标搜索出来的所有结果
-  iconsStrAllArray: IconItem[] = [];
-  sourceIconsArray: IconItem[] = []; // 所有icon的数据源
-  iconsStrShowArray: IconItem[] = []; // 每页中展示的icon
-  gridStyle = {
-    width: '20%'
-  };
-  destroyRef = inject(DestroyRef);
+  readonly iconsStrAllArray = computed<IconItem[]>(() => {
+    const keyword = this.searchText();
+    if (!keyword) {
+      return this.sourceIconsArray;
+    }
+    return this.sourceIconsArray.filter(item => item.icon.includes(keyword));
+  });
 
-  private cdr = inject(ChangeDetectorRef);
+  // 分页信息
+  readonly pageObj = signal({ pageSize: 50, pageIndex: 1 });
 
-  constructor() {
-    zorroIcons.forEach(item => {
-      this.sourceIconsArray.push({ icon: fnKebabCase(item), isChecked: false });
-    });
-    this.iconsStrAllArray = JSON.parse(JSON.stringify(this.sourceIconsArray));
-  }
+  // 每页中展示的icon
+  readonly iconsStrShowArray = computed<IconItem[]>(() => {
+    const { pageIndex, pageSize } = this.pageObj();
+    return this.iconsStrAllArray().slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
+  });
+
+  readonly gridStyle = { width: '20%' };
+  selectedIcon = '';
 
   searchIcon(e: Event): void {
+    this.pageObj.update(v => ({ ...v, pageIndex: 1 }));
     this.searchText$.next((e.target as HTMLInputElement).value);
   }
 
   selIconFn(item: IconItem): void {
     this.selectedIcon = item.icon;
-    [this.sourceIconsArray, this.iconsStrShowArray, this.iconsStrAllArray].forEach(item => {
-      item.forEach(icon => (icon.isChecked = false));
-    });
+    this.sourceIconsArray.forEach(icon => (icon.isChecked = false));
     item.isChecked = true;
     this.selIcon.emit(item.icon);
   }
 
   pageSizeChange(event: number): void {
-    this.pageObj = { ...this.pageObj, pageSize: event };
-    this.getData(1);
+    this.pageObj.update(v => ({ ...v, pageSize: event, pageIndex: 1 }));
   }
 
-  // 分页获取数据
-  getData(event: number = this.pageObj.pageIndex): void {
-    this.pageObj = { ...this.pageObj, pageIndex: event };
-    this.iconsStrShowArray = [...this.iconsStrAllArray.slice((this.pageObj.pageIndex - 1) * this.pageObj.pageSize, this.pageObj.pageIndex * this.pageObj.pageSize)];
-    this.cdr.markForCheck();
-  }
-
-  ngOnInit(): void {
-    this.getData();
-  }
-
-  ngAfterViewInit(): void {
-    this.searchText$.pipe(debounceTime(200), distinctUntilChanged(), takeUntilDestroyed(this.destroyRef)).subscribe(res => {
-      this.iconsStrAllArray = this.sourceIconsArray.filter(item => item.icon.includes(res));
-      this.getData();
-      this.cdr.markForCheck();
-    });
+  pageIndexChange(pageIndex: number): void {
+    this.pageObj.update(v => ({ ...v, pageIndex }));
   }
 }

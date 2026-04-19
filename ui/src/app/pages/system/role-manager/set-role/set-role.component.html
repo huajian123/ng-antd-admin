@@ -1,10 +1,10 @@
 <!--头部版块-->
-<app-page-header [backTpl]="backTpl" [backUrl]="'/default/system/role-manager'" [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+<app-page-header [backTpl]="backTpl" [backUrl]="'/default/system/role-manager'" [pageHeaderInfo]="pageHeaderInfo()"></app-page-header>
 <ng-template #backTpl>返回</ng-template>
 <div class="normal-table-wrap">
   <nz-card>
     <ul>
-      @for (permission of permissionList; track permission) {
+      @for (permission of permissionList(); track permission) {
         <li>
           <div class="first-menu">
             <label nz-checkbox [(ngModel)]="permission.checked">{{ permission.menuName }}</label>

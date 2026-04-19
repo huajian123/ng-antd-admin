@@ -1,6 +1,6 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { ComponentPortal, CdkPortalOutletAttachedRef, Portal, ComponentType, PortalModule } from '@angular/cdk/portal';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ComponentRef, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ComponentRef, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { StepThreeComponent } from '@app/pages/page-demo/form/step/step-three/step-three.component';
@@ -30,26 +30,23 @@ enum StepEnum {
   imports: [PageHeaderComponent, NzCardModule, WaterMarkComponent, NzStepsModule, PortalModule]
 })
 export class StepComponent implements OnInit, AfterViewInit {
-  selectedPortal!: Portal<NzSafeAny>;
+  selectedPortal = signal<Portal<NzSafeAny> | null>(null);
   stepDirection = signal<'horizontal' | 'vertical'>('horizontal');
-  pageHeaderInfo: Partial<PageHeaderType> = {
+  readonly pageHeaderInfo: Partial<PageHeaderType> = {
     title: '分步表单',
     desc: '将一个冗长或用户不熟悉的表单任务分成多个步骤，指导用户完成。（演示cdk传送点）',
     breadcrumb: ['首页', '表单页', '分步表单']
   };
-  currentStep = 1;
+  currentStep = signal(1);
   stepComponentArray: Array<ComponentType<comp>> = [StepOneComponent, StepTwoComponent, StepThreeComponent];
   componentPortal?: ComponentPortal<comp>;
   destroyRef = inject(DestroyRef);
-  private cdr = inject(ChangeDetectorRef);
   private breakpointObserver = inject(BreakpointObserver);
 
   go(step: StepEnum, ref: CdkPortalOutletAttachedRef, currentStepNum: number): void {
-    this.currentStep = currentStepNum;
+    this.currentStep.set(currentStepNum);
     ref!.destroy();
     this.goStep(step);
-    // ngZoneEventCoalescing，ngZoneRunCoalescing例子,请查看main.ts
-    this.cdr.detectChanges();
   }
 
   // 这么做完全是为了演示CDK portal的简单用法
@@ -58,15 +55,15 @@ export class StepComponent implements OnInit, AfterViewInit {
       if (ref.instance instanceof StepOneComponent) {
         ref.setInput('stepDirection', this.stepDirection());
         ref.instance.next.subscribe(() => {
-          this.go(StepEnum.Two, ref, this.currentStep + 1);
+          this.go(StepEnum.Two, ref, this.currentStep() + 1);
         });
       }
       if (ref.instance instanceof StepTwoComponent) {
         ref.instance.previous.subscribe(() => {
-          this.go(StepEnum.One, ref, this.currentStep - 1);
+          this.go(StepEnum.One, ref, this.currentStep() - 1);
         });
         ref.instance.next.subscribe(() => {
-          this.go(StepEnum.Three, ref, this.currentStep + 1);
+          this.go(StepEnum.Three, ref, this.currentStep() + 1);
         });
       }
       if (ref.instance instanceof StepThreeComponent) {
@@ -92,7 +89,7 @@ export class StepComponent implements OnInit, AfterViewInit {
 
   goStep(step: number): void {
     this.componentPortal = new ComponentPortal(this.stepComponentArray[step]);
-    this.selectedPortal = this.componentPortal;
+    this.selectedPortal.set(this.componentPortal);
   }
 
   ngAfterViewInit(): void {

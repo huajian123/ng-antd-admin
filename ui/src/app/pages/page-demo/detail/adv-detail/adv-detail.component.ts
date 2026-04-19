@@ -1,6 +1,6 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, TemplateRef, AfterViewInit, ChangeDetectorRef, inject, DestroyRef, viewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, TemplateRef, inject, DestroyRef, viewChild, signal, computed } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { AntTableConfig, AntTableComponent } from '@shared/components/ant-table/ant-table.component';
@@ -68,22 +68,36 @@ enum TabEnum {
     AntTableComponent
   ]
 })
-export class AdvDetailComponent implements OnInit, AfterViewInit {
+export class AdvDetailComponent implements OnInit {
   readonly headerExtra = viewChild.required<TemplateRef<NzSafeAny>>('headerExtra');
   readonly headerContent = viewChild.required<TemplateRef<NzSafeAny>>('headerContent');
   readonly headerFooter = viewChild.required<TemplateRef<NzSafeAny>>('headerFooter');
   readonly highLightTpl = viewChild.required<TemplateRef<NzSafeAny>>('highLightTpl');
-  stepDirection: 'horizontal' | 'vertical' = 'horizontal';
-  returnTableConfig!: AntTableConfig;
-  pageHeaderInfo: Partial<PageHeaderType> = {
-    title: '',
-    breadcrumb: [],
-    extra: '',
-    desc: '',
-    footer: ''
-  };
+  stepDirection = signal<'horizontal' | 'vertical'>('horizontal');
+  returnTableConfig = computed<AntTableConfig>(() => ({
+    showCheckbox: false,
+    headers: [
+      { title: '操作类型', field: 'num', width: 50 },
+      { title: '操作人', width: 60, field: 'name' },
+      { title: '执行结果', width: 50, field: 'code', tdTemplate: this.highLightTpl() },
+      { title: '操作时间', width: 50, field: 'unitPrice', pipe: 'date:yyyy-MM-dd HH:mm' },
+      { title: '备注', width: 50, field: 'number' }
+    ],
+    xScroll: 500,
+    total: 0,
+    loading: false,
+    pageSize: 10,
+    pageIndex: 1
+  }));
+  pageHeaderInfo = computed<Partial<PageHeaderType>>(() => ({
+    title: '单号：234231029431',
+    breadcrumb: ['首页', '详情页', '高级详情页'],
+    extra: this.headerExtra(),
+    desc: this.headerContent(),
+    footer: this.headerFooter()
+  }));
   tabEnum = TabEnum;
-  currentSelTab: number = this.tabEnum.Detail;
+  currentSelTab = signal<number>(TabEnum.Detail);
   destroyRef = inject(DestroyRef);
 
   returnDataList: ReturnObj[] = [
@@ -128,52 +142,10 @@ export class AdvDetailComponent implements OnInit, AfterViewInit {
       price: '2.00'
     }
   ];
-  private cdr = inject(ChangeDetectorRef);
   private breakpointObserver = inject(BreakpointObserver);
 
   to(tabIndex: TabEnum): void {
-    this.currentSelTab = tabIndex;
-    this.cdr.detectChanges();
-  }
-
-  private initReturnTable(): void {
-    this.returnTableConfig = {
-      showCheckbox: false,
-      headers: [
-        {
-          title: '操作类型',
-          field: 'num',
-          width: 50
-        },
-        {
-          title: '操作人',
-          width: 60,
-          field: 'name'
-        },
-        {
-          title: '执行结果',
-          width: 50,
-          field: 'code',
-          tdTemplate: this.highLightTpl()
-        },
-        {
-          title: '操作时间',
-          width: 50,
-          field: 'unitPrice',
-          pipe: 'date:yyyy-MM-dd HH:mm'
-        },
-        {
-          title: '备注',
-          width: 50,
-          field: 'number'
-        }
-      ],
-      xScroll: 500,
-      total: 0,
-      loading: false,
-      pageSize: 10,
-      pageIndex: 1
-    };
+    this.currentSelTab.set(tabIndex);
   }
 
   ngOnInit(): void {
@@ -181,22 +153,7 @@ export class AdvDetailComponent implements OnInit, AfterViewInit {
       .observe(['(max-width: 770px)'])
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(result => {
-        if (result.matches) {
-          this.stepDirection = 'vertical';
-        } else {
-          this.stepDirection = 'horizontal';
-        }
+        this.stepDirection.set(result.matches ? 'vertical' : 'horizontal');
       });
-    this.initReturnTable();
-  }
-
-  ngAfterViewInit(): void {
-    this.pageHeaderInfo = {
-      title: '单号：234231029431',
-      breadcrumb: ['首页', '详情页', '高级详情页'],
-      extra: this.headerExtra(),
-      desc: this.headerContent(),
-      footer: this.headerFooter()
-    };
   }
 }
