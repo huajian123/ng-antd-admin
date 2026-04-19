@@ -78,8 +78,7 @@ export class CardTableWrapComponent implements AfterContentInit {
 
   // 是否展示复选框
   changeTableCheckBoxShow(e: boolean): void {
-    this.currentTableComponent().tableConfig().showCheckbox = e;
-    this.tableChangeDectction();
+    this.currentTableComponent().updateTableConfig(c => ({ ...c, showCheckbox: e }));
   }
 
   // 大中小表格密度
@@ -96,7 +95,7 @@ export class CardTableWrapComponent implements AfterContentInit {
       this.allTableFieldIndeterminate = false;
     }
     this.tableHeaders.forEach(item => (item.show = e));
-    this.tableChangeDectction();
+    this.currentTableComponent().updateTableConfig(c => ({ ...c, headers: [...this.tableHeaders] }));
   }
 
   // 设置固定左侧还是右侧
@@ -116,8 +115,7 @@ export class CardTableWrapComponent implements AfterContentInit {
         noFixedArray.push(item);
       }
     });
-    this.currentTableComponent().tableConfig().headers = [...fixedLeftArray, ...noFixedArray, ...fixedRightArray];
-    this.tableChangeDectction();
+    this.currentTableComponent().updateTableConfig(c => ({ ...c, headers: [...fixedLeftArray, ...noFixedArray, ...fixedRightArray] }));
   }
 
   dropTableConfig(event: CdkDragDrop<string[]>): void {
@@ -139,12 +137,7 @@ export class CardTableWrapComponent implements AfterContentInit {
   changeSignalCheck(e: boolean, item: TableHeader): void {
     item.show = e;
     this.judgeAllChecked();
-    this.tableChangeDectction();
-  }
-
-  // 使子列表变更检测
-  tableChangeDectction(): void {
-    this.currentTableComponent().tableChangeDectction();
+    this.currentTableComponent().updateTableConfig(c => ({ ...c, headers: [...this.tableHeaders] }));
   }
 
   // 判断列展示这个checkbox的状态
@@ -160,8 +153,7 @@ export class CardTableWrapComponent implements AfterContentInit {
     this.copyHeader.forEach(item => {
       this.tableHeaders.push({ ...item });
     });
-    this.currentTableComponent().tableConfig().headers = [...this.tableHeaders];
-    this.tableChangeDectction();
+    this.currentTableComponent().updateTableConfig(c => ({ ...c, headers: [...this.tableHeaders] }));
   }
 
   ngAfterContentInit(): void {

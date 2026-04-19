@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnChanges, SimpleChanges, inject, input, InputSignal, output, computed } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnChanges, SimpleChanges, input, InputSignal, output, computed, linkedSignal, signal } from '@angular/core';
 
 import { AntTableConfig, SortFile, TableHeader } from '@shared/components/ant-table/ant-table.component';
 import { fnGetFlattenTreeDataByMap, fnTreeDataToMap } from '@utils/treeTableTools';
@@ -25,7 +25,7 @@ export abstract class AntTreeTableComponentToken {
   tableSize!: NzTableSize;
   tableConfig!: InputSignal<AntTableConfig>;
 
-  abstract tableChangeDectction(): void;
+  abstract updateTableConfig(updater: (config: AntTableConfig) => AntTableConfig): void;
 }
 
 @Component({
@@ -37,9 +37,6 @@ export abstract class AntTreeTableComponentToken {
   imports: [NzTableModule, NzResizableModule, NgTemplateOutlet, MapPipe, TableFiledPipe]
 })
 export class TreeTableComponent implements OnChanges {
-  private cdr = inject(ChangeDetectorRef);
-
-  // _dataList!: TreeNodeInterface[];
   allChecked = false;
   indeterminate = false;
   // 从业务组件中传入的缓存的已经选中的checkbox数据数组,相当于缓存的tableData
@@ -50,8 +47,18 @@ export class TreeTableComponent implements OnChanges {
   readonly changePageSize = output<number>();
   mapOfExpandedData: Record<string, TreeNodeInterface[]> = {};
   readonly tableConfig = input.required<AntTableConfig>();
+  readonly _tableConfig = linkedSignal(() => this.tableConfig());
+  readonly _tableSize = signal<NzTableSize>('default');
   readonly selectedChange = output<NzSafeAny[]>();
   cashExpandIdArray: Array<number | string> = []; // 缓存已经展开的节点的id
+
+  set tableSize(value: NzTableSize) {
+    this._tableSize.set(value);
+  }
+
+  get tableSize(): NzTableSize {
+    return this._tableSize();
+  }
 
   tableData = input<TreeNodeInterface[]>([]);
   _dataList = computed(() => {
@@ -77,45 +84,28 @@ export class TreeTableComponent implements OnChanges {
     return this.tableData();
   });
 
-  _tableSize: NzTableSize = 'default';
-  set tableSize(value: NzTableSize) {
-    this._tableSize = value;
-    this.tableChangeDectction();
-  }
-
-  get tableSize(): NzTableSize {
-    return this._tableSize;
-  }
-
-  tableChangeDectction(): void {
-    // 改变引用触发变更检测。
-    // this._dataList = [...this._dataList];
-    this.cdr.markForCheck();
+  updateTableConfig(updater: (config: AntTableConfig) => AntTableConfig): void {
+    this._tableConfig.update(updater);
   }
 
   // 表头拖动
   onResize(nzResizeEvent: NzResizeEvent, col: string): void {
-    this.tableConfig().headers = this.tableConfig().headers.map(e =>
-      e.title === col
-        ? {
-            ...e,
-            width: +`${nzResizeEvent.width}`
-          }
-        : e
-    ) as TableHeader[];
+    this._tableConfig.update(config => ({
+      ...config,
+      headers: config.headers.map(e => (e.title === col ? { ...e, width: +`${nzResizeEvent.width}` } : e)) as TableHeader[]
+    }));
   }
 
   // 点击排序
   changeSort(tableHeader: TableHeader): void {
-    this.tableConfig().headers.forEach(item => {
-      if (item.field !== tableHeader.field) {
-        item.sortDir = undefined;
-      }
-    });
     const sortDicArray: [undefined, 'asc', 'desc'] = [undefined, 'asc', 'desc'];
     const index = sortDicArray.findIndex(item => item === tableHeader.sortDir);
-    tableHeader.sortDir = index === sortDicArray.length - 1 ? sortDicArray[0] : sortDicArray[index + 1];
-    this.sortFn.emit({ fileName: tableHeader.field!, sortDir: tableHeader.sortDir });
+    const nextDir = index === sortDicArray.length - 1 ? sortDicArray[0] : sortDicArray[index + 1];
+    this._tableConfig.update(config => ({
+      ...config,
+      headers: config.headers.map(item => (item.field === tableHeader.field ? { ...item, sortDir: nextDir } : { ...item, sortDir: undefined }))
+    }));
+    this.sortFn.emit({ fileName: tableHeader.field!, sortDir: nextDir });
   }
 
   // 分页页码改变

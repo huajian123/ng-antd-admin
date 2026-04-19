@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, inject, input, InputSignal, OnChanges, output, SimpleChanges, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, InputSignal, linkedSignal, OnChanges, output, SimpleChanges, TemplateRef, signal } from '@angular/core';
 
 import { ContextPipePipe } from '@shared/components/ant-table/context-pipe.pipe';
 
@@ -46,7 +46,7 @@ export abstract class AntTableComponentToken {
   tableSize!: NzTableSize;
   tableConfig!: InputSignal<AntTableConfig>;
 
-  abstract tableChangeDectction(): void;
+  abstract updateTableConfig(updater: (config: AntTableConfig) => AntTableConfig): void;
 }
 
 export interface SortFile {
@@ -67,30 +67,27 @@ export class AntTableComponent implements OnChanges {
   readonly checkedCashArrayFromComment = input<NzSafeAny[]>([]);
 
   tableData = input<NzSafeAny[]>([]);
+  tableConfig = input.required<AntTableConfig>();
+  readonly _tableConfig = linkedSignal(() => this.tableConfig());
+  private readonly _showCheckbox = linkedSignal(() => this._tableConfig().showCheckbox);
+  readonly _tableSize = signal<NzTableSize>('default');
+
+  set tableSize(value: NzTableSize) {
+    this._tableSize.set(value);
+  }
+
+  get tableSize(): NzTableSize {
+    return this._tableSize();
+  }
+
   _dataList = computed(() => {
-    if (this.tableConfig().showCheckbox) {
-      return this.tableData().map(item => {
-        return { ...item, _checked: false };
-      });
+    if (this._showCheckbox()) {
+     return this.tableData().map(item => ({ ...item, _checked: false }));
     }
     return this.tableData();
   });
 
-  _tableSize: NzTableSize = 'default';
-  set tableSize(value: NzTableSize) {
-    this._tableSize = value;
-    this.tableChangeDectction();
-  }
-
-  get tableSize(): NzTableSize {
-    return this._tableSize;
-  }
-
-  tableConfig = input.required<AntTableConfig>();
-
-  _scrollConfig = computed(() => {
-    return this.setScrollConfig(this.tableConfig());
-  });
+  _scrollConfig = computed(() => this.setScrollConfig(this._tableConfig()));
 
   readonly changePageIndex = output<NzTableQueryParams>();
   readonly changePageSize = output<number>();
@@ -98,7 +95,6 @@ export class AntTableComponent implements OnChanges {
   readonly sortFn = output<SortFile>();
   indeterminate = false;
   allChecked = false;
-  private cdr = inject(ChangeDetectorRef);
 
   setScrollConfig(value: AntTableConfig): { x: string; y: string } | {} {
     if (!value || value.needNoScroll) {
@@ -115,21 +111,29 @@ export class AntTableComponent implements OnChanges {
   }
 
   changeSort(tableHeader: TableHeader): void {
-    this.tableConfig().headers.forEach(item => {
-      if (item.field !== tableHeader.field) {
-        item.sortDir = undefined;
-      }
-    });
     const sortDicArray: [undefined, 'asc', 'desc'] = [undefined, 'asc', 'desc'];
     const index = sortDicArray.findIndex(item => item === tableHeader.sortDir);
-    tableHeader.sortDir = index === sortDicArray.length - 1 ? sortDicArray[0] : sortDicArray[index + 1];
-    this.sortFn.emit({ fileName: tableHeader.field!, sortDir: tableHeader.sortDir });
+    const nextDir = index === sortDicArray.length - 1 ? sortDicArray[0] : sortDicArray[index + 1];
+    this._tableConfig.update(config => ({
+      ...config,
+      headers: config.headers.map(item =>
+        item.field === tableHeader.field
+          ? { ...item, sortDir: nextDir }
+          : { ...item, sortDir: undefined }
+      )
+    }));
+    this.sortFn.emit({ fileName: tableHeader.field!, sortDir: nextDir });
   }
 
-  tableChangeDectction(): void {
-    // 改变引用触发变更检测。
-    // this._dataList() = [...this._dataList()];
-    this.cdr.markForCheck();
+  updateTableConfig(updater: (config: AntTableConfig) => AntTableConfig): void {
+    this._tableConfig.update(updater);
+  }
+
+  onResize({ width }: NzResizeEvent, col: string): void {
+    this._tableConfig.update(config => ({
+      ...config,
+      headers: config.headers.map(e => e.title === col ? { ...e, width: +`${width}` } : e) as TableHeader[]
+    }));
   }
 
   trackById(_: number, data: { id: number }): number {
@@ -152,17 +156,6 @@ export class AntTableComponent implements OnChanges {
   // 修改一页几条的页码
   onPageSizeChange($event: NzSafeAny): void {
     this.changePageSize.emit($event);
-  }
-
-  onResize({ width }: NzResizeEvent, col: string): void {
-    this.tableConfig().headers = this.tableConfig().headers.map(e =>
-      e.title === col
-        ? {
-            ...e,
-            width: +`${width}`
-          }
-        : e
-    ) as TableHeader[];
   }
 
   checkFn(dataItem: NzSafeAny, isChecked: boolean): void {
