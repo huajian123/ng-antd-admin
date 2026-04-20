@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -9,6 +9,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
   selector: 'app-task-search-filters',
   imports: [NzListModule, NzTypographyModule, NzAvatarModule, NzIconModule],
   templateUrl: './task-search-filters.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './task-search-filters.component.less'
 })
 export class TaskSearchFiltersComponent {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { UserMemberManageComponent } from '@app/pages/page-demo/form/advanced/user-member-manage/user-member-manage.component';
 
@@ -10,6 +10,7 @@ import { NzInputDirective, NzInputWrapperComponent} from 'ng-zorro-antd/input';
 
 @Component({
   selector: 'app-new-page-layout',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NzBreadCrumbComponent, NzBreadCrumbItemComponent, NzIconDirective, NzCardComponent, UserMemberManageComponent, NzButtonComponent, NzInputDirective, NzInputWrapperComponent],
   templateUrl: './new-page-layout.component.html'
 })

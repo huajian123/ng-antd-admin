@@ -1,4 +1,4 @@
-import { Component, signal, computed, inject } from '@angular/core';
+import { Component, signal, computed, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CdkDragDrop, DragDropModule, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 import { ModalBtnStatus } from '@widget/base-modal';
@@ -39,6 +39,7 @@ export interface Column {
   selector: 'app-task-list-panel',
   imports: [DragDropModule, FormsModule, NzCardModule, NzIconModule, NzTagModule, NzButtonModule, NzInputModule, NzBadgeModule, NzEmptyModule, NzTooltipModule],
   templateUrl: './task-list-panel.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './task-list-panel.component.less'
 })
 export class TaskListPanelComponent {

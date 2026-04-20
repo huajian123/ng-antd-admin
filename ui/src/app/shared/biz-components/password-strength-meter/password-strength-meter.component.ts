@@ -1,4 +1,4 @@
-import { Component, OnChanges, SimpleChanges, booleanAttribute, numberAttribute, inject, input, output } from '@angular/core';
+import { Component, OnChanges, SimpleChanges, booleanAttribute, numberAttribute, inject, input, output, ChangeDetectionStrategy } from '@angular/core';
 
 import { PasswordStrengthMeterService } from './password-strength-meter.service';
 import { PSMProgressBarDirective } from './psm-progress-bar.directive';
@@ -9,6 +9,7 @@ import { PSMProgressBarDirective } from './psm-progress-bar.directive';
   templateUrl: './password-strength-meter.component.html',
   styleUrl: './password-strength-meter.component.less',
   providers: [PasswordStrengthMeterService],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [PSMProgressBarDirective],
   host: {
     class: 'psm'

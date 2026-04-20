@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 /**
  * 此组件用于在tab刷新时临时跳转用
@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-refresh-empty',
   imports: [],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: ''
 })
 export class RefreshEmptyComponent {}
