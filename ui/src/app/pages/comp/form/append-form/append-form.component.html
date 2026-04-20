@@ -122,7 +122,7 @@
       <span>添加</span>
     </button>
 
-    <nz-list [nzDataSource]="showTaskList" [nzLoading]="loading" [nzPagination]="pagination" [nzRenderItem]="item">
+    <nz-list [nzDataSource]="showTaskList()" [nzLoading]="loading()" [nzPagination]="pagination" [nzRenderItem]="item">
       <ng-template #item let-item>
         <nz-list-item [nzActions]="[edit, op]" [nzContent]="nzContent">
           <ng-template #edit>
@@ -169,10 +169,10 @@
         <nz-pagination
           nzShowQuickJumper
           nzShowSizeChanger
-          [nzPageSize]="pageObj.pageSize"
+          [nzPageIndex]="pageObj().pageIndex"
+          [nzPageSize]="pageObj().pageSize"
           [nzPageSizeOptions]="[3, 5, 10, 20]"
           [nzTotal]="showAllTaskList.length"
-          [(nzPageIndex)]="pageObj.pageIndex"
           (nzPageIndexChange)="getData($event)"
           (nzPageSizeChange)="pageSizeChange($event)"
         ></nz-pagination>

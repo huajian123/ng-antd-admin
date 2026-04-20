@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -96,7 +96,6 @@ export enum TaskStateSearchCheckPeriodEnum {
 })
 export class AppendFormComponent implements OnInit {
   private modalService = inject(AppendFormModalService);
-  private cdr = inject(ChangeDetectorRef);
   private fb = inject(FormBuilder);
 
   destroyRef = inject(DestroyRef);
@@ -108,11 +107,8 @@ export class AppendFormComponent implements OnInit {
   taskStateSearchEnum = TaskStateSearchEnum;
   taskState = TaskStateSearchEnum.All;
   taskCheckPeriodState = TaskStateSearchCheckPeriodEnum.All;
-  pageObj = {
-    pageSize: 3,
-    pageIndex: 1
-  };
-  showTaskList: TaskObj[] = [];
+  pageObj = signal({ pageSize: 3, pageIndex: 1 });
+  showTaskList = signal<TaskObj[]>([]);
   showAllTaskList: TaskObj[] = [
     {
       id: 1,
@@ -196,7 +192,7 @@ export class AppendFormComponent implements OnInit {
     }
   ];
   taskCheckPeriodStateEnum = TaskStateSearchCheckPeriodEnum;
-  loading = false;
+  loading = signal(false);
 
   validateForm = this.fb.group({
     formArray: this.fb.array([this.creatForm()])
@@ -230,7 +226,7 @@ export class AppendFormComponent implements OnInit {
   }
 
   pageSizeChange(event: number): void {
-    this.pageObj = { ...this.pageObj, pageSize: event };
+    this.pageObj.update(p => ({ ...p, pageSize: event }));
     this.getData(1);
   }
 
@@ -239,13 +235,13 @@ export class AppendFormComponent implements OnInit {
   }
 
   searchTask(): void {
-    this.pageObj = { ...this.pageObj, pageIndex: 1 };
+    this.pageObj.update(p => ({ ...p, pageIndex: 1 }));
 
     this.showAllTaskList = this.showAllTaskList.filter(() => {
       return true;
     });
 
-    this.pageSizeChange(this.pageObj.pageSize);
+    this.pageSizeChange(this.pageObj().pageSize);
   }
 
   add(): void {
@@ -262,15 +258,14 @@ export class AppendFormComponent implements OnInit {
       });
   }
 
-  onEllipsisChange(ellipsis: boolean): void {
+  onEllipsisChange(_ellipsis: boolean): void {
     // console.log(ellipsis);
   }
 
   // 分页获取数据
-  getData(event: number = this.pageObj.pageIndex): void {
-    this.pageObj = { ...this.pageObj, pageIndex: event };
-    this.showTaskList = [...this.showAllTaskList.slice((this.pageObj.pageIndex - 1) * this.pageObj.pageSize, this.pageObj.pageIndex * this.pageObj.pageSize)];
-    this.cdr.markForCheck();
+  getData(event: number = this.pageObj().pageIndex): void {
+    this.pageObj.update(p => ({ ...p, pageIndex: event }));
+    this.showTaskList.set([...this.showAllTaskList.slice((this.pageObj().pageIndex - 1) * this.pageObj().pageSize, this.pageObj().pageIndex * this.pageObj().pageSize)]);
   }
 
   ngOnInit(): void {

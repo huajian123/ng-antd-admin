@@ -1,15 +1,15 @@
 @let tableConfig = this._tableConfig();
 @let _scrollConfig = this._scrollConfig();
 <nz-table
+  nzBordered
+  nzOuterBordered
   nzShowPagination
   nzShowQuickJumper
   nzShowSizeChanger
   nzTableLayout="fixed"
-  nzBordered
   [nzData]="_dataList()"
   [nzFrontPagination]="false"
   [nzLoading]="tableConfig.loading"
-  nzOuterBordered
   [nzPageIndex]="tableConfig.pageIndex"
   [nzPageSize]="tableConfig.pageSize"
   [nzScroll]="_scrollConfig"
@@ -24,7 +24,7 @@
   <thead>
     <tr>
       @if (tableConfig.showCheckbox) {
-        <th class="animate-bg-0" [nzChecked]="allChecked" [nzIndeterminate]="indeterminate" [nzLeft]="true" nzWidth="40px" (nzCheckedChange)="onAllChecked($event)"></th>
+        <th class="animate-bg-0" nzWidth="40px" [nzChecked]="allChecked" [nzIndeterminate]="indeterminate" [nzLeft]="true" (nzCheckedChange)="onAllChecked($event)"></th>
       }
       @for (head of tableConfig.headers; track trackByTableHead(headIndex, head); let headIndex = $index; let last = $last; let first = $first) {
         @if (head.show === undefined || head.show === true) {
