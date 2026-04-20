@@ -133,9 +133,12 @@ let menus: Menu[] = [
   { id: 115, fatherId: 95, menuName: 'Menu1-1-1', menuType: 'C', alIcon: '', icon: '', path: '/default/level/menu1/menu1-1/menu1-1-1', code: 'default:level:menu1:menu1-1:menu1-1-1', orderNum: 1, status: true, newLinkFlag: false, visible: true },
   { id: 116, fatherId: 95, menuName: 'Menu1-1-2', menuType: 'C', alIcon: '', icon: '', path: '/default/level/menu1/menu1-1/menu1-1-2', code: 'default:level:menu1:menu1-1:menu1-1-2', orderNum: 2, status: true, newLinkFlag: false, visible: true },
   { id: 117, fatherId: 3, menuName: '过渡', menuType: 'C', alIcon: '', icon: 'logout', path: '/default/feat/transitions', code: 'default:feat:transitions', orderNum: 27, status: true, newLinkFlag: false, visible: true },
+  { id: 118, fatherId: 52, menuName: 'defer演示', menuType: 'C', alIcon: '', icon: 'logout', path: '/default/comp/lazy/lazy-defer', code: 'default:comp:lazy:lazy-defer', orderNum: 3, status: true, newLinkFlag: false, visible: true },
+  { id: 119, fatherId: 52, menuName: '懒加载script脚本', menuType: 'C', alIcon: '', icon: 'login', path: '/default/comp/lazy/lazy-loadscript', code: 'default:comp:lazy:lazy-loadscript', orderNum: 4, status: true, newLinkFlag: false, visible: true },
+  { id: 120, fatherId: 52, menuName: '动态组件', menuType: 'C', alIcon: '', icon: 'up-circle', path: '/default/comp/lazy/dynamic-comp', code: 'default:comp:lazy:dynamic-comp', orderNum: 5, status: true, newLinkFlag: false, visible: true },
 ];
 
-let nextId = 118;
+let nextId = 121;
 
 export const menu = [
   http.post('/site/api/auth/menu', () => {
