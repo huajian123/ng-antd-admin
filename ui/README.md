@@ -130,8 +130,8 @@ provideRouter(routes, withViewTransitions({ skipInitialTransition: true }))
 使用 MSW (Mock Service Worker) 模拟数据，无需启动后端即可体验完整功能。
 
 ```bash
-# 1. 克隆 mock 分支
-git clone -b mock https://github.com/huajian123/ng-antd-admin.git
+# 1. 克隆
+git clone https://github.com/huajian123/ng-antd-admin.git
 
 # 2. 进入前端目录
 cd ng-antd-admin/ui
@@ -177,13 +177,16 @@ npm run start
 # 1. 进入前端目录
 cd ui
 
-# 2. 安装依赖
+# 2. 修改环境environment.ts的  mockEnabled字段
+  mockEnabled: true
+
+# 3. 安装依赖
 npm install
 
-# 3. 启动开发服务器
+# 4. 启动开发服务器
 npm start
 
-# 4. 浏览器访问 http://localhost:4201
+# 5. 浏览器访问 http://localhost:4201
 ```
 
 ### 方式三：纯净版 (零业务代码)
