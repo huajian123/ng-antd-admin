@@ -1,1 +1,0 @@
-import{Ka as t,ma as o}from"./chunk-EYYHWBDM.js";var a=class e{$globalSpinStore=t(!1);static \u0275fac=function(n){return new(n||e)};static \u0275prov=o({token:e,factory:e.\u0275fac,providedIn:"root"})};export{a};

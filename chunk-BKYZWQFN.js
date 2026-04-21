@@ -1,0 +1,1 @@
+import{Ka as r,ma as o}from"./chunk-RN5X5DJI.js";var a=class e{lockScreenSignalStore=r({locked:!1,password:"",beforeLockPath:""});static \u0275fac=function(c){return new(c||e)};static \u0275prov=o({token:e,factory:e.\u0275fac,providedIn:"root"})};export{a};

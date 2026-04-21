@@ -1,0 +1,1 @@
+import{Ka as c,ma as r}from"./chunk-RN5X5DJI.js";var x=(o=>(o[o.xs=0]="xs",o[o.sm=1]="sm",o[o.md=2]="md",o[o.lg=3]="lg",o[o.xl=4]="xl",o[o.xxl=5]="xxl",o))(x||{}),l=class a{$windowWidth=c(5);static \u0275fac=function(s){return new(s||a)};static \u0275prov=r({token:a,factory:a.\u0275fac,providedIn:"root"})};export{x as a,l as b};

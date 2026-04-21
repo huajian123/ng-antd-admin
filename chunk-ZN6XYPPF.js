@@ -1,1 +1,0 @@
-import{Fb as n}from"./chunk-EYYHWBDM.js";import"./chunk-DAQOROHW.js";var o=class e{static \u0275fac=function(t){return new(t||e)};static \u0275cmp=n({type:e,selectors:[["app-refresh-empty"]],decls:0,vars:0,template:function(t,r){},encapsulation:2})};export{o as RefreshEmptyComponent};
