@@ -1,0 +1,189 @@
+<app-page-header [pageHeaderInfo]="pageHeaderInfo" />
+
+<div class="normal-table-wrap">
+  <!-- 说明卡片 -->
+  <nz-card class="p-24 m-b-20 b-r-8" [nzBodyStyle]="{ padding: 0 }">
+    <div class="left-start-center" style="gap: 12px">
+      <span class="sp-32">⏳</span>
+      <div>
+        <h3 class="m-0">&#64;defer 延迟加载</h3>
+        <p class="sp-14 m-0">
+          <code>&#64;defer</code> 将组件的 JS 代码拆分为独立 chunk，仅在触发条件满足时才下载并渲染。 支持 <code>on idle</code>、<code>on viewport</code>、<code>on interaction</code>、
+          <code>on hover</code>、<code>on timer</code>、<code>when</code> 六种触发方式， 并可配合 <code>&#64;placeholder</code>、<code>&#64;loading</code>、<code>&#64;error</code> 子块。
+        </p>
+      </div>
+    </div>
+  </nz-card>
+
+  <div nz-row [nzGutter]="[24, 24]">
+    <!-- 1. on idle -->
+    <div nz-col [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+      <div class="demo-card">
+        <div class="demo-header">
+          <span class="demo-badge idle">on idle</span>
+          <h4 class="m-0">浏览器空闲时加载</h4>
+          <p class="sp-12 demo-desc">页面完成初始渲染、浏览器进入空闲状态后自动触发，适合非关键内容。</p>
+        </div>
+        <div class="demo-body">
+          @defer (on idle) {
+            <app-heavy-card color="#722ed1" desc="浏览器空闲后自动加载，无需任何用户操作" icon="💤" title="Idle 触发成功" [tags]="['on idle', '非关键内容', '自动触发']" />
+          } @loading (minimum 500ms) {
+            <div class="demo-loading"><nz-spin nzSimple /></div>
+          } @placeholder {
+            <div class="demo-placeholder">等待浏览器空闲…</div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. on interaction -->
+    <div nz-col [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+      <div class="demo-card">
+        <div class="demo-header">
+          <span class="demo-badge interaction">on interaction</span>
+          <h4 class="m-0">用户交互时加载</h4>
+          <p class="sp-12 demo-desc">点击或按键触发 placeholder 元素时开始加载，适合折叠面板、弹窗等按需内容。</p>
+        </div>
+        <div class="demo-body">
+          @defer (on interaction(triggerBtn)) {
+            <app-heavy-card color="#fa8c16" desc="点击下方按钮后才开始加载此组件" icon="🖱️" title="Interaction 触发成功" [tags]="['on interaction', '点击触发', '按需加载']" />
+          } @loading (minimum 500ms) {
+            <div class="demo-loading"><nz-spin nzSimple /></div>
+          } @placeholder {
+            <button #triggerBtn nz-button nzType="dashed" style="width: 100%">点击此处触发加载</button>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. on hover -->
+    <div nz-col [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+      <div class="demo-card">
+        <div class="demo-header">
+          <span class="demo-badge hover">on hover</span>
+          <h4 class="m-0">鼠标悬停时加载</h4>
+          <p class="sp-12 demo-desc">鼠标移入 placeholder 区域时触发，适合 tooltip、预览卡片等悬停内容。</p>
+        </div>
+        <div class="demo-body">
+          @defer (on hover(hoverZone)) {
+            <app-heavy-card color="#eb2f96" desc="鼠标悬停在下方区域后触发加载" icon="🎯" title="Hover 触发成功" [tags]="['on hover', '悬停触发', 'mouseenter']" />
+          } @loading (minimum 500ms) {
+            <div class="demo-loading"><nz-spin nzSimple /></div>
+          } @placeholder {
+            <div #hoverZone class="demo-placeholder hover-zone">将鼠标移入此区域触发加载</div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. on timer -->
+    <div nz-col [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+      <div class="demo-card">
+        <div class="demo-header">
+          <span class="demo-badge timer">on timer</span>
+          <h4 class="m-0">定时延迟加载</h4>
+          <p class="sp-12 demo-desc">页面渲染后等待指定时间再加载，适合广告位、次要信息等低优先级内容。</p>
+        </div>
+        <div class="demo-body">
+          @defer (on timer(3s)) {
+            <app-heavy-card color="#52c41a" desc="页面加载 3 秒后自动触发，无需任何操作" icon="⏱️" title="Timer 触发成功" [tags]="['on timer(3s)', '定时触发', '低优先级']" />
+          } @loading (minimum 500ms) {
+            <div class="demo-loading"><nz-spin nzSimple /></div>
+          } @placeholder (minimum 1s) {
+            <div class="demo-placeholder">3 秒后自动加载…</div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. when 条件触发 -->
+    <div nz-col [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+      <div class="demo-card">
+        <div class="demo-header">
+          <span class="demo-badge when">when</span>
+          <h4 class="m-0">条件满足时加载</h4>
+          <p class="sp-12 demo-desc">绑定一个布尔表达式，值变为 <code>true</code> 时触发，适合权限控制、步骤流程等场景。</p>
+        </div>
+        <div class="demo-body">
+          <div style="margin-bottom: 12px">
+            <button nz-button [nzType]="showWhen() ? 'primary' : 'default'" (click)="showWhen.set(!showWhen())">
+              {{ showWhen() ? '已触发加载' : '点击满足条件' }}
+            </button>
+          </div>
+          @defer (when showWhen()) {
+            <app-heavy-card color="#1890ff" desc="showWhen() 变为 true 后才开始加载此组件" icon="✅" title="When 条件触发成功" [tags]="['when', '条件触发', '权限控制']" />
+          } @loading (minimum 500ms) {
+            <div class="demo-loading"><nz-spin nzSimple /></div>
+          } @placeholder {
+            <div class="demo-placeholder">等待条件满足（showWhen = false）…</div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. on viewport -->
+    <div nz-col [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+      <div class="demo-card">
+        <div class="demo-header">
+          <span class="demo-badge viewport">on viewport</span>
+          <h4 class="m-0">进入视口时加载</h4>
+          <p class="sp-12 demo-desc">元素滚动进入可视区域时触发，是长列表、图片懒加载的最佳选择。</p>
+        </div>
+        <div class="demo-body">
+          @defer (on viewport) {
+            <app-heavy-card color="#13c2c2" desc="滚动到此区域后才开始加载，节省首屏流量" icon="👁️" title="Viewport 触发成功" [tags]="['on viewport', '滚动加载', 'IntersectionObserver']" />
+          } @loading (minimum 500ms) {
+            <div class="demo-loading"><nz-spin nzSimple /></div>
+          } @placeholder {
+            <div class="demo-placeholder">滚动到此处触发加载…</div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. prefetch 预取 -->
+    <div nz-col [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzXs]="24">
+      <div class="demo-card">
+        <div class="demo-header">
+          <span class="demo-badge prefetch">prefetch</span>
+          <h4 class="m-0">预取 + 延迟渲染（prefetch on idle; on interaction）</h4>
+          <p class="sp-12 demo-desc">
+            <code>prefetch</code> 控制 JS chunk 的<strong>下载时机</strong>，触发条件控制<strong>渲染时机</strong>，两者独立。 此示例在浏览器空闲时预下载代码，但等到点击时才渲染，兼顾性能与体验。
+          </p>
+        </div>
+        <div class="demo-body">
+          <!--on interaction(prefetchBtn) 何时渲染组件-》用户点击时-->
+          <!--prefetch on idle 何时下载js chunk-》浏览器空闲时-->
+          <!--对比没有 prefetch 的情况：
+            - 无 prefetch：点击 → 开始下载 chunk → 下载完成 → 渲染（有明显延迟，会看到 @loading 状态）
+            - 有 prefetch：点击 → chunk 已就绪 → 立即渲染（@loading 几乎一闪而过）
+          -->
+          <!--
+            prefetch 支持的触发条件和主触发器一样：
+            prefetch on idle        // 最常用，空闲时预取
+            prefetch on viewport    // 进入视口时预取
+            prefetch on hover       // 悬停时预取（比渲染早一步）
+            prefetch when condition // 条件满足时预取
+          -->
+          @defer (on interaction(prefetchBtn); prefetch on idle) {
+            <div nz-row [nzGutter]="[16, 16]">
+              <div nz-col [nzMd]="8" [nzSm]="12" [nzXs]="24">
+                <app-heavy-card color="#dd0031" desc="代码已预取，点击后立即渲染" icon="🚀" title="Prefetch 卡片 A" [tags]="['prefetch', 'on idle']" />
+              </div>
+              <div nz-col [nzMd]="8" [nzSm]="12" [nzXs]="24">
+                <app-heavy-card color="#1890ff" desc="无需等待下载，渲染几乎无延迟" icon="⚡" title="Prefetch 卡片 B" [tags]="['instant render']" />
+              </div>
+              <div nz-col [nzMd]="8" [nzSm]="12" [nzXs]="24">
+                <app-heavy-card color="#52c41a" desc="多个组件共享同一 defer chunk" icon="🎉" title="Prefetch 卡片 C" [tags]="['chunk sharing']" />
+              </div>
+            </div>
+          } @loading (minimum 300ms) {
+            <div class="demo-loading"><nz-spin nzSimple /></div>
+          } @placeholder {
+            <button #prefetchBtn nz-button nzType="dashed" style="width: 100%">点击渲染（代码已在后台预取）</button>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

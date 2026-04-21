@@ -1,0 +1,77 @@
+.demo-card {
+  border-radius: 8px;
+  border: 1px solid #f0f0f0;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.demo-header {
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid #f5f5f5;
+
+  h4 {
+    font-size: 14px;
+    margin: 4px 0 6px;
+  }
+}
+
+.demo-desc {
+  color: #8c8c8c;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.demo-body {
+  padding: 16px 20px;
+  flex: 1;
+}
+
+.demo-placeholder {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  border: 1px dashed #d9d9d9;
+  color: #bfbfbf;
+  font-size: 13px;
+  background: #fafafa;
+}
+
+.demo-loading {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hover-zone {
+  cursor: default;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+
+  &:hover {
+    border-color: #1890ff;
+    color: #1890ff;
+    background: #e6f7ff;
+  }
+}
+
+.demo-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: monospace;
+  margin-bottom: 4px;
+
+  &.idle       { background: #f9f0ff; color: #722ed1; }
+  &.viewport   { background: #e6fffb; color: #13c2c2; }
+  &.interaction{ background: #fff7e6; color: #fa8c16; }
+  &.hover      { background: #fff0f6; color: #eb2f96; }
+  &.timer      { background: #f6ffed; color: #52c41a; }
+  &.when       { background: #e6f7ff; color: #1890ff; }
+  &.prefetch   { background: #fff1f0; color: #dd0031; }
+}

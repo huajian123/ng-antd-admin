@@ -80,6 +80,7 @@ const adminAuthCodes = [
   'default:feat:transitions',
   'default:comp','default:comp:basic','default:comp:transition','default:comp:luckysheet',
   'default:comp:lazy','default:comp:lazy:lazy-basic','default:comp:lazy:lazy-scroll',
+  'default:comp:lazy:lazy-defer','default:comp:lazy:lazy-loadscript','default:comp:lazy:dynamic-comp',
   'default:comp:desc','default:comp:strength-meter','default:comp:form','default:comp:form:shrink-form',
   'default:comp:form:append-form','default:comp:blingbling',
   'default:level','default:level:menu1','default:level:menu1:menu1-1',
