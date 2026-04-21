@@ -1,0 +1,226 @@
+.code-block {
+  margin: 0 0 16px;
+  padding: 12px;
+  background: #f5f5f5;
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 1.7;
+  overflow-x: auto;
+
+  code {
+    font-family: 'SFMono-Regular', Consolas, monospace;
+  }
+}
+
+.empty-hint {
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #bfbfbf;
+  font-size: 13px;
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+}
+
+.compare-block {
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #d9d9d9;
+
+  &.good {
+    border-color: #52c41a;
+  }
+
+  &.bad {
+    border-color: #ff4d4f;
+  }
+
+  .compare-label {
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #595959;
+  }
+
+  &.good .compare-label { color: #52c41a; }
+  &.bad .compare-label  { color: #ff4d4f; }
+}
+
+// Step indicator
+.step-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 8px 0;
+}
+
+.step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+
+  .step-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #d9d9d9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 13px;
+    color: #8c8c8c;
+    background: #fff;
+    transition: all 0.25s;
+  }
+
+  .step-label {
+    font-size: 11px;
+    color: #8c8c8c;
+    white-space: nowrap;
+    transition: color 0.25s;
+  }
+
+  &.active {
+    .step-dot {
+      border-color: #722ed1;
+      background: #722ed1;
+      color: #fff;
+    }
+
+    .step-label {
+      color: #722ed1;
+      font-weight: 600;
+    }
+  }
+}
+
+.step-line {
+  flex: 1;
+  height: 2px;
+  background: #d9d9d9;
+  margin: 0 8px;
+  margin-bottom: 20px;
+  transition: background 0.25s;
+
+  &.done {
+    background: #722ed1;
+  }
+}
+.code-block {
+  margin: 0 0 16px;
+  padding: 12px;
+  background: #f5f5f5;
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 1.7;
+  overflow-x: auto;
+
+  code {
+    font-family: 'SFMono-Regular', Consolas, monospace;
+  }
+}
+
+.empty-hint {
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #bfbfbf;
+  font-size: 13px;
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+}
+
+.compare-block {
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #d9d9d9;
+
+  &.good {
+    border-color: #52c41a;
+  }
+
+  &.bad {
+    border-color: #ff4d4f;
+  }
+
+  .compare-label {
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #595959;
+  }
+
+  &.good .compare-label { color: #52c41a; }
+  &.bad .compare-label  { color: #ff4d4f; }
+}
+
+// Step indicator
+.step-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 8px 0;
+}
+
+.step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+
+  .step-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #d9d9d9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 13px;
+    color: #8c8c8c;
+    background: #fff;
+    transition: all 0.25s;
+  }
+
+  .step-label {
+    font-size: 11px;
+    color: #8c8c8c;
+    white-space: nowrap;
+    transition: color 0.25s;
+  }
+
+  &.active {
+    .step-dot {
+      border-color: #722ed1;
+      background: #722ed1;
+      color: #fff;
+    }
+
+    .step-label {
+      color: #722ed1;
+      font-weight: 600;
+    }
+  }
+}
+
+.step-line {
+  flex: 1;
+  height: 2px;
+  background: #d9d9d9;
+  margin: 0 8px;
+  margin-bottom: 20px;
+  transition: background 0.25s;
+
+  &.done {
+    background: #722ed1;
+  }
+}

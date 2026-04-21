@@ -4,6 +4,7 @@ import { PageHeaderComponent, PageHeaderType } from '@shared/components/page-hea
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 
@@ -12,7 +13,7 @@ import { HeavyCard } from './heavy-card';
 @Component({
   selector: 'app-lazy-defer',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [PageHeaderComponent, HeavyCard, NzCardModule, NzGridModule, NzButtonModule, NzSpinModule],
+  imports: [PageHeaderComponent, HeavyCard, NzCardModule, NzGridModule, NzButtonModule, NzSpinModule, NzDividerModule],
   templateUrl: './lazy-defer.html',
   styleUrl: './lazy-defer.less'
 })

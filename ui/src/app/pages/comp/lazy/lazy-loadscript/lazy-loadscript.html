@@ -1,1 +1,139 @@
-<p>lazy-loadscript works!</p>
+<app-page-header [pageHeaderInfo]="pageHeaderInfo" />
+
+<div class="normal-table-wrap">
+  <!-- 说明卡片 -->
+  <nz-card class="p-24 m-b-20 b-r-8" [nzBodyStyle]="{ padding: 0 }">
+    <div class="left-start-center" style="gap: 12px">
+      <span class="sp-32">📦</span>
+      <div>
+        <h3 class="m-0">LazyService 懒加载脚本</h3>
+        <p class="sp-14 m-0">
+          按需动态插入 <code>&lt;script&gt;</code> 或 <code>&lt;link&gt;</code> 标签到 <code>&lt;head&gt;</code>，支持缓存去重，避免重复加载同一资源。
+          适合加载第三方库（地图、图表、代码高亮）、字体、主题样式等外部资源。
+        </p>
+      </div>
+    </div>
+  </nz-card>
+
+  <div nz-row [nzGutter]="[24, 24]">
+
+    <!-- Demo 1: loadScript -->
+    <div nz-col [nzXs]="24" [nzMd]="12" [nzXl]="8">
+      <nz-card nzTitle="loadScript()" [nzExtra]="scriptTagTpl">
+        <ng-template #scriptTagTpl>
+          <nz-tag [nzColor]="scriptStatus() === 'done' ? 'success' : scriptStatus() === 'cached' ? 'blue' : scriptStatus() === 'loading' ? 'processing' : 'default'">
+            {{ scriptStatus() === 'done' ? '已加载' : scriptStatus() === 'cached' ? '已缓存' : scriptStatus() === 'loading' ? '加载中' : '未加载' }}
+          </nz-tag>
+        </ng-template>
+
+        <div class="preview">
+          @if (scriptStatus() === 'idle') {
+            <div class="preview-hint">点击下方按钮加载 highlight.js</div>
+          } @else if (scriptStatus() === 'loading') {
+            <div class="preview-hint">正在从 CDN 下载…</div>
+          } @else {
+            <div class="highlight-result" [innerHTML]="highlightResult()"></div>
+          }
+        </div>
+
+        <nz-divider />
+
+        <pre class="code-block"><code>// 动态加载 CDN JS
+const url = 'https://cdnjs.cloudflare.com/.../highlight.min.js';
+const result = await lazyService.loadScript(url);
+
+// result.status: 'ok' | 'error' | 'loading'
+// 'loading' 表示已在缓存中，无需重复加载
+
+if (result.status === 'ok') &#123;
+  // 调用全局 API
+  window.hljs.highlight(code, &#123; language: 'ts' &#125;);
+&#125;</code></pre>
+
+        <button nz-button nzBlock nzType="primary" [nzLoading]="scriptStatus() === 'loading'" (click)="loadScript()">
+          {{ scriptStatus() === 'idle' ? '加载 highlight.js' : scriptStatus() === 'loading' ? '加载中' : '再次加载（命中缓存）' }}
+        </button>
+      </nz-card>
+    </div>
+
+    <!-- Demo 2: loadStyle -->
+    <div nz-col [nzXs]="24" [nzMd]="12" [nzXl]="8">
+      <nz-card nzTitle="loadStyle()" [nzExtra]="styleTagTpl">
+        <ng-template #styleTagTpl>
+          <nz-tag [nzColor]="styleStatus() === 'done' ? 'success' : styleStatus() === 'loading' ? 'processing' : 'default'">
+            {{ styleStatus() === 'done' ? '已加载' : styleStatus() === 'loading' ? '加载中' : '未加载' }}
+          </nz-tag>
+        </ng-template>
+
+        <div class="preview">
+          <div class="font-demo" [class.font-applied]="fontApplied()">
+            {{ fontApplied() ? 'Pacifico Font Loaded!' : 'Default System Font' }}
+          </div>
+        </div>
+
+        <nz-divider />
+
+        <pre class="code-block"><code>// 动态加载 Google Fonts
+const url = 'https://fonts.googleapis.com/css2?family=Pacifico';
+const result = await lazyService.loadStyle(url);
+
+// CSS 加载后立即生效，无需额外操作
+// 在模板中使用 font-family: 'Pacifico' 即可</code></pre>
+
+        <button nz-button nzBlock nzType="primary" [nzLoading]="styleStatus() === 'loading'" [disabled]="styleStatus() === 'done'" (click)="loadStyle()">
+          {{ styleStatus() === 'idle' ? '加载 Pacifico 字体' : styleStatus() === 'loading' ? '加载中' : '字体已应用' }}
+        </button>
+      </nz-card>
+    </div>
+
+    <!-- Demo 3: load 批量 -->
+    <div nz-col [nzXs]="24" [nzMd]="12" [nzXl]="8">
+      <nz-card nzTitle="load() 批量加载" [nzExtra]="batchTagTpl">
+        <ng-template #batchTagTpl>
+          <nz-tag [nzColor]="batchStatus() === 'done' ? 'success' : batchStatus() === 'loading' ? 'processing' : 'default'">
+            {{ batchStatus() === 'done' ? '已加载' : batchStatus() === 'loading' ? '加载中' : '未加载' }}
+          </nz-tag>
+        </ng-template>
+
+        <div class="preview">
+          @if (batchStatus() === 'idle') {
+            <div class="preview-hint">批量加载 JS + CSS</div>
+          } @else if (batchStatus() === 'loading') {
+            <div class="preview-hint">并行下载中…</div>
+          } @else {
+            <div class="batch-results">
+              @for (item of batchResults(); track item.path) {
+                <div class="result-item">
+                  <span class="result-icon">{{ item.status === 'ok' ? '✅' : item.status === 'loading' ? '🔄' : '❌' }}</span>
+                  <span class="result-path">{{ item.path }}</span>
+                  <nz-tag [nzColor]="item.status === 'ok' ? 'success' : item.status === 'loading' ? 'blue' : 'error'" class="sp-11">
+                    {{ item.status }}
+                  </nz-tag>
+                </div>
+              }
+            </div>
+          }
+        </div>
+
+        <nz-divider />
+
+        <pre class="code-block"><code>// 批量加载多个资源（JS + CSS）
+const resources = [
+  'https://.../highlight.min.js',
+  'https://.../github.min.css'
+];
+
+// Promise.all 语义，全部完成后返回
+const results = await lazyService.load(resources);
+
+// results: LazyResult[]
+// 每个 result 包含 path、status、error（可选）</code></pre>
+
+        <button nz-button nzBlock nzType="primary" [nzLoading]="batchStatus() === 'loading'" (click)="loadBatch()">
+          {{ batchStatus() === 'idle' ? '批量加载资源' : batchStatus() === 'loading' ? '加载中' : '再次加载（查看缓存）' }}
+        </button>
+      </nz-card>
+    </div>
+
+  </div>
+</div>

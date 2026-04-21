@@ -1,1 +1,198 @@
-<p>dynamic-comp works!</p>
+<app-page-header [pageHeaderInfo]="pageHeaderInfo" />
+
+<div class="normal-table-wrap">
+  <nz-tabs>
+    <!-- ── Tab 1: createComponent ── -->
+    <nz-tab nzTitle="createComponent()">
+      <div class="p-t-16 p-b-0" nz-row [nzGutter]="[24, 24]">
+        <!-- 说明卡片 -->
+        <div nz-col [nzXs]="24">
+          <nz-card>
+            <div class="left-start-center g-8">
+              <span class="sp-28">⚙️</span>
+              <div>
+                <h4 class="m-0">ViewContainerRef.createComponent()</h4>
+                <p class="sp-12 m-0" style="color: #8c8c8c">
+                  在运行时动态创建组件并插入 DOM，通过 <code>setInput()</code> 注入数据，通过 <code>instance.output.subscribe()</code> 监听事件，通过 <code>ref.destroy()</code> 销毁。
+                </p>
+              </div>
+            </div>
+          </nz-card>
+        </div>
+
+        <!-- 操作区 + 代码 -->
+        <div nz-col [nzMd]="12" [nzXs]="24">
+          <nz-card nzTitle="操作面板" [nzExtra]="countTpl">
+            <ng-template #countTpl>
+              <nz-tag nzColor="blue">已创建 {{ dynCards().length }} 个</nz-tag>
+            </ng-template>
+
+            <p style="color: #8c8c8c; font-size: 13px; margin-bottom: 16px">
+              每次点击「创建组件」，都会在下方容器中动态插入一个新的 <code>DynCard</code> 组件实例。点击卡片上的「销毁」按钮可单独移除。
+            </p>
+
+            <div class="flex g-8" style="flex-wrap: wrap">
+              <button nz-button nzType="primary" (click)="createCard()">＋ 创建组件</button>
+              <button nz-button nzDanger [disabled]="dynCards().length === 0" (click)="clearAll()">清空全部</button>
+            </div>
+
+            <nz-divider />
+
+            <pre class="code-block"><code>// 1. 获取宿主容器
+const vcr = viewChild&lt;ViewContainerRef&gt;('dynHost',
+  &#123; read: ViewContainerRef &#125;);
+
+// 2. 动态创建组件
+const ref = vcr().createComponent(DynCard);
+
+// 3. setInput() 注入数据（触发 ngOnChanges）
+ref.setInput('title', '动态卡片');
+ref.setInput('theme', 'blue');
+
+// 4. 订阅 output
+ref.instance.destroy.subscribe(() => ref.destroy());
+
+// 5. 销毁
+ref.destroy();</code></pre>
+          </nz-card>
+        </div>
+
+        <!-- 动态组件容器 -->
+        <div nz-col [nzMd]="12" [nzXs]="24">
+          <nz-card nzTitle="组件容器" [nzBodyStyle]="{ minHeight: '200px' }">
+            @if (dynCards().length === 0) {
+              <div class="empty-hint">点击「创建组件」在此处动态插入组件</div>
+            }
+            <!-- ViewContainerRef 宿主锚点 -->
+            <ng-container #dynHost />
+          </nz-card>
+        </div>
+
+        <!-- setInput vs 直接赋值 对比说明 -->
+        <div nz-col [nzXs]="24">
+          <nz-card nzTitle="setInput() vs 直接赋值">
+            <div nz-row [nzGutter]="[16, 16]">
+              <div nz-col [nzMd]="12" [nzXs]="24">
+                <div class="compare-block good">
+                  <div class="compare-label">✅ setInput()（推荐）</div>
+                  <pre class="code-block m-0"><code>ref.setInput('title', value);
+// ✔ 触发 ngOnChanges
+// ✔ 触发 OnPush 变更检测
+// ✔ 与模板绑定行为一致</code></pre>
+                </div>
+              </div>
+              <div nz-col [nzMd]="12" [nzXs]="24">
+                <div class="compare-block bad">
+                  <div class="compare-label">❌ 直接赋值（不推荐）</div>
+                  <pre class="code-block m-0"><code>ref.instance.title = value;
+// ✘ 不触发 ngOnChanges
+// ✘ OnPush 组件不会更新
+// ✘ 绕过 Angular 输入机制</code></pre>
+                </div>
+              </div>
+            </div>
+          </nz-card>
+        </div>
+      </div>
+    </nz-tab>
+
+    <!-- ── Tab 2: CDK Portal ── -->
+    <nz-tab nzTitle="CDK Portal">
+      <div class="p-t-16 p-b-0" nz-row [nzGutter]="[24, 24]">
+        <!-- 说明卡片 -->
+        <div nz-col [nzXs]="24">
+          <nz-card>
+            <div class="left-start-center g-8">
+              <span class="sp-28">🌀</span>
+              <div>
+                <h4 class="m-0">ComponentPortal + CdkPortalOutlet</h4>
+                <p class="sp-12 m-0" style="color: #8c8c8c">
+                  CDK Portal 将组件包装为可传送的内容单元，通过 <code>[cdkPortalOutlet]</code> 渲染到任意位置。 <code>(attached)</code> 事件返回 <code>CdkPortalOutletAttachedRef</code>，可调用
+                  <code>setInput()</code> 并订阅 output。
+                </p>
+              </div>
+            </div>
+          </nz-card>
+        </div>
+
+        <!-- 步骤指示器 -->
+        <div nz-col [nzXs]="24">
+          <nz-card>
+            <div class="step-indicator">
+              @for (key of portalStepKeys; track key) {
+                <div class="step-item" [class.active]="currentStep() === key" (click)="goStep(key)">
+                  <div class="step-dot">{{ key }}</div>
+                  <div class="step-label">{{ portalSteps[key].title }}</div>
+                </div>
+                @if (key !== 'C') {
+                  <div class="step-line" [class.done]="currentStep() !== 'A' && (key === 'A' || (key === 'B' && currentStep() === 'C'))"></div>
+                }
+              }
+            </div>
+          </nz-card>
+        </div>
+
+        <!-- Portal Outlet + 代码 -->
+        <div nz-col [nzMd]="12" [nzXs]="24">
+          <nz-card nzTitle="Portal Outlet" [nzExtra]="stepTagTpl">
+            <ng-template #stepTagTpl>
+              <nz-tag nzColor="purple">步骤 {{ currentStep() }}</nz-tag>
+            </ng-template>
+            <!-- 传送点 -->
+            <ng-template [cdkPortalOutlet]="selectedPortal()" (attached)="initPortalCard($event)" />
+          </nz-card>
+        </div>
+
+        <!-- 代码说明 -->
+        <div nz-col [nzMd]="12" [nzXs]="24">
+          <nz-card nzTitle="核心代码">
+            <pre class="code-block"><code>// 1. 创建 Portal（包装组件）
+const portal = new ComponentPortal(PortalCard);
+this.selectedPortal.set(portal);
+
+// 2. 模板中声明 outlet
+&lt;ng-template
+  [cdkPortalOutlet]="selectedPortal()"
+  (attached)="onAttached($event)"
+/&gt;
+
+// 3. attached 回调中注入数据
+onAttached(ref: CdkPortalOutletAttachedRef) &#123;
+  if (!(ref instanceof ComponentRef)) return;
+  ref.setInput('title', '步骤内容');
+  ref.instance.next.subscribe(() => &#123;
+    ref.destroy();       // 卸载当前
+    this.goNext();       // 切换到下一步
+  &#125;);
+&#125;</code></pre>
+
+            <nz-divider nzText="Portal vs createComponent" />
+
+            <div nz-row [nzGutter]="[12, 12]">
+              <div nz-col [nzXs]="24">
+                <div class="compare-block good">
+                  <div class="compare-label">Portal 适合</div>
+                  <ul class="m-0 p-l-16 sp-12" style="color: #595959">
+                    <li>需要将内容渲染到任意 DOM 位置（如 overlay）</li>
+                    <li>内容与宿主模板解耦</li>
+                    <li>配合 Dialog / Drawer 等场景</li>
+                  </ul>
+                </div>
+              </div>
+              <div nz-col [nzXs]="24">
+                <div class="compare-block" style="border-color: #1890ff">
+                  <div class="compare-label" style="color: #1890ff">createComponent 适合</div>
+                  <ul class="m-0 p-l-16 sp-12" style="color: #595959">
+                    <li>在固定容器内动态增删组件</li>
+                    <li>需要精确控制组件生命周期</li>
+                    <li>列表式动态渲染（如广告位轮播）</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </nz-card>
+        </div>
+      </div>
+    </nz-tab>
+  </nz-tabs>
+</div>

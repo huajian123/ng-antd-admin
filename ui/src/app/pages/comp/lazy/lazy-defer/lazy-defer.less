@@ -1,10 +1,7 @@
 .demo-card {
-  border-radius: 8px;
   border: 1px solid #f0f0f0;
   overflow: hidden;
   height: 100%;
-  display: flex;
-  flex-direction: column;
 }
 
 .demo-header {
@@ -25,7 +22,20 @@
 
 .demo-body {
   padding: 16px 20px;
-  flex: 1;
+}
+
+.code-block {
+  margin: 0;
+  padding: 12px;
+  background: #f5f5f5;
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 1.7;
+  overflow-x: auto;
+
+  code {
+    font-family: 'SFMono-Regular', Consolas, monospace;
+  }
 }
 
 .demo-placeholder {
@@ -38,13 +48,6 @@
   color: #bfbfbf;
   font-size: 13px;
   background: #fafafa;
-}
-
-.demo-loading {
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .hover-zone {
@@ -62,10 +65,8 @@
   display: inline-block;
   padding: 2px 8px;
   border-radius: 4px;
-  font-size: 11px;
   font-weight: 600;
   font-family: monospace;
-  margin-bottom: 4px;
 
   &.idle       { background: #f9f0ff; color: #722ed1; }
   &.viewport   { background: #e6fffb; color: #13c2c2; }
