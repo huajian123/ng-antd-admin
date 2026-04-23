@@ -1,0 +1,1 @@
+import{Bb as t,Hb as r,ra as i}from"./chunk-42PKMRMR.js";var n=class e{viewContainerRef=i(t);static \u0275fac=function(a){return new(a||e)};static \u0275dir=r({type:e,selectors:[["","appAd",""]]})};export{n as a};
