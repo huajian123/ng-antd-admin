@@ -1,0 +1,91 @@
+<app-page-header [pageHeaderInfo]="pageHeaderInfo" />
+<div class="normal-table-wrap">
+  <div nz-row [nzGutter]="[24, 24]">
+    <!-- Card 1: signal() -->
+    <div nz-col [nzMd]="12" [nzXl]="8" [nzXs]="24">
+      <nz-card nzTitle="signal() — 读写更新" [nzExtra]="tag1">
+        <ng-template #tag1><nz-tag nzColor="blue">signal()</nz-tag></ng-template>
+        <div class="demo-value">{{ count() }}</div>
+        <div class="btn-row">
+          <button nz-button (click)="decrement()">－</button>
+          <button nz-button nzType="primary" (click)="increment()">＋</button>
+          <button nz-button nzDanger (click)="reset()">重置</button>
+        </div>
+        <nz-divider />
+        <pre class="code-block"><code>count = signal(0);
+count.update(v => v + 1); // update
+count.set(0);             // set
+count()                   // read</code></pre>
+      </nz-card>
+    </div>
+
+    <!-- Card 2: computed() -->
+    <div nz-col [nzMd]="12" [nzXl]="8" [nzXs]="24">
+      <nz-card nzTitle="computed() — 派生计算" [nzExtra]="tag2">
+        <ng-template #tag2><nz-tag nzColor="green">computed()</nz-tag></ng-template>
+        <div class="input-row">
+          <nz-input-number [nzMax]="99" [nzMin]="-99" [(ngModel)]="numA" />
+          <span class="op">＋</span>
+          <nz-input-number [nzMax]="99" [nzMin]="-99" [(ngModel)]="numB" />
+        </div>
+        <nz-descriptions nzBordered nzSize="small" [nzColumn]="1">
+          <nz-descriptions-item nzTitle="sum()">{{ sum() }}</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="product()">{{ product() }}</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="isEven()">
+            <nz-tag [nzColor]="isEven() ? 'success' : 'warning'">{{ isEven() ? '偶数' : '奇数' }}</nz-tag>
+          </nz-descriptions-item>
+        </nz-descriptions>
+        <nz-divider />
+        <pre class="code-block"><code>sum = computed(() => numA() + numB());
+// 仅当 numA 或 numB 变化时重新计算</code></pre>
+      </nz-card>
+    </div>
+
+    <!-- Card 3: effect() -->
+    <div nz-col [nzMd]="12" [nzXl]="8" [nzXs]="24">
+      <nz-card nzTitle="effect() — 副作用" [nzExtra]="tag3">
+        <ng-template #tag3><nz-tag nzColor="purple">effect()</nz-tag></ng-template>
+        <div class="color-preview" [style.background]="effectColor()"></div>
+        <input class="m-b-8" type="color" nz-input [(ngModel)]="effectColor" />
+        <div class="log-panel">
+          @for (line of effectLog(); track line) {
+            <div class="log-line">{{ line }}</div>
+          }
+          @if (effectLog().length === 0) {
+            <div class="log-empty">改变颜色以触发 effect</div>
+          }
+        </div>
+        <button class="m-t-5" nz-button nzSize="small" (click)="clearLog()">清空日志</button>
+        <nz-divider />
+        <pre class="code-block"><code>private colorEffect = effect(() => {{ '{' }}
+          const color = this.effectColor(); // 自动追踪
+  log.update(l => [color, ...l]);
+          {{ '}' }});</code></pre>
+      </nz-card>
+    </div>
+
+    <!-- Card 4: equal option -->
+    <div nz-col [nzMd]="12" [nzXl]="8" [nzXs]="24">
+      <nz-card nzTitle="signal equal — 自定义相等" [nzExtra]="tag4">
+        <ng-template #tag4><nz-tag nzColor="orange">equal option</nz-tag></ng-template>
+        <nz-descriptions nzBordered nzSize="small" [nzColumn]="1">
+          <nz-descriptions-item nzTitle="name">{{ profile().name }}</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="age">{{ profile().age }}</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="实际触发次数">
+            <nz-tag nzColor="blue">{{ updateCount() }}</nz-tag>
+          </nz-descriptions-item>
+        </nz-descriptions>
+        <div class="btn-row m-t-10">
+          <button nz-button (click)="setProfileSame()">设置相同值（不触发）</button>
+          <button nz-button nzType="primary" (click)="setProfileDiff()">age+1（触发）</button>
+        </div>
+        <nz-divider />
+        <pre class="code-block"><code>profile = signal(obj, {{ '{' }}
+          equal: (a, b) => a.name === b.name
+                && a.age === b.age
+          {{ '}' }});
+// 设置相同值 → 不触发更新</code></pre>
+      </nz-card>
+    </div>
+  </div>
+</div>

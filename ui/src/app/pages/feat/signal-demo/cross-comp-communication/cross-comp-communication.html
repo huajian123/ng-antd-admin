@@ -1,0 +1,106 @@
+<app-page-header [pageHeaderInfo]="pageHeaderInfo" />
+<div class="normal-table-wrap">
+  <div nz-row [nzGutter]="[24, 24]">
+    <!-- Card 1: input() 父→子 -->
+    <div nz-col [nzMd]="12" [nzXs]="24">
+      <nz-card nzTitle="input() — 父组件传值给子组件" [nzExtra]="tag1">
+        <ng-template #tag1><nz-tag nzColor="blue">input()</nz-tag></ng-template>
+        <p class="hint">父组件修改 signal，子组件通过 input() 接收，computed() 自动派生大写值。</p>
+        <input nz-input placeholder="输入内容..." [value]="parentText()" (input)="onParentTextInput($event)" />
+        <div class="child-box m-t-10">
+          <p class="child-label">子组件 &lt;app-child-display&gt;：</p>
+          <app-child-display [value]="parentText()" />
+        </div>
+        <nz-divider />
+        <pre class="code-block"><code>// 父组件
+readonly parentText = signal('Hello');
+
+// 子组件
+readonly value = input.required&lt;string&gt;();
+readonly upperValue = computed(() => this.value().toUpperCase());</code></pre>
+      </nz-card>
+    </div>
+
+    <!-- Card 2: output() 子→父 -->
+    <div nz-col [nzMd]="12" [nzXs]="24">
+      <nz-card nzTitle="output() — 子组件事件传给父组件" [nzExtra]="tag2">
+        <ng-template #tag2><nz-tag nzColor="green">output()</nz-tag></ng-template>
+        <p class="hint">子组件点击按钮触发 output()，父组件接收事件更新自身 signal。</p>
+        <div class="child-box">
+          <p class="child-label">子组件 &lt;app-child-counter&gt;（仅计数部分）：</p>
+          <app-child-counter (countChange)="onCountChange($event)" />
+        </div>
+        <div class="result-row m-t-10">
+          <span class="label">父组件接收到的计数：</span>
+          <nz-tag class="sp-16" nzColor="blue">{{ receivedCount() }}</nz-tag>
+        </div>
+        <nz-divider />
+        <pre class="code-block"><code>// 子组件
+readonly countChange = output&lt;number&gt;();
+increment(): void {{ '{' }}
+          this.count.update(v => v + 1);
+  this.countChange.emit(this.count());
+          {{ '}' }}
+
+          // 父组件模板
+&lt;app-child-counter (countChange)="onCountChange($event)" /&gt;</code></pre>
+      </nz-card>
+    </div>
+
+    <!-- Card 3: model() 双向绑定 -->
+    <div nz-col [nzMd]="12" [nzXs]="24">
+      <nz-card nzTitle="model() — 双向绑定" [nzExtra]="tag3">
+        <ng-template #tag3><nz-tag nzColor="purple">model()</nz-tag></ng-template>
+        <p class="hint">model() 是 input + output 的语法糖，支持 [(xxx)] 双向绑定语法。</p>
+        <div class="result-row">
+          <span class="label">父组件状态：</span>
+          <nz-tag [nzColor]="parentChecked() ? 'success' : 'default'">
+            {{ parentChecked() ? '开启' : '关闭' }}
+          </nz-tag>
+        </div>
+        <div class="child-box m-t-10">
+          <p class="child-label">子组件（开关在子组件内）：</p>
+          <app-child-counter [(checked)]="parentChecked" />
+        </div>
+        <nz-divider />
+        <pre class="code-block"><code>// 子组件
+readonly checked = model(false);
+
+// 父组件模板
+&lt;app-child [(checked)]="parentChecked" /&gt;
+// 等价于：
+// [checked]="parentChecked()"
+// (checkedChange)="parentChecked.set($event)"</code></pre>
+      </nz-card>
+    </div>
+
+    <!-- Card 4: 服务级 Signal 共享 -->
+    <div nz-col [nzMd]="12" [nzXs]="24">
+      <nz-card nzTitle="服务级 Signal — 兄弟组件通信" [nzExtra]="tag4">
+        <ng-template #tag4><nz-tag nzColor="orange">Service Signal</nz-tag></ng-template>
+        <p class="hint">两个子组件注入同一个 Service，通过 Service 的 signal 实现兄弟通信，无需父组件中转。</p>
+        <div class="sibling-row">
+          <div class="sibling-box">
+            <p class="child-label">兄组件（写入）：</p>
+            <input nz-input placeholder="修改共享值..." [value]="$sharedValue()" (input)="onSharedInput($event)" />
+          </div>
+          <div class="sibling-arrow">→</div>
+          <div class="sibling-box">
+            <p class="child-label">弟组件（读取）：</p>
+            <nz-tag class="sp-14" nzColor="cyan">{{ $sharedValue() }}</nz-tag>
+          </div>
+        </div>
+        <nz-divider />
+        <pre class="code-block"><code>&#64;Injectable({{ '{' }} providedIn: 'root' {{ '}' }})
+export class SharedSignalService {{ '{' }}
+          readonly $sharedValue = signal('初始值');
+          {{ '}' }}
+
+          // 兄弟组件各自 inject 同一个 Service
+private svc = inject(SharedSignalService);
+// 读取：svc.$sharedValue()
+// 写入：svc.$sharedValue.set(x)</code></pre>
+      </nz-card>
+    </div>
+  </div>
+</div>

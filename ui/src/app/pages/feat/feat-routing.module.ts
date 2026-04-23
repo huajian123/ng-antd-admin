@@ -42,28 +42,5 @@ export default [
   { path: 'water-mark', title: '水印', data: { key: 'water-mark' }, loadComponent: () => import('./water-mark/water-mark.component').then(m => m.WaterMarkDemoComponent) },
   { path: 'keep-alive', title: 'KeepAlive', data: { key: 'keep-alive' }, loadComponent: () => import('./keep-alive/keep-alive').then(m => m.KeepAliveDemo) },
   { path: 'transitions', loadChildren: () => import('./transitions/transitions-routing') },
-  {
-    path: 'feat1',
-    title: '新功能1',
-    data: { key: 'feat1' },
-    loadComponent: () => import('../../pages/no-content/no-content.component').then(m => m.NoContentComponent)
-  },
-  {
-    path: 'feat3',
-    title: '新功能3',
-    data: { key: 'feat3' },
-    loadComponent: () => import('../../pages/no-content/no-content.component').then(m => m.NoContentComponent)
-  },
-  {
-    path: 'feat4',
-    title: '新功能4',
-    data: { key: 'feat4' },
-    loadComponent: () => import('../../pages/no-content/no-content.component').then(m => m.NoContentComponent)
-  },
-  {
-    path: 'feat5',
-    title: '新功能5',
-    data: { key: 'feat5' },
-    loadComponent: () => import('../../pages/no-content/no-content.component').then(m => m.NoContentComponent)
-  }
+  { path: 'signal-demo', loadChildren: () => import('./signal-demo/signal-demo-routing') }
 ] satisfies Route[];

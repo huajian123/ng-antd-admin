@@ -1,0 +1,100 @@
+<app-page-header [pageHeaderInfo]="pageHeaderInfo" />
+<div class="normal-table-wrap">
+  <div nz-row [nzGutter]="[24, 24]">
+    <!-- Card 1: toSignal from Subject -->
+    <div nz-col [nzMd]="12" [nzXs]="24">
+      <nz-card nzTitle="toSignal() — 从 Subject 转换" [nzExtra]="tag1">
+        <ng-template #tag1><nz-tag nzColor="blue">toSignal()</nz-tag></ng-template>
+        <p class="hint">输入内容，300ms 防抖后更新 Signal。镜像本项目 icon-sel.component.ts 的真实用法。</p>
+        <input nz-input placeholder="输入搜索内容..." (input)="onSearchInput($event)" />
+        <div class="result-row m-t-10">
+          <span class="label">防抖后的值：</span>
+          <nz-tag nzColor="green">{{ debouncedSearch() || '（空）' }}</nz-tag>
+        </div>
+        <nz-divider />
+        <pre class="code-block"><code>private readonly search$ = new Subject&lt;string&gt;();
+readonly debouncedSearch = toSignal(
+  this.search$.pipe(debounceTime(300), distinctUntilChanged()),
+          {{ '{' }} initialValue: '' {{ '}' }}
+          );</code></pre>
+      </nz-card>
+    </div>
+
+    <!-- Card 2: toSignal from interval -->
+    <div nz-col [nzMd]="12" [nzXs]="24">
+      <nz-card nzTitle="toSignal() — 从 interval() 转换" [nzExtra]="tag2">
+        <ng-template #tag2><nz-tag nzColor="purple">toSignal()</nz-tag></ng-template>
+        <p class="hint">将 interval Observable 转为 Signal，配合 computed() 格式化显示。无需手动订阅/取消订阅。</p>
+        <div class="timer-display">{{ tickFormatted() }}</div>
+        <nz-descriptions class="m-t-10" nzBordered nzSize="small" [nzColumn]="1">
+          <nz-descriptions-item nzTitle="tick()（原始值）">{{ tick() }}</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="tickFormatted()（computed）">{{ tickFormatted() }}</nz-descriptions-item>
+        </nz-descriptions>
+        <nz-divider />
+        <pre class="code-block"><code>readonly tick = toSignal(
+  interval(1000).pipe(map(n => n + 1)),
+          {{ '{' }} initialValue: 0 {{ '}' }}
+          );
+readonly tickFormatted = computed(() => {{ '{' }}
+          const t = this.tick();
+  return `${{ '{' }}Math.floor(t/60){{ '}' }}:${{ '{' }}t%60{{ '}' }}`;
+          {{ '}' }});</code></pre>
+      </nz-card>
+    </div>
+
+    <!-- Card 3: toObservable from signal -->
+    <div nz-col [nzMd]="12" [nzXs]="24">
+      <nz-card nzTitle="toObservable() — Signal 转 Observable" [nzExtra]="tag3">
+        <ng-template #tag3><nz-tag nzColor="orange">toObservable()</nz-tag></ng-template>
+        <p class="hint">Signal → Observable，再经过 RxJS 管道处理，最后用 toSignal() 转回 Signal 消费。</p>
+        <input nz-input placeholder="过滤水果..." (input)="onFilterInput($event)" />
+        <div class="tag-list m-t-10">
+          @for (fruit of filteredFruits(); track fruit) {
+            <nz-tag nzColor="cyan">{{ fruit }}</nz-tag>
+          }
+          @if (filteredFruits().length === 0) {
+            <span class="empty-text">无匹配结果</span>
+          }
+        </div>
+        <nz-divider />
+        <pre class="code-block"><code>readonly filterText = signal('');
+readonly filteredFruits = toSignal(
+  toObservable(this.filterText).pipe(
+    debounceTime(200),
+    distinctUntilChanged(),
+    map(text => list.filter(f => f.includes(text)))
+  ),
+          {{ '{' }} initialValue: list {{ '}' }}
+          );</code></pre>
+      </nz-card>
+    </div>
+
+    <!-- Card 4: takeUntilDestroyed -->
+    <div nz-col [nzMd]="12" [nzXs]="24">
+      <nz-card nzTitle="takeUntilDestroyed — 自动取消订阅" [nzExtra]="tag4">
+        <ng-template #tag4><nz-tag nzColor="red">takeUntilDestroyed</nz-tag></ng-template>
+        <p class="hint">每 2 秒产生一个事件，组件销毁时自动取消订阅，无需手动 unsubscribe()。</p>
+        <div class="log-panel">
+          @for (line of subLog(); track line) {
+            <div class="log-line">{{ line }}</div>
+          }
+          @if (subLog().length === 0) {
+            <div class="log-empty">等待事件...</div>
+          }
+        </div>
+        <button class="m-t-5" nz-button nzSize="small" (click)="clearSubLog()">清空</button>
+        <nz-divider />
+        <pre class="code-block"><code>private destroyRef = inject(DestroyRef);
+
+// ✅ 推荐：组件销毁时自动取消
+someObs$.pipe(
+  takeUntilDestroyed(this.destroyRef)
+).subscribe(...);
+
+// ❌ 旧写法：需手动管理
+private sub = someObs$.subscribe(...);
+ngOnDestroy() {{ '{' }} this.sub.unsubscribe(); {{ '}' }}</code></pre>
+      </nz-card>
+    </div>
+  </div>
+</div>

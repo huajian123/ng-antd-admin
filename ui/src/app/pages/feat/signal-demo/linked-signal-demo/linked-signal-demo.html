@@ -1,0 +1,105 @@
+<app-page-header [pageHeaderInfo]="pageHeaderInfo" />
+<div class="normal-table-wrap">
+  <div nz-row [nzGutter]="[24, 24]">
+    <!-- Card 1: basic linkedSignal -->
+    <div nz-col [nzMd]="12" [nzXs]="24">
+      <nz-card nzTitle="linkedSignal() 基础" [nzExtra]="tag1">
+        <ng-template #tag1><nz-tag nzColor="blue">linkedSignal()</nz-tag></ng-template>
+        <p class="hint">切换分类时，选中项自动重置为默认值；也可手动覆盖。</p>
+        <div class="field-row">
+          <span class="label">分类：</span>
+          <nz-select class="w-140" [(ngModel)]="selectedCategory">
+            @for (cat of categories; track cat.id) {
+              <nz-option [nzLabel]="cat.name" [nzValue]="cat" />
+            }
+          </nz-select>
+        </div>
+        <div class="field-row m-t-8">
+          <span class="label">选中项：</span>
+          <nz-tag nzColor="green">{{ selectedItem() }}</nz-tag>
+          <button nz-button nzSize="small" (click)="overrideItem()">手动覆盖</button>
+        </div>
+        <nz-divider />
+        <pre class="code-block"><code>selectedCategory = signal(categories[0]);
+selectedItem = linkedSignal(
+  () => selectedCategory().defaultItem
+);
+// 切换 selectedCategory → selectedItem 自动重置
+// selectedItem.set('x') → 手动覆盖，直到下次 source 变化</code></pre>
+      </nz-card>
+    </div>
+
+    <!-- Card 2: computation function -->
+    <div nz-col [nzMd]="12" [nzXs]="24">
+      <nz-card nzTitle="linkedSignal 带 computation" [nzExtra]="tag2">
+        <ng-template #tag2><nz-tag nzColor="purple">computation fn</nz-tag></ng-template>
+        <p class="hint">切换列表时，索引自动重置为 0；也可手动修改索引。</p>
+        <div class="field-row">
+          <span class="label">列表：</span>
+          <nz-select [(ngModel)]="currentListKey">
+            <nz-option nzLabel="水果" nzValue="fruits" />
+            <nz-option nzLabel="蔬菜" nzValue="vegs" />
+            <nz-option nzLabel="饮料" nzValue="drinks" />
+          </nz-select>
+        </div>
+        <div class="field-row m-t-8">
+          <span class="label">索引：</span>
+          <nz-input-number [nzMax]="currentList().length - 1" [nzMin]="0" [(ngModel)]="selectedIndex" />
+          <nz-tag class="m-l-8" nzColor="blue">{{ selectedListItem }}</nz-tag>
+        </div>
+        <nz-divider />
+        <pre class="code-block"><code>selectedIndex = linkedSignal&lt;number&gt;({{ '{' }}
+          source: currentList,
+  computation: () => 0  // 列表变化时重置为 0
+          {{ '}' }});</code></pre>
+      </nz-card>
+    </div>
+
+    <!-- Card 3: computed vs linkedSignal -->
+    <div nz-col [nzMd]="12" [nzXs]="24">
+      <nz-card nzTitle="computed vs linkedSignal" [nzExtra]="tag3">
+        <ng-template #tag3><nz-tag nzColor="orange">对比</nz-tag></ng-template>
+        <p class="hint">核心区别：computed 只读，linkedSignal 可写但 source 变化时自动同步。</p>
+        <nz-descriptions nzBordered nzSize="small" [nzColumn]="1">
+          <nz-descriptions-item nzTitle="baseValue()">{{ baseValue() }}</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="computedDouble()（只读）">{{ computedDouble() }}</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="linkedDouble()（可写）">{{ linkedDouble() }}</nz-descriptions-item>
+        </nz-descriptions>
+        <div class="btn-row m-t-10">
+          <button nz-button (click)="overrideLinked()">覆盖 linkedDouble = 999</button>
+          <button nz-button nzType="primary" (click)="resetBase()">baseValue+1（重置 linked）</button>
+        </div>
+        <nz-divider />
+        <pre class="code-block"><code>computedDouble = computed(() => baseValue() * 2);
+// ❌ computedDouble.set(x) — 编译错误，只读
+
+linkedDouble = linkedSignal(() => baseValue() * 2);
+// ✅ linkedDouble.set(999) — 可写
+// ✅ baseValue 变化时自动重新同步</code></pre>
+      </nz-card>
+    </div>
+
+    <!-- Card 4: table config pattern -->
+    <div nz-col [nzMd]="12" [nzXs]="24">
+      <nz-card nzTitle="实战：表格配置同步" [nzExtra]="tag4">
+        <ng-template #tag4><nz-tag nzColor="cyan">实战模式</nz-tag></ng-template>
+        <p class="hint">本项目 ant-table.component.ts 中的真实用法：父组件传入 tableConfig，子组件用 linkedSignal 做本地副本，可本地修改而不影响父组件。</p>
+        <nz-descriptions nzBordered nzSize="small" [nzColumn]="1">
+          <nz-descriptions-item nzTitle="parentConfig.pageIndex">{{ parentConfig().pageIndex }}</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="localConfig.pageIndex">{{ localConfig().pageIndex }}</nz-descriptions-item>
+        </nz-descriptions>
+        <div class="btn-row m-t-10">
+          <button nz-button (click)="changeLocalPage()">本地翻页（不影响父）</button>
+          <button nz-button nzType="primary" (click)="resetFromParent()">父组件重置（同步到本地）</button>
+        </div>
+        <nz-divider />
+        <pre class="code-block"><code>// ant-table.component.ts 中的真实代码
+readonly tableConfig = input.required&lt;AntTableConfig&gt;();
+readonly _tableConfig = linkedSignal(() => this.tableConfig());
+
+// 本地修改（如拖拽列宽）不影响父组件
+this._tableConfig.update(c => ({{ '{' }} ...c, headers: [...] {{ '}' }}));</code></pre>
+      </nz-card>
+    </div>
+  </div>
+</div>

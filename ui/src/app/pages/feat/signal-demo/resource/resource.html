@@ -1,0 +1,138 @@
+<app-page-header [pageHeaderInfo]="pageHeaderInfo" />
+<div class="normal-table-wrap">
+  <div nz-row [nzGutter]="[24, 24]">
+    <!-- Card 1: resource() 基础 -->
+    <div nz-col [nzMd]="12" [nzXs]="24">
+      <nz-card nzTitle="resource() — 基础用法" [nzExtra]="tag1">
+        <ng-template #tag1><nz-tag nzColor="blue">resource()</nz-tag></ng-template>
+        <p class="hint">request signal 变化时自动重新加载，无需手动订阅。</p>
+        <div class="field-row">
+          <span class="label">用户 ID：</span>
+          <nz-select [(ngModel)]="userId">
+            <nz-option nzLabel="用户 1" [nzValue]="1" />
+            <nz-option nzLabel="用户 2" [nzValue]="2" />
+            <nz-option nzLabel="用户 3" [nzValue]="3" />
+          </nz-select>
+        </div>
+        <div class="resource-result m-t-10">
+          @if (userResource.isLoading()) {
+            <nz-spin nzSimple />
+          } @else if (userResource.error()) {
+            <nz-tag nzColor="error">错误：{{ userResource.error() }}</nz-tag>
+          } @else if (userResource.value()) {
+            <nz-descriptions nzBordered nzSize="small" [nzColumn]="1">
+              <nz-descriptions-item nzTitle="name">{{ userResource.value()!.name }}</nz-descriptions-item>
+              <nz-descriptions-item nzTitle="email">{{ userResource.value()!.email }}</nz-descriptions-item>
+              <nz-descriptions-item nzTitle="role">{{ userResource.value()!.role }}</nz-descriptions-item>
+            </nz-descriptions>
+          }
+        </div>
+        <nz-divider />
+        <pre class="code-block"><code>readonly userId = signal(1);
+readonly userResource = resource({{ '{' }}
+          params: () => this.userId(),
+  loader: ({{ '{' }} params: id {{ '}' }}) => fetchUser(id)
+          {{ '}' }});
+// userId 变化 → 自动重新加载</code></pre>
+      </nz-card>
+    </div>
+
+    <!-- Card 2: resource() 状态机 -->
+    <div nz-col [nzMd]="12" [nzXs]="24">
+      <nz-card nzTitle="resource() — 状态机" [nzExtra]="tag2">
+        <ng-template #tag2><nz-tag nzColor="purple">状态管理</nz-tag></ng-template>
+        <p class="hint">resource 有三种状态：loading / loaded / error，通过 isLoading()、value()、error() 读取。</p>
+        <div class="status-row">
+          <span class="label">当前状态：</span>
+          @if (userResource.isLoading()) {
+            <nz-tag nzColor="processing">loading</nz-tag>
+          } @else if (userResource.error()) {
+            <nz-tag nzColor="error">error</nz-tag>
+          } @else {
+            <nz-tag nzColor="success">loaded</nz-tag>
+          }
+        </div>
+        <div class="btn-row m-t-10">
+          <button nz-button nzType="primary" (click)="triggerSuccess()">触发成功加载</button>
+          <button nz-button nzDanger (click)="triggerError()">触发错误（ID=0）</button>
+        </div>
+        <nz-divider />
+        <pre class="code-block"><code>// 读取三种状态
+userResource.isLoading() // boolean
+userResource.value()     // T | undefined
+userResource.error()     // unknown
+
+// 状态流转
+// signal 变化 → loading → loaded/error</code></pre>
+      </nz-card>
+    </div>
+
+    <!-- Card 3: resource() 手动刷新 -->
+    <div nz-col [nzMd]="12" [nzXs]="24">
+      <nz-card nzTitle="resource() — 手动刷新" [nzExtra]="tag3">
+        <ng-template #tag3><nz-tag nzColor="orange">reload()</nz-tag></ng-template>
+        <p class="hint">调用 reload() 强制重新加载，即使 request signal 未变化。</p>
+        <div class="status-row">
+          <span class="label">上次刷新：</span>
+          <nz-tag nzColor="cyan">{{ lastLoadTime() }}</nz-tag>
+        </div>
+        <div class="status-row m-t-8">
+          <span class="label">加载状态：</span>
+          @if (userResource.isLoading()) {
+            <nz-tag nzColor="processing">加载中...</nz-tag>
+          } @else {
+            <nz-tag nzColor="success">已完成</nz-tag>
+          }
+        </div>
+        <button class="m-t-10" nz-button nzType="primary" [disabled]="userResource.isLoading()" (click)="reload()"> 手动刷新 </button>
+        <nz-divider />
+        <pre class="code-block"><code>// 手动触发重新加载
+userResource.reload();
+
+// 适用场景：
+// - 用户点击刷新按钮
+// - 轮询数据
+// - 操作完成后刷新列表</code></pre>
+      </nz-card>
+    </div>
+
+    <!-- Card 4: rxResource vs resource -->
+    <div nz-col [nzMd]="12" [nzXs]="24">
+      <nz-card nzTitle="rxResource() — Observable loader" [nzExtra]="tag4">
+        <ng-template #tag4><nz-tag nzColor="cyan">rxResource()</nz-tag></ng-template>
+        <p class="hint">rxResource() 与 resource() 用法相同，区别是 loader 返回 Observable 而非 Promise。</p>
+        <div class="field-row">
+          <span class="label">用户 ID：</span>
+          <nz-select [(ngModel)]="rxUserId">
+            <nz-option nzLabel="用户 1" [nzValue]="1" />
+            <nz-option nzLabel="用户 2" [nzValue]="2" />
+            <nz-option nzLabel="用户 3" [nzValue]="3" />
+          </nz-select>
+        </div>
+        <div class="resource-result m-t-10">
+          @if (rxUserResource.isLoading()) {
+            <nz-spin nzSimple />
+          } @else if (rxUserResource.value()) {
+            <nz-descriptions nzBordered nzSize="small" [nzColumn]="1">
+              <nz-descriptions-item nzTitle="name">{{ rxUserResource.value()!.name }}</nz-descriptions-item>
+              <nz-descriptions-item nzTitle="email">{{ rxUserResource.value()!.email }}</nz-descriptions-item>
+            </nz-descriptions>
+          }
+        </div>
+        <nz-divider />
+        <pre class="code-block"><code>// resource() — Promise loader
+readonly r1 = resource({{ '{' }}
+          params: () => this.id(),
+  loader: ({{ '{' }} params: id {{ '}' }}) => fetchUser(id)
+          {{ '}' }});
+
+// rxResource() — Observable loader
+readonly r2 = rxResource({{ '{' }}
+          params: () => this.id(),
+  loader: ({{ '{' }} params: id {{ '}' }}) =>
+    http.get&lt;User&gt;(`/api/user/${{ '{' }}id{{ '}' }}`)
+          {{ '}' }});</code></pre>
+      </nz-card>
+    </div>
+  </div>
+</div>

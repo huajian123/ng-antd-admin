@@ -1,0 +1,105 @@
+<app-page-header [pageHeaderInfo]="pageHeaderInfo" />
+<div class="normal-table-wrap">
+  <div nz-row [nzGutter]="[24, 24]">
+    <!-- 左侧：商品列表 -->
+    <div nz-col [nzLg]="14" [nzXs]="24">
+      <nz-card [nzTitle]="productTitle">
+        <ng-template #productTitle>
+          <span>商品列表</span>
+          <nz-tag class="m-l-8" nzColor="blue">resource() 加载</nz-tag>
+        </ng-template>
+        <input class="m-b-10" nz-input placeholder="搜索商品名称或分类..." (input)="onSearchInput($event)" />
+        @if (productsResource.isLoading()) {
+          <div class="loading-wrap">
+            <nz-spin nzSimple nzTip="加载商品中..." />
+          </div>
+        } @else {
+          <nz-list nzItemLayout="horizontal" [nzDataSource]="filteredProducts()" [nzRenderItem]="productItem">
+            <ng-template #productItem let-product>
+              <nz-list-item [nzActions]="[addAction]">
+                <ng-template #addAction>
+                  @if (quantityFor(product.id) > 0) {
+                    <div class="qty-ctrl">
+                      <button nz-button nzSize="small" (click)="updateQuantity(product.id, -1)">－</button>
+                      <span class="qty-num">{{ quantityFor(product.id) }}</span>
+                      <button nz-button nzSize="small" nzType="primary" (click)="updateQuantity(product.id, 1)">＋</button>
+                    </div>
+                  } @else {
+                    <button nz-button nzSize="small" nzType="primary" (click)="addToCart(product.id)">加入购物车</button>
+                  }
+                </ng-template>
+                <nz-list-item-meta [nzDescription]="productDesc" [nzTitle]="productName">
+                  <ng-template #productName>
+                    {{ product.name }}
+                    <nz-tag class="m-l-5" nzColor="cyan">{{ product.category }}</nz-tag>
+                  </ng-template>
+                  <ng-template #productDesc>
+                    <span class="price">¥{{ product.price.toLocaleString() }}</span>
+                    <span class="stock m-l-8">库存 {{ product.stock }}</span>
+                  </ng-template>
+                </nz-list-item-meta>
+              </nz-list-item>
+            </ng-template>
+          </nz-list>
+          @if (filteredProducts().length === 0) {
+            <nz-empty nzNotFoundContent="无匹配商品" />
+          }
+        }
+      </nz-card>
+    </div>
+
+    <!-- 右侧：购物车 -->
+    <div nz-col [nzLg]="10" [nzXs]="24">
+      <nz-card [nzTitle]="cartTitle">
+        <ng-template #cartTitle>
+          <span>购物车</span>
+          <nz-badge class="m-l-8" [nzCount]="cartCount()">
+            <nz-tag nzColor="orange">signal() + computed()</nz-tag>
+          </nz-badge>
+        </ng-template>
+
+        @if (isEmpty()) {
+          <nz-empty nzNotFoundContent="购物车为空" />
+        } @else {
+          <nz-list [nzDataSource]="cart()" [nzRenderItem]="cartItem">
+            <ng-template #cartItem let-item>
+              <nz-list-item [nzActions]="[removeAction]">
+                <ng-template #removeAction>
+                  <span class="remove-btn" (click)="removeFromCart(item.productId)">删除</span>
+                </ng-template>
+                <nz-list-item-meta [nzDescription]="cartItemDesc" [nzTitle]="cartItemName">
+                  <ng-template #cartItemName>{{ productFor(item.productId)?.name }}</ng-template>
+                  <ng-template #cartItemDesc>
+                    <div class="cart-item-ctrl">
+                      <button nz-button nzSize="small" (click)="updateQuantity(item.productId, -1)">－</button>
+                      <span class="qty-num">{{ item.quantity }}</span>
+                      <button nz-button nzSize="small" (click)="updateQuantity(item.productId, 1)">＋</button>
+                      <span class="item-subtotal m-l-8"> ¥{{ ((productFor(item.productId)?.price ?? 0) * item.quantity).toLocaleString() }} </span>
+                    </div>
+                  </ng-template>
+                </nz-list-item-meta>
+              </nz-list-item>
+            </ng-template>
+          </nz-list>
+
+          <nz-divider />
+          <div class="cart-footer">
+            <nz-statistic nzPrefix="¥" nzTitle="合计（computed）" [nzValue]="cartTotal()" />
+            <button nz-button nzDanger (click)="clearCart()">清空购物车</button>
+          </div>
+        }
+
+        <nz-divider />
+        <div class="signal-legend">
+          <p class="legend-title">本页面使用的 Signal 特性：</p>
+          <div class="legend-list">
+            <nz-tag nzColor="blue">resource()</nz-tag>
+            <nz-tag nzColor="green">signal()</nz-tag>
+            <nz-tag nzColor="purple">computed()</nz-tag>
+            <nz-tag nzColor="orange">toSignal()</nz-tag>
+          </div>
+        </div>
+      </nz-card>
+    </div>
+  </div>
+</div>

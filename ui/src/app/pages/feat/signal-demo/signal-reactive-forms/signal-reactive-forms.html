@@ -1,0 +1,132 @@
+<app-page-header [pageHeaderInfo]="pageHeaderInfo" />
+<div class="normal-table-wrap">
+  <div nz-row [nzGutter]="[24, 24]">
+    <!-- Card 1: FormControl 值同步到 Signal -->
+    <div nz-col [nzMd]="12" [nzXs]="24">
+      <nz-card nzTitle="FormControl → toSignal()" [nzExtra]="tag1">
+        <ng-template #tag1><nz-tag nzColor="blue">toSignal()</nz-tag></ng-template>
+        <p class="hint">用 toSignal() 将 FormControl.valueChanges 转为 Signal，再用 computed() 派生字符数。</p>
+        <nz-form-item>
+          <nz-form-label>姓名</nz-form-label>
+          <nz-form-control>
+            <input nz-input placeholder="输入姓名..." [formControl]="nameControl" />
+          </nz-form-control>
+        </nz-form-item>
+        <nz-descriptions nzBordered nzSize="small" [nzColumn]="1">
+          <nz-descriptions-item nzTitle="nameSignal()">{{ nameSignal() || '（空）' }}</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="nameLength()（computed）">
+            <nz-tag [nzColor]="nameLength() > 0 ? 'blue' : 'default'">{{ nameLength() }} 字符</nz-tag>
+          </nz-descriptions-item>
+          <nz-descriptions-item nzTitle="isNameValid()（computed）">
+            <nz-tag [nzColor]="isNameValid() ? 'success' : 'error'">{{ isNameValid() ? '有效' : '无效' }}</nz-tag>
+          </nz-descriptions-item>
+        </nz-descriptions>
+        <nz-divider />
+        <pre class="code-block"><code>readonly nameControl = new FormControl('', Validators.required);
+readonly nameSignal = toSignal(
+  this.nameControl.valueChanges,
+          {{ '{' }} initialValue: '' {{ '}' }}
+          );
+readonly nameLength = computed(() => (this.nameSignal() ?? '').length);</code></pre>
+      </nz-card>
+    </div>
+
+    <!-- Card 2: Signal 驱动表单验证状态 -->
+    <div nz-col [nzMd]="12" [nzXs]="24">
+      <nz-card nzTitle="Signal 驱动验证状态" [nzExtra]="tag2">
+        <ng-template #tag2><nz-tag nzColor="green">formStatus</nz-tag></ng-template>
+        <p class="hint">toSignal() 订阅 statusChanges，computed() 派生 isValid，驱动提交按钮的禁用状态。</p>
+        <form nz-form [formGroup]="form">
+          <nz-form-item>
+            <nz-form-label [nzRequired]="true">用户名</nz-form-label>
+            <nz-form-control nzErrorTip="至少 3 个字符">
+              <input formControlName="username" nz-input placeholder="至少 3 个字符" />
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-label [nzRequired]="true">邮箱</nz-form-label>
+            <nz-form-control nzErrorTip="请输入有效邮箱">
+              <input formControlName="email" nz-input placeholder="user@example.com" />
+            </nz-form-control>
+          </nz-form-item>
+          @if (showExtra()) {
+            <nz-form-item>
+              <nz-form-label [nzRequired]="true">附加字段</nz-form-label>
+              <nz-form-control nzErrorTip="必填">
+                <input formControlName="extra" nz-input placeholder="动态字段..." />
+              </nz-form-control>
+            </nz-form-item>
+          }
+        </form>
+        <div class="status-row">
+          <span class="label">表单状态：</span>
+          <nz-tag [nzColor]="isValid() ? 'success' : 'error'">{{ formStatus() }}</nz-tag>
+        </div>
+        <nz-divider />
+        <pre class="code-block"><code>readonly formStatus = toSignal(
+  this.form.statusChanges,
+          {{ '{' }} initialValue: 'INVALID' {{ '}' }}
+          );
+readonly isValid = computed(() => this.formStatus() === 'VALID');</code></pre>
+      </nz-card>
+    </div>
+
+    <!-- Card 3: Signal 控制动态表单字段 -->
+    <div nz-col [nzMd]="12" [nzXs]="24">
+      <nz-card nzTitle="Signal 控制动态字段" [nzExtra]="tag3">
+        <ng-template #tag3><nz-tag nzColor="purple">动态 FormControl</nz-tag></ng-template>
+        <p class="hint">Signal 控制是否显示附加字段，同时动态 addControl / removeControl。</p>
+        <div class="toggle-row">
+          <label nz-checkbox [(ngModel)]="showExtraModel"> 显示附加字段 </label>
+          <nz-tag [nzColor]="showExtra() ? 'processing' : 'default'">
+            {{ showExtra() ? '已添加 extra 控件' : '已移除 extra 控件' }}
+          </nz-tag>
+        </div>
+        <nz-descriptions class="m-t-10" nzBordered nzSize="small" [nzColumn]="1">
+          <nz-descriptions-item nzTitle="form.controls 数量">
+            <nz-tag nzColor="blue">{{ controlCount() }}</nz-tag>
+          </nz-descriptions-item>
+          <nz-descriptions-item nzTitle="showExtra()">{{ showExtra() }}</nz-descriptions-item>
+        </nz-descriptions>
+        <nz-divider />
+        <pre class="code-block"><code>readonly showExtra = signal(false);
+toggleExtra(): void {{ '{' }}
+          if (this.showExtra()) {{ '{' }}
+          this.form.removeControl('extra');
+          {{ '}' }} else {{ '{' }}
+          this.form.addControl('extra', new FormControl(''));
+          {{ '}' }}
+          this.showExtra.update(v => !v);
+          {{ '}' }}</code></pre>
+      </nz-card>
+    </div>
+
+    <!-- Card 4: 表单提交结果 -->
+    <div nz-col [nzMd]="12" [nzXs]="24">
+      <nz-card nzTitle="表单提交 → Signal 存储结果" [nzExtra]="tag4">
+        <ng-template #tag4><nz-tag nzColor="orange">submitResult</nz-tag></ng-template>
+        <p class="hint">提交后将表单值存入 Signal，用 nz-descriptions 展示。先在上方卡片填写有效表单再提交。</p>
+        <div class="btn-row">
+          <button nz-button nzType="primary" [disabled]="!isValid()" (click)="submit()">提交表单</button>
+          <button nz-button (click)="resetForm()">重置</button>
+        </div>
+        @if (submitResult()) {
+          <nz-descriptions class="m-t-10" nzBordered nzSize="small" [nzColumn]="1">
+            @for (entry of submitResult() | keyvalue; track entry.key) {
+              <nz-descriptions-item [nzTitle]="entry.key">{{ entry.value }}</nz-descriptions-item>
+            }
+          </nz-descriptions>
+        } @else {
+          <div class="empty-hint m-t-10">提交后结果显示在这里</div>
+        }
+        <nz-divider />
+        <pre class="code-block"><code>readonly submitResult = signal&lt;Record&lt;string, unknown&gt; | null&gt;(null);
+submit(): void {{ '{' }}
+          if (this.form.valid) {{ '{' }}
+          this.submitResult.set(this.form.value);
+          {{ '}' }}
+          {{ '}' }}</code></pre>
+      </nz-card>
+    </div>
+  </div>
+</div>

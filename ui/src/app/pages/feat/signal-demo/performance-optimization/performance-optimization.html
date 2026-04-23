@@ -1,0 +1,115 @@
+<app-page-header [pageHeaderInfo]="pageHeaderInfo" />
+<div class="normal-table-wrap">
+  <div nz-row [nzGutter]="[24, 24]">
+    <!-- Card 1: trackBy -->
+    <div nz-col [nzMd]="12" [nzXs]="24">
+      <nz-card nzTitle="trackBy — 优化列表渲染" [nzExtra]="tag1">
+        <ng-template #tag1><nz-tag nzColor="blue">trackBy</nz-tag></ng-template>
+        <p class="hint">使用 trackBy 后，打乱顺序时 Angular 只移动 DOM 节点而不重建，大幅减少渲染开销。</p>
+        <div class="btn-row m-b-10">
+          <button nz-button (click)="shuffleItems()">打乱顺序</button>
+          <button nz-button nzType="primary" (click)="addItem()">新增一项</button>
+        </div>
+        <div class="item-list">
+          @for (item of items(); track trackById($index, item)) {
+            <nz-tag nzColor="cyan">{{ item.name }}</nz-tag>
+          }
+        </div>
+        <nz-divider />
+        <pre class="code-block"><code>// ✅ 使用 trackBy：打乱时只移动 DOM
+          @for (item of items(); track trackById($index, item)) { ... }
+          trackById = (_: number, item: Item) => item.id;
+
+// ❌ 不用 trackBy：打乱时销毁重建所有 DOM
+          @for (item of items(); track $index) { ... }</code></pre>
+      </nz-card>
+    </div>
+
+    <!-- Card 2: computed() caching -->
+    <div nz-col [nzMd]="12" [nzXs]="24">
+      <nz-card nzTitle="computed() — 缓存避免重复计算" [nzExtra]="tag2">
+        <ng-template #tag2><nz-tag nzColor="green">computed 缓存</nz-tag></ng-template>
+        <p class="hint">computed() 有缓存：依赖未变化时，多次读取只计算一次。</p>
+        <nz-descriptions nzBordered nzSize="small" [nzColumn]="1">
+          <nz-descriptions-item nzTitle="列表长度">{{ bigList().length }}</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="expensiveSum()">{{ expensiveSum() }}</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="实际计算次数">
+            <nz-tag nzColor="orange">{{ actualComputeCount() }}</nz-tag>
+          </nz-descriptions-item>
+        </nz-descriptions>
+        <div class="btn-row m-t-10">
+          <button nz-button (click)="readSumTenTimes()">读取 10 次（验证缓存）</button>
+          <button nz-button nzType="primary" (click)="triggerRecompute()">新增元素（触发重算）</button>
+        </div>
+        <nz-divider />
+        <pre class="code-block"><code>readonly expensiveSum = computed(() => {{ '{' }}
+          return bigList().reduce((a, b) => a + b, 0);
+          {{ '}' }});
+
+// 读取 10 次 expensiveSum()
+// → 实际只计算 1 次（缓存命中）
+// 依赖 bigList 变化 → 才重新计算</code></pre>
+      </nz-card>
+    </div>
+
+    <!-- Card 3: OnPush + signal -->
+    <div nz-col [nzMd]="12" [nzXs]="24">
+      <nz-card nzTitle="OnPush + Signal — 自动变更检测" [nzExtra]="tag3">
+        <ng-template #tag3><nz-tag nzColor="purple">OnPush</nz-tag></ng-template>
+        <p class="hint">OnPush 组件中，Signal 变化自动触发视图更新；普通属性修改不触发。</p>
+        <nz-descriptions nzBordered nzSize="small" [nzColumn]="1">
+          <nz-descriptions-item nzTitle="signalValue()（Signal）">
+            <nz-tag nzColor="success">{{ signalValue() }}</nz-tag>
+          </nz-descriptions-item>
+          <nz-descriptions-item nzTitle="plainValue（普通属性）">
+            <nz-tag nzColor="default">{{ plainValue }}</nz-tag>
+          </nz-descriptions-item>
+        </nz-descriptions>
+        <div class="btn-row m-t-10">
+          <button nz-button nzType="primary" (click)="updateSignal()">更新 Signal（视图更新）</button>
+          <button nz-button (click)="updatePlain()">更新普通属性（视图不更新）</button>
+        </div>
+        <nz-divider />
+        <pre class="code-block"><code>// ✅ Signal 变化 → OnPush 自动更新
+readonly signalValue = signal('初始值');
+updateSignal(): void {{ '{' }} this.signalValue.set('新值'); {{ '}' }}
+
+          // ❌ 普通属性修改 → OnPush 不更新视图
+plainValue = '初始值';
+updatePlain(): void {{ '{' }} this.plainValue = '新值'; {{ '}' }}</code></pre>
+      </nz-card>
+    </div>
+
+    <!-- Card 4: untracked() -->
+    <div nz-col [nzMd]="12" [nzXs]="24">
+      <nz-card nzTitle="untracked() — 避免不必要的依赖" [nzExtra]="tag4">
+        <ng-template #tag4><nz-tag nzColor="orange">untracked()</nz-tag></ng-template>
+        <p class="hint">untracked() 读取 signal 但不建立依赖，b 变化时 withUntracked 不重算。</p>
+        <nz-descriptions nzBordered nzSize="small" [nzColumn]="1">
+          <nz-descriptions-item nzTitle="a()">{{ a() }}</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="b()">{{ b() }}</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="withTracking()（依赖 a+b）">{{ withTracking() }}</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="withUntracked()（仅依赖 a）">{{ withUntracked() }}</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="withTracking 计算次数">
+            <nz-tag nzColor="red">{{ trackingCallCount() }}</nz-tag>
+          </nz-descriptions-item>
+          <nz-descriptions-item nzTitle="withUntracked 计算次数">
+            <nz-tag nzColor="green">{{ untrackedCallCount() }}</nz-tag>
+          </nz-descriptions-item>
+        </nz-descriptions>
+        <div class="btn-row m-t-10">
+          <button nz-button (click)="incrementB()">b+1（withUntracked 不重算）</button>
+          <button nz-button nzType="primary" (click)="incrementA()">a+1（两者都重算）</button>
+        </div>
+        <nz-divider />
+        <pre class="code-block"><code>// 依赖 a 和 b，b 变化时重算
+readonly withTracking = computed(() => a() + b());
+
+// 只依赖 a，b 变化时不重算
+readonly withUntracked = computed(() =>
+  a() + untracked(() => b())
+);</code></pre>
+      </nz-card>
+    </div>
+  </div>
+</div>

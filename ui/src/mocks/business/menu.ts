@@ -35,9 +35,6 @@ let menus: Menu[] = [
   { id: 17, fatherId: 2, menuName: '图形编辑器', menuType: 'C', alIcon: 'icon-mel-help', icon: '', path: '/default/page-demo/flow', code: 'default:page-demo:flow', orderNum: 7, status: true, newLinkFlag: false, visible: true },
   { id: 18, fatherId: 2, menuName: '任务', menuType: 'C', alIcon: '', icon: 'border-bottom', path: '/default/page-demo/task', code: 'default:page-demo:task', orderNum: 8, status: true, newLinkFlag: false, visible: true },
   { id: 19, fatherId: 2, menuName: '新布局', menuType: 'C', alIcon: '', icon: 'caret-down', path: '/default/page-demo/page-demo1', code: 'default:page-demo:page-demo1', orderNum: 9, status: true, newLinkFlag: false, visible: true },
-  { id: 20, fatherId: 2, menuName: '新页面2', menuType: 'C', alIcon: '', icon: 'up', path: '/default/page-demo/page-demo2', code: 'default:page-demo:page-demo2', orderNum: 10, status: true, newLinkFlag: false, visible: true },
-  { id: 21, fatherId: 2, menuName: '新页面3', menuType: 'C', alIcon: '', icon: 'down', path: '/default/page-demo/page-demo3', code: 'default:page-demo:page-demo3', orderNum: 11, status: true, newLinkFlag: false, visible: true },
-  { id: 22, fatherId: 2, menuName: '新页面4', menuType: 'C', alIcon: '', icon: 'caret-down', path: '/default/page-demo/page-demo4', code: 'default:page-demo:page-demo4', orderNum: 12, status: true, newLinkFlag: false, visible: true },
   { id: 23, fatherId: 3, menuName: '消息提示', menuType: 'C', alIcon: '', icon: 'dashboard', path: '/default/feat/msg', code: 'default:feat:msg', orderNum: 1, status: true, newLinkFlag: false, visible: true },
   { id: 24, fatherId: 3, menuName: '图标', menuType: 'C', alIcon: '', icon: 'dashboard', path: '/default/feat/icons', code: 'default:feat:icons', orderNum: 2, status: true, newLinkFlag: false, visible: true },
   { id: 25, fatherId: 3, menuName: '右键菜单', menuType: 'C', alIcon: '', icon: 'dashboard', path: '/default/feat/context-menu', code: 'default:feat:context-menu', orderNum: 3, status: true, newLinkFlag: false, visible: true },
@@ -136,9 +133,18 @@ let menus: Menu[] = [
   { id: 118, fatherId: 52, menuName: 'defer演示', menuType: 'C', alIcon: '', icon: 'logout', path: '/default/comp/lazy/lazy-defer', code: 'default:comp:lazy:lazy-defer', orderNum: 3, status: true, newLinkFlag: false, visible: true },
   { id: 119, fatherId: 52, menuName: '懒加载script脚本', menuType: 'C', alIcon: '', icon: 'login', path: '/default/comp/lazy/lazy-loadscript', code: 'default:comp:lazy:lazy-loadscript', orderNum: 4, status: true, newLinkFlag: false, visible: true },
   { id: 120, fatherId: 52, menuName: '动态组件', menuType: 'C', alIcon: '', icon: 'up-circle', path: '/default/comp/lazy/dynamic-comp', code: 'default:comp:lazy:dynamic-comp', orderNum: 5, status: true, newLinkFlag: false, visible: true },
+  { id: 121, fatherId: 3, menuName: 'Signal演示', menuType: 'C', alIcon: '', icon: 'slack-square', path: '/default/feat/signal-demo', code: 'default:feat:signal-demo', orderNum: 28, status: true, newLinkFlag: false, visible: true },
+  { id: 122, fatherId: 121, menuName: '基础与进阶', menuType: 'C', alIcon: '', icon: 'rollback', path: '/default/feat/signal-demo/basic-advanced', code: 'default:feat:signal-demo:basic-advanced', orderNum: 1, status: true, newLinkFlag: false, visible: true },
+  { id: 123, fatherId: 121, menuName: 'linkedSignal演示', menuType: 'C', alIcon: '', icon: 'border-horizontal', path: '/default/feat/signal-demo/linked-signal-demo', code: 'default:feat:signal-demo:linked-signal-demo', orderNum: 2, status: true, newLinkFlag: false, visible: true },
+  { id: 124, fatherId: 121, menuName: '性能优化', menuType: 'C', alIcon: '', icon: 'alipay-circle', path: '/default/feat/signal-demo/performance-optimization', code: 'default:feat:signal-demo:performance-optimization', orderNum: 3, status: true, newLinkFlag: false, visible: true },
+  { id: 125, fatherId: 121, menuName: 'resource演示', menuType: 'C', alIcon: '', icon: 'play-circle', path: '/default/feat/signal-demo/resource', code: 'default:feat:signal-demo:resource', orderNum: 4, status: true, newLinkFlag: false, visible: true },
+  { id: 126, fatherId: 121, menuName: '跨组件通信', menuType: 'C', alIcon: '', icon: 'up-circle', path: '/default/feat/signal-demo/cross-comp-communication', code: 'default:feat:signal-demo:cross-comp-communication', orderNum: 5, status: true, newLinkFlag: false, visible: true },
+  { id: 127, fatherId: 121, menuName: '与Observable互转', menuType: 'C', alIcon: '', icon: 'border-inner', path: '/default/feat/signal-demo/change-to-observable', code: 'default:feat:signal-demo:change-to-observable', orderNum: 6, status: true, newLinkFlag: false, visible: true },
+  { id: 128, fatherId: 121, menuName: 'Signal&Reactive Forms', menuType: 'C', alIcon: '', icon: 'caret-left', path: '/default/feat/signal-demo/signal-reactive-forms', code: 'default:feat:signal-demo:signal-reactive-forms', orderNum: 7, status: true, newLinkFlag: false, visible: true },
+  { id: 129, fatherId: 121, menuName: '综合实战', menuType: 'C', alIcon: '', icon: 'instagram', path: '/default/feat/signal-demo/signal-comprehensive-practical', code: 'default:feat:signal-demo:signal-comprehensive-practical', orderNum: 8, status: true, newLinkFlag: false, visible: true },
 ];
 
-let nextId = 121;
+let nextId = 130;
 
 export const menu = [
   http.post('/site/api/auth/menu', () => {

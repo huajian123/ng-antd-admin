@@ -6,12 +6,12 @@
       <nz-card nzSize="default" style="border-radius: 10px">
         <nz-input-wrapper>
           <input id="newPassword" nz-input placeholder="新密码" [type]="passwordVisible ? 'text' : 'password'" [(ngModel)]="newPassword" />
-          <i nzInputSuffix nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
+          <i nz-icon nzInputSuffix [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
         </nz-input-wrapper>
         <password-strength-meter [password]="newPassword" />
         <nz-input-wrapper>
           <input id="disablePassword" nz-input placeholder="禁用" [disabled]="true" />
-          <i nzInputSuffix nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
+          <i nz-icon nzInputSuffix [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
         </nz-input-wrapper>
         <password-strength-meter [password]="'fasdfasd23423'" />
       </nz-card>
