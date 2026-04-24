@@ -7,11 +7,11 @@
   <ng-container *nzDrawerContent>
     @if (_themesOptions.mode !== 'mixin') {
       <div class="m-b-24">
-        <h3 class="title">整体风格设置</h3>
+        <h3 class="title">{{ 'settings.themeStyle' | translate }}</h3>
         <div class="block-checkbox">
           @for (theme of themes; track $index) {
-            <div class="item" nz-tooltip [nzTooltipTitle]="theme.title" (click)="changeTheme(theme)">
-              <img [alt]="theme.title" [src]="theme.image" />
+            <div class="item" nz-tooltip [nzTooltipTitle]="theme.title | translate" (click)="changeTheme(theme)">
+              <img [alt]="theme.title | translate" [src]="theme.image" />
               @if (theme.isChecked) {
                 <div class="select-icon">
                   <i nz-icon nzTheme="outline" nzType="check"></i>
@@ -25,10 +25,10 @@
 
     @if (_currentStyleTheme.default) {
       <div class="m-b-24 theme-color" [class.m-t-25]="_themesOptions.mode !== 'mixin'">
-        <h3 class="title">主题色</h3>
+        <h3 class="title">{{ 'settings.themeColor' | translate }}</h3>
         <div class="content">
           @for (color of colors; track $index) {
-            <div class="color-block" nz-tooltip [nzTooltipTitle]="color.title" [style.background]="color.color" (click)="changePrimaryColor(color)">
+            <div class="color-block" nz-tooltip [nzTooltipTitle]="color.title | translate" [style.background]="color.color" (click)="changePrimaryColor(color)">
               @if (color.isChecked) {
                 <i nz-icon nzTheme="outline" nzType="check"></i>
               }
@@ -42,11 +42,11 @@
     }
 
     <div class="m-b-24">
-      <h3 class="title">导航模式</h3>
+      <h3 class="title">{{ 'settings.navMode' | translate }}</h3>
       <div class="block-checkbox">
         @for (mode of modes; track $index) {
-          <div class="item" nz-tooltip [nzTooltipTitle]="mode.title" (click)="changeMode(mode)">
-            <img [alt]="mode.title" [src]="mode.image" />
+          <div class="item" nz-tooltip [nzTooltipTitle]="mode.title | translate" (click)="changeMode(mode)">
+              <img [alt]="mode.title | translate" [src]="mode.image" />
             @if (mode.isChecked) {
               <div class="select-icon">
                 <i nz-icon nzTheme="outline" nzType="check"></i>
@@ -57,27 +57,27 @@
       </div>
     </div>
     <nz-list [nzSplit]="false">
-      <nz-list-item [nzActions]="[fixedTabAction]">固定页签</nz-list-item>
+      <nz-list-item [nzActions]="[fixedTabAction]">{{ 'settings.fixedTab' | translate }}</nz-list-item>
       <ng-template #fixedTabAction>
         <nz-switch nzSize="small" [ngModel]="_themesOptions.fixedTab" [nzDisabled]="!_themesOptions.fixedHead" (ngModelChange)="changeThemeOptions($event, 'fixedTab')" />
       </ng-template>
     </nz-list>
     <nz-list [nzSplit]="false">
-      <nz-list-item [nzActions]="[fixedHeadAction]">固定头部</nz-list-item>
+      <nz-list-item [nzActions]="[fixedHeadAction]">{{ 'settings.fixedHead' | translate }}</nz-list-item>
       <ng-template #fixedHeadAction>
         <nz-switch nzSize="small" [ngModel]="_themesOptions.fixedHead" (ngModelChange)="changeThemeOptions($event, 'fixedHead')" />
       </ng-template>
     </nz-list>
 
     <nz-list [nzSplit]="false">
-      <nz-list-item [nzActions]="[fixedLeftNavAction]">固定侧边栏</nz-list-item>
+      <nz-list-item [nzActions]="[fixedLeftNavAction]">{{ 'settings.fixedLeftNav' | translate }}</nz-list-item>
       <ng-template #fixedLeftNavAction>
         <nz-switch nzSize="small" [ngModel]="_themesOptions.fixedLeftNav" (ngModelChange)="changeThemeOptions($event, 'fixedLeftNav')" />
       </ng-template>
     </nz-list>
 
     <nz-list [nzSplit]="false">
-      <nz-list-item [nzActions]="[isShowTabTpl]">多页签</nz-list-item>
+      <nz-list-item [nzActions]="[isShowTabTpl]">{{ 'settings.isShowTab' | translate }}</nz-list-item>
       <ng-template #isShowTabTpl>
         <nz-switch nzSize="small" [ngModel]="_themesOptions.isShowTab" (ngModelChange)="changeThemeOptions($event, 'isShowTab')" />
       </ng-template>
@@ -85,7 +85,7 @@
 
     @if (_themesOptions.mode === 'mixin') {
       <nz-list [nzSplit]="false">
-        <nz-list-item [nzActions]="[splitNavAction]">自动分割菜单</nz-list-item>
+        <nz-list-item [nzActions]="[splitNavAction]">{{ 'settings.splitNav' | translate }}</nz-list-item>
         <ng-template #splitNavAction>
           <nz-switch nzSize="small" [ngModel]="_themesOptions.splitNav" (ngModelChange)="changeThemeOptions($event, 'splitNav')" />
         </ng-template>
@@ -95,28 +95,28 @@
     <nz-divider />
 
     <div class="m-b-24">
-      <h3 class="title">内容区域</h3>
+      <h3 class="title">{{ 'settings.contentArea' | translate }}</h3>
       <nz-list [nzSplit]="false">
-        <nz-list-item [nzActions]="[topAreaAction]">顶栏</nz-list-item>
+        <nz-list-item [nzActions]="[topAreaAction]">{{ 'settings.hasTopArea' | translate }}</nz-list-item>
         <ng-template #topAreaAction>
           <nz-switch nzSize="small" [ngModel]="_themesOptions.hasTopArea" (ngModelChange)="changeThemeOptions($event, 'hasTopArea')" />
         </ng-template>
       </nz-list>
       <nz-list [nzSplit]="false">
-        <nz-list-item [nzActions]="[footerAreaAction]">页脚</nz-list-item>
+        <nz-list-item [nzActions]="[footerAreaAction]">{{ 'settings.hasFooterArea' | translate }}</nz-list-item>
         <ng-template #footerAreaAction>
           <nz-switch nzSize="small" [ngModel]="_themesOptions.hasFooterArea" (ngModelChange)="changeThemeOptions($event, 'hasFooterArea')" />
         </ng-template>
       </nz-list>
       <nz-list [nzSplit]="false">
-        <nz-list-item [nzActions]="[navAreaAction]">菜单</nz-list-item>
+        <nz-list-item [nzActions]="[navAreaAction]">{{ 'settings.hasNavArea' | translate }}</nz-list-item>
         <ng-template #navAreaAction>
           <nz-switch nzSize="small" [ngModel]="_themesOptions.hasNavArea" (ngModelChange)="changeThemeOptions($event, 'hasNavArea')" />
         </ng-template>
       </nz-list>
       @if (_themesOptions.mode !== 'mixin') {
         <nz-list [nzSplit]="false">
-          <nz-list-item [nzActions]="[navHeadAreaAction]">菜单头</nz-list-item>
+          <nz-list-item [nzActions]="[navHeadAreaAction]">{{ 'settings.hasNavHeadArea' | translate }}</nz-list-item>
           <ng-template #navHeadAreaAction>
             <nz-switch nzSize="small" [ngModel]="_themesOptions.hasNavHeadArea" (ngModelChange)="changeThemeOptions($event, 'hasNavHeadArea')" />
           </ng-template>
@@ -127,39 +127,39 @@
     <nz-divider />
 
     <div class="m-b-24">
-      <h3 class="title">其他设置</h3>
+      <h3 class="title">{{ 'settings.otherSettings' | translate }}</h3>
       <nz-list [nzSplit]="false">
-        <nz-list-item [nzActions]="[layoutDefaultAction]">默认模式</nz-list-item>
+        <nz-list-item [nzActions]="[layoutDefaultAction]">{{ 'settings.defaultMode' | translate }}</nz-list-item>
         <ng-template #layoutDefaultAction>
           <nz-switch nzSize="small" [ngModel]="_currentStyleTheme.default" [nzDisabled]="_currentStyleTheme.default" (ngModelChange)="changeStyleTheme('default')"></nz-switch>
         </ng-template>
       </nz-list>
       <nz-list [nzSplit]="false">
-        <nz-list-item [nzActions]="[layoutNightAction]">暗黑模式</nz-list-item>
+        <nz-list-item [nzActions]="[layoutNightAction]">{{ 'settings.darkMode' | translate }}</nz-list-item>
         <ng-template #layoutNightAction>
           <nz-switch nzSize="small" [ngModel]="_currentStyleTheme.dark" [nzDisabled]="_currentStyleTheme.dark" (ngModelChange)="changeStyleTheme('dark')"></nz-switch>
         </ng-template>
       </nz-list>
       <nz-list [nzSplit]="false">
-        <nz-list-item [nzActions]="[layoutAliyunAction]">阿里云模式</nz-list-item>
+        <nz-list-item [nzActions]="[layoutAliyunAction]">{{ 'settings.aliyunMode' | translate }}</nz-list-item>
         <ng-template #layoutAliyunAction>
           <nz-switch nzSize="small" [ngModel]="_currentStyleTheme.aliyun" [nzDisabled]="_currentStyleTheme.aliyun" (ngModelChange)="changeStyleTheme('aliyun')"></nz-switch>
         </ng-template>
       </nz-list>
       <nz-list [nzSplit]="false">
-        <nz-list-item [nzActions]="[layoutCompactAction]">紧凑模式</nz-list-item>
+        <nz-list-item [nzActions]="[layoutCompactAction]">{{ 'settings.compactMode' | translate }}</nz-list-item>
         <ng-template #layoutCompactAction>
           <nz-switch nzSize="small" [ngModel]="_currentStyleTheme.compact" [nzDisabled]="_currentStyleTheme.compact" (ngModelChange)="changeStyleTheme('compact')"></nz-switch>
         </ng-template>
       </nz-list>
       <nz-list [nzSplit]="false">
-        <nz-list-item [nzActions]="[otherAction]">色弱模式</nz-list-item>
+        <nz-list-item [nzActions]="[otherAction]">{{ 'settings.colorWeakMode' | translate }}</nz-list-item>
         <ng-template #otherAction>
           <nz-switch nzSize="small" [ngModel]="_themesOptions.colorWeak" (ngModelChange)="changeSpecialTheme($event, 'color-weak')" />
         </ng-template>
       </nz-list>
       <nz-list [nzSplit]="false">
-        <nz-list-item [nzActions]="[greyAction]">灰色模式</nz-list-item>
+        <nz-list-item [nzActions]="[greyAction]">{{ 'settings.greyMode' | translate }}</nz-list-item>
         <ng-template #greyAction>
           <nz-switch nzSize="small" [ngModel]="_themesOptions.greyTheme" (ngModelChange)="changeSpecialTheme($event, 'grey-theme')" />
         </ng-template>

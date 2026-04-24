@@ -11,6 +11,8 @@ import { WindowService } from '@core/services/common/window.service';
 import { SettingInterface, StyleTheme, StyleThemeInterface, ThemeService } from '@store/common-store/theme.service';
 import { fnFormatToHump } from '@utils/tools';
 
+import { TranslateModule } from '@ngx-translate/core';
+
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzConfigService } from 'ng-zorro-antd/core/config';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
@@ -50,7 +52,7 @@ type SettingKey = Exclude<keyof SettingInterface, ExcludedKeys>;
   templateUrl: './setting-drawer.component.html',
   styleUrl: './setting-drawer.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CdkDrag, NzIconModule, NzButtonModule, NzDrawerModule, NzTooltipModule, NzDividerModule, NzListModule, NzSwitchModule, FormsModule]
+  imports: [CdkDrag, NzIconModule, NzButtonModule, NzDrawerModule, NzTooltipModule, NzDividerModule, NzListModule, NzSwitchModule, FormsModule, TranslateModule]
 })
 export class SettingDrawerComponent implements OnInit {
   private themesService = inject(ThemeService);
@@ -92,13 +94,13 @@ export class SettingDrawerComponent implements OnInit {
     {
       key: 'dark',
       image: 'imgs/theme-dark.svg',
-      title: '暗色菜单风格',
+      title: 'settings.theme.dark',
       isChecked: true
     },
     {
       key: 'light',
       image: 'imgs/theme-light.svg',
-      title: '亮色菜单风格',
+      title: 'settings.theme.light',
       isChecked: false
     }
   ];
@@ -106,49 +108,49 @@ export class SettingDrawerComponent implements OnInit {
     {
       key: 'dust',
       color: '#F5222D',
-      title: '薄暮',
+      title: 'settings.color.dust',
       isChecked: false
     },
     {
       key: 'volcano',
       color: '#FA541C',
-      title: '火山',
+      title: 'settings.color.volcano',
       isChecked: false
     },
     {
       key: 'sunset',
       color: '#FAAD14',
-      title: '日暮',
+      title: 'settings.color.sunset',
       isChecked: false
     },
     {
       key: 'cyan',
       color: '#13C2C2',
-      title: '明青',
+      title: 'settings.color.cyan',
       isChecked: false
     },
     {
       key: 'green',
       color: '#52C41A',
-      title: '极光绿',
+      title: 'settings.color.green',
       isChecked: false
     },
     {
       key: 'daybreak',
       color: '#1890FF',
-      title: '拂晓蓝（默认）',
+      title: 'settings.color.daybreak',
       isChecked: true
     },
     {
       key: 'geekblue',
       color: '#2F54EB',
-      title: '极客蓝',
+      title: 'settings.color.geekblue',
       isChecked: false
     },
     {
       key: 'purple',
       color: '#722ED1',
-      title: '酱紫',
+      title: 'settings.color.purple',
       isChecked: false
     }
   ];
@@ -156,19 +158,19 @@ export class SettingDrawerComponent implements OnInit {
     {
       key: 'side',
       image: 'imgs/menu-side.svg',
-      title: '侧边菜单布局',
+      title: 'settings.mode.side',
       isChecked: true
     },
     {
       key: 'top',
       image: 'imgs/menu-top.svg',
-      title: '顶部菜单布局',
+      title: 'settings.mode.top',
       isChecked: false
     },
     {
       key: 'mixin',
       image: 'imgs/menu-top.svg',
-      title: '混合菜单布局',
+      title: 'settings.mode.mixin',
       isChecked: false
     }
   ];

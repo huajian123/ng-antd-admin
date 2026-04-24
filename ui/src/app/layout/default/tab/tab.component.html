@@ -4,7 +4,7 @@
   <nz-card id="multi-tab" class="m-t-10" style="height: 35px" [nzBodyStyle]="{ padding: 0 }" [nzBordered]="false">
     <nz-tabs nzHideAdd nzTabPosition="top" nzType="editable-card" [nzSelectedIndex]="currentIndex()" [nzTabBarStyle]="{ height: '35px' }" (nzClose)="clickCloseIcon($event)">
       @for (tab of tabsSourceData(); track trackByTab(i, tab); let i = $index) {
-        <nz-tab nzClosable [nzTitle]="tab.title" (nzClick)="goPage(tab)" (nzContextmenu)="contextMenu($event, menu)">
+        <nz-tab nzClosable [nzTitle]="tab.title | translate" (nzClick)="goPage(tab)" (nzContextmenu)="contextMenu($event, menu)">
           <nz-dropdown-menu #menu="nzDropdownMenu">
             <ul nz-menu>
               <li nz-menu-item [nzDisabled]="router.url !== tab.path" (click)="refresh()">刷新</li>
@@ -35,7 +35,7 @@
         <nz-tab nzClosable [nzTitle]="titleTemplate" (nzClick)="goPage(tab)" (nzContextmenu)="contextMenu($event, menu)">
           <ng-template #titleTemplate>
             <span class="text-center p-l-16 p-r-16 relative d-i-b" appMouseHoverShow style="min-width: 60px">
-              {{ tab.title }}
+              {{ tab.title | translate }}
               <i class="m-0 none" nz-icon nzType="close" (click)="clickCloseIcon({ index: i }); $event.stopPropagation()"></i>
             </span>
           </ng-template>

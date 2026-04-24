@@ -32,37 +32,37 @@ export default [
   },
   {
     path: 'task',
-    title: '任务',
+    title: 'menu.default:page-demo:task',
     data: { key: 'task' },
     loadComponent: () => import('./task/task.component').then(m => m.TaskComponent)
   },
   {
     path: 'page-demo1',
-    title: '新布局',
+    title: 'menu.default:page-demo:page-demo1',
     data: { key: 'page-demo1' },
     loadComponent: () => import('./new-page-layout/new-page-layout.component').then(m => m.NewPageLayoutComponent)
   },
   {
     path: 'page-demo1',
-    title: '新布局',
+    title: 'menu.default:page-demo:page-demo1',
     data: { key: 'page-demo1' },
     loadComponent: () => import('./new-page-layout/new-page-layout.component').then(m => m.NewPageLayoutComponent)
   },
   {
     path: 'page-demo2',
-    title: '新页面2',
+    title: 'menu.default:page-demo:page-demo1',
     data: { key: 'page-demo2' },
     loadComponent: () => import('../../pages/no-content/no-content.component').then(m => m.NoContentComponent)
   },
   {
     path: 'page-demo3',
-    title: '新页面3',
+    title: 'menu.default:page-demo:page-demo1',
     data: { key: 'page-demo3' },
     loadComponent: () => import('../../pages/no-content/no-content.component').then(m => m.NoContentComponent)
   },
   {
     path: 'page-demo4',
-    title: '新页面4',
+    title: 'menu.default:page-demo:page-demo1',
     data: { key: 'page-demo4' },
     loadComponent: () => import('../../pages/no-content/no-content.component').then(m => m.NoContentComponent)
   }

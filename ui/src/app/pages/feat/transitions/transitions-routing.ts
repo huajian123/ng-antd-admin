@@ -3,7 +3,7 @@ import { Route } from '@angular/router';
 export default [
   {
     path: '',
-    title: 'View Transitions',
+    title: 'menu.default:feat:transitions',
     data: {
       key: 'transitions',
       shouldDetach: 'no' // 禁用路由复用
@@ -12,7 +12,7 @@ export default [
   },
   {
     path: 'transitions-detail',
-    title: 'View Transitions',
+    title: 'menu.default:feat:transitions',
     data: {
       key: 'transitions-detail',
       shouldDetach: 'no' // 禁用路由复用

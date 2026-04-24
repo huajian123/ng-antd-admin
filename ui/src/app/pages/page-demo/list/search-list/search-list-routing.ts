@@ -11,9 +11,9 @@ export default [
     component: SearchListComponent,
     data: { key: 'search-list' },
     children: [
-      { path: 'article', component: ArticleComponent, title: '搜索列表(文章)', data: { key: 'article' } },
-      { path: 'project', component: ProjectComponent, title: '搜索列表(项目)', data: { key: 'project' } },
-      { path: 'application', component: ApplicationComponent, title: '搜索列表(应用)', data: { key: 'application' } }
+      { path: 'article', component: ArticleComponent, title: 'menu.default:page-demo:list:search-list:article', data: { key: 'article' } },
+      { path: 'project', component: ProjectComponent, title: 'menu.default:page-demo:list:search-list:project', data: { key: 'project' } },
+      { path: 'application', component: ApplicationComponent, title: 'menu.default:page-demo:list:search-list:application', data: { key: 'application' } }
     ]
   },
 

@@ -12,7 +12,9 @@
   },
   "lang": {
     "zhCN": "简体中文",
-    "enUS": "English"
+    "zhTW": "繁體中文",
+    "enUS": "English",
+    "viVN": "Tiếng Việt"
   },
   "menu": {
     "default:dashboard": "Dashboard",
@@ -125,5 +127,40 @@
     "blank:other-login": "其他登录方式",
     "blank:other-login:login1": "第一种",
     "blank:empty-page": "空白页"
+  },
+  "settings": {
+    "themeStyle": "整体风格设置",
+    "themeColor": "主题色",
+    "navMode": "导航模式",
+    "contentArea": "内容区域",
+    "otherSettings": "其他设置",
+    "fixedTab": "固定页签",
+    "fixedHead": "固定头部",
+    "fixedLeftNav": "固定侧边栏",
+    "isShowTab": "多页签",
+    "splitNav": "自动分割菜单",
+    "hasTopArea": "顶栏",
+    "hasFooterArea": "页脚",
+    "hasNavArea": "菜单",
+    "hasNavHeadArea": "菜单头",
+    "defaultMode": "默认模式",
+    "darkMode": "暗黑模式",
+    "aliyunMode": "阿里云模式",
+    "compactMode": "紧凑模式",
+    "colorWeakMode": "色弱模式",
+    "greyMode": "灰色模式",
+    "theme.dark": "暗色菜单风格",
+    "theme.light": "亮色菜单风格",
+    "mode.side": "侧边菜单布局",
+    "mode.top": "顶部菜单布局",
+    "mode.mixin": "混合菜单布局",
+    "color.dust": "薄暮",
+    "color.volcano": "火山",
+    "color.sunset": "日暮",
+    "color.cyan": "明青",
+    "color.green": "极光绿",
+    "color.daybreak": "拂晓蓝（默认）",
+    "color.geekblue": "极客蓝",
+    "color.purple": "酱紫"
   }
 }

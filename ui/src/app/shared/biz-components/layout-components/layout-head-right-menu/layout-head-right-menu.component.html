@@ -78,8 +78,10 @@
     </span>
     <nz-dropdown-menu #language="nzDropdownMenu">
       <ul nz-menu nzSelectable>
-        <li nz-menu-item [nzSelected]="$currentLang() === 'en_US'" (click)="changeLang('en_US')">{{ 'lang.enUS' | translate }}</li>
         <li nz-menu-item [nzSelected]="$currentLang() === 'zh_CN'" (click)="changeLang('zh_CN')">{{ 'lang.zhCN' | translate }}</li>
+        <li nz-menu-item [nzSelected]="$currentLang() === 'zh_TW'" (click)="changeLang('zh_TW')">{{ 'lang.zhTW' | translate }}</li>
+        <li nz-menu-item [nzSelected]="$currentLang() === 'en_US'" (click)="changeLang('en_US')">{{ 'lang.enUS' | translate }}</li>
+        <li nz-menu-item [nzSelected]="$currentLang() === 'vi_VN'" (click)="changeLang('vi_VN')">{{ 'lang.viVN' | translate }}</li>
       </ul>
     </nz-dropdown-menu>
   </div>
