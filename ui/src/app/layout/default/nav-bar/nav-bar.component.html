@@ -22,7 +22,7 @@
                 } @else if (menu.alIcon) {
                   <i nz-icon [nzIconfont]="menu.alIcon"></i>
                 }
-                <span>{{ menu.menuName }}</span>
+                <span>{{ 'menu.' + menu.code | translate }}</span>
               </a>
             </li>
           }
@@ -42,7 +42,7 @@
                 } @else if (menu.alIcon) {
                   <i nz-icon [nzIconfont]="menu.alIcon"></i>
                 }
-                <span>{{ menu.menuName }}</span>
+                <span>{{ 'menu.' + menu.code | translate }}</span>
               </ng-template>
               <ul>
                 @for (menuSecond of menu.children; track menuSecond.path) {
@@ -56,7 +56,7 @@
                           } @else if (menuSecond.alIcon) {
                             <i nz-icon [nzIconfont]="menuSecond.alIcon"></i>
                           }
-                          <span>{{ menuSecond.menuName }}</span>
+                          <span>{{ 'menu.' + menuSecond.code | translate }}</span>
                         </a>
                       </li>
                     }
@@ -75,7 +75,7 @@
                           } @else if (menuSecond.alIcon) {
                             <i nz-icon [nzIconfont]="menuSecond.alIcon"></i>
                           }
-                          <span>{{ menuSecond.menuName }}</span>
+                          <span>{{ 'menu.' + menuSecond.code | translate }}</span>
                         </ng-template>
                         <ul>
                           @for (menuThird of menuSecond.children; track menuThird.path) {
@@ -88,7 +88,7 @@
                                     } @else if (menuThird.alIcon) {
                                       <i nz-icon [nzIconfont]="menuThird.alIcon"></i>
                                     }
-                                    <span>{{ menuThird.menuName }}</span>
+                                    <span>{{ 'menu.' + menuThird.code | translate }}</span>
                                   </a>
                                 </li>
                               }
@@ -107,7 +107,7 @@
                                     } @else if (menuThird.alIcon) {
                                       <i nz-icon [nzIconfont]="menuSecond.alIcon"></i>
                                     }
-                                    <span>{{ menuThird.menuName }}</span>
+                                    <span>{{ 'menu.' + menuThird.code | translate }}</span>
                                   </ng-template>
                                   <ul>
                                     @for (forthThird of menuThird.children; track forthThird.path) {
@@ -119,7 +119,7 @@
                                             } @else if (forthThird.alIcon) {
                                               <i nz-icon [nzIconfont]="forthThird.alIcon"></i>
                                             }
-                                            <span>{{ forthThird.menuName }}</span>
+                                            <span>{{ 'menu.' + forthThird.code | translate }}</span>
                                           </a>
                                         </li>
                                       </ng-container>
@@ -156,7 +156,7 @@
               } @else if (menu.alIcon) {
                 <i nz-icon [nzIconfont]="menu.alIcon"></i>
               }
-              <span>{{ menu.menuName }}</span>
+              <span>{{ 'menu.' + menu.code | translate }}</span>
             </a>
           </li>
         }
@@ -168,7 +168,7 @@
             } @else if (menu.alIcon) {
               <i nz-icon [nzIconfont]="menu.alIcon"></i>
             }
-            <span>{{ menu.menuName }}</span>
+            <span>{{ 'menu.' + menu.code | translate }}</span>
           </li>
         }
       </ng-container>

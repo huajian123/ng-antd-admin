@@ -28,6 +28,8 @@
     "@antv/x6": "^2.18.1",
     "@antv/x6-plugin-dnd": "^2.1.1",
     "@auth0/angular-jwt": "^5.2.0",
+    "@ngx-translate/core": "^17.0.0",
+    "@ngx-translate/http-loader": "^17.0.0",
     "@tinymce/tinymce-angular": "^9.0.0",
     "@zxcvbn-ts/core": "^2.1.0",
     "@zxcvbn-ts/language-en": "^2.1.0",

@@ -10,12 +10,16 @@ import {
   EnvironmentProviders,
   provideBrowserGlobalErrorListeners
 } from '@angular/core';
+
+import { TranslateModule } from '@ngx-translate/core';
+import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FormsModule } from '@angular/forms';
 import { provideRouter, RouteReuseStrategy, TitleStrategy, withComponentInputBinding, withHashLocation, withInMemoryScrolling, withPreloading, withViewTransitions } from '@angular/router';
 
 import { DashboardOutline, FormOutline, MenuFoldOutline, MenuUnfoldOutline } from '@ant-design/icons-angular/icons';
 import { appRoutes } from '@app/app.routes';
 import { CustomPageTitleResolverService } from '@core/services/common/custom-page-title-resolver.service';
+import { InitLangService } from '@core/services/common/init-lang.service';
 import { InitThemeService } from '@core/services/common/init-theme.service';
 import { LoadAliIconCdnService } from '@core/services/common/load-ali-icon-cdn.service';
 import { SimpleReuseStrategy } from '@core/services/common/reuse-strategy';
@@ -91,6 +95,10 @@ const APPINIT_PROVIDES: EnvironmentProviders[] = [
       return themeService.loadTheme();
     })(inject(ThemeSkinService));
     return initializerFn();
+  }),
+  // 初始化语言
+  provideAppInitializer(() => {
+    inject(InitLangService).initLang();
   })
 ];
 
@@ -132,7 +140,13 @@ export const appConfig: ApplicationConfig = {
       withHashLocation(), // 使用哈希路由
       withComponentInputBinding() // 开启路由参数绑定到组件的输入属性,ng16新增特性
     ),
-    importProvidersFrom(NzDrawerModule, NzModalModule, FormsModule),
+    importProvidersFrom(
+      NzDrawerModule,
+      NzModalModule,
+      FormsModule,
+      TranslateModule.forRoot()
+    ),
+    provideTranslateHttpLoader({ prefix: './i18n/', suffix: '.json' }),
     ...APPINIT_PROVIDES, // 项目启动之前，需要调用的一系列方法
     provideHttpClient(withInterceptors([httpInterceptorService])),
     provideZonelessChangeDetection() // 开启 zoneless

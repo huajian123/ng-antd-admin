@@ -7,7 +7,7 @@
             nzTheme="outline"></i>
         </span>-->
 
-    <span *appScreenLessHidden="320" class="bst-header-icon" nz-tooltip nzTooltipPlacement="bottom" nzTooltipTitle="搜索" (click)="showSearchModal()">
+    <span *appScreenLessHidden="320" class="bst-header-icon" nz-tooltip nzTooltipPlacement="bottom" [nzTooltipTitle]="'common.search' | translate" (click)="showSearchModal()">
       <i nz-icon nzTheme="outline" nzType="search"></i>
     </span>
     <!--注释的是一个弹出外连接的按钮-->
@@ -23,7 +23,7 @@
       appToggleFullscreen
       nz-tooltip
       nzTooltipPlacement="bottom"
-      [nzTooltipTitle]="toogleFullScreenDir.isFullscreenFlag() ? '全屏' : '退出全屏'"
+      [nzTooltipTitle]="toogleFullScreenDir.isFullscreenFlag() ? ('common.fullscreen' | translate) : ('common.exitFullscreen' | translate)"
     >
       @if (toogleFullScreenDir.isFullscreenFlag()) {
         <i nz-icon nzTheme="outline" nzType="fullscreen"></i>
@@ -45,29 +45,29 @@
       <ul nz-menu>
         <li nz-menu-item (click)="goPage('personal-center')">
           <i class="m-r-8" nz-icon nzTheme="outline" nzType="user"></i>
-          <span>个人中心</span>
+          <span>{{ 'common.personalCenter' | translate }}</span>
         </li>
         <li nz-menu-item (click)="goPage('personal-setting')">
           <i class="m-r-8" nz-icon nzTheme="outline" nzType="setting"></i>
-          <span>个人设置</span>
+          <span>{{ 'common.personalSetting' | translate }}</span>
         </li>
         <li nz-menu-item (click)="changePassWorld()">
           <i class="m-r-8" nz-icon nzTheme="outline" nzType="lock"></i>
-          <span>修改密码</span>
+          <span>{{ 'common.changePassword' | translate }}</span>
         </li>
         <li nz-menu-divider></li>
         <li nz-menu-item (click)="clean()">
           <i class="m-r-8" nz-icon nzTheme="outline" nzType="clear"></i>
-          <span>清除缓存</span>
+          <span>{{ 'common.clearCache' | translate }}</span>
         </li>
         <li nz-menu-item (click)="lockScreen()">
           <i class="m-r-8" nz-icon nzTheme="outline" nzType="lock"></i>
-          <span>锁定屏幕</span>
+          <span>{{ 'common.lockScreen' | translate }}</span>
         </li>
         <li nz-menu-item>
           <div (click)="goLogin()">
             <i class="m-r-8" nz-icon nzTheme="outline" nzType="logout"></i>
-            <span>退出登录</span>
+            <span>{{ 'common.logout' | translate }}</span>
           </div>
         </li>
       </ul>
@@ -78,12 +78,8 @@
     </span>
     <nz-dropdown-menu #language="nzDropdownMenu">
       <ul nz-menu nzSelectable>
-        <li nz-menu-item (click)="showMessage()">English</li>
-        <li nz-menu-item (click)="showMessage()">Bahasa Indonesia</li>
-        <li nz-menu-item (click)="showMessage()">日本語</li>
-        <li nz-menu-item (click)="showMessage()">Português</li>
-        <li nz-menu-item nzSelected (click)="showMessage()">简体中文</li>
-        <li nz-menu-item (click)="showMessage()">繁體中文</li>
+        <li nz-menu-item [nzSelected]="$currentLang() === 'en_US'" (click)="changeLang('en_US')">{{ 'lang.enUS' | translate }}</li>
+        <li nz-menu-item [nzSelected]="$currentLang() === 'zh_CN'" (click)="changeLang('zh_CN')">{{ 'lang.zhCN' | translate }}</li>
       </ul>
     </nz-dropdown-menu>
   </div>

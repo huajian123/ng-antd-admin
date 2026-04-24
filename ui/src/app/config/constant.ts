@@ -25,6 +25,9 @@ export const SideCollapsedMaxWidth = 700;
 // 顶部菜单变成over模式最大的宽度
 export const TopCollapsedMaxWidth = 1253;
 
+// 语言key
+export const LangKey = 'LangKey';
+
 // 左侧菜单的宽度
 export const SideNavWidth = 208; // 如果修改，请同步修改@left-nav-width的值
 // Collapsed状态下左侧菜单的宽度
