@@ -38,6 +38,12 @@ export class TabService {
         if (tab.title === tabModel.title && !isNewTabDetailPage) {
           // 列表详情操作，例如用户表单点击详情，在当前tab中打开这个详情，可以看在线示例："查询表格"与表格中的"查看按钮"
           // title需和用户表单详情组件路由的title相同
+          // 将每个tab下的组件快照存入tab数组中，下面做了去重操作，否则在当前页签跳转详情的场景下，详情有状态缓存，list也有状态缓存，直接关闭list的tab，详情里面的状态不会被清空掉
+          const existingUrls = new Set(tab.snapshotArray.map(s => (s as any)['_routerState'].url));
+          const newSnapshots = tabModel.snapshotArray.filter(s => !existingUrls.has((s as any)['_routerState'].url));
+          // 是关闭 tab 时的"清理名单
+          tab.snapshotArray = [...tab.snapshotArray, ...newSnapshots];
+
           // 当前页中打开详情时，需要将对应的tab的path替换掉
           tab.path = tabModel.path;
         }
