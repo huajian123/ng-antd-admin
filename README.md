@@ -115,6 +115,7 @@ provideRouter(routes, withViewTransitions({ skipInitialTransition: true }))
 - 🔖 **多页签**：支持右键菜单、拖拽排序，类浏览器体验。
 - 📱 **响应式**：完美适配 PC、平板、手机等各种屏幕尺寸。
 - 🔒 **安全增强**：内置锁屏功能、细粒度的按钮级权限控制。
+- 🌍 **多语言**：内置简体中文、繁体中文、英文、越南语，运行时无刷新切换，覆盖菜单、Tab 标题、浏览器标签页、设置面板全链路。
 
 ### 后端集成 (可选)
 提供基于 **NestJS + PostgreSQL + Drizzle ORM** 的完整后端服务：
@@ -258,6 +259,91 @@ this.winWidthService.getWindowWidthStore()
 { path: 'add', component: FormComponent, title: '用户管理' },
 { path: 'edit/:id', component: FormComponent, title: '用户管理' }
 ```
+
+### 4. 国际化 (i18n)
+
+项目使用 `@ngx-translate/core` 实现运行时多语言切换，**无需刷新页面**，语言偏好持久化到 `localStorage`。
+
+#### 支持的语言
+
+| 语言 | 代码 | 翻译文件 |
+|------|------|----------|
+| 简体中文 | `zh_CN` | `public/i18n/zh_CN.json` |
+| 繁体中文 | `zh_TW` | `public/i18n/zh_TW.json` |
+| English | `en_US` | `public/i18n/en_US.json` |
+| Tiếng Việt | `vi_VN` | `public/i18n/vi_VN.json` |
+
+#### 翻译文件结构
+
+每个语言文件按命名空间组织，新增语言只需复制一份并翻译内容：
+
+```json
+{
+  "common": {
+    "search": "搜索",
+    "logout": "退出登录"
+  },
+  "lang": {
+    "zhCN": "简体中文",
+    "zhTW": "繁體中文",
+    "enUS": "English",
+    "viVN": "Tiếng Việt"
+  },
+  "menu": {
+    "default:dashboard": "Dashboard",
+    "default:dashboard:analysis": "分析页"
+  },
+  "settings": {
+    "themeStyle": "整体风格设置",
+    "darkMode": "暗黑模式"
+  }
+}
+```
+
+#### 在模板中使用翻译
+
+```html
+<!-- 文本插值 -->
+<span>{{ 'common.logout' | translate }}</span>
+
+<!-- 属性绑定 -->
+<input [placeholder]="'common.search' | translate" />
+
+<!-- 动态 key（菜单名称场景） -->
+<span>{{ 'menu.' + menu.code | translate }}</span>
+```
+
+#### 路由 title 与 Tab 标题
+
+路由的 `title` 字段存翻译 key，Tab 组件通过 `| translate` pipe 自动响应语言切换：
+
+```typescript
+// 路由配置
+{
+  path: 'account',
+  title: 'menu.default:system:account',  // 存 key，不存翻译后的文字
+  data: { key: 'account' },
+  loadComponent: () => import('./account.component')
+}
+```
+
+#### 切换语言
+
+调用 `LanguageService.setLang()` 即可，它会同步更新 `@ngx-translate`、ng-zorro 组件库语言包和 `localStorage`：
+
+```typescript
+private languageService = inject(LanguageService);
+
+// 支持的 Lang 类型：'zh_CN' | 'zh_TW' | 'en_US' | 'vi_VN'
+this.languageService.setLang('en_US');
+```
+
+#### 新增一门语言
+
+1. 在 `public/i18n/` 下新建 `xx_XX.json`，参照现有文件翻译全部 key。
+2. 在 `language.service.ts` 中扩展 `Lang` 类型，并在 `nzLocaleMap` 中加入对应的 ng-zorro locale。
+3. 在 `layout-head-right-menu.component.html` 的语言菜单里新增一个 `<li>` 选项。
+4. 在所有语言文件的 `lang` 命名空间中加入新语言的显示名称 key。
 
 ---
 
