@@ -10,6 +10,8 @@ import { Menu } from '@core/services/types';
 import { MenuStoreService } from '@store/common-store/menu-store.service';
 import { BasicConfirmModalComponent } from '@widget/base-modal';
 
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
@@ -34,7 +36,7 @@ const passiveEventListenerOptions = normalizePassiveListenerOptions({ passive: t
   templateUrl: './search-route.component.html',
   styleUrl: './search-route.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NzButtonModule, NzInputModule, FormsModule, NzIconModule, NzEmptyModule, NzGridModule, NzDividerModule],
+  imports: [NzButtonModule, NzInputModule, FormsModule, NzIconModule, NzEmptyModule, NzGridModule, NzDividerModule, TranslateModule],
   host: {
     '(window:keyup.enter)': 'onEnterUp()',
     '(window:keyup.arrowUp)': 'onArrowUp()',
@@ -44,6 +46,7 @@ const passiveEventListenerOptions = normalizePassiveListenerOptions({ passive: t
 export class SearchRouteComponent extends BasicConfirmModalComponent implements AfterViewInit {
   private menuStoreService = inject(MenuStoreService);
   private router = inject(Router);
+  private translate = inject(TranslateService);
 
   resultListShow = signal<ResultItem[]>([]);
   resultList: ResultItem[] = [];
@@ -101,7 +104,13 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
   }
 
   getResultItem(menu: Menu, fatherTitle = ''): ResultItem[] {
-    const fatherTitleTemp = fatherTitle === '' ? menu.menuName : `${fatherTitle} > ${menu.menuName}`;
+    // menu的code，用于翻译
+    const key = `menu.${menu.code}`; // 比如 "menu.default:feat:msg"
+    // translate.instant(key) 有一个特性：当 key 在当前语言包里找不到对应翻译时，它不会返回空字符串或 null，而是直接把 key 本身原样返回。
+    const translated = this.translate.instant(key); //找到翻译："消息提示"（和 key 不同），找不到翻译"menu.default:feat:msg"（和 key 完全相同）
+
+    const name = translated !== key ? translated : menu.menuName;
+    const fatherTitleTemp = fatherTitle === '' ? name : `${fatherTitle} > ${name}`;
     const resultItem: ResultItem = {
       title: fatherTitleTemp,
       routePath: menu.path!,

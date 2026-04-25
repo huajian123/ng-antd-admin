@@ -1,17 +1,17 @@
 <div class="flex center flex-column">
-  <nz-avatar [nzSize]="70" nzSrc="imgs/default_face.png"></nz-avatar>
+  <nz-avatar nzSrc="imgs/default_face.png" [nzSize]="70"></nz-avatar>
   <p class="sp-16 m-t-8">Serati Ma</p>
 
-  <form class="m-t-30 full-with p-l-25 p-r-24 m-b-20" autocomplete="off" nz-form [formGroup]="validateForm" nzLayout="vertical">
+  <form class="m-t-30 full-with p-l-25 p-r-24 m-b-20" autocomplete="off" nz-form nzLayout="vertical" [formGroup]="validateForm">
     <nz-form-item>
-      <nz-form-label nzRequired>锁屏密码</nz-form-label>
-      <nz-form-control nzErrorTip="请输入锁屏密码">
+      <nz-form-label nzRequired>{{ 'lockWidget.password' | translate }}</nz-form-label>
+      <nz-form-control [nzErrorTip]="'lockWidget.passwordRequired' | translate">
         <nz-input-wrapper>
-          <input name="password" autocomplete="off" formControlName="password" nz-input placeholder="请输入" [type]="passwordVisible ? 'text' : 'password'" />
-          <i nzInputSuffix nz-icon [nzType]="!passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
+          <input name="password" autocomplete="off" formControlName="password" nz-input [placeholder]="'lockWidget.placeholder' | translate" [type]="passwordVisible ? 'text' : 'password'" />
+          <i nz-icon nzInputSuffix [nzType]="!passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
         </nz-input-wrapper>
       </nz-form-control>
     </nz-form-item>
-    <button class="login-form-button full-with" nz-button nzSize="large" nzType="primary" (click)="submitForm()">锁 定</button>
+    <button class="login-form-button full-with" nz-button nzSize="large" nzType="primary" (click)="submitForm()">{{ 'lockWidget.lockBtn' | translate }}</button>
   </form>
 </div>

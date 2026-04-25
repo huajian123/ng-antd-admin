@@ -8,7 +8,9 @@
     "changePassword": "修改密码",
     "clearCache": "清除缓存",
     "lockScreen": "锁定屏幕",
-    "logout": "退出登录"
+    "logout": "退出登录",
+    "changePwdSuccess": "修改成功，请重新登录",
+    "clearCacheSuccess": "清除成功，请重新登录"
   },
   "lang": {
     "zhCN": "简体中文",
@@ -163,8 +165,12 @@
     "color.geekblue": "极客蓝",
     "color.purple": "酱紫"
   },
-  "searchRoute": {
-    "placeholder": "搜索",
+  "lockWidget": {    "password": "锁屏密码",
+    "passwordRequired": "请输入锁屏密码",
+    "placeholder": "请输入",
+    "lockBtn": "锁 定"
+  },
+  "searchRoute": {    "placeholder": "搜索",
     "emptyText": "请输入菜单名称进行搜索",
     "confirm": "确认",
     "switch": "切换",

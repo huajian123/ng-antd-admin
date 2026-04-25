@@ -1,7 +1,7 @@
 <div class="p-24">
   <nz-input-wrapper nzAllowClear (nzClear)="clearInput()">
     <i nz-icon nzInputPrefix nzType="search"></i>
-    <input #searchInput type="text" nz-input nzSize="large" placeholder="搜索" [(ngModel)]="inputValue" />
+    <input #searchInput type="text" nz-input nzSize="large" [placeholder]="'searchRoute.placeholder' | translate" [(ngModel)]="inputValue" />
   </nz-input-wrapper>
 
   <div class="m-t-15">
@@ -26,7 +26,7 @@
     } @else {
       <nz-empty [nzNotFoundContent]="contentTpl">
         <ng-template #contentTpl>
-          <span>请输入菜单名称进行搜索</span>
+          <span>{{ 'searchRoute.emptyText' | translate }}</span>
         </ng-template>
       </nz-empty>
     }
@@ -37,11 +37,11 @@
 <div class="p-l-24 p-t-16 p-b-16">
   <footer class="flex left-start-center">
     <i class="footer-icon" nz-icon nzTheme="outline" nzType="enter"></i>
-    确认
+    {{ 'searchRoute.confirm' | translate }}
     <i class="footer-icon m-l-8" nz-icon nzTheme="outline" nzType="arrow-up"></i>
     <i class="footer-icon m-l-8" nz-icon nzTheme="outline" nzType="arrow-down"></i>
-    切换
+    {{ 'searchRoute.switch' | translate }}
     <span class="footer-icon sp-12 m-l-8">ESC</span>
-    关闭
+    {{ 'searchRoute.close' | translate }}
   </footer>
 </div>

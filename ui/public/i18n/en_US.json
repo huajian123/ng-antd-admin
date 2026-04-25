@@ -8,7 +8,9 @@
     "changePassword": "Change Password",
     "clearCache": "Clear Cache",
     "lockScreen": "Lock Screen",
-    "logout": "Logout"
+    "logout": "Logout",
+    "changePwdSuccess": "Password changed, please log in again",
+    "clearCacheSuccess": "Cache cleared, please log in again"
   },
   "lang": {
     "zhCN": "简体中文",
@@ -162,6 +164,12 @@
     "color.daybreak": "Daybreak Blue (Default)",
     "color.geekblue": "Geek Blue",
     "color.purple": "Purple"
+  },
+  "lockWidget": {
+    "password": "Lock Screen Password",
+    "passwordRequired": "Please enter lock screen password",
+    "placeholder": "Please enter",
+    "lockBtn": "Lock"
   },
   "searchRoute": {
     "placeholder": "Search",
