@@ -8,7 +8,9 @@
     "changePassword": "修改密码",
     "clearCache": "清除缓存",
     "lockScreen": "锁定屏幕",
-    "logout": "退出登录"
+    "logout": "退出登录",
+    "changePwdSuccess": "修改成功，请重新登录",
+    "clearCacheSuccess": "清除成功，请重新登录"
   },
   "lang": {
     "zhCN": "简体中文",
@@ -53,7 +55,7 @@
     "default:page-demo:flow": "图形编辑器",
     "default:page-demo:flow:flow-chat": "流程图",
     "default:page-demo:task": "任务",
-    "default:page-demo:page-demo1": "新布局",
+    "default:page-demo:new-layout": "新布局",
     "default:feat": "功能",
     "default:feat:msg": "消息提示",
     "default:feat:icons": "图标",
@@ -67,6 +69,7 @@
     "default:feat:click-out-side": "clickOutSide",
     "default:feat:frame": "外部文档",
     "default:feat:frame:zorro-doc": "zorro文档",
+    "default:feat:frame:other-link": "外部链接",
     "default:feat:scroll": "滚动条",
     "default:feat:scroll:keep-scroll-page": "缓存滚动条",
     "default:feat:scroll:play-scroll": "玩弄滚动条",
@@ -95,6 +98,7 @@
     "default:feat:signal-demo:change-to-observable": "与Observable互转",
     "default:feat:signal-demo:signal-reactive-forms": "Signal&Reactive Forms",
     "default:feat:signal-demo:signal-comprehensive-practical": "综合实战",
+    "default:feat:multilingual": "多语言",
     "default:comp": "组件",
     "default:comp:basic": "基础组件",
     "default:comp:transition": "动画组件",
@@ -162,5 +166,42 @@
     "color.daybreak": "拂晓蓝（默认）",
     "color.geekblue": "极客蓝",
     "color.purple": "酱紫"
+  },
+  "lockScreen": {
+    "clickToUnlock": "点击解锁",
+    "placeholder": "请输入",
+    "back": "返回",
+    "backToLogin": "返回登录",
+    "enterSystem": "进入系统",
+    "weekPrefix": "星期",
+    "weekday": {
+      "0": "日",
+      "1": "一",
+      "2": "二",
+      "3": "三",
+      "4": "四",
+      "5": "五",
+      "6": "六"
+    },
+    "passwordRequired": "请填写锁屏密码",
+    "passwordWrong": "锁屏密码不正确"
+  },
+  "lockWidget": {    "password": "锁屏密码",
+    "passwordRequired": "请输入锁屏密码",
+    "placeholder": "请输入",
+    "lockBtn": "锁 定"
+  },
+  "searchRoute": {    "placeholder": "搜索",
+    "emptyText": "请输入菜单名称进行搜索",
+    "confirm": "确认",
+    "switch": "切换",
+    "close": "关闭"
+  },
+  "tab": {
+    "refresh": "刷新",
+    "closeTab": "关闭标签",
+    "closeOtherTab": "关闭其他标签",
+    "closeRightTab": "关闭右侧标签",
+    "closeLeftTab": "关闭左侧标签"
   }
 }

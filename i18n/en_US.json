@@ -8,7 +8,9 @@
     "changePassword": "Change Password",
     "clearCache": "Clear Cache",
     "lockScreen": "Lock Screen",
-    "logout": "Logout"
+    "logout": "Logout",
+    "changePwdSuccess": "Password changed, please log in again",
+    "clearCacheSuccess": "Cache cleared, please log in again"
   },
   "lang": {
     "zhCN": "简体中文",
@@ -53,7 +55,7 @@
     "default:page-demo:flow": "Flow Editor",
     "default:page-demo:flow:flow-chat": "Flowchart",
     "default:page-demo:task": "Task",
-    "default:page-demo:page-demo1": "New Layout",
+    "default:page-demo:new-layout": "New Layout",
     "default:feat": "Features",
     "default:feat:msg": "Message",
     "default:feat:icons": "Icons",
@@ -67,6 +69,7 @@
     "default:feat:click-out-side": "ClickOutside",
     "default:feat:frame": "External Docs",
     "default:feat:frame:zorro-doc": "Zorro Docs",
+    "default:feat:frame:other-link": "External Link",
     "default:feat:scroll": "Scroll",
     "default:feat:scroll:keep-scroll-page": "Keep Scroll",
     "default:feat:scroll:play-scroll": "Play Scroll",
@@ -95,6 +98,7 @@
     "default:feat:signal-demo:change-to-observable": "To Observable",
     "default:feat:signal-demo:signal-reactive-forms": "Signal & Reactive Forms",
     "default:feat:signal-demo:signal-comprehensive-practical": "Comprehensive",
+    "default:feat:multilingual": "Multilingual",
     "default:comp": "Components",
     "default:comp:basic": "Basic",
     "default:comp:transition": "Animation",
@@ -162,5 +166,44 @@
     "color.daybreak": "Daybreak Blue (Default)",
     "color.geekblue": "Geek Blue",
     "color.purple": "Purple"
+  },
+  "lockScreen": {
+    "clickToUnlock": "Click to Unlock",
+    "placeholder": "Please enter",
+    "back": "Back",
+    "backToLogin": "Back to Login",
+    "enterSystem": "Enter",
+    "weekPrefix": "",
+    "weekday": {
+      "0": "Sun",
+      "1": "Mon",
+      "2": "Tue",
+      "3": "Wed",
+      "4": "Thu",
+      "5": "Fri",
+      "6": "Sat"
+    },
+    "passwordRequired": "Please enter lock screen password",
+    "passwordWrong": "Incorrect lock screen password"
+  },
+  "lockWidget": {
+    "password": "Lock Screen Password",
+    "passwordRequired": "Please enter lock screen password",
+    "placeholder": "Please enter",
+    "lockBtn": "Lock"
+  },
+  "searchRoute": {
+    "placeholder": "Search",
+    "emptyText": "Enter a menu name to search",
+    "confirm": "Confirm",
+    "switch": "Switch",
+    "close": "Close"
+  },
+  "tab": {
+    "refresh": "Refresh",
+    "closeTab": "Close Tab",
+    "closeOtherTab": "Close Other Tabs",
+    "closeRightTab": "Close Tabs to the Right",
+    "closeLeftTab": "Close Tabs to the Left"
   }
 }

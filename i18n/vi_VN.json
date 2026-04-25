@@ -8,7 +8,9 @@
     "changePassword": "Đổi mật khẩu",
     "clearCache": "Xóa bộ nhớ cache",
     "lockScreen": "Khóa màn hình",
-    "logout": "Đăng xuất"
+    "logout": "Đăng xuất",
+    "changePwdSuccess": "Đổi mật khẩu thành công, vui lòng đăng nhập lại",
+    "clearCacheSuccess": "Xóa cache thành công, vui lòng đăng nhập lại"
   },
   "lang": {
     "zhCN": "简体中文",
@@ -53,7 +55,7 @@
     "default:page-demo:flow": "Trình chỉnh sửa đồ họa",
     "default:page-demo:flow:flow-chat": "Sơ đồ luồng",
     "default:page-demo:task": "Nhiệm vụ",
-    "default:page-demo:page-demo1": "Bố cục mới",
+    "default:page-demo:new-layout": "Bố cục mới",
     "default:feat": "Tính năng",
     "default:feat:msg": "Thông báo",
     "default:feat:icons": "Biểu tượng",
@@ -67,6 +69,7 @@
     "default:feat:click-out-side": "ClickOutside",
     "default:feat:frame": "Tài liệu bên ngoài",
     "default:feat:frame:zorro-doc": "Tài liệu Zorro",
+    "default:feat:frame:other-link": "Liên kết ngoài",
     "default:feat:scroll": "Thanh cuộn",
     "default:feat:scroll:keep-scroll-page": "Giữ thanh cuộn",
     "default:feat:scroll:play-scroll": "Chơi với thanh cuộn",
@@ -95,6 +98,7 @@
     "default:feat:signal-demo:change-to-observable": "Chuyển đổi với Observable",
     "default:feat:signal-demo:signal-reactive-forms": "Signal & Reactive Forms",
     "default:feat:signal-demo:signal-comprehensive-practical": "Thực hành toàn diện",
+    "default:feat:multilingual": "Đa ngôn ngữ",
     "default:comp": "Component",
     "default:comp:basic": "Component cơ bản",
     "default:comp:transition": "Component hoạt ảnh",
@@ -162,5 +166,44 @@
     "color.daybreak": "Xanh bình minh (Mặc định)",
     "color.geekblue": "Xanh geek",
     "color.purple": "Tím"
+  },
+  "lockScreen": {
+    "clickToUnlock": "Nhấn để mở khóa",
+    "placeholder": "Vui lòng nhập",
+    "back": "Quay lại",
+    "backToLogin": "Quay lại đăng nhập",
+    "enterSystem": "Vào hệ thống",
+    "weekPrefix": "",
+    "weekday": {
+      "0": "CN",
+      "1": "T2",
+      "2": "T3",
+      "3": "T4",
+      "4": "T5",
+      "5": "T6",
+      "6": "T7"
+    },
+    "passwordRequired": "Vui lòng nhập mật khẩu khóa màn hình",
+    "passwordWrong": "Mật khẩu khóa màn hình không đúng"
+  },
+  "lockWidget": {
+    "password": "Mật khẩu khóa màn hình",
+    "passwordRequired": "Vui lòng nhập mật khẩu khóa màn hình",
+    "placeholder": "Vui lòng nhập",
+    "lockBtn": "Khóa"
+  },
+  "searchRoute": {
+    "placeholder": "Tìm kiếm",
+    "emptyText": "Nhập tên menu để tìm kiếm",
+    "confirm": "Xác nhận",
+    "switch": "Chuyển đổi",
+    "close": "Đóng"
+  },
+  "tab": {
+    "refresh": "Làm mới",
+    "closeTab": "Đóng tab",
+    "closeOtherTab": "Đóng tab khác",
+    "closeRightTab": "Đóng tab bên phải",
+    "closeLeftTab": "Đóng tab bên trái"
   }
 }

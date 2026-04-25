@@ -1,0 +1,1 @@
+import{Fb as l,Uc as a,sc as i,tc as n}from"./chunk-42PKMRMR.js";import"./chunk-DAQOROHW.js";var u=class e{static \u0275fac=function(t){return new(t||e)};static \u0275cmp=l({type:e,selectors:[["app-multilingual"]],decls:2,vars:0,template:function(t,m){t&1&&(i(0,"p"),a(1,"multilingual works!"),n())},encapsulation:2})};export{u as Multilingual};
