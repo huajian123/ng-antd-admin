@@ -162,5 +162,19 @@
     "color.daybreak": "Daybreak Blue (Default)",
     "color.geekblue": "Geek Blue",
     "color.purple": "Purple"
+  },
+  "searchRoute": {
+    "placeholder": "Search",
+    "emptyText": "Enter a menu name to search",
+    "confirm": "Confirm",
+    "switch": "Switch",
+    "close": "Close"
+  },
+  "tab": {
+    "refresh": "Refresh",
+    "closeTab": "Close Tab",
+    "closeOtherTab": "Close Other Tabs",
+    "closeRightTab": "Close Tabs to the Right",
+    "closeLeftTab": "Close Tabs to the Left"
   }
 }

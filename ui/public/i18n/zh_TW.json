@@ -162,5 +162,19 @@
     "color.daybreak": "拂曉藍（預設）",
     "color.geekblue": "極客藍",
     "color.purple": "醬紫"
+  },
+  "searchRoute": {
+    "placeholder": "搜尋",
+    "emptyText": "請輸入選單名稱進行搜尋",
+    "confirm": "確認",
+    "switch": "切換",
+    "close": "關閉"
+  },
+  "tab": {
+    "refresh": "重新整理",
+    "closeTab": "關閉標籤",
+    "closeOtherTab": "關閉其他標籤",
+    "closeRightTab": "關閉右側標籤",
+    "closeLeftTab": "關閉左側標籤"
   }
 }

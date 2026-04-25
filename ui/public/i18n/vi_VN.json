@@ -162,5 +162,19 @@
     "color.daybreak": "Xanh bình minh (Mặc định)",
     "color.geekblue": "Xanh geek",
     "color.purple": "Tím"
+  },
+  "searchRoute": {
+    "placeholder": "Tìm kiếm",
+    "emptyText": "Nhập tên menu để tìm kiếm",
+    "confirm": "Xác nhận",
+    "switch": "Chuyển đổi",
+    "close": "Đóng"
+  },
+  "tab": {
+    "refresh": "Làm mới",
+    "closeTab": "Đóng tab",
+    "closeOtherTab": "Đóng tab khác",
+    "closeRightTab": "Đóng tab bên phải",
+    "closeLeftTab": "Đóng tab bên trái"
   }
 }

@@ -162,5 +162,19 @@
     "color.daybreak": "拂晓蓝（默认）",
     "color.geekblue": "极客蓝",
     "color.purple": "酱紫"
+  },
+  "searchRoute": {
+    "placeholder": "搜索",
+    "emptyText": "请输入菜单名称进行搜索",
+    "confirm": "确认",
+    "switch": "切换",
+    "close": "关闭"
+  },
+  "tab": {
+    "refresh": "刷新",
+    "closeTab": "关闭标签",
+    "closeOtherTab": "关闭其他标签",
+    "closeRightTab": "关闭右侧标签",
+    "closeLeftTab": "关闭左侧标签"
   }
 }
