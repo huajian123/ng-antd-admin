@@ -165,6 +165,25 @@
     "color.geekblue": "极客蓝",
     "color.purple": "酱紫"
   },
+  "lockScreen": {
+    "clickToUnlock": "点击解锁",
+    "placeholder": "请输入",
+    "back": "返回",
+    "backToLogin": "返回登录",
+    "enterSystem": "进入系统",
+    "weekPrefix": "星期",
+    "weekday": {
+      "0": "日",
+      "1": "一",
+      "2": "二",
+      "3": "三",
+      "4": "四",
+      "5": "五",
+      "6": "六"
+    },
+    "passwordRequired": "请填写锁屏密码",
+    "passwordWrong": "锁屏密码不正确"
+  },
   "lockWidget": {    "password": "锁屏密码",
     "passwordRequired": "请输入锁屏密码",
     "placeholder": "请输入",

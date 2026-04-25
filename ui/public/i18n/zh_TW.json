@@ -165,6 +165,25 @@
     "color.geekblue": "極客藍",
     "color.purple": "醬紫"
   },
+  "lockScreen": {
+    "clickToUnlock": "點擊解鎖",
+    "placeholder": "請輸入",
+    "back": "返回",
+    "backToLogin": "返回登入",
+    "enterSystem": "進入系統",
+    "weekPrefix": "星期",
+    "weekday": {
+      "0": "日",
+      "1": "一",
+      "2": "二",
+      "3": "三",
+      "4": "四",
+      "5": "五",
+      "6": "六"
+    },
+    "passwordRequired": "請填寫鎖屏密碼",
+    "passwordWrong": "鎖屏密碼不正確"
+  },
   "lockWidget": {
     "password": "鎖屏密碼",
     "passwordRequired": "請輸入鎖屏密碼",

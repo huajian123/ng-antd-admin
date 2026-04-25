@@ -165,6 +165,25 @@
     "color.geekblue": "Geek Blue",
     "color.purple": "Purple"
   },
+  "lockScreen": {
+    "clickToUnlock": "Click to Unlock",
+    "placeholder": "Please enter",
+    "back": "Back",
+    "backToLogin": "Back to Login",
+    "enterSystem": "Enter",
+    "weekPrefix": "",
+    "weekday": {
+      "0": "Sun",
+      "1": "Mon",
+      "2": "Tue",
+      "3": "Wed",
+      "4": "Thu",
+      "5": "Fri",
+      "6": "Sat"
+    },
+    "passwordRequired": "Please enter lock screen password",
+    "passwordWrong": "Incorrect lock screen password"
+  },
   "lockWidget": {
     "password": "Lock Screen Password",
     "passwordRequired": "Please enter lock screen password",

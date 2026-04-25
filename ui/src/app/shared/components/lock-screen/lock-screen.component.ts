@@ -13,6 +13,8 @@ import { LockScreenStoreService } from '@store/common-store/lock-screen-store.se
 import { fnCheckForm, fnEncrypt } from '@utils/tools';
 import { getDay } from 'date-fns';
 
+import { TranslateModule } from '@ngx-translate/core';
+
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -21,14 +23,12 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 
-import { ChangNumberToChinesePipe } from '../../pipes/chang-number-to-chinese.pipe';
-
 @Component({
   selector: 'app-lock-screen',
   templateUrl: './lock-screen.component.html',
   styleUrl: './lock-screen.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NzIconModule, NzButtonModule, NzGridModule, NzAvatarModule, FormsModule, NzFormModule, ReactiveFormsModule, NzInputModule, ChangNumberToChinesePipe, AsyncPipe, DatePipe]
+  imports: [NzIconModule, NzButtonModule, NzGridModule, NzAvatarModule, FormsModule, NzFormModule, ReactiveFormsModule, NzInputModule, AsyncPipe, DatePipe, TranslateModule]
 })
 export class LockScreenComponent implements OnInit {
   public showUnlock = false;
@@ -84,8 +84,8 @@ export class LockScreenComponent implements OnInit {
     this.showUnlock = true;
   }
 
-  getDays(date: NzSafeAny): 0 | 1 | 2 | 3 | 4 | 5 | 6 {
-    return getDay(date);
+  getWeekdayKey(date: NzSafeAny): string {
+    return `lockScreen.weekday.${getDay(date)}`;
   }
 
   initForm(): void {

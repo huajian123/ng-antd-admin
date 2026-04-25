@@ -165,6 +165,25 @@
     "color.geekblue": "Xanh geek",
     "color.purple": "Tím"
   },
+  "lockScreen": {
+    "clickToUnlock": "Nhấn để mở khóa",
+    "placeholder": "Vui lòng nhập",
+    "back": "Quay lại",
+    "backToLogin": "Quay lại đăng nhập",
+    "enterSystem": "Vào hệ thống",
+    "weekPrefix": "",
+    "weekday": {
+      "0": "CN",
+      "1": "T2",
+      "2": "T3",
+      "3": "T4",
+      "4": "T5",
+      "5": "T6",
+      "6": "T7"
+    },
+    "passwordRequired": "Vui lòng nhập mật khẩu khóa màn hình",
+    "passwordWrong": "Mật khẩu khóa màn hình không đúng"
+  },
   "lockWidget": {
     "password": "Mật khẩu khóa màn hình",
     "passwordRequired": "Vui lòng nhập mật khẩu khóa màn hình",
