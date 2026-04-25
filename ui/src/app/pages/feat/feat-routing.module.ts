@@ -42,5 +42,11 @@ export default [
   { path: 'water-mark', title: '水印', data: { key: 'water-mark' }, loadComponent: () => import('./water-mark/water-mark.component').then(m => m.WaterMarkDemoComponent) },
   { path: 'keep-alive', title: 'KeepAlive', data: { key: 'keep-alive' }, loadComponent: () => import('./keep-alive/keep-alive').then(m => m.KeepAliveDemo) },
   { path: 'transitions', loadChildren: () => import('./transitions/transitions-routing') },
-  { path: 'signal-demo', loadChildren: () => import('./signal-demo/signal-demo-routing') }
+  { path: 'signal-demo', loadChildren: () => import('./signal-demo/signal-demo-routing') },
+  {
+    path: 'multilingual',
+    title: 'menu.default:feat:multilingual',
+    data: { key: 'basic-advanced' },
+    loadComponent: () => import('./multilingual/multilingual').then(m => m.Multilingual)
+  }
 ] satisfies Route[];

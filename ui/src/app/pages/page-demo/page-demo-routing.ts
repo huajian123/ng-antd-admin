@@ -37,9 +37,9 @@ export default [
     loadComponent: () => import('./task/task.component').then(m => m.TaskComponent)
   },
   {
-    path: 'page-demo1',
-    title: 'menu.default:page-demo:page-demo1',
-    data: { key: 'page-demo1' },
+    path: 'new-layout',
+    title: 'menu.default:page-demo:new-layout',
+    data: { key: 'new-layout' },
     loadComponent: () => import('./new-page-layout/new-page-layout.component').then(m => m.NewPageLayoutComponent)
   },
   {

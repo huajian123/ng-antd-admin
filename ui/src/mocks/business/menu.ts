@@ -34,7 +34,7 @@ let menus: Menu[] = [
   { id: 16, fatherId: 2, menuName: '个人页', menuType: 'C', alIcon: '', icon: 'user', path: '/default/page-demo/personal', code: 'default:page-demo:personal', orderNum: 6, status: true, newLinkFlag: false, visible: true },
   { id: 17, fatherId: 2, menuName: '图形编辑器', menuType: 'C', alIcon: 'icon-mel-help', icon: '', path: '/default/page-demo/flow', code: 'default:page-demo:flow', orderNum: 7, status: true, newLinkFlag: false, visible: true },
   { id: 18, fatherId: 2, menuName: '任务', menuType: 'C', alIcon: '', icon: 'border-bottom', path: '/default/page-demo/task', code: 'default:page-demo:task', orderNum: 8, status: true, newLinkFlag: false, visible: true },
-  { id: 19, fatherId: 2, menuName: '新布局', menuType: 'C', alIcon: '', icon: 'caret-down', path: '/default/page-demo/page-demo1', code: 'default:page-demo:page-demo1', orderNum: 9, status: true, newLinkFlag: false, visible: true },
+  { id: 19, fatherId: 2, menuName: '新布局', menuType: 'C', alIcon: '', icon: 'caret-down', path: '/default/page-demo/new-layout', code: 'default:page-demo:new-layout', orderNum: 9, status: true, newLinkFlag: false, visible: true },
   { id: 23, fatherId: 3, menuName: '消息提示', menuType: 'C', alIcon: '', icon: 'dashboard', path: '/default/feat/msg', code: 'default:feat:msg', orderNum: 1, status: true, newLinkFlag: false, visible: true },
   { id: 24, fatherId: 3, menuName: '图标', menuType: 'C', alIcon: '', icon: 'dashboard', path: '/default/feat/icons', code: 'default:feat:icons', orderNum: 2, status: true, newLinkFlag: false, visible: true },
   { id: 25, fatherId: 3, menuName: '右键菜单', menuType: 'C', alIcon: '', icon: 'dashboard', path: '/default/feat/context-menu', code: 'default:feat:context-menu', orderNum: 3, status: true, newLinkFlag: false, visible: true },
@@ -96,7 +96,7 @@ let menus: Menu[] = [
   { id: 81, fatherId: 16, menuName: '个人设置', menuType: 'C', alIcon: '', icon: 'user', path: '/default/page-demo/personal/personal-setting', code: 'default:page-demo:personal:personal-setting', orderNum: 2, status: true, newLinkFlag: false, visible: true },
   { id: 82, fatherId: 17, menuName: '流程图', menuType: 'C', alIcon: '', icon: 'highlight', path: '/default/page-demo/flow/flow-chat', code: 'default:page-demo:flow:flow-chat', orderNum: 1, status: true, newLinkFlag: false, visible: true },
   { id: 83, fatherId: 33, menuName: 'zorro文档', menuType: 'C', alIcon: '', icon: 'dashboard', path: '/default/feat/frame/zorro-doc', code: 'default:feat:frame:zorro-doc', orderNum: 1, status: true, newLinkFlag: false, visible: true },
-  { id: 84, fatherId: 33, menuName: '外部链接', menuType: 'C', alIcon: '', icon: 'usergroup-delete', path: 'https://github.com/huajian123/ng-antd-admin', code: 'https://github.com/huajian123/ng-antd-admin', orderNum: 2, status: true, newLinkFlag: true, visible: true },
+  { id: 84, fatherId: 33, menuName: '外部链接', menuType: 'C', alIcon: '', icon: 'usergroup-delete', path: 'https://github.com/huajian123/ng-antd-admin', code: 'default:feat:frame:other-link', orderNum: 2, status: true, newLinkFlag: true, visible: true },
   { id: 85, fatherId: 34, menuName: '缓存滚动条', menuType: 'C', alIcon: '', icon: 'dashboard', path: '/default/feat/scroll/keep-scroll-page', code: 'default:feat:scroll:keep-scroll-page', orderNum: 1, status: true, newLinkFlag: false, visible: true },
   { id: 86, fatherId: 34, menuName: '玩弄滚动条', menuType: 'C', alIcon: '', icon: 'dashboard', path: '/default/feat/scroll/play-scroll', code: 'default:feat:scroll:play-scroll', orderNum: 2, status: true, newLinkFlag: false, visible: true },
   { id: 87, fatherId: 35, menuName: '高德', menuType: 'C', alIcon: '', icon: 'highlight', path: '/default/feat/charts/gaode-map', code: 'default:feat:charts:gaode-map', orderNum: 1, status: true, newLinkFlag: false, visible: true },
@@ -142,9 +142,10 @@ let menus: Menu[] = [
   { id: 127, fatherId: 121, menuName: '与Observable互转', menuType: 'C', alIcon: '', icon: 'border-inner', path: '/default/feat/signal-demo/change-to-observable', code: 'default:feat:signal-demo:change-to-observable', orderNum: 6, status: true, newLinkFlag: false, visible: true },
   { id: 128, fatherId: 121, menuName: 'Signal&Reactive Forms', menuType: 'C', alIcon: '', icon: 'caret-left', path: '/default/feat/signal-demo/signal-reactive-forms', code: 'default:feat:signal-demo:signal-reactive-forms', orderNum: 7, status: true, newLinkFlag: false, visible: true },
   { id: 129, fatherId: 121, menuName: '综合实战', menuType: 'C', alIcon: '', icon: 'instagram', path: '/default/feat/signal-demo/signal-comprehensive-practical', code: 'default:feat:signal-demo:signal-comprehensive-practical', orderNum: 8, status: true, newLinkFlag: false, visible: true },
+  { id: 130, fatherId: 3, menuName: '多语言', menuType: 'C', alIcon: '', icon: 'menu-fold', path: '/default/feat/multilingual', code: 'default:feat:multilingual', orderNum: 29, status: true, newLinkFlag: false, visible: true },
 ];
 
-let nextId = 130;
+let nextId = 131;
 
 export const menu = [
   http.post('/site/api/auth/menu', () => {
