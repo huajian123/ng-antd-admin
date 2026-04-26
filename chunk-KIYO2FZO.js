@@ -1,1 +1,0 @@
-import"./chunk-DAQOROHW.js";var t=[{path:"",redirectTo:"login1",pathMatch:"full"},{path:"login1",title:"menu.blank:other-login:login1",data:{key:"login1"},loadComponent:()=>import("./chunk-37F7SNJN.js").then(o=>o.Login1Component)}];export{t as default};
