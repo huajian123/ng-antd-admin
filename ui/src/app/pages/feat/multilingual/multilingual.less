@@ -1,0 +1,272 @@
+.multilingual-page {
+  width: 100%;
+}
+
+// Hero Section
+.hero-section {
+  padding: 40px 0 32px;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.hero-title {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.hero-subtitle {
+  font-size: 15px;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.7;
+  opacity: 0.65;
+}
+
+.current-lang-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  border-radius: 40px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+
+  .flag {
+    font-size: 20px;
+    line-height: 1;
+  }
+}
+
+// Section Label
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+
+  span[nz-icon] {
+    font-size: 13px;
+  }
+}
+
+// Language Cards
+.lang-card {
+  cursor: pointer;
+  border-radius: 12px !important;
+  transition: all 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.lang-card__inner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.lang-card__flag {
+  font-size: 32px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.lang-card__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.lang-card__name {
+  font-size: 15px;
+  font-weight: 600;
+  transition: color 0.2s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lang-card__native {
+  font-size: 11px;
+  margin-top: 2px;
+  opacity: 0.55;
+}
+
+.lang-card__region {
+  font-size: 11px;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  opacity: 0.45;
+}
+
+.lang-card__indicator {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #fff;
+  font-size: 12px;
+  transition: all 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+// Preview Card
+.preview-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.preview-card__title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.preview-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.preview-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  transition: background 0.2s;
+
+  &__key {
+    font-family: 'SFMono-Regular', Consolas, monospace;
+    font-size: 12px;
+    flex: 0 0 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    opacity: 0.55;
+  }
+
+  &__arrow {
+    font-size: 14px;
+    flex-shrink: 0;
+    opacity: 0.3;
+  }
+
+  &__value {
+    font-size: 14px;
+    font-weight: 500;
+    flex: 1;
+  }
+}
+
+// Stats
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.stat-item {
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+// Timeline
+.timeline-desc {
+  font-size: 12px;
+  margin: 4px 0 0;
+  line-height: 1.5;
+  opacity: 0.65;
+}
+
+// Code block
+.code-block {
+  border-radius: 10px;
+  padding: 16px;
+  margin: 0;
+  overflow-x: auto;
+  background: #1a1a2e;
+
+  code {
+    font-family: 'SFMono-Regular', Consolas, monospace;
+    font-size: 12px;
+    line-height: 1.7;
+    white-space: pre;
+    color: #a8d8a8;
+  }
+}
+
+@import 'mixin';
+.themeMixin({
+  :host {
+    .hero-eyebrow {
+      background: @primary-color;
+      color: @text-color-inverse;
+    }
+
+    .current-lang-badge {
+      background: @background-color-base;
+    }
+
+    .section-label {
+      color: @text-color-secondary;
+    }
+
+    .lang-card {
+      &:hover {
+        border-color: @primary-color !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+      }
+
+      &--active {
+        border-color: @primary-color !important;
+        background: @background-color-base;
+
+        .lang-card__name {
+          color: @primary-color;
+        }
+      }
+    }
+
+    .lang-card__indicator {
+      background: @background-color-base;
+    }
+
+    .preview-item {
+      background: @background-color-base;
+
+      &:hover {
+        border-color: @primary-color;
+      }
+    }
+
+    .stat-item {
+      background: @background-color-base;
+    }
+
+  }
+});

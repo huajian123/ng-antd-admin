@@ -4,6 +4,7 @@ import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-hea
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -20,7 +21,7 @@ type confirmType = common | 'info' | 'confirm';
   templateUrl: './msg.component.html',
   styleUrl: './msg.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [PageHeaderComponent, NzCardModule, NzButtonModule, NzWaveModule, NzIconModule]
+  imports: [PageHeaderComponent, NzCardModule, NzButtonModule, NzWaveModule, NzIconModule, NzGridModule]
 })
 export class MsgComponent {
   map = {

@@ -1,22 +1,99 @@
-[nz-button] {
-  margin-right: 8px;
-  margin-bottom: 12px;
+// Hero Section
+.hero-section {
+  padding: 40px 0 32px;
 }
 
-.success {
-  border-color: #55d187;
-  color: white;
-  background: #55d187;
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
-.warning {
-  border-color: #efbd47;
-  color: white;
-  background: #efbd47;
+.hero-title {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
 }
 
-.loading {
-  border-color: #0960bd;
-  color: white;
-  background: #0960bd;
+.hero-subtitle {
+  font-size: 14px;
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.7;
+  opacity: 0.65;
 }
+
+// Section Label
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+
+  span[nz-icon] {
+    font-size: 13px;
+  }
+}
+
+.card-desc {
+  font-size: 13px;
+  line-height: 1.6;
+  opacity: 0.65;
+}
+
+// Button group
+.btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  [nz-button] {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    border-radius: 8px;
+    transition: all 0.25s cubic-bezier(0.32, 0.72, 0, 1);
+
+    &:active {
+      transform: scale(0.97) translateY(1px);
+    }
+  }
+}
+
+@import 'mixin';
+.themeMixin({
+  :host {
+    .hero-eyebrow {
+      background: @primary-color;
+      color: @text-color-inverse;
+    }
+
+    .section-label {
+      color: @text-color-secondary;
+    }
+
+    .card-desc {
+      color: @text-color-secondary;
+    }
+
+    .btn-ghost-success {
+      color: #52c41a !important;
+      border-color: #52c41a !important;
+    }
+
+    .btn-warning {
+      color: #faad14 !important;
+      border-color: #faad14 !important;
+    }
+  }
+});

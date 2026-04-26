@@ -1,1 +1,149 @@
-<p>multilingual works!</p>
+<div class="multilingual-page p-24">
+  <!-- Hero Section -->
+  <div class="hero-section text-center m-b-30">
+    <div class="hero-eyebrow m-b-20">
+      <span nz-icon nzTheme="outline" nzType="global"></span>
+      {{ 'menu.default:feat:multilingual' | translate }}
+    </div>
+    <h1 class="hero-title m-b-8">多语言国际化</h1>
+    <p class="hero-subtitle">支持简体中文、繁體中文、English、Tiếng Việt 四种语言实时切换，基于 @ngx-translate 与 ng-zorro-antd i18n 双引擎驱动</p>
+    <div class="current-lang-badge m-t-20">
+      <span class="flag">{{ currentLangOption().flag }}</span>
+      <span>{{ currentLangOption().label }}</span>
+      <nz-badge nzText="Active" [nzColor]="currentLangOption().color"></nz-badge>
+    </div>
+  </div>
+
+  <!-- Language Switcher -->
+  <div class="section-label m-b-10">
+    <span nz-icon nzTheme="outline" nzType="swap"></span>
+    语言切换
+  </div>
+  <div class="m-b-24" nz-row [nzGutter]="[16, 16]">
+    @for (lang of langOptions; track lang.key) {
+      <div nz-col [nzLg]="6" [nzMd]="12" [nzSm]="12" [nzXs]="24">
+        <nz-card class="lang-card" [class.lang-card--active]="currentLang() === lang.key" [nzBodyStyle]="{ padding: '16px' }" [nzBordered]="true" (click)="switchLang(lang.key)">
+          <div class="lang-card__inner">
+            <div class="lang-card__flag">{{ lang.flag }}</div>
+            <div class="lang-card__info">
+              <div class="lang-card__name">{{ lang.label }}</div>
+              <div class="lang-card__native">{{ lang.nativeName }}</div>
+              <div class="lang-card__region">
+                <span nz-icon nzTheme="outline" nzType="environment"></span>
+                {{ lang.region }}
+              </div>
+            </div>
+            <div class="lang-card__indicator" [style.background]="lang.color">
+              @if (currentLang() === lang.key) {
+                <span nz-icon nzTheme="outline" nzType="check"></span>
+              }
+            </div>
+          </div>
+        </nz-card>
+      </div>
+    }
+  </div>
+
+  <!-- Live Preview -->
+  <div class="section-label m-b-10">
+    <span nz-icon nzTheme="outline" nzType="eye"></span>
+    实时预览
+  </div>
+  <div class="m-b-24" nz-row [nzGutter]="[16, 16]">
+    <div nz-col [nzLg]="14" [nzXs]="24">
+      <nz-card [nzBordered]="false">
+        <div class="preview-card__header m-b-8">
+          <span class="preview-card__title">
+            <span nz-icon nzTheme="outline" nzType="translation"></span>
+            当前语言文本预览
+          </span>
+          <nz-tag [nzColor]="currentLangOption().color">{{ currentLangOption().flag }} {{ currentLangOption().label }}</nz-tag>
+        </div>
+        <nz-divider></nz-divider>
+        <div class="preview-items">
+          @for (key of previewKeys; track key) {
+            <div class="preview-item">
+              <span class="preview-item__key">{{ key }}</span>
+              <span class="preview-item__arrow">→</span>
+              <span class="preview-item__value">{{ key | translate }}</span>
+            </div>
+          }
+        </div>
+      </nz-card>
+    </div>
+
+    <div nz-col [nzLg]="10" [nzXs]="24">
+      <div nz-row [nzGutter]="[0, 16]">
+        <div nz-col [nzSpan]="24">
+          <nz-card [nzBordered]="false">
+            <div class="stats-grid">
+              <div class="stat-item">
+                <nz-statistic nzSuffix="种" nzTitle="支持语言" [nzValue]="4"></nz-statistic>
+              </div>
+              <div class="stat-item">
+                <nz-statistic nzSuffix="个" nzTitle="翻译命名空间" [nzValue]="6"></nz-statistic>
+              </div>
+              <div class="stat-item">
+                <nz-statistic nzSuffix="+" nzTitle="翻译条目" [nzValue]="200"></nz-statistic>
+              </div>
+              <div class="stat-item">
+                <nz-statistic nzSuffix="个" nzTitle="翻译引擎" nzValue="2"></nz-statistic>
+              </div>
+            </div>
+          </nz-card>
+        </div>
+        <div nz-col [nzSpan]="24">
+          <nz-card nzTitle="技术架构" [nzBordered]="false">
+            <nz-timeline>
+              <nz-timeline-item nzColor="blue">
+                <strong>@ngx-translate/core</strong>
+                <p class="timeline-desc">管理应用级翻译文本，支持 pipe 与 service 两种调用方式</p>
+              </nz-timeline-item>
+              <nz-timeline-item nzColor="green">
+                <strong>ng-zorro-antd i18n</strong>
+                <p class="timeline-desc">同步切换 Zorro 组件内置文本（日期选择器、分页等）</p>
+              </nz-timeline-item>
+              <nz-timeline-item nzColor="red">
+                <strong>LanguageService</strong>
+                <p class="timeline-desc">统一封装切换逻辑，使用 Signal 响应式存储当前语言状态</p>
+              </nz-timeline-item>
+              <nz-timeline-item nzColor="grey">
+                <strong>LocalStorage 持久化</strong>
+                <p class="timeline-desc">语言偏好写入本地存储，刷新页面后自动恢复</p>
+              </nz-timeline-item>
+            </nz-timeline>
+          </nz-card>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Translation Table -->
+  <div class="section-label m-b-10">
+    <span nz-icon nzTheme="outline" nzType="table"></span>
+    翻译对照表
+  </div>
+  <nz-card class="m-b-24" [nzBordered]="false">
+    <app-ant-table [tableConfig]="tableConfig" [tableData]="translationKeys"></app-ant-table>
+  </nz-card>
+
+  <!-- Usage Guide -->
+  <div class="section-label m-b-10">
+    <span nz-icon nzTheme="outline" nzType="code"></span>
+    使用方式
+  </div>
+  <div nz-row [nzGutter]="[16, 16]">
+    <div nz-col [nzLg]="12" [nzXs]="24">
+      <nz-card nzTitle="Pipe 用法（模板）" [nzBordered]="false">
+        <nz-alert nzMessage="在模板中使用 translate pipe 即可自动响应语言切换" nzShowIcon nzType="info"></nz-alert>
+        <pre class="code-block m-t-16"><code>{{ pipeExample }}</code></pre>
+      </nz-card>
+    </div>
+    <div nz-col [nzLg]="12" [nzXs]="24">
+      <nz-card nzTitle="Service 用法（组件）" [nzBordered]="false">
+        <nz-alert nzMessage="在组件中注入 LanguageService 调用 setLang() 切换语言" nzShowIcon nzType="success"></nz-alert>
+        <pre class="code-block m-t-16"><code>{{ serviceExample }}</code></pre>
+      </nz-card>
+    </div>
+  </div>
+</div>
