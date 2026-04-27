@@ -46,7 +46,7 @@ export default [
   {
     path: 'multilingual',
     title: 'menu.default:feat:multilingual',
-    data: { key: 'basic-advanced' },
+    data: { key: 'multilingual' },
     loadComponent: () => import('./multilingual/multilingual').then(m => m.Multilingual)
   }
 ] satisfies Route[];

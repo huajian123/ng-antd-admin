@@ -1,35 +1,3 @@
-// Hero Section
-.hero-section {
-  padding: 40px 0 32px;
-}
-
-.hero-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 14px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.hero-title {
-  font-size: 36px;
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-}
-
-.hero-subtitle {
-  font-size: 14px;
-  max-width: 560px;
-  margin: 0 auto;
-  line-height: 1.7;
-  opacity: 0.65;
-}
-
 // Section Label
 .section-label {
   display: flex;
@@ -39,6 +7,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
+  opacity: 0.55;
 
   span[nz-icon] {
     font-size: 13px;
@@ -70,30 +39,12 @@
   }
 }
 
-@import 'mixin';
-.themeMixin({
-  :host {
-    .hero-eyebrow {
-      background: @primary-color;
-      color: @text-color-inverse;
-    }
+.btn-ghost-success {
+  color: #52c41a !important;
+  border-color: #52c41a !important;
+}
 
-    .section-label {
-      color: @text-color-secondary;
-    }
-
-    .card-desc {
-      color: @text-color-secondary;
-    }
-
-    .btn-ghost-success {
-      color: #52c41a !important;
-      border-color: #52c41a !important;
-    }
-
-    .btn-warning {
-      color: #faad14 !important;
-      border-color: #faad14 !important;
-    }
-  }
-});
+.btn-warning {
+  color: #faad14 !important;
+  border-color: #faad14 !important;
+}

@@ -1,16 +1,6 @@
 <app-page-header [pageHeaderInfo]="pageHeaderInfo" />
 
 <div class="p-24">
-  <!-- Hero Section -->
-  <div class="hero-section text-center m-b-30">
-    <div class="hero-eyebrow m-b-20">
-      <span nz-icon nzTheme="outline" nzType="bell"></span>
-      消息与通知
-    </div>
-    <h1 class="hero-title m-b-8">消息提示系统</h1>
-    <p class="hero-subtitle">涵盖 Message、Confirm、Modal、Notification 四种反馈形式，满足不同交互场景下的用户提示需求</p>
-  </div>
-
   <!-- Message -->
   <div class="section-label m-b-10">
     <span nz-icon nzTheme="outline" nzType="message"></span>
@@ -29,7 +19,7 @@
 
   <!-- Confirm + Modal -->
   <div class="m-b-24" nz-row [nzGutter]="[16, 16]">
-    <div nz-col [nzMd]="12" [nzXs]="24">
+    <div nz-col [nzLg]="12" [nzXs]="24">
       <div class="section-label m-b-10">
         <span nz-icon nzTheme="outline" nzType="question-circle"></span>
         确认对话框
@@ -45,7 +35,7 @@
       </nz-card>
     </div>
 
-    <div nz-col [nzMd]="12" [nzXs]="24">
+    <div nz-col [nzLg]="12" [nzXs]="24">
       <div class="section-label m-b-10">
         <span nz-icon nzTheme="outline" nzType="layout"></span>
         模态对话框

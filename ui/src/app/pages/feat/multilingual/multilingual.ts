@@ -3,6 +3,7 @@ import { Component, ChangeDetectionStrategy, inject, computed } from '@angular/c
 import { TranslateModule } from '@ngx-translate/core';
 import { LanguageService, Lang } from '@core/services/store/common-store/language.service';
 import { AntTableComponent, AntTableConfig } from '@shared/components/ant-table/ant-table.component';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzTagModule } from 'ng-zorro-antd/tag';
@@ -37,10 +38,16 @@ interface TranslationKey {
   templateUrl: './multilingual.html',
   styleUrl: './multilingual.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, AntTableComponent, NzCardModule, NzTagModule, NzDividerModule, NzBadgeModule, NzIconModule, NzGridModule, NzStatisticModule, NzTimelineModule, NzAlertModule]
+  imports: [TranslateModule, PageHeaderComponent, AntTableComponent, NzCardModule, NzTagModule, NzDividerModule, NzBadgeModule, NzIconModule, NzGridModule, NzStatisticModule, NzTimelineModule, NzAlertModule]
 })
 export class Multilingual {
   private langService = inject(LanguageService);
+
+  pageHeaderInfo: Partial<PageHeaderType> = {
+    title: '多语言国际化',
+    breadcrumb: ['首页', '功能', '多语言'],
+    desc: '支持简体中文、繁體中文、English、Tiếng Việt 四种语言实时切换'
+  };
 
   currentLang = this.langService.$currentLang;
 

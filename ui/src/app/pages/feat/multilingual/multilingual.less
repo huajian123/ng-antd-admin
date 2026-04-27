@@ -2,54 +2,6 @@
   width: 100%;
 }
 
-// Hero Section
-.hero-section {
-  padding: 40px 0 32px;
-}
-
-.hero-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 14px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.hero-title {
-  font-size: 40px;
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-}
-
-.hero-subtitle {
-  font-size: 15px;
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: 1.7;
-  opacity: 0.65;
-}
-
-.current-lang-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 20px;
-  border-radius: 40px;
-  font-size: 14px;
-  font-weight: 500;
-  transition: all 0.3s cubic-bezier(0.32, 0.72, 0, 1);
-
-  .flag {
-    font-size: 20px;
-    line-height: 1;
-  }
-}
-
 // Section Label
 .section-label {
   display: flex;
@@ -59,6 +11,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
+  opacity: 0.55;
 
   span[nz-icon] {
     font-size: 13px;
@@ -71,35 +24,38 @@
   border-radius: 12px !important;
   transition: all 0.3s cubic-bezier(0.32, 0.72, 0, 1);
 
+  &:hover {
+    border-color: #1677ff !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  }
+
   &:active {
     transform: scale(0.98);
   }
+
+  &--active {
+    border-color: #1677ff !important;
+
+    ::ng-deep .ant-card-meta-title {
+      color: #1677ff;
+    }
+  }
 }
 
-.lang-card__inner {
+.lang-card__body {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 8px;
+
+  nz-card-meta {
+    flex: 1;
+    min-width: 0;
+  }
 }
 
 .lang-card__flag {
   font-size: 32px;
   line-height: 1;
-  flex-shrink: 0;
-}
-
-.lang-card__info {
-  flex: 1;
-  min-width: 0;
-}
-
-.lang-card__name {
-  font-size: 15px;
-  font-weight: 600;
-  transition: color 0.2s;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .lang-card__native {
@@ -124,7 +80,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
   color: #fff;
   font-size: 12px;
   transition: all 0.3s cubic-bezier(0.32, 0.72, 0, 1);
@@ -157,7 +112,12 @@
   gap: 12px;
   padding: 10px 14px;
   border-radius: 8px;
-  transition: background 0.2s;
+  border: 1px solid transparent;
+  transition: border-color 0.2s;
+
+  &:hover {
+    border-color: #1677ff;
+  }
 
   &__key {
     font-family: 'SFMono-Regular', Consolas, monospace;
@@ -193,6 +153,7 @@
   padding: 12px;
   border-radius: 10px;
   text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 // Timeline
@@ -220,53 +181,3 @@
   }
 }
 
-@import 'mixin';
-.themeMixin({
-  :host {
-    .hero-eyebrow {
-      background: @primary-color;
-      color: @text-color-inverse;
-    }
-
-    .current-lang-badge {
-      background: @background-color-base;
-    }
-
-    .section-label {
-      color: @text-color-secondary;
-    }
-
-    .lang-card {
-      &:hover {
-        border-color: @primary-color !important;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-      }
-
-      &--active {
-        border-color: @primary-color !important;
-        background: @background-color-base;
-
-        .lang-card__name {
-          color: @primary-color;
-        }
-      }
-    }
-
-    .lang-card__indicator {
-      background: @background-color-base;
-    }
-
-    .preview-item {
-      background: @background-color-base;
-
-      &:hover {
-        border-color: @primary-color;
-      }
-    }
-
-    .stat-item {
-      background: @background-color-base;
-    }
-
-  }
-});

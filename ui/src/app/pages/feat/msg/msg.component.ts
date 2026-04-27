@@ -24,6 +24,12 @@ type confirmType = common | 'info' | 'confirm';
   imports: [PageHeaderComponent, NzCardModule, NzButtonModule, NzWaveModule, NzIconModule, NzGridModule]
 })
 export class MsgComponent {
+  pageHeaderInfo: Partial<PageHeaderType> = {
+    title: '消息提示',
+    breadcrumb: ['首页', '功能', '消息提示'],
+    desc: '涵盖 Message、Confirm、Modal、Notification 四种反馈形式'
+  };
+
   map = {
     info: 'exclamation-circle',
     warning: 'exclamation-circle',
@@ -32,11 +38,6 @@ export class MsgComponent {
     confirm: 'confirm'
   };
 
-  pageHeaderInfo: Partial<PageHeaderType> = {
-    title: '消息提示',
-    breadcrumb: ['首页', '功能', '消息提示'],
-    desc: '这个是好心人pr的功能'
-  };
   private message = inject(NzMessageService);
   private modal = inject(NzModalService);
   private notification = inject(NzNotificationService);
