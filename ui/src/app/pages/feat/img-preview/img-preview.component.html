@@ -2,12 +2,12 @@
 
 <div class="p-24">
   <!-- Group Preview -->
-  <div class="section-label m-b-10">
+  <div class="pg-section-label m-b-10">
     <span nz-icon nzTheme="outline" nzType="picture"></span>
     图片组预览
   </div>
   <nz-card class="m-b-24" [nzBordered]="false">
-    <p class="card-desc m-b-20">多张图片包裹在 <code class="inline-code">nz-image-group</code> 中，点击任意图片可在预览模式下左右切换。</p>
+    <p class="pg-card-desc m-b-20">多张图片包裹在 <code class="pg-inline-code">nz-image-group</code> 中，点击任意图片可在预览模式下左右切换。</p>
     <div class="img-grid">
       @for (img of groupImages; track img.src) {
         <div class="img-item">
@@ -19,18 +19,18 @@
   </nz-card>
 
   <!-- Service Preview -->
-  <div class="section-label m-b-10">
+  <div class="pg-section-label m-b-10">
     <span nz-icon nzTheme="outline" nzType="eye"></span>
     无图预览（Service 调用）
   </div>
   <nz-card [nzBordered]="false">
-    <p class="card-desc m-b-20">通过注入 <code class="inline-code">NzImageService</code> 调用 <code class="inline-code">preview()</code>，无需在模板中放置 img 元素，适合动态数据场景。</p>
-    <div class="demo-area">
+    <p class="pg-card-desc m-b-20">通过注入 <code class="pg-inline-code">NzImageService</code> 调用 <code class="pg-inline-code">preview()</code>，无需在模板中放置 img 元素，适合动态数据场景。</p>
+    <div class="pg-demo-area">
       <button nz-button nzType="primary" (click)="onClick()">
         <span nz-icon nzTheme="outline" nzType="eye"></span>
         打开预览
       </button>
-      <span class="demo-hint">
+      <span class="pg-demo-hint">
         <span nz-icon nzTheme="outline" nzType="info-circle"></span>
         点击按钮直接唤起图片预览，支持缩放与旋转
       </span>

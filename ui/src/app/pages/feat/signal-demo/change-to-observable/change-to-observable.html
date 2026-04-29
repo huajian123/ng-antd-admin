@@ -12,7 +12,7 @@
           <nz-tag nzColor="green">{{ debouncedSearch() || '（空）' }}</nz-tag>
         </div>
         <nz-divider />
-        <pre class="code-block"><code>private readonly search$ = new Subject&lt;string&gt;();
+        <pre class="pg-code-block"><code>private readonly search$ = new Subject&lt;string&gt;();
 readonly debouncedSearch = toSignal(
   this.search$.pipe(debounceTime(300), distinctUntilChanged()),
           {{ '{' }} initialValue: '' {{ '}' }}
@@ -31,7 +31,7 @@ readonly debouncedSearch = toSignal(
           <nz-descriptions-item nzTitle="tickFormatted()（computed）">{{ tickFormatted() }}</nz-descriptions-item>
         </nz-descriptions>
         <nz-divider />
-        <pre class="code-block"><code>readonly tick = toSignal(
+        <pre class="pg-code-block"><code>readonly tick = toSignal(
   interval(1000).pipe(map(n => n + 1)),
           {{ '{' }} initialValue: 0 {{ '}' }}
           );
@@ -57,7 +57,7 @@ readonly tickFormatted = computed(() => {{ '{' }}
           }
         </div>
         <nz-divider />
-        <pre class="code-block"><code>readonly filterText = signal('');
+        <pre class="pg-code-block"><code>readonly filterText = signal('');
 readonly filteredFruits = toSignal(
   toObservable(this.filterText).pipe(
     debounceTime(200),
@@ -84,7 +84,7 @@ readonly filteredFruits = toSignal(
         </div>
         <button class="m-t-5" nz-button nzSize="small" (click)="clearSubLog()">清空</button>
         <nz-divider />
-        <pre class="code-block"><code>private destroyRef = inject(DestroyRef);
+        <pre class="pg-code-block"><code>private destroyRef = inject(DestroyRef);
 
 // ✅ 推荐：组件销毁时自动取消
 someObs$.pipe(

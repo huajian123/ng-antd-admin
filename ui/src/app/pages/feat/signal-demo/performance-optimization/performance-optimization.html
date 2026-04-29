@@ -16,7 +16,7 @@
           }
         </div>
         <nz-divider />
-        <pre class="code-block"><code>// ✅ 使用 trackBy：打乱时只移动 DOM
+        <pre class="pg-code-block"><code>// ✅ 使用 trackBy：打乱时只移动 DOM
           @for (item of items(); track trackById($index, item)) { ... }
           trackById = (_: number, item: Item) => item.id;
 
@@ -42,7 +42,7 @@
           <button nz-button nzType="primary" (click)="triggerRecompute()">新增元素（触发重算）</button>
         </div>
         <nz-divider />
-        <pre class="code-block"><code>readonly expensiveSum = computed(() => {{ '{' }}
+        <pre class="pg-code-block"><code>readonly expensiveSum = computed(() => {{ '{' }}
           return bigList().reduce((a, b) => a + b, 0);
           {{ '}' }});
 
@@ -70,7 +70,7 @@
           <button nz-button (click)="updatePlain()">更新普通属性（视图不更新）</button>
         </div>
         <nz-divider />
-        <pre class="code-block"><code>// ✅ Signal 变化 → OnPush 自动更新
+        <pre class="pg-code-block"><code>// ✅ Signal 变化 → OnPush 自动更新
 readonly signalValue = signal('初始值');
 updateSignal(): void {{ '{' }} this.signalValue.set('新值'); {{ '}' }}
 
@@ -102,7 +102,7 @@ updatePlain(): void {{ '{' }} this.plainValue = '新值'; {{ '}' }}</code></pre>
           <button nz-button nzType="primary" (click)="incrementA()">a+1（两者都重算）</button>
         </div>
         <nz-divider />
-        <pre class="code-block"><code>// 依赖 a 和 b，b 变化时重算
+        <pre class="pg-code-block"><code>// 依赖 a 和 b，b 变化时重算
 readonly withTracking = computed(() => a() + b());
 
 // 只依赖 a，b 变化时不重算

@@ -28,7 +28,7 @@
           }
         </div>
         <nz-divider />
-        <pre class="code-block"><code>readonly userId = signal(1);
+        <pre class="pg-code-block"><code>readonly userId = signal(1);
 readonly userResource = resource({{ '{' }}
           params: () => this.userId(),
   loader: ({{ '{' }} params: id {{ '}' }}) => fetchUser(id)
@@ -57,7 +57,7 @@ readonly userResource = resource({{ '{' }}
           <button nz-button nzDanger (click)="triggerError()">触发错误（ID=0）</button>
         </div>
         <nz-divider />
-        <pre class="code-block"><code>// 读取三种状态
+        <pre class="pg-code-block"><code>// 读取三种状态
 userResource.isLoading() // boolean
 userResource.value()     // T | undefined
 userResource.error()     // unknown
@@ -86,7 +86,7 @@ userResource.error()     // unknown
         </div>
         <button class="m-t-10" nz-button nzType="primary" [disabled]="userResource.isLoading()" (click)="reload()"> 手动刷新 </button>
         <nz-divider />
-        <pre class="code-block"><code>// 手动触发重新加载
+        <pre class="pg-code-block"><code>// 手动触发重新加载
 userResource.reload();
 
 // 适用场景：
@@ -120,7 +120,7 @@ userResource.reload();
           }
         </div>
         <nz-divider />
-        <pre class="code-block"><code>// resource() — Promise loader
+        <pre class="pg-code-block"><code>// resource() — Promise loader
 readonly r1 = resource({{ '{' }}
           params: () => this.id(),
   loader: ({{ '{' }} params: id {{ '}' }}) => fetchUser(id)

@@ -12,7 +12,7 @@
           <button nz-button nzDanger (click)="reset()">重置</button>
         </div>
         <nz-divider />
-        <pre class="code-block"><code>count = signal(0);
+        <pre class="pg-code-block"><code>count = signal(0);
 count.update(v => v + 1); // update
 count.set(0);             // set
 count()                   // read</code></pre>
@@ -36,7 +36,7 @@ count()                   // read</code></pre>
           </nz-descriptions-item>
         </nz-descriptions>
         <nz-divider />
-        <pre class="code-block"><code>sum = computed(() => numA() + numB());
+        <pre class="pg-code-block"><code>sum = computed(() => numA() + numB());
 // 仅当 numA 或 numB 变化时重新计算</code></pre>
       </nz-card>
     </div>
@@ -57,7 +57,7 @@ count()                   // read</code></pre>
         </div>
         <button class="m-t-5" nz-button nzSize="small" (click)="clearLog()">清空日志</button>
         <nz-divider />
-        <pre class="code-block"><code>private colorEffect = effect(() => {{ '{' }}
+        <pre class="pg-code-block"><code>private colorEffect = effect(() => {{ '{' }}
           const color = this.effectColor(); // 自动追踪
   log.update(l => [color, ...l]);
           {{ '}' }});</code></pre>
@@ -80,7 +80,7 @@ count()                   // read</code></pre>
           <button nz-button nzType="primary" (click)="setProfileDiff()">age+1（触发）</button>
         </div>
         <nz-divider />
-        <pre class="code-block"><code>profile = signal(obj, {{ '{' }}
+        <pre class="pg-code-block"><code>profile = signal(obj, {{ '{' }}
           equal: (a, b) => a.name === b.name
                 && a.age === b.age
           {{ '}' }});

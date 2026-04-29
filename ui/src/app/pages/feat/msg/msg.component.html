@@ -2,12 +2,12 @@
 
 <div class="p-24">
   <!-- Message -->
-  <div class="section-label m-b-10">
+  <div class="pg-section-label m-b-10">
     <span nz-icon nzTheme="outline" nzType="message"></span>
     全局消息
   </div>
   <nz-card class="m-b-24" [nzBordered]="false">
-    <p class="card-desc m-b-20">轻量级的信息反馈，从顶部出现，3 秒后自动消失，不打断用户操作。</p>
+    <p class="pg-card-desc m-b-20">轻量级的信息反馈，从顶部出现，3 秒后自动消失，不打断用户操作。</p>
     <div class="btn-group">
       <button nz-button nzType="primary" (click)="msg('info')"> <span nz-icon nzTheme="outline" nzType="info-circle"></span>Info </button>
       <button class="btn-ghost-success" nz-button nzGhost nzType="primary" (click)="msg('success')"> <span nz-icon nzTheme="outline" nzType="check-circle"></span>Success </button>
@@ -20,12 +20,12 @@
   <!-- Confirm + Modal -->
   <div class="m-b-24" nz-row [nzGutter]="[16, 16]">
     <div nz-col [nzLg]="12" [nzXs]="24">
-      <div class="section-label m-b-10">
+      <div class="pg-section-label m-b-10">
         <span nz-icon nzTheme="outline" nzType="question-circle"></span>
         确认对话框
       </div>
       <nz-card [nzBordered]="false">
-        <p class="card-desc m-b-20">需要用户明确确认或取消的操作，阻断式交互，防止误操作。</p>
+        <p class="pg-card-desc m-b-20">需要用户明确确认或取消的操作，阻断式交互，防止误操作。</p>
         <div class="btn-group">
           <button nz-button nzType="primary" (click)="modalShow('confirm', 'info')"> <span nz-icon nzTheme="outline" nzType="info-circle"></span>Info </button>
           <button class="btn-ghost-success" nz-button nzGhost nzType="primary" (click)="modalShow('confirm', 'success')"> <span nz-icon nzTheme="outline" nzType="check-circle"></span>Success </button>
@@ -36,12 +36,12 @@
     </div>
 
     <div nz-col [nzLg]="12" [nzXs]="24">
-      <div class="section-label m-b-10">
+      <div class="pg-section-label m-b-10">
         <span nz-icon nzTheme="outline" nzType="layout"></span>
         模态对话框
       </div>
       <nz-card [nzBordered]="false">
-        <p class="card-desc m-b-20">带有标题、内容和操作按钮的完整对话框，适合展示详细信息或表单。</p>
+        <p class="pg-card-desc m-b-20">带有标题、内容和操作按钮的完整对话框，适合展示详细信息或表单。</p>
         <div class="btn-group">
           <button nz-button nzType="primary" (click)="modalShow('info', 'info')"> <span nz-icon nzTheme="outline" nzType="info-circle"></span>Info </button>
           <button class="btn-ghost-success" nz-button nzGhost nzType="primary" (click)="modalShow('success', 'success')"> <span nz-icon nzTheme="outline" nzType="check-circle"></span>Success </button>
@@ -53,12 +53,12 @@
   </div>
 
   <!-- Notification -->
-  <div class="section-label m-b-10">
+  <div class="pg-section-label m-b-10">
     <span nz-icon nzTheme="outline" nzType="notification"></span>
     通知提醒
   </div>
   <nz-card [nzBordered]="false">
-    <p class="card-desc m-b-20">从右上角滑入的通知卡片，支持自定义内容，适合异步任务完成、系统推送等场景。</p>
+    <p class="pg-card-desc m-b-20">从右上角滑入的通知卡片，支持自定义内容，适合异步任务完成、系统推送等场景。</p>
     <div class="btn-group">
       <button nz-button nzType="primary" (click)="createBasicNotification(template)"> <span nz-icon nzTheme="outline" nzType="bell"></span>触发通知 </button>
     </div>

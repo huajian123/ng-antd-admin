@@ -1,12 +1,12 @@
 <app-page-header [pageHeaderInfo]="pageHeaderInfo" />
 
 <div class="p-24">
-  <div class="section-label m-b-10">
+  <div class="pg-section-label m-b-10">
     <span nz-icon nzTheme="outline" nzType="select"></span>
     点击区域检测
   </div>
   <nz-card [nzBordered]="false">
-    <p class="card-desc m-b-20">点击蓝色区域内部与外部会触发不同事件，通过监听 document click 与目标元素 click 的冒泡差异实现区分。</p>
+    <p class="pg-card-desc m-b-20">点击蓝色区域内部与外部会触发不同事件，通过监听 document click 与目标元素 click 的冒泡差异实现区分。</p>
     <div #targetHtml class="click-zone">
       <span class="click-zone__icon" nz-icon nzTheme="outline" nzType="aim"></span>
       <span class="click-zone__text">{{ text() }}</span>

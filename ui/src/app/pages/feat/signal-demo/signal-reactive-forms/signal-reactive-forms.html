@@ -22,7 +22,7 @@
           </nz-descriptions-item>
         </nz-descriptions>
         <nz-divider />
-        <pre class="code-block"><code>readonly nameControl = new FormControl('', Validators.required);
+        <pre class="pg-code-block"><code>readonly nameControl = new FormControl('', Validators.required);
 readonly nameSignal = toSignal(
   this.nameControl.valueChanges,
           {{ '{' }} initialValue: '' {{ '}' }}
@@ -63,7 +63,7 @@ readonly nameLength = computed(() => (this.nameSignal() ?? '').length);</code></
           <nz-tag [nzColor]="isValid() ? 'success' : 'error'">{{ formStatus() }}</nz-tag>
         </div>
         <nz-divider />
-        <pre class="code-block"><code>readonly formStatus = toSignal(
+        <pre class="pg-code-block"><code>readonly formStatus = toSignal(
   this.form.statusChanges,
           {{ '{' }} initialValue: 'INVALID' {{ '}' }}
           );
@@ -89,7 +89,7 @@ readonly isValid = computed(() => this.formStatus() === 'VALID');</code></pre>
           <nz-descriptions-item nzTitle="showExtra()">{{ showExtra() }}</nz-descriptions-item>
         </nz-descriptions>
         <nz-divider />
-        <pre class="code-block"><code>readonly showExtra = signal(false);
+        <pre class="pg-code-block"><code>readonly showExtra = signal(false);
 toggleExtra(): void {{ '{' }}
           if (this.showExtra()) {{ '{' }}
           this.form.removeControl('extra');
@@ -120,7 +120,7 @@ toggleExtra(): void {{ '{' }}
           <div class="empty-hint m-t-10">提交后结果显示在这里</div>
         }
         <nz-divider />
-        <pre class="code-block"><code>readonly submitResult = signal&lt;Record&lt;string, unknown&gt; | null&gt;(null);
+        <pre class="pg-code-block"><code>readonly submitResult = signal&lt;Record&lt;string, unknown&gt; | null&gt;(null);
 submit(): void {{ '{' }}
           if (this.form.valid) {{ '{' }}
           this.submitResult.set(this.form.value);

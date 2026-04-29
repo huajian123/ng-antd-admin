@@ -2,18 +2,18 @@
 
 <div class="p-24">
   <!-- Basic -->
-  <div class="section-label m-b-10">
+  <div class="pg-section-label m-b-10">
     <span nz-icon nzTheme="outline" nzType="interaction"></span>
     基础用法
   </div>
   <nz-card class="m-b-24" [nzBordered]="false">
-    <p class="card-desc m-b-20">在目标元素上监听 <code class="inline-code">contextmenu</code> 事件，调用 <code class="inline-code">NzContextMenuService.create()</code> 即可唤起菜单。</p>
-    <div class="demo-area">
+    <p class="pg-card-desc m-b-20">在目标元素上监听 <code class="pg-inline-code">contextmenu</code> 事件，调用 <code class="pg-inline-code">NzContextMenuService.create()</code> 即可唤起菜单。</p>
+    <div class="pg-demo-area">
       <button nz-button nzType="primary" (contextmenu)="contextMenu($event, menu)">
         <span nz-icon nzTheme="outline" nzType="right-circle"></span>
         在此处右键单击
       </button>
-      <span class="demo-hint">
+      <span class="pg-demo-hint">
         <span nz-icon nzTheme="outline" nzType="info-circle"></span>
         右键点击按钮唤起菜单
       </span>
@@ -21,7 +21,7 @@
   </nz-card>
 
   <!-- Usage Guide -->
-  <div class="section-label m-b-10">
+  <div class="pg-section-label m-b-10">
     <span nz-icon nzTheme="outline" nzType="code"></span>
     使用方式
   </div>
@@ -29,13 +29,13 @@
     <div nz-col [nzLg]="12" [nzXs]="24">
       <nz-card nzTitle="模板" [nzBordered]="false">
         <nz-alert nzMessage="在目标元素绑定 contextmenu 事件，并声明 nz-dropdown-menu" nzShowIcon nzType="info"></nz-alert>
-        <pre class="code-block m-t-16"><code>{{ templateExample }}</code></pre>
+        <pre class="pg-code-block m-t-16"><code>{{ templateExample }}</code></pre>
       </nz-card>
     </div>
     <div nz-col [nzLg]="12" [nzXs]="24">
       <nz-card nzTitle="组件" [nzBordered]="false">
         <nz-alert nzMessage="注入 NzContextMenuService，在事件回调中调用 create()" nzShowIcon nzType="success"></nz-alert>
-        <pre class="code-block m-t-16"><code>{{ componentExample }}</code></pre>
+        <pre class="pg-code-block m-t-16"><code>{{ componentExample }}</code></pre>
       </nz-card>
     </div>
   </div>

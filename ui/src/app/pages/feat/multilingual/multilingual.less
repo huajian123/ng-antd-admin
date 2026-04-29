@@ -2,23 +2,6 @@
   width: 100%;
 }
 
-// Section Label
-.section-label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  opacity: 0.55;
-
-  span[nz-icon] {
-    font-size: 13px;
-  }
-}
-
-// Language Cards
 .lang-card {
   cursor: pointer;
   border-radius: 12px !important;
@@ -85,7 +68,6 @@
   transition: all 0.3s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
-// Preview Card
 .preview-card__header {
   display: flex;
   align-items: center;
@@ -105,79 +87,3 @@
   flex-direction: column;
   gap: 10px;
 }
-
-.preview-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 14px;
-  border-radius: 8px;
-  border: 1px solid transparent;
-  transition: border-color 0.2s;
-
-  &:hover {
-    border-color: #1677ff;
-  }
-
-  &__key {
-    font-family: 'SFMono-Regular', Consolas, monospace;
-    font-size: 12px;
-    flex: 0 0 200px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    opacity: 0.55;
-  }
-
-  &__arrow {
-    font-size: 14px;
-    flex-shrink: 0;
-    opacity: 0.3;
-  }
-
-  &__value {
-    font-size: 14px;
-    font-weight: 500;
-    flex: 1;
-  }
-}
-
-// Stats
-.stats-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-.stat-item {
-  padding: 12px;
-  border-radius: 10px;
-  text-align: center;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-}
-
-// Timeline
-.timeline-desc {
-  font-size: 12px;
-  margin: 4px 0 0;
-  line-height: 1.5;
-  opacity: 0.65;
-}
-
-// Code block
-.code-block {
-  border-radius: 10px;
-  padding: 16px;
-  margin: 0;
-  overflow-x: auto;
-  background: #1a1a2e;
-
-  code {
-    font-family: 'SFMono-Regular', Consolas, monospace;
-    font-size: 12px;
-    line-height: 1.7;
-    white-space: pre;
-    color: #a8d8a8;
-  }
-}
-

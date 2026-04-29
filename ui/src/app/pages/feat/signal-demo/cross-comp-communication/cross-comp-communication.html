@@ -12,7 +12,7 @@
           <app-child-display [value]="parentText()" />
         </div>
         <nz-divider />
-        <pre class="code-block"><code>// 父组件
+        <pre class="pg-code-block"><code>// 父组件
 readonly parentText = signal('Hello');
 
 // 子组件
@@ -35,7 +35,7 @@ readonly upperValue = computed(() => this.value().toUpperCase());</code></pre>
           <nz-tag class="sp-16" nzColor="blue">{{ receivedCount() }}</nz-tag>
         </div>
         <nz-divider />
-        <pre class="code-block"><code>// 子组件
+        <pre class="pg-code-block"><code>// 子组件
 readonly countChange = output&lt;number&gt;();
 increment(): void {{ '{' }}
           this.count.update(v => v + 1);
@@ -63,7 +63,7 @@ increment(): void {{ '{' }}
           <app-child-counter [(checked)]="parentChecked" />
         </div>
         <nz-divider />
-        <pre class="code-block"><code>// 子组件
+        <pre class="pg-code-block"><code>// 子组件
 readonly checked = model(false);
 
 // 父组件模板
@@ -91,7 +91,7 @@ readonly checked = model(false);
           </div>
         </div>
         <nz-divider />
-        <pre class="code-block"><code>&#64;Injectable({{ '{' }} providedIn: 'root' {{ '}' }})
+        <pre class="pg-code-block"><code>&#64;Injectable({{ '{' }} providedIn: 'root' {{ '}' }})
 export class SharedSignalService {{ '{' }}
           readonly $sharedValue = signal('初始值');
           {{ '}' }}

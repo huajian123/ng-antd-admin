@@ -38,7 +38,7 @@
 
             <nz-divider />
 
-            <pre class="code-block"><code>// 1. 获取宿主容器
+            <pre class="pg-code-block"><code>// 1. 获取宿主容器
 const vcr = viewChild&lt;ViewContainerRef&gt;('dynHost',
   &#123; read: ViewContainerRef &#125;);
 
@@ -146,7 +146,7 @@ ref.destroy();</code></pre>
         <!-- 代码说明 -->
         <div nz-col [nzMd]="12" [nzXs]="24">
           <nz-card nzTitle="核心代码">
-            <pre class="code-block"><code>// 1. 创建 Portal（包装组件）
+            <pre class="pg-code-block"><code>// 1. 创建 Portal（包装组件）
 const portal = new ComponentPortal(PortalCard);
 this.selectedPortal.set(portal);
 

@@ -38,7 +38,7 @@
 
         <nz-divider />
 
-        <pre class="code-block"><code>// 动态加载 CDN JS
+        <pre class="pg-code-block"><code>// 动态加载 CDN JS
 const url = 'https://cdnjs.cloudflare.com/.../highlight.min.js';
 const result = await lazyService.loadScript(url);
 
@@ -73,7 +73,7 @@ if (result.status === 'ok') &#123;
 
         <nz-divider />
 
-        <pre class="code-block"><code>// 动态加载 Google Fonts
+        <pre class="pg-code-block"><code>// 动态加载 Google Fonts
 const url = 'https://fonts.googleapis.com/css2?family=Pacifico';
 const result = await lazyService.loadStyle(url);
 
@@ -117,7 +117,7 @@ const result = await lazyService.loadStyle(url);
 
         <nz-divider />
 
-        <pre class="code-block"><code>// 批量加载多个资源（JS + CSS）
+        <pre class="pg-code-block"><code>// 批量加载多个资源（JS + CSS）
 const resources = [
   'https://.../highlight.min.js',
   'https://.../github.min.css'

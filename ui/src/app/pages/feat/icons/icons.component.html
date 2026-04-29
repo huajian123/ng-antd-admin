@@ -2,12 +2,12 @@
 
 <div class="p-24">
   <!-- Icon Selector -->
-  <div class="section-label m-b-10">
+  <div class="pg-section-label m-b-10">
     <span nz-icon nzTheme="outline" nzType="search"></span>
     图标选择器
   </div>
   <nz-card class="m-b-24" [nzBordered]="false">
-    <p class="card-desc m-b-20">内置图标选择器，支持关键词搜索与前端分页，选中后同步到输入框。</p>
+    <p class="pg-card-desc m-b-20">内置图标选择器，支持关键词搜索与前端分页，选中后同步到输入框。</p>
     <div class="selector-row">
       <button nz-button nzType="primary" (click)="visible = !visible">
         <span nz-icon nzTheme="outline" nzType="appstore"></span>
@@ -21,13 +21,13 @@
   </nz-card>
 
   <!-- Outline Icons -->
-  <div class="section-label m-b-10">
+  <div class="pg-section-label m-b-10">
     <span nz-icon nzTheme="outline" nzType="border"></span>
     线框风格
   </div>
   <nz-card class="m-b-24" [nzBordered]="false">
-    <p class="card-desc m-b-20"
-      >ng-zorro 内置的 outline 主题图标，通过 <code class="inline-code">nzType</code> 指定图标名，<code class="inline-code">nzTheme</code> 指定风格（outline / fill / twotone）。</p
+    <p class="pg-card-desc m-b-20"
+      >ng-zorro 内置的 outline 主题图标，通过 <code class="pg-inline-code">nzType</code> 指定图标名，<code class="pg-inline-code">nzTheme</code> 指定风格（outline / fill / twotone）。</p
     >
     <div class="icon-grid">
       @for (icon of outlineIcons; track icon.type) {
@@ -40,12 +40,12 @@
   </nz-card>
 
   <!-- Twotone Icons -->
-  <div class="section-label m-b-10">
+  <div class="pg-section-label m-b-10">
     <span nz-icon nzTheme="twotone" nzType="smile"></span>
     双色风格
   </div>
   <nz-card class="m-b-24" [nzBordered]="false">
-    <p class="card-desc m-b-20">双色图标支持通过 <code class="inline-code">nzTwotoneColor</code> 自定义强调色。</p>
+    <p class="pg-card-desc m-b-20">双色图标支持通过 <code class="pg-inline-code">nzTwotoneColor</code> 自定义强调色。</p>
     <div class="icon-grid">
       @for (icon of twotoneIcons; track icon.type) {
         <div class="icon-item">
@@ -57,12 +57,12 @@
   </nz-card>
 
   <!-- Custom SVG Icons -->
-  <div class="section-label m-b-10">
+  <div class="pg-section-label m-b-10">
     <span nz-icon nzTheme="outline" nzType="code"></span>
     自定义 SVG 图标
   </div>
   <nz-card class="m-b-24" [nzBordered]="false">
-    <p class="card-desc m-b-20">在 <code class="inline-code">i[nz-icon]</code> 内直接放 svg 元素，或通过 <code class="inline-code">provideNzIcons</code> 全局注册。</p>
+    <p class="pg-card-desc m-b-20">在 <code class="pg-inline-code">i[nz-icon]</code> 内直接放 svg 元素，或通过 <code class="pg-inline-code">provideNzIcons</code> 全局注册。</p>
     <div class="icon-grid">
       <div class="icon-item">
         <i class="icon-item__icon icon-item__icon--pink" nz-icon>
@@ -88,14 +88,14 @@
   </nz-card>
 
   <!-- Iconfont Icons -->
-  <div class="section-label m-b-10">
+  <div class="pg-section-label m-b-10">
     <span nz-icon nzTheme="outline" nzType="cloud"></span>
     阿里图标库
   </div>
   <nz-card [nzBordered]="false">
-    <p class="card-desc m-b-20"
-      >去 <code class="inline-code">iconfont.cn</code> 生成在线 JS，通过 <code class="inline-code">LoadAliIconCdnService</code> 在应用启动时加载，模板中用
-      <code class="inline-code">nzIconfont</code> 渲染。</p
+    <p class="pg-card-desc m-b-20"
+      >去 <code class="pg-inline-code">iconfont.cn</code> 生成在线 JS，通过 <code class="pg-inline-code">LoadAliIconCdnService</code> 在应用启动时加载，模板中用
+      <code class="pg-inline-code">nzIconfont</code> 渲染。</p
     >
     <div class="icon-grid">
       @for (icon of iconfontIcons; track icon.type) {

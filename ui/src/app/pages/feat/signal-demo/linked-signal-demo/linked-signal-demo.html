@@ -20,7 +20,7 @@
           <button nz-button nzSize="small" (click)="overrideItem()">手动覆盖</button>
         </div>
         <nz-divider />
-        <pre class="code-block"><code>selectedCategory = signal(categories[0]);
+        <pre class="pg-code-block"><code>selectedCategory = signal(categories[0]);
 selectedItem = linkedSignal(
   () => selectedCategory().defaultItem
 );
@@ -48,7 +48,7 @@ selectedItem = linkedSignal(
           <nz-tag class="m-l-8" nzColor="blue">{{ selectedListItem }}</nz-tag>
         </div>
         <nz-divider />
-        <pre class="code-block"><code>selectedIndex = linkedSignal&lt;number&gt;({{ '{' }}
+        <pre class="pg-code-block"><code>selectedIndex = linkedSignal&lt;number&gt;({{ '{' }}
           source: currentList,
   computation: () => 0  // 列表变化时重置为 0
           {{ '}' }});</code></pre>
@@ -70,7 +70,7 @@ selectedItem = linkedSignal(
           <button nz-button nzType="primary" (click)="resetBase()">baseValue+1（重置 linked）</button>
         </div>
         <nz-divider />
-        <pre class="code-block"><code>computedDouble = computed(() => baseValue() * 2);
+        <pre class="pg-code-block"><code>computedDouble = computed(() => baseValue() * 2);
 // ❌ computedDouble.set(x) — 编译错误，只读
 
 linkedDouble = linkedSignal(() => baseValue() * 2);
@@ -93,7 +93,7 @@ linkedDouble = linkedSignal(() => baseValue() * 2);
           <button nz-button nzType="primary" (click)="resetFromParent()">父组件重置（同步到本地）</button>
         </div>
         <nz-divider />
-        <pre class="code-block"><code>// ant-table.component.ts 中的真实代码
+        <pre class="pg-code-block"><code>// ant-table.component.ts 中的真实代码
 readonly tableConfig = input.required&lt;AntTableConfig&gt;();
 readonly _tableConfig = linkedSignal(() => this.tableConfig());
 

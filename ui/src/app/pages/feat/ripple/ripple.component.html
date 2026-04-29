@@ -1,12 +1,12 @@
 <app-page-header [pageHeaderInfo]="pageHeaderInfo" />
 
 <div class="p-24">
-  <div class="section-label m-b-10">
+  <div class="pg-section-label m-b-10">
     <span nz-icon nzTheme="outline" nzType="highlight"></span>
     水波纹效果
   </div>
   <nz-card [nzBordered]="false">
-    <p class="card-desc m-b-20">自定义 <code class="inline-code">appRipple</code> 指令，点击区域触发水波纹动效，支持禁用与无边界模式。</p>
+    <p class="pg-card-desc m-b-20">自定义 <code class="pg-inline-code">appRipple</code> 指令，点击区域触发水波纹动效，支持禁用与无边界模式。</p>
     <div class="ripple-controls m-b-16">
       <label nz-checkbox [ngModelOptions]="{ standalone: true }" [(ngModel)]="disabled">禁用</label>
       <label nz-checkbox [ngModelOptions]="{ standalone: true }" [(ngModel)]="unbounded">无边界</label>

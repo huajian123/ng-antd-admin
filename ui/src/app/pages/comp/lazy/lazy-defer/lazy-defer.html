@@ -33,7 +33,7 @@
             <div class="demo-placeholder">等待浏览器空闲…</div>
           }
           <nz-divider />
-          <pre class="code-block"><code>&#64;defer (on idle) &#123;
+          <pre class="pg-code-block"><code>&#64;defer (on idle) &#123;
   &lt;app-heavy-card /&gt;
 &#125; &#64;loading (minimum 500ms) &#123;
   &lt;nz-spin nzSimple /&gt;
@@ -61,7 +61,7 @@
             <button #triggerBtn nz-button nzType="dashed" style="width: 100%">点击此处触发加载</button>
           }
           <nz-divider />
-          <pre class="code-block"><code>&#64;defer (on interaction(triggerBtn)) &#123;
+          <pre class="pg-code-block"><code>&#64;defer (on interaction(triggerBtn)) &#123;
   &lt;app-heavy-card /&gt;
 &#125; &#64;placeholder &#123;
   &lt;!-- triggerBtn 是触发元素，点击/键盘触发 --&gt;
@@ -88,7 +88,7 @@
             <div #hoverZone class="demo-placeholder hover-zone">将鼠标移入此区域触发加载</div>
           }
           <nz-divider />
-          <pre class="code-block"><code>&#64;defer (on hover(hoverZone)) &#123;
+          <pre class="pg-code-block"><code>&#64;defer (on hover(hoverZone)) &#123;
   &lt;app-heavy-card /&gt;
 &#125; &#64;placeholder &#123;
   &lt;!-- hoverZone 是触发元素，mouseenter 触发 --&gt;
@@ -115,7 +115,7 @@
             <div class="demo-placeholder">3 秒后自动加载…</div>
           }
           <nz-divider />
-          <pre class="code-block"><code>&#64;defer (on timer(3s)) &#123;
+          <pre class="pg-code-block"><code>&#64;defer (on timer(3s)) &#123;
   &lt;app-heavy-card /&gt;
 &#125; &#64;placeholder (minimum 1s) &#123;
   &lt;!-- minimum 保证 placeholder 至少显示 1s --&gt;
@@ -147,7 +147,7 @@
             <div class="demo-placeholder">等待条件满足（showWhen = false）…</div>
           }
           <nz-divider />
-          <pre class="code-block"><code>// TS
+          <pre class="pg-code-block"><code>// TS
 readonly showWhen = signal(false);
 
 // Template
@@ -177,7 +177,7 @@ readonly showWhen = signal(false);
             <div class="demo-placeholder">滚动到此处触发加载…</div>
           }
           <nz-divider />
-          <pre class="code-block"><code>&#64;defer (on viewport) &#123;
+          <pre class="pg-code-block"><code>&#64;defer (on viewport) &#123;
   &lt;app-heavy-card /&gt;
 &#125; &#64;placeholder &#123;
   &lt;!-- placeholder 本身即观察目标 --&gt;
@@ -230,7 +230,7 @@ readonly showWhen = signal(false);
             <button #prefetchBtn nz-button nzType="dashed" style="width: 100%">点击渲染（代码已在后台预取）</button>
           }
           <nz-divider />
-          <pre class="code-block"><code>&#64;defer (
+          <pre class="pg-code-block"><code>&#64;defer (
   on interaction(prefetchBtn);  // 渲染时机：点击时
   prefetch on idle              // 下载时机：浏览器空闲时
 ) &#123;
