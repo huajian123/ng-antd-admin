@@ -1,9 +1,26 @@
-.div-scroll {
+.scroll-box {
   overflow: auto;
-  height: 100px;
-  border: 1px solid #0c63bd;
+  height: 160px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 12px 16px;
 
   p {
     white-space: nowrap;
+    margin-bottom: 6px;
+    font-size: 13px;
+    opacity: 0.75;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
+}
+
+.inline-code {
+  padding: 1px 6px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+  font-family: 'SFMono-Regular', Consolas, monospace;
+  font-size: 12px;
 }

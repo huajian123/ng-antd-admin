@@ -1,4 +1,15 @@
 <app-page-header [pageHeaderInfo]="pageHeaderInfo" />
-<div class="normal-table-wrap">
-  <button nz-button (click)="go()">开 始</button>
+
+<div class="p-24">
+  <div class="pg-section-label m-b-10">
+    <span nz-icon nzTheme="outline" nzType="compass"></span>
+    引导步骤
+  </div>
+  <nz-card [nzBordered]="false">
+    <p class="pg-card-desc m-b-20">基于 Driver.js 实现的页面引导，逐步高亮目标元素并展示说明，适合新用户上手引导。</p>
+    <button nz-button nzType="primary" (click)="go()">
+      <span nz-icon nzTheme="outline" nzType="play-circle"></span>
+      开始引导
+    </button>
+  </nz-card>
 </div>

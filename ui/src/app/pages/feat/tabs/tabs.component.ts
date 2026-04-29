@@ -4,10 +4,9 @@ import { Router } from '@angular/router';
 import { TabService } from '@core/services/common/tab.service';
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 
-import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzSpaceCompactComponent } from 'ng-zorro-antd/space';
@@ -15,14 +14,18 @@ import { NzSpaceCompactComponent } from 'ng-zorro-antd/space';
 @Component({
   selector: 'app-tabs',
   templateUrl: './tabs.component.html',
+  styleUrl: './tabs.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [PageHeaderComponent, NzCardModule, NzAlertModule, NzButtonModule, NzInputModule, NzWaveModule, NzSpaceCompactComponent]
+  imports: [PageHeaderComponent, NzCardModule, NzButtonModule, NzInputModule, NzIconModule, NzSpaceCompactComponent]
 })
 export class TabsComponent {
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '标签页操作示例，如果需要在当前tab页面展示详情，请在"列表页>查询表格"中点击表格查看按钮，演示效果',
-    breadcrumb: ['首页', '扩展功能', '标签页面操作示例']
+    breadcrumb: ['首页', '功能', '标签页操作'],
+    desc: '修改 Tab 标题、关闭标签页、在新 Tab 中打开详情页'
   };
+
+  readonly detailItems = [1, 2, 3, 4, 5];
   private msg = inject(NzMessageService);
   private tabService = inject(TabService);
   private router = inject(Router);
