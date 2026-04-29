@@ -1,4 +1,21 @@
 <app-page-header [pageHeaderInfo]="pageHeaderInfo" />
-<div class="normal-table-wrap">
-  <button nz-button (click)="go()">触 发</button>
+
+<div class="p-24">
+  <div class="section-label m-b-10">
+    <span nz-icon nzTheme="outline" nzType="clock-circle"></span>
+    登录超时
+  </div>
+  <nz-card [nzBordered]="false">
+    <p class="card-desc m-b-20">模拟后端 Token 过期场景：接口返回 401 后弹出重新登录弹窗，登录成功自动重发原请求；登录失败则跳转登录页。</p>
+    <div class="demo-area">
+      <button nz-button nzType="primary" (click)="go()">
+        <span nz-icon nzTheme="outline" nzType="thunderbolt"></span>
+        触发超时
+      </button>
+      <span class="demo-hint">
+        <span nz-icon nzTheme="outline" nzType="info-circle"></span>
+        点击后将发起一个会返回 401 的请求
+      </span>
+    </div>
+  </nz-card>
 </div>

@@ -1,12 +1,39 @@
 <app-page-header [pageHeaderInfo]="pageHeaderInfo" />
 
-<div class="normal-table-wrap">
-  <nz-image-group>
-    <nz-space>
-      <img *nzSpaceItem alt="" nz-image nzSrc="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" width="200px" />
-      <img *nzSpaceItem alt="" nz-image nzSrc="https://img.alicdn.com/tfs/TB1Z0PywTtYBeNjy1XdXXXXyVXa-186-200.svg" width="200px" />
-    </nz-space>
-  </nz-image-group>
-  <br />
-  <button class="m-t-8" nz-button nzType="primary" (click)="onClick()">无图预览</button>
+<div class="p-24">
+  <!-- Group Preview -->
+  <div class="section-label m-b-10">
+    <span nz-icon nzTheme="outline" nzType="picture"></span>
+    图片组预览
+  </div>
+  <nz-card class="m-b-24" [nzBordered]="false">
+    <p class="card-desc m-b-20">多张图片包裹在 <code class="inline-code">nz-image-group</code> 中，点击任意图片可在预览模式下左右切换。</p>
+    <div class="img-grid">
+      @for (img of groupImages; track img.src) {
+        <div class="img-item">
+          <img class="img-item__thumb" nz-image [alt]="img.alt" [nzSrc]="img.src" />
+          <span class="img-item__label">{{ img.alt }}</span>
+        </div>
+      }
+    </div>
+  </nz-card>
+
+  <!-- Service Preview -->
+  <div class="section-label m-b-10">
+    <span nz-icon nzTheme="outline" nzType="eye"></span>
+    无图预览（Service 调用）
+  </div>
+  <nz-card [nzBordered]="false">
+    <p class="card-desc m-b-20">通过注入 <code class="inline-code">NzImageService</code> 调用 <code class="inline-code">preview()</code>，无需在模板中放置 img 元素，适合动态数据场景。</p>
+    <div class="demo-area">
+      <button nz-button nzType="primary" (click)="onClick()">
+        <span nz-icon nzTheme="outline" nzType="eye"></span>
+        打开预览
+      </button>
+      <span class="demo-hint">
+        <span nz-icon nzTheme="outline" nzType="info-circle"></span>
+        点击按钮直接唤起图片预览，支持缩放与旋转
+      </span>
+    </div>
+  </nz-card>
 </div>

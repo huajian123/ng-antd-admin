@@ -5,13 +5,16 @@ import { ExampleService } from '@services/example/example.service';
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @Component({
   selector: 'app-session-timeout',
   templateUrl: './session-timeout.component.html',
+  styleUrl: './session-timeout.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [PageHeaderComponent, NzButtonModule, NzWaveModule]
+  imports: [PageHeaderComponent, NzButtonModule, NzWaveModule, NzCardModule, NzIconModule]
 })
 export class SessionTimeoutComponent {
   pageHeaderInfo: Partial<PageHeaderType> = {

@@ -2,12 +2,15 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { PageHeaderComponent, PageHeaderType } from '@shared/components/page-header/page-header.component';
 
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzQRCodeModule } from 'ng-zorro-antd/qr-code';
 
 @Component({
   selector: 'app-qrcode',
-  imports: [NzQRCodeModule, PageHeaderComponent],
+  imports: [NzQRCodeModule, PageHeaderComponent, NzCardModule, NzIconModule],
   templateUrl: './qrcode.component.html',
+  styleUrl: './qrcode.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QrcodeComponent {

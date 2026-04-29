@@ -27,30 +27,20 @@
   border: 1px solid rgba(0, 0, 0, 0.12);
 }
 
-.ripple-controls {
+.qr-row {
   display: flex;
-  gap: 16px;
+  flex-wrap: wrap;
+  gap: 24px;
 }
 
-.ripple-demo {
-  height: 240px;
-  border-radius: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.06);
+.qr-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 12px;
-  cursor: pointer;
-  overflow: hidden;
+  gap: 10px;
 
-  &__icon {
-    font-size: 36px;
-    opacity: 0.15;
-  }
-
-  &__hint {
-    font-size: 13px;
-    opacity: 0.45;
+  &__label {
+    font-size: 12px;
+    opacity: 0.55;
   }
 }

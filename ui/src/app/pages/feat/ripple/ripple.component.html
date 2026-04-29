@@ -1,13 +1,19 @@
 <app-page-header [pageHeaderInfo]="pageHeaderInfo" />
 
-<div class="normal-table-wrap">
-  <nz-card>
-    <div class="controls">
-      <label nz-checkbox [ngModelOptions]="{ standalone: true }" [(ngModel)]="disabled">disabled</label>
-      <label nz-checkbox [ngModelOptions]="{ standalone: true }" [(ngModel)]="unbounded">unbounded</label>
+<div class="p-24">
+  <div class="section-label m-b-10">
+    <span nz-icon nzTheme="outline" nzType="highlight"></span>
+    水波纹效果
+  </div>
+  <nz-card [nzBordered]="false">
+    <p class="card-desc m-b-20">自定义 <code class="inline-code">appRipple</code> 指令，点击区域触发水波纹动效，支持禁用与无边界模式。</p>
+    <div class="ripple-controls m-b-16">
+      <label nz-checkbox [ngModelOptions]="{ standalone: true }" [(ngModel)]="disabled">禁用</label>
+      <label nz-checkbox [ngModelOptions]="{ standalone: true }" [(ngModel)]="unbounded">无边界</label>
     </div>
-    <div class="center m-t-10 hand-model ripple-demo" appRipple [color]="color()" [disabled]="disabled()" [unbounded]="unbounded()">
-      <span class="sp-28">点击</span>
+    <div class="ripple-demo" appRipple [color]="color()" [disabled]="disabled()" [unbounded]="unbounded()">
+      <span class="ripple-demo__icon" nz-icon nzTheme="outline" nzType="highlight"></span>
+      <span class="ripple-demo__hint">点击触发水波纹</span>
     </div>
   </nz-card>
 </div>

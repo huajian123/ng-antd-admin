@@ -1,6 +1,21 @@
 <app-page-header [pageHeaderInfo]="pageHeaderInfo" />
-<div class="normal-table-wrap">
-  <nz-qrcode nzValue="https://ng.ant.design/"></nz-qrcode>
 
-  <nz-qrcode class="m-l-8" nzIcon="https://img.alicdn.com/imgextra/i2/O1CN01TBIkzL1Nk3IBB0DLA_!!6000000001607-2-tps-106-120.png" nzLevel="H" nzValue="https://ng.ant.design/"></nz-qrcode>
+<div class="p-24">
+  <div class="section-label m-b-10">
+    <span nz-icon nzTheme="outline" nzType="qrcode"></span>
+    二维码生成
+  </div>
+  <nz-card class="m-b-24" [nzBordered]="false">
+    <p class="card-desc m-b-20">基于 <code class="inline-code">nz-qrcode</code> 组件生成二维码，支持自定义 Logo 与纠错等级。</p>
+    <div class="qr-row">
+      <div class="qr-item">
+        <nz-qrcode nzValue="https://ng.ant.design/"></nz-qrcode>
+        <span class="qr-item__label">基础二维码</span>
+      </div>
+      <div class="qr-item">
+        <nz-qrcode nzIcon="https://img.alicdn.com/imgextra/i2/O1CN01TBIkzL1Nk3IBB0DLA_!!6000000001607-2-tps-106-120.png" nzLevel="H" nzValue="https://ng.ant.design/"> </nz-qrcode>
+        <span class="qr-item__label">带 Logo（高纠错）</span>
+      </div>
+    </div>
+  </nz-card>
 </div>

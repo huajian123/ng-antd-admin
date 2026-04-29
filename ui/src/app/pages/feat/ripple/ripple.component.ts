@@ -6,13 +6,14 @@ import { RippleDirective } from '@shared/directives/ripple.directive';
 
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @Component({
   selector: 'app-ripple',
   templateUrl: './ripple.component.html',
   styleUrl: './ripple.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [PageHeaderComponent, NzCardModule, NzCheckboxModule, FormsModule, RippleDirective]
+  imports: [PageHeaderComponent, NzCardModule, NzCheckboxModule, NzIconModule, FormsModule, RippleDirective]
 })
 export class RippleComponent {
   pageHeaderInfo: Partial<PageHeaderType> = {
