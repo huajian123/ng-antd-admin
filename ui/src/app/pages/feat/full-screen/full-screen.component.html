@@ -1,27 +1,64 @@
 <app-page-header [pageHeaderInfo]="pageHeaderInfo" />
 
-<div class="normal-table-wrap">
-  <nz-card nzTitle="Window Full Screen(不知道为什么vben非要写英文)">
-    <nz-space>
-      <button *nzSpaceItem nz-button nzType="primary" (click)="intoFull()">进入全屏</button>
-      <button *nzSpaceItem nz-button nzType="primary" (click)="toggle()">切换全屏</button>
-      <button *nzSpaceItem nz-button nzType="primary" (click)="exitFull()">退出全屏</button>
-    </nz-space>
-    <div>
-      当前全屏状态：
-      <span class="sp-28 text-error">{{ !isFullscreenFlag() }}</span>
+<div class="p-24">
+  <!-- Window Full Screen -->
+  <div class="pg-section-label m-b-10">
+    <span nz-icon nzTheme="outline" nzType="fullscreen"></span>
+    窗口全屏
+  </div>
+  <nz-card class="m-b-24" [nzBordered]="false">
+    <p class="pg-card-desc m-b-20">控制浏览器窗口进入或退出全屏模式，基于 Fullscreen API 实现。</p>
+    <div class="btn-group m-b-20">
+      <button nz-button nzType="primary" (click)="intoFull()">
+        <span nz-icon nzTheme="outline" nzType="fullscreen"></span>
+        进入全屏
+      </button>
+      <button nz-button nzType="default" (click)="toggle()">
+        <span nz-icon nzTheme="outline" nzType="swap"></span>
+        切换全屏
+      </button>
+      <button nz-button nzDanger nzType="primary" (click)="exitFull()">
+        <span nz-icon nzTheme="outline" nzType="fullscreen-exit"></span>
+        退出全屏
+      </button>
+    </div>
+    <div class="status-row">
+      <span class="status-label">当前状态</span>
+      @if (isFullscreenFlag()) {
+        <nz-tag nzColor="error">
+          <span nz-icon nzTheme="outline" nzType="fullscreen-exit"></span>
+          未全屏
+        </nz-tag>
+      } @else {
+        <nz-tag nzColor="success">
+          <span nz-icon nzTheme="outline" nzType="fullscreen"></span>
+          全屏中
+        </nz-tag>
+      }
     </div>
   </nz-card>
 
-  <nz-card class="m-t-15" nzTitle="Dom Full Screen">
-    <button nz-button nzType="primary" (click)="intoDomFull(dom)">下面一整块的dom全屏</button>
+  <!-- Dom Full Screen -->
+  <div class="pg-section-label m-b-10">
+    <span nz-icon nzTheme="outline" nzType="block"></span>
+    DOM 全屏
+  </div>
+  <nz-card class="m-b-16" [nzBordered]="false">
+    <p class="pg-card-desc m-b-20">将指定 DOM 元素全屏展示，而非整个浏览器窗口，适合图表、视频等局部内容放大。</p>
+    <button nz-button nzType="primary" (click)="intoDomFull(dom)">
+      <span nz-icon nzTheme="outline" nzType="expand"></span>
+      将下方区域全屏
+    </button>
   </nz-card>
 
-  <div #dom class="m-t-30 center" style="height: 600px; background: white; margin-left: auto; margin-right: auto">
-    <div>
-      <p class="text-center sp-28 text-error">我就是这个可能被全屏的dom</p>
-
-      <button nz-button nzType="primary" (click)="exitFull()">我这个dom取消全屏</button>
+  <div #dom class="dom-preview">
+    <div class="dom-preview-inner">
+      <span class="dom-preview-icon" nz-icon nzTheme="outline" nzType="block"></span>
+      <p class="dom-preview-title">这块区域可以被全屏</p>
+      <button nz-button nzType="default" (click)="exitFull()">
+        <span nz-icon nzTheme="outline" nzType="fullscreen-exit"></span>
+        退出全屏
+      </button>
     </div>
   </div>
 </div>

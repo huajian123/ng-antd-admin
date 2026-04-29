@@ -1,0 +1,53 @@
+.btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.status-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-label {
+  opacity: 0.55;
+  font-size: 13px;
+}
+
+.dom-preview {
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color cubic-bezier(0.32, 0.72, 0, 1) 0.2s;
+  &:hover {
+    border-color: #1677ff;
+  }
+
+  &:fullscreen,
+  &:-webkit-full-screen {
+    border-radius: 0;
+    border: none;
+  }
+}
+
+.dom-preview-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.dom-preview-icon {
+  font-size: 40px;
+  opacity: 0.2;
+}
+
+.dom-preview-title {
+  font-size: 15px;
+  opacity: 0.45;
+  margin: 0;
+}

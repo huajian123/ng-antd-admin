@@ -7,14 +7,15 @@ import screenfull from 'screenfull';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { NzWaveModule } from 'ng-zorro-antd/core/wave';
-import { NzSpaceModule } from 'ng-zorro-antd/space';
+import { NzTagModule } from 'ng-zorro-antd/tag';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @Component({
   selector: 'app-full-screen',
   templateUrl: './full-screen.component.html',
+  styleUrl: './full-screen.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [PageHeaderComponent, NzCardModule, NzSpaceModule, NzButtonModule, NzWaveModule]
+  imports: [PageHeaderComponent, NzCardModule, NzButtonModule, NzTagModule, NzIconModule]
 })
 export class FullScreenComponent implements OnInit {
   pageHeaderInfo: Partial<PageHeaderType> = {

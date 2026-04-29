@@ -10,21 +10,24 @@ import { ModalResizeDirective } from '@widget/modal/modal-resize.directive';
 import { NzModalWrapService } from '@widget/modal/nz-modal-wrap.service';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-ex-modal',
   templateUrl: './ex-modal.component.html',
+  styleUrl: './ex-modal.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [PageHeaderComponent, NzButtonModule, NzWaveModule, NzModalModule, ModalDragDirective, ModalResizeDirective, CdkDrag, CdkDragHandle]
+  imports: [PageHeaderComponent, NzButtonModule, NzCardModule, NzIconModule, NzModalModule, ModalDragDirective, ModalResizeDirective, CdkDrag, CdkDragHandle]
 })
 export class ExModalComponent {
   readonly dragTpl = viewChild.required<TemplateRef<NzSafeAny>>('dragTpl');
   pageHeaderInfo: Partial<PageHeaderType> = {
-    title: '拖动Modal，是对zorro弹窗组件的拓展',
-    breadcrumb: ['首页', '拖拽modal']
+    title: '拖拽 Modal',
+    breadcrumb: ['首页', '功能', '拖拽 Modal'],
+    desc: '对 ng-zorro Modal 的扩展，支持拖拽移动与自由调整大小'
   };
   destroyRef = inject(DestroyRef);
   isVisible = false;

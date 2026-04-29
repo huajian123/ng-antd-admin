@@ -1,17 +1,71 @@
 <app-page-header [pageHeaderInfo]="pageHeaderInfo" />
 
-<div class="normal-table-wrap">
-  <button class="m-r-8 m-b-8" nz-button (click)="showDailog()">服务的方式创建自定义modal</button>
-  <button class="m-r-8 m-b-8" nz-button (click)="showDailog1()">modal标签通过传nzTitle来进行拖拽</button>
-  <button class="m-r-8 m-b-8" nz-button (click)="showDailogConfirm()">创建可拖动的confirm（by山间之明月）</button>
-  <button class="m-r-8 m-b-8" nz-button (click)="showDailogInfo()">创建可拖动的info（by山间之明月）</button>
-  <button class="m-r-8 m-b-8" nz-button (click)="showDailogSuccess()">创建可拖动的success（by山间之明月）</button>
-  <button class="m-r-8 m-b-8" nz-button (click)="showDailogError()">创建可拖动的error（by山间之明月）</button>
-  <button class="m-r-8 m-b-8" nz-button (click)="showDailogWarning()">创建可拖动的warning（by山间之明月）</button>
-  <button class="m-r-8 m-b-8" nz-button (click)="isVisibleByDir = true">指令创建（by山间之明月）</button>
-  <button class="m-r-8 m-b-8" nz-button nzType="primary" (click)="isVisibleDragResize = true">可拖拽+可调整大小的modal</button>
+<div class="p-24">
+  <!-- 服务方式 -->
+  <div class="pg-section-label m-b-10">
+    <span nz-icon nzTheme="outline" nzType="code"></span>
+    服务方式创建
+  </div>
+  <nz-card class="m-b-24" [nzBordered]="false">
+    <p class="pg-card-desc m-b-20">通过注入 <code class="inline-code">NzModalWrapService</code> 或 <code class="inline-code">DragService</code> 以编程方式弹出对话框，支持拖拽、自定义内容与回调。</p>
+    <div class="btn-group m-b-8">
+      <button nz-button nzType="primary" (click)="showDailog()">
+        <span nz-icon nzTheme="outline" nzType="drag"></span>
+        自定义拖拽 Modal
+      </button>
+      <button nz-button nzType="primary" (click)="showDailog1()">
+        <span nz-icon nzTheme="outline" nzType="border"></span>
+        标签拖拽 Modal
+      </button>
+    </div>
+    <div class="btn-group">
+      <button nz-button nzType="primary" (click)="showDailogConfirm()">
+        <span nz-icon nzTheme="outline" nzType="question-circle"></span>
+        Confirm
+      </button>
+      <button nz-button nzType="primary" (click)="showDailogInfo()">
+        <span nz-icon nzTheme="outline" nzType="info-circle"></span>
+        Info
+      </button>
+      <button class="btn-ghost-success" nz-button nzGhost nzType="primary" (click)="showDailogSuccess()">
+        <span nz-icon nzTheme="outline" nzType="check-circle"></span>
+        Success
+      </button>
+      <button nz-button nzDanger nzType="primary" (click)="showDailogError()">
+        <span nz-icon nzTheme="outline" nzType="close-circle"></span>
+        Error
+      </button>
+      <button class="btn-warning" nz-button nzType="default" (click)="showDailogWarning()">
+        <span nz-icon nzTheme="outline" nzType="exclamation-circle"></span>
+        Warning
+      </button>
+    </div>
+  </nz-card>
+
+  <!-- 指令方式 -->
+  <div class="pg-section-label m-b-10">
+    <span nz-icon nzTheme="outline" nzType="tool"></span>
+    指令方式创建
+  </div>
+  <nz-card class="m-b-24" [nzBordered]="false">
+    <p class="pg-card-desc m-b-20"
+      >在 <code class="inline-code">nz-modal</code> 标签上添加 <code class="inline-code">nzxModalDrag</code> /
+      <code class="inline-code">nzxModalResize</code> 指令，无需额外服务即可获得拖拽与缩放能力。</p
+    >
+    <div class="btn-group">
+      <button nz-button nzType="primary" (click)="isVisibleByDir = true">
+        <span nz-icon nzTheme="outline" nzType="drag"></span>
+        指令拖拽 Modal
+      </button>
+      <button nz-button nzType="primary" (click)="isVisibleDragResize = true">
+        <span nz-icon nzTheme="outline" nzType="column-width"></span>
+        拖拽 + 调整大小
+      </button>
+    </div>
+  </nz-card>
 </div>
 
+<!-- Modal: 标签拖拽 -->
 <nz-modal [nzTitle]="dragTpl" [(nzVisible)]="isVisible" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
   <ng-container *nzModalContent>
     <p>床前明月光</p>
@@ -21,6 +75,7 @@
   </ng-container>
 </nz-modal>
 
+<!-- Modal: 指令拖拽 -->
 <nz-modal nzTitle="指令创建可拖拽" nzxModalDrag nzxModalResize [(nzVisible)]="isVisibleByDir" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
   <ng-container *nzModalContent>
     <p>床前明月光</p>
@@ -30,8 +85,9 @@
   </ng-container>
 </nz-modal>
 
+<!-- Modal: 拖拽 + 调整大小 -->
 <nz-modal
-  nzTitle="可拖拽+可调整大小"
+  nzTitle="可拖拽 + 可调整大小"
   nzxModalDrag
   nzxModalResize
   [nzFooter]="null"
@@ -42,20 +98,18 @@
   (nzOnOk)="handleOk()"
 >
   <ng-container *nzModalContent>
-    <p>这个对话框同时支持拖拽和调整大小</p>
-    <p
-      ><strong>拖拽：</strong
-      >点击并拖动标题栏来调整大小：拖动边缘或角落来改变大小调整大小：拖动边缘或角落来改变大小调整大小：拖动边缘或角落来改变大小调整大小：拖动边缘或角落来改变大小调整大小：拖动边缘或角落来改变大小调整大小：拖动边缘或角落来改变大小调整大小：拖动边缘或角落来改变大小调整大小：拖动边缘或角落来改变大小调整大小：拖动边缘或角落来改变大小调整大小：拖动边缘或角落来改变大小调整大小：拖动边缘或角落来改变大小调整大小：拖动边缘或角落来改变大小调整大小：拖动边缘或角落来改变大小移动对话框</p
-    >
-    <p><strong>调整大小：</strong>拖动边缘或角落来改变大小</p>
-    <p>两个功能可以同时使用，互不干扰</p>
-    <div style="margin-top: 20px; padding: 15px; background: #f0f0f0; border-radius: 4px">
-      <p style="margin: 0"><strong>提示：</strong>这个对话框更加灵活，可以根据内容需要自由调整位置和大小</p>
+    <p>这个对话框同时支持拖拽和调整大小。</p>
+    <p><strong>拖拽：</strong>点击并拖动标题栏移动对话框位置。</p>
+    <p><strong>调整大小：</strong>拖动边缘或角落来改变大小。</p>
+    <p>两个功能可以同时使用，互不干扰。</p>
+    <div class="resize-tip">
+      <span nz-icon nzTheme="outline" nzType="info-circle"></span>
+      对话框可根据内容需要自由调整位置和大小。
     </div>
   </ng-container>
 </nz-modal>
 
 <!--可以将下列代码放开，放到modal的nzTitle中，也能达到拖动效果-->
 <ng-template #dragTpl>
-  <div class="hand-model-move" cdkDrag cdkDragBoundary="nz-modal-container" cdkDragHandle cdkDragRootElement=".ant-modal-content">这是一个可拖动modal</div>
+  <div class="hand-model-move" cdkDrag cdkDragBoundary="nz-modal-container" cdkDragHandle cdkDragRootElement=".ant-modal-content">这是一个可拖动 Modal</div>
 </ng-template>

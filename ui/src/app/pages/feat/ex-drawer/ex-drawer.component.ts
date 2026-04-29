@@ -7,14 +7,17 @@ import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-hea
 import { ModalBtnStatus } from '@widget/base-modal';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzTagModule } from 'ng-zorro-antd/tag';
 
 @Component({
   selector: 'app-ex-drawer',
   templateUrl: './ex-drawer.component.html',
+  styleUrl: './ex-drawer.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [PageHeaderComponent, NzInputModule, FormsModule, NzButtonModule, NzWaveModule]
+  imports: [PageHeaderComponent, NzInputModule, FormsModule, NzButtonModule, NzCardModule, NzIconModule, NzTagModule]
 })
 export class ExDrawerComponent {
   pageHeaderInfo: Partial<PageHeaderType> = {
