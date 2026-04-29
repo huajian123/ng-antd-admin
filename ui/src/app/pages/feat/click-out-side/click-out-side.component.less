@@ -1,4 +1,45 @@
-.block {
-  height: 500px;
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.55;
+
+  span[nz-icon] {
+    font-size: 13px;
+  }
+}
+
+.card-desc {
+  font-size: 13px;
+  line-height: 1.6;
+  opacity: 0.65;
+}
+
+.click-zone {
+  height: 240px;
   background: #408ede;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: background 0.25s cubic-bezier(0.32, 0.72, 0, 1);
+
+  &__icon {
+    font-size: 36px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  &__text {
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    letter-spacing: 0.04em;
+  }
 }

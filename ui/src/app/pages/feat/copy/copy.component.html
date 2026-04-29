@@ -1,9 +1,18 @@
 <app-page-header [pageHeaderInfo]="pageHeaderInfo" />
-<div class="normal-table-wrap">
-  <nz-card nzTitle="复制示例">
-    <nz-space-compact nzSize="large" [style.width.%]="100">
-      <input  nz-input [(ngModel)]="value" placeholder="input search text" />
-      <button nz-button nzType="primary" [cdkCopyToClipboard]="value" (click)="info()">copy</button>
-    </nz-space-compact>
+
+<div class="p-24">
+  <div class="section-label m-b-10">
+    <span nz-icon nzTheme="outline" nzType="copy"></span>
+    文本复制
+  </div>
+  <nz-card [nzBordered]="false">
+    <p class="card-desc m-b-20">输入文本后点击复制按钮，内容将写入剪贴板，可直接粘贴使用。</p>
+    <div class="copy-row">
+      <input class="copy-input" nz-input placeholder="输入要复制的文本" [(ngModel)]="value" />
+      <button nz-button nzType="primary" [cdkCopyToClipboard]="value" (click)="info()">
+        <span nz-icon nzTheme="outline" nzType="copy"></span>
+        复制
+      </button>
+    </div>
   </nz-card>
 </div>

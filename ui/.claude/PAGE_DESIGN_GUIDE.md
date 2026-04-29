@@ -286,12 +286,30 @@ tableConfig: AntTableConfig = {
 
 ### 5.3 代码演示区块
 
-代码块固定深色背景，明暗主题下均适用：
+#### 是否需要代码块：按需决策，不是默认标配
+
+这是**后台管理系统模板**，不是组件库文档站。开发者看代码会直接翻源文件，不需要在页面上重复贴一遍。
+
+**不需要代码块的情况（占多数）：**
+- 用法从演示区的 HTML 属性/交互就能看懂，例如 `nz-icon` 的 `nzType`、`nzTheme` 属性
+- 代码只是对演示的文字复述，没有额外信息量
+
+**需要代码块的情况：**
+- 演示 demo 本身无法体现的用法，例如：
+  - pipe / 指令的模板写法（`{{ 'key' | translate }}`）
+  - Service API 的注入与调用方式
+  - 需要在 `app.config.ts` 等入口文件配置的接入步骤
+- 简单说：**看了演示还是不知道怎么写代码，才需要贴代码块**
+
+#### 代码块样式
+
+放在演示区下方，`margin-top: 16px` 与演示保持间隔，固定深色背景，明暗主题下均适用：
 
 ```less
 .code-block {
   border-radius: 10px;
   padding: 16px;
+  margin-top: 16px;
   overflow-x: auto;
   background: #1a1a2e;
 
