@@ -1,14 +1,22 @@
 <app-page-header [pageHeaderInfo]="pageHeaderInfo" />
-<div class="transition-wrap">
-  <nz-tabs>
-    <nz-tab nzTitle="CSS Transition">
-      <app-demo-css-transition />
-    </nz-tab>
-    <nz-tab nzTitle="进场 / 离场">
-      <app-demo-enter-leave />
-    </nz-tab>
-    <nz-tab nzTitle="交错动画">
-      <app-demo-stagger />
-    </nz-tab>
-  </nz-tabs>
+
+<div class="p-24">
+  <div class="pg-section-label m-b-10">
+    <span nz-icon nzTheme="outline" nzType="thunderbolt"></span>
+    动画示例
+  </div>
+  <nz-card [nzBordered]="false">
+    <p class="pg-card-desc m-b-20">基于 CSS 原生动画的 Angular 官方推荐方式，替代已弃用的 <code class="inline-code">@angular/animations</code>。</p>
+    <nz-tabs>
+      <nz-tab nzTitle="CSS Transition">
+        <app-demo-css-transition />
+      </nz-tab>
+      <nz-tab nzTitle="进场 / 离场">
+        <app-demo-enter-leave />
+      </nz-tab>
+      <nz-tab nzTitle="交错动画">
+        <app-demo-stagger />
+      </nz-tab>
+    </nz-tabs>
+  </nz-card>
 </div>

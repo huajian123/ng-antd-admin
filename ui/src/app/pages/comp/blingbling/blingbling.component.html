@@ -1,17 +1,35 @@
 <app-page-header [pageHeaderInfo]="pageHeaderInfo" />
 
-<div class="normal-table-wrap">
-  <nz-card class="m-b-10" nzTitle="文字">
+<div class="p-24">
+  <!-- 文字闪光 -->
+  <div class="pg-section-label m-b-10">
+    <span nz-icon nzTheme="outline" nzType="font-size"></span>
+    文字闪光
+  </div>
+  <nz-card class="m-b-24" [nzBordered]="false">
+    <p class="pg-card-desc m-b-20">利用 <code class="inline-code">background-clip: text</code> + 渐变动画实现文字扫光效果。</p>
     <span class="shark-txt">老华货真价实</span>
   </nz-card>
 
-  <nz-card class="m-b-10" nzTitle="卡片">
+  <!-- 卡片闪光 -->
+  <div class="pg-section-label m-b-10">
+    <span nz-icon nzTheme="outline" nzType="credit-card"></span>
+    卡片闪光
+  </div>
+  <nz-card class="m-b-24" [nzBordered]="false">
+    <p class="pg-card-desc m-b-20">通过伪元素 <code class="inline-code">::after</code> 叠加渐变层并平移，模拟光泽扫过卡片的效果。</p>
     <div class="shark-wrap card">
       <img alt="" src="imgs/blingbling/bling1.png" />
     </div>
   </nz-card>
 
-  <nz-card class="m-b-10" nzTitle="头像">
+  <!-- 头像闪光 -->
+  <div class="pg-section-label m-b-10">
+    <span nz-icon nzTheme="outline" nzType="user"></span>
+    头像闪光
+  </div>
+  <nz-card [nzBordered]="false">
+    <p class="pg-card-desc m-b-20">同样的扫光技术应用于圆形头像，<code class="inline-code">border-radius: 50%</code> 配合 <code class="inline-code">overflow: hidden</code> 裁剪光效。</p>
     <div class="shark-wrap radius">
       <img alt="" src="imgs/blingbling/bling2.png" />
     </div>

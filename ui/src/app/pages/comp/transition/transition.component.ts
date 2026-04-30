@@ -2,6 +2,8 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 
 import { DemoCssTransitionComponent } from './demo-css-transition/demo-css-transition.component';
@@ -13,7 +15,7 @@ import { DemoStaggerComponent } from './demo-stagger/demo-stagger.component';
   templateUrl: './transition.component.html',
   styleUrl: './transition.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [PageHeaderComponent, NzTabsModule, DemoCssTransitionComponent, DemoEnterLeaveComponent, DemoStaggerComponent]
+  imports: [PageHeaderComponent, NzCardModule, NzIconModule, NzTabsModule, DemoCssTransitionComponent, DemoEnterLeaveComponent, DemoStaggerComponent]
 })
 export class TransitionComponent {
   pageHeaderInfo: Partial<PageHeaderType> = {

@@ -2,7 +2,6 @@ import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzTagModule } from 'ng-zorro-antd/tag';
@@ -12,7 +11,7 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
   templateUrl: './demo-css-transition.component.html',
   styleUrl: './demo-css-transition.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NzButtonModule, NzWaveModule, NzCardModule, NzGridModule, NzTagModule, NzDividerModule]
+  imports: [NzButtonModule, NzCardModule, NzGridModule, NzTagModule, NzDividerModule]
 })
 export class DemoCssTransitionComponent {
   expanded = signal(false);

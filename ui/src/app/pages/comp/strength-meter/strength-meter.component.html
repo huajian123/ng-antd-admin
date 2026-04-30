@@ -1,20 +1,34 @@
 <app-page-header [pageHeaderInfo]="pageHeaderInfo" />
 
-<div class="normal-table-wrap">
-  <div nz-row nzJustify="center" [nzGutter]="[32, 16]">
-    <div nz-col [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzXl]="12" [nzXs]="24" [nzXXl]="12">
-      <nz-card nzSize="default" style="border-radius: 10px">
-        <nz-input-wrapper>
-          <input id="newPassword" nz-input placeholder="新密码" [type]="passwordVisible ? 'text' : 'password'" [(ngModel)]="newPassword" />
-          <i nz-icon nzInputSuffix [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
-        </nz-input-wrapper>
-        <password-strength-meter [password]="newPassword" />
-        <nz-input-wrapper>
-          <input id="disablePassword" nz-input placeholder="禁用" [disabled]="true" />
-          <i nz-icon nzInputSuffix [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
-        </nz-input-wrapper>
-        <password-strength-meter [password]="'fasdfasd23423'" />
-      </nz-card>
-    </div>
+<div class="p-24">
+  <div class="pg-section-label m-b-10">
+    <span nz-icon nzTheme="outline" nzType="safety-certificate"></span>
+    密码强度校验
   </div>
+  <nz-card [nzBordered]="false">
+    <p class="pg-card-desc m-b-20">输入密码后实时计算强度，强度条颜色随等级变化。</p>
+    <div nz-row [nzGutter]="[24, 24]">
+      <div nz-col [nzLg]="12" [nzXs]="24">
+        <div class="field-label m-b-8">可交互</div>
+        <nz-input-group [nzSuffix]="visibleTpl">
+          <input nz-input placeholder="输入新密码" [type]="passwordVisible ? 'text' : 'password'" [(ngModel)]="newPassword" />
+        </nz-input-group>
+        <ng-template #visibleTpl>
+          <span nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" nzTheme="outline" class="pwd-toggle" (click)="passwordVisible = !passwordVisible"></span>
+        </ng-template>
+        <password-strength-meter class="m-t-8" [password]="newPassword" />
+      </div>
+
+      <div nz-col [nzLg]="12" [nzXs]="24">
+        <div class="field-label m-b-8">禁用状态</div>
+        <nz-input-group [nzSuffix]="disabledEyeTpl">
+          <input nz-input placeholder="禁用" [disabled]="true" />
+        </nz-input-group>
+        <ng-template #disabledEyeTpl>
+          <span nz-icon nzType="eye-invisible" nzTheme="outline" class="pwd-toggle"></span>
+        </ng-template>
+        <password-strength-meter class="m-t-8" [password]="'fasdfasd23423'" />
+      </div>
+    </div>
+  </nz-card>
 </div>

@@ -4,7 +4,6 @@ import { timer } from 'rxjs';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzTagModule } from 'ng-zorro-antd/tag';
@@ -19,7 +18,7 @@ interface StaggerItem {
   templateUrl: './demo-stagger.component.html',
   styleUrl: './demo-stagger.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NzButtonModule, NzWaveModule, NzCardModule, NzGridModule, NzTagModule, NzDividerModule]
+  imports: [NzButtonModule, NzCardModule, NzGridModule, NzTagModule, NzDividerModule]
 })
 export class DemoStaggerComponent {
   private readonly destroyRef = inject(DestroyRef);
