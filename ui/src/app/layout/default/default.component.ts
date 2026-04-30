@@ -36,8 +36,6 @@ import { ToolBarComponent } from './tool-bar/tool-bar.component';
     SettingDrawerComponent,
     ChatComponent,
     NzMenuModule,
-    NzButtonModule,
-    NzIconModule,
     SideNavComponent,
     NgTemplateOutlet,
     ToolBarComponent,

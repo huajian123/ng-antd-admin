@@ -1,122 +1,204 @@
 ---
-updated: 2026-04-10
+name: change-hotspots
+description: ng-antd-admin 高风险变更区列表，需求高变区、强耦合区、公共底座区
+type: project
 ---
 
-# Change Hotspots — 高风险变更区
+# 高风险变更区
 
-> 变更频率高、影响面广、或容易引入 Bug 的区域。变更前先确认影响面。
+## 风险等级说明
 
-## 1. 路由复用策略（高风险）
-
-**文件**：`src/app/core/services/common/reuse-strategy.ts`
-
-**风险**：任何对 `SimpleReuseStrategy` 的修改都会影响全部页面的缓存行为。Tab 刷新依赖 `refresh-empty` 占位路由，若路由 key 逻辑变动，Tab 刷新会失效。
-
-**影响面**：所有带 `data.key` 的路由、`TabService`、`layout/default/tab/`
-
-**grep**：`shouldDetach`, `retrieve`, `deleteRouteSnapshot`, `refresh-empty`
-
----
-
-## 2. 登录/登出流程（高风险）
-
-**文件**：`src/app/core/services/common/login-in-out.service.ts`
-
-**风险**：同时涉及 Token 存储、用户信息 signal、菜单 BehaviorSubject、Tab 清理、路由跳转。任一环节失败都会导致登录态异常或菜单不显示。
-
-**影响面**：`StartupService`、`JudgeLoginGuard`、`MenuStoreService`、`UserInfoStoreService`、`TabService`
-
-**grep**：`loginIn`, `loginOut`, `clearTabCash`, `clearSessionCash`
+| 等级 | 含义 |
+|------|------|
+| 🔴 高 | 改动影响面广，极易引发回归问题 |
+| 🟡 中 | 改动影响局部模块，需要测试覆盖 |
+| 🟢 低 | 改动相对独立，影响面小 |
 
 ---
 
-## 3. 主题系统（中风险）
-
-**文件**：
-- `src/app/core/services/common/theme-skin.service.ts`
-- `src/app/core/services/store/common-store/theme.service.ts`
-- `src/app/layout/default/setting-drawer/setting-drawer.component.ts`
-
-**风险**：动态插入/替换 CSS `<link>` 标签，若文件路径或命名规则变动，主题切换会静默失败（无报错但样式不变）。`$themeStyle` signal 的 effect 联动 `$isNightTheme`/`$isCompactTheme`，修改时注意副作用。
-
-**影响面**：全局样式、所有组件的 Less 文件
-
-**grep**：`loadTheme`, `StyleThemeModelKey`, `ThemeOptionsKey`, `themeMixin`
-
----
-
-## 4. HTTP 基础服务（中风险）
+## 1. 🔴 BaseHttpService — HTTP 基础封装
 
 **文件**：`src/app/core/services/http/base-http.service.ts`
 
-**风险**：所有业务 HTTP 服务都继承或注入此服务。修改 `resultHandle`、`handleFilter`、`handleLoading` 会影响全部接口的响应处理逻辑。Loading 的 500ms 最小展示时间是刻意设计，不要随意删除。
+**风险原因**：
+- 所有业务 HTTP 服务（AccountService/RoleService/MenusService/DeptService/LoginService）都继承或注入此服务
+- `resultHandle()` 的 code 判断逻辑（200/201）影响全局响应处理
+- `handleLoading()` 的 500ms 最小展示逻辑影响所有带 loading 的请求
+- `getUrl()` 的 URL 拼接逻辑影响所有接口路径
 
-**影响面**：全部 HTTP 服务
-
-**grep**：`resultHandle`, `handleFilter`, `handleLoading`, `ActionResult`
-
----
-
-## 5. HTTP 拦截器（中风险）
-
-**文件**：`src/app/core/services/interceptors/http-interceptor.ts`
-
-**风险**：Token 注入逻辑在此，修改 header key 需同步修改后端（或 mock）。`filter(e => e.type !== 0)` 过滤掉上传进度事件，若需要上传进度功能需特别处理。
-
-**影响面**：全部 HTTP 请求
-
-**grep**：`httpInterceptorService`, `TokenKey`, `Authorization`
+**影响面**：全部 HTTP 请求  
+**grep 关键词**：`BaseHttpService`, `resultHandle`, `handleFilter`
 
 ---
 
-## 6. 应用启动初始化（中风险）
+## 2. 🔴 SimpleReuseStrategy — 路由复用策略
+
+**文件**：`src/app/core/services/common/reuse-strategy.ts`
+
+**风险原因**：
+- 控制所有页面的缓存/销毁行为
+- `handlers` 静态 Map 是全局状态，内存泄漏风险
+- `waitDelete` 静态变量在并发操作时可能产生竞态
+- 与 `TabService` 深度耦合，Tab 关闭/刷新/切换都依赖此策略
+- 滚动位置恢复逻辑（`scrollHandlers`）在 DOM 已移除时可能失效
+
+**影响面**：所有带 Tab 的页面、路由切换体验  
+**grep 关键词**：`SimpleReuseStrategy`, `shouldDetach`, `waitDelete`, `handlers`
+
+---
+
+## 3. 🔴 LoginInOutService — 登录/登出核心
+
+**文件**：`src/app/core/services/common/login-in-out.service.ts`
+
+**风险原因**：
+- 登录流程串联 Token 存储、JWT 解析、权限码获取、菜单获取、Store 更新
+- 任何一步失败都会导致登录状态不完整
+- 静态追加权限码（`TabsDetail`、`SearchTableDetail`）是硬编码，新增类似需求需修改此处
+- `loginOut()` 需要清理 Tab 缓存、Session、菜单 Store，顺序依赖强
+
+**影响面**：登录/登出/应用启动恢复  
+**grep 关键词**：`LoginInOutService`, `loginIn`, `loginOut`, `clearTabCash`
+
+---
+
+## 4. 🔴 TabService — 多页签管理
+
+**文件**：`src/app/core/services/common/tab.service.ts`
+
+**风险原因**：
+- Tab 的增删改查逻辑复杂，涉及索引计算、路由快照管理
+- `delTab`/`delLeftTab`/`delRightTab`/`delOtherTab` 四种删除场景，边界条件多
+- `$currSelectedIndexTab` 的索引维护在并发操作时容易出错
+- `refresh()` 依赖 `skipLocationChange` 的中间路由跳转，时序敏感
+- 与 `SimpleReuseStrategy` 深度耦合
+
+**影响面**：所有多页签操作  
+**grep 关键词**：`TabService`, `delTab`, `addTab`, `$tabArray`
+
+---
+
+## 5. 🔴 ThemeService + ThemeSkinService — 主题体系
+
+**文件**：
+- `src/app/core/services/store/common-store/theme.service.ts`
+- `src/app/core/services/common/theme-skin.service.ts`
+
+**风险原因**：
+- `$themesOptions` Signal 被 `DefaultComponent` 的 `effect()` 监听，修改字段会触发布局重算
+- 4 套主题 CSS bundle 的动态加载/卸载，若时序错误会出现样式闪烁
+- `SettingInterface` 字段变更会影响 `DefaultComponent`、`SettingDrawerComponent`、`InitThemeService`
+- Less 主题变量（`src/styles/themes/`）修改影响所有组件样式
+
+**影响面**：全局布局、所有组件样式  
+**grep 关键词**：`ThemeService`, `$themesOptions`, `ThemeSkinService`, `loadTheme`
+
+---
+
+## 6. 🟡 ModalWrapService — 弹窗服务
+
+**文件**：`src/app/widget/base-modal.ts`
+
+**风险原因**：
+- 所有业务弹窗（系统管理 CRUD）都通过此服务打开
+- 拖拽逻辑（`createDrag`）依赖 DOM 结构（`.ant-modal-content`、`.ant-modal-header`），ng-zorro 升级可能破坏
+- z-index 管理逻辑在多弹窗场景下复杂
+- `BasicConfirmModalComponent` 抽象类是所有弹窗组件的基类，修改影响所有弹窗
+
+**影响面**：所有使用 Modal 的业务功能  
+**grep 关键词**：`ModalWrapService`, `BasicConfirmModalComponent`, `getCurrentValue`
+
+---
+
+## 7. 🟡 AntTableComponent — 通用表格
+
+**文件**：`src/app/shared/components/ant-table/ant-table.component.ts`
+
+**风险原因**：
+- 被所有列表页面复用（系统管理 4 个模块 + page-demo 多个列表页）
+- `TableHeader` 接口字段变更影响所有使用方
+- checkbox 选中状态管理（`checkedCashArrayFromComment`）依赖外部传入数组的引用，容易产生状态不同步
+- `linkedSignal` 的使用（`_tableConfig`）在 Angular 21 中是较新特性，行为需关注
+
+**影响面**：所有列表页  
+**grep 关键词**：`AntTableComponent`, `AntTableConfig`, `TableHeader`
+
+---
+
+## 8. 🟡 app.config.ts — 全局配置
 
 **文件**：`src/app/app.config.ts`
 
-**风险**：`APPINIT_PROVIDES` 是顺序执行的，若某个 initializer 抛出未捕获异常，后续初始化不会执行，应用会卡在白屏。`StartupService.load()` 依赖 `LoginInOutService`，链路较长。
+**风险原因**：
+- `APPINIT_PROVIDES` 中初始化服务的执行顺序固定，调整顺序可能导致依赖未就绪
+- `provideZonelessChangeDetection()` 是 Zoneless 模式，异步操作需要手动触发变更检测
+- `SimpleReuseStrategy` 作为 `RouteReuseStrategy` 注册，替换时需同步更新 `TabService`
 
-**影响面**：应用启动、首屏渲染
-
-**grep**：`provideAppInitializer`, `StartupService`, `APPINIT_PROVIDES`
-
----
-
-## 7. 菜单 Store（中风险）
-
-**文件**：`src/app/core/services/store/common-store/menu-store.service.ts`
-
-**风险**：使用 `BehaviorSubject`（非 signal），与其他 signal-based store 风格不一致。`SideNavComponent` 和 `NavBarComponent` 都订阅此 Observable，修改数据结构需同步更新两处渲染逻辑。
-
-**影响面**：左侧菜单、顶部菜单、混合模式菜单
-
-**grep**：`MenuStoreService`, `getMenuArrayStore`, `setMenuArrayStore`
+**影响面**：应用启动、全局行为  
+**grep 关键词**：`APPINIT_PROVIDES`, `provideZonelessChangeDetection`, `SimpleReuseStrategy`
 
 ---
 
-## 8. 占位页（低风险但需关注）
+## 9. 🟡 actionCode.ts — 权限码配置
 
-**文件**：`src/app/pages/no-content/no-content.component.ts`
+**文件**：`src/app/config/actionCode.ts`
 
-**说明**：`comp/comp2~5`、`feat/feat1,3,4,5`、`page-demo/page-demo2~4` 均指向此占位组件，是未实现功能的标记。新增真实页面时需同步更新对应路由配置。
+**风险原因**：
+- 权限码字符串与后端菜单管理中的 `code` 字段必须严格一致
+- 新增功能需要同时在此文件添加权限码 + 后端菜单表插入对应记录
+- 权限码格式（`default:模块:子模块:操作`）若不统一会导致权限失效
 
-**grep**：`no-content`
-
----
-
-## 9. 权限码配置（低风险但需关注）
-
-**文件**：`src/app/config/actionCode.ts`（待验证路径）
-
-**风险**：`LoginInOutService.loginIn()` 中硬编码了两个权限码（`ActionCode.TabsDetail`、`ActionCode.SearchTableDetail`），注释说明这是临时方案。实际项目中应从后端权限管理获取，不应硬编码。
-
-**grep**：`ActionCode.TabsDetail`, `ActionCode.SearchTableDetail`, `authCode.push`
+**影响面**：所有需要权限控制的功能按钮  
+**grep 关键词**：`ActionCode`, `authCode`, `code`
 
 ---
 
-## 10. MSW Mock 数据（开发环境风险）
+## 10. 🟡 DefaultComponent — 主布局容器
+
+**文件**：`src/app/layout/default/default.component.ts`
+
+**风险原因**：
+- 包含两个 `effect()`，监听主题变化并重算布局参数
+- `judgeMarginTop()` 的计算逻辑依赖多个布局状态的组合，条件复杂
+- 布局模式（side/top/mixin）切换涉及多个子组件的显示/隐藏
+- `ngAfterViewInit` 中的首次登录引导（driver.js）依赖 localStorage
+
+**影响面**：整个后台布局  
+**grep 关键词**：`DefaultComponent`, `judgeMarginTop`, `isMixinMode`
+
+---
+
+## 11. 🟢 系统管理 CRUD 页面（account/role/menu/dept）
+
+**风险原因**：
+- 各模块相对独立，改动影响面局限在本模块
+- 弹窗组件（`widget/biz-widget/system/`）与页面组件解耦
+- 但修改 API 路径需同步修改 HTTP 服务和 Mock 数据
+
+**影响面**：单个系统管理模块  
+**grep 关键词**：`AccountService`/`RoleService`/`MenusService`/`DeptService`
+
+---
+
+## 12. 🟢 Mock 数据层
 
 **文件**：`src/mocks/`
 
-**风险**：Mock 数据与真实后端接口可能存在字段差异。`public/mockServiceWorker.js` 需要与 MSW 版本匹配，升级 MSW 后需重新生成。
+**风险原因**：
+- Mock 数据与真实 API 响应结构必须保持一致
+- 新增接口需要同步添加 MSW handler
+- Mock 仅在开发环境生效（`src/mocks/browser.ts` 中条件启动）
 
-**grep**：`handlers`, `mockServiceWorker`
+**影响面**：开发/测试环境  
+**grep 关键词**：`handlers`, `http.post`, `http.get`（msw）
+
+---
+
+## 待验证问题
+
+| 问题 | 风险 | 验证方式 |
+|------|------|---------|
+| `default-routing.ts` 中 `canActivateChild: []` 为空，路由守卫是否真正生效？ | 高 | 检查子路由是否单独挂载守卫 |
+| `LoginInOutService` 中 `takeUntilDestroyed(this.destroyRef)` 在 root 服务中是否会提前取消订阅？ | 中 | 检查 DestroyRef 在 root 服务中的生命周期 |
+| `SimpleReuseStrategy.handlers` 静态 Map 是否存在内存泄漏？ | 中 | 检查长时间使用后的内存占用 |
+| `checkedCashArrayFromComment` 使用数组引用传递，是否存在状态污染？ | 中 | 检查多个表格实例共存时的行为 |
