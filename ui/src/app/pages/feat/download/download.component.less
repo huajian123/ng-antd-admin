@@ -1,0 +1,45 @@
+.download-item {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  height: 100%;
+  transition: border-color cubic-bezier(0.32, 0.72, 0, 1) 0.2s;
+
+  &:hover {
+    border-color: #1677ff;
+  }
+}
+
+.download-icon {
+  font-size: 24px;
+  opacity: 0.35;
+}
+
+.download-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.download-title {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.download-desc {
+  font-size: 12px;
+  opacity: 0.45;
+  line-height: 1.6;
+}
+
+.inline-code {
+  padding: 1px 6px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+  font-family: 'SFMono-Regular', Consolas, monospace;
+  font-size: 12px;
+}

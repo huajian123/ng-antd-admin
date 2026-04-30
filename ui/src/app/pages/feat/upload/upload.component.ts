@@ -7,7 +7,6 @@ import { fnCheckForm } from '@utils/tools';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -17,14 +16,15 @@ import { NzUploadChangeParam, NzUploadFile, NzUploadModule } from 'ng-zorro-antd
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',
+  styleUrl: './upload.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [PageHeaderComponent, NzCardModule, NzUploadModule, NzButtonModule, NzWaveModule, NzIconModule, FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule]
+  imports: [PageHeaderComponent, NzCardModule, NzUploadModule, NzButtonModule, NzIconModule, FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule]
 })
 export class UploadComponent implements OnInit {
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: '文件上传',
     breadcrumb: ['首页', '功能', '文件上传'],
-    desc: '简单弄一下，返回的都是服务器统一返回的文件'
+    desc: '支持简单上传与表单嵌入上传，文件大小限制 5MB'
   };
   uploadUrl = environment.production ? '/api/file/test/upload/document/' : '/site/api/file/test/upload/document/';
   fileList: NzUploadFile[] = [];

@@ -1,38 +1,59 @@
 <app-page-header [pageHeaderInfo]="pageHeaderInfo" />
+
 <div class="p-24">
-  <nz-card nzTitle="简单实例，服务器返回的文件地址统一，演示功能不会保存上传的文件">
+  <!-- 简单上传 -->
+  <div class="pg-section-label m-b-10">
+    <span nz-icon nzTheme="outline" nzType="upload"></span>
+    简单上传
+  </div>
+  <nz-card class="m-b-24" [nzBordered]="false">
+    <p class="pg-card-desc m-b-20">演示用途，服务器不会保存上传的文件，返回统一的文件地址。单文件限制 5MB。</p>
     <nz-upload nzName="document" nzShowButton [nzAction]="uploadUrl" [nzFileList]="fileList" [nzLimit]="1" [nzSize]="1024 * 5" (nzChange)="handleChange($event)">
-      <button nz-button>
-        <i nz-icon nzType="upload"></i>
-        导入材料(最大测试上传5M)
+      <button nz-button nzType="default">
+        <span nz-icon nzTheme="outline" nzType="upload"></span>
+        选择文件
       </button>
     </nz-upload>
   </nz-card>
-  <nz-card class="m-t-20" nzTitle="嵌入表单，加入表单验证">
+
+  <!-- 表单上传 -->
+  <div class="pg-section-label m-b-10">
+    <span nz-icon nzTheme="outline" nzType="form"></span>
+    表单上传
+  </div>
+  <nz-card [nzBordered]="false">
+    <p class="pg-card-desc m-b-20">上传组件嵌入表单，文件上传成功后写入表单字段，提交时一并校验。</p>
     <form nz-form nzLayout="vertical" [formGroup]="validateForm">
-      <nz-form-item nz-col nzSpan="24">
-        <nz-form-control [nzErrorTip]="combineTpl" [nzSm]="6" [nzXs]="24">
-          <nz-form-label [nzSm]="14" [nzXs]="24">附件：</nz-form-label>
-          <nz-form-control [nzSm]="14" [nzXs]="24">
-            <nz-upload nzName="document" [nzAction]="uploadUrl" [nzFileList]="fileFormList" [nzLimit]="1" [nzSize]="1024 * 5" (nzChange)="uploadFn($event)">
-              <button nz-button>
-                <i nz-icon nzType="upload"></i>
-                上传附件(最大测试上传5M)
-              </button>
-              <input formControlName="file" [hidden]="true" />
-            </nz-upload>
-          </nz-form-control>
+      <nz-form-item>
+        <nz-form-label nzRequired>附件</nz-form-label>
+        <nz-form-control [nzErrorTip]="combineTpl">
+          <nz-upload nzName="document" [nzAction]="uploadUrl" [nzFileList]="fileFormList" [nzLimit]="1" [nzSize]="1024 * 5" (nzChange)="uploadFn($event)">
+            <button nz-button nzType="default">
+              <span nz-icon nzTheme="outline" nzType="upload"></span>
+              上传附件（最大 5MB）
+            </button>
+            <input formControlName="file" [hidden]="true" />
+          </nz-upload>
         </nz-form-control>
-        <nz-form-item class="m-t-20" nz-row>
-          <nz-form-control [nzSpan]="14">
-            <button nz-button nzType="primary" (click)="submitForm()">提交</button>
-            <button class="m-l-10" nz-button nzType="default" (click)="resetForm()">重置</button>
-          </nz-form-control>
-        </nz-form-item>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <div class="btn-group">
+            <button nz-button nzType="primary" (click)="submitForm()">
+              <span nz-icon nzTheme="outline" nzType="check"></span>
+              提交
+            </button>
+            <button nz-button nzType="default" (click)="resetForm()">
+              <span nz-icon nzTheme="outline" nzType="redo"></span>
+              重置
+            </button>
+          </div>
+        </nz-form-control>
       </nz-form-item>
     </form>
   </nz-card>
 </div>
+
 <ng-template #combineTpl let-control>
   @if (control.hasError('message')) {
     {{ control.errors.message }}

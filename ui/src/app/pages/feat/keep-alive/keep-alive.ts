@@ -5,18 +5,21 @@ import { PageHeaderComponent, PageHeaderType } from '@shared/components/page-hea
 import { KeepAlive } from '@shared/directives/keep-alive';
 
 import { NzButtonComponent } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputDirective } from 'ng-zorro-antd/input';
 
 @Component({
   selector: 'app-keep-alive',
-  imports: [NzButtonComponent, PageHeaderComponent, NzInputDirective, ReactiveFormsModule, KeepAlive],
-  templateUrl: './keep-alive.html'
+  imports: [NzButtonComponent, NzCardModule, NzIconModule, PageHeaderComponent, NzInputDirective, ReactiveFormsModule, KeepAlive],
+  templateUrl: './keep-alive.html',
+  styleUrl: './keep-alive.less'
 })
 export class KeepAliveDemo {
   pageHeaderInfo: Partial<PageHeaderType> = {
     title: 'KeepAlive',
-    breadcrumb: ['首页', '功能', 'keepAlive'],
-    desc: 'ng群主提供的指令，我觉得很棒分享给大家。你先输入一些内容到输入框，切换按钮，输入框中的内容仍然能保留。可以是输入框也可以是表单'
+    breadcrumb: ['首页', '功能', 'KeepAlive'],
+    desc: '使用 *appKeepAlive 指令保留输入框或表单的状态，切换后内容不丢失'
   };
 
   flag = signal(true);

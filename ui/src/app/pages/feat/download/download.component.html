@@ -1,16 +1,76 @@
 <app-page-header [pageHeaderInfo]="pageHeaderInfo" />
 
-<div class="normal-table-wrap">
-  <nz-card class="m-b-10" nzTitle="根据后台接口文件流下载">
-    <button nz-button nzType="primary" (click)="fileStreamDownload()">文件流下载</button>
-  </nz-card>
-  <nz-card class="m-b-10" nzTitle="根据文件地址下载文件">
-    <button nz-button nzType="primary" (click)="fileStreamDownload()">文件地址下载</button>
-  </nz-card>
-  <nz-card class="m-b-10" nzTitle="base64流下载">
-    <button nz-button nzType="primary" (click)="fileStreamDownload()">base64流下载</button>
-  </nz-card>
-  <nz-card class="m-b-10" nzTitle="图片Url下载,如果有跨域问题，需要处理图片跨域">
-    <button nz-button nzType="primary" (click)="fileStreamDownload()">图片Url下载</button>
+<div class="p-24">
+  <div class="pg-section-label m-b-10">
+    <span nz-icon nzTheme="outline" nzType="download"></span>
+    文件下载
+  </div>
+  <nz-card [nzBordered]="false">
+    <p class="pg-card-desc m-b-20">支持多种文件下载方式，基于 <code class="inline-code">FileSaver</code> 实现。</p>
+    <div nz-row [nzGutter]="[16, 16]">
+      <div nz-col [nzLg]="6" [nzMd]="12" [nzXs]="24">
+        <div class="download-item">
+          <div class="download-icon">
+            <span nz-icon nzTheme="outline" nzType="api"></span>
+          </div>
+          <div class="download-info">
+            <span class="download-title">文件流下载</span>
+            <span class="download-desc">通过后台接口返回的二进制流保存文件</span>
+          </div>
+          <button nz-button nzType="primary" (click)="fileStreamDownload()">
+            <span nz-icon nzTheme="outline" nzType="download"></span>
+            下载
+          </button>
+        </div>
+      </div>
+
+      <div nz-col [nzLg]="6" [nzMd]="12" [nzXs]="24">
+        <div class="download-item">
+          <div class="download-icon">
+            <span nz-icon nzTheme="outline" nzType="link"></span>
+          </div>
+          <div class="download-info">
+            <span class="download-title">文件地址下载</span>
+            <span class="download-desc">通过文件 URL 直接触发浏览器下载</span>
+          </div>
+          <button nz-button nzType="default" (click)="fileStreamDownload()">
+            <span nz-icon nzTheme="outline" nzType="download"></span>
+            下载
+          </button>
+        </div>
+      </div>
+
+      <div nz-col [nzLg]="6" [nzMd]="12" [nzXs]="24">
+        <div class="download-item">
+          <div class="download-icon">
+            <span nz-icon nzTheme="outline" nzType="file-text"></span>
+          </div>
+          <div class="download-info">
+            <span class="download-title">Base64 流下载</span>
+            <span class="download-desc">将 Base64 编码数据解码后保存为文件</span>
+          </div>
+          <button nz-button nzType="default" (click)="fileStreamDownload()">
+            <span nz-icon nzTheme="outline" nzType="download"></span>
+            下载
+          </button>
+        </div>
+      </div>
+
+      <div nz-col [nzLg]="6" [nzMd]="12" [nzXs]="24">
+        <div class="download-item">
+          <div class="download-icon">
+            <span nz-icon nzTheme="outline" nzType="picture"></span>
+          </div>
+          <div class="download-info">
+            <span class="download-title">图片 URL 下载</span>
+            <span class="download-desc">下载远程图片，跨域场景需服务端配置 CORS</span>
+          </div>
+          <button nz-button nzType="default" (click)="fileStreamDownload()">
+            <span nz-icon nzTheme="outline" nzType="download"></span>
+            下载
+          </button>
+        </div>
+      </div>
+    </div>
   </nz-card>
 </div>

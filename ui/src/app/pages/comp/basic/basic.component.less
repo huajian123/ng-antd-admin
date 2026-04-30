@@ -1,26 +1,43 @@
-[nz-button] {
-  margin-right: 8px;
+.btn-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
-.success {
+.btn-section-label {
+  font-size: 12px;
+  opacity: 0.45;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.btn-success {
   border-color: #55d187;
-  color: white;
+  color: #fff;
   background: #55d187;
 }
 
-.warning {
+.btn-warning-solid {
   border-color: #efbd47;
-  color: white;
+  color: #fff;
   background: #efbd47;
 }
 
-.title {
-  margin-top: 0;
-  margin-bottom: 0.5em;
-  font-weight: 500;
-  color: #000000d9;
-}
-
-.ghost-border {
+.ghost-bg {
   background-color: #999a9b;
+  border-radius: 8px;
+  padding: 12px;
 }

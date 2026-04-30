@@ -1,5 +1,18 @@
 <app-page-header [pageHeaderInfo]="pageHeaderInfo" />
-<div class="normal-table-wrap">
-  <button class="m-b-8" nz-button (click)="go()">切 换</button>
-  <input *appKeepAlive="flag()" class="full-with" nz-input placeholder="输入框输入内容，点击切换按钮，内容仍然能保留，表单内容也可以" />
+
+<div class="p-24">
+  <div class="pg-section-label m-b-10">
+    <span nz-icon nzTheme="outline" nzType="save"></span>
+    状态保留演示
+  </div>
+  <nz-card [nzBordered]="false">
+    <p class="pg-card-desc m-b-20">在输入框中输入内容，点击切换按钮后再切换回来，内容仍然保留。表单状态同样适用。</p>
+    <div class="demo-row m-b-20">
+      <input *appKeepAlive="flag()" class="keep-input" nz-input placeholder="输入内容后点击切换，内容不会丢失" />
+    </div>
+    <button nz-button nzType="primary" (click)="go()">
+      <span nz-icon nzTheme="outline" nzType="swap"></span>
+      切换
+    </button>
+  </nz-card>
 </div>

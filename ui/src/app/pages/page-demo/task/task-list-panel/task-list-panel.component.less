@@ -1,4 +1,4 @@
-@import 'mixin';
+
 .kanban-container {
   min-height: calc(100vh - 200px);
 }
@@ -95,38 +95,34 @@
 }
 
 // 任务卡片
-.themeMixin({
-  :host {
-    .task-card {
-      border-left: 3px solid transparent !important;
-      border-radius: 8px !important;
-      cursor: grab;
-      transition: all 0.2s;
+.task-card {
+  border-left: 3px solid transparent !important;
+  border-radius: 8px !important;
+  cursor: grab;
+  transition: all 0.2s;
 
-      ::ng-deep .ant-card-body {
-        padding: 10px 12px;
-      }
+  ::ng-deep .ant-card-body {
+    padding: 10px 12px;
+  }
 
-      &:hover {
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+  &:hover {
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
 
-        .delete-btn {
-          opacity: 1;
-        }
-      }
-
-      &:active {
-        cursor: grabbing;
-      }
-
-      &.overdue {
-        ::ng-deep .ant-card-body {
-          background: @warning-color;
-        }
-      }
+    .delete-btn {
+      opacity: 1;
     }
   }
-});
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  &.overdue {
+    ::ng-deep .ant-card-body {
+      background: #c8c757;
+    }
+  }
+}
 
 .task-card-body {
   display: flex;
