@@ -10,23 +10,19 @@
     <div nz-row [nzGutter]="[24, 24]">
       <div nz-col [nzLg]="12" [nzXs]="24">
         <div class="field-label m-b-8">可交互</div>
-        <nz-input-group [nzSuffix]="visibleTpl">
+        <nz-input-wrapper>
           <input nz-input placeholder="输入新密码" [type]="passwordVisible ? 'text' : 'password'" [(ngModel)]="newPassword" />
-        </nz-input-group>
-        <ng-template #visibleTpl>
-          <span nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" nzTheme="outline" class="pwd-toggle" (click)="passwordVisible = !passwordVisible"></span>
-        </ng-template>
+          <span class="pwd-toggle" nz-icon nzInputSuffix nzTheme="outline" [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></span>
+        </nz-input-wrapper>
         <password-strength-meter class="m-t-8" [password]="newPassword" />
       </div>
 
       <div nz-col [nzLg]="12" [nzXs]="24">
         <div class="field-label m-b-8">禁用状态</div>
-        <nz-input-group [nzSuffix]="disabledEyeTpl">
+        <nz-input-wrapper>
           <input nz-input placeholder="禁用" [disabled]="true" />
-        </nz-input-group>
-        <ng-template #disabledEyeTpl>
-          <span nz-icon nzType="eye-invisible" nzTheme="outline" class="pwd-toggle"></span>
-        </ng-template>
+          <span class="pwd-toggle" nz-icon nzInputSuffix nzTheme="outline" nzType="eye-invisible"></span>
+        </nz-input-wrapper>
         <password-strength-meter class="m-t-8" [password]="'fasdfasd23423'" />
       </div>
     </div>
