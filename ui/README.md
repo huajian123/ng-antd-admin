@@ -431,7 +431,7 @@ npm run lint:style    # 样式检查
 
 如果这个项目对你有帮助，请给个 **Star** ⭐️ 支持一下！
 
-[![Star History Chart](https://api.star-history.com/svg?repos=huajian123/ng-antd-admin&type=Date)](https://star-history.com/#huajian123/ng-antd-admin&Date)
+[![Star History Chart](https://star-history.dera.page/svg?repos=huajian123/ng-antd-admin&type=Date)](https://star-history.dera.page/#huajian123/ng-antd-admin&Date)
 
 ---
 
