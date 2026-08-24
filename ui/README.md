@@ -2,13 +2,13 @@
 
 # 🚀 ng-antd-admin
 
-**基于 Angular 21 的企业级中后台前端解决方案**
+**基于 Angular 22 的企业级中后台前端解决方案**
 
 [![CodeFactor](https://www.codefactor.io/repository/github/huajian123/ng-antd-admin/badge)](https://www.codefactor.io/repository/github/huajian123/ng-antd-admin)
 ![License](https://img.shields.io/badge/License-MIT-blue.svg)
-[![Angular](https://img.shields.io/badge/Build%20with-Angular%2021-red?logo=angular)](https://www.github.com/angular/angular)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue?logo=typescript)
-![ng-zorro](https://img.shields.io/badge/ng--zorro--antd-21-blue?logo=ant-design)
+[![Angular](https://img.shields.io/badge/Build%20with-Angular%2022-red?logo=angular)](https://www.github.com/angular/angular)
+![TypeScript](https://img.shields.io/badge/TypeScript-6.0-blue?logo=typescript)
+![ng-zorro](https://img.shields.io/badge/ng--zorro--antd-22-blue?logo=ant-design)
 
 [在线预览](https://huajian123.github.io/ng-antd-admin/) · [功能演示](https://www.bilibili.com/video/BV1gF411x7rN/) · [问题反馈](https://github.com/huajian123/ng-antd-admin/issues) · [更新日志](https://github.com/huajian123/ng-antd-admin/releases)
 
@@ -217,7 +217,7 @@ const routes: Routes = [
   }
 ];
 
-// 组件生命周期钩子
+// 切换页签时，进入新页签和离开旧页签会触发的组件生命周期钩子
 export class ListComponent {
   _onReuseInit() {
     console.log('页面从缓存中恢复');
@@ -247,7 +247,7 @@ this.winWidthService.getWindowWidthStore()
 支持在新标签页打开详情，或在同一标签页复用组件。
 
 ```typescript
-// 场景A：列表点详情，打开新 Tab,请看在线地址上的演示，菜单为：功能>标签页操作>打开详情页1、打开详情页2、打开详情页3
+// 场景A：“列表中点击详情按钮，打开新 Tab以查看数据详情”,请看在线地址上的演示，菜单为：功能>标签页操作>打开详情页1、打开详情页2、打开详情页3
 { 
   path: 'detail/:id', 
   component: DetailComponent, 
