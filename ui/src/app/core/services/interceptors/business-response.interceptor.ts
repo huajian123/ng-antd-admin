@@ -8,14 +8,7 @@ import { ActionResult } from '@core/services/http/http-types';
 import { NEED_SUCCESS_INFO, NEED_UNWRAP } from './http-context-tokens';
 
 function isActionResult(body: unknown): body is ActionResult<unknown> {
-  return (
-    typeof body === 'object' &&
-    body !== null &&
-    'code' in body &&
-    'data' in body &&
-    'msg' in body &&
-    typeof (body as ActionResult<unknown>).code === 'number'
-  );
+  return typeof body === 'object' && body !== null && 'code' in body && 'data' in body && 'msg' in body && typeof (body as ActionResult<unknown>).code === 'number';
 }
 
 // 只处理业务响应（需要 NEED_UNWRAP 标记的请求才会解包，防止第三方库的请求也经过此拦截器）

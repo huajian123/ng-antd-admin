@@ -1,4 +1,4 @@
-import {  Component, input, output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';

@@ -1,4 +1,4 @@
-import {  Component } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { PageHeaderComponent, PageHeaderType } from '@shared/components/page-header/page-header.component';
 
@@ -10,8 +10,7 @@ import { NzQRCodeModule } from 'ng-zorro-antd/qr-code';
   selector: 'app-qrcode',
   imports: [NzQRCodeModule, PageHeaderComponent, NzCardModule, NzIconModule],
   templateUrl: './qrcode.component.html',
-  styleUrl: './qrcode.component.less',
-
+  styleUrl: './qrcode.component.less'
 })
 export class QrcodeComponent {
   pageHeaderInfo: Partial<PageHeaderType> = {

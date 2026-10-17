@@ -15,7 +15,7 @@ import { ModalResizeConfig, ModalResizeService } from './modal-resize.service';
  */
 @Directive({
   // eslint-disable-next-line @angular-eslint/directive-selector
-  selector: 'nz-modal[nzxModalResize]',
+  selector: 'nz-modal[nzxModalResize]'
 })
 export class ModalResizeDirective {
   readonly nzxResizeConfig = input<ModalResizeConfig>();

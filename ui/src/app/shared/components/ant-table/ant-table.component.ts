@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import {  Component, computed, input, InputSignal, linkedSignal, OnChanges, output, SimpleChanges, TemplateRef, signal } from '@angular/core';
+import { Component, computed, input, InputSignal, linkedSignal, OnChanges, output, SimpleChanges, TemplateRef, signal } from '@angular/core';
 
 import { ContextPipePipe } from '@shared/components/ant-table/context-pipe.pipe';
 

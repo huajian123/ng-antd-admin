@@ -46,7 +46,7 @@ export interface MapItem {
 }
 
 @Pipe({
-  name: 'map',
+  name: 'map'
 })
 export class MapPipe implements PipeTransform {
   private datePipe: DatePipe = new DatePipe('en-US');

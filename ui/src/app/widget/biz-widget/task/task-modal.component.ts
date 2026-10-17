@@ -1,4 +1,4 @@
-import {  Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
@@ -19,16 +19,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
   selector: 'app-task-modal',
   templateUrl: './task-modal.component.html',
 
-  imports: [
-    FormsModule,
-    NzFormModule,
-    ReactiveFormsModule,
-    NzGridModule,
-    NzInputModule,
-    NzDatePickerModule,
-    NzRadioModule,
-    NzSelectModule,
-  ]
+  imports: [FormsModule, NzFormModule, ReactiveFormsModule, NzGridModule, NzInputModule, NzDatePickerModule, NzRadioModule, NzSelectModule]
 })
 export class TaskModalComponent extends BasicConfirmModalComponent implements OnInit {
   taskForm!: FormGroup;

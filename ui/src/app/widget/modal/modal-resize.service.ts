@@ -42,7 +42,7 @@ export class ModalResizeService {
       maxHeight: window.innerHeight - 100,
       ...config,
       // 以 modal 打开时的实际高度作为最小高度
-      minHeight: initialHeight,
+      minHeight: initialHeight
     };
 
     const handles = ['n', 'e', 's', 'w', 'ne', 'nw', 'se', 'sw'];

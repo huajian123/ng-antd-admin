@@ -1,4 +1,4 @@
-import { AfterViewInit,  Component, computed, DestroyRef, inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, computed, DestroyRef, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs/operators';

@@ -1,4 +1,4 @@
-import {  Component, inject, TemplateRef, input } from '@angular/core';
+import { Component, inject, TemplateRef, input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';

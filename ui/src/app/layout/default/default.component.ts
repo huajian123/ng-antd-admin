@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { AfterViewInit,  Component, computed, DestroyRef, effect, inject, viewChild } from '@angular/core';
+import { AfterViewInit, Component, computed, DestroyRef, effect, inject, viewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { SettingDrawerComponent, Theme } from '@app/layout/default/setting-drawer/setting-drawer.component';
@@ -46,7 +46,7 @@ import { ToolBarComponent } from './tool-bar/tool-bar.component';
     RouterOutlet,
     NavDrawerComponent,
     ChatComponent
-]
+  ]
 })
 export class DefaultComponent implements AfterViewInit {
   readonly navDrawer = viewChild.required<NavDrawerComponent>('navDrawer');

@@ -35,12 +35,7 @@ function makeGetResult(authCodeArray: string[], router: Router, loginOutService:
 }
 
 export const JudgeAuthGuard: CanActivateChildFn = (childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-  const getResult = makeGetResult(
-    inject(UserInfoStoreService).$userInfo().authCode,
-    inject(Router),
-    inject(LoginInOutService),
-    inject(NzMessageService)
-  );
+  const getResult = makeGetResult(inject(UserInfoStoreService).$userInfo().authCode, inject(Router), inject(LoginInOutService), inject(NzMessageService));
   const menuNavList = inject(MenuStoreService).$menuArray();
 
   while (childRoute.firstChild) {

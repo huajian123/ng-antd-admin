@@ -1,4 +1,4 @@
-import { Component,  DestroyRef, inject, signal } from '@angular/core';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { timer } from 'rxjs';
 
@@ -45,15 +45,19 @@ export class DemoStaggerComponent {
 
   playCards(): void {
     this.visibleCards.set([]);
-    timer(50).pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-      this.visibleCards.set(this.cardItems);
-    });
+    timer(50)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        this.visibleCards.set(this.cardItems);
+      });
   }
 
   playList(): void {
     this.visibleList.set([]);
-    timer(50).pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-      this.visibleList.set(this.listItems);
-    });
+    timer(50)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        this.visibleList.set(this.listItems);
+      });
   }
 }

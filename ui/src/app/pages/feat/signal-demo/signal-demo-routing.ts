@@ -51,4 +51,3 @@ export default [
   },
   { path: '', redirectTo: 'basic-advanced', pathMatch: 'full' }
 ] satisfies Route[];
-

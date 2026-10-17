@@ -1,4 +1,4 @@
-import { Component, OnInit,  input } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { NzListModule } from 'ng-zorro-antd/list';

@@ -1,4 +1,4 @@
-import {  Component, computed, effect, signal } from '@angular/core';
+import { Component, computed, effect, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { PageHeaderComponent, PageHeaderType } from '@shared/components/page-header/page-header.component';
@@ -66,4 +66,3 @@ export class BasicAdvanced {
     this.updateCount.update(v => v + 1);
   }
 }
-

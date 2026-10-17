@@ -1,12 +1,11 @@
-import { Component,  AfterViewInit, inject } from '@angular/core';
+import { Component, AfterViewInit, inject } from '@angular/core';
 
 import { LazyService } from '@core/services/common/lazy.service';
 
 @Component({
   selector: 'app-luckysheet',
   templateUrl: './luckysheet.component.html',
-  styleUrl: './luckysheet.component.less',
-
+  styleUrl: './luckysheet.component.less'
 })
 export class LuckysheetComponent implements AfterViewInit {
   private lazyService = inject(LazyService);

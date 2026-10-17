@@ -1,4 +1,4 @@
-import { Component,  input, output, InputSignal } from '@angular/core';
+import { Component, input, output, InputSignal } from '@angular/core';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';

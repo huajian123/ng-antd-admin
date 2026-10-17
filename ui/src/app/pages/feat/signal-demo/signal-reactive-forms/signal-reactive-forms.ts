@@ -1,5 +1,5 @@
 import { KeyValuePipe } from '@angular/common';
-import {  Component, computed, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormsModule, ReactiveFormsModule, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 
@@ -94,4 +94,3 @@ export class SignalReactiveForms {
     this.submitResult.set(null);
   }
 }
-

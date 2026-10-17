@@ -1,4 +1,4 @@
-import {  Component } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzCardModule } from 'ng-zorro-antd/card';

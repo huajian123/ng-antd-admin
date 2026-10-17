@@ -1,14 +1,4 @@
-import {
-  ComponentRef,
-  Directive,
-  Type,
-  ViewContainerRef,
-  TemplateRef,
-  inject,
-  input,
-  effect,
-  ChangeDetectorRef
-} from '@angular/core';
+import { ComponentRef, Directive, Type, ViewContainerRef, TemplateRef, inject, input, effect, ChangeDetectorRef } from '@angular/core';
 
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
@@ -26,7 +16,7 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
  */
 @Directive({
   // eslint-disable-next-line @angular-eslint/directive-selector
-  selector: '[viewOutlet]',
+  selector: '[viewOutlet]'
 })
 export class ViewOutletDirective {
   private componentRef: ComponentRef<NzSafeAny> | undefined;

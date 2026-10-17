@@ -1,12 +1,11 @@
-import { Component,  ElementRef, AfterViewInit, inject, viewChild } from '@angular/core';
+import { Component, ElementRef, AfterViewInit, inject, viewChild } from '@angular/core';
 
 import { WaterMarkService } from '@core/services/common/water-mark.service';
 
 @Component({
   selector: 'app-water-mark',
   templateUrl: './water-mark.component.html',
-  styleUrl: './water-mark.component.less',
-
+  styleUrl: './water-mark.component.less'
 })
 export class WaterMarkComponent implements AfterViewInit {
   readonly watermark = viewChild.required<ElementRef>('watermark');

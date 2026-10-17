@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'changNumberToChinese',
+  name: 'changNumberToChinese'
 })
 export class ChangNumberToChinesePipe implements PipeTransform {
   transform(value: number): string {

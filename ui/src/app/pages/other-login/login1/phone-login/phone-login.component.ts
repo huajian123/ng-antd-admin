@@ -1,5 +1,4 @@
-
-import { Component, OnInit,  inject, DestroyRef, computed } from '@angular/core';
+import { Component, OnInit, inject, DestroyRef, computed } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { LoginType } from '@app/pages/other-login/login1/login1.component';

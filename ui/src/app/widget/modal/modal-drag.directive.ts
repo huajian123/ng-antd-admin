@@ -14,7 +14,7 @@ import { ModalDragService } from './modal-drag.service';
  */
 @Directive({
   // eslint-disable-next-line @angular-eslint/directive-selector
-  selector: 'nz-modal[nzxModalDrag]',
+  selector: 'nz-modal[nzxModalDrag]'
 })
 export class ModalDragDirective {
   modalDragService = inject(ModalDragService);

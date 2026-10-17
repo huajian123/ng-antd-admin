@@ -1,5 +1,4 @@
-
-import { Component,  inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { form, FormField } from '@angular/forms/signals';
 
 interface SearchInfo {
@@ -42,7 +41,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
     NzAvatarModule,
     NzTooltipModule,
     NumberLoopPipe
-]
+  ]
 })
 export class ProjectComponent {
   expanded = false;

@@ -1,4 +1,4 @@
-import {  Component, DestroyRef, inject, input, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, input, OnInit, signal } from '@angular/core';
 import { form, FormField, required } from '@angular/forms/signals';
 
 interface DetailFormModel {
@@ -26,7 +26,7 @@ export class SearchTableDetailComponent implements OnInit {
   formModel = signal<DetailFormModel>({
     userName: ''
   });
-  validateForm = form(this.formModel, (schemaPath) => {
+  validateForm = form(this.formModel, schemaPath => {
     required(schemaPath.userName, { message: '请输入用户名' });
   });
   name = input.required<string>(); // 从路由中获取的参数，ng16支持的新特性

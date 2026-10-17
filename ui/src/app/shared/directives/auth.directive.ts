@@ -3,7 +3,7 @@ import { computed, Directive, effect, inject, input, TemplateRef, ViewContainerR
 import { UserInfoStoreService } from '@store/common-store/userInfo-store.service';
 
 @Directive({
-  selector: '[appAuth]',
+  selector: '[appAuth]'
 })
 export class AuthDirective {
   readonly appAuth = input.required<string>();

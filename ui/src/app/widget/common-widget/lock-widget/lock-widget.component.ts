@@ -1,4 +1,4 @@
-import { Component,  inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NonNullableFormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';

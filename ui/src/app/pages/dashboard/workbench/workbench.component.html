@@ -66,20 +66,13 @@
         </div>
         <div nz-col nzSpan="24">
           <nz-card nzTitle="能力评估">
-            <nz-list nzSize="small" nzBordered>
+            <nz-list nzBordered nzSize="small">
               @for (item of radarData; track item.name) {
                 <nz-list-item>
-                  <span style="width: 100px; display: inline-block;">{{ item.name }}</span>
-                  <nz-progress
-                    [nzPercent]="item.score"
-                    [nzShowInfo]="false"
-                    nzStrokeColor="#1890ff"
-                    style="flex: 1; margin: 0 16px;" />
-                  <nz-rate
-                    [ngModel]="item.score / 20"
-                    [nzDisabled]="true"
-                    style="font-size: 14px;" />
-                  <strong style="margin-left: 8px; width: 40px; text-align: right;">{{ item.score }}</strong>
+                  <span style="width: 100px; display: inline-block">{{ item.name }}</span>
+                  <nz-progress nzStrokeColor="#1890ff" style="flex: 1; margin: 0 16px" [nzPercent]="item.score" [nzShowInfo]="false" />
+                  <nz-rate style="font-size: 14px" [ngModel]="item.score / 20" [nzDisabled]="true" />
+                  <strong style="margin-left: 8px; width: 40px; text-align: right">{{ item.score }}</strong>
                 </nz-list-item>
               }
             </nz-list>

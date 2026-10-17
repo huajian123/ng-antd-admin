@@ -1,5 +1,5 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Component, OnInit,  ChangeDetectorRef, inject, DestroyRef, viewChild, effect, computed, signal } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, inject, DestroyRef, viewChild, effect, computed, signal } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { map } from 'rxjs/operators';
@@ -54,12 +54,7 @@ export class Login1Component {
   private breakpointObserver = inject(BreakpointObserver);
 
   // Use toSignal to convert BreakpointObserver to Signal
-  isOverModel = toSignal(
-    this.breakpointObserver.observe(['(max-width: 1200px)']).pipe(
-      map(res => res.matches)
-    ),
-    { initialValue: true }
-  );
+  isOverModel = toSignal(this.breakpointObserver.observe(['(max-width: 1200px)']).pipe(map(res => res.matches)), { initialValue: true });
 
   $isNightTheme = computed(() => this.themesService.$isNightTheme());
   destroyRef = inject(DestroyRef);

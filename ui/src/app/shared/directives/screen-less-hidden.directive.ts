@@ -4,7 +4,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 /*屏幕宽度小于某个宽度时不显示的组件*/
 @Directive({
-  selector: '[appScreenLessHidden]',
+  selector: '[appScreenLessHidden]'
 })
 export class ScreenLessHiddenDirective {
   readonly appScreenLessHidden = input('', { transform: appendPx });
@@ -15,11 +15,14 @@ export class ScreenLessHiddenDirective {
   private readonly destroyRef = inject(DestroyRef);
 
   constructor() {
-    effect((onCleanup) => {
+    effect(onCleanup => {
       const query = `(max-width: ${this.appScreenLessHidden()})`;
-      const sub = this.breakpointObserver.observe([query]).pipe(takeUntilDestroyed(this.destroyRef)).subscribe(result => {
-        result.matches ? this.viewContainerRef.clear() : this.viewContainerRef.createEmbeddedView(this.templateRef);
-      });
+      const sub = this.breakpointObserver
+        .observe([query])
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe(result => {
+          result.matches ? this.viewContainerRef.clear() : this.viewContainerRef.createEmbeddedView(this.templateRef);
+        });
       onCleanup(() => sub.unsubscribe());
     });
   }

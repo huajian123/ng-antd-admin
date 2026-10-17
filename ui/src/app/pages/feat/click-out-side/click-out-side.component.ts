@@ -43,8 +43,6 @@ export class ClickOutSideComponent implements AfterViewInit {
         this.text.set('心斩灵魂');
       })
     );
-    merge(this.targetHtmlClick$, this.winClick$)
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe();
+    merge(this.targetHtmlClick$, this.winClick$).pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
   }
 }

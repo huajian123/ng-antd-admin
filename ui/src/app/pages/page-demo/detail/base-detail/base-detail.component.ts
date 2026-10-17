@@ -1,4 +1,4 @@
-import { Component, OnInit,  TemplateRef, viewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef, viewChild } from '@angular/core';
 
 import { AntTableConfig, AntTableComponent } from '@shared/components/ant-table/ant-table.component';
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';

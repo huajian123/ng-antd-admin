@@ -5,12 +5,4 @@ import { role } from './business/role';
 import { menu } from './business/menu';
 import { permission } from './business/permission';
 
-export const handlers = [
-  login,
-  loginOut,
-  ...user,
-  ...department,
-  ...role,
-  ...menu,
-  ...permission,
-];
+export const handlers = [login, loginOut, ...user, ...department, ...role, ...menu, ...permission];

@@ -1,4 +1,4 @@
-import { Component,  computed, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { Lang, LanguageService } from '@core/services/store/common-store/language.service';

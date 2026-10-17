@@ -1,4 +1,4 @@
-import {  Component, computed, resource, signal } from '@angular/core';
+import { Component, computed, resource, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -140,4 +140,3 @@ export class SignalComprehensivePractical {
     this.cart.set([]);
   }
 }
-

@@ -1,4 +1,4 @@
-import {  Component, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 import { PageHeaderComponent, PageHeaderType } from '@shared/components/page-header/page-header.component';
 

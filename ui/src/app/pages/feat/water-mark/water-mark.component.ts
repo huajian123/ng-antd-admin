@@ -1,4 +1,4 @@
-import {  Component } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { PageHeaderComponent, PageHeaderType } from '@shared/components/page-header/page-header.component';
 import { WaterMarkComponent } from '@shared/components/water-mark/water-mark.component';
@@ -6,8 +6,7 @@ import { WaterMarkComponent } from '@shared/components/water-mark/water-mark.com
 @Component({
   selector: 'app-water-mark-demo',
   imports: [PageHeaderComponent, WaterMarkComponent],
-  templateUrl: './water-mark.component.html',
-
+  templateUrl: './water-mark.component.html'
 })
 export class WaterMarkDemoComponent {
   pageHeaderInfo: Partial<PageHeaderType> = {

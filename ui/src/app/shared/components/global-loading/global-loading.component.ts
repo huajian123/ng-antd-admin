@@ -1,4 +1,4 @@
-import {  Component } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-global-loading',
@@ -9,7 +9,6 @@ import {  Component } from '@angular/core';
         <h1>loading...</h1>
       </div>
     </div>
-  `,
-
+  `
 })
 export class GlobalLoadingComponent {}

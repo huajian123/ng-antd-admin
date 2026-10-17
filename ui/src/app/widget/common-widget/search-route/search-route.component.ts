@@ -1,5 +1,5 @@
 import { normalizePassiveListenerOptions } from '@angular/cdk/platform';
-import { Component,  ElementRef, AfterViewInit, inject, DestroyRef, viewChild, signal, effect } from '@angular/core';
+import { Component, ElementRef, AfterViewInit, inject, DestroyRef, viewChild, signal, effect } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -100,7 +100,9 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
   }
 
   resultClick(resultItem: ResultItem): void {
-    this.router.navigate([resultItem.routePath]).then(() => {this.modalRef.destroy();})
+    this.router.navigate([resultItem.routePath]).then(() => {
+      this.modalRef.destroy();
+    });
   }
 
   getResultItem(menu: Menu, fatherTitle = ''): ResultItem[] {

@@ -1,5 +1,5 @@
 // https://www.thinktecture.com/angular/view-transition-api-integration-in-angular-a-brave-new-world-part-1/
-import {  Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
@@ -93,7 +93,7 @@ export class Transitions {
 
   readonly items = TECH_ITEMS;
 
-  toDetail(id:number) {
+  toDetail(id: number) {
     this.router.navigate(['default/feat/transitions/transitions-detail'], { queryParams: { id } });
   }
 }

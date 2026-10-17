@@ -1,4 +1,4 @@
-import { Component,  AfterViewInit, TemplateRef, inject, viewChild, computed } from '@angular/core';
+import { Component, AfterViewInit, TemplateRef, inject, viewChild, computed } from '@angular/core';
 
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { WaterMarkComponent } from '@shared/components/water-mark/water-mark.component';

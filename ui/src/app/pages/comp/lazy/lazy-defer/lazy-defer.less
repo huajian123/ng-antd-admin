@@ -52,7 +52,10 @@
 
 .hover-zone {
   cursor: default;
-  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  transition:
+    border-color 0.2s,
+    color 0.2s,
+    background 0.2s;
 
   &:hover {
     border-color: #1890ff;
@@ -68,11 +71,32 @@
   font-weight: 600;
   font-family: monospace;
 
-  &.idle       { background: #f9f0ff; color: #722ed1; }
-  &.viewport   { background: #e6fffb; color: #13c2c2; }
-  &.interaction{ background: #fff7e6; color: #fa8c16; }
-  &.hover      { background: #fff0f6; color: #eb2f96; }
-  &.timer      { background: #f6ffed; color: #52c41a; }
-  &.when       { background: #e6f7ff; color: #1890ff; }
-  &.prefetch   { background: #fff1f0; color: #dd0031; }
+  &.idle {
+    background: #f9f0ff;
+    color: #722ed1;
+  }
+  &.viewport {
+    background: #e6fffb;
+    color: #13c2c2;
+  }
+  &.interaction {
+    background: #fff7e6;
+    color: #fa8c16;
+  }
+  &.hover {
+    background: #fff0f6;
+    color: #eb2f96;
+  }
+  &.timer {
+    background: #f6ffed;
+    color: #52c41a;
+  }
+  &.when {
+    background: #e6f7ff;
+    color: #1890ff;
+  }
+  &.prefetch {
+    background: #fff1f0;
+    color: #dd0031;
+  }
 }

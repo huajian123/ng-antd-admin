@@ -1,4 +1,4 @@
-import {  Component, computed, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 
@@ -7,7 +7,7 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
 
   imports: [NzDescriptionsModule, NzTagModule],
   template: `
-    <nz-descriptions nzBordered [nzColumn]="1" nzSize="small">
+    <nz-descriptions nzBordered nzSize="small" [nzColumn]="1">
       <nz-descriptions-item nzTitle="value()">{{ value() }}</nz-descriptions-item>
       <nz-descriptions-item nzTitle="upperValue()">
         <nz-tag nzColor="blue">{{ upperValue() }}</nz-tag>

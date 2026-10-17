@@ -128,15 +128,9 @@ const rolePermissions: Record<number, string[]> = {
     'default:system:dept:edit',
     'default:system:dept:del',
     'default:system:dept:addlowlevel',
-    'default:about',
+    'default:about'
   ],
-  2: [
-    'default:dashboard',
-    'default:dashboard:analysis',
-    'default:dashboard:monitor',
-    'default:dashboard:workbench',
-    'default:about',
-  ],
+  2: ['default:dashboard', 'default:dashboard:analysis', 'default:dashboard:monitor', 'default:dashboard:workbench', 'default:about']
 };
 
 export const permission = [
@@ -149,8 +143,8 @@ export const permission = [
 
   // 更新角色权限
   http.post('/site/api/permission/assign-role-menu', async ({ request }) => {
-    const body = await request.json() as { roleId: number; permCodes: string[] };
+    const body = (await request.json()) as { roleId: number; permCodes: string[] };
     rolePermissions[body.roleId] = body.permCodes;
     return HttpResponse.json({ code: 200, msg: 'SUCCESS', data: null });
-  }),
+  })
 ];

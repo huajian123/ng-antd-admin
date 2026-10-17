@@ -1,4 +1,4 @@
-import { Component,  SimpleChanges, OnChanges, inject, DestroyRef, input, computed, output } from '@angular/core';
+import { Component, SimpleChanges, OnChanges, inject, DestroyRef, input, computed, output } from '@angular/core';
 
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -6,10 +6,10 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 
 export enum LazySelPeopleEnum {
-  'Yanzu',
-  'Dehua',
-  'YiLin',
-  'Jielun'
+  Yanzu,
+  Dehua,
+  YiLin,
+  Jielun
 }
 
 @Component({

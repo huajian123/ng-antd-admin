@@ -1,5 +1,5 @@
 import { DecimalPipe } from '@angular/common';
-import { Component,  inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { form, FormField } from '@angular/forms/signals';
 
 interface SearchInfo {
@@ -47,7 +47,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
     NzMenuModule,
     DecimalPipe,
     NumberLoopPipe
-]
+  ]
 })
 export class ApplicationComponent {
   expanded = false;

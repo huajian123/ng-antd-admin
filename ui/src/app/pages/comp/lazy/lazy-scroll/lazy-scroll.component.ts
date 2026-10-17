@@ -1,5 +1,5 @@
 import { normalizePassiveListenerOptions } from '@angular/cdk/platform';
-import { AfterViewInit, Component,  DestroyRef, inject, viewChild } from '@angular/core';
+import { AfterViewInit, Component, DestroyRef, inject, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { fromEvent, take } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';

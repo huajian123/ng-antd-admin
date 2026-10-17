@@ -1,4 +1,4 @@
-import { Component,  AfterViewInit, inject, viewChild } from '@angular/core';
+import { Component, AfterViewInit, inject, viewChild } from '@angular/core';
 
 import { LazyServiceService } from '@app/pages/comp/lazy/lazy-service.service';
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';

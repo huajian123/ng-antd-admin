@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component,  inject, computed } from '@angular/core';
+import { Component, inject, computed } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { LoginInOutService } from '@core/services/common/login-in-out.service';
@@ -32,7 +32,19 @@ import { HomeNoticeComponent } from '../home-notice/home-notice.component';
   templateUrl: './layout-head-right-menu.component.html',
   styleUrl: './layout-head-right-menu.component.less',
 
-  imports: [NgTemplateOutlet, NzTooltipModule, NzIconModule, NzButtonModule, ToggleFullscreenDirective, NzDropdownModule, NzBadgeModule, NzMenuModule, HomeNoticeComponent, ScreenLessHiddenDirective, TranslatePipe]
+  imports: [
+    NgTemplateOutlet,
+    NzTooltipModule,
+    NzIconModule,
+    NzButtonModule,
+    ToggleFullscreenDirective,
+    NzDropdownModule,
+    NzBadgeModule,
+    NzMenuModule,
+    HomeNoticeComponent,
+    ScreenLessHiddenDirective,
+    TranslatePipe
+  ]
 })
 export class LayoutHeadRightMenuComponent {
   user!: UserPsd;

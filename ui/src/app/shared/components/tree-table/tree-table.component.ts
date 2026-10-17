@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component,  OnChanges, SimpleChanges, input, InputSignal, output, computed, linkedSignal, signal } from '@angular/core';
+import { Component, OnChanges, SimpleChanges, input, InputSignal, output, computed, linkedSignal, signal } from '@angular/core';
 
 import { AntTableConfig, SortFile, TableHeader } from '@shared/components/ant-table/ant-table.component';
 import { fnGetFlattenTreeDataByMap, fnTreeDataToMap } from '@utils/treeTableTools';

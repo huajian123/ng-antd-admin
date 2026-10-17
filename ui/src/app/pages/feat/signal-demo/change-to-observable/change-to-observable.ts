@@ -1,4 +1,4 @@
-import {  Component, DestroyRef, computed, inject, signal } from '@angular/core';
+import { Component, DestroyRef, computed, inject, signal } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { Subject, interval } from 'rxjs';
@@ -73,4 +73,3 @@ export class ChangeToObservable {
     this.subLog.set([]);
   }
 }
-

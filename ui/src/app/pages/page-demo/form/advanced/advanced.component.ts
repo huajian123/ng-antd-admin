@@ -1,4 +1,4 @@
-import {  Component, inject, OnInit, viewChild } from '@angular/core';
+import { Component, inject, OnInit, viewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { TaskManageFormComponent } from '@app/pages/page-demo/form/advanced/task-manage-form/task-manage-form.component';

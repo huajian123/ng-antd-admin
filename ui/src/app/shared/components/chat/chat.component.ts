@@ -1,5 +1,4 @@
-
-import { Component, OnInit,  ElementRef, OnDestroy, inject, output, viewChild, computed, signal, DestroyRef } from '@angular/core';
+import { Component, OnInit, ElementRef, OnDestroy, inject, output, viewChild, computed, signal, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { timer } from 'rxjs';
@@ -144,25 +143,30 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.clearMsgInput();
 
     // Use RxJS timer instead of setTimeout
-    timer(1000).pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-      this.isSending.set(true);
-      this.messageArray.update(arr =>
-        arr.map(item => item.dir === 'right' ? { ...item, isReaded: true } : item)
-      );
-      // Signal automatically triggers change detection
-    });
+    timer(1000)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        this.isSending.set(true);
+        this.messageArray.update(arr => arr.map(item => (item.dir === 'right' ? { ...item, isReaded: true } : item)));
+        // Signal automatically triggers change detection
+      });
 
-    timer(3000).pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-      const index = fnGetRandomNum(0, this.randomReport.length);
-      this.messageArray.update(arr => [...arr, {
-        msg: this.randomReport[index],
-        dir: 'left',
-        isReaded: false
-      }]);
-      this.isSending.set(false);
-      this.scrollToBottom();
-      // Signal automatically triggers change detection
-    });
+    timer(3000)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        const index = fnGetRandomNum(0, this.randomReport.length);
+        this.messageArray.update(arr => [
+          ...arr,
+          {
+            msg: this.randomReport[index],
+            dir: 'left',
+            isReaded: false
+          }
+        ]);
+        this.isSending.set(false);
+        this.scrollToBottom();
+        // Signal automatically triggers change detection
+      });
   }
 
   ngOnInit(): void {

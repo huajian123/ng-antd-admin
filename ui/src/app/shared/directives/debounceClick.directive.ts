@@ -17,7 +17,7 @@ export class DebounceClickDirective {
   private clicks = new Subject<NzSafeAny>();
 
   constructor() {
-    effect((onCleanup) => {
+    effect(onCleanup => {
       const sub = this.clicks.pipe(debounceTime(this.debounceTime())).subscribe(e => this.debounceClick.emit(e));
       onCleanup(() => sub.unsubscribe());
     });

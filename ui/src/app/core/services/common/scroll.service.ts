@@ -1,5 +1,5 @@
 import { Platform } from '@angular/cdk/platform';
-import { inject,  DOCUMENT, Service } from '@angular/core';
+import { inject, DOCUMENT, Service } from '@angular/core';
 
 @Service()
 export class ScrollService {

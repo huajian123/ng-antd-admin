@@ -1,6 +1,6 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 
-import { Component, OnInit,  inject, DestroyRef, viewChild, signal } from '@angular/core';
+import { Component, OnInit, inject, DestroyRef, viewChild, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { AdComponent, DynamicComponent } from '@core/services/types';

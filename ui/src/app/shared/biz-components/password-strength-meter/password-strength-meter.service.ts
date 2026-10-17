@@ -16,16 +16,14 @@ export class PasswordStrengthMeterService {
     const defaultOptions = {
       dictionary: {
         ...commonDictionary,
-        ...enDictionary,
+        ...enDictionary
       },
       graphs: adjacencyGraphs,
-      translations: translations,
+      translations: translations
     };
 
     // 合并自定义选项
-    const options = this.customOptions
-      ? { ...defaultOptions, ...this.customOptions }
-      : defaultOptions;
+    const options = this.customOptions ? { ...defaultOptions, ...this.customOptions } : defaultOptions;
 
     // 创建 zxcvbn 实例
     this.zxcvbn = new ZxcvbnFactory(options);

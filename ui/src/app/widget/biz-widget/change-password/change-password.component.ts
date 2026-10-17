@@ -1,4 +1,4 @@
-import { Component,  inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, NonNullableFormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 

@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component,  TemplateRef, Renderer2, ElementRef, inject, effect, input } from '@angular/core';
+import { Component, TemplateRef, Renderer2, ElementRef, inject, effect, input } from '@angular/core';
 
 import { CollapsedNavWidth, SideNavWidth } from '@app/config/constant';
 import { SplitNavStoreService } from '@store/common-store/split-nav-store.service';

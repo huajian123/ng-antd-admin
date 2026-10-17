@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, OnInit,  inject, DestroyRef, booleanAttribute, input, computed, signal, effect, untracked } from '@angular/core';
+import { Component, OnInit, inject, DestroyRef, booleanAttribute, input, computed, signal, effect, untracked } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
 import { filter, map, mergeMap, tap } from 'rxjs/operators';
@@ -268,9 +268,7 @@ export class NavBarComponent implements OnInit {
     return menus.map(menu => ({
       ...menu,
       open: false,
-      children: menu.children && menu.children.length > 0
-        ? this.closeMenuOpen(menu.children)
-        : menu.children
+      children: menu.children && menu.children.length > 0 ? this.closeMenuOpen(menu.children) : menu.children
     }));
   }
 

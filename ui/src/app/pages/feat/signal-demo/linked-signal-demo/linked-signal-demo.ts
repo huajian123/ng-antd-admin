@@ -1,4 +1,4 @@
-import {  Component, computed, linkedSignal, signal } from '@angular/core';
+import { Component, computed, linkedSignal, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { PageHeaderComponent, PageHeaderType } from '@shared/components/page-header/page-header.component';
@@ -81,4 +81,3 @@ export class LinkedSignalDemo {
     this.parentConfig.update(c => ({ ...c, pageIndex: 1 }));
   }
 }
-

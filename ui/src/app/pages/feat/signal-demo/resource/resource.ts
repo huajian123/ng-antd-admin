@@ -1,4 +1,4 @@
-import {  Component, signal, resource } from '@angular/core';
+import { Component, signal, resource } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
@@ -67,4 +67,3 @@ export class Resource {
     stream: ({ params: id }) => of<UserData>({ name: `用户${id}`, email: `user${id}@example.com`, role: '演示' }).pipe(delay(500))
   });
 }
-

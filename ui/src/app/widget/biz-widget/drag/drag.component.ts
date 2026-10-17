@@ -1,4 +1,4 @@
-import { Component, OnInit,  inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { BasicConfirmModalComponent } from '@widget/base-modal';
@@ -16,8 +16,7 @@ export interface DragModalData {
 
 @Component({
   selector: 'app-drag',
-  templateUrl: './drag.component.html',
-
+  templateUrl: './drag.component.html'
 })
 export class DragComponent extends BasicConfirmModalComponent implements OnInit {
   readonly nzModalData: DragModalData = inject(NZ_MODAL_DATA);

@@ -1,4 +1,4 @@
-import { Component,  ElementRef, viewChild, signal, afterNextRender, inject, Injector } from '@angular/core';
+import { Component, ElementRef, viewChild, signal, afterNextRender, inject, Injector } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AdComponent, DynamicComponent } from '@core/services/types';

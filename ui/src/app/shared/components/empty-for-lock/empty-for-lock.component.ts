@@ -1,12 +1,11 @@
-import { Component,  inject, DestroyRef, computed } from '@angular/core';
+import { Component, inject, DestroyRef, computed } from '@angular/core';
 
 import { LockScreenStoreService } from '@store/common-store/lock-screen-store.service';
 
 /*此组件为了解决锁屏时f12仍然能查看到被隐藏的页面，而创建的空白页面*/
 @Component({
   selector: 'app-empty-for-lock',
-  template: ``,
-
+  template: ``
 })
 export class EmptyForLockComponent {
   destroyRef = inject(DestroyRef);

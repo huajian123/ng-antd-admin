@@ -1,4 +1,4 @@
-import { Component,  inject, DestroyRef, signal, effect, computed } from '@angular/core';
+import { Component, inject, DestroyRef, signal, effect, computed } from '@angular/core';
 
 import { SideNavWidth } from '@app/config/constant';
 import { ThemeService } from '@store/common-store/theme.service';

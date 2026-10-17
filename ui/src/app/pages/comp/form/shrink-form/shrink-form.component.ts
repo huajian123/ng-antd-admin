@@ -1,4 +1,4 @@
-import {  Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';

@@ -1,4 +1,4 @@
-import {  Component, inject, signal, DestroyRef } from '@angular/core';
+import { Component, inject, signal, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
 import { timer } from 'rxjs';
@@ -36,9 +36,11 @@ export class TopProgressBarComponent {
         return;
       }
       if (this.isFetching()) {
-        timer(600).pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-          this.isFetching.set(false);
-        });
+        timer(600)
+          .pipe(takeUntilDestroyed(this.destroyRef))
+          .subscribe(() => {
+            this.isFetching.set(false);
+          });
       }
     });
   }

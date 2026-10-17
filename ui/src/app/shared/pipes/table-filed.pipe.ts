@@ -14,7 +14,7 @@ function getByPath(obj: unknown, path: string, defaultVal: unknown = ''): unknow
 }
 
 @Pipe({
-  name: 'tableFiledPipe',
+  name: 'tableFiledPipe'
 })
 export class TableFiledPipe implements PipeTransform {
   transform(value: NzSafeAny, args?: string): NzSafeAny {

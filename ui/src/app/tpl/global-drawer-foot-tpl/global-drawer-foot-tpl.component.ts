@@ -1,4 +1,4 @@
-import {  Component, TemplateRef, output, OutputEmitterRef, Signal, viewChild } from '@angular/core';
+import { Component, TemplateRef, output, OutputEmitterRef, Signal, viewChild } from '@angular/core';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -15,8 +15,7 @@ export abstract class GlobalDrawerFootTplComponentToken {
   selector: 'app-global-drawer-foot-tpl',
   imports: [NzButtonModule],
   templateUrl: './global-drawer-foot-tpl.component.html',
-  providers: [{ provide: GlobalDrawerFootTplComponentToken, useExisting: GlobalDrawerFootTplComponent }],
-
+  providers: [{ provide: GlobalDrawerFootTplComponentToken, useExisting: GlobalDrawerFootTplComponent }]
 })
 export class GlobalDrawerFootTplComponent implements GlobalDrawerFootTplComponentToken {
   readonly componentTpl: Signal<TemplateRef<NzSafeAny>> = viewChild.required<TemplateRef<NzSafeAny>>('componentTpl');

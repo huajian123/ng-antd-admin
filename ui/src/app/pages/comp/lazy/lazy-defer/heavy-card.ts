@@ -1,4 +1,4 @@
-import {  Component, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 
@@ -7,7 +7,7 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
 
   imports: [NzCardModule, NzTagModule],
   template: `
-    <nz-card [nzBodyStyle]="{ padding: '16px' }" style="border-radius: 8px; border: 1px solid #f0f0f0;">
+    <nz-card style="border-radius: 8px; border: 1px solid #f0f0f0;" [nzBodyStyle]="{ padding: '16px' }">
       <div class="left-start-center" style="gap: 12px">
         <span style="font-size: 32px">{{ icon() }}</span>
         <div>

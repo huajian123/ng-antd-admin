@@ -1,4 +1,4 @@
-import {  Component } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { UserMemberManageComponent } from '@app/pages/page-demo/form/advanced/user-member-manage/user-member-manage.component';
 
@@ -6,7 +6,7 @@ import { NzBreadCrumbComponent, NzBreadCrumbItemComponent } from 'ng-zorro-antd/
 import { NzButtonComponent } from 'ng-zorro-antd/button';
 import { NzCardComponent } from 'ng-zorro-antd/card';
 import { NzIconDirective } from 'ng-zorro-antd/icon';
-import { NzInputDirective, NzInputWrapperComponent} from 'ng-zorro-antd/input';
+import { NzInputDirective, NzInputWrapperComponent } from 'ng-zorro-antd/input';
 
 @Component({
   selector: 'app-new-page-layout',

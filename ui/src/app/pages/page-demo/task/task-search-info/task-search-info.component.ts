@@ -1,4 +1,4 @@
-import {  Component } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { TaskSearchFiltersComponent } from '@app/pages/page-demo/task/task-search-info/task-search-filters/task-search-filters.component';
 import { UserInfoComponent } from '@app/pages/page-demo/task/task-search-info/user-info/user-info.component';

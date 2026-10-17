@@ -1,4 +1,4 @@
-import {  Component, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { PageHeaderComponent, PageHeaderType } from '@shared/components/page-header/page-header.component';
@@ -64,4 +64,3 @@ export class CrossCompCommunication {
     this.$sharedValue.set((e.target as HTMLInputElement).value);
   }
 }
-

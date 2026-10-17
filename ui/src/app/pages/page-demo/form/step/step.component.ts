@@ -1,6 +1,6 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { ComponentPortal, CdkPortalOutletAttachedRef, Portal, ComponentType, PortalModule } from '@angular/cdk/portal';
-import { AfterViewInit,  Component, ComponentRef, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { AfterViewInit, Component, ComponentRef, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { StepThreeComponent } from '@app/pages/page-demo/form/step/step-three/step-three.component';

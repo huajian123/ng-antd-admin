@@ -8,6 +8,6 @@ import { Component } from '@angular/core';
       <ng-content select="ng-container[right]" />
     </div>
   `,
-  styleUrl: './tool-bar.component.less',
+  styleUrl: './tool-bar.component.less'
 })
 export class ToolBarComponent {}

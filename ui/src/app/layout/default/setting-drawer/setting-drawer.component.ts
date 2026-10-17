@@ -1,5 +1,5 @@
 import { CdkDrag } from '@angular/cdk/drag-drop';
-import {  Component, computed, DestroyRef, effect, inject, OnInit, Renderer2, signal, DOCUMENT } from '@angular/core';
+import { Component, computed, DestroyRef, effect, inject, OnInit, Renderer2, signal, DOCUMENT } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 

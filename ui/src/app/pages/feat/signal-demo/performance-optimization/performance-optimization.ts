@@ -1,4 +1,4 @@
-import {  Component, computed, signal, untracked } from '@angular/core';
+import { Component, computed, signal, untracked } from '@angular/core';
 
 import { PageHeaderComponent, PageHeaderType } from '@shared/components/page-header/page-header.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -102,4 +102,3 @@ export class PerformanceOptimization {
     this.untrackedCallCount.set(this.withUntrackedCount);
   }
 }
-
