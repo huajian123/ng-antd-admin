@@ -7,10 +7,10 @@ import { fromEvent, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
 
 import { Menu } from '@core/services/types';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { MenuStoreService } from '@store/common-store/menu-store.service';
 import { BasicConfirmModalComponent } from '@widget/base-modal';
 
-import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';

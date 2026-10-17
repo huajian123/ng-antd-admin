@@ -1,19 +1,20 @@
 import { Component, signal, resource } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
+import { FormsModule } from '@angular/forms';
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
 import { PageHeaderComponent, PageHeaderType } from '@shared/components/page-header/page-header.component';
+
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzTagModule } from 'ng-zorro-antd/tag';
-import { NzWaveModule } from 'ng-zorro-antd/core/wave';
-import { FormsModule } from '@angular/forms';
 
 interface UserData {
   name: string;

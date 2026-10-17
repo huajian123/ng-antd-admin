@@ -8,6 +8,7 @@ import { NumberLoopPipe } from '@shared/pipes/number-loop.pipe';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzNoAnimationDirective } from 'ng-zorro-antd/core/animation';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -19,7 +20,6 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { ApplicationComponent } from './application/application.component';
 import { ArticleComponent } from './article/article.component';
 import { ProjectsComponent } from './projects/projects.component';
-import { NzNoAnimationDirective } from 'ng-zorro-antd/core/animation';
 
 interface TabInterface {
   label: string;

@@ -4,19 +4,20 @@ import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
 import { PageHeaderComponent, PageHeaderType } from '@shared/components/page-header/page-header.component';
+
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzGridModule } from 'ng-zorro-antd/grid';
-import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzSpinModule } from 'ng-zorro-antd/spin';
-import { NzTagModule } from 'ng-zorro-antd/tag';
-import { NzWaveModule } from 'ng-zorro-antd/core/wave';
-import { NzBadgeModule } from 'ng-zorro-antd/badge';
-import { NzStatisticModule } from 'ng-zorro-antd/statistic';
-import { NzListModule } from 'ng-zorro-antd/list';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzListModule } from 'ng-zorro-antd/list';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzStatisticModule } from 'ng-zorro-antd/statistic';
+import { NzTagModule } from 'ng-zorro-antd/tag';
 
 export interface Product {
   id: number;

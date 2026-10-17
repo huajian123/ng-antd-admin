@@ -1,9 +1,9 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 
 import { authInterceptor } from './auth.interceptor';
-import { loadingInterceptor } from './loading.interceptor';
 import { businessResponseInterceptor } from './business-response.interceptor';
 import { errorHandlerInterceptor } from './error-handler.interceptor';
+import { loadingInterceptor } from './loading.interceptor';
 
 /**
  * 拦截器执行顺序（不可随意调整）

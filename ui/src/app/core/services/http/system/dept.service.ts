@@ -1,5 +1,5 @@
-import { inject, Service } from '@angular/core';
 import { HttpResourceRef } from '@angular/common/http';
+import { inject, Service } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { PageInfo, SearchCommonVO } from '../../types';

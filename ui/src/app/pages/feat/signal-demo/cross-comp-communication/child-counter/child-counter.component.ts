@@ -1,9 +1,10 @@
 import { Component, model, output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { NzTagModule } from 'ng-zorro-antd/tag';
 
 @Component({
   selector: 'app-child-counter',

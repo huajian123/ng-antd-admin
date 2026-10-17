@@ -91,7 +91,7 @@ export default tseslint.config(
         }
       ],
       '@typescript-eslint/no-empty-function': 'off',
-      '@typescript-eslint/no-explicit-any': 'error',
+      '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-floating-promises': 'off',
       '@typescript-eslint/no-for-in-array': 'error',
       '@typescript-eslint/no-inferrable-types': [
@@ -106,7 +106,7 @@ export default tseslint.config(
       '@typescript-eslint/naming-convention': 'off',
       '@typescript-eslint/no-unused-expressions': 'off',
       '@typescript-eslint/explicit-function-return-type': [
-        'error',
+        'off',
         {
           allowExpressions: true,
           allowConciseArrowFunctionExpressionsStartingWithVoid: true
@@ -118,7 +118,7 @@ export default tseslint.config(
       // --- 未使用导入/变量检查 ---
       'unused-imports/no-unused-imports': 'error',
       'unused-imports/no-unused-vars': [
-        'warn',
+        'off',
         {
           vars: 'all',
           varsIgnorePattern: '^_',

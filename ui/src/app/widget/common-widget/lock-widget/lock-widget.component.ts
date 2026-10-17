@@ -5,11 +5,11 @@ import { of } from 'rxjs';
 
 import { LockedKey, salt } from '@config/constant';
 import { WindowService } from '@core/services/common/window.service';
+import { TranslatePipe } from '@ngx-translate/core';
 import { LockScreenFlag, LockScreenStoreService } from '@store/common-store/lock-screen-store.service';
 import { fnCheckForm, fnEncrypt } from '@utils/tools';
 import { BasicConfirmModalComponent } from '@widget/base-modal';
 
-import { TranslatePipe } from '@ngx-translate/core';
 
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzButtonModule } from 'ng-zorro-antd/button';

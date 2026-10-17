@@ -6,7 +6,7 @@ import { fnGetFlattenTreeDataByMap, fnTreeDataToMap } from '@utils/treeTableTool
 
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzResizeEvent, NzResizableModule } from 'ng-zorro-antd/resizable';
-import { NzTableQueryParams, NzTableSize, NzTableModule } from 'ng-zorro-antd/table';
+import { NzTableSize, NzTableModule } from 'ng-zorro-antd/table';
 
 import { MapPipe } from '../../pipes/map.pipe';
 import { TableFiledPipe } from '../../pipes/table-filed.pipe';

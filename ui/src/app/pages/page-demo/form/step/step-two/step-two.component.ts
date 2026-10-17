@@ -1,4 +1,4 @@
-import { Component, OnInit, output, signal } from '@angular/core';
+import { Component, output, signal } from '@angular/core';
 import { form, FormField, required } from '@angular/forms/signals';
 
 interface StepTwoFormModel {
@@ -21,7 +21,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 
   imports: [NzAlertModule, NzDescriptionsModule, NzDividerModule, FormField, NzGridModule, NzFormModule, NzButtonModule, NzInputModule, NzWaveModule]
 })
-export class StepTwoComponent implements OnInit {
+export class StepTwoComponent {
   readonly next = output<void>();
   readonly previous = output<void>();
 
@@ -41,9 +41,5 @@ export class StepTwoComponent implements OnInit {
     }
     console.log('表单数据:', this.formModel());
     this.next.emit();
-  }
-
-  ngOnInit(): void {
-    // Signal Forms 不需要 initForm
   }
 }

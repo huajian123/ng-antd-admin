@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-connect-charts',
@@ -6,6 +6,6 @@ import { Component, AfterViewInit } from '@angular/core';
   styles: [],
   imports: []
 })
-export class ConnectChartsComponent implements AfterViewInit {
-  ngAfterViewInit(): void {}
+export class ConnectChartsComponent  {
+
 }

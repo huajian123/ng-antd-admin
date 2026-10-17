@@ -2,15 +2,16 @@ import { Component, computed, linkedSignal, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { PageHeaderComponent, PageHeaderType } from '@shared/components/page-header/page-header.component';
+
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzTagModule } from 'ng-zorro-antd/tag';
-import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 
 interface Category {
   id: number;

@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
 
-import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { FullscreenService } from '@core/services/common/fullscreen.service';
+import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzTagModule } from 'ng-zorro-antd/tag';
 
 @Component({
   selector: 'app-full-screen',

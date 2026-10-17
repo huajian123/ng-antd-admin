@@ -5,12 +5,13 @@ import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-hea
 import { ViewTransitionDirective } from '@shared/directives/view-transition.directive';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardComponent } from 'ng-zorro-antd/card';
+import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzTagModule } from 'ng-zorro-antd/tag';
-import { NzGridModule } from 'ng-zorro-antd/grid';
 
 import { TECH_ITEMS, TechItem } from './transitions';
-import { NzCardComponent } from 'ng-zorro-antd/card';
+
 
 @Component({
   selector: 'app-transitions-detail',

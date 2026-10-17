@@ -1,4 +1,4 @@
-import { Component, OnInit, input, output, InputSignal, signal } from '@angular/core';
+import { Component, input, output, InputSignal, signal } from '@angular/core';
 import { form, FormField, required } from '@angular/forms/signals';
 
 interface StepOneFormModel {
@@ -25,7 +25,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
 
   imports: [FormField, NzFormModule, NzGridModule, NzSelectModule, NzButtonModule, NzInputModule, NzWaveModule, NzDividerModule, NzTypographyModule]
 })
-export class StepOneComponent implements OnInit {
+export class StepOneComponent{
   stepDirection: InputSignal<'horizontal' | 'vertical'> = input<'horizontal' | 'vertical'>('horizontal');
   readonly next = output<void>();
 
@@ -53,9 +53,5 @@ export class StepOneComponent implements OnInit {
     }
     console.log('表单数据:', this.formModel());
     this.next.emit();
-  }
-
-  ngOnInit(): void {
-    // Signal Forms 不需要 initForm
   }
 }

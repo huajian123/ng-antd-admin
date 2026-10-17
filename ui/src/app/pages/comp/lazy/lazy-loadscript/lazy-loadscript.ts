@@ -43,7 +43,7 @@ export class LazyLoadscript {
     // highlight.js 加载后调用其 API
     const code = `const ref = vcr.createComponent(MyComp);\nref.setInput('title', 'Hello');\nref.instance.close.subscribe(() => ref.destroy());`;
     // @ts-ignore
-    this.highlightResult.set((window as any).hljs?.highlight(code, { language: 'typescript' })?.value ?? code);
+    this.highlightResult.set((window as never).hljs?.highlight(code, { language: 'typescript' })?.value ?? code);
   }
 
   // ── Demo 2: loadStyle ───────────────────────────────────────────────────
@@ -60,7 +60,7 @@ export class LazyLoadscript {
 
   // ── Demo 3: load 批量 ───────────────────────────────────────────────────
   readonly batchStatus = signal<LoadStatus>('idle');
-  readonly batchResults = signal<{ path: string; status: string }[]>([]);
+  readonly batchResults = signal<Array<{ path: string; status: string }>>([]);
 
   async loadBatch(): Promise<void> {
     this.batchStatus.set('loading');

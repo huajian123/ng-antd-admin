@@ -1,19 +1,19 @@
 import { Component, inject, computed } from '@angular/core';
 
-import { TranslatePipe } from '@ngx-translate/core';
 import { LanguageService, Lang } from '@core/services/store/common-store/language.service';
+import { TranslatePipe } from '@ngx-translate/core';
 import { AntTableComponent, AntTableConfig } from '@shared/components/ant-table/ant-table.component';
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 
-import { NzCardModule } from 'ng-zorro-antd/card';
-import { NzTagModule } from 'ng-zorro-antd/tag';
-import { NzDividerModule } from 'ng-zorro-antd/divider';
-import { NzBadgeModule } from 'ng-zorro-antd/badge';
-import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzGridModule } from 'ng-zorro-antd/grid';
-import { NzStatisticModule } from 'ng-zorro-antd/statistic';
-import { NzTimelineModule } from 'ng-zorro-antd/timeline';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzStatisticModule } from 'ng-zorro-antd/statistic';
+import { NzTagModule } from 'ng-zorro-antd/tag';
+import { NzTimelineModule } from 'ng-zorro-antd/timeline';
 
 interface LangOption {
   key: Lang;

@@ -1,6 +1,6 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Component, OnInit, ChangeDetectorRef, inject, DestroyRef, viewChild, effect, computed, signal } from '@angular/core';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { Component, ChangeDetectorRef, inject, DestroyRef, viewChild, effect, computed } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { map } from 'rxjs/operators';
 

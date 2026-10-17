@@ -11,8 +11,8 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzSpaceCompactComponent } from 'ng-zorro-antd/space';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
 
 interface TabInterface {
   label: string;

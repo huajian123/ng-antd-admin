@@ -141,7 +141,7 @@ export class AnalysisComponent {
   constructor() {}
 
   // 为环图项目获取颜色
-  getColorForItem(item: any): string {
+  getColorForItem(item: never): string {
     const colors = ['#5B8FF9', '#5AD8A6', '#5D7092', '#F6BD16', '#E8684A', '#6DC8EC'];
     const index = this.ringData.indexOf(item);
     return colors[index % colors.length];

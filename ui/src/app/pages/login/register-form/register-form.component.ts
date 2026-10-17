@@ -2,9 +2,9 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { fnCheckForm } from '@utils/tools';
 
-import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 import { NzFormModule } from 'ng-zorro-antd/form';

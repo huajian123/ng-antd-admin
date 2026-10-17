@@ -1,18 +1,18 @@
-import { Component, signal, computed, inject } from '@angular/core';
 import { CdkDragDrop, DragDropModule, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { Component, signal, computed, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { ModalBtnStatus } from '@widget/base-modal';
 import { TaskModalService } from '@widget/biz-widget/task/task-modal.service';
 
-import { NzCardModule } from 'ng-zorro-antd/card';
-import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzTagModule } from 'ng-zorro-antd/tag';
-import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzTooltipModule } from 'ng-zorro-antd/tooltip';
-import { FormsModule } from '@angular/forms';
 
 export type TaskPriority = 'high' | 'medium' | 'low';
 export type TaskStatus = 'todo' | 'in-progress' | 'done';

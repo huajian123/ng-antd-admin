@@ -4,9 +4,9 @@ import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-hea
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';

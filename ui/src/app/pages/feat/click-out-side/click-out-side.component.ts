@@ -7,8 +7,8 @@ import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-hea
 import { fnStopMouseEvent } from '@utils/tools';
 
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @Component({
   selector: 'app-click-out-side',

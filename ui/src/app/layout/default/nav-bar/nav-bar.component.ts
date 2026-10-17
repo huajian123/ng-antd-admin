@@ -6,6 +6,7 @@ import { filter, map, mergeMap, tap } from 'rxjs/operators';
 
 import { TabService } from '@core/services/common/tab.service';
 import { Menu } from '@core/services/types';
+import { TranslatePipe } from '@ngx-translate/core';
 import { AuthDirective } from '@shared/directives/auth.directive';
 import { MenuStoreService } from '@store/common-store/menu-store.service';
 import { SplitNavStoreService } from '@store/common-store/split-nav-store.service';
@@ -18,7 +19,6 @@ import { NzNoAnimationDirective } from 'ng-zorro-antd/core/animation';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 
-import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-nav-bar',
