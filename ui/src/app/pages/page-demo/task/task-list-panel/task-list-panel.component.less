@@ -4,12 +4,12 @@
 
 // 顶部工具栏
 .kanban-toolbar {
+  flex-wrap: wrap;
   gap: 12px;
   margin-bottom: 20px;
-  flex-wrap: wrap;
 
   .add-btn-text {
-    @media (max-width: 768px) {
+    @media (width <= 768px) {
       display: none;
     }
   }
@@ -22,11 +22,11 @@
   gap: 16px;
   align-items: start;
 
-  @media (max-width: 1200px) {
+  @media (width <= 1200px) {
     gap: 12px;
   }
 
-  @media (max-width: 900px) {
+  @media (width <= 900px) {
     grid-template-columns: 1fr;
     gap: 16px;
   }
@@ -34,9 +34,9 @@
 
 // 列头卡片
 .col-header-card {
-  border-radius: 8px 8px 0 0 !important;
   margin-bottom: 0 !important;
   border-bottom: none !important;
+  border-radius: 8px 8px 0 0 !important;
 
   ::ng-deep .ant-card-body {
     border-top-left-radius: 8px;
@@ -46,34 +46,33 @@
 
 // 列内容区卡片
 .col-body-card {
-  border-radius: 0 0 8px 8px !important;
-  border-top: none !important;
   margin-top: 0 !important;
+  border-top: none !important;
+  border-radius: 0 0 8px 8px !important;
 
   ::ng-deep .ant-card-body {
-    border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
   }
 }
 
 // 列内容区（drop zone）
 .col-body {
-  min-height: 200px;
-  padding: 8px;
-
-  border-top: none;
-  border-radius: 0 0 8px 8px;
   display: flex;
   flex-direction: column;
   gap: 8px;
+  min-height: 200px;
+  padding: 8px;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
 
   &.cdk-drop-list-dragging .task-card:not(.cdk-drag-placeholder) {
     transition: all 0.2s;
   }
 
   &.cdk-drop-list-receiving {
-    background: #e6f4ff;
     border-color: #1890ff;
+    background: #e6f4ff;
   }
 }
 
@@ -81,12 +80,12 @@
 .col-empty {
   display: flex;
   flex-direction: column;
+  gap: 8px;
   align-items: center;
   justify-content: center;
-  gap: 8px;
   padding: 32px 0;
-  opacity: 0.3;
   font-size: 12px;
+  opacity: 0.3;
 
   span[nz-icon] {
     font-size: 28px;
@@ -95,9 +94,9 @@
 
 // 任务卡片
 .task-card {
+  cursor: grab;
   border-left: 3px solid transparent !important;
   border-radius: 8px !important;
-  cursor: grab;
   transition: all 0.2s;
 
   ::ng-deep .ant-card-body {
@@ -124,10 +123,10 @@
 }
 
 .task-card-body {
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   gap: 6px;
-  cursor: pointer;
   transition: all 0.2s;
 
   &:hover {
@@ -142,16 +141,16 @@
 // 标题行
 .task-header {
   display: flex;
+  gap: 6px;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 6px;
 }
 
 .task-title {
+  flex: 1;
   font-size: 13px;
   font-weight: 500;
   line-height: 1.5;
-  flex: 1;
   word-break: break-word;
 
   &.done-title {
@@ -165,7 +164,7 @@
   opacity: 0;
   transition: opacity 0.2s;
 
-  @media (max-width: 768px) {
+  @media (width <= 768px) {
     opacity: 1;
   }
 }
@@ -173,9 +172,9 @@
 // 描述
 .task-desc {
   font-size: 12px;
-  opacity: 0.55;
   line-height: 1.5;
   word-break: break-word;
+  opacity: 0.55;
 }
 
 // 底部标签
@@ -192,18 +191,18 @@
 
 // 拖拽占位
 .drag-placeholder {
+  min-height: 60px;
   border: 2px dashed #1890ff;
   border-radius: 8px;
-  min-height: 60px;
   opacity: 0.6;
 }
 
 // 拖拽预览
 .drag-preview {
-  border-radius: 8px;
-  padding: 10px 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   max-width: 280px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 
   .drag-preview-title {
     font-size: 13px;

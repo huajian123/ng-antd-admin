@@ -1,14 +1,14 @@
 .hint {
-  color: #8c8c8c;
-  font-size: 13px;
   margin-bottom: 12px;
+  font-size: 13px;
+  color: #8c8c8c;
 }
 
 .result-row,
 .field-row {
   display: flex;
-  align-items: center;
   gap: 8px;
+  align-items: center;
 
   .label {
     color: #595959;
@@ -17,12 +17,12 @@
 }
 
 .timer-display {
+  margin-bottom: 12px;
   font-size: 48px;
   font-weight: 700;
-  text-align: center;
-  color: #1890ff;
-  margin-bottom: 12px;
   font-variant-numeric: tabular-nums;
+  color: #1890ff;
+  text-align: center;
 }
 
 .tag-list {
@@ -33,43 +33,43 @@
 }
 
 .empty-text {
-  color: #bfbfbf;
   font-size: 13px;
+  color: #bfbfbf;
 }
 
 .log-panel {
+  overflow-y: auto;
   min-height: 80px;
   max-height: 120px;
-  overflow-y: auto;
-  background: #f5f5f5;
-  border-radius: 4px;
   padding: 8px;
+  border-radius: 4px;
+  font-family: SFMono-Regular, Consolas, monospace;
   font-size: 12px;
-  font-family: 'SFMono-Regular', Consolas, monospace;
+  background: #f5f5f5;
 }
 
 .log-line {
-  color: #595959;
   line-height: 1.8;
+  color: #595959;
 }
 
 .log-empty {
+  padding-top: 16px;
   color: #bfbfbf;
   text-align: center;
-  padding-top: 16px;
 }
 
 .code-block {
+  overflow-x: auto;
   margin: 0;
   padding: 12px;
-  background: #f5f5f5;
   border-radius: 6px;
   font-size: 12px;
   line-height: 1.7;
-  overflow-x: auto;
   white-space: pre;
+  background: #f5f5f5;
 
   code {
-    font-family: 'SFMono-Regular', Consolas, monospace;
+    font-family: SFMono-Regular, Consolas, monospace;
   }
 }

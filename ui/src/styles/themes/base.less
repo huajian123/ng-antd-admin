@@ -581,7 +581,7 @@ h6 {
 
 // 通用页面统一布局
 .normal-table-wrap {
-  padding: 27px 27px 0 27px;
+  padding: 27px 27px 0;
 
   /* 列表顶部样式 */
   .ant-pro-table-toolbar {
@@ -716,8 +716,8 @@ input[nz-input] {
 
 .pg-section-label {
   display: flex;
-  align-items: center;
   gap: 8px;
+  align-items: center;
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
@@ -736,24 +736,24 @@ input[nz-input] {
 }
 
 .pg-inline-code {
-  font-family: 'SFMono-Regular', Consolas, monospace;
-  font-size: 12px;
   padding: 1px 5px;
-  border-radius: 4px;
   border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+  font-family: SFMono-Regular, Consolas, monospace;
+  font-size: 12px;
 }
 
 .pg-demo {
   &-area {
     display: flex;
-    align-items: center;
-    gap: 12px;
     flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
 
     [nz-button] {
       display: inline-flex;
-      align-items: center;
       gap: 5px;
+      align-items: center;
       border-radius: 8px;
       transition: all 0.25s cubic-bezier(0.32, 0.72, 0, 1);
 
@@ -765,26 +765,26 @@ input[nz-input] {
 
   &-hint {
     display: inline-flex;
-    align-items: center;
     gap: 5px;
+    align-items: center;
     font-size: 12px;
     opacity: 0.45;
   }
 }
 
 .pg-code-block {
-  border-radius: 10px;
-  padding: 16px;
-  margin-top: 16px;
   overflow-x: auto;
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: 10px;
   background: #1a1a2e;
 
   code {
-    font-family: 'SFMono-Regular', Consolas, monospace;
+    font-family: SFMono-Regular, Consolas, monospace;
     font-size: 12px;
     line-height: 1.7;
-    white-space: pre;
     color: #a8d8a8;
+    white-space: pre;
   }
 }
 
@@ -796,10 +796,10 @@ input[nz-input] {
 
   &-n,
   &-s {
-    left: 0;
-    right: 0;
-    height: 8px;
     cursor: ns-resize;
+    right: 0;
+    left: 0;
+    height: 8px;
   }
 
   &-n {
@@ -812,10 +812,10 @@ input[nz-input] {
 
   &-e,
   &-w {
+    cursor: ew-resize;
     top: 0;
     bottom: 0;
     width: 8px;
-    cursor: ew-resize;
   }
 
   &-e {
@@ -830,32 +830,32 @@ input[nz-input] {
   &-nw,
   &-se,
   &-sw {
+    z-index: 11;
     width: 12px;
     height: 12px;
-    z-index: 11;
   }
 
   &-ne {
+    cursor: nesw-resize;
     top: 0;
     right: 0;
-    cursor: nesw-resize;
   }
 
   &-nw {
+    cursor: nwse-resize;
     top: 0;
     left: 0;
-    cursor: nwse-resize;
   }
 
   &-se {
-    bottom: 0;
-    right: 0;
     cursor: nwse-resize;
+    right: 0;
+    bottom: 0;
   }
 
   &-sw {
+    cursor: nesw-resize;
     bottom: 0;
     left: 0;
-    cursor: nesw-resize;
   }
 }

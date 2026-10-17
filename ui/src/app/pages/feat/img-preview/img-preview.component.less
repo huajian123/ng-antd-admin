@@ -5,15 +5,15 @@
 }
 
 .img-item {
+  cursor: pointer;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 8px;
+  align-items: center;
   padding: 12px;
-  border-radius: 8px;
   border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
   transition: all 0.25s cubic-bezier(0.32, 0.72, 0, 1);
-  cursor: pointer;
 
   &:hover {
     border-color: #1677ff;
@@ -21,11 +21,11 @@
   }
 
   &__thumb {
+    display: block;
     width: 160px;
     height: 120px;
-    object-fit: cover;
     border-radius: 4px;
-    display: block;
+    object-fit: cover;
   }
 
   &__label {

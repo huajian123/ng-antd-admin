@@ -14,8 +14,8 @@
   border-radius: 8px;
 
   &.list {
-    height: 320px;
     align-items: flex-start;
+    height: 320px;
   }
 }
 
@@ -28,12 +28,13 @@
 
 @keyframes staggerIn {
   from {
-    opacity: 0;
     transform: translateY(20px) scale(0.8);
+    opacity: 0;
   }
+
   to {
-    opacity: 1;
     transform: translateY(0) scale(1);
+    opacity: 1;
   }
 }
 
@@ -54,19 +55,20 @@
 
 @keyframes slideInLeft {
   from {
-    opacity: 0;
     transform: translateX(-20px);
+    opacity: 0;
   }
+
   to {
-    opacity: 1;
     transform: translateX(0);
+    opacity: 1;
   }
 }
 
 .stagger-list-item {
   display: flex;
-  align-items: center;
   gap: 10px;
+  align-items: center;
   padding: 10px 14px;
   border: 1px solid rgba(0, 0, 0, 0.06);
   border-left: 3px solid;
@@ -76,10 +78,10 @@
 }
 
 .item-dot {
+  flex-shrink: 0;
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  flex-shrink: 0;
 }
 
 .item-label {

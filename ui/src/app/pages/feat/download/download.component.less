@@ -2,10 +2,10 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 16px;
-  border-radius: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
   height: 100%;
+  padding: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
   transition: border-color cubic-bezier(0.32, 0.72, 0, 1) 0.2s;
 
   &:hover {
@@ -20,9 +20,9 @@
 
 .download-info {
   display: flex;
+  flex: 1;
   flex-direction: column;
   gap: 4px;
-  flex: 1;
 }
 
 .download-title {
@@ -32,14 +32,14 @@
 
 .download-desc {
   font-size: 12px;
-  opacity: 0.45;
   line-height: 1.6;
+  opacity: 0.45;
 }
 
 .inline-code {
   padding: 1px 6px;
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 4px;
-  font-family: 'SFMono-Regular', Consolas, monospace;
+  font-family: SFMono-Regular, Consolas, monospace;
   font-size: 12px;
 }

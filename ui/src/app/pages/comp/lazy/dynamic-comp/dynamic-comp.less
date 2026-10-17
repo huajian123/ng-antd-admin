@@ -1,32 +1,32 @@
 .code-block {
+  overflow-x: auto;
   margin: 0 0 16px;
   padding: 12px;
-  background: #f5f5f5;
   border-radius: 6px;
   font-size: 12px;
   line-height: 1.7;
-  overflow-x: auto;
+  background: #f5f5f5;
 
   code {
-    font-family: 'SFMono-Regular', Consolas, monospace;
+    font-family: SFMono-Regular, Consolas, monospace;
   }
 }
 
 .empty-hint {
-  height: 160px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #bfbfbf;
-  font-size: 13px;
+  height: 160px;
   border: 1px dashed #d9d9d9;
   border-radius: 6px;
+  font-size: 13px;
+  color: #bfbfbf;
 }
 
 .compare-block {
   padding: 12px;
-  border-radius: 6px;
   border: 1px solid #d9d9d9;
+  border-radius: 6px;
 
   &.good {
     border-color: #52c41a;
@@ -37,15 +37,16 @@
   }
 
   .compare-label {
+    margin-bottom: 8px;
     font-size: 12px;
     font-weight: 600;
-    margin-bottom: 8px;
     color: #595959;
   }
 
   &.good .compare-label {
     color: #52c41a;
   }
+
   &.bad .compare-label {
     color: #ff4d4f;
   }
@@ -54,29 +55,29 @@
 // Step indicator
 .step-indicator {
   display: flex;
+  gap: 0;
   align-items: center;
   justify-content: center;
-  gap: 0;
   padding: 8px 0;
 }
 
 .step-item {
+  cursor: pointer;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 6px;
-  cursor: pointer;
+  align-items: center;
 
   .step-dot {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    border: 2px solid #d9d9d9;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 600;
+    width: 32px;
+    height: 32px;
+    border: 2px solid #d9d9d9;
+    border-radius: 50%;
     font-size: 13px;
+    font-weight: 600;
     color: #8c8c8c;
     background: #fff;
     transition: all 0.25s;
@@ -92,13 +93,13 @@
   &.active {
     .step-dot {
       border-color: #722ed1;
-      background: #722ed1;
       color: #fff;
+      background: #722ed1;
     }
 
     .step-label {
-      color: #722ed1;
       font-weight: 600;
+      color: #722ed1;
     }
   }
 }
@@ -106,44 +107,45 @@
 .step-line {
   flex: 1;
   height: 2px;
-  background: #d9d9d9;
   margin: 0 8px;
   margin-bottom: 20px;
+  background: #d9d9d9;
   transition: background 0.25s;
 
   &.done {
     background: #722ed1;
   }
 }
+
 .code-block {
+  overflow-x: auto;
   margin: 0 0 16px;
   padding: 12px;
-  background: #f5f5f5;
   border-radius: 6px;
   font-size: 12px;
   line-height: 1.7;
-  overflow-x: auto;
+  background: #f5f5f5;
 
   code {
-    font-family: 'SFMono-Regular', Consolas, monospace;
+    font-family: SFMono-Regular, Consolas, monospace;
   }
 }
 
 .empty-hint {
-  height: 160px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #bfbfbf;
-  font-size: 13px;
+  height: 160px;
   border: 1px dashed #d9d9d9;
   border-radius: 6px;
+  font-size: 13px;
+  color: #bfbfbf;
 }
 
 .compare-block {
   padding: 12px;
-  border-radius: 6px;
   border: 1px solid #d9d9d9;
+  border-radius: 6px;
 
   &.good {
     border-color: #52c41a;
@@ -154,15 +156,16 @@
   }
 
   .compare-label {
+    margin-bottom: 8px;
     font-size: 12px;
     font-weight: 600;
-    margin-bottom: 8px;
     color: #595959;
   }
 
   &.good .compare-label {
     color: #52c41a;
   }
+
   &.bad .compare-label {
     color: #ff4d4f;
   }
@@ -171,29 +174,29 @@
 // Step indicator
 .step-indicator {
   display: flex;
+  gap: 0;
   align-items: center;
   justify-content: center;
-  gap: 0;
   padding: 8px 0;
 }
 
 .step-item {
+  cursor: pointer;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 6px;
-  cursor: pointer;
+  align-items: center;
 
   .step-dot {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    border: 2px solid #d9d9d9;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 600;
+    width: 32px;
+    height: 32px;
+    border: 2px solid #d9d9d9;
+    border-radius: 50%;
     font-size: 13px;
+    font-weight: 600;
     color: #8c8c8c;
     background: #fff;
     transition: all 0.25s;
@@ -209,13 +212,13 @@
   &.active {
     .step-dot {
       border-color: #722ed1;
-      background: #722ed1;
       color: #fff;
+      background: #722ed1;
     }
 
     .step-label {
-      color: #722ed1;
       font-weight: 600;
+      color: #722ed1;
     }
   }
 }
@@ -223,9 +226,9 @@
 .step-line {
   flex: 1;
   height: 2px;
-  background: #d9d9d9;
   margin: 0 8px;
   margin-bottom: 20px;
+  background: #d9d9d9;
   transition: background 0.25s;
 
   &.done {

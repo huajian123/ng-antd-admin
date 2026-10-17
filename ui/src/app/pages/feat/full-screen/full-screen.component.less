@@ -6,39 +6,40 @@
 
 .status-row {
   display: flex;
-  align-items: center;
   gap: 8px;
+  align-items: center;
 }
 
 .status-label {
-  opacity: 0.55;
   font-size: 13px;
+  opacity: 0.55;
 }
 
 .dom-preview {
-  border-radius: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  height: 280px;
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 280px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
   transition: border-color cubic-bezier(0.32, 0.72, 0, 1) 0.2s;
+
   &:hover {
     border-color: #1677ff;
   }
 
   &:fullscreen,
-  &:-webkit-full-screen {
-    border-radius: 0;
+  &:full-screen {
     border: none;
+    border-radius: 0;
   }
 }
 
 .dom-preview-inner {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 16px;
+  align-items: center;
 }
 
 .dom-preview-icon {
@@ -47,7 +48,7 @@
 }
 
 .dom-preview-title {
+  margin: 0;
   font-size: 15px;
   opacity: 0.45;
-  margin: 0;
 }
