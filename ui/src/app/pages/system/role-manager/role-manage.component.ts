@@ -55,7 +55,7 @@ export class RoleManageComponent implements OnInit {
   searchModel = signal<SearchParam>({ ...DEFAULT_SEARCH_PARAM });
   searchForm = form(this.searchModel);
   readonly pageHeaderInfo: Partial<PageHeaderType> = {
-    title: '角色管理',
+    title: '角色管理，设置权限按钮演示v22.2.0提供的路由resource',
     breadcrumb: ['首页', '用户管理', '角色管理']
   };
   checkedCashArray = [];
@@ -122,7 +122,7 @@ export class RoleManageComponent implements OnInit {
 
   // 设置权限
   setRole(id: number, roleName: string): void {
-    this.router.navigate(['/default/system/role-manager/set-role'], { queryParams: { id, roleName } });
+    this.router.navigate(['/default/system/role-manager/set-role', id], { queryParams: { roleName } });
   }
 
   add(): void {

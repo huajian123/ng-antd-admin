@@ -3,10 +3,9 @@ import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import angular from 'angular-eslint';
 
-import jsdoc from 'eslint-plugin-jsdoc';
-import prettier from 'eslint-plugin-prettier';
-import importPlugin from 'eslint-plugin-import';
+import importX from 'eslint-plugin-import-x';
 import unusedImports from 'eslint-plugin-unused-imports';
+import eslintConfigPrettier from 'eslint-config-prettier/flat';
 
 /*https://blog.miniasp.com/post/2021/08/29/Angular-ESLint-with-so-much-details*/
 /*https://github.com/angular-eslint/angular-eslint/tree/main/packages/eslint-plugin/docs/rules*/
@@ -14,18 +13,14 @@ import unusedImports from 'eslint-plugin-unused-imports';
 /*https://eslint.org/docs/latest/user-guide/getting-started*/
 
 export default tseslint.config(
+  // --- 全局忽略配置 ---
   {
-    ignores: [
-      '.*/',
-      'publish/',
-      'lib/',
-      'dist/',
-      'junit/',
-      'coverage-report/'
-    ]
+    ignores: ['.*/', 'publish/', 'lib/', 'dist/', 'junit/', 'coverage-report/', '.angular/']
   },
+
+  // --- TypeScript 文件配置 ---
   {
-    files: ["**/*.ts"],
+    files: ['**/*.ts'],
     languageOptions: {
       parserOptions: {
         projectService: true, // 启用项目服务（通常用于增强类型信息）
@@ -33,30 +28,24 @@ export default tseslint.config(
       }
     },
     plugins: {
-      jsdoc,
-      import: importPlugin,
-      prettier,
+      // eslint-plugin-import-x 是 eslint-plugin-import 的现代替代方案，兼容 ESLint 10
+      'import-x': importX,
       'unused-imports': unusedImports
     },
-    extends: [
-      eslint.configs.recommended,
-      ...tseslint.configs.recommended,
-      ...tseslint.configs.stylistic,
-      ...angular.configs.tsRecommended,
-    ],
+    extends: [eslint.configs.recommended, ...tseslint.configs.recommended, ...tseslint.configs.stylistic, ...angular.configs.tsRecommended],
     processor: angular.processInlineTemplates,
     rules: {
-      'prettier/prettier': 'error',
-      "@angular-eslint/directive-selector": [
-        "error",
+      // --- Angular 规则 ---
+      '@angular-eslint/directive-selector': [
+        'error',
         {
-          type: "attribute",
-          prefix: "app",
-          style: "camelCase",
-        },
+          type: 'attribute',
+          prefix: 'app',
+          style: 'camelCase'
+        }
       ],
-      "@angular-eslint/component-selector": [
-        "error",
+      '@angular-eslint/component-selector': [
+        'error',
         {
           type: ['element', 'attribute'],
           prefix: ['app', 'test'],
@@ -66,7 +55,8 @@ export default tseslint.config(
       '@angular-eslint/prefer-inject': 'off',
       '@angular-eslint/no-rename-input': 'off',
       '@angular-eslint/no-attribute-decorator': 'error',
-      '@angular-eslint/no-conflicting-lifecycle': 'off',
+      // angular-eslint v22 已移除 no-conflicting-lifecycle 规则，保留配置会触发 ESLint 报错
+      // '@angular-eslint/no-conflicting-lifecycle': 'off',
       '@angular-eslint/no-forward-ref': 'off',
       '@angular-eslint/no-host-metadata-property': 'off',
       '@angular-eslint/no-lifecycle-call': 'off',
@@ -75,6 +65,7 @@ export default tseslint.config(
       '@angular-eslint/use-component-selector': 'off',
       '@angular-eslint/use-component-view-encapsulation': 'off',
 
+      // --- TypeScript 规则 ---
       '@typescript-eslint/array-type': [
         'error',
         {
@@ -123,6 +114,8 @@ export default tseslint.config(
       ],
       '@typescript-eslint/no-require-imports': 'warn',
       '@typescript-eslint/no-unused-vars': 'off',
+
+      // --- 未使用导入/变量检查 ---
       'unused-imports/no-unused-imports': 'error',
       'unused-imports/no-unused-vars': [
         'warn',
@@ -133,11 +126,12 @@ export default tseslint.config(
           argsIgnorePattern: '^_'
         }
       ],
-      'prefer-arrow/prefer-arrow-functions': 'off',
-      'import/no-duplicates': 'error',
-      'import/no-unused-modules': 'error',
-      'import/no-unassigned-import': 'error',
-      'import/order': [
+
+      // --- import 规则（使用 import-x 前缀替代旧的 import 前缀） ---
+      'import-x/no-duplicates': 'error',
+      'import-x/no-unused-modules': 'off', // ESLint 10 下功能不可用，等待插件适配
+      'import-x/no-unassigned-import': 'error',
+      'import-x/order': [
         'error',
         {
           alphabetize: { order: 'asc', caseInsensitive: false },
@@ -158,6 +152,8 @@ export default tseslint.config(
           pathGroupsExcludedImportTypes: []
         }
       ],
+
+      // --- 通用 JavaScript 规则 ---
       'no-prototype-builtins': 'off',
       'no-bitwise': 'off',
       'no-duplicate-imports': 'error',
@@ -172,25 +168,20 @@ export default tseslint.config(
       'prefer-object-spread': 'error',
       'prefer-template': 'error',
       yoda: 'error'
-    },
+    }
   },
+
+  // --- HTML 模板文件配置 ---
   {
-    files: ["**/*.html"],
-    plugins: {
-      prettier
-    },
+    files: ['**/*.html'],
     extends: [
-      ...angular.configs.templateRecommended,
+      ...angular.configs.templateRecommended
       // todo(a11y)
       // ...angular.configs.templateAccessibility,
     ],
-    rules: {
-      'prettier/prettier': [
-        'error',
-        {
-          parser: 'angular'
-        }
-      ]
-    },
-  }
+    rules: {}
+  },
+
+  // --- eslint-config-prettier 必须放在最后，用于关闭与 Prettier 冲突的格式化规则 ---
+  eslintConfigPrettier
 );

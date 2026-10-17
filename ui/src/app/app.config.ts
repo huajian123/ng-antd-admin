@@ -3,7 +3,17 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import zh from '@angular/common/locales/zh';
 import { ApplicationConfig, importProvidersFrom, provideZonelessChangeDetection, inject, provideAppInitializer, EnvironmentProviders, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { provideRouter, RouteReuseStrategy, TitleStrategy, withComponentInputBinding, withHashLocation, withInMemoryScrolling, withPreloading, withViewTransitions } from '@angular/router';
+import {
+  provideRouter,
+  RouteReuseStrategy,
+  TitleStrategy,
+  withComponentInputBinding,
+  withHashLocation,
+  withInMemoryScrolling,
+  withPreloading,
+  withRouterResources,
+  withViewTransitions
+} from '@angular/router';
 
 import { DashboardOutline, FormOutline, MenuFoldOutline, MenuUnfoldOutline } from '@ant-design/icons-angular/icons';
 import { appRoutes } from '@app/app.routes';
@@ -131,11 +141,12 @@ export const appConfig: ApplicationConfig = {
         scrollPositionRestoration: 'top'
       }),
       withHashLocation(), // 使用哈希路由
-      withComponentInputBinding() // 开启路由参数绑定到组件的输入属性,ng16新增特性
+      withComponentInputBinding(), // 开启路由参数绑定到组件的输入属性,ng16新增特性
+      withRouterResources() // 开启路由级 Resource 加载与自动绑定,ng22.2新增特性
     ),
     importProvidersFrom(NzDrawerModule, NzModalModule, FormsModule),
     provideTranslateService({
-      fallbackLang: 'zh_CN'  // 当翻译键缺失时的回退语言
+      fallbackLang: 'zh_CN' // 当翻译键缺失时的回退语言
     }),
     provideTranslateHttpLoader({ prefix: './i18n/', suffix: '.json' }),
     ...APPINIT_PROVIDES, // 项目启动之前，需要调用的一系列方法

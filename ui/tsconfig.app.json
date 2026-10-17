@@ -3,7 +3,6 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "./out-tsc/app",
     "types": []
   },
   "include": ["src/**/*.ts"],
@@ -11,8 +10,8 @@
   "angularCompilerOptions": {
     "extendedDiagnostics": {
       "checks": {
-        "nullishCoalescingNotNullable": "suppress",
-        "optionalChainNotNullable": "suppress"
+        "nullishCoalescingNotNullable": "warning",
+        "optionalChainNotNullable": "warning"
       }
     }
   }

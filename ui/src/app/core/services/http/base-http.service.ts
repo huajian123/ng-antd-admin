@@ -1,11 +1,12 @@
 import { HttpClient, HttpHeaders, HttpParams, httpResource, HttpResourceRef } from '@angular/common/http';
 import { inject, Injector, Service } from '@angular/core';
 import { Observable } from 'rxjs';
-import * as qs from 'qs';
+
+import { buildHttpContext } from '@core/services/interceptors/http-context-tokens';
 
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { apiUrl } from './api-url';
-import { buildHttpContext } from '@core/services/interceptors/http-context-tokens';
 
 export interface HttpCustomConfig {
   needSuccessInfo?: boolean; // 是否需要"操作成功"提示
@@ -14,18 +15,19 @@ export interface HttpCustomConfig {
   loadingText?: string; // 可选：自定义Loading文案
 }
 
+export type HttpQueryParams = Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
+
 @Service()
 export class BaseHttpService {
   http = inject(HttpClient);
   private injector = inject(Injector);
 
-  getResource<T>(path: string, param?: NzSafeAny, config?: HttpCustomConfig): HttpResourceRef<T> {
-    const params = new HttpParams({ fromString: qs.stringify(param) });
+  getResource<T>(path: string, param?: HttpQueryParams, config?: HttpCustomConfig): HttpResourceRef<T> {
     const context = buildHttpContext(config);
     return httpResource<T>(
       () => ({
         url: this.getUrl(path, config),
-        params,
+        params: this.createHttpParams(param),
         context
       }),
       { injector: this.injector }
@@ -45,16 +47,14 @@ export class BaseHttpService {
     ) as HttpResourceRef<T>;
   }
 
-  get<T>(path: string, param?: NzSafeAny, config?: HttpCustomConfig): Observable<T> {
-    const params = new HttpParams({ fromString: qs.stringify(param) });
+  get<T>(path: string, param?: HttpQueryParams, config?: HttpCustomConfig): Observable<T> {
     const context = buildHttpContext(config);
-    return this.http.get<T>(this.getUrl(path, config), { params, context });
+    return this.http.get<T>(this.getUrl(path, config), { params: this.createHttpParams(param), context });
   }
 
-  delete<T>(path: string, param?: NzSafeAny, config?: HttpCustomConfig): Observable<T> {
-    const params = new HttpParams({ fromString: qs.stringify(param) });
+  delete<T>(path: string, param?: HttpQueryParams, config?: HttpCustomConfig): Observable<T> {
     const context = buildHttpContext(config);
-    return this.http.delete<T>(this.getUrl(path, config), { params, context });
+    return this.http.delete<T>(this.getUrl(path, config), { params: this.createHttpParams(param), context });
   }
 
   post<T>(path: string, param?: NzSafeAny, config?: HttpCustomConfig): Observable<T> {
@@ -79,5 +79,9 @@ export class BaseHttpService {
       return path;
     }
     return apiUrl(path);
+  }
+
+  private createHttpParams(param?: HttpQueryParams): HttpParams {
+    return param ? new HttpParams({ fromObject: param }) : new HttpParams();
   }
 }

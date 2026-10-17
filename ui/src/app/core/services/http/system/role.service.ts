@@ -1,5 +1,5 @@
-import { inject, Service } from '@angular/core';
 import { HttpResourceRef } from '@angular/common/http';
+import { inject, Service } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -45,8 +45,8 @@ export class RoleService {
     return this.http.postResource<PageInfo<Role>>('/role/list', param, { showLoading: true, loadingText: '请求中' });
   }
 
-  getPermissionByIdResource(id: () => string): HttpResourceRef<string[]> {
-    return this.http.getResource<string[]>(`/permission/list-role-resources/${id()}`);
+  public getPermissionById(id: string): Observable<string[]> {
+    return this.http.get<string[]>(`/permission/list-role-resources/${id}`);
   }
 
   public getRolesDetail(id: number): Observable<Role> {
