@@ -100,6 +100,7 @@
     "default:feat:img-preview": "图片预览",
     "default:feat:full-screen": "全屏",
     "default:feat:tabs": "标签页操作",
+    "default:feat:tabs:example-detail": "演示详情",
     "default:feat:ex-modal": "拖拽modal",
     "default:feat:ex-drawer": "封装抽屉",
     "default:feat:rich-text": "富文本",

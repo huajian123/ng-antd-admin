@@ -6,7 +6,7 @@ export default [
   { path: '', title: 'menu.default:feat:tabs', data: { key: 'tabs' }, loadComponent: () => import('./tabs.component').then(m => m.TabsComponent) },
   {
     path: 'example-detail',
-    title: 'menu.default:feat:tabs',
+    title: 'menu.default:feat:tabs:example-detail',
     data: { newTab: 'true', authCode: ActionCode.TabsDetail, key: 'example-detail' },
     loadComponent: () => import('./detail/detail.component').then(m => m.DetailComponent)
   }

@@ -37,7 +37,7 @@ export class TabComponent {
   $isCollapsed = computed(() => this.themesService.$isCollapsed());
 
   public trackByTab(index: number, tab: TabModel): string {
-    return tab.title;
+    return tab.path;
   }
 
   // 点击tab跳转到对应的path

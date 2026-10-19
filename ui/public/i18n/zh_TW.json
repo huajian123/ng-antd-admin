@@ -100,6 +100,7 @@
     "default:feat:img-preview": "圖片預覽",
     "default:feat:full-screen": "全螢幕",
     "default:feat:tabs": "標籤頁操作",
+    "default:feat:tabs:example-detail": "演示詳情",
     "default:feat:ex-modal": "拖曳modal",
     "default:feat:ex-drawer": "封裝抽屜",
     "default:feat:rich-text": "富文字",

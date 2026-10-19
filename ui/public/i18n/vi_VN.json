@@ -100,6 +100,7 @@
     "default:feat:img-preview": "Xem trước hình ảnh",
     "default:feat:full-screen": "Toàn màn hình",
     "default:feat:tabs": "Thao tác tab",
+    "default:feat:tabs:example-detail": "Chi tiết demo",
     "default:feat:ex-modal": "Kéo modal",
     "default:feat:ex-drawer": "Ngăn kéo",
     "default:feat:rich-text": "Văn bản phong phú",
