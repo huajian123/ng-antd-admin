@@ -37,9 +37,7 @@ export class DrawerWrapService {
     const defaultOptions: NzDrawerOptions = {
       nzContent: component,
       nzClosable: false,
-      nzContentParams: {
-        params
-      },
+      nzData: params,
       nzFooter: drawerOptions.nzFooter || this.btnTpl()
     };
     return { ...defaultOptions, ...drawerOptions };

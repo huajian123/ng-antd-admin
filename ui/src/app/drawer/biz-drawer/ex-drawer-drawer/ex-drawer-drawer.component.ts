@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { fnCheckForm } from '@utils/tools';
 
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NZ_DRAWER_DATA } from 'ng-zorro-antd/drawer';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -16,7 +17,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 })
 export class ExDrawerDrawerComponent {
   private fb = inject(NonNullableFormBuilder);
-  params: { name: string } = { name: '' };
+  readonly params = inject(NZ_DRAWER_DATA) ?? { name: '' };
   validateForm = this.fb.group({
     password: ['', [Validators.required]]
   });
