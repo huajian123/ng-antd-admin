@@ -19,13 +19,13 @@
 
 ## 📖 项目简介
 
-**ng-antd-admin** 是一个**生产就绪**的企业级中后台前端解决方案，基于 **Angular 21** 和 **ng-zorro-antd 21** 构建。
+**ng-antd-admin** 是一个**生产就绪**的企业级中后台前端解决方案，基于 **Angular 22** 和 **ng-zorro-antd 22** 构建。
 
 本项目紧跟 Angular 技术演进，充分利用最新特性，包括 **Standalone Components**、**Zoneless Change Detection**、**Signals API** 和 **View Transitions**，旨在为开发者提供一个现代化、高性能、易于维护的开发模板。
 
 ### 💡 为什么选择 ng-antd-admin？
 
-- ✅ **技术前沿**：率先拥抱 Angular 21 全新生态（Signals, Zoneless, Control Flow）。
+- ✅ **技术前沿**：率先拥抱 Angular 22 全新生态（Signals, Zoneless, Control Flow）。
 - ✅ **性能卓越**：全链路 OnPush 策略 + 智能路由复用 + 懒加载，体验媲美原生应用。
 - ✅ **开箱即用**：内置成熟的 RBAC 权限系统、主题切换、多页签管理等核心功能。
 - ✅ **代码规范**：集成严格的 ESLint + TypeScript + Prettier 配置，保障代码质量。
@@ -38,14 +38,14 @@
 
 ### 🎯 技术栈一览
 
-| 技术 | 版本 | 说明 |
-|------|------|------|
-| **Angular** | 21.0.3 | 核心框架，全面采用 Standalone 架构 |
-| **TypeScript** | 5.9.3 | 开发语言，开启严格模式 |
-| **ng-zorro-antd** | 21.0.0 | 企业级 UI 组件库 (Ant Design) |
-| **RxJS** | 7.8.0 | 响应式编程库 |
-| **Less** | 4.2.0 | CSS 预处理器 |
-| **NestJS** | 10.x | (可选) 后端服务框架 |
+| 技术 | 版本   | 说明 |
+|------|--------|------|
+| **Angular** | 22.2.0 | 核心框架，全面采用 Standalone 架构 |
+| **TypeScript** | 6.0.2  | 开发语言，开启严格模式 |
+| **ng-zorro-antd** | 22.1.2 | 企业级 UI 组件库 (Ant Design) |
+| **RxJS** | 7.8.0  | 响应式编程库 |
+| **Less** | 4.2.0  | CSS 预处理器 |
+| **NestJS** | 10.x   | (可选) 后端服务框架 |
 
 ### 🚀 前沿特性详解
 
